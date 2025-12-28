@@ -1,0 +1,7224 @@
+[
+    {
+        "q": "What is reactivity in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Automatic UI updates when state changes",
+            "Manual DOM manipulation",
+            "Server-side rendering",
+            "Component styling"
+        ]
+    },
+    {
+        "q": "Svelte reactivity automatically updates the _____ when state changes.",
+        "type": "fill_blank",
+        "answers": [
+            "UI"
+        ],
+        "other_options": [
+            "server",
+            "database",
+            "API"
+        ]
+    },
+    {
+        "q": "How does Svelte implement reactivity?",
+        "type": "mcq",
+        "o": [
+            "At compile time by adding update code to assignments",
+            "Using a virtual DOM",
+            "Using proxies at runtime",
+            "Using observables"
+        ]
+    },
+    {
+        "q": "Svelte's reactivity is implemented at _____ time.",
+        "type": "fill_blank",
+        "answers": [
+            "compile"
+        ],
+        "other_options": [
+            "run",
+            "load",
+            "build"
+        ]
+    },
+    {
+        "q": "What triggers reactivity in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Variable assignments with =",
+            "Using setState()",
+            "Calling update()",
+            "Dispatching events"
+        ]
+    },
+    {
+        "q": "Reactivity is triggered by _____ operator.",
+        "type": "fill_blank",
+        "answers": [
+            "="
+        ],
+        "other_options": [
+            "==",
+            "===",
+            "=>"
+        ]
+    },
+    {
+        "q": "What is a reactive declaration?",
+        "type": "mcq",
+        "c": "$: doubled = count * 2;",
+        "o": [
+            "Statement that re-runs when its dependencies change",
+            "Variable declaration",
+            "Event handler",
+            "Style declaration"
+        ]
+    },
+    {
+        "q": "Reactive declarations start with _____: syntax.",
+        "type": "fill_blank",
+        "answers": [
+            "$"
+        ],
+        "other_options": [
+            "@",
+            "#",
+            "&"
+        ]
+    },
+    {
+        "q": "Match reactivity concepts:",
+        "type": "match",
+        "left": [
+            "$: statement",
+            "Assignment",
+            "Derived value",
+            "Side effect"
+        ],
+        "right": [
+            "Reactive declaration",
+            "Trigger update",
+            "Computed from state",
+            "Action on change"
+        ]
+    },
+    {
+        "q": "How do you create a derived value?",
+        "type": "mcq",
+        "c": "<script>\n  let count = 0;\n  $: doubled = count * 2;\n  $: quadrupled = doubled * 2;\n</script>",
+        "o": [
+            "Using $: to compute value from dependencies",
+            "Using computed()",
+            "Using useMemo()",
+            "Using @computed decorator"
+        ]
+    },
+    {
+        "q": "Derived values are created with $: _____ = expression.",
+        "type": "fill_blank",
+        "answers": [
+            "variable"
+        ],
+        "other_options": [
+            "function",
+            "class",
+            "const"
+        ]
+    },
+    {
+        "q": "What happens when a dependency of $: changes?",
+        "type": "mcq",
+        "o": [
+            "The reactive statement re-runs",
+            "Nothing happens",
+            "An error is thrown",
+            "The component remounts"
+        ]
+    },
+    {
+        "q": "When dependencies change, reactive statements _____.",
+        "type": "fill_blank",
+        "answers": [
+            "re-run"
+        ],
+        "other_options": [
+            "stop",
+            "cache",
+            "freeze"
+        ]
+    },
+    {
+        "q": "Can $: run arbitrary statements?",
+        "type": "mcq",
+        "c": "$: console.log('count is', count);",
+        "o": [
+            "Yes, any JavaScript statement",
+            "No, only assignments",
+            "No, only function calls",
+            "No, only expressions"
+        ]
+    },
+    {
+        "q": "$: can run any JavaScript _____.",
+        "type": "fill_blank",
+        "answers": [
+            "statement"
+        ],
+        "other_options": [
+            "function",
+            "class",
+            "module"
+        ]
+    },
+    {
+        "q": "Rearrange reactive update flow:",
+        "type": "rearrange",
+        "words": [
+            "State changes",
+            "Compiler detects",
+            "Reactive runs",
+            "DOM updates",
+            "UI reflects"
+        ]
+    },
+    {
+        "q": "How do you run multiple statements reactively?",
+        "type": "mcq",
+        "c": "$: {\n  console.log('count is', count);\n  doubled = count * 2;\n}",
+        "o": [
+            "Use a reactive block with curly braces",
+            "Use multiple $: lines only",
+            "Use @reactive decorator",
+            "Cannot run multiple statements"
+        ]
+    },
+    {
+        "q": "Multiple reactive statements use _____ braces.",
+        "type": "fill_blank",
+        "answers": [
+            "curly"
+        ],
+        "other_options": [
+            "square",
+            "parentheses",
+            "angle"
+        ]
+    },
+    {
+        "q": "When do reactive declarations run?",
+        "type": "mcq",
+        "o": [
+            "Before the DOM updates, after dependencies change",
+            "Immediately on declaration",
+            "After DOM updates",
+            "On component mount only"
+        ]
+    },
+    {
+        "q": "Reactive declarations run _____ DOM updates.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "without"
+        ]
+    },
+    {
+        "q": "Why doesn't array.push() trigger reactivity?",
+        "type": "mcq",
+        "c": "// Won't update UI\nitems.push(newItem);\n\n// Will update UI\nitems = [...items, newItem];",
+        "o": [
+            "Reactivity requires assignment, not mutation",
+            "Push is too slow",
+            "Arrays are not reactive",
+            "Bug in Svelte"
+        ]
+    },
+    {
+        "q": "Reactivity requires _____, not mutation.",
+        "type": "fill_blank",
+        "answers": [
+            "assignment"
+        ],
+        "other_options": [
+            "creation",
+            "deletion",
+            "copying"
+        ]
+    },
+    {
+        "q": "How do you make array changes reactive?",
+        "type": "mcq",
+        "c": "// Method 1: Spread\nitems = [...items, newItem];\n\n// Method 2: Self-assign\nitems.push(newItem);\nitems = items;",
+        "o": [
+            "Reassign the array after modification",
+            "Use special array methods",
+            "Use Observable arrays",
+            "Arrays are always reactive"
+        ]
+    },
+    {
+        "q": "Array changes need _____ after mutation.",
+        "type": "fill_blank",
+        "answers": [
+            "reassignment"
+        ],
+        "other_options": [
+            "copying",
+            "cloning",
+            "freezing"
+        ]
+    },
+    {
+        "q": "Match array reactive patterns:",
+        "type": "match",
+        "left": [
+            "items = [...items, x]",
+            "items.push(x); items = items",
+            "items = items.filter()",
+            "items[0] = x; items = items"
+        ],
+        "right": [
+            "Spread add",
+            "Mutate reassign",
+            "Filter remove",
+            "Index update"
+        ]
+    },
+    {
+        "q": "Why does object property update without reassignment work?",
+        "type": "mcq",
+        "c": "// This works\nobj.name = 'new';\n\n// Because obj is still assigned in the same scope",
+        "o": [
+            "Svelte tracks top-level variable updates",
+            "Objects are special",
+            "Properties are always reactive",
+            "It doesn't work"
+        ]
+    },
+    {
+        "q": "Object property updates work because Svelte tracks _____ variables.",
+        "type": "fill_blank",
+        "answers": [
+            "top-level"
+        ],
+        "other_options": [
+            "all",
+            "nested",
+            "global"
+        ]
+    },
+    {
+        "q": "When do you need to reassign objects?",
+        "type": "mcq",
+        "o": [
+            "When modifying nested objects not tracked directly",
+            "Always",
+            "Never",
+            "Only for arrays"
+        ]
+    },
+    {
+        "q": "Nested object changes may need _____.",
+        "type": "fill_blank",
+        "answers": [
+            "reassignment"
+        ],
+        "other_options": [
+            "cloning",
+            "copying",
+            "freezing"
+        ]
+    },
+    {
+        "q": "What is a store in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Object with subscribe method for reactive state sharing",
+            "Database connection",
+            "Component type",
+            "Build tool"
+        ]
+    },
+    {
+        "q": "Stores are objects with _____ method.",
+        "type": "fill_blank",
+        "answers": [
+            "subscribe"
+        ],
+        "other_options": [
+            "get",
+            "set",
+            "update"
+        ]
+    },
+    {
+        "q": "What are the three store types in Svelte?",
+        "type": "mcq",
+        "o": [
+            "writable, readable, derived",
+            "state, computed, effect",
+            "reactive, static, dynamic",
+            "local, global, shared"
+        ]
+    },
+    {
+        "q": "Svelte provides writable, readable, and _____ stores.",
+        "type": "fill_blank",
+        "answers": [
+            "derived"
+        ],
+        "other_options": [
+            "computed",
+            "static",
+            "dynamic"
+        ]
+    },
+    {
+        "q": "Rearrange store import:",
+        "type": "rearrange",
+        "words": [
+            "import",
+            "{",
+            "writable",
+            "}",
+            "from",
+            "'svelte/store'"
+        ]
+    },
+    {
+        "q": "How do you create a writable store?",
+        "type": "mcq",
+        "c": "import { writable } from 'svelte/store';\n\nconst count = writable(0);",
+        "o": [
+            "Using writable() with initial value",
+            "Using new Store()",
+            "Using createStore()",
+            "Using observable()"
+        ]
+    },
+    {
+        "q": "Writable stores are created with writable(_____)",
+        "type": "fill_blank",
+        "answers": [
+            "initialValue"
+        ],
+        "other_options": [
+            "options",
+            "config",
+            "name"
+        ]
+    },
+    {
+        "q": "How do you read a store value?",
+        "type": "mcq",
+        "c": "count.subscribe(value => {\n  console.log(value);\n});",
+        "o": [
+            "Using subscribe() method",
+            "Using get() method",
+            "Using value property",
+            "Using read() method"
+        ]
+    },
+    {
+        "q": "Store values are read via _____ method.",
+        "type": "fill_blank",
+        "answers": [
+            "subscribe"
+        ],
+        "other_options": [
+            "get",
+            "read",
+            "fetch"
+        ]
+    },
+    {
+        "q": "How do you update a writable store?",
+        "type": "mcq",
+        "c": "count.set(5);\n// or\ncount.update(n => n + 1);",
+        "o": [
+            "Using set() or update() methods",
+            "Using assign() method",
+            "Using value property",
+            "Using dispatch()"
+        ]
+    },
+    {
+        "q": "Writable stores use set() and _____ methods.",
+        "type": "fill_blank",
+        "answers": [
+            "update"
+        ],
+        "other_options": [
+            "modify",
+            "change",
+            "mutate"
+        ]
+    },
+    {
+        "q": "Match store methods:",
+        "type": "match",
+        "left": [
+            "subscribe()",
+            "set()",
+            "update()",
+            "get()"
+        ],
+        "right": [
+            "Listen changes",
+            "Replace value",
+            "Transform value",
+            "Read once"
+        ]
+    },
+    {
+        "q": "What does update() method receive?",
+        "type": "mcq",
+        "c": "count.update(n => n + 1);",
+        "o": [
+            "Callback receiving current value, returning new value",
+            "New value directly",
+            "Object with changes",
+            "Event object"
+        ]
+    },
+    {
+        "q": "update() receives callback returning _____ value.",
+        "type": "fill_blank",
+        "answers": [
+            "new"
+        ],
+        "other_options": [
+            "old",
+            "same",
+            "null"
+        ]
+    },
+    {
+        "q": "How do you unsubscribe from a store?",
+        "type": "mcq",
+        "c": "const unsubscribe = count.subscribe(value => {\n  console.log(value);\n});\n\n// Later\nunsubscribe();",
+        "o": [
+            "Call the function returned by subscribe()",
+            "Call unsubscribe() method",
+            "Set store to null",
+            "Cannot unsubscribe"
+        ]
+    },
+    {
+        "q": "subscribe() returns _____ function.",
+        "type": "fill_blank",
+        "answers": [
+            "unsubscribe"
+        ],
+        "other_options": [
+            "cleanup",
+            "dispose",
+            "remove"
+        ]
+    },
+    {
+        "q": "What is auto-subscription syntax?",
+        "type": "mcq",
+        "c": "<script>\n  import { count } from './stores.js';\n</script>\n\n<p>Count: {$count}</p>",
+        "o": [
+            "Using $ prefix to automatically subscribe to store",
+            "Using @ prefix",
+            "Using # prefix",
+            "Using & prefix"
+        ]
+    },
+    {
+        "q": "Auto-subscription uses _____ prefix.",
+        "type": "fill_blank",
+        "answers": [
+            "$"
+        ],
+        "other_options": [
+            "@",
+            "#",
+            "&"
+        ]
+    },
+    {
+        "q": "What does $ prefix do?",
+        "type": "mcq",
+        "o": [
+            "Subscribes on mount, unsubscribes on destroy, returns value",
+            "Creates new store",
+            "Copies store",
+            "Freezes store"
+        ]
+    },
+    {
+        "q": "$ prefix auto-subscribes on mount and _____ on destroy.",
+        "type": "fill_blank",
+        "answers": [
+            "unsubscribes"
+        ],
+        "other_options": [
+            "copies",
+            "freezes",
+            "resets"
+        ]
+    },
+    {
+        "q": "Rearrange auto-subscription lifecycle:",
+        "type": "rearrange",
+        "words": [
+            "Component mounts",
+            "Svelte subscribes",
+            "Value available",
+            "Component destroys",
+            "Svelte unsubscribes"
+        ]
+    },
+    {
+        "q": "Can you assign to $store?",
+        "type": "mcq",
+        "c": "$count = 5; // Same as count.set(5)",
+        "o": [
+            "Yes, it calls set() on writable stores",
+            "No, $ variables are read-only",
+            "Only for derived stores",
+            "Only in reactive blocks"
+        ]
+    },
+    {
+        "q": "Assigning to $store calls _____ method.",
+        "type": "fill_blank",
+        "answers": [
+            "set"
+        ],
+        "other_options": [
+            "update",
+            "assign",
+            "write"
+        ]
+    },
+    {
+        "q": "What is a readable store?",
+        "type": "mcq",
+        "c": "import { readable } from 'svelte/store';\n\nconst time = readable(new Date(), set => {\n  const interval = setInterval(() => set(new Date()), 1000);\n  return () => clearInterval(interval);\n});",
+        "o": [
+            "Store that can only be written from inside its start function",
+            "Store that never changes",
+            "Store that reads from file",
+            "Store that reads from API"
+        ]
+    },
+    {
+        "q": "Readable stores are written only from _____ function.",
+        "type": "fill_blank",
+        "answers": [
+            "start"
+        ],
+        "other_options": [
+            "init",
+            "create",
+            "setup"
+        ]
+    },
+    {
+        "q": "What does readable() second argument receive?",
+        "type": "mcq",
+        "o": [
+            "set function to update the store value",
+            "Initial value",
+            "Options object",
+            "Store reference"
+        ]
+    },
+    {
+        "q": "Readable's start function receives _____ parameter.",
+        "type": "fill_blank",
+        "answers": [
+            "set"
+        ],
+        "other_options": [
+            "get",
+            "update",
+            "subscribe"
+        ]
+    },
+    {
+        "q": "What should readable's start function return?",
+        "type": "mcq",
+        "o": [
+            "Cleanup function called when no subscribers",
+            "Nothing",
+            "Initial value",
+            "Store reference"
+        ]
+    },
+    {
+        "q": "Start function returns _____ function.",
+        "type": "fill_blank",
+        "answers": [
+            "cleanup"
+        ],
+        "other_options": [
+            "start",
+            "init",
+            "setup"
+        ]
+    },
+    {
+        "q": "Match store types:",
+        "type": "match",
+        "left": [
+            "writable",
+            "readable",
+            "derived",
+            "custom"
+        ],
+        "right": [
+            "External writes",
+            "Internal writes",
+            "Computed",
+            "With contract"
+        ]
+    },
+    {
+        "q": "When does readable's cleanup run?",
+        "type": "mcq",
+        "o": [
+            "When subscriber count goes to zero",
+            "On component destroy",
+            "Immediately",
+            "Never"
+        ]
+    },
+    {
+        "q": "Cleanup runs when _____ count reaches zero.",
+        "type": "fill_blank",
+        "answers": [
+            "subscriber"
+        ],
+        "other_options": [
+            "component",
+            "store",
+            "value"
+        ]
+    },
+    {
+        "q": "What is a derived store?",
+        "type": "mcq",
+        "c": "import { derived } from 'svelte/store';\n\nconst doubled = derived(count, $count => $count * 2);",
+        "o": [
+            "Store computed from one or more other stores",
+            "Store that creates others",
+            "Store with derivation",
+            "Store for derivatives"
+        ]
+    },
+    {
+        "q": "Derived stores are computed from _____ stores.",
+        "type": "fill_blank",
+        "answers": [
+            "other"
+        ],
+        "other_options": [
+            "new",
+            "old",
+            "all"
+        ]
+    },
+    {
+        "q": "How do you create a derived store from one store?",
+        "type": "mcq",
+        "c": "const doubled = derived(count, $count => $count * 2);",
+        "o": [
+            "derived(store, callback) with value transformation",
+            "derived(callback) only",
+            "derived(store) only",
+            "store.derive(callback)"
+        ]
+    },
+    {
+        "q": "Derived from single store: derived(store, _____).",
+        "type": "fill_blank",
+        "answers": [
+            "callback"
+        ],
+        "other_options": [
+            "options",
+            "config",
+            "initial"
+        ]
+    },
+    {
+        "q": "How do you derive from multiple stores?",
+        "type": "mcq",
+        "c": "const total = derived(\n  [price, quantity],\n  ([$price, $quantity]) => $price * $quantity\n);",
+        "o": [
+            "Pass array of stores, receive array of values",
+            "Pass multiple arguments",
+            "Use spread operator",
+            "Cannot derive from multiple"
+        ]
+    },
+    {
+        "q": "Multiple stores are passed as _____.",
+        "type": "fill_blank",
+        "answers": [
+            "array"
+        ],
+        "other_options": [
+            "object",
+            "spread",
+            "tuple"
+        ]
+    },
+    {
+        "q": "Rearrange derived store creation:",
+        "type": "rearrange",
+        "words": [
+            "import derived",
+            "Specify source",
+            "Write callback",
+            "Return value",
+            "Export store"
+        ]
+    },
+    {
+        "q": "What is async derived store?",
+        "type": "mcq",
+        "c": "const data = derived(\n  query,\n  ($query, set) => {\n    fetch(`/api?q=${$query}`)\n      .then(r => r.json())\n      .then(set);\n  },\n  'loading...'\n);",
+        "o": [
+            "Derived store using set function for async operations",
+            "Store that loads asynchronously",
+            "Derived with promises",
+            "Store with async/await"
+        ]
+    },
+    {
+        "q": "Async derived uses _____ parameter to set value.",
+        "type": "fill_blank",
+        "answers": [
+            "set"
+        ],
+        "other_options": [
+            "resolve",
+            "update",
+            "value"
+        ]
+    },
+    {
+        "q": "What is the third argument to async derived?",
+        "type": "mcq",
+        "o": [
+            "Initial value before async completes",
+            "Options object",
+            "Cleanup function",
+            "Error handler"
+        ]
+    },
+    {
+        "q": "Third argument is _____ value.",
+        "type": "fill_blank",
+        "answers": [
+            "initial"
+        ],
+        "other_options": [
+            "default",
+            "fallback",
+            "loading"
+        ]
+    },
+    {
+        "q": "Can async derived return cleanup?",
+        "type": "mcq",
+        "c": "const data = derived(query, ($query, set) => {\n  const controller = new AbortController();\n  fetch(`/api?q=${$query}`, { signal: controller.signal })\n    .then(r => r.json())\n    .then(set);\n  return () => controller.abort();\n});",
+        "o": [
+            "Yes, return cleanup function for cancellation",
+            "No cleanup possible",
+            "Only for readable stores",
+            "Only for writable stores"
+        ]
+    },
+    {
+        "q": "Async derived can return _____ function.",
+        "type": "fill_blank",
+        "answers": [
+            "cleanup"
+        ],
+        "other_options": [
+            "promise",
+            "result",
+            "error"
+        ]
+    },
+    {
+        "q": "What is get() function?",
+        "type": "mcq",
+        "c": "import { get } from 'svelte/store';\n\nconst value = get(count);",
+        "o": [
+            "Gets store value once without subscribing",
+            "Creates a getter store",
+            "Gets store from context",
+            "Gets store reference"
+        ]
+    },
+    {
+        "q": "get() reads value without _____.",
+        "type": "fill_blank",
+        "answers": [
+            "subscribing"
+        ],
+        "other_options": [
+            "updating",
+            "creating",
+            "copying"
+        ]
+    },
+    {
+        "q": "Match store utilities:",
+        "type": "match",
+        "left": [
+            "writable()",
+            "readable()",
+            "derived()",
+            "get()"
+        ],
+        "right": [
+            "Create mutable",
+            "Create internal",
+            "Create computed",
+            "Read once"
+        ]
+    },
+    {
+        "q": "When should you use get()?",
+        "type": "mcq",
+        "o": [
+            "For one-time reads in event handlers or non-reactive contexts",
+            "Always",
+            "Never",
+            "For subscriptions"
+        ]
+    },
+    {
+        "q": "get() is for _____ reads in non-reactive contexts.",
+        "type": "fill_blank",
+        "answers": [
+            "one-time"
+        ],
+        "other_options": [
+            "continuous",
+            "periodic",
+            "multiple"
+        ]
+    },
+    {
+        "q": "Why avoid get() in reactive contexts?",
+        "type": "mcq",
+        "o": [
+            "It doesn't track dependencies for re-running",
+            "It's slower",
+            "It causes memory leaks",
+            "It's deprecated"
+        ]
+    },
+    {
+        "q": "get() doesn't track _____ for reactivity.",
+        "type": "fill_blank",
+        "answers": [
+            "dependencies"
+        ],
+        "other_options": [
+            "values",
+            "stores",
+            "components"
+        ]
+    },
+    {
+        "q": "What is a custom store?",
+        "type": "mcq",
+        "c": "function createCounter() {\n  const { subscribe, set, update } = writable(0);\n  return {\n    subscribe,\n    increment: () => update(n => n + 1),\n    reset: () => set(0)\n  };\n}",
+        "o": [
+            "Store with custom methods built on writable/readable",
+            "Store created from scratch",
+            "Store with special features",
+            "Store with validation"
+        ]
+    },
+    {
+        "q": "Custom stores build on _____ stores.",
+        "type": "fill_blank",
+        "answers": [
+            "writable"
+        ],
+        "other_options": [
+            "native",
+            "base",
+            "core"
+        ]
+    },
+    {
+        "q": "What must custom stores expose?",
+        "type": "mcq",
+        "o": [
+            "subscribe method for $ syntax compatibility",
+            "get method",
+            "value property",
+            "update method"
+        ]
+    },
+    {
+        "q": "Custom stores must expose _____ method.",
+        "type": "fill_blank",
+        "answers": [
+            "subscribe"
+        ],
+        "other_options": [
+            "set",
+            "get",
+            "update"
+        ]
+    },
+    {
+        "q": "Rearrange custom store creation:",
+        "type": "rearrange",
+        "words": [
+            "Create writable",
+            "Destructure methods",
+            "Add custom methods",
+            "Return object",
+            "Keep subscribe"
+        ]
+    },
+    {
+        "q": "Can custom stores hide set/update?",
+        "type": "mcq",
+        "o": [
+            "Yes, only expose subscribe and custom methods",
+            "No, all methods required",
+            "Only set can be hidden",
+            "Only update can be hidden"
+        ]
+    },
+    {
+        "q": "Custom stores can hide set and _____ methods.",
+        "type": "fill_blank",
+        "answers": [
+            "update"
+        ],
+        "other_options": [
+            "subscribe",
+            "get",
+            "destroy"
+        ]
+    },
+    {
+        "q": "What is a store contract?",
+        "type": "mcq",
+        "o": [
+            "Object with subscribe method returning unsubscribe function",
+            "Legal agreement",
+            "Store configuration",
+            "Store validation"
+        ]
+    },
+    {
+        "q": "Store contract requires subscribe returning _____.",
+        "type": "fill_blank",
+        "answers": [
+            "unsubscribe"
+        ],
+        "other_options": [
+            "value",
+            "store",
+            "callback"
+        ]
+    },
+    {
+        "q": "Can any object with subscribe be used as store?",
+        "type": "mcq",
+        "o": [
+            "Yes, if subscribe follows the store contract",
+            "No, must use Svelte's functions",
+            "Only classes",
+            "Only functions"
+        ]
+    },
+    {
+        "q": "Any object following store _____ works as store.",
+        "type": "fill_blank",
+        "answers": [
+            "contract"
+        ],
+        "other_options": [
+            "interface",
+            "protocol",
+            "pattern"
+        ]
+    },
+    {
+        "q": "Match custom store patterns:",
+        "type": "match",
+        "left": [
+            "Counter store",
+            "Toggle store",
+            "List store",
+            "Form store"
+        ],
+        "right": [
+            "increment/decrement",
+            "toggle/on/off",
+            "add/remove/sort",
+            "validate/submit/reset"
+        ]
+    },
+    {
+        "q": "What is a toggle custom store?",
+        "type": "mcq",
+        "c": "function createToggle(initial = false) {\n  const { subscribe, update, set } = writable(initial);\n  return {\n    subscribe,\n    toggle: () => update(v => !v),\n    on: () => set(true),\n    off: () => set(false)\n  };\n}",
+        "o": [
+            "Store with toggle, on, off methods for boolean state",
+            "Store that toggles types",
+            "Store for switches",
+            "Store for checkboxes"
+        ]
+    },
+    {
+        "q": "Toggle store has toggle, on, and _____ methods.",
+        "type": "fill_blank",
+        "answers": [
+            "off"
+        ],
+        "other_options": [
+            "reset",
+            "clear",
+            "hide"
+        ]
+    },
+    {
+        "q": "How do you share stores between components?",
+        "type": "mcq",
+        "o": [
+            "Export from a separate module and import where needed",
+            "Use props only",
+            "Use context only",
+            "Cannot share stores"
+        ]
+    },
+    {
+        "q": "Stores are shared via separate _____.",
+        "type": "fill_blank",
+        "answers": [
+            "modules"
+        ],
+        "other_options": [
+            "components",
+            "files",
+            "folders"
+        ]
+    },
+    {
+        "q": "What is the typical stores file pattern?",
+        "type": "mcq",
+        "c": "// stores.js\nimport { writable } from 'svelte/store';\n\nexport const user = writable(null);\nexport const theme = writable('light');",
+        "o": [
+            "Dedicated file exporting store instances",
+            "Stores in each component",
+            "Global stores object",
+            "Store factory file"
+        ]
+    },
+    {
+        "q": "Stores are typically in dedicated _____ file.",
+        "type": "fill_blank",
+        "answers": [
+            "stores"
+        ],
+        "other_options": [
+            "state",
+            "data",
+            "shared"
+        ]
+    },
+    {
+        "q": "Can stores be component-scoped?",
+        "type": "mcq",
+        "o": [
+            "Yes, create store inside component for local state",
+            "No, always global",
+            "Only with context",
+            "Only readable stores"
+        ]
+    },
+    {
+        "q": "Component-scoped stores are created _____ the component.",
+        "type": "fill_blank",
+        "answers": [
+            "inside"
+        ],
+        "other_options": [
+            "outside",
+            "above",
+            "before"
+        ]
+    },
+    {
+        "q": "Rearrange store sharing pattern:",
+        "type": "rearrange",
+        "words": [
+            "Create stores.js",
+            "Export stores",
+            "Import in components",
+            "Subscribe with $",
+            "Read/write values"
+        ]
+    },
+    {
+        "q": "What is tweened store?",
+        "type": "mcq",
+        "c": "import { tweened } from 'svelte/motion';\n\nconst progress = tweened(0, {\n  duration: 400,\n  easing: cubicOut\n});",
+        "o": [
+            "Store that animates between values over time",
+            "Store for Twitter",
+            "Store for text",
+            "Store for timing"
+        ]
+    },
+    {
+        "q": "Tweened stores _____ between values.",
+        "type": "fill_blank",
+        "answers": [
+            "animate"
+        ],
+        "other_options": [
+            "jump",
+            "skip",
+            "teleport"
+        ]
+    },
+    {
+        "q": "Where do you import tweened from?",
+        "type": "mcq",
+        "o": [
+            "svelte/motion",
+            "svelte/store",
+            "svelte/animation",
+            "svelte/transition"
+        ]
+    },
+    {
+        "q": "Tweened is imported from svelte/_____.",
+        "type": "fill_blank",
+        "answers": [
+            "motion"
+        ],
+        "other_options": [
+            "store",
+            "animate",
+            "transition"
+        ]
+    },
+    {
+        "q": "What options does tweened accept?",
+        "type": "mcq",
+        "o": [
+            "duration, delay, easing, interpolate",
+            "speed, timing, curve",
+            "start, end, steps",
+            "from, to, time"
+        ]
+    },
+    {
+        "q": "Tweened accepts duration, delay, easing, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "interpolate"
+        ],
+        "other_options": [
+            "transform",
+            "modify",
+            "calculate"
+        ]
+    },
+    {
+        "q": "Match motion store options:",
+        "type": "match",
+        "left": [
+            "duration",
+            "delay",
+            "easing",
+            "interpolate"
+        ],
+        "right": [
+            "Animation length",
+            "Wait before start",
+            "Curve function",
+            "Value transform"
+        ]
+    },
+    {
+        "q": "What is spring store?",
+        "type": "mcq",
+        "c": "import { spring } from 'svelte/motion';\n\nconst coords = spring({ x: 0, y: 0 }, {\n  stiffness: 0.1,\n  damping: 0.25\n});",
+        "o": [
+            "Store with physics-based spring animation",
+            "Store for seasons",
+            "Store for jumping",
+            "Store for bouncing"
+        ]
+    },
+    {
+        "q": "Spring stores use _____ animation.",
+        "type": "fill_blank",
+        "answers": [
+            "physics-based"
+        ],
+        "other_options": [
+            "linear",
+            "step",
+            "instant"
+        ]
+    },
+    {
+        "q": "What options does spring accept?",
+        "type": "mcq",
+        "o": [
+            "stiffness, damping, precision",
+            "duration, easing",
+            "speed, mass",
+            "tension, friction"
+        ]
+    },
+    {
+        "q": "Spring accepts stiffness, damping, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "precision"
+        ],
+        "other_options": [
+            "duration",
+            "speed",
+            "mass"
+        ]
+    },
+    {
+        "q": "What does stiffness control?",
+        "type": "mcq",
+        "o": [
+            "How quickly spring responds to changes",
+            "Animation duration",
+            "Final position",
+            "Initial velocity"
+        ]
+    },
+    {
+        "q": "Stiffness controls response _____.",
+        "type": "fill_blank",
+        "answers": [
+            "speed"
+        ],
+        "other_options": [
+            "direction",
+            "color",
+            "size"
+        ]
+    },
+    {
+        "q": "What does damping control?",
+        "type": "mcq",
+        "o": [
+            "How quickly spring settles (less = more bouncy)",
+            "Animation color",
+            "Start delay",
+            "End position"
+        ]
+    },
+    {
+        "q": "Lower damping means more _____.",
+        "type": "fill_blank",
+        "answers": [
+            "bouncy"
+        ],
+        "other_options": [
+            "slow",
+            "fast",
+            "smooth"
+        ]
+    },
+    {
+        "q": "Match spring vs tweened:",
+        "type": "match",
+        "left": [
+            "Spring",
+            "Tweened",
+            "Stiffness",
+            "Duration"
+        ],
+        "right": [
+            "Physics motion",
+            "Timed motion",
+            "Spring setting",
+            "Tween setting"
+        ]
+    },
+    {
+        "q": "When to use spring vs tweened?",
+        "type": "mcq",
+        "o": [
+            "Spring for continuous input, tweened for discrete changes",
+            "Always use spring",
+            "Always use tweened",
+            "Same thing"
+        ]
+    },
+    {
+        "q": "Spring is better for _____ input like drag.",
+        "type": "fill_blank",
+        "answers": [
+            "continuous"
+        ],
+        "other_options": [
+            "discrete",
+            "single",
+            "occasional"
+        ]
+    },
+    {
+        "q": "What is tick function?",
+        "type": "mcq",
+        "c": "import { tick } from 'svelte';\n\nasync function handleClick() {\n  count++;\n  await tick();\n  // DOM is now updated\n}",
+        "o": [
+            "Returns promise that resolves after pending state changes apply to DOM",
+            "Timer function",
+            "Animation frame",
+            "Event loop"
+        ]
+    },
+    {
+        "q": "tick() waits for _____ to update.",
+        "type": "fill_blank",
+        "answers": [
+            "DOM"
+        ],
+        "other_options": [
+            "state",
+            "props",
+            "store"
+        ]
+    },
+    {
+        "q": "When should you use tick?",
+        "type": "mcq",
+        "o": [
+            "When you need to read/manipulate DOM after state change",
+            "Always after state changes",
+            "Never",
+            "Only in loops"
+        ]
+    },
+    {
+        "q": "tick() is used when needing DOM after _____ change.",
+        "type": "fill_blank",
+        "answers": [
+            "state"
+        ],
+        "other_options": [
+            "prop",
+            "context",
+            "store"
+        ]
+    },
+    {
+        "q": "Rearrange tick usage:",
+        "type": "rearrange",
+        "words": [
+            "Update state",
+            "Call tick()",
+            "Await promise",
+            "DOM updated",
+            "Access DOM"
+        ]
+    },
+    {
+        "q": "Is tick synchronous or async?",
+        "type": "mcq",
+        "o": [
+            "Async - returns a promise",
+            "Synchronous",
+            "Both",
+            "Neither"
+        ]
+    },
+    {
+        "q": "tick() returns a _____.",
+        "type": "fill_blank",
+        "answers": [
+            "promise"
+        ],
+        "other_options": [
+            "value",
+            "callback",
+            "void"
+        ]
+    },
+    {
+        "q": "What is Svelte 5's $state rune?",
+        "type": "mcq",
+        "c": "let count = $state(0);",
+        "o": [
+            "Creates reactive state that triggers updates on assignment",
+            "Creates constant",
+            "Creates store",
+            "Creates prop"
+        ]
+    },
+    {
+        "q": "$state() creates _____ state.",
+        "type": "fill_blank",
+        "answers": [
+            "reactive"
+        ],
+        "other_options": [
+            "static",
+            "constant",
+            "frozen"
+        ]
+    },
+    {
+        "q": "How does $state differ from let in Svelte 4?",
+        "type": "mcq",
+        "o": [
+            "Explicit reactivity, works in modules and classes",
+            "No difference",
+            "Faster performance",
+            "More syntax"
+        ]
+    },
+    {
+        "q": "$state works in modules and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "classes"
+        ],
+        "other_options": [
+            "functions",
+            "stores",
+            "props"
+        ]
+    },
+    {
+        "q": "What is $state.raw?",
+        "type": "mcq",
+        "c": "let data = $state.raw({ items: [] });",
+        "o": [
+            "Creates state that is not deeply reactive",
+            "Raw string state",
+            "Unprocessed state",
+            "Undefined state"
+        ]
+    },
+    {
+        "q": "$state.raw creates _____ reactive state.",
+        "type": "fill_blank",
+        "answers": [
+            "shallowly"
+        ],
+        "other_options": [
+            "deeply",
+            "fully",
+            "non"
+        ]
+    },
+    {
+        "q": "Match Svelte 5 runes:",
+        "type": "match",
+        "left": [
+            "$state",
+            "$derived",
+            "$effect",
+            "$props"
+        ],
+        "right": [
+            "Reactive var",
+            "Computed",
+            "Side effect",
+            "Component input"
+        ]
+    },
+    {
+        "q": "What is $derived rune?",
+        "type": "mcq",
+        "c": "let doubled = $derived(count * 2);",
+        "o": [
+            "Creates value that updates when dependencies change",
+            "Creates derived store",
+            "Creates computed function",
+            "Creates effect"
+        ]
+    },
+    {
+        "q": "$derived replaces _____ reactive declarations.",
+        "type": "fill_blank",
+        "answers": [
+            "$:"
+        ],
+        "other_options": [
+            "let",
+            "const",
+            "var"
+        ]
+    },
+    {
+        "q": "What is $derived.by?",
+        "type": "mcq",
+        "c": "let total = $derived.by(() => {\n  return items.reduce((sum, item) => sum + item.price, 0);\n});",
+        "o": [
+            "Derived value using a function for complex calculations",
+            "Derived by reference",
+            "Derived by type",
+            "Derived by name"
+        ]
+    },
+    {
+        "q": "$derived.by uses a _____ for complex derivations.",
+        "type": "fill_blank",
+        "answers": [
+            "function"
+        ],
+        "other_options": [
+            "expression",
+            "value",
+            "store"
+        ]
+    },
+    {
+        "q": "What is $effect rune?",
+        "type": "mcq",
+        "c": "$effect(() => {\n  console.log('count is', count);\n});",
+        "o": [
+            "Runs side effects when dependencies change",
+            "Creates visual effect",
+            "Animation effect",
+            "Store effect"
+        ]
+    },
+    {
+        "q": "$effect runs when _____ change.",
+        "type": "fill_blank",
+        "answers": [
+            "dependencies"
+        ],
+        "other_options": [
+            "props",
+            "stores",
+            "events"
+        ]
+    },
+    {
+        "q": "When does $effect run?",
+        "type": "mcq",
+        "o": [
+            "After DOM updates when dependencies change",
+            "Before DOM updates",
+            "During compile",
+            "On mount only"
+        ]
+    },
+    {
+        "q": "$effect runs _____ DOM updates.",
+        "type": "fill_blank",
+        "answers": [
+            "after"
+        ],
+        "other_options": [
+            "before",
+            "during",
+            "without"
+        ]
+    },
+    {
+        "q": "Rearrange $effect lifecycle:",
+        "type": "rearrange",
+        "words": [
+            "Dependencies change",
+            "Svelte detects",
+            "DOM updates",
+            "$effect runs",
+            "Cleanup if needed"
+        ]
+    },
+    {
+        "q": "How do you return cleanup from $effect?",
+        "type": "mcq",
+        "c": "$effect(() => {\n  const id = setInterval(() => console.log('tick'), 1000);\n  return () => clearInterval(id);\n});",
+        "o": [
+            "Return a cleanup function",
+            "Call cleanup()",
+            "Use finally block",
+            "Cannot cleanup"
+        ]
+    },
+    {
+        "q": "Cleanup in $effect is returned _____.",
+        "type": "fill_blank",
+        "answers": [
+            "function"
+        ],
+        "other_options": [
+            "value",
+            "promise",
+            "void"
+        ]
+    },
+    {
+        "q": "What is $effect.pre?",
+        "type": "mcq",
+        "c": "$effect.pre(() => {\n  // Runs before DOM update\n});",
+        "o": [
+            "Effect that runs before DOM update",
+            "Previous effect",
+            "Pre-compiled effect",
+            "Preparation effect"
+        ]
+    },
+    {
+        "q": "$effect.pre runs _____ DOM update.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "without"
+        ]
+    },
+    {
+        "q": "When to use $effect.pre?",
+        "type": "mcq",
+        "o": [
+            "When you need to read DOM before it changes",
+            "Always",
+            "Never",
+            "For animations only"
+        ]
+    },
+    {
+        "q": "$effect.pre reads DOM _____ changes.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "without"
+        ]
+    },
+    {
+        "q": "What is $effect.root?",
+        "type": "mcq",
+        "c": "const destroy = $effect.root(() => {\n  // Effects created here\n});\n// Later: destroy();",
+        "o": [
+            "Creates effect scope with manual cleanup control",
+            "Root component effect",
+            "Global effect",
+            "Main effect"
+        ]
+    },
+    {
+        "q": "$effect.root returns _____ function.",
+        "type": "fill_blank",
+        "answers": [
+            "destroy"
+        ],
+        "other_options": [
+            "cleanup",
+            "dispose",
+            "remove"
+        ]
+    },
+    {
+        "q": "Match $effect variants:",
+        "type": "match",
+        "left": [
+            "$effect",
+            "$effect.pre",
+            "$effect.root",
+            "cleanup"
+        ],
+        "right": [
+            "Post-DOM",
+            "Pre-DOM",
+            "Manual scope",
+            "Teardown"
+        ]
+    },
+    {
+        "q": "What is $props rune?",
+        "type": "mcq",
+        "c": "let { name, age = 0 } = $props();",
+        "o": [
+            "Declares component props via destructuring",
+            "Creates props store",
+            "Props validation",
+            "Props typing"
+        ]
+    },
+    {
+        "q": "$props() uses _____ to declare props.",
+        "type": "fill_blank",
+        "answers": [
+            "destructuring"
+        ],
+        "other_options": [
+            "export",
+            "import",
+            "define"
+        ]
+    },
+    {
+        "q": "How do you set default prop values?",
+        "type": "mcq",
+        "c": "let { count = 0, name = 'Guest' } = $props();",
+        "o": [
+            "Using destructuring defaults",
+            "Using defaultProps",
+            "Using @default decorator",
+            "Using setDefault()"
+        ]
+    },
+    {
+        "q": "Default props use destructuring _____.",
+        "type": "fill_blank",
+        "answers": [
+            "defaults"
+        ],
+        "other_options": [
+            "values",
+            "options",
+            "config"
+        ]
+    },
+    {
+        "q": "What is rest props in Svelte 5?",
+        "type": "mcq",
+        "c": "let { name, ...rest } = $props();",
+        "o": [
+            "Capturing remaining props in an object",
+            "Resting props",
+            "Sleeping props",
+            "Inactive props"
+        ]
+    },
+    {
+        "q": "Rest props use _____ operator.",
+        "type": "fill_blank",
+        "answers": [
+            "spread"
+        ],
+        "other_options": [
+            "rest",
+            "collect",
+            "gather"
+        ]
+    },
+    {
+        "q": "Rearrange Svelte 5 prop declaration:",
+        "type": "rearrange",
+        "words": [
+            "Call $props()",
+            "Destructure result",
+            "Set defaults",
+            "Use rest",
+            "Access values"
+        ]
+    },
+    {
+        "q": "What is $bindable rune?",
+        "type": "mcq",
+        "c": "let { value = $bindable() } = $props();",
+        "o": [
+            "Marks prop as bindable for two-way binding",
+            "Creates binding",
+            "Binds to store",
+            "Binds to context"
+        ]
+    },
+    {
+        "q": "$bindable() enables _____ binding.",
+        "type": "fill_blank",
+        "answers": [
+            "two-way"
+        ],
+        "other_options": [
+            "one-way",
+            "no",
+            "optional"
+        ]
+    },
+    {
+        "q": "How do you use $bindable with initial value?",
+        "type": "mcq",
+        "c": "let { checked = $bindable(false) } = $props();",
+        "o": [
+            "Pass initial value to $bindable()",
+            "Use separate default",
+            "Cannot have initial",
+            "Use @initial decorator"
+        ]
+    },
+    {
+        "q": "$bindable() can take _____ value.",
+        "type": "fill_blank",
+        "answers": [
+            "initial"
+        ],
+        "other_options": [
+            "final",
+            "default",
+            "required"
+        ]
+    },
+    {
+        "q": "Match bindable patterns:",
+        "type": "match",
+        "left": [
+            "$bindable()",
+            "bind:value",
+            "Parent passes",
+            "Child updates"
+        ],
+        "right": [
+            "Declare bindable",
+            "Use binding",
+            "Initial value",
+            "Syncs parent"
+        ]
+    },
+    {
+        "q": "What is $inspect rune?",
+        "type": "mcq",
+        "c": "$inspect(state);",
+        "o": [
+            "Logs value and when it changes (dev mode)",
+            "Inspects element",
+            "Debug breakpoint",
+            "Type inspection"
+        ]
+    },
+    {
+        "q": "$inspect logs values in _____ mode.",
+        "type": "fill_blank",
+        "answers": [
+            "dev"
+        ],
+        "other_options": [
+            "prod",
+            "test",
+            "build"
+        ]
+    },
+    {
+        "q": "What is $inspect().with?",
+        "type": "mcq",
+        "c": "$inspect(count).with((type, value) => {\n  debugger;\n});",
+        "o": [
+            "Custom handler for inspected value changes",
+            "With statement",
+            "With binding",
+            "With context"
+        ]
+    },
+    {
+        "q": "$inspect.with provides custom _____.",
+        "type": "fill_blank",
+        "answers": [
+            "handler"
+        ],
+        "other_options": [
+            "value",
+            "type",
+            "log"
+        ]
+    },
+    {
+        "q": "Is $inspect in production builds?",
+        "type": "mcq",
+        "o": [
+            "No, it's stripped from production",
+            "Yes always",
+            "Optional",
+            "Only with flag"
+        ]
+    },
+    {
+        "q": "$inspect is _____ from production.",
+        "type": "fill_blank",
+        "answers": [
+            "stripped"
+        ],
+        "other_options": [
+            "kept",
+            "optimized",
+            "hidden"
+        ]
+    },
+    {
+        "q": "What is $host rune?",
+        "type": "mcq",
+        "o": [
+            "Accesses host element in custom elements",
+            "Hosting server",
+            "Host component",
+            "Host platform"
+        ]
+    },
+    {
+        "q": "$host accesses host in _____ elements.",
+        "type": "fill_blank",
+        "answers": [
+            "custom"
+        ],
+        "other_options": [
+            "standard",
+            "native",
+            "web"
+        ]
+    },
+    {
+        "q": "Rearrange reactivity debugging:",
+        "type": "rearrange",
+        "words": [
+            "Add $inspect",
+            "Run dev mode",
+            "See initial log",
+            "Trigger change",
+            "See update log"
+        ]
+    },
+    {
+        "q": "What is untrack function?",
+        "type": "mcq",
+        "c": "import { untrack } from 'svelte';\n\n$effect(() => {\n  const current = untrack(() => count);\n  // current doesn't trigger effect\n});",
+        "o": [
+            "Reads reactive value without creating dependency",
+            "Removes tracking",
+            "Stops reactivity",
+            "Clears dependencies"
+        ]
+    },
+    {
+        "q": "untrack() reads without creating _____.",
+        "type": "fill_blank",
+        "answers": [
+            "dependency"
+        ],
+        "other_options": [
+            "value",
+            "effect",
+            "state"
+        ]
+    },
+    {
+        "q": "When to use untrack?",
+        "type": "mcq",
+        "o": [
+            "When you need value but don't want re-run on change",
+            "Always",
+            "Never",
+            "For logging only"
+        ]
+    },
+    {
+        "q": "untrack prevents _____ on value change.",
+        "type": "fill_blank",
+        "answers": [
+            "re-run"
+        ],
+        "other_options": [
+            "reading",
+            "writing",
+            "tracking"
+        ]
+    },
+    {
+        "q": "What is flushSync?",
+        "type": "mcq",
+        "c": "import { flushSync } from 'svelte';\n\nflushSync(() => {\n  count++;\n});\n// DOM is updated here",
+        "o": [
+            "Forces synchronous DOM update",
+            "Clears state",
+            "Flushes logs",
+            "Clears effects"
+        ]
+    },
+    {
+        "q": "flushSync forces _____ DOM update.",
+        "type": "fill_blank",
+        "answers": [
+            "synchronous"
+        ],
+        "other_options": [
+            "async",
+            "delayed",
+            "cancelled"
+        ]
+    },
+    {
+        "q": "When to use flushSync?",
+        "type": "mcq",
+        "o": [
+            "When you need DOM immediately after state change",
+            "Always",
+            "Never",
+            "For animations only"
+        ]
+    },
+    {
+        "q": "flushSync is for _____ DOM access.",
+        "type": "fill_blank",
+        "answers": [
+            "immediate"
+        ],
+        "other_options": [
+            "delayed",
+            "async",
+            "batched"
+        ]
+    },
+    {
+        "q": "Match reactivity utilities:",
+        "type": "match",
+        "left": [
+            "tick",
+            "untrack",
+            "flushSync",
+            "$inspect"
+        ],
+        "right": [
+            "Await update",
+            "No dependency",
+            "Sync update",
+            "Debug log"
+        ]
+    },
+    {
+        "q": "What is reactivity in classes?",
+        "type": "mcq",
+        "c": "class Counter {\n  count = $state(0);\n  doubled = $derived(this.count * 2);\n  increment() { this.count++; }\n}",
+        "o": [
+            "Using runes in class properties and methods",
+            "Class-based components",
+            "Reactive classes",
+            "Component classes"
+        ]
+    },
+    {
+        "q": "Runes work in class _____.",
+        "type": "fill_blank",
+        "answers": [
+            "properties"
+        ],
+        "other_options": [
+            "methods",
+            "constructors",
+            "names"
+        ]
+    },
+    {
+        "q": "Can classes use $derived?",
+        "type": "mcq",
+        "o": [
+            "Yes, as class properties",
+            "No",
+            "Only in methods",
+            "Only in constructor"
+        ]
+    },
+    {
+        "q": "$derived works as class _____.",
+        "type": "fill_blank",
+        "answers": [
+            "property"
+        ],
+        "other_options": [
+            "method",
+            "constructor",
+            "static"
+        ]
+    },
+    {
+        "q": "What is module-level reactivity?",
+        "type": "mcq",
+        "c": "// store.svelte.js\nexport const count = $state(0);",
+        "o": [
+            "Using runes in .svelte.js module files",
+            "Module exports",
+            "Module imports",
+            "Module scope"
+        ]
+    },
+    {
+        "q": "Module reactivity uses _____.svelte.js files.",
+        "type": "fill_blank",
+        "answers": [
+            ".svelte"
+        ],
+        "other_options": [
+            ".js",
+            ".ts",
+            ".mjs"
+        ]
+    },
+    {
+        "q": "Rearrange reactive class usage:",
+        "type": "rearrange",
+        "words": [
+            "Define class",
+            "Use $state fields",
+            "Add $derived",
+            "Create instance",
+            "React to changes"
+        ]
+    },
+    {
+        "q": "How do stores work with runes?",
+        "type": "mcq",
+        "o": [
+            "Stores still work, $state adds alternative for simpler cases",
+            "Stores replaced",
+            "Stores removed",
+            "Runes are stores"
+        ]
+    },
+    {
+        "q": "Stores and runes work _____.",
+        "type": "fill_blank",
+        "answers": [
+            "together"
+        ],
+        "other_options": [
+            "separately",
+            "exclusively",
+            "alternatively"
+        ]
+    },
+    {
+        "q": "When to prefer stores over $state?",
+        "type": "mcq",
+        "o": [
+            "Cross-component state, complex subscriptions, existing patterns",
+            "Always",
+            "Never",
+            "Small apps only"
+        ]
+    },
+    {
+        "q": "Stores are better for _____ state.",
+        "type": "fill_blank",
+        "answers": [
+            "cross-component"
+        ],
+        "other_options": [
+            "local",
+            "simple",
+            "temporary"
+        ]
+    },
+    {
+        "q": "What is fine-grained reactivity?",
+        "type": "mcq",
+        "o": [
+            "Only affected parts update, not entire component",
+            "Small updates",
+            "Slow updates",
+            "Frequent updates"
+        ]
+    },
+    {
+        "q": "Fine-grained reactivity updates only _____ parts.",
+        "type": "fill_blank",
+        "answers": [
+            "affected"
+        ],
+        "other_options": [
+            "all",
+            "visible",
+            "rendered"
+        ]
+    },
+    {
+        "q": "Match reactivity scope:",
+        "type": "match",
+        "left": [
+            "$state",
+            "stores",
+            "context",
+            "$derived"
+        ],
+        "right": [
+            "Local/module",
+            "Cross-component",
+            "Subtree",
+            "Computed"
+        ]
+    },
+    {
+        "q": "What is signal pattern?",
+        "type": "mcq",
+        "o": [
+            "Fine-grained reactive primitives that track dependencies",
+            "Event system",
+            "Message passing",
+            "Network signals"
+        ]
+    },
+    {
+        "q": "Signals are reactive _____.",
+        "type": "fill_blank",
+        "answers": [
+            "primitives"
+        ],
+        "other_options": [
+            "components",
+            "stores",
+            "effects"
+        ]
+    },
+    {
+        "q": "Is $state based on signals?",
+        "type": "mcq",
+        "o": [
+            "Yes, Svelte 5 uses signals internally",
+            "No",
+            "Partially",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "Svelte 5 uses _____ internally.",
+        "type": "fill_blank",
+        "answers": [
+            "signals"
+        ],
+        "other_options": [
+            "observables",
+            "proxies",
+            "watchers"
+        ]
+    },
+    {
+        "q": "What is proxy-based reactivity?",
+        "type": "mcq",
+        "o": [
+            "Using JavaScript Proxy to intercept property access",
+            "Network proxy",
+            "Proxy server",
+            "CSS proxy"
+        ]
+    },
+    {
+        "q": "Proxy reactivity intercepts property _____.",
+        "type": "fill_blank",
+        "answers": [
+            "access"
+        ],
+        "other_options": [
+            "definition",
+            "deletion",
+            "creation"
+        ]
+    },
+    {
+        "q": "Rearrange reactivity concepts by granularity:",
+        "type": "rearrange",
+        "words": [
+            "Signals",
+            "Fine-grained",
+            "Component",
+            "Subtree",
+            "App-wide"
+        ]
+    },
+    {
+        "q": "What is reactivity tracing?",
+        "type": "mcq",
+        "o": [
+            "Understanding which dependencies trigger updates",
+            "Drawing traces",
+            "Logging calls",
+            "Debugging lines"
+        ]
+    },
+    {
+        "q": "Tracing shows which dependencies trigger _____.",
+        "type": "fill_blank",
+        "answers": [
+            "updates"
+        ],
+        "other_options": [
+            "errors",
+            "logs",
+            "events"
+        ]
+    },
+    {
+        "q": "How do you debug reactivity?",
+        "type": "mcq",
+        "o": [
+            "Use $inspect, console.log in $effect, Svelte DevTools",
+            "No debugging available",
+            "Only console.log",
+            "Only breakpoints"
+        ]
+    },
+    {
+        "q": "$inspect helps _____ reactivity.",
+        "type": "fill_blank",
+        "answers": [
+            "debug"
+        ],
+        "other_options": [
+            "create",
+            "remove",
+            "optimize"
+        ]
+    },
+    {
+        "q": "What are reactivity gotchas?",
+        "type": "mcq",
+        "o": [
+            "Object mutation, closure stale values, async timing",
+            "No gotchas",
+            "Performance only",
+            "Syntax only"
+        ]
+    },
+    {
+        "q": "Common gotcha is object _____ not triggering updates.",
+        "type": "fill_blank",
+        "answers": [
+            "mutation"
+        ],
+        "other_options": [
+            "creation",
+            "deletion",
+            "access"
+        ]
+    },
+    {
+        "q": "Match reactivity problems and solutions:",
+        "type": "match",
+        "left": [
+            "Mutation",
+            "Stale closure",
+            "Async timing",
+            "Deep object"
+        ],
+        "right": [
+            "Reassign",
+            "Use $effect",
+            "Use tick()",
+            "Use $state.raw"
+        ]
+    },
+    {
+        "q": "What is stale closure problem?",
+        "type": "mcq",
+        "o": [
+            "Callback captures old value instead of current",
+            "Old function",
+            "Memory leak",
+            "Slow closure"
+        ]
+    },
+    {
+        "q": "Stale closures capture _____ values.",
+        "type": "fill_blank",
+        "answers": [
+            "old"
+        ],
+        "other_options": [
+            "new",
+            "null",
+            "undefined"
+        ]
+    },
+    {
+        "q": "How to fix stale closures in effects?",
+        "type": "mcq",
+        "o": [
+            "Access reactive values directly, not in closure",
+            "Use let instead",
+            "Ignore the problem",
+            "No solution"
+        ]
+    },
+    {
+        "q": "Access reactive values _____ in effect.",
+        "type": "fill_blank",
+        "answers": [
+            "directly"
+        ],
+        "other_options": [
+            "indirectly",
+            "through closure",
+            "via callback"
+        ]
+    },
+    {
+        "q": "What is effect cleanup order?",
+        "type": "mcq",
+        "o": [
+            "Previous cleanup runs before new effect",
+            "After new effect",
+            "Same time",
+            "Random order"
+        ]
+    },
+    {
+        "q": "Cleanup runs _____ new effect.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "without"
+        ]
+    },
+    {
+        "q": "Rearrange effect with cleanup:",
+        "type": "rearrange",
+        "words": [
+            "Dependency changes",
+            "Run cleanup",
+            "Create new effect",
+            "Run effect body",
+            "Return new cleanup"
+        ]
+    },
+    {
+        "q": "What is batching in reactivity?",
+        "type": "mcq",
+        "o": [
+            "Multiple state changes applied in single DOM update",
+            "Batch processing",
+            "Multiple components",
+            "Many files"
+        ]
+    },
+    {
+        "q": "Batching combines multiple changes in _____ update.",
+        "type": "fill_blank",
+        "answers": [
+            "single"
+        ],
+        "other_options": [
+            "multiple",
+            "separate",
+            "async"
+        ]
+    },
+    {
+        "q": "Does Svelte batch by default?",
+        "type": "mcq",
+        "o": [
+            "Yes, within same execution frame",
+            "No",
+            "Only with option",
+            "Only in production"
+        ]
+    },
+    {
+        "q": "Svelte batches within same _____ frame.",
+        "type": "fill_blank",
+        "answers": [
+            "execution"
+        ],
+        "other_options": [
+            "animation",
+            "render",
+            "event"
+        ]
+    },
+    {
+        "q": "What is reactive context?",
+        "type": "mcq",
+        "o": [
+            "Scope where reactivity tracking is active",
+            "Context API",
+            "Component context",
+            "Global context"
+        ]
+    },
+    {
+        "q": "Reactive context tracks _____.",
+        "type": "fill_blank",
+        "answers": [
+            "dependencies"
+        ],
+        "other_options": [
+            "components",
+            "stores",
+            "events"
+        ]
+    },
+    {
+        "q": "When is reactive context inactive?",
+        "type": "mcq",
+        "o": [
+            "In callbacks like setTimeout, event handlers outside Svelte",
+            "Never",
+            "Always",
+            "In components"
+        ]
+    },
+    {
+        "q": "SetTimeout callbacks are _____ reactive context.",
+        "type": "fill_blank",
+        "answers": [
+            "outside"
+        ],
+        "other_options": [
+            "inside",
+            "within",
+            "part of"
+        ]
+    },
+    {
+        "q": "Match reactivity timing:",
+        "type": "match",
+        "left": [
+            "Sync",
+            "Microtask",
+            "tick()",
+            "flushSync"
+        ],
+        "right": [
+            "State change",
+            "DOM update",
+            "After DOM",
+            "Force sync"
+        ]
+    },
+    {
+        "q": "What is reactive lifecycle?",
+        "type": "mcq",
+        "o": [
+            "Order of reactivity operations during update cycle",
+            "Component lifecycle",
+            "Store lifecycle",
+            "Effect lifecycle"
+        ]
+    },
+    {
+        "q": "Reactive lifecycle defines update _____.",
+        "type": "fill_blank",
+        "answers": [
+            "order"
+        ],
+        "other_options": [
+            "speed",
+            "type",
+            "scope"
+        ]
+    },
+    {
+        "q": "Summary: What makes Svelte reactivity special?",
+        "type": "mcq",
+        "o": [
+            "Compile-time, no runtime overhead, assignment-based",
+            "Virtual DOM",
+            "Runtime library",
+            "Observable streams"
+        ]
+    },
+    {
+        "q": "Svelte reactivity has no runtime _____.",
+        "type": "fill_blank",
+        "answers": [
+            "overhead"
+        ],
+        "other_options": [
+            "features",
+            "updates",
+            "tracking"
+        ]
+    },
+    {
+        "q": "What are easing functions?",
+        "type": "mcq",
+        "o": [
+            "Mathematical functions that control animation speed over time",
+            "Easy functions",
+            "Simple callbacks",
+            "Quick methods"
+        ]
+    },
+    {
+        "q": "Easing controls animation _____ over time.",
+        "type": "fill_blank",
+        "answers": [
+            "speed"
+        ],
+        "other_options": [
+            "color",
+            "direction",
+            "size"
+        ]
+    },
+    {
+        "q": "Where do you import easing functions?",
+        "type": "mcq",
+        "o": [
+            "svelte/easing",
+            "svelte/animate",
+            "svelte/motion",
+            "svelte/transition"
+        ]
+    },
+    {
+        "q": "Easing is imported from svelte/_____.",
+        "type": "fill_blank",
+        "answers": [
+            "easing"
+        ],
+        "other_options": [
+            "motion",
+            "animate",
+            "transition"
+        ]
+    },
+    {
+        "q": "What is linear easing?",
+        "type": "mcq",
+        "o": [
+            "Constant speed throughout animation",
+            "Fast start",
+            "Slow end",
+            "Bouncy finish"
+        ]
+    },
+    {
+        "q": "Linear easing has _____ speed.",
+        "type": "fill_blank",
+        "answers": [
+            "constant"
+        ],
+        "other_options": [
+            "variable",
+            "increasing",
+            "decreasing"
+        ]
+    },
+    {
+        "q": "Match easing types:",
+        "type": "match",
+        "left": [
+            "linear",
+            "cubicOut",
+            "elasticIn",
+            "bounceOut"
+        ],
+        "right": [
+            "Constant",
+            "Smooth end",
+            "Spring start",
+            "Bounce end"
+        ]
+    },
+    {
+        "q": "What is cubicOut easing?",
+        "type": "mcq",
+        "o": [
+            "Fast start, slows down at end",
+            "Slow start, fast end",
+            "Constant speed",
+            "Bouncy"
+        ]
+    },
+    {
+        "q": "cubicOut starts _____ and slows.",
+        "type": "fill_blank",
+        "answers": [
+            "fast"
+        ],
+        "other_options": [
+            "slow",
+            "medium",
+            "bouncy"
+        ]
+    },
+    {
+        "q": "What is cubicIn easing?",
+        "type": "mcq",
+        "o": [
+            "Slow start, accelerates at end",
+            "Fast start, slow end",
+            "Constant speed",
+            "Elastic"
+        ]
+    },
+    {
+        "q": "cubicIn starts _____ and accelerates.",
+        "type": "fill_blank",
+        "answers": [
+            "slow"
+        ],
+        "other_options": [
+            "fast",
+            "medium",
+            "bouncy"
+        ]
+    },
+    {
+        "q": "What is cubicInOut?",
+        "type": "mcq",
+        "o": [
+            "Slow start, fast middle, slow end",
+            "Fast throughout",
+            "Slow throughout",
+            "Random speed"
+        ]
+    },
+    {
+        "q": "cubicInOut is slow at start and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "end"
+        ],
+        "other_options": [
+            "middle",
+            "always",
+            "never"
+        ]
+    },
+    {
+        "q": "What is elasticOut easing?",
+        "type": "mcq",
+        "o": [
+            "Overshoots target then settles back",
+            "No overshoot",
+            "Constant speed",
+            "Linear motion"
+        ]
+    },
+    {
+        "q": "Elastic easing _____ the target.",
+        "type": "fill_blank",
+        "answers": [
+            "overshoots"
+        ],
+        "other_options": [
+            "undershoots",
+            "matches",
+            "ignores"
+        ]
+    },
+    {
+        "q": "Rearrange easing intensity:",
+        "type": "rearrange",
+        "words": [
+            "linear",
+            "quadOut",
+            "cubicOut",
+            "quartOut",
+            "quintOut"
+        ]
+    },
+    {
+        "q": "What is bounceOut easing?",
+        "type": "mcq",
+        "o": [
+            "Bounces at the end like dropping ball",
+            "Single bounce",
+            "No bounce",
+            "Continuous bouncing"
+        ]
+    },
+    {
+        "q": "bounceOut simulates _____ ball.",
+        "type": "fill_blank",
+        "answers": [
+            "dropping"
+        ],
+        "other_options": [
+            "throwing",
+            "rolling",
+            "spinning"
+        ]
+    },
+    {
+        "q": "What is backOut easing?",
+        "type": "mcq",
+        "o": [
+            "Slightly overshoots before settling",
+            "Goes backward",
+            "No overshoot",
+            "Linear"
+        ]
+    },
+    {
+        "q": "backOut slightly _____ target.",
+        "type": "fill_blank",
+        "answers": [
+            "overshoots"
+        ],
+        "other_options": [
+            "undershoots",
+            "hits",
+            "misses"
+        ]
+    },
+    {
+        "q": "Match easing for use cases:",
+        "type": "match",
+        "left": [
+            "UI elements",
+            "Playful UI",
+            "Notifications",
+            "Loading"
+        ],
+        "right": [
+            "cubicOut",
+            "elasticOut",
+            "backOut",
+            "linear"
+        ]
+    },
+    {
+        "q": "What is custom easing function?",
+        "type": "mcq",
+        "c": "const myEasing = t => t * t;",
+        "o": [
+            "Function taking 0-1 and returning 0-1",
+            "CSS transition",
+            "Animation frame",
+            "Timer callback"
+        ]
+    },
+    {
+        "q": "Custom easing takes _____ and returns 0-1.",
+        "type": "fill_blank",
+        "answers": [
+            "0-1"
+        ],
+        "other_options": [
+            "0-100",
+            "0-10",
+            "any number"
+        ]
+    },
+    {
+        "q": "What is bezier easing?",
+        "type": "mcq",
+        "o": [
+            "Easing defined by cubic bezier curve control points",
+            "Linear easing",
+            "Step easing",
+            "No easing"
+        ]
+    },
+    {
+        "q": "Bezier easing uses _____ control points.",
+        "type": "fill_blank",
+        "answers": [
+            "four"
+        ],
+        "other_options": [
+            "two",
+            "three",
+            "five"
+        ]
+    },
+    {
+        "q": "What is state management in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Organizing and sharing application state across components",
+            "CSS management",
+            "File management",
+            "Package management"
+        ]
+    },
+    {
+        "q": "State management organizes _____ state.",
+        "type": "fill_blank",
+        "answers": [
+            "application"
+        ],
+        "other_options": [
+            "component",
+            "local",
+            "CSS"
+        ]
+    },
+    {
+        "q": "What state management options exist in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Stores, context, props, runes",
+            "Only stores",
+            "Only props",
+            "Only context"
+        ]
+    },
+    {
+        "q": "Svelte state management includes stores and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "context"
+        ],
+        "other_options": [
+            "CSS",
+            "HTML",
+            "scripts"
+        ]
+    },
+    {
+        "q": "When to use props vs stores?",
+        "type": "mcq",
+        "o": [
+            "Props for parent-child, stores for distant components",
+            "Always props",
+            "Always stores",
+            "Same thing"
+        ]
+    },
+    {
+        "q": "Props are for _____ communication.",
+        "type": "fill_blank",
+        "answers": [
+            "parent-child"
+        ],
+        "other_options": [
+            "global",
+            "sibling",
+            "remote"
+        ]
+    },
+    {
+        "q": "Match state sharing methods:",
+        "type": "match",
+        "left": [
+            "Props",
+            "Context",
+            "Stores",
+            "Events"
+        ],
+        "right": [
+            "Direct child",
+            "Subtree",
+            "Global",
+            "Child to parent"
+        ]
+    },
+    {
+        "q": "What is state machine pattern?",
+        "type": "mcq",
+        "o": [
+            "Defining explicit states and transitions between them",
+            "Machine learning",
+            "Hardware state",
+            "Network state"
+        ]
+    },
+    {
+        "q": "State machines define explicit _____.",
+        "type": "fill_blank",
+        "answers": [
+            "transitions"
+        ],
+        "other_options": [
+            "styles",
+            "events",
+            "components"
+        ]
+    },
+    {
+        "q": "What is XState?",
+        "type": "mcq",
+        "o": [
+            "Popular state machine library that works with Svelte",
+            "CSS framework",
+            "Build tool",
+            "Test library"
+        ]
+    },
+    {
+        "q": "XState is a state _____ library.",
+        "type": "fill_blank",
+        "answers": [
+            "machine"
+        ],
+        "other_options": [
+            "management",
+            "storage",
+            "sharing"
+        ]
+    },
+    {
+        "q": "How do you use XState with Svelte?",
+        "type": "mcq",
+        "c": "import { useMachine } from '@xstate/svelte';\n\nconst { state, send } = useMachine(machine);",
+        "o": [
+            "Using @xstate/svelte package with useMachine hook",
+            "Direct integration",
+            "Store wrapper",
+            "Context only"
+        ]
+    },
+    {
+        "q": "XState integration uses _____ hook.",
+        "type": "fill_blank",
+        "answers": [
+            "useMachine"
+        ],
+        "other_options": [
+            "useState",
+            "useStore",
+            "useMachine"
+        ]
+    },
+    {
+        "q": "Rearrange state machine flow:",
+        "type": "rearrange",
+        "words": [
+            "Define states",
+            "Define transitions",
+            "Send event",
+            "Update state",
+            "React to change"
+        ]
+    },
+    {
+        "q": "What is reducer pattern?",
+        "type": "mcq",
+        "o": [
+            "Pure function that takes state and action, returns new state",
+            "Reducing arrays",
+            "Minimizing code",
+            "Compression algorithm"
+        ]
+    },
+    {
+        "q": "Reducers take state and action, return _____.",
+        "type": "fill_blank",
+        "answers": [
+            "new state"
+        ],
+        "other_options": [
+            "action",
+            "event",
+            "void"
+        ]
+    },
+    {
+        "q": "Can you implement Redux pattern in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Yes, using stores with reducer pattern",
+            "No, not possible",
+            "Only with library",
+            "Built-in support"
+        ]
+    },
+    {
+        "q": "Redux pattern uses stores with _____.",
+        "type": "fill_blank",
+        "answers": [
+            "reducers"
+        ],
+        "other_options": [
+            "actions",
+            "props",
+            "events"
+        ]
+    },
+    {
+        "q": "What is action pattern in stores?",
+        "type": "mcq",
+        "c": "function createStore() {\n  const { subscribe, update } = writable(initialState);\n  return {\n    subscribe,\n    addItem: (item) => update(s => ({ ...s, items: [...s.items, item] })),\n    removeItem: (id) => update(s => ({ ...s, items: s.items.filter(i => i.id !== id) }))\n  };\n}",
+        "o": [
+            "Encapsulating updates as named methods",
+            "Redux actions",
+            "Event actions",
+            "CSS actions"
+        ]
+    },
+    {
+        "q": "Actions encapsulate updates as named _____.",
+        "type": "fill_blank",
+        "answers": [
+            "methods"
+        ],
+        "other_options": [
+            "functions",
+            "callbacks",
+            "handlers"
+        ]
+    },
+    {
+        "q": "Match state patterns:",
+        "type": "match",
+        "left": [
+            "Simple state",
+            "Complex state",
+            "Predictable flow",
+            "Async state"
+        ],
+        "right": [
+            "Writable store",
+            "Custom store",
+            "State machine",
+            "Derived store"
+        ]
+    },
+    {
+        "q": "What is optimistic updates?",
+        "type": "mcq",
+        "o": [
+            "Update UI immediately, then sync with server",
+            "Wait for server",
+            "Skip server",
+            "Cache only"
+        ]
+    },
+    {
+        "q": "Optimistic updates update UI _____.",
+        "type": "fill_blank",
+        "answers": [
+            "immediately"
+        ],
+        "other_options": [
+            "later",
+            "never",
+            "randomly"
+        ]
+    },
+    {
+        "q": "How to handle optimistic update failure?",
+        "type": "mcq",
+        "o": [
+            "Rollback to previous state on error",
+            "Ignore error",
+            "Crash app",
+            "Keep wrong state"
+        ]
+    },
+    {
+        "q": "On failure, _____ to previous state.",
+        "type": "fill_blank",
+        "answers": [
+            "rollback"
+        ],
+        "other_options": [
+            "commit",
+            "forward",
+            "delete"
+        ]
+    },
+    {
+        "q": "What is normalization in state?",
+        "type": "mcq",
+        "o": [
+            "Storing entities by ID in flat structure",
+            "Making state normal",
+            "Formatting data",
+            "Validating state"
+        ]
+    },
+    {
+        "q": "Normalization stores entities by _____.",
+        "type": "fill_blank",
+        "answers": [
+            "ID"
+        ],
+        "other_options": [
+            "name",
+            "type",
+            "order"
+        ]
+    },
+    {
+        "q": "Why normalize state?",
+        "type": "mcq",
+        "o": [
+            "Avoid duplication, easier updates, better performance",
+            "More duplication",
+            "Slower updates",
+            "Larger size"
+        ]
+    },
+    {
+        "q": "Normalization avoids data _____.",
+        "type": "fill_blank",
+        "answers": [
+            "duplication"
+        ],
+        "other_options": [
+            "storage",
+            "access",
+            "creation"
+        ]
+    },
+    {
+        "q": "Rearrange data flow:",
+        "type": "rearrange",
+        "words": [
+            "User action",
+            "Dispatch event",
+            "Update store",
+            "Re-render component",
+            "Update DOM"
+        ]
+    },
+    {
+        "q": "What is selective subscription?",
+        "type": "mcq",
+        "o": [
+            "Only subscribing to needed parts of state",
+            "All subscriptions",
+            "No subscriptions",
+            "Random subscriptions"
+        ]
+    },
+    {
+        "q": "Selective subscription improves _____.",
+        "type": "fill_blank",
+        "answers": [
+            "performance"
+        ],
+        "other_options": [
+            "readability",
+            "security",
+            "styling"
+        ]
+    },
+    {
+        "q": "How to select slice of store?",
+        "type": "mcq",
+        "c": "const name = derived(user, $user => $user.name);",
+        "o": [
+            "Use derived store to select part of state",
+            "Use get()",
+            "Use subscribe()",
+            "Cannot select"
+        ]
+    },
+    {
+        "q": "Derived stores can _____ state slices.",
+        "type": "fill_blank",
+        "answers": [
+            "select"
+        ],
+        "other_options": [
+            "create",
+            "delete",
+            "modify"
+        ]
+    },
+    {
+        "q": "What is store composition?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple stores into new store",
+            "Single store",
+            "Store deletion",
+            "Store separation"
+        ]
+    },
+    {
+        "q": "Composition combines multiple _____.",
+        "type": "fill_blank",
+        "answers": [
+            "stores"
+        ],
+        "other_options": [
+            "components",
+            "props",
+            "events"
+        ]
+    },
+    {
+        "q": "Match store patterns:",
+        "type": "match",
+        "left": [
+            "Composition",
+            "Selection",
+            "Derivation",
+            "Subscription"
+        ],
+        "right": [
+            "Combine stores",
+            "Pick slice",
+            "Compute value",
+            "Listen changes"
+        ]
+    },
+    {
+        "q": "What is time travel debugging?",
+        "type": "mcq",
+        "o": [
+            "Storing state history to replay/undo changes",
+            "Fast debugging",
+            "Future prediction",
+            "Past viewing"
+        ]
+    },
+    {
+        "q": "Time travel stores state _____.",
+        "type": "fill_blank",
+        "answers": [
+            "history"
+        ],
+        "other_options": [
+            "future",
+            "prediction",
+            "guess"
+        ]
+    },
+    {
+        "q": "How to implement undo?",
+        "type": "mcq",
+        "o": [
+            "Store previous states in array, restore on undo",
+            "Cannot undo",
+            "Automatic undo",
+            "Browser undo"
+        ]
+    },
+    {
+        "q": "Undo restores _____ state.",
+        "type": "fill_blank",
+        "answers": [
+            "previous"
+        ],
+        "other_options": [
+            "next",
+            "current",
+            "initial"
+        ]
+    },
+    {
+        "q": "What is persistence pattern?",
+        "type": "mcq",
+        "o": [
+            "Saving state to localStorage/database and restoring",
+            "Memory only",
+            "Session only",
+            "No saving"
+        ]
+    },
+    {
+        "q": "Persistence saves state to _____.",
+        "type": "fill_blank",
+        "answers": [
+            "localStorage"
+        ],
+        "other_options": [
+            "memory",
+            "cache",
+            "cookies"
+        ]
+    },
+    {
+        "q": "How to persist store?",
+        "type": "mcq",
+        "c": "const persisted = writable(\n  JSON.parse(localStorage.getItem('key') || 'null'),\n  () => {\n    return () => localStorage.setItem('key', JSON.stringify(get(persisted)));\n  }\n);",
+        "o": [
+            "Load from storage on init, save on cleanup/change",
+            "Automatic persistence",
+            "Cannot persist",
+            "Only with library"
+        ]
+    },
+    {
+        "q": "Persisted stores load from _____ on init.",
+        "type": "fill_blank",
+        "answers": [
+            "storage"
+        ],
+        "other_options": [
+            "server",
+            "cache",
+            "memory"
+        ]
+    },
+    {
+        "q": "Rearrange persistence flow:",
+        "type": "rearrange",
+        "words": [
+            "Check storage",
+            "Load if exists",
+            "Use default if not",
+            "Subscribe changes",
+            "Save on change"
+        ]
+    },
+    {
+        "q": "What are cross-tab stores?",
+        "type": "mcq",
+        "o": [
+            "Stores that sync state across browser tabs",
+            "Tab component",
+            "Browser tabs",
+            "Component tabs"
+        ]
+    },
+    {
+        "q": "Cross-tab stores sync across browser _____.",
+        "type": "fill_blank",
+        "answers": [
+            "tabs"
+        ],
+        "other_options": [
+            "windows",
+            "sessions",
+            "domains"
+        ]
+    },
+    {
+        "q": "How to sync across tabs?",
+        "type": "mcq",
+        "o": [
+            "Use localStorage events or BroadcastChannel API",
+            "Automatic sync",
+            "Cannot sync",
+            "Server only"
+        ]
+    },
+    {
+        "q": "Tab sync uses localStorage or _____ API.",
+        "type": "fill_blank",
+        "answers": [
+            "BroadcastChannel"
+        ],
+        "other_options": [
+            "WebSocket",
+            "Fetch",
+            "XMLHttpRequest"
+        ]
+    },
+    {
+        "q": "What is reactive immutability?",
+        "type": "mcq",
+        "o": [
+            "Creating new objects instead of mutating for reactivity",
+            "Freezing objects",
+            "Preventing changes",
+            "Constant values"
+        ]
+    },
+    {
+        "q": "Immutability creates _____ objects.",
+        "type": "fill_blank",
+        "answers": [
+            "new"
+        ],
+        "other_options": [
+            "same",
+            "frozen",
+            "constant"
+        ]
+    },
+    {
+        "q": "Match immutable patterns:",
+        "type": "match",
+        "left": [
+            "Spread array",
+            "Spread object",
+            "Filter",
+            "Map"
+        ],
+        "right": [
+            "[...arr, item]",
+            "{...obj, key: val}",
+            "arr.filter()",
+            "arr.map()"
+        ]
+    },
+    {
+        "q": "What is immer library?",
+        "type": "mcq",
+        "o": [
+            "Library that allows mutable syntax with immutable results",
+            "Animation library",
+            "Store library",
+            "UI library"
+        ]
+    },
+    {
+        "q": "Immer allows mutable _____ with immutable results.",
+        "type": "fill_blank",
+        "answers": [
+            "syntax"
+        ],
+        "other_options": [
+            "state",
+            "logic",
+            "code"
+        ]
+    },
+    {
+        "q": "Can you use immer with Svelte?",
+        "type": "mcq",
+        "o": [
+            "Yes, in store update functions",
+            "No",
+            "Only with wrapper",
+            "Built-in support"
+        ]
+    },
+    {
+        "q": "Immer works in store _____ functions.",
+        "type": "fill_blank",
+        "answers": [
+            "update"
+        ],
+        "other_options": [
+            "set",
+            "subscribe",
+            "get"
+        ]
+    },
+    {
+        "q": "What is dependency injection in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Using context to provide dependencies to components",
+            "npm injection",
+            "Code injection",
+            "Script injection"
+        ]
+    },
+    {
+        "q": "DI in Svelte uses _____ API.",
+        "type": "fill_blank",
+        "answers": [
+            "context"
+        ],
+        "other_options": [
+            "store",
+            "prop",
+            "event"
+        ]
+    },
+    {
+        "q": "Rearrange DI pattern:",
+        "type": "rearrange",
+        "words": [
+            "Create service",
+            "Set in context",
+            "Get in child",
+            "Use service",
+            "Cleanup if needed"
+        ]
+    },
+    {
+        "q": "What is reactive caching?",
+        "type": "mcq",
+        "o": [
+            "Caching computed values to avoid recomputation",
+            "Browser cache",
+            "HTTP cache",
+            "Store cache"
+        ]
+    },
+    {
+        "q": "Reactive caching avoids _____.",
+        "type": "fill_blank",
+        "answers": [
+            "recomputation"
+        ],
+        "other_options": [
+            "storage",
+            "rendering",
+            "networking"
+        ]
+    },
+    {
+        "q": "How to cache expensive computations?",
+        "type": "mcq",
+        "o": [
+            "Use memoization or derived stores with stable dependencies",
+            "Cannot cache",
+            "Always recompute",
+            "Use local storage"
+        ]
+    },
+    {
+        "q": "Memoization caches function _____.",
+        "type": "fill_blank",
+        "answers": [
+            "results"
+        ],
+        "other_options": [
+            "calls",
+            "inputs",
+            "outputs"
+        ]
+    },
+    {
+        "q": "What is reactive debouncing?",
+        "type": "mcq",
+        "o": [
+            "Delaying reactive updates until input settles",
+            "Immediate updates",
+            "Skipping updates",
+            "Random delays"
+        ]
+    },
+    {
+        "q": "Debouncing delays until input _____.",
+        "type": "fill_blank",
+        "answers": [
+            "settles"
+        ],
+        "other_options": [
+            "starts",
+            "continues",
+            "resets"
+        ]
+    },
+    {
+        "q": "How to debounce store updates?",
+        "type": "mcq",
+        "c": "const debouncedSearch = derived(\n  search,\n  ($search, set) => {\n    const timeout = setTimeout(() => set($search), 300);\n    return () => clearTimeout(timeout);\n  },\n  ''\n);",
+        "o": [
+            "Use derived store with timeout",
+            "Use special store",
+            "Cannot debounce",
+            "Automatic debouncing"
+        ]
+    },
+    {
+        "q": "Debounced derived uses _____.",
+        "type": "fill_blank",
+        "answers": [
+            "timeout"
+        ],
+        "other_options": [
+            "interval",
+            "immediate",
+            "frame"
+        ]
+    },
+    {
+        "q": "Match reactive patterns:",
+        "type": "match",
+        "left": [
+            "Debounce",
+            "Throttle",
+            "Cache",
+            "Batch"
+        ],
+        "right": [
+            "Wait for pause",
+            "Limit frequency",
+            "Store result",
+            "Combine updates"
+        ]
+    },
+    {
+        "q": "What is throttling?",
+        "type": "mcq",
+        "o": [
+            "Limiting updates to maximum frequency",
+            "Speeding updates",
+            "Blocking updates",
+            "Random updates"
+        ]
+    },
+    {
+        "q": "Throttling limits update _____.",
+        "type": "fill_blank",
+        "answers": [
+            "frequency"
+        ],
+        "other_options": [
+            "count",
+            "size",
+            "type"
+        ]
+    },
+    {
+        "q": "Debounce vs throttle?",
+        "type": "mcq",
+        "o": [
+            "Debounce waits for pause, throttle limits frequency",
+            "Same thing",
+            "Throttle waits",
+            "Debounce limits"
+        ]
+    },
+    {
+        "q": "Debounce waits for _____, throttle limits rate.",
+        "type": "fill_blank",
+        "answers": [
+            "pause"
+        ],
+        "other_options": [
+            "input",
+            "output",
+            "start"
+        ]
+    },
+    {
+        "q": "What is store middleware?",
+        "type": "mcq",
+        "o": [
+            "Functions that intercept and transform store operations",
+            "Server middleware",
+            "Route middleware",
+            "API middleware"
+        ]
+    },
+    {
+        "q": "Middleware intercepts store _____.",
+        "type": "fill_blank",
+        "answers": [
+            "operations"
+        ],
+        "other_options": [
+            "values",
+            "types",
+            "names"
+        ]
+    },
+    {
+        "q": "How to implement logging middleware?",
+        "type": "mcq",
+        "c": "function withLogging(store) {\n  return {\n    ...store,\n    set: (value) => {\n      console.log('Setting:', value);\n      store.set(value);\n    }\n  };\n}",
+        "o": [
+            "Wrap store methods with logging",
+            "Use console.log directly",
+            "Cannot add logging",
+            "Built-in logging"
+        ]
+    },
+    {
+        "q": "Logging middleware wraps store _____.",
+        "type": "fill_blank",
+        "answers": [
+            "methods"
+        ],
+        "other_options": [
+            "values",
+            "types",
+            "names"
+        ]
+    },
+    {
+        "q": "Rearrange middleware chain:",
+        "type": "rearrange",
+        "words": [
+            "Create store",
+            "Add logging",
+            "Add validation",
+            "Add persistence",
+            "Export wrapped"
+        ]
+    },
+    {
+        "q": "What is store validation?",
+        "type": "mcq",
+        "o": [
+            "Checking values before allowing store updates",
+            "Validating forms",
+            "Type checking",
+            "Syntax checking"
+        ]
+    },
+    {
+        "q": "Validation checks values before _____.",
+        "type": "fill_blank",
+        "answers": [
+            "updating"
+        ],
+        "other_options": [
+            "reading",
+            "subscribing",
+            "creating"
+        ]
+    },
+    {
+        "q": "How to add validation to store?",
+        "type": "mcq",
+        "c": "function createValidatedStore(initial, validate) {\n  const { subscribe, set, update } = writable(initial);\n  return {\n    subscribe,\n    set: (v) => validate(v) && set(v),\n    update: (fn) => update(s => {\n      const n = fn(s);\n      return validate(n) ? n : s;\n    })\n  };\n}",
+        "o": [
+            "Wrap set/update with validation check",
+            "Cannot validate",
+            "Automatic validation",
+            "Use schema"
+        ]
+    },
+    {
+        "q": "Validated store wraps _____ with check.",
+        "type": "fill_blank",
+        "answers": [
+            "set/update"
+        ],
+        "other_options": [
+            "subscribe",
+            "get",
+            "destroy"
+        ]
+    },
+    {
+        "q": "What is store versioning?",
+        "type": "mcq",
+        "o": [
+            "Tracking store schema versions for migrations",
+            "Git versioning",
+            "API versioning",
+            "Code versioning"
+        ]
+    },
+    {
+        "q": "Versioning helps with data _____.",
+        "type": "fill_blank",
+        "answers": [
+            "migrations"
+        ],
+        "other_options": [
+            "storage",
+            "access",
+            "creation"
+        ]
+    },
+    {
+        "q": "Match advanced patterns:",
+        "type": "match",
+        "left": [
+            "Middleware",
+            "Validation",
+            "Versioning",
+            "Migration"
+        ],
+        "right": [
+            "Intercept ops",
+            "Check values",
+            "Track schema",
+            "Transform data"
+        ]
+    },
+    {
+        "q": "What is lazy loading state?",
+        "type": "mcq",
+        "o": [
+            "Loading state only when needed",
+            "Slow loading",
+            "Preloading all",
+            "No loading"
+        ]
+    },
+    {
+        "q": "Lazy loading loads state when _____.",
+        "type": "fill_blank",
+        "answers": [
+            "needed"
+        ],
+        "other_options": [
+            "mounted",
+            "always",
+            "never"
+        ]
+    },
+    {
+        "q": "How to lazy load store data?",
+        "type": "mcq",
+        "o": [
+            "Fetch on first subscription or access",
+            "Preload always",
+            "Cannot lazy load",
+            "Use special store"
+        ]
+    },
+    {
+        "q": "Lazy stores fetch on first _____.",
+        "type": "fill_blank",
+        "answers": [
+            "subscription"
+        ],
+        "other_options": [
+            "creation",
+            "import",
+            "export"
+        ]
+    },
+    {
+        "q": "What is reactive polling?",
+        "type": "mcq",
+        "o": [
+            "Periodically fetching and updating store",
+            "User voting",
+            "One-time fetch",
+            "No fetch"
+        ]
+    },
+    {
+        "q": "Polling periodically _____ data.",
+        "type": "fill_blank",
+        "answers": [
+            "fetches"
+        ],
+        "other_options": [
+            "stores",
+            "deletes",
+            "creates"
+        ]
+    },
+    {
+        "q": "How to implement polling store?",
+        "type": "mcq",
+        "c": "const polled = readable(null, set => {\n  const fetch = () => api.getData().then(set);\n  fetch();\n  const id = setInterval(fetch, 5000);\n  return () => clearInterval(id);\n});",
+        "o": [
+            "Use readable store with interval in start function",
+            "Cannot poll",
+            "Use writable only",
+            "Built-in polling"
+        ]
+    },
+    {
+        "q": "Polling store uses _____ in start.",
+        "type": "fill_blank",
+        "answers": [
+            "interval"
+        ],
+        "other_options": [
+            "timeout",
+            "frame",
+            "immediate"
+        ]
+    },
+    {
+        "q": "Rearrange async store pattern:",
+        "type": "rearrange",
+        "words": [
+            "Create store",
+            "Set loading",
+            "Fetch data",
+            "Set result",
+            "Handle error"
+        ]
+    },
+    {
+        "q": "What is server state vs client state?",
+        "type": "mcq",
+        "o": [
+            "Server state comes from API, client state is local only",
+            "Same thing",
+            "Server is faster",
+            "Client is faster"
+        ]
+    },
+    {
+        "q": "Server state comes from _____.",
+        "type": "fill_blank",
+        "answers": [
+            "API"
+        ],
+        "other_options": [
+            "localStorage",
+            "memory",
+            "component"
+        ]
+    },
+    {
+        "q": "How to handle loading states?",
+        "type": "mcq",
+        "c": "const store = writable({ loading: true, data: null, error: null });",
+        "o": [
+            "Track loading, data, error in store shape",
+            "Only track data",
+            "Use separate stores",
+            "Ignore loading"
+        ]
+    },
+    {
+        "q": "Store tracks loading, data, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "success",
+            "pending",
+            "complete"
+        ]
+    },
+    {
+        "q": "Match data states:",
+        "type": "match",
+        "left": [
+            "loading",
+            "success",
+            "error",
+            "idle"
+        ],
+        "right": [
+            "Fetching",
+            "Has data",
+            "Failed",
+            "Not started"
+        ]
+    },
+    {
+        "q": "Summary: Key reactivity concepts?",
+        "type": "mcq",
+        "o": [
+            "$: declarations, stores, runes, compile-time magic",
+            "Only stores",
+            "Only runes",
+            "Only props"
+        ]
+    },
+    {
+        "q": "Svelte reactivity combines declarations, stores, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "runes"
+        ],
+        "other_options": [
+            "hooks",
+            "observables",
+            "signals"
+        ]
+    },
+    {
+        "q": "What is computed properties pattern?",
+        "type": "mcq",
+        "o": [
+            "Values automatically calculated from other values",
+            "Manual calculation",
+            "Static values",
+            "Constant values"
+        ]
+    },
+    {
+        "q": "Computed properties are automatically _____.",
+        "type": "fill_blank",
+        "answers": [
+            "calculated"
+        ],
+        "other_options": [
+            "static",
+            "constant",
+            "manual"
+        ]
+    },
+    {
+        "q": "How to create computed in Svelte 4?",
+        "type": "mcq",
+        "c": "$: fullName = firstName + ' ' + lastName;",
+        "o": [
+            "Using $: reactive declaration",
+            "Using computed()",
+            "Using @computed",
+            "Using refs"
+        ]
+    },
+    {
+        "q": "$: is used for _____ values.",
+        "type": "fill_blank",
+        "answers": [
+            "computed"
+        ],
+        "other_options": [
+            "static",
+            "constant",
+            "manual"
+        ]
+    },
+    {
+        "q": "How to create computed in Svelte 5?",
+        "type": "mcq",
+        "c": "let fullName = $derived(firstName + ' ' + lastName);",
+        "o": [
+            "Using $derived() rune",
+            "Using $:",
+            "Using computed()",
+            "Using refs"
+        ]
+    },
+    {
+        "q": "Svelte 5 uses _____ for computed.",
+        "type": "fill_blank",
+        "answers": [
+            "$derived"
+        ],
+        "other_options": [
+            "$computed",
+            "$:",
+            "$state"
+        ]
+    },
+    {
+        "q": "Match computed patterns:",
+        "type": "match",
+        "left": [
+            "$: x = y",
+            "$derived(y)",
+            "$derived.by(fn)",
+            "get x()"
+        ],
+        "right": [
+            "Svelte 4",
+            "Svelte 5 simple",
+            "Svelte 5 complex",
+            "Class getter"
+        ]
+    },
+    {
+        "q": "What is watch pattern?",
+        "type": "mcq",
+        "o": [
+            "Running code when specific values change",
+            "Timer pattern",
+            "Clock display",
+            "Timeout pattern"
+        ]
+    },
+    {
+        "q": "Watch runs code when values _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "How to watch value in Svelte 4?",
+        "type": "mcq",
+        "c": "$: if (count > 0) {\n  console.log('Count changed to', count);\n}",
+        "o": [
+            "Using $: with statement or block",
+            "Using watch()",
+            "Using @watch decorator",
+            "Using watchEffect()"
+        ]
+    },
+    {
+        "q": "$: can run side effects when dependencies _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "exist",
+            "load",
+            "mount"
+        ]
+    },
+    {
+        "q": "How to watch in Svelte 5?",
+        "type": "mcq",
+        "c": "$effect(() => {\n  console.log('Count is now', count);\n});",
+        "o": [
+            "Using $effect() rune",
+            "Using $watch()",
+            "Using $:",
+            "Using watchEffect()"
+        ]
+    },
+    {
+        "q": "$effect() is the Svelte 5 _____ pattern.",
+        "type": "fill_blank",
+        "answers": [
+            "watch"
+        ],
+        "other_options": [
+            "computed",
+            "state",
+            "prop"
+        ]
+    },
+    {
+        "q": "Rearrange watch lifecycle:",
+        "type": "rearrange",
+        "words": [
+            "Dependency defined",
+            "Value changes",
+            "Effect runs",
+            "New value used",
+            "Cleanup if any"
+        ]
+    },
+    {
+        "q": "What is deep reactivity?",
+        "type": "mcq",
+        "o": [
+            "Tracking nested object property changes",
+            "Surface tracking",
+            "Shallow updates",
+            "Top-level only"
+        ]
+    },
+    {
+        "q": "Deep reactivity tracks _____ properties.",
+        "type": "fill_blank",
+        "answers": [
+            "nested"
+        ],
+        "other_options": [
+            "top-level",
+            "shallow",
+            "surface"
+        ]
+    },
+    {
+        "q": "Does $state have deep reactivity?",
+        "type": "mcq",
+        "o": [
+            "Yes, by default",
+            "No",
+            "Optional",
+            "Only with flag"
+        ]
+    },
+    {
+        "q": "$state is deeply reactive by _____.",
+        "type": "fill_blank",
+        "answers": [
+            "default"
+        ],
+        "other_options": [
+            "option",
+            "flag",
+            "request"
+        ]
+    },
+    {
+        "q": "How to opt out of deep reactivity?",
+        "type": "mcq",
+        "c": "let data = $state.raw({ items: [] });",
+        "o": [
+            "Using $state.raw()",
+            "Using shallow: true",
+            "Using freeze()",
+            "Cannot opt out"
+        ]
+    },
+    {
+        "q": "$state.raw() is _____ reactive.",
+        "type": "fill_blank",
+        "answers": [
+            "shallowly"
+        ],
+        "other_options": [
+            "deeply",
+            "fully",
+            "not"
+        ]
+    },
+    {
+        "q": "Match reactivity depth:",
+        "type": "match",
+        "left": [
+            "$state",
+            "$state.raw",
+            "Object.freeze",
+            "Proxy"
+        ],
+        "right": [
+            "Deep",
+            "Shallow",
+            "Immutable",
+            "Intercepted"
+        ]
+    },
+    {
+        "q": "What is store binding?",
+        "type": "mcq",
+        "o": [
+            "Two-way binding between input and store value",
+            "One-way store",
+            "Store reference",
+            "Store copy"
+        ]
+    },
+    {
+        "q": "Store binding provides _____ sync.",
+        "type": "fill_blank",
+        "answers": [
+            "two-way"
+        ],
+        "other_options": [
+            "one-way",
+            "no",
+            "optional"
+        ]
+    },
+    {
+        "q": "How to bind input to store?",
+        "type": "mcq",
+        "c": "<input bind:value={$store}>",
+        "o": [
+            "Use $ prefix with bind:",
+            "Use bind:store=",
+            "Use store.bind()",
+            "Cannot bind"
+        ]
+    },
+    {
+        "q": "bind:value={$store} creates _____ binding.",
+        "type": "fill_blank",
+        "answers": [
+            "two-way"
+        ],
+        "other_options": [
+            "one-way",
+            "no",
+            "readonly"
+        ]
+    },
+    {
+        "q": "What is reactive loop pattern?",
+        "type": "mcq",
+        "o": [
+            "Iterating over reactive array with automatic updates",
+            "Infinite loop",
+            "For loop",
+            "While loop"
+        ]
+    },
+    {
+        "q": "Reactive loops update when array _____.",
+        "type": "fill_blank",
+        "answers": [
+            "changes"
+        ],
+        "other_options": [
+            "loads",
+            "mounts",
+            "renders"
+        ]
+    },
+    {
+        "q": "How to iterate reactively?",
+        "type": "mcq",
+        "c": "{#each items as item (item.id)}\n  <Item {item} />\n{/each}",
+        "o": [
+            "Using {#each} with key",
+            "Using for loop",
+            "Using forEach",
+            "Using map only"
+        ]
+    },
+    {
+        "q": "{#each} with key enables _____ updates.",
+        "type": "fill_blank",
+        "answers": [
+            "efficient"
+        ],
+        "other_options": [
+            "slow",
+            "random",
+            "no"
+        ]
+    },
+    {
+        "q": "Rearrange each block reactivity:",
+        "type": "rearrange",
+        "words": [
+            "Array changes",
+            "Svelte detects",
+            "Compare keys",
+            "Update changed",
+            "Skip unchanged"
+        ]
+    },
+    {
+        "q": "What is conditional reactivity?",
+        "type": "mcq",
+        "o": [
+            "Showing/hiding content based on reactive state",
+            "Always true",
+            "Always false",
+            "Static condition"
+        ]
+    },
+    {
+        "q": "Conditional reactivity updates when condition _____.",
+        "type": "fill_blank",
+        "answers": [
+            "changes"
+        ],
+        "other_options": [
+            "mounts",
+            "loads",
+            "renders"
+        ]
+    },
+    {
+        "q": "How to show content conditionally?",
+        "type": "mcq",
+        "c": "{#if isVisible}\n  <Content />\n{/if}",
+        "o": [
+            "Using {#if} block",
+            "Using v-if",
+            "Using conditional rendering",
+            "Using display: none"
+        ]
+    },
+    {
+        "q": "{#if} reactively shows content when _____.",
+        "type": "fill_blank",
+        "answers": [
+            "true"
+        ],
+        "other_options": [
+            "false",
+            "null",
+            "undefined"
+        ]
+    },
+    {
+        "q": "Match conditional patterns:",
+        "type": "match",
+        "left": [
+            "{#if}",
+            "{:else if}",
+            "{:else}",
+            "{#await}"
+        ],
+        "right": [
+            "Primary condition",
+            "Secondary",
+            "Fallback",
+            "Promise"
+        ]
+    },
+    {
+        "q": "What is await block reactivity?",
+        "type": "mcq",
+        "o": [
+            "Reactive template for handling promises",
+            "Await keyword",
+            "Async function",
+            "Promise chain"
+        ]
+    },
+    {
+        "q": "Await blocks react to _____ state.",
+        "type": "fill_blank",
+        "answers": [
+            "promise"
+        ],
+        "other_options": [
+            "sync",
+            "immediate",
+            "static"
+        ]
+    },
+    {
+        "q": "How to use await block?",
+        "type": "mcq",
+        "c": "{#await promise}\n  <Loading />\n{:then data}\n  <Data {data} />\n{:catch error}\n  <Error {error} />\n{/await}",
+        "o": [
+            "Using {#await} with :then and :catch",
+            "Using async/await",
+            "Using .then().catch()",
+            "Using try/catch"
+        ]
+    },
+    {
+        "q": "{#await} handles loading, success, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "pending",
+            "complete",
+            "done"
+        ]
+    },
+    {
+        "q": "Rearrange await block states:",
+        "type": "rearrange",
+        "words": [
+            "Promise pending",
+            "Show loading",
+            "Promise resolves",
+            "Show data",
+            "or show error"
+        ]
+    },
+    {
+        "q": "What is key block?",
+        "type": "mcq",
+        "c": "{#key expression}\n  <Component />\n{/key}",
+        "o": [
+            "Forces recreation when expression changes",
+            "Unique identifier",
+            "Object key",
+            "Array key"
+        ]
+    },
+    {
+        "q": "Key block _____ component on change.",
+        "type": "fill_blank",
+        "answers": [
+            "recreates"
+        ],
+        "other_options": [
+            "updates",
+            "caches",
+            "hides"
+        ]
+    },
+    {
+        "q": "When to use key block?",
+        "type": "mcq",
+        "o": [
+            "When you need full remount instead of update",
+            "Always",
+            "Never",
+            "For styling"
+        ]
+    },
+    {
+        "q": "Key block causes full _____ of content.",
+        "type": "fill_blank",
+        "answers": [
+            "remount"
+        ],
+        "other_options": [
+            "update",
+            "render",
+            "cache"
+        ]
+    },
+    {
+        "q": "What is reactive class binding?",
+        "type": "mcq",
+        "c": "<div class:active={isActive}>",
+        "o": [
+            "Conditionally applying CSS class based on value",
+            "CSS class string",
+            "className attribute",
+            "Style binding"
+        ]
+    },
+    {
+        "q": "class:name={condition} adds class when _____.",
+        "type": "fill_blank",
+        "answers": [
+            "true"
+        ],
+        "other_options": [
+            "false",
+            "null",
+            "always"
+        ]
+    },
+    {
+        "q": "How to bind multiple classes reactively?",
+        "type": "mcq",
+        "c": "<div class:active class:disabled={isDisabled}>",
+        "o": [
+            "Multiple class: directives",
+            "Single class string",
+            "Array of classes",
+            "Object of classes"
+        ]
+    },
+    {
+        "q": "Multiple class bindings use multiple class: _____.",
+        "type": "fill_blank",
+        "answers": [
+            "directives"
+        ],
+        "other_options": [
+            "strings",
+            "arrays",
+            "objects"
+        ]
+    },
+    {
+        "q": "Match reactive bindings:",
+        "type": "match",
+        "left": [
+            "class:",
+            "style:",
+            "bind:value",
+            "on:event"
+        ],
+        "right": [
+            "Class toggle",
+            "Style prop",
+            "Two-way",
+            "Event handler"
+        ]
+    },
+    {
+        "q": "What is reactive style binding?",
+        "type": "mcq",
+        "c": "<div style:color={textColor}>",
+        "o": [
+            "Binding CSS property to reactive value",
+            "Style string",
+            "Class binding",
+            "Inline style object"
+        ]
+    },
+    {
+        "q": "style:property={value} binds CSS _____.",
+        "type": "fill_blank",
+        "answers": [
+            "property"
+        ],
+        "other_options": [
+            "class",
+            "selector",
+            "rule"
+        ]
+    },
+    {
+        "q": "Can you use units in style binding?",
+        "type": "mcq",
+        "c": "<div style:width=\"{width}px\">",
+        "o": [
+            "Yes, concatenate unit string",
+            "No, value only",
+            "Automatic units",
+            "Use separate prop"
+        ]
+    },
+    {
+        "q": "Style binding can include unit _____.",
+        "type": "fill_blank",
+        "answers": [
+            "strings"
+        ],
+        "other_options": [
+            "numbers",
+            "objects",
+            "arrays"
+        ]
+    },
+    {
+        "q": "What is reactive attribute spreading?",
+        "type": "mcq",
+        "c": "<button {...attrs}>Click</button>",
+        "o": [
+            "Spreading reactive object as attributes",
+            "Single attribute",
+            "Class spreading",
+            "Style spreading"
+        ]
+    },
+    {
+        "q": "{...obj} spreads object as _____.",
+        "type": "fill_blank",
+        "answers": [
+            "attributes"
+        ],
+        "other_options": [
+            "classes",
+            "styles",
+            "events"
+        ]
+    },
+    {
+        "q": "Rearrange reactive binding types:",
+        "type": "rearrange",
+        "words": [
+            "class:",
+            "style:",
+            "bind:",
+            "on:",
+            "{...spread}"
+        ]
+    },
+    {
+        "q": "What is reactive action?",
+        "type": "mcq",
+        "c": "<div use:myAction={param}>",
+        "o": [
+            "Action with reactive parameter that updates",
+            "Static action",
+            "Event handler",
+            "Component method"
+        ]
+    },
+    {
+        "q": "Actions update when parameter _____.",
+        "type": "fill_blank",
+        "answers": [
+            "changes"
+        ],
+        "other_options": [
+            "mounts",
+            "loads",
+            "renders"
+        ]
+    },
+    {
+        "q": "How does action receive updates?",
+        "type": "mcq",
+        "c": "export function myAction(node, param) {\n  return {\n    update(newParam) { /* handle update */ }\n  };\n}",
+        "o": [
+            "Via update() return function",
+            "Automatic updates",
+            "New call each time",
+            "No updates"
+        ]
+    },
+    {
+        "q": "Action update() is called when param _____.",
+        "type": "fill_blank",
+        "answers": [
+            "changes"
+        ],
+        "other_options": [
+            "mounts",
+            "loads",
+            "renders"
+        ]
+    },
+    {
+        "q": "What is reactive form validation?",
+        "type": "mcq",
+        "o": [
+            "Validation that runs when form values change",
+            "Static validation",
+            "Server validation",
+            "Manual validation"
+        ]
+    },
+    {
+        "q": "Reactive validation runs on value _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "submit",
+            "load",
+            "mount"
+        ]
+    },
+    {
+        "q": "How to validate reactively?",
+        "type": "mcq",
+        "c": "$: errors = validate(formData);",
+        "o": [
+            "Derive validation errors from form data",
+            "Manual validation",
+            "Event validation",
+            "Submit validation"
+        ]
+    },
+    {
+        "q": "Errors derived from form data update _____.",
+        "type": "fill_blank",
+        "answers": [
+            "automatically"
+        ],
+        "other_options": [
+            "manually",
+            "on submit",
+            "never"
+        ]
+    },
+    {
+        "q": "Match form patterns:",
+        "type": "match",
+        "left": [
+            "bind:value",
+            "$: errors",
+            "on:submit",
+            "formData store"
+        ],
+        "right": [
+            "Input sync",
+            "Validation",
+            "Submit handler",
+            "Shared state"
+        ]
+    },
+    {
+        "q": "What is reactive filtering?",
+        "type": "mcq",
+        "o": [
+            "Filter results that update when criteria change",
+            "Static filter",
+            "One-time filter",
+            "Server filter"
+        ]
+    },
+    {
+        "q": "Reactive filters update when criteria _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "How to create reactive filter?",
+        "type": "mcq",
+        "c": "$: filtered = items.filter(item => item.name.includes(search));",
+        "o": [
+            "Derive filtered array from source and criteria",
+            "Use filter() only",
+            "Manual update",
+            "Store filter"
+        ]
+    },
+    {
+        "q": "Filtered array is _____ from source.",
+        "type": "fill_blank",
+        "answers": [
+            "derived"
+        ],
+        "other_options": [
+            "copied",
+            "cached",
+            "stored"
+        ]
+    },
+    {
+        "q": "Rearrange reactive search:",
+        "type": "rearrange",
+        "words": [
+            "User types",
+            "Search updates",
+            "Filter runs",
+            "Results update",
+            "List re-renders"
+        ]
+    },
+    {
+        "q": "What is reactive sorting?",
+        "type": "mcq",
+        "o": [
+            "Sort order that updates when criteria change",
+            "Static sort",
+            "One-time sort",
+            "Server sort"
+        ]
+    },
+    {
+        "q": "Reactive sorting updates on sort _____ change.",
+        "type": "fill_blank",
+        "answers": [
+            "criteria"
+        ],
+        "other_options": [
+            "method",
+            "function",
+            "type"
+        ]
+    },
+    {
+        "q": "How to sort reactively?",
+        "type": "mcq",
+        "c": "$: sorted = [...items].sort((a, b) => \n  sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)\n);",
+        "o": [
+            "Derive sorted array from items and order",
+            "Mutate original array",
+            "Use store sort",
+            "Manual sort"
+        ]
+    },
+    {
+        "q": "Sorted array should [...items].sort() to avoid _____.",
+        "type": "fill_blank",
+        "answers": [
+            "mutation"
+        ],
+        "other_options": [
+            "copying",
+            "caching",
+            "updating"
+        ]
+    },
+    {
+        "q": "What is reactive pagination?",
+        "type": "mcq",
+        "o": [
+            "Page data that updates when page number changes",
+            "Static pages",
+            "All data at once",
+            "Server pagination"
+        ]
+    },
+    {
+        "q": "Reactive pagination updates on page _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "How to paginate reactively?",
+        "type": "mcq",
+        "c": "$: pagedItems = items.slice(page * pageSize, (page + 1) * pageSize);",
+        "o": [
+            "Derive page slice from items and page number",
+            "Fetch each page",
+            "Store all pages",
+            "Manual pagination"
+        ]
+    },
+    {
+        "q": "Paged items are derived using _____.",
+        "type": "fill_blank",
+        "answers": [
+            "slice"
+        ],
+        "other_options": [
+            "filter",
+            "map",
+            "reduce"
+        ]
+    },
+    {
+        "q": "Match list operations:",
+        "type": "match",
+        "left": [
+            "filter()",
+            "sort()",
+            "slice()",
+            "map()"
+        ],
+        "right": [
+            "Filter items",
+            "Order items",
+            "Page items",
+            "Transform items"
+        ]
+    },
+    {
+        "q": "What is reactive grouping?",
+        "type": "mcq",
+        "o": [
+            "Grouping items by category that updates reactively",
+            "Static groups",
+            "Manual groups",
+            "Server groups"
+        ]
+    },
+    {
+        "q": "Reactive grouping updates when items _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "How to group reactively?",
+        "type": "mcq",
+        "c": "$: grouped = items.reduce((acc, item) => {\n  (acc[item.category] ||= []).push(item);\n  return acc;\n}, {});",
+        "o": [
+            "Derive grouped object using reduce",
+            "Use groupBy()",
+            "Manual grouping",
+            "Store groups"
+        ]
+    },
+    {
+        "q": "Grouped data is derived using _____.",
+        "type": "fill_blank",
+        "answers": [
+            "reduce"
+        ],
+        "other_options": [
+            "filter",
+            "map",
+            "sort"
+        ]
+    },
+    {
+        "q": "What is reactive aggregation?",
+        "type": "mcq",
+        "o": [
+            "Computing totals/averages that update reactively",
+            "Static calculations",
+            "One-time sum",
+            "Server aggregation"
+        ]
+    },
+    {
+        "q": "Reactive aggregation updates computed _____.",
+        "type": "fill_blank",
+        "answers": [
+            "totals"
+        ],
+        "other_options": [
+            "items",
+            "lists",
+            "arrays"
+        ]
+    },
+    {
+        "q": "How to compute sum reactively?",
+        "type": "mcq",
+        "c": "$: total = items.reduce((sum, item) => sum + item.price, 0);",
+        "o": [
+            "Derive sum using reduce",
+            "Manual calculation",
+            "Store sum",
+            "Server calculation"
+        ]
+    },
+    {
+        "q": "Sum is derived using reduce with _____.",
+        "type": "fill_blank",
+        "answers": [
+            "accumulator"
+        ],
+        "other_options": [
+            "counter",
+            "index",
+            "array"
+        ]
+    },
+    {
+        "q": "Rearrange data pipeline:",
+        "type": "rearrange",
+        "words": [
+            "Filter",
+            "Sort",
+            "Paginate",
+            "Transform",
+            "Render"
+        ]
+    },
+    {
+        "q": "What is reactive caching in derived?",
+        "type": "mcq",
+        "o": [
+            "Derived values only recalculate when dependencies change",
+            "Always recalculate",
+            "Manual cache",
+            "No caching"
+        ]
+    },
+    {
+        "q": "Derived values cache until dependencies _____.",
+        "type": "fill_blank",
+        "answers": [
+            "change"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "Does Svelte memoize derived values?",
+        "type": "mcq",
+        "o": [
+            "Yes, only recomputes when dependencies change",
+            "No, always recomputes",
+            "Optional memoization",
+            "Manual memoization"
+        ]
+    },
+    {
+        "q": "Svelte _____ derived values.",
+        "type": "fill_blank",
+        "answers": [
+            "memoizes"
+        ],
+        "other_options": [
+            "caches",
+            "stores",
+            "copies"
+        ]
+    },
+    {
+        "q": "What is reactive debugging?",
+        "type": "mcq",
+        "o": [
+            "Understanding and fixing reactive update issues",
+            "Console debugging",
+            "Breakpoint debugging",
+            "Network debugging"
+        ]
+    },
+    {
+        "q": "Reactive debugging fixes _____ issues.",
+        "type": "fill_blank",
+        "answers": [
+            "update"
+        ],
+        "other_options": [
+            "style",
+            "network",
+            "syntax"
+        ]
+    },
+    {
+        "q": "Match debugging techniques:",
+        "type": "match",
+        "left": [
+            "$inspect",
+            "console.log",
+            "DevTools",
+            "$effect"
+        ],
+        "right": [
+            "Track rune",
+            "Manual log",
+            "Browser tool",
+            "Side effect log"
+        ]
+    },
+    {
+        "q": "What is reactivity graph?",
+        "type": "mcq",
+        "o": [
+            "Visual representation of dependencies",
+            "Bar chart",
+            "Line graph",
+            "Pie chart"
+        ]
+    },
+    {
+        "q": "Reactivity graph shows _____.",
+        "type": "fill_blank",
+        "answers": [
+            "dependencies"
+        ],
+        "other_options": [
+            "performance",
+            "memory",
+            "network"
+        ]
+    },
+    {
+        "q": "How to trace dependencies?",
+        "type": "mcq",
+        "o": [
+            "Use $inspect or log in $effect",
+            "Automatic tracing",
+            "Manual tracking",
+            "Cannot trace"
+        ]
+    },
+    {
+        "q": "$inspect and $effect help trace _____.",
+        "type": "fill_blank",
+        "answers": [
+            "dependencies"
+        ],
+        "other_options": [
+            "errors",
+            "styles",
+            "routes"
+        ]
+    },
+    {
+        "q": "What is circular dependency?",
+        "type": "mcq",
+        "o": [
+            "Values that depend on each other in a cycle",
+            "Single dependency",
+            "No dependency",
+            "Linear dependency"
+        ]
+    },
+    {
+        "q": "Circular dependencies cause infinite _____.",
+        "type": "fill_blank",
+        "answers": [
+            "loops"
+        ],
+        "other_options": [
+            "values",
+            "errors",
+            "warnings"
+        ]
+    },
+    {
+        "q": "How to avoid circular dependencies?",
+        "type": "mcq",
+        "o": [
+            "Break cycle with intermediate value or restructure",
+            "Ignore them",
+            "Use more $:",
+            "Add delays"
+        ]
+    },
+    {
+        "q": "Break cycles with _____ values.",
+        "type": "fill_blank",
+        "answers": [
+            "intermediate"
+        ],
+        "other_options": [
+            "final",
+            "initial",
+            "constant"
+        ]
+    },
+    {
+        "q": "Rearrange reactivity troubleshooting:",
+        "type": "rearrange",
+        "words": [
+            "Identify issue",
+            "Add $inspect",
+            "Check dependencies",
+            "Fix problem",
+            "Verify solution"
+        ]
+    },
+    {
+        "q": "What is reactivity performance?",
+        "type": "mcq",
+        "o": [
+            "How efficiently reactive updates run",
+            "Component speed",
+            "Network speed",
+            "Render speed"
+        ]
+    },
+    {
+        "q": "Reactivity performance affects _____ speed.",
+        "type": "fill_blank",
+        "answers": [
+            "update"
+        ],
+        "other_options": [
+            "load",
+            "network",
+            "compile"
+        ]
+    },
+    {
+        "q": "What affects reactivity performance?",
+        "type": "mcq",
+        "o": [
+            "Number of dependencies, computation complexity, update frequency",
+            "File size",
+            "Code style",
+            "Variable names"
+        ]
+    },
+    {
+        "q": "Performance depends on dependency _____.",
+        "type": "fill_blank",
+        "answers": [
+            "count"
+        ],
+        "other_options": [
+            "names",
+            "types",
+            "styles"
+        ]
+    },
+    {
+        "q": "How to optimize reactive computations?",
+        "type": "mcq",
+        "o": [
+            "Minimize dependencies, cache results, avoid unnecessary work",
+            "Add more dependencies",
+            "Skip caching",
+            "Increase frequency"
+        ]
+    },
+    {
+        "q": "Minimize dependencies and _____ results.",
+        "type": "fill_blank",
+        "answers": [
+            "cache"
+        ],
+        "other_options": [
+            "copy",
+            "delete",
+            "ignore"
+        ]
+    },
+    {
+        "q": "Match performance patterns:",
+        "type": "match",
+        "left": [
+            "Memoization",
+            "Lazy evaluation",
+            "Batching",
+            "Debouncing"
+        ],
+        "right": [
+            "Cache results",
+            "Compute on demand",
+            "Combine updates",
+            "Delay updates"
+        ]
+    },
+    {
+        "q": "What is over-subscription?",
+        "type": "mcq",
+        "o": [
+            "Subscribing to more data than needed",
+            "Too few subscriptions",
+            "No subscriptions",
+            "Perfect subscriptions"
+        ]
+    },
+    {
+        "q": "Over-subscription causes unnecessary _____.",
+        "type": "fill_blank",
+        "answers": [
+            "updates"
+        ],
+        "other_options": [
+            "reads",
+            "writes",
+            "deletes"
+        ]
+    },
+    {
+        "q": "How to avoid over-subscription?",
+        "type": "mcq",
+        "o": [
+            "Use derived stores to select only needed data",
+            "Subscribe to everything",
+            "Avoid stores",
+            "Use global state"
+        ]
+    },
+    {
+        "q": "Derived stores help _____ subscriptions.",
+        "type": "fill_blank",
+        "answers": [
+            "narrow"
+        ],
+        "other_options": [
+            "widen",
+            "remove",
+            "add"
+        ]
+    },
+    {
+        "q": "What is reactive boundary?",
+        "type": "mcq",
+        "o": [
+            "Where reactivity tracking stops",
+            "Component boundary",
+            "File boundary",
+            "Module boundary"
+        ]
+    },
+    {
+        "q": "Reactivity boundary defines tracking _____.",
+        "type": "fill_blank",
+        "answers": [
+            "scope"
+        ],
+        "other_options": [
+            "type",
+            "speed",
+            "size"
+        ]
+    },
+    {
+        "q": "Rearrange reactivity concepts:",
+        "type": "rearrange",
+        "words": [
+            "State declaration",
+            "Dependency tracking",
+            "Change detection",
+            "Update propagation",
+            "DOM sync"
+        ]
+    },
+    {
+        "q": "What is store subscription leak?",
+        "type": "mcq",
+        "o": [
+            "Failing to unsubscribe causing memory issues",
+            "Fast subscription",
+            "Slow subscription",
+            "No subscription"
+        ]
+    },
+    {
+        "q": "Subscription leaks cause _____ issues.",
+        "type": "fill_blank",
+        "answers": [
+            "memory"
+        ],
+        "other_options": [
+            "speed",
+            "style",
+            "syntax"
+        ]
+    },
+    {
+        "q": "How to prevent subscription leaks?",
+        "type": "mcq",
+        "o": [
+            "Use $ auto-subscription or call unsubscribe",
+            "Subscribe more",
+            "Avoid stores",
+            "Ignore leaks"
+        ]
+    },
+    {
+        "q": "$ prefix _____ unsubscribes.",
+        "type": "fill_blank",
+        "answers": [
+            "auto"
+        ],
+        "other_options": [
+            "never",
+            "manual",
+            "optional"
+        ]
+    },
+    {
+        "q": "What is effect cleanup leak?",
+        "type": "mcq",
+        "o": [
+            "Failing to return cleanup causing resource issues",
+            "Fast effects",
+            "Slow effects",
+            "No effects"
+        ]
+    },
+    {
+        "q": "Effect leaks happen without _____ return.",
+        "type": "fill_blank",
+        "answers": [
+            "cleanup"
+        ],
+        "other_options": [
+            "value",
+            "error",
+            "promise"
+        ]
+    },
+    {
+        "q": "Match cleanup patterns:",
+        "type": "match",
+        "left": [
+            "Interval",
+            "Event listener",
+            "Animation frame",
+            "Subscription"
+        ],
+        "right": [
+            "clearInterval",
+            "removeEventListener",
+            "cancelAnimationFrame",
+            "unsubscribe"
+        ]
+    },
+    {
+        "q": "What is reactivity composition?",
+        "type": "mcq",
+        "o": [
+            "Combining reactive primitives into reusable patterns",
+            "Single reactive value",
+            "Static composition",
+            "Component composition"
+        ]
+    },
+    {
+        "q": "Reactivity composition creates reusable _____.",
+        "type": "fill_blank",
+        "answers": [
+            "patterns"
+        ],
+        "other_options": [
+            "values",
+            "types",
+            "styles"
+        ]
+    },
+    {
+        "q": "How to compose reactive patterns?",
+        "type": "mcq",
+        "o": [
+            "Create functions that return reactive primitives and effects",
+            "Use single store",
+            "Avoid composition",
+            "Copy paste code"
+        ]
+    },
+    {
+        "q": "Composable functions return reactive _____.",
+        "type": "fill_blank",
+        "answers": [
+            "primitives"
+        ],
+        "other_options": [
+            "strings",
+            "numbers",
+            "arrays"
+        ]
+    },
+    {
+        "q": "What is similar to React hooks in Svelte?",
+        "type": "mcq",
+        "o": [
+            "Custom stores and runes in .svelte.js files",
+            "Nothing similar",
+            "Exact hooks",
+            "Vue composition"
+        ]
+    },
+    {
+        "q": "Svelte's equivalent to hooks are stores and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "runes"
+        ],
+        "other_options": [
+            "actions",
+            "props",
+            "events"
+        ]
+    },
+    {
+        "q": "Rearrange composable creation:",
+        "type": "rearrange",
+        "words": [
+            "Define function",
+            "Create state",
+            "Add derived",
+            "Setup effects",
+            "Return API"
+        ]
+    },
+    {
+        "q": "What is reactive testing?",
+        "type": "mcq",
+        "o": [
+            "Testing that reactive updates work correctly",
+            "Speed testing",
+            "Load testing",
+            "Security testing"
+        ]
+    },
+    {
+        "q": "Reactive testing verifies _____ work.",
+        "type": "fill_blank",
+        "answers": [
+            "updates"
+        ],
+        "other_options": [
+            "styles",
+            "routes",
+            "types"
+        ]
+    },
+    {
+        "q": "How to test reactive updates?",
+        "type": "mcq",
+        "o": [
+            "Change state and assert DOM or derived values updated",
+            "Manual testing only",
+            "Cannot test reactivity",
+            "Skip testing"
+        ]
+    },
+    {
+        "q": "Test by changing state and asserting _____.",
+        "type": "fill_blank",
+        "answers": [
+            "output"
+        ],
+        "other_options": [
+            "input",
+            "syntax",
+            "style"
+        ]
+    },
+    {
+        "q": "Match testing approaches:",
+        "type": "match",
+        "left": [
+            "Unit test",
+            "Integration test",
+            "E2E test",
+            "Snapshot"
+        ],
+        "right": [
+            "Single unit",
+            "Combined units",
+            "Full flow",
+            "Output compare"
+        ]
+    },
+    {
+        "q": "Final: What is the core of Svelte reactivity?",
+        "type": "mcq",
+        "o": [
+            "Compile-time transformation of assignments into updates",
+            "Runtime library",
+            "Virtual DOM",
+            "Observable streams"
+        ]
+    },
+    {
+        "q": "Svelte reactivity is _____ at compile time.",
+        "type": "fill_blank",
+        "answers": [
+            "transformed"
+        ],
+        "other_options": [
+            "interpreted",
+            "executed",
+            "cached"
+        ]
+    },
+    {
+        "q": "What is $state.snapshot()?",
+        "type": "mcq",
+        "o": [
+            "Creates non-reactive copy of reactive state",
+            "Takes screenshot",
+            "Saves state history",
+            "Freezes state"
+        ]
+    },
+    {
+        "q": "$state.snapshot() creates _____ copy.",
+        "type": "fill_blank",
+        "answers": [
+            "non-reactive"
+        ],
+        "other_options": [
+            "reactive",
+            "deep",
+            "shallow"
+        ]
+    },
+    {
+        "q": "When to use $state.snapshot()?",
+        "type": "mcq",
+        "o": [
+            "When passing state to external APIs or logging",
+            "Always",
+            "Never",
+            "For rendering"
+        ]
+    },
+    {
+        "q": "Snapshot is useful for _____ APIs.",
+        "type": "fill_blank",
+        "answers": [
+            "external"
+        ],
+        "other_options": [
+            "internal",
+            "reactive",
+            "component"
+        ]
+    },
+    {
+        "q": "What is $state.is()?",
+        "type": "mcq",
+        "o": [
+            "Checks if value refers to same reactive state",
+            "Checks equality",
+            "Checks type",
+            "Checks null"
+        ]
+    },
+    {
+        "q": "$state.is() checks _____ identity.",
+        "type": "fill_blank",
+        "answers": [
+            "state"
+        ],
+        "other_options": [
+            "value",
+            "type",
+            "object"
+        ]
+    },
+    {
+        "q": "Match $state methods:",
+        "type": "match",
+        "left": [
+            "$state()",
+            "$state.raw()",
+            "$state.snapshot()",
+            "$state.is()"
+        ],
+        "right": [
+            "Deep reactive",
+            "Shallow reactive",
+            "Non-reactive copy",
+            "Identity check"
+        ]
+    },
+    {
+        "q": "What is $effect.pre()?",
+        "type": "mcq",
+        "o": [
+            "Effect that runs before DOM updates",
+            "Effect that runs after",
+            "Effect that never runs",
+            "Effect that runs once"
+        ]
+    },
+    {
+        "q": "$effect.pre() runs _____ DOM update.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "instead of"
+        ]
+    },
+    {
+        "q": "When to use $effect.pre()?",
+        "type": "mcq",
+        "o": [
+            "When you need to read DOM before it updates",
+            "Always",
+            "Never",
+            "For animations"
+        ]
+    },
+    {
+        "q": "$effect.pre() reads DOM _____ changes apply.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "when",
+            "unless"
+        ]
+    },
+    {
+        "q": "What is $effect.root()?",
+        "type": "mcq",
+        "o": [
+            "Creates effect outside component lifecycle",
+            "Root component",
+            "First effect",
+            "Main effect"
+        ]
+    },
+    {
+        "q": "$effect.root() is outside component _____.",
+        "type": "fill_blank",
+        "answers": [
+            "lifecycle"
+        ],
+        "other_options": [
+            "tree",
+            "file",
+            "module"
+        ]
+    },
+    {
+        "q": "Match effect types:",
+        "type": "match",
+        "left": [
+            "$effect",
+            "$effect.pre",
+            "$effect.root",
+            "$effect.tracking"
+        ],
+        "right": [
+            "After update",
+            "Before update",
+            "Manual cleanup",
+            "Check tracking"
+        ]
+    },
+    {
+        "q": "What is $effect.tracking()?",
+        "type": "mcq",
+        "o": [
+            "Returns true if currently inside tracking context",
+            "Enables tracking",
+            "Disables tracking",
+            "Tracks variables"
+        ]
+    },
+    {
+        "q": "$effect.tracking() returns _____ inside effects.",
+        "type": "fill_blank",
+        "answers": [
+            "true"
+        ],
+        "other_options": [
+            "false",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is universal reactivity?",
+        "type": "mcq",
+        "o": [
+            "Runes that work in .svelte.js/ts files",
+            "Global reactivity",
+            "Server reactivity",
+            "Cross-browser"
+        ]
+    },
+    {
+        "q": "Universal reactivity works in _____ files.",
+        "type": "fill_blank",
+        "answers": [
+            ".svelte.js"
+        ],
+        "other_options": [
+            ".js",
+            ".ts",
+            ".svelte"
+        ]
+    },
+    {
+        "q": "Rearrange universal reactivity setup:",
+        "type": "rearrange",
+        "words": [
+            "Create .svelte.js file",
+            "Export function",
+            "Use $state inside",
+            "Import in component",
+            "Call function"
+        ]
+    },
+    {
+        "q": "What is reactive class?",
+        "type": "mcq",
+        "c": "class Counter {\n  count = $state(0);\n  double = $derived(this.count * 2);\n}",
+        "o": [
+            "Class using runes for reactive properties",
+            "CSS class binding",
+            "Component class",
+            "Utility class"
+        ]
+    },
+    {
+        "q": "Reactive classes use _____ for properties.",
+        "type": "fill_blank",
+        "answers": [
+            "runes"
+        ],
+        "other_options": [
+            "decorators",
+            "getters",
+            "proxies"
+        ]
+    },
+    {
+        "q": "Can you use $state in class fields?",
+        "type": "mcq",
+        "o": [
+            "Yes, in .svelte.js/ts files",
+            "No",
+            "Only in components",
+            "Only with decorator"
+        ]
+    },
+    {
+        "q": "Class $state works in _____ files.",
+        "type": "fill_blank",
+        "answers": [
+            ".svelte.js"
+        ],
+        "other_options": [
+            ".js",
+            ".component.js",
+            ".class.js"
+        ]
+    },
+    {
+        "q": "What is reactive singleton?",
+        "type": "mcq",
+        "c": "// store.svelte.js\nlet count = $state(0);\nexport const increment = () => count++;",
+        "o": [
+            "Module-level reactive state that persists across components",
+            "Single component",
+            "One-time state",
+            "Immutable state"
+        ]
+    },
+    {
+        "q": "Reactive singletons persist across _____.",
+        "type": "fill_blank",
+        "answers": [
+            "components"
+        ],
+        "other_options": [
+            "files",
+            "pages",
+            "sessions"
+        ]
+    },
+    {
+        "q": "Match reactive patterns:",
+        "type": "match",
+        "left": [
+            "Local state",
+            "Prop state",
+            "Store state",
+            "Singleton state"
+        ],
+        "right": [
+            "Component only",
+            "From parent",
+            "Shared store",
+            "Module-level"
+        ]
+    },
+    {
+        "q": "What is SSR reactivity?",
+        "type": "mcq",
+        "o": [
+            "Reactivity behavior during server-side rendering",
+            "Super reactive",
+            "Simple reactive",
+            "Static reactive"
+        ]
+    },
+    {
+        "q": "SSR stands for _____-side rendering.",
+        "type": "fill_blank",
+        "answers": [
+            "server"
+        ],
+        "other_options": [
+            "simple",
+            "super",
+            "static"
+        ]
+    },
+    {
+        "q": "Do effects run during SSR?",
+        "type": "mcq",
+        "o": [
+            "No, only on client",
+            "Yes, always",
+            "Sometimes",
+            "Only $effect.pre"
+        ]
+    },
+    {
+        "q": "Effects only run on _____.",
+        "type": "fill_blank",
+        "answers": [
+            "client"
+        ],
+        "other_options": [
+            "server",
+            "both",
+            "neither"
+        ]
+    },
+    {
+        "q": "How to check if running on client?",
+        "type": "mcq",
+        "c": "import { browser } from '$app/environment';",
+        "o": [
+            "Using browser from $app/environment in SvelteKit",
+            "Using window check",
+            "Using typeof document",
+            "Always client"
+        ]
+    },
+    {
+        "q": "SvelteKit's browser import tells if on _____.",
+        "type": "fill_blank",
+        "answers": [
+            "client"
+        ],
+        "other_options": [
+            "server",
+            "mobile",
+            "desktop"
+        ]
+    },
+    {
+        "q": "Rearrange SSR lifecycle:",
+        "type": "rearrange",
+        "words": [
+            "Server renders HTML",
+            "Client hydrates",
+            "Effects run",
+            "State syncs",
+            "Interactive"
+        ]
+    },
+    {
+        "q": "What is hydration?",
+        "type": "mcq",
+        "o": [
+            "Making server-rendered HTML interactive on client",
+            "Adding water",
+            "Loading data",
+            "Caching"
+        ]
+    },
+    {
+        "q": "Hydration makes HTML _____.",
+        "type": "fill_blank",
+        "answers": [
+            "interactive"
+        ],
+        "other_options": [
+            "static",
+            "cached",
+            "compressed"
+        ]
+    },
+    {
+        "q": "When does hydration occur?",
+        "type": "mcq",
+        "o": [
+            "When client JavaScript loads after SSR",
+            "On server",
+            "Before render",
+            "Never"
+        ]
+    },
+    {
+        "q": "Hydration happens on _____ load.",
+        "type": "fill_blank",
+        "answers": [
+            "client"
+        ],
+        "other_options": [
+            "server",
+            "network",
+            "cache"
+        ]
+    },
+    {
+        "q": "What is reactive serialization?",
+        "type": "mcq",
+        "o": [
+            "Converting reactive state to JSON for transfer",
+            "Making serial numbers",
+            "Ordering data",
+            "Sequencing"
+        ]
+    },
+    {
+        "q": "Serialization converts state to _____.",
+        "type": "fill_blank",
+        "answers": [
+            "JSON"
+        ],
+        "other_options": [
+            "HTML",
+            "XML",
+            "binary"
+        ]
+    },
+    {
+        "q": "Match SSR concepts:",
+        "type": "match",
+        "left": [
+            "SSR",
+            "Hydration",
+            "Serialization",
+            "Streaming"
+        ],
+        "right": [
+            "Server render",
+            "Client activate",
+            "Data transfer",
+            "Progressive send"
+        ]
+    },
+    {
+        "q": "What is streaming SSR?",
+        "type": "mcq",
+        "o": [
+            "Sending HTML progressively as it's generated",
+            "Video streaming",
+            "Audio streaming",
+            "Data streaming"
+        ]
+    },
+    {
+        "q": "Streaming sends HTML _____.",
+        "type": "fill_blank",
+        "answers": [
+            "progressively"
+        ],
+        "other_options": [
+            "instantly",
+            "slowly",
+            "never"
+        ]
+    },
+    {
+        "q": "What is partial hydration?",
+        "type": "mcq",
+        "o": [
+            "Only hydrating interactive parts of page",
+            "Full hydration",
+            "No hydration",
+            "Delayed hydration"
+        ]
+    },
+    {
+        "q": "Partial hydration activates only _____ parts.",
+        "type": "fill_blank",
+        "answers": [
+            "interactive"
+        ],
+        "other_options": [
+            "all",
+            "static",
+            "visible"
+        ]
+    },
+    {
+        "q": "What is lazy hydration?",
+        "type": "mcq",
+        "o": [
+            "Delaying hydration until component is needed",
+            "No hydration",
+            "Fast hydration",
+            "Deep hydration"
+        ]
+    },
+    {
+        "q": "Lazy hydration delays until _____.",
+        "type": "fill_blank",
+        "answers": [
+            "needed"
+        ],
+        "other_options": [
+            "always",
+            "never",
+            "loaded"
+        ]
+    },
+    {
+        "q": "Rearrange hydration strategies:",
+        "type": "rearrange",
+        "words": [
+            "Server render",
+            "Send HTML",
+            "Load JS",
+            "Hydrate visible",
+            "Lazy hydrate rest"
+        ]
+    },
+    {
+        "q": "What is reactive prefetching?",
+        "type": "mcq",
+        "o": [
+            "Loading data before it's needed based on predictions",
+            "Pre-rendering",
+            "Pre-caching",
+            "Pre-compiling"
+        ]
+    },
+    {
+        "q": "Prefetching loads data _____ needed.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "when",
+            "unless"
+        ]
+    },
+    {
+        "q": "How does prefetching improve UX?",
+        "type": "mcq",
+        "o": [
+            "Data is ready when user navigates",
+            "Slower loading",
+            "More bandwidth",
+            "No improvement"
+        ]
+    },
+    {
+        "q": "Prefetching makes navigation feel _____.",
+        "type": "fill_blank",
+        "answers": [
+            "instant"
+        ],
+        "other_options": [
+            "slow",
+            "delayed",
+            "blocked"
+        ]
+    },
+    {
+        "q": "What is optimistic prefetch?",
+        "type": "mcq",
+        "o": [
+            "Prefetching on link hover anticipating click",
+            "Always prefetch",
+            "Never prefetch",
+            "Random prefetch"
+        ]
+    },
+    {
+        "q": "Optimistic prefetch triggers on _____.",
+        "type": "fill_blank",
+        "answers": [
+            "hover"
+        ],
+        "other_options": [
+            "click",
+            "load",
+            "scroll"
+        ]
+    },
+    {
+        "q": "Match data loading patterns:",
+        "type": "match",
+        "left": [
+            "Lazy load",
+            "Eager load",
+            "Prefetch",
+            "Infinite scroll"
+        ],
+        "right": [
+            "On demand",
+            "Immediately",
+            "Anticipate",
+            "On scroll"
+        ]
+    },
+    {
+        "q": "What is reactive infinite scroll?",
+        "type": "mcq",
+        "o": [
+            "Loading more data as user scrolls using reactive state",
+            "Endless page",
+            "No scroll",
+            "Fixed scroll"
+        ]
+    },
+    {
+        "q": "Infinite scroll loads more on _____.",
+        "type": "fill_blank",
+        "answers": [
+            "scroll"
+        ],
+        "other_options": [
+            "click",
+            "hover",
+            "load"
+        ]
+    },
+    {
+        "q": "How to implement infinite scroll?",
+        "type": "mcq",
+        "o": [
+            "Intersection Observer with reactive loading state",
+            "setInterval",
+            "setTimeout",
+            "requestAnimationFrame"
+        ]
+    },
+    {
+        "q": "Infinite scroll often uses Intersection _____.",
+        "type": "fill_blank",
+        "answers": [
+            "Observer"
+        ],
+        "other_options": [
+            "Handler",
+            "Watcher",
+            "Tracker"
+        ]
+    },
+    {
+        "q": "What is reactive virtual scroll?",
+        "type": "mcq",
+        "o": [
+            "Only rendering visible items in long lists",
+            "Fake scrolling",
+            "No scrolling",
+            "Smooth scrolling"
+        ]
+    },
+    {
+        "q": "Virtual scroll renders only _____ items.",
+        "type": "fill_blank",
+        "answers": [
+            "visible"
+        ],
+        "other_options": [
+            "all",
+            "first",
+            "last"
+        ]
+    },
+    {
+        "q": "Rearrange virtual scroll logic:",
+        "type": "rearrange",
+        "words": [
+            "Calculate visible range",
+            "Slice data",
+            "Position items",
+            "Track scroll",
+            "Update on scroll"
+        ]
+    },
+    {
+        "q": "What is reactive search autocomplete?",
+        "type": "mcq",
+        "o": [
+            "Search suggestions that update as user types",
+            "Static search",
+            "One-time search",
+            "Manual search"
+        ]
+    },
+    {
+        "q": "Autocomplete updates as user _____.",
+        "type": "fill_blank",
+        "answers": [
+            "types"
+        ],
+        "other_options": [
+            "clicks",
+            "hovers",
+            "scrolls"
+        ]
+    },
+    {
+        "q": "How to build reactive autocomplete?",
+        "type": "mcq",
+        "o": [
+            "Debounced derived store from input with API call",
+            "Manual updates",
+            "Static list",
+            "No debounce"
+        ]
+    },
+    {
+        "q": "Autocomplete should _____ API calls.",
+        "type": "fill_blank",
+        "answers": [
+            "debounce"
+        ],
+        "other_options": [
+            "skip",
+            "repeat",
+            "cache"
+        ]
+    },
+    {
+        "q": "What is reactive form wizard?",
+        "type": "mcq",
+        "o": [
+            "Multi-step form with reactive step state",
+            "Magic forms",
+            "Auto forms",
+            "Simple forms"
+        ]
+    },
+    {
+        "q": "Form wizard tracks current _____ reactively.",
+        "type": "fill_blank",
+        "answers": [
+            "step"
+        ],
+        "other_options": [
+            "field",
+            "value",
+            "error"
+        ]
+    },
+    {
+        "q": "Match form patterns:",
+        "type": "match",
+        "left": [
+            "Single form",
+            "Multi-step",
+            "Dynamic fields",
+            "Conditional fields"
+        ],
+        "right": [
+            "One page",
+            "Wizard",
+            "Add/remove",
+            "Show/hide"
+        ]
+    },
+    {
+        "q": "What is reactive drag and drop?",
+        "type": "mcq",
+        "o": [
+            "DnD with reactive state for positions and ordering",
+            "Static drag",
+            "Mouse events only",
+            "Touch events only"
+        ]
+    },
+    {
+        "q": "Reactive DnD updates _____ on drag.",
+        "type": "fill_blank",
+        "answers": [
+            "state"
+        ],
+        "other_options": [
+            "styles",
+            "classes",
+            "events"
+        ]
+    },
+    {
+        "q": "How to track drag state?",
+        "type": "mcq",
+        "o": [
+            "Reactive variables for dragging item, position, drop zone",
+            "CSS only",
+            "HTML5 DnD only",
+            "No tracking"
+        ]
+    },
+    {
+        "q": "Drag state includes dragging item and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "position"
+        ],
+        "other_options": [
+            "color",
+            "size",
+            "type"
+        ]
+    },
+    {
+        "q": "What is reactive notification system?",
+        "type": "mcq",
+        "o": [
+            "Toast/alert system with reactive notification store",
+            "Push notifications",
+            "Email notifications",
+            "SMS notifications"
+        ]
+    },
+    {
+        "q": "Notification system uses reactive _____.",
+        "type": "fill_blank",
+        "answers": [
+            "store"
+        ],
+        "other_options": [
+            "events",
+            "props",
+            "context"
+        ]
+    },
+    {
+        "q": "Rearrange notification flow:",
+        "type": "rearrange",
+        "words": [
+            "Dispatch notification",
+            "Add to store",
+            "Render toast",
+            "Auto dismiss",
+            "Remove from store"
+        ]
+    },
+    {
+        "q": "What is reactive theme system?",
+        "type": "mcq",
+        "o": [
+            "Theme toggle with reactive CSS variable updates",
+            "Static theme",
+            "CSS only theme",
+            "JS only theme"
+        ]
+    },
+    {
+        "q": "Theme system updates CSS _____ reactively.",
+        "type": "fill_blank",
+        "answers": [
+            "variables"
+        ],
+        "other_options": [
+            "classes",
+            "files",
+            "imports"
+        ]
+    },
+    {
+        "q": "How to persist theme preference?",
+        "type": "mcq",
+        "o": [
+            "Store in localStorage and load on mount",
+            "Cookies only",
+            "Database only",
+            "Cannot persist"
+        ]
+    },
+    {
+        "q": "Theme persists in _____.",
+        "type": "fill_blank",
+        "answers": [
+            "localStorage"
+        ],
+        "other_options": [
+            "memory",
+            "session",
+            "cache"
+        ]
+    },
+    {
+        "q": "What is reactive i18n?",
+        "type": "mcq",
+        "o": [
+            "Internationalization with reactive locale state",
+            "Static translations",
+            "Server-only i18n",
+            "Build-time i18n"
+        ]
+    },
+    {
+        "q": "Reactive i18n updates when locale _____.",
+        "type": "fill_blank",
+        "answers": [
+            "changes"
+        ],
+        "other_options": [
+            "loads",
+            "compiles",
+            "builds"
+        ]
+    },
+    {
+        "q": "Match app features:",
+        "type": "match",
+        "left": [
+            "Theme",
+            "i18n",
+            "Auth",
+            "Settings"
+        ],
+        "right": [
+            "Dark/light",
+            "Languages",
+            "User state",
+            "Preferences"
+        ]
+    },
+    {
+        "q": "What is reactive auth state?",
+        "type": "mcq",
+        "o": [
+            "Authentication state that updates across app reactively",
+            "Static auth",
+            "Server auth only",
+            "Cookie auth only"
+        ]
+    },
+    {
+        "q": "Auth state updates across app _____.",
+        "type": "fill_blank",
+        "answers": [
+            "reactively"
+        ],
+        "other_options": [
+            "manually",
+            "slowly",
+            "never"
+        ]
+    },
+    {
+        "q": "How to share auth state?",
+        "type": "mcq",
+        "o": [
+            "Global store or context with user data",
+            "Props drilling",
+            "Event emitting",
+            "URL params"
+        ]
+    },
+    {
+        "q": "Auth state often uses global _____.",
+        "type": "fill_blank",
+        "answers": [
+            "store"
+        ],
+        "other_options": [
+            "prop",
+            "event",
+            "variable"
+        ]
+    },
+    {
+        "q": "What is reactive permission check?",
+        "type": "mcq",
+        "o": [
+            "Derived state based on user roles/permissions",
+            "Static permissions",
+            "Server check only",
+            "No permissions"
+        ]
+    },
+    {
+        "q": "Permissions are _____ from user roles.",
+        "type": "fill_blank",
+        "answers": [
+            "derived"
+        ],
+        "other_options": [
+            "copied",
+            "stored",
+            "cached"
+        ]
+    },
+    {
+        "q": "Rearrange auth flow:",
+        "type": "rearrange",
+        "words": [
+            "User logs in",
+            "Store token",
+            "Update auth state",
+            "Derive permissions",
+            "Show/hide UI"
+        ]
+    },
+    {
+        "q": "What is reactive route guard?",
+        "type": "mcq",
+        "o": [
+            "Navigation protection based on reactive auth state",
+            "Static routes",
+            "Server routing",
+            "No protection"
+        ]
+    },
+    {
+        "q": "Route guards check _____ before navigation.",
+        "type": "fill_blank",
+        "answers": [
+            "auth"
+        ],
+        "other_options": [
+            "cache",
+            "network",
+            "speed"
+        ]
+    },
+    {
+        "q": "How to implement route guard in SvelteKit?",
+        "type": "mcq",
+        "o": [
+            "Use hooks or load functions with auth check",
+            "CSS only",
+            "HTML only",
+            "Cannot guard"
+        ]
+    },
+    {
+        "q": "SvelteKit guards use hooks or _____ functions.",
+        "type": "fill_blank",
+        "answers": [
+            "load"
+        ],
+        "other_options": [
+            "render",
+            "build",
+            "compile"
+        ]
+    },
+    {
+        "q": "What is reactive error boundary?",
+        "type": "mcq",
+        "o": [
+            "Component that catches errors and shows fallback UI",
+            "Error prevention",
+            "Error logging",
+            "Error ignoring"
+        ]
+    },
+    {
+        "q": "Error boundary shows _____ UI on error.",
+        "type": "fill_blank",
+        "answers": [
+            "fallback"
+        ],
+        "other_options": [
+            "main",
+            "loading",
+            "empty"
+        ]
+    },
+    {
+        "q": "Match error handling:",
+        "type": "match",
+        "left": [
+            "Error boundary",
+            "Try/catch",
+            "onError",
+            "+error.svelte"
+        ],
+        "right": [
+            "Component catch",
+            "Code catch",
+            "Event handler",
+            "SvelteKit page"
+        ]
+    },
+    {
+        "q": "What is reactive loading state?",
+        "type": "mcq",
+        "o": [
+            "Boolean or enum tracking async operation status",
+            "Static loading",
+            "CSS loading",
+            "HTML loading"
+        ]
+    },
+    {
+        "q": "Loading state tracks _____ operations.",
+        "type": "fill_blank",
+        "answers": [
+            "async"
+        ],
+        "other_options": [
+            "sync",
+            "static",
+            "immediate"
+        ]
+    },
+    {
+        "q": "What is optimistic loading?",
+        "type": "mcq",
+        "o": [
+            "Showing success state before server confirms",
+            "Slow loading",
+            "No loading",
+            "Error loading"
+        ]
+    },
+    {
+        "q": "Optimistic loading assumes _____.",
+        "type": "fill_blank",
+        "answers": [
+            "success"
+        ],
+        "other_options": [
+            "failure",
+            "error",
+            "timeout"
+        ]
+    },
+    {
+        "q": "Rearrange loading states:",
+        "type": "rearrange",
+        "words": [
+            "idle",
+            "loading",
+            "success",
+            "error",
+            "retry"
+        ]
+    },
+    {
+        "q": "What is reactive retry logic?",
+        "type": "mcq",
+        "o": [
+            "Automatically retrying failed operations with reactive count",
+            "Manual retry",
+            "No retry",
+            "Instant retry"
+        ]
+    },
+    {
+        "q": "Retry logic tracks attempt _____.",
+        "type": "fill_blank",
+        "answers": [
+            "count"
+        ],
+        "other_options": [
+            "time",
+            "time",
+            "result"
+        ]
+    },
+    {
+        "q": "What is exponential backoff?",
+        "type": "mcq",
+        "o": [
+            "Increasing delay between retry attempts",
+            "Constant delay",
+            "No delay",
+            "Random delay"
+        ]
+    },
+    {
+        "q": "Exponential backoff _____ delay each retry.",
+        "type": "fill_blank",
+        "answers": [
+            "increases"
+        ],
+        "other_options": [
+            "decreases",
+            "keeps",
+            "removes"
+        ]
+    },
+    {
+        "q": "Final summary: Key Svelte reactivity features?",
+        "type": "mcq",
+        "o": [
+            "$state, $derived, $effect, $props, stores, auto-subscriptions",
+            "Only stores",
+            "Only $state",
+            "Only effects"
+        ]
+    },
+    {
+        "q": "Svelte 5 reactivity centers on _____ runes.",
+        "type": "fill_blank",
+        "answers": [
+            "$state"
+        ],
+        "other_options": [
+            "useState",
+            "ref",
+            "signal"
+        ]
+    },
+    {
+        "q": "What is reactive snapshot comparison?",
+        "type": "mcq",
+        "o": [
+            "Comparing state at different points in time",
+            "Photo comparison",
+            "Version comparison",
+            "Build comparison"
+        ]
+    },
+    {
+        "q": "Snapshot comparison tracks state over _____.",
+        "type": "fill_blank",
+        "answers": [
+            "time"
+        ],
+        "other_options": [
+            "space",
+            "memory",
+            "network"
+        ]
+    },
+    {
+        "q": "What is reactive batch scheduling?",
+        "type": "mcq",
+        "o": [
+            "Grouping multiple updates into single render cycle",
+            "Job scheduling",
+            "Task queuing",
+            "Event ordering"
+        ]
+    },
+    {
+        "q": "Batching groups updates into one _____ cycle.",
+        "type": "fill_blank",
+        "answers": [
+            "render"
+        ],
+        "other_options": [
+            "compile",
+            "build",
+            "deploy"
+        ]
+    },
+    {
+        "q": "What is reactive context isolation?",
+        "type": "mcq",
+        "o": [
+            "Keeping reactive contexts separate to avoid interference",
+            "CSS isolation",
+            "Component isolation",
+            "Module isolation"
+        ]
+    },
+    {
+        "q": "Context isolation prevents _____.",
+        "type": "fill_blank",
+        "answers": [
+            "interference"
+        ],
+        "other_options": [
+            "isolation",
+            "separation",
+            "division"
+        ]
+    },
+    {
+        "q": "Match advanced concepts:",
+        "type": "match",
+        "left": [
+            "Batching",
+            "Scheduling",
+            "Isolation",
+            "Propagation"
+        ],
+        "right": [
+            "Group updates",
+            "Order updates",
+            "Separate contexts",
+            "Spread changes"
+        ]
+    },
+    {
+        "q": "What is push vs pull reactivity?",
+        "type": "mcq",
+        "o": [
+            "Push: notify on change. Pull: compute on access",
+            "Same thing",
+            "Push is slower",
+            "Pull is slower"
+        ]
+    },
+    {
+        "q": "Push reactivity _____ subscribers on change.",
+        "type": "fill_blank",
+        "answers": [
+            "notifies"
+        ],
+        "other_options": [
+            "ignores",
+            "delays",
+            "caches"
+        ]
+    },
+    {
+        "q": "What is reactive equality check?",
+        "type": "mcq",
+        "o": [
+            "Determining if values actually changed before triggering updates",
+            "Object comparison",
+            "Type checking",
+            "Null checking"
+        ]
+    },
+    {
+        "q": "Equality checks prevent _____ updates.",
+        "type": "fill_blank",
+        "answers": [
+            "unnecessary"
+        ],
+        "other_options": [
+            "all",
+            "some",
+            "no"
+        ]
+    },
+    {
+        "q": "What is signal-based reactivity?",
+        "type": "mcq",
+        "o": [
+            "Fine-grained reactivity using explicit subscriptions",
+            "Event-based",
+            "Observable-based",
+            "Promise-based"
+        ]
+    },
+    {
+        "q": "Signals provide _____ grained reactivity.",
+        "type": "fill_blank",
+        "answers": [
+            "fine"
+        ],
+        "other_options": [
+            "coarse",
+            "medium",
+            "no"
+        ]
+    },
+    {
+        "q": "Does Svelte 5 use signals internally?",
+        "type": "mcq",
+        "o": [
+            "Yes, runes compile to signal-based system",
+            "No",
+            "Partially",
+            "Only for stores"
+        ]
+    },
+    {
+        "q": "Svelte 5 runes compile to _____ internally.",
+        "type": "fill_blank",
+        "answers": [
+            "signals"
+        ],
+        "other_options": [
+            "observables",
+            "streams",
+            "events"
+        ]
+    },
+    {
+        "q": "Rearrange Svelte reactive evolution:",
+        "type": "rearrange",
+        "words": [
+            "Svelte 3 $:",
+            "Svelte 4 improvements",
+            "Svelte 5 runes",
+            "Fine-grained signals",
+            "Universal reactivity"
+        ]
+    },
+    {
+        "q": "What is reactive memo?",
+        "type": "mcq",
+        "o": [
+            "Caching computed values to avoid recomputation",
+            "Memory allocation",
+            "Note taking",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Memo caches computed _____.",
+        "type": "fill_blank",
+        "answers": [
+            "values"
+        ],
+        "other_options": [
+            "functions",
+            "events",
+            "effects"
+        ]
+    },
+    {
+        "q": "Is $derived automatically memoized?",
+        "type": "mcq",
+        "o": [
+            "Yes, only recomputes when dependencies change",
+            "No",
+            "Partially",
+            "Optional"
+        ]
+    },
+    {
+        "q": "$derived automatically _____ results.",
+        "type": "fill_blank",
+        "answers": [
+            "memoizes"
+        ],
+        "other_options": [
+            "stores",
+            "copies",
+            "deletes"
+        ]
+    },
+    {
+        "q": "What is reactive gc (garbage collection)?",
+        "type": "mcq",
+        "o": [
+            "Cleaning up unused reactive subscriptions automatically",
+            "Manual cleanup",
+            "Memory leak",
+            "No cleanup"
+        ]
+    },
+    {
+        "q": "Reactive garbage collection cleans _____ subscriptions.",
+        "type": "fill_blank",
+        "answers": [
+            "unused"
+        ],
+        "other_options": [
+            "all",
+            "some",
+            "new"
+        ]
+    },
+    {
+        "q": "Match lifecycle cleanup:",
+        "type": "match",
+        "left": [
+            "onDestroy",
+            "$effect cleanup",
+            "store unsubscribe",
+            "event removal"
+        ],
+        "right": [
+            "Component unmount",
+            "Effect teardown",
+            "Stop listening",
+            "Remove handler"
+        ]
+    },
+    {
+        "q": "What is reactive lazy initialization?",
+        "type": "mcq",
+        "o": [
+            "Creating reactive state only when first accessed",
+            "Eager initialization",
+            "Immediate creation",
+            "No initialization"
+        ]
+    },
+    {
+        "q": "Lazy initialization creates state on first _____.",
+        "type": "fill_blank",
+        "answers": [
+            "access"
+        ],
+        "other_options": [
+            "load",
+            "mount",
+            "render"
+        ]
+    },
+    {
+        "q": "Summary: What are the three pillars of Svelte reactivity?",
+        "type": "mcq",
+        "o": [
+            "State ($state), Derived ($derived), Effects ($effect)",
+            "Props, Events, Stores",
+            "Components, Bindings, Slots",
+            "HTML, CSS, JS"
+        ]
+    },
+    {
+        "q": "The three pillars are state, derived, and _____.",
+        "type": "fill_blank",
+        "answers": [
+            "effects"
+        ],
+        "other_options": [
+            "props",
+            "events",
+            "stores"
+        ]
+    }
+]
