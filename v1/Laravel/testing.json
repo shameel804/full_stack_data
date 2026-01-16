@@ -1,0 +1,3836 @@
+[
+    {
+        "q": "What is the default testing framework used in Laravel?",
+        "type": "mcq",
+        "o": [
+            "PHPUnit.",
+            "Pest",
+            "Behat",
+            "Codeception"
+        ]
+    },
+    {
+        "q": "Configuration file for PHPUnit in Laravel?",
+        "type": "mcq",
+        "o": [
+            "phpunit.xml.",
+            "config/testing.php",
+            ".env.test",
+            "tests/config.php"
+        ]
+    },
+    {
+        "q": "Where are Feature tests located?",
+        "type": "mcq",
+        "o": [
+            "tests/Feature.",
+            "tests/Unit",
+            "tests/Integration",
+            "tests/Functional"
+        ]
+    },
+    {
+        "q": "Where are Unit tests located?",
+        "type": "mcq",
+        "o": [
+            "tests/Unit.",
+            "tests/Feature",
+            "tests/Classes",
+            "tests/Code"
+        ]
+    },
+    {
+        "q": "Command to run all tests?",
+        "type": "mcq",
+        "o": [
+            "php artisan test (or ./vendor/bin/phpunit).",
+            "php artisan run:tests",
+            "php artisan unit",
+            "npm test"
+        ]
+    },
+    {
+        "q": "What environment is used during testing?",
+        "type": "mcq",
+        "o": [
+            "testing. (APP_ENV=testing defined in phpunit.xml).",
+            "local",
+            "development",
+            "production"
+        ]
+    },
+    {
+        "q": "Difference between Unit and Feature tests in Laravel context?",
+        "type": "mcq",
+        "o": [
+            "Unit tests focus on single class/method in isolation. Feature tests test larger slice of app (HTTP requests, DB).",
+            "Unit tests use DB",
+            "Feature tests use mocking only",
+            "No difference"
+        ]
+    },
+    {
+        "q": "Trait to reset database after each test?",
+        "type": "mcq",
+        "o": [
+            "RefreshDatabase.",
+            "ResetDatabase",
+            "MigrateFresh",
+            "DatabaseTransactions"
+        ]
+    },
+    {
+        "q": "What does `RefreshDatabase` do?",
+        "type": "mcq",
+        "o": [
+            "Migrates the database (if needed) and uses transactions (or truncation) to rollback changes after test.",
+            "Deletes database",
+            "Seeds database",
+            "Locks database"
+        ]
+    },
+    {
+        "q": "Creating a new test file command?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:test UserTest.",
+            "php artisan create:test UserTest",
+            "php artisan new:test UserTest",
+            "php artisan test:make UserTest"
+        ]
+    },
+    {
+        "q": "Creating a Unit test explicitly?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:test UserTest --unit.",
+            "php artisan make:unittest UserTest",
+            "php artisan make:test --type=unit",
+            "Move file manually"
+        ]
+    },
+    {
+        "q": "Method to make a GET request in a test?",
+        "type": "mcq",
+        "o": [
+            "$this->get('/uri');",
+            "$this->visit('/uri')",
+            "$this->call('GET', '/uri')",
+            "$this->request('GET', '/uri')"
+        ]
+    },
+    {
+        "q": "Method to assert HTTP status code?",
+        "type": "mcq",
+        "o": [
+            "$response->assertStatus(200);",
+            "$response->assertCode(200)",
+            "$this->assertStatus(200)",
+            "expect($response)->code(200)"
+        ]
+    },
+    {
+        "q": "Shorthand to assert status 200?",
+        "type": "mcq",
+        "o": [
+            "$response->assertOk();",
+            "$response->assertSuccess()",
+            "$response->assert200()",
+            "$response->isOk()"
+        ]
+    },
+    {
+        "q": "Assertion for validation errors?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasErrors(['field']);",
+            "$response->assertInvalid()",
+            "$response->assertError()",
+            "$response->assertFail()"
+        ]
+    },
+    {
+        "q": "Assertion that database has a record?",
+        "type": "mcq",
+        "o": [
+            "$this->assertDatabaseHas('table', ['column' => 'value']);",
+            "$this->seeInDatabase()",
+            "$this->checkDatabase()",
+            "$this->hasDatabase()"
+        ]
+    },
+    {
+        "q": "Assertion that database is missing a record?",
+        "type": "mcq",
+        "o": [
+            "$this->assertDatabaseMissing('table', ['column' => 'value']);",
+            "$this->notSeeInDatabase()",
+            "$this->checkDatabaseMissing()",
+            "$this->missingDatabase()"
+        ]
+    },
+    {
+        "q": "Mocking the currently authenticated user?",
+        "type": "mcq",
+        "o": [
+            "$this->actingAs($user);",
+            "$this->login($user)",
+            "$this->auth($user)",
+            "$this->be($user)"
+        ]
+    },
+    {
+        "q": "Does `actingAs` persist for other tests?",
+        "type": "mcq",
+        "o": [
+            "No, only for the current test method.",
+            "Yes",
+            "Yes, until logout",
+            "Yes, until teardown"
+        ]
+    },
+    {
+        "q": "Asserting view is returned?",
+        "type": "mcq",
+        "o": [
+            "$response->assertViewIs('view.name');",
+            "$response->expectView('view.name')",
+            "$response->seeView('view.name')",
+            "$response->hasView('view.name')"
+        ]
+    },
+    {
+        "q": "Asserting view has data?",
+        "type": "mcq",
+        "o": [
+            "$response->assertViewHas('key', 'value');",
+            "$response->assertData('key')",
+            "$response->with('key')",
+            "$response->has('key')"
+        ]
+    },
+    {
+        "q": "Factory creating a user?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->create();",
+            "factory(User::class)->create()",
+            "User::create()",
+            "new User()"
+        ]
+    },
+    {
+        "q": "Factory verify unpersisted instance?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->make();",
+            "User::factory()->build()",
+            "User::factory()->new()",
+            "User::factory()->instance()"
+        ]
+    },
+    {
+        "q": "Overriding factory attributes?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->create(['name' => 'Test']);",
+            "User::factory(['name' => 'Test'])",
+            "User::factory()->set(['name' => 'Test'])",
+            "User::factory()->with(['name' => 'Test'])"
+        ]
+    },
+    {
+        "q": "Asserting redirect?",
+        "type": "mcq",
+        "o": [
+            "$response->assertRedirect('/path');",
+            "$response->assertLocation('/path')",
+            "$response->assertHeader('Location', '/path')",
+            "All of the above (assertLocation is alias)"
+        ]
+    },
+    {
+        "q": "Asserting JSON structure?",
+        "type": "mcq",
+        "o": [
+            "$response->assertJsonStructure(['data' => ['id', 'name']]);",
+            "$response->assertStructure()",
+            "$response->assertSchema()",
+            "$response->assertKeys()"
+        ]
+    },
+    {
+        "q": "Asserting exact JSON fragment?",
+        "type": "mcq",
+        "o": [
+            "$response->assertJson(['created' => true]);",
+            "$response->containsJson()",
+            "$response->seeJson()",
+            "$response->hasJson()"
+        ]
+    },
+    {
+        "q": "Mocking a Facade?",
+        "type": "mcq",
+        "o": [
+            "Storage::fake('disk'); or Cache::shouldReceive(...);",
+            "Storage::mock()",
+            "Storage::test()",
+            "Storage::spy()"
+        ]
+    },
+    {
+        "q": "Faking events?",
+        "type": "mcq",
+        "o": [
+            "Event::fake();",
+            "Event::mock()",
+            "Event::disable()",
+            "Event::prevent()"
+        ]
+    },
+    {
+        "q": "Asserting event was dispatched?",
+        "type": "mcq",
+        "o": [
+            "Event::assertDispatched(OrderShipped::class);",
+            "Event::assertFired()",
+            "Event::assertCalled()",
+            "Event::assertSent()"
+        ]
+    },
+    {
+        "q": "Faking jobs?",
+        "type": "mcq",
+        "o": [
+            "Bus::fake();",
+            "Queue::fake()",
+            "Job::fake()",
+            "Artisan::fake()"
+        ]
+    },
+    {
+        "q": "Faking mail?",
+        "type": "mcq",
+        "o": [
+            "Mail::fake();",
+            "Mail::mock()",
+            "Mail::disable()",
+            "Mail::trap()"
+        ]
+    },
+    {
+        "q": "Asserting email sent?",
+        "type": "mcq",
+        "o": [
+            "Mail::assertSent(OrderShipped::class);",
+            "Mail::assertMailed()",
+            "Mail::assertDispatched()",
+            "Mail::assertQueued()"
+        ]
+    },
+    {
+        "q": "Debugging test response?",
+        "type": "mcq",
+        "o": [
+            "$response->dump(); or $response->dd();",
+            "$response->print()",
+            "$response->echo()",
+            "$response->log()"
+        ]
+    },
+    {
+        "q": "Asserting session has key?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHas('key', 'value');",
+            "$response->assertSession('key')",
+            "Session::assertHas('key')",
+            "Session::check('key')"
+        ]
+    },
+    {
+        "q": "Testing validation rules directly?",
+        "type": "mcq",
+        "o": [
+            "Possible via Validator facade, but simpler to test via HTTP request to endpoint.",
+            "Mandatory",
+            "Deprecated",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "Dusk testing focus?",
+        "type": "mcq",
+        "o": [
+            "Browser automation/end-to-end testing (JavaScript interaction).",
+            "Unit testing",
+            "API testing",
+            "Load testing"
+        ]
+    },
+    {
+        "q": "How to seed DB in test?",
+        "type": "mcq",
+        "o": [
+            "$this->seed(DatabaseSeeder::class);",
+            "Artisan::call('db:seed')",
+            "Seed::run()",
+            "DB::seed()"
+        ]
+    },
+    {
+        "q": "Mocking time?",
+        "type": "mcq",
+        "o": [
+            "$this->travel(5)->minutes(); or $this->travelTo($date);",
+            "Carbon::setTestNow($date)",
+            "Time::fake()",
+            "Clock::mock()"
+        ]
+    },
+    {
+        "q": "Method `withoutExceptionHandling`?",
+        "type": "mcq",
+        "o": [
+            "Disables Laravel's exception handling to let PHPUnit report the actual exception/stack trace.",
+            "Silences errors",
+            "Ignores crash",
+            "Halts test"
+        ]
+    },
+    {
+        "q": "What is `assertSoftDeleted`?",
+        "type": "mcq",
+        "o": [
+            "Asserts the record exists but `deleted_at` is not null.",
+            "Asserts record gone",
+            "Asserts record active",
+            "Asserts transaction rollback"
+        ]
+    },
+    {
+        "q": "Asserting HTTP 403?",
+        "type": "mcq",
+        "o": [
+            "$response->assertForbidden();",
+            "$response->assertUnauthorized()",
+            "$response->assertAccessDenied()",
+            "$response->assertBlocked()"
+        ]
+    },
+    {
+        "q": "Asserting HTTP 401?",
+        "type": "mcq",
+        "o": [
+            "$response->assertUnauthorized();",
+            "$response->assertForbidden()",
+            "$response->assertUnauthenticated()",
+            "$response->assertGuest()"
+        ]
+    },
+    {
+        "q": "Asserting HTTP 404?",
+        "type": "mcq",
+        "o": [
+            "$response->assertNotFound();",
+            "$response->assertMissing()",
+            "$response->assertGhost()",
+            "$response->assertVoid()"
+        ]
+    },
+    {
+        "q": "Using `faker` in tests?",
+        "type": "mcq",
+        "o": [
+            "Available via `WithFaker` trait or `User::factory()`.",
+            "Global variable",
+            "Static class",
+            "Not available"
+        ]
+    },
+    {
+        "q": "How to run a single test method?",
+        "type": "mcq",
+        "o": [
+            "php artisan test --filter methodName",
+            "php artisan test methodName",
+            "phpunit methodName",
+            "npm test methodName"
+        ]
+    },
+    {
+        "q": "Parallel testing command?",
+        "type": "mcq",
+        "o": [
+            "php artisan test --parallel",
+            "php artisan test --fast",
+            "php artisan test --concurrent",
+            "php artisan test --multi"
+        ]
+    },
+    {
+        "q": "Testing file upload?",
+        "type": "mcq",
+        "o": [
+            "UploadedFile::fake()->image('avatar.jpg');",
+            "File::fake()",
+            "Storage::upload()",
+            "Input::file()"
+        ]
+    },
+    {
+        "q": "Asserting file was stored?",
+        "type": "mcq",
+        "o": [
+            "Storage::disk('local')->assertExists('avatar.jpg');",
+            "File::exists()",
+            "Storage::has()",
+            "Disk::has()"
+        ]
+    },
+    {
+        "q": "Mocking HTTP Client (External APIs)?",
+        "type": "mcq",
+        "o": [
+            "Http::fake(['github.com/*' => Http::response('ok', 200)]);",
+            "Http::mock()",
+            "Curl::fake()",
+            "Guzzle::fake()"
+        ]
+    },
+    {
+        "q": "Asserting no emails sent?",
+        "type": "mcq",
+        "o": [
+            "Mail::assertNothingSent();",
+            "Mail::assertNone()",
+            "Mail::assertEmpty()",
+            "Mail::assertZero()"
+        ]
+    },
+    {
+        "q": "Asserting specific mail recipient?",
+        "type": "mcq",
+        "o": [
+            "Mail::assertSent(OrderShipped::class, function ($mail) use ($user) { return $mail->hasTo($user->email); });",
+            "Mail::assertTo($user)",
+            "Mail::assertRecipient($user)",
+            "Mail::assertSentTo($user)"
+        ]
+    },
+    {
+        "q": "Database assertions helper trait `DatabaseMigrations`?",
+        "type": "mcq",
+        "o": [
+            "Runs all migrations before each test and rolls them back. Slower than `RefreshDatabase` (transaction based).",
+            "Faster than RefreshDatabase",
+            "Same as RefreshDatabase",
+            "Only for production"
+        ]
+    },
+    {
+        "q": "Asserting response headers?",
+        "type": "mcq",
+        "o": [
+            "$response->assertHeader('X-Frame-Options', 'DENY');",
+            "$response->assertHead()",
+            "$response->assertMeta()",
+            "$response->seeHeader()"
+        ]
+    },
+    {
+        "q": "Asserting cookie presence?",
+        "type": "mcq",
+        "o": [
+            "$response->assertCookie('name', 'value');",
+            "$response->hasCookie()",
+            "$response->seeCookie()",
+            "$response->assertSessionHasCookie()"
+        ]
+    },
+    {
+        "q": "Asserting cookie missing?",
+        "type": "mcq",
+        "o": [
+            "$response->assertCookieMissing('name');",
+            "$response->assertNoCookie()",
+            "$response->missingCookie()",
+            "$response->withoutCookie()"
+        ]
+    },
+    {
+        "q": "Testing console commands?",
+        "type": "mcq",
+        "o": [
+            "$this->artisan('command:name')->assertExitCode(0);",
+            "$this->command()",
+            "$this->console()",
+            "$this->run()"
+        ]
+    },
+    {
+        "q": "Asserting command output?",
+        "type": "mcq",
+        "o": [
+            "$this->artisan('cmd')->expectsOutput('Success!');",
+            "$this->artisan('cmd')->see('Success!')",
+            "$this->artisan('cmd')->output('Success!')",
+            "$this->artisan('cmd')->read('Success!')"
+        ]
+    },
+    {
+        "q": "Asking user input in command test?",
+        "type": "mcq",
+        "o": [
+            "$this->artisan('cmd')->expectsQuestion('Name?', 'Taylor');",
+            "$this->artisan('cmd')->input('Taylor')",
+            "$this->artisan('cmd')->answer('Taylor')",
+            "$this->artisan('cmd')->reply('Taylor')"
+        ]
+    },
+    {
+        "q": "Asserting exact JSON match (strict)?",
+        "type": "mcq",
+        "o": [
+            "$response->assertExactJson([...]);",
+            "$response->assertJson()",
+            "$response->assertStrict()",
+            "$response->assertSame()"
+        ]
+    },
+    {
+        "q": "Asserting JSON count?",
+        "type": "mcq",
+        "o": [
+            "$response->assertJsonCount(3, 'data');",
+            "$response->assertCount()",
+            "$response->assertTotal()",
+            "$response->assertSize()"
+        ]
+    },
+    {
+        "q": "Helper to get content as array?",
+        "type": "mcq",
+        "o": [
+            "$response->json();",
+            "$response->array()",
+            "$response->decode()",
+            "$response->getData()"
+        ]
+    },
+    {
+        "q": "What is `dump()` in a chain?",
+        "type": "mcq",
+        "o": [
+            "$response->dump()->assertOk(); prints content but continues chain.",
+            "Stops execution",
+            "Logs to file",
+            "Clears output"
+        ]
+    },
+    {
+        "q": "Asserting validation errors on specific fields?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasErrors(['email', 'password']);",
+            "$response->assertErrors()",
+            "$response->assertInvalidFields()",
+            "$response->assertFieldErrors()"
+        ]
+    },
+    {
+        "q": "Asserting no validation errors?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasNoErrors();",
+            "$response->assertValid()",
+            "$response->assertNoError()",
+            "$response->assertClean()"
+        ]
+    },
+    {
+        "q": "Can you test Middleware in isolation?",
+        "type": "mcq",
+        "o": [
+            "Yes, instantiate it and call `handle` with a mock Request and Closure.",
+            "No, only via Route",
+            "No, only via HTTP",
+            "No, only via Controller"
+        ]
+    },
+    {
+        "q": "Assertion `assertAuthenticated`?",
+        "type": "mcq",
+        "o": [
+            "Asserts that the user is authenticated (checked via default guard).",
+            "Asserts user exists",
+            "Asserts login page",
+            "Asserts token"
+        ]
+    },
+    {
+        "q": "Assertion `assertGuest`?",
+        "type": "mcq",
+        "o": [
+            "Asserts that the user is NOT authenticated.",
+            "Asserts guest role",
+            "Asserts public page",
+            "Asserts 401"
+        ]
+    },
+    {
+        "q": "Assertion `assertAuthenticatedAs($user)`?",
+        "type": "mcq",
+        "o": [
+            "Asserts that the specific user instance is authenticated.",
+            "Asserts name matches",
+            "Asserts id matches",
+            "Asserts role matches"
+        ]
+    },
+    {
+        "q": "Can you use `RefreshDatabase` with specific connection?",
+        "type": "mcq",
+        "o": [
+            "Yes, define `$connectionsToTransact` property in test class.",
+            "No, default only",
+            "No, sqlite only",
+            "No, mysql only"
+        ]
+    },
+    {
+        "q": "What does `$this->withoutMiddleware()` do?",
+        "type": "mcq",
+        "o": [
+            "Disables all middleware for the test. Useful for testing controller logic in isolation.",
+            "Disables auth only",
+            "Disables csrf only",
+            "Disables throttle only"
+        ]
+    },
+    {
+        "q": "Can you disable specific middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$this->withoutMiddleware([Middleware::class])`.",
+            "No, all or nothing",
+            "Yes, by name string",
+            "Yes, by group name"
+        ]
+    },
+    {
+        "q": "What is `assertCreated`?",
+        "type": "mcq",
+        "o": [
+            "Asserts status code 201.",
+            "Asserts 200",
+            "Asserts DB insert",
+            "Asserts factory run"
+        ]
+    },
+    {
+        "q": "What is `assertNoContent`?",
+        "type": "mcq",
+        "o": [
+            "Asserts status code 204.",
+            "Asserts empty body",
+            "Asserts blank page",
+            "Asserts 404"
+        ]
+    },
+    {
+        "q": "What is `assertUnprocessable`?",
+        "type": "mcq",
+        "o": [
+            "Asserts status code 422 (Validation Error).",
+            "Asserts 500",
+            "Asserts 400",
+            "Asserts 401"
+        ]
+    },
+    {
+        "q": "Testing JSON API validation errors?",
+        "type": "mcq",
+        "o": [
+            "$response->assertJsonValidationErrors(['field']);",
+            "$response->assertApiErrors()",
+            "$response->assertJsonErrors()",
+            "$response->assertSchemaError()"
+        ]
+    },
+    {
+        "q": "Difference `assertSessionHas` vs `assertSessionHasErrors`?",
+        "type": "mcq",
+        "o": [
+            "`assertSessionHas` checks for arbitrary session keys (flash inputs, etc). `assertSessionHasErrors` checks the `errors` bag specifically.",
+            "Same",
+            "Reverse",
+            "No difference"
+        ]
+    },
+    {
+        "q": "How to verify a job was pushed to a specific queue?",
+        "type": "mcq",
+        "o": [
+            "Queue::assertPushedOn('queue-name', Job::class);",
+            "Queue::assertQueue()",
+            "Job::assertQueue()",
+            "Bus::assertQueue()"
+        ]
+    },
+    {
+        "q": "How to verify a job was NOT pushed?",
+        "type": "mcq",
+        "o": [
+            "Queue::assertNotPushed(Job::class);",
+            "Queue::assertEmpty()",
+            "Queue::assertNone()",
+            "Queue::assertZero()"
+        ]
+    },
+    {
+        "q": "Asserting a listener is attached to event?",
+        "type": "mcq",
+        "o": [
+            "Event::assertListening(Event::class, Listener::class);",
+            "Event::assertAttached()",
+            "Event::assertBound()",
+            "Event::assertConnected()"
+        ]
+    },
+    {
+        "q": "Where to configure environment variables for testing?",
+        "type": "mcq",
+        "o": [
+            "phpunit.xml `<php>` section (e.g. `<server name='APP_ENV' value='testing'/>`).",
+            ".env.testing only",
+            "config/testing.php",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "Does `.env.testing` override `.env`?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it exists, it is loaded when environment is `testing`.",
+            "No",
+            "Only if forced",
+            "Only for dusk"
+        ]
+    },
+    {
+        "q": "What is `LazilyRefreshDatabase`?",
+        "type": "mcq",
+        "o": [
+            "Resets database only if/when the test interacts with the database. Faster for tests that don't touch DB.",
+            "Lazy migration",
+            "Lazy factory",
+            "Lazy seeding"
+        ]
+    },
+    {
+        "q": "Assertion `assertDownload`?",
+        "type": "mcq",
+        "o": [
+            "$response->assertDownload('filename.pdf'); Asserts response is a download attachment.",
+            "$response->assertFile()",
+            "$response->assertStream()",
+            "$response->assertAttachment()"
+        ]
+    },
+    {
+        "q": "Property `$seed` in test class?",
+        "type": "mcq",
+        "o": [
+            "If true, runs the `DatabaseSeeder` after migrating (used with `RefreshDatabase`).",
+            "If true, uses faker",
+            "If true, strict mode",
+            "If true, debugging"
+        ]
+    },
+    {
+        "q": "Can you use different seeder in `$seed`?",
+        "type": "mcq",
+        "o": [
+            "Yes, define `$seeder = SpecificSeeder::class;` property.",
+            "No",
+            "Only via setup",
+            "Only via method"
+        ]
+    },
+    {
+        "q": "Method `setUp` visibility?",
+        "type": "mcq",
+        "o": [
+            "protected function setUp(): void. Must call `parent::setUp()`.",
+            "public",
+            "private",
+            "static"
+        ]
+    },
+    {
+        "q": "Method `tearDown` visibility?",
+        "type": "mcq",
+        "o": [
+            "protected function tearDown(): void. Must call `parent::tearDown()`.",
+            "public",
+            "private",
+            "static"
+        ]
+    },
+    {
+        "q": "Testing notification via channels?",
+        "type": "mcq",
+        "o": [
+            "Notification::assertSentTo($user, InvoicePaid::class, function ($n, $channels) { return in_array('mail', $channels); });",
+            "Notification::assertChannel()",
+            "Notification::assertVia()",
+            "Notification::assertRoute()"
+        ]
+    },
+    {
+        "q": "Dusk: `browse` closure?",
+        "type": "mcq",
+        "o": [
+            "$this->browse(function (Browser $browser) { ... });",
+            "$this->dusk()",
+            "$this->chrome()",
+            "$this->visit()"
+        ]
+    },
+    {
+        "q": "Dusk: `waitForText`?",
+        "type": "mcq",
+        "o": [
+            "$browser->waitForText('Success', 10); Waits 10s for text to appear.",
+            "Waits for input",
+            "Waits for click",
+            "Waits for alert"
+        ]
+    },
+    {
+        "q": "Dusk: `screenshot`?",
+        "type": "mcq",
+        "o": [
+            "$browser->screenshot('filename'); Saves to tests/Browser/screenshots.",
+            "Captures video",
+            "Captures log",
+            "Captures pdf"
+        ]
+    },
+    {
+        "q": "Dusk: `typeSlowly`?",
+        "type": "mcq",
+        "o": [
+            "$browser->typeSlowly('name', 'Taylor', 100); Simulates typing delay.",
+            "Types fast",
+            "Types random",
+            "Types invalid"
+        ]
+    },
+    {
+        "q": "Dusk: `press` selector?",
+        "type": "mcq",
+        "o": [
+            "Clicks a button with the given text/value/name.",
+            "Clicks link",
+            "Clicks div",
+            "Clicks image"
+        ]
+    },
+    {
+        "q": "Dusk: `loginAs`?",
+        "type": "mcq",
+        "o": [
+            "$browser->loginAs($user); Authenticates user in the browser session.",
+            "$browser->auth()",
+            "$browser->user()",
+            "$browser->session()"
+        ]
+    },
+    {
+        "q": "Mocking `Blade::directive`?",
+        "type": "mcq",
+        "o": [
+            "Hard to test directly. Usually test the output of the view that uses the directive.",
+            "Blade::fake()",
+            "Blade::mock()",
+            "Blade::spy()"
+        ]
+    },
+    {
+        "q": "Asserting view has errors?",
+        "type": "mcq",
+        "o": [
+            "$response->assertViewHas('errors');",
+            "$response->assertErrors()",
+            "$response->seeErrors()",
+            "$response->errors()"
+        ]
+    },
+    {
+        "q": "Checking validation errors are specifically for a bag?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasErrorsIn('bagName', ['field']);",
+            "$response->assertBagErrors()",
+            "$response->assertNamedErrors()",
+            "$response->assertScopedErrors()"
+        ]
+    },
+    {
+        "q": "Does `assertDatabaseHas` respect soft deletes?",
+        "type": "mcq",
+        "o": [
+            "It checks the raw table. If record is soft deleted, it IS in the database (so assertions passes). Use `deleted_at => null` property to check exact state.",
+            "Yes, ignores deleted",
+            "No",
+            "Depends on config"
+        ]
+    }
+,
+{
+    "q": "Assertion `assertSeeText` vs `assertSee`?",
+    "type": "mcq",
+    "o": [
+        "`assertSee` checks raw properties (can match HTML tags). `assertSeeText` strips HTML tags before checking (User perspective).",
+        "Same",
+        "Reverse",
+        "assertSee is deprecated"
+    ]
+},
+{
+    "q": "What is `assertDontSee`?",
+    "type": "mcq",
+    "o": [
+        "Asserts that the given string is NOT contained within the response.",
+        "Asserts error",
+        "Asserts forbidden",
+        "Asserts missing file"
+    ]
+},
+{
+    "q": "Testing: `from($url)` method on test request?",
+    "type": "mcq",
+    "o": [
+        "Sets the `referer` header, simulating coming FROM a specific page (useful for testing redirects 'back').",
+        "Sets form data",
+        "Sets from email",
+        "Sets format"
+    ]
+},
+{
+    "q": "Testing: `followingRedirects()`?",
+    "type": "mcq",
+    "o": [
+        "Automatically follow any redirects invoked by the request. Returns the final response.",
+        "Logs redirects",
+        "Blocks redirects",
+        "Asserts redirects"
+    ]
+},
+{
+    "q": "Can you test file downloads content?",
+    "type": "mcq",
+    "o": [
+        "Yes, `$response->streamedContent()` retrieves the file content (if streamed/downloaded).",
+        "No",
+        "Only filename",
+        "Only headers"
+    ]
+},
+{
+    "q": "What is `dumpSession` on response?",
+    "type": "mcq",
+    "o": [
+        "$response->dumpSession(); dumps session data to console.",
+        "Clears session",
+        "Saves session",
+        "Encrypts session"
+    ]
+},
+{
+    "q": "What is `dumpHeaders` on response?",
+    "type": "mcq",
+    "o": [
+        "Dumps response headers to console.",
+        "Clears headers",
+        "Sets headers",
+        "Hides headers"
+    ]
+},
+{
+    "q": "Asserting that a cookie is NOT expiring soon?",
+    "type": "mcq",
+    "o": [
+        "$response->assertCookieNotExpired('name');",
+        "$response->assertCookieValid()",
+        "$response->assertCookieFresh()",
+        "$response->assertCookieActive()"
+    ]
+},
+{
+    "q": "Asserting cookie value encrypted?",
+    "type": "mcq",
+    "o": [
+        "Cookies are encrypted by default. To assert value of *unencrypted* cookie, use `assertCookie`. For encrypted internal value, standard assert checks the decrypted value if encryption is handled by middleware (test environment usually handles this).",
+        "assertEncryptedCookie",
+        "assertSecretCookie",
+        "assertHashCookie"
+    ]
+},
+{
+    "q": "Mocking `Http` client and inspection?",
+    "type": "mcq",
+    "o": [
+        "Http::assertSent(function (Request $request) { return $request->url() == '...' && $request['name'] == 'Taylor'; });",
+        "Http::inspect()",
+        "Http::spy()",
+        "Http::log()"
+    ]
+},
+{
+    "q": "Http fake sequence?",
+    "type": "mcq",
+    "o": [
+        "Http::fakeSequence()->push('Hello')->push('World', 200); Returns different responses sequentially.",
+        "Http::sequence()",
+        "Http::list()",
+        "Http::queue()"
+    ]
+},
+{
+    "q": "Preventing stray requests in Http tests?",
+    "type": "mcq",
+    "o": [
+        "Http::preventStrayRequests(); throws exception if request has no fake defined.",
+        "Http::block()",
+        "Http::lock()",
+        "Http::stop()"
+    ]
+},
+{
+    "q": "What is `Time::travelBack()`?",
+    "type": "mcq",
+    "o": [
+        "$this->travelBack(); resets time to 'now' after using `travel()`.",
+        "Reverses time",
+        "Moves to yesterday",
+        "Errors"
+    ]
+},
+{
+    "q": "Testing Middleware: `expectsEvents`?",
+    "type": "mcq",
+    "o": [
+        "Legacy/Deprecated method to expect events. Use `Event::fake()` and `assertDispatched` instead.",
+        "Valid",
+        "Recommended",
+        "Only for middleware"
+    ]
+},
+{
+    "q": "Testing Middleware: `expectsJobs`?",
+    "type": "mcq",
+    "o": [
+        "Legacy. Use `Bus::fake()`.",
+        "Valid",
+        "Recommended",
+        "Only for queue"
+    ]
+},
+{
+    "q": "How to verify strict order of events?",
+    "type": "mcq",
+    "o": [
+        "Hard with `Event::fake()` alone. May need spies or callback logic storing timestamps.",
+        "Event::assertOrder()",
+        "Event::assertSequence()",
+        "Event::assertList()"
+    ]
+},
+{
+    "q": "Does `RefreshDatabase` work with multiple connections?",
+    "type": "mcq",
+    "o": [
+        "Yes, but you must define `$connectionsToTransact` array if they are not default.",
+        "No",
+        "Auto detects",
+        "Only mysql/pgsql"
+    ]
+},
+{
+    "q": "Assertion `assertModelExists($model)`?",
+    "type": "mcq",
+    "o": [
+        "Asserts model exists in DB.",
+        "Asserts class exists",
+        "Asserts variable set",
+        "Asserts has id"
+    ]
+},
+{
+    "q": "Assertion `assertModelMissing($model)`?",
+    "type": "mcq",
+    "o": [
+        "Asserts model deleted from DB.",
+        "Asserts null",
+        "Asserts hidden",
+        "Asserts soft deleted"
+    ]
+},
+{
+    "q": "Testing console command inputs?",
+    "type": "mcq",
+    "o": [
+        "$this->artisan('cmd', ['--flag' => true, 'arg' => 'val']);",
+        "$this->run('cmd')",
+        "$this->exec('cmd')",
+        "$this->call('cmd')"
+    ]
+},
+{
+    "q": "Console testing: `assertFailed`?",
+    "type": "mcq",
+    "o": [
+        "Asserts exit code was non-zero.",
+        "Asserts exception",
+        "Asserts error log",
+        "Asserts nothing"
+    ]
+},
+{
+    "q": "Console testing: `assertSuccessful`?",
+    "type": "mcq",
+    "o": [
+        "Asserts exit code was 0.",
+        "Asserts no output",
+        "Asserts true",
+        "Asserts valid"
+    ]
+},
+{
+    "q": "Testing JSON: `assertJsonPath`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertJsonPath('data.0.id', 123);",
+        "$response->assertPath()",
+        "$response->assertValue()",
+        "$response->assertKey()"
+    ]
+},
+{
+    "q": "Testing JSON: what is `assertJsonMissing`?",
+    "type": "mcq",
+    "o": [
+        "Asserts the provided array subset is NOT in the JSON response.",
+        "Asserts empty json",
+        "Asserts missing key only",
+        "Asserts null"
+    ]
+},
+{
+    "q": "Dusk: `waitForLocation`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitForLocation('/path');",
+        "Waits for gps",
+        "Waits for map",
+        "Waits for redirect"
+    ]
+},
+{
+    "q": "Dusk: `assertSeeIn` selector?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertSeeIn('.selector', 'Text'); Checks text inside specific element.",
+        "Checks if element exists",
+        "Checks connection",
+        "Checks input value"
+    ]
+},
+{
+    "q": "Dusk: `attach` file?",
+    "type": "mcq",
+    "o": [
+        "$browser->attach('input[type=file]', '/path/to/file');",
+        "$browser->upload()",
+        "$browser->file()",
+        "$browser->send()"
+    ]
+},
+{
+    "q": "Dusk: `drag` and `drop`?",
+    "type": "mcq",
+    "o": [
+        "$browser->drag('.from', '.to');",
+        "$browser->move()",
+        "$browser->slide()",
+        "$browser->push()"
+    ]
+},
+{
+    "q": "Dusk: `script` execution?",
+    "type": "mcq",
+    "o": [
+        "$browser->script('return window.scrollY;'); Executes JS in browser.",
+        "$browser->js()",
+        "$browser->run()",
+        "$browser->exec()"
+    ]
+},
+{
+    "q": "Mocking `Storage` to test S3?",
+    "type": "mcq",
+    "o": [
+        "Storage::fake('s3'); Operations on 's3' disk are cached in temp folder/memory array.",
+        "Storage::mock('s3')",
+        "Storage::test('s3')",
+        "Storage::dummy('s3')"
+    ]
+},
+{
+    "q": "Testing Batch Jobs?",
+    "type": "mcq",
+    "o": [
+        "Bus::fake(); ... Bus::assertBatched(function (PendingBatch $batch) { ... });",
+        "Bus::assertGroup()",
+        "Bus::assertCollection()",
+        "Bus::assertJobCount()"
+    ]
+},
+{
+    "q": "Testing Job Chains?",
+    "type": "mcq",
+    "o": [
+        "Bus::assertChained([JobA::class, JobB::class]);",
+        "Bus::assertSequence()",
+        "Bus::assertOrder()",
+        "Bus::assertSeries()"
+    ]
+},
+{
+    "q": "Assertions on `Notification` content?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertSentTo($user, Class, function ($n) { return $n->toMail($user)->subject === 'Hi'; });",
+        "Hard to test",
+        "Use Mail::fake",
+        "Use Log::fake"
+    ]
+},
+{
+    "q": "What is `assertOk` code?",
+    "type": "mcq",
+    "o": [
+        "200.",
+        "201",
+        "202",
+        "204"
+    ]
+},
+{
+    "q": "What is `assertCreated` code?",
+    "type": "mcq",
+    "o": [
+        "201.",
+        "200",
+        "202",
+        "204"
+    ]
+},
+{
+    "q": "What is `assertAccepted` code?",
+    "type": "mcq",
+    "o": [
+        "202 (Accepted).",
+        "200",
+        "201",
+        "204"
+    ]
+},
+{
+    "q": "What for `assertNoContent` code?",
+    "type": "mcq",
+    "o": [
+        "204.",
+        "200",
+        "201",
+        "202"
+    ]
+},
+{
+    "q": "What for `assertMovedPermanently` code?",
+    "type": "mcq",
+    "o": [
+        "301.",
+        "302",
+        "303",
+        "307"
+    ]
+},
+{
+    "q": "What for `assertFound` code?",
+    "type": "mcq",
+    "o": [
+        "302 (Found/Redirect).",
+        "301",
+        "200",
+        "404"
+    ]
+},
+{
+    "q": "What for `assertBadRequest` code?",
+    "type": "mcq",
+    "o": [
+        "400.",
+        "401",
+        "403",
+        "404"
+    ]
+},
+{
+    "q": "What for `assertUnauthorized` code?",
+    "type": "mcq",
+    "o": [
+        "401.",
+        "403",
+        "400",
+        "419"
+    ]
+},
+{
+    "q": "What for `assertForbidden` code?",
+    "type": "mcq",
+    "o": [
+        "403.",
+        "401",
+        "400",
+        "419"
+    ]
+},
+{
+    "q": "What for `assertNotFound` code?",
+    "type": "mcq",
+    "o": [
+        "404.",
+        "400",
+        "500",
+        "503"
+    ]
+},
+{
+    "q": "What for `assertMethodNotAllowed` code?",
+    "type": "mcq",
+    "o": [
+        "405.",
+        "404",
+        "406",
+        "400"
+    ]
+},
+{
+    "q": "What for `assertGone` code?",
+    "type": "mcq",
+    "o": [
+        "410.",
+        "404",
+        "500",
+        "400"
+    ]
+},
+{
+    "q": "What for `assertStatus(419)`?",
+    "type": "mcq",
+    "o": [
+        "Page Expired (CSRF token mismatch).",
+        "Too Many Requests",
+        "Teapot",
+        "Server Error"
+    ]
+},
+{
+    "q": "What for `assertTooManyRequests`? (Laravel 8+)",
+    "type": "mcq",
+    "o": [
+        "assertStatus(429).",
+        "422",
+        "419",
+        "503"
+    ]
+},
+{
+    "q": "What for `assertUnprocessable`? (Laravel 8+)",
+    "type": "mcq",
+    "o": [
+        "assertStatus(422).",
+        "400",
+        "404",
+        "500"
+    ]
+},
+{
+    "q": "What for `assertNotModified`?",
+    "type": "mcq",
+    "o": [
+        "304.",
+        "200",
+        "404",
+        "500"
+    ]
+},
+{
+    "q": "What for `assertServerError`?",
+    "type": "mcq",
+    "o": [
+        "500.",
+        "503",
+        "400",
+        "404"
+    ]
+},
+{
+    "q": "What for `assertServiceUnavailable`?",
+    "type": "mcq",
+    "o": [
+        "503.",
+        "500",
+        "404",
+        "504"
+    ]
+},
+{
+    "q": "Check if an exception is thrown in test?",
+    "type": "mcq",
+    "o": [
+        "$this->expectException(Exception::class); placed BEFORE the action.",
+        "$this->assertException()",
+        "$this->shouldThrow()",
+        "try catch block"
+    ]
+},
+{
+    "q": "Check exception message?",
+    "type": "mcq",
+    "o": [
+        "$this->expectExceptionMessage('Error occurred');",
+        "$this->assertMessage()",
+        "$this->seeMessage()",
+        "$this->hasMessage()"
+    ]
+},
+{
+    "q": "Database assert count?",
+    "type": "mcq",
+    "o": [
+        "$this->assertDatabaseCount('table', 5);",
+        "$this->assertTableCount()",
+        "$this->assertRows()",
+        "$this->assertRecords()"
+    ]
+},
+{
+    "q": "Disabling middleware logic for a specific test group?",
+    "type": "mcq",
+    "o": [
+        "Use `WithoutMiddleware` trait in the class.",
+        "Use `NoMiddleware` trait",
+        "Disable in phpunit.xml",
+        "Cannot do it"
+    ]
+},
+{
+    "q": "What is `WithFaker` trait used for?",
+    "type": "mcq",
+    "o": [
+        "Available property `$this->faker` to generate fake data.",
+        "Auto seeds db",
+        "Auto mocks api",
+        "Auto fills forms"
+    ]
+},
+{
+    "q": "Seeding specific seeder class?",
+    "type": "mcq",
+    "o": [
+        "$this->seed(RoleSeeder::class);",
+        "Seed::class()",
+        "DB::class()",
+        "Artisan::seed()"
+    ]
+},
+{
+    "q": "Can you use `RefreshDatabase` and `DatabaseMigrations` traits together?",
+    "type": "mcq",
+    "o": [
+        "No, pick one strategy. Usually `RefreshDatabase` is preferred (transaction/migrate once).",
+        "Yes, safer",
+        "Yes, faster",
+        "Yes, mandatory"
+    ]
+},
+{
+    "q": "Dusk: `waitForDialog`?",
+    "type": "mcq",
+    "o": [
+        "Waits for a JS alert/confirm dialog.",
+        "Waits for modal div",
+        "Waits for chat",
+        "Waits for support"
+    ]
+},
+{
+    "q": "Dusk: `acceptDialog`?",
+    "type": "mcq",
+    "o": [
+        "$browser->acceptDialog(); Clicks OK.",
+        "$browser->clickOk()",
+        "$browser->confirm()",
+        "$browser->yes()"
+    ]
+},
+{
+    "q": "Dusk: `dismissDialog`?",
+    "type": "mcq",
+    "o": [
+        "$browser->dismissDialog(); Clicks Cancel.",
+        "$browser->cancel()",
+        "$browser->no()",
+        "$browser->close()"
+    ]
+},
+{
+    "q": "Dusk: `resize` window?",
+    "type": "mcq",
+    "o": [
+        "$browser->resize(1920, 1080);",
+        "$browser->size()",
+        "$browser->window()",
+        "$browser->viewport()"
+    ]
+},
+{
+    "q": "Dusk: `maximize` window?",
+    "type": "mcq",
+    "o": [
+        "$browser->maximize();",
+        "$browser->fullscreen()",
+        "$browser->big()",
+        "$browser->fit()"
+    ]
+},
+{
+    "q": "Testing: `deleteJson` method?",
+    "type": "mcq",
+    "o": [
+        "$this->deleteJson('/api/resource/1'); Sends DELETE with Accept: application/json.",
+        "$this->delete()",
+        "$this->json('DELETE', ...)",
+        "$this->del()"
+    ]
+},
+{
+    "q": "Testing: `postJson` vs `post`?",
+    "type": "mcq",
+    "o": [
+        "`postJson` sets Content-Type and Accept to `application/json` and expects JSON response. `post` simulates form submit.",
+        "Same",
+        "Reverse",
+        "postJson is deprecated"
+    ]
+},
+{
+    "q": "Asserting response has NO content (empty body)?",
+    "type": "mcq",
+    "o": [
+        "$response->assertNoContent(); (204 or just empty body check?) Actually implies 204.",
+        "$response->assertEmpty()",
+        "$response->assertBlank()",
+        "$response->assertVoid()"
+    ]
+},
+{
+    "q": "Unit test running code in transaction manually?",
+    "type": "mcq",
+    "o": [
+        "DB::beginTransaction(); ... DB::rollBack(); (RefreshDatabase does this automatically).",
+        "DB::start()",
+        "DB::go()",
+        "DB::try()"
+    ]
+},
+{
+    "q": "What is `assertDatabaseMissing` logic?",
+    "type": "mcq",
+    "o": [
+        "SELECT count(*) where matching criteria == 0.",
+        "count < 0",
+        "count == null",
+        "count != 0"
+    ]
+},
+{
+    "q": "Can you test protected methods in Unit tests?",
+    "type": "mcq",
+    "o": [
+        "Use ReflectionClass to make accessible, or test via public interface. PHPUnit itself doesn't directly access protected.",
+        "Yes, standard",
+        "Yes, use magic",
+        "Yes, `->protected()`"
+    ]
+},
+{
+    "q": "Testing Trait behavior?",
+    "type": "mcq",
+    "o": [
+        "Create an anonymous class or a dummy class that uses the trait, then test that.",
+        "Test trait directly",
+        "Cannot test traits",
+        "Use Mockery"
+    ]
+},
+{
+    "q": "Testing Abstract Class?",
+    "type": "mcq",
+    "o": [
+        "Create a concrete anonymous class extending it, or mock it.",
+        "Test directly",
+        "Cannot test",
+        "Use Interface"
+    ]
+},
+{
+    "q": "How to verify that a Notification was sent via specific channel?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertSentTo($user, InvoicePaid::class, function($notification, $channels) { return in_array('mail', $channels); });",
+        "Notification::assertChannel('mail')",
+        "Notification::assertVia('mail')",
+        "Notification::sentVia()"
+    ]
+},
+{
+    "q": "Can `be()` method take a guard?",
+    "type": "mcq",
+    "o": [
+        "Yes. `$this->be($user, 'api');`.",
+        "No",
+        "Only web",
+        "Only token"
+    ]
+},
+{
+    "q": "Assertion that session has old input?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSessionHasInput('name', 'Taylor');",
+        "$response->assertOldInput()",
+        "$response->assertInput()",
+        "$response->hasInput()"
+    ]
+},
+{
+    "q": "Assertion that session has error keys only?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSessionHasErrors(['name', 'email']);",
+        "$response->assertInputErrors()",
+        "$response->assertBadInput()",
+        "$response->assertFailures()"
+    ]
+},
+{
+    "q": "Assertion `assertJsonFragment`?",
+    "type": "mcq",
+    "o": [
+        "Asserts that the response contains the given JSON somewhere (not strictly structure match).",
+        "Exact match",
+        "Structure match",
+        "Count match"
+    ]
+},
+{
+    "q": "Assertion `assertJsonMissingValidationErrors`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertJsonMissingValidationErrors(['field']);",
+        "$response->assertValidJson()",
+        "$response->assertGoodJson()",
+        "$response->assertCleanJson()"
+    ]
+},
+{
+    "q": "Does `withoutExceptionHandling` expose validation errors?",
+    "type": "mcq",
+    "o": [
+        "Yes, checking `ValidationException` directly instead of redirect.",
+        "No",
+        "Only HTTP errors",
+        "Only logic errors"
+    ]
+},
+{
+    "q": "Asserting view data via closure?",
+    "type": "mcq",
+    "o": [
+        "$response->assertViewHas('posts', function($posts) { return $posts->count() === 3; });",
+        "Not supported",
+        "Via assertSee",
+        "Via assertData"
+    ]
+},
+{
+    "q": "Testing file download filename?",
+    "type": "mcq",
+    "o": [
+        "$response->assertDownload('invoice.pdf');",
+        "$response->assertFilename()",
+        "$response->getName()",
+        "$response->checkName()"
+    ]
+},
+{
+    "q": "How to make request as Ajax?",
+    "type": "mcq",
+    "o": [
+        "$this->post('/uri', [, ['X-Requested-With' => 'XMLHttpRequest']); (or `json` methods).",
+        "$this->ajax()",
+        "$this->xhr()",
+        "$this->async()"
+    ]
+},
+{
+    "q": "Why use `View::share` in tests?",
+    "type": "mcq",
+    "o": [
+        "To inject data into all views for test setup (rare).",
+        "To test view composers",
+        "To limit views",
+        "To clear views"
+    ]
+},
+{
+    "q": "What is `TestResponse` class?",
+    "type": "mcq",
+    "o": [
+        "The wrapper class returned by `$this->call/get/post` wrapping `Illuminate\\Http\\Response` with assertion methods.",
+        "Standard response",
+        "PHPUnit response",
+        "Browser response"
+    ]
+},
+{
+    "q": "Assertion `assertCookieNotExpired`?",
+    "type": "mcq",
+    "o": [
+        "Available in TestResponse. Checks expiry time > now.",
+        "assertCookieValid",
+        "assertCookieFresh",
+        "assertCookieAlive"
+    ]
+},
+{
+    "q": "Assertion `assertSessionMissing`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSessionMissing('key');",
+        "$response->assertNoSession()",
+        "$response->assertSessionEmpty()",
+        "$response->assertSessionNull()"
+    ]
+},
+{
+    "q": "Assertion `assertContent`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertContent('Exact String Match');",
+        "$response->assertBody()",
+        "$response->assertText()",
+        "$response->assertHtml()"
+    ]
+},
+{
+    "q": "Assertion `assertCreated` means?",
+    "type": "mcq",
+    "o": [
+        "Response status 201.",
+        "Response status 200",
+        "Response status 204",
+        "Response matches created_at"
+    ]
+},
+{
+    "q": "Assertion `assertNoContent` means?",
+    "type": "mcq",
+    "o": [
+        "Response status 204.",
+        "Response empty string",
+        "Response null",
+        "Response 404"
+    ]
+},
+{
+    "q": "How to test component rendering directly?",
+    "type": "mcq",
+    "o": [
+        "$view = $this->component(Alert::class, ['message' => 'Hi']); $view->assertSee('Hi');",
+        "$this->view()",
+        "$this->render()",
+        "$this->blade()"
+    ]
+},
+{
+    "q": "How to test Blade view string directly?",
+    "type": "mcq",
+    "o": [
+        "$view = $this->blade('<x-alert :message=\"$msg\"/>', ['msg' => 'Hi']);",
+        "$this->string()",
+        "$this->compile()",
+        "$this->parse()"
+    ]
+},
+{
+    "q": "Can you define custom assertions?",
+    "type": "mcq",
+    "o": [
+        "Yes, via `TestResponse::macro()` in AppServiceProvider.",
+        "No",
+        "Only by extending class",
+        "Only in traits"
+    ]
+},
+{
+    "q": "Testing: what is `assertSuccessful` range?",
+    "type": "mcq",
+    "o": [
+        ">= 200 and < 300.",
+        "200 only",
+        "200, 201 only",
+        "200-400"
+    ]
+},
+{
+    "q": "Assertion name for checking forbidden?",
+    "type": "mcq",
+    "o": [
+        "assertForbidden (403).",
+        "assertDenied",
+        "assertBlocked",
+        "assertReject"
+    ]
+},
+{
+    "q": "Assertion name for checking unauthorized?",
+    "type": "mcq",
+    "o": [
+        "assertUnauthorized (401).",
+        "assertGuest",
+        "assertLogin",
+        "assertAuth"
+    ]
+},
+{
+    "q": "What is `assertLocation`?",
+    "type": "mcq",
+    "o": [
+        "Asserts the Location header in a redirect response.",
+        "Asserts current url",
+        "Asserts gps",
+        "Asserts map"
+    ]
+},
+{
+    "q": "Dusk: `waitUntil`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitUntil('window.loaded == true'); JS condition.",
+        "Waits until time",
+        "Waits until click",
+        "Waits until close"
+    ]
+},
+{
+    "q": "Dusk: `waitFor`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitFor('.selector'); Waits for element to appear.",
+        "Waits for response",
+        "Waits for network",
+        "Waits for cpu"
+    ]
+},
+{
+    "q": "Dusk: `waitUntilMissing`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitUntilMissing('.selector'); Waits for element to disappear.",
+        "Waits for delete",
+        "Waits for hide",
+        "Waits for remove"
+    ]
+}
+,
+{
+    "q": "How to run tests with coverage count?",
+    "type": "mcq",
+    "o": [
+        "php artisan test --coverage",
+        "php artisan test --report",
+        "php artisan test --stats",
+        "php artisan test --audit"
+    ]
+},
+{
+    "q": "Minimum coverage threshold enforcement?",
+    "type": "mcq",
+    "o": [
+        "php artisan test --min=80",
+        "php artisan test --threshold=80",
+        "php artisan test --limit=80",
+        "php artisan test --fail=80"
+    ]
+},
+{
+    "q": "Where to configure coverage exclude paths?",
+    "type": "mcq",
+    "o": [
+        "phpunit.xml <coverage> <exclude> or <include> section.",
+        "config/testing.php",
+        ".env",
+        "composer.json"
+    ]
+},
+{
+    "q": "Parallel testing: hooks for setup/teardown?",
+    "type": "mcq",
+    "o": [
+        "ParallelTesting::setUpProcess(...) and tearDownProcess(...). Put in AppServiceProvider boot.",
+        "TestListener class",
+        "EventSubscriber class",
+        "Cannot hook"
+    ]
+},
+{
+    "q": "Sharing state between parallel processes?",
+    "type": "mcq",
+    "o": [
+        "Difficult. Processes are isolated. Use token based locking or external service (Redis) if absolutely needed, but avoid shared state.",
+        "Use global variables",
+        "Use static properties",
+        "Use singleton"
+    ]
+},
+{
+    "q": "Parallel testing: Token for current process?",
+    "type": "mcq",
+    "o": [
+        "ParallelTesting::token(); Returns unique integer for the process.",
+        "ParallelTesting::id()",
+        "ParallelTesting::process()",
+        "ParallelTesting::key()"
+    ]
+},
+{
+    "q": "Dusk: `waitUntilEnabled`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitUntilEnabled('.btn');",
+        "Waits for click",
+        "Waits for active",
+        "Waits for visible"
+    ]
+},
+{
+    "q": "Dusk: `waitUntilVue`?",
+    "type": "mcq",
+    "o": [
+        "$browser->waitUntilVue('key', 'value', '@component'); Waits for Vue component data to match.",
+        "Waits for react",
+        "Waits for angular",
+        "Waits for js"
+    ]
+},
+{
+    "q": "Dusk: `scope` method?",
+    "type": "mcq",
+    "o": [
+        "$browser->with('.modal', function ($modal) { ... }); Scope operations to a selector.",
+        "$browser->focus()",
+        "$browser->target()",
+        "$browser->select()"
+    ]
+},
+{
+    "q": "Dusk: Opening multiple browser windows?",
+    "type": "mcq",
+    "o": [
+        "Use multiple browser arguments in callback. `browse(function ($first, $second) { ... })`.",
+        "Not supported",
+        "Use tabs",
+        "Use processes"
+    ]
+},
+{
+    "q": "Dusk: Console Log access?",
+    "type": "mcq",
+    "o": [
+        "$browser->driver->manage()->getLog('browser');",
+        "$browser->console()",
+        "$browser->logs()",
+        "$browser->report()"
+    ]
+},
+{
+    "q": "Dusk: Global element wait timeout?",
+    "type": "mcq",
+    "o": [
+        "Set static `$waitSeconds` in DuskTestCase?",
+        "Config dusk.timeout",
+        "Env DUSK_TIMEOUT",
+        "Hardcoded 5s"
+    ]
+},
+{
+    "q": "Mocking objects: `mock` vs `spy`?",
+    "type": "mcq",
+    "o": [
+        "`mock` expects calls (strict). `spy` records calls (loose, assert afterwards).",
+        "Same",
+        "Spy is real object",
+        "Mock is partial"
+    ]
+},
+{
+    "q": "Partial mocks?",
+    "type": "mcq",
+    "o": [
+        "Use `partialMock(Class::class, fn($mock) => ...)`.",
+        "Mockery::partial()",
+        "this->partial()",
+        "Cannot do partial"
+    ]
+},
+{
+    "q": "Testing: `freezeTime` (Laravel 8+)?",
+    "type": "mcq",
+    "o": [
+        "$this->freezeTime(fn() => ...); Locks Carbon 'now' for the callback execution.",
+        "Time::stop()",
+        "Clock::freeze()",
+        "Carbon::freeze()"
+    ]
+},
+{
+    "q": "What is `$this->travelTo($date, fn() => ...)`?",
+    "type": "mcq",
+    "o": [
+        "Sets time to date, runs closure, then restores time.",
+        "Moves time permanently",
+        "Changes timezone",
+        "Changes locality"
+    ]
+},
+{
+    "q": "Asserting view content contains text in order?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSeeTextInOrder(['First', 'Second']);",
+        "$response->assertSequence()",
+        "$response->assertOrderedText()",
+        "$response->assertList()"
+    ]
+},
+{
+    "q": "Testing custom validation rule?",
+    "type": "mcq",
+    "o": [
+        "Instantiate rule object, call `passes`, or use Validator facade with the rule instance.",
+        "Rule::test()",
+        "Rule::fake()",
+        "Rule::check()"
+    ]
+},
+{
+    "q": "Asserting Blade Component state?",
+    "type": "mcq",
+    "o": [
+        "$this->component(Alert::class, ['type' => 'error'])->assertSee('Error');",
+        "Cannot test state",
+        "Only output",
+        "Only class"
+    ]
+},
+{
+    "q": "Skipping tests conditionally?",
+    "type": "mcq",
+    "o": [
+        "$this->markTestSkipped('Reason'); or using `@requires` annotation.",
+        "$this->skip()",
+        "$this->ignore()",
+        "$this->pass()"
+    ]
+},
+{
+    "q": "Marking test incomplete?",
+    "type": "mcq",
+    "o": [
+        "$this->markTestIncomplete('TODO');",
+        "$this->todo()",
+        "$this->later()",
+        "$this->pend()"
+    ]
+},
+{
+    "q": "Testing `Gate::inspect` results?",
+    "type": "mcq",
+    "o": [
+        "$response = Gate::inspect('ability'); $this->assertTrue($response->allowed());",
+        "$this->assertGate()",
+        "$this->can()",
+        "$this->inspect()"
+    ]
+},
+{
+    "q": "Testing middleware order?",
+    "type": "mcq",
+    "o": [
+        "Difficult integration test. Usually inspecting `Route::getMiddleware()` array or trust the kernel config.",
+        "Middleware::assertOrder()",
+        "Route::assertMiddlewareOrder()",
+        "Kernel::assertOrder()"
+    ]
+},
+{
+    "q": "Asserting Job delay?",
+    "type": "mcq",
+    "o": [
+        "Bus::assertDispatched(Job::class, function ($job) { return $job->delay === 10; });",
+        "Bus::assertDelayed()",
+        "Job::assertDelay()",
+        "Queue::assertDelay()"
+    ]
+},
+{
+    "q": "Asserting Job queue name?",
+    "type": "mcq",
+    "o": [
+        "Bus::assertDispatched(Job::class, function ($job) { return $job->queue === 'high'; });",
+        "Bus::assertQueueName()",
+        "Job::assertQueueName()",
+        "Queue::assertName()"
+    ]
+},
+{
+    "q": "Asserting Mail has attachment?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return $mail->hasAttachment('file.pdf'); });",
+        "Mail::assertAttached()",
+        "Mail::assertFile()",
+        "Mail::assertHas()"
+    ]
+},
+{
+    "q": "Asserting Mail cc/bcc?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return $mail->hasCc('foo@bar.com'); });",
+        "Mail::assertCc()",
+        "Mail::assertBcc()",
+        "Mail::assertCopy()"
+    ]
+},
+{
+    "q": "Testing Notification via `database` channel?",
+    "type": "mcq",
+    "o": [
+        "After logging in, $user->notifications()->first(); Assert DB content.",
+        "Notification::assertDatabase()",
+        "DB::assertNotification()",
+        "User::assertNotification()"
+    ]
+},
+{
+    "q": "Testing Notification via `anonymous` notifiable?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertSentTo(new AnonymousNotifiable, ...);",
+        "Notification::fakeAnonymous()",
+        "Notification::assertAnonymous()",
+        "Notification::assertGuest()"
+    ]
+},
+{
+    "q": "Testing Model Observers?",
+    "type": "mcq",
+    "o": [
+        "Perform actions (create/update) and assert side effects. Or mock the observer.",
+        "Observer::fake()",
+        "Model::assertObserved()",
+        "Observer::assertCalled()"
+    ]
+},
+{
+    "q": "Mocking `Process` (Laravel 10+)?",
+    "type": "mcq",
+    "o": [
+        "Process::fake(['ls *' => 'file.txt']);",
+        "Process::mock()",
+        "Exec::fake()",
+        "Shell::fake()"
+    ]
+},
+{
+    "q": "Asserting Process run?",
+    "type": "mcq",
+    "o": [
+        "Process::assertRan('ls *');",
+        "Process::assertExecuted()",
+        "Process::assertCalled()",
+        "Process::assertCommand()"
+    ]
+},
+{
+    "q": "Faking generic class injection?",
+    "type": "mcq",
+    "o": [
+        "$this->mock(Service::class, function ($mock) { ... });",
+        "$this->fake()",
+        "$this->inject()",
+        "$this->bind()"
+    ]
+},
+{
+    "q": "Does `mock()` bind to container?",
+    "type": "mcq",
+    "o": [
+        "Yes, it swaps the instance in the service container automatically.",
+        "No, manual bind needed",
+        "No, local only",
+        "No, static only"
+    ]
+},
+{
+    "q": "Difference `this->mock` vs `this->instance`?",
+    "type": "mcq",
+    "o": [
+        "`mock` creates a Mockery object using a closure setup. `instance` binds an already created object/mock to the container.",
+        "Same",
+        "Reverse",
+        "Unrelated"
+    ]
+},
+{
+    "q": "Testing `throttle` middleware effectiveness?",
+    "type": "mcq",
+    "o": [
+        "Make N requests in loop, assert 429 on N+1. Or verify headers `X-RateLimit-Remaining`.",
+        "Throttle::fake()",
+        "Middleware::fake()",
+        "RateLimiter::fake()"
+    ]
+},
+{
+    "q": "Testing `Broadcast` events?",
+    "type": "mcq",
+    "o": [
+        "Event::fake(); assertDispatched(Event::class) checks broadcast capabilities if it implements ShouldBroadcast.",
+        "Broadcast::fake()",
+        "Socket::fake()",
+        "Channel::fake()"
+    ]
+},
+{
+    "q": "Asserting Broadcaster specific channel?",
+    "type": "mcq",
+    "o": [
+        "Check `$event->broadcastOn()` return value in assertDispatched callback.",
+        "Broadcast::assertChannel()",
+        "Event::assertChannel()",
+        "Channel::assert()"
+    ]
+},
+{
+    "q": "Testing File Upload Validation (max size)?",
+    "type": "mcq",
+    "o": [
+        "UploadedFile::fake()->create('video.mp4', 50000); (size in kb). Assert 422.",
+        "File::size()",
+        "Storage::size()",
+        "Validation::size()"
+    ]
+},
+{
+    "q": "Testing `signed` routes?",
+    "type": "mcq",
+    "o": [
+        "Use `URL::signedRoute` to generate valid URL for test request.",
+        "Mock signature",
+        "Disable signature",
+        "Force signature"
+    ]
+},
+{
+    "q": "Asserting 403 on invalid signature?",
+    "type": "mcq",
+    "o": [
+        "Call route with modified/missing signature parameter. Assert 403.",
+        "Assert 401",
+        "Assert 404",
+        "Assert 500"
+    ]
+},
+{
+    "q": "Testing `can` middleware with parameters?",
+    "type": "mcq",
+    "o": [
+        "Create user, model, POST to route. Middleware calls Gate. If user not authorized, 403.",
+        "Gate::fake()",
+        "Middleware::spy()",
+        "Policy::spy()"
+    ]
+},
+{
+    "q": "Database assertions: `assertSoftDeleted` with custom column?",
+    "type": "mcq",
+    "o": [
+        "$this->assertSoftDeleted('table', ['id' => 1, 'deleted_at_column'); (Wait, does it support col name arg? Usually relies on model config or raw db check).",
+        "Yes, 3rd arg",
+        "No, only default",
+        "Use assertDatabaseHas"
+    ]
+},
+{
+    "q": "Mocking `Log` facade?",
+    "type": "mcq",
+    "o": [
+        "Log::shouldReceive('info')->once();",
+        "Log::fake() (Available in recent versions? No, strict Log fake not explicitly in docs like Event::fake, usually 'shouldReceive' or 'spy').",
+        "Logger::mock()",
+        "Log::spy()"
+    ]
+},
+{
+    "q": "Testing `abort(404)` behavior?",
+    "type": "mcq",
+    "o": [
+        "$response->assertNotFound();",
+        "$response->assertAborted()",
+        "$response->assertExit()",
+        "$response->assertDie()"
+    ]
+},
+{
+    "q": "Assertion `assertJsonValidationErrors` key vs array?",
+    "type": "mcq",
+    "o": [
+        "Can accept string 'key' or array ['key' => 'message'].",
+        "Key only",
+        "Message only",
+        "Array only"
+    ]
+},
+{
+    "q": "Assertion `assertSessionHasAll`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSessionHasAll(['key1' => 'val1', 'key2']);",
+        "$response->assertAllSession()",
+        "$response->assertSessionMatch()",
+        "$response->assertSessionArray()"
+    ]
+},
+{
+    "q": "Assertion `assertExactJson` order sensitivity?",
+    "type": "mcq",
+    "o": [
+        "Yes, requires keys to be in same order if array is associative? Actually strictly matches the array structure.",
+        "No order ignore",
+        "Ignore keys",
+        "Ignore values"
+    ]
+},
+{
+    "q": "What is `assertJsonCanonical`?",
+    "type": "mcq",
+    "o": [
+        "Asserts JSON matches loosely (reordering keys enabled) but same data. (Available in newer PHPUnit/Laravel wrappers).",
+        "Strict match",
+        "String match",
+        "Byte match"
+    ]
+},
+{
+    "q": "Testing `response()->stream()`?",
+    "type": "mcq",
+    "o": [
+        "Hard to capture output. Use `streamedContent()` helper or capture output buffer.",
+        "Just assertStatus",
+        "AssertStream",
+        "AssertBody"
+    ]
+},
+{
+    "q": "What environment variable disables vite/mix build in tests?",
+    "type": "mcq",
+    "o": [
+        "Usually none. But checking `app()->environment('testing')` inside blade to skip assets if needed.",
+        "SKIP_BUILD",
+        "NO_ASSETS",
+        "TEST_ASSETS"
+    ]
+},
+{
+    "q": "Does `actingAs` generic user work with Sanctum/Passport?",
+    "type": "mcq",
+    "o": [
+        "Not automatically. `actingAs($user, 'sanctum')` is needed for Sanctum to hydrate the request properly with token-like context.",
+        "Yes",
+        "No",
+        "Only Passport"
+    ]
+},
+{
+    "q": "Mocking `Sanctum` specifically?",
+    "type": "mcq",
+    "o": [
+        "Sanctum::actingAs($user, ['abilities']); Shortcuts the token check.",
+        "Auth::login()",
+        "User::login()",
+        "Token::create()"
+    ]
+},
+{
+    "q": "Mocking `Passport` specifically?",
+    "type": "mcq",
+    "o": [
+        "Passport::actingAs($user, ['scopes']);",
+        "Auth::login()",
+        "User::login()",
+        "Client::login()"
+    ]
+},
+{
+    "q": "Testing `Gate::after` behavior?",
+    "type": "mcq",
+    "o": [
+        "Define Gate::after callback, run gate check. Assert result.",
+        "Gate::assertAfter()",
+        "Gate::mockAfter()",
+        "Gate::spyAfter()"
+    ]
+},
+{
+    "q": "Testing `Schedule` (Cron)?",
+    "type": "mcq",
+    "o": [
+        "$this->travelTo(time); Artisan::call('schedule:run'); Assert commands ran.",
+        "Schedule::fake()",
+        "Cron::fake()",
+        "Time::fake()"
+    ]
+},
+{
+    "q": "Testing `Storage::download`?",
+    "type": "mcq",
+    "o": [
+        "Returns StreamedResponse. Assert headers `Content-Disposition`. Assert `streamedContent()` matches.",
+        "Storage::assertDownload()",
+        "File::assertDownload()",
+        "Response::assertFile()"
+    ]
+},
+{
+    "q": "Testing `abort_if`?",
+    "type": "mcq",
+    "o": [
+        "Assert exception/status code based on condition.",
+        "AssertAbort",
+        "AssertIf",
+        "AssertCondition"
+    ]
+},
+{
+    "q": "Assertion `assertLanguage`?",
+    "type": "mcq",
+    "o": [
+        "Not standard. Check `app()->getLocale()` or session `locale` depending on implementation.",
+        "Asserts translation",
+        "Asserts localization",
+        "Asserts lang"
+    ]
+},
+{
+    "q": "Assertion `assertViewMissing`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertViewMissing('key'); Asserts view data specific key is missing.",
+        "Asserts view file missing",
+        "Asserts 404",
+        "Asserts null"
+    ]
+},
+{
+    "q": "Testing `Redirect::back()`?",
+    "type": "mcq",
+    "o": [
+        "Provide `Reference` header or use `from($url)`. Assert redirect to `$url`.",
+        "AssertBack",
+        "AssertReturn",
+        "AssertPrevious"
+    ]
+},
+{
+    "q": "Assertion `assertRedirectToSignedRoute`?",
+    "type": "mcq",
+    "o": [
+        "$response->assertRedirectToSignedRoute('route.name');",
+        "assertSignedRedirect",
+        "assertRedirectSigned",
+        "assertSecureRedirect"
+    ]
+},
+{
+    "q": "Assertion `assertRedirectContains`?",
+    "type": "mcq",
+    "o": [
+        "Check `$response->headers->get('Location')`. Standard `assertRedirect` checks exact or route match.",
+        "Built-in",
+        "assertRedirectLike",
+        "assertRedirectPartial"
+    ]
+},
+{
+    "q": "Testing `RateLimiter::clear`?",
+    "type": "mcq",
+    "o": [
+        "Setup throttle, hit limit. Call clear. Hit again. Assert success.",
+        "RateLimiter::assertCleared()",
+        "Throttle::assertCleared()",
+        "Limit::assertCleared()"
+    ]
+}
+,
+{
+    "q": "What is `Mockery::close()` used for?",
+    "type": "mcq",
+    "o": [
+        "Cleans up the container and verifies mock expectations. Laravel calls this automatically in `tearDown`.",
+        "Starts mocking",
+        "Resets mocks",
+        "Ignores mocks"
+    ]
+},
+{
+    "q": "Testing `Password::defaults` rule?",
+    "type": "mcq",
+    "o": [
+        "Difficult to test configuration directly. Test the validation logic on a route using a password field.",
+        "Password::fake()",
+        "Password::mock()",
+        "Rule::password()"
+    ]
+},
+{
+    "q": "Testing `Container` binding resolution?",
+    "type": "mcq",
+    "o": [
+        "$instance = app(Service::class); $this->assertInstanceOf(Expected::class, $instance);",
+        "Container::assertBound()",
+        "App::assertResolved()",
+        "Service::assert()"
+    ]
+},
+{
+    "q": "Testing `abort_if` condition false (no abort)?",
+    "type": "mcq",
+    "o": [
+        "Assert response status is NOT the aborted code (e.g. 200 OK).",
+        "AssertNoAbort",
+        "AssertContinue",
+        "AssertNext"
+    ]
+},
+{
+    "q": "How to test `Broadcast` presence channel users?",
+    "type": "mcq",
+    "o": [
+        "Manually invoke the channel authorization callback in `routes/channels.php`.",
+        "Broadcast::auth()",
+        "Channel::participants()",
+        "Socket::users()"
+    ]
+},
+{
+    "q": "Testing `Event::listen` manually?",
+    "type": "mcq",
+    "o": [
+        "Event::dispatch(new MyEvent()); Assert listener side effects.",
+        "Event::call()",
+        "Listener::run()",
+        "Event::trigger()"
+    ]
+},
+{
+    "q": "What is `withoutEvents()` trait?",
+    "type": "mcq",
+    "o": [
+        "Doesn't exist as a testing trait. `WithoutEvents` is a model trait. In tests, use `Event::fake()`.",
+        "Disables all events",
+        "Disables model events",
+        "Disables jobs"
+    ]
+},
+{
+    "q": "Testing `Notification` not sent to others?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertNotSentTo($otherUser, InvoicePaid::class);",
+        "Notification::assertOnlyTo($user)",
+        "Notification::assertSingle()",
+        "Notification::assertUnique()"
+    ]
+},
+{
+    "q": "Testing `Mail` content HTML?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return $mail->assertSeeInHtml('Text'); }); (Laravel 8.x+ helper on mailable).",
+        "Mail::html()",
+        "Mail::body()",
+        "Mail::view()"
+    ]
+},
+{
+    "q": "Testing `Mail` text content?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return $mail->assertSeeInText('Text'); });",
+        "Mail::text()",
+        "Mail::raw()",
+        "Mail::plain()"
+    ]
+},
+{
+    "q": "Testing `Str::uuid` generation shim?",
+    "type": "mcq",
+    "o": [
+        "Str::createUuidsUsing(fn() => 'fixed-uuid'); Useful for deterministic tests.",
+        "Str::fake()",
+        "Uuid::fake()",
+        "Str::mock()"
+    ]
+},
+{
+    "q": "Testing `now()` verification?",
+    "type": "mcq",
+    "o": [
+        "Carbon::setTestNow('2021-01-01'); Assert `now()` returns this date.",
+        "Time::fake()",
+        "Timestamp::mock()",
+        "Date::fix()"
+    ]
+},
+{
+    "q": "Testing `sleep` in code?",
+    "type": "mcq",
+    "o": [
+        "Sleep::fake(); (Laravel 10+). Assert Sleep::assertSlept(3).",
+        "Time::speed()",
+        "PHPUnit::sleep()",
+        "Clock::skip()"
+    ]
+},
+{
+    "q": "Testing `DB::transaction` rollback on exception?",
+    "type": "mcq",
+    "o": [
+        "Trigger logic that throws exception inside transaction. Assert `assertDatabaseMissing`. (Note: Outer RefreshDatabase might interfere if not handled carefully).",
+        "Transaction::fake()",
+        "DB::assertRollback()",
+        "DB::fail()"
+    ]
+},
+{
+    "q": "Testing `Cache::remember` logic?",
+    "type": "mcq",
+    "o": [
+        "Use `Cache::shouldReceive('remember')->once()->andReturn('value');` or test side effect: DB query count reduces on second call.",
+        "Cache::fake()",
+        "Cache::spy()",
+        "Cache::test()"
+    ]
+},
+{
+    "q": "Testing `artisan` command interactive input failure?",
+    "type": "mcq",
+    "o": [
+        "If `expectsQuestion` is missing for a prompt, test fails with ExpectationFailed.",
+        "Waits forever",
+        "Skips",
+        "Defaults"
+    ]
+},
+{
+    "q": "Testing `Http` client timeout?",
+    "type": "mcq",
+    "o": [
+        "Hard to simulate real timeout. Http::fake() usually returns immediate response. Can verify `timeout` config passed to client mock.",
+        "Http::timeout()",
+        "Http::delay()",
+        "Http::slow()"
+    ]
+},
+{
+    "q": "Testing `Storage` delete?",
+    "type": "mcq",
+    "o": [
+        "Storage::assertMissing('file.jpg'); after calling delete.",
+        "Storage::assertDeleted()",
+        "Storage::assertGone()",
+        "Storage::assertRemoved()"
+    ]
+},
+{
+    "q": "Testing `Job` failure logic?",
+    "type": "mcq",
+    "o": [
+        "Simulate failure by calling handle() directly and catching exception? Or `Bus::fake` probably won't run failure logic. Integration test needed.",
+        "Job::fail()",
+        "Queue::fail()",
+        "Bus::fail()"
+    ]
+},
+{
+    "q": "Testing `Middleware` termination?",
+    "type": "mcq",
+    "o": [
+        "Call `$middleware->terminate($request, $response)` manually in unit test.",
+        "Middleware::terminate()",
+        "App::terminate()",
+        "Http::terminate()"
+    ]
+},
+{
+    "q": "Testing `View` composer data?",
+    "type": "mcq",
+    "o": [
+        "Render a view that uses the composer and assert data presence.",
+        "View::composer()",
+        "Composer::assert()",
+        "Data::assert()"
+    ]
+},
+{
+    "q": "Testing `Blade` custom directive?",
+    "type": "mcq",
+    "o": [
+        "Blade::compileString('@directive'); Assert output PHP code.",
+        "Blade::run()",
+        "Directive::test()",
+        "Output::assert()"
+    ]
+},
+{
+    "q": "Testing `Validation` rule 'unique' ignore?",
+    "type": "mcq",
+    "o": [
+        "Post update to route with existing ID. Assert valid.",
+        "Rule::ignore()",
+        "DB::ignore()",
+        "Validator::ignore()"
+    ]
+},
+{
+    "q": "Testing `Model` accessor?",
+    "type": "mcq",
+    "o": [
+        "Instantiate model, set attribute, assert accessor value.",
+        "Model::accessor()",
+        "Attribute::test()",
+        "DB::select()"
+    ]
+},
+{
+    "q": "Testing `Model` mutator?",
+    "type": "mcq",
+    "o": [
+        "Set attribute on model, assert internal attribute value is mutated.",
+        "Model::mutate()",
+        "Attribute::set()",
+        "DB::update()"
+    ]
+},
+{
+    "q": "Testing `Route` model binding resolution?",
+    "type": "mcq",
+    "o": [
+        "Call route with ID. Assert controller receives Model instance.",
+        "Route::bind()",
+        "Model::resolve()",
+        "Http::bind()"
+    ]
+},
+{
+    "q": "Testing `Route` model binding missing (404)?",
+    "type": "mcq",
+    "o": [
+        "Call route with non-existent ID. Assert 404.",
+        "Assert 500",
+        "Assert 422",
+        "Assert 400"
+    ]
+},
+{
+    "q": "Testing `Authorization` policy via Controller?",
+    "type": "mcq",
+    "o": [
+        "Call route that uses `$this->authorize()`. Assert 403 if unauthorized.",
+        "Policy::fake()",
+        "Gate::check()",
+        "Auth::test()"
+    ]
+},
+{
+    "q": "Testing `Broadcast` private channel auth?",
+    "type": "mcq",
+    "o": [
+        "Post to `/broadcasting/auth`. Assert 200/403.",
+        "Channel::auth()",
+        "Broadcast::check()",
+        "Socket::connect()"
+    ]
+},
+{
+    "q": "Testing `Sanctum` token abilities?",
+    "type": "mcq",
+    "o": [
+        "Sanctum::actingAs($user, ['scope']); Call route checking `tokenCan`. Assert success/fail.",
+        "Token::ability()",
+        "Scope::test()",
+        "Auth::can()"
+    ]
+},
+{
+    "q": "Testing `Passport` scopes?",
+    "type": "mcq",
+    "o": [
+        "Passport::actingAs($user, ['scope']); Call route. Assert.",
+        "Scope::check()",
+        "Token::scope()",
+        "Client::scope()"
+    ]
+},
+{
+    "q": "Testing `JSON` response pagination?",
+    "type": "mcq",
+    "o": [
+        "$response->assertJsonStructure(['data', 'links', 'meta']);",
+        "$response->assertPaginated()",
+        "$response->assertPaged()",
+        "$response->assertList()"
+    ]
+},
+{
+    "q": "Testing `FileUpload` max dimensions?",
+    "type": "mcq",
+    "o": [
+        "UploadedFile::fake()->image('img.jpg', 1000, 1000); (width, height). Assert validation error.",
+        "File::dimensions()",
+        "Image::size()",
+        "Upload::fail()"
+    ]
+},
+{
+    "q": "Testing `Response` download headers?",
+    "type": "mcq",
+    "o": [
+        "$response->assertHeader('Content-Type', 'application/pdf');",
+        "$response->assertDownloadHeaders()",
+        "$response->assertFileHeaders()",
+        "$response->assertStreamHeaders()"
+    ]
+},
+{
+    "q": "Testing `Response` specific cookie options (httpOnly)?",
+    "type": "mcq",
+    "o": [
+        "$response->assertCookie('name', 'val', false); (Assertion logic usually checks value, getting cookie instance needs `$response->getCookie('name')` to check options).",
+        "assertCookieOption",
+        "assertHttpOnly",
+        "assertSecure"
+    ]
+},
+{
+    "q": "Testing `App::isDownForMaintenance()`?",
+    "type": "mcq",
+    "o": [
+        "Artisan::call('down'); Request route; Assert 503. Artisan::call('up');",
+        "App::down()",
+        "Site::down()",
+        "Maintenance::on()"
+    ]
+},
+{
+    "q": "Testing `Log` context?",
+    "type": "mcq",
+    "o": [
+        "Log::shouldReceive('info')->with('Message', ['context' => 'val']);",
+        "Log::context()",
+        "Log::has()",
+        "Log::assert()"
+    ]
+},
+{
+    "q": "Testing `Schedule` frequency?",
+    "type": "mcq",
+    "o": [
+        "Inspect `Schedule` events list and check cron expression.",
+        "Schedule::assertFrequency()",
+        "Cron::check()",
+        "Event::frequency()"
+    ]
+},
+{
+    "q": "Testing `Command` output buffering?",
+    "type": "mcq",
+    "o": [
+        "$this->artisan(...)->expectsOutput('...'); (Buffers output internally).",
+        "Command::buffer()",
+        "Console::buffer()",
+        "Artisan::buffer()"
+    ]
+},
+{
+    "q": "Testing `Command` interactive confirmation?",
+    "type": "mcq",
+    "o": [
+        "expectsConfirmation('Do you wish to continue?', 'no');",
+        "expectsYes",
+        "expectsNo",
+        "expectsAsk"
+    ]
+},
+{
+    "q": "Testing `Command` interactive choice?",
+    "type": "mcq",
+    "o": [
+        "expectsChoice('Which one?', 'Option A', ['Option A', 'Option B']);",
+        "expectsSelect",
+        "expectsOption",
+        "expectsPick"
+    ]
+},
+{
+    "q": "Testing `Component` attributes rendering?",
+    "type": "mcq",
+    "o": [
+        "$this->blade('<x-comp class=\"p-4\" />')->assertSee('p-4');",
+        "Component::assertAttr()",
+        "Blade::assertAttr()",
+        "View::assertAttr()"
+    ]
+},
+{
+    "q": "Testing `Component` slot rendering?",
+    "type": "mcq",
+    "o": [
+        "$this->blade('<x-comp>Content</x-comp>')->assertSee('Content');",
+        "Component::assertSlot()",
+        "Blade::assertSlot()",
+        "View::assertSlot()"
+    ]
+},
+{
+    "q": "Testing `Event` subscriber?",
+    "type": "mcq",
+    "o": [
+        "Dispatch events, assert listener methods called? Or inspect `Event::getListeners`. usually integration test.",
+        "Event::subscriber()",
+        "Listener::subscriber()",
+        "Event::assertSubscribed()"
+    ]
+},
+{
+    "q": "Testing `Mail` queueing?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertQueued(Mailable::class);",
+        "Mail::assertLater()",
+        "Mail::assertBackground()",
+        "Mail::assertAsync()"
+    ]
+},
+{
+    "q": "Testing `Notification` queueing?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertSentTo($user, Class, fn($n) => $n->queue === 'default'); (Check properties).",
+        "Notification::assertQueued()",
+        "Notification::assertLater()",
+        "Notification::assertAsync()"
+    ]
+},
+{
+    "q": "Testing `Queue` connection?",
+    "type": "mcq",
+    "o": [
+        "Bus::assertDispatched(Job::class, fn($job) => $job->connection === 'sqs');",
+        "Queue::assertConnection()",
+        "Job::assertConnection()",
+        "Bus::assertConnection()"
+    ]
+},
+{
+    "q": "Testing `Cookie` queuing?",
+    "type": "mcq",
+    "o": [
+        "Cookie::queue('name', 'val'); Assert Cookie::getQueuedCookies() has it.",
+        "Cookie::assertQueued()",
+        "Cookie::assertSet()",
+        "Cookie::assertPending()"
+    ]
+},
+{
+    "q": "Testing `Storage` visibility?",
+    "type": "mcq",
+    "o": [
+        "Storage::getVisibility('file.jpg'); Assert 'public' or 'private'.",
+        "Storage::assertVisible()",
+        "Storage::assertPublic()",
+        "Storage::assertPrivate()"
+    ]
+},
+{
+    "q": "Testing `Storage` url generation?",
+    "type": "mcq",
+    "o": [
+        "$url = Storage::url('file.jpg'); Assert contains filename.",
+        "Storage::assertUrl()",
+        "Link::test()",
+        "File::url()"
+    ]
+},
+{
+    "q": "Testing `Storage` temporary url?",
+    "type": "mcq",
+    "o": [
+        "Only on S3/supported drivers. Returns signed url. Assert non-empty.",
+        "Storage::assertTempUrl()",
+        "File::tempUrl()",
+        "Aws::test()"
+    ]
+},
+{
+    "q": "Testing `Validation` custom error message?",
+    "type": "mcq",
+    "o": [
+        "Post invalid data, assertSessionHasErrors(['field' => 'Custom Message']);",
+        "AssertMessage",
+        "AssertText",
+        "AssertError"
+    ]
+},
+{
+    "q": "Testing `Validation` redirects?",
+    "type": "mcq",
+    "o": [
+        "Post invalid data, assertStatus(302), assertRedirect(prevUrl).",
+        "AssertBack",
+        "AssertReturn",
+        "AssertStay"
+    ]
+},
+{
+    "q": "Testing `Sanctum` SPA authentication?",
+    "type": "mcq",
+    "o": [
+        "Get /sanctum/csrf-cookie. Post /login. Assert authenticated. (Integration test).",
+        "Sanctum::spa()",
+        "Auth::spa()",
+        "Login::spa()"
+    ]
+},
+{
+    "q": "Testing `Throttle` lock release?",
+    "type": "mcq",
+    "o": [
+        "Time::travel(61)->seconds(); Assert request succeeds.",
+        "Time::skip()",
+        "Throttle::reset()",
+        "Rate::clear()"
+    ]
+},
+{
+    "q": "Testing `Model` pruning (Laravel 8.50+)?",
+    "type": "mcq",
+    "o": [
+        "Artisan::call('model:prune'); Assert old models deleted.",
+        "Model::prune()",
+        "DB::prune()",
+        "Prunable::test()"
+    ]
+},
+{
+    "q": "Testing `PendingCommand` expectation (output)?",
+    "type": "mcq",
+    "o": [
+        "->doesntExpectOutput('Error');",
+        "->noOutput()",
+        "->hideOutput()",
+        "->silence()"
+    ]
+},
+{
+    "q": "Testing `PendingCommand` exit code failure?",
+    "type": "mcq",
+    "o": [
+        "->assertFailed(); (Exit code != 0).",
+        "->assertError()",
+        "->assertCrash()",
+        "->assertStop()"
+    ]
+},
+{
+    "q": "Testing `Seeder` idempotency?",
+    "type": "mcq",
+    "o": [
+        "Run seeder twice. Assert count is same (if designed idempotent).",
+        "Seeder::assertIdempotent()",
+        "DB::assertUnique()",
+        "Run::twice()"
+    ]
+},
+{
+    "q": "Testing `Request` validation rules method?",
+    "type": "mcq",
+    "o": [
+        "Instantiate FormRequest, call rules(). Assert array keys.",
+        "Request::rules()",
+        "Form::test()",
+        "Rules::check()"
+    ]
+},
+{
+    "q": "Testing `Request` authorization method?",
+    "type": "mcq",
+    "o": [
+        "Instantiate FormRequest, call authorize(). Assert boolean.",
+        "Request::auth()",
+        "Form::auth()",
+        "Auth::check()"
+    ]
+},
+{
+    "q": "Testing `Resource` response format?",
+    "type": "mcq",
+    "o": [
+        "Instantiate Resource($model). Call resolve(). Assert array structure.",
+        "Resource::test()",
+        "Api::test()",
+        "Json::test()"
+    ]
+},
+{
+    "q": "Testing with `dump` vs `dd`?",
+    "type": "mcq",
+    "o": [
+        "`dump` outputs but tests continue. `dd` stops execution (tests fail/imcomplete).",
+        "Same",
+        "dump stops",
+        "dd continues"
+    ]
+},
+{
+    "q": "What is `test` vs `it` in Pest?",
+    "type": "mcq",
+    "o": [
+        "Aliases. `it` reads better with 'should' sentences. `test` is generic.",
+        "it is unit",
+        "test is feature",
+        "Different scopes"
+    ]
+},
+{
+    "q": "Does Laravel support `Pest` by default?",
+    "type": "mcq",
+    "o": [
+        "Yes, via `laravel/pest-plugin` or starter kits. Default installation usually offers PHPUnit.",
+        "No",
+        "Only via Docker",
+        "Only via Forge"
+    ]
+},
+{
+    "q": "Using `dataset` in Pest (Laravel)?",
+    "type": "mcq",
+    "o": [
+        "dataset('emails', ['a@b.com', 'c@d.com']); Used in `with` to run test multiple times.",
+        "dataProvider in PHPUnit",
+        "Both A and B",
+        "None"
+    ]
+},
+{
+    "q": "Testing `LazyCollection` handling?",
+    "type": "mcq",
+    "o": [
+        "Integration test mainly, ensuring memory usage is low? Or assert output is correct.",
+        "Lazy::fake()",
+        "Collection::fake()",
+        "Memory::assert()"
+    ]
+},
+{
+    "q": "Testing `CursorPagination`?",
+    "type": "mcq",
+    "o": [
+        "Assert response structure contains `prev_cursor`, `next_cursor`.",
+        "Assert page number",
+        "Assert limit",
+        "Assert offset"
+    ]
+},
+{
+    "q": "Testing `Scout` search?",
+    "type": "mcq",
+    "o": [
+        "Mock the engine, or rely on database engine for testing. `Scout::fake()` is not standard.",
+        "Search::fake()",
+        "Index::fake()",
+        "Meili::fake()"
+    ]
+},
+{
+    "q": "Testing `Telescope` recording?",
+    "type": "mcq",
+    "o": [
+        "Usually disabled in testing to save performance. Can enable via config if testing debugging tools.",
+        "Always on",
+        "Always off",
+        "Cannot disable"
+    ]
+},
+{
+    "q": "Testing `Horizon` tags?",
+    "type": "mcq",
+    "o": [
+        "Assert Job has `tags()` method returning expected array.",
+        "Horizon::assertTags()",
+        "Queue::assertTags()",
+        "Job::assertTags()"
+    ]
+},
+{
+    "q": "Testing `Sanctum` hash check?",
+    "type": "mcq",
+    "o": [
+        "Create token, hash it. Assert `hash_equals` returns true with DB value.",
+        "Token::check()",
+        "Hash::check()",
+        "Auth::check()"
+    ]
+},
+{
+    "q": "Testing `URL` generation with forced root?",
+    "type": "mcq",
+    "o": [
+        "URL::forceRootUrl('http://test.com'); Assert generated route matches.",
+        "URL::fake()",
+        "Route::fake()",
+        "Link::fake()"
+    ]
+},
+{
+    "q": "Testing `Redirect` intended fallback?",
+    "type": "mcq",
+    "o": [
+        "Call `redirect()->intended('/fallback')`. Assert location.",
+        "Redirect::fake()",
+        "Output::fake()",
+        "Route::intended()"
+    ]
+},
+{
+    "q": "Testing `Session` flash messages?",
+    "type": "mcq",
+    "o": [
+        "$response->assertSessionHas('message');",
+        "Session::assertFlash()",
+        "Flash::assert()",
+        "Alert::assert()"
+    ]
+},
+{
+    "q": "Testing `Blade` stack/push?",
+    "type": "mcq",
+    "o": [
+        "Render view, assert substring appears in correct order.",
+        "Blade::assertPush()",
+        "Blade::assertStack()",
+        "View::assertPush()"
+    ]
+},
+{
+    "q": "Testing `Component` alias?",
+    "type": "mcq",
+    "o": [
+        "Render `x-alias`. Assert correct component output.",
+        "Component::assertAlias()",
+        "Blade::assertAlias()",
+        "View::assertAlias()"
+    ]
+},
+{
+    "q": "Testing `Config` set at runtime?",
+    "type": "mcq",
+    "o": [
+        "Config::set('app.name', 'Test'); Assert `config('app.name')`.",
+        "Config::fake()",
+        "Env::set()",
+        "App::config()"
+    ]
+},
+{
+    "q": "Does `RefreshDatabase` handle seeders?",
+    "type": "mcq",
+    "o": [
+        "It runs seeders if `$seed = true` property is set on test class. Otherwise rolls back to empty (migrated) state.",
+        "Always seeds",
+        "Never seeds",
+        "Seeds only production"
+    ]
+},
+{
+    "q": "Testing `Gate` denial response code?",
+    "type": "mcq",
+    "o": [
+        "Gate::deny('Msg', 404); Assert AuthorizationException code is 404.",
+        "Gate::code()",
+        "Policy::code()",
+        "Auth::code()"
+    ]
+}
+,
+{
+    "q": "How to assert number of DB queries executed?",
+    "type": "mcq",
+    "o": [
+        "DB::listen(function($query) use(&$count) { $count++; }); ... assertTrue($count === 2); (Manual) or use third party packages. Laravel has no built-in `assertQueryCount` yet.",
+        "DB::assertQueryCount()",
+        "assertQueries()",
+        "DB::count()"
+    ]
+},
+{
+    "q": "Testing `Cookie` expiration?",
+    "type": "mcq",
+    "o": [
+        "$cookie = $response->getCookie('name'); $this->assertTrue($cookie->getExpiresTime() < time());",
+        "$response->assertCookieExpired()",
+        "$response->assertExpired()",
+        "$response->checkExpiry()"
+    ]
+},
+{
+    "q": "Testing `Middleware` parameters passed?",
+    "type": "mcq",
+    "o": [
+        "Mock the middleware class? Or register a fake middleware bound to that name and assert it received parameters.",
+        "Middleware::assertParams()",
+        "Route::assertParams()",
+        "Http::assertParams()"
+    ]
+},
+{
+    "q": "Testing `UploadedFile` mime type validation?",
+    "type": "mcq",
+    "o": [
+        "UploadedFile::fake()->create('doc.pdf', 100, 'application/pdf'); Post to route validating `mimes:pdf`.",
+        "File::mime()",
+        "Type::fake()",
+        "Mime::fake()"
+    ]
+},
+{
+    "q": "Testing `UploadedFile` image dimensions validation?",
+    "type": "mcq",
+    "o": [
+        "UploadedFile::fake()->image('img.png', 800, 600); Post to route validating `dimensions:min_width=1000`. Assert error.",
+        "Dimension::fake()",
+        "Size::fake()",
+        "Image::fakeSize()"
+    ]
+},
+{
+    "q": "Testing `Notification` via `Slack`?",
+    "type": "mcq",
+    "o": [
+        "Notification::fake(); Notification::assertSentTo($user, InvoicePaid::class); (Same generic assertion works for all channels if configured).",
+        "Slack::fake()",
+        "Notification::assertSlack()",
+        "Slack::assertSent()"
+    ]
+},
+{
+    "q": "Testing `Mail` attachments content?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return $mail->attachments[0,'data'] === 'content'; });",
+        "Mail::assertAttachmentContent()",
+        "Mail::checkFile()",
+        "Mail::verify()"
+    ]
+},
+{
+    "q": "Testing `Command` expects table output?",
+    "type": "mcq",
+    "o": [
+        "expectsTable(['Header', [['Row']]);",
+        "expectsGrid",
+        "expectsList",
+        "expectsRows"
+    ]
+},
+{
+    "q": "Testing `Command` verbosity level?",
+    "type": "mcq",
+    "o": [
+        "Call command with `-v` or `-vv`. Assert output normally.",
+        "Command::verbosity()",
+        "Output::level()",
+        "Artisan::level()"
+    ]
+},
+{
+    "q": "Testing `Sanctum` token scopes check?",
+    "type": "mcq",
+    "o": [
+        "Sanctum::actingAs($user, ['admin']); Route using `middleware('ability:admin')`. Assert 200.",
+        "Token::scope()",
+        "Scope::admin()",
+        "Auth::scope()"
+    ]
+},
+{
+    "q": "Testing `Auth::logout` behavior?",
+    "type": "mcq",
+    "o": [
+        "Call `logout` route. Assert redirected. Assert `Auth::check()` is false.",
+        "Auth::assertLogout()",
+        "Session::assertLogout()",
+        "User::assertLogout()"
+    ]
+},
+{
+    "q": "Testing `Redirect::intended` default?",
+    "type": "mcq",
+    "o": [
+        "Call route performing redirect. Assert location is the default path passed to `intended()`.",
+        "Assert home",
+        "Assert invalid",
+        "Assert 404"
+    ]
+},
+{
+    "q": "Testing `Model` `wasRecentlyCreated`?",
+    "type": "mcq",
+    "o": [
+        "Create model via factory. Assert `$model->wasRecentlyCreated` is true.",
+        "Model::assertCreated()",
+        "DB::assertCreated()",
+        "Factory::assertCreated()"
+    ]
+},
+{
+    "q": "Testing `Collection` assertions?",
+    "type": "mcq",
+    "o": [
+        "No specific `Collection::assert` in standard. Use PHPUnit `assertCount`, `assertEquals` on collection items.",
+        "Collection::fake()",
+        "Collect::test()",
+        "List::test()"
+    ]
+},
+{
+    "q": "Testing `Str::random` output mocks?",
+    "type": "mcq",
+    "o": [
+        "No built-in shim for `Str::random`. Usually not mocked. If critical, use a wrapper service.",
+        "Str::fake()",
+        "Random::fake()",
+        "String::mock()"
+    ]
+},
+{
+    "q": "Testing `Cache` expiry time?",
+    "type": "mcq",
+    "o": [
+        "Use `Carbon::setTestNow`. Put item with TTL. Move time forward. Assert item missing.",
+        "Cache::assertExpired()",
+        "Cache::assertTTL()",
+        "Cache::checkTime()"
+    ]
+},
+{
+    "q": "Testing `RateLimiter` remaining attempts?",
+    "type": "mcq",
+    "o": [
+        "Hit route. Check `X-RateLimit-Remaining` header.",
+        "RateLimiter::remaining()",
+        "RateLimiter::assertCount()",
+        "Header::remaining()"
+    ]
+},
+{
+    "q": "Testing `Blade` component attributes bag?",
+    "type": "mcq",
+    "o": [
+        "Render component `x-comp data-testid=\"1\"`. Assert HTML contains `data-testid=\"1\"`.",
+        "Component::attributes()",
+        "Blade::bag()",
+        "View::attributes()"
+    ]
+},
+{
+    "q": "Testing `JsonResource` wrapping?",
+    "type": "mcq",
+    "o": [
+        "Assert `data` key exists (default wrapping). Or `JsonResource::withoutWrapping()` in test setup.",
+        "Resource::wrap()",
+        "Api::wrap()",
+        "Json::wrap()"
+    ]
+},
+{
+    "q": "Testing `Response` json option (escaping)?",
+    "type": "mcq",
+    "o": [
+        "Assert string content contains escaped/unescaped chars as expected.",
+        "Json::options()",
+        "Response::escape()",
+        "Output::format()"
+    ]
+},
+{
+    "q": "Testing `Request` method spoofing?",
+    "type": "mcq",
+    "o": [
+        "Post to route with `_method` field. Assert intended controller method (PUT/DELETE) called.",
+        "Request::spoof()",
+        "Method::fake()",
+        "Form::fake()"
+    ]
+},
+{
+    "q": "Testing `SignedMiddleware` failure?",
+    "type": "mcq",
+    "o": [
+        "Call route without signature. Assert 403.",
+        "Assert 401",
+        "Assert 500",
+        "Assert 200"
+    ]
+},
+{
+    "q": "Testing `Broadcast` channel validates user?",
+    "type": "mcq",
+    "o": [
+        "Assert channel callback returns false for unauthorized user mocking.",
+        "Channel::assertValid()",
+        "Socket::assertValid()",
+        "Broadcast::assertValid()"
+    ]
+},
+{
+    "q": "Testing `Mail` cc/bcc recipients counts?",
+    "type": "mcq",
+    "o": [
+        "Mail::assertSent(Mailable::class, function ($mail) { return count($mail->cc) === 2; });",
+        "Mail::assertCount()",
+        "Mail::assertRecipients()",
+        "Mail::assertList()"
+    ]
+},
+{
+    "q": "Testing `Notification` sent to multiple users?",
+    "type": "mcq",
+    "o": [
+        "Notification::assertSentTo([$user1, $user2, Class::class);",
+        "Notification::assertSentMany()",
+        "Notification::assertMultiple()",
+        "Notification::assertGroup()"
+    ]
+},
+{
+    "q": "Testing `Event` propagation stopped?",
+    "type": "mcq",
+    "o": [
+        "If listener returns false. Assert subsequence listeners not called? (Integration).",
+        "Event::assertStopped()",
+        "Event::assertHalted()",
+        "Event::assertBroken()"
+    ]
+},
+{
+    "q": "Testing `Eloquent` scope logic?",
+    "type": "mcq",
+    "o": [
+        "Create models (some matching, some not). Call scope. Assert result count/ids.",
+        "Scope::test()",
+        "Model::assertScope()",
+        "Builder::test()"
+    ]
+},
+{
+    "q": "Testing `Eloquent` global scope?",
+    "type": "mcq",
+    "o": [
+        "Query model. Assert excluded records missing. Use `withoutGlobalScopes` to verify presence otherwise.",
+        "Scope::assertGlobal()",
+        "Global::test()",
+        "Model::all()"
+    ]
+},
+{
+    "q": "Testing `Queue` priority?",
+    "type": "mcq",
+    "o": [
+        "Push jobs with keys. Hard to test exact processing order with `Queue::fake`, but can inspect `queue` property.",
+        "Queue::priority()",
+        "Job::priority()",
+        "Bus::priority()"
+    ]
+},
+{
+    "q": "Testing `Job` middleware?",
+    "type": "mcq",
+    "o": [
+        "Dispatch job. Assert middleware valid. Or Integration test job execution.",
+        "Job::middleware()",
+        "Bus::middleware()",
+        "Queue::middleware()"
+    ]
+},
+{
+    "q": "Testing `Storage` file exists? (Redundant but vital)",
+    "type": "mcq",
+    "o": [
+        "Storage::assertExists('path/to/file');",
+        "Storage::has()",
+        "File::exists()",
+        "Disk::has()"
+    ]
+},
+{
+    "q": "Testing `Storage` file missing?",
+    "type": "mcq",
+    "o": [
+        "Storage::assertMissing('path/to/file');",
+        "Storage::doesntHave()",
+        "File::missing()",
+        "Disk::missing()"
+    ]
+},
+{
+    "q": "Testing `Storage` directory empty?",
+    "type": "mcq",
+    "o": [
+        "Assert `Storage::allFiles('dir')` is empty.",
+        "Storage::assertEmpty()",
+        "Dir::empty()",
+        "Folder::empty()"
+    ]
+},
+{
+    "q": "Testing `Console` command input stream?",
+    "type": "mcq",
+    "o": [
+        "Use `expectsQuestion` for prompt interactions. Works as stream.",
+        "Stream::fake()",
+        "Input::fake()",
+        "Console::stream()"
+    ]
+},
+{
+    "q": "Testing `Blade` component data binding?",
+    "type": "mcq",
+    "o": [
+        "Render component with props. Assert output reflects data.",
+        "Component::data()",
+        "Blade::data()",
+        "View::data()"
+    ]
+},
+{
+    "q": "Testing `Dusk` click link?",
+    "type": "mcq",
+    "o": [
+        "$browser->clickLink('Text');",
+        "$browser->click()",
+        "$browser->link()",
+        "$browser->visit()"
+    ]
+},
+{
+    "q": "Testing `Dusk` assertPathIs?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertPathIs('/home');",
+        "$browser->assertUrl()",
+        "$browser->assertLocation()",
+        "$browser->assertRoute()"
+    ]
+},
+{
+    "q": "Testing `Dusk` assertTitle?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertTitle('Home - App');",
+        "$browser->assertHeader()",
+        "$browser->assertName()",
+        "$browser->assertText()"
+    ]
+},
+{
+    "q": "Testing `Dusk` assertInputValue?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertInputValue('field', 'value');",
+        "$browser->assertValue()",
+        "$browser->assertInput()",
+        "$browser->assertText()"
+    ]
+},
+{
+    "q": "Testing `Dusk` assertChecked?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertChecked('checkbox');",
+        "$browser->assertSelected()",
+        "$browser->assertOn()",
+        "$browser->assertTrue()"
+    ]
+},
+{
+    "q": "Testing `Dusk` assertSelected?",
+    "type": "mcq",
+    "o": [
+        "$browser->assertSelected('select', 'value');",
+        "$browser->assertChosen()",
+        "$browser->assertOption()",
+        "$browser->assertDropdown()"
+    ]
+},
+{
+    "q": "Testing `Config` persistence?",
+    "type": "mcq",
+    "o": [
+        "Config set used `Config::set` only lasts for request. No persistence to files.",
+        "Persists to .env",
+        "Persists to db",
+        "Persists to cache"
+    ]
+}
+]

@@ -1,0 +1,5022 @@
+[
+    {
+        "q": "What is the primary purpose of a Controller in Laravel?",
+        "type": "mcq",
+        "o": [
+            "To group related request handling logic into a single class",
+            "To define database table headers",
+            "To write HTML templates",
+            "To configure the server"
+        ]
+    },
+    {
+        "q": "Where are controllers typically stored in a Laravel project?",
+        "type": "mcq",
+        "o": [
+            "app/Http/Controllers",
+            "routes/controllers",
+            "resources/controllers",
+            "database/controllers"
+        ]
+    },
+    {
+        "q": "What is the base class that most Laravel controllers extend?",
+        "type": "mcq",
+        "o": [
+            "App\\Http\\Controllers\\Controller",
+            "Illuminate\\Routing\\Controller",
+            "None, extending is optional",
+            "BaseController"
+        ]
+    },
+    {
+        "q": "Which Artisan command generates a new controller?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:controller UserController",
+            "php artisan create:controller UserController",
+            "php artisan new:controller UserController",
+            "php artisan generate:controller UserController"
+        ]
+    },
+    {
+        "q": "How do you define a route that points to a controller method?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/user/{id}', [UserController::class, 'show']);",
+            "Route::get('/user/{id}', 'UserController');",
+            "Route::get('/user/{id}', UserController::class);",
+            "Route::controller('UserController')"
+        ]
+    },
+    {
+        "q": "What is a 'Single Action Controller'?",
+        "type": "mcq",
+        "o": [
+            "A controller with a single `__invoke` method",
+            "A controller with only `index` method",
+            "A controller that can only handle one request at a time",
+            "A static controller"
+        ]
+    },
+    {
+        "q": "Which method must you define for a Single Action Controller?",
+        "type": "mcq",
+        "o": [
+            "__invoke()",
+            "handle()",
+            "execute()",
+            "run()"
+        ]
+    },
+    {
+        "q": "How do you route to a Single Action Controller?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/profile', ShowProfile::class);",
+            "Route::get('/profile', [ShowProfile::class, '__invoke']);",
+            "Route::action('/profile', ShowProfile::class);",
+            "Route::single('/profile', ShowProfile::class);"
+        ]
+    },
+    {
+        "q": "Controller Middleware can be assigned in:",
+        "type": "mcq",
+        "o": [
+            "Routes file or Controller constructor",
+            "Only Routes file",
+            "Only Controller constructor",
+            "Only Kernel.php"
+        ]
+    },
+    {
+        "q": "How do you define middleware in a controller constructor?",
+        "type": "mcq",
+        "o": [
+            "$this->middleware('auth');",
+            "Middleware::auth();",
+            "Route::middleware('auth');",
+            "use Middleware('auth');"
+        ]
+    },
+    {
+        "q": "Can you restrict middleware to specific methods in the controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, using `->only(['method'])` or `->except(['method'])`",
+            "No, it always applies to all methods",
+            "Yes, using private methods",
+            "Yes, using comments"
+        ]
+    },
+    {
+        "q": "Example: Apply 'auth' middleware only to 'store' and 'update' methods.",
+        "type": "mcq",
+        "o": [
+            "$this->middleware('auth')->only(['store', 'update']);",
+            "$this->middleware('auth', ['only' => ['store', 'update']]);",
+            "Route::middleware('auth')->on(['store', 'update']);",
+            "Public function store() { $this->middleware('auth'); }"
+        ]
+    },
+    {
+        "q": "What is a 'Resource Controller'?",
+        "type": "mcq",
+        "o": [
+            "A controller that handles all typical CRUD operations (index, create, store, show, edit, update, destroy)",
+            "A controller for static resources",
+            "A database controller",
+            "A file controller"
+        ]
+    },
+    {
+        "q": "Command to create a Resource Controller:",
+        "type": "mcq",
+        "o": [
+            "php artisan make:controller PhotoController --resource",
+            "php artisan make:controller PhotoController --crud",
+            "php artisan make:resource PhotoController",
+            "php artisan create:controller --type=resource"
+        ]
+    },
+    {
+        "q": "Which method allows you to register all typical CRUD routes for a controller at once?",
+        "type": "mcq",
+        "o": [
+            "Route::resource('photos', PhotoController::class);",
+            "Route::crud('photos', PhotoController::class);",
+            "Route::controller('photos', PhotoController::class);",
+            "Route::all('photos', PhotoController::class);"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `index()` typically do?",
+        "type": "mcq",
+        "o": [
+            "Display a listing of the resource",
+            "Show a single resource",
+            "Show the create form",
+            "Save a new resource"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `create()` typically do?",
+        "type": "mcq",
+        "o": [
+            "Show the form for creating a new resource",
+            "Save the new resource",
+            "Create the table",
+            "Create the database"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `store()` typically do?",
+        "type": "mcq",
+        "o": [
+            "Store a newly created resource in storage",
+            "Show the form",
+            "Validate only",
+            "Store in session"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `show($id)` typically do?",
+        "type": "mcq",
+        "o": [
+            "Display the specified resource",
+            "Edit the resource",
+            "Delete the resource",
+            "List all resources"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `edit($id)` typically do?",
+        "type": "mcq",
+        "o": [
+            "Show the form for editing the specified resource",
+            "Update the resource",
+            "Modify the table structure",
+            "Show the resource"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `update(Request $request, $id)` typically do?",
+        "type": "mcq",
+        "o": [
+            "Update the specified resource in storage",
+            "Show the edit form",
+            "Log the update",
+            "Validate updates only"
+        ]
+    },
+    {
+        "q": "In a resource controller, what does `destroy($id)` typically do?",
+        "type": "mcq",
+        "o": [
+            "Remove the specified resource from storage",
+            "Clear form",
+            "Destroy session",
+            "Shut down server"
+        ]
+    },
+    {
+        "q": "What is an 'API Resource Controller'?",
+        "type": "mcq",
+        "o": [
+            "A resource controller that excludes `create` and `edit` methods (since APIs don't serve HTML forms)",
+            "A controller that only returns JSON",
+            "A controller for external APIs",
+            "A secure controller"
+        ]
+    },
+    {
+        "q": "Command to create an API Resource Controller:",
+        "type": "mcq",
+        "o": [
+            "php artisan make:controller ApiController --api",
+            "php artisan make:controller ApiController --type=api",
+            "php artisan make:api ApiController",
+            "php artisan create:api"
+        ]
+    },
+    {
+        "q": "How do you access the incoming request data in a controller method?",
+        "type": "mcq",
+        "o": [
+            "Type-hint `Illuminate\\Http\\Request` in the method signature",
+            "Use `$_POST`",
+            "Use `$_GET`",
+            "Use global `$request` variable"
+        ]
+    },
+    {
+        "q": "Example of dependency injection in a controller method:",
+        "type": "mcq",
+        "o": [
+            "public function update(Request $request, $id)",
+            "public function update($id, $request)",
+            "public function update($request)",
+            "public function update()"
+        ]
+    },
+    {
+        "q": "Does Laravel automatically inject dependencies defined in the method signature?",
+        "type": "mcq",
+        "o": [
+            "Yes, via the Service Container",
+            "No, you must manually pass them",
+            "Only for Request",
+            "Only for Models"
+        ]
+    },
+    {
+        "q": "Can you use Constructor Injection in Controllers?",
+        "type": "mcq",
+        "o": [
+            "Yes, dependencies type-hinted in `__construct` are automatically resolved",
+            "No",
+            "Only for Middleware",
+            "Only for abstract classes"
+        ]
+    },
+    {
+        "q": "How do you return a JSON response from a controller?",
+        "type": "mcq",
+        "o": [
+            "return response()->json(['key' => 'value']);",
+            "return json_encode([...]);",
+            "return ['key' => 'value']; (Laravel converts arrays to JSON automatically, but helper gives more control)",
+            "return new JsonResponse([...]);"
+        ]
+    },
+    {
+        "q": "How do you return a View from a controller?",
+        "type": "mcq",
+        "o": [
+            "return view('welcome', ['data' => $data]);",
+            "return make('welcome');",
+            "return template('welcome');",
+            "return render('welcome');"
+        ]
+    },
+    {
+        "q": "How do you redirect to a named route from a controller?",
+        "type": "mcq",
+        "o": [
+            "return redirect()->route('home');",
+            "return route('home');",
+            "return redirect('home');",
+            "return go('home');"
+        ]
+    },
+    {
+        "q": "How to flash session data during redirect?",
+        "type": "mcq",
+        "o": [
+            "return redirect('/dashboard')->with('status', 'Profile updated!');",
+            "return redirect('/dashboard')->flash('status', ...);",
+            "session()->flash(...); return redirect(...);",
+            "Using `$_SESSION`"
+        ]
+    },
+    {
+        "q": "How to validate a request in a controller (basic way)?",
+        "type": "mcq",
+        "o": [
+            "$validated = $request->validate(['title' => 'required|max:255']);",
+            "$this->validate($request, ...); (Legacy/Trait)",
+            "Validation::check($request, ...);",
+            "check($request->all(), ...);"
+        ]
+    },
+    {
+        "q": "If `$request->validate()` fails, what happens automatically?",
+        "type": "mcq",
+        "o": [
+            "Laravel redirects back to the previous location with error messages flashed to session (or returns JSON 422 for AJAX)",
+            "Script stops execution",
+            "Throws 500 Error",
+            "Returns generic error page"
+        ]
+    },
+    {
+        "q": "What allows you to use `Route::controller()`?",
+        "type": "mcq",
+        "o": [
+            "Defining a group of routes that all use the same controller",
+            "Defining a single controller",
+            "Overriding global controller",
+            "Testing controller"
+        ]
+    },
+    {
+        "q": "Syntax for `Route::controller()` group:",
+        "type": "mcq",
+        "o": [
+            "Route::controller(OrderController::class)->group(function () { Route::get('/orders/{id}', 'show'); ... });",
+            "Route::group(['controller' => ...])",
+            "Route::resource(...)",
+            "Route::prefix(...)"
+        ]
+    },
+    {
+        "q": "How to handle a 404 Not Found manually in a controller?",
+        "type": "mcq",
+        "o": [
+            "abort(404);",
+            "return 404;",
+            "throw new NotFoundException;",
+            "exit(404);"
+        ]
+    },
+    {
+        "q": "What is 'Route Model Binding'?",
+        "type": "mcq",
+        "o": [
+            "Automatically injecting model instances into routes/controllers based on URI parameters",
+            "Binding routes to views",
+            "Binding models to databases",
+            "Creating routes from models"
+        ]
+    },
+    {
+        "q": "Implicit binding example: `public function show(User $user)` matches route param `{user}`. What does Laravel do?",
+        "type": "mcq",
+        "o": [
+            "It queries the `users` table where ID matches the `{user}` URI segment and injects the User instance",
+            "It creates a new User",
+            "It injects the ID only",
+            "It errors if not found"
+        ]
+    },
+    {
+        "q": "If Route Model Binding fails to find a record, what happens?",
+        "type": "mcq",
+        "o": [
+            "Automatically generates a 404 HTTP response",
+            "Returns null",
+            "Throws 500 error",
+            "Creates the record"
+        ]
+    },
+    {
+        "q": "Can you use different keys for Route Model Binding (not id)?",
+        "type": "mcq",
+        "o": [
+            "Yes, using `{post:slug}` in route definition or overriding `getRouteKeyName` in Model",
+            "No, only ID",
+            "Only in API",
+            "Yes, using middleware"
+        ]
+    },
+    {
+        "q": "How to bind a controller method to a route without a name array?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/foo', 'PhotoController@method'); (String syntax)",
+            "Route::get('/foo', PhotoController::method);",
+            "Route::get('/foo', PhotoController->method);",
+            "Route::get('/foo', new PhotoController);"
+        ]
+    },
+    {
+        "q": "What is the recommended syntax for defining controller actions in routes today?",
+        "type": "mcq",
+        "o": [
+            "Tuple syntax: `[Controller::class, 'method']`",
+            "String syntax: `'Controller@method'`",
+            "Closure syntax",
+            "Array syntax: `['controller' => ..., 'use' => ...]`"
+        ]
+    },
+    {
+        "q": "Why is `[Controller::class, 'method']` preferred over string syntax?",
+        "type": "mcq",
+        "o": [
+            "Better IDE support (navigation, refactoring) and static analysis",
+            "Performance",
+            "Shorter to write",
+            "Required by PHP 8"
+        ]
+    },
+    {
+        "q": "Can you call a controller method from another controller method?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but it is bad practice (tight coupling). Better to extract logic to a Service or Action class.",
+            "Yes, typical workflow",
+            "No, impossible",
+            "Only if static"
+        ]
+    },
+    {
+        "q": "How to prevent XSS when returning strings from controller directly?",
+        "type": "mcq",
+        "o": [
+            "Laravel automatically escapes output if returning views, but returning raw strings is displayed as-is (browser treats as text/html). Best to use Views or JSON.",
+            "Use `e()` helper manually",
+            "Impossible to prevent",
+            "Use HTTPS"
+        ]
+    },
+    {
+        "q": "What is the `__invoke` method used for?",
+        "type": "mcq",
+        "o": [
+            "Making a class callable as a function, used for Single Action Controllers",
+            "Debugging",
+            "Destructing class",
+            "Initializing class"
+        ]
+    },
+    {
+        "q": "If `php artisan make:controller` is run with `--model=Photo`, what happens?",
+        "type": "mcq",
+        "o": [
+            "Generates a controller with methods type-hinted for the `Photo` model (and imports it)",
+            "Creates the model too",
+            "Creates migration",
+            "Errors"
+        ]
+    },
+    {
+        "q": "What does `--parent` option do in `make:controller`?",
+        "type": "mcq",
+        "o": [
+            "Generates a nested resource controller (e.g. `CommentController` nested under `Photo`), expecting parent model binding",
+            "Inherits from parent class",
+            "Creates parent folder",
+            "Creates parent controller"
+        ]
+    },
+    {
+        "q": "How to get the currently authenticated user in a controller?",
+        "type": "mcq",
+        "o": [
+            "$request->user() or auth()->user()",
+            "User::current()",
+            "Session::user()",
+            "$this->user"
+        ]
+    },
+    {
+        "q": "What if `$request->user()` is null?",
+        "type": "mcq",
+        "o": [
+            "The user is not logged in",
+            "System error",
+            "Database error",
+            "Cache error"
+        ]
+    },
+    {
+        "q": "Can you cache responses directly from the controller?",
+        "type": "mcq",
+        "o": [
+            "No built-in method on BaseController, usually done via `Cache` facade logic inside the method or middleware",
+            "Yes, `return cache(...)`",
+            "Yes, `this->cache(...)`",
+            "Yes, via property"
+        ]
+    },
+    {
+        "q": "What is `FormRequest`?",
+        "type": "mcq",
+        "o": [
+            "A dedicated class class that encapsulates validation and authorization logic for a specific request",
+            "A form builder",
+            "A deprecated feature",
+            "A frontend tool"
+        ]
+    },
+    {
+        "q": "How to use a `FormRequest` in a controller?",
+        "type": "mcq",
+        "o": [
+            "Type-hint the FormRequest class instead of the standard `Request` class in the method signature",
+            "Uncomment it in Kernel.php",
+            "Use `FormRequest::make()`",
+            "Extend it"
+        ]
+    },
+    {
+        "q": "If you use a FormRequest, do you need to manually call `$request->validate()` in the controller?",
+        "type": "mcq",
+        "o": [
+            "No, the validation runs automatically before the controller method is executed",
+            "Yes, always",
+            "Yes, but it's faster",
+            "Only for POST"
+        ]
+    },
+    {
+        "q": "What methods does a generated `FormRequest` usually contain?",
+        "type": "mcq",
+        "o": [
+            "`authorize()` and `rules()`",
+            "`validate()` and `save()`",
+            "`check()` and `run()`",
+            "`index()` and `show()`"
+        ]
+    },
+    {
+        "q": "In `FormRequest`, if `authorize()` returns false, what happens?",
+        "type": "mcq",
+        "o": [
+            "A 403 Forbidden response is automatically generated",
+            "Validation continues",
+            "404 Not Found",
+            "Redirect to home"
+        ]
+    },
+    {
+        "q": "Can controllers implement interfaces?",
+        "type": "mcq",
+        "o": [
+            "Yes, just like any PHP class",
+            "No, framework restriction",
+            "Only `ControllerInterface`",
+            "Only `ResourceInterface`"
+        ]
+    },
+    {
+        "q": "What is the result of `return` nothing (void) from a controller method?",
+        "type": "mcq",
+        "o": [
+            "Laravel attempts to handle it, often resulting in empty response or error depending on middleware stack (usually empty 200 OK)",
+            "500 Error",
+            "404 Error",
+            "Standard default view"
+        ]
+    },
+    {
+        "q": "Are controllers required to extend `App\\Http\\Controllers\\Controller`?",
+        "type": "mcq",
+        "o": [
+            "No, but they lose access to convenience methods like `middleware()`, `validate()`, `dispatch()` unless traits are used directly",
+            "Yes, strictly",
+            "Only in API",
+            "Only in Web"
+        ]
+    },
+    {
+        "q": "How to access route parameters that are NOT bound to models?",
+        "type": "mcq",
+        "o": [
+            "Just add arguments to the method matching route parameter order/names",
+            "Use `param()` helper",
+            "Use `$this->params`",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "Can you mix `FormRequest` and route parameters in signature?",
+        "type": "mcq",
+        "o": [
+            "Yes, `public function update(UpdatePostRequest $request, Post $post)`",
+            "No",
+            "Only valid for store",
+            "Only valid for index"
+        ]
+    },
+    {
+        "q": "What happens if you type-hint a class that is NOT in the container and NOT a Route Model?",
+        "type": "mcq",
+        "o": [
+            "Laravel tries to instantiate it via reflection (auto-wiring). If it has no dependencies, it works. If it has unresolvable dependencies, it throws `BindingResolutionException`.",
+            "It is ignored",
+            "It is null",
+            "Warning log"
+        ]
+    },
+    {
+        "q": "How to organize controllers into subfolders (e.g. Admin)?",
+        "type": "mcq",
+        "o": [
+            "Create directory `app/Http/Controllers/Admin`, namespace `App\\Http\\Controllers\\Admin`, update routes alias or usage",
+            "Just move file",
+            "Just rename class",
+            "Use `artisan mv`"
+        ]
+    },
+    {
+        "q": "Artisan command to create controller in subfolder:",
+        "type": "mcq",
+        "o": [
+            "php artisan make:controller Admin/UserController",
+            "php artisan make:controller Admin.UserController",
+            "php artisan make:controller --folder=Admin UserController",
+            "php artisan make:controller UserController --path=Admin"
+        ]
+    },
+    {
+        "q": "How to access the raw request body content?",
+        "type": "mcq",
+        "o": [
+            "$request->getContent()",
+            "$request->body()",
+            "$request->raw()",
+            "$request->input()"
+        ]
+    },
+    {
+        "q": "How to check if the request wants JSON response?",
+        "type": "mcq",
+        "o": [
+            "$request->wantsJson()",
+            "$request->isJson()",
+            "$request->acceptsJson()",
+            "$request->format('json')"
+        ]
+    },
+    {
+        "q": "What does `$request->isJson()` check?",
+        "type": "mcq",
+        "o": [
+            "If the request Content-Type is `application/json` (incoming data format)",
+            "If request wants JSON output",
+            "If request has JSON body",
+            "If request is AJAX"
+        ]
+    },
+    {
+        "q": "How to retrieve a specific header from request?",
+        "type": "mcq",
+        "o": [
+            "$request->header('X-Name')",
+            "$request->get('X-Name')",
+            "$request->headers['X-Name']",
+            "header('X-Name')"
+        ]
+    },
+    {
+        "q": "How to retrieve a cookie from request?",
+        "type": "mcq",
+        "o": [
+            "$request->cookie('name')",
+            "cookie('name')",
+            "$_COOKIE['name']",
+            "$request->cookies->get('name')"
+        ]
+    },
+    {
+        "q": "How to attach a cookie to a response from controller?",
+        "type": "mcq",
+        "o": [
+            "return response('Hello')->cookie('name', 'value', $minutes);",
+            "Cookie::queue('name', 'value'); return 'Hello';",
+            "Both A and B are common patterns (Queueing is useful when not using response builder directly)",
+            "setcookie(...)"
+        ]
+    },
+    {
+        "q": "What is `Response::noContent()`?",
+        "type": "mcq",
+        "o": [
+            "Returns a 204 No Content response (empty body)",
+            "Returns 404",
+            "Returns null",
+            "Returns empty string"
+        ]
+    },
+    {
+        "q": "What is usage of `Response::streamDownload`?",
+        "type": "mcq",
+        "o": [
+            "Streaming a file download callback (e.g. valid for standard response factory)",
+            "Streaming video",
+            "Streaming audio",
+            "Streaming text"
+        ]
+    },
+    {
+        "q": "How to dependency inject `Illuminate\\Contracts\\Routing\\ResponseFactory`?",
+        "type": "mcq",
+        "o": [
+            "Type hint in constructor or method",
+            "Use Response facade",
+            "Use response() helper",
+            "All of the above (Facade/Helper access the same underlying service)"
+        ]
+    },
+    {
+        "q": "Is business logic recommended in Controllers?",
+        "type": "mcq",
+        "o": [
+            "Ideally minimized ('Thin Controllers, Fat Models' or 'Service Layers'). Controllers should just handle input/output translation.",
+            "Yes, put everything there",
+            "Yes, better than models",
+            "No, logic goes in Views"
+        ]
+    },
+    {
+        "q": "What is a 'Job' in context of Controllers?",
+        "type": "mcq",
+        "o": [
+            "A task that can be dispatched from a controller (possibly to a queue) to handle background processing",
+            "A cron job",
+            "A route",
+            "A middleware"
+        ]
+    },
+    {
+        "q": "Can a controller extend a BaseController that is NOT in `App\\Http\\Controllers`?",
+        "type": "mcq",
+        "o": [
+            "Yes, inheritance works normally in PHP irrespective of folder, as long as namespaces match and autoloader finds it.",
+            "No",
+            "Only if in `vendor`",
+            "Only if abstract"
+        ]
+    },
+    {
+        "q": "How to view all registered routes pointing to controllers?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:list",
+            "php artisan controller:list",
+            "php artisan app:routes",
+            "php artisan show:routes"
+        ]
+    },
+    {
+        "q": "Can you define same-name methods in a Controller (overloading)?",
+        "type": "mcq",
+        "o": [
+            "No, PHP does not support method overloading by signature (arguments) natively.",
+            "Yes",
+            "Yes, if private",
+            "Yes, if static"
+        ]
+    },
+    {
+        "q": "What does `request()->filled('key')` check?",
+        "type": "mcq",
+        "o": [
+            "If the key is present AND not empty",
+            "If the key is present (even if empty)",
+            "If the key is valid",
+            "If the key is numeric"
+        ]
+    },
+    {
+        "q": "What does `request()->has('key')` check?",
+        "type": "mcq",
+        "o": [
+            "If the key is present in input (even if empty string/null)",
+            "If the key is not empty",
+            "If the key is true",
+            "If the key is 1"
+        ]
+    },
+    {
+        "q": "How to get only specific keys from input?",
+        "type": "mcq",
+        "o": [
+            "$request->only(['username', 'password'])",
+            "$request->get(['username', 'password'])",
+            "$request->filter(['username', 'password'])",
+            "$request->select(['username', 'password'])"
+        ]
+    },
+    {
+        "q": "How to get all input EXCEPT specifics?",
+        "type": "mcq",
+        "o": [
+            "$request->except(['credit_card'])",
+            "$request->without(['credit_card'])",
+            "$request->skip(['credit_card'])",
+            "$request->ignore(['credit_card'])"
+        ]
+    },
+    {
+        "q": "When does `__construct` run in a Controller?",
+        "type": "mcq",
+        "o": [
+            "When the Router resolves the Controller class to dispatch the route",
+            "When server starts",
+            "When response is sent",
+            "When view is rendered"
+        ]
+    },
+    {
+        "q": "Can you return `true` or `false` (booleans) from a method?",
+        "type": "mcq",
+        "o": [
+            "Yes, Laravel often converts this to string '1' or '0' or JSON depending on context/stack? Usually rendered as string content.",
+            "No, throws error",
+            "Yes, redirects",
+            "Yes, aborts"
+        ]
+    },
+    {
+        "q": "If you inject `Route` into controller method, what do you get?",
+        "type": "mcq",
+        "o": [
+            "The current Route instance",
+            "The Router service",
+            "String URL",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "How to get the route name inside the controller method?",
+        "type": "mcq",
+        "o": [
+            "$request->route()->getName()",
+            "$this->name",
+            "Route::name()",
+            "static::name()"
+        ]
+    },
+    {
+        "q": "Is the Controller class mandatory for a Laravel app?",
+        "type": "mcq",
+        "o": [
+            "No, small apps can use Route Closures exclusively.",
+            "Yes, MVC framework requires C.",
+            "Yes, for performance",
+            "Yes, for routing"
+        ]
+    },
+    {
+        "q": "What is the primary disadvantage of using only Route Closures?",
+        "type": "mcq",
+        "o": [
+            "Cannot use Route Caching (before Laravel 8/recent optimizations), and creates cluttered routes file.",
+            "Security risk",
+            "Slower execution",
+            "Memory leak"
+        ]
+    },
+    {
+        "q": "Does Laravel 8+ support caching routes with Closures?",
+        "type": "mcq",
+        "o": [
+            "No, it still throws 'Unable to prepare route [..] for serialization. Uses Closure.'",
+            "Yes, it serializes closures now",
+            "Yes, via OpCache",
+            "Yes, native feature"
+        ]
+    },
+    {
+        "q": "So to cache routes, you MUST use Controllers?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Maybe",
+            "Depends on OS"
+        ]
+    },
+    {
+        "q": "Does `$request->all()` include query parameters?",
+        "type": "mcq",
+        "o": [
+            "Yes, it merges query, body, and files inputs",
+            "No, only body",
+            "No, only query",
+            "No, only files"
+        ]
+    },
+    {
+        "q": "How to get a boolean value from request that might be 'true', 'on', '1'?",
+        "type": "mcq",
+        "o": [
+            "$request->boolean('key')",
+            "$request->bool('key')",
+            "(bool) $request->input('key')",
+            "boolval($request->key)"
+        ]
+    },
+    {
+        "q": "How to retrieve data from 'php://input' (JSON payload)?",
+        "type": "mcq",
+        "o": [
+            "Laravel automatically parses JSON body if `Content-Type: application/json` is sent, access via `input()`. Or `json()->all()`.",
+            "file_get_contents('php://input')",
+            "$_POST",
+            "$_REQUEST"
+        ]
+    },
+    {
+        "q": "Can you use `Invokable` controllers with Resource routing?",
+        "type": "mcq",
+        "o": [
+            "No, Resource routing expects standard method names (index, etc.). Invokable has only `__invoke`. You'd map it manually.",
+            "Yes, automapped to index",
+            "Yes, automapped to all",
+            "Yes"
+        ]
+    },
+    {
+        "q": "What is the primary benefit of Constructor Injection in a Controller?",
+        "type": "mcq",
+        "o": [
+            "It makes dependencies explicit and testable (easy to mock)",
+            "It is faster",
+            "It is shorter",
+            "It validates input"
+        ]
+    },
+    {
+        "q": "If you define a dependency in the constructor, is it available in all methods?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you assign it to a property: `$this->repo = $repo`",
+            "No, only in constructor",
+            "Yes, magically via `$repo` global",
+            "No, must be static"
+        ]
+    },
+    {
+        "q": "What happens if you define a method argument that is NOT type-hinted and does not match a route parameter?",
+        "type": "mcq",
+        "o": [
+            "It will likely receive null or cause an ArgumentCountError if route doesn't supplied enough parameters? Actually, Laravel fills dependencies and matched params. Extra args might just be null or error.",
+            "It gets request object",
+            "It gets route object",
+            "System crash"
+        ]
+    },
+    {
+        "q": "How to handle file uploads in a controller?",
+        "type": "mcq",
+        "o": [
+            "$request->file('avatar')->store('avatars');",
+            "$_FILES['avatar']",
+            "File::upload('avatar')",
+            "Storage::put('avatar')"
+        ]
+    },
+    {
+        "q": "What does `$request->hasFile('photo')` check?",
+        "type": "mcq",
+        "o": [
+            "If the file exists on the request AND was uploaded successfully",
+            "If the input field exists",
+            "If the file path is string",
+            "If storage has file"
+        ]
+    },
+    {
+        "q": "Can you use `Request` facade instead of injection?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Request::input('key')` works identically to `$request->input('key')`",
+            "No, Facade is deprecated",
+            "No, Facade is read-only",
+            "No, Facade is slower"
+        ]
+    },
+    {
+        "q": "Why prefer Injection over Facades in Controllers?",
+        "type": "mcq",
+        "o": [
+            "Better for unit testing and dependency clarity (though Facades are testable in Laravel)",
+            "Facades are buggy",
+            "Injection is faster",
+            "Facades don't work in API"
+        ]
+    },
+    {
+        "q": "What is `Response::download($path)`?",
+        "type": "mcq",
+        "o": [
+            "Generates a response that forces the browser to download the file at `$path`",
+            "Downloads file to server",
+            "Deletes file",
+            "Reads file string"
+        ]
+    },
+    {
+        "q": "How to set headers on a JSON response?",
+        "type": "mcq",
+        "o": [
+            "response()->json($data)->header('X-Meta', 'val')",
+            "json($data, headers: ['X-Meta' => 'val'])",
+            "Both A and passing 3rd arg to json helper works",
+            "header('X-Meta: val')"
+        ]
+    },
+    {
+        "q": "What is `redirect()->action([Controller::class, 'method'])`?",
+        "type": "mcq",
+        "o": [
+            "Redirects to the URL associated with that controller action",
+            "Runs the action immediately",
+            "Copies the action",
+            "Validates the action"
+        ]
+    },
+    {
+        "q": "Can you redirect to external domains?",
+        "type": "mcq",
+        "o": [
+            "Yes, `return redirect()->away('https://google.com')`",
+            "No, security risk",
+            "Only with middleware",
+            "Only if configured"
+        ]
+    },
+    {
+        "q": "What is `back()->withInput()`?",
+        "type": "mcq",
+        "o": [
+            "Redirects to previous page and flashes the input data to session so it can be repopulated in the form (using `old()` helper)",
+            "Returns input array",
+            "Returns previous view",
+            "Refreshes page"
+        ]
+    },
+    {
+        "q": "How to exclude sensitive data (passwords) from `withInput`?",
+        "type": "mcq",
+        "o": [
+            "`withInput($request->except('password'))` (although default behavior often excludes password automatically)",
+            "It is impossible",
+            "Use `safe()`",
+            "Use `clean()`"
+        ]
+    },
+    {
+        "q": "What is a 'Missing Model' behavior customization in Resource Controllers?",
+        "type": "mcq",
+        "o": [
+            "Using `Route::resource(...)->missing(callback)` to handle 404s for implicit binding failure on that resource",
+            "Modifying controller `missing()` method",
+            "Global event",
+            "Try catch"
+        ]
+    },
+    {
+        "q": "Can you define a Constructor in a Resource Controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, typically to inject dependencies or set middleware",
+            "No, throws error",
+            "No, resource controllers are static",
+            "No, interferes with routing"
+        ]
+    },
+    {
+        "q": "What is the `authorizeResource` method in controller?",
+        "type": "mcq",
+        "o": [
+            "$this->authorizeResource(Model::class, 'parameter_name'); Automatically applies policy authorization to resource methods (viewAny, view, create, update, delete)",
+            "Authorizes user login",
+            "Authorizes API access",
+            "Creates policy"
+        ]
+    },
+    {
+        "q": "If using `authorizeResource`, where do you call it?",
+        "type": "mcq",
+        "o": [
+            "In the controller's `__construct()` method",
+            "In `boot()`",
+            "In `index()`",
+            "In `RouteServiceProvider`"
+        ]
+    },
+    {
+        "q": "For `authorizeResource`, does `index` maps to `viewAny` policy?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No, maps to index",
+            "No, maps to view",
+            "No, maps to list"
+        ]
+    },
+    {
+        "q": "Does `authorizeResource` create the Policy class for you?",
+        "type": "mcq",
+        "o": [
+            "No, you must create it via `make:policy` and register it (or use auto-discovery)",
+            "Yes",
+            "Yes, empty one",
+            "Yes, generic one"
+        ]
+    },
+    {
+        "q": "What does `$request->collect()` return? (Laravel 8.x+)",
+        "type": "mcq",
+        "o": [
+            "A `Collection` instance containing the input data",
+            "An array",
+            "A JSON string",
+            "A generator"
+        ]
+    },
+    {
+        "q": "How to get integer input safely casting?",
+        "type": "mcq",
+        "o": [
+            "$request->integer('key', default: 0)",
+            "(int) $request->input('key')",
+            "intval($request->key)",
+            "All of the above (Helper is cleanest)"
+        ]
+    },
+    {
+        "q": "How to get a float input?",
+        "type": "mcq",
+        "o": [
+            "$request->float('key')",
+            "floatval(...)",
+            "(float)...",
+            "number(...)"
+        ]
+    },
+    {
+        "q": "How to get a date input as Carbon instance?",
+        "type": "mcq",
+        "o": [
+            "$request->date('key') (Returns Carbon object or null)",
+            "Carbon::parse($request->input('key'))",
+            "Both A and B",
+            "date($request->input('key'))"
+        ]
+    },
+    {
+        "q": "What does `$request->merge(['key' => 'val'])` do?",
+        "type": "mcq",
+        "o": [
+            "Merges the new input into the existing request data (modifying request state)",
+            "Returns new array",
+            "Saves to DB",
+            "Errros if key exists"
+        ]
+    },
+    {
+        "q": "Can you use `$request->replace([...])`?",
+        "type": "mcq",
+        "o": [
+            "Yes, it replaces the ENTIRE input array with the new array",
+            "No",
+            "Only for query params",
+            "Only for files"
+        ]
+    },
+    {
+        "q": "How to check if request is secure (HTTPS)?",
+        "type": "mcq",
+        "o": [
+            "$request->secure()",
+            "$request->isHttps()",
+            "$request->ssl()",
+            "$request->encrypted()"
+        ]
+    },
+    {
+        "q": "How to get the user's IP address in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->ip()",
+            "$_SERVER['REMOTE_ADDR']",
+            "Request::ip()",
+            "All of the above (Request method handles proxy headers correctly if configured)"
+        ]
+    },
+    {
+        "q": "How to store a file with a randomly generated filename?",
+        "type": "mcq",
+        "o": [
+            "$path = $request->file('avatar')->store('avatars'); (Returns path with hash)",
+            "$request->file('avatar')->save();",
+            "$request->file('avatar')->upload();",
+            "Storage::save($file)"
+        ]
+    },
+    {
+        "q": "How to store a file with a specific filename?",
+        "type": "mcq",
+        "o": [
+            "$request->file('avatar')->storeAs('avatars', 'user_1.jpg');",
+            "$request->file('avatar')->store('avatars', 'user_1.jpg');",
+            "$request->file('avatar')->name('user_1.jpg')->store();",
+            "rename(...)"
+        ]
+    },
+    {
+        "q": "What defines the visibility of a stored file?",
+        "type": "mcq",
+        "o": [
+            "The disk configuration or passing 'public' as output option: `store('path', 'public')`",
+            "File permission",
+            "Random",
+            "Always public"
+        ]
+    },
+    {
+        "q": "Can you type-hint a model in the controller constructor?",
+        "type": "mcq",
+        "o": [
+            "Yes, for dependency injection (e.g. `User $user` empty model), useful for repositories or factories",
+            "No, only methods",
+            "No, only Request",
+            "No, loop reference"
+        ]
+    },
+    {
+        "q": "What is `Response::make($content, $status)`?",
+        "type": "mcq",
+        "o": [
+            "Manual creation of a Response object (useful for custom headers/content)",
+            "Creates view",
+            "Creates file",
+            "Creates redirect"
+        ]
+    },
+    {
+        "q": "How to set a cookie that lasts 'forever' (5 years)?",
+        "type": "mcq",
+        "o": [
+            "Cookie::forever('name', 'value')",
+            "Cookie::make('name', 'value', 99999999)",
+            "Cookie::long('name', 'value')",
+            "cookie('name', 'va', 'forever')"
+        ]
+    },
+    {
+        "q": "How to access the raw uploaded file instance (UploadedFile)?",
+        "type": "mcq",
+        "o": [
+            "$request->file('name')",
+            "$_FILES['name']",
+            "$request->input('name')",
+            "File::get('name')"
+        ]
+    },
+    {
+        "q": "Is `UploadedFile` an extension of `SplFileInfo`?",
+        "type": "mcq",
+        "o": [
+            "Yes (via Symfony\\Component\\HttpFoundation\\File\\UploadedFile)",
+            "No, separate class",
+            "No, array",
+            "No, stream"
+        ]
+    },
+    {
+        "q": "How to get the original extension of uploaded file?",
+        "type": "mcq",
+        "o": [
+            "$file->getClientOriginalExtension()",
+            "$file->extension() (Guesses based on MIME)",
+            "$file->originalExt()",
+            "$file->ext()"
+        ]
+    },
+    {
+        "q": "Is `getClientOriginalExtension` safe?",
+        "type": "mcq",
+        "o": [
+            "No, it is user-supplied (could be spoofed). Better use `extension()` / `guessExtension()` which inspects contents.",
+            "Yes, always safe",
+            "Yes, validated by browser",
+            "Yes, validated by PHP"
+        ]
+    },
+    {
+        "q": "How to validate image dimensions in controller validation?",
+        "type": "mcq",
+        "o": [
+            "'avatar' => 'dimensions:min_width=100,min_height=200'",
+            "'avatar' => 'image|size:100x200'",
+            "'avatar' => 'width:100'",
+            "'avatar' => 'pixels:200'"
+        ]
+    },
+    {
+        "q": "What does `$this->dispatch(new Job)` do in a controller?",
+        "type": "mcq",
+        "o": [
+            "Dispatches the job to the queue (if configured) or runs explicitly",
+            "Runs immediately only",
+            "Schedules it",
+            "Deletes it"
+        ]
+    },
+    {
+        "q": "Do modern Laravel controllers use the `DispatchesJobs` trait by default?",
+        "type": "mcq",
+        "o": [
+            "It was common in older versions. In standard install now, `Controller` extends base which uses `AuthorizesRequests`, `ValidatesRequests`. `DispatchesJobs` might be missing or included depending on version scaffolding.",
+            "Yes always",
+            "No never",
+            "Only API"
+        ]
+    },
+    {
+        "q": "How to return a view with HTTP status 404?",
+        "type": "mcq",
+        "o": [
+            "return response()->view('errors.404', [], 404);",
+            "return view('errors.404')->status(404);",
+            "return view('404'); (Returns 200 OK typically)",
+            "abort(404, 'view')"
+        ]
+    },
+    {
+        "q": "Can you use `view()` helper without arguments?",
+        "type": "mcq",
+        "o": [
+            "Yes, returns the View Factory instance",
+            "No, error",
+            "Returns empty string",
+            "Returns null"
+        ]
+    },
+    {
+        "q": "What is `View::share('key', 'val')` used for?",
+        "type": "mcq",
+        "o": [
+            "Sharing data with ALL views rendered by the application (usually in AppServiceProvider, but technicaly controller could call it)",
+            "Sharing with session",
+            "Sharing with request",
+            "Sharing with DB"
+        ]
+    },
+    {
+        "q": "How to get the ID of the inserted record after `store`?",
+        "type": "mcq",
+        "o": [
+            "$model = User::create(...); $id = $model->id;",
+            "Model::insertGetId(...);",
+            "Both A and B",
+            "$request->id"
+        ]
+    },
+    {
+        "q": "If you use `$request->all()`, can you mass assignment vulnerability occur?",
+        "type": "mcq",
+        "o": [
+            "Yes, if `$fillable` / `$guarded` are not properly set on the Model. (e.g. user passes `is_admin=1`)",
+            "No, Laravel prevents it",
+            "No, Request prevents it",
+            "Only in raw SQL"
+        ]
+    },
+    {
+        "q": "How to ensure safety when creating models from request?",
+        "type": "mcq",
+        "o": [
+            "Use `$request->validated()` (from FormRequest or validator) or `$request->only(...)`, plus Model `$fillable` protection.",
+            "Use `$request->all()`",
+            "Disable fillable",
+            "Trust user"
+        ]
+    },
+    {
+        "q": "What is `$request->validated()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the subset of input data that passed validation (requires `validate` or FormRequest usage)",
+            "Returns true/false",
+            "Returns validator instance",
+            "Returns error bag"
+        ]
+    },
+    {
+        "q": "Can you define `__call` in a controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, to handle dynamic method calls or missing methods (e.g. magic routing), standard PHP magic method.",
+            "No",
+            "Only static",
+            "Only private"
+        ]
+    },
+    {
+        "q": "What is the `Controller` class namespace?",
+        "type": "mcq",
+        "o": [
+            "App\\Http\\Controllers",
+            "Illuminate\\Http",
+            "App\\Controllers",
+            "System\\Http"
+        ]
+    },
+    {
+        "q": "Can you put controllers in sub-sub-folders?",
+        "type": "mcq",
+        "o": [
+            "Yes, `App\\Http\\Controllers\\Api\\V1\\UserController`",
+            "No, max 1 level",
+            "No, flat structure only",
+            "Yes, but routing fails"
+        ]
+    },
+    {
+        "q": "How to reference a subfolder controller in strict string syntax?",
+        "type": "mcq",
+        "o": [
+            "'Api\\V1\\UserController@index'",
+            "'Api/V1/UserController@index'",
+            "'Api.V1.UserController@index'",
+            "All work"
+        ]
+    },
+    {
+        "q": "If you rename a controller class, does the file name need to change?",
+        "type": "mcq",
+        "o": [
+            "Yes, for PSR-4 autoloading to find it, filename must match class name",
+            "No, just mapping",
+            "No, PHP finds it",
+            "Only in production"
+        ]
+    },
+    {
+        "q": "Can you define properties in a controller to hold state?",
+        "type": "mcq",
+        "o": [
+            "Yes, but remember controllers are instantiated per request. State does not persist between requests (stateless HTTP).",
+            "Yes, persists forever",
+            "No, properties forbidden",
+            "Only constants"
+        ]
+    },
+    {
+        "q": "Is the controller instantiated if the route is cached?",
+        "type": "mcq",
+        "o": [
+            "Yes, when the request hits the route. Route cache just speeds up finding the route, not executing it.",
+            "No, it runs from cache",
+            "Only once on boot",
+            "Never"
+        ]
+    },
+    {
+        "q": "Can a controller call `abort(403)`?",
+        "type": "mcq",
+        "o": [
+            "Yes, throws `HttpException` which renders 403 view",
+            "No",
+            "Yes, stops PHP",
+            "Yes, logs out"
+        ]
+    },
+    {
+        "q": "What if you want to stream a video file response?",
+        "type": "mcq",
+        "o": [
+            "Use `response()->stream()` or `response()->file()` with range support",
+            "Return raw binary",
+            "Use echo",
+            "Use `readfile`"
+        ]
+    },
+    {
+        "q": "How to return 401 Unauthorized?",
+        "type": "mcq",
+        "o": [
+            "abort(401); or response()->json(..., 401)",
+            "return false;",
+            "return redirect('login'); (This is usually what auth middleware does, not 401 directly unless API)",
+            "throw Exception"
+        ]
+    },
+    {
+        "q": "What is `Response::jsonp($callback, $data)`?",
+        "type": "mcq",
+        "o": [
+            "Returns JSONP response (wrapped in callback function) for cross-domain requests (legacy technique)",
+            "Returns JSON pretty",
+            "Returns JSON part",
+            "Returns JSON patch"
+        ]
+    },
+    {
+        "q": "Can you use `dd()` inside a controller for debugging and stop execution?",
+        "type": "mcq",
+        "o": [
+            "Yes, `dump and die`",
+            "No, use log",
+            "No, use return",
+            "No, use echo"
+        ]
+    },
+    {
+        "q": "What does `dump()` do vs `dd()`?",
+        "type": "mcq",
+        "o": [
+            "Output vars but continue execution",
+            "Stop execution",
+            "Save to log",
+            "Send email"
+        ]
+    },
+    {
+        "q": "How to access session data in controller?",
+        "type": "mcq",
+        "o": [
+            "session('key') or $request->session()->get('key')",
+            "$_SESSION['key']",
+            "Session::read('key')",
+            "cookie('key')"
+        ]
+    },
+    {
+        "q": "How to regenerate session ID in controller (e.g. after login)?",
+        "type": "mcq",
+        "o": [
+            "$request->session()->regenerate();",
+            "Session::new()",
+            "session_regenerate_id() (Native PHP, but better use Laravel wrapper)",
+            "Auth::refresh()"
+        ]
+    },
+    {
+        "q": "Can you manually trigger the Garbage Collector for session?",
+        "type": "mcq",
+        "o": [
+            "Standard Laravel handles this via lottery in middleware. Manually? `$request->session()->getHandler()->gc($lifetime)` maybe, but rare.",
+            "Session::gc()",
+            "Artisan::gc()",
+            "Garbage::collect()"
+        ]
+    },
+    {
+        "q": "How to check if the request is an AJAX request?",
+        "type": "mcq",
+        "o": [
+            "$request->ajax()",
+            "$request->isAjax()",
+            "$request->xhr()",
+            "header('X-Requested-With')"
+        ]
+    },
+    {
+        "q": "Does `$request->ajax()` work with Fetch API default headers?",
+        "type": "mcq",
+        "o": [
+            "It checks for `X-Requested-With: XMLHttpRequest`. Fetch/Axios usually set this, but if your frontend lib doesn't, it returns false.",
+            "Yes always",
+            "No never",
+            "Only jQuery"
+        ]
+    },
+    {
+        "q": "How to force a response to be downloaded as a specific MIME type?",
+        "type": "mcq",
+        "o": [
+            "response()->download(..., headers: ['Content-Type' => '...'])",
+            "response()->type(...)",
+            "mime(...)",
+            "header(...)"
+        ]
+    },
+    {
+        "q": "How to return an empty 200 OK?",
+        "type": "mcq",
+        "o": [
+            "return response(''); or return output nothing? Explicit: `return response()->noContent();` is 204. For 200: `return response()->ok();` (macro) or `return response('');`",
+            "return true;",
+            "return null;",
+            "exit;"
+        ]
+    },
+    {
+        "q": "Does returning an integer `1337` from controller work?",
+        "type": "mcq",
+        "o": [
+            "It is converted to string '1337' in the body",
+            "It sets status code 1337",
+            "It crashes",
+            "It downloads file"
+        ]
+    },
+    {
+        "q": "Can a controller function be `private`?",
+        "type": "mcq",
+        "o": [
+            "Yes, but it cannot be a route action. Used for internal helper logic.",
+            "No",
+            "Yes, accessible via route",
+            "Only protected"
+        ]
+    },
+    {
+        "q": "If you have a `private` method `show` and route points to it, what happens?",
+        "type": "mcq",
+        "o": [
+            "BadMethodCallException / Error, router cannot invoke non-public method",
+            "It works",
+            "404",
+            "403"
+        ]
+    },
+    {
+        "q": "How to unit test a controller method?",
+        "type": "mcq",
+        "o": [
+            "Instantiate the controller class, mock dependencies, call method, assert return. (Though Feature tests performing HTTP request are more common/robust in Laravel context).",
+            "Cannot unit test",
+            "Only browser test",
+            "Only manual test"
+        ]
+    },
+    {
+        "q": "What is the specialized Controller Trait `AuthorizesRequests` used for?",
+        "type": "mcq",
+        "o": [
+            "Provides method `$this->authorize()` to check policies/gates easily",
+            "Validates forms",
+            "Dispatches jobs",
+            "Connects DB"
+        ]
+    },
+    {
+        "q": "If `$this->authorize('update', $post)` fails, what happens?",
+        "type": "mcq",
+        "o": [
+            "Throws `AuthorizationException` (converted to 403 Response)",
+            "Returns false",
+            "Redirects login",
+            "Logs warning"
+        ]
+    },
+    {
+        "q": "Can a controller be `final`?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you don't intend to extend it. Good for strict design.",
+            "No, because Laravel extends it",
+            "No, proxies need extension",
+            "No"
+        ]
+    },
+    {
+        "q": "How to implement `middleware` logic WITHOUT middleware classes in a controller?",
+        "type": "mcq",
+        "o": [
+            "Use a Closure middleware in constructor: `$this->middleware(function ($request, $next) { ... });`",
+            "Cannot do it",
+            "Write loop in index",
+            "Use events"
+        ]
+    },
+    {
+        "q": "Is the Closure middleware in constructor executed when running `route:list`?",
+        "type": "mcq",
+        "o": [
+            "Yes, usually controller is instantiated to gather middleware? Actually, route cache process instantiates controller to check middleware.",
+            "No",
+            "Maybe",
+            "Only in prod"
+        ]
+    },
+    {
+        "q": "Why is it risky to use `Auth::user()` in controller constructor?",
+        "type": "mcq",
+        "o": [
+            "Session/Auth middleware hasn't run yet when constructor is called. Auth user is null. Use closure middleware to access it.",
+            "It crashes",
+            "It is slow",
+            "It is deprecated"
+        ]
+    },
+    {
+        "q": "Correct way to check Auth in constructor:",
+        "type": "mcq",
+        "o": [
+            "$this->middleware(function ($request, $next) { $user = auth()->user(); ... return $next($request); });",
+            "if (auth()->check()) ...",
+            "$this->user = auth()->user();",
+            "Auth::guard()"
+        ]
+    },
+    {
+        "q": "What is `Response::view()` shorthand?",
+        "type": "mcq",
+        "o": [
+            "Same as `view()` helper or `View::make()`. But allows chaining response methods like header/cookie immediately.",
+            "Different engine",
+            "Only for XML",
+            "Only for PDF"
+        ]
+    },
+    {
+        "q": "Can a controller method return a Generator (`yield`)?",
+        "type": "mcq",
+        "o": [
+            "Laravel handles it if using `StreamedResponse` manually or outputting json stream, but returning raw Generator to router usually results in empty/error unless explicitly handled/iterated.",
+            "Yes, streams auto",
+            "No",
+            "Only in console"
+        ]
+    },
+    {
+        "q": "How to type-hint route parameters for a nested resource `photos.comments` (URI: photos/{photo}/comments/{comment})?",
+        "type": "mcq",
+        "o": [
+            "public function show(Photo $photo, Comment $comment)",
+            "public function show($photo, $comment)",
+            "public function show(Comment $comment, Photo $photo)",
+            "public function show($id1, $id2)"
+        ]
+    },
+    {
+        "q": "What is the specialized `callAction` method in a controller?",
+        "type": "mcq",
+        "o": [
+            "It is the method on the base Controller that actually calls the target action method. You can override it to execute code before/after every action.",
+            "It calls the router",
+            "It calls the view",
+            "It calls the database"
+        ]
+    },
+    {
+        "q": "If you override `callAction($method, $parameters)`, what must you do?",
+        "type": "mcq",
+        "o": [
+            "Call `return parent::callAction($method, $parameters);` to ensure the action is actually executed",
+            "Return true",
+            "Return null",
+            "Just exit"
+        ]
+    },
+    {
+        "q": "What happens if a controller method returns a `string`, but the routes are API (expecting JSON)?",
+        "type": "mcq",
+        "o": [
+            "Laravel (by default) sends it as `text/html`. You must explicitly return `response()->json()` or rely on middleware/clients `Accept` header triggering generic fallback if configured.",
+            "It automatically converts to JSON",
+            "It throws an error",
+            "It sends XML"
+        ]
+    },
+    {
+        "q": "How to pass parameters to controller middleware?",
+        "type": "mcq",
+        "o": [
+            "$this->middleware('role:admin');",
+            "$this->middleware('role', 'admin');",
+            "$this->middleware(['role' => 'admin']);",
+            "Middleware::role('admin');"
+        ]
+    },
+    {
+        "q": "Can you exclude middleware for specific methods using properties?",
+        "type": "mcq",
+        "o": [
+            "No, only via the fluent `none()`/`except()` methods on the object returned by `$this->middleware()` in constructor.",
+            "Yes, `$this->except = [...]`",
+            "Yes, `$this->noMiddleware = [...]`",
+            "Yes, protected property"
+        ]
+    },
+    {
+        "q": "What does `abort_if($boolean, 403, 'Message')` do?",
+        "type": "mcq",
+        "o": [
+            "If the boolean is true, it throws a HttpException with status 403 and the message",
+            "It always aborts",
+            "It logs the message",
+            "It redirects"
+        ]
+    },
+    {
+        "q": "What is the difference between `$this->validate()` and `$request->validate()`?",
+        "type": "mcq",
+        "o": [
+            "`$this->validate` is a method from the `ValidatesRequests` trait (legacy). `$request->validate` is directly on Request. They behave similarly (redirect on fail).",
+            "One is deprecated",
+            "One is faster",
+            "One is secure"
+        ]
+    },
+    {
+        "q": "How to validate an array of items (e.g. `items` input containing objects with `id`)?",
+        "type": "mcq",
+        "o": [
+            "'items.*.id' => 'required|integer'",
+            "'items.id' => 'required'",
+            "'items[].id' => 'required'",
+            "'items...id' => 'required'"
+        ]
+    },
+    {
+        "q": "What validation rule checks if a value exists in a database table?",
+        "type": "mcq",
+        "o": [
+            "'exists:table_name,column_name'",
+            "'in:table_name'",
+            "'db:table_name'",
+            "'check:table_name'"
+        ]
+    },
+    {
+        "q": "What validation rule checks if a value is unique in a database table?",
+        "type": "mcq",
+        "o": [
+            "'unique:table_name,column_name'",
+            "'distinct:table_name'",
+            "'one:table_name'",
+            "'single:table_name'"
+        ]
+    },
+    {
+        "q": "How to ignore the current record ID during a unique check validation (update scenario)?",
+        "type": "mcq",
+        "o": [
+            "Rule::unique('users')->ignore($user->id)",
+            "'unique:users,email,' . $user->id (String syntax)",
+            "Both A and B",
+            "unique_except($id)"
+        ]
+    },
+    {
+        "q": "How to customize validation error messages for a specific field?",
+        "type": "mcq",
+        "o": [
+            "Pass an array of messages as the second argument to `validate()`: `['email.required' => 'We need your email!']`",
+            "Use `trans()`",
+            "Edit `lang/en/validation.php`",
+            "Edit `config/app.php`"
+        ]
+    },
+    {
+        "q": "What does `redirect()->withErrors($validator)` do?",
+        "type": "mcq",
+        "o": [
+            "Flashes the errors to the session key `errors` (ViewErrorBag) so they are available in views via `$errors` variable",
+            "Logs errors",
+            "Sends email",
+            "Stops script"
+        ]
+    },
+    {
+        "q": "Can you use `Redirect::intended('/default')`?",
+        "type": "mcq",
+        "o": [
+            "Yes, redirects user to the URL they were trying to access before being intercepted by authentication middleware (or fallback to default)",
+            "No, only `back()`",
+            "No, `intended` is deprecated",
+            "No, usually `guest`"
+        ]
+    },
+    {
+        "q": "What Exception is thrown if `findOrFail` fails inside a controller?",
+        "type": "mcq",
+        "o": [
+            "ModelNotFoundException (which is automatically rendered as 404 by default handler)",
+            "QueryException",
+            "PDOException",
+            "FatalError"
+        ]
+    },
+    {
+        "q": "What Exception is thrown if `authorize` fails?",
+        "type": "mcq",
+        "o": [
+            "AuthorizationException (rendered as 403)",
+            "AuthenticationException (401)",
+            "AccessDeniedException",
+            "ForbiddenException"
+        ]
+    },
+    {
+        "q": "How to return a downloadable file that is dynamically generated (string content)?",
+        "type": "mcq",
+        "o": [
+            "response()->streamDownload(function(){ echo 'content'; }, 'name.txt')",
+            "response()->stringDownload(...)",
+            "response()->text(...)",
+            "response()->raw(...)"
+        ]
+    },
+    {
+        "q": "Does `controller` middleware run before or after `global` middleware?",
+        "type": "mcq",
+        "o": [
+            "After. (Global -> Route Group -> Route/Controller)",
+            "Before",
+            "Parallel",
+            "Random"
+        ]
+    },
+    {
+        "q": "Can you define a controller that does invokable logic `__invoke` AND other methods?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but Routing treats it as a Single Action Controller if you register it as such. If you use `[Class, 'method']` syntax, you can call other methods too.",
+            "No, error",
+            "No, only invoke",
+            "Yes, but invoke breaks"
+        ]
+    },
+    {
+        "q": "How to resolve a service from the container inside a method explicitly?",
+        "type": "mcq",
+        "o": [
+            "app(Service::class) or resolve(Service::class)",
+            "new Service()",
+            "Service::make()",
+            "Container::get()"
+        ]
+    },
+    {
+        "q": "What is `Response::capsule()`?",
+        "type": "mcq",
+        "o": [
+            "Not a standard Laravel method.",
+            "A database helper",
+            "A view helper",
+            "A response helper"
+        ]
+    },
+    {
+        "q": "How to return a 419 Page Expired manually?",
+        "type": "mcq",
+        "o": [
+            "abort(419);",
+            "return 419;",
+            "throw TokenMismatchException",
+            "expire()"
+        ]
+    },
+    {
+        "q": "Can you use the `ValidatesRequests` trait in a plain class (not extending Controller)?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you use the trait and resolving dependencies correctly. But it relies on `ThrowValidationException` logic which needs exception handler integration.",
+            "No",
+            "Only in Models",
+            "Only in Jobs"
+        ]
+    },
+    {
+        "q": "What does `$request->query('key')` retrieve?",
+        "type": "mcq",
+        "o": [
+            "Only data from the query string (GET parameters)",
+            "Body parameters",
+            "Headers",
+            "Cookies"
+        ]
+    },
+    {
+        "q": "What does `$request->post('key')` retrieve?",
+        "type": "mcq",
+        "o": [
+            "Only data from the POST body",
+            "Query parameters",
+            "Files",
+            "Headers"
+        ]
+    },
+    {
+        "q": "Difference between `input` vs `query` vs `post`?",
+        "type": "mcq",
+        "o": [
+            "`input` checks payload (JSON/Post) AND query string. `query` only query string. `post` only POST body.",
+            "No difference",
+            "Input is deprecated",
+            "Query is faster"
+        ]
+    },
+    {
+        "q": "How to validate that two fields match (e.g. password and confirmation)?",
+        "type": "mcq",
+        "o": [
+            "'password' => 'confirmed' (expects `password_confirmation` field to match)",
+            "'password' => 'same:password_confirmation'",
+            "Both A and B works",
+            "'password' => 'matches_confirmation'"
+        ]
+    },
+    {
+        "q": "What if you want to validate a field only if another field is present?",
+        "type": "mcq",
+        "o": [
+            "'field' => 'sometimes|required_with:other_field'",
+            "'field' => 'if_present'",
+            "'field' => 'conditional'",
+            "'field' => 'dependency'"
+        ]
+    },
+    {
+        "q": "How to apply `trim` middleware only to specific requests?",
+        "type": "mcq",
+        "o": [
+            "Usually `TrimStrings` is global. To skip, override `$except` property in the Middleware class. Dynamic application per controller is harder, better to ignore fields.",
+            "Controller::trim()",
+            "Route::trim()",
+            "Request::trim()"
+        ]
+    },
+    {
+        "q": "Can you use Dependency Injection for `primitive types` (string $apiKey) in Controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you use Contextual Binding in a ServiceProvider (`$this->app->when(Controller::class)->needs('$apiKey')->give('...')`)",
+            "No, only classes",
+            "Yes, Laravel guesses values",
+            "Yes, from route params"
+        ]
+    },
+    {
+        "q": "What happens if a controller dependency throws an exception in constructor?",
+        "type": "mcq",
+        "o": [
+            "Construction fails, returns 500 error before any method is called",
+            "Controller skipped",
+            "Method called anyway",
+            "Graceful fallback"
+        ]
+    },
+    {
+        "q": "How to instruct the browser to cache the response for 1 hour?",
+        "type": "mcq",
+        "o": [
+            "return response($content)->header('Cache-Control', 'max-age=3600');",
+            "return response($content)->cache(60);",
+            "Config::set('cache', 60);",
+            "Request::cache(60);"
+        ]
+    },
+    {
+        "q": "What is `Response::make()->withHeaders([...])`?",
+        "type": "mcq",
+        "o": [
+            "Standard way to attach headers to a manually created response",
+            "Deprecated",
+            "Wrong syntax",
+            "Only for API"
+        ]
+    },
+    {
+        "q": "Can you access the route inside the `FormRequest` `rules()` method?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$this->route('parameter_name')`",
+            "No",
+            "Only via `request()` global",
+            "Only via `input()`"
+        ]
+    },
+    {
+        "q": "Why access route inside `rules()`?",
+        "type": "mcq",
+        "o": [
+            "To ignore the current record's ID for unique validation during updates",
+            "To redirect",
+            "To auth",
+            "To log"
+        ]
+    },
+    {
+        "q": "How to add 'after' validation hook in FormRequest?",
+        "type": "mcq",
+        "o": [
+            "Use the `withValidator($validator)` method to add `after` callbacks",
+            "Use `after()` method",
+            "Use `hook()` method",
+            "Use `finish()` method"
+        ]
+    },
+    {
+        "q": "What is the `prepareForValidation` method in FormRequest?",
+        "type": "mcq",
+        "o": [
+            "Allows you to sanitize or format data (merge into request) BEFORE validation rules run",
+            "Runs after validation",
+            "Runs before auth",
+            "Runs after auth"
+        ]
+    },
+    {
+        "q": "Can you stop validation on first failure?",
+        "type": "mcq",
+        "o": [
+            "Yes, use `bail` rule: `'field' => 'bail|required|numeric'`",
+            "Yes, `stop`",
+            "Yes, `halt`",
+            "Yes, `exit`"
+        ]
+    },
+    {
+        "q": "What does `bail` rule do?",
+        "type": "mcq",
+        "o": [
+            "Stops running subsequent rules on the *attribute* after the first failure",
+            "Stops entire validation",
+            "Stops request",
+            "Throws exception"
+        ]
+    },
+    {
+        "q": "How to make a custom Validation Rule object?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:rule RuleName",
+            "php artisan create:rule RuleName",
+            "php artisan new:rule RuleName",
+            "php artisan generate:rule RuleName"
+        ]
+    },
+    {
+        "q": "Where are custom rules stored?",
+        "type": "mcq",
+        "o": [
+            "app/Rules",
+            "app/Validators",
+            "app/Http/Rules",
+            "app/Http/Validators"
+        ]
+    },
+    {
+        "q": "How to use a Rule object?",
+        "type": "mcq",
+        "o": [
+            "'size' => ['required', new Uppercase()]",
+            "'size' => 'required|Uppercase'",
+            "'size' => 'Rule:Uppercase'",
+            "'size' => new Uppercase()"
+        ]
+    },
+    {
+        "q": "Can a controller method be static?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but using standard `[Class, 'method']` router syntax works with instances. Static methods don't have `$this` context (middleware, helpers).",
+            "Yes, preferred",
+            "No, fatal error",
+            "No, router limitation"
+        ]
+    },
+    {
+        "q": "How to interact with cookies that are encrypted?",
+        "type": "mcq",
+        "o": [
+            "Laravel automatically encrypts/decrypts `EncryptCookies` middleware. Access via `$request->cookie()`. Disable encryption for specific cookies in middleware.",
+            "You must decrypt manually",
+            "You cannot use cookies",
+            "Use `rawCookie`"
+        ]
+    },
+    {
+        "q": "How to send a specific cookie with a redirect?",
+        "type": "mcq",
+        "o": [
+            "return redirect('/home')->withCookie(cookie('name', 'value'));",
+            "return redirect('/home')->cookie(...);",
+            "Response::cookie(...)",
+            "Cookie::send(...)"
+        ]
+    },
+    {
+        "q": "What happens if a required parameter is missing in the route URL?",
+        "type": "mcq",
+        "o": [
+            "404 Not Found (Page doesn't match the route pattern)",
+            "500 Error",
+            "Controller runs with null",
+            "Default value used"
+        ]
+    },
+    {
+        "q": "How to retrieve the currently matching route object in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->route()",
+            "Route::current()",
+            "Both A and B",
+            "this->route"
+        ]
+    },
+    {
+        "q": "How to check if the route is named 'profile'?",
+        "type": "mcq",
+        "o": [
+            "$request->route()->named('profile')",
+            "route('profile')",
+            "is_route('profile')",
+            "check('profile')"
+        ]
+    },
+    {
+        "q": "Can a controller extend a Trait?",
+        "type": "mcq",
+        "o": [
+            "No, classes 'use' traits. They extend classes.",
+            "Yes",
+            "Yes, if abstract",
+            "Yes, if interface"
+        ]
+    },
+    {
+        "q": "Common Trait used in controllers for API responses?",
+        "type": "mcq",
+        "o": [
+            "Many developers create `ApiResponser` trait with methods like `success()`, `error()`.",
+            "ApiResponseTrait (Built-in)",
+            "JsonTrait",
+            "RestTrait"
+        ]
+    },
+    {
+        "q": "How to get all methods of a controller class programmatically?",
+        "type": "mcq",
+        "o": [
+            "get_class_methods(Controller::class)",
+            "Controller::methods()",
+            "Route::methods()",
+            "Reflect::methods()"
+        ]
+    },
+    {
+        "q": "Can you use `Magic Methods` like `__get` in controllers?",
+        "type": "mcq",
+        "o": [
+            "Yes, standard PHP behavior application.",
+            "No",
+            "Only `__construct`",
+            "Only `__destruct`"
+        ]
+    },
+    {
+        "q": "What is `Response::macro`?",
+        "type": "mcq",
+        "o": [
+            "Allows defining custom response methods, e.g. `return response()->caps($str)`",
+            "A keyboard macro",
+            "A huge response",
+            "A database macro"
+        ]
+    },
+    {
+        "q": "Where to define Response macros?",
+        "type": "mcq",
+        "o": [
+            "AppServiceProvider `boot` method",
+            "Controller `boot`",
+            "Route `boot`",
+            "Config file"
+        ]
+    },
+    {
+        "q": "Can you return an Eloquent Collection directly?",
+        "type": "mcq",
+        "o": [
+            "Yes, Laravel automatically converts it to JSON",
+            "No, must calls `toArray()`",
+            "No, must calls `toJson()`",
+            "No, throws error"
+        ]
+    },
+    {
+        "q": "What status code does generic JSON return use?",
+        "type": "mcq",
+        "o": [
+            "200 OK by default",
+            "201 Created",
+            "400 Bad Request",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "How to return 201 Created with JSON?",
+        "type": "mcq",
+        "o": [
+            "response()->json($data, 201)",
+            "return $data;",
+            "return 201;",
+            "response(201)"
+        ]
+    },
+    {
+        "q": "Can you define two routes with same URI but different methods pointing to same controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::get('/user', 'index')` and `Route::post('/user', 'store')`",
+            "No, duplicate route error",
+            "No, controller confusion",
+            "Only if names differ"
+        ]
+    },
+    {
+        "q": "Can a controller action return an object that implements `__toString`?",
+        "type": "mcq",
+        "o": [
+            "Yes, Laravel will echo the string result as valid response body",
+            "No, must be string primitive",
+            "No, must be Response object",
+            "No, serialization error"
+        ]
+    },
+    {
+        "q": "What is `Responsable` interface?",
+        "type": "mcq",
+        "o": [
+            "Interface that classes can implement (`toResponse($request)`) to be automatically converted to HTTP response when returned from controller",
+            "Interface for Requests",
+            "Interface for Validation",
+            "Interface for Views"
+        ]
+    },
+    {
+        "q": "Benefit of `Responsable`?",
+        "type": "mcq",
+        "o": [
+            "Clean controllers (return `new FiscalReport($data)`), encapsulated response logic",
+            "None",
+            "Speed",
+            "Security"
+        ]
+    },
+    {
+        "q": "Can you type-hint `Illuminate\\Contracts\\Auth\\Guard` in controller method?",
+        "type": "mcq",
+        "o": [
+            "Yes, resolves the default guard driver",
+            "No",
+            "Only if singleton",
+            "Only if facade"
+        ]
+    },
+    {
+        "q": "How to get the current authenticated user ID directly?",
+        "type": "mcq",
+        "o": [
+            "auth()->id()",
+            "auth()->user()->id",
+            "$request->user()->id",
+            "All of the above"
+        ]
+    },
+    {
+        "q": "If `auth()->id()` is called when guest, what is returned?",
+        "type": "mcq",
+        "o": [
+            "null",
+            "0",
+            "false",
+            "throws Error"
+        ]
+    },
+    {
+        "q": "Is `middleware` priority defined in Kernel?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$middlewarePriority` (or sort order of groups) determines order if multiple apply",
+            "No, random",
+            "No, alphabetical",
+            "No, file order"
+        ]
+    },
+    {
+        "q": "Can you specify middleware priority in Controller?",
+        "type": "mcq",
+        "o": [
+            "No, priority is global config. Controller only attaches them.",
+            "Yes",
+            "Yes via weight",
+            "Yes via index"
+        ]
+    },
+    {
+        "q": "What is `URL::previous()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the referrer URL (used by `back()`)",
+            "Returns history array",
+            "Returns last route name",
+            "Returns home"
+        ]
+    },
+    {
+        "q": "How to mock a controller in a test?",
+        "type": "mcq",
+        "o": [
+            "You generally don't mock the controller itself. You mock dependencies injected into it (Service, Repository).",
+            "Mock::controller()",
+            "Controller::shouldReceive()",
+            "Test::controller()"
+        ]
+    },
+    {
+        "q": "How to assert that a controller action was dispatched?",
+        "type": "mcq",
+        "o": [
+            "Not typical. You assert response status/content/view. Or spy on the action using heavy reflection (not recommended).",
+            "assertAction()",
+            "assertController()",
+            "assertDispatched()"
+        ]
+    },
+    {
+        "q": "Can you use standard PHP `header()` function in controller?",
+        "type": "mcq",
+        "o": [
+            "You can, but it bypasses Laravel's response object flow (middleware might not see it, testing harder). Use `response()->header()`. ",
+            "Yes, recommended",
+            "No, forbidden",
+            "No, crashes"
+        ]
+    },
+    {
+        "q": "What happens if you echo content in a controller instead of return?",
+        "type": "mcq",
+        "o": [
+            "It outputs immediately (likely before headers sent by framework), potentially breaking headers/cookies setup. Bad practice.",
+            "It is captured by buffer and appended",
+            "It is ignored",
+            "It throws error"
+        ]
+    },
+    {
+        "q": "How to stream data but still use Laravel headers?",
+        "type": "mcq",
+        "o": [
+            "`response()->stream(...)`",
+            "`echo` then `exit`",
+            "`flush()`",
+            "`ob_start()`"
+        ]
+    },
+    {
+        "q": "Can you use `Response` facade aliases?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Response::json()` is valid alias for `response()->json()`",
+            "No",
+            "Only in views",
+            "Only in tests"
+        ]
+    },
+    {
+        "q": "What does `request()->getScheme()` return?",
+        "type": "mcq",
+        "o": [
+            "'http' or 'https'",
+            "Domain",
+            "Port",
+            "Path"
+        ]
+    },
+    {
+        "q": "How to get query string as array?",
+        "type": "mcq",
+        "o": [
+            "$request->query() (without args)",
+            "$request->get()",
+            "$_GET",
+            "$request->args()"
+        ]
+    },
+    {
+        "q": "If you inject a Service that is a Singleton, is it the same instance across requests?",
+        "type": "mcq",
+        "o": [
+            "In standard PHP-FPM, memory is cleared between requests. Singleton is unique per REQUEST lifecycle. (In Octane, it persists).",
+            "Yes, always persists forever",
+            "No, created new every injection",
+            "Depends on browser"
+        ]
+    },
+    {
+        "q": "Does Laravel support Method Injection for standard class methods (non-controller)?",
+        "type": "mcq",
+        "o": [
+            "Yes, via `$app->call([$object, 'method'])` container invocation.",
+            "No, only controllers",
+            "No, only jobs",
+            "No, only events"
+        ]
+    },
+    {
+        "q": "Can you use `compact()` helper to pass vars to View?",
+        "type": "mcq",
+        "o": [
+            "Yes, `view('name', compact('data'))`. Creates associative array from variable names.",
+            "No",
+            "Deprecated",
+            "Unsafe"
+        ]
+    },
+    {
+        "q": "What is `with()` method on View?",
+        "type": "mcq",
+        "o": [
+            "Fluent way to add piece of data: `view('name')->with('key', 'val')`",
+            "Includes another view",
+            "Redirects",
+            "Validates"
+        ]
+    },
+    {
+        "q": "How to nest controllers directories in `make:controller`?",
+        "type": "mcq",
+        "o": [
+            "Just use slashes or dots: `make:controller Admin/DashController`",
+            "Use `--dir`",
+            "Use `--nest`",
+            "Use `--folder`"
+        ]
+    },
+    {
+        "q": "Can you create a controller that invokes a command?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Artisan::call('command')`",
+            "No",
+            "Only async",
+            "Only via queue"
+        ]
+    },
+    {
+        "q": "Can you rename standard CRUD methods in Resource Controller?",
+        "type": "mcq",
+        "o": [
+            "No, standard names (index, create...) are expected by `Route::resource`. You'd have to define manual routes to use different names.",
+            "Yes, via config",
+            "Yes, via translation",
+            "Yes, via annotation"
+        ]
+    },
+    {
+        "q": "What if you need a 'restore' method for soft deletes in Resource Controller?",
+        "type": "mcq",
+        "o": [
+            "Define it manually and register a separate route `post('/.../restore')` before/after resource definition.",
+            "It's included in resource",
+            "Use `update`",
+            "Use `create`"
+        ]
+    },
+    {
+        "q": "How to prevent direct access to a controller method (e.g. valid public method but not for routing)?",
+        "type": "mcq",
+        "o": [
+            "Don't register a route for it. If you use wildcard routing (not recommended) it might be exposed. Explicit routes prevent this.",
+            "Make it private",
+            "Add `_` prefix",
+            "Comment it out"
+        ]
+    },
+    {
+        "q": "Does `Route::resource` create routes for public methods that are NOT crud?",
+        "type": "mcq",
+        "o": [
+            "No, only the 7 standard actions.",
+            "Yes, all public methods",
+            "Yes, if they start with 'action'",
+            "Yes, if annotated"
+        ]
+    },
+    {
+        "q": "What does `$request->safe()` return in a FormRequest?",
+        "type": "mcq",
+        "o": [
+            "An instance of `ValidatedInput` containing only the validated data (safer than `validated()` array)",
+            "The entire request",
+            "Sanitized HTML",
+            "Encrypted data"
+        ]
+    },
+    {
+        "q": "How to get a subset of safe data from FormRequest?",
+        "type": "mcq",
+        "o": [
+            "$request->safe()->only(['name', 'email'])",
+            "$request->onlySafe(['name', 'email'])",
+            "$request->subset(['name', 'email'])",
+            "$request->validated(['name', 'email'])"
+        ]
+    },
+    {
+        "q": "Can you use `FormRequest` to merge default values if missing?",
+        "type": "mcq",
+        "o": [
+            "Yes, using `prepareForValidation` method: `$this->mergeIfMissing(['key' => 'default'])`",
+            "No, only in controller",
+            "Yes, in `rules`",
+            "Yes, in route"
+        ]
+    },
+    {
+        "q": "What is `redirect()->away('https://google.com')`?",
+        "type": "mcq",
+        "o": [
+            "Creates a redirect response to an external URL (that is not validated effectively against strict app domain rules)",
+            "Redirects to home",
+            "Redirects to previous",
+            "Throws error"
+        ]
+    },
+    {
+        "q": "What is `redirect()->secure('/path')`?",
+        "type": "mcq",
+        "o": [
+            "Redirects to the HTTPS version of the path",
+            "Encrypts the redirect",
+            " signs the redirect",
+            "Redirects to admin"
+        ]
+    },
+    {
+        "q": "How to define a 'fallback' controller for 404s?",
+        "type": "mcq",
+        "o": [
+            "Route::fallback(FallbackController::class);",
+            "Route::404(FallbackController::class);",
+            "Route::catch(FallbackController::class);",
+            "Route::miss(FallbackController::class);"
+        ]
+    },
+    {
+        "q": "Can you invoke a Controller as an 'Action' class?",
+        "type": "mcq",
+        "o": [
+            "Yes, Single Action Controllers (`__invoke`) are often called Actions pattern.",
+            "No",
+            "Only in API",
+            "Only in Console"
+        ]
+    },
+    {
+        "q": "How to authorize a resource action in Controller constructor?",
+        "type": "mcq",
+        "o": [
+            "$this->authorizeResource(Model::class, 'parameter_name');",
+            "$this->auth(Model::class);",
+            "$this->check(Model::class);",
+            "$this->policy(Model::class);"
+        ]
+    },
+    {
+        "q": "If `authorizeResource` is used, do you need `$this->authorize()` in methods like `update`?",
+        "type": "mcq",
+        "o": [
+            "No, it automatically maps `update` => `update` policy ability, `show` => `view` ability, etc.",
+            "Yes, always",
+            "Yes, for safety",
+            "Only for delete"
+        ]
+    },
+    {
+        "q": "What does `Gate::inspect('update', $post)` return?",
+        "type": "mcq",
+        "o": [
+            "A `Response` object (Illuminate\\Auth\\Access\\Response) that allows checking `allowed()` or `denied()` and getting the `message()`.",
+            "A boolean",
+            "A string",
+            "An exception"
+        ]
+    },
+    {
+        "q": "How to share data with ALL views from a Controller (Base Controller)?",
+        "type": "mcq",
+        "o": [
+            "Use `View::share('key', 'val')` in the `__construct` (or `boot` of ServiceProvider).",
+            "return view()->all('key', 'val')",
+            "$this->share('key', 'val')",
+            "Config::set('key', 'val')"
+        ]
+    },
+    {
+        "q": "What is `View::composer`?",
+        "type": "mcq",
+        "o": [
+            "A way to attach data to specific views *whenever* they are rendered (often used instead of cluttering controllers)",
+            "A music composer",
+            "A template engine",
+            "A compiler"
+        ]
+    },
+    {
+        "q": "How to put the application in maintenance mode manually via code (not artisan)?",
+        "type": "mcq",
+        "o": [
+            "Not standard. Usually `php artisan down` creates a file. You *could* throw `MaintenanceModeException` but artisan is preferred.",
+            "App::down()",
+            "Server::stop()",
+            "Route::stop()"
+        ]
+    },
+    {
+        "q": "Can you customize rate limiting per controller method?",
+        "type": "mcq",
+        "o": [
+            "Yes, apply `throttle:60,1` middleware to specific methods.",
+            "No",
+            "Only globally",
+            "Only per user"
+        ]
+    },
+    {
+        "q": "What method to override in `FormRequest` to customize failed validation response?",
+        "type": "mcq",
+        "o": [
+            "failedValidation(Validator $validator)",
+            "failed(Validator $validator)",
+            "error(Validator $validator)",
+            "response(Validator $validator)"
+        ]
+    },
+    {
+        "q": "What method to override in `FormRequest` to customize failed authorization response?",
+        "type": "mcq",
+        "o": [
+            "failedAuthorization()",
+            "denied()",
+            "forbidden()",
+            "stop()"
+        ]
+    },
+    {
+        "q": "Input casting: `boolean` rule vs `boolean` input casting?",
+        "type": "mcq",
+        "o": [
+            "`boolean` rule validates it accepts true/false/0/1/'true'. `merge(['field' => $this->boolean('field')])` casts it to PHP bool.",
+            "They are the same",
+            "Rule converts it",
+            "Casting validates it"
+        ]
+    },
+    {
+        "q": "How to check for `current_password` validation (e.g. changing password)?",
+        "type": "mcq",
+        "o": [
+            "'old_password' => 'current_password'",
+            "'old_password' => 'required|password'",
+            "'old_password' => 'match_auth'",
+            "'old_password' => 'verify'"
+        ]
+    },
+    {
+        "q": "What does `Password::defaults()` do in validation?",
+        "type": "mcq",
+        "o": [
+            "Uses the default password rule configuration (length, complexity) defined in `AppServiceProvider`.",
+            "Uses 'password' string",
+            "Uses 'secret'",
+            "Uses 'admin'"
+        ]
+    },
+    {
+        "q": "In a test, how to assert the controller redirected to a signed route?",
+        "type": "mcq",
+        "o": [
+            "$response->assertRedirectToSignedRoute('name', parameters: ...)",
+            "$response->assertSigned('name')",
+            "$response->assertRedirect('name', signed: true)",
+            "Cannot assert signed"
+        ]
+    },
+    {
+        "q": "How to assert the session has specific errors after a controller post?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasErrors(['field'])",
+            "$response->assertErrors(['field'])",
+            "$response->assertFail(['field'])",
+            "$response->assertInvalid(['field']) (Newer alias)"
+        ]
+    },
+    {
+        "q": "Difference between `assertSessionHasErrors` and `assertInvalid`?",
+        "type": "mcq",
+        "o": [
+            "`assertInvalid` is a newer, more fluent alias that also checks validation errors. They are largely similar in intent.",
+            "assertInvalid is deprecated",
+            "assertSessionHasErrors is deprecated",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What does `$this->withoutExceptionHandling()` do in a test?",
+        "type": "mcq",
+        "o": [
+            "Disables Laravel's exception handling (rendering HTML error pages), allowing the actual PHP exception to bubble up for easier debugging.",
+            "Catches all exceptions",
+            "Ignores errors",
+            "Deletes logs"
+        ]
+    },
+    {
+        "q": "Binding `scoped` resources: `Route::resource('users.posts', ...)->scoped()`?",
+        "type": "mcq",
+        "o": [
+            "Automatically scopes nested bindings (e.g. valid post must belong to user) without needing custom keys.",
+            "Scopes to current user",
+            "Scopes to session",
+            "Scopes to global"
+        ]
+    },
+    {
+        "q": "If using SoftDeletes, how to allow a route binding to find deleted models?",
+        "type": "mcq",
+        "o": [
+            "Use `withTrashed()` in route definition: `Route::get(...)->withTrashed()`",
+            "Use `force()`",
+            "Use `all()`",
+            "Use `restore()`"
+        ]
+    },
+    {
+        "q": "How to allow `missing` model behavior customization in `Route::resource`?",
+        "type": "mcq",
+        "o": [
+            "Chain `->missing(function (Request $request) { ... })`",
+            "Chain `->catch()`",
+            "Chain `->fallback()`",
+            "Chain `->error()`"
+        ]
+    },
+    {
+        "q": "Can you use Enums for route parameters (Laravel 9+)?",
+        "type": "mcq",
+        "o": [
+            "Yes, implicit Enum binding. `show(CategoryEnum $category)` matches if URI component matches enum value.",
+            "No",
+            "Only backed enums",
+            "Yes, but manual"
+        ]
+    },
+    {
+        "q": "What rule ensures a field is prohibited (must not be present)?",
+        "type": "mcq",
+        "o": [
+            "'field' => 'prohibited'",
+            "'field' => 'forbidden'",
+            "'field' => 'missing'",
+            "'field' => 'absent'"
+        ]
+    },
+    {
+        "q": "Validation: `required_if:another_field,value`",
+        "type": "mcq",
+        "o": [
+            "The field is required only if `another_field` equals `value`.",
+            "The field is required if `another_field` exists",
+            "The field is required if `another_field` is null",
+            "The field is never required"
+        ]
+    },
+    {
+        "q": "How to validate a JSON field contains specific keys?",
+        "type": "mcq",
+        "o": [
+            "Using dot notation: `'data.key' => 'required'`",
+            "Using `json_has:key`",
+            "Using `contains:key`",
+            "Using `structure:key`"
+        ]
+    },
+    {
+        "q": "What is `Date` casting in request?",
+        "type": "mcq",
+        "o": [
+            "$request->date('field') returns a Carbon instance",
+            "Returns string Y-m-d",
+            "Returns timestamp",
+            "Returns Date object"
+        ]
+    },
+    {
+        "q": "Can you retrieve a generic collection from input array?",
+        "type": "mcq",
+        "o": [
+            "$request->collect('key') returns a Collection",
+            "$request->collection('key')",
+            "collect($request->key)",
+            "new Collection($request->key)"
+        ]
+    },
+    {
+        "q": "Does `$request->collect()` return a Recursive Collection?",
+        "type": "mcq",
+        "o": [
+            "No, it creates a collection from the array. Nested arrays remain arrays unless mapped.",
+            "Yes, always recursive",
+            "No, invalid method",
+            "Yes, deep collection"
+        ]
+    },
+    {
+        "q": "How to check if request came from a specific named route (e.g. in controller logic)?",
+        "type": "mcq",
+        "o": [
+            "Ideally routes invoke different controllers. Checking referring route is unreliable (`url()->previous()`). Checking current route: `$request->routeIs('name')`.",
+            "route('name')->isCurrent()",
+            "Current::route('name')",
+            "is_route('name')"
+        ]
+    },
+    {
+        "q": "What is `Redirect::setIntendedUrl($url)`?",
+        "type": "mcq",
+        "o": [
+            "Manually setting the 'intended' URL (usually done by auth middleware).",
+            "Redirecting now",
+            "Setting home page",
+            "Setting previous page"
+        ]
+    },
+    {
+        "q": "Can you use `Responsable` objects with `Mail`?",
+        "type": "mcq",
+        "o": [
+            "Yes, Mailables are often Responsable too (can be returned from controller to preview in browser).",
+            "No",
+            "Only in Queue",
+            "Only in Local"
+        ]
+    },
+    {
+        "q": "How to return a generic error view with specific status code?",
+        "type": "mcq",
+        "o": [
+            "response()->view('errors.custom', [], 500)",
+            "return view('errors.custom', 500);",
+            "view('errors.custom')->status(500)",
+            "abort('errors.custom', 500)"
+        ]
+    },
+    {
+        "q": "Can `abort()` accept response headers?",
+        "type": "mcq",
+        "o": [
+            "Yes, `abort(403, 'Msg', ['X-Header' => 'Val'])`",
+            "No",
+            "Only in 404",
+            "Only in 500"
+        ]
+    },
+    {
+        "q": "What is the `Controller::getMiddleware()` method?",
+        "type": "mcq",
+        "o": [
+            "Returns the array of middleware registered for the controller",
+            "Gets global middleware",
+            "Gets route middleware",
+            "Gets kernel middleware"
+        ]
+    },
+    {
+        "q": "How to prevent fields from being mass-assigned when using `create()` in controller?",
+        "type": "mcq",
+        "o": [
+            "Define `$fillable` or `$guarded` in the Model. Controller just passes array.",
+            "Use `$request->safe()` (best practice) or `only()` in controller.",
+            "Both A and B (Model protection is last line of defense, Controller filtering is first)",
+            "All of the above"
+        ]
+    },
+    {
+        "q": "What creates a `MassAssignmentException`?",
+        "type": "mcq",
+        "o": [
+            "Passing a non-fillable attribute to `create/update` while Model is totally unguarded is fine. Exception happens if Model is strict and you pass guarded data, OR if using `forceCreate` incorrectly.",
+            "Wait, actually default Laravel silently discards non-fillable attributes. `MassAssignmentException` only occurs if you explicitly `Model::preventSilentlyDiscardingAttributes()`.",
+            "Always happens",
+            "Never happens"
+        ]
+    },
+    {
+        "q": "How to force download of a file existing on disk?",
+        "type": "mcq",
+        "o": [
+            "return response()->download($pathToFile);",
+            "return response()->file($pathToFile);",
+            "return download($pathToFile);",
+            "return file($pathToFile);"
+        ]
+    },
+    {
+        "q": "Difference between `download` and `file` response?",
+        "type": "mcq",
+        "o": [
+            "`download` forces browser to save (Content-Disposition: attachment). `file` displays it (inline).",
+            "No difference",
+            "File is faster",
+            "Download is safer"
+        ]
+    },
+    {
+        "q": "How to delete the file after sending it (e.g. temporary export)?",
+        "type": "mcq",
+        "o": [
+            "response()->download($path)->deleteFileAfterSend()",
+            "response()->download($path, delete: true)",
+            "File::delete($path); return ...",
+            "Cannot be done"
+        ]
+    },
+    {
+        "q": "What is `ResponseFactory`?",
+        "type": "mcq",
+        "o": [
+            "The implementation behind the `response()` helper.",
+            "A factory pattern for models",
+            "A seeding tool",
+            "A testing tool"
+        ]
+    },
+    {
+        "q": "Can you use `Redirect::route()` with parameters?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Redirect::route('profile', ['id' => 1])`",
+            "No, only name",
+            "Yes, but parameters are query string only",
+            "No, parameters auto-injected"
+        ]
+    },
+    {
+        "q": "How to redirect to external domain?",
+        "type": "mcq",
+        "o": [
+            "redirect()->away('http://...')",
+            "redirect('http://...') works too but away is explicit",
+            "redirect()->external('...')",
+            "redirect()->out('...')"
+        ]
+    },
+    {
+        "q": "How to unit test a controller method that uses `Auth` facade?",
+        "type": "mcq",
+        "o": [
+            "Mock the Auth facade (`Auth::shouldReceive...`) OR use `actingAs($user)` in feature test.",
+            "Cannot test Auth",
+            "Login manually",
+            "Send password in array"
+        ]
+    },
+    {
+        "q": "What is `actingAs($user)` in tests?",
+        "type": "mcq",
+        "o": [
+            "Authenticates the given user for the duration of the test request",
+            "Acts as strict mode",
+            "Simulates role",
+            "Simulates admin"
+        ]
+    },
+    {
+        "q": "How to assert the controller set a specific cookie?",
+        "type": "mcq",
+        "o": [
+            "$response->assertCookie('name', 'value')",
+            "$response->hasCookie('name')",
+            "$response->cookie('name')",
+            "Cookie::assert('name')"
+        ]
+    },
+    {
+        "q": "How to assert cookie is expired (deleted)?",
+        "type": "mcq",
+        "o": [
+            "$response->assertCookieExpired('name')",
+            "$response->assertCookieMissing('name')",
+            "$response->assertNoCookie('name')",
+            "Cannot assert"
+        ]
+    },
+    {
+        "q": "Can you test validation logic without hitting the controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, by manually instantiating Validator in test or testing FormRequest isolation.",
+            "No, must hit route",
+            "No, too complex",
+            "Only in dusk"
+        ]
+    },
+    {
+        "q": "What does `from($url)` do in test chaining?",
+        "type": "mcq",
+        "o": [
+            "Sets the 'referer' header to simulate coming from a specific page (useful for `back()` redirects)",
+            "Sets the form source",
+            "Sets the email from",
+            "Sets the IP"
+        ]
+    },
+    {
+        "q": "How to check if session has ANY errors in test?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasErrors()",
+            "$response->assertErrors()",
+            "$response->assertFail()",
+            "$response->assertInvalid()"
+        ]
+    },
+    {
+        "q": "How to check if session has NO errors?",
+        "type": "mcq",
+        "o": [
+            "$response->assertSessionHasNoErrors()",
+            "$response->assertValid()",
+            "$response->assertSuccess()",
+            "$response->assertOk()"
+        ]
+    },
+    {
+        "q": "What if you need request IP in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->ip()",
+            "$request->getIp()",
+            "$_SERVER['REMOTE_ADDR']",
+            "Request::ip()"
+        ]
+    },
+    {
+        "q": "What if app is behind load balancer, does `$request->ip()` work?",
+        "type": "mcq",
+        "o": [
+            "Yes, if TrustedProxies middleware is configured correctly (TrustProxies)",
+            "No, always returns balancer IP",
+            "Yes, magically",
+            "No, returns 127.0.0.1"
+        ]
+    },
+    {
+        "q": "How to get User Agent?",
+        "type": "mcq",
+        "o": [
+            "$request->userAgent()",
+            "$request->header('User-Agent')",
+            "Both A and B",
+            "$request->agent"
+        ]
+    },
+    {
+        "q": "How to merge new input into the request during the controller method?",
+        "type": "mcq",
+        "o": [
+            "$request->merge(['key' => 'val'])",
+            "$request->add(['key' => 'val'])",
+            "$request->push(['key' => 'val'])",
+            "$request->input('key', 'val')"
+        ]
+    },
+    {
+        "q": "Difference between `merge` and `replace` in request?",
+        "type": "mcq",
+        "o": [
+            "Merge adds/overwrites specific keys. Replace replaces the ENTIRE input array.",
+            "No difference",
+            "Replace is faster",
+            "Merge is deprecated"
+        ]
+    },
+    {
+        "q": "Can you use `offsetSet` on Request (ArrayAccess)?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$request['key'] = 'value'`",
+            "No",
+            "Only for reading",
+            "Only for deleting"
+        ]
+    },
+    {
+        "q": "How to flash input to session manually (e.g. not redirecting yet)?",
+        "type": "mcq",
+        "o": [
+            "$request->flash()",
+            "session()->flashInput($request->input())",
+            "Input::flash()",
+            "Request::save()"
+        ]
+    },
+    {
+        "q": "How to flash only password?",
+        "type": "mcq",
+        "o": [
+            "You generally DON'T flash passwords for security. Assuming you want to: `$request->flashP()` - wait, no built-in method specifically for password, `flashOnly` works but usually passwords are excluded.",
+            "$request->flashOnly(['password'])",
+            "Passwrod::flash()",
+            "Unsafe behavior"
+        ]
+    },
+    {
+        "q": "Default `flash` behavior regarding passwords?",
+        "type": "mcq",
+        "o": [
+            "Laravel automatically excludes `password`, `password_confirmation` from flashing.",
+            "Flashes everything",
+            "Flashes nothing",
+            "Ask user"
+        ]
+    },
+    {
+        "q": "How to get old input in Controller (from previous request)?",
+        "type": "mcq",
+        "o": [
+            "$request->old('key')",
+            "old('key')",
+            "Both A and B",
+            "Session::get('old')"
+        ]
+    },
+    {
+        "q": "Can you access uploaded files via `input()`?",
+        "type": "mcq",
+        "o": [
+            "No, use `file()` or `allFiles()`. `input` is for non-file data.",
+            "Yes, `input` includes files",
+            "Yes, if configured",
+            "Yes, via `$_FILES`"
+        ]
+    },
+    {
+        "q": "How to store an uploaded file to 'avatars' disk?",
+        "type": "mcq",
+        "o": [
+            "$request->file('avatar')->store('avatars')",
+            "Storage::put('avatars', $request->file('avatar'))",
+            "Both A and B works (Store returns path)",
+            "File::save(...)"
+        ]
+    },
+    {
+        "q": "How to store file with specific filename?",
+        "type": "mcq",
+        "o": [
+            "storeAs('path', 'filename.jpg')",
+            "store('path', 'filename.jpg')",
+            "saveAs('filename.jpg')",
+            "move('filename.jpg')"
+        ]
+    },
+    {
+        "q": "What object does `$request->file('name')` return?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Http\\UploadedFile (extends SplFileInfo)",
+            "PHP native array",
+            "String path",
+            "Resource stream"
+        ]
+    },
+    {
+        "q": "How to check if file was uploaded successfully?",
+        "type": "mcq",
+        "o": [
+            "$request->file('name')->isValid()",
+            "$request->hasFile('name')",
+            "file_exists(...)",
+            "check_file(...)"
+        ]
+    },
+    {
+        "q": "How to validate image dimensions?",
+        "type": "mcq",
+        "o": [
+            "'avatar' => 'dimensions:min_width=100,min_height=200'",
+            "'avatar' => 'size:100x200'",
+            "'avatar' => 'width:100'",
+            "'avatar' => 'image_size:100'"
+        ]
+    },
+    {
+        "q": "How to validate file MIME types?",
+        "type": "mcq",
+        "o": [
+            "'file' => 'mimes:jpg,bmp,png'",
+            "'file' => 'type:jpg'",
+            "'file' => 'ext:jpg'",
+            "'file' => 'format:jpg'"
+        ]
+    },
+    {
+        "q": "Does `mimes` validation check extension or content?",
+        "type": "mcq",
+        "o": [
+            "It checks the MIME type of the file contents (magic bytes), not just the extension.",
+            "Only extension",
+            "Only filename",
+            "Only size"
+        ]
+    },
+    {
+        "q": "Can you dispatch a Job from controller using `dispatch()` helper?",
+        "type": "mcq",
+        "o": [
+            "Yes, `dispatch(new Job)`",
+            "No, must use `Job::dispatch()`",
+            "No, must use `Bus::dispatch()`",
+            "All work"
+        ]
+    },
+    {
+        "q": "How to return a response with specific view AND headers?",
+        "type": "mcq",
+        "o": [
+            "response()->view('hello', $data, 200)->header('Content-Type', 'text/xml')",
+            "return view('hello')->header(...); (View object doesn't have header method unless wrapped in Response)",
+            "response()->header(...)->view(...)",
+            "View::make(...)->withHeaders(...)"
+        ]
+    },
+    {
+        "q": "What is `response()->join` (not real)?",
+        "type": "mcq",
+        "o": [
+            "Fake method",
+            "Joins strings",
+            "Joins files",
+            "Joins tables"
+        ]
+    },
+    {
+        "q": "What is `Response::jsonp($callback, $data)`?",
+        "type": "mcq",
+        "o": [
+            "Returns JSONP response (JSON with padding for cross-domain)",
+            "Returns JSON Pretty",
+            "Returns JSON Private",
+            "Returns JSON Protected"
+        ]
+    },
+    {
+        "q": "How to dump variables in controller and die (debug)?",
+        "type": "mcq",
+        "o": [
+            "dd($var)",
+            "dump($var); die;",
+            "Both A and B",
+            "print_r($var); exit;"
+        ]
+    },
+    {
+        "q": "How to dump variables without dying?",
+        "type": "mcq",
+        "o": [
+            "dump($var)",
+            "d($var) (simpler alias often available)",
+            "log($var)",
+            "echo $var"
+        ]
+    },
+    {
+        "q": "How to access session in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->session()->get('key') or session('key')",
+            "$_SESSION['key']",
+            "Session::read('key')",
+            "Cookie::get('key')"
+        ]
+    },
+    {
+        "q": "How to regenerate ID of session (security)?",
+        "type": "mcq",
+        "o": [
+            "$request->session()->regenerate()",
+            "session_regenerate_id()",
+            "Session::newId()",
+            "Auth::refresh()"
+        ]
+    },
+    {
+        "q": "When is session ID regenerated automatically?",
+        "type": "mcq",
+        "o": [
+            "On login (via default LoginController trait)",
+            "On every request",
+            "On logout",
+            "Never"
+        ]
+    },
+    {
+        "q": "How to detect if request is AJAX (XHR)?",
+        "type": "mcq",
+        "o": [
+            "$request->ajax()",
+            "$request->isXmlHttpRequest()",
+            "Both A and B",
+            "$request->isAsync()"
+        ]
+    },
+    {
+        "q": "What does `abort(204)` return?",
+        "type": "mcq",
+        "o": [
+            "Empty response with 204 status",
+            "Error page",
+            "Exception",
+            "Redirect"
+        ]
+    },
+    {
+        "q": "Can you declare a controller class `final`?",
+        "type": "mcq",
+        "o": [
+            "Yes, it prevents inheritance but works fine as a controller.",
+            "No, Laravel needs to extend it",
+            "No, Proxies need to extend it",
+            "No, Testing needs to extend it"
+        ]
+    },
+    {
+        "q": "What is `AuthorizesRequests` trait?",
+        "type": "mcq",
+        "o": [
+            "Provides `authorize` method to Controller. Included in standard BaseController.",
+            "Provides login",
+            "Provides HTTP requests",
+            "Provides routing"
+        ]
+    },
+    {
+        "q": "If you don't extend BaseController, can you use `authorize`?",
+        "type": "mcq",
+        "o": [
+            "Only if you `use AuthorizesRequests` trait in your class, or use `Gate::authorize` facade directly.",
+            "No",
+            "Yes, magical global",
+            "Yes, via Request"
+        ]
+    },
+    {
+        "q": "Can you type hint a model in a Controller constructor?",
+        "type": "mcq",
+        "o": [
+            "Yes, but it won't be Route Model Bound (no route parameters in constructor). It will be a fresh instance.",
+            "Yes, it works as binding",
+            "No, throws error",
+            "No, impossible"
+        ]
+    },
+    {
+        "q": "How to define middleware closure in Controller `__construct`?",
+        "type": "mcq",
+        "o": [
+            "$this->middleware(function ($request, $next) { ... return $next($request); });",
+            "Cannot be done",
+            "using `Middleware` facade",
+            "using `Route` facade"
+        ]
+    },
+    {
+        "q": "Can you type-hint a nested resource parent in method? `update(User $user, Post $post)`",
+        "type": "mcq",
+        "o": [
+            "Yes, if route is nested `/users/{user}/posts/{post}`. Both are resolved.",
+            "No, only first one",
+            "No, only last one",
+            "Yes, but manual lookup needed"
+        ]
+    },
+    {
+        "q": "What is `Contextual Binding` in controllers usage?",
+        "type": "mcq",
+        "o": [
+            "Defining that when `ControllerA` needs `Service`, give `ImplementationA`, but when `ControllerB` needs `Service`, give `ImplementationB`.",
+            "Binding data to views",
+            "Binding routes to middleware",
+            "Binding sessions"
+        ]
+    },
+    {
+        "q": "How to create a `Singleton` Resource Controller (Laravel 9+)?",
+        "type": "mcq",
+        "o": [
+            "Route::singleton('profile', ProfileController::class);",
+            "Route::resource('profile', ProfileController::class)->singleton();",
+            "Route::one('profile', ProfileController::class);",
+            "Route::unit('profile', ProfileController::class);"
+        ]
+    },
+    {
+        "q": "What is unique about a `Singleton` Resource Controller?",
+        "type": "mcq",
+        "o": [
+            "It manages a resource that can only have ONE instance (e.g. user's own profile). Routes don't have IDs (e.g. `/profile/edit`, not `/profile/{id}/edit`).",
+            "It only allows one request at a time",
+            "It runs once",
+            "It has no methods"
+        ]
+    },
+    {
+        "q": "What is `creatable()` method on a singleton resource?",
+        "type": "mcq",
+        "o": [
+            "Adds `create` and `store` routes to the singleton resource (which are usually omitted by default for singletons like 'profile').",
+            "Creates the controller file",
+            "Creates the model",
+            "Creates the database"
+        ]
+    },
+    {
+        "q": "What is `destroyable()` on singleton resource?",
+        "type": "mcq",
+        "o": [
+            "Adds `destroy` route to the singleton resource.",
+            "Destroys it",
+            "Deletes file",
+            "Removes route"
+        ]
+    },
+    {
+        "q": "Deep Dive: How does Laravel instantiate a Controller?",
+        "type": "mcq",
+        "o": [
+            "The `ControllerDispatcher` resolves it from the Service Container (handling constructor injection), then calls the method via `callAction` (handling method injection).",
+            "Using `new Controller()`",
+            "Using eval",
+            "Using static methods"
+        ]
+    },
+    {
+        "q": "If you define `__call` in a controller, when is it triggered?",
+        "type": "mcq",
+        "o": [
+            "When the router tries to call a method that doesn't exist. This allows dynamic routing logic if router points to missing method.",
+            "Always",
+            "Never",
+            "On 404"
+        ]
+    },
+    {
+        "q": "How to return a stream response that generates a CSV on the fly?",
+        "type": "mcq",
+        "o": [
+            "response()->stream(function() { ...fputcsv... }, 200, ['Content-Type' => 'text/csv'])",
+            "response()->csv(...)",
+            "return csv(...)",
+            "return stream(...)"
+        ]
+    },
+    {
+        "q": "Can you define middleware in Controller `__construct` that uses the `web` group?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$this->middleware('web')`. However, `web` is usually applied at RouteServiceProvider level to all routes in `web.php`.",
+            "No, only single middleware",
+            "No, error",
+            "Yes, but it duplicates logic"
+        ]
+    },
+    {
+        "q": "What is `TerminableMiddleware`?",
+        "type": "mcq",
+        "o": [
+            "Middleware with a `terminate($request, $response)` method stuck to the end of lifecycle (after response sent to browser).",
+            "Middleware that stops requests",
+            "Middleware that deletes app",
+            "Middleware for CLI"
+        ]
+    },
+    {
+        "q": "Do Controller Middleware aliases (strings) need to be registered in Kernel?",
+        "type": "mcq",
+        "o": [
+            "Yes, in `$middlewareAliases` (or `$routeMiddleware` in older versions).",
+            "No, they are auto-discovered",
+            "No, they are file paths",
+            "Only for global"
+        ]
+    },
+    {
+        "q": "How to customize the `parameters` names in `Route::resource`?",
+        "type": "mcq",
+        "o": [
+            "Route::resource('users', UserController::class)->parameters(['users' => 'admin_user']); (changes `{user}` to `{admin_user}`)",
+            "->names()",
+            "->keys()",
+            "->vars()"
+        ]
+    },
+    {
+        "q": "Why customize resource parameter names?",
+        "type": "mcq",
+        "o": [
+            "To match Route Model Binding expectations if the binding key differs from singularized resource name, or for clarity in `route:list`.",
+            "For performance",
+            "For SEO",
+            "For security"
+        ]
+    },
+    {
+        "q": "Using `InputBag` directly: `$request->query` is instance of?",
+        "type": "mcq",
+        "o": [
+            "Symfony\\Component\\HttpFoundation\\InputBag (or ParameterBag)",
+            "Array",
+            "Collection",
+            "String"
+        ]
+    },
+    {
+        "q": "Does `$request->all()` include cookies?",
+        "type": "mcq",
+        "o": [
+            "No, only query, POST data, and files (depending on config). Cookies are separate bag.",
+            "Yes",
+            "Yes if encrypted",
+            "Yes if signed"
+        ]
+    },
+    {
+        "q": "What is `$request->json()` method useful for?",
+        "type": "mcq",
+        "o": [
+            "Retrieving data from JSON body content (ParameterBag). `$request->input()` covers this automatically, but `json()` is explicit.",
+            "Responding JSON",
+            "Formatting JSON",
+            "Validating JSON"
+        ]
+    },
+    {
+        "q": "If you return `true` from a controller action, what is the HTTP response?",
+        "type": "mcq",
+        "o": [
+            "Response with body '1' and status 200.",
+            "Empty 200 OK",
+            "500 Error",
+            "JSON true"
+        ]
+    },
+    {
+        "q": "How to redirect with a fragment identifier (#section)?",
+        "type": "mcq",
+        "o": [
+            "redirect()->to('/url')->withFragment('section')",
+            "redirect('/url#section')",
+            "Both A and B work",
+            "redirect('/url')->fragment('section')"
+        ]
+    },
+    {
+        "q": "How to perform cursor pagination in controller?",
+        "type": "mcq",
+        "o": [
+            "Model::cursorPaginate(10)",
+            "Model::paginate(10, 'cursor')",
+            "Model::simplePaginate(10)",
+            "Model::stream(10)"
+        ]
+    },
+    {
+        "q": "Benefit of `cursorPaginate` vs `paginate`?",
+        "type": "mcq",
+        "o": [
+            "Performance on large datasets (avoids `COUNT(*)` query and `OFFSET`). Uses 'next' pointer.",
+            "Allows infinite scroll",
+            "Better UI",
+            "Sorting options"
+        ]
+    },
+    {
+        "q": "Limitation of `cursorPaginate`?",
+        "type": "mcq",
+        "o": [
+            "Cannot jump to specific page number (no total pages info). Only Next/Prev.",
+            "Slow",
+            "No output",
+            "Complex syntax"
+        ]
+    },
+    {
+        "q": "Returning `LazyCollection` from controller?",
+        "type": "mcq",
+        "o": [
+            "Laravel can stream it as JSON automatically (memory efficient).",
+            "Must be converted to array",
+            "Throws error",
+            "Must be cached"
+        ]
+    },
+    {
+        "q": "How to protect against `Reflected XSS` via HTTP headers?",
+        "type": "mcq",
+        "o": [
+            "Use middleware to set `X-XSS-Protection`, `Content-Security-Policy` headers.",
+            "Controller automatically does it",
+            "Use `e()` on headers",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "What does `SubstituteBindings` middleware do?",
+        "type": "mcq",
+        "o": [
+            "It performs the logic of replacing route parameters with Model instances (Route Model Binding). Essential for `web` and `api` groups.",
+            "Substitutes config",
+            "Substitutes env vars",
+            "Substitutes views"
+        ]
+    },
+    {
+        "q": "What happens if you remove `SubstituteBindings` from middleware group?",
+        "type": "mcq",
+        "o": [
+            "Controllers receive raw ID strings instead of Models.",
+            "Routes fail",
+            "Controllers fail",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Can you use `can:` middleware syntax for authorization?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::middleware('can:update,post')`.",
+            "No",
+            "Only in blade",
+            "Only in events"
+        ]
+    },
+    {
+        "q": "What does `can:create,App\\Models\\Post` do?",
+        "type": "mcq",
+        "o": [
+            "Authorizes 'create' action for the Post class (checks Policy 'create'). helper for resource authorization without instance.",
+            "Creates post",
+            "Checks if post exists",
+            "Checks login"
+        ]
+    },
+    {
+        "q": "If using `can:` middleware, do you need `authorize` in controller?",
+        "type": "mcq",
+        "o": [
+            "No, the middleware handles the check before controller is reached.",
+            "Yes, double check",
+            "Yes, for logging",
+            "Yes, for messages"
+        ]
+    },
+    {
+        "q": "What allows `request()->user()` to work?",
+        "type": "mcq",
+        "o": [
+            "The `Authenticate` middleware (or guard logic) resolves the user and sets it on the request object via `setUserResolver`.",
+            "Magic",
+            "Session auto-load",
+            "Database trigger"
+        ]
+    },
+    {
+        "q": "How to get the 'guard' used for current authentication?",
+        "type": "mcq",
+        "o": [
+            "Does not explicitly store 'guard' name easily on user. Access via `auth()->guard('name')->check()` or inspect detailed Auth manager.",
+            "auth()->currentGuard()",
+            "$user->guard",
+            "Session::guard()"
+        ]
+    },
+    {
+        "q": "What is `Response::view(...)->setStatusCode(404)`?",
+        "type": "mcq",
+        "o": [
+            "Valid way to return a view with non-200 status.",
+            "Invalid",
+            "Deprecated",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Can you return a generator function from controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, if wrapped in `response()->stream()` or `streamJson()`.",
+            "No",
+            "Yes, returns array",
+            "Yes, returns null"
+        ]
+    },
+    {
+        "q": "What is `response()->json($data)->withCallback($callback)`?",
+        "type": "mcq",
+        "o": [
+            "Sets the JSONP callback function name.",
+            "Runs callback on server",
+            "Runs callback on database",
+            "Adds callback field"
+        ]
+    },
+    {
+        "q": "How to validate that a field contains one of values in an Enum?",
+        "type": "mcq",
+        "o": [
+            "new Enum(UserType::class)",
+            "enum:UserType",
+            "in_enum:UserType",
+            "validate_enum:UserType"
+        ]
+    },
+    {
+        "q": "Does `Rule::in` acccept a Collection?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Rule::in($collection)`.",
+            "No, only array",
+            "No, only string",
+            "No, only logic"
+        ]
+    },
+    {
+        "q": "How to test if a controller triggers a specific Event?",
+        "type": "mcq",
+        "o": [
+            "Event::fake(); ... logic ...; Event::assertDispatched(EventName::class);",
+            "expect(Event::class)",
+            "assertEvent()",
+            "Cannot test events"
+        ]
+    },
+    {
+        "q": "What if you want to fake only specific events?",
+        "type": "mcq",
+        "o": [
+            "Event::fake([EventA::class, EventB::class])",
+            "Event::only([...])",
+            "Event::mock([...])",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "How to resolve a dependency that needs the current Request in its constructor?",
+        "type": "mcq",
+        "o": [
+            "Laravel container automatically injects current Request when type-hinted in services resolvable by container.",
+            "Manually pass it",
+            "Use global only",
+            "Use middleware only"
+        ]
+    },
+    {
+        "q": "What is the `ConvertEmptyStringsToNull` middleware?",
+        "type": "mcq",
+        "o": [
+            "Converts empty string inputs `''` to `null`. Helps with database constraints (nullable columns).",
+            "Deletes empty strings",
+            "Trims strings",
+            "Encrypts strings"
+        ]
+    },
+    {
+        "q": "Can you disable `ConvertEmptyStringsToNull` for a specific field?",
+        "type": "mcq",
+        "o": [
+            "Similar to TrimStrings, need to override `skipWhen` or `$except` in the middleware definition. Not easily per-controller.",
+            "Yes, use `keep_empty` rule",
+            "Yes, use `raw`",
+            "Yes, use `string`"
+        ]
+    },
+    {
+        "q": "What happens if you type-hint `mixed` in controller method (PHP 8)?",
+        "type": "mcq",
+        "o": [
+            "Laravel won't inject anything (cannot resolve 'mixed'). It assumes it's a route parameter.",
+            "Injects container",
+            "Injects null",
+            "Errors"
+        ]
+    },
+    {
+        "q": "How to use `Union Types` in controller injection `User|Admin $user`?",
+        "type": "mcq",
+        "o": [
+            "Container support for union types is limited/complex. Usually assumes first resolvable type or fails. Better to use Interface.",
+            "Works perfectly",
+            "Laravel tries both",
+            "Injects both"
+        ]
+    },
+    {
+        "q": "What is `withoutMiddleware` method in Test?",
+        "type": "mcq",
+        "o": [
+            "Disables all middleware for the test request. Useful for testing controller logic in isolation from auth/validation middleware.",
+            "Disables only auth",
+            "Disables only CSRF",
+            "Disables routing"
+        ]
+    },
+    {
+        "q": "Can you disable specific middleware in Test?",
+        "type": "mcq",
+        "o": [
+            "$this->withoutMiddleware([MiddlewareClass::class])",
+            "$this->skipMiddleware(...)",
+            "$this->noMiddleware(...)",
+            "$this->removeMiddleware(...)"
+        ]
+    },
+    {
+        "q": "How to render a Blade component directly from controller?",
+        "type": "mcq",
+        "o": [
+            "return new ComponentClass($data); (if component is renderable via toResponse)",
+            "return component('name')",
+            "return blade('name')",
+            "return x_tag('name')"
+        ]
+    },
+    {
+        "q": "Service Providers vs Controllers?",
+        "type": "mcq",
+        "o": [
+            "Service Providers bootstrap application (register bindings). Controllers handle requests. Controllers use services registered by providers.",
+            "Same thing",
+            "Controllers register services",
+            "Providers handle requests"
+        ]
+    },
+    {
+        "q": "What is the `invoke` method on a Rule object?",
+        "type": "mcq",
+        "o": [
+            "The method called to validate. `__invoke($attribute, $value, $fail)` in function-based/invokable rules.",
+            "passes()",
+            "check()",
+            "validate()"
+        ]
+    },
+    {
+        "q": "Invokable rules vs `Rule` interface (passes/message)?",
+        "type": "mcq",
+        "o": [
+            "Laravel moving towards single `__invoke` method rules (simplified) calling `$fail('msg')`. Old interface separated `passes` and `message`.",
+            "Invokable is slower",
+            "Interface is deprecated",
+            "No difference"
+        ]
+    },
+    {
+        "q": "How to get all upload files as array?",
+        "type": "mcq",
+        "o": [
+            "$request->allFiles()",
+            "$request->files()",
+            "$request->uploads()",
+            "$request->getFiles()"
+        ]
+    },
+    {
+        "q": "Can `Route::resource` generate API routes only?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::apiResource(...)` is syntactic sugar for `resource()->only([...])` excluding create/edit, or `resource(...)->except(['create', 'edit'])`.",
+            "No",
+            "Yes, via config",
+            "Yes, via flag"
+        ]
+    },
+    {
+        "q": "Is `apiResource` equivalent to `resource` with `except(['create', 'edit'])`?",
+        "type": "mcq",
+        "o": [
+            "Yes, exactly.",
+            "No, it adds more routes",
+            "No, it changes method names",
+            "No, it changes middleware"
+        ]
+    },
+    {
+        "q": "Does `apiResource` automatically use `api` middleware group?",
+        "type": "mcq",
+        "o": [
+            "No, middleware group depends on where the route is defined (e.g. `api.php` vs `web.php`). `apiResource` just limits the generated route methods.",
+            "Yes, always",
+            "Yes, if in web.php",
+            "No, uses web group"
+        ]
+    },
+    {
+        "q": "How to handle a situation where controller needs long processing time?",
+        "type": "mcq",
+        "o": [
+            "Dispatch a Job to Queue and return 'Accepted' (202) immediately. UI polls for status or uses Broadcasting.",
+            "set_time_limit(0) in controller",
+            "use sleep()",
+            "use async()"
+        ]
+    },
+    {
+        "q": "Difference between `Queue` and `Task Scheduling`?",
+        "type": "mcq",
+        "o": [
+            "Queue handles background jobs triggered by app events. Task Scheduling runs commands at fixed time intervals (Cron). Controller typically interacts with Queues.",
+            "Same thing",
+            "Scheduling is faster",
+            "Queue is for time"
+        ]
+    },
+    {
+        "q": "Can you programmatically call a console command from controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Artisan::call('command', params)`.",
+            "No",
+            "Only via shell_exec",
+            "Only via exec"
+        ]
+    },
+    {
+        "q": "Does `Artisan::call` run in the same process?",
+        "type": "mcq",
+        "o": [
+            "Yes, it runs synchronously. Be careful with long commands blocking the request.",
+            "No, async",
+            "No, background",
+            "Depends on driver"
+        ]
+    },
+    {
+        "q": "How to use `db` transaction within controller method?",
+        "type": "mcq",
+        "o": [
+            "DB::transaction(function() { ... });",
+            "controller->transaction(...)",
+            "Transaction::run(...)",
+            "Model::transaction(...)"
+        ]
+    },
+    {
+        "q": "Why use `DB::transaction` in controller?",
+        "type": "mcq",
+        "o": [
+            "To ensure atomicity of multiple database operations (e.g. creating User AND Profile). Rollback if any fails.",
+            "Speed",
+            "Logging",
+            "Caching"
+        ]
+    },
+    {
+        "q": "What is `Route::domain()` group?",
+        "type": "mcq",
+        "o": [
+            "Limits routes/controllers to a specific subdomain/domain. `Route::domain('{account}.app.com')->group(...)`.",
+            "Sets DNS",
+            "Sets HTTPS",
+            "Sets email"
+        ]
+    },
+    {
+        "q": "How to access domain parameters (`{account}`) in controller?",
+        "type": "mcq",
+        "o": [
+            "They are passed as arguments to the method, just like URI parameters.",
+            "Via `server()`",
+            "Via `config()`",
+            "Via `env()`"
+        ]
+    },
+    {
+        "q": "If route has domain param `{account}` AND uri param `{id}`, order in method?",
+        "type": "mcq",
+        "o": [
+            "Domain parameters come first, then URI parameters. `show($account, $id)`.",
+            "URI first",
+            "Random",
+            "Alphabetic"
+        ]
+    },
+    {
+        "q": "How to retrieve header 'Authorization'?",
+        "type": "mcq",
+        "o": [
+            "$request->bearerToken() (helper for Bearer schema) or $request->header('Authorization')",
+            "$request->auth()",
+            "$request->token()",
+            "Auth::header()"
+        ]
+    },
+    {
+        "q": "Can you use `Response::download` with S3 file?",
+        "type": "mcq",
+        "o": [
+            "Not directly with path string. Use `Storage::disk('s3')->download('path')` or stream it.",
+            "Yes, just verify path",
+            "No, S3 not supported",
+            "Only local files"
+        ]
+    },
+    {
+        "q": "How to add a 'Server-Timing' header to response?",
+        "type": "mcq",
+        "o": [
+            "response(...)->header('Server-Timing', 'db;dur=53')",
+            "header('Server-Timing...)",
+            "Timing::set(...)",
+            "Debugbar::time(...)"
+        ]
+    },
+    {
+        "q": "What does `$request->expectsJson()` check?",
+        "type": "mcq",
+        "o": [
+            "Alias for checks like `wantsJson()`. Often used to decide whether to render error view vs error JSON.",
+            "Checks body",
+            "Checks method",
+            "Checks route"
+        ]
+    },
+    {
+        "q": "Legacy: What was `Input::get()`?",
+        "type": "mcq",
+        "o": [
+            "Old facade for `Request::input()`. Removed/Deprecated in generic use, Request instance preferred.",
+            "Standard way",
+            "New way",
+            "Only for console"
+        ]
+    },
+    {
+        "q": "How to force SSL for a route invoking a controller?",
+        "type": "mcq",
+        "o": [
+            "Use `scheme` restriction or middleware `ForceHttps`. Often handled at load balancer level now.",
+            "Route::ssl()",
+            "Controller::ssl()",
+            "https => true"
+        ]
+    },
+    {
+        "q": "Can a controller function accept variable arguments `...$args`?",
+        "type": "mcq",
+        "o": [
+            "Yes, PHP variadic support works if route parameters map correctly.",
+            "No",
+            "Only for strings",
+            "Only for ints"
+        ]
+    },
+    {
+        "q": "What happens if you define a destructor `__destruct` in Controller?",
+        "type": "mcq",
+        "o": [
+            "It runs when the controller object is destroyed (end of lifecycle). Valid PHP.",
+            "It runs before response",
+            "It runs on error",
+            "It crashes Laravel"
+        ]
+    },
+    {
+        "q": "Is the controller instance destroyed immediately after method return?",
+        "type": "mcq",
+        "o": [
+            "Usually yes, after response is sent and Kernel terminates, PHP tears down script/objects.",
+            "No, kept in memory",
+            "No, reused",
+            "Depends on session"
+        ]
+    },
+    {
+        "q": "Can you use `throw_if` in controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, `throw_if($condition, Exception::class)` helper.",
+            "No",
+            "Only in tests",
+            "Only in model"
+        ]
+    },
+    {
+        "q": "Why rely on `abort` instead of `throw new HttpException`?",
+        "type": "mcq",
+        "o": [
+            "Syntactic sugar. `abort` throws the exception for you. Consistency.",
+            "Abort is faster",
+            "Throw is unsafe",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is `Response::deny()`?",
+        "type": "mcq",
+        "o": [
+            "Used within Gate/Policy methods to return a denial response (with message/code). Not typically returned directly from controller action.",
+            "Controller deny",
+            "Router deny",
+            "Model deny"
+        ]
+    },
+    {
+        "q": "Final verification: Do controllers support `Attributes` (PHP 8)?",
+        "type": "mcq",
+        "o": [
+            "Yes, ecosystem is moving that way (e.g. Spatie Route Attributes). Core Laravel uses them for some features (Scoped bindings etc).",
+            "No",
+            "Only comments",
+            "Only yaml"
+        ]
+    },
+    {
+        "q": "How to group controllers by functionality?",
+        "type": "mcq",
+        "o": [
+            "Namespacing/Subfolders (Admin, API, etc.) or Domain Driven Design (Modules).",
+            "One giant file",
+            "Prefixing names",
+            "Suffixing names"
+        ]
+    },
+    {
+        "q": "What is the primary design goal of a Controller?",
+        "type": "mcq",
+        "o": [
+            "To receive a request, invoke necessary business logic (Service/Model), and return a response. Glue code.",
+            "To contain all application logic",
+            "To design the UI",
+            "To manage database connection"
+        ]
+    },
+    {
+        "q": "Does Laravel compile Controllers?",
+        "type": "mcq",
+        "o": [
+            "Not strictly 'compile', but Opcache caches bytecode. Route caching serializes route-controller mapping for speed.",
+            "Yes, to machine code",
+            "Yes, to binary",
+            "No, interpreted every line every time (unless Opcache)"
+        ]
+    },
+    {
+        "q": "What if you change controller code while `php artisan serve` is running?",
+        "type": "mcq",
+        "o": [
+            "Changes are reflected immediately (development detail).",
+            "Must restart server",
+            "Must recompile",
+            "Must clear cache"
+        ]
+    },
+    {
+        "q": "Does `route:cache` prevent seeing controller changes?",
+        "type": "mcq",
+        "o": [
+            "No, route cache stores the MAPPING to the controller class/method. It doesn't cache the controller code itself. However, new routes/methods won't appear until cache clear.",
+            "Yes, locks code",
+            "Yes, ignores changes",
+            "No, irrelevant"
+        ]
+    },
+    {
+        "q": "Controller 'best practice': Form Validations?",
+        "type": "mcq",
+        "o": [
+            "Extract to FormRequest for complex logic. Keep controller methods clean.",
+            "Keep in controller always",
+            "Put in model",
+            "Put in view"
+        ]
+    },
+    {
+        "q": "Controller 'best practice': Database Queries?",
+        "type": "mcq",
+        "o": [
+            "Use Eloquent/Repositories/Services. Avoid raw SQL or complex query building inside controller methods if possible.",
+            "Raw SQL in controller",
+            "Queries in view",
+            "Queries in route"
+        ]
+    },
+    {
+        "q": "Can you use `Constructor Property Promotion` in Controllers (PHP 8)?",
+        "type": "mcq",
+        "o": [
+            "Yes, `public function __construct(protected UserService $service) {}` works perfectly with Laravel DI.",
+            "No",
+            "Only for public properties",
+            "Only for private"
+        ]
+    },
+    {
+        "q": "How to broadcast an event from a controller that should only go to others?",
+        "type": "mcq",
+        "o": [
+            "broadcast(new Event($data))->toOthers(); (Exclude current user's socket ID)",
+            "broadcast(new Event($data))->others();",
+            "Event::dispatch($data)->others();",
+            "Broadcasting::others($data);"
+        ]
+    },
+    {
+        "q": "Where does `toOthers` get the socket ID from?",
+        "type": "mcq",
+        "o": [
+            "From the `X-Socket-ID` header sent by the client (e.g. Echo).",
+            "From session",
+            "From cookie",
+            "From database"
+        ]
+    },
+    {
+        "q": "How to send a Notification from controller to logged-in user?",
+        "type": "mcq",
+        "o": [
+            "$user->notify(new InvoicePaid($invoice));",
+            "Notification::send($user, new InvoicePaid($invoice));",
+            "Both A and B",
+            "Notify::user($user, ...)"
+        ]
+    },
+    {
+        "q": "How to send notification to anonymous notifiable (e.g. just an email address)?",
+        "type": "mcq",
+        "o": [
+            "Notification::route('mail', 'taylor@example.com')->notify(new InvoicePaid($invoice));",
+            "Notification::anonymous()->email('...')->send(...)",
+            "User::guest('...')->notify(...)",
+            "Cannot notify anonymous"
+        ]
+    },
+    {
+        "q": "Session Blocking: How to prevent concurrent requests in a controller handling critical data?",
+        "type": "mcq",
+        "o": [
+            "Use `block` method on route definition: `Route::post(...)->block($seconds, $wait)`.",
+            "Use `Lock::get()` inside controller",
+            "Use `flock()`",
+            "Use `set_time_limit`"
+        ]
+    },
+    {
+        "q": "What mechanism does Laravel Session Blocking use?",
+        "type": "mcq",
+        "o": [
+            "Atomic locks (Cache driver) based on Session ID. Requires cache driver that supports atomic locks (redis, memcached, database, etc).",
+            "File locks only",
+            "Database transactions",
+            "PHP native session lock"
+        ]
+    },
+    {
+        "q": "What happens if a blocked request waits longer than the timeout?",
+        "type": "mcq",
+        "o": [
+            "Throws `LockTimeoutException` (429 Too Many Requests usually, or 500 depending on handler).",
+            "It proceeds anyway",
+            "It retries forever",
+            "It crashes PHP"
+        ]
+    },
+    {
+        "q": "How to create a `Mock` object for a service in a controller test?",
+        "type": "mcq",
+        "o": [
+            "$this->mock(Service::class, function (MockInterface $mock) { ... });",
+            "$this->createMock(Service::class)",
+            "Mock::create(Service::class)",
+            "new Mock(Service::class)"
+        ]
+    },
+    {
+        "q": "Difference between `mock` and `partialMock`?",
+        "type": "mcq",
+        "o": [
+            "`mock` mocks the entire class (all methods return null/default unless defined). `partialMock` keeps original methods unless overridden.",
+            "No difference",
+            "Partial is faster",
+            "Mock is strict"
+        ]
+    },
+    {
+        "q": "How to assert a JsonResource response has specific meta data?",
+        "type": "mcq",
+        "o": [
+            "$response->assertJsonPath('meta.key', 'value')",
+            "$response->assertMeta('key', 'value')",
+            "$response->assertResourceMeta('key', 'value')",
+            "Cannot text meta"
+        ]
+    },
+    {
+        "q": "How to add meta data to *every* JsonResource response?",
+        "type": "mcq",
+        "o": [
+            "Override `with` method in Resource class.",
+            "Use middleware",
+            "Use config",
+            "Use helper"
+        ]
+    },
+    {
+        "q": "Single Action Controllers (`__invoke`): Can they have other public methods?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but they won't be routed automatically unless you define separate routes pointing to `Controller@method`. The main route points to invoke.",
+            "No, PHP error",
+            "No, Laravel error",
+            "Yes, auto routed"
+        ]
+    },
+    {
+        "q": "Middleware `terminate` method: Does it have access to the final response?",
+        "type": "mcq",
+        "o": [
+            "Yes, `terminate($request, $response)`. Useful for logging the response status or size.",
+            "No, only request",
+            "No, only session",
+            "No, it runs before response"
+        ]
+    },
+    {
+        "q": "Resource Controller: `PUT` vs `PATCH` default handling?",
+        "type": "mcq",
+        "o": [
+            "Laravel routes `PUT` and `PATCH` to the SAME `update` method in the resource controller.",
+            "PUT goes to `replace`, PATCH to `update`",
+            "PUT goes to `createOrUpdate`",
+            "They are separate methods"
+        ]
+    },
+    {
+        "q": "How to differentiate PUT vs PATCH inside `update` method?",
+        "type": "mcq",
+        "o": [
+            "Check `$request->method()` (returns PUT or PATCH).",
+            "Not possible",
+            "Check usage of `replace` params",
+            "Check headers"
+        ]
+    },
+    {
+        "q": "Customizing Route Model Binding resolution logic globally?",
+        "type": "mcq",
+        "o": [
+            "Route::bind('user', function ($value) { return User::where('uuid', $value)->firstOrFail(); }); in `boot`.",
+            "Route::resolve('user', ...)",
+            "Model::bind('user', ...)",
+            "Controller::bind('user', ...)"
+        ]
+    },
+    {
+        "q": "What if you need to bind a model based on TWO parameters (e.g. /posts/{post}/comments/{comment})?",
+        "type": "mcq",
+        "o": [
+            "Use Scoped Bindings (automatic) OR custom binding logic is tricky. Usually controller handles the relationship check: `$post->comments()->findOrFail($commentId)`.",
+            "Route::bindTwo(...)",
+            "Impossible",
+            "Use DoubleModel"
+        ]
+    },
+    {
+        "q": "Handling Binary File Uploads (raw body) in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->getContent() gets raw body. Useful for direct binary streams not using `multipart/form-data`.",
+            "$request->binary()",
+            "$request->stream()",
+            "$request->raw()"
+        ]
+    },
+    {
+        "q": "Difference between `$request->input()` and `$request->query()`?",
+        "type": "mcq",
+        "o": [
+            "`input()` merges query string and input body (POST). `query()` retrieves ONLY from query string.",
+            "No difference",
+            "Input is only POST",
+            "Query is only GET"
+        ]
+    },
+    {
+        "q": "Order of precedence in `input()`?",
+        "type": "mcq",
+        "o": [
+            "Input body (POST) takes precedence over Query string if keys collide.",
+            "Query string takes precedence",
+            "Random",
+            "Undefined"
+        ]
+    },
+    {
+        "q": "How to get a value from JSON payload specifically?",
+        "type": "mcq",
+        "o": [
+            "Use `$request->json('key')`. Note: `input()` also reads JSON if Content-Type is application/json.",
+            "Only `json('key')` works",
+            "Only `input` works",
+            "Need to decode manually"
+        ]
+    },
+    {
+        "q": "Does Laravel automatically verify CSRF on `read` (GET) requests?",
+        "type": "mcq",
+        "o": [
+            "No, GET/HEAD/OPTIONS are exempt from CSRF checks. Only destructive methods (POST/PUT/DELETE) are checked.",
+            "Yes, always",
+            "Yes, if logged in",
+            "Yes, if in web group"
+        ]
+    },
+    {
+        "q": "How to exclude a specific route from CSRF protection?",
+        "type": "mcq",
+        "o": [
+            "Add URI to `$except` array in `VerifyCsrfToken` middleware (or `bootstrap/app.php` in Laravel 11).",
+            "Add `@csrf_exclude` annotation",
+            "Use `no-csrf` middleware",
+            "Delete the route"
+        ]
+    },
+    {
+        "q": "What is `X-CSRF-TOKEN` header?",
+        "type": "mcq",
+        "o": [
+            "Header used for AJAX requests to pass the CSRF token (instead of hidden input). Laravel looks for `_token` input, `X-CSRF-TOKEN` header, or `X-XSRF-TOKEN` header.",
+            "For authentication",
+            "For caching",
+            "For cookies"
+        ]
+    },
+    {
+        "q": "What is `X-XSRF-TOKEN`?",
+        "type": "mcq",
+        "o": [
+            "Encrypted version of CSRF token stored in a cookie by Laravel (for libraries like Axios/Angular that auto-read XSRF-TOKEN cookie). Laravel decrypts it automatically.",
+            "Same as CSRF token",
+            "For XML",
+            "For XHTML"
+        ]
+    },
+    {
+        "q": "How to regenerate CSRF token manually (e.g. after login)?",
+        "type": "mcq",
+        "o": [
+            "$request->session()->regenerateToken()",
+            "csrf_regenerate()",
+            "Token::new()",
+            "Auth::newToken()"
+        ]
+    },
+    {
+        "q": "In a controller, how to determine if the request is AJAX/XHR?",
+        "type": "mcq",
+        "o": [
+            "$request->ajax() or $request->wantsJson() (checking `X-Requested-With: XMLHttpRequest`).",
+            "$request->isAjax()",
+            "$request->xhr()",
+            "is_ajax()"
+        ]
+    },
+    {
+        "q": "What is `$request->pjax()`?",
+        "type": "mcq",
+        "o": [
+            "Checks if request is a PJAX request (HTML replacement checks `X-PJAX` header).",
+            "Checks if Python Ajax",
+            "Checks if PHP Ajax",
+            "Checks if Partial Ajax"
+        ]
+    },
+    {
+        "q": "Which method is called if validation fails in `validate()`?",
+        "type": "mcq",
+        "o": [
+            "Throws `ValidationException`. Exception handler catches it and redirects back with errors (web) or returns JSON 422 (api/json).",
+            "Returns false",
+            "Returns null",
+            "Calls `failed()`"
+        ]
+    },
+    {
+        "q": "Can you manually throw a ValidationException?",
+        "type": "mcq",
+        "o": [
+            "Yes, `throw ValidationException::withMessages(['key' => 'Error message']);`",
+            "No",
+            "Only in FormRequest",
+            "Only in Validator"
+        ]
+    },
+    {
+        "q": "How to validate arrays in request: `tags.*.id`?",
+        "type": "mcq",
+        "o": [
+            "Validates the `id` key of EVERY item in the `tags` array.",
+            "Validates only first id",
+            "Validates array existence",
+            "Validates string id"
+        ]
+    },
+    {
+        "q": "Validation rule `distinct`?",
+        "type": "mcq",
+        "o": [
+            "Ensures values in an array are unique (e.g. `ids.*` => `distinct`).",
+            "Ensures value is unique in database",
+            "Ensures value is distinct from other fields",
+            "Ensures value is not null"
+        ]
+    },
+    {
+        "q": "Validation rule `missing_with:foo`?",
+        "type": "mcq",
+        "o": [
+            "Field must be missing if `foo` is present.",
+            "Field must be present if `foo` is missing",
+            "Field must have value equal to `foo`",
+            "Field must be missing always"
+        ]
+    },
+    {
+        "q": "How to authorize users based on 'Roles' without a package?",
+        "type": "mcq",
+        "o": [
+            "Define Gates (e.g. `Gate::define('isAdmin', ...)`). Use `$this->authorize('isAdmin')`.",
+            "Cannot be done",
+            "Must use Spatie",
+            "Must use Entrust"
+        ]
+    },
+    {
+        "q": "Can controller methods return `void`?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, Laravel will assume empty 200 OK response (or 204 No Content if configured). But strictly it expects a Response or string.",
+            "No, throws error",
+            "Yes, returns 404",
+            "Yes, returns 500"
+        ]
+    },
+    {
+        "q": "What happens if controller returns an object implementing `Arrayable`?",
+        "type": "mcq",
+        "o": [
+            "Laravel calls `toArray()` and returns it as JSON.",
+            "It errors",
+            "It casts to string",
+            "It serializes"
+        ]
+    },
+    {
+        "q": "What happens if controller returns an object implementing `Jsonable`?",
+        "type": "mcq",
+        "o": [
+            "Laravel calls `toJson()` and returns it.",
+            "It errors",
+            "It dumps",
+            "It logs"
+        ]
+    },
+    {
+        "q": "How to stream a large file download?",
+        "type": "mcq",
+        "o": [
+            "response()->streamDownload(function() { echo content; }, 'name.txt')",
+            "return stream('path')",
+            "return chunk('path')",
+            "return pipe('path')"
+        ]
+    },
+    {
+        "q": "Can you use `Response::macro`?",
+        "type": "mcq",
+        "o": [
+            "Yes, define custom response types in ServiceProvider `Response::macro('caps', function($str) { return Response::make(strtoupper($str)); });`",
+            "No",
+            "Only for requests",
+            "Only for routers"
+        ]
+    },
+    {
+        "q": "How to use custom macro'd response in controller?",
+        "type": "mcq",
+        "o": [
+            "response()->caps('foo')",
+            "Response::caps('foo')",
+            "Both if factory used",
+            "Only Response facade"
+        ]
+    },
+    {
+        "q": "What is `startSession` middleware doing?",
+        "type": "mcq",
+        "o": [
+            "Starts the session, retrieves ID from cookie, loads session data. Runs before controller.",
+            "Starts PHP session only",
+            "Starts database connection",
+            "Starts timer"
+        ]
+    },
+    {
+        "q": "If you don't use `web` middleware group, do you get sessions?",
+        "type": "mcq",
+        "o": [
+            "No, sessions are not enabled by default for API routes (unless you manually add StartSession).",
+            "Yes always",
+            "Yes but read-only",
+            "No but cookies work"
+        ]
+    },
+    {
+        "q": "Can a controller implment `HasMiddleware` interface (modern)?",
+        "type": "mcq",
+        "o": [
+            "Yes, allows defining `middleware()` method returning array of middleware objects/closures. (New in recent Laravel versions replacing `getMiddleware`).",
+            "No",
+            "Only models",
+            "Only requests"
+        ]
+    },
+    {
+        "q": "How to define 'signed' routes?",
+        "type": "mcq",
+        "o": [
+            "URL::signedRoute('unsubscribe', ['user' => 1])",
+            "Route::signed('...')",
+            "Link::sign('...')",
+            "Sign::url('...')"
+        ]
+    },
+    {
+        "q": "How to validate signed route in controller?",
+        "type": "mcq",
+        "o": [
+            "Use `signed` middleware on the route (`Route::get(...)->middleware('signed')`). Or `$request->hasValidSignature()`.",
+            "Validate::signature()",
+            "Auth::signed()",
+            "Check hash manually"
+        ]
+    },
+    {
+        "q": "What happens if signature is invalid?",
+        "type": "mcq",
+        "o": [
+            "Middleware throws 403 Invalid Signature exception.",
+            "404 Not Found",
+            "500 Error",
+            "Redirect home"
+        ]
+    },
+    {
+        "q": "Can you generate temporary signed routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, `URL::temporarySignedRoute('name', now()->addMinutes(30), [...])`",
+            "No",
+            "Only permanent",
+            "Only 1 hour"
+        ]
+    },
+    {
+        "q": "Controller methods should purely return...?",
+        "type": "mcq",
+        "o": [
+            "Response objects (or things convertible to response). They should AVOID logic that belongs in Domain/Service layers.",
+            "Views only",
+            "JSON only",
+            "Anything"
+        ]
+    },
+    {
+        "q": "Why avoid `env()` calls in Controllers?",
+        "type": "mcq",
+        "o": [
+            "Because if `config:cache` is run, `env()` returns null. Always use `config('app.key')` instead.",
+            "Performance",
+            "Security",
+            "Style"
+        ]
+    },
+    {
+        "q": "What is `Request::capture()` in `index.php`?",
+        "type": "mcq",
+        "o": [
+            "Creates the global request object from PHP globals. Controller eventually receives this object.",
+            "Screenshots the page",
+            "Captures errors",
+            "Captures session"
+        ]
+    },
+    {
+        "q": "How to get raw POST body if content type is not form-data?",
+        "type": "mcq",
+        "o": [
+            "$request->getContent()",
+            "$request->body()",
+            "$request->raw()",
+            "$request->post()"
+        ]
+    },
+    {
+        "q": "Can you modify the request object in middleware before controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$request->merge(['extra' => 'data'])` or attributes.",
+            "No, it's immutable",
+            "Only headers",
+            "Only cookies"
+        ]
+    },
+    {
+        "q": "Final verification: `__invoke` controllers benefit?",
+        "type": "mcq",
+        "o": [
+            "Focused, Single Responsibility. Easier to read/test than giant controllers with 10 methods.",
+            "Run faster",
+            "Use less memory",
+            "Required for API"
+        ]
+    },
+    {
+        "q": "If a controller extends a BaseController, does it inherit middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes, if defined in `__construct` of parent. `getMiddleware` also inherited.",
+            "No",
+            "Only if overridden",
+            "Only global middleware"
+        ]
+    },
+    {
+        "q": "Can you use `AuthorizesRequests` trait in a plain class?",
+        "type": "mcq",
+        "o": [
+            "Yes, as long as container can resolve it (or you handle dependencies). It mainly provides the `authorize` method wrapping `Gate`.",
+            "No, only controllers",
+            "No, only models",
+            "No, only views"
+        ]
+    },
+    {
+        "q": "Should you put all logic in Controllers?",
+        "type": "mcq",
+        "o": [
+            "No. 'Fat Models, Skinny Controllers' or using Service/Action classes is preferred for maintainability.",
+            "Yes, it's easiest",
+            "Yes, for speed",
+            "No, put in views"
+        ]
+    },
+    {
+        "q": "What is the return type of `redirect()->back()`?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Http\\RedirectResponse",
+            "String",
+            "Boolean",
+            "View"
+        ]
+    },
+    {
+        "q": "Can you redirect back with input AND errors?",
+        "type": "mcq",
+        "o": [
+            "Yes, `return back()->withInput()->withErrors($validator);`",
+            "No, pick one",
+            "Only input",
+            "Only errors"
+        ]
+    },
+    {
+        "q": "How to check if a request parameter is present but empty?",
+        "type": "mcq",
+        "o": [
+            "$request->filled('key') returns false. $request->has('key') returns true.",
+            "$request->exists('key')",
+            "$request->empty('key')",
+            "$request->check('key')"
+        ]
+    },
+    {
+        "q": "What effectively happens when you return an array `['foo'=>'bar']`?",
+        "type": "mcq",
+        "o": [
+            "Laravel wraps it in `JsonResponse` automatically.",
+            "It prints Array",
+            "It errors",
+            "It returns string"
+        ]
+    },
+    {
+        "q": "Bonus: How to get the current Route object in controller?",
+        "type": "mcq",
+        "o": [
+            "$request->route() or Route::current() in facade.",
+            "$request->current()",
+            "Route::this()",
+            "this->route()"
+        ]
+    },
+    {
+        "q": "Bonus: Getting route name?",
+        "type": "mcq",
+        "o": [
+            "$request->route()->getName()",
+            "$request->name()",
+            "Route::name()",
+            "this->name()"
+        ]
+    },
+    {
+        "q": "Bonus: Getting route action method name?",
+        "type": "mcq",
+        "o": [
+            "$request->route()->getActionMethod()",
+            "$request->methodName()",
+            "Route::action()",
+            "this->action()"
+        ]
+    },
+    {
+        "q": "Bonus: Checking if route has middleware?",
+        "type": "mcq",
+        "o": [
+            "in_array('name', $request->route()->gatherMiddleware())",
+            "$request->hasMiddleware('name')",
+            "Route::middleware('name')",
+            "this->middleware('name')"
+        ]
+    },
+    {
+        "q": "What does the `request()` helper function do if called with no arguments?",
+        "type": "mcq",
+        "o": [
+            "Returns the current request instance (same as Facade or injection).",
+            "Returns null",
+            "Returns new request",
+            "Returns array"
+        ]
+    },
+    {
+        "q": "What is `abort_unless($condition, 403)` equivalent to?",
+        "type": "mcq",
+        "o": [
+            "if (!$condition) { abort(403); }",
+            "if ($condition) { abort(403); }",
+            "unless ($condition) { return; }",
+            "Global try catch"
+        ]
+    },
+    {
+        "q": "What is `abort_if($condition, 403)` equivalent to?",
+        "type": "mcq",
+        "o": [
+            "if ($condition) { abort(403); }",
+            "if (!$condition) { abort(403); }",
+            "if (true) { abort(403); }",
+            "if (false) { abort(403); }"
+        ]
+    },
+    {
+        "q": "How to return a 204 No Content response easily?",
+        "type": "mcq",
+        "o": [
+            "response()->noContent()",
+            "response()->empty()",
+            "response()->null()",
+            "return null;"
+        ]
+    },
+    {
+        "q": "Artisan command to create a resource controller?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:controller PhotoController --resource",
+            "php artisan make:controller PhotoController --r",
+            "php artisan create:controller PhotoController",
+            "php artisan new:controller PhotoController"
+        ]
+    }
+]

@@ -1,0 +1,5072 @@
+[
+    {
+        "q": "What is 'psql'?",
+        "type": "mcq",
+        "o": [
+            "The primary command-line interface (CLI) for interacting with PostgreSQL",
+            "GUI tool",
+            "Server process",
+            "Log viewer"
+        ]
+    },
+    {
+        "q": "psql command to list databases?",
+        "type": "mcq",
+        "o": [
+            "\\l (ell)",
+            "\\list",
+            "\\db",
+            "SHOW TABLES"
+        ]
+    },
+    {
+        "q": "psql command to connect to a database?",
+        "type": "mcq",
+        "o": [
+            "\\c dbname",
+            "USE dbname",
+            "GO dbname",
+            "CONNECT dbname"
+        ]
+    },
+    {
+        "q": "psql command to list tables?",
+        "type": "mcq",
+        "o": [
+            "\\dt",
+            "\\tables",
+            "SHOW TABLES",
+            "\\lt"
+        ]
+    },
+    {
+        "q": "psql command to describe a table schema?",
+        "type": "mcq",
+        "o": [
+            "\\d table_name",
+            "DESCRIBE table_name",
+            "SHOW CREATE TABLE",
+            "\\desc"
+        ]
+    },
+    {
+        "q": "psql command to list users (roles)?",
+        "type": "mcq",
+        "o": [
+            "\\du",
+            "\\users",
+            "SHOW USERS",
+            "\\rol"
+        ]
+    },
+    {
+        "q": "psql command to quit?",
+        "type": "mcq",
+        "o": [
+            "\\q",
+            "exit",
+            "quit",
+            "bye"
+        ]
+    },
+    {
+        "q": "What is 'JSONB'?",
+        "type": "mcq",
+        "o": [
+            "Binary JSON format. Parsed/Processed (slower) on input, but very fast to query/index.",
+            "Text JSON",
+            "String",
+            "Blob"
+        ]
+    },
+    {
+        "q": "What is 'JSON' data type (vs JSONB)?",
+        "type": "mcq",
+        "o": [
+            "Exact copy of input text (preserves whitespace). Faster to insert, slower to query. No indexing.",
+            "Binary",
+            "Indexed",
+            "Efficient"
+        ]
+    },
+    {
+        "q": "Which is recommended: JSON or JSONB?",
+        "type": "mcq",
+        "o": [
+            "JSONB (for almost all use cases requiring querying/indexing)",
+            "JSON",
+            "Text",
+            "Varchar"
+        ]
+    },
+    {
+        "q": "Postgres Array Type syntax?",
+        "type": "mcq",
+        "o": [
+            "integer[], text[]",
+            "array<integer>",
+            "list[text]",
+            "vector"
+        ]
+    },
+    {
+        "q": "Insert array value syntax?",
+        "type": "mcq",
+        "o": [
+            "'{1, 2, 3}' or ARRAY[1, 2, 3]",
+            "[1, 2, 3]",
+            "(1, 2, 3)",
+            "1, 2, 3"
+        ]
+    },
+    {
+        "q": "Operator to check if Array contains value?",
+        "type": "mcq",
+        "o": [
+            "@> (Contains) e.g. ARRAY[1,2,3] @> ARRAY[2]",
+            "IN",
+            "HAS",
+            "CONTAINS"
+        ]
+    },
+    {
+        "q": "What is 'UUID' type?",
+        "type": "mcq",
+        "o": [
+            "Native 128-bit Universally Unique Identifier type",
+            "String",
+            "Varchar(36)",
+            "BigInt"
+        ]
+    },
+    {
+        "q": "Extension for UUID generation functions?",
+        "type": "mcq",
+        "o": [
+            "uuid-ossp (provides uuid_generate_v4())",
+            "crypto",
+            "pg_uuid",
+            "std"
+        ]
+    },
+    {
+        "q": "What is 'HSTORE'?",
+        "type": "mcq",
+        "o": [
+            "Key-Value store within a column (Pre-dates JSONB, text-based)",
+            "JSON",
+            "XML",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'SERIAL'?",
+        "type": "mcq",
+        "o": [
+            "Pseudo-type creating an auto-increment integer using a SEQUENCE object implicitly",
+            "Identity",
+            "AutoInt",
+            "Sequence"
+        ]
+    },
+    {
+        "q": "What is 'IDENTITY' column (Postgres 10+)?",
+        "type": "mcq",
+        "o": [
+            "SQL Standard auto-increment (GENERATED ALWAYS AS IDENTITY). Preferred over SERIAL.",
+            "Serial",
+            "Sequence",
+            "NextVal"
+        ]
+    },
+    {
+        "q": "What is 'search_path'?",
+        "type": "mcq",
+        "o": [
+            "Configuration determining which schemas are searched for non-qualified table names",
+            "File path",
+            "Index path",
+            "Log path"
+        ]
+    },
+    {
+        "q": "Default search_path?",
+        "type": "mcq",
+        "o": [
+            "\"$user\", public",
+            "public",
+            "all",
+            "root"
+        ]
+    },
+    {
+        "q": "What is 'Schema' in Postgres?",
+        "type": "mcq",
+        "o": [
+            "Logical namespace within a database (e.g. 'public', 'sales')",
+            "Database",
+            "File system",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'MVCC'?",
+        "type": "mcq",
+        "o": [
+            "Multi-Version Concurrency Control. Readers don't block Writers. Each sees snapshot.",
+            "Locking",
+            "Single Thread",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What is 'VACUUM'?",
+        "type": "mcq",
+        "o": [
+            "Process reclaiming storage occupied by dead tuples (deleted/updated rows)",
+            "Cleaning log",
+            "Deleting tables",
+            "Restarting"
+        ]
+    },
+    {
+        "q": "Why is VACUUM needed (MVCC)?",
+        "type": "mcq",
+        "o": [
+            "UPDATE/DELETE marks rows as dead (doesn't remove). New inserts use new space. Vacuum frees dead space.",
+            "It speeds up CPU",
+            "It locks tables",
+            "It backs up data"
+        ]
+    },
+    {
+        "q": "What is 'Autovacuum'?",
+        "type": "mcq",
+        "o": [
+            "Background daemon automatically triggering VACUUM based on threshold of dead tuples",
+            "Manual",
+            "Cron job",
+            "Virus"
+        ]
+    },
+    {
+        "q": "What is 'xmin' system column?",
+        "type": "mcq",
+        "o": [
+            "Transaction ID (XID) that inserted the row version",
+            "Deleted ID",
+            "Row ID",
+            "Page ID"
+        ]
+    },
+    {
+        "q": "What is 'xmax' system column?",
+        "type": "mcq",
+        "o": [
+            "Transaction ID (XID) that deleted (or updated) the row version. 0 if alive.",
+            "Inserted ID",
+            "Max value",
+            "Limit"
+        ]
+    },
+    {
+        "q": "What is 'TOAST'?",
+        "type": "mcq",
+        "o": [
+            "The Oversized-Attribute Storage Technique. Compresses/Stores large columns off-table.",
+            "Bread",
+            "Cache",
+            "Memory"
+        ]
+    },
+    {
+        "q": "TOAST trigger size?",
+        "type": "mcq",
+        "o": [
+            "Typically when row exceeds 2KB (Postgres page size is 8KB)",
+            "8KB",
+            "1MB",
+            "100 bytes"
+        ]
+    },
+    {
+        "q": "What is 'postgresql.conf'?",
+        "type": "mcq",
+        "o": [
+            "Main configuration file (Memory, Ports, Logging, Workers)",
+            "Auth file",
+            "Data file",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'pg_hba.conf'?",
+        "type": "mcq",
+        "o": [
+            "Host Based Authentication. Controls client authentication (IP, Database, User, Method).",
+            "Main config",
+            "Password file",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Authentication method 'trust'?",
+        "type": "mcq",
+        "o": [
+            "Allows connection without password (Insecure for production, ok for local)",
+            "Password",
+            "MD5",
+            "Kerberos"
+        ]
+    },
+    {
+        "q": "Authentication method 'md5' / 'scram-sha-256'?",
+        "type": "mcq",
+        "o": [
+            "Password based authentication (SCRAM is newer/safer)",
+            "Trust",
+            "Peer",
+            "Certificate"
+        ]
+    },
+    {
+        "q": "What is 'peer' authentication?",
+        "type": "mcq",
+        "o": [
+            "Leverages OS user identity (Unix socket). User 'postgres' OS user = 'postgres' DB user.",
+            "Password",
+            "LDAP",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Tablespace'?",
+        "type": "mcq",
+        "o": [
+            "Location on file system where database objects can be stored (Mapping to Disk)",
+            "Schema",
+            "Memory",
+            "Folder"
+        ]
+    },
+    {
+        "q": "Default port for PostgreSQL?",
+        "type": "mcq",
+        "o": [
+            "5432",
+            "3306",
+            "1433",
+            "8080"
+        ]
+    },
+    {
+        "q": "Command to install extension?",
+        "type": "mcq",
+        "o": [
+            "CREATE EXTENSION extension_name;",
+            "INSTALL EXTENSION",
+            "IMPORT EXTENSION",
+            "ADD MODULE"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_activity'?",
+        "type": "mcq",
+        "o": [
+            "View showing current connections, queries, states, and pids",
+            "Log file",
+            "History",
+            "User list"
+        ]
+    },
+    {
+        "q": "How to kill a session?",
+        "type": "mcq",
+        "o": [
+            "SELECT pg_terminate_backend(pid);",
+            "KILL pid",
+            "STOP pid",
+            "END session"
+        ]
+    },
+    {
+        "q": "How to cancel a running query (without killing connection)?",
+        "type": "mcq",
+        "o": [
+            "SELECT pg_cancel_backend(pid);",
+            "pg_stop_query",
+            "KILL query",
+            "BREAK"
+        ]
+    },
+    {
+        "q": "What is 'RETURNING' clause?",
+        "type": "mcq",
+        "o": [
+            "Returns data from modified rows (INSERT/UPDATE/DELETE) in one round trip",
+            "Select only",
+            "Go back",
+            "Undo"
+        ]
+    },
+    {
+        "q": "Example 'DELETE ... RETURNING *'?",
+        "type": "mcq",
+        "o": [
+            "Deletes rows and returns their contents (like a Select)",
+            "Only deletes",
+            "Errors",
+            "Backs up"
+        ]
+    },
+    {
+        "q": "What is 'CTE' (Common Table Expression)?",
+        "type": "mcq",
+        "o": [
+            "WITH clause. Named temporary result set. Postgres materializes them (historically, though changed in v12).",
+            "Temp table",
+            "Variable",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'CITEXT'?",
+        "type": "mcq",
+        "o": [
+            "Case-Insensitive Text type (Extension). Compares 'Apple' = 'apple'.",
+            "Text",
+            "Varchar",
+            "Blob"
+        ]
+    },
+    {
+        "q": "What is 'Range Type' (e.g. int4range)?",
+        "type": "mcq",
+        "o": [
+            "Data type representing a range of values (e.g. [1, 10)). Native overlap support.",
+            "List",
+            "Array",
+            "Enum"
+        ]
+    },
+    {
+        "q": "What is '&&' operator (Ranges/Arrays)?",
+        "type": "mcq",
+        "o": [
+            "Overlap operator (Do these two ranges/arrays have common elements?)",
+            "And",
+            "Or",
+            "Concat"
+        ]
+    },
+    {
+        "q": "What is 'EXPLAIN'?",
+        "type": "mcq",
+        "o": [
+            "Shows execution plan for a query",
+            "Runs query",
+            "Describes table",
+            "Documentation"
+        ]
+    },
+    {
+        "q": "What is 'EXPLAIN ANALYZE'?",
+        "type": "mcq",
+        "o": [
+            "Executes query (Actual run) and shows plan with actual timing/rows",
+            "Estimate only",
+            "Parse only",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'COPY' command?",
+        "type": "mcq",
+        "o": [
+            "Fast bulk loader/exporter (Server side). \\copy is client side.",
+            "Insert",
+            "Select",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'pg_dump'?",
+        "type": "mcq",
+        "o": [
+            "Command line utility to backup (export) a database into script or archive",
+            "Restore tool",
+            "Vacuum tool",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "What is 'GIN' Index?",
+        "type": "mcq",
+        "o": [
+            "Generalized Inverted Index. Best for JSONB, Arrays, and Full Text Search.",
+            "B-Tree",
+            "Hash",
+            "Heap"
+        ]
+    },
+    {
+        "q": "What is 'GiST' Index?",
+        "type": "mcq",
+        "o": [
+            "Generalized Search Tree. Good for Geometric data (PostGIS), Ranges, Network addresses.",
+            "B-Tree",
+            "Hash",
+            "Bit"
+        ]
+    },
+    {
+        "q": "What is 'BRIN' Index?",
+        "type": "mcq",
+        "o": [
+            "Block Range Index. Very small, stores min/max per block range. Great for huge, naturally sorted time-series data.",
+            "Big index",
+            "Bit index",
+            "Binary"
+        ]
+    },
+    {
+        "q": "What is 'Partial Index'?",
+        "type": "mcq",
+        "o": [
+            "Index with a WHERE clause (e.g. WHERE active = true). Smaller and faster.",
+            "Full index",
+            "Hash index",
+            "Unique"
+        ]
+    },
+    {
+        "q": "Syntax for JSONB Index (GIN)?",
+        "type": "mcq",
+        "o": [
+            "CREATE INDEX idx ON tbl USING GIN (json_col);",
+            "USING BTREE",
+            "USING HASH",
+            "USING SP-GIST"
+        ]
+    },
+    {
+        "q": "What is 'jsonb_path_ops'?",
+        "type": "mcq",
+        "o": [
+            "Operator class for GIN indexes optimizing @> operator (Smaller/Faster than default, but supports fewer operators)",
+            "Default",
+            "Slow",
+            "Text only"
+        ]
+    },
+    {
+        "q": "What starts a Transaction in Postgres?",
+        "type": "mcq",
+        "o": [
+            "BEGIN (or START TRANSACTION)",
+            "OPEN",
+            "GO",
+            "TRAN"
+        ]
+    },
+    {
+        "q": "How to see transaction isolation level?",
+        "type": "mcq",
+        "o": [
+            "SHOW transaction_isolation;",
+            "SELECT level",
+            "VIEW config",
+            "DESCRIBE"
+        ]
+    },
+    {
+        "q": "Default Isolation Level in Postgres?",
+        "type": "mcq",
+        "o": [
+            "Read Committed (Readers see only committed data)",
+            "Serializable",
+            "Repeatable Read",
+            "Uncommitted"
+        ]
+    },
+    {
+        "q": "What is 'WAL'?",
+        "type": "mcq",
+        "o": [
+            "Write-Ahead Logging. Ensures durability (ACID). Changes logged before writing data pages.",
+            "Log file",
+            "Error log",
+            "Audit"
+        ]
+    },
+    {
+        "q": "What is 'Checkpoint'?",
+        "type": "mcq",
+        "o": [
+            "Process flushing dirty pages from Shared Buffers to Disk and truncating WAL",
+            "Backup",
+            "Restore",
+            "Vacuum"
+        ]
+    },
+    {
+        "q": "What is 'shared_buffers'?",
+        "type": "mcq",
+        "o": [
+            "Memory config dedicated to Postgres for caching data pages (Recommended ~25% of RAM)",
+            "All RAM",
+            "Temp mem",
+            "Log mem"
+        ]
+    },
+    {
+        "q": "Does Postgres use OS Cache?",
+        "type": "mcq",
+        "o": [
+            "Yes, heavily relies on OS Filesystem Cache (Double buffering happens, but OS cache is vital)",
+            "No",
+            "Never",
+            "Bypasses"
+        ]
+    },
+    {
+        "q": "What is 'work_mem'?",
+        "type": "mcq",
+        "o": [
+            "Memory limit *per operation* (Sort/Hash) within a query. Too low = Disk Spill. Too high = OOM.",
+            "Total mem",
+            "Buffer",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'maintenance_work_mem'?",
+        "type": "mcq",
+        "o": [
+            "Memory for maintenance ops (VACUUM, INDEX CREATE). Usually set higher than work_mem.",
+            "Worker mem",
+            "Shared",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'PgBouncer'?",
+        "type": "mcq",
+        "o": [
+            "Lightweight connection pooler for PostgreSQL (Reduces connection overhead)",
+            "Driver",
+            "Client",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "Benefits of PgBouncer?",
+        "type": "mcq",
+        "o": [
+            "Supports thousands of client connections mapping to few server connections (Pooling)",
+            "Faster query",
+            "Storage",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Streaming Replication'?",
+        "type": "mcq",
+        "o": [
+            "Physical replication shipping WAL records to Standby server (Exact copy)",
+            "Logical",
+            "Manual",
+            "Tape"
+        ]
+    },
+    {
+        "q": "What is 'Hot Standby'?",
+        "type": "mcq",
+        "o": [
+            "Replica that accept Read-Only queries while applying WAL updates",
+            "Cold",
+            "Warm",
+            "Offline"
+        ]
+    },
+    {
+        "q": "What is 'Logical Replication'?",
+        "type": "mcq",
+        "o": [
+            "Replicating data objects/changes (decoded from WAL) allowing partial/cross-version replication",
+            "Physical",
+            "Binary",
+            "Block"
+        ]
+    },
+    {
+        "q": "Publisher / Subscriber model is used in?",
+        "type": "mcq",
+        "o": [
+            "Logical Replication",
+            "Streaming",
+            "Backups",
+            "Vacuum"
+        ]
+    },
+    {
+        "q": "What is 'Slot' (Replication Slot)?",
+        "type": "mcq",
+        "o": [
+            "Mechanism on Primary ensuring WAL segments needed by Replica are not deleted",
+            "Hole",
+            "Time",
+            "Port"
+        ]
+    },
+    {
+        "q": "Risk of unused Replication Slot?",
+        "type": "mcq",
+        "o": [
+            "WAL files accumulate indefinitely -> Disk Full -> Server Down",
+            "CPU high",
+            "RAM high",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Partitioning' (Declarative)?",
+        "type": "mcq",
+        "o": [
+            "PARTITION BY RANGE/LIST/HASH. Splitting table into child tables managed automatically.",
+            "Sharding",
+            "Index",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "Partitioning benefit?",
+        "type": "mcq",
+        "o": [
+            "Partition Pruning (Query ignores irrelevant partitions) and maintenance (Detach old data)",
+            "Speed only",
+            "Space only",
+            "Types"
+        ]
+    },
+    {
+        "q": "What is 'PL/pgSQL'?",
+        "type": "mcq",
+        "o": [
+            "Procedural Language for PostgreSQL (Variables, Loops, Conditions)",
+            "Python",
+            "Java",
+            "Ruby"
+        ]
+    },
+    {
+        "q": "What is '$$' (Dollar Quoting)?",
+        "type": "mcq",
+        "o": [
+            "Used to quote string bodies (e.g. Function body) avoiding need to escape single quotes",
+            "Currency",
+            "Variable",
+            "Comment"
+        ]
+    },
+    {
+        "q": "What is 'DO' block?",
+        "type": "mcq",
+        "o": [
+            "Executes an anonymous code block (PL/pgSQL) without creating a function",
+            "Make",
+            "Run",
+            "Go"
+        ]
+    },
+    {
+        "q": "Trigger: BEFORE vs AFTER?",
+        "type": "mcq",
+        "o": [
+            "BEFORE: Can modify NEW row before insert. AFTER: Sees final state, good for audit/cascading.",
+            "Same",
+            "Only BEFORE",
+            "Only AFTER"
+        ]
+    },
+    {
+        "q": "Trigger: FOR EACH ROW vs STATEMENT?",
+        "type": "mcq",
+        "o": [
+            "ROW: Fires once per row (e.g. 10 times for 10 inserts). STATEMENT: Fires once per query.",
+            "Same",
+            "Random",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'NEW' and 'OLD' in Triggers?",
+        "type": "mcq",
+        "o": [
+            "Records representing the new state (Insert/Update) and old state (Update/Delete) of the row",
+            "Tables",
+            "Views",
+            "Vars"
+        ]
+    },
+    {
+        "q": "What is 'EXCLUDE' constraint?",
+        "type": "mcq",
+        "o": [
+            "Constraint ensuring no two rows overlap (e.g. Booking time ranges). Requires index.",
+            "Check",
+            "Unique",
+            "Primary"
+        ]
+    },
+    {
+        "q": "What is 'CHECK' constraint?",
+        "type": "mcq",
+        "o": [
+            "Validates generic boolean condition (e.g. price > 0)",
+            "Uniqueness",
+            "Foreign Key",
+            "Type"
+        ]
+    },
+    {
+        "q": "What is 'Upsert' syntax?",
+        "type": "mcq",
+        "o": [
+            "INSERT ... ON CONFLICT (col) DO UPDATE ... (or DO NOTHING)",
+            "MERGE",
+            "UPSERT",
+            "REPLACE"
+        ]
+    },
+    {
+        "q": "What is 'UNLOGGED' table?",
+        "type": "mcq",
+        "o": [
+            "Table not written to WAL. Faster writes. Truncated on crash recovery (Data loss).",
+            "Temp",
+            "Locked",
+            "Logged"
+        ]
+    },
+    {
+        "q": "What is 'Listen / Notify'?",
+        "type": "mcq",
+        "o": [
+            "Pub/Sub mechanism for asynchronous events between sessions/clients",
+            "Email",
+            "Trigger",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Advisory Lock'?",
+        "type": "mcq",
+        "o": [
+            "Application-defined lock (using ID). Database doesn't enforce on rows, App must check it.",
+            "Row lock",
+            "Table lock",
+            "Page lock"
+        ]
+    },
+    {
+        "q": "What is 'LATERAL' Join?",
+        "type": "mcq",
+        "o": [
+            "Like a Correlated Subquery loop in JOIN form. Right side references Left side columns.",
+            "Cross",
+            "Inner",
+            "Outer"
+        ]
+    },
+    {
+        "q": "LATERAL use case?",
+        "type": "mcq",
+        "o": [
+            "Exploring arrays, calling set-returning functions per row (e.g. TOP N per category)",
+            "Simple join",
+            "Filter",
+            "Sort"
+        ]
+    },
+    {
+        "q": "What is 'Foreign Data Wrapper' (FDW)?",
+        "type": "mcq",
+        "o": [
+            "Standard interface to access remote data (Postgres, CSV, MySQL) as local tables (postgres_fdw)",
+            "Replication",
+            "Link",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_statements'?",
+        "type": "mcq",
+        "o": [
+            "Extension tracking execution statistics of all SQL statements (Count, Mean Time, I/O)",
+            "Profiler",
+            "Log",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'pg_locks'?",
+        "type": "mcq",
+        "o": [
+            "View showing current locks held by transactions",
+            "Stats",
+            "Activity",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_class'?",
+        "type": "mcq",
+        "o": [
+            "System catalog table containing relation metadata (Tables, Indexes, Sequences)",
+            "Classes",
+            "Users",
+            "Types"
+        ]
+    },
+    {
+        "q": "What is 'pg_type'?",
+        "type": "mcq",
+        "o": [
+            "System catalog table containing data types",
+            "Tables",
+            "Views",
+            "Roles"
+        ]
+    },
+    {
+        "q": "What is 'oid' (Object Identifier)?",
+        "type": "mcq",
+        "o": [
+            "System hidden column used as internal PK for system tables (Legacy)",
+            "User ID",
+            "Row ID",
+            "Name"
+        ]
+    },
+    {
+        "q": "What is 'Cast' syntax?",
+        "type": "mcq",
+        "o": [
+            "value::type (e.g. '123'::int) or CAST(val AS type)",
+            "CONVERT",
+            "PARSE",
+            "CHANGE"
+        ]
+    },
+    {
+        "q": "How to see database size?",
+        "type": "mcq",
+        "o": [
+            "pg_database_size('dbname') and pg_size_pretty(...)",
+            "SHOW SIZE",
+            "Check disk",
+            "Use count"
+        ]
+    },
+    {
+        "q": "How to see table size?",
+        "type": "mcq",
+        "o": [
+            "pg_relation_size('tbl') or pg_total_relation_size('tbl') (includes indexes)",
+            "Select count",
+            "Show table",
+            "Stat"
+        ]
+    },
+    {
+        "q": "What is 'aggregate' function array_agg?",
+        "type": "mcq",
+        "o": [
+            "Aggregates values into an Array",
+            "Sum",
+            "Count",
+            "String agg"
+        ]
+    },
+    {
+        "q": "What is 'string_agg'?",
+        "type": "mcq",
+        "o": [
+            "Aggregates values into a String with delimiter (like GROUP_CONCAT)",
+            "Array agg",
+            "Concat",
+            "Join"
+        ]
+    },
+    {
+        "q": "What is 'pg_trgm' extension?",
+        "type": "mcq",
+        "o": [
+            "Provides Trigram Matching (breaking strings into 3-char chunks) for fuzzy search and similarity",
+            "Trigger",
+            "Transaction",
+            "Transfer"
+        ]
+    },
+    {
+        "q": "Trigram Similarity operator?",
+        "type": "mcq",
+        "o": [
+            "% (e.g. 'word' % 'wrd')",
+            "==",
+            "~",
+            "LIKE"
+        ]
+    },
+    {
+        "q": "Index for 'pg_trgm' LIKE search?",
+        "type": "mcq",
+        "o": [
+            "GIN index with gin_trgm_ops (Supports '%value%')",
+            "B-Tree",
+            "Hash",
+            "Brin"
+        ]
+    },
+    {
+        "q": "What is 'tsvector'?",
+        "type": "mcq",
+        "o": [
+            "Sorted list of distinct lexemes (normalized words) for Full Text Search",
+            "String",
+            "Text",
+            "Array"
+        ]
+    },
+    {
+        "q": "What is 'tsquery'?",
+        "type": "mcq",
+        "o": [
+            "Search query representation (e.g. 'fat & rat') with boolean operators",
+            "Sql query",
+            "Vector",
+            "List"
+        ]
+    },
+    {
+        "q": "Function to convert text to tsvector?",
+        "type": "mcq",
+        "o": [
+            "to_tsvector('config', 'text')",
+            "cast",
+            "convert",
+            "vectorize"
+        ]
+    },
+    {
+        "q": "Operator for FTS match?",
+        "type": "mcq",
+        "o": [
+            "@@ (e.g. to_tsvector(...) @@ to_tsquery(...))",
+            "==",
+            "MATCH",
+            "LIKE"
+        ]
+    },
+    {
+        "q": "What is 'ts_rank'?",
+        "type": "mcq",
+        "o": [
+            "Calculates relevance score of a document against a query (for sorting)",
+            "Rank",
+            "Row number",
+            "Count"
+        ]
+    },
+    {
+        "q": "What is 'PostGIS'?",
+        "type": "mcq",
+        "o": [
+            "Spatial database extender for PostgreSQL (Geometry, Geography types)",
+            "GIS tool",
+            "Map app",
+            "Graph"
+        ]
+    },
+    {
+        "q": "Data type 'Geometry' vs 'Geography'?",
+        "type": "mcq",
+        "o": [
+            "Geometry = Flat plane (Cartesian). Geography = Spheroid (Earth).",
+            "Same",
+            "Geography flat",
+            "Geometry round"
+        ]
+    },
+    {
+        "q": "Function 'ST_Distance'?",
+        "type": "mcq",
+        "o": [
+            "Calculates distance between two geometries",
+            "Length",
+            "Area",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Table Inheritance'?",
+        "type": "mcq",
+        "o": [
+            "Feature where a table inherits columns from a parent table (Predecessor to Partitioning)",
+            "Copy",
+            "Clone",
+            "View"
+        ]
+    },
+    {
+        "q": "Keyword for Inheritance?",
+        "type": "mcq",
+        "o": [
+            "INHERITS (parent_table)",
+            "EXTENDS",
+            "IMPLEMENTS",
+            "COPY"
+        ]
+    },
+    {
+        "q": "What is 'Rule System' (CREATE RULE)?",
+        "type": "mcq",
+        "o": [
+            "Rewrites query parse tree before planning (e.g. Implementing Views). Powerful but complex.",
+            "Trigger",
+            "Function",
+            "Constraint"
+        ]
+    },
+    {
+        "q": "Rule vs Trigger?",
+        "type": "mcq",
+        "o": [
+            "Rule rewrites the query sent to optimizer. Trigger executes function per row/stmt during execution.",
+            "Same",
+            "Rule is per row",
+            "Trigger is rewrite"
+        ]
+    },
+    {
+        "q": "What is 'Updatable View' condition?",
+        "type": "mcq",
+        "o": [
+            "Simple views (1 table, no Agg/Dist/Group) are auto-updatable. Complex views need INSTEAD OF Triggers/Rules.",
+            "Always updatable",
+            "Never",
+            "Only admin"
+        ]
+    },
+    {
+        "q": "What is 'Window Function' Frame default?",
+        "type": "mcq",
+        "o": [
+            "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW (Not whole partition!)",
+            "Whole partition",
+            "Current row",
+            "Rows between"
+        ]
+    },
+    {
+        "q": "ROWS vs RANGE in Window?",
+        "type": "mcq",
+        "o": [
+            "ROWS counts physical rows. RANGE looks at logical value range.",
+            "Same",
+            "Rows logical",
+            "Range physical"
+        ]
+    },
+    {
+        "q": "What is 'FILTER' clause (Aggregates)?",
+        "type": "mcq",
+        "o": [
+            "count(*) FILTER (WHERE type='A') - Cleaner syntax than CASE WHEN",
+            "Where",
+            "Having",
+            "Limit"
+        ]
+    },
+    {
+        "q": "What is 'WITH RECURSIVE'?",
+        "type": "mcq",
+        "o": [
+            "CTE allowing self-reference (Union All) to traverse hierarchies/graphs",
+            "Loop",
+            "While",
+            "For"
+        ]
+    },
+    {
+        "q": "Cycle detection in Recursive CTE?",
+        "type": "mcq",
+        "o": [
+            "Postgres has CYCLE clause (v14+) or manual path tracking array check",
+            "Automatic",
+            "Error",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'Crosstab' function?",
+        "type": "mcq",
+        "o": [
+            "Function (tablefunc extension) to Pivot rows to columns",
+            "Pivot",
+            "Unpivot",
+            "Rotate"
+        ]
+    },
+    {
+        "q": "What is 'Materialized View'?",
+        "type": "mcq",
+        "o": [
+            "Snapshotted result of query stored physically. Needs REFRESH.",
+            "Virtual view",
+            "Live view",
+            "Temp table"
+        ]
+    },
+    {
+        "q": "Command to update Mat View?",
+        "type": "mcq",
+        "o": [
+            "REFRESH MATERIALIZED VIEW name (Locks table unless CONCURRENTLY used)",
+            "UPDATE VIEW",
+            "REBUILD VIEW",
+            "RELOAD"
+        ]
+    },
+    {
+        "q": "REFRESH CONCURRENTLY requirement?",
+        "type": "mcq",
+        "o": [
+            "Requires Unique Index on the Materialized View",
+            "PK",
+            "No index",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'Event Trigger'?",
+        "type": "mcq",
+        "o": [
+            "Fires on DDL events (CREATE/DROP TABLE). Global to DB.",
+            "DML",
+            "Row",
+            "Time"
+        ]
+    },
+    {
+        "q": "Event Trigger use case?",
+        "type": "mcq",
+        "o": [
+            "Audit schema changes, prevent specific DROP commands",
+            "Modify data",
+            "Log insert",
+            "Replication"
+        ]
+    },
+    {
+        "q": "What is 'Large Object' (LO) API?",
+        "type": "mcq",
+        "o": [
+            "Facility to stream large files (Images) into pg_largeobject (oid based).",
+            "Bytea",
+            "Text",
+            "Varchar"
+        ]
+    },
+    {
+        "q": "Bytea vs Large Object?",
+        "type": "mcq",
+        "o": [
+            "Bytea is single column (RAM limit ~1GB). LO supports streaming/seeking > 1GB.",
+            "Same",
+            "Bytea bigger",
+            "LO simpler"
+        ]
+    },
+    {
+        "q": "What is 'pg_upgrade'?",
+        "type": "mcq",
+        "o": [
+            "Tool for in-place major version upgrade (Fast linking mode supported)",
+            "Update",
+            "Patch",
+            "Reinstall"
+        ]
+    },
+    {
+        "q": "What is 'Link Mode' (pg_upgrade)?",
+        "type": "mcq",
+        "o": [
+            "Uses hard links to reuse data files (Instant upgrade, no copy)",
+            "Copy",
+            "Move",
+            "Zip"
+        ]
+    },
+    {
+        "q": "What is 'WAL Archiving'?",
+        "type": "mcq",
+        "o": [
+            "Copying completed WAL segments to secondary location (Backup/PITR)",
+            "Delete",
+            "Compress",
+            "Hide"
+        ]
+    },
+    {
+        "q": "Config 'archive_command'?",
+        "type": "mcq",
+        "o": [
+            "Shell command executed to copy WAL file (e.g. cp %p /archive/%f)",
+            "Sql command",
+            "Path",
+            "Url"
+        ]
+    },
+    {
+        "q": "What is 'PITR'?",
+        "type": "mcq",
+        "o": [
+            "Point-In-Time Recovery. Restore Base Backup + Replay WAL Archive to specific timestamp.",
+            "Full restore",
+            "Snapshot",
+            "Undo"
+        ]
+    },
+    {
+        "q": "What is 'recovery.signal'?",
+        "type": "mcq",
+        "o": [
+            "File presence indicates Postgres should start in Recovery Mode",
+            "Error",
+            "Log",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'Standby Signal'?",
+        "type": "mcq",
+        "o": [
+            "File (standby.signal) indicating server is a hot standby replica",
+            "Master",
+            "Primary",
+            "Offline"
+        ]
+    },
+    {
+        "q": "What is 'Promote'?",
+        "type": "mcq",
+        "o": [
+            "Action turning a Standby into Primary (Allowing writes)",
+            "Demote",
+            "Start",
+            "Stop"
+        ]
+    },
+    {
+        "q": "Command 'pg_ctl promote'?",
+        "type": "mcq",
+        "o": [
+            "Promotes standby to primary",
+            "Stops server",
+            "Reloads config",
+            "Restarts"
+        ]
+    },
+    {
+        "q": "What is 'Extension' concept?",
+        "type": "mcq",
+        "o": [
+            "Packaging for objects/C-libs. 'CREATE EXTENSION' loads into DB.",
+            "Plugin",
+            "Module",
+            "Driver"
+        ]
+    },
+    {
+        "q": "Where are extensions installed?",
+        "type": "mcq",
+        "o": [
+            "Into the current database (Per-DB)",
+            "Global",
+            "Per user",
+            "Per table"
+        ]
+    },
+    {
+        "q": "What is 'pg_crypto'?",
+        "type": "mcq",
+        "o": [
+            "Extension for hashing (digest), encryption, and generating UUIDs (gen_random_uuid)",
+            "Coin",
+            "Currency",
+            "Security"
+        ]
+    },
+    {
+        "q": "Function 'gen_random_uuid()'?",
+        "type": "mcq",
+        "o": [
+            "Generates v4 random UUID (native in v13+)",
+            "v1",
+            "v3",
+            "String"
+        ]
+    },
+    {
+        "q": "What is 'Domain' type?",
+        "type": "mcq",
+        "o": [
+            "User-defined data type with constraints (e.g. type 'email' = text check(@ symbol))",
+            "Table",
+            "View",
+            "Enum"
+        ]
+    },
+    {
+        "q": "What is 'Composite Type'?",
+        "type": "mcq",
+        "o": [
+            "Type representing a row structure (CREATE TYPE name AS (col1 int, col2 text))",
+            "Array",
+            "List",
+            "Scalar"
+        ]
+    },
+    {
+        "q": "What is 'Enum' Type?",
+        "type": "mcq",
+        "o": [
+            "Static set of ordered values (CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy'))",
+            "Int",
+            "Text",
+            "Table"
+        ]
+    },
+    {
+        "q": "What is 'Sequence' cache?",
+        "type": "mcq",
+        "o": [
+            "Pre-allocating numbers in memory for performance. Risk of gaps on crash.",
+            "Table cache",
+            "Disk cache",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'currval' vs 'nextval'?",
+        "type": "mcq",
+        "o": [
+            "nextval increments. currval returns last value generated in THIS session.",
+            "Last global",
+            "Next global",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'setval'?",
+        "type": "mcq",
+        "o": [
+            "Manually sets sequence current value (e.g. after bulk load)",
+            "Reset",
+            "Start",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What happens when Sequence reaches Max?",
+        "type": "mcq",
+        "o": [
+            "Error (unless CYCLE is enabled)",
+            "Restarts",
+            "Negatives",
+            "Grows"
+        ]
+    },
+    {
+        "q": "What is 'UNLOGGED' table crash safety?",
+        "type": "mcq",
+        "o": [
+            "Not safe. Data truncated on restart.",
+            "Safe",
+            "Partial",
+            "Fully logged"
+        ]
+    },
+    {
+        "q": "What is 'Logical Decoding'?",
+        "type": "mcq",
+        "o": [
+            "Process of extracting changes from WAL into a clean format (e.g. JSON) for external systems",
+            "Physical decoding",
+            "Backup",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'wal2json'?",
+        "type": "mcq",
+        "o": [
+            "Popular Output Plugin for Logical Decoding (Outputs JSON stream)",
+            "Standard",
+            "Native",
+            "Backup tool"
+        ]
+    },
+    {
+        "q": "What is 'Output Plugin'?",
+        "type": "mcq",
+        "o": [
+            "Module transforming raw WAL data into specific format (JSON, ProtoBuf, SQL)",
+            "Input plugin",
+            "Filter",
+            "Trigger"
+        ]
+    },
+    {
+        "q": "Logical Replication Requirement?",
+        "type": "mcq",
+        "o": [
+            "wal_level = logical (Requires restart)",
+            "wal_level = replica",
+            "wal_level = minimal",
+            "archive_mode = off"
+        ]
+    },
+    {
+        "q": "What is 'Publication' (Logical Rep)?",
+        "type": "mcq",
+        "o": [
+            "Set of tables on Publisher to be replicated (CREATE PUBLICATION name FOR TABLE...)",
+            "Subscription",
+            "Slot",
+            "Role"
+        ]
+    },
+    {
+        "q": "What is 'Subscription' (Logical Rep)?",
+        "type": "mcq",
+        "o": [
+            "Configuration on Subscriber connecting to Publisher (CREATE SUBSCRIPTION ...)",
+            "Publication",
+            "Slot",
+            "User"
+        ]
+    },
+    {
+        "q": "Can Logical Replication replicate DDL?",
+        "type": "mcq",
+        "o": [
+            "No (Historically). Only DML (Insert/Update/Delete). Schema changes manual.",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can Logical Replication replicate Sequences?",
+        "type": "mcq",
+        "o": [
+            "No. Sequences are not replicated logically. Careful sync needed.",
+            "Yes",
+            "Always",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'Synchronous Commit'?",
+        "type": "mcq",
+        "o": [
+            "Waiting for WAL flush to disk (on Primary and optionally Standby) before reporting Success",
+            "Async",
+            "Lazy",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Command 'SET synchronous_commit = off'?",
+        "type": "mcq",
+        "o": [
+            "Disables waiting for WAL flush. Faster, but risk of data loss on crash.",
+            "Ensures safety",
+            "Slower",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'synchronous_standby_names'?",
+        "type": "mcq",
+        "o": [
+            "Config on Primary listing Standbys that MUST ack write for Synchronous Replication",
+            "Async list",
+            "Ignore list",
+            "IP list"
+        ]
+    },
+    {
+        "q": "What is 'Quorum Commit' (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "ANY 2 (s1, s2, s3) - Waits for any N standbys",
+            "All",
+            "One",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Fillfactor' (Table)?",
+        "type": "mcq",
+        "o": [
+            "% of page filled on Insert. Lower (e.g. 70-80) leaves room for HOT updates (Optimizing Vacuum).",
+            "100",
+            "0",
+            "Higher is better"
+        ]
+    },
+    {
+        "q": "What is 'HOT' (Heap Only Tuple) update?",
+        "type": "mcq",
+        "o": [
+            "Update where new row version stays on same page. Avoids Index updates. Crucial for performance.",
+            "Cold update",
+            "Slow update",
+            "Index update"
+        ]
+    },
+    {
+        "q": "What enables 'HOT' update?",
+        "type": "mcq",
+        "o": [
+            "No indexed columns modified + Space available on page (Fillfactor)",
+            "Index scan",
+            "Vacuum",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'Autovacuum Freeze Max Age'?",
+        "type": "mcq",
+        "o": [
+            "Threshold to force aggressive vacuum to prevent Transaction ID wraparound (Shutdown risk)",
+            "Time limit",
+            "Size limit",
+            "Row limit"
+        ]
+    },
+    {
+        "q": "What is 'Transaction ID Wraparound'?",
+        "type": "mcq",
+        "o": [
+            "XIDs are 32-bit. Running out causes old data to become invisible. Must 'Freeze' old XIDs.",
+            "Feature",
+            "Loop",
+            "Good thing"
+        ]
+    },
+    {
+        "q": "What is 'MultiXact'?",
+        "type": "mcq",
+        "o": [
+            "Mechanism for row locking sharing (Select For Share). Wraparound issue exists here too.",
+            "SingleXact",
+            "No lock",
+            "Fast lock"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_bgwriter'?",
+        "type": "mcq",
+        "o": [
+            "Stats for Background Writer process (Checkpoints, Buffers Cleaned)",
+            "User stats",
+            "Query stats",
+            "Table stats"
+        ]
+    },
+    {
+        "q": "Background Writer (BGWriter) purpose?",
+        "type": "mcq",
+        "o": [
+            "Trickle flushes dirty pages to disk to reduce Checkpoint spike load",
+            "Logs",
+            "Vacuums",
+            "Reads"
+        ]
+    },
+    {
+        "q": "What is 'Listen Addresses' default?",
+        "type": "mcq",
+        "o": [
+            "'localhost' (Changes needed to '*' for remote access)",
+            "*",
+            "0.0.0.0",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'Superuser'?",
+        "type": "mcq",
+        "o": [
+            "Role with all privileges (Bypasses checks). Default is 'postgres'.",
+            "Admin",
+            "User",
+            "Guest"
+        ]
+    },
+    {
+        "q": "What is 'NoLogin' role?",
+        "type": "mcq",
+        "o": [
+            "Role used as a Group (cannot login directly)",
+            "User",
+            "Banned",
+            "System"
+        ]
+    },
+    {
+        "q": "Command to create user?",
+        "type": "mcq",
+        "o": [
+            "CREATE ROLE name LOGIN PASSWORD '...';",
+            "ADD USER",
+            "NEW USER",
+            "INSERT USER"
+        ]
+    },
+    {
+        "q": "What is 'Template1'?",
+        "type": "mcq",
+        "o": [
+            "Default template database. New databases are copied from this.",
+            "User db",
+            "Log db",
+            "Empty"
+        ]
+    },
+    {
+        "q": "What is 'Extension' trusted?",
+        "type": "mcq",
+        "o": [
+            "Extensions marked trusted can be installed by non-superusers",
+            "Untrusted",
+            "Safe",
+            "Verified"
+        ]
+    },
+    {
+        "q": "What is 'Lateral' join requirement?",
+        "type": "mcq",
+        "o": [
+            "Inner query must be on Right side of Join",
+            "Left side",
+            "Top",
+            "Bottom"
+        ]
+    },
+    {
+        "q": "What is 'Row Security' (RLS)?",
+        "type": "mcq",
+        "o": [
+            "Row Level Security policies restricting access based on user role/variable",
+            "Column security",
+            "Table security",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "Command to enable RLS?",
+        "type": "mcq",
+        "o": [
+            "ALTER TABLE t ENABLE ROW LEVEL SECURITY;",
+            "SET RLS ON",
+            "CREATE RLS",
+            "SECURE TABLE"
+        ]
+    },
+    {
+        "q": "What is 'Policy' (RLS)?",
+        "type": "mcq",
+        "o": [
+            "CREATE POLICY p ON t USING (user_id = current_user_id());",
+            "Rule",
+            "Trigger",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'BypassRLS' attribute?",
+        "type": "mcq",
+        "o": [
+            "Role attribute allowing user to ignore RLS (Superuser has this)",
+            "Admin",
+            "Ignore",
+            "Break"
+        ]
+    },
+    {
+        "q": "What is 'Foreign Key' Action Set Null?",
+        "type": "mcq",
+        "o": [
+            "On Delete, sets child FK column to Null",
+            "Cascade",
+            "Restrict",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Foreign Key' Action Restrict?",
+        "type": "mcq",
+        "o": [
+            "Prevents deletion of parent if children exist (Default)",
+            "Cascade",
+            "Null",
+            "Allow"
+        ]
+    },
+    {
+        "q": "What is 'Advisory Lock' Session vs Transaction?",
+        "type": "mcq",
+        "o": [
+            "Session locks persist until unlocking or session end. Tx locks auto-release at commit.",
+            "Same",
+            "Session auto",
+            "Tx manual"
+        ]
+    },
+    {
+        "q": "Function 'pg_advisory_lock(key)'?",
+        "type": "mcq",
+        "o": [
+            "Acquires session level exclusive advisory lock. Waits if busy.",
+            "Transaction level",
+            "Shared",
+            "Non blocking"
+        ]
+    },
+    {
+        "q": "Function 'pg_try_advisory_lock(key)'?",
+        "type": "mcq",
+        "o": [
+            "Attempts to lock. Returns true/false immediately (Non-blocking).",
+            "Waits",
+            "Errors",
+            "Blocks"
+        ]
+    },
+    {
+        "q": "What is 'Tid' (Tuple ID)?",
+        "type": "mcq",
+        "o": [
+            "Physical location pointer (Block Number, Offset). Syntax: ctid.",
+            "Key",
+            "Hash",
+            "Row"
+        ]
+    },
+    {
+        "q": "Can ctid change?",
+        "type": "mcq",
+        "o": [
+            "Yes, on UPDATE/VACUUM (Row moves)",
+            "No",
+            "Never",
+            "Static"
+        ]
+    },
+    {
+        "q": "What is 'Curser'?",
+        "type": "mcq",
+        "o": [
+            "Pointer to result set allowing fetch row-by-row",
+            "Mouse",
+            "Index",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'Holdable Cursor'?",
+        "type": "mcq",
+        "o": [
+            "Cursor that remains open after transaction commit (WITH HOLD)",
+            "Temp",
+            "Closed",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Scrollable Cursor'?",
+        "type": "mcq",
+        "o": [
+            "Cursor supporting backward fetching (SCROLL)",
+            "Forward only",
+            "Read only",
+            "Static"
+        ]
+    },
+    {
+        "q": "What is 'Refcursor'?",
+        "type": "mcq",
+        "o": [
+            "Data type for cursor reference (passed to functions)",
+            "Int",
+            "Text",
+            "Pointer"
+        ]
+    },
+    {
+        "q": "What is 'Prepared Statement'?",
+        "type": "mcq",
+        "o": [
+            "Parsed plan saved for reuse. PREPARE name(args) AS ... EXECUTE name.",
+            "Dynamic SQL",
+            "Ad-hoc",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Deallocate'?",
+        "type": "mcq",
+        "o": [
+            "Removes prepared statement. DEALLOCATE name.",
+            "Drop",
+            "Delete",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'Explain (Format JSON)'?",
+        "type": "mcq",
+        "o": [
+            "Returns plan in JSON format (Easier for parsing/tools)",
+            "Text",
+            "Xml",
+            "Yaml"
+        ]
+    },
+    {
+        "q": "What is 'Buffers' option in Explain?",
+        "type": "mcq",
+        "o": [
+            "Shows Shared Hit/Read (Memory vs Disk) usage. Requires ANALYZE.",
+            "CPU",
+            "Network",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Timing' option in Explain?",
+        "type": "mcq",
+        "o": [
+            "Measures time per node (Can add overhead). Default On.",
+            "Off",
+            "Estimates",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Cost' in Explain?",
+        "type": "mcq",
+        "o": [
+            "Arbitrary units (Startup Cost .. Total Cost). 1.0 = Sequential Page Read.",
+            "Seconds",
+            "Bytes",
+            "Rows"
+        ]
+    },
+    {
+        "q": "What is 'Startup Cost'?",
+        "type": "mcq",
+        "o": [
+            "Cost to fetch the first row (e.g. Index Seek = low, Sort = high/wait)",
+            "Total cost",
+            "Money",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Width' in Explain?",
+        "type": "mcq",
+        "o": [
+            "Estimated average byte width of rows output by the node",
+            "Columns",
+            "Pixels",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'pg_checksums'?",
+        "type": "mcq",
+        "o": [
+            "Tool to verify or enable/disable data checksums on an offline cluster",
+            "Online check",
+            "Backup check",
+            "Table check"
+        ]
+    },
+    {
+        "q": "Can checksums be enabled online?",
+        "type": "mcq",
+        "o": [
+            "No. Requires cluster shutdown (pg_checksums --enable) on older versions. Newer allows initdb flag.",
+            "Yes",
+            "Always on",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'pg_resetwal'?",
+        "type": "mcq",
+        "o": [
+            "Dangerous tool to force a WAL reset (Last resort for corrupted transaction logs). Risk of data inconsistency.",
+            "Safe reset",
+            "Daily maintenance",
+            "Backup tool"
+        ]
+    },
+    {
+        "q": "What is 'pg_rewind'?",
+        "type": "mcq",
+        "o": [
+            "Efficiently resynchronizes a demoted primary with the new primary (avoids full rebuild)",
+            "Rewinds time",
+            "Undoes table",
+            "Restores backup"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Query'?",
+        "type": "mcq",
+        "o": [
+            "Using multiple background workers to execute a single query (Scan/Join/Aggregate) faster",
+            "Serial",
+            "Distributed",
+            "Remote"
+        ]
+    },
+    {
+        "q": "What is 'Gather' node (Explain)?",
+        "type": "mcq",
+        "o": [
+            "Node that collects results from parallel workers",
+            "Scatter",
+            "Worker",
+            "Start"
+        ]
+    },
+    {
+        "q": "Config 'max_parallel_workers_per_gather'?",
+        "type": "mcq",
+        "o": [
+            "Maximum workers a single query/Gather node can use",
+            "Total workers",
+            "Min workers",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'JIT' (Just-In-Time) Compilation?",
+        "type": "mcq",
+        "o": [
+            "Compiling parts of query execution ( Expressions, Deforming) into native machine code using LLVM",
+            "Interpretation",
+            "Caching",
+            "Optimization"
+        ]
+    },
+    {
+        "q": "When is JIT beneficial?",
+        "type": "mcq",
+        "o": [
+            "Complex, long-running analytical queries (OLAP). Overhead hurts short OLTP queries.",
+            "Simple queries",
+            "Indexes",
+            "Writes"
+        ]
+    },
+    {
+        "q": "Config 'jit'?",
+        "type": "mcq",
+        "o": [
+            "on/off. Enabled by default in modern Postgres.",
+            "fast/slow",
+            "level",
+            "debug"
+        ]
+    },
+    {
+        "q": "What is 'IMPORT FOREIGN SCHEMA'?",
+        "type": "mcq",
+        "o": [
+            "Bulk imports table definitions from a remote server (via FDW) into local schema",
+            "Copy data",
+            "Move data",
+            "Sync"
+        ]
+    },
+    {
+        "q": "What is 'FDW Pushdown'?",
+        "type": "mcq",
+        "o": [
+            "Optimization sending WHERE clauses / Sorts to the remote server instead of filtering locally",
+            "Pull up",
+            "Local filter",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Can FDW write data?",
+        "type": "mcq",
+        "o": [
+            "Yes. postgres_fdw supports INSERT/UPDATE/DELETE on remote tables.",
+            "No",
+            "Read only",
+            "Copy only"
+        ]
+    },
+    {
+        "q": "What is 'Custom Aggregate'?",
+        "type": "mcq",
+        "o": [
+            "User defined aggregate function (CREATE AGGREGATE) using state transition functions",
+            "Group by",
+            "Sum",
+            "Avg"
+        ]
+    },
+    {
+        "q": "Parts of Custom Aggregate?",
+        "type": "mcq",
+        "o": [
+            "SFUNC (State Function), STYPE (State Type), FINALFUNC (Optional Finalizer)",
+            "Trigger",
+            "Loop",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'Moving Aggregate' support?",
+        "type": "mcq",
+        "o": [
+            "Optimized window aggregates using MSFUNC (Inverse transition) to slide window efficiently",
+            "Static",
+            "Slow",
+            "Re-calc all"
+        ]
+    },
+    {
+        "q": "What is 'Table Access Method' API?",
+        "type": "mcq",
+        "o": [
+            "Pluggable interface allowing different storage engines (heap, zheap, columnar) per table (Postgres 12+)",
+            "Index only",
+            "Lock only",
+            "View"
+        ]
+    },
+    {
+        "q": "Default Access Method?",
+        "type": "mcq",
+        "o": [
+            "heap",
+            "btree",
+            "columnar",
+            "memory"
+        ]
+    },
+    {
+        "q": "What is 'pg_attribute'?",
+        "type": "mcq",
+        "o": [
+            "System catalog storing information about table columns (attributes)",
+            "Rows",
+            "Pages",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_proc'?",
+        "type": "mcq",
+        "o": [
+            "System catalog storing function/procedure definitions",
+            "Processes",
+            "Locks",
+            "Tables"
+        ]
+    },
+    {
+        "q": "What is 'pg_depend'?",
+        "type": "mcq",
+        "o": [
+            "Tracks dependencies between objects (ensures you can't drop object if others depend on it)",
+            "Logs",
+            "Backups",
+            "Versions"
+        ]
+    },
+    {
+        "q": "What is 'CASCADE' drop?",
+        "type": "mcq",
+        "o": [
+            "DROP TABLE x CASCADE; Automatically drops dependent objects (Views, FKs)",
+            "Restrict",
+            "Error",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'RESTRICT' drop?",
+        "type": "mcq",
+        "o": [
+            "Prevents drop if dependencies exist (Default)",
+            "Cascade",
+            "Force",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'PL/Perl'?",
+        "type": "mcq",
+        "o": [
+            "Trusted/Untrusted Percolator procedural language",
+            "Python",
+            "Java",
+            "C"
+        ]
+    },
+    {
+        "q": "What is 'PL/Python' untrusted (u)?",
+        "type": "mcq",
+        "o": [
+            "plpython3u allows access to OS, Files, Sockets. Only Superusers can create functions.",
+            "Safe",
+            "Restricted",
+            "Sandboxed"
+        ]
+    },
+    {
+        "q": "What is 'SSL Mode' verify-full?",
+        "type": "mcq",
+        "o": [
+            "Verify server certificate and hostname (Strictest/Safest)",
+            "Verify-ca",
+            "Require",
+            "Disable"
+        ]
+    },
+    {
+        "q": "What is 'SSL Mode' prefer?",
+        "type": "mcq",
+        "o": [
+            "Try SSL, fall back to plain text if unavailable (Insecure)",
+            "Require",
+            "Verify",
+            "Off"
+        ]
+    },
+    {
+        "q": "What is 'GSSAPI'?",
+        "type": "mcq",
+        "o": [
+            "Generic Security Services API (often used for Kerberos authentication)",
+            "SSL",
+            "MD5",
+            "Ssh"
+        ]
+    },
+    {
+        "q": "What is 'LDAP' Usage?",
+        "type": "mcq",
+        "o": [
+            "Using external Directory Service for user/password validation",
+            "Local",
+            "File",
+            "Trust"
+        ]
+    },
+    {
+        "q": "What is 'pg_ident.conf'?",
+        "type": "mcq",
+        "o": [
+            "User name mapping file (Maps OS/Ident/Cert user to Postgres Role)",
+            "Password",
+            "Network",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'pg_basebackup'?",
+        "type": "mcq",
+        "o": [
+            "Tool to take a binary physical backup (base backup) of a running cluster (for Replication/PITR)",
+            "Logical backup",
+            "SQL dump",
+            "Copy"
+        ]
+    },
+    {
+        "q": "pg_basebackup '-X stream'?",
+        "type": "mcq",
+        "o": [
+            "Streams WAL logs needed for backup consistency during the backup (Self-contained)",
+            "Fetch",
+            "None",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'pg_receivewal'?",
+        "type": "mcq",
+        "o": [
+            "Streams WAL logs in real-time to a local directory (Zero data loss capability)",
+            "Base backup",
+            "Archive",
+            "Restore"
+        ]
+    },
+    {
+        "q": "What is 'pg_isready'?",
+        "type": "mcq",
+        "o": [
+            "Utility to check connection status of a PostgreSQL server",
+            "Start",
+            "Stop",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'pgbench'?",
+        "type": "mcq",
+        "o": [
+            "Benchmarking tool (TPC-B like) to stress test Postgres",
+            "Monitor",
+            "Admin",
+            "Backup"
+        ]
+    },
+    {
+        "q": "pgbench default scenario?",
+        "type": "mcq",
+        "o": [
+            "Bank transaction (Update balance, insert history)",
+            "Select only",
+            "Insert only",
+            "Sleep"
+        ]
+    },
+    {
+        "q": "What is 'psql variable' (:v)?",
+        "type": "mcq",
+        "o": [
+            "Variables defined in psql (\\set v value) used in scripts (:v)",
+            "Server var",
+            "Config",
+            "Env"
+        ]
+    },
+    {
+        "q": "What is '\\copy'?",
+        "type": "mcq",
+        "o": [
+            "Client-side COPY. Reads file from client machine and sends to server. (COPY is server-side)",
+            "Server copy",
+            "Fast copy",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is '\\timing'?",
+        "type": "mcq",
+        "o": [
+            "psql command to toggle display of query execution time",
+            "Explain",
+            "Profile",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is '\\x' (Expanded Display)?",
+        "type": "mcq",
+        "o": [
+            "Toggles expanded (vertical) output mode. Good for wide tables.",
+            "Exit",
+            "Hex",
+            "Execute"
+        ]
+    },
+    {
+        "q": "What is '\\watch'?",
+        "type": "mcq",
+        "o": [
+            "Re-executes the previous query every N seconds (\\watch 2)",
+            "Monitor",
+            "Clock",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'pg_file_settings'?",
+        "type": "mcq",
+        "o": [
+            "View showing contents of config files AND pending values (validation errors)",
+            "Current settings",
+            "History",
+            "Logs"
+        ]
+    },
+    {
+        "q": "View 'pg_settings'?",
+        "type": "mcq",
+        "o": [
+            "Provides access to runtime parameters (context, min/max, current val)",
+            "File content",
+            "Binaries",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'application_name'?",
+        "type": "mcq",
+        "o": [
+            "Client connection parameter. Visible in pg_stat_activity. Useful for debugging.",
+            "DB Name",
+            "User Name",
+            "Host"
+        ]
+    },
+    {
+        "q": "What is 'statement_timeout'?",
+        "type": "mcq",
+        "o": [
+            "Aborts any statement taking longer than specific milliseconds",
+            "Connection timeout",
+            "Lock timeout",
+            "Idle timeout"
+        ]
+    },
+    {
+        "q": "What is 'lock_timeout'?",
+        "type": "mcq",
+        "o": [
+            "Time to wait for a lock before aborting. Use before strict DDL migrations.",
+            "Query timeout",
+            "Conn timeout",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'idle_in_transaction_session_timeout'?",
+        "type": "mcq",
+        "o": [
+            "Terminates sessions idling inside an open transaction (holding locks/vacuum) too long",
+            "Idle timeout",
+            "Active timeout",
+            "Login timeout"
+        ]
+    },
+    {
+        "q": "Why kill idle in transaction?",
+        "type": "mcq",
+        "o": [
+            "They hold locks and prevent VACUUM from cleaning up dead tuples (Bloat)",
+            "Save RAM",
+            "Save CPU",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'effective_cache_size'?",
+        "type": "mcq",
+        "o": [
+            "Planner hint (NOT memory allocation) estimating OS cache + Buffer Pool. Helps prefer Index Scans.",
+            "Allocation",
+            "Max RAM",
+            "Min RAM"
+        ]
+    },
+    {
+        "q": "What is 'random_page_cost'?",
+        "type": "mcq",
+        "o": [
+            "Planner cost estimate for non-sequential disk page fetch. Lower for SSDs (1.1). Default 4.0 (HDD).",
+            "Seq cost",
+            "CPU cost",
+            "Net cost"
+        ]
+    },
+    {
+        "q": "What is 'pg_prewarm'?",
+        "type": "mcq",
+        "o": [
+            "Extension to load relation data into Shared Buffers / OS Cache (Manual Warming)",
+            "Heater",
+            "CPU warm",
+            "Disk warm"
+        ]
+    },
+    {
+        "q": "What is 'pg_buffercache'?",
+        "type": "mcq",
+        "o": [
+            "Extension providing view to inspect contents of Shared Buffers (What pages are cached)",
+            "Clear cache",
+            "Increase cache",
+            "Disk view"
+        ]
+    },
+    {
+        "q": "What is 'pg_visibility'?",
+        "type": "mcq",
+        "o": [
+            "Extension to inspect Visibility Map (VM) and PD_ALL_VISIBLE flags",
+            "Hide tables",
+            "Show tables",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'Visibility Map' (VM)?",
+        "type": "mcq",
+        "o": [
+            "Bitmap tracking which pages contain only 'visible' tuples (All old XIDs). Enables Index-Only Scan.",
+            "Index map",
+            "Table map",
+            "Lock map"
+        ]
+    },
+    {
+        "q": "What is 'Index-Only Scan'?",
+        "type": "mcq",
+        "o": [
+            "Scanning index only (no heap fetch) if VM confirms all tuples on page are visible to snapshot",
+            "Seq scan",
+            "Bitmap scan",
+            "Full scan"
+        ]
+    },
+    {
+        "q": "What is 'Heap Fetch' (Index Only Scan)?",
+        "type": "mcq",
+        "o": [
+            "Fallback to heap read if VM says page is not all-visible (Dirty)",
+            "Index read",
+            "Table scan",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Fillfactor' for Index?",
+        "type": "mcq",
+        "o": [
+            "Leaves space in B-Tree pages (Default 90%). Lowering helps concurrent inserts/right-growth.",
+            "100",
+            "10",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'Covering Index' (INCLUDE)?",
+        "type": "mcq",
+        "o": [
+            "Index with non-key columns in leaf (Payload). CREATE INDEX ... INCLUDE (col).",
+            "Partial",
+            "Unique",
+            "Hash"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Column Index' order?",
+        "type": "mcq",
+        "o": [
+            "Left-to-right. (a, b) supports query on (a) or (a,b). Not (b) alone (efficiently).",
+            "Any order",
+            "Right-to-left",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Bitmap Index Scan'?",
+        "type": "mcq",
+        "o": [
+            "Scans index to build bitmap of TIDs, then reads Heap based on bitmap (Sorted physical IO)",
+            "Seq scan",
+            "Index scan",
+            "Hash"
+        ]
+    },
+    {
+        "q": "Bitmap Scan 'Lossy'?",
+        "type": "mcq",
+        "o": [
+            "If bitmap too big for work_mem, it degrades to tracking Pages instead of Rows (Re-check required)",
+            "Data lost",
+            "Exact",
+            "Perfect"
+        ]
+    },
+    {
+        "q": "What is 'TID Scan'?",
+        "type": "mcq",
+        "o": [
+            "Fastest access method. Retrieving row by known CTID (Block/Offset).",
+            "Seq scan",
+            "Index scan",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Lateral Join' for function?",
+        "type": "mcq",
+        "o": [
+            "SELECT * FROM t, LATERAL func(t.col). Calls func for each row in t.",
+            "Cross join",
+            "Inner join",
+            "Left join"
+        ]
+    },
+    {
+        "q": "What is 'Strict' function?",
+        "type": "mcq",
+        "o": [
+            "Function that returns NULL if any argument is NULL (Skipped execution). RETURNS NULL ON NULL INPUT.",
+            "Volatile",
+            "Stable",
+            "Immutable"
+        ]
+    },
+    {
+        "q": "What is 'Volatile' function?",
+        "type": "mcq",
+        "o": [
+            "Can modify DB or check time (random(), timeofday()). Optimizer cannot cache.",
+            "Stable",
+            "Immutable",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Stable' function?",
+        "type": "mcq",
+        "o": [
+            "Returns same result for same args within a single table scan (current_timestamp). Can be used in Index Scan.",
+            "Volatile",
+            "Immutable",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Immutable' function?",
+        "type": "mcq",
+        "o": [
+            "Returns same result for same args always (1+1). Computed at plan time. Required for Functional Index.",
+            "Stable",
+            "Volatile",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Security Definer'?",
+        "type": "mcq",
+        "o": [
+            "Function executes with privileges of the Author (Creator), not the Caller. (Like SUID).",
+            "Security Invoker",
+            "Admin",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'Security Invoker'?",
+        "type": "mcq",
+        "o": [
+            "Default. Function executes with privileges of the Caller.",
+            "Definer",
+            "Owner",
+            "Root"
+        ]
+    },
+    {
+        "q": "Risk of Security Definer?",
+        "type": "mcq",
+        "o": [
+            "Privilege Escalation if search_path is not secured (User can hijack calls)",
+            "Slow",
+            "None",
+            "Limits"
+        ]
+    },
+    {
+        "q": "What is 'Cost' parameter for Function?",
+        "type": "mcq",
+        "o": [
+            "Hints planner about expense (Default 100). High cost prevents running usually.",
+            "Money",
+            "Price",
+            "Bytes"
+        ]
+    },
+    {
+        "q": "What is 'Rows' parameter for Function?",
+        "type": "mcq",
+        "o": [
+            "Estimate of rows returned by Set-Returning Function (Default 1000). Helps Join planning.",
+            "Columns",
+            "Lines",
+            "Limit"
+        ]
+    },
+    {
+        "q": "What is 'Polymorphic Type'?",
+        "type": "mcq",
+        "o": [
+            "Functions accepting 'anyelement' or 'anyarray'. Logic works on multiple types.",
+            "Static",
+            "Fixed",
+            "Void"
+        ]
+    },
+    {
+        "q": "What is 'Variadic' function?",
+        "type": "mcq",
+        "o": [
+            "Function accepting variable number of arguments (as an array)",
+            "Single arg",
+            "No arg",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Operator Class'?",
+        "type": "mcq",
+        "o": [
+            "Defines how a data type behaves with an index method (e.g. text_pattern_ops for LIKE)",
+            "Table class",
+            "User class",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'Collation'?",
+        "type": "mcq",
+        "o": [
+            "Rules for string sort order and equality (locale dependent)",
+            "Encoding",
+            "Encryption",
+            "Type"
+        ]
+    },
+    {
+        "q": "What is 'C' Collation?",
+        "type": "mcq",
+        "o": [
+            "Byte-order sorting. Fastest. No locale rules.",
+            "Slowest",
+            "Complex",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'Deterministic Collation' (ICU)?",
+        "type": "mcq",
+        "o": [
+            "Postgres 12+. Can define Case-Insensitive collation natively without CITEXT.",
+            "Case sensitive",
+            "Accent sensitive",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'pg_catalog'?",
+        "type": "mcq",
+        "o": [
+            "Schema containing system tables and built-in functions. Always in search_path (implicitly).",
+            "Data schema",
+            "Public",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'information_schema'?",
+        "type": "mcq",
+        "o": [
+            "SQL Standard views of metadata (Portable). Maps to pg_catalog.",
+            "Proprietary",
+            "Internal",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'pg_cast'?",
+        "type": "mcq",
+        "o": [
+            "Catalog of cast paths (Type conversion functions)",
+            "Actors",
+            "Movies",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'pg_am'?",
+        "type": "mcq",
+        "o": [
+            "Catalog of Access Methods (Index types: btree, gist, gin...)",
+            "Morning",
+            "Time",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_namespace'?",
+        "type": "mcq",
+        "o": [
+            "Catalog of Schemas (Namespaces)",
+            "Names",
+            "Spaces",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_authid'?",
+        "type": "mcq",
+        "o": [
+            "Catalog of Roles/Users and Passwords (Sensitive, needs superuser)",
+            "Public",
+            "Logs",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_replication'?",
+        "type": "mcq",
+        "o": [
+            "View on Primary showing connected Standbys and their WAL lag/state",
+            "Standby view",
+            "Offline view",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_wal_receiver'?",
+        "type": "mcq",
+        "o": [
+            "View on Standby showing status of WAL receiver process (connection to primary)",
+            "Primary view",
+            "Sender view",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'pg_replication_slots'?",
+        "type": "mcq",
+        "o": [
+            "View showing active/inactive replication slots and retained LSN",
+            "Config",
+            "Files",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'xmin' horizon?",
+        "type": "mcq",
+        "o": [
+            "Oldest Transaction ID needed by any active transaction/slot. Determines what Vacuum can clean.",
+            "Newest ID",
+            "Future ID",
+            "Max ID"
+        ]
+    },
+    {
+        "q": "What sends 'Cancel Request'?",
+        "type": "mcq",
+        "o": [
+            "Client creates new connection to send Cancel signal (SIGINT) to backend PID",
+            "Same connection",
+            "Admin",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Terminate' vs 'Cancel'?",
+        "type": "mcq",
+        "o": [
+            "Cancel (SIGINT) stops query but keeps connection. Terminate (SIGTERM) kills process/connection.",
+            "Same",
+            "Cancel kills",
+            "Terminate stops"
+        ]
+    },
+    {
+        "q": "What is 'pg_hba.conf' reload?",
+        "type": "mcq",
+        "o": [
+            "pg_ctl reload (or SELECT pg_reload_conf()). Doesn't disconnect existing sessions.",
+            "Restart required",
+            "Disconnects all",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'pg_ident.conf'?",
+        "type": "mcq",
+        "o": [
+            "Maps external user names (Ident/Cert) to internal Postgres role names",
+            "Passwords",
+            "Databases",
+            "Tables"
+        ]
+    },
+    {
+        "q": "What is 'huge_pages'?",
+        "type": "mcq",
+        "o": [
+            "OS feature (HugeTLB) reducing TLB misses for large Shared Memory (shared_buffers)",
+            "Small pages",
+            "Web pages",
+            "Docs"
+        ]
+    },
+    {
+        "q": "Config 'cluster_name'?",
+        "type": "mcq",
+        "o": [
+            "Sets the name visible in process title (ps aux). Good for multi-instance servers.",
+            "DB Name",
+            "Table Name",
+            "File Name"
+        ]
+    },
+    {
+        "q": "What is 'Single User Mode'?",
+        "type": "mcq",
+        "o": [
+            "Emergency mode (postgres --single). stdin/stdout interface. Used for repair.",
+            "Multi user",
+            "Safe mode",
+            "Normal"
+        ]
+    },
+    {
+        "q": "What is 'Postmaster'?",
+        "type": "mcq",
+        "o": [
+            "The main supervisor process (postgres) that spawns backends",
+            "Mail server",
+            "Client",
+            "Worker"
+        ]
+    },
+    {
+        "q": "What is 'Checkpointer' process?",
+        "type": "mcq",
+        "o": [
+            "Background process handling checkpoints (separately from bgwriter since v9.2)",
+            "Writer",
+            "Reader",
+            "Logger"
+        ]
+    },
+    {
+        "q": "What is 'WalWriter' process?",
+        "type": "mcq",
+        "o": [
+            "Periodically flushes WAL buffer to disk (avoids commit wait)",
+            "Reader",
+            "Vacuum",
+            "Stats"
+        ]
+    },
+    {
+        "q": "What is 'Stats Collector'?",
+        "type": "mcq",
+        "o": [
+            "Process aggregating stats (UDP). Writes to temp files/memory for views.",
+            "Data collector",
+            "Garbage collector",
+            "Tax collector"
+        ]
+    },
+    {
+        "q": "What is 'Autovacuum Launcher'?",
+        "type": "mcq",
+        "o": [
+            "Process that starts Autovacuum Workers when needed",
+            "Worker",
+            "Cleaner",
+            "Manager"
+        ]
+    },
+    {
+        "q": "What is 'Recovery Conflict'?",
+        "type": "mcq",
+        "o": [
+            "Conflict on Standby when WAL replay needs to act on an object (e.g. drop table) currently locked by a read-query",
+            "Network conflict",
+            "Disk conflict",
+            "User conflict"
+        ]
+    },
+    {
+        "q": "What is 'max_standby_streaming_delay'?",
+        "type": "mcq",
+        "o": [
+            "Max time Standby waits before cancelling running queries to allow WAL replay to proceed",
+            "Replay delay",
+            "Network delay",
+            "Sync delay"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Conflict'?",
+        "type": "mcq",
+        "o": [
+            "When Vacuum on Primary cleans up old row versions needed by a long-running transaction on Standby",
+            "View conflict",
+            "Backup conflict",
+            "Time conflict"
+        ]
+    },
+    {
+        "q": "How to reduce Standby Conflicts?",
+        "type": "mcq",
+        "o": [
+            "Enable 'hot_standby_feedback' (Tells Primary not to Vacuum rows needed by Standby)",
+            "Disable vacuum",
+            "Stop standby",
+            "Increase delay"
+        ]
+    },
+    {
+        "q": "Side effect of 'hot_standby_feedback'?",
+        "type": "mcq",
+        "o": [
+            "Primary table bloat (Vacuum is delayed because Standby needs old rows)",
+            "Standby bloat",
+            "Fast vacuum",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Vacuum Freeze'?",
+        "type": "mcq",
+        "o": [
+            "Process of marking old tuples as 'Frozen' (Visible to all future transactions) to reset XID age",
+            "Delete",
+            "Archive",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'vacuum_freeze_min_age'?",
+        "type": "mcq",
+        "o": [
+            "Minimum age (in XIDs) before a tuple is frozen. Prevents freezing too early (wasteful if row changes soon).",
+            "Max age",
+            "Time",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'aggressive vacuum'?",
+        "type": "mcq",
+        "o": [
+            "Vacuum that visits every page (skips Visibility Map optimization) to freeze tuples. Triggered by max age.",
+            "Gentle vacuum",
+            "Quick vacuum",
+            "Lazy vacuum"
+        ]
+    },
+    {
+        "q": "What is 'REINDEX CONCURRENTLY'?",
+        "type": "mcq",
+        "o": [
+            "Rebuilds index without blocking writes (Postgres 12+). Uses more IO/CPU but keeps app live.",
+            "Blocks writes",
+            "Offline",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'pgstattuple' extension?",
+        "type": "mcq",
+        "o": [
+            "Provides functions to key exact tuple-level stats (e.g. dead_tuple_percent) to diagnose bloat",
+            "Table stats",
+            "Index stats",
+            "Log stats"
+        ]
+    },
+    {
+        "q": "What is 'bloat'?",
+        "type": "mcq",
+        "o": [
+            "Wasted space in table/index files due to dead tuples not yet reused or freed",
+            "Buffer",
+            "Cache",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Hash Partitioning'?",
+        "type": "mcq",
+        "o": [
+            "Partitioning based on hash of partition key (modulus/remainder). Distributes data evenly.",
+            "Range",
+            "List",
+            "Sort"
+        ]
+    },
+    {
+        "q": "What is 'Default Partition'?",
+        "type": "mcq",
+        "o": [
+            "Partition catching all values that don't match other partitions (Catch-all)",
+            "First",
+            "Last",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Partition Pruning'?",
+        "type": "mcq",
+        "o": [
+            "Optimizer capability to skip scanning partitions that cannot contain the WHERE clause value",
+            "Dropping",
+            "Deleting",
+            "Adding"
+        ]
+    },
+    {
+        "q": "What is 'ddl_command_start'?",
+        "type": "mcq",
+        "o": [
+            "Event Trigger type firing before a DDL command executes",
+            "After",
+            "End",
+            "Fail"
+        ]
+    },
+    {
+        "q": "What is PL/pgSQL 'EXCEPTION' block?",
+        "type": "mcq",
+        "o": [
+            "BEGIN ... EXCEPTION WHEN ... END. Catches errors. Has performance overhead (Subtransaction).",
+            "Try catch",
+            "On error",
+            "Break"
+        ]
+    },
+    {
+        "q": "PL/pgSQL 'GET DIAGNOSTICS'?",
+        "type": "mcq",
+        "o": [
+            "Retrieves info about last SQL command (e.g. ROW_COUNT affected)",
+            "Get error",
+            "Get time",
+            "Get row"
+        ]
+    },
+    {
+        "q": "What is 'FOREACH'? (PL/pgSQL)",
+        "type": "mcq",
+        "o": [
+            "Loop construct to iterate over an Array",
+            "While",
+            "For loop",
+            "Cursor loop"
+        ]
+    },
+    {
+        "q": "What is 'User Mapping' (FDW)?",
+        "type": "mcq",
+        "o": [
+            "Maps a local Postgres user to a remote server user/password",
+            "Schema map",
+            "Table map",
+            "Type map"
+        ]
+    },
+    {
+        "q": "What is 'ALTER TABLE SET STATISTICS'?",
+        "type": "mcq",
+        "o": [
+            "Increases histogram bucket count (default 100) for a specific column. Helps with bad cardinality estimates.",
+            "Stats view",
+            "Logs",
+            "Memory"
+        ]
+    },
+    {
+        "q": "What is 'Extended Statistics' (CREATE STATISTICS)?",
+        "type": "mcq",
+        "o": [
+            "Captures cross-column correlation or N-Distinct values for group of columns",
+            "Table stats",
+            "Index stats",
+            "Basic stats"
+        ]
+    },
+    {
+        "q": "What is 'n_distinct'?",
+        "type": "mcq",
+        "o": [
+            "Statistic estimating number of unique values. Negative value means ratio (e.g. -1 = Unique).",
+            "Count",
+            "Sum",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'cpu_tuple_cost'?",
+        "type": "mcq",
+        "o": [
+            "Cost unit to process a row in CPU (Default 0.01). Reference for planner.",
+            "IO cost",
+            "Net cost",
+            "Disk cost"
+        ]
+    },
+    {
+        "q": "What is 'seq_page_cost'?",
+        "type": "mcq",
+        "o": [
+            "Cost unit to fetch a page sequentially from disk (Default 1.0)",
+            "Random cost",
+            "CPU cost",
+            "Net cost"
+        ]
+    },
+    {
+        "q": "What is 'SIGHUP'?",
+        "type": "mcq",
+        "o": [
+            "Signal sent to Postgres to reload configuration files (without restart)",
+            "Kill",
+            "Stop",
+            "Pause"
+        ]
+    },
+    {
+        "q": "What is 'SIGINT'?",
+        "type": "mcq",
+        "o": [
+            "Signal used to Cancel the active query (Ctrl+C equivalent)",
+            "Kill process",
+            "Reload",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'SIGTERM'?",
+        "type": "mcq",
+        "o": [
+            "Signal used for Smart Shutdown (Wait for active sessions) or Terminate Backend",
+            "Immediate",
+            "Reload",
+            "Cancel"
+        ]
+    },
+    {
+        "q": "What is 'SIGKILL' (Kill -9)?",
+        "type": "mcq",
+        "o": [
+            "Force kill. Process halts immediately. Shared memory may be corrupted (Requires Auto-Recovery on start).",
+            "Safe kill",
+            "Soft kill",
+            "Reload"
+        ]
+    },
+    {
+        "q": "What is 'Smart Shutdown'?",
+        "type": "mcq",
+        "o": [
+            "Stops new connections, waits for existing clients to disconnect, then stops.",
+            "Fast",
+            "Immediate",
+            "Force"
+        ]
+    },
+    {
+        "q": "What is 'Fast Shutdown' (Default)?",
+        "type": "mcq",
+        "o": [
+            "Stops new connections, sends SIGTERM to active sessions (aborts transactions), saves state, stops.",
+            "Smart",
+            "Immediate",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Immediate Shutdown'?",
+        "type": "mcq",
+        "o": [
+            "Sends SIGQUIT. Aborts immediately without saving state. Like a crash. Recovery needed on start.",
+            "Fast",
+            "Smart",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Foreign Key' Check?",
+        "type": "mcq",
+        "o": [
+            "Postgres checks FK on Insert in Child (Read lock on Parent). Can cause blocking if Parent is widely updated.",
+            "Write lock",
+            "No lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "Unindexed Foreign Key columns?",
+        "type": "mcq",
+        "o": [
+            "On Delete/Update of Parent, Postgres must Scan Child table to check for orphans. Slow! Index FK columns.",
+            "Fast",
+            "Key lookup",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_user_tables'?",
+        "type": "mcq",
+        "o": [
+            "View showing stats (seq_scan, idx_scan, n_tup_ins) for user tables",
+            "System tables",
+            "Logs",
+            "Config"
+        ]
+    },
+    {
+        "q": "High 'seq_tup_read' vs 'idx_tup_fetch'?",
+        "type": "mcq",
+        "o": [
+            "Indicates potential missing indexes (Lots of sequential scanning)",
+            "Good indexing",
+            "Normal",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'pg_statio_user_tables'?",
+        "type": "mcq",
+        "o": [
+            "IO statistics (heap_blks_read vs heap_blks_hit) for user tables. Hit ratio calculation.",
+            "Row stats",
+            "CPU stats",
+            "Log stats"
+        ]
+    },
+    {
+        "q": "Ideal 'Cache Hit Ratio'?",
+        "type": "mcq",
+        "o": [
+            "> 99% (Most pages found in buffer). If low, need more RAM or better queries.",
+            "50%",
+            "10%",
+            "0%"
+        ]
+    },
+    {
+        "q": "What is 'pg_dump --data-only'?",
+        "type": "mcq",
+        "o": [
+            "-a. Dumps only data (INSERT/COPY), no DDL (CREATE TABLE).",
+            "Schema only",
+            "Full",
+            "Blobs"
+        ]
+    },
+    {
+        "q": "What is 'pg_dump --schema-only'?",
+        "type": "mcq",
+        "o": [
+            "-s. Dumps only DDL (Table definitions), no data.",
+            "Data only",
+            "Full",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_restore -j'?",
+        "type": "mcq",
+        "o": [
+            "Run restore in parallel (Multi-threaded). Only works with custom/directory format dumps.",
+            "Json",
+            "Join",
+            "Jump"
+        ]
+    },
+    {
+        "q": "What is 'Custom Format' (pg_dump -Fc)?",
+        "type": "mcq",
+        "o": [
+            "Binary format. Compressed. Flexible (allows partial restore, reordering). Recommended.",
+            "Text",
+            "Tar",
+            "Raw"
+        ]
+    },
+    {
+        "q": "What is 'autovacuum_vacuum_scale_factor'?",
+        "type": "mcq",
+        "o": [
+            "Fraction of table size (0.2 = 20%) that must change to trigger autovacuum. Lower for huge tables.",
+            "Blocks",
+            "Rows",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'autovacuum_vacuum_threshold'?",
+        "type": "mcq",
+        "o": [
+            "Minimum number of tuple updates (50) to trigger vacuum. Used with scale_factor.",
+            "Max updates",
+            "Pages",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'temp_buffers'?",
+        "type": "mcq",
+        "o": [
+            "Memory for temporary tables (Session local). Default 8MB.",
+            "Global",
+            "Shared",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'commit_delay'?",
+        "type": "mcq",
+        "o": [
+            "Time to wait before flushing WAL, hoping to group commit with others (Group Commit).",
+            "Lock delay",
+            "IO delay",
+            "Net delay"
+        ]
+    },
+    {
+        "q": "What is 'fsync'?",
+        "type": "mcq",
+        "o": [
+            "OS call forcing flush to physical disk. MUST be 'on' for durability. 'off' is risky (only for temp DBs).",
+            "Async",
+            "Sync",
+            "Buffer"
+        ]
+    },
+    {
+        "q": "What is 'full_page_writes'?",
+        "type": "mcq",
+        "o": [
+            "Writes full page image to WAL on first change after checkpoint. Prevents 'Torn Page' corruption.",
+            "Partial write",
+            "No write",
+            "Fast write"
+        ]
+    },
+    {
+        "q": "What is 'Torn Page'?",
+        "type": "mcq",
+        "o": [
+            "Partial write (e.g. 4KB of 8KB written) during crash. DB page is mixed old/new garbage.",
+            "Full page",
+            "Clean page",
+            "Lost page"
+        ]
+    },
+    {
+        "q": "What is 'pg_test_fsync'?",
+        "type": "mcq",
+        "o": [
+            "Tool to benchmark easiest/fastest fsync method for specific hardware",
+            "Disk test",
+            "Mem test",
+            "Net test"
+        ]
+    },
+    {
+        "q": "What is 'pg_waldump'?",
+        "type": "mcq",
+        "o": [
+            "Tool to decode/display raw WAL files (Debug/Forensics)",
+            "Dump db",
+            "Dump table",
+            "Dump user"
+        ]
+    },
+    {
+        "q": "What is 'Range Type' overlap op?",
+        "type": "mcq",
+        "o": [
+            "&& (Overlaps). e.g. '[1,5]'::int4range && '[4,9]'::int4range is true.",
+            "||",
+            "==",
+            "<>"
+        ]
+    },
+    {
+        "q": "What is 'Range Type' union op?",
+        "type": "mcq",
+        "o": [
+            "+ (Union). e.g. '[1,5]' + '[5,10]'",
+            "-",
+            "*",
+            "/"
+        ]
+    },
+    {
+        "q": "What is 'Multirange' (v14+)?",
+        "type": "mcq",
+        "o": [
+            "Type storing multiple non-contiguous ranges (e.g. {[1,2], [5,6]})",
+            "Single range",
+            "Array",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'LEAKPROOF' function?",
+        "type": "mcq",
+        "o": [
+            "Function that reveals no info about arguments in error messages. Allowed in security barrier views/RLS.",
+            "Secure",
+            "Private",
+            "Hidden"
+        ]
+    },
+    {
+        "q": "What is 'Security Barrier' View?",
+        "type": "mcq",
+        "o": [
+            "View option preventing optimizer from pushing predicates down (leaking data) before view filter applies",
+            "Fast view",
+            "Temp view",
+            "System view"
+        ]
+    },
+    {
+        "q": "What is 'pg_replication_slot_advance'?",
+        "type": "mcq",
+        "o": [
+            "Function to manually move a slot forward (skipping WAL). Dangerous but fixes stuck slots.",
+            "Move back",
+            "Delete",
+            "Create"
+        ]
+    },
+    {
+        "q": "What is 'TOAST' Chunk Size?",
+        "type": "mcq",
+        "o": [
+            "Typically 2KB chunks. Stored in separate toaster table.",
+            "8KB",
+            "1MB",
+            "64KB"
+        ]
+    },
+    {
+        "q": "TOAST Compression?",
+        "type": "mcq",
+        "o": [
+            "pglz (default) or lz4 (v14+, faster). Compresses attributes before storage.",
+            "Zip",
+            "Gzip",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'TimescaleDB' (Concept)?",
+        "type": "mcq",
+        "o": [
+            "Extension for Time-Series data (Hypertables). Auto-partitioning by time.",
+            "Graph DB",
+            "Key-Value",
+            "Memory"
+        ]
+    },
+    {
+        "q": "What is 'Citus' (Concept)?",
+        "type": "mcq",
+        "o": [
+            "Extension turning Postgres into a distributed database (Sharding tables across nodes)",
+            "Replication",
+            "Backup",
+            "Pool"
+        ]
+    },
+    {
+        "q": "PgBouncer 'Session Pooling'?",
+        "type": "mcq",
+        "o": [
+            "Server connection assigned to client for entire session duration. Good for temp tables.",
+            "Transaction",
+            "Statement",
+            "None"
+        ]
+    },
+    {
+        "q": "PgBouncer 'Transaction Pooling'?",
+        "type": "mcq",
+        "o": [
+            "Server connection assigned only for transaction duration. Highest scale. No session features (SET, Temp Tables).",
+            "Session",
+            "Statement",
+            "All"
+        ]
+    },
+    {
+        "q": "PgBouncer 'Statement Pooling'?",
+        "type": "mcq",
+        "o": [
+            "Server connection assigned per statement. Very restrictive (No multi-statement tx). Aggressive.",
+            "Session",
+            "Transaction",
+            "Loose"
+        ]
+    },
+    {
+        "q": "What is 'Query ID' (pg_stat_statements)?",
+        "type": "mcq",
+        "o": [
+            "Hash identifying unique query structure (normalized). Stable across restarts (v14+).",
+            "PID",
+            "User ID",
+            "Row ID"
+        ]
+    },
+    {
+        "q": "What is 'Wait Event'?",
+        "type": "mcq",
+        "o": [
+            "Indicates what a process is waiting for (e.g. IO:DataFileRead, Lock:relation)",
+            "Error",
+            "Status",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'LWLock' (Lightweight Lock)?",
+        "type": "mcq",
+        "o": [
+            "Internal memory locks (Spinlocks/Semaphores) protecting shared structures (Buffers, WAL)",
+            "Heavy lock",
+            "Row lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "Common LWLock 'BufferMapping'?",
+        "type": "mcq",
+        "o": [
+            "Contention on Hash Map mapping pages to Shared Buffers (Hot pages)",
+            "WAL write",
+            "Disk read",
+            "Network"
+        ]
+    },
+    {
+        "q": "Common LWLock 'WALWrite'?",
+        "type": "mcq",
+        "o": [
+            "Waiting for WAL buffer flush to disk (Commit latency)",
+            "Read",
+            "Buffer",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'Vacuum Failsafe'?",
+        "type": "mcq",
+        "o": [
+            "Mechanism disabling cost-based delays if Wraparound is imminent (Emergency mode)",
+            "Cancel",
+            "Stop",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'System Identifier'?",
+        "type": "mcq",
+        "o": [
+            "Unique ID generated at initdb. Ensures backups/WALs belong to same cluster.",
+            "Server ID",
+            "IP",
+            "Name"
+        ]
+    },
+    {
+        "q": "What is 'pg_control'?",
+        "type": "mcq",
+        "o": [
+            "Binary file containing cluster state (Checkpoint info, WAL position, State). Vital.",
+            "Config",
+            "Log",
+            "Data"
+        ]
+    },
+    {
+        "q": "What is 'pg_controldata'?",
+        "type": "mcq",
+        "o": [
+            "Tool to display pg_control file contents (Check DB state: shut down vs in production)",
+            "Edit control",
+            "Delete control",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_database_conflicts'?",
+        "type": "mcq",
+        "o": [
+            "Stats on replica conflicts (snapshot, tablespace, lock) causing query cancels",
+            "Master conflicts",
+            "User conflicts",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'temp_file_limit'?",
+        "type": "mcq",
+        "o": [
+            "Max space a process can use for temp files (Sort spills). Prevents disk fill execution.",
+            "RAM limit",
+            "Table limit",
+            "Row limit"
+        ]
+    },
+    {
+        "q": "What is 'log_temp_files'?",
+        "type": "mcq",
+        "o": [
+            "Logs temporary file creation > size. (-1 disables, 0 logs all). Good for tuning work_mem.",
+            "Delete files",
+            "Block files",
+            "Archive"
+        ]
+    },
+    {
+        "q": "What is 'log_min_duration_statement'?",
+        "type": "mcq",
+        "o": [
+            "Logs queries taking longer than N ms (Slow Query Log)",
+            "Log all",
+            "Log errors",
+            "Log none"
+        ]
+    },
+    {
+        "q": "What is 'log_lock_waits'?",
+        "type": "mcq",
+        "o": [
+            "Logs when a session waits longer than deadlock_timeout for a lock",
+            "Deadlocks only",
+            "All locks",
+            "No locks"
+        ]
+    },
+    {
+        "q": "What is 'deadlock_timeout'?",
+        "type": "mcq",
+        "o": [
+            "Time (default 1s) to wait before checking for deadlock condition (Expensive check)",
+            "Query timeout",
+            "Connect time",
+            "Idle time"
+        ]
+    },
+    {
+        "q": "What is 'track_io_timing'?",
+        "type": "mcq",
+        "o": [
+            "Enables timing of block I/O calls. Essential for Explain (Buffers/Timing). Off by default.",
+            "On",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'track_functions'?",
+        "type": "mcq",
+        "o": [
+            "Tracks execution stats (count, time) for user functions (pg_stat_user_functions)",
+            "System functions",
+            "All",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_progress_vacuum'?",
+        "type": "mcq",
+        "o": [
+            "View showing live progress of Vacuum (Phase, Heap Blks Scanned)",
+            "History",
+            "Log",
+            "Plan"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_progress_create_index'?",
+        "type": "mcq",
+        "o": [
+            "View showing live progress of Index Creation",
+            "Table create",
+            "DB create",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_progress_copy'?",
+        "type": "mcq",
+        "o": [
+            "View showing progress of COPY command (Bytes processed)",
+            "Backup",
+            "Restore",
+            "Insert"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_slru'?",
+        "type": "mcq",
+        "o": [
+            "View showing simple LRU cache stats (CLOG, Subtrans, etc)",
+            "Buffer",
+            "Memory",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'CLOG' (Commit Log)?",
+        "type": "mcq",
+        "o": [
+            "Bitmap storing transaction status (Committed/Aborted). Now usually called 'pg_xact'.",
+            "Data log",
+            "Error log",
+            "Audit"
+        ]
+    },
+    {
+        "q": "What is 'pg_xact'?",
+        "type": "mcq",
+        "o": [
+            "Directory containing Commit Log files (renamed from pg_clog in v10)",
+            "Wal",
+            "Base",
+            "Global"
+        ]
+    },
+    {
+        "q": "What is 'pg_tblspc'?",
+        "type": "mcq",
+        "o": [
+            "Directory containing symlinks to external Tablespaces",
+            "Tables",
+            "Spaces",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'pg_terminate_backend(pid, timeout)'?",
+        "type": "mcq",
+        "o": [
+            "New signature allowing graceful wait before termination",
+            "Kill instant",
+            "Cancel",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'search_path' injection risk?",
+        "type": "mcq",
+        "o": [
+            "If public is first, malicious user can create object masking system object. Put 'public' last.",
+            "None",
+            "Features",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'GENERATED ALWAYS AS'?",
+        "type": "mcq",
+        "o": [
+            "Generated column syntax (Computed). 'STORED' calculates on write.",
+            "Virtual",
+            "View",
+            "Index"
+        ]
+    },
+    {
+        "q": "What is 'XML' type?",
+        "type": "mcq",
+        "o": [
+            "Validates XML structure. Provides xpath support.",
+            "Text",
+            "Json",
+            "Blob"
+        ]
+    },
+    {
+        "q": "What is 'xpath' function?",
+        "type": "mcq",
+        "o": [
+            "Extracts data from XML using XPath query",
+            "Json path",
+            "Text search",
+            "Parse"
+        ]
+    },
+    {
+        "q": "What is 'bit' type?",
+        "type": "mcq",
+        "o": [
+            "Fixed length bit string. bit(3).",
+            "Boolean",
+            "Byte",
+            "Char"
+        ]
+    },
+    {
+        "q": "What is 'varbit' type?",
+        "type": "mcq",
+        "o": [
+            "Variable length bit string",
+            "Bit",
+            "Text",
+            "Blob"
+        ]
+    },
+    {
+        "q": "What is 'cidr' type?",
+        "type": "mcq",
+        "o": [
+            "IPv4/IPv6 network address specification (e.g. 192.168.1.0/24)",
+            "Inet",
+            "Macaddr",
+            "Text"
+        ]
+    },
+    {
+        "q": "What is 'inet' type?",
+        "type": "mcq",
+        "o": [
+            "IPv4/IPv6 host address (e.g. 192.168.1.1/24). Stores netmask.",
+            "Cidr",
+            "Ip",
+            "Address"
+        ]
+    },
+    {
+        "q": "What is 'macaddr' type?",
+        "type": "mcq",
+        "o": [
+            "MAC address (6 bytes). macaddr8 (8 bytes EUI-64).",
+            "Ip",
+            "Net",
+            "Text"
+        ]
+    },
+    {
+        "q": "What is 'money' type?",
+        "type": "mcq",
+        "o": [
+            "Currency amount with fixed fractional precision (locale dependent). Often discouraged for numeric/decimal.",
+            "Decimal",
+            "Float",
+            "Int"
+        ]
+    },
+    {
+        "q": "What is 'pg_ls_dir'?",
+        "type": "mcq",
+        "o": [
+            "Lists files in a directory (Restricted to Superuser/pg_read_server_files)",
+            "Read file",
+            "Write file",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'pg_read_file'?",
+        "type": "mcq",
+        "o": [
+            "Reads content of a file (text) from data directory",
+            "Write file",
+            "Execute",
+            "Scan"
+        ]
+    },
+    {
+        "q": "What is 'LSN'?",
+        "type": "mcq",
+        "o": [
+            "Log Sequence Number. 64-bit integer representing a position in the WAL stream (FileId / Offset).",
+            "Line number",
+            "List number",
+            "Legal ID"
+        ]
+    },
+    {
+        "q": "LSN Format?",
+        "type": "mcq",
+        "o": [
+            "Hexadecimal (e.g. 0/15D68C50)",
+            "Decimal",
+            "Binary",
+            "String"
+        ]
+    },
+    {
+        "q": "What is 'WAL Segment' size?",
+        "type": "mcq",
+        "o": [
+            "Default 16MB. Can be changed at compile time or initdb (v11+).",
+            "1GB",
+            "1MB",
+            "4KB"
+        ]
+    },
+    {
+        "q": "What is 'Timeline ID'?",
+        "type": "mcq",
+        "o": [
+            "Identifier preventing confusion between original history and recovery history (branched history after PITR/Promotion)",
+            "Time zone",
+            "Date",
+            "Clock"
+        ]
+    },
+    {
+        "q": "What is 'Partial WAL' file?",
+        "type": "mcq",
+        "o": [
+            "File ending in .partial. Remnant of the old timeline after a promotion/recovery.",
+            "Corrupt",
+            "Temp",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Temporary Replication Slot'?",
+        "type": "mcq",
+        "o": [
+            "Slot that is automatically dropped when the session ends. No risk of disk full if client crashes.",
+            "Permanent",
+            "Logical",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Index' (Extension)?",
+        "type": "mcq",
+        "o": [
+            "Lossy index structure (Signature). Good for multi-column queries where varying subsets of columns are queried.",
+            "B-Tree",
+            "Hash",
+            "Exact"
+        ]
+    },
+    {
+        "q": "What is 'RUM Index' (Concept)?",
+        "type": "mcq",
+        "o": [
+            "Extension based on GIN. Stores additional info (positions/rank) to speed up FTS ranking and phrase search.",
+            "Gin",
+            "Gist",
+            "Rumor"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Vacuum'?",
+        "type": "mcq",
+        "o": [
+            "Feature (v13+) allowing Vacuum to use multiple workers for Index phases (Faster cleanup)",
+            "Serial",
+            "Slow",
+            "No workers"
+        ]
+    },
+    {
+        "q": "What is 'Attach Partition'?",
+        "type": "mcq",
+        "o": [
+            "Adding a standard table as a partition to a partitioned table. (Requires scanning/validating constraints unless CHECK is present).",
+            "Create",
+            "Detach",
+            "Drop"
+        ]
+    },
+    {
+        "q": "Attach Partition 'CONCURRENTLY'?",
+        "type": "mcq",
+        "o": [
+            "Attaches without exclusive lock on Parent (Postgres 14+ P), avoids blocking select/insert.",
+            "Block",
+            "Lock",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Detach Partition'?",
+        "type": "mcq",
+        "o": [
+            "Removes table from partition hierarchy. Data remains in table (now standalone). Fast way to archive data.",
+            "Drop",
+            "Delete",
+            "Truncate"
+        ]
+    },
+    {
+        "q": "What is 'pg_rotate_logfile'?",
+        "type": "mcq",
+        "o": [
+            "Signals logging collector to switch to a new file immediately",
+            "Delete log",
+            "Archive log",
+            "Stop log"
+        ]
+    },
+    {
+        "q": "What is 'Access Share' Lock?",
+        "type": "mcq",
+        "o": [
+            "Least restrictive lock. Taken by SELECT statements. Conflicts only with Access Exclusive.",
+            "Exclusive",
+            "Row Share",
+            "Update"
+        ]
+    },
+    {
+        "q": "What is 'Row Exclusive' Lock?",
+        "type": "mcq",
+        "o": [
+            "Taken by UPDATE, DELETE, INSERT. Conflicts with Full/Scan locks.",
+            "Share",
+            "Read",
+            "Access"
+        ]
+    },
+    {
+        "q": "What is 'Access Exclusive' Lock?",
+        "type": "mcq",
+        "o": [
+            "Most restrictive. Conflicts with EVERYTHING (even Select). Taken by ALTER TABLE, DROP, TRUNCATE, VACUUM FULL.",
+            "Share",
+            "Row",
+            "Page"
+        ]
+    },
+    {
+        "q": "What is 'Share Update Exclusive' Lock?",
+        "type": "mcq",
+        "o": [
+            "Taken by VACUUM (standard), CREATE INDEX CONCURRENTLY, ANALYZE. Conflicts with itself.",
+            "Full",
+            "Access",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is 'superuser_reserved_connections'?",
+        "type": "mcq",
+        "o": [
+            "Number of connection slots (default 3) reserved for Superusers. Allows Admin login even if max_connections reached.",
+            "User slots",
+            "Public slots",
+            "Guest"
+        ]
+    },
+    {
+        "q": "What is 'template0'?",
+        "type": "mcq",
+        "o": [
+            "Pristine system template database. Should never be modified. Used to create template1.",
+            "User db",
+            "Test db",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Role Attribute 'CREATEDB'?",
+        "type": "mcq",
+        "o": [
+            "Permission to create new databases",
+            "Tables",
+            "Views",
+            "Users"
+        ]
+    },
+    {
+        "q": "Role Attribute 'CREATEROLE'?",
+        "type": "mcq",
+        "o": [
+            "Permission to create/alter other roles (except Superusers)",
+            "Create DB",
+            "Create Table",
+            "Create View"
+        ]
+    },
+    {
+        "q": "Role Attribute 'REPLICATION'?",
+        "type": "mcq",
+        "o": [
+            "Permission to connect in replication mode (streaming/logical) and manage slots",
+            "Copy",
+            "Backup",
+            "Restore"
+        ]
+    },
+    {
+        "q": "What is 'pg_switch_wal'?",
+        "type": "mcq",
+        "o": [
+            "Forces a switch to a new WAL file (useful for archiving/backups)",
+            "Delete WAL",
+            "Stop WAL",
+            "Reset WAL"
+        ]
+    },
+    {
+        "q": "What is 'pg_current_wal_lsn'?",
+        "type": "mcq",
+        "o": [
+            "Returns current write location in WAL",
+            "Read location",
+            "File name",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'pg_create_restore_point'?",
+        "type": "mcq",
+        "o": [
+            "Creates a named point in WAL (e.g. 'before_upgrade') for PITR targeting",
+            "Snapshot",
+            "Backup",
+            "Savepoint"
+        ]
+    },
+    {
+        "q": "What is 'pg_show_all_settings'?",
+        "type": "mcq",
+        "o": [
+            "Returns all GUC parameters describing values and descriptions",
+            "Show tables",
+            "Config",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'GUC'?",
+        "type": "mcq",
+        "o": [
+            "Grand Unified Configuration. Term for Postgres configuration parameters.",
+            "Global",
+            "General",
+            "Group"
+        ]
+    },
+    {
+        "q": "What is 'SET LOCAL'?",
+        "type": "mcq",
+        "o": [
+            "Sets a config parameter only for the current transaction (Reverts on Commit/Rollback)",
+            "Session",
+            "Global",
+            "Permanent"
+        ]
+    },
+    {
+        "q": "What is 'RESET ALL'?",
+        "type": "mcq",
+        "o": [
+            "Resets all settable parameters to default values for the session",
+            "Clear",
+            "Delete",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_archiver'?",
+        "type": "mcq",
+        "o": [
+            "Stats about WAL archiving process (last_archived_wal, last_failed_wal)",
+            "Backup",
+            "Wal receiver",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_bgwriter' buffers_checkpoint?",
+        "type": "mcq",
+        "o": [
+            "Number of buffers written during checkpoints",
+            "Clean",
+            "Backend",
+            "Alloc"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_bgwriter' buffers_clean?",
+        "type": "mcq",
+        "o": [
+            "Number of buffers written by the background writer (cleaning dirty pages)",
+            "Checkpoint",
+            "Backend",
+            "Alloc"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_bgwriter' buffers_backend?",
+        "type": "mcq",
+        "o": [
+            "Number of buffers written directly by backend (query) process. Bad! Means bgwriter/checkpointer is too slow.",
+            "Good",
+            "Normal",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'pg_ls_waldir'?",
+        "type": "mcq",
+        "o": [
+            "Function listing files in pg_wal directory (access restricted)",
+            "Log dir",
+            "Data dir",
+            "Temp dir"
+        ]
+    },
+    {
+        "q": "What is 'pg_wal_replay_pause'?",
+        "type": "mcq",
+        "o": [
+            "Pauses WAL replay on standby (Useful for inspecting state at a point in time)",
+            "Stop",
+            "Resume",
+            "Lag"
+        ]
+    },
+    {
+        "q": "What is 'pg_wal_replay_resume'?",
+        "type": "mcq",
+        "o": [
+            "Resumes paused WAL replay",
+            "Stop",
+            "Pause",
+            "Sync"
+        ]
+    },
+    {
+        "q": "What is 'pg_last_xact_replay_timestamp'?",
+        "type": "mcq",
+        "o": [
+            "Timestamp of the last transaction replayed on Standby (Used to calculate Lag)",
+            "Write time",
+            "Commit time",
+            "Start time"
+        ]
+    },
+    {
+        "q": "What is 'Lag' measured in?",
+        "type": "mcq",
+        "o": [
+            "Bytes (WAL difference) or Time (Replay delay)",
+            "Rows",
+            "Tables",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'pg_safe_snapshot_blocking_pids'?",
+        "type": "mcq",
+        "o": [
+            "Returns PIDs of sessions blocking a Safe Snapshot export",
+            "Locks",
+            "Users",
+            "Tables"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Export'?",
+        "type": "mcq",
+        "o": [
+            "Exporting a snapshot identifier so other transactions can see exactly the same state (Consistent backup)",
+            "Photo",
+            "File",
+            "View"
+        ]
+    },
+    {
+        "q": "pg_dump '--snapshot'?",
+        "type": "mcq",
+        "o": [
+            "Uses a synchronized snapshot (exported by another session) to dump consistent state",
+            "New snapshot",
+            "No snapshot",
+            "Latest"
+        ]
+    },
+    {
+        "q": "What is 'pg_backend_pid'?",
+        "type": "mcq",
+        "o": [
+            "Returns the Process ID (PID) of the current session",
+            "Server PID",
+            "User ID",
+            "Name"
+        ]
+    },
+    {
+        "q": "What is 'pg_conf_load_time'?",
+        "type": "mcq",
+        "o": [
+            "Timestamp when configuration files were last loaded",
+            "Start time",
+            "Boot time",
+            "Now"
+        ]
+    },
+    {
+        "q": "What is 'pg_postmaster_start_time'?",
+        "type": "mcq",
+        "o": [
+            "Timestamp when the server instance started",
+            "Reload time",
+            "Config time",
+            "Now"
+        ]
+    },
+    {
+        "q": "What is 'pg_listening_channels'?",
+        "type": "mcq",
+        "o": [
+            "Returns list of channels the current session is LISTENING to",
+            "Broadcasting",
+            "Waiting",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'pg_notification_queue_usage'?",
+        "type": "mcq",
+        "o": [
+            "Fraction of async notification queue currently occupied",
+            "Memory",
+            "Disk",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'pg_trigger_depth'?",
+        "type": "mcq",
+        "o": [
+            "Current nesting level of triggers",
+            "Recursion",
+            "Stack",
+            "Count"
+        ]
+    },
+    {
+        "q": "What is 'max_stack_depth'?",
+        "type": "mcq",
+        "o": [
+            "Safe limit for stack usage (function recursion). Prevents crash (Segfault).",
+            "Heap limit",
+            "Mem limit",
+            "Row limit"
+        ]
+    },
+    {
+        "q": "What is 'pg_blocking_pids(pid)'?",
+        "type": "mcq",
+        "o": [
+            "Returns array of PIDs blocking the specified PID",
+            "Waiting",
+            "Running",
+            "Idle"
+        ]
+    },
+    {
+        "q": "What is 'pg_shmem_allocations'?",
+        "type": "mcq",
+        "o": [
+            "View showing allocations in shared memory (Buffer pool, Locks, WAL buffers)",
+            "Local mem",
+            "Disk",
+            "Heap"
+        ]
+    },
+    {
+        "q": "Connection URI format?",
+        "type": "mcq",
+        "o": [
+            "postgresql://user:password@host:port/dbname",
+            "postgres:user@host",
+            "sql://host",
+            "connectString"
+        ]
+    },
+    {
+        "q": "Environment Variable: PGHOST?",
+        "type": "mcq",
+        "o": [
+            "Specifies the database host",
+            "User",
+            "Port",
+            "Password"
+        ]
+    },
+    {
+        "q": "Environment Variable: PGPORT?",
+        "type": "mcq",
+        "o": [
+            "Specifies the port (Default 5432)",
+            "Host",
+            "DB",
+            "User"
+        ]
+    },
+    {
+        "q": "Environment Variable: PGPASSWORD?",
+        "type": "mcq",
+        "o": [
+            "Specifies password (Not recommended for security, use .pgpass)",
+            "User",
+            "Host",
+            "DB"
+        ]
+    },
+    {
+        "q": "What is '.pgpass' file?",
+        "type": "mcq",
+        "o": [
+            "File storing passwords. Format: hostname:port:database:username:password",
+            "Config",
+            "Log",
+            "Text"
+        ]
+    },
+    {
+        "q": "Permissions for .pgpass?",
+        "type": "mcq",
+        "o": [
+            "Msut be 0600 (Read/Write by user only) on Unix. Ignored otherwise.",
+            "777",
+            "Public",
+            "Any"
+        ]
+    },
+    {
+        "q": "What is 'root.crt'?",
+        "type": "mcq",
+        "o": [
+            "Trusted Certificate Authority (CA) certificate file",
+            "Server key",
+            "Client key",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'server.key'?",
+        "type": "mcq",
+        "o": [
+            "Server's private key. Must be protected (0600).",
+            "Public cert",
+            "Root CA",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'log_line_prefix'?",
+        "type": "mcq",
+        "o": [
+            "Formatting string for log lines (e.g. '%t [%p]: [%l-1] user=%u,db=%d ')",
+            "File name",
+            "Dir path",
+            "Size"
+        ]
+    },
+    {
+        "q": "Log Prefix '%m'?",
+        "type": "mcq",
+        "o": [
+            "Time stamp with milliseconds",
+            "Message",
+            "Minute",
+            "Month"
+        ]
+    },
+    {
+        "q": "Log Prefix '%u'?",
+        "type": "mcq",
+        "o": [
+            "User name",
+            "Uuid",
+            "Url",
+            "Usage"
+        ]
+    },
+    {
+        "q": "Log Prefix '%d'?",
+        "type": "mcq",
+        "o": [
+            "Database name",
+            "Date",
+            "Duration",
+            "Dir"
+        ]
+    },
+    {
+        "q": "What is 'log_statement'?",
+        "type": "mcq",
+        "o": [
+            "Controls which SQL statements are logged. Values: none, ddl, mod, all.",
+            "On/Off",
+            "True/False",
+            "Level"
+        ]
+    },
+    {
+        "q": "log_statement = 'ddl'?",
+        "type": "mcq",
+        "o": [
+            "Logs data definition statements (CREATE, ALTER, DROP)",
+            "Selects",
+            "Inserts",
+            "All"
+        ]
+    },
+    {
+        "q": "log_statement = 'mod'?",
+        "type": "mcq",
+        "o": [
+            "Logs ddl + data-modifying statements (INSERT, UPDATE, DELETE, TRUNCATE, COPY)",
+            "Selects",
+            "Errors",
+            "None"
+        ]
+    },
+    {
+        "q": "RLS Policy: USING vs WITH CHECK?",
+        "type": "mcq",
+        "o": [
+            "USING checks visibility (Select/Update/Delete existing). WITH CHECK checks new data (Insert/Update new).",
+            "Same",
+            "Using is insert",
+            "Check is select"
+        ]
+    },
+    {
+        "q": "What causes 'Table Rewrite'?",
+        "type": "mcq",
+        "o": [
+            "Changing column type (e.g. text to int), Adding column with default (pre-v11), VACUUM FULL, CLUSTER.",
+            "Select",
+            "Index create",
+            "Grant"
+        ]
+    },
+    {
+        "q": "Impact of Table Rewrite?",
+        "type": "mcq",
+        "o": [
+            "Exclusive Lock on table. Copies all data to new file. High IO. Blocking.",
+            "Fast",
+            "Online",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'shared_preload_libraries'?",
+        "type": "mcq",
+        "o": [
+            "Libraries to load at server start (pg_stat_statements, pgaudit). Requires Restart.",
+            "Dynamic load",
+            "Client lib",
+            "User lib"
+        ]
+    },
+    {
+        "q": "What is 'session_preload_libraries'?",
+        "type": "mcq",
+        "o": [
+            "Libraries loaded at start of each session",
+            "Server start",
+            "Boot",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'pg_audit'?",
+        "type": "mcq",
+        "o": [
+            "Extension for detailed session/object audit logging (Compliance)",
+            "Debug",
+            "Optimize",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'pg_cron'?",
+        "type": "mcq",
+        "o": [
+            "Extension running scheduled jobs (cron syntax) inside the database",
+            "OS Cron",
+            "Timer",
+            "Watch"
+        ]
+    },
+    {
+        "q": "What is 'pg_partman'?",
+        "type": "mcq",
+        "o": [
+            "Extension for managing partitioned tables (time/serial based automatic creation)",
+            "Manual",
+            "Views",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'pg_repack'?",
+        "type": "mcq",
+        "o": [
+            "Third party tool to remove bloat (LIKE Vacuum Full) but ONLINE (Minimal locking)",
+            "Offline",
+            "Slow",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "Does Postgres have Native 'KeepAlive'?",
+        "type": "mcq",
+        "o": [
+            "Yes (tcp_keepalives_idle, etc). Helps detect dead client connections.",
+            "No",
+            "Only Linux",
+            "Only Windows"
+        ]
+    },
+    {
+        "q": "What is 'ssl_ciphers'?",
+        "type": "mcq",
+        "o": [
+            "Configures allowed SSL cipher suites (Security hardening)",
+            "Key",
+            "Cert",
+            "Version"
+        ]
+    },
+    {
+        "q": "What is 'password_encryption'?",
+        "type": "mcq",
+        "o": [
+            "Configures hashing algorithm for CREATE/ALTER ROLE. Default scram-sha-256 (v14+).",
+            "Md5",
+            "Text",
+            "Des"
+        ]
+    },
+    {
+        "q": "What is 'row_security' GUC?",
+        "type": "mcq",
+        "o": [
+            "Controls whether RLS policies are applied (on/off). Default on. Superusers bypass.",
+            "Table lock",
+            "Admin",
+            "Audit"
+        ]
+    },
+    {
+        "q": "What is 'client_min_messages'?",
+        "type": "mcq",
+        "o": [
+            "Minimum message level sent to client (NOTICE, WARNING, ERROR)",
+            "Debug",
+            "Log",
+            "All"
+        ]
+    },
+    {
+        "q": "What is 'log_min_messages'?",
+        "type": "mcq",
+        "o": [
+            "Minimum message level written to server log",
+            "Client",
+            "User",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'bytea' format 'hex'?",
+        "type": "mcq",
+        "o": [
+            "Default output format (e.g. \\xDEADBEEF)",
+            "Escape",
+            "Base64",
+            "Binary"
+        ]
+    },
+    {
+        "q": "What is 'escape' format (Bytea)?",
+        "type": "mcq",
+        "o": [
+            "Traditional octal escape format (legacy)",
+            "Hex",
+            "New",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Can Postgres be run as Root?",
+        "type": "mcq",
+        "o": [
+            "No. Security feature prevents running server as root user.",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'postmaster.pid'?",
+        "type": "mcq",
+        "o": [
+            "File in data directory containing PID and start info. Prevents multiple instances on same dir.",
+            "Config",
+            "Log",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'pg_ident.conf' map?",
+        "type": "mcq",
+        "o": [
+            "Maps 'map-name' 'system-username' 'postgres-username'",
+            "IP Port",
+            "DB Table",
+            "File Dir"
+        ]
+    },
+    {
+        "q": "What is 'Target List'?",
+        "type": "mcq",
+        "o": [
+            "The list of expressions between SELECT and FROM",
+            "Where clause",
+            "Order by",
+            "Limit"
+        ]
+    },
+    {
+        "q": "What is 'Range Table'?",
+        "type": "mcq",
+        "o": [
+            "List of relations used in a query",
+            "Index",
+            "Log",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'Plan Tree'?",
+        "type": "mcq",
+        "o": [
+            "Tree of nodes (Scan, Join, Sort) representing execution strategy",
+            "B-Tree",
+            "Table",
+            "View"
+        ]
+    },
+    {
+        "q": "What is 'Executor'?",
+        "type": "mcq",
+        "o": [
+            "Component that recursively initializes, steps through, and shuts down plan nodes",
+            "Planner",
+            "Parser",
+            "Rewriter"
+        ]
+    },
+    {
+        "q": "What is 'Parser'?",
+        "type": "mcq",
+        "o": [
+            "Checks syntax and builds Parse Tree",
+            "Executor",
+            "Planner",
+            "Storage"
+        ]
+    },
+    {
+        "q": "What is 'Planner/Optimizer'?",
+        "type": "mcq",
+        "o": [
+            "Generates multiple path candidates and selects cheapest based on cost model",
+            "Parser",
+            "Executor",
+            "Writer"
+        ]
+    },
+    {
+        "q": "What is 'pg_hint_plan'?",
+        "type": "mcq",
+        "o": [
+            "Extension allowing Oracle-style hints in comments (Postgres core doesn't support hints)",
+            "Core feature",
+            "Native",
+            "Standard"
+        ]
+    },
+    {
+        "q": "Why no hints in Postgres (Philosophy)?",
+        "type": "mcq",
+        "o": [
+            "Belief that hints rot and disguise bugs. Fix the statistics or planner instead.",
+            "Lazy",
+            "Hard",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Generic Plan' (Prepared Stmt)?",
+        "type": "mcq",
+        "o": [
+            "Plan created without parameter values (Costly if distribution is skewed)",
+            "Custom plan",
+            "Specific plan",
+            "Fast plan"
+        ]
+    },
+    {
+        "q": "What is 'Custom Plan' (Prepared Stmt)?",
+        "type": "mcq",
+        "o": [
+            "Plan created for specific parameter values (Peeking). Used for first few executions.",
+            "Generic",
+            "Slow",
+            "Bad"
+        ]
+    },
+    {
+        "q": "Heuristic for Generic vs Custom?",
+        "type": "mcq",
+        "o": [
+            "After 5 executions, if Generic is not much worse than Custom average, switch to Generic (Avoids replanning)",
+            "Always custom",
+            "Always generic",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Pre-warm' vs 'Cache'?",
+        "type": "mcq",
+        "o": [
+            "Pre-warm loads data from disk to RAM. Cache is the RAM holding it.",
+            "Same",
+            "Pre-warm computes",
+            "Cache writes"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_ssl'?",
+        "type": "mcq",
+        "o": [
+            "View showing SSL status/cipher/bits for each connection",
+            "Table stats",
+            "Index stats",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'pg_stat_gssapi'?",
+        "type": "mcq",
+        "o": [
+            "View showing GSSAPI authentication status",
+            "SSL",
+            "Login",
+            "Audit"
+        ]
+    },
+    {
+        "q": "Is 'Money' type stored as text?",
+        "type": "mcq",
+        "o": [
+            "No. It is a 64-bit integer (fixed point). Input/Output is formatted string.",
+            "Yes",
+            "Float",
+            "Double"
+        ]
+    },
+    {
+        "q": "What is 'NaN' (Numeric)?",
+        "type": "mcq",
+        "o": [
+            "Not a Number. Supported by Postgres Numeric/Float types.",
+            "Null",
+            "Zero",
+            "Error"
+        ]
+    },
+    {
+        "q": "Infinity timestamp?",
+        "type": "mcq",
+        "o": [
+            "Postgres supports 'infinity' and '-infinity' for timestamp comparisons",
+            "No",
+            "MaxInt",
+            "End of time"
+        ]
+    },
+    {
+        "q": "What is 'Current_Schema'?",
+        "type": "mcq",
+        "o": [
+            "Returns name of current schema in search path (usually first one)",
+            "User",
+            "DB",
+            "Table"
+        ]
+    },
+    {
+        "q": "What is 'Statement Latency'?",
+        "type": "mcq",
+        "o": [
+            "Time taken from parsing to completion",
+            "Wait time",
+            "Lock time",
+            "Ping"
+        ]
+    },
+    {
+        "q": "Where to find slow queries?",
+        "type": "mcq",
+        "o": [
+            "pg_stat_statements view (Top by total_exec_time)",
+            "pg_class",
+            "pg_user",
+            "pg_proc"
+        ]
+    },
+    {
+        "q": "Where to find missing indexes?",
+        "type": "mcq",
+        "o": [
+            "Check pg_stat_user_tables for high sequential scans and usage patterns",
+            "pg_index",
+            "pg_type",
+            "pg_db"
+        ]
+    },
+    {
+        "q": "Postgres Primary Key type recommended?",
+        "type": "mcq",
+        "o": [
+            "bigint (identity) or uuid (if distributed)",
+            "text",
+            "smallint",
+            "json"
+        ]
+    }
+]

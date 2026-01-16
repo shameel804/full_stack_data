@@ -1,0 +1,5911 @@
+[
+    {
+        "q": "What is middleware in Express.js?",
+        "type": "mcq",
+        "o": [
+            "Functions that have access to request, response, and next",
+            "Database connectors",
+            "Template engines",
+            "Route definitions"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use((req, res, next) => {\n    console.log('Middleware ran');\n    next();\n});\n\napp.get('/', (req, res) => {\n    res.send('Hello');\n});\n\n// When GET / is called",
+        "o": [
+            "Logs 'Middleware ran' then sends 'Hello'",
+            "Only sends 'Hello'",
+            "Only logs 'Middleware ran'",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ function passes control to the next middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "next"
+        ],
+        "other_options": [
+            "continue",
+            "forward",
+            "pass"
+        ]
+    },
+    {
+        "q": "Middleware must call next() to continue the chain.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is application-level middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware bound to the app instance using app.use()",
+            "Middleware for specific routes only",
+            "Error handling middleware",
+            "Built-in middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use('/api', (req, res, next) => {\n    console.log('API middleware');\n    next();\n});\n\napp.get('/api/users', (req, res) => res.send('Users'));\napp.get('/home', (req, res) => res.send('Home'));\n\n// When GET /home is called",
+        "o": [
+            "Only sends 'Home' - middleware not called",
+            "Logs 'API middleware' then sends 'Home'",
+            "Error",
+            "Both log and send"
+        ]
+    },
+    {
+        "q": "The ______ method mounts middleware at a specific path.",
+        "type": "fill_blank",
+        "answers": [
+            "use"
+        ],
+        "other_options": [
+            "mount",
+            "attach",
+            "bind"
+        ]
+    },
+    {
+        "q": "Path-specific middleware runs only for matching routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is router-level middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware bound to an express.Router() instance",
+            "Middleware for all routes",
+            "Error middleware",
+            "Built-in middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst router = express.Router();\n\nrouter.use((req, res, next) => {\n    req.timestamp = Date.now();\n    next();\n});\n\nrouter.get('/data', (req, res) => {\n    res.json({ time: req.timestamp });\n});\n\nconst app = express();\napp.use('/api', router);\n\n// GET /api/data returns",
+        "o": [
+            "{\"time\": <current timestamp>}",
+            "{\"time\": undefined}",
+            "Error",
+            "Empty object"
+        ]
+    },
+    {
+        "q": "Router middleware only affects routes on that ______.",
+        "type": "fill_blank",
+        "answers": [
+            "router"
+        ],
+        "other_options": [
+            "app",
+            "server",
+            "path"
+        ]
+    },
+    {
+        "q": "Router-level and application-level middleware work similarly.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error-handling middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware with four parameters: err, req, res, next",
+            "Middleware that never fails",
+            "Logging middleware",
+            "Authentication middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/', (req, res, next) => {\n    next(new Error('Something wrong'));\n});\n\napp.use((err, req, res, next) => {\n    res.status(500).json({ error: err.message });\n});\n\n// When GET / is called",
+        "o": [
+            "500 status with {\"error\": \"Something wrong\"}",
+            "Normal response",
+            "App crashes",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "Error middleware must have ______ parameters.",
+        "type": "fill_blank",
+        "answers": [
+            "four"
+        ],
+        "other_options": [
+            "three",
+            "two",
+            "five"
+        ]
+    },
+    {
+        "q": "Error middleware should be defined last.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of express.json()?",
+        "type": "mcq",
+        "o": [
+            "Parsing JSON request bodies",
+            "Sending JSON responses",
+            "JSON validation",
+            "JSON formatting"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use(express.json());\n\napp.post('/data', (req, res) => {\n    res.json({ received: req.body });\n});\n\n// POST with {\"name\": \"John\"} body",
+        "o": [
+            "{\"received\": {\"name\": \"John\"}}",
+            "{\"received\": undefined}",
+            "Error",
+            "{\"received\": null}"
+        ]
+    },
+    {
+        "q": "The ______ middleware parses JSON request bodies.",
+        "type": "fill_blank",
+        "answers": [
+            "express.json()"
+        ],
+        "other_options": [
+            "express.urlencoded()",
+            "body-parser",
+            "json-parser"
+        ]
+    },
+    {
+        "q": "express.json() is built into Express 4.16+.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of express.urlencoded()?",
+        "type": "mcq",
+        "o": [
+            "Parsing URL-encoded form data",
+            "Encoding URLs",
+            "Decoding URLs",
+            "URL validation"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use(express.urlencoded({ extended: true }));\n\napp.post('/form', (req, res) => {\n    res.json(req.body);\n});\n\n// POST with form data: name=John&age=30",
+        "o": [
+            "{\"name\": \"John\", \"age\": \"30\"}",
+            "name=John&age=30",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "The ______ option allows nested objects in form data.",
+        "type": "fill_blank",
+        "answers": [
+            "extended"
+        ],
+        "other_options": [
+            "nested",
+            "deep",
+            "complex"
+        ]
+    },
+    {
+        "q": "extended: true uses qs library for parsing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of express.static()?",
+        "type": "mcq",
+        "o": [
+            "Serving static files like HTML, CSS, images",
+            "Creating static routes",
+            "Static analysis",
+            "Caching static data"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use(express.static('public'));\n\n// Accessing /images/logo.png",
+        "o": [
+            "Serves public/images/logo.png file",
+            "404 error",
+            "Requires route handler",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ middleware serves files from a directory.",
+        "type": "fill_blank",
+        "answers": [
+            "express.static()"
+        ],
+        "other_options": [
+            "express.files()",
+            "static-serve",
+            "file-server"
+        ]
+    },
+    {
+        "q": "Static middleware serves files without route handlers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the cors middleware?",
+        "type": "mcq",
+        "o": [
+            "Enables Cross-Origin Resource Sharing",
+            "Encryption middleware",
+            "Compression middleware",
+            "Caching middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst cors = require('cors');\nconst app = express();\n\napp.use(cors());\n\napp.get('/data', (req, res) => res.json({ data: 1 }));\n\n// Response header Access-Control-Allow-Origin",
+        "o": [
+            "* (allows all origins)",
+            "localhost only",
+            "No header",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ header allows cross-origin requests.",
+        "type": "fill_blank",
+        "answers": [
+            "Access-Control-Allow-Origin"
+        ],
+        "other_options": [
+            "CORS-Allow",
+            "Origin-Access",
+            "Cross-Origin"
+        ]
+    },
+    {
+        "q": "CORS prevents unauthorized cross-origin requests by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the morgan middleware?",
+        "type": "mcq",
+        "o": [
+            "HTTP request logger",
+            "Error logger",
+            "Database logger",
+            "Console logger"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst morgan = require('morgan');\nconst app = express();\n\napp.use(morgan('dev'));\n\napp.get('/', (req, res) => res.send('OK'));\n\n// Console output for GET /",
+        "o": [
+            "GET / 200 <response time> - <content length>",
+            "No output",
+            "Only errors",
+            "JSON format"
+        ]
+    },
+    {
+        "q": "The ______ format in morgan shows colorful dev output.",
+        "type": "fill_blank",
+        "answers": [
+            "dev"
+        ],
+        "other_options": [
+            "common",
+            "combined",
+            "short"
+        ]
+    },
+    {
+        "q": "morgan can write logs to files using streams.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the morgan formats with their descriptions:",
+        "type": "match",
+        "left": [
+            "combined",
+            "common",
+            "dev",
+            "tiny"
+        ],
+        "right": [
+            "Apache combined log",
+            "Apache common log",
+            "Colored status output",
+            "Minimal output"
+        ]
+    },
+    {
+        "q": "What is the helmet middleware?",
+        "type": "mcq",
+        "o": [
+            "Sets security-related HTTP headers",
+            "Protects from DDoS",
+            "Encrypts data",
+            "Rate limiting"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst helmet = require('helmet');\nconst app = express();\n\napp.use(helmet());\n\napp.get('/', (req, res) => res.send('Secure'));\n\n// Which header is NOT set by helmet?",
+        "o": [
+            "Authorization",
+            "X-Content-Type-Options",
+            "X-Frame-Options",
+            "X-XSS-Protection"
+        ]
+    },
+    {
+        "q": "The ______ header prevents clickjacking.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Frame-Options"
+        ],
+        "other_options": [
+            "X-XSS-Protection",
+            "Content-Security-Policy",
+            "X-Content-Type-Options"
+        ]
+    },
+    {
+        "q": "helmet() enables multiple security headers by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the compression middleware?",
+        "type": "mcq",
+        "o": [
+            "Compresses response bodies using gzip/deflate",
+            "Compresses images",
+            "Compresses database",
+            "Compresses logs"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst compression = require('compression');\nconst app = express();\n\napp.use(compression());\n\napp.get('/data', (req, res) => {\n    res.json({ large: 'data'.repeat(1000) });\n});\n\n// Response header Content-Encoding",
+        "o": [
+            "gzip (for large responses)",
+            "deflate",
+            "No compression",
+            "br"
+        ]
+    },
+    {
+        "q": "The ______ encoding compresses responses in Node.js.",
+        "type": "fill_blank",
+        "answers": [
+            "gzip"
+        ],
+        "other_options": [
+            "deflate",
+            "br",
+            "compress"
+        ]
+    },
+    {
+        "q": "Compression reduces response size and bandwidth usage.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is body-parser middleware?",
+        "type": "mcq",
+        "o": [
+            "Third-party body parsing middleware (now built into Express)",
+            "HTML parser",
+            "URL parser",
+            "Cookie parser"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "// Express 4.16+\napp.use(express.json());\napp.use(express.urlencoded({ extended: true }));\n\n// vs Express < 4.16\nconst bodyParser = require('body-parser');\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({ extended: true }));\n\n// Difference?",
+        "o": [
+            "Functionally equivalent - body-parser now built-in",
+            "body-parser is faster",
+            "express.json() has more features",
+            "Cannot be compared"
+        ]
+    },
+    {
+        "q": "Express ______ includes body-parser functionality.",
+        "type": "fill_blank",
+        "answers": [
+            "4.16"
+        ],
+        "other_options": [
+            "4.0",
+            "5.0",
+            "3.0"
+        ]
+    },
+    {
+        "q": "body-parser is deprecated in favor of express built-ins.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cookie-parser middleware?",
+        "type": "mcq",
+        "o": [
+            "Parses Cookie header and populates req.cookies",
+            "Creates cookies",
+            "Encrypts cookies",
+            "Validates cookies"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst cookieParser = require('cookie-parser');\nconst app = express();\n\napp.use(cookieParser('secret'));\n\napp.get('/read', (req, res) => {\n    res.json({\n        cookies: req.cookies,\n        signed: req.signedCookies\n    });\n});\n\n// Request with Cookie: name=John; token=abc",
+        "o": [
+            "{\"cookies\": {\"name\": \"John\", \"token\": \"abc\"}, \"signed\": {}}",
+            "{\"cookies\": {}, \"signed\": {}}",
+            "Error",
+            "{\"name\": \"John\"}"
+        ]
+    },
+    {
+        "q": "The ______ object contains verified signed cookies.",
+        "type": "fill_blank",
+        "answers": [
+            "signedCookies"
+        ],
+        "other_options": [
+            "cookies",
+            "secureCookies",
+            "verifiedCookies"
+        ]
+    },
+    {
+        "q": "Signed cookies are verified with a secret key.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is method-override middleware?",
+        "type": "mcq",
+        "o": [
+            "Allows PUT/DELETE from forms using POST",
+            "Overrides all methods",
+            "Changes HTTP verbs",
+            "Blocks certain methods"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const methodOverride = require('method-override');\napp.use(methodOverride('_method'));\n\napp.delete('/items/:id', (req, res) => {\n    res.send('Deleted');\n});\n\n// POST /items/1?_method=DELETE",
+        "o": [
+            "Routes to DELETE handler, returns 'Deleted'",
+            "Routes to POST handler",
+            "404 error",
+            "405 Method Not Allowed"
+        ]
+    },
+    {
+        "q": "The ______ query parameter commonly overrides HTTP method.",
+        "type": "fill_blank",
+        "answers": [
+            "_method"
+        ],
+        "other_options": [
+            "method",
+            "http_method",
+            "_http"
+        ]
+    },
+    {
+        "q": "method-override helps HTML forms use REST methods.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the middleware execution order:",
+        "type": "rearrange",
+        "words": [
+            "Logging",
+            "Body parsing",
+            "Authentication",
+            "Route handler",
+            "Error handling"
+        ]
+    },
+    {
+        "q": "What is express-session middleware?",
+        "type": "mcq",
+        "o": [
+            "Server-side session management",
+            "Client-side storage",
+            "Cache management",
+            "Cookie encryption"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const session = require('express-session');\napp.use(session({\n    secret: 'keyboard cat',\n    resave: false,\n    saveUninitialized: false\n}));\n\napp.get('/login', (req, res) => {\n    req.session.user = { id: 1 };\n    res.send('Logged in');\n});\n\napp.get('/profile', (req, res) => {\n    res.json(req.session.user);\n});",
+        "o": [
+            "Session data persists across requests",
+            "Session data is lost",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "The ______ option prevents resaving unmodified sessions.",
+        "type": "fill_blank",
+        "answers": [
+            "resave"
+        ],
+        "other_options": [
+            "save",
+            "update",
+            "persist"
+        ]
+    },
+    {
+        "q": "Session data is stored server-side by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-rate-limit middleware?",
+        "type": "mcq",
+        "o": [
+            "Limits repeated requests to public APIs",
+            "Speeds up requests",
+            "Caches responses",
+            "Authenticates users"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const rateLimit = require('express-rate-limit');\n\nconst limiter = rateLimit({\n    windowMs: 15 * 60 * 1000,\n    max: 100,\n    message: 'Too many requests'\n});\n\napp.use('/api', limiter);\n\n// After 101 requests in 15 minutes",
+        "o": [
+            "429 status with 'Too many requests'",
+            "Normal response",
+            "500 error",
+            "Connection refused"
+        ]
+    },
+    {
+        "q": "The ______ option sets maximum requests per window.",
+        "type": "fill_blank",
+        "answers": [
+            "max"
+        ],
+        "other_options": [
+            "limit",
+            "count",
+            "threshold"
+        ]
+    },
+    {
+        "q": "Rate limiting protects against brute force attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is multer middleware?",
+        "type": "mcq",
+        "o": [
+            "Handles multipart/form-data for file uploads",
+            "Multiple route handler",
+            "Multiplexer",
+            "Multiple database connector"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const multer = require('multer');\nconst upload = multer({ dest: 'uploads/' });\n\napp.post('/upload', upload.single('avatar'), (req, res) => {\n    res.json({\n        filename: req.file.filename,\n        size: req.file.size\n    });\n});\n\n// File upload response",
+        "o": [
+            "{\"filename\": \"random-name\", \"size\": <bytes>}",
+            "{\"avatar\": <file data>}",
+            "Error",
+            "Plain text"
+        ]
+    },
+    {
+        "q": "The ______ method handles single file upload.",
+        "type": "fill_blank",
+        "answers": [
+            "single"
+        ],
+        "other_options": [
+            "one",
+            "file",
+            "upload"
+        ]
+    },
+    {
+        "q": "multer stores uploaded files in req.file or req.files.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connect-timeout middleware?",
+        "type": "mcq",
+        "o": [
+            "Sets timeout for request handling",
+            "Database timeout",
+            "Session timeout",
+            "Connection pooling"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const timeout = require('connect-timeout');\n\napp.use(timeout('5s'));\n\napp.get('/slow', (req, res) => {\n    setTimeout(() => {\n        if (!req.timedout) res.send('Done');\n    }, 10000);\n});\n\n// After 5 seconds",
+        "o": [
+            "Request times out, no response sent",
+            "Response after 10 seconds",
+            "'Done' is sent",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ property indicates request timeout.",
+        "type": "fill_blank",
+        "answers": [
+            "timedout"
+        ],
+        "other_options": [
+            "timeout",
+            "expired",
+            "cancelled"
+        ]
+    },
+    {
+        "q": "Check req.timedout before sending response after timeout.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the third-party middleware with their purposes:",
+        "type": "match",
+        "left": [
+            "cors",
+            "helmet",
+            "morgan",
+            "multer"
+        ],
+        "right": [
+            "Cross-origin requests",
+            "Security headers",
+            "Request logging",
+            "File uploads"
+        ]
+    },
+    {
+        "q": "What is creating custom middleware?",
+        "type": "mcq",
+        "o": [
+            "Writing a function with req, res, next parameters",
+            "Installing packages",
+            "Configuring Express",
+            "Using built-in middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const requestTime = (req, res, next) => {\n    req.requestTime = Date.now();\n    next();\n};\n\napp.use(requestTime);\n\napp.get('/', (req, res) => {\n    res.send(`Time: ${req.requestTime}`);\n});\n\n// Response includes",
+        "o": [
+            "Current timestamp",
+            "undefined",
+            "Error",
+            "Empty string"
+        ]
+    },
+    {
+        "q": "Custom middleware adds functionality to the ______ object.",
+        "type": "fill_blank",
+        "answers": [
+            "request"
+        ],
+        "other_options": [
+            "response",
+            "app",
+            "server"
+        ]
+    },
+    {
+        "q": "Custom middleware must call next() or send a response.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware factory pattern?",
+        "type": "mcq",
+        "o": [
+            "Function that returns configured middleware",
+            "Middleware manufacturing",
+            "Creating multiple middlewares",
+            "Middleware templates"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const logger = (format) => {\n    return (req, res, next) => {\n        if (format === 'simple') {\n            console.log(req.method, req.url);\n        } else {\n            console.log(`[${new Date()}] ${req.method} ${req.url}`);\n        }\n        next();\n    };\n};\n\napp.use(logger('simple'));\n\n// GET / logs",
+        "o": [
+            "GET /",
+            "[timestamp] GET /",
+            "Nothing",
+            "Error"
+        ]
+    },
+    {
+        "q": "Middleware factories return ______ middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "configured"
+        ],
+        "other_options": [
+            "new",
+            "custom",
+            "dynamic"
+        ]
+    },
+    {
+        "q": "Middleware factories enable reusable, configurable middleware.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is async middleware in Express?",
+        "type": "mcq",
+        "o": [
+            "Middleware using async/await for asynchronous operations",
+            "Faster middleware",
+            "Parallel middleware",
+            "Background middleware"
+        ]
+    },
+    {
+        "q": "The ______ wrapper catches async errors and passes to next().",
+        "type": "fill_blank",
+        "answers": [
+            "asyncHandler"
+        ],
+        "other_options": [
+            "errorHandler",
+            "asyncWrapper",
+            "errorWrapper"
+        ]
+    },
+    {
+        "q": "Express 5 automatically handles async error propagation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware chaining?",
+        "type": "mcq",
+        "o": [
+            "Multiple middleware functions in sequence",
+            "Linking routers",
+            "Connecting databases",
+            "Route chaining"
+        ]
+    },
+    {
+        "q": "The ______ parameter connects middleware in a chain.",
+        "type": "fill_blank",
+        "answers": [
+            "next"
+        ],
+        "other_options": [
+            "chain",
+            "continue",
+            "forward"
+        ]
+    },
+    {
+        "q": "Middleware order affects request processing flow.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is conditional middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware that executes based on conditions",
+            "If-else statements",
+            "Optional middleware",
+            "Debug middleware"
+        ]
+    },
+    {
+        "q": "The ______ pattern skips middleware based on conditions.",
+        "type": "fill_blank",
+        "answers": [
+            "unless"
+        ],
+        "other_options": [
+            "skip",
+            "bypass",
+            "except"
+        ]
+    },
+    {
+        "q": "Conditional middleware improves performance by skipping unnecessary processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware composition?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple middleware into one unit",
+            "Writing middleware",
+            "Creating middleware",
+            "Middleware templates"
+        ]
+    },
+    {
+        "q": "The ______ function combines multiple middleware functions.",
+        "type": "fill_blank",
+        "answers": [
+            "compose"
+        ],
+        "other_options": [
+            "combine",
+            "merge",
+            "join"
+        ]
+    },
+    {
+        "q": "Composed middleware executes all components in order.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is authentication middleware?",
+        "type": "mcq",
+        "o": [
+            "Verifies user identity before allowing access",
+            "Creates user accounts",
+            "Logs user actions",
+            "Encrypts passwords"
+        ]
+    },
+    {
+        "q": "The ______ header commonly carries authentication tokens.",
+        "type": "fill_blank",
+        "answers": [
+            "Authorization"
+        ],
+        "other_options": [
+            "Auth",
+            "Token",
+            "Access"
+        ]
+    },
+    {
+        "q": "Authentication middleware should run before protected routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is authorization middleware?",
+        "type": "mcq",
+        "o": [
+            "Checks if authenticated user has permission",
+            "Verifies identity",
+            "Creates permissions",
+            "Logs access"
+        ]
+    },
+    {
+        "q": "The ______ pattern checks user roles for access control.",
+        "type": "fill_blank",
+        "answers": [
+            "role-based"
+        ],
+        "other_options": [
+            "permission",
+            "access",
+            "level"
+        ]
+    },
+    {
+        "q": "Authorization follows authentication in the middleware chain.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is validation middleware?",
+        "type": "mcq",
+        "o": [
+            "Validates request data before processing",
+            "Validates routes",
+            "Validates responses",
+            "Validates middleware"
+        ]
+    },
+    {
+        "q": "The ______ package provides validation middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "express-validator"
+        ],
+        "other_options": [
+            "joi",
+            "yup",
+            "zod"
+        ]
+    },
+    {
+        "q": "Validation rejects invalid requests before reaching handlers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is sanitization middleware?",
+        "type": "mcq",
+        "o": [
+            "Cleans and normalizes input data",
+            "Input validation",
+            "Output encoding",
+            "Error sanitization"
+        ]
+    },
+    {
+        "q": "The ______ method removes leading/trailing whitespace.",
+        "type": "fill_blank",
+        "answers": [
+            "trim"
+        ],
+        "other_options": [
+            "strip",
+            "clean",
+            "normalize"
+        ]
+    },
+    {
+        "q": "Sanitization helps prevent XSS attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the middleware types with their purposes:",
+        "type": "match",
+        "left": [
+            "Authentication",
+            "Authorization",
+            "Validation",
+            "Sanitization"
+        ],
+        "right": [
+            "Verify identity",
+            "Check permissions",
+            "Validate input",
+            "Clean data"
+        ]
+    },
+    {
+        "q": "What is caching middleware?",
+        "type": "mcq",
+        "o": [
+            "Stores and returns cached responses",
+            "Memory management",
+            "Database caching",
+            "Session caching"
+        ]
+    },
+    {
+        "q": "The ______ header controls response caching.",
+        "type": "fill_blank",
+        "answers": [
+            "Cache-Control"
+        ],
+        "other_options": [
+            "Expires",
+            "ETag",
+            "Last-Modified"
+        ]
+    },
+    {
+        "q": "ETag-based caching validates if content has changed.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response time middleware?",
+        "type": "mcq",
+        "o": [
+            "Tracks and reports request processing time",
+            "Speeds up responses",
+            "Times out requests",
+            "Delays responses"
+        ]
+    },
+    {
+        "q": "The ______ header shows response processing time.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Response-Time"
+        ],
+        "other_options": [
+            "Response-Time",
+            "X-Time",
+            "Processing-Time"
+        ]
+    },
+    {
+        "q": "Response time metrics help identify slow endpoints.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request ID middleware?",
+        "type": "mcq",
+        "o": [
+            "Assigns unique ID to each request for tracing",
+            "User identification",
+            "Session ID",
+            "Database ID"
+        ]
+    },
+    {
+        "q": "The ______ header carries the request identifier.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Request-ID"
+        ],
+        "other_options": [
+            "Request-ID",
+            "X-Trace-ID",
+            "Correlation-ID"
+        ]
+    },
+    {
+        "q": "Request IDs enable distributed tracing across services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request context middleware?",
+        "type": "mcq",
+        "o": [
+            "Stores and provides request-scoped data",
+            "Global context",
+            "Application context",
+            "Database context"
+        ]
+    },
+    {
+        "q": "The ______ library provides async request context.",
+        "type": "fill_blank",
+        "answers": [
+            "async_hooks"
+        ],
+        "other_options": [
+            "context",
+            "request-context",
+            "express-context"
+        ]
+    },
+    {
+        "q": "Request context allows accessing request data without passing explicitly.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange middleware execution for a typical API:",
+        "type": "rearrange",
+        "words": [
+            "CORS",
+            "Body parsing",
+            "Rate limiting",
+            "Authentication",
+            "Route handlers"
+        ]
+    },
+    {
+        "q": "What is proxy trust middleware?",
+        "type": "mcq",
+        "o": [
+            "Trusts headers set by reverse proxies",
+            "Creates proxy",
+            "Forwards requests",
+            "Blocks proxies"
+        ]
+    },
+    {
+        "q": "The ______ setting configures proxy trust level.",
+        "type": "fill_blank",
+        "answers": [
+            "trust proxy"
+        ],
+        "other_options": [
+            "proxy trust",
+            "trusted proxies",
+            "proxy level"
+        ]
+    },
+    {
+        "q": "Proper proxy trust ensures correct client IP detection.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful shutdown middleware?",
+        "type": "mcq",
+        "o": [
+            "Handles in-flight requests before server stops",
+            "Immediate shutdown",
+            "Restart middleware",
+            "Health check"
+        ]
+    },
+    {
+        "q": "The ______ signal triggers graceful shutdown.",
+        "type": "fill_blank",
+        "answers": [
+            "SIGTERM"
+        ],
+        "other_options": [
+            "SIGKILL",
+            "SIGINT",
+            "SIGHUP"
+        ]
+    },
+    {
+        "q": "Graceful shutdown prevents losing in-flight requests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is health check middleware?",
+        "type": "mcq",
+        "o": [
+            "Reports application health status",
+            "Monitors user health",
+            "System monitoring",
+            "Performance testing"
+        ]
+    },
+    {
+        "q": "The ______ endpoint is commonly used for health checks.",
+        "type": "fill_blank",
+        "answers": [
+            "/health"
+        ],
+        "other_options": [
+            "/status",
+            "/ping",
+            "/ready"
+        ]
+    },
+    {
+        "q": "Readiness probes check if app can handle traffic.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is circuit breaker middleware?",
+        "type": "mcq",
+        "o": [
+            "Prevents cascade failures by stopping failed calls",
+            "Electrical circuit",
+            "Breaking connections",
+            "Routing control"
+        ]
+    },
+    {
+        "q": "The ______ state allows trial requests after failures.",
+        "type": "fill_blank",
+        "answers": [
+            "half-open"
+        ],
+        "other_options": [
+            "open",
+            "closed",
+            "trial"
+        ]
+    },
+    {
+        "q": "Circuit breakers protect downstream services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is retry middleware?",
+        "type": "mcq",
+        "o": [
+            "Automatically retries failed operations",
+            "User retry button",
+            "Manual retry",
+            "Route retry"
+        ]
+    },
+    {
+        "q": "The ______ backoff increases delay between retries.",
+        "type": "fill_blank",
+        "answers": [
+            "exponential"
+        ],
+        "other_options": [
+            "linear",
+            "constant",
+            "random"
+        ]
+    },
+    {
+        "q": "Retries help handle transient failures.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is fallback middleware?",
+        "type": "mcq",
+        "o": [
+            "Provides alternative response when primary fails",
+            "Error handling",
+            "Default route",
+            "Backup server"
+        ]
+    },
+    {
+        "q": "The ______ function returns cached data on failure.",
+        "type": "fill_blank",
+        "answers": [
+            "fallback"
+        ],
+        "other_options": [
+            "backup",
+            "default",
+            "alternative"
+        ]
+    },
+    {
+        "q": "Fallback maintains service availability during failures.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the resilience patterns with their behaviors:",
+        "type": "match",
+        "left": [
+            "Circuit breaker",
+            "Retry",
+            "Timeout",
+            "Fallback"
+        ],
+        "right": [
+            "Stop failing calls",
+            "Repeat operations",
+            "Limit wait time",
+            "Alternative response"
+        ]
+    },
+    {
+        "q": "What is metrics middleware?",
+        "type": "mcq",
+        "o": [
+            "Collects and exposes application metrics",
+            "Math calculations",
+            "Measurement units",
+            "Analytics tracking"
+        ]
+    },
+    {
+        "q": "The ______ library provides Prometheus metrics.",
+        "type": "fill_blank",
+        "answers": [
+            "prom-client"
+        ],
+        "other_options": [
+            "prometheus",
+            "metrics",
+            "stats"
+        ]
+    },
+    {
+        "q": "Histograms track request duration distributions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is tracing middleware?",
+        "type": "mcq",
+        "o": [
+            "Tracks request flow across services",
+            "Error tracing",
+            "Route tracing",
+            "Debug logging"
+        ]
+    },
+    {
+        "q": "The ______ ID links related spans across services.",
+        "type": "fill_blank",
+        "answers": [
+            "trace"
+        ],
+        "other_options": [
+            "span",
+            "request",
+            "correlation"
+        ]
+    },
+    {
+        "q": "Distributed tracing helps debug microservices.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is feature flag middleware?",
+        "type": "mcq",
+        "o": [
+            "Controls feature availability dynamically",
+            "Marking routes",
+            "Tagging requests",
+            "Feature testing"
+        ]
+    },
+    {
+        "q": "The ______ pattern toggles features without deployment.",
+        "type": "fill_blank",
+        "answers": [
+            "feature flag"
+        ],
+        "other_options": [
+            "feature toggle",
+            "switch",
+            "flag toggle"
+        ]
+    },
+    {
+        "q": "Feature flags enable gradual rollouts and A/B testing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request transformation middleware?",
+        "type": "mcq",
+        "o": [
+            "Modifies request before processing",
+            "Response transformation",
+            "Data conversion",
+            "Format change"
+        ]
+    },
+    {
+        "q": "The ______ object is modified to transform requests.",
+        "type": "fill_blank",
+        "answers": [
+            "req"
+        ],
+        "other_options": [
+            "request",
+            "body",
+            "data"
+        ]
+    },
+    {
+        "q": "Request transformation can normalize different API versions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response transformation middleware?",
+        "type": "mcq",
+        "o": [
+            "Modifies response before sending to client",
+            "Request transformation",
+            "Data encoding",
+            "Compression"
+        ]
+    },
+    {
+        "q": "Response transformation can add standard wrapper to all responses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is tenant middleware for multi-tenancy?",
+        "type": "mcq",
+        "o": [
+            "Identifies and isolates tenant context",
+            "Building management",
+            "User sessions",
+            "Database connections"
+        ]
+    },
+    {
+        "q": "The ______ header commonly identifies the tenant.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Tenant-ID"
+        ],
+        "other_options": [
+            "Tenant",
+            "X-Organization",
+            "Client-ID"
+        ]
+    },
+    {
+        "q": "Tenant middleware ensures data isolation in multi-tenant apps.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is locale middleware?",
+        "type": "mcq",
+        "o": [
+            "Detects and sets user language/region",
+            "Location tracking",
+            "GPS middleware",
+            "Map integration"
+        ]
+    },
+    {
+        "q": "The ______ header indicates preferred language.",
+        "type": "fill_blank",
+        "answers": [
+            "Accept-Language"
+        ],
+        "other_options": [
+            "Language",
+            "Locale",
+            "Content-Language"
+        ]
+    },
+    {
+        "q": "Locale middleware enables internationalization.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is versioning middleware?",
+        "type": "mcq",
+        "o": [
+            "Routes requests based on API version",
+            "Version control",
+            "Git integration",
+            "Deployment versions"
+        ]
+    },
+    {
+        "q": "URL path versioning is most common for REST APIs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is CSRF protection middleware?",
+        "type": "mcq",
+        "o": [
+            "Prevents cross-site request forgery attacks",
+            "Cross-site scripting protection",
+            "SQL injection prevention",
+            "DDoS protection"
+        ]
+    },
+    {
+        "q": "The ______ token validates request origin.",
+        "type": "fill_blank",
+        "answers": [
+            "CSRF"
+        ],
+        "other_options": [
+            "XSS",
+            "CORS",
+            "JWT"
+        ]
+    },
+    {
+        "q": "CSRF tokens should be included in form submissions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is HPP (HTTP Parameter Pollution) middleware?",
+        "type": "mcq",
+        "o": [
+            "Protects against parameter pollution attacks",
+            "HTTP parsing",
+            "Parameter validation",
+            "URL encoding"
+        ]
+    },
+    {
+        "q": "The ______ option specifies which params can be arrays.",
+        "type": "fill_blank",
+        "answers": [
+            "whitelist"
+        ],
+        "other_options": [
+            "allowlist",
+            "arrays",
+            "permitted"
+        ]
+    },
+    {
+        "q": "HPP middleware picks last parameter value by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-slow-down middleware?",
+        "type": "mcq",
+        "o": [
+            "Slows down responses instead of blocking",
+            "Performance degradation",
+            "Speed limiting",
+            "Bandwidth control"
+        ]
+    },
+    {
+        "q": "The ______ option sets delay per request after threshold.",
+        "type": "fill_blank",
+        "answers": [
+            "delayMs"
+        ],
+        "other_options": [
+            "delay",
+            "slowdown",
+            "wait"
+        ]
+    },
+    {
+        "q": "Slow down is gentler than hard rate limiting.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-brute middleware?",
+        "type": "mcq",
+        "o": [
+            "Prevents brute force attacks",
+            "Force restart",
+            "Memory management",
+            "Connection handling"
+        ]
+    },
+    {
+        "q": "The ______ store persists brute force data.",
+        "type": "fill_blank",
+        "answers": [
+            "MemoryStore"
+        ],
+        "other_options": [
+            "Store",
+            "Cache",
+            "Database"
+        ]
+    },
+    {
+        "q": "Express-brute uses progressive delays to slow attackers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match security middleware with their protections:",
+        "type": "match",
+        "left": [
+            "helmet",
+            "cors",
+            "csurf",
+            "hpp"
+        ],
+        "right": [
+            "Security headers",
+            "Cross-origin",
+            "CSRF tokens",
+            "Parameter pollution"
+        ]
+    },
+    {
+        "q": "What is passport middleware?",
+        "type": "mcq",
+        "o": [
+            "Authentication middleware for Express",
+            "Passport validation",
+            "Travel API",
+            "Document scanner"
+        ]
+    },
+    {
+        "q": "The ______ function initializes Passport in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "initialize"
+        ],
+        "other_options": [
+            "start",
+            "setup",
+            "config"
+        ]
+    },
+    {
+        "q": "Passport supports multiple authentication strategies.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is passport-local strategy?",
+        "type": "mcq",
+        "o": [
+            "Username/password authentication",
+            "Local file storage",
+            "Location-based auth",
+            "Local network"
+        ]
+    },
+    {
+        "q": "The ______ function stores user info in session.",
+        "type": "fill_blank",
+        "answers": [
+            "serializeUser"
+        ],
+        "other_options": [
+            "saveUser",
+            "storeUser",
+            "persistUser"
+        ]
+    },
+    {
+        "q": "passport-local requires express-session for sessions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is passport-jwt strategy?",
+        "type": "mcq",
+        "o": [
+            "JWT-based authentication",
+            "JSON validation",
+            "Token creation",
+            "Session management"
+        ]
+    },
+    {
+        "q": "The ______ extracts JWT from request.",
+        "type": "fill_blank",
+        "answers": [
+            "ExtractJwt"
+        ],
+        "other_options": [
+            "GetJwt",
+            "ParseJwt",
+            "ReadJwt"
+        ]
+    },
+    {
+        "q": "JWT strategy is stateless - no session needed.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is passport-oauth2 strategy?",
+        "type": "mcq",
+        "o": [
+            "OAuth 2.0 third-party authentication",
+            "Second auth factor",
+            "Dual authentication",
+            "Backup auth"
+        ]
+    },
+    {
+        "q": "The ______ URL receives the authorization code.",
+        "type": "fill_blank",
+        "answers": [
+            "callback"
+        ],
+        "other_options": [
+            "redirect",
+            "return",
+            "response"
+        ]
+    },
+    {
+        "q": "OAuth strategies require client ID and secret.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the OAuth flow steps:",
+        "type": "rearrange",
+        "words": [
+            "Redirect to provider",
+            "User authorizes",
+            "Receive code",
+            "Exchange for token",
+            "Access resources"
+        ]
+    },
+    {
+        "q": "What is passport-google-oauth20?",
+        "type": "mcq",
+        "o": [
+            "Google OAuth 2.0 authentication strategy",
+            "Google search API",
+            "Google Maps",
+            "Google Analytics"
+        ]
+    },
+    {
+        "q": "The ______ scope requests user email access.",
+        "type": "fill_blank",
+        "answers": [
+            "email"
+        ],
+        "other_options": [
+            "mail",
+            "gmail",
+            "user:email"
+        ]
+    },
+    {
+        "q": "Google strategy requires OAuth credentials from Google Console.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-validator middleware?",
+        "type": "mcq",
+        "o": [
+            "Validation and sanitization for Express",
+            "Form builder",
+            "Schema generator",
+            "Type checking"
+        ]
+    },
+    {
+        "q": "The ______ function checks validation results.",
+        "type": "fill_blank",
+        "answers": [
+            "validationResult"
+        ],
+        "other_options": [
+            "validateResult",
+            "checkResult",
+            "getErrors"
+        ]
+    },
+    {
+        "q": "express-validator wraps validator.js library.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Joi validation middleware?",
+        "type": "mcq",
+        "o": [
+            "Schema-based validation library",
+            "Joy tracking",
+            "Happiness API",
+            "Emotion detection"
+        ]
+    },
+    {
+        "q": "The ______ method creates required string schema.",
+        "type": "fill_blank",
+        "answers": [
+            "string().required()"
+        ],
+        "other_options": [
+            "required.string()",
+            "string.required",
+            "isString()"
+        ]
+    },
+    {
+        "q": "Joi schemas are declarative and reusable.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Zod validation middleware?",
+        "type": "mcq",
+        "o": [
+            "TypeScript-first schema validation",
+            "Zodiac API",
+            "Time zone",
+            "Zone detection"
+        ]
+    },
+    {
+        "q": "The ______ method parses and validates data.",
+        "type": "fill_blank",
+        "answers": [
+            "parse"
+        ],
+        "other_options": [
+            "validate",
+            "check",
+            "verify"
+        ]
+    },
+    {
+        "q": "Zod provides TypeScript type inference from schemas.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match validation libraries with their features:",
+        "type": "match",
+        "left": [
+            "express-validator",
+            "Joi",
+            "Zod",
+            "Yup"
+        ],
+        "right": [
+            "Middleware chain",
+            "Object schema",
+            "TypeScript types",
+            "Async validation"
+        ]
+    },
+    {
+        "q": "What is connect-flash middleware?",
+        "type": "mcq",
+        "o": [
+            "Stores flash messages across redirects",
+            "Flash animations",
+            "Fast loading",
+            "Cache clearing"
+        ]
+    },
+    {
+        "q": "The ______ method sets a flash message.",
+        "type": "fill_blank",
+        "answers": [
+            "flash"
+        ],
+        "other_options": [
+            "message",
+            "notice",
+            "alert"
+        ]
+    },
+    {
+        "q": "Flash messages are cleared after being read.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-fileupload middleware?",
+        "type": "mcq",
+        "o": [
+            "Simple file upload middleware",
+            "File download",
+            "File compression",
+            "File encryption"
+        ]
+    },
+    {
+        "q": "The ______ object contains uploaded files.",
+        "type": "fill_blank",
+        "answers": [
+            "req.files"
+        ],
+        "other_options": [
+            "req.uploads",
+            "req.attachments",
+            "req.data"
+        ]
+    },
+    {
+        "q": "express-fileupload simpler than multer for basic uploads.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is serve-index middleware?",
+        "type": "mcq",
+        "o": [
+            "Serves directory listings",
+            "Index page",
+            "Search index",
+            "Database index"
+        ]
+    },
+    {
+        "q": "The ______ option enables file icons in listing.",
+        "type": "fill_blank",
+        "answers": [
+            "icons"
+        ],
+        "other_options": [
+            "images",
+            "thumbnails",
+            "previews"
+        ]
+    },
+    {
+        "q": "serve-index works with express.static for file serving.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is vhost middleware?",
+        "type": "mcq",
+        "o": [
+            "Virtual host routing based on hostname",
+            "Virtual hosting",
+            "VPN routing",
+            "Virtual server"
+        ]
+    },
+    {
+        "q": "The ______ parameter matches the hostname pattern.",
+        "type": "fill_blank",
+        "answers": [
+            "hostname"
+        ],
+        "other_options": [
+            "host",
+            "domain",
+            "subdomain"
+        ]
+    },
+    {
+        "q": "vhost enables multiple apps on single Express server.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange file upload processing steps:",
+        "type": "rearrange",
+        "words": [
+            "Receive multipart",
+            "Parse form data",
+            "Validate file",
+            "Save to disk",
+            "Return response"
+        ]
+    },
+    {
+        "q": "What is response-time middleware?",
+        "type": "mcq",
+        "o": [
+            "Adds X-Response-Time header to responses",
+            "Delays responses",
+            "Times out requests",
+            "Measures uptime"
+        ]
+    },
+    {
+        "q": "The ______ option specifies time unit digits.",
+        "type": "fill_blank",
+        "answers": [
+            "digits"
+        ],
+        "other_options": [
+            "precision",
+            "decimals",
+            "accuracy"
+        ]
+    },
+    {
+        "q": "Response time header helps with performance monitoring.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is serve-favicon middleware?",
+        "type": "mcq",
+        "o": [
+            "Serves favicon with caching",
+            "Creates favicons",
+            "Favicon generator",
+            "Icon library"
+        ]
+    },
+    {
+        "q": "The ______ option sets cache duration.",
+        "type": "fill_blank",
+        "answers": [
+            "maxAge"
+        ],
+        "other_options": [
+            "cache",
+            "ttl",
+            "expires"
+        ]
+    },
+    {
+        "q": "serve-favicon caches favicon in memory.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-useragent middleware?",
+        "type": "mcq",
+        "o": [
+            "Parses user agent strings",
+            "User tracking",
+            "Agent management",
+            "Bot detection"
+        ]
+    },
+    {
+        "q": "The ______ property contains parsed UA info.",
+        "type": "fill_blank",
+        "answers": [
+            "useragent"
+        ],
+        "other_options": [
+            "ua",
+            "agent",
+            "browser"
+        ]
+    },
+    {
+        "q": "User agent parsing helps with browser-specific logic.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-ipfilter middleware?",
+        "type": "mcq",
+        "o": [
+            "Allows or blocks IPs",
+            "IP logging",
+            "IP lookup",
+            "Geolocation"
+        ]
+    },
+    {
+        "q": "The ______ option blocks specified IPs.",
+        "type": "fill_blank",
+        "answers": [
+            "mode: deny"
+        ],
+        "other_options": [
+            "block: true",
+            "reject: true",
+            "blacklist: true"
+        ]
+    },
+    {
+        "q": "IP filtering can whitelist or blacklist addresses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the utility middleware with their functions:",
+        "type": "match",
+        "left": [
+            "serve-favicon",
+            "response-time",
+            "vhost",
+            "serve-index"
+        ],
+        "right": [
+            "Favicon serving",
+            "Performance header",
+            "Virtual hosts",
+            "Directory listing"
+        ]
+    },
+    {
+        "q": "What is express-promise-router?",
+        "type": "mcq",
+        "o": [
+            "Router that handles async errors automatically",
+            "Promise management",
+            "Route ordering",
+            "Async routing"
+        ]
+    },
+    {
+        "q": "Async errors are passed to ______ automatically.",
+        "type": "fill_blank",
+        "answers": [
+            "error middleware"
+        ],
+        "other_options": [
+            "console",
+            "logger",
+            "handler"
+        ]
+    },
+    {
+        "q": "express-promise-router eliminates need for asyncHandler.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-list-endpoints?",
+        "type": "mcq",
+        "o": [
+            "Lists all registered routes",
+            "Endpoint creation",
+            "Route testing",
+            "API documentation"
+        ]
+    },
+    {
+        "q": "The ______ function extracts routes from app.",
+        "type": "fill_blank",
+        "answers": [
+            "listEndpoints"
+        ],
+        "other_options": [
+            "getRoutes",
+            "endpoints",
+            "routes"
+        ]
+    },
+    {
+        "q": "Listing endpoints helps with API documentation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-status-monitor?",
+        "type": "mcq",
+        "o": [
+            "Real-time server status dashboard",
+            "Status codes",
+            "Health checks",
+            "Uptime monitoring"
+        ]
+    },
+    {
+        "q": "The ______ endpoint shows the status dashboard.",
+        "type": "fill_blank",
+        "answers": [
+            "/status"
+        ],
+        "other_options": [
+            "/monitor",
+            "/dashboard",
+            "/admin"
+        ]
+    },
+    {
+        "q": "Status monitor shows CPU, memory, and response times.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-openapi-validator?",
+        "type": "mcq",
+        "o": [
+            "Validates requests against OpenAPI spec",
+            "Creates OpenAPI docs",
+            "API generator",
+            "Schema builder"
+        ]
+    },
+    {
+        "q": "The ______ file defines the API schema.",
+        "type": "fill_blank",
+        "answers": [
+            "openapi.yaml"
+        ],
+        "other_options": [
+            "swagger.json",
+            "api.json",
+            "schema.yaml"
+        ]
+    },
+    {
+        "q": "OpenAPI validation ensures requests match spec.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the OpenAPI validation flow:",
+        "type": "rearrange",
+        "words": [
+            "Load spec",
+            "Parse request",
+            "Validate path",
+            "Validate body",
+            "Process or reject"
+        ]
+    },
+    {
+        "q": "What is express-pino-logger?",
+        "type": "mcq",
+        "o": [
+            "High-performance JSON logger",
+            "Pine tree API",
+            "Log rotation",
+            "Console logger"
+        ]
+    },
+    {
+        "q": "Pino is ______ than other logging libraries.",
+        "type": "fill_blank",
+        "answers": [
+            "faster"
+        ],
+        "other_options": [
+            "slower",
+            "larger",
+            "simpler"
+        ]
+    },
+    {
+        "q": "Pino outputs structured JSON logs by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is winston-express?",
+        "type": "mcq",
+        "o": [
+            "Winston integration for Express",
+            "British logging",
+            "Windows logging",
+            "System logs"
+        ]
+    },
+    {
+        "q": "The ______ option sets log output destination.",
+        "type": "fill_blank",
+        "answers": [
+            "transports"
+        ],
+        "other_options": [
+            "outputs",
+            "destinations",
+            "targets"
+        ]
+    },
+    {
+        "q": "Winston supports multiple simultaneous transports.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-graphql middleware?",
+        "type": "mcq",
+        "o": [
+            "GraphQL HTTP server middleware",
+            "Graph database",
+            "Data visualization",
+            "Chart API"
+        ]
+    },
+    {
+        "q": "The ______ option enables interactive GraphQL IDE.",
+        "type": "fill_blank",
+        "answers": [
+            "graphiql"
+        ],
+        "other_options": [
+            "playground",
+            "explorer",
+            "ide"
+        ]
+    },
+    {
+        "q": "GraphQL middleware handles POST requests to /graphql.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is apollo-server-express?",
+        "type": "mcq",
+        "o": [
+            "Apollo GraphQL integration for Express",
+            "Space API",
+            "Moon tracking",
+            "NASA integration"
+        ]
+    },
+    {
+        "q": "The ______ method connects Apollo to Express.",
+        "type": "fill_blank",
+        "answers": [
+            "applyMiddleware"
+        ],
+        "other_options": [
+            "connect",
+            "attach",
+            "use"
+        ]
+    },
+    {
+        "q": "Apollo Server provides additional GraphQL features.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is swagger-ui-express middleware?",
+        "type": "mcq",
+        "o": [
+            "Serves Swagger UI for API documentation",
+            "Swagger authentication",
+            "API testing",
+            "Code generation"
+        ]
+    },
+    {
+        "q": "The ______ function sets up Swagger UI.",
+        "type": "fill_blank",
+        "answers": [
+            "serve"
+        ],
+        "other_options": [
+            "setup",
+            "mount",
+            "create"
+        ]
+    },
+    {
+        "q": "swagger-ui-express renders interactive API docs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-ws middleware?",
+        "type": "mcq",
+        "o": [
+            "WebSocket support for Express",
+            "Web server",
+            "Web security",
+            "Web scraping"
+        ]
+    },
+    {
+        "q": "The ______ method creates WebSocket endpoint.",
+        "type": "fill_blank",
+        "answers": [
+            "ws"
+        ],
+        "other_options": [
+            "websocket",
+            "socket",
+            "connect"
+        ]
+    },
+    {
+        "q": "express-ws adds ws routes alongside HTTP routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-sse middleware?",
+        "type": "mcq",
+        "o": [
+            "Server-Sent Events support",
+            "Session storage",
+            "Static serving",
+            "Security scanning"
+        ]
+    },
+    {
+        "q": "SSE uses ______ content type.",
+        "type": "fill_blank",
+        "answers": [
+            "text/event-stream"
+        ],
+        "other_options": [
+            "application/json",
+            "text/plain",
+            "text/html"
+        ]
+    },
+    {
+        "q": "SSE is unidirectional from server to client.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the real-time middleware with their use cases:",
+        "type": "match",
+        "left": [
+            "WebSocket",
+            "SSE",
+            "Long Polling",
+            "Socket.io"
+        ],
+        "right": [
+            "Bidirectional",
+            "Server push",
+            "Request-based",
+            "Fallback support"
+        ]
+    },
+    {
+        "q": "What is express-http-proxy middleware?",
+        "type": "mcq",
+        "o": [
+            "Proxies HTTP requests to other servers",
+            "HTTP caching",
+            "HTTP logging",
+            "HTTP validation"
+        ]
+    },
+    {
+        "q": "The ______ option transforms proxy request.",
+        "type": "fill_blank",
+        "answers": [
+            "proxyReqOptDecorator"
+        ],
+        "other_options": [
+            "requestTransform",
+            "modifyRequest",
+            "decorateRequest"
+        ]
+    },
+    {
+        "q": "HTTP proxy enables API gateway patterns.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is http-proxy-middleware?",
+        "type": "mcq",
+        "o": [
+            "Configurable proxy middleware for Express",
+            "HTTP client",
+            "HTTP server",
+            "HTTP testing"
+        ]
+    },
+    {
+        "q": "The ______ function creates proxy middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "createProxyMiddleware"
+        ],
+        "other_options": [
+            "proxy",
+            "createProxy",
+            "makeProxy"
+        ]
+    },
+    {
+        "q": "http-proxy-middleware supports WebSocket proxying.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-request-id middleware?",
+        "type": "mcq",
+        "o": [
+            "Generates unique ID for each request",
+            "Request counter",
+            "Request logging",
+            "Request validation"
+        ]
+    },
+    {
+        "q": "UUIDs are commonly used for ______ IDs.",
+        "type": "fill_blank",
+        "answers": [
+            "request"
+        ],
+        "other_options": [
+            "session",
+            "user",
+            "transaction"
+        ]
+    },
+    {
+        "q": "Request IDs should be returned in response headers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cls-hooked middleware?",
+        "type": "mcq",
+        "o": [
+            "Continuation-local storage for async context",
+            "Class hooks",
+            "Clone storage",
+            "Clear cache"
+        ]
+    },
+    {
+        "q": "The ______ API provides async context in Node.js.",
+        "type": "fill_blank",
+        "answers": [
+            "AsyncLocalStorage"
+        ],
+        "other_options": [
+            "AsyncContext",
+            "LocalStorage",
+            "ContextStore"
+        ]
+    },
+    {
+        "q": "CLS enables accessing request context without passing it.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-queue middleware?",
+        "type": "mcq",
+        "o": [
+            "Queues requests to prevent overload",
+            "Message queue",
+            "Task queue",
+            "Print queue"
+        ]
+    },
+    {
+        "q": "The ______ option limits concurrent requests.",
+        "type": "fill_blank",
+        "answers": [
+            "activeLimit"
+        ],
+        "other_options": [
+            "maxConcurrent",
+            "limit",
+            "max"
+        ]
+    },
+    {
+        "q": "Request queuing prevents server overload.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the request lifecycle with middleware:",
+        "type": "rearrange",
+        "words": [
+            "Request received",
+            "Middleware chain",
+            "Route matching",
+            "Handler execution",
+            "Response sent"
+        ]
+    },
+    {
+        "q": "What is express-actuator middleware?",
+        "type": "mcq",
+        "o": [
+            "Production-ready endpoints like Spring Boot",
+            "Motor control",
+            "Automation",
+            "Testing"
+        ]
+    },
+    {
+        "q": "The ______ endpoint shows application info.",
+        "type": "fill_blank",
+        "answers": [
+            "/info"
+        ],
+        "other_options": [
+            "/about",
+            "/version",
+            "/app"
+        ]
+    },
+    {
+        "q": "Actuator exposes health, metrics, and info endpoints.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-mongo-sanitize middleware?",
+        "type": "mcq",
+        "o": [
+            "Prevents NoSQL injection attacks",
+            "MongoDB connection",
+            "Data migration",
+            "Schema validation"
+        ]
+    },
+    {
+        "q": "The sanitizer removes ______ from request data.",
+        "type": "fill_blank",
+        "answers": [
+            "$ operators"
+        ],
+        "other_options": [
+            "special chars",
+            "numbers",
+            "spaces"
+        ]
+    },
+    {
+        "q": "NoSQL injection can manipulate MongoDB queries.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is xss-clean middleware?",
+        "type": "mcq",
+        "o": [
+            "Sanitizes input to prevent XSS attacks",
+            "CSS cleaning",
+            "Code cleanup",
+            "Cache clearing"
+        ]
+    },
+    {
+        "q": "XSS attacks inject malicious ______ into pages.",
+        "type": "fill_blank",
+        "answers": [
+            "scripts"
+        ],
+        "other_options": [
+            "styles",
+            "images",
+            "links"
+        ]
+    },
+    {
+        "q": "xss-clean escapes HTML entities in input.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match security sanitizers with their targets:",
+        "type": "match",
+        "left": [
+            "mongo-sanitize",
+            "xss-clean",
+            "hpp",
+            "helmet"
+        ],
+        "right": [
+            "NoSQL injection",
+            "Cross-site scripting",
+            "Parameter pollution",
+            "HTTP headers"
+        ]
+    },
+    {
+        "q": "What is express-domain-middleware?",
+        "type": "mcq",
+        "o": [
+            "Creates domain for error isolation",
+            "Domain validation",
+            "DNS lookup",
+            "Host routing"
+        ]
+    },
+    {
+        "q": "Domains help catch ______ errors in async code.",
+        "type": "fill_blank",
+        "answers": [
+            "uncaught"
+        ],
+        "other_options": [
+            "syntax",
+            "type",
+            "runtime"
+        ]
+    },
+    {
+        "q": "Domains are deprecated in favor of async_hooks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-async-errors package?",
+        "type": "mcq",
+        "o": [
+            "Patches Express for async error handling",
+            "Error generation",
+            "Error logging",
+            "Error recovery"
+        ]
+    },
+    {
+        "q": "It eliminates need for ______ wrappers.",
+        "type": "fill_blank",
+        "answers": [
+            "try-catch"
+        ],
+        "other_options": [
+            "async-await",
+            "promise",
+            "callback"
+        ]
+    },
+    {
+        "q": "express-async-errors is a monkey patch solution.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-boom middleware?",
+        "type": "mcq",
+        "o": [
+            "HTTP-friendly error responses",
+            "Explosion effects",
+            "Sound API",
+            "Logging"
+        ]
+    },
+    {
+        "q": "The ______ method creates 404 error.",
+        "type": "fill_blank",
+        "answers": [
+            "notFound"
+        ],
+        "other_options": [
+            "missing",
+            "absent",
+            "gone"
+        ]
+    },
+    {
+        "q": "Boom errors include status code and message.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is http-errors package?",
+        "type": "mcq",
+        "o": [
+            "Creates HTTP errors with status codes",
+            "Error logging",
+            "Error recovery",
+            "Error analysis"
+        ]
+    },
+    {
+        "q": "The ______ status code means unauthorized.",
+        "type": "fill_blank",
+        "answers": [
+            "401"
+        ],
+        "other_options": [
+            "403",
+            "404",
+            "400"
+        ]
+    },
+    {
+        "q": "http-errors integrates with Express error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error handling flow:",
+        "type": "rearrange",
+        "words": [
+            "Error thrown",
+            "Next called with error",
+            "Error middleware executed",
+            "Error response sent",
+            "Error logged"
+        ]
+    },
+    {
+        "q": "What is express-json-validator-middleware?",
+        "type": "mcq",
+        "o": [
+            "JSON Schema validation middleware",
+            "JSON formatting",
+            "JSON parsing",
+            "JSON compression"
+        ]
+    },
+    {
+        "q": "JSON Schema uses ______ to define data structure.",
+        "type": "fill_blank",
+        "answers": [
+            "$schema"
+        ],
+        "other_options": [
+            "schema",
+            "definition",
+            "type"
+        ]
+    },
+    {
+        "q": "JSON Schema validation is declarative.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is ajv JSON validator?",
+        "type": "mcq",
+        "o": [
+            "Fast JSON Schema validator",
+            "API validator",
+            "Async validator",
+            "Advanced validator"
+        ]
+    },
+    {
+        "q": "Ajv compiles schemas for ______ validation.",
+        "type": "fill_blank",
+        "answers": [
+            "faster"
+        ],
+        "other_options": [
+            "stricter",
+            "better",
+            "simpler"
+        ]
+    },
+    {
+        "q": "Ajv supports JSON Schema draft-07 and newer.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is celebrate middleware?",
+        "type": "mcq",
+        "o": [
+            "Joi validation for Express",
+            "Celebration effects",
+            "Event handling",
+            "Party API"
+        ]
+    },
+    {
+        "q": "Celebrate validates ______, params, query, and headers.",
+        "type": "fill_blank",
+        "answers": [
+            "body"
+        ],
+        "other_options": [
+            "request",
+            "data",
+            "input"
+        ]
+    },
+    {
+        "q": "Celebrate uses Joi schemas for validation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the validation approaches with their characteristics:",
+        "type": "match",
+        "left": [
+            "JSON Schema",
+            "Joi",
+            "Zod",
+            "express-validator"
+        ],
+        "right": [
+            "Standard format",
+            "Fluent API",
+            "TypeScript first",
+            "Middleware chain"
+        ]
+    },
+    {
+        "q": "What is express-recaptcha middleware?",
+        "type": "mcq",
+        "o": [
+            "Google reCAPTCHA integration",
+            "Image recognition",
+            "Text extraction",
+            "Audio processing"
+        ]
+    },
+    {
+        "q": "reCAPTCHA prevents ______ submissions.",
+        "type": "fill_blank",
+        "answers": [
+            "bot"
+        ],
+        "other_options": [
+            "spam",
+            "fake",
+            "invalid"
+        ]
+    },
+    {
+        "q": "reCAPTCHA v3 scores request without user interaction.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-rate-limit-redis?",
+        "type": "mcq",
+        "o": [
+            "Redis store for distributed rate limiting",
+            "Redis connection",
+            "Redis caching",
+            "Redis pub/sub"
+        ]
+    },
+    {
+        "q": "Redis enables ______ rate limiting across instances.",
+        "type": "fill_blank",
+        "answers": [
+            "distributed"
+        ],
+        "other_options": [
+            "faster",
+            "persistent",
+            "secure"
+        ]
+    },
+    {
+        "q": "In-memory rate limiting fails in clustered deployments.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-bouncer middleware?",
+        "type": "mcq",
+        "o": [
+            "Enhanced rate limiting with blocking",
+            "Bounce effects",
+            "Animation",
+            "Redirection"
+        ]
+    },
+    {
+        "q": "The ______ duration blocks repeat offenders.",
+        "type": "fill_blank",
+        "answers": [
+            "block"
+        ],
+        "other_options": [
+            "wait",
+            "delay",
+            "timeout"
+        ]
+    },
+    {
+        "q": "Bouncer blocks IPs that repeatedly hit limits.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is node-cache middleware?",
+        "type": "mcq",
+        "o": [
+            "In-memory caching for Node.js",
+            "File caching",
+            "Network caching",
+            "Database caching"
+        ]
+    },
+    {
+        "q": "The ______ option sets cache TTL in seconds.",
+        "type": "fill_blank",
+        "answers": [
+            "stdTTL"
+        ],
+        "other_options": [
+            "ttl",
+            "expire",
+            "maxAge"
+        ]
+    },
+    {
+        "q": "node-cache TTL can be per-key or global default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is apicache middleware?",
+        "type": "mcq",
+        "o": [
+            "Response caching for Express APIs",
+            "API creation",
+            "API testing",
+            "API documentation"
+        ]
+    },
+    {
+        "q": "The ______ method caches for specified duration.",
+        "type": "fill_blank",
+        "answers": [
+            "middleware"
+        ],
+        "other_options": [
+            "cache",
+            "store",
+            "save"
+        ]
+    },
+    {
+        "q": "apicache can cache based on status codes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange caching strategies by speed:",
+        "type": "rearrange",
+        "words": [
+            "In-memory",
+            "Redis",
+            "File system",
+            "Database",
+            "Network CDN"
+        ]
+    },
+    {
+        "q": "What is express-force-ssl middleware?",
+        "type": "mcq",
+        "o": [
+            "Redirects HTTP to HTTPS",
+            "SSL generation",
+            "Certificate validation",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "The ______ status code redirects permanently.",
+        "type": "fill_blank",
+        "answers": [
+            "301"
+        ],
+        "other_options": [
+            "302",
+            "303",
+            "307"
+        ]
+    },
+    {
+        "q": "HTTPS redirect should be permanent for SEO.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-enforces-ssl?",
+        "type": "mcq",
+        "o": [
+            "Enforces SSL with HSTS header",
+            "SSL configuration",
+            "SSL testing",
+            "SSL logging"
+        ]
+    },
+    {
+        "q": "HSTS stands for HTTP Strict ______ Security.",
+        "type": "fill_blank",
+        "answers": [
+            "Transport"
+        ],
+        "other_options": [
+            "Transfer",
+            "Transmission",
+            "Traffic"
+        ]
+    },
+    {
+        "q": "HSTS prevents downgrade attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-content-length-validator?",
+        "type": "mcq",
+        "o": [
+            "Validates request content length",
+            "Response length",
+            "URL length",
+            "Header length"
+        ]
+    },
+    {
+        "q": "The ______ option sets maximum allowed bytes.",
+        "type": "fill_blank",
+        "answers": [
+            "max"
+        ],
+        "other_options": [
+            "limit",
+            "maxBytes",
+            "size"
+        ]
+    },
+    {
+        "q": "Content length validation prevents large payload attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-basic-auth middleware?",
+        "type": "mcq",
+        "o": [
+            "HTTP Basic authentication",
+            "Basic route creation",
+            "Simple auth",
+            "Default auth"
+        ]
+    },
+    {
+        "q": "Basic auth uses ______ header for credentials.",
+        "type": "fill_blank",
+        "answers": [
+            "Authorization"
+        ],
+        "other_options": [
+            "Auth",
+            "Credentials",
+            "User"
+        ]
+    },
+    {
+        "q": "Basic auth credentials are Base64 encoded, not encrypted.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-bearer-token middleware?",
+        "type": "mcq",
+        "o": [
+            "Extracts Bearer tokens from requests",
+            "Creates tokens",
+            "Validates tokens",
+            "Refreshes tokens"
+        ]
+    },
+    {
+        "q": "Bearer tokens use ______ scheme in Authorization header.",
+        "type": "fill_blank",
+        "answers": [
+            "Bearer"
+        ],
+        "other_options": [
+            "Token",
+            "Auth",
+            "JWT"
+        ]
+    },
+    {
+        "q": "Bearer tokens can come from header, body, or query.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the auth middleware with their token types:",
+        "type": "match",
+        "left": [
+            "passport-local",
+            "passport-jwt",
+            "express-basic-auth",
+            "express-bearer-token"
+        ],
+        "right": [
+            "Session cookie",
+            "JWT in header",
+            "Base64 credentials",
+            "Bearer token extraction"
+        ]
+    },
+    {
+        "q": "What is express-jwt-permissions middleware?",
+        "type": "mcq",
+        "o": [
+            "Checks permissions in JWT claims",
+            "Creates JWTs",
+            "Validates signatures",
+            "Refreshes tokens"
+        ]
+    },
+    {
+        "q": "The ______ claim commonly contains user permissions.",
+        "type": "fill_blank",
+        "answers": [
+            "permissions"
+        ],
+        "other_options": [
+            "roles",
+            "scope",
+            "access"
+        ]
+    },
+    {
+        "q": "JWT permissions enable fine-grained access control.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-acl middleware?",
+        "type": "mcq",
+        "o": [
+            "Access Control List management",
+            "ACL configuration",
+            "Role creation",
+            "User management"
+        ]
+    },
+    {
+        "q": "ACL defines ______ for different user groups.",
+        "type": "fill_blank",
+        "answers": [
+            "permissions"
+        ],
+        "other_options": [
+            "rules",
+            "access",
+            "rights"
+        ]
+    },
+    {
+        "q": "ACL middleware checks role before allowing route access.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-gateway?",
+        "type": "mcq",
+        "o": [
+            "API gateway framework built on Express",
+            "Payment gateway",
+            "Network gateway",
+            "Database gateway"
+        ]
+    },
+    {
+        "q": "API gateways handle ______ concerns for microservices.",
+        "type": "fill_blank",
+        "answers": [
+            "cross-cutting"
+        ],
+        "other_options": [
+            "routing",
+            "caching",
+            "logging"
+        ]
+    },
+    {
+        "q": "Express Gateway can aggregate multiple services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange API gateway processing:",
+        "type": "rearrange",
+        "words": [
+            "Request received",
+            "Auth check",
+            "Rate limiting",
+            "Route to service",
+            "Response transformation"
+        ]
+    },
+    {
+        "q": "What is express-locale middleware?",
+        "type": "mcq",
+        "o": [
+            "Detects and sets request locale",
+            "Location tracking",
+            "Local storage",
+            "File paths"
+        ]
+    },
+    {
+        "q": "The ______ lookup checks Accept-Language header.",
+        "type": "fill_blank",
+        "answers": [
+            "header"
+        ],
+        "other_options": [
+            "request",
+            "browser",
+            "client"
+        ]
+    },
+    {
+        "q": "Locale detection enables internationalization.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is i18n middleware?",
+        "type": "mcq",
+        "o": [
+            "Internationalization for multiple languages",
+            "18 inch display",
+            "Integer handling",
+            "Index management"
+        ]
+    },
+    {
+        "q": "The ______ function gets translated string.",
+        "type": "fill_blank",
+        "answers": [
+            "__"
+        ],
+        "other_options": [
+            "t",
+            "translate",
+            "i18n"
+        ]
+    },
+    {
+        "q": "i18n stores translations in JSON or YAML files.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-subdomain middleware?",
+        "type": "mcq",
+        "o": [
+            "Routes based on subdomain",
+            "Subdomain creation",
+            "DNS management",
+            "Domain validation"
+        ]
+    },
+    {
+        "q": "Subdomain routing enables ______ applications.",
+        "type": "fill_blank",
+        "answers": [
+            "multi-tenant"
+        ],
+        "other_options": [
+            "multi-domain",
+            "multi-host",
+            "multi-site"
+        ]
+    },
+    {
+        "q": "Subdomain middleware can mount different apps.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-partials middleware?",
+        "type": "mcq",
+        "o": [
+            "Enables layout/partial views",
+            "Partial responses",
+            "Partial updates",
+            "Partial content"
+        ]
+    },
+    {
+        "q": "The ______ file wraps page content.",
+        "type": "fill_blank",
+        "answers": [
+            "layout"
+        ],
+        "other_options": [
+            "template",
+            "wrapper",
+            "container"
+        ]
+    },
+    {
+        "q": "Partials reduce view code duplication.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match i18n concepts with their meanings:",
+        "type": "match",
+        "left": [
+            "i18n",
+            "l10n",
+            "locale",
+            "translation"
+        ],
+        "right": [
+            "Internationalization",
+            "Localization",
+            "Language+region",
+            "Converted text"
+        ]
+    },
+    {
+        "q": "What is express-minify middleware?",
+        "type": "mcq",
+        "o": [
+            "Minifies JavaScript and CSS responses",
+            "Minimizes routes",
+            "Reduces logs",
+            "Compresses images"
+        ]
+    },
+    {
+        "q": "Minification removes ______ from code.",
+        "type": "fill_blank",
+        "answers": [
+            "whitespace"
+        ],
+        "other_options": [
+            "comments",
+            "variables",
+            "functions"
+        ]
+    },
+    {
+        "q": "Minification reduces response size.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-sitemap middleware?",
+        "type": "mcq",
+        "o": [
+            "Generates XML sitemap for SEO",
+            "Site navigation",
+            "Route listing",
+            "Page mapping"
+        ]
+    },
+    {
+        "q": "Sitemaps help ______ discover pages.",
+        "type": "fill_blank",
+        "answers": [
+            "search engines"
+        ],
+        "other_options": [
+            "users",
+            "browsers",
+            "servers"
+        ]
+    },
+    {
+        "q": "Sitemap should be at /sitemap.xml by convention.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-robots middleware?",
+        "type": "mcq",
+        "o": [
+            "Generates robots.txt for crawler control",
+            "Robot API",
+            "Automation",
+            "Bot detection"
+        ]
+    },
+    {
+        "q": "The ______ directive blocks crawlers from paths.",
+        "type": "fill_blank",
+        "answers": [
+            "Disallow"
+        ],
+        "other_options": [
+            "Block",
+            "Deny",
+            "Reject"
+        ]
+    },
+    {
+        "q": "robots.txt is advisory, not enforceable.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange SEO middleware priorities:",
+        "type": "rearrange",
+        "words": [
+            "robots.txt",
+            "sitemap.xml",
+            "Meta tags",
+            "Structured data",
+            "Canonical URLs"
+        ]
+    },
+    {
+        "q": "What is express-version-route middleware?",
+        "type": "mcq",
+        "o": [
+            "API versioning through header or URL",
+            "Version control",
+            "Git integration",
+            "Release management"
+        ]
+    },
+    {
+        "q": "The ______ header commonly carries API version.",
+        "type": "fill_blank",
+        "answers": [
+            "Accept-Version"
+        ],
+        "other_options": [
+            "Version",
+            "API-Version",
+            "X-Version"
+        ]
+    },
+    {
+        "q": "URL versioning is most common for public APIs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-handlebars middleware?",
+        "type": "mcq",
+        "o": [
+            "Handlebars template engine integration",
+            "Handle creation",
+            "Bar charts",
+            "Form handling"
+        ]
+    },
+    {
+        "q": "Handlebars uses ______ for variable interpolation.",
+        "type": "fill_blank",
+        "answers": [
+            "{{}}"
+        ],
+        "other_options": [
+            "<%= %>",
+            "${}",
+            "<% %>"
+        ]
+    },
+    {
+        "q": "Handlebars helpers extend template functionality.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is nunjucks middleware?",
+        "type": "mcq",
+        "o": [
+            "Jinja2-inspired template engine for Express",
+            "Ninja tools",
+            "Number formatting",
+            "Node utilities"
+        ]
+    },
+    {
+        "q": "The ______ method configures Nunjucks for Express.",
+        "type": "fill_blank",
+        "answers": [
+            "configure"
+        ],
+        "other_options": [
+            "setup",
+            "init",
+            "create"
+        ]
+    },
+    {
+        "q": "Nunjucks supports template inheritance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-ejs-layouts middleware?",
+        "type": "mcq",
+        "o": [
+            "Layout support for EJS templates",
+            "EJS configuration",
+            "Layout generation",
+            "Page structure"
+        ]
+    },
+    {
+        "q": "EJS uses ______ for JavaScript execution.",
+        "type": "fill_blank",
+        "answers": [
+            "<% %>"
+        ],
+        "other_options": [
+            "{{ }}",
+            "${ }",
+            "<? ?>"
+        ]
+    },
+    {
+        "q": "EJS layouts enable consistent page structure.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match template engines with their syntax:",
+        "type": "match",
+        "left": [
+            "EJS",
+            "Pug",
+            "Handlebars",
+            "Mustache"
+        ],
+        "right": [
+            "<%= %>",
+            "Indentation",
+            "{{ }}",
+            "{{ }}"
+        ]
+    },
+    {
+        "q": "What is express-flash middleware?",
+        "type": "mcq",
+        "o": [
+            "Flash messages with session support",
+            "Flash animations",
+            "Quick messages",
+            "Alert system"
+        ]
+    },
+    {
+        "q": "Flash messages persist across ______.",
+        "type": "fill_blank",
+        "answers": [
+            "redirects"
+        ],
+        "other_options": [
+            "requests",
+            "pages",
+            "sessions"
+        ]
+    },
+    {
+        "q": "Flash messages are automatically cleared after display.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-history-api-fallback middleware?",
+        "type": "mcq",
+        "o": [
+            "Serves index.html for SPA routing",
+            "Browser history",
+            "Request history",
+            "Backup fallback"
+        ]
+    },
+    {
+        "q": "SPA fallback supports client-side ______.",
+        "type": "fill_blank",
+        "answers": [
+            "routing"
+        ],
+        "other_options": [
+            "rendering",
+            "caching",
+            "storage"
+        ]
+    },
+    {
+        "q": "History API fallback enables React/Vue/Angular routing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-mung middleware?",
+        "type": "mcq",
+        "o": [
+            "Transforms response body before sending",
+            "Request munging",
+            "Data manipulation",
+            "Format conversion"
+        ]
+    },
+    {
+        "q": "Mung intercepts ______ before sending.",
+        "type": "fill_blank",
+        "answers": [
+            "res.json"
+        ],
+        "other_options": [
+            "res.send",
+            "res.end",
+            "res.write"
+        ]
+    },
+    {
+        "q": "Mung enables adding wrappers to all JSON responses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-delay middleware?",
+        "type": "mcq",
+        "o": [
+            "Adds artificial delay for testing",
+            "Queue management",
+            "Throttling",
+            "Rate limiting"
+        ]
+    },
+    {
+        "q": "Delay middleware helps test ______ behavior.",
+        "type": "fill_blank",
+        "answers": [
+            "slow network"
+        ],
+        "other_options": [
+            "fast network",
+            "error",
+            "timeout"
+        ]
+    },
+    {
+        "q": "Artificial delays simulate real-world latency.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange response transformation steps:",
+        "type": "rearrange",
+        "words": [
+            "Handler returns data",
+            "Mung intercepts",
+            "Transform applied",
+            "Headers set",
+            "Response sent"
+        ]
+    },
+    {
+        "q": "What is express-debug middleware?",
+        "type": "mcq",
+        "o": [
+            "Development debugging panel",
+            "Error logging",
+            "Breakpoints",
+            "Stack traces"
+        ]
+    },
+    {
+        "q": "Debug middleware should be disabled in ______.",
+        "type": "fill_blank",
+        "answers": [
+            "production"
+        ],
+        "other_options": [
+            "development",
+            "testing",
+            "staging"
+        ]
+    },
+    {
+        "q": "Debug panels expose sensitive application info.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-uncapitalize middleware?",
+        "type": "mcq",
+        "o": [
+            "Redirects uppercase URLs to lowercase",
+            "Text transformation",
+            "Case conversion",
+            "String formatting"
+        ]
+    },
+    {
+        "q": "URL normalization helps with ______ issues.",
+        "type": "fill_blank",
+        "answers": [
+            "SEO"
+        ],
+        "other_options": [
+            "performance",
+            "security",
+            "caching"
+        ]
+    },
+    {
+        "q": "Lowercase URLs prevent duplicate content penalties.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-slash middleware?",
+        "type": "mcq",
+        "o": [
+            "Handles trailing slash normalization",
+            "Path parsing",
+            "URL splitting",
+            "Route matching"
+        ]
+    },
+    {
+        "q": "Trailing slash consistency improves ______ and caching.",
+        "type": "fill_blank",
+        "answers": [
+            "SEO"
+        ],
+        "other_options": [
+            "speed",
+            "security",
+            "routing"
+        ]
+    },
+    {
+        "q": "Inconsistent trailing slashes create duplicate URLs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-no-powered-by middleware?",
+        "type": "mcq",
+        "o": [
+            "Removes X-Powered-By header",
+            "Power management",
+            "Server info",
+            "Framework detection"
+        ]
+    },
+    {
+        "q": "Hiding framework info reduces ______ surface.",
+        "type": "fill_blank",
+        "answers": [
+            "attack"
+        ],
+        "other_options": [
+            "code",
+            "response",
+            "header"
+        ]
+    },
+    {
+        "q": "helmet also removes X-Powered-By by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the URL normalization middleware:",
+        "type": "match",
+        "left": [
+            "uncapitalize",
+            "slash",
+            "redirect",
+            "canonical"
+        ],
+        "right": [
+            "Lowercase URLs",
+            "Trailing slash",
+            "URL forwarding",
+            "Preferred URL"
+        ]
+    },
+    {
+        "q": "What is express-resource-middleware?",
+        "type": "mcq",
+        "o": [
+            "RESTful resource routing shortcuts",
+            "Resource loading",
+            "Asset management",
+            "Memory management"
+        ]
+    },
+    {
+        "q": "Resource middleware creates ______ routes automatically.",
+        "type": "fill_blank",
+        "answers": [
+            "CRUD"
+        ],
+        "other_options": [
+            "REST",
+            "API",
+            "HTTP"
+        ]
+    },
+    {
+        "q": "Resource routing reduces boilerplate for REST APIs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-method-override middleware?",
+        "type": "mcq",
+        "o": [
+            "Enables PUT/DELETE from HTML forms",
+            "Method creation",
+            "HTTP verbs",
+            "Route overriding"
+        ]
+    },
+    {
+        "q": "HTML forms only support GET and ______.",
+        "type": "fill_blank",
+        "answers": [
+            "POST"
+        ],
+        "other_options": [
+            "PUT",
+            "DELETE",
+            "PATCH"
+        ]
+    },
+    {
+        "q": "Method override uses hidden field or query param.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-interceptor middleware?",
+        "type": "mcq",
+        "o": [
+            "Intercepts and modifies responses",
+            "Request interception",
+            "Error interception",
+            "Route interception"
+        ]
+    },
+    {
+        "q": "Interceptors can modify response ______ before sending.",
+        "type": "fill_blank",
+        "answers": [
+            "body"
+        ],
+        "other_options": [
+            "headers",
+            "status",
+            "type"
+        ]
+    },
+    {
+        "q": "Response interceptors enable global transformations.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-interceptor vs express-mung?",
+        "type": "mcq",
+        "o": [
+            "Same purpose, different APIs",
+            "Completely different",
+            "Request vs response",
+            "Sync vs async"
+        ]
+    },
+    {
+        "q": "Choose interceptor based on ______ preference.",
+        "type": "fill_blank",
+        "answers": [
+            "API"
+        ],
+        "other_options": [
+            "performance",
+            "features",
+            "size"
+        ]
+    },
+    {
+        "q": "Both can wrap responses in standard format.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-request-proxy middleware?",
+        "type": "mcq",
+        "o": [
+            "Forwards requests to another server",
+            "Request caching",
+            "Request logging",
+            "Request validation"
+        ]
+    },
+    {
+        "q": "Proxying enables ______ pattern in microservices.",
+        "type": "fill_blank",
+        "answers": [
+            "gateway"
+        ],
+        "other_options": [
+            "router",
+            "facade",
+            "adapter"
+        ]
+    },
+    {
+        "q": "Proxy middleware can transform requests before forwarding.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is custom error handler best practice?",
+        "type": "mcq",
+        "o": [
+            "Four parameters, last in middleware chain",
+            "Three parameters",
+            "First in chain",
+            "Before routes"
+        ]
+    },
+    {
+        "q": "Error handler signature is ______, req, res, next.",
+        "type": "fill_blank",
+        "answers": [
+            "err"
+        ],
+        "other_options": [
+            "error",
+            "exception",
+            "e"
+        ]
+    },
+    {
+        "q": "Express recognizes error handlers by parameter count.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match middleware patterns with their use cases:",
+        "type": "match",
+        "left": [
+            "Factory",
+            "Composition",
+            "Conditional",
+            "Wrapper"
+        ],
+        "right": [
+            "Configurable middleware",
+            "Combined middleware",
+            "Selective execution",
+            "Error handling"
+        ]
+    },
+    {
+        "q": "What is middleware testing with supertest?",
+        "type": "mcq",
+        "o": [
+            "Testing middleware through HTTP requests",
+            "Unit testing middleware",
+            "Mocking middleware",
+            "Stubbing middleware"
+        ]
+    },
+    {
+        "q": "Supertest creates ______ server for testing.",
+        "type": "fill_blank",
+        "answers": [
+            "temporary"
+        ],
+        "other_options": [
+            "permanent",
+            "mock",
+            "stub"
+        ]
+    },
+    {
+        "q": "Integration tests verify full middleware chain.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware unit testing?",
+        "type": "mcq",
+        "o": [
+            "Testing middleware in isolation",
+            "Testing all middleware",
+            "Testing routes",
+            "Testing responses"
+        ]
+    },
+    {
+        "q": "Mock ______ and res objects for unit tests.",
+        "type": "fill_blank",
+        "answers": [
+            "req"
+        ],
+        "other_options": [
+            "request",
+            "http",
+            "app"
+        ]
+    },
+    {
+        "q": "Unit tests are faster than integration tests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware performance optimization?",
+        "type": "mcq",
+        "o": [
+            "Reducing middleware overhead",
+            "Adding more middleware",
+            "Parallel middleware",
+            "Async middleware"
+        ]
+    },
+    {
+        "q": "Fewer middleware in chain means ______ requests.",
+        "type": "fill_blank",
+        "answers": [
+            "faster"
+        ],
+        "other_options": [
+            "slower",
+            "bigger",
+            "smaller"
+        ]
+    },
+    {
+        "q": "Conditional middleware improves performance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange middleware optimization steps:",
+        "type": "rearrange",
+        "words": [
+            "Profile middleware",
+            "Identify bottlenecks",
+            "Remove unnecessary",
+            "Combine related",
+            "Measure improvement"
+        ]
+    },
+    {
+        "q": "What is express-cluster middleware?",
+        "type": "mcq",
+        "o": [
+            "Runs Express across multiple CPU cores",
+            "Database clustering",
+            "Network clustering",
+            "Cache clustering"
+        ]
+    },
+    {
+        "q": "Node.js cluster uses ______ processes.",
+        "type": "fill_blank",
+        "answers": [
+            "worker"
+        ],
+        "other_options": [
+            "child",
+            "forked",
+            "spawned"
+        ]
+    },
+    {
+        "q": "Clustering improves throughput on multi-core machines.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is PM2 with Express?",
+        "type": "mcq",
+        "o": [
+            "Production process manager",
+            "Package manager",
+            "Project manager",
+            "Performance monitor"
+        ]
+    },
+    {
+        "q": "PM2 provides ______ restarts on failures.",
+        "type": "fill_blank",
+        "answers": [
+            "automatic"
+        ],
+        "other_options": [
+            "manual",
+            "scheduled",
+            "delayed"
+        ]
+    },
+    {
+        "q": "PM2 can run Express in cluster mode.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is memory leak detection middleware?",
+        "type": "mcq",
+        "o": [
+            "Monitors memory usage patterns",
+            "Memory cleaning",
+            "Memory allocation",
+            "Memory caching"
+        ]
+    },
+    {
+        "q": "The ______ module provides memory usage info.",
+        "type": "fill_blank",
+        "answers": [
+            "process.memoryUsage"
+        ],
+        "other_options": [
+            "os.memory",
+            "v8.memory",
+            "node.memory"
+        ]
+    },
+    {
+        "q": "Memory leaks gradually increase heapUsed.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match production middleware with their purposes:",
+        "type": "match",
+        "left": [
+            "compression",
+            "helmet",
+            "PM2",
+            "cluster"
+        ],
+        "right": [
+            "Reduce size",
+            "Security headers",
+            "Process management",
+            "Multi-core"
+        ]
+    },
+    {
+        "q": "What is request body size limiting?",
+        "type": "mcq",
+        "o": [
+            "Limiting maximum request payload size",
+            "Body parsing",
+            "Body validation",
+            "Body compression"
+        ]
+    },
+    {
+        "q": "The ______ option limits JSON body size.",
+        "type": "fill_blank",
+        "answers": [
+            "limit"
+        ],
+        "other_options": [
+            "max",
+            "size",
+            "maxSize"
+        ]
+    },
+    {
+        "q": "Large payloads can cause denial of service.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-fileupload size limiting?",
+        "type": "mcq",
+        "o": [
+            "Maximum file upload size",
+            "File count limit",
+            "File type limit",
+            "Directory limit"
+        ]
+    },
+    {
+        "q": "The ______ option sets maximum file bytes.",
+        "type": "fill_blank",
+        "answers": [
+            "limits.fileSize"
+        ],
+        "other_options": [
+            "maxSize",
+            "sizeLimit",
+            "maxBytes"
+        ]
+    },
+    {
+        "q": "File size limits prevent storage exhaustion.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-query-parser?",
+        "type": "mcq",
+        "o": [
+            "Extended query string parsing",
+            "SQL queries",
+            "Database queries",
+            "Search queries"
+        ]
+    },
+    {
+        "q": "Query parser handles ______ objects in query strings.",
+        "type": "fill_blank",
+        "answers": [
+            "nested"
+        ],
+        "other_options": [
+            "flat",
+            "simple",
+            "basic"
+        ]
+    },
+    {
+        "q": "Extended query parsing supports arrays and nested objects.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange request validation steps:",
+        "type": "rearrange",
+        "words": [
+            "Define schema",
+            "Apply to route",
+            "Validate request",
+            "Return errors",
+            "Process valid data"
+        ]
+    },
+    {
+        "q": "What is express-nocache middleware?",
+        "type": "mcq",
+        "o": [
+            "Prevents response caching",
+            "Clears cache",
+            "Cache management",
+            "Cache warming"
+        ]
+    },
+    {
+        "q": "No-cache sets ______ to prevent caching.",
+        "type": "fill_blank",
+        "answers": [
+            "Cache-Control"
+        ],
+        "other_options": [
+            "Pragma",
+            "Expires",
+            "ETag"
+        ]
+    },
+    {
+        "q": "Sensitive endpoints should prevent client caching.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-conditional-middleware?",
+        "type": "mcq",
+        "o": [
+            "Applies middleware based on conditions",
+            "Conditional routes",
+            "If-else routing",
+            "Dynamic middleware"
+        ]
+    },
+    {
+        "q": "Conditional middleware checks ______ before executing.",
+        "type": "fill_blank",
+        "answers": [
+            "predicate"
+        ],
+        "other_options": [
+            "condition",
+            "rule",
+            "filter"
+        ]
+    },
+    {
+        "q": "Conditional middleware reduces unnecessary processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-domain-middleware for?",
+        "type": "mcq",
+        "o": [
+            "Error isolation using domains",
+            "Domain validation",
+            "DNS lookup",
+            "Host detection"
+        ]
+    },
+    {
+        "q": "Domains catch ______ errors in async code.",
+        "type": "fill_blank",
+        "answers": [
+            "unhandled"
+        ],
+        "other_options": [
+            "syntax",
+            "type",
+            "reference"
+        ]
+    },
+    {
+        "q": "async_hooks is preferred over domains in modern Node.js.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-sslify?",
+        "type": "mcq",
+        "o": [
+            "Enforces HTTPS connections",
+            "SSL certificate",
+            "TLS configuration",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "HTTPS redirect improves ______.",
+        "type": "fill_blank",
+        "answers": [
+            "security"
+        ],
+        "other_options": [
+            "speed",
+            "SEO",
+            "caching"
+        ]
+    },
+    {
+        "q": "SSL enforcement should check for proxy headers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the middleware concerns with their solutions:",
+        "type": "match",
+        "left": [
+            "DoS protection",
+            "XSS prevention",
+            "CSRF protection",
+            "SQL injection"
+        ],
+        "right": [
+            "Rate limiting",
+            "Input sanitization",
+            "CSRF tokens",
+            "Parameterized queries"
+        ]
+    },
+    {
+        "q": "What is express-ctx?",
+        "type": "mcq",
+        "o": [
+            "Request context storage",
+            "Context switching",
+            "Contextual routing",
+            "Context menus"
+        ]
+    },
+    {
+        "q": "Context stores request-scoped ______.",
+        "type": "fill_blank",
+        "answers": [
+            "data"
+        ],
+        "other_options": [
+            "routes",
+            "handlers",
+            "middleware"
+        ]
+    },
+    {
+        "q": "Context is accessible without passing through functions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-bunyan-logger?",
+        "type": "mcq",
+        "o": [
+            "Bunyan logging integration",
+            "Logger configuration",
+            "Log rotation",
+            "Log analysis"
+        ]
+    },
+    {
+        "q": "Bunyan outputs ______ formatted logs.",
+        "type": "fill_blank",
+        "answers": [
+            "JSON"
+        ],
+        "other_options": [
+            "text",
+            "XML",
+            "YAML"
+        ]
+    },
+    {
+        "q": "JSON logs are easier for automated processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-opentracing?",
+        "type": "mcq",
+        "o": [
+            "Distributed tracing support",
+            "Open source routing",
+            "Trace logging",
+            "Performance monitoring"
+        ]
+    },
+    {
+        "q": "OpenTracing provides ______ tracing standard.",
+        "type": "fill_blank",
+        "answers": [
+            "vendor-neutral"
+        ],
+        "other_options": [
+            "proprietary",
+            "cloud-specific",
+            "language-specific"
+        ]
+    },
+    {
+        "q": "Distributed tracing helps debug microservices.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange logging levels by severity:",
+        "type": "rearrange",
+        "words": [
+            "trace",
+            "debug",
+            "info",
+            "warn",
+            "error",
+            "fatal"
+        ]
+    },
+    {
+        "q": "What is express-prometheus-middleware?",
+        "type": "mcq",
+        "o": [
+            "Exposes Prometheus metrics",
+            "Prometheus configuration",
+            "Alert management",
+            "Dashboard creation"
+        ]
+    },
+    {
+        "q": "Prometheus scrapes /______ endpoint.",
+        "type": "fill_blank",
+        "answers": [
+            "metrics"
+        ],
+        "other_options": [
+            "prometheus",
+            "stats",
+            "monitor"
+        ]
+    },
+    {
+        "q": "Prometheus enables observability in production.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-circuit-breaker?",
+        "type": "mcq",
+        "o": [
+            "Prevents cascade failures",
+            "Circuit connection",
+            "Electrical routing",
+            "Network breaks"
+        ]
+    },
+    {
+        "q": "Circuit opens after ______ consecutive failures.",
+        "type": "fill_blank",
+        "answers": [
+            "threshold"
+        ],
+        "other_options": [
+            "timeout",
+            "limit",
+            "count"
+        ]
+    },
+    {
+        "q": "Open circuit returns fast failure without trying.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-timeout-handler?",
+        "type": "mcq",
+        "o": [
+            "Custom timeout response handling",
+            "Request timeout",
+            "Connection timeout",
+            "Database timeout"
+        ]
+    },
+    {
+        "q": "Timeout handler responds with ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "503"
+        ],
+        "other_options": [
+            "504",
+            "408",
+            "500"
+        ]
+    },
+    {
+        "q": "Timeout handling prevents hanging connections.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the observability middleware:",
+        "type": "match",
+        "left": [
+            "morgan",
+            "prometheus",
+            "opentracing",
+            "pino"
+        ],
+        "right": [
+            "HTTP logging",
+            "Metrics",
+            "Distributed tracing",
+            "JSON logging"
+        ]
+    },
+    {
+        "q": "What is express-request-language?",
+        "type": "mcq",
+        "o": [
+            "Detects user preferred language",
+            "Language translation",
+            "Language validation",
+            "Language detection"
+        ]
+    },
+    {
+        "q": "Language detection uses ______ header.",
+        "type": "fill_blank",
+        "answers": [
+            "Accept-Language"
+        ],
+        "other_options": [
+            "Language",
+            "Content-Language",
+            "Locale"
+        ]
+    },
+    {
+        "q": "Language middleware enables i18n.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-device middleware?",
+        "type": "mcq",
+        "o": [
+            "Detects device type from user agent",
+            "Device registration",
+            "Device management",
+            "IoT integration"
+        ]
+    },
+    {
+        "q": "Device detection differentiates ______, tablet, desktop.",
+        "type": "fill_blank",
+        "answers": [
+            "mobile"
+        ],
+        "other_options": [
+            "phone",
+            "smartphone",
+            "handheld"
+        ]
+    },
+    {
+        "q": "Device type enables responsive content serving.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-sanitized?",
+        "type": "mcq",
+        "o": [
+            "Recursive input sanitization",
+            "Sanitized routing",
+            "Clean output",
+            "Secure logging"
+        ]
+    },
+    {
+        "q": "Sanitization prevents ______ injection attacks.",
+        "type": "fill_blank",
+        "answers": [
+            "XSS"
+        ],
+        "other_options": [
+            "SQL",
+            "CSRF",
+            "LDAP"
+        ]
+    },
+    {
+        "q": "Recursive sanitization handles nested objects.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange security middleware priority:",
+        "type": "rearrange",
+        "words": [
+            "helmet",
+            "cors",
+            "rate-limit",
+            "auth",
+            "validation"
+        ]
+    },
+    {
+        "q": "What is express-ip middleware?",
+        "type": "mcq",
+        "o": [
+            "Extracts real client IP",
+            "IP validation",
+            "IP blocking",
+            "IP logging"
+        ]
+    },
+    {
+        "q": "Behind proxy, real IP comes from ______.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Forwarded-For"
+        ],
+        "other_options": [
+            "X-Real-IP",
+            "Client-IP",
+            "Remote-Addr"
+        ]
+    },
+    {
+        "q": "Trust proxy setting affects IP detection.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-ipfilter for?",
+        "type": "mcq",
+        "o": [
+            "IP whitelist and blacklist",
+            "IP detection",
+            "IP logging",
+            "Geolocation"
+        ]
+    },
+    {
+        "q": "IP filtering allows or denies based on ______.",
+        "type": "fill_blank",
+        "answers": [
+            "address"
+        ],
+        "other_options": [
+            "location",
+            "country",
+            "region"
+        ]
+    },
+    {
+        "q": "IP filtering can use CIDR notation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-geoip middleware?",
+        "type": "mcq",
+        "o": [
+            "Determines user location from IP",
+            "GPS tracking",
+            "Map integration",
+            "Location logging"
+        ]
+    },
+    {
+        "q": "GeoIP databases map IPs to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "locations"
+        ],
+        "other_options": [
+            "users",
+            "domains",
+            "services"
+        ]
+    },
+    {
+        "q": "GeoIP enables location-based content.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-correlation-id?",
+        "type": "mcq",
+        "o": [
+            "Tracks requests across services",
+            "ID generation",
+            "Request counting",
+            "User tracking"
+        ]
+    },
+    {
+        "q": "Correlation ID enables ______ tracing.",
+        "type": "fill_blank",
+        "answers": [
+            "distributed"
+        ],
+        "other_options": [
+            "local",
+            "async",
+            "sync"
+        ]
+    },
+    {
+        "q": "Same correlation ID spans multiple services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the request identification middleware:",
+        "type": "match",
+        "left": [
+            "request-id",
+            "correlation-id",
+            "trace-id",
+            "span-id"
+        ],
+        "right": [
+            "Single request",
+            "Cross-service",
+            "Trace context",
+            "Single operation"
+        ]
+    },
+    {
+        "q": "What is express-dynamic-middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware that can be added/removed at runtime",
+            "Dynamic routing",
+            "Live reload",
+            "Hot module"
+        ]
+    },
+    {
+        "q": "Dynamic middleware enables runtime ______.",
+        "type": "fill_blank",
+        "answers": [
+            "configuration"
+        ],
+        "other_options": [
+            "routing",
+            "loading",
+            "updating"
+        ]
+    },
+    {
+        "q": "Feature flags can toggle middleware dynamically.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-on-finished middleware?",
+        "type": "mcq",
+        "o": [
+            "Callback when response finishes",
+            "Request completion",
+            "Route finishing",
+            "Middleware ending"
+        ]
+    },
+    {
+        "q": "On-finished fires after response is ______.",
+        "type": "fill_blank",
+        "answers": [
+            "sent"
+        ],
+        "other_options": [
+            "built",
+            "ready",
+            "created"
+        ]
+    },
+    {
+        "q": "Finish hook useful for cleanup and logging.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-response-hooks?",
+        "type": "mcq",
+        "o": [
+            "Intercepts response methods",
+            "Request hooks",
+            "Route hooks",
+            "Middleware hooks"
+        ]
+    },
+    {
+        "q": "Response hooks can transform data before ______.",
+        "type": "fill_blank",
+        "answers": [
+            "sending"
+        ],
+        "other_options": [
+            "parsing",
+            "receiving",
+            "processing"
+        ]
+    },
+    {
+        "q": "Hooks enable global response transformations.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware best practice summary?",
+        "type": "mcq",
+        "o": [
+            "Use what you need, order matters, handle errors",
+            "Use all available middleware",
+            "Random order is fine",
+            "Ignore errors"
+        ]
+    },
+    {
+        "q": "Middleware should be minimal and ______.",
+        "type": "fill_blank",
+        "answers": [
+            "focused"
+        ],
+        "other_options": [
+            "complex",
+            "comprehensive",
+            "universal"
+        ]
+    },
+    {
+        "q": "Well-designed middleware makes Express apps maintainable.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is body-parser limit default?",
+        "type": "mcq",
+        "o": [
+            "100kb for JSON parsing",
+            "1mb",
+            "10mb",
+            "No limit"
+        ]
+    },
+    {
+        "q": "The ______ option in express.json() sets body size limit.",
+        "type": "fill_blank",
+        "answers": [
+            "limit"
+        ],
+        "other_options": [
+            "max",
+            "size",
+            "maxSize"
+        ]
+    },
+    {
+        "q": "Body size limits prevent memory exhaustion attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express.raw() middleware?",
+        "type": "mcq",
+        "o": [
+            "Parses body as raw Buffer",
+            "Raw text parsing",
+            "Raw data output",
+            "Unprocessed routes"
+        ]
+    },
+    {
+        "q": "Raw body parsing returns ______ object.",
+        "type": "fill_blank",
+        "answers": [
+            "Buffer"
+        ],
+        "other_options": [
+            "String",
+            "Object",
+            "Array"
+        ]
+    },
+    {
+        "q": "express.raw() is useful for webhook signatures.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express.text() middleware?",
+        "type": "mcq",
+        "o": [
+            "Parses body as plain text string",
+            "Text formatting",
+            "Text encoding",
+            "Text response"
+        ]
+    },
+    {
+        "q": "Text body parsing returns ______ type.",
+        "type": "fill_blank",
+        "answers": [
+            "string"
+        ],
+        "other_options": [
+            "Buffer",
+            "Object",
+            "Array"
+        ]
+    },
+    {
+        "q": "Content-Type must match for correct parsing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the body parsers with their content types:",
+        "type": "match",
+        "left": [
+            "express.json()",
+            "express.urlencoded()",
+            "express.raw()",
+            "express.text()"
+        ],
+        "right": [
+            "application/json",
+            "application/x-www-form-urlencoded",
+            "application/octet-stream",
+            "text/plain"
+        ]
+    },
+    {
+        "q": "What is multer disk storage?",
+        "type": "mcq",
+        "o": [
+            "Saves uploaded files to filesystem",
+            "Memory storage",
+            "Cloud storage",
+            "Database storage"
+        ]
+    },
+    {
+        "q": "The ______ function customizes upload filename.",
+        "type": "fill_blank",
+        "answers": [
+            "filename"
+        ],
+        "other_options": [
+            "name",
+            "file",
+            "saveName"
+        ]
+    },
+    {
+        "q": "Disk storage is more memory efficient for large files.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is multer memory storage?",
+        "type": "mcq",
+        "o": [
+            "Keeps uploaded files in memory as Buffer",
+            "Disk storage",
+            "Temporary files",
+            "Cached files"
+        ]
+    },
+    {
+        "q": "Memory storage provides file as req.file.______.",
+        "type": "fill_blank",
+        "answers": [
+            "buffer"
+        ],
+        "other_options": [
+            "data",
+            "content",
+            "bytes"
+        ]
+    },
+    {
+        "q": "Memory storage works for small files or streaming.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is multer file filter?",
+        "type": "mcq",
+        "o": [
+            "Validates file type before accepting",
+            "Filters file content",
+            "Sorts files",
+            "Searches files"
+        ]
+    },
+    {
+        "q": "File filter callback receives ______, file, cb.",
+        "type": "fill_blank",
+        "answers": [
+            "req"
+        ],
+        "other_options": [
+            "res",
+            "app",
+            "next"
+        ]
+    },
+    {
+        "q": "File type validation prevents malicious uploads.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange file upload security steps:",
+        "type": "rearrange",
+        "words": [
+            "Check size",
+            "Validate type",
+            "Scan for malware",
+            "Generate safe name",
+            "Store securely"
+        ]
+    },
+    {
+        "q": "What is express-formidable?",
+        "type": "mcq",
+        "o": [
+            "Alternative multipart form parser",
+            "Form validation",
+            "Form generation",
+            "Form styling"
+        ]
+    },
+    {
+        "q": "Formidable supports ______ file uploads with progress.",
+        "type": "fill_blank",
+        "answers": [
+            "large"
+        ],
+        "other_options": [
+            "small",
+            "quick",
+            "async"
+        ]
+    },
+    {
+        "q": "Formidable streams files to reduce memory usage.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connect-busboy?",
+        "type": "mcq",
+        "o": [
+            "Streaming multipart parser",
+            "Bus routing",
+            "Connection pooling",
+            "Socket management"
+        ]
+    },
+    {
+        "q": "Busboy is more ______ than multer for streaming.",
+        "type": "fill_blank",
+        "answers": [
+            "performant"
+        ],
+        "other_options": [
+            "simple",
+            "secure",
+            "reliable"
+        ]
+    },
+    {
+        "q": "Busboy exposes file streams for custom handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-fileupload memory limit?",
+        "type": "mcq",
+        "o": [
+            "Configurable maximum upload size",
+            "RAM usage limit",
+            "CPU limit",
+            "Disk limit"
+        ]
+    },
+    {
+        "q": "The ______ option temporarily stores large files.",
+        "type": "fill_blank",
+        "answers": [
+            "useTempFiles"
+        ],
+        "other_options": [
+            "tempStorage",
+            "diskFallback",
+            "fileTemp"
+        ]
+    },
+    {
+        "q": "Temp files prevent memory exhaustion for large uploads.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match upload middleware with their features:",
+        "type": "match",
+        "left": [
+            "multer",
+            "formidable",
+            "busboy",
+            "express-fileupload"
+        ],
+        "right": [
+            "Most popular",
+            "Progress events",
+            "Streaming",
+            "Simplest API"
+        ]
+    },
+    {
+        "q": "What is express-session store?",
+        "type": "mcq",
+        "o": [
+            "Backend storage for session data",
+            "Session creation",
+            "Session validation",
+            "Session encryption"
+        ]
+    },
+    {
+        "q": "The ______ store is not suitable for production.",
+        "type": "fill_blank",
+        "answers": [
+            "MemoryStore"
+        ],
+        "other_options": [
+            "RedisStore",
+            "MongoStore",
+            "FileStore"
+        ]
+    },
+    {
+        "q": "Redis store enables sessions across server instances.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connect-redis?",
+        "type": "mcq",
+        "o": [
+            "Redis session store for Express",
+            "Redis connection",
+            "Redis caching",
+            "Redis pub/sub"
+        ]
+    },
+    {
+        "q": "Redis sessions require a Redis ______.",
+        "type": "fill_blank",
+        "answers": [
+            "client"
+        ],
+        "other_options": [
+            "server",
+            "database",
+            "connection"
+        ]
+    },
+    {
+        "q": "Redis sessions support horizontal scaling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connect-mongo?",
+        "type": "mcq",
+        "o": [
+            "MongoDB session store",
+            "MongoDB connection",
+            "MongoDB caching",
+            "MongoDB schema"
+        ]
+    },
+    {
+        "q": "Mongo sessions are stored in ______ collection.",
+        "type": "fill_blank",
+        "answers": [
+            "sessions"
+        ],
+        "other_options": [
+            "users",
+            "tokens",
+            "data"
+        ]
+    },
+    {
+        "q": "MongoDB TTL index auto-expires old sessions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange session management priorities:",
+        "type": "rearrange",
+        "words": [
+            "Generate ID",
+            "Create session",
+            "Store securely",
+            "Set cookie",
+            "Validate on request"
+        ]
+    },
+    {
+        "q": "What is cookie-session middleware?",
+        "type": "mcq",
+        "o": [
+            "Client-side session storage in cookies",
+            "Cookie parsing",
+            "Cookie encryption",
+            "Cookie validation"
+        ]
+    },
+    {
+        "q": "Cookie-session stores data in ______ itself.",
+        "type": "fill_blank",
+        "answers": [
+            "cookie"
+        ],
+        "other_options": [
+            "server",
+            "database",
+            "cache"
+        ]
+    },
+    {
+        "q": "Cookie sessions have size limitations.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is client-sessions by Mozilla?",
+        "type": "mcq",
+        "o": [
+            "Encrypted client-side sessions",
+            "Browser sessions",
+            "Window sessions",
+            "Tab sessions"
+        ]
+    },
+    {
+        "q": "Client-sessions uses ______ encryption.",
+        "type": "fill_blank",
+        "answers": [
+            "AES-256"
+        ],
+        "other_options": [
+            "RSA",
+            "DES",
+            "MD5"
+        ]
+    },
+    {
+        "q": "Encrypted cookies are safe for sensitive data.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match session types with their storage:",
+        "type": "match",
+        "left": [
+            "express-session",
+            "cookie-session",
+            "connect-redis",
+            "connect-mongo"
+        ],
+        "right": [
+            "Server-side",
+            "Cookie-based",
+            "Redis",
+            "MongoDB"
+        ]
+    },
+    {
+        "q": "What is express-jwt middleware?",
+        "type": "mcq",
+        "o": [
+            "JWT token verification middleware",
+            "JWT creation",
+            "JWT signing",
+            "JWT refresh"
+        ]
+    },
+    {
+        "q": "express-jwt sets decoded token on req.______.",
+        "type": "fill_blank",
+        "answers": [
+            "auth"
+        ],
+        "other_options": [
+            "user",
+            "token",
+            "decoded"
+        ]
+    },
+    {
+        "q": "express-jwt automatically handles token validation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is jsonwebtoken library?",
+        "type": "mcq",
+        "o": [
+            "Creates and verifies JWT tokens",
+            "JSON parsing",
+            "Web tokens",
+            "Token storage"
+        ]
+    },
+    {
+        "q": "The ______ method creates a new JWT.",
+        "type": "fill_blank",
+        "answers": [
+            "sign"
+        ],
+        "other_options": [
+            "create",
+            "generate",
+            "make"
+        ]
+    },
+    {
+        "q": "JWT payload should not contain sensitive data.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is jwks-rsa middleware?",
+        "type": "mcq",
+        "o": [
+            "Retrieves RS256 public keys from JWKS endpoint",
+            "RSA encryption",
+            "Key generation",
+            "Certificate management"
+        ]
+    },
+    {
+        "q": "JWKS stands for JSON Web ______ Set.",
+        "type": "fill_blank",
+        "answers": [
+            "Key"
+        ],
+        "other_options": [
+            "Token",
+            "Signature",
+            "Auth"
+        ]
+    },
+    {
+        "q": "JWKS enables key rotation without code changes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange JWT validation steps:",
+        "type": "rearrange",
+        "words": [
+            "Extract token",
+            "Decode header",
+            "Fetch key",
+            "Verify signature",
+            "Check claims"
+        ]
+    },
+    {
+        "q": "What is express-oauth-server?",
+        "type": "mcq",
+        "o": [
+            "OAuth 2.0 server implementation",
+            "OAuth client",
+            "OAuth testing",
+            "OAuth configuration"
+        ]
+    },
+    {
+        "q": "OAuth server issues ______ and refresh tokens.",
+        "type": "fill_blank",
+        "answers": [
+            "access"
+        ],
+        "other_options": [
+            "API",
+            "user",
+            "session"
+        ]
+    },
+    {
+        "q": "OAuth server handles token lifecycle.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is oidc-provider?",
+        "type": "mcq",
+        "o": [
+            "OpenID Connect identity provider",
+            "OAuth client",
+            "Auth middleware",
+            "Token validator"
+        ]
+    },
+    {
+        "q": "OIDC adds ______ layer on top of OAuth 2.0.",
+        "type": "fill_blank",
+        "answers": [
+            "identity"
+        ],
+        "other_options": [
+            "security",
+            "encryption",
+            "validation"
+        ]
+    },
+    {
+        "q": "OIDC provides standardized user info endpoint.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-openid-connect?",
+        "type": "mcq",
+        "o": [
+            "Auth0 OpenID Connect library",
+            "Open connection",
+            "ID validation",
+            "Connect management"
+        ]
+    },
+    {
+        "q": "OpenID Connect middleware handles ______ flow.",
+        "type": "fill_blank",
+        "answers": [
+            "authentication"
+        ],
+        "other_options": [
+            "authorization",
+            "validation",
+            "token"
+        ]
+    },
+    {
+        "q": "express-openid-connect integrates with Auth0.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the auth standards with their purposes:",
+        "type": "match",
+        "left": [
+            "OAuth 2.0",
+            "OpenID Connect",
+            "SAML",
+            "JWT"
+        ],
+        "right": [
+            "Authorization",
+            "Authentication",
+            "Enterprise SSO",
+            "Token format"
+        ]
+    },
+    {
+        "q": "What is express-unless middleware?",
+        "type": "mcq",
+        "o": [
+            "Conditionally skips middleware",
+            "Route exclusion",
+            "Negative matching",
+            "Exception handling"
+        ]
+    },
+    {
+        "q": "unless allows skipping middleware for ______ paths.",
+        "type": "fill_blank",
+        "answers": [
+            "specified"
+        ],
+        "other_options": [
+            "all",
+            "dynamic",
+            "secure"
+        ]
+    },
+    {
+        "q": "Public routes can be excluded from auth middleware.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware ordering importance?",
+        "type": "mcq",
+        "o": [
+            "Determines which middleware runs first",
+            "Code organization",
+            "Performance tuning",
+            "Memory management"
+        ]
+    },
+    {
+        "q": "Error handling middleware should be ______.",
+        "type": "fill_blank",
+        "answers": [
+            "last"
+        ],
+        "other_options": [
+            "first",
+            "second",
+            "middle"
+        ]
+    },
+    {
+        "q": "Middleware order affects request processing flow.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware debugging strategy?",
+        "type": "mcq",
+        "o": [
+            "Add logging to trace execution flow",
+            "Remove all middleware",
+            "Disable middleware",
+            "Skip middleware"
+        ]
+    },
+    {
+        "q": "Debug middleware execution with console.______ statements.",
+        "type": "fill_blank",
+        "answers": [
+            "log"
+        ],
+        "other_options": [
+            "debug",
+            "trace",
+            "info"
+        ]
+    },
+    {
+        "q": "Tracing helps identify middleware that hangs requests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange debugging middleware issues:",
+        "type": "rearrange",
+        "words": [
+            "Identify symptom",
+            "Add logging",
+            "Trace flow",
+            "Find issue",
+            "Apply fix"
+        ]
+    },
+    {
+        "q": "What is middleware performance impact?",
+        "type": "mcq",
+        "o": [
+            "Each middleware adds processing time",
+            "No impact",
+            "Improves performance",
+            "Only affects memory"
+        ]
+    },
+    {
+        "q": "Fewer middleware in chain means ______ latency.",
+        "type": "fill_blank",
+        "answers": [
+            "lower"
+        ],
+        "other_options": [
+            "higher",
+            "same",
+            "variable"
+        ]
+    },
+    {
+        "q": "Benchmark middleware to identify slow ones.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware composition pattern?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple middleware into reusable unit",
+            "Writing middleware",
+            "Testing middleware",
+            "Debugging middleware"
+        ]
+    },
+    {
+        "q": "Composed middleware improves code ______.",
+        "type": "fill_blank",
+        "answers": [
+            "reusability"
+        ],
+        "other_options": [
+            "speed",
+            "security",
+            "size"
+        ]
+    },
+    {
+        "q": "Composition reduces code duplication.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match middleware best practices:",
+        "type": "match",
+        "left": [
+            "Order",
+            "Size",
+            "Error handling",
+            "Testing"
+        ],
+        "right": [
+            "Place correctly",
+            "Keep minimal",
+            "Handle all errors",
+            "Test in isolation"
+        ]
+    },
+    {
+        "q": "What is the final middleware concept summary?",
+        "type": "mcq",
+        "o": [
+            "Middleware is the heart of Express architecture",
+            "Middleware is optional",
+            "Middleware is deprecated",
+            "Middleware is complex"
+        ]
+    },
+    {
+        "q": "Express apps are essentially a series of ______ calls.",
+        "type": "fill_blank",
+        "answers": [
+            "middleware"
+        ],
+        "other_options": [
+            "route",
+            "function",
+            "callback"
+        ]
+    },
+    {
+        "q": "Understanding middleware is key to Express mastery.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware hot reloading?",
+        "type": "mcq",
+        "o": [
+            "Updating middleware without server restart",
+            "Overheating middleware",
+            "Cache warming",
+            "Performance tuning"
+        ]
+    },
+    {
+        "q": "Hot reload helps during ______ workflow.",
+        "type": "fill_blank",
+        "answers": [
+            "development"
+        ],
+        "other_options": [
+            "production",
+            "testing",
+            "deployment"
+        ]
+    },
+    {
+        "q": "nodemon enables automatic restart on changes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is middleware dependency injection?",
+        "type": "mcq",
+        "o": [
+            "Passing dependencies to middleware factory",
+            "Installing middleware",
+            "Injecting code",
+            "Dependency management"
+        ]
+    },
+    {
+        "q": "DI improves middleware ______.",
+        "type": "fill_blank",
+        "answers": [
+            "testability"
+        ],
+        "other_options": [
+            "speed",
+            "size",
+            "security"
+        ]
+    },
+    {
+        "q": "Injected dependencies can be mocked in tests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is async-local-storage for middleware?",
+        "type": "mcq",
+        "o": [
+            "Request-scoped context without explicit passing",
+            "Async file storage",
+            "Local database",
+            "Cache storage"
+        ]
+    },
+    {
+        "q": "AsyncLocalStorage replaced deprecated ______ module.",
+        "type": "fill_blank",
+        "answers": [
+            "domain"
+        ],
+        "other_options": [
+            "context",
+            "scope",
+            "local"
+        ]
+    },
+    {
+        "q": "AsyncLocalStorage enables implicit context passing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the middleware lifecycle events:",
+        "type": "match",
+        "left": [
+            "Request start",
+            "Route match",
+            "Handler run",
+            "Response sent"
+        ],
+        "right": [
+            "Middleware begins",
+            "Router executes",
+            "Controller runs",
+            "Cleanup hooks"
+        ]
+    }
+]

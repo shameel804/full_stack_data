@@ -1,0 +1,4392 @@
+[
+    {
+        "q": "How do you define a basic GET route in Laravel?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/url', function () { ... });",
+            "Route::to('/url', 'GET', ...);",
+            "Router::get('/url', ...);",
+            "$app->get('/url', ...);"
+        ]
+    },
+    {
+        "q": "Which facade is used to define routes?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\\\Support\\\\Facades\\\\Route",
+            "Illuminate\\\\Routing\\\\Router",
+            "Illuminate\\\\Http\\\\Route",
+            "App\\\\Facades\\\\Route"
+        ]
+    },
+    {
+        "q": "How do you return a simple string from a route?",
+        "type": "mcq",
+        "o": [
+            "return 'Hello World';",
+            "echo 'Hello World';",
+            "response('Hello World');",
+            "return response()->text('Hello World');"
+        ]
+    },
+    {
+        "q": "How do you define a route that accepts multiple HTTP verbs?",
+        "type": "mcq",
+        "o": [
+            "Route::match(['get', 'post'], '/', ...);",
+            "Route::any(['get', 'post'], '/', ...);",
+            "Route::map(['get', 'post'], '/', ...);",
+            "Route::many(['get', 'post'], '/', ...);"
+        ]
+    },
+    {
+        "q": "How do you define a route that accepts ALL HTTP verbs?",
+        "type": "mcq",
+        "o": [
+            "Route::any('/', ...);",
+            "Route::all('/', ...);",
+            "Route::everything('/', ...);",
+            "Route::catch('/', ...);"
+        ]
+    },
+    {
+        "q": "What is the purpose of 'Route::redirect'?",
+        "type": "mcq",
+        "o": [
+            "To define a route that redirects to another URI",
+            "To redirect the user inside a controller",
+            "To cache redirects",
+            "To handle 404s"
+        ]
+    },
+    {
+        "q": "What is the default status code for 'Route::redirect'?",
+        "type": "mcq",
+        "o": [
+            "302 Found",
+            "301 Moved Permanently",
+            "307 Temporary Redirect",
+            "200 OK"
+        ]
+    },
+    {
+        "q": "How do you specify a 301 Permanent Redirect using the route helper?",
+        "type": "mcq",
+        "o": [
+            "Route::permanentRedirect('/here', '/there');",
+            "Route::redirect('/here', '/there', 301);",
+            "Both A and B",
+            "Route::moved('/here', '/there');"
+        ]
+    },
+    {
+        "q": "What is 'Route::view' used for?",
+        "type": "mcq",
+        "o": [
+            "To return a view directly without needing a full controller method or closure",
+            "To render a view in the console",
+            "To cache views",
+            "To test views"
+        ]
+    },
+    {
+        "q": "What are the arguments for 'Route::view'?",
+        "type": "mcq",
+        "o": [
+            "Route::view('/uri', 'view.name', ['data' => 'value'])",
+            "Route::view('view.name', '/uri')",
+            "Route::view('/uri', function() { return view(...); })",
+            "Route::view(['uri' => 'view.name'])"
+        ]
+    },
+    {
+        "q": "How do you define a route parameter?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/user/{id}', ...)",
+            "Route::get('/user/:id', ...)",
+            "Route::get('/user/$id', ...)",
+            "Route::get('/user/<id>', ...)"
+        ]
+    },
+    {
+        "q": "Can you have multiple parameters in a route?",
+        "type": "mcq",
+        "o": [
+            "Yes, e.g., /posts/{post}/comments/{comment}",
+            "No, only one",
+            "Yes, but they must be adjacent",
+            "Only in API routes"
+        ]
+    },
+    {
+        "q": "How are route parameters passed to the closure/controller?",
+        "type": "mcq",
+        "o": [
+            "In the order they appear in the route definition",
+            "By name matching the variable",
+            "As an array",
+            "They are properly injected by type hint only"
+        ]
+    },
+    {
+        "q": "How do you define an optional route parameter?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/user/{name?}', ...)",
+            "Route::get('/user/{name:optional}', ...)",
+            "Route::get('/user/{name}?', ...)",
+            "Route::get('/user/[name]', ...)"
+        ]
+    },
+    {
+        "q": "If you have an optional parameter, what must you do in the callback signature?",
+        "type": "mcq",
+        "o": [
+            "Provide a default value (e.g., $name = null)",
+            "Type hint it as nullable",
+            "Nothing, it overrides automatically",
+            "Use the Optional class"
+        ]
+    },
+    {
+        "q": "How do you define a 'Named Route'?",
+        "type": "mcq",
+        "o": [
+            "->name('profile')",
+            "->as('profile')",
+            "Route::name('profile')->get(...)",
+            "['as' => 'profile']"
+        ]
+    },
+    {
+        "q": "Why are named routes useful?",
+        "type": "mcq",
+        "o": [
+            "They allow you to generate URLs or redirects without coupling to the specific URI",
+            "They are faster",
+            "They are required for middleware",
+            "They look better"
+        ]
+    },
+    {
+        "q": "How do you generate a URL for a named route?",
+        "type": "mcq",
+        "o": [
+            "route('profile')",
+            "url('profile')",
+            "link('profile')",
+            "path('profile')"
+        ]
+    },
+    {
+        "q": "How do you pass parameters to the 'route' helper?",
+        "type": "mcq",
+        "o": [
+            "route('profile', ['id' => 1])",
+            "route('profile', 1)",
+            "Both A and B (if single parameter)",
+            "route('profile')->with(1)"
+        ]
+    },
+    {
+        "q": "What happens if you pass extra parameters to the 'route' helper that are not in the URI?",
+        "type": "mcq",
+        "o": [
+            "They are appended as a query string",
+            "They are ignored",
+            "An error is thrown",
+            "They are added as headers"
+        ]
+    },
+    {
+        "q": "How do you group routes?",
+        "type": "mcq",
+        "o": [
+            "Route::group([], function () { ... }); (or methods like Route::prefix()->group())",
+            "Route::batch(function () { ... });",
+            "Route::bundle(function () { ... });",
+            "Route::collection(function () { ... });"
+        ]
+    },
+    {
+        "q": "How do you add a prefix to a route group?",
+        "type": "mcq",
+        "o": [
+            "Route::prefix('admin')->group(...)",
+            "Route::group(['prefix' => 'admin'], ...)",
+            "Both A and B",
+            "Route::prepend('admin')->group(...)"
+        ]
+    },
+    {
+        "q": "How do you add a middleware to a route group?",
+        "type": "mcq",
+        "o": [
+            "Route::middleware(['auth'])->group(...)",
+            "Route::group(['middleware' => 'auth'], ...)",
+            "Both A and B",
+            "Route::guard('auth')->group(...)"
+        ]
+    },
+    {
+        "q": "What is the purpose of 'Route::namespace' (Legacy)?",
+        "type": "mcq",
+        "o": [
+            "To prefix the controller namespace for a group of routes",
+            "To define the PHP namespace of the route file",
+            "To group routes by folder",
+            "To creating database namespaces"
+        ]
+    },
+    {
+        "q": "How do you rename named routes in a group (Prefixing names)?",
+        "type": "mcq",
+        "o": [
+            "Route::name('admin.')->group(...) (Appends to existing names)",
+            "Route::as('admin.')->group(...)",
+            "Both A and B",
+            "Route::rename('admin.')->group(...)"
+        ]
+    },
+    {
+        "q": "If you have a group with prefix 'admin' and inside it a route with URI 'dashboard', what is the full URI?",
+        "type": "mcq",
+        "o": [
+            "admin/dashboard",
+            "admin-dashboard",
+            "dashboard",
+            "admin.dashboard"
+        ]
+    },
+    {
+        "q": "Use of 'Route::resource' creates how many standard routes?",
+        "type": "mcq",
+        "o": [
+            "7 (index, create, store, show, edit, update, destroy)",
+            "5",
+            "4",
+            "1"
+        ]
+    },
+    {
+        "q": "How do you list all registered routes in CLI?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:list",
+            "php artisan routes",
+            "php artisan show:routes",
+            "php artisan route:all"
+        ]
+    },
+    {
+        "q": "How do you filter `route:list` by method?",
+        "type": "mcq",
+        "o": [
+            "--method=GET",
+            "--verb=GET",
+            "--type=GET",
+            "--only=GET"
+        ]
+    },
+    {
+        "q": "How do you filter `route:list` by name?",
+        "type": "mcq",
+        "o": [
+            "--name=profile",
+            "--filter=profile",
+            "--search=profile",
+            "--find=profile"
+        ]
+    },
+    {
+        "q": "How do you define a route that handles all unmatched requests (404 alternative)?",
+        "type": "mcq",
+        "o": [
+            "Route::fallback(function () { ... });",
+            "Route::catchAll(function () { ... });",
+            "Route::any('*', ...);",
+            "Route::missing(function () { ... });"
+        ]
+    },
+    {
+        "q": "Where should `Route::fallback` be defined?",
+        "type": "mcq",
+        "o": [
+            "At the very end of your routes file",
+            "At the beginning",
+            "Inside a group",
+            "Anywhere"
+        ]
+    },
+    {
+        "q": "Can you use `Route::fallback` with `Route::prefix`?",
+        "type": "mcq",
+        "o": [
+            "No, fallback generally applies globally or needs careful ordering within the main file logic (it matches 'anything' not matched earlier)",
+            "Yes, it scopes to the prefix",
+            "Yes, but it errors",
+            "Yes, it handles errors"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb for retrieving resources?",
+        "type": "mcq",
+        "o": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb for creating resources?",
+        "type": "mcq",
+        "o": [
+            "POST",
+            "PUT",
+            "GET",
+            "PATCH"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb for updating resources (replacing)?",
+        "type": "mcq",
+        "o": [
+            "PUT",
+            "PATCH",
+            "POST",
+            "UPDATE"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb for updating resources (partial update)?",
+        "type": "mcq",
+        "o": [
+            "PATCH",
+            "PUT",
+            "POST",
+            "MODIFY"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb for deleting resources?",
+        "type": "mcq",
+        "o": [
+            "DELETE",
+            "REMOVE",
+            "DESTROY",
+            "POST"
+        ]
+    },
+    {
+        "q": "What is the HTTP verb 'HEAD' used for?",
+        "type": "mcq",
+        "o": [
+            "Retrieving headers only (no body)",
+            "Retrieving the main page",
+            "Checking server status",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "Does Laravel support the 'OPTIONS' verb?",
+        "type": "mcq",
+        "o": [
+            "Yes, Route::options(...)",
+            "No",
+            "Only for API",
+            "Only for CORS"
+        ]
+    },
+    {
+        "q": "Check current route name in Blade:",
+        "type": "mcq",
+        "o": [
+            "Request::routeIs('home')",
+            "Route::is('home')",
+            "route('home')",
+            "is_route('home')"
+        ]
+    },
+    {
+        "q": "Limit the rate of access to a route:",
+        "type": "mcq",
+        "o": [
+            "->middleware('throttle:60,1')",
+            "->limit(60)",
+            "->rate(60)",
+            "->restrict(60)"
+        ]
+    },
+    {
+        "q": "What does 'throttle:60,1' mean?",
+        "type": "mcq",
+        "o": [
+            "60 requests per 1 minute",
+            "60 requests per 1 second",
+            "1 request per 60 minutes",
+            "60 blocked IPs per 1 minute"
+        ]
+    },
+    {
+        "q": "Where are API routes defined by default?",
+        "type": "mcq",
+        "o": [
+            "routes/api.php",
+            "routes/web.php",
+            "routes/http.php",
+            "app/Api/routes.php"
+        ]
+    },
+    {
+        "q": "What middleware group is automatically applied to `routes/api.php`?",
+        "type": "mcq",
+        "o": [
+            "'api'",
+            "'web'",
+            "'auth'",
+            "'guest'"
+        ]
+    },
+    {
+        "q": "What is the URL prefix for routes in `routes/api.php` by default?",
+        "type": "mcq",
+        "o": [
+            "/api",
+            "/",
+            "/v1",
+            "/json"
+        ]
+    },
+    {
+        "q": "Can you change the '/api' prefix?",
+        "type": "mcq",
+        "o": [
+            "Yes, in `app/Providers/RouteServiceProvider.php` (or boot method in app provider)",
+            "No, it is hardcoded",
+            "Yes, in .env only",
+            "Yes, by deleting the file"
+        ]
+    },
+    {
+        "q": "What middleware group is applied to `routes/web.php`?",
+        "type": "mcq",
+        "o": [
+            "'web'",
+            "'http'",
+            "'browser'",
+            "'gui'"
+        ]
+    },
+    {
+        "q": "What key feature does the 'web' middleware group provide that 'api' does not?",
+        "type": "mcq",
+        "o": [
+            "Session state and CSRF protection",
+            "Throttle",
+            "Routing",
+            "Model binding"
+        ]
+    },
+    {
+        "q": "Is it possible to define routes in `routes/console.php`?",
+        "type": "mcq",
+        "o": [
+            "Yes, for closure-based Artisan commands",
+            "No, it is for config only",
+            "Yes, for HTTP routes",
+            "Yes, for database routes"
+        ]
+    },
+    {
+        "q": "How to define a route that returns a JSON response?",
+        "type": "mcq",
+        "o": [
+            "return response()->json(['key' => 'value']);",
+            "return json_encode([...]);",
+            "return ['key' => 'value']; (Laravel automatically converts arrays/collections to JSON if returned from route)",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "What regex constraint matches numbers only?",
+        "type": "mcq",
+        "o": [
+            "'[0-9]+'",
+            "'[a-z]+'",
+            "'num'",
+            "'int'"
+        ]
+    },
+    {
+        "q": "What helper generates a regex constraint for IDs?",
+        "type": "mcq",
+        "o": [
+            "->whereNumber('id')",
+            "->whereId('id')",
+            "->id()",
+            "->int('id')"
+        ]
+    },
+    {
+        "q": "Can you constrain parameters globally?",
+        "type": "mcq",
+        "o": [
+            "Yes, in `RouteServiceProvider::boot` using `Route::pattern`",
+            "No, only locally",
+            "Yes, in .env",
+            "Yes, in config"
+        ]
+    },
+    {
+        "q": "Syntax for defining a global pattern:",
+        "type": "mcq",
+        "o": [
+            "Route::pattern('id', '[0-9]+');",
+            "Route::global('id', '[0-9]+');",
+            "Pattern::set('id', '[0-9]+');",
+            "Route::regex('id', '[0-9]+');"
+        ]
+    },
+    {
+        "q": "What happens if a route parameter does not match the `where` constraint?",
+        "type": "mcq",
+        "o": [
+            "The route is not matched (likely 404 if no other route matches)",
+            "A 500 error",
+            "Validation exception",
+            "Parameter is null"
+        ]
+    },
+    {
+        "q": "How do you define a subdomain route?",
+        "type": "mcq",
+        "o": [
+            "Route::domain('api.site.com')->group(...)",
+            "Route::subdomain('api')->group(...)",
+            "Route::host('api.site.com')->group(...)",
+            "Route::prefix('api')->group(...)"
+        ]
+    },
+    {
+        "q": "Can you use parameters in domain routing?",
+        "type": "mcq",
+        "o": [
+            "Yes, Route::domain('{account}.site.com')",
+            "No",
+            "Only hardcoded domains",
+            "Only in local environment"
+        ]
+    },
+    {
+        "q": "Where to define routes that need to be signed?",
+        "type": "mcq",
+        "o": [
+            "Use the `signed` middleware",
+            "Use `Route::signed`",
+            "Use `Route::secure`",
+            "Use `Route::verify`"
+        ]
+    },
+    {
+        "q": "How to create a temporary signed route URL?",
+        "type": "mcq",
+        "o": [
+            "URL::temporarySignedRoute('name', now()->addMinutes(30), [...])",
+            "URL::signedRoute('name', [...])",
+            "route('name')->expire(30)",
+            "URL::temp('name')"
+        ]
+    },
+    {
+        "q": "How to validate a signed route request?",
+        "type": "mcq",
+        "o": [
+            "Use `signed` middleware or `$request->hasValidSignature()`",
+            "Check token manually",
+            "Decrypt signature",
+            "Use `auth` middleware"
+        ]
+    },
+    {
+        "q": "What happens if a signed route has an invalid signature?",
+        "type": "mcq",
+        "o": [
+            "403 Invalid Signature exception",
+            "404 Not Found",
+            "500 Error",
+            "Redirect to home"
+        ]
+    },
+    {
+        "q": "How to exclude a route from CSRF protection?",
+        "type": "mcq",
+        "o": [
+            "Add URI to `$except` array in `VerifyCsrfToken` middleware",
+            "Remove `web` middleware",
+            "Use `@csrf_disable`",
+            "Set `CSRF_ENABLED=false`"
+        ]
+    },
+    {
+        "q": "Can you access the current route action method name?",
+        "type": "mcq",
+        "o": [
+            "Route::currentRouteAction()",
+            "Route::method()",
+            "Route::action()",
+            "request()->action()"
+        ]
+    },
+    {
+        "q": "What does `Route::current()` return?",
+        "type": "mcq",
+        "o": [
+            "The underlying Route instance",
+            "The URI string",
+            "The name string",
+            "Boolean"
+        ]
+    },
+    {
+        "q": "How to bind a model to a route parameter automatically?",
+        "type": "mcq",
+        "o": [
+            "Type-hint the Model class in the controller method (Implicit Binding)",
+            "Use `Route::bind`",
+            "Use middleware",
+            "Use dependency injection"
+        ]
+    },
+    {
+        "q": "Implicit binding requires the route parameter name to match what?",
+        "type": "mcq",
+        "o": [
+            "The variable name in the controller method",
+            "The model class name",
+            "The database table",
+            "The ID column"
+        ]
+    },
+    {
+        "q": "By default, what column does implicit binding use to find the model?",
+        "type": "mcq",
+        "o": [
+            "id",
+            "slug",
+            "uuid",
+            "name"
+        ]
+    },
+    {
+        "q": "How to customize the key used for implicit binding in the route definition?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/posts/{post:slug}', ...)",
+            "Route::get('/posts/{post:key=slug}', ...)",
+            "Route::get('/posts/{post(slug)}', ...)",
+            "Route::get('/posts/{post}', ...)->key('slug')"
+        ]
+    },
+    {
+        "q": "How to customize the default key used for model binding globally on the model?",
+        "type": "mcq",
+        "o": [
+            "Override `getRouteKeyName()` method in the Model",
+            "Set `protected $primaryKey`",
+            "Set `protected $routeKey`",
+            "Set `public $slug`"
+        ]
+    },
+    {
+        "q": "What happens if a model is not found during binding?",
+        "type": "mcq",
+        "o": [
+            "404 Not Found is automatically thrown",
+            "Null is passed",
+            "Empty model is passed",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "How do you handle soft-deleted models in route binding?",
+        "type": "mcq",
+        "o": [
+            "->withTrashed() chaining in route definition",
+            "It works by default",
+            "You cannot",
+            "Use explicit binding"
+        ]
+    },
+    {
+        "q": "What is 'Explicit Binding'?",
+        "type": "mcq",
+        "o": [
+            "Manually registering a callback for a parameter name via `Route::model` or `Route::bind`",
+            "Type hinting",
+            "Using middleware",
+            "Using keys"
+        ]
+    },
+    {
+        "q": "Where do you define explicit bindings?",
+        "type": "mcq",
+        "o": [
+            "RouteServiceProvider::boot()",
+            "Controller constructor",
+            "Model boot method",
+            "routes/web.php"
+        ]
+    },
+    {
+        "q": "Syntax for explicit model binding:",
+        "type": "mcq",
+        "o": [
+            "Route::model('user', App\\User::class)",
+            "Route::bind('user', App\\User::class)",
+            "Route::map('user', App\\User::class)",
+            "Route::link('user', App\\User::class)"
+        ]
+    },
+    {
+        "q": "How to pass data to a route view directly?",
+        "type": "mcq",
+        "o": [
+            "Route::view('/welcome', 'welcome', ['name' => 'Taylor'])",
+            "Route::view('/welcome', 'welcome')->with('name', 'Taylor')",
+            "Route::view('/welcome', 'welcome', 'name=Taylor')",
+            "Route::view('/welcome', 'welcome')->data(['name' => 'Taylor'])"
+        ]
+    },
+    {
+        "q": "Is the order of routes important?",
+        "type": "mcq",
+        "o": [
+            "Yes, the first matching route is used",
+            "No, Laravel finds the best match",
+            "No, alphabetical",
+            "Only for groups"
+        ]
+    },
+    {
+        "q": "If you have `get('/{any}')` defined before `get('/about')`, which one handles `/about`?",
+        "type": "mcq",
+        "o": [
+            "`/{any}` will catch it first",
+            "`/about`",
+            "Both run",
+            "Error"
+        ]
+    },
+    {
+        "q": "How do you avoid the 'catch-all' route issue?",
+        "type": "mcq",
+        "o": [
+            "Define specific routes BEFORE wildcards",
+            "Use regex constraints on the wildcard",
+            "Both A and B",
+            "Use named routes"
+        ]
+    },
+    {
+        "q": "What does `Route::currentRouteName()` return if the route has no name?",
+        "type": "mcq",
+        "o": [
+            "null",
+            "Empty string",
+            "False",
+            "Throws exception"
+        ]
+    },
+    {
+        "q": "Can you define routes inside a controller method?",
+        "type": "mcq",
+        "o": [
+            "No, routes must be defined in route files",
+            "Yes, dynamic routing",
+            "Yes, if cache is disabled",
+            "Only in API"
+        ]
+    },
+    {
+        "q": "What is the recommended way to organize routes in a large application?",
+        "type": "mcq",
+        "o": [
+            "Splitting into multiple files and registering them in RouteServiceProvider",
+            "Put everything in web.php",
+            "Use one controller",
+            "Use database"
+        ]
+    },
+    {
+        "q": "Which command lists routes with their middleware?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:list",
+            "php artisan route:middleware",
+            "php artisan show:middleware",
+            "php artisan list:middleware"
+        ]
+    },
+    {
+        "q": "How to check if routes are cached?",
+        "type": "mcq",
+        "o": [
+            "Check if `bootstrap/cache/routes-v7.php` exists",
+            "php artisan route:status",
+            "php artisan is:cached",
+            "config('app.route_cache')"
+        ]
+    },
+    {
+        "q": "What does `Route::resources` (plural) do?",
+        "type": "mcq",
+        "o": [
+            "Register multiple resource controllers at once",
+            "Create multiple resources",
+            "Register API resources",
+            "Register nested resources"
+        ]
+    },
+    {
+        "q": "Syntax for `Route::resources`:",
+        "type": "mcq",
+        "o": [
+            "Route::resources(['photos' => PhotoController::class, 'posts' => PostController::class])",
+            "Route::resources([PhotoController::class, PostController::class])",
+            "Route::batchResources(...)",
+            "Route::manyResources(...)"
+        ]
+    },
+    {
+        "q": "How to create a resource route that only includes specific actions?",
+        "type": "mcq",
+        "o": [
+            "Route::resource(...)->only(['index', 'show'])",
+            "Route::resource(...)->except(['create', 'store'])",
+            "Both A and B",
+            "Route::resource(...)->limit(['index'])"
+        ]
+    },
+    {
+        "q": "How to create a resource route that excludes specific actions?",
+        "type": "mcq",
+        "o": [
+            "Route::resource(...)->except(['destroy'])",
+            "Route::resource(...)->without(['destroy'])",
+            "Route::resource(...)->skip(['destroy'])",
+            "Route::resource(...)->block(['destroy'])"
+        ]
+    },
+    {
+        "q": "What are 'API Resource Routes'?",
+        "type": "mcq",
+        "o": [
+            "Resource routes that exclude `create` and `edit` (HTML forms)",
+            "Routes for JSON only",
+            "Routes with authentication",
+            "Routes for mobile"
+        ]
+    },
+    {
+        "q": "How to define API resource routes?",
+        "type": "mcq",
+        "o": [
+            "Route::apiResource('photos', PhotoController::class)",
+            "Route::resource('photos', PhotoController::class)->api()",
+            "Route::api('photos', PhotoController::class)",
+            "Route::rest('photos', PhotoController::class)"
+        ]
+    },
+    {
+        "q": "What is the URI for the `store` action in a resource route 'photos'?",
+        "type": "mcq",
+        "o": [
+            "POST /photos",
+            "GET /photos/create",
+            "PUT /photos",
+            "POST /photos/store"
+        ]
+    },
+    {
+        "q": "What is the URI for the `update` action in a resource route 'photos'?",
+        "type": "mcq",
+        "o": [
+            "PUT/PATCH /photos/{photo}",
+            "POST /photos/{photo}/update",
+            "POST /photos/{photo}",
+            "UPDATE /photos/{photo}"
+        ]
+    },
+    {
+        "q": "What is the URI for the `destroy` action in a resource route 'photos'?",
+        "type": "mcq",
+        "o": [
+            "DELETE /photos/{photo}",
+            "POST /photos/{photo}/delete",
+            "GET /photos/{photo}/delete",
+            "REMOVE /photos/{photo}"
+        ]
+    },
+    {
+        "q": "Can you customize the default parameter name '{photo}' in resource routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, explicit syntax: ->parameters(['photos' => 'image'])",
+            "No, it assumes singular of URI",
+            "Yes, using `parameter` method",
+            "Yes, using `name` method"
+        ]
+    },
+    {
+        "q": "How to name the resource routes differently?",
+        "type": "mcq",
+        "o": [
+            "->names(['create' => 'photos.build'])",
+            "->as('photos.build')",
+            "->rename(...)",
+            "->alias(...)"
+        ]
+    },
+    {
+        "q": "What is 'Route Model Binding' primary benefit?",
+        "type": "mcq",
+        "o": [
+            "Automatically injecting model instances into routes/controllers, reducing boilerplate query code",
+            "Security",
+            "Performance",
+            "Caching"
+        ]
+    },
+    {
+        "q": "How to create a slug-based route model binding easily?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/post/{post:slug}', ...)",
+            "Route::get('/post/{post}', ...)->slug()",
+            "Use middleware",
+            "Use a trait"
+        ]
+    },
+    {
+        "q": "You can define Custom Keys for scoping in nested routes. Example: User has many Posts.",
+        "type": "mcq",
+        "o": [
+            "Route::get('/users/{user}/posts/{post:slug}', ...)",
+            "Route::get('/users/{user}/posts/{post}', ...)",
+            "Route::scope('/users/{user}/posts/{post}')",
+            "Route::nested(...)"
+        ]
+    },
+    {
+        "q": "When using `Route::match`, what is the first argument?",
+        "type": "mcq",
+        "o": [
+            "Array of HTTP verbs",
+            "URI",
+            "Controller",
+            "Name"
+        ]
+    },
+    {
+        "q": "Can a route return an array?",
+        "type": "mcq",
+        "o": [
+            "Yes, Laravel converts it to JSON automatically",
+            "No, must be string",
+            "No, must be object",
+            "No, must be Response"
+        ]
+    },
+    {
+        "q": "What is the method to add a regular expression constraint to a route parameter?",
+        "type": "mcq",
+        "o": [
+            "->where('id', '[0-9]+')",
+            "->regex('id', '[0-9]+')",
+            "->match('id', '[0-9]+')",
+            "->pattern('id', '[0-9]+')"
+        ]
+    },
+    {
+        "q": "How can you apply constraints to multiple parameters at once?",
+        "type": "mcq",
+        "o": [
+            "->where(['id' => '[0-9]+', 'name' => '[a-z]+'])",
+            "->where('id', '[0-9]+')->where('name', '[a-z]+')",
+            "Both A and B",
+            "->constraints(['id' => '[0-9]+'])"
+        ]
+    },
+    {
+        "q": "If you defined `Route::pattern('id', '[0-9]+')` in `boot`, do you need to add `->where('id', ...)` on every route?",
+        "type": "mcq",
+        "o": [
+            "No, it applies globally to any parameter named 'id'",
+            "Yes, global patterns are opt-in",
+            "Yes, unless you use middleware",
+            "Only for resource routes"
+        ]
+    },
+    {
+        "q": "What helper method constrains a parameter to be UUID?",
+        "type": "mcq",
+        "o": [
+            "->whereUuid('id')",
+            "->uuid('id')",
+            "->isUuid('id')",
+            "->format('id', 'uuid')"
+        ]
+    },
+    {
+        "q": "What helper method constrains a parameter to be one of a list of values?",
+        "type": "mcq",
+        "o": [
+            "->whereIn('category', ['movie', 'song'])",
+            "->where('category', ['movie', 'song'])",
+            "->in('category', ['movie', 'song'])",
+            "->values('category', ['movie', 'song'])"
+        ]
+    },
+    {
+        "q": "How does Laravel determine if a route matches?",
+        "type": "mcq",
+        "o": [
+            "It iterates through registered routes and stops at the first match",
+            "It finds the most specific match",
+            "It finds the last match",
+            "It scores matches"
+        ]
+    },
+    {
+        "q": "What is 'Route::fallback' primarily used for?",
+        "type": "mcq",
+        "o": [
+            "Handling 404 Not Found situations gracefully (e.g. for SPA fallback)",
+            "Handling 500 errors",
+            "Handling database errors",
+            "Redirecting old URLs"
+        ]
+    },
+    {
+        "q": "Does `Route::fallback` run middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes, it runs middleware defined in the `web` group or wherever it is placed",
+            "No, fallbacks are raw",
+            "Only global middleware",
+            "Only 'guest' middleware"
+        ]
+    },
+    {
+        "q": "Rate Limiting: How do you define a limiter named 'uploads'?",
+        "type": "mcq",
+        "o": [
+            "RateLimiter::for('uploads', function (Request $request) { ... })",
+            "RateLimiter::define('uploads', ...)",
+            "Route::limiter('uploads', ...)",
+            "Middleware::limiter('uploads', ...)"
+        ]
+    },
+    {
+        "q": "What object should the RateLimiter callback return?",
+        "type": "mcq",
+        "o": [
+            "Limit::perMinute(5)",
+            "Access::allow(5)",
+            "5",
+            "True"
+        ]
+    },
+    {
+        "q": "How to allow unlimited access for a specific user in RateLimiter?",
+        "type": "mcq",
+        "o": [
+            "Return `Limit::none()`",
+            "Return `Limit::unlimited()`",
+            "Return `null`",
+            "Return `false`"
+        ]
+    },
+    {
+        "q": "How to return a custom response when limit is exceeded?",
+        "type": "mcq",
+        "o": [
+            "Limit::perMinute(5)->response(...) ",
+            "RateLimiter::response(...)",
+            "Throw error",
+            "Return view"
+        ]
+    },
+    {
+        "q": "What HTTP header typically indicates the remaining requests?",
+        "type": "mcq",
+        "o": [
+            "X-RateLimit-Remaining",
+            "X-Requests-Left",
+            "X-Limit-Status",
+            "X-Throttle-Count"
+        ]
+    },
+    {
+        "q": "What HTTP header indicates when the limit resets?",
+        "type": "mcq",
+        "o": [
+            "X-RateLimit-Reset",
+            "X-Reset-Time",
+            "X-Next-Request",
+            "X-Retry-At"
+        ]
+    },
+    {
+        "q": "What status code is returned when rate limit is exceeded?",
+        "type": "mcq",
+        "o": [
+            "429 Too Many Requests",
+            "403 Forbidden",
+            "503 Service Unavailable",
+            "400 Bad Request"
+        ]
+    },
+    {
+        "q": "How do you spoof PUT requests in an HTML form?",
+        "type": "mcq",
+        "o": [
+            "Method POST + Hidden field `_method` = `PUT`",
+            "Method PUT directly",
+            "Method GET + `_method` = `PUT`",
+            "Javascript only"
+        ]
+    },
+    {
+        "q": "Can you spoof PATCH requests?",
+        "type": "mcq",
+        "o": [
+            "Yes, using `_method` = `PATCH`",
+            "No",
+            "Only API",
+            "Only AJAX"
+        ]
+    },
+    {
+        "q": "What happens if you send a POST request to a route defined as GET?",
+        "type": "mcq",
+        "o": [
+            "405 Method Not Allowed",
+            "404 Not Found",
+            "500 Server Error",
+            "It works if URI matches"
+        ]
+    },
+    {
+        "q": "What happens if you send a GET request to a route defined as POST?",
+        "type": "mcq",
+        "o": [
+            "405 Method Not Allowed",
+            "404 Not Found",
+            "It redirects",
+            "It works"
+        ]
+    },
+    {
+        "q": "How to access the currently bound route from the Request object?",
+        "type": "mcq",
+        "o": [
+            "$request->route()",
+            "$request->current()",
+            "$request->getRoute()",
+            "$request->router"
+        ]
+    },
+    {
+        "q": "How to get a parameter value from the current route?",
+        "type": "mcq",
+        "o": [
+            "$request->route('id')",
+            "$request->input('id')",
+            "$request->query('id')",
+            "$request->get('id')"
+        ]
+    },
+    {
+        "q": "Does `$request->route('id')` return the Model instance if binding is used?",
+        "type": "mcq",
+        "o": [
+            "Yes, if route model binding resolved it",
+            "No, always string",
+            "No, always int",
+            "Yes, but wrapped in array"
+        ]
+    },
+    {
+        "q": "How to check if the current route is named 'profile'?",
+        "type": "mcq",
+        "o": [
+            "$request->routeIs('profile')",
+            "$request->named('profile')",
+            "Route::is('profile')",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "How to name a route inside a controller group?",
+        "type": "mcq",
+        "o": [
+            "The group might have a name prefix, and individual routes add to it",
+            "You cannot name routes in groups",
+            "Use `as` array key",
+            "Use `alias`"
+        ]
+    },
+    {
+        "q": "Example: `Route::name('admin.')->group(...)`. Inside, `Route::get('/users')->name('users')`. Full name?",
+        "type": "mcq",
+        "o": [
+            "admin.users",
+            "admin.name.users",
+            "users",
+            "admin-users"
+        ]
+    },
+    {
+        "q": "How to organize routes for different roles (e.g. Admin vs User)?",
+        "type": "mcq",
+        "o": [
+            "Use separate route files (admin.php) or groups with prefixes/middleware",
+            "Use if statements",
+            "Use database",
+            "Use cookies"
+        ]
+    },
+    {
+        "q": "What is the 'signed' middleware used for?",
+        "type": "mcq",
+        "o": [
+            "Verifying that the URL has a valid signature (preventing tampering)",
+            "Login user",
+            "Check SSL",
+            "Check API key"
+        ]
+    },
+    {
+        "q": "How to exclude specific parameters from signature verification?",
+        "type": "mcq",
+        "o": [
+            "You generally cannot; the signature covers the whole URL",
+            "Use `except`",
+            "Use `unguard`",
+            "Use `ignore`"
+        ]
+    },
+    {
+        "q": "Does the signature include the query string?",
+        "type": "mcq",
+        "o": [
+            "Yes, all query parameters are signed",
+            "No, only path",
+            "Only if specified",
+            "Only 'id'"
+        ]
+    },
+    {
+        "q": "Route Model Binding: What checks does Laravel perform for Soft Deletes by default?",
+        "type": "mcq",
+        "o": [
+            "It excludes soft-deleted models (returns 404)",
+            "It includes them",
+            "It includes them if user is admin",
+            "It throws 500"
+        ]
+    },
+    {
+        "q": "Route Model Binding: How to include soft-deleted models?",
+        "type": "mcq",
+        "o": [
+            "->withTrashed() in route definition",
+            "->includeDeleted()",
+            "->all()",
+            "->force()"
+        ]
+    },
+    {
+        "q": "What is 'Scope Binding' (Parent/Child)?",
+        "type": "mcq",
+        "o": [
+            "Automatically checking that the child model belongs to the parent model in nested routes",
+            "Binding directly to database scope",
+            "Scoping to user",
+            "Global scope"
+        ]
+    },
+    {
+        "q": "Example: `/users/{user}/posts/{post}`. If Post (ID 1) does not belong to User (ID 1), what happens with scope binding?",
+        "type": "mcq",
+        "o": [
+            "404 Not Found",
+            "It loads fine",
+            "403 Forbidden",
+            "It redirects"
+        ]
+    },
+    {
+        "q": "Is scope binding enabled by default in recent Laravel versions?",
+        "type": "mcq",
+        "o": [
+            "Yes, if using variable names that guess relationship",
+            "No, must enable manually",
+            "Only for resources",
+            "Only for API"
+        ]
+    },
+    {
+        "q": "How to force scope binding if not automatically detected?",
+        "type": "mcq",
+        "o": [
+            "->scopeBindings()",
+            "->scope()",
+            "->restrict()",
+            "->child()"
+        ]
+    },
+    {
+        "q": "How to disable scope binding?",
+        "type": "mcq",
+        "o": [
+            "->withoutScopedBindings()",
+            "->unscoped()",
+            "->global()",
+            "->ignoreParent()"
+        ]
+    },
+    {
+        "q": "What method generates a URL to a controller action?",
+        "type": "mcq",
+        "o": [
+            "action([UserController::class, 'index'])",
+            "url('UserController@index')",
+            "route('UserController.index')",
+            "link('UserController@index')"
+        ]
+    },
+    {
+        "q": "Can you pass parameters to `action()`?",
+        "type": "mcq",
+        "o": [
+            "Yes, action([Controller::class, 'method'], ['id' => 1])",
+            "No",
+            "Yes, as string",
+            "Yes, as query"
+        ]
+    },
+    {
+        "q": "What is the 'asset()' helper used for?",
+        "type": "mcq",
+        "o": [
+            "Generating a URL to an asset in the public directory",
+            "Compiling asset",
+            "Minifying asset",
+            "Deleting asset"
+        ]
+    },
+    {
+        "q": "What is 'secure_asset()'?",
+        "type": "mcq",
+        "o": [
+            "Same as asset(), but forces HTTPS",
+            "Assets with password",
+            "Assets with signature",
+            "Private assets"
+        ]
+    },
+    {
+        "q": "How to force all generated URLs to be HTTPS?",
+        "type": "mcq",
+        "o": [
+            "URL::forceScheme('https') in AppServiceProvider",
+            "In .env set HTTPS=true",
+            "Route::secure()",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "What helper gets the current full URL?",
+        "type": "mcq",
+        "o": [
+            "url()->full()",
+            "current_url()",
+            "link()",
+            "uri()"
+        ]
+    },
+    {
+        "q": "What helper gets the previous URL?",
+        "type": "mcq",
+        "o": [
+            "url()->previous() or back()->getTargetUrl()",
+            "previous_url()",
+            "last_url()",
+            "history()"
+        ]
+    },
+    {
+        "q": "Middleware: What does adding specific middleware to a route do?",
+        "type": "mcq",
+        "o": [
+            "It filters the request before it reaches the controller (e.g. Auth check)",
+            "It speeds up route",
+            "It logs route",
+            "It modifies URL"
+        ]
+    },
+    {
+        "q": "Can you register middleware classes directly in routes (without alias)?",
+        "type": "mcq",
+        "o": [
+            "Yes, Route::middleware(MyMiddleware::class)",
+            "No, must have alias in Kernel",
+            "Only for groups",
+            "Only for closures"
+        ]
+    },
+    {
+        "q": "How to assign multiple middleware?",
+        "type": "mcq",
+        "o": [
+            "->middleware(['first', 'second'])",
+            "->middleware('first, second')",
+            "->middleware('first')->middleware('second')",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "How to exclude middleware from a group?",
+        "type": "mcq",
+        "o": [
+            "->withoutMiddleware(['auth'])",
+            "->skipMiddleware(['auth'])",
+            "->exceptMiddleware(['auth'])",
+            "->noMiddleware()"
+        ]
+    },
+    {
+        "q": "What is a 'Global Middleware'?",
+        "type": "mcq",
+        "o": [
+            "Middleware that runs on every HTTP request to the application",
+            "Middleware for all users",
+            "Middleware for all APIs",
+            "Middleware from packages"
+        ]
+    },
+    {
+        "q": "Where are global middleware registered?",
+        "type": "mcq",
+        "o": [
+            "Kernel.php `$middleware` array",
+            "Kernel.php `$routeMiddleware`",
+            "web.php",
+            "api.php"
+        ]
+    },
+    {
+        "q": "Controller Route Binding: Can you type-hint an interface?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you bind the interface to an implementation in ServiceContainer",
+            "No",
+            "Only for routing",
+            "Only in construct"
+        ]
+    },
+    {
+        "q": "What is 'Route Caching' primarily for?",
+        "type": "mcq",
+        "o": [
+            "Drastically speeding up route registration in production (via serialization)",
+            "Caching views",
+            "Caching databases",
+            "Caching API responses"
+        ]
+    },
+    {
+        "q": "Can you use closure-based routes with Route Caching?",
+        "type": "mcq",
+        "o": [
+            "No, serialization of closures is not supported natively. Routes must use controllers.",
+            "Yes",
+            "Only simple closures",
+            "Only GET closures"
+        ]
+    },
+    {
+        "q": "What happens if you run `route:cache` with closure routes?",
+        "type": "mcq",
+        "o": [
+            "It throws a LogicException",
+            "It skips them",
+            "It works fine",
+            "It warns but proceeds"
+        ]
+    },
+    {
+        "q": "How to clear route cache?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:clear",
+            "php artisan cache:clear",
+            "php artisan clear:route",
+            "Delete the file manually"
+        ]
+    },
+    {
+        "q": "Where is the route cache file stored?",
+        "type": "mcq",
+        "o": [
+            "bootstrap/cache/routes-v7.php",
+            "storage/framework/routes.php",
+            "app/routes.php",
+            "vendor/routes.php"
+        ]
+    },
+    {
+        "q": "What is the benefit of 'Constructor Injection' in Controllers?",
+        "type": "mcq",
+        "o": [
+            "Dependencies are resolved automatically by the container",
+            "Faster execution",
+            "Less code",
+            "Easier routing"
+        ]
+    },
+    {
+        "q": "Can you define a route that accepts only AJAX requests?",
+        "type": "mcq",
+        "o": [
+            "No special route definition, but you can filter via middleware or `request()->ajax()` check inside",
+            "Route::ajax(...)",
+            "Route::xhr(...)",
+            "Route::async(...)"
+        ]
+    },
+    {
+        "q": "How to group routes by Domain?",
+        "type": "mcq",
+        "o": [
+            "Route::domain('example.com')->group(...)",
+            "Route::host('example.com')->group(...)",
+            "Route::site('example.com')->group(...)",
+            "Route::url('example.com')->group(...)"
+        ]
+    },
+    {
+        "q": "Domain routing: Can you capture subdomains as parameters?",
+        "type": "mcq",
+        "o": [
+            "Yes: Route::domain('{account}.example.com')",
+            "No",
+            "Yes: Route::domain('*.example.com')",
+            "Only in API"
+        ]
+    },
+    {
+        "q": "If using domain parameters, where are they passed?",
+        "type": "mcq",
+        "o": [
+            "To the controller methods/closures arguments",
+            "To the session",
+            "To the header",
+            "To the cookie"
+        ]
+    },
+    {
+        "q": "If route has `{account}` domain param and `{id}` path param, order of arguments?",
+        "type": "mcq",
+        "o": [
+            "$account, $id",
+            "$id, $account",
+            "Array",
+            "Only $id"
+        ]
+    },
+    {
+        "q": "What is `Route::bind('user', ...)` used for?",
+        "type": "mcq",
+        "o": [
+            "Defining explicit binding logic for 'user' parameter",
+            "Binding to view",
+            "Binding to controller",
+            "Binding to database"
+        ]
+    },
+    {
+        "q": "Can you throw a 404 manually inside route closure?",
+        "type": "mcq",
+        "o": [
+            "abort(404);",
+            "return 404;",
+            "throw 404;",
+            "exit(404);"
+        ]
+    },
+    {
+        "q": "Can you throw a 403 manually?",
+        "type": "mcq",
+        "o": [
+            "abort(403, 'Unauthorized action.');",
+            "return 403;",
+            "die(403);",
+            "response(403);"
+        ]
+    },
+    {
+        "q": "What exception does `abort(404)` throw?",
+        "type": "mcq",
+        "o": [
+            "Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
+            "Exception",
+            "Error",
+            "RouteNotFoundException"
+        ]
+    },
+    {
+        "q": "How to define a route for `options` requests?",
+        "type": "mcq",
+        "o": [
+            "Route::options(...)",
+            "Route::opt(...)",
+            "Route::match(['OPTIONS'], ...)",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "How to create a listing of routes as JSON?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:list --json",
+            "php artisan route:json",
+            "php artisan routes --format=json",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "What column is 'Missing' in `route:list` output?",
+        "type": "mcq",
+        "o": [
+            "It isn't a column, but recent versions show 'middleware', 'name', 'action'. Maybe 'Missing' refers to missing controller?",
+            "Vendor",
+            "Path",
+            "Method"
+        ]
+    },
+    {
+        "q": "If a controller does not exist, `route:list` will show:",
+        "type": "mcq",
+        "o": [
+            "ReflectionException or 'Target class not exists' error",
+            "A warning",
+            "Empty list",
+            "The route but marked invalid"
+        ]
+    },
+    {
+        "q": "How to define a redirect route permanently (301)?",
+        "type": "mcq",
+        "o": [
+            "Route::permanentRedirect('/old', '/new')",
+            "Route::redirect('/old', '/new', 301)",
+            "Both A and B",
+            "Route::move('/old', '/new')"
+        ]
+    },
+    {
+        "q": "Is it possible to redirect with a POST method?",
+        "type": "mcq",
+        "o": [
+            "Redirects generally change method to GET unless 307/308 status is used. `Route::redirect` defaults to 302/301 which are GET.",
+            "Yes, always",
+            "No",
+            "Only with AJAX"
+        ]
+    },
+    {
+        "q": "How to redirect using 307 (Temporary Redirect, preserving method)?",
+        "type": "mcq",
+        "o": [
+            "Route::redirect('/from', '/to', 307)",
+            "Route::preserve('/from', '/to')",
+            "Route::temp('/from', '/to')",
+            "Route::postRedirect('/from', '/to')"
+        ]
+    },
+    {
+        "q": "What functionality does `Illuminate\\Routing\\Controllers\\HasMiddleware` interface provide (Laravel 10+)?",
+        "type": "mcq",
+        "o": [
+            "Allows defining middleware in the controller using a static `middleware` method",
+            "Nothing",
+            "Markers for routing",
+            "Enables caching"
+        ]
+    },
+    {
+        "q": "What allows you to define a 'shallow' nested resource?",
+        "type": "mcq",
+        "o": [
+            "Route::resource('photos.comments', CommentController::class)->shallow()",
+            "Route::shallow('photos.comments', CommentController::class)",
+            "Route::nested('photos.comments', CommentController::class)->shallow()",
+            "Route::resource('photos.comments', CommentController::class)->flat()"
+        ]
+    },
+    {
+        "q": "What is the benefit of 'shallow' nesting?",
+        "type": "mcq",
+        "o": [
+            "It keeps URLs short by only nesting routes that strictly require the parent ID (e.g., index/create), while others use the child ID directly (e.g. show/edit/update/destroy)",
+            "It saves database queries",
+            "It disables nesting",
+            "It hides routes"
+        ]
+    },
+    {
+        "q": "For a shallow resource `photos.comments`, what is the URI for `show`?",
+        "type": "mcq",
+        "o": [
+            "/comments/{comment}",
+            "/photos/{photo}/comments/{comment}",
+            "/show/comments/{comment}",
+            "/c/{comment}"
+        ]
+    },
+    {
+        "q": "For a shallow resource `photos.comments`, what is the URI for `index`?",
+        "type": "mcq",
+        "o": [
+            "/photos/{photo}/comments",
+            "/comments",
+            "/photos/comments",
+            "/index/comments"
+        ]
+    },
+    {
+        "q": "How can you customize the behavior when a model is not found during implicit binding (without throwing global 404)?",
+        "type": "mcq",
+        "o": [
+            "Chain `->missing(function (Request $request) { ... })` to the route definition",
+            "Use `->fail(...)`",
+            "Use try-catch in routes",
+            "Use `->fallback(...)`"
+        ]
+    },
+    {
+        "q": "Does `->missing()` work for explicit bindings defined in `boot()`?",
+        "type": "mcq",
+        "o": [
+            "No, it is primarily for implicit binding or scoped bindings defined inline. Explicit bindings throw 404 immediately in the callback usually.",
+            "Yes, always",
+            "Only for resources",
+            "Only for API"
+        ]
+    },
+    {
+        "q": "How to define a Route Macro?",
+        "type": "mcq",
+        "o": [
+            "Route::macro('myCustomRoute', function (...) { ... });",
+            "Route::extend('myCustomRoute', ...);",
+            "Route::mixin('myCustomRoute', ...);",
+            "Route::add('myCustomRoute', ...);"
+        ]
+    },
+    {
+        "q": "Where should you define route macros?",
+        "type": "mcq",
+        "o": [
+            "AppServiceProvider::boot() (or RouteServiceProvider)",
+            "routes/web.php",
+            "config/app.php",
+            "composer.json"
+        ]
+    },
+    {
+        "q": "Can you define properties on the Route object itself via macro?",
+        "type": "mcq",
+        "o": [
+            "Yes, typically macro on `Illuminate\\Routing\\Route` class",
+            "No",
+            "Only on Router",
+            "Only on Request"
+        ]
+    },
+    {
+        "q": "Where does `url()->current()` get the scheme (http/https) from?",
+        "type": "mcq",
+        "o": [
+            "From the incoming request parameters (HTTP_HOST, HTTPS server vars, or X-Forwarded-Proto if configured)",
+            "From .env APP_URL only",
+            "Randomly",
+            "Hardcoded"
+        ]
+    },
+    {
+        "q": "If your app is behind a load balancer terminating SSL, `url()` might return http://. How to fix?",
+        "type": "mcq",
+        "o": [
+            "Configure Trusted Proxies correctly (TrustProxies middleware)",
+            "Force HTTPS in .env",
+            "Manually replace string",
+            "Hack the core"
+        ]
+    },
+    {
+        "q": "What is the middleware `TrimStrings` used for?",
+        "type": "mcq",
+        "o": [
+            "Automatically trims whitespace from all string input fields",
+            "Trims URL",
+            "Trims Body lines",
+            "Trims Database"
+        ]
+    },
+    {
+        "q": "What is the middleware `ConvertEmptyStringsToNull` used for?",
+        "type": "mcq",
+        "o": [
+            "Converts empty string inputs ('') to `null`",
+            "Convers null to string",
+            "Removes empty keys",
+            "Errors on empty strings"
+        ]
+    },
+    {
+        "q": "How to skip `TrimStrings` for a specific field?",
+        "type": "mcq",
+        "o": [
+            "Add field name to `$except` array in the middleware class",
+            "Use `->raw()` request",
+            "Use `no_trim` rule",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "How to prioritize middleware execution order?",
+        "type": "mcq",
+        "o": [
+            "Modify the `$middlewarePriority` array in `app/Http/Kernel.php`",
+            "Alphabetical order",
+            "Registration order in routes",
+            "Random"
+        ]
+    },
+    {
+        "q": "Why is middleware priority important?",
+        "type": "mcq",
+        "o": [
+            "It determines which middleware runs first (e.g. StartSession should run before Auth)",
+            "It affects speed",
+            "It affects routing matching",
+            "It is not important"
+        ]
+    },
+    {
+        "q": "Can you add parameters to middleware call in route?",
+        "type": "mcq",
+        "o": [
+            "Yes: `middleware('role:admin,manager')`",
+            "No",
+            "Only one param",
+            "Yes: `middleware('role', ['admin'])`"
+        ]
+    },
+    {
+        "q": "How do you access middleware parameters in the middleware handle method?",
+        "type": "mcq",
+        "o": [
+            "Add extra arguments to `handle($request, $next, ...$guards)`",
+            "Use `$request->param`",
+            "Use `$this->param`",
+            "Use `func_get_args`"
+        ]
+    },
+    {
+        "q": "How to get the route resolver used by the request?",
+        "type": "mcq",
+        "o": [
+            "$request->getRouteResolver()",
+            "$request->resolver()",
+            "Route::resolver()",
+            "app('router')"
+        ]
+    },
+    {
+        "q": "How to substitute route bindings when testing?",
+        "type": "mcq",
+        "o": [
+            "Often irrelevant if using factories, but `Route::bind(...)` can be mocked or simply rely on database factories",
+            "Route::fake()",
+            "Route::mock()",
+            "Route::subs()"
+        ]
+    },
+    {
+        "q": "Can you use localized routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, usually via packages (mcamara/laravel-localization) or manual prefixing logic",
+            "Yes, `Route::localized()` built-in",
+            "No",
+            "Only for views"
+        ]
+    },
+    {
+        "q": "How to define a route that only matches if a header is present?",
+        "type": "mcq",
+        "o": [
+            "Logic must be in middleware or route closure check; no native `Route::header()` constraint exists",
+            "Route::header('X-Header', 'val')",
+            "Route::hasHeader('X-Header')",
+            "Route::matchHeader(...)"
+        ]
+    },
+    {
+        "q": "Using `Route::resource` with `parameters` option allows you to:",
+        "type": "mcq",
+        "o": [
+            "Override the route parameter names for resource actions (e.g., use `{user_id}` instead of `{user}`)",
+            "Add query params",
+            "Add body params",
+            "Validate params"
+        ]
+    },
+    {
+        "q": "Example: `Route::resource('users', ...)->parameters(['users' => 'admin_user'])`. URI for show becomes:",
+        "type": "mcq",
+        "o": [
+            "/users/{admin_user}",
+            "/users/{user}",
+            "/users/{admin}",
+            "/users/{id}"
+        ]
+    },
+    {
+        "q": "What is the 'VerifyCsrfToken' middleware exception meant for?",
+        "type": "mcq",
+        "o": [
+            "Handling TokenMismatchException specifically (usually redirecting to login or showing 419 Page Expired)",
+            "Verifying password",
+            "Verifying email",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Does API middleware group use CSRF protection?",
+        "type": "mcq",
+        "o": [
+            "No, API is typically stateless (token based) and does not use cookies/sessions/CSRF",
+            "Yes",
+            "Yes, but different",
+            "Yes, optional"
+        ]
+    },
+    {
+        "q": "Which command lists all 'api' middleware?",
+        "type": "mcq",
+        "o": [
+            "php artisan route:list is not grouped by middleware type easily, but you can inspect Kernel.php",
+            "php artisan middleware:api",
+            "php artisan list:api",
+            "It is impossible"
+        ]
+    },
+    {
+        "q": "How to name a route resource names globally?",
+        "type": "mcq",
+        "o": [
+            "Route::resourceVerbs(['create' => 'crear']) in AppServiceProvider",
+            "Route::verbs(...)",
+            "Route::names(...)",
+            "Route::translate(...)"
+        ]
+    },
+    {
+        "q": "What is `Route::resourceVerbs` used for?",
+        "type": "mcq",
+        "o": [
+            "Localizing or changing the URL verbs (e.g. /create to /crear) globally",
+            "Changing HTTP verbs",
+            "Changing Controllers",
+            "Changing Views"
+        ]
+    },
+    {
+        "q": "How do you check if a route exists by name?",
+        "type": "mcq",
+        "o": [
+            "Route::has('login')",
+            "Route::exists('login')",
+            "Route::check('login')",
+            "Router::has('login')"
+        ]
+    },
+    {
+        "q": "How do you retrieve the underlying collection of routes?",
+        "type": "mcq",
+        "o": [
+            "Route::getRoutes()",
+            "Route::collection()",
+            "app('routes')",
+            "Route::list()"
+        ]
+    },
+    {
+        "q": "How do you clear the generic application cache but NOT the route cache?",
+        "type": "mcq",
+        "o": [
+            "php artisan cache:clear (Route cache is cleared by route:clear)",
+            "You cannot",
+            "php artisan cache:app",
+            "php artisan clear:data"
+        ]
+    },
+    {
+        "q": "If you change a route file, do you need to restart the server?",
+        "type": "mcq",
+        "o": [
+            "No, unless using Route Caching or Octane. Standard `serve` reflects changes immediately.",
+            "Yes, always",
+            "Yes, for POST routes",
+            "No, even with cache"
+        ]
+    },
+    {
+        "q": "What is `SubstituteBindings` middleware?",
+        "type": "mcq",
+        "o": [
+            "The middleware responsible for performing Route Model Binding substitutions",
+            "Substitutes strings",
+            "Substitutes views",
+            "Substitutes config"
+        ]
+    },
+    {
+        "q": "Is `SubstituteBindings` included in 'web' group?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only in production",
+            "Only in testing"
+        ]
+    },
+    {
+        "q": "Is `SubstituteBindings` included in 'api' group?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only in production",
+            "Only in testing"
+        ]
+    },
+    {
+        "q": "What happens if you remove `SubstituteBindings` from middleware group?",
+        "type": "mcq",
+        "o": [
+            "Route model binding stops working; you receive the ID string instead of the Model",
+            "Request fails",
+            "Nothing happens",
+            "Laravel crashes"
+        ]
+    },
+    {
+        "q": "What is `Illuminate\\Routing\\Middleware\\ValidateSignature`?",
+        "type": "mcq",
+        "o": [
+            "The implementation for `signed` middleware",
+            "Validates user signature",
+            "Validates method signature",
+            "Validates file signature"
+        ]
+    },
+    {
+        "q": "How to customize the `403` response for invalid signatures?",
+        "type": "mcq",
+        "o": [
+            "Catch `InvalidSignatureException` in `Handler.php`",
+            "Modify the middleware",
+            "Use `->missing()`",
+            "Use `->fail()`"
+        ]
+    },
+    {
+        "q": "What is a 'Single Action Controller'?",
+        "type": "mcq",
+        "o": [
+            "A controller with an `__invoke` method, routed without specifying a method name",
+            "A controller with one static method",
+            "A singleton controller",
+            "A closure"
+        ]
+    },
+    {
+        "q": "Route syntax for Single Action Controller:",
+        "type": "mcq",
+        "o": [
+            "Route::get('/user', ShowProfile::class);",
+            "Route::get('/user', [ShowProfile::class]);",
+            "Route::get('/user', 'ShowProfile@invoke');",
+            "Route::single('/user', ShowProfile::class);"
+        ]
+    },
+    {
+        "q": "Can you use Rate Limiting with Redis?",
+        "type": "mcq",
+        "o": [
+            "Yes, standard Laravel Cache/RateLimit supports Redis",
+            "No, only database",
+            "No, only memory",
+            "No, only file"
+        ]
+    },
+    {
+        "q": "How to specify the cache driver for Rate Limiter?",
+        "type": "mcq",
+        "o": [
+            "Typically uses default cache defined in `config/cache.php`. Cannot easily switch per limiter without custom implementation.",
+            "Limit::driver('redis')",
+            "RateLimiter::driver('redis')",
+            "Route::driver('redis')"
+        ]
+    },
+    {
+        "q": "Can you clear rate limiter attempts manually?",
+        "type": "mcq",
+        "o": [
+            "Yes, RateLimiter::clear($key)",
+            "No",
+            "Only asking user to wait",
+            "Only restarting server"
+        ]
+    },
+    {
+        "q": "What key is used for rate limiting?",
+        "type": "mcq",
+        "o": [
+            "Usually IP address or User ID (set in the callback)",
+            "Session ID",
+            "Random UUID",
+            "Route name"
+        ]
+    },
+    {
+        "q": "How to group routes by subdomain using a fluent method?",
+        "type": "mcq",
+        "o": [
+            "Route::domain('api.app.com')->group(...)",
+            "Route::subdomain('api')->group(...)",
+            "Both are valid",
+            "Route::dns('api')->group(...)"
+        ]
+    },
+    {
+        "q": "Is the 'domain' parameter passed to the controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it contains parameters defined with `{}`",
+            "Always",
+            "Never",
+            "Only if typed"
+        ]
+    },
+    {
+        "q": "Can you use Regex in Domain routing?",
+        "type": "mcq",
+        "o": [
+            "Not explicitly supported in `domain()` string, usually fixed or simple wildcards, parameters can use global patterns",
+            "Yes, `Route::domainRegex(...)`",
+            "Yes, with regex symbols",
+            "No"
+        ]
+    },
+    {
+        "q": "How to register a fallback route only for a specific group/prefix?",
+        "type": "mcq",
+        "o": [
+            "Define a catch-all `Route::any('{any?}', ...)` at the end of that group",
+            "Use `Route::fallback` inside the group",
+            "Cannot be done",
+            "Use `Route::missing` inside group"
+        ]
+    },
+    {
+        "q": "Why is `Route::fallback` better than `{any?}`?",
+        "type": "mcq",
+        "o": [
+            "It is explicit, handles 404s logically, and doesn't interfere with other route matching order as easily if defined last",
+            "It is faster",
+            "It allows POST",
+            "It caches better"
+        ]
+    },
+    {
+        "q": "How to debug routes that are not matching?",
+        "type": "mcq",
+        "o": [
+            "Check `route:list`, check order, check regex constraints, check method",
+            "Reinstall Laravel",
+            "Restart PHP",
+            "Clear browser cache only"
+        ]
+    },
+    {
+        "q": "Does Laravel route parameter matching support unicode?",
+        "type": "mcq",
+        "o": [
+            "Yes, by default unless constrained by regex",
+            "No, ASCII only",
+            "Yes, but requires config",
+            "Only if using UTF-8 middleware"
+        ]
+    },
+    {
+        "q": "Can you use middleware to change the request URI before routing?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but dangerous. Usually better to redirect.",
+            "No, URI is immutable",
+            "Yes, `setUri()`",
+            "Yes, `changeUrl()`"
+        ]
+    },
+    {
+        "q": "What is 'Route Model Binding' Custom Resolution Logic?",
+        "type": "mcq",
+        "o": [
+            "Overriding `resolveRouteBinding` method on the Model",
+            "Overriding `find`",
+            "Overriding `get`",
+            "Overriding `search`"
+        ]
+    },
+    {
+        "q": "Signature of `resolveRouteBinding($value, $field = null)`",
+        "type": "mcq",
+        "o": [
+            "It receives the value to match and optionally the field name",
+            "It receives the request",
+            "It receives the route",
+            "It receives the controller"
+        ]
+    },
+    {
+        "q": "How to customize resolution for 'Scoped Bindings'?",
+        "type": "mcq",
+        "o": [
+            "Override `resolveChildRouteBinding($childType, $value, $field)` on the parent model",
+            "Override `resolveScope`",
+            "Override `scope`",
+            "Use `child` method"
+        ]
+    },
+    {
+        "q": "If using Soft Deletes, `resolveRouteBinding` MUST handle it manually if you override it?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you write a custom query, you decide whether to use `withTrashed`",
+            "No, Laravel forces it",
+            "No, it wraps it",
+            "Sort of"
+        ]
+    },
+    {
+        "q": "What is the `can` middleware used for in routes?",
+        "type": "mcq",
+        "o": [
+            "Authorization checks (Policies/Gates). Syntax: `middleware('can:update,post')`",
+            "Can do logic",
+            "Capability check",
+            "Permission check"
+        ]
+    },
+    {
+        "q": "In `can:update,post`, what does 'post' refer to?",
+        "type": "mcq",
+        "o": [
+            "The route parameter name that holds the Post model",
+            "The class name",
+            "The table name",
+            "The string 'post'"
+        ]
+    },
+    {
+        "q": "If the route parameter is missing in `can:create,App\\Post`, what gets passed?",
+        "type": "mcq",
+        "o": [
+            "The class name string (for Create policies that don't need an instance)",
+            "Null",
+            "Error",
+            "Empty object"
+        ]
+    },
+    {
+        "q": "Can you combine `auth` and `can` middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes, often `auth` is required first to have a user to check capabilities against",
+            "No, they conflict",
+            "Only one allowed",
+            "Use `auth.can`"
+        ]
+    },
+    {
+        "q": "How to define a route that bypasses global middleware?",
+        "type": "mcq",
+        "o": [
+            "Generally you cannot easily bypass global middleware for a specific route without hacky workarounds. Global means global.",
+            "->bypassGlobal()",
+            "->noGlobal()",
+            "->raw()"
+        ]
+    },
+    {
+        "q": "What is the 'Precognition' feature (Laravel 9/10+)?",
+        "type": "mcq",
+        "o": [
+            "Handling 'future' requests? No, it's for predicting validation errors live.",
+            "Allowing frontend to validate inputs via backend rules without executing the full controller action",
+            "AI routing",
+            "Voice control"
+        ]
+    },
+    {
+        "q": "Route header needed for Precognition?",
+        "type": "mcq",
+        "o": [
+            "Precognition: true",
+            "Validate: true",
+            "Check: true",
+            "Dry-Run: true"
+        ]
+    },
+    {
+        "q": "Does the `HandlePrecognitionRequests` middleware handle route matching?",
+        "type": "mcq",
+        "o": [
+            "No, it handles the response format for precognitive requests",
+            "Yes",
+            "Partially",
+            "Only for POST"
+        ]
+    },
+    {
+        "q": "How to indicate a route is deprecated?",
+        "type": "mcq",
+        "o": [
+            "No built-in 'deprecated' flag. Usually document it, log warning, or adding a specific header via middleware.",
+            "Route::deprecated()",
+            "->deprecated()",
+            "->obsolete()"
+        ]
+    },
+    {
+        "q": "Can you define two routes with the same URI and Method?",
+        "type": "mcq",
+        "o": [
+            "Yes, but the second one overwrites the first (or first one takes precedence depending on definition order of execution)",
+            "No, throws error",
+            "Yes, random",
+            "Yes, round robin"
+        ]
+    },
+    {
+        "q": "Can you define two routes with same URI but DIFFERENT methods?",
+        "type": "mcq",
+        "o": [
+            "Yes, perfectly valid",
+            "No",
+            "Only if named differently",
+            "Only if grouped"
+        ]
+    },
+    {
+        "q": "What happens if you define a route with the same name as another?",
+        "type": "mcq",
+        "o": [
+            "The later definition overwrites the name reference",
+            "Error: Duplicate Route Name",
+            "Both work",
+            "System crash"
+        ]
+    },
+    {
+        "q": "How to share a parameter constraint across ALL routes?",
+        "type": "mcq",
+        "o": [
+            "Route::pattern('name', 'regex')",
+            "Route::global('name', 'regex')",
+            "Route::share('name', 'regex')",
+            "Pattern::all('name', 'regex')"
+        ]
+    },
+    {
+        "q": "Can you access the router instance from a Controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, implicitly or injection",
+            "No",
+            "Only in construct",
+            "Only via facade"
+        ]
+    },
+    {
+        "q": "Which property in a resource controller mapping handles the parameter names?",
+        "type": "mcq",
+        "o": [
+            "There isn't a property, you use `->parameters()` on the route definition",
+            "public $parameters = []",
+            "protected $names",
+            "private $map"
+        ]
+    },
+    {
+        "q": "How to invoke the route action manually (e.g. internal request)?",
+        "type": "mcq",
+        "o": [
+            "Request::create(...); app()->handle($req);",
+            "Route::run()",
+            "Route::call()",
+            "Controller::call()"
+        ]
+    },
+    {
+        "q": "How to protect routes from cross-site scripting (XSS)?",
+        "type": "mcq",
+        "o": [
+            "Output encoding in Blade ({{ }}), validating input. Routing doesn't strictly handle XSS itself but Middleware can sanitizer.",
+            "Use `xss` middleware",
+            "Use `Route::secureXss()`",
+            "Enable HTTPS"
+        ]
+    },
+    {
+        "q": "How to enable CORS for routes?",
+        "type": "mcq",
+        "o": [
+            "Configure `config/cors.php` and ensure `HandleCors` middleware is active",
+            "Route::cors()",
+            "Middleware `cors`",
+            "Add headers manually in every controller"
+        ]
+    },
+    {
+        "q": "Where is `HandleCors` middleware usually registered?",
+        "type": "mcq",
+        "o": [
+            "Global middleware in Kernel (Laravel 7+ default)",
+            "In `api` group",
+            "In `web` group",
+            "Manually"
+        ]
+    },
+    {
+        "q": "What does `Route::currentRouteNamed('admin.*')` check?",
+        "type": "mcq",
+        "o": [
+            "Checks if current route name matches the pattern (wildcard)",
+            "Checks if route starts with admin",
+            "Checks if admin is user",
+            "Errors"
+        ]
+    },
+    {
+        "q": "Is the `web.php` file required?",
+        "type": "mcq",
+        "o": [
+            "Technically no, you can remove it if you remove the loading instruction in `RouteServiceProvider`, but standard apps use it.",
+            "Yes, core requirement",
+            "Yes, PHP requires it",
+            "No, it is optional"
+        ]
+    },
+    {
+        "q": "Can you use attributes (PHP 8) to define routes in Laravel?",
+        "type": "mcq",
+        "o": [
+            "Not natively in core (as of Laravel 10), but widely available via packages like `spatie/laravel-route-attributes`",
+            "Yes, `#[Route(...)]` is default",
+            "Yes, `#[Get(...)]`",
+            "Yes, `#[Post(...)]`"
+        ]
+    },
+    {
+        "q": "What is the difference between `Route::get` and `Route::post`?",
+        "type": "mcq",
+        "o": [
+            "They match different HTTP verbs",
+            "One is faster",
+            "One is secure",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is the common use for `Route::patch`?",
+        "type": "mcq",
+        "o": [
+            "Partial updates to a resource",
+            "Full updates",
+            "Deleting",
+            "Creating"
+        ]
+    },
+    {
+        "q": "What is the common use for `Route::put`?",
+        "type": "mcq",
+        "o": [
+            "Full replacement/update of a resource",
+            "Partial update",
+            "Creating",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "Can you use a route to serve a file download?",
+        "type": "mcq",
+        "o": [
+            "Yes, return `response()->download(...)`",
+            "No",
+            "Only images",
+            "Only PDFs"
+        ]
+    },
+    {
+        "q": "Can you stream a response from a route?",
+        "type": "mcq",
+        "o": [
+            "Yes, `response()->stream(...)`",
+            "No",
+            "Only file stream",
+            "Only video"
+        ]
+    },
+    {
+        "q": "How to add a 'server' header to all route responses?",
+        "type": "mcq",
+        "o": [
+            "Middleware",
+            "Route::header()",
+            "Config",
+            "Controller constructor"
+        ]
+    },
+    {
+        "q": "Which is executed first: Global Middleware or Route Middleware?",
+        "type": "mcq",
+        "o": [
+            "Global Middleware",
+            "Route Middleware",
+            "Simultaneous",
+            "Random"
+        ]
+    },
+    {
+        "q": "How to register a new middleware alias?",
+        "type": "mcq",
+        "o": [
+            "Add to `$middlewareAliases` (or `$routeMiddleware` legacy) in Kernel.php",
+            "Add to `routes.php`",
+            "Add to `AppServiceProvider`",
+            "Add to `composer.json`"
+        ]
+    },
+    {
+        "q": "How to make a route accept JSON input?",
+        "type": "mcq",
+        "o": [
+            "It automatically accepts JSON if `Content-Type: application/json` header is sent. Access via `$request->input()` etc.",
+            "Use `Route::json()`",
+            "Use middleware `json`",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "If JSON is invalid in request body, what happens?",
+        "type": "mcq",
+        "o": [
+            "Laravel (middleware) may convert it to empty, or throw logic exception if parsing fails before reaching code.",
+            "400 Bad Request",
+            "500 Error",
+            "Ignored"
+        ]
+    },
+    {
+        "q": "Can routes defined in a package be overridden?",
+        "type": "mcq",
+        "o": [
+            "Yes, by defining a route with the same URI/Name *after* the package routes are loaded (or forcing your routes to load after)",
+            "No",
+            "Only if package allows",
+            "Only if private"
+        ]
+    },
+    {
+        "q": "What is the `Route::fallback` typical status code?",
+        "type": "mcq",
+        "o": [
+            "Typically 404, unless you manually return something else",
+            "200",
+            "500",
+            "302"
+        ]
+    },
+    {
+        "q": "Can you use Dependency Injection in Route Closure?",
+        "type": "mcq",
+        "o": [
+            "Yes, type-hint dependencies in the closure signature",
+            "No",
+            "Only Request",
+            "Only Models"
+        ]
+    },
+    {
+        "q": "What happens if a Closure route is defined in `routes/api.php` and you run `route:cache`?",
+        "type": "mcq",
+        "o": [
+            "It will throw a LogicException because Closures cannot be serialized",
+            "It will work fine",
+            "It will be skipped",
+            "It will be converted to a controller"
+        ]
+    },
+    {
+        "q": "If you are using `route:cache`, do your routes update instantly when you modify `web.php`?",
+        "type": "mcq",
+        "o": [
+            "No, you must run `route:cache` again (or `route:clear`)",
+            "Yes, always",
+            "Yes, if in local environment",
+            "Yes, if using Octane"
+        ]
+    },
+    {
+        "q": "Does `route:cache` cache middleware logic?",
+        "type": "mcq",
+        "o": [
+            "No, it caches the route definitions and their assigned middleware names/lists, but not the middleware PHP code itself",
+            "Yes, it compiles middleware to C++",
+            "Yes, it snapshots middleware state",
+            "Partially"
+        ]
+    },
+    {
+        "q": "What is the primary trade-off of using Route Caching?",
+        "type": "mcq",
+        "o": [
+            "You cannot use Closure-based routes",
+            "It uses more memory",
+            "It makes request slower",
+            "It disables middleware"
+        ]
+    },
+    {
+        "q": "If you want to use Route Caching, all routes must point to:",
+        "type": "mcq",
+        "o": [
+            "Controller classes (tuples or 'Class@method' strings)",
+            "Views",
+            "Closures",
+            "Files"
+        ]
+    },
+    {
+        "q": "Explicit Binding: `Route::bind('user', function ($value) { ... })`. If you return `null` from the closure, what happens?",
+        "type": "mcq",
+        "o": [
+            "A 404 Not Found is thrown (implicit behavior of bind failure)",
+            "Null is passed to controller",
+            "Request continues",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "How to create a binding that passes the raw value if lookup fails (instead of 404)?",
+        "type": "mcq",
+        "o": [
+            "In `Route::bind`, return the `$value` if model not found (though usually you want strict checking)",
+            "Use `Route::bindOptional`",
+            "Use `Route::softBind`",
+            "Use `Route::raw`"
+        ]
+    },
+    {
+        "q": "What is `abort_if($condition, $code)`?",
+        "type": "mcq",
+        "o": [
+            "Throws an HTTP exception if the condition is true",
+            "Redirects if true",
+            "Logs if true",
+            "Stops execution without error"
+        ]
+    },
+    {
+        "q": "What is `abort_unless($condition, $code)`?",
+        "type": "mcq",
+        "o": [
+            "Throws an HTTP exception if the condition is false",
+            "Throws if true",
+            "Redirects if false",
+            "Logs if false"
+        ]
+    },
+    {
+        "q": "Default validation error code in Laravel?",
+        "type": "mcq",
+        "o": [
+            "422 Unprocessable Entity",
+            "400 Bad Request",
+            "500 Server Error",
+            "200 OK"
+        ]
+    },
+    {
+        "q": "When using `Route::apiResource`, which actions are excluded compared to `Route::resource`?",
+        "type": "mcq",
+        "o": [
+            "`create` and `edit`",
+            "`index` and `show`",
+            "`store` and `update`",
+            "`destroy`"
+        ]
+    },
+    {
+        "q": "Can you register ONLY specific API actions?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::apiResource(...)->only([...])`",
+            "No, API resources are fixed",
+            "Yes, `Route::apiOnly(...)`",
+            "Yes, `Route::restOnly(...)`"
+        ]
+    },
+    {
+        "q": "What is `apiResource` shorthand for?",
+        "type": "mcq",
+        "o": [
+            "`resource()->except(['create', 'edit'])`",
+            "`resource()->only(['index', 'show'])`",
+            "`resource()->api()`",
+            "`resource()->json()`"
+        ]
+    },
+    {
+        "q": "If you define a resource route, do you need to manually define the path strings?",
+        "type": "mcq",
+        "o": [
+            "No, Laravel generates them based on the resource name",
+            "Yes, always",
+            "Only for index",
+            "Only for show"
+        ]
+    },
+    {
+        "q": "How to register multiple singular Resource Routes?",
+        "type": "mcq",
+        "o": [
+            "Route::resources([...]); (Wait, syntax for plural resources is same, singular concept is different)",
+            "Route::singleton('profile', ProfileController::class)",
+            "Route::one('profile', ProfileController::class)",
+            "Route::single('profile', ProfileController::class)"
+        ]
+    },
+    {
+        "q": "What is a 'Singleton Resource'?",
+        "type": "mcq",
+        "o": [
+            "A resource that has a single instance (e.g. user profile /user/profile), no ID in URI usually",
+            "A resource with one method",
+            "A global resource",
+            "A static resource"
+        ]
+    },
+    {
+        "q": "Routes generated by `Route::singleton('profile', ...)` usually include:",
+        "type": "mcq",
+        "o": [
+            "show, edit, update (without ID param mostly)",
+            "index, create, store, show, edit, update, destroy",
+            "only show",
+            "only update"
+        ]
+    },
+    {
+        "q": "Does `Route::singleton` support `destroy`?",
+        "type": "mcq",
+        "o": [
+            "No, usually singletons are not destroyed via standard route (unless createable)",
+            "Yes, if created via standard call",
+            "Yes, `creatable()` method adds store/destroy support",
+            "Always"
+        ]
+    },
+    {
+        "q": "How to make a singleton resource 'creatable' and 'destroyable'?",
+        "type": "mcq",
+        "o": [
+            "Route::singleton(...)->creatable() (Adds create/store) and destroyable()",
+            "Route::singleton(...)->all()",
+            "Route::singleton(...)->full()",
+            "Route::singleton(...)->extended()"
+        ]
+    },
+    {
+        "q": "In a singleton route `/profile`, where is the ID?",
+        "type": "mcq",
+        "o": [
+            "It is absent; the resource is assumed to be the currently authenticated user's or a fixed entity",
+            "Query param",
+            "Hidden field",
+            "Header"
+        ]
+    },
+    {
+        "q": "Can you nest singleton resources?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::singleton('photos.comments', ...)`",
+            "No",
+            "Only in API",
+            "Only one level"
+        ]
+    },
+    {
+        "q": "Where does Laravel store the list of compiled routes when running `optimize`?",
+        "type": "mcq",
+        "o": [
+            "bootstrap/cache/routes-v7.php",
+            "storage/app/routes.php",
+            "public/routes.php",
+            "config/routes.php"
+        ]
+    },
+    {
+        "q": "Is Route Model Binding performed before or after 'Global' middleware?",
+        "type": "mcq",
+        "o": [
+            "After (it happens in `SubstituteBindings` which is in `web` group usually, or global group if moved)",
+            "Before",
+            "Simultaneously",
+            "Never"
+        ]
+    },
+    {
+        "q": "So can Global Middleware access the resolved Route Model?",
+        "type": "mcq",
+        "o": [
+            "No, typically the binding hasn't happened yet unless using explicit logic/ordering",
+            "Yes, always",
+            "Yes, via `request()->model()`",
+            "Yes, via `Auth`"
+        ]
+    },
+    {
+        "q": "What happens if you define `Route::resource('photos', ...)` twice?",
+        "type": "mcq",
+        "o": [
+            "The second one overrides the first",
+            "Error",
+            "Both exist",
+            "Merged"
+        ]
+    },
+    {
+        "q": "How to use `Route::controller` (Laravel 9+)?",
+        "type": "mcq",
+        "o": [
+            "Route::controller(OrderController::class)->group(function () { Route::get('/orders', 'index'); ... });",
+            "Route::group(['controller' => ...])",
+            "Route::use(OrderController::class)",
+            "Route::with(OrderController::class)"
+        ]
+    },
+    {
+        "q": "Benefit of `Route::controller`?",
+        "type": "mcq",
+        "o": [
+            "Reduces repetition of the Controller class name for a group of routes",
+            "Performance",
+            "Security",
+            "Caching"
+        ]
+    },
+    {
+        "q": "Can `Route::controller` group contain routes for other controllers?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, if you specify the full 'Class@method' string, binding is overridden? No, typically it prefixes the controller.",
+            "No, it forces that controller",
+            "Yes, always",
+            "Yes, but ignored"
+        ]
+    },
+    {
+        "q": "How to define a route parameter that matches slugs containing slashes (e.g. /docs/v1/installation)?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/docs/{page}', ...)->where('page', '.*')",
+            "Route::get('/docs/{page}', ...)->all()",
+            "Route::get('/docs/{*page}', ...)",
+            "Route::get('/docs/{...page}', ...)"
+        ]
+    },
+    {
+        "q": "What constraint allows slashes?",
+        "type": "mcq",
+        "o": [
+            "'.*'",
+            "'/'",
+            "'all'",
+            "'path'"
+        ]
+    },
+    {
+        "q": "If you have `{page}` matching `.*`, does it match empty string?",
+        "type": "mcq",
+        "o": [
+            "No, unless optional `{page?}`",
+            "Yes",
+            "Maybe",
+            "Depends on regex engine"
+        ]
+    },
+    {
+        "q": "How to create a route group that applies to all subdomains?",
+        "type": "mcq",
+        "o": [
+            "Route::domain('{subdomain}.example.com')->group(...)",
+            "Route::domain('*')->group(...)",
+            "Route::anyDomain()->group(...)",
+            "Route::subdomains()->group(...)"
+        ]
+    },
+    {
+        "q": "How to access the `{subdomain}` parameter in a controller in the wildcard group?",
+        "type": "mcq",
+        "o": [
+            "It is passed as the first argument to methods",
+            "It is in `request()->subdomain`",
+            "It is global",
+            "It is session"
+        ]
+    },
+    {
+        "q": "What is `Route::hasMacro('name')` used for?",
+        "type": "mcq",
+        "o": [
+            "Checking if a custom macro is defined",
+            "Checking route name",
+            "Checking macro enabled",
+            "Checking macro speed"
+        ]
+    },
+    {
+        "q": "Can you use standard PHP attributes to register routes without route files?",
+        "type": "mcq",
+        "o": [
+            "No, Laravel (core) uses route files (PHP based DSL). Attributes require 3rd party package.",
+            "Yes, native feature",
+            "Yes, via `artisan route:scan`",
+            "Yes, since V5"
+        ]
+    },
+    {
+        "q": "What is `URL::defaults(['locale' => 'en'])`?",
+        "type": "mcq",
+        "o": [
+            "Sets default values for route parameters (e.g. {locale}) across all generated URLs for the request",
+            "Sets default config",
+            "Sets default session",
+            "Sets default cookie"
+        ]
+    },
+    {
+        "q": "Where to call `URL::defaults`?",
+        "type": "mcq",
+        "o": [
+            "Middleware (e.g. `SetLocale`)",
+            "Config",
+            "Model",
+            "View"
+        ]
+    },
+    {
+        "q": "Does `url()->current()` include query parameters?",
+        "type": "mcq",
+        "o": [
+            "No, it includes path (and domain/scheme). Use `full()` for query params.",
+            "Yes",
+            "Yes, via option",
+            "Only 'id'"
+        ]
+    },
+    {
+        "q": "Does `url()->full()` include query parameters?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only 'id'",
+            "Only on GET"
+        ]
+    },
+    {
+        "q": "How to generate a signed route that expires?",
+        "type": "mcq",
+        "o": [
+            "temporarySignedRoute('name', expiration, params)",
+            "signedRoute('name', params, expiration)",
+            "expiringRoute('name', expiration)",
+            "timedRoute('name', expiration)"
+        ]
+    },
+    {
+        "q": "If temporary signed route expires, what status code?",
+        "type": "mcq",
+        "o": [
+            "403 Forbidden (Signature Invalid/Expired)",
+            "404 Not Found",
+            "401 Unauthorized",
+            "419 Expired"
+        ]
+    },
+    {
+        "q": "How to define a route using `Route::addRoute` (low level)?",
+        "type": "mcq",
+        "o": [
+            "Normally internal use, but accepts (methods, uri, action)",
+            "Route::new(...)",
+            "Route::create(...)",
+            "Route::push(...)"
+        ]
+    },
+    {
+        "q": "Can you define routes in `routes/channels.php`?",
+        "type": "mcq",
+        "o": [
+            "No, that file is for Broadcast Channels, not HTTP routes",
+            "Yes, for websockets HTTP upgrade",
+            "Yes, but ignored",
+            "Yes, for API"
+        ]
+    },
+    {
+        "q": "How to force generated URLs to include a specific port?",
+        "type": "mcq",
+        "o": [
+            "Set `APP_URL` in .env with port (e.g. http://localhost:8000)",
+            "Route::port(8000)",
+            "URL::port(8000)",
+            "Config::port(8000)"
+        ]
+    },
+    {
+        "q": "How to get the root URL of the application?",
+        "type": "mcq",
+        "o": [
+            "url('/')",
+            "root()",
+            "base()",
+            "home()"
+        ]
+    },
+    {
+        "q": "What is `Route::is('admin.*')` useful for?",
+        "type": "mcq",
+        "o": [
+            "Determining active menu items in Blade layouts based on current route name",
+            "Security checks",
+            "Performance",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Can `Route::is` accept multiple patterns?",
+        "type": "mcq",
+        "o": [
+            "Yes: `Route::is('admin.*', 'dashboard')`",
+            "No",
+            "Only array",
+            "Only regex"
+        ]
+    },
+    {
+        "q": "What is `request()->path()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the current path info (e.g. 'users/1')",
+            "Returns full URL",
+            "Returns root",
+            "Returns domain"
+        ]
+    },
+    {
+        "q": "What is `request()->is('admin/*')`?",
+        "type": "mcq",
+        "o": [
+            "Checks if the request path matches the pattern",
+            "Checks route name",
+            "Checks controller",
+            "Checks method"
+        ]
+    },
+    {
+        "q": "Difference between `Route::is` and `Request::is`?",
+        "type": "mcq",
+        "o": [
+            "`Route::is` checks Route Names. `Request::is` checks URI paths.",
+            "Same thing",
+            "`Route::is` is deprecated",
+            "`Request::is` checks names"
+        ]
+    },
+    {
+        "q": "How to limit a route parameter to letters only?",
+        "type": "mcq",
+        "o": [
+            "->whereAlpha('name')",
+            "->alpha('name')",
+            "->letters('name')",
+            "->string('name')"
+        ]
+    },
+    {
+        "q": "How to limit a route parameter to alpha-numeric?",
+        "type": "mcq",
+        "o": [
+            "->whereAlphaNumeric('name')",
+            "->alphaNum('name')",
+            "->alnum('name')",
+            "->text('name')"
+        ]
+    },
+    {
+        "q": "What trait enables `resolveRouteBinding` on Eloquent Models?",
+        "type": "mcq",
+        "o": [
+            "Models extend `Model` which uses nothing special but the method is defined in `Illuminate\\Database\\Eloquent\\Model`",
+            "RouteBindingTrait",
+            "Bindable",
+            "Routable"
+        ]
+    },
+    {
+        "q": "How to ignore case in route parameters?",
+        "type": "mcq",
+        "o": [
+            "Use regex `(?i)` flag in `where` constraint, or normalize in middleware/controller. Laravel router is case sensitive usually.",
+            "->ignoreCase()",
+            "Config route.case_insensitive",
+            "Default is insensitive"
+        ]
+    },
+    {
+        "q": "If you have `Route::get('/User')` vs `Route::get('/user')` in Laravel:",
+        "type": "mcq",
+        "o": [
+            "They are distinct routes (unless server normalizes it, but Laravel router sees distinct paths)",
+            "They are same",
+            "Second overrides",
+            "Error"
+        ]
+    },
+    {
+        "q": "How to get the 'prefix' of the current route group?",
+        "type": "mcq",
+        "o": [
+            "Route::current()->getPrefix()",
+            "Route::prefix()",
+            "request()->prefix()",
+            "app('prefix')"
+        ]
+    },
+    {
+        "q": "How to get the 'middleware' array of the current route?",
+        "type": "mcq",
+        "o": [
+            "Route::current()->middleware()",
+            "Route::middleware()",
+            "request()->middleware()",
+            "Middleware::list()"
+        ]
+    },
+    {
+        "q": "What is `Route::dispatch`?",
+        "type": "mcq",
+        "o": [
+            "The method Router uses to dispatch the request to a route",
+            "Job dispatch",
+            "Event dispatch",
+            "Queue dispatch"
+        ]
+    },
+    {
+        "q": "How to set a custom 'missing' handler for `Route::resource`?",
+        "type": "mcq",
+        "o": [
+            "->missing(function...) applies to all implicit bindings in the resource",
+            "->fail(...)",
+            "->error(...)",
+            "->notFound(...)"
+        ]
+    },
+    {
+        "q": "Can you use `Route::resource` for API but exclude 'show'?",
+        "type": "mcq",
+        "o": [
+            "Yes: `Route::apiResource(...)->except('show')`",
+            "No",
+            "Only for web",
+            "Only if named"
+        ]
+    },
+    {
+        "q": "What happens if a resource controller method is missing but route calls it?",
+        "type": "mcq",
+        "o": [
+            "500 Server Error (BadMethodCallException / ReflectionException)",
+            "404 Not Found",
+            "Ignored",
+            "302 Redirect"
+        ]
+    },
+    {
+        "q": "How to alias `Route::resource` parameters globally?",
+        "type": "mcq",
+        "o": [
+            "Normally done via `Route::resourceVerbs` for verbs, but parameters usually `Route::model` binding or `Route::pattern`",
+            "Route::aliasParams",
+            "Route::mapParams",
+            "Config"
+        ]
+    },
+    {
+        "q": "Is `Illuminate\\Support\\Facades\\Route` a facade for `Illuminate\\Routing\\Router`?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No, fo Route class",
+            "No, for Request",
+            "No for App"
+        ]
+    },
+    {
+        "q": "How to redirect to 'back'?",
+        "type": "mcq",
+        "o": [
+            "return back();",
+            "return redirect()->back();",
+            "Both A and B",
+            "return previous();"
+        ]
+    },
+    {
+        "q": "How to redirect to 'route' with input?",
+        "type": "mcq",
+        "o": [
+            "redirect()->route('name')->withInput()",
+            "redirect('name', input: true)",
+            "back(true)",
+            "route('name')->input()"
+        ]
+    },
+    {
+        "q": "What is `redirect()->away($url)`?",
+        "type": "mcq",
+        "o": [
+            "Redirects to an external URL without validation/encoding",
+            "Redirects to internal URL",
+            "Redirects to file",
+            "Redirects to logout"
+        ]
+    },
+    {
+        "q": "How to redirect to a named route with parameters?",
+        "type": "mcq",
+        "o": [
+            "return to_route('profile', ['id' => 1]); (Laravel 9+ helper) or redirect()->route(...)",
+            "return route('profile', 1);",
+            "return go('profile', 1);",
+            "return visit('profile', 1);"
+        ]
+    },
+    {
+        "q": "What is `to_route()` helper?",
+        "type": "mcq",
+        "o": [
+            "Shorthand for `redirect()->route(...)` which returns a RedirectResponse",
+            "Returns a string URL",
+            "Returns a View",
+            "Returns JSON"
+        ]
+    },
+    {
+        "q": "How to permanently redirect using helper?",
+        "type": "mcq",
+        "o": [
+            "redirect('/', 301)",
+            "redirect('/', 302)",
+            "redirect('/', permanent: true)",
+            "permanent('/')"
+        ]
+    },
+    {
+        "q": "Can you use `Route::view` for pages requiring data from DB?",
+        "type": "mcq",
+        "o": [
+            "Technically no, unless you use View Composers to inject data, or pass static data array. `Route::view` does not execute a closure/controller to fetch data.",
+            "Yes, dynamic data is auto fetched",
+            "Yes, via hidden params",
+            "No"
+        ]
+    },
+    {
+        "q": "If you need data from DB, should you use `Route::view`?",
+        "type": "mcq",
+        "o": [
+            "Probably not; use a Controller or Closure route",
+            "Yes",
+            "Yes, with middleware",
+            "Yes, with view composer only"
+        ]
+    },
+    {
+        "q": "What is the order of execution?",
+        "type": "mcq",
+        "o": [
+            "Request -> Global Middleware -> Route Match -> Route Middleware -> Controller -> Response",
+            "Request -> Controller -> Middleware",
+            "Request -> Route Match -> Controller",
+            "Controller -> Middleware -> Response"
+        ]
+    },
+    {
+        "q": "How to terminate a request early in middleware?",
+        "type": "mcq",
+        "o": [
+            "Return a Response object immediately (skipping `$next($request)`)",
+            "die()",
+            "exit()",
+            "return false"
+        ]
+    },
+    {
+        "q": "If middleware returns response early, does controller run?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes, in background",
+            "Yes, but ignored",
+            "Yes, always"
+        ]
+    },
+    {
+        "q": "Can you modify the response in middleware *after* the controller runs?",
+        "type": "mcq",
+        "o": [
+            "Yes: `$response = $next($request); $response->header(...); return $response;`",
+            "No",
+            "Only headers",
+            "Only body"
+        ]
+    },
+    {
+        "q": "How to register a route that responds to `PUT`, `POST`, and `PATCH`?",
+        "type": "mcq",
+        "o": [
+            "Route::match(['put', 'post', 'patch'], ...)",
+            "Route::any(...)",
+            "Route::ppp(...)",
+            "Route::write(...)"
+        ]
+    },
+    {
+        "q": "Is `HEAD` automatically handled by `GET` routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, typically HEAD request to a GET route returns headers without body",
+            "No, must define `Route::head`",
+            "No, returns 404",
+            "No, returns 405"
+        ]
+    },
+    {
+        "q": "What does `Route::getBindings()` return?",
+        "type": "mcq",
+        "o": [
+            "Array of registered implicit bindings? Actually it returns the patterns/bindings on the Router instance.",
+            "Array of db connections",
+            "Array of views",
+            "Array of files"
+        ]
+    },
+    {
+        "q": "What is the `SubstituteImplicitBindings` middleware actually doing?",
+        "type": "mcq",
+        "o": [
+            "Scans route parameters, finding ones matching model types, and querying DB to replace ID with Model instance",
+            "Substitutes string vars",
+            "Encrypts params",
+            "Decrypts params"
+        ]
+    },
+    {
+        "q": "If you have `Route::middleware('web')` in `api.php`, what happens?",
+        "type": "mcq",
+        "o": [
+            "The routes get session support, CSRF token check expectations, etc. (Cookie based auth becomes possible)",
+            "Error",
+            "Nothing",
+            "They become web routes"
+        ]
+    },
+    {
+        "q": "If you have `Route::middleware('api')` in `web.php`?",
+        "type": "mcq",
+        "o": [
+            "Routes lose session/state? No, they explicitly get throttle:api, sub bindings. But if `web` group runs first (globally or file level), they might still have sessions.",
+            "They become API",
+            "They stop working",
+            "They get API throttling and statelessness features often"
+        ]
+    },
+    {
+        "q": "How to debug valid routes?",
+        "type": "mcq",
+        "o": [
+            "Use `php artisan route:list` to see if it is registered and points to correct action",
+            "Check .env",
+            "Check storage",
+            "Check database"
+        ]
+    },
+    {
+        "q": "Does `route:list` show closure routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, Action column shows 'Closure'",
+            "No",
+            "Only if named",
+            "Only in verbose mode"
+        ]
+    },
+    {
+        "q": "Does `route:list` show middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes, Middleware column",
+            "No",
+            "Only global",
+            "Only auth"
+        ]
+    },
+    {
+        "q": "How to hide a route from `route:list`?",
+        "type": "mcq",
+        "o": [
+            "Not a standard feature, usually vendor routes can be hidden via specific commands/logic or ignoring vendor publish",
+            "->hide()",
+            "->hidden()",
+            "->private()"
+        ]
+    },
+    {
+        "q": "Are query parameters (`?foo=bar`) part of the route signature definition?",
+        "type": "mcq",
+        "o": [
+            "No, they are dynamic input.",
+            "Yes, `{foo}`",
+            "Yes, `[foo]`",
+            "Yes, `?foo`"
+        ]
+    },
+    {
+        "q": "Does route caching cache the `request` object?",
+        "type": "mcq",
+        "o": [
+            "No, request is created per lifecycle",
+            "Yes",
+            "Only headers",
+            "Only method"
+        ]
+    },
+    {
+        "q": "Can you use `Route::resource` for a database table without a model?",
+        "type": "mcq",
+        "o": [
+            "The controller can do whatever it wants (DB facade), but 'Resource' usually implies RESTful conventions. Route doesn't enforce Model class existence, just Controller existence.",
+            "No, Model required",
+            "Yes, but limited",
+            "Only read-only"
+        ]
+    },
+    {
+        "q": "What is `Route::auth()` (Legacy)?",
+        "type": "mcq",
+        "o": [
+            "Scaffolds authentication routes (login, register, password reset) from `laravel/ui` package",
+            "Enables auth",
+            "Creates middleware",
+            "Logs user in"
+        ]
+    },
+    {
+        "q": "In Laravel Breeze/Jetstream, where are auth routes?",
+        "type": "mcq",
+        "o": [
+            "In `routes/auth.php` (included in web.php)",
+            "Hidden in vendor",
+            "In `api.php`",
+            "In `console.php`"
+        ]
+    },
+    {
+        "q": "How to include `routes/auth.php` in `routes/web.php`?",
+        "type": "mcq",
+        "o": [
+            "require __DIR__.'/auth.php';",
+            "include('auth.php');",
+            "Route::file('auth.php');",
+            "Route::load('auth.php');"
+        ]
+    },
+    {
+        "q": "What interface is returned when `Route::current()` is called?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Routing\\Route",
+            "Illuminate\\Http\\Request",
+            "Illuminate\\Routing\\Router",
+            "Illuminate\\Support\\Collection"
+        ]
+    },
+    {
+        "q": "What does the `Route::compile()` method do internally?",
+        "type": "mcq",
+        "o": [
+            "Parses the URI pattern into a `CompiledRoute` instance with regex for matching",
+            "Runs the route",
+            "Caches the route",
+            "Validates the route"
+        ]
+    },
+    {
+        "q": "Which class handles the matching logic for a route (checking method, scheme, host, uri)?",
+        "type": "mcq",
+        "o": [
+            "The Router iterates routes, but checks are done via 'Route Validators' (UriValidator, MethodValidator, SchemeValidator, HostValidator)",
+            "RouteMatcher",
+            "RouteChecker",
+            "Middleware"
+        ]
+    },
+    {
+        "q": "If you return an object implementing `Illuminate\\Contracts\\Support\\Responsable` from a route, what performs the conversion to Response?",
+        "type": "mcq",
+        "o": [
+            "The Router (via `toResponse` method check in `prepareResponse`)",
+            "The Controller",
+            "The view",
+            "PHP native"
+        ]
+    },
+    {
+        "q": "What is the primary benefit of `Responsable` objects?",
+        "type": "mcq",
+        "o": [
+            "They encapsulate the HTTP response logic (headers, status, format) within a dedicated class, keeping controllers clean",
+            "Faster execution",
+            "Better encryption",
+            "Automatic validation"
+        ]
+    },
+    {
+        "q": "If you return an array from a route, which class handles the JSON conversion?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Routing\\Router (via `prepareResponse` calling `JsonResponse::fromJsonString` or similar logic)",
+            "ArrayObject",
+            "JsonResource",
+            "ResponseFactory"
+        ]
+    },
+    {
+        "q": "Can you use `Response::macro` to create custom response types available in routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, defined in Service Provider, usage: `return response()->myCustomMacro(...)`",
+            "No",
+            "Only for views",
+            "Only for errors"
+        ]
+    },
+    {
+        "q": "How does Laravel 'guess' dependencies for Controller methods?",
+        "type": "mcq",
+        "o": [
+            "Using PHP Reflection (`ReflectionMethod` / `ReflectionFunction`), checking type hints against container and route parameters",
+            "Magic methods",
+            "Config files",
+            "Variable names only"
+        ]
+    },
+    {
+        "q": "If a controller method needs a route parameter AND a dependency, does the order matter?",
+        "type": "mcq",
+        "o": [
+            "Technically yes, but Laravel is smart: Dependencies (type-hinted classes) usually listed first, followed by scalar route parameters (names don't strictly match route params, just order).",
+            "No, order is random",
+            "Route params must be first",
+            "Cannot mix them"
+        ]
+    },
+    {
+        "q": "Actually, in modern Laravel, does parameter NAME matter for scalar route params in controller?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you use scoped bindings or specific resolution logic, names matter. But for simple scalar injection, they fill in after dependencies.",
+            "No, never",
+            "Always strictly matched by name only",
+            "Only for keyed arrays"
+        ]
+    },
+    {
+        "q": "What allows `Route::get(...)` to work statically?",
+        "type": "mcq",
+        "o": [
+            "The `Route` Facade (`Illuminate\\Support\\Facades\\Route`) which proxies to the `Router` singleton",
+            "Static methods on Route class",
+            "Magic __callStatic",
+            "Global function"
+        ]
+    },
+    {
+        "q": "Can you define a route that accepts ANY HTTP method?",
+        "type": "mcq",
+        "o": [
+            "Route::any('/', ...)",
+            "Route::all('/', ...)",
+            "Route::everything('/', ...)",
+            "Route::methods('*', ...)"
+        ]
+    },
+    {
+        "q": "What does `Route::any` cover?",
+        "type": "mcq",
+        "o": [
+            "HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS (Standard verbs)",
+            "Only GET and POST",
+            "Every string possible",
+            "Only safe methods"
+        ]
+    },
+    {
+        "q": "How to register a custom route matching validator?",
+        "type": "mcq",
+        "o": [
+            "Route::addValidator(...) ? No, usually requires extending Router or replacing `Route` class binding. Not a common public API.",
+            "Route::validator(...)",
+            "Router::extend(...)",
+            "App::validator(...)"
+        ]
+    },
+    {
+        "q": "When using `Route::group`, how are attributes merged?",
+        "type": "mcq",
+        "o": [
+            "Prefixes are concatenated, Middleware are merged, Names are concatenated (with dot potentially if handled), others may overwrite or merge logic.",
+            "Last one wins",
+            "First one wins",
+            "Error"
+        ]
+    },
+    {
+        "q": "Internally, how does Router track groups?",
+        "type": "mcq",
+        "o": [
+            "It maintains a `$groupStack` array, pushing/popping group attributes as closures are executed",
+            "It uses recursion only",
+            "It uses database",
+            "It uses session"
+        ]
+    },
+    {
+        "q": "If you use `Route::middleware(['web', 'auth'])` inside a group that already has `middleware('api')`, what is the result?",
+        "type": "mcq",
+        "o": [
+            "The final route has all middlewares: `['api', 'web', 'auth']`",
+            "Only `['web', 'auth']`",
+            "Only `['api']`",
+            "Error"
+        ]
+    },
+    {
+        "q": "What happens if you define a middleware twice in the stack?",
+        "type": "mcq",
+        "o": [
+            "It runs twice (unless the middleware itself has logic to prevent re-execution)",
+            "Laravel removes duplicates automatically",
+            "Error",
+            "It is skipped"
+        ]
+    },
+    {
+        "q": "Can middleware prevent route parameter binding?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it runs before `SubstituteBindings` and returns a response early",
+            "No, binding is first",
+            "No, synchronous",
+            "Only in API"
+        ]
+    },
+    {
+        "q": "What is `Route::pattern('id', '[0-9]+')` actually doing?",
+        "type": "mcq",
+        "o": [
+            "Adding a global constraint to the Router's `$patterns` array, used when compiling routes with matching parameter names",
+            "Validating immediately",
+            "Creating a middleware",
+            "Filtering request"
+        ]
+    },
+    {
+        "q": "If a local `where()` conflicts with a global `pattern()`, which wins?",
+        "type": "mcq",
+        "o": [
+            "The local `where()` constraint overrides the global pattern",
+            "The global pattern",
+            "Combined via AND",
+            "Error"
+        ]
+    },
+    {
+        "q": "How to check if the current route has a specific parameter?",
+        "type": "mcq",
+        "o": [
+            "Route::current()->hasParameter('id')",
+            "request()->has('id')",
+            "Route::has('id')",
+            "app('id')"
+        ]
+    },
+    {
+        "q": "How to get the value of a route parameter in a Service Provider?",
+        "type": "mcq",
+        "o": [
+            "Route::current()->parameter('id') (Note: Route must be matched first, so only in `boot` or later, not `register`)",
+            "request()->id",
+            "Both A and B usually work if route matched",
+            "Cannot access in Provider"
+        ]
+    },
+    {
+        "q": "Why might `Route::current()` return null in a Service Provider?",
+        "type": "mcq",
+        "o": [
+            "If the request hasn't been routed yet (e.g. inside `register` method, or early in `boot` before routing middleware runs)",
+            "It never returns null",
+            "If using api",
+            "If using console"
+        ]
+    },
+    {
+        "q": "What is `StreamedResponse`?",
+        "type": "mcq",
+        "o": [
+            "A response that sends content in chunks (e.g. `response()->stream(...)`), keeping connection open",
+            "A video file",
+            "A websocket",
+            "A redirect"
+        ]
+    },
+    {
+        "q": "When is `StreamedResponse` useful?",
+        "type": "mcq",
+        "o": [
+            "Large data exports (CSV), Server Sent Events (SSE), or live logs",
+            "Static pages",
+            "JSON APIs",
+            "Authentication"
+        ]
+    },
+    {
+        "q": "What is `BinaryFileResponse`?",
+        "type": "mcq",
+        "o": [
+            "Optimized response for sending files (uses `fpassthru` or `X-Sendfile`), supports ranges/resuming",
+            "Sends binary 1s and 0s text",
+            "Sends images only",
+            "Sends archives"
+        ]
+    },
+    {
+        "q": "How to trigger a file download with custom filename?",
+        "type": "mcq",
+        "o": [
+            "return response()->download($path, 'custom_name.pdf');",
+            "return response()->file($path, 'custom');",
+            "return download($path, 'custom');",
+            "return file($path, 'custom');"
+        ]
+    },
+    {
+        "q": "Difference between `response()->file()` and `response()->download()`?",
+        "type": "mcq",
+        "o": [
+            "`file()` displays inline (Content-Disposition: inline), `download()` forces download (attachment)",
+            "No difference",
+            "`file()` is faster",
+            "`download()` supports delete"
+        ]
+    },
+    {
+        "q": "Can `response()->download()` delete the file after sending?",
+        "type": "mcq",
+        "o": [
+            "Yes, `->deleteFileAfterSend()`",
+            "No",
+            "Automatically",
+            "Only if temp"
+        ]
+    },
+    {
+        "q": "What does `Route::currentRouteAction()` return?",
+        "type": "mcq",
+        "o": [
+            "The string representing the controller action (e.g. 'App\\Http\\Controllers\\HomeController@index') or Closure",
+            "The URI",
+            "The method",
+            "The name"
+        ]
+    },
+    {
+        "q": "What does `Route::uses()` method do?",
+        "type": "mcq",
+        "o": [
+            "Specifies the controller action for the route (fluent syntax, rarely used directly vs get parameter)",
+            "Uses a middleware",
+            "Uses a trait",
+            "Uses a view"
+        ]
+    },
+    {
+        "q": "Can you name a route defined with a Closure?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::get(..., function() {})->name('home')`",
+            "No, only controller routes",
+            "No, because closures are anonymous",
+            "Yes, but ignored"
+        ]
+    },
+    {
+        "q": "What happens if `Route::middleware()` is called with an empty array?",
+        "type": "mcq",
+        "o": [
+            "No middleware is added, route works as normal",
+            "LogicException",
+            "Route is disabled",
+            "All middleware are removed"
+        ]
+    },
+    {
+        "q": "How are route names stored internally?",
+        "type": "mcq",
+        "o": [
+            "In a name lookup table (`$nameList`) in the Router/RouteCollection",
+            "In database",
+            "In cache only",
+            "In session"
+        ]
+    },
+    {
+        "q": "If you force a custom `HostValidator` to fail, what exception is likely thrown?",
+        "type": "mcq",
+        "o": [
+            "NotFoundHttpException (Route doesn't match)",
+            "AccessDenied",
+            "HostMismatchException",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "Can existing routes be modified after definition?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you hold the Route instance (`$route = Route::get...`), you can call methods like `->name()` later before request dispatch",
+            "No, they are immutable",
+            "Only in local",
+            "Only via macro"
+        ]
+    },
+    {
+        "q": "What is `Route::setFallback(...)` on the Router class?",
+        "type": "mcq",
+        "o": [
+            "Sets the route to use when no other route matches (catch-all)",
+            "Sets default route",
+            "Sets home route",
+            "Sets error route"
+        ]
+    },
+    {
+        "q": "Is the fallback route part of the standard route collection?",
+        "type": "mcq",
+        "o": [
+            "Yes, usually added as a specific route at the end of collection by the helper",
+            "No, stored separately",
+            "No, generated on fly",
+            "No, part of exception handler"
+        ]
+    },
+    {
+        "q": "Can you use `Route::fallback` inside a `Route::domain` group?",
+        "type": "mcq",
+        "o": [
+            "Yes, it creates a fallback for that domain only",
+            "No, global only",
+            "No, throws error",
+            "Yes, but applies globally"
+        ]
+    },
+    {
+        "q": "What is `RoutingServiceProvider` responsible for?",
+        "type": "mcq",
+        "o": [
+            "Binding the 'router', 'url', 'redirect', 'response' services into the container, and registering PSR-7 checks",
+            "Loading routes.php",
+            "Compiling views",
+            " Connecting to DB"
+        ]
+    },
+    {
+        "q": "How to use PSR-7 requests in Laravel routes?",
+        "type": "mcq",
+        "o": [
+            "Type-hint `Psr\\Http\\Message\\ServerRequestInterface` in controller method (requires `symfony/psr-http-message-bridge` and `nyholm/psr7`)",
+            "Native support out of box",
+            "Not supported",
+            "Use middleware"
+        ]
+    },
+    {
+        "q": "If you type-hint a PSR-7 request, Laravel will:",
+        "type": "mcq",
+        "o": [
+            "Convert the Illuminate Request to PSR-7 Request and inject it",
+            "Throw error",
+            "Pass null",
+            "Pass Illuminate request"
+        ]
+    },
+    {
+        "q": "Can you return a PSR-7 Response from a route?",
+        "type": "mcq",
+        "o": [
+            "Yes, Laravel converts it back to Illuminate Response before sending (if configured/bridged)",
+            "No",
+            "Yes, raw",
+            "Only JSON"
+        ]
+    },
+    {
+        "q": "What is `Route::getDomain()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the domain constraint pattern defined for the route (e.g. '{account}.app.com')",
+            "Returns current host",
+            "Returns generic domain",
+            "Returns tld"
+        ]
+    },
+    {
+        "q": "Difference `Route::getDomain()` vs `request()->getHost()`?",
+        "type": "mcq",
+        "o": [
+            "`Route::getDomain()` gives the *definition* regex/pattern. `request()->getHost()` gives the *actual* incoming Header value.",
+            "Same value",
+            "Opposite",
+            "Undefined"
+        ]
+    },
+    {
+        "q": "If `Route::getDomain()` returns null, what does it mean?",
+        "type": "mcq",
+        "o": [
+            "The route is valid for any domain (root domain relative)",
+            "The route is invalid",
+            "The route is skipped",
+            "The route is local"
+        ]
+    },
+    {
+        "q": "How to add a custom method to `Route` facade?",
+        "type": "mcq",
+        "o": [
+            "Route::macro('method', closure)",
+            "Route::extend('method', closure)",
+            "Route::add('method', closure)",
+            "Route::push('method', closure)"
+        ]
+    },
+    {
+        "q": "Can Route Macros generate routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::macro('myApi', function($uri, $ctrl) { return Route::get($uri, $ctrl)->middleware('api'); });`",
+            "No, macros cannot call Route methods",
+            "No, only properties",
+            "No, static only"
+        ]
+    },
+    {
+        "q": "What class handles URL generation?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Routing\\UrlGenerator",
+            "UrlBuilder",
+            "RouteBuilder",
+            "LinkFactory"
+        ]
+    },
+    {
+        "q": "Can UrlGenerator generate URLs for routes outside the current application?",
+        "type": "mcq",
+        "o": [
+            "Yes, if you use `to()` with absolute string. But `route()` is for internal named routes. `action()` is for controllers.",
+            "No",
+            "Yes, `routeExternal()`",
+            "Yes, `link()`"
+        ]
+    },
+    {
+        "q": "How to check if a route URI matches a given pattern?",
+        "type": "mcq",
+        "o": [
+            "Router matches against request usually. Manual checking: `Str::is($pattern, $route->uri())`",
+            "Route::test()",
+            "Route::matchPattern()",
+            "App::check()"
+        ]
+    },
+    {
+        "q": "Does `Route::currentRouteName()` return null if route is unnamed?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No, returns URI",
+            "No, returns 'unknown'",
+            "No, returns index"
+        ]
+    },
+    {
+        "q": "Can you have a route name ending with a dot?",
+        "type": "mcq",
+        "o": [
+            "Yes, though unconventional. Usually dot denotes nesting separator.",
+            "No, trim error",
+            "No, invalid char",
+            "Yes, auto removed"
+        ]
+    },
+    {
+        "q": "When using `Route::apiResources`, names are automatically generated as:",
+        "type": "mcq",
+        "o": [
+            "index, store, show, update, destroy",
+            "create, edit also",
+            "list, add, view, save, delete",
+            "numbers"
+        ]
+    },
+    {
+        "q": "How to exclude middleware from a specific route in a group?",
+        "type": "mcq",
+        "o": [
+            "->withoutMiddleware([...])",
+            "->skipMiddleware([...])",
+            "->noMiddleware([...])",
+            "->ignoreMiddleware([...])"
+        ]
+    },
+    {
+        "q": "Does `withoutMiddleware` work for Global Middleware?",
+        "type": "mcq",
+        "o": [
+            "Yes (in recent Laravel versions), it can skip global middleware if specified by class name",
+            "No, only route middleware",
+            "No, only groups",
+            "No"
+        ]
+    },
+    {
+        "q": "What happens if a route closure throws an exception?",
+        "type": "mcq",
+        "o": [
+            "It bubbles up to the ExceptionHandler (Handler.php) and is rendered as error response",
+            "Silent fail",
+            "White screen",
+            "Browser crash"
+        ]
+    },
+    {
+        "q": "Can you define routes based on class inheritance?",
+        "type": "mcq",
+        "o": [
+            "No, routing is declarative. You must register routes pointing to child classes/methods explicitly.",
+            "Yes, auto discovery",
+            "Yes, via trait",
+            "Yes"
+        ]
+    },
+    {
+        "q": "How to serve a single-page app (SPA) fallback route?",
+        "type": "mcq",
+        "o": [
+            "Route::get('/{any}', function () { return view('app'); })->where('any', '.*');",
+            "Route::spa('app')",
+            "Route::vue('app')",
+            "Route::react('app')"
+        ]
+    },
+    {
+        "q": "Why use specific 'any' regex for SPA catch-all?",
+        "type": "mcq",
+        "o": [
+            "To catch 'foo/bar/baz' segments. Standard curly braces only capture one segment without regex override.",
+            "Performance",
+            "Security",
+            "SEO"
+        ]
+    },
+    {
+        "q": "Does this SPA route interfere with API routes?",
+        "type": "mcq",
+        "o": [
+            "Yes, if defined *before* API routes. Must be defined *last* or strictly in `web.php` while API is in `api.php` with `/api` prefix.",
+            "No, API has priority",
+            "No, different file",
+            "Yes, always breaks"
+        ]
+    },
+    {
+        "q": "What is `Route::view` standard response code?",
+        "type": "mcq",
+        "o": [
+            "200 OK",
+            "302 Found",
+            "201 Created",
+            "404 Not Found"
+        ]
+    },
+    {
+        "q": "Can `Route::redirect` use 301?",
+        "type": "mcq",
+        "o": [
+            "Yes, third argument `Route::redirect('/from', '/to', 301)` or `Route::permanentRedirect(...)`",
+            "No, only 302",
+            "Only 307",
+            "Only 308"
+        ]
+    },
+    {
+        "q": "In `Route::permanentRedirect`, what is the status code?",
+        "type": "mcq",
+        "o": [
+            "301 Moved Permanently",
+            "302 Found",
+            "308 Permanent Redirect",
+            "307 Temp Redirect"
+        ]
+    },
+    {
+        "q": "How to access the route name inside a Blade view?",
+        "type": "mcq",
+        "o": [
+            "Route::currentRouteName() or request()->route()->getName()",
+            "$route->name",
+            "name()",
+            "@route"
+        ]
+    },
+    {
+        "q": "Can you use `route('name')` in JavaScript files?",
+        "type": "mcq",
+        "o": [
+            "No, PHP code doesn't run in .js files. Use a package like `Ziggy` or pass route strings to JS via variable/data-attributes.",
+            "Yes, natively",
+            "Yes, with @js",
+            "Yes, with {{ }}"
+        ]
+    },
+    {
+        "q": "What is Ziggy?",
+        "type": "mcq",
+        "o": [
+            "A popular library to share Laravel named routes with JavaScript",
+            "A mascot",
+            "A routing engine",
+            "A debugger"
+        ]
+    },
+    {
+        "q": "If you change a route parameter name in definition, what else must change?",
+        "type": "mcq",
+        "o": [
+            "Any usage of `route('name', ['old_param' => ...])` if using associative array (though positional often works). And controller argument name if dependent on match.",
+            "Database",
+            "Model",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Does named route generation url encoding handle spaces?",
+        "type": "mcq",
+        "o": [
+            "Yes, converts space to `%20` (or `+` depending on query/path context)",
+            "No, throws error",
+            "No, removes space",
+            "No, converts to dash"
+        ]
+    },
+    {
+        "q": "Can you use arrays in query parameters with `route()` helper?",
+        "type": "mcq",
+        "o": [
+            "Yes, `['filter' => ['a', 'b']]` becomes `filter[0]=a&filter[1]=b`",
+            "No",
+            "Only if JSON",
+            "Only if encoded"
+        ]
+    },
+    {
+        "q": "Which facade is often used to get current route parameters?",
+        "type": "mcq",
+        "o": [
+            "Route (Route::current()->parameters())",
+            "URL",
+            "App",
+            "Config"
+        ]
+    },
+    {
+        "q": "Is it possible to define routes in a config file?",
+        "type": "mcq",
+        "o": [
+            "Technically yes if you iterate config and call Route methods, but not standard practice.",
+            "Yes, `config/routes.php` exists",
+            "Yes, automatically loaded",
+            "No"
+        ]
+    },
+    {
+        "q": "What is 'Implicit Route Model Binding' key type guessing?",
+        "type": "mcq",
+        "o": [
+            "It guesses based on type hint. If type-hint is Model, it looks for `{parameter}` matching method argument name or tries to align.",
+            "Guesses by table size",
+            "Guesses by ID type",
+            "Guesses by migration"
+        ]
+    },
+    {
+        "q": "Can you bind a model to a route parameter name that is different from variable?",
+        "type": "mcq",
+        "o": [
+            "Yes, explicit binding `Route::model('user_param', User::class)`",
+            "No",
+            "Only if same name",
+            "Only via magic"
+        ]
+    },
+    {
+        "q": "If you bind `Route::model('user', User::class)`, does it apply to ALL routes with `{user}`?",
+        "type": "mcq",
+        "o": [
+            "Yes, global explicit binding applies to any route defined AFTER the binding logic runs (typically in boot)",
+            "No, only next route",
+            "No, only web",
+            "No, only getters"
+        ]
+    },
+    {
+        "q": "Does `Route::input('key')` retrieve route parameters?",
+        "type": "mcq",
+        "o": [
+            "Yes, retrieves parameter value from current route",
+            "No, retrieves query",
+            "No, retrieves body",
+            "No, retrieves header"
+        ]
+    },
+    {
+        "q": "Can `Route::input` retrieve default values?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Route::input('key', 'default')`",
+            "No",
+            "Only null",
+            "Only void"
+        ]
+    },
+    {
+        "q": "How to check if the route is using a specific controller method?",
+        "type": "mcq",
+        "o": [
+            "Route::current()->uses('Controller@method')",
+            "Route::uses('...')",
+            "request()->uses('...')",
+            "app()->uses('...')"
+        ]
+    },
+    {
+        "q": "Does `uses()` check include namespace?",
+        "type": "mcq",
+        "o": [
+            "Yes, it expects the full class name and method",
+            "No, just controller name",
+            "No, just method",
+            "Partial"
+        ]
+    },
+    {
+        "q": "What is the `signature` property used for in Console Routes?",
+        "type": "mcq",
+        "o": [
+            "Defining command name and arguments (e.g. 'email:send {user}'). Conceptually similar to route signature but for Artisan.",
+            "Signing URLs",
+            "Signing Cookies",
+            "Encrypting"
+        ]
+    },
+    {
+        "q": "Is there a relationship between Console Routes and HTTP Routes?",
+        "type": "mcq",
+        "o": [
+            "Separate systems (console.php vs web.php), but they share the application container and can call similar services.",
+            "They are the same",
+            "Console routes are accessible via HTTP",
+            "HTTP routes run in console"
+        ]
+    },
+    {
+        "q": "Final Question: Can you mock the `Route` facade in tests?",
+        "type": "mcq",
+        "o": [
+            "Yes, but usually better to test full HTTP cycle (`$this->get(...)`). Mocking Route facade is rare/complex due to static nature proxies, but standard Facade mocking applies.",
+            "No, Route cannot be mocked",
+            "Yes, Route::shouldReceive happens automatically",
+            "No, because it is final"
+        ]
+    }
+]

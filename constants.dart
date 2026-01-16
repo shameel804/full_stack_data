@@ -1107,7 +1107,7 @@ class Constants {
         'topics': ['Horizontal scaling', 'replication', 'sharding'],
       },
     ],
-    "ORM/ODM": [
+    "ORM and ODM": [
       {
         'id': 'basics',
         'title': 'Basics',
@@ -1331,7 +1331,7 @@ class Constants {
         'topics': ['Secrets', 'resource limits', 'vulnerability scanning'],
       },
     ],
-    "CI/CD": [
+    "CI CD": [
       {
         'id': 'basics',
         'title': 'Basics',

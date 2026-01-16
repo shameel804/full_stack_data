@@ -1,0 +1,5072 @@
+[
+    {
+        "q": "What is 'Query Optimization'?",
+        "type": "mcq",
+        "o": [
+            "Process of selecting the most efficient execution plan for a SQL statement",
+            "Writing shorter SQL",
+            "Using more indexes",
+            "Designing DB"
+        ]
+    },
+    {
+        "q": "What is an 'Execution Plan'?",
+        "type": "mcq",
+        "o": [
+            "Visual or XML representation of the steps the database engine takes to execute a query",
+            "Table schema",
+            "Database diagram",
+            "ERD"
+        ]
+    },
+    {
+        "q": "What is 'Estimated Execution Plan'?",
+        "type": "mcq",
+        "o": [
+            "The plan the optimizer *would* use if the query were run (without actually running it)",
+            "Actual stats",
+            "Runtime metrics",
+            "Past plan"
+        ]
+    },
+    {
+        "q": "What is 'Actual Execution Plan'?",
+        "type": "mcq",
+        "o": [
+            "The plan actually used during execution, containing runtime statistics (row counts, resource usage)",
+            "Guess",
+            "Estimate",
+            "Proposal"
+        ]
+    },
+    {
+        "q": "What is 'SET STATISTICS IO ON'?",
+        "type": "mcq",
+        "o": [
+            "Command displaying page read counts (Logical/Physical) for each table accessed",
+            "Time taken",
+            "CPU usage",
+            "Network stats"
+        ]
+    },
+    {
+        "q": "What shows 'CPU time' and 'Elapsed time'?",
+        "type": "mcq",
+        "o": [
+            "SET STATISTICS TIME ON",
+            "SET IO ON",
+            "SET PROFILE ON",
+            "SET XML ON"
+        ]
+    },
+    {
+        "q": "What is 'Logical Read'?",
+        "type": "mcq",
+        "o": [
+            "Reading a data page from the Buffer Pool (Memory). Fast.",
+            "Reading from disk",
+            "Reading from network",
+            "Reading from log"
+        ]
+    },
+    {
+        "q": "What is 'Physical Read'?",
+        "type": "mcq",
+        "o": [
+            "Reading a data page from Disk into Buffer Pool (Slow I/O)",
+            "Reading from memory",
+            "Reading from cache",
+            "Scanning RAM"
+        ]
+    },
+    {
+        "q": "Goal of Query Tuning regarding Reads?",
+        "type": "mcq",
+        "o": [
+            "Minimize Logical Reads (often reduces Physical Reads too)",
+            "Maximize Reads",
+            "Ignore Reads",
+            "Balance Reads"
+        ]
+    },
+    {
+        "q": "What is 'Table Scan' (Heap)?",
+        "type": "mcq",
+        "o": [
+            "Reading every row in a table (O(N)) because no useful index exists",
+            "Efficient seek",
+            "Binary search",
+            "Jump"
+        ]
+    },
+    {
+        "q": "What is 'Clustered Index Scan'?",
+        "type": "mcq",
+        "o": [
+            "Scanning the entire Clustered Index (Equivalent to Table Scan but continuously sorted)",
+            "Seeking specific row",
+            "Using Hash",
+            "Skipping rows"
+        ]
+    },
+    {
+        "q": "What is 'Clustered Index Seek'?",
+        "type": "mcq",
+        "o": [
+            "Navigating B-Tree to find specific key(s). Efficient (O(logN)).",
+            "Scanning all",
+            "Reading all",
+            "Slowest op"
+        ]
+    },
+    {
+        "q": "What is 'Key Lookup' (Bookmark Lookup)?",
+        "type": "mcq",
+        "o": [
+            "Jumping from Non-Clustered Index to Clustered Index to fetch missing columns",
+            "Scanning table",
+            "Using covers",
+            "Merging data"
+        ]
+    },
+    {
+        "q": "Why avoid excessive Key Lookups?",
+        "type": "mcq",
+        "o": [
+            "They generate random I/O (expensive). Often better to Scan or Cover.",
+            "They are sequential",
+            "They confuse users",
+            "They lock table"
+        ]
+    },
+    {
+        "q": "What is a 'Covering Index'?",
+        "type": "mcq",
+        "o": [
+            "Index containing all columns needed by the query (Select + Where + Join)",
+            "Primary key",
+            "Unique index",
+            "Global index"
+        ]
+    },
+    {
+        "q": "How to create Covering Index?",
+        "type": "mcq",
+        "o": [
+            "Use INCLUDE clause for non-key columns (avoids limits on key size/ordering)",
+            "Add more keys",
+            "Join tables",
+            "Create view"
+        ]
+    },
+    {
+        "q": "What is 'SARGable'?",
+        "type": "mcq",
+        "o": [
+            "Search ARGument Able: Predicate that can utilize an Index Seek",
+            "Searchable",
+            "Sortable",
+            "Selectable"
+        ]
+    },
+    {
+        "q": "Is 'WHERE Year(DateCol) = 2023' SARGable?",
+        "type": "mcq",
+        "o": [
+            "No, function on column prevents Seek (Forces Scan)",
+            "Yes",
+            "Maybe",
+            "Partially"
+        ]
+    },
+    {
+        "q": "How to make 'Year(DateCol) = 2023' SARGable?",
+        "type": "mcq",
+        "o": [
+            "WHERE DateCol >= '2023-01-01' AND DateCol < '2024-01-01' (Range)",
+            "Create Function Index",
+            "Use computed col",
+            "Cannot fix"
+        ]
+    },
+    {
+        "q": "Is 'WHERE Name LIKE '%Smith'' SARGable?",
+        "type": "mcq",
+        "o": [
+            "No, leading wildcard prevents Seek",
+            "Yes",
+            "Requires full text",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Is 'WHERE Name LIKE 'Smith%'' SARGable?",
+        "type": "mcq",
+        "o": [
+            "Yes, prefix allows Range Seek",
+            "No",
+            "Only case sensitive",
+            "Only case insensitive"
+        ]
+    },
+    {
+        "q": "What is 'Implicit Conversion' (Performance)?",
+        "type": "mcq",
+        "o": [
+            "Data type mismatch forces engine to convert column value on-the-fly (Non-SARGable)",
+            "Fast conversion",
+            "No impact",
+            "Better plan"
+        ]
+    },
+    {
+        "q": "Common Implicit Conversion culprit?",
+        "type": "mcq",
+        "o": [
+            "Comparing VARCHAR column to NCHAR variable (Unicode precedence)",
+            "Int to BigInt",
+            "Date to DateTime",
+            "Null to Empty"
+        ]
+    },
+    {
+        "q": "What is 'Parameter Sniffing'?",
+        "type": "mcq",
+        "o": [
+            "Plan generated for specific parameter value is reused for all values (Can be suboptimal)",
+            "Sniffing packets",
+            "Security audit",
+            "Tracing"
+        ]
+    },
+    {
+        "q": "Symptom of bad Parameter Sniffing?",
+        "type": "mcq",
+        "o": [
+            "Query runs fast for some inputs, very slow for others (using same plan)",
+            "Always slow",
+            "Always fast",
+            "Error"
+        ]
+    },
+    {
+        "q": "Quick fix for Parameter Sniffing (Test)?",
+        "type": "mcq",
+        "o": [
+            "OPTION (RECOMPILE) to see if fresh plan helps",
+            "Restart server",
+            "Update stats",
+            "Delete data"
+        ]
+    },
+    {
+        "q": "What is 'Index Fragmentation'?",
+        "type": "mcq",
+        "o": [
+            "Logical page order doesn't match physical order (External) or Empty space (Internal)",
+            "Broken file",
+            "Missing index",
+            "Corrupt data"
+        ]
+    },
+    {
+        "q": "How does Fragmentation affect Read-Ahead?",
+        "type": "mcq",
+        "o": [
+            "Reduces efficiency of Read-Ahead scans (More random I/O)",
+            "Improves it",
+            "No effect",
+            "Stops it"
+        ]
+    },
+    {
+        "q": "What is 'Rebuild Index'?",
+        "type": "mcq",
+        "o": [
+            "Drops and recreates index fresh (Removes fragmentation, updates stats)",
+            "Defrags in place",
+            "Updates stats only",
+            "Compacts"
+        ]
+    },
+    {
+        "q": "What is 'Reorganize Index'?",
+        "type": "mcq",
+        "o": [
+            "Defragments leaf level pages in-place (Online, lighter weight than Rebuild)",
+            "Offline only",
+            "Heavy",
+            "Locks table"
+        ]
+    },
+    {
+        "q": "Best practice: Reorg vs Rebuild threshold?",
+        "type": "mcq",
+        "o": [
+            "Reorg if > 5% and < 30%; Rebuild if > 30% (General rule)",
+            "Always Rebuild",
+            "Always Reorg",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Blobs of info about data distribution (Histogram) used by Optimizer to estimate cardinality",
+            "Logs",
+            "Audits",
+            "Counts"
+        ]
+    },
+    {
+        "q": "What happens if Statistics are outdated?",
+        "type": "mcq",
+        "o": [
+            "Optimizer guesses wrong row counts -> Bad Plan (e.g. Loop Join instead of Hash)",
+            "Query fails",
+            "Data corruption",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "How to update statistics manually?",
+        "type": "mcq",
+        "o": [
+            "UPDATE STATISTICS TableName",
+            "REFRESH STATISTICS",
+            "RELOAD STATISTICS",
+            "CREATE STATISTICS"
+        ]
+    },
+    {
+        "q": "What is 'Filtered Index'?",
+        "type": "mcq",
+        "o": [
+            "Non-Clustered index with a WHERE clause (Smaller, faster for specific subsets)",
+            "Sorted index",
+            "Partial table",
+            "Blocked index"
+        ]
+    },
+    {
+        "q": "Use case for Filtered Index?",
+        "type": "mcq",
+        "o": [
+            "Indexing 'Active' rows only, or non-NULL values",
+            "Indexing all rows",
+            "Primary Key",
+            "Identity"
+        ]
+    },
+    {
+        "q": "What is 'Selectivity'?",
+        "type": "mcq",
+        "o": [
+            "Ratio of distinct values to total rows. High selectivity (few dupes) = Good for Index.",
+            "Density",
+            "Cardinality",
+            "Complexity"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality'?",
+        "type": "mcq",
+        "o": [
+            "Number of elements (rows) in a set",
+            "Uniqueness",
+            "Size in bytes",
+            "Type"
+        ]
+    },
+    {
+        "q": "What is 'Scalar UDF' performance impact?",
+        "type": "mcq",
+        "o": [
+            "Runs row-by-row (RBAR), prevents parallelism, hides complexity from optimizer (Black Box)",
+            "Fast",
+            "Parallel",
+            "Efficient"
+        ]
+    },
+    {
+        "q": "Alternate to Scalar UDF?",
+        "type": "mcq",
+        "o": [
+            "Inline Table-Valued Function (ITVF) or direct logic in query",
+            "Multi-statement TVF",
+            "Stored Proc",
+            "Trigger"
+        ]
+    },
+    {
+        "q": "What is 'RBAR'?",
+        "type": "mcq",
+        "o": [
+            "Row By Agonizing Row (Processing data iteratively instead of set-based)",
+            "Set based",
+            "Batch",
+            "Parallel"
+        ]
+    },
+    {
+        "q": "What is 'Cursor'?",
+        "type": "mcq",
+        "o": [
+            "Database object to loop through rows one by one. Often slow.",
+            "Pointer",
+            "Mouse",
+            "Index"
+        ]
+    },
+    {
+        "q": "When to use Cursor?",
+        "type": "mcq",
+        "o": [
+            "Calling external procs per row, or maintenance tasks (Running backups per DB)",
+            "Select statements",
+            "Aggregations",
+            "Joins"
+        ]
+    },
+    {
+        "q": "What is 'Temp Table' vs 'Table Variable' estimates?",
+        "type": "mcq",
+        "o": [
+            "#Temp has statistics (Good estimates). @Variable has no statistics (Estimates 1 row).",
+            "@Variable is better",
+            "Both same",
+            "#Temp has no stats"
+        ]
+    },
+    {
+        "q": "What is 'NOLOCK' hint usage?",
+        "type": "mcq",
+        "o": [
+            "Reads without acquiring locks (Dirty Reads). Improves concurrency at cost of consistency.",
+            "Locks table",
+            "Consistency",
+            "Durability"
+        ]
+    },
+    {
+        "q": "Risk of NOLOCK?",
+        "type": "mcq",
+        "o": [
+            "Dirty reads, missing rows (page splits), double counting rows",
+            "Deadlock",
+            "Slowdown",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Optimize for Ad Hoc Workloads'?",
+        "type": "mcq",
+        "o": [
+            "Server setting: Stores plan stub first time. Full plan on 2nd run. Saves Plan Cache memory.",
+            "Stores all",
+            "Disables cache",
+            "Clears RAM"
+        ]
+    },
+    {
+        "q": "What is 'Data Type Precedence'?",
+        "type": "mcq",
+        "o": [
+            "Rules enforcing which type is converted to which (e.g. Varchar converts to Int)",
+            "User preference",
+            "Random",
+            "Alphabetical"
+        ]
+    },
+    {
+        "q": "What is 'Trivial Plan'?",
+        "type": "mcq",
+        "o": [
+            "Optimizer stops early because query is simple and only one obvious plan exists",
+            "Full search",
+            "Complex plan",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "What is 'Database Engine Tuning Advisor' (DTA)?",
+        "type": "mcq",
+        "o": [
+            "Tool that analyzes workload and suggests Indexes/Partitions",
+            "Profiler",
+            "SSMS",
+            "Agent"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_exec_query_stats'?",
+        "type": "mcq",
+        "o": [
+            "DMV showing aggregated performance stats (CPU, Reads, Time) for cached query plans",
+            "Current requests",
+            "Waits",
+            "Locks"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_os_wait_stats'?",
+        "type": "mcq",
+        "o": [
+            "DMV showing cumulative wait stats for the instance since last restart",
+            "File stats",
+            "Query stats",
+            "User stats"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_exec_requests'?",
+        "type": "mcq",
+        "o": [
+            "DMV showing currently executing requests/queries (Status, Command, Wait)",
+            "History",
+            "Cached plans",
+            "Buffers"
+        ]
+    },
+    {
+        "q": "What is 'Signal Wait Time'?",
+        "type": "mcq",
+        "o": [
+            "Time taken between task being signaled (Runable) and starting to run (Running) - CPU pressure indicator",
+            "Resource wait",
+            "IO wait",
+            "Lock wait"
+        ]
+    },
+    {
+        "q": "What is 'PAGEIOLATCH_SH'?",
+        "type": "mcq",
+        "o": [
+            "Wait typical of reading data pages from disk into memory (Disk I/O bottleneck)",
+            "Locking",
+            "CPU",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'CXPACKET'?",
+        "type": "mcq",
+        "o": [
+            "Wait type associated with Parallelism (Threads waiting on each other)",
+            "Lock",
+            "Latch",
+            "Disk"
+        ]
+    },
+    {
+        "q": "Is CXPACKET usually the root cause?",
+        "type": "mcq",
+        "o": [
+            "No, often a symptom of skew or heavy scan. Check Cost Threshold for Parallelism.",
+            "Yes always",
+            "Never",
+            "Fatal"
+        ]
+    },
+    {
+        "q": "What is 'SOS_SCHEDULER_YIELD'?",
+        "type": "mcq",
+        "o": [
+            "Wait where thread yields CPU voluntarily (Quantum exhausted). High values imply CPU pressure.",
+            "Disk pressure",
+            "Ram pressure",
+            "Network pressure"
+        ]
+    },
+    {
+        "q": "What is 'Blocked Process Report'?",
+        "type": "mcq",
+        "o": [
+            "Event reporting processes blocked for > N seconds (Configurable)",
+            "Deadlock graph",
+            "Error log",
+            "Wait stat"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock'?",
+        "type": "mcq",
+        "o": [
+            "Circular blocking chain where two processes hold locks the other needs (Requires victim)",
+            "Blocking",
+            "Timeout",
+            "Crash"
+        ]
+    },
+    {
+        "q": "How does SQL Server handle Deadlock?",
+        "type": "mcq",
+        "o": [
+            "Deadlock Monitor detects cycle and kills the 'cheapest' transaction (Error 1205)",
+            "Waits forever",
+            "Stops server",
+            "Resumes"
+        ]
+    },
+    {
+        "q": "How to minimize Deadlocks?",
+        "type": "mcq",
+        "o": [
+            "Access objects in same order, keep transactions short, Read Committed Snapshot, Covering Indexes",
+            "Use cursors",
+            "Lock table",
+            "Long transactions"
+        ]
+    },
+    {
+        "q": "What is 'Read Committed Snapshot Isolation' (RCSI)?",
+        "type": "mcq",
+        "o": [
+            "Optimistic locking using Row Versioning (Readers don't block Writers; Writers don't block Readers)",
+            "Pessimistic",
+            "Serializable",
+            "Dirty read"
+        ]
+    },
+    {
+        "q": "What is 'Fill Factor'?",
+        "type": "mcq",
+        "o": [
+            "Percentage of leaf page filled during index creation/rebuild (Leave space for inserts)",
+            "Compression ratio",
+            "Index depth",
+            "Row count"
+        ]
+    },
+    {
+        "q": "Why set Fill Factor < 100?",
+        "type": "mcq",
+        "o": [
+            "To reduce Page Splits and Fragmentation on volatile tables",
+            "Save disk",
+            "Save ram",
+            "Faster read"
+        ]
+    },
+    {
+        "q": "What is 'Page Split'?",
+        "type": "mcq",
+        "o": [
+            "Expensive operation when inserting into full page; page splits, half rows move (Frag)",
+            "Paper tear",
+            "Table split",
+            "File split"
+        ]
+    },
+    {
+        "q": "What is 'Partitioning' (Performance)?",
+        "type": "mcq",
+        "o": [
+            "Splitting large table horizontally. Helps performance via Partition Elimination (searching only specific partitions).",
+            "Vertical split",
+            "Sharding",
+            "Replication"
+        ]
+    },
+    {
+        "q": "What is 'Row Compression'?",
+        "type": "mcq",
+        "o": [
+            "Storing fixed-length types as variable length to save space (Zero byte removal). Low CPU cost.",
+            "Zip",
+            "Page comp",
+            "LOB comp"
+        ]
+    },
+    {
+        "q": "What is 'Page Compression'?",
+        "type": "mcq",
+        "o": [
+            "Includes Row Compression + Prefix Compression + Dictionary Compression. Higher CPU, better savings.",
+            "Row comp only",
+            "Zip",
+            "Rar"
+        ]
+    },
+    {
+        "q": "Benefit of Compression for Performance?",
+        "type": "mcq",
+        "o": [
+            "Fewer pages to read from disk/stay in RAM (Reduced I/O) > CPU cost",
+            "Slower IO",
+            "More IO",
+            "Bad for RAM"
+        ]
+    },
+    {
+        "q": "What is 'Query Store'?",
+        "type": "mcq",
+        "o": [
+            "Flight data recorder for queries. Captures query plans, runtime stats, and history.",
+            "Store procedure",
+            "Audit log",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Plan Regression'?",
+        "type": "mcq",
+        "o": [
+            "When a new execution plan performs worse than the previous one",
+            "Better plan",
+            "Faster plan",
+            "Optimal plan"
+        ]
+    },
+    {
+        "q": "How does Query Store help with Regression?",
+        "type": "mcq",
+        "o": [
+            "Allows identifying regressed queries and Forcing the old 'good' plan",
+            "Auto fixes",
+            "Deletes query",
+            "Backups DB"
+        ]
+    },
+    {
+        "q": "What is 'Columnstore Index'?",
+        "type": "mcq",
+        "o": [
+            "Index storing data by column (not row). High compression. Great for Analytics/Aggregation.",
+            "Row store",
+            "B-Tree",
+            "Linked List"
+        ]
+    },
+    {
+        "q": "When to use Columnstore?",
+        "type": "mcq",
+        "o": [
+            "Data Warehousing, large aggregations (SUM, AVG) on big tables",
+            "OLTP",
+            "Single row seek",
+            "Small tables"
+        ]
+    },
+    {
+        "q": "What is 'Batch Mode' processing?",
+        "type": "mcq",
+        "o": [
+            "Processing rows in batches (vectors) instead of row-by-row (CPU efficient). Enabled by Columnstore.",
+            "Slow mode",
+            "RBAR",
+            "Serial"
+        ]
+    },
+    {
+        "q": "What is 'Memory-Optimized Table' (In-Memory OLTP)?",
+        "type": "mcq",
+        "o": [
+            "Table stored in main memory. Lock-free (Optimistic CC). Fast for high concurrency.",
+            "Temp table",
+            "Cached table",
+            "Disk table"
+        ]
+    },
+    {
+        "q": "Durability of Memory-Optimized Tables?",
+        "type": "mcq",
+        "o": [
+            "SCHEMA_AND_DATA (Durable via checkpoints/logs) or SCHEMA_ONLY (Non-durable)",
+            "Always none",
+            "Always full",
+            "Partial"
+        ]
+    },
+    {
+        "q": "What is 'Resource Governor'?",
+        "type": "mcq",
+        "o": [
+            "Feature to limit CPU/Memory usage for specific workloads (Login/App)",
+            "Limits disk",
+            "Limits users",
+            "Limits network"
+        ]
+    },
+    {
+        "q": "What is 'Workload Group'?",
+        "type": "mcq",
+        "o": [
+            "Container for session requests within Resource Governor",
+            "Table group",
+            "Index group",
+            "File group"
+        ]
+    },
+    {
+        "q": "What is 'MaxDOP' server query hint?",
+        "type": "mcq",
+        "o": [
+            "Limits the number of processors used for a specific query",
+            "Forces parallel",
+            "Forces serial",
+            "Forces index"
+        ]
+    },
+    {
+        "q": "What is 'FAST N' hint?",
+        "type": "mcq",
+        "o": [
+            "Optimize query to return first N rows quickly (e.g. for paging)",
+            "Fastest plan",
+            "Scan all",
+            "Index only"
+        ]
+    },
+    {
+        "q": "What is 'FORCESEEK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces optimizer to use Index Seek operation",
+            "Force scan",
+            "Force hash",
+            "Force loop"
+        ]
+    },
+    {
+        "q": "What is 'FORCESCAN' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces optimizer to use Index/Table Scan operation",
+            "Force seek",
+            "Force loop",
+            "Force sort"
+        ]
+    },
+    {
+        "q": "What is 'Hash Join'?",
+        "type": "mcq",
+        "o": [
+            "Join using hash table in memory. Good for large unsorted inputs. Heavy memory usage.",
+            "Loop join",
+            "Merge join",
+            "Cross join"
+        ]
+    },
+    {
+        "q": "What is 'Nested Loop Join'?",
+        "type": "mcq",
+        "o": [
+            "For each row in outer table, scan inner table. Good for small inputs or indexed lookups.",
+            "Hash join",
+            "Merge join",
+            "Complex join"
+        ]
+    },
+    {
+        "q": "What is 'Merge Join'?",
+        "type": "mcq",
+        "o": [
+            "Join requiring both inputs sorted. Very fast/efficient if data is already sorted (Indexes).",
+            "Hash join",
+            "Loop join",
+            "Slow join"
+        ]
+    },
+    {
+        "q": "What is 'Spool' (Lazy/Eager)?",
+        "type": "mcq",
+        "o": [
+            "Storing intermediate query results in TempDB (Worktable). Often indicates inefficiency.",
+            "Fast op",
+            "Good sign",
+            "Memory op"
+        ]
+    },
+    {
+        "q": "What is 'Missing Index Warning'?",
+        "type": "mcq",
+        "o": [
+            "Green text in Execution Plan suggesting an index that could improve cost",
+            "Error",
+            "Alert",
+            "Failure"
+        ]
+    },
+    {
+        "q": "Should you apply every Missing Index?",
+        "type": "mcq",
+        "o": [
+            "No. Verify actual benefit vs maintenance cost (Writes). Missing Index logic is basic.",
+            "Yes always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Unused Index'?",
+        "type": "mcq",
+        "o": [
+            "Index that incurs maintenance overhead (updates) but is never used for reading (Check sys.dm_db_index_usage_stats)",
+            "Bad index",
+            "Broken index",
+            "Old index"
+        ]
+    },
+    {
+        "q": "What is 'Duplicate Index'?",
+        "type": "mcq",
+        "o": [
+            "Index with exact same key/include columns as another. Redundant overhead.",
+            "Copy",
+            "Mirror",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Constraint' impact on Performance?",
+        "type": "mcq",
+        "o": [
+            "Positive: Trusted constraints help Optimizer simplify plans (Partition Elimination, Join simplification)",
+            "Negative",
+            "None",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Check Constraint' Trusted vs Untrusted?",
+        "type": "mcq",
+        "o": [
+            "Trusted (is_not_trusted=0): Optimizer knows data valid. Untrusted: Optimizer ignores constraint.",
+            "No diff",
+            "Always trusted",
+            "Always untrusted"
+        ]
+    },
+    {
+        "q": "What is 'Indexed View' (Materialized View)?",
+        "type": "mcq",
+        "o": [
+            "View with Clustered Index. Results persisted physically. Auto-updated on base table change.",
+            "Standard view",
+            "Virtual table",
+            "Temp table"
+        ]
+    },
+    {
+        "q": "Benefit of Indexed View?",
+        "type": "mcq",
+        "o": [
+            "Pre-aggregates expensive sums/joins. Great for read-heavy OLAP.",
+            "Fast write",
+            "Less space",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "Cost of Indexed View?",
+        "type": "mcq",
+        "o": [
+            "Slows down writes to base tables (Engine must update View sync)",
+            "Slow reading",
+            "None",
+            "Space only"
+        ]
+    },
+    {
+        "q": "What is 'NOEXPAND' hint?",
+        "type": "mcq",
+        "o": [
+            "Hint required (often) to force Standard Edition to use the Indexed View directly",
+            "Explain",
+            "No lock",
+            "Expand"
+        ]
+    },
+    {
+        "q": "What is 'SP_EXECUTESQL'?",
+        "type": "mcq",
+        "o": [
+            "Recommended procedure to execute dynamic SQL with parameters (Promotes Plan Reuse)",
+            "EXEC",
+            "Bad practice",
+            "Slow"
+        ]
+    },
+    {
+        "q": "EXEC vs SP_EXECUTESQL?",
+        "type": "mcq",
+        "o": [
+            "EXEC (Dynamic String) prone to Injection and no Plan Reuse. SP_EXECUTESQL safe and reuse.",
+            "EXEC better",
+            "Same",
+            "EXEC safer"
+        ]
+    },
+    {
+        "q": "What is 'Bitmap Filter' (in Plan)?",
+        "type": "mcq",
+        "o": [
+            "Optimization for Hash Joins; builds a bitmap of join keys to pre-filter rows from the probe side",
+            "Image filter",
+            "Index type",
+            "Slow op"
+        ]
+    },
+    {
+        "q": "What indicates 'Bitmap Filter' in Plan?",
+        "type": "mcq",
+        "o": [
+            "'Bitmap Create' and 'Probe' operators (Early filtering)",
+            "Index Seek",
+            "Table Scan",
+            "Filter operator"
+        ]
+    },
+    {
+        "q": "What is 'Adaptive Join' (IQP)?",
+        "type": "mcq",
+        "o": [
+            "Optimizer defers choice between Hash Join and Nested Loop Join until runtime based on actual row count",
+            "Merge join",
+            "Static join",
+            "Cross join"
+        ]
+    },
+    {
+        "q": "What is 'Batch Mode Memory Grant Feedback'?",
+        "type": "mcq",
+        "o": [
+            "If a query spills or wastes memory, subsequent runs adjust the grant size automatically",
+            "Static grant",
+            "Manual grant",
+            "Disabled"
+        ]
+    },
+    {
+        "q": "What is 'Table Spool' (Eager)?",
+        "type": "mcq",
+        "o": [
+            "Reads all rows from input, stores in TempDB, then processes. Blocking operator.",
+            "Non blocking",
+            "Lazy",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Table Spool' (Lazy)?",
+        "type": "mcq",
+        "o": [
+            "Reads rows only as needed and caches them. Re-reads from cache if needed again (e.g. correlated subquery)",
+            "Eager",
+            "Blocking",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Sort' operator implication?",
+        "type": "mcq",
+        "o": [
+            "Blocking operator (Must read all rows before outputting one). High memory usage.",
+            "Streaming",
+            "Fast",
+            "Low memory"
+        ]
+    },
+    {
+        "q": "Technique to avoid 'Sort'?",
+        "type": "mcq",
+        "o": [
+            "Add an Index sorted by the required column (B-Tree is already sorted)",
+            "Add RAM",
+            "Hash join",
+            "Scan"
+        ]
+    },
+    {
+        "q": "What is 'Stream Aggregate'?",
+        "type": "mcq",
+        "o": [
+            "Aggregation (Sum/Count) requiring sorted input. Fast and low memory.",
+            "Hash Aggregate",
+            "Slow",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What is 'Hash Aggregate'?",
+        "type": "mcq",
+        "o": [
+            "Aggregation using Hash Table. No sort required. Uses Memory (Risk of Spill).",
+            "Stream Aggregate",
+            "Sorted",
+            "Fastest"
+        ]
+    },
+    {
+        "q": "What is 'Compute Scalar'?",
+        "type": "mcq",
+        "o": [
+            "Operator performing a calculation (e.g. Col1 + Col2, or Convert)",
+            "Aggregation",
+            "Sort",
+            "Filter"
+        ]
+    },
+    {
+        "q": "What is 'Concatenation' operator?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple input sets into one (UNION ALL)",
+            "Join",
+            "String concat",
+            "Split"
+        ]
+    },
+    {
+        "q": "What is 'Assert' operator?",
+        "type": "mcq",
+        "o": [
+            "Verifies a condition (e.g. Check Constraint, FK) matches. Throws error if fails.",
+            "Debug",
+            "Test",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Segment' operator?",
+        "type": "mcq",
+        "o": [
+            "Identifies groups of rows (e.g. for Window Functions OVER partition)",
+            "Disk segment",
+            "Table part",
+            "Split"
+        ]
+    },
+    {
+        "q": "What is 'Window Spool'?",
+        "type": "mcq",
+        "o": [
+            "Expands rows for Window Aggregation (Processing Moving Averages etc)",
+            "Table spool",
+            "Eager spool",
+            "Lazy spool"
+        ]
+    },
+    {
+        "q": "What is 'Sequence Project'?",
+        "type": "mcq",
+        "o": [
+            "Generates row numbers or rank values (Row_Number, Rank)",
+            "Projection",
+            "Selection",
+            "Sort"
+        ]
+    },
+    {
+        "q": "What is 'Top' operator?",
+        "type": "mcq",
+        "o": [
+            "Limits number of rows passed to next operator (TOP N)",
+            "Bottom",
+            "Head",
+            "First"
+        ]
+    },
+    {
+        "q": "What is 'Top N Sort'?",
+        "type": "mcq",
+        "o": [
+            "Optimized sort that only tracks top N rows in memory (Efficient)",
+            "Full sort",
+            "Slow sort",
+            "Spill sort"
+        ]
+    },
+    {
+        "q": "What includes 'Include Actual Execution Plan' overhead?",
+        "type": "mcq",
+        "o": [
+            "Yes, collecting runtime stats adds overhead. Do not use in production loop.",
+            "No overhead",
+            "Faster",
+            "Safe always"
+        ]
+    },
+    {
+        "q": "What is 'Live Query Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Shows execution plan progress in real-time (Rows moving between operators)",
+            "Static plan",
+            "Estimated plan",
+            "History"
+        ]
+    },
+    {
+        "q": "What is 'Extended Events' (XEvents)?",
+        "type": "mcq",
+        "o": [
+            "Lightweight performance monitoring system replacing SQL Profiler (Xe)",
+            "Log file",
+            "Audit",
+            "Trace"
+        ]
+    },
+    {
+        "q": "Why is Profiler deprecated?",
+        "type": "mcq",
+        "o": [
+            "High overhead (Synchronous writing to UI). XEvents is Async and lower impact.",
+            "Hard to use",
+            "Expensive",
+            "Old UI"
+        ]
+    },
+    {
+        "q": "What is 'Ring Buffer' target (XEvents)?",
+        "type": "mcq",
+        "o": [
+            "Memory storage for event data (FIFO). Lost on restart.",
+            "File",
+            "Disk",
+            "Permanent"
+        ]
+    },
+    {
+        "q": "What is 'Event File' target (Xel)?",
+        "type": "mcq",
+        "o": [
+            "Writes events to binary file on disk (Persistent)",
+            "Memory",
+            "Buffer",
+            "Grid"
+        ]
+    },
+    {
+        "q": "What is 'causality tracking' in XEvents?",
+        "type": "mcq",
+        "o": [
+            "Links related events across tasks using ActivityID",
+            "Tracking change",
+            "Audit",
+            "Time track"
+        ]
+    },
+    {
+        "q": "What is 'system_health' session?",
+        "type": "mcq",
+        "o": [
+            "Default XEvent session running always. Captures deadlocks, severe errors, spills.",
+            "User session",
+            "Admin session",
+            "Custom"
+        ]
+    },
+    {
+        "q": "Where to find Deadlock Graphs historically?",
+        "type": "mcq",
+        "o": [
+            "system_health session XEvent file",
+            "Error log only",
+            "Nowhere",
+            "Profiler"
+        ]
+    },
+    {
+        "q": "What is 'Latch Contention'?",
+        "type": "mcq",
+        "o": [
+            "Contention on in-memory structures (not transactional locks). e.g. Trying to read/write same Page in RAM.",
+            "Disk wait",
+            "Lock wait",
+            "Network"
+        ]
+    },
+    {
+        "q": "What implies 'PAGELATCH_EX'?",
+        "type": "mcq",
+        "o": [
+            "Thread waiting for Exclusive access to a buffer page (Insert Hotspot)",
+            "Read wait",
+            "Disk wait",
+            "CPU wait"
+        ]
+    },
+    {
+        "q": "What implies 'PAGELATCH_SH'?",
+        "type": "mcq",
+        "o": [
+            "Thread waiting for Shared access to a buffer page (Hot Index Root/intermediate page)",
+            "Write wait",
+            "Disk wait",
+            "Exclusive"
+        ]
+    },
+    {
+        "q": "What is 'Spinlock'?",
+        "type": "mcq",
+        "o": [
+            "Lightweight sync object. CPU 'spins' (loops) checking availability. High CPU usage if contended.",
+            "Sleep",
+            "Yield",
+            "Block"
+        ]
+    },
+    {
+        "q": "What is 'TempDB Contention' symptoms?",
+        "type": "mcq",
+        "o": [
+            "PAGELATCH_* on PFS, GAM, SGAM pages (Allocation pages)",
+            "Disk IO",
+            "Network",
+            "Locking"
+        ]
+    },
+    {
+        "q": "What is 'Trace Flag 1118'?",
+        "type": "mcq",
+        "o": [
+            "Forces Uniform Extent Allocation (8 pages) instead of Mixed. Reduces TempDB SGAM contention. (Default in 2016+)",
+            "Print log",
+            "Debug",
+            "Skip check"
+        ]
+    },
+    {
+        "q": "What is 'Trace Flag 1117'?",
+        "type": "mcq",
+        "o": [
+            "Forces all files in filegroup to grow together. (Default in 2016+ for TempDB)",
+            "Shrink",
+            "Split",
+            "Merge"
+        ]
+    },
+    {
+        "q": "How many TempDB files recommended?",
+        "type": "mcq",
+        "o": [
+            "1 per logical core (up to 8, then test). Reduces allocation page contention.",
+            "1",
+            "100",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Optimized for Sequential Key'?",
+        "type": "mcq",
+        "o": [
+            "SQL 2019 feature (Index option) optimizing Last Page Insert contention",
+            "Sort key",
+            "Hash key",
+            "Random key"
+        ]
+    },
+    {
+        "q": "What is 'Resumable Index Rebuild'?",
+        "type": "mcq",
+        "o": [
+            "Pause/Resume index operations. Manages Log growth better (Commit chunks).",
+            "Standard",
+            "Offline",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Wait Type'?",
+        "type": "mcq",
+        "o": [
+            "Reason (String) why a worker thread is legally suspended (Waiting for resource)",
+            "Error",
+            "Status",
+            "ID"
+        ]
+    },
+    {
+        "q": "What is 'ASYNC_NETWORK_IO'?",
+        "type": "mcq",
+        "o": [
+            "SQL Server sent data, but Application is slow to consume it (RBAR in app)",
+            "Network slow",
+            "Server slow",
+            "Disk slow"
+        ]
+    },
+    {
+        "q": "What is 'WRITELOG' wait?",
+        "type": "mcq",
+        "o": [
+            "Waiting for log buffer flush to disk (Commit). Disk Latency on LDF file.",
+            "Reading log",
+            "Network",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'OLEDB' wait?",
+        "type": "mcq",
+        "o": [
+            "Waiting for Linked Server or external call",
+            "Local disk",
+            "Memory",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'PREEMPTIVE_*' wait?",
+        "type": "mcq",
+        "o": [
+            "SQL OS yielded control to OS (e.g. File growth, Authentication). Thread runs 'outside' SQL scheduler.",
+            "Standard wait",
+            "Internal",
+            "Bad wait"
+        ]
+    },
+    {
+        "q": "What is 'THREADPOOL' wait?",
+        "type": "mcq",
+        "o": [
+            "No worker threads available to pick up request (Max Worker Threads exhaustion). Severe.",
+            "Pool party",
+            "Swimming",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Max Worker Threads'?",
+        "type": "mcq",
+        "o": [
+            "Setting limiting threads (Default ~512-900 depending on CPU). Prevents death by context switching.",
+            "Unlimited",
+            "100",
+            "50"
+        ]
+    },
+    {
+        "q": "What is 'User Mode Scheduler' (UMS)?",
+        "type": "mcq",
+        "o": [
+            "SQL's cooperative scheduler. Threads yield voluntarily (Yield) to prevent OS preemption.",
+            "Preemptive",
+            "Kernel",
+            "Driver"
+        ]
+    },
+    {
+        "q": "What is 'Context Switch'?",
+        "type": "mcq",
+        "o": [
+            "CPU switching from one thread to another. Expensive. High values = CPU pressure.",
+            "Switch user",
+            "Switch db",
+            "Mode switch"
+        ]
+    },
+    {
+        "q": "What is 'Processor Queue Length'?",
+        "type": "mcq",
+        "o": [
+            "Perfmon counter. Threads waiting for CPU time. > 2-4 per core is bad.",
+            "Disk queue",
+            "Network queue",
+            "Memory queue"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Cache Hit Ratio'?",
+        "type": "mcq",
+        "o": [
+            "Pages found in RAM vs Total Requests. Ideal > 99%.",
+            "Disk hits",
+            "Miss ratio",
+            "Space used"
+        ]
+    },
+    {
+        "q": "What is 'Disk Queue Length'?",
+        "type": "mcq",
+        "o": [
+            "Number of IO requests waiting for disk. Sustained high value = IO bottleneck.",
+            "CPU queue",
+            "RAM queue",
+            "Net queue"
+        ]
+    },
+    {
+        "q": "What is 'Disk Latency' (Sec/Read)?",
+        "type": "mcq",
+        "o": [
+            "< 10ms Good. > 20ms Warning. > 50ms Critical.",
+            "1 sec",
+            "1 min",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Memory Grant'?",
+        "type": "mcq",
+        "o": [
+            "Workspace memory reserved for Sort/Hash operations (Steals from Buffer Pool)",
+            "Buffer pool",
+            "Plan cache",
+            "Stack"
+        ]
+    },
+    {
+        "q": "What is 'Memory Grant Pending'?",
+        "type": "mcq",
+        "o": [
+            "Processes waiting for Query Workspace Memory (RESOURCE_SEMAPHORE wait)",
+            "CPU wait",
+            "Disk wait",
+            "Lock wait"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' Data Flush Interval?",
+        "type": "mcq",
+        "o": [
+            "Interval to flush in-memory stats to disk (Async). Default 15 mins. Risk of data loss on crash.",
+            "Instant",
+            "Hourly",
+            "Daily"
+        ]
+    },
+    {
+        "q": "What is 'Stale Query Threshold' (Query Store)?",
+        "type": "mcq",
+        "o": [
+            "How long to keep inactive query data (Default 30 days)",
+            "1 day",
+            "1 year",
+            "Forever"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' capture mode 'Auto'?",
+        "type": "mcq",
+        "o": [
+            "Ignores insignificant queries (low execute count/duration) to save space",
+            "Captures all",
+            "Captures none",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' capture mode 'All'?",
+        "type": "mcq",
+        "o": [
+            "Captures every executed query (High overhead)",
+            "Auto",
+            "None",
+            "Selective"
+        ]
+    },
+    {
+        "q": "What is 'Force Plan' failure?",
+        "type": "mcq",
+        "o": [
+            "If forced plan is invalid (e.g. Index dropped), SQL resorts to Recompile (and records failure)",
+            "Crash",
+            "Stop",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Automatic Tuning' (SQL 2017+)?",
+        "type": "mcq",
+        "o": [
+            "Service that uses Query Store to detect regression and automatically Force Last Good Plan",
+            "Magic",
+            "AI",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Intelligent Query Processing' (IQP)?",
+        "type": "mcq",
+        "o": [
+            "Family of features (Adaptive Joins, Memory Grant Feedback, etc.) improving performance automatically",
+            "Old engine",
+            "Slow engine",
+            "Manual engine"
+        ]
+    },
+    {
+        "q": "What is 'Scalar UDF Inlining'?",
+        "type": "mcq",
+        "o": [
+            "IQP feature transforming Scalar UDFs into set-based operations automatically",
+            "Delete UDF",
+            "Ignore UDF",
+            "Compile UDF"
+        ]
+    },
+    {
+        "q": "What is 'Table Variable Deferred Compilation'?",
+        "type": "mcq",
+        "o": [
+            "IQP feature compiling Plan using actual cardinality of Table Variable first time (Fixes 1-row guess)",
+            "Slow compile",
+            "Fast compile",
+            "Skip"
+        ]
+    },
+    {
+        "q": "What is 'Optimize for Sequential Key'?",
+        "type": "mcq",
+        "o": [
+            "Index option optimizing insert hotspots (Last Page Latch contention) for identity columns",
+            "Sort",
+            "Hash",
+            "Seek"
+        ]
+    },
+    {
+        "q": "What is 'Data Compression' (Columnstore vs Row)?",
+        "type": "mcq",
+        "o": [
+            "Columnstore uses excessive compression (10x-100x). Row/Page uses typically 2x-4x.",
+            "Same",
+            "Row better",
+            "No diff"
+        ]
+    },
+    {
+        "q": "What is 'Segment Elimination'?",
+        "type": "mcq",
+        "o": [
+            "Skipping Columnstore Segments based on Min/Max metadata (similar to Partition Elimination)",
+            "Row elim",
+            "Table elim",
+            "Index elim"
+        ]
+    },
+    {
+        "q": "What is 'Rowgroup' (Columnstore)?",
+        "type": "mcq",
+        "o": [
+            "Group of rows (max 1 million) compressed together into Segments",
+            "Page",
+            "Extent",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Deltastore'?",
+        "type": "mcq",
+        "o": [
+            "Traditional B-Tree holding small inserts before they are compressed into Columnstore",
+            "Main store",
+            "Log store",
+            "Temp store"
+        ]
+    },
+    {
+        "q": "What is 'Tuple Mover'?",
+        "type": "mcq",
+        "o": [
+            "Background task moving closed Deltastores to Compressed Rowgroups",
+            "Copy task",
+            "Delete task",
+            "Index task"
+        ]
+    },
+    {
+        "q": "What is 'Bulk Load' threshold?",
+        "type": "mcq",
+        "o": [
+            "102,400 rows. Below = Trickle to Deltastore. Above = Direct to Compressed Rowgroup.",
+            "100",
+            "1000",
+            "1 million"
+        ]
+    },
+    {
+        "q": "What is 'Deleted Bitmap'?",
+        "type": "mcq",
+        "o": [
+            "Logical deletion tracking in Columnstore (Rows not physically removed immediately)",
+            "Recycle bin",
+            "Trash",
+            "Log"
+        ]
+    },
+    {
+        "q": "How to reclaim space from Deleted Bitmap?",
+        "type": "mcq",
+        "o": [
+            "ALTER INDEX REORGANIZE (Consolidates rowgroups, removes dead rows)",
+            "Delete",
+            "Truncate",
+            "Drop"
+        ]
+    },
+    {
+        "q": "What is 'Clustered Columnstore Index' (CCI)?",
+        "type": "mcq",
+        "o": [
+            "Primary storage of the table. No traditional Clustered B-Tree primary key allowed (unless SQL 2022+)",
+            "Secondary",
+            "Backup",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'Non-Clustered Columnstore Index' (NCCI)?",
+        "type": "mcq",
+        "o": [
+            "Secondary index on a row-store table. Allows Real-Time Operational Analytics.",
+            "Primary",
+            "Hidden",
+            "System"
+        ]
+    },
+    {
+        "q": "What is 'Hybrid Buffer Pool'?",
+        "type": "mcq",
+        "o": [
+            "Allows SQL to access database files on PMEM (Persistent Memory) directly (Byte-addressable)",
+            "SSD cache",
+            "RAM drive",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Persistent Memory' (PMEM)?",
+        "type": "mcq",
+        "o": [
+            "Storage class memory (NVDIMM). Fast like RAM, persistent like Ssd.",
+            "Flash",
+            "Tape",
+            "Disc"
+        ]
+    },
+    {
+        "q": "What is 'Indirect Checkpoint'?",
+        "type": "mcq",
+        "o": [
+            "Algorithmic checkpointing based on Target Recovery Time (smooths IO spike)",
+            "Direct",
+            "Manual",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Recovery Interval' (sp_configure)?",
+        "type": "mcq",
+        "o": [
+            "Legacy instance-level setting (0 = Auto). Indirect Checkpoint is DB-level and better.",
+            "Modern",
+            "Fast",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Accelerated Database Recovery' (ADR)?",
+        "type": "mcq",
+        "o": [
+            "Uses Persistent Version Store (PVS) for instant rollback and aggressive log truncation",
+            "Fast disk",
+            "More RAM",
+            "Parallel"
+        ]
+    },
+    {
+        "q": "Benefit of ADR for Log?",
+        "type": "mcq",
+        "o": [
+            "Prevents transaction log from growing infinitely due to long running active transactions",
+            "None",
+            "Shrinks log",
+            "Deletes log"
+        ]
+    },
+    {
+        "q": "What is 'Instant File Initialization' (IFI)?",
+        "type": "mcq",
+        "o": [
+            "Grants 'Perform Volume Maintenance Tasks' right to Service Account. Skips zeroing data files.",
+            "Zeroes all",
+            "Compress",
+            "Encrypt"
+        ]
+    },
+    {
+        "q": "Does IFI work for Log Files?",
+        "type": "mcq",
+        "o": [
+            "No, log files must always be zeroed for security/integrity",
+            "Yes",
+            "Sometimes",
+            "Partial"
+        ]
+    },
+    {
+        "q": "What is 'Lock Pages in Memory' (LPIM)?",
+        "type": "mcq",
+        "o": [
+            "Windows policy preventing SQL pages from being paged to disk (Swap). Vital for stability.",
+            "Lock files",
+            "Lock rows",
+            "Lock user"
+        ]
+    },
+    {
+        "q": "What is 'Priority Boost'?",
+        "type": "mcq",
+        "o": [
+            "Deprecated setting. Do Not Use (Can starve OS threads).",
+            "Good setting",
+            "Boosts speed",
+            "Recommended"
+        ]
+    },
+    {
+        "q": "What is 'Affinity Mask'?",
+        "type": "mcq",
+        "o": [
+            "Manually binding schedulers to cores. Rarely needed now (SQL handles NUMA well).",
+            "Binding disk",
+            "Binding RAM",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Max Server Memory'?",
+        "type": "mcq",
+        "o": [
+            "Crucial setting. Cap memory so OS helps ~4GB-10% free. Prevents starvation.",
+            "Unlimited",
+            "Min memory",
+            "Cache size"
+        ]
+    },
+    {
+        "q": "What consumes memory OUTSIDE 'Max Server Memory'?",
+        "type": "mcq",
+        "o": [
+            "Direct allocations (CLR, Extended Procs, backup buffers, thread stacks)",
+            "Buffer pool",
+            "Plan cache",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'External Scripts' memory?",
+        "type": "mcq",
+        "o": [
+            "R / Python machine learning services run in separate processes (Launchpad)",
+            "Interna",
+            "Buffer",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Resource Governor' Classifier?",
+        "type": "mcq",
+        "o": [
+            "Function that classifies incoming sessions into Workload Groups (based on Login, AppName)",
+            "Trigger",
+            "Proc",
+            "Table"
+        ]
+    },
+    {
+        "q": "What is 'Soft NUMA'?",
+        "type": "mcq",
+        "o": [
+            "Configuring logical NUMA nodes to distribute IO/Scheduler load on large SMP systems",
+            "Hard NUMA",
+            "Physical",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Parallelism' inhibition?",
+        "type": "mcq",
+        "o": [
+            "Scalar UDFs, Table Variables (Legacy), Recursive CTEs, TOP",
+            "Joins",
+            "Selects",
+            "Where"
+        ]
+    },
+    {
+        "q": "What is 'Generic Plan' (Ad-Hoc)?",
+        "type": "mcq",
+        "o": [
+            "Plan created for dynamic SQL. Low reuse probability unless exact string match.",
+            "Parameterized",
+            "Stored",
+            "Cached"
+        ]
+    },
+    {
+        "q": "What is 'Plan Stuffing'?",
+        "type": "mcq",
+        "o": [
+            "Not a term. Maybe Parameter Sniffing or Cache Bloat.",
+            "Feature",
+            "Optimization",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Plan Cache Bloat'?",
+        "type": "mcq",
+        "o": [
+            "Thousands of single-use ad-hoc plans filling memory (Wasting Buffer Pool)",
+            "Data bloat",
+            "Log bloat",
+            "Disk bloat"
+        ]
+    },
+    {
+        "q": "Solution for Plan Cache Bloat?",
+        "type": "mcq",
+        "o": [
+            "Parameterize queries, or 'Optimize for Ad Hoc Workloads' = True",
+            "Add RAM",
+            "Restart",
+            "Delete plans"
+        ]
+    },
+    {
+        "q": "What is 'DBCC FREEPROCCACHE'?",
+        "type": "mcq",
+        "o": [
+            "Clears procedure cache (Removes all plans). Causes CPU spike on recompilation.",
+            "Clears data",
+            "Clears log",
+            "Clears disk"
+        ]
+    },
+    {
+        "q": "What is 'DBCC DROPCLEANBUFFERS'?",
+        "type": "mcq",
+        "o": [
+            "Clears data pages from Buffer Pool (Don't run in Prod). Forces physical IO.",
+            "Clears plans",
+            "Clears logs",
+            "Clears RAM"
+        ]
+    },
+    {
+        "q": "What is 'Query Hash'?",
+        "type": "mcq",
+        "o": [
+            "Hash of query logic. Used to aggregate stats for ad-hoc queries with same logic.",
+            "Plan hash",
+            "User hash",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Plan Handle'?",
+        "type": "mcq",
+        "o": [
+            "Unique identifier for a cached execution plan (Used in DMVs)",
+            "Query handle",
+            "File handle",
+            "User handle"
+        ]
+    },
+    {
+        "q": "What is 'Sql Handle'?",
+        "type": "mcq",
+        "o": [
+            "Identifier for the SQL Text of a batch",
+            "Plan handle",
+            "Job handle",
+            "Task handle"
+        ]
+    },
+    {
+        "q": "What is 'Trivial Plan' optimization?",
+        "type": "mcq",
+        "o": [
+            "Fast path. No cost-based optimization (e.g. SELECT * FROM Table).",
+            "Full path",
+            "Parallel",
+            "Deep"
+        ]
+    },
+    {
+        "q": "What prevents Trivial Plan?",
+        "type": "mcq",
+        "o": [
+            "Joins, Subqueries, Inequalities, Hints",
+            "Select",
+            "Where",
+            "Order"
+        ]
+    },
+    {
+        "q": "What is 'RAID 10' performance?",
+        "type": "mcq",
+        "o": [
+            "Stripe of Mirrors. Best for Write-heavy OLTP (Fast Writes + Redundancy + Fast Reads). Expensive.",
+            "Slow write",
+            "No redundancy",
+            "Cheap"
+        ]
+    },
+    {
+        "q": "What is 'RAID 5' performance?",
+        "type": "mcq",
+        "o": [
+            "Stripe with Parity. Reading is fast. Writing is slow (Parity calculation overhead).",
+            "Fast write",
+            "Best for writes",
+            "No parity"
+        ]
+    },
+    {
+        "q": "What is 'RAID 0' performance?",
+        "type": "mcq",
+        "o": [
+            "Striping only. Fastest R/W. Zero redundancy (One drive fails = Data lost).",
+            "Slow",
+            "Redundant",
+            "Safe"
+        ]
+    },
+    {
+        "q": "Best RAID for Transaction Log?",
+        "type": "mcq",
+        "o": [
+            "RAID 10 (Sequential Write speed is critical) or RAID 1",
+            "RAID 5",
+            "RAID 0",
+            "USB"
+        ]
+    },
+    {
+        "q": "What is 'Disk Alignment' (Partition Offset)?",
+        "type": "mcq",
+        "o": [
+            "Aligning filesystem cluster to physical disk sector (e.g. 64KB alignment). Misalignment double IOs.",
+            "Sorting",
+            "Formatting",
+            "Labeling"
+        ]
+    },
+    {
+        "q": "What is 'NTFS Allocation Unit Size' recommended for SQL?",
+        "type": "mcq",
+        "o": [
+            "64KB (Matches SQL Extent size). Default 4KB causes fragmentation.",
+            "4KB",
+            "128KB",
+            "1MB"
+        ]
+    },
+    {
+        "q": "What is 'Trace Flag 1118' necessity now?",
+        "type": "mcq",
+        "o": [
+            "Not needed in SQL 2016+ (Default behavior for TempDB is uniform allocation)",
+            "Essential",
+            "Required",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Pool Extension' risk?",
+        "type": "mcq",
+        "o": [
+            "If SSD is slow or fails, performance degrades significantly (Synchronous writes)",
+            "Memory leak",
+            "Data loss",
+            "CPU spike"
+        ]
+    },
+    {
+        "q": "What is 'KEEP PLAN' hint?",
+        "type": "mcq",
+        "o": [
+            "Relaxes recompile threshold for temp tables (Good if temp table size changes but plan shouldn't)",
+            "Forces recompile",
+            "Drops plan",
+            "Locks plan"
+        ]
+    },
+    {
+        "q": "What is 'KEEPFIXED PLAN' hint?",
+        "type": "mcq",
+        "o": [
+            "Prevents recompilation due to statistics updates (Only schema change recompiles)",
+            "Always recompile",
+            "Updates stats",
+            "Fixes plan"
+        ]
+    },
+    {
+        "q": "What is 'USE PLAN' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces query to use specific XML plan (Last resort for regression)",
+            "New plan",
+            "Clean plan",
+            "Auto plan"
+        ]
+    },
+    {
+        "q": "What is 'IGNORE_NONCLUSTERED_COLUMNSTORE_INDEX'?",
+        "type": "mcq",
+        "o": [
+            "Hint to prevent optimizer from using NCCI (useful for regression testing)",
+            "Force usage",
+            "Create index",
+            "Drop index"
+        ]
+    },
+    {
+        "q": "What is 'EXPAND VIEWS' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces expansion of indexed views into base tables (Ignoring the pre-aggregated index)",
+            "Use view",
+            "Collapse",
+            "Hide"
+        ]
+    },
+    {
+        "q": "What is 'Force Order' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces join order to match the syntax in FROM clause",
+            "Optimize order",
+            "Random order",
+            "Reverse order"
+        ]
+    },
+    {
+        "q": "What is 'Remote Join'?",
+        "type": "mcq",
+        "o": [
+            "Join operation happens between local and remote table (Linked Server). Often slow.",
+            "Local join",
+            "Fast join",
+            "Memory join"
+        ]
+    },
+    {
+        "q": "What is 'Remote Scan'?",
+        "type": "mcq",
+        "o": [
+            "Scanning remote table row-by-row across network (Avoid! Use OPENQUERY/EXEC AT)",
+            "Fast scan",
+            "Local scan",
+            "Index seek"
+        ]
+    },
+    {
+        "q": "What is 'OPENQUERY' benefit?",
+        "type": "mcq",
+        "o": [
+            "Pass-through query executes on remote server; only results return (Better performance than 4-part name)",
+            "Slower",
+            "More network",
+            "Harder"
+        ]
+    },
+    {
+        "q": "What is 'EXEC AT'?",
+        "type": "mcq",
+        "o": [
+            "Execute dynamic SQL on linked server (Pass-through)",
+            "Local exec",
+            "System exec",
+            "Job"
+        ]
+    },
+    {
+        "q": "What is 'Cost Threshold' default warning?",
+        "type": "mcq",
+        "o": [
+            "Default 5 is legacy. Modern CPUs execute cost 5 instantly. Leads to too much parallelism overhead.",
+            "Default is perfect",
+            "Too high",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Priority Boost' setting?",
+        "type": "mcq",
+        "o": [
+            "Increases SQL Server process priority base. DANGEROUS. Can starve OS/Drivers -> Crash.",
+            "Recommended",
+            "Safe",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Lightweight Pooling'?",
+        "type": "mcq",
+        "o": [
+            "Uses Fibers instead of Threads. Limits features (CLR, etc). Rarely used.",
+            "Recommended",
+            "Standard",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Database Scoped Configuration'?",
+        "type": "mcq",
+        "o": [
+            "Settings (MaxDOP, Cardinality Estimator) applied per Database (Not Instance level).",
+            "Server scoped",
+            "Table scoped",
+            "Session scoped"
+        ]
+    },
+    {
+        "q": "What is 'Legacy Cardinality Estimation' (LCE)?",
+        "type": "mcq",
+        "o": [
+            "Estimation model used in SQL 2012 and earlier. 'New CE' (2014+) assumes different correlations.",
+            "Modern",
+            "Future",
+            "Better"
+        ]
+    },
+    {
+        "q": "When to use 'LEGACY_CARDINALITY_ESTIMATION'?",
+        "type": "mcq",
+        "o": [
+            "If queries regress significantly on New CE and code change is impossible",
+            "Always",
+            "Never",
+            "New DBs"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' vs 'Flush Interval'?",
+        "type": "mcq",
+        "o": [
+            "Data is async flushed. Crash means losing last ~15 mins of query stats (Acceptable trade-off).",
+            "Instant",
+            "Sync",
+            "No loss"
+        ]
+    },
+    {
+        "q": "What is 'Procedure Cache' size limit?",
+        "type": "mcq",
+        "o": [
+            "Auto-managed, but excessive ad-hoc plans can steal memory from Buffer Pool (Data)",
+            "Fixed 1GB",
+            "Fixed 10%",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'Ad Hoc Plan' usage count?",
+        "type": "mcq",
+        "o": [
+            "1. Plan compiled, used once, stays in cache occupying space.",
+            "100",
+            "1000",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Plan Cache' pollution?",
+        "type": "mcq",
+        "o": [
+            "Cache filled with single-use plans. Low Buffer Cache Hit Ratio due to memory pressure.",
+            "Disk pollution",
+            "Log pollution",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Resource Governor' IO Throttling?",
+        "type": "mcq",
+        "o": [
+            "Limit MAX_IOPS_PER_VOLUME (SQL 2014+). Controls noisy neighbors.",
+            "Limit RAM",
+            "Limit CPU",
+            "Limit Net"
+        ]
+    },
+    {
+        "q": "What is 'External Resource Pool'?",
+        "type": "mcq",
+        "o": [
+            "Resource Governor pool for R/Python/Java external processes (CPU/Memory limits)",
+            "Internal",
+            "Virtual",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'In-Memory OLTP' durability?",
+        "type": "mcq",
+        "o": [
+            "Schema_Only (Lost on restart) vs Schema_and_Data (Persisted to Checkpoint Files)",
+            "None",
+            "Always",
+            "Partial"
+        ]
+    },
+    {
+        "q": "What is 'Native Compilation'?",
+        "type": "mcq",
+        "o": [
+            "Compiling Stored Proc into C code -> DLL. Extremely fast execution (No interpretation).",
+            "Interpreted",
+            "Slow",
+            "Standard"
+        ]
+    },
+    {
+        "q": "Native Compilation limitations?",
+        "type": "mcq",
+        "o": [
+            "Restrictive T-SQL surface area (No CURSORS, CTEs, etc. in older versions)",
+            "None",
+            "Supports all",
+            "Slows down"
+        ]
+    },
+    {
+        "q": "What is 'Checkpoint' in In-Memory?",
+        "type": "mcq",
+        "o": [
+            "Background thread writing memory data to Data/Delta files",
+            "Log flush",
+            "Backup",
+            "Restore"
+        ]
+    },
+    {
+        "q": "What is 'Garbage Collection' in In-Memory?",
+        "type": "mcq",
+        "o": [
+            "Cooperative. Worker threads scanning indexes unlink old row versions.",
+            "System thread",
+            "Admin",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Hash Index' bucket count?",
+        "type": "mcq",
+        "o": [
+            "Must be sized correctly (1.5x - 2x row count). Too small = collisions (chains). Too big = waste.",
+            "Auto",
+            "10 buckets",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "What happens if Hash Index collisions high?",
+        "type": "mcq",
+        "o": [
+            "Performance degrades to table scan (walking long chain)",
+            "Error",
+            "Page split",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "What is 'Range Index' (In-Memory)?",
+        "type": "mcq",
+        "o": [
+            "Bw-Tree (Lock-free B-Tree). Good for range scans (WHERE ID > 10).",
+            "Hash",
+            "Heap",
+            "Clustered"
+        ]
+    },
+    {
+        "q": "When to use Hash vs Range Index?",
+        "type": "mcq",
+        "o": [
+            "Hash for Point Lookups (ID=1). Range for Ranges (ID > 1).",
+            "Hash for >",
+            "Range for =",
+            "Any"
+        ]
+    },
+    {
+        "q": "What is 'Migration Advisor'?",
+        "type": "mcq",
+        "o": [
+            "Tool in SSMS determining if table/proc is compatible with In-Memory OLTP",
+            "Tuning advisor",
+            "Sales tool",
+            "Backup tool"
+        ]
+    },
+    {
+        "q": "What is 'Transaction Performance Analysis Reports'?",
+        "type": "mcq",
+        "o": [
+            "Reports identifying high-contention tables suitable for In-Memory migration",
+            "Sales report",
+            "User report",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'AMR' (Analysis, Migration, Reporting)?",
+        "type": "mcq",
+        "o": [
+            "Workflow methodologies for Memory Optimization",
+            "Tool",
+            "Language",
+            "Protocol"
+        ]
+    },
+    {
+        "q": "What is 'Natively Compiled' Atomic Block?",
+        "type": "mcq",
+        "o": [
+            "BEGIN ATOMIC ... END. Required. Transaction commits/rolls back as whole.",
+            "Begin Tran",
+            "Try Catch",
+            "Commit"
+        ]
+    },
+    {
+        "q": "Can you access Disk Tables from Native Proc?",
+        "type": "mcq",
+        "o": [
+            "No. Native procs can only access Memory tables. (Interpreted procs can access both).",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Interpreted Transact-SQL' access to Memory Tables?",
+        "type": "mcq",
+        "o": [
+            "Supported (Interop). Slower than Native, but flexible.",
+            "Not supported",
+            "Fastest",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Container Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Transaction touching both Disk-based and Memory-Optimized tables",
+            "Local",
+            "Distributed",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Log Rate' limit (Cloud)?",
+        "type": "mcq",
+        "o": [
+            "Azure SQL limits Log Throughput (MB/s) based on Tier. Transaction throttle.",
+            "Unlimited",
+            "User set",
+            "Disk speed"
+        ]
+    },
+    {
+        "q": "What is 'DTU' (Database Transaction Unit)?",
+        "type": "mcq",
+        "o": [
+            "Blended measure of CPU, Memory, IO. DTU limit throttles performance.",
+            "CPU only",
+            "RAM only",
+            "IO only"
+        ]
+    },
+    {
+        "q": "What is 'vCore' model?",
+        "type": "mcq",
+        "o": [
+            "Purchasing specific cores/RAM (Like VM). More predictable than DTU.",
+            "DTU",
+            "Serverless",
+            "Shared"
+        ]
+    },
+    {
+        "q": "What is 'Hyperscale'?",
+        "type": "mcq",
+        "o": [
+            "Azure Tier separating Compute from Storage (Page Servers). Scales to 100TB+.",
+            "Small DB",
+            "Local DB",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'Hyperscale' Log architecture?",
+        "type": "mcq",
+        "o": [
+            "Log service pushes changes to Page Servers and Secondary compute nodes (Fast commit)",
+            "Standard log",
+            "Network log",
+            "Slow log"
+        ]
+    },
+    {
+        "q": "What is 'Serverless' Compute?",
+        "type": "mcq",
+        "o": [
+            "Auto-scaling compute (pauses when idle). Good for sporadic workloads.",
+            "Fixed",
+            "Dedicated",
+            "Always on"
+        ]
+    },
+    {
+        "q": "Serverless 'Warm-up' delay?",
+        "type": "mcq",
+        "o": [
+            "30-60 secs to resume from pause (latency on first connection)",
+            "Instant",
+            "1 hour",
+            "1 day"
+        ]
+    },
+    {
+        "q": "What is 'Elastic Pool'?",
+        "type": "mcq",
+        "o": [
+            "Sharing resources (eDTUs) among multiple databases to handle peak/valley usage",
+            "Single DB",
+            "Instance",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "What is 'Instance Pool'?",
+        "type": "mcq",
+        "o": [
+            "Pre-provisioned pool of vCores for Managed Instances (Fast create)",
+            "Elastic pool",
+            "Resource Gov",
+            "VM pool"
+        ]
+    },
+    {
+        "q": "What is 'Zone Redundant'?",
+        "type": "mcq",
+        "o": [
+            "Replicas spread across Availability Zones (Data Centers) for HA",
+            "Local",
+            "Region",
+            "Geo"
+        ]
+    },
+    {
+        "q": "What is 'Geo-Replication'?",
+        "type": "mcq",
+        "o": [
+            "Async replication to a different region (DR). Readable secondaries.",
+            "Sync",
+            "Zone",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Failover Group'?",
+        "type": "mcq",
+        "o": [
+            "Manages failover of multiple DBs and connection strings (Read/Write listener)",
+            "Single DB",
+            "Manual",
+            "Agroup"
+        ]
+    },
+    {
+        "q": "What is 'Read Scale-Out'?",
+        "type": "mcq",
+        "o": [
+            "Offloading Read-Only queries to secondary replica (ApplicationIntent=ReadOnly)",
+            "Write scale",
+            "Sharding",
+            "Partitioning"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Data Warehouse' (PDW)?",
+        "type": "mcq",
+        "o": [
+            "Legacy name for Synapse Analytics (MPP architecture)",
+            "OLTP",
+            "SQL Express",
+            "Access"
+        ]
+    },
+    {
+        "q": "What is 'MPP' (Massively Parallel Processing)?",
+        "type": "mcq",
+        "o": [
+            "Many compute nodes processing specific data distributions (Sharding) in parallel",
+            "SMP",
+            "Single node",
+            "Laptop"
+        ]
+    },
+    {
+        "q": "What is 'Control Node' (Synapse)?",
+        "type": "mcq",
+        "o": [
+            "Brain of MPP. Receives query, generates distributed plan (D-SQL), aggregates results.",
+            "Compute node",
+            "Data node",
+            "Worker"
+        ]
+    },
+    {
+        "q": "What is 'Compute Node' (Synapse)?",
+        "type": "mcq",
+        "o": [
+            "Executes local query on its data slice and returns to Control Node",
+            "Manager",
+            "Client",
+            "Master"
+        ]
+    },
+    {
+        "q": "What is 'Distribution' (Synapse)?",
+        "type": "mcq",
+        "o": [
+            "Unit of storage. 60 distributions per Synapse pool.",
+            "Table",
+            "File",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is 'Hash Distribution'?",
+        "type": "mcq",
+        "o": [
+            "Rows distributed based on hash of a column (Deterministically). Good for Joins.",
+            "Round robin",
+            "Replicate",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Round Robin Distribution'?",
+        "type": "mcq",
+        "o": [
+            "Rows distributed evenly 1-2-3-4. Good for loading speed. Bad for join performance.",
+            "Hash",
+            "Replicate",
+            "Sorted"
+        ]
+    },
+    {
+        "q": "What is 'Replicated Distribution'?",
+        "type": "mcq",
+        "o": [
+            "Full copy of table on every Compute Node. Good for small dimension tables.",
+            "Hash",
+            "Partition",
+            "Split"
+        ]
+    },
+    {
+        "q": "What is 'Data Movement' (DMS)?",
+        "type": "mcq",
+        "o": [
+            "Moving data between nodes to satisfy a join (Shuffle/Broadcast). Expensive!",
+            "Fast",
+            "Local",
+            "Storage"
+        ]
+    },
+    {
+        "q": "How to minimize Data Movement?",
+        "type": "mcq",
+        "o": [
+            "Distribute tables on Join Keys (Hash Distributed)",
+            "Round robin",
+            "Use fewer nodes",
+            "Use more RAM"
+        ]
+    },
+    {
+        "q": "What is 'Clustered Columnstore' default in Synapse?",
+        "type": "mcq",
+        "o": [
+            "Yes. Tables are CCI by default for compression/performance.",
+            "Heap",
+            "B-Tree",
+            "XML"
+        ]
+    },
+    {
+        "q": "What is 'Result Set Caching'?",
+        "type": "mcq",
+        "o": [
+            "Caching query results in Synapse to serve repetitive dashboard queries instantly",
+            "Disk cache",
+            "Browser cache",
+            "App cache"
+        ]
+    },
+    {
+        "q": "What is 'Materialized View' in Synapse?",
+        "type": "mcq",
+        "o": [
+            "Pre-computed aggregations auto-used by optimizer (Performance booster)",
+            "Standard view",
+            "Temp table",
+            "CTE"
+        ]
+    },
+    {
+        "q": "What is 'Table Partitioning' (Performance)?",
+        "type": "mcq",
+        "o": [
+            "Allows Partition Elimination (reading only relevant files) and Sliding Window maintenance",
+            "Formatting",
+            "Styling",
+            "Creating"
+        ]
+    },
+    {
+        "q": "What is 'Partition Switch'?",
+        "type": "mcq",
+        "o": [
+            "Metadata operation moving a partition between tables instantaneously (Loading)",
+            "Data copy",
+            "Insert",
+            "Update"
+        ]
+    },
+    {
+        "q": "Partition Switch alignment?",
+        "type": "mcq",
+        "o": [
+            "Source and Target must have identical schema/indexes and reside on same filegroup",
+            "Different schema",
+            "Different FG",
+            "No rules"
+        ]
+    },
+    {
+        "q": "What is 'Aligned Index'?",
+        "type": "mcq",
+        "o": [
+            "Index partitioned on same column/function as base table (Supports switching)",
+            "Non aligned",
+            "Global",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Compression' estimate?",
+        "type": "mcq",
+        "o": [
+            "sp_estimate_data_compression_savings",
+            "Guess",
+            "Check size",
+            "Trial"
+        ]
+    },
+    {
+        "q": "What causes 'Spill to TempDB' on Sort?",
+        "type": "mcq",
+        "o": [
+            "Insufficient Memory Grant (Sort doesn't fit in RAM). Writes intermediate runs to disk.",
+            "Too much RAM",
+            "Small sort",
+            "Nulls"
+        ]
+    },
+    {
+        "q": "What is 'Sort Warning'?",
+        "type": "mcq",
+        "o": [
+            "Profiler event indicating a Sort operation spilled to disk (Performance hit)",
+            "Error",
+            "Alert",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Hash Warning'?",
+        "type": "mcq",
+        "o": [
+            "Profiler event indicating Hash Recursion (Spill) or Bailout (Severe spill)",
+            "Error",
+            "Info",
+            "Log"
+        ]
+    },
+    {
+        "q": "How to fix Spills?",
+        "type": "mcq",
+        "o": [
+            "Update Stats (better cardinality est), Fix Plan, or Increase Memory Grant (Min Grant hints)",
+            "Add disk",
+            "Ignore",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'MIN_GRANT_PERCENT'?",
+        "type": "mcq",
+        "o": [
+            "Hint/Resource Gov setting to force minimum memory grant (prevents under-estimation)",
+            "Max grant",
+            "Zero",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'MAX_GRANT_PERCENT'?",
+        "type": "mcq",
+        "o": [
+            "Limits memory grant (prevents one query hogging all RAM)",
+            "Min grant",
+            "Unlimited",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Query Hints' vs 'Plan Guides'?",
+        "type": "mcq",
+        "o": [
+            "Hints require changing code. Plan Guides apply hints without changing code.",
+            "Same",
+            "Guides change code",
+            "Hints external"
+        ]
+    },
+    {
+        "q": "What is 'Force Parameterization'?",
+        "type": "mcq",
+        "o": [
+            "Database setting. Forces all queries to be parameterized. Reduces compilation. Risk of bad plans.",
+            "Simple",
+            "None",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Simple Parameterization'?",
+        "type": "mcq",
+        "o": [
+            "Default. Only parameterizes trivial queries.",
+            "Force",
+            "All",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Optimize for Ad Hoc Workloads'?",
+        "type": "mcq",
+        "o": [
+            "Stores plan stub on 1st run. Full plan on 2nd run. Saves memory.",
+            "Stores all",
+            "Disable cache",
+            "Clear cache"
+        ]
+    },
+    {
+        "q": "What is 'Implicit Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Session mode where transaction starts automatically but must be committed manually",
+            "Auto commit",
+            "Explicit",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'XACT_ABORT'?",
+        "type": "mcq",
+        "o": [
+            "Setting ensuring transaction rolls back immediately on runtime error (Best practice)",
+            "Commit on error",
+            "Ignore error",
+            "Continue"
+        ]
+    },
+    {
+        "q": "What is 'TRY...CATCH' usage?",
+        "type": "mcq",
+        "o": [
+            "Error handling block. CATCH block can Inspect Error and Rollback.",
+            "Loop",
+            "Logic",
+            "Print"
+        ]
+    },
+    {
+        "q": "What is 'ERROR_NUMBER()'?",
+        "type": "mcq",
+        "o": [
+            "Returns ID of error causing CATCH block entry",
+            "Line number",
+            "Message",
+            "Severity"
+        ]
+    },
+    {
+        "q": "What is 'RAISERROR' vs 'THROW'?",
+        "type": "mcq",
+        "o": [
+            "THROW is modern, re-throws original error, honors XACT_ABORT. RAISERROR is legacy.",
+            "Same",
+            "RAISERROR better",
+            "THROW unsafe"
+        ]
+    },
+    {
+        "q": "Can you THROW in CATCH block?",
+        "type": "mcq",
+        "o": [
+            "Yes, 'THROW;' re-throws the caught exception to caller",
+            "No",
+            "Only RAISERROR",
+            "Stops server"
+        ]
+    },
+    {
+        "q": "What is 'GO' command?",
+        "type": "mcq",
+        "o": [
+            "Batch separator (Client tool instruction, not T-SQL). Resets variable scope.",
+            "Start",
+            "End",
+            "Run"
+        ]
+    },
+    {
+        "q": "What is 'GO 10'?",
+        "type": "mcq",
+        "o": [
+            "Executes the batch 10 times (SSMS trick)",
+            "Moves 10 lines",
+            "Waits 10 sec",
+            "Prioritizes"
+        ]
+    },
+    {
+        "q": "What is 'Semi-Join'?",
+        "type": "mcq",
+        "o": [
+            "Returns rows from A where match exists in B (EXISTS). Does not duplicate A rows.",
+            "Anti semi join",
+            "Inner join",
+            "Cross join"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Semi Join'?",
+        "type": "mcq",
+        "o": [
+            "Returns rows from A where match Does NOT exist in B (NOT EXISTS).",
+            "Semi join",
+            "Outer join",
+            "Inner join"
+        ]
+    },
+    {
+        "q": "What is 'Halloween Protection' (SQL)?",
+        "type": "mcq",
+        "o": [
+            "Spool/Optimization to prevent an UPDATE from continuously updating the same rows if index moves them forward",
+            "Ghost",
+            "Witch",
+            "Pumpkin"
+        ]
+    },
+    {
+        "q": "What is 'Wide Table' performance?",
+        "type": "mcq",
+        "o": [
+            "Tables with many columns (esp LOBs) reduce rows per page (Higher IO)",
+            "Faster",
+            "Better",
+            "No impact"
+        ]
+    },
+    {
+        "q": "What is 'Sparse Column'?",
+        "type": "mcq",
+        "o": [
+            "Optimized storage for NULL values (0 bytes). Overhead for non-nulls. Good for 98% NULLs.",
+            "Dense",
+            "Wide",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'Spatial Index'?",
+        "type": "mcq",
+        "o": [
+            "Index optimized for Geometry/Geography data (Tessellation/Grid)",
+            "B-Tree",
+            "Hash",
+            "Text"
+        ]
+    },
+    {
+        "q": "What is 'Tessellation'?",
+        "type": "mcq",
+        "o": [
+            "Decomposing space into a grid hierarchy (Levels 1-4) for Spatial Indexing",
+            "Compression",
+            "Encryption",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'Nearest Neighbor' query?",
+        "type": "mcq",
+        "o": [
+            "Spatial query finding closest points (TOP N ... ORDER BY Distance)",
+            "Join",
+            "Union",
+            "Loop"
+        ]
+    },
+    {
+        "q": "What is 'XML Index'?",
+        "type": "mcq",
+        "o": [
+            "Shredded representation of XML column stored in B-Tree (Primary XML Index)",
+            "Blob",
+            "File",
+            "String"
+        ]
+    },
+    {
+        "q": "What is 'Secondary XML Index' types?",
+        "type": "mcq",
+        "o": [
+            "PATH, VALUE, PROPERTY",
+            "Primary, Unique",
+            "Clustered, Non-Clustered",
+            "Hash, Range"
+        ]
+    },
+    {
+        "q": "What is 'Full Text Index'?",
+        "type": "mcq",
+        "o": [
+            "Inverted index storing token-based keywords for linguistic search (CONTAINS, FREETEXT)",
+            "B-Tree",
+            "Hash",
+            "Heap"
+        ]
+    },
+    {
+        "q": "What is 'Stoplist' (Full Text)?",
+        "type": "mcq",
+        "o": [
+            "List of noise words (the, and, a) ignored by indexer to save space",
+            "Blocklist",
+            "Allowlist",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'Stemming' (Full Text)?",
+        "type": "mcq",
+        "o": [
+            "Reducing words to root form (running -> run) to match variations",
+            "Branching",
+            "Leafing",
+            "Rooting"
+        ]
+    },
+    {
+        "q": "What is 'iFTS' (Integrated Full Text Search)?",
+        "type": "mcq",
+        "o": [
+            "Full Text engine integrated into SQL process (fdhost.exe helper)",
+            "External",
+            "Cloud",
+            "Plugin"
+        ]
+    },
+    {
+        "q": "What is 'Semantic Search'?",
+        "type": "mcq",
+        "o": [
+            "Advanced FTS identifying meaning/key phrases and document similarity",
+            "Syntax search",
+            "Simple search",
+            "Binary search"
+        ]
+    },
+    {
+        "q": "What is 'Graph Database' (SQL)?",
+        "type": "mcq",
+        "o": [
+            "Node and Edge tables allowing traversal queries (Match) for relationships",
+            "Chart",
+            "Plot",
+            "Pie"
+        ]
+    },
+    {
+        "q": "What is 'MATCH' clause?",
+        "type": "mcq",
+        "o": [
+            "Graph query syntax: WHERE MATCH(Person-(Friend)->Person)",
+            "Join",
+            "Like",
+            "Equals"
+        ]
+    },
+    {
+        "q": "What is 'Shortest Path' (Graph)?",
+        "type": "mcq",
+        "o": [
+            "SHORTEST_PATH function finding minimum hops between nodes",
+            "Longest path",
+            "Random path",
+            "Circle"
+        ]
+    },
+    {
+        "q": "What is 'Temporal Table' performance cost?",
+        "type": "mcq",
+        "o": [
+            "Updates/Deletes trigger write to History table (Double IO). History table grows large.",
+            "Zero",
+            "Faster",
+            "Less space"
+        ]
+    },
+    {
+        "q": "Indexing History Table?",
+        "type": "mcq",
+        "o": [
+            "Critical. Needs Clustered Index (usually on EndTime, StartTime) for time-travel queries.",
+            "No index",
+            "Heap",
+            "Hash"
+        ]
+    },
+    {
+        "q": "What is 'Ledger Table' overhead?",
+        "type": "mcq",
+        "o": [
+            "History table write + Ledger View computation + Hash chain calculation (Significant write overhead)",
+            "None",
+            "Fast",
+            "Read overhead"
+        ]
+    },
+    {
+        "q": "What is 'Scalar UDF Inlining' requirements?",
+        "type": "mcq",
+        "o": [
+            "UDF must be deterministic, no side effects, single statement structure (mostly)",
+            "Any UDF",
+            "Random UDF",
+            "Void UDF"
+        ]
+    },
+    {
+        "q": "What is 'Approximate Count Distinct' error rate?",
+        "type": "mcq",
+        "o": [
+            "Up to 2% error (Trade-off for massive speedup)",
+            "10%",
+            "50%",
+            "0%"
+        ]
+    },
+    {
+        "q": "What is 'Stack Tracing' in XEvents?",
+        "type": "mcq",
+        "o": [
+            "Action capturing the call stack (symbols) when event fires (Identify code path)",
+            "Memory stack",
+            "Network stack",
+            "Disk stack"
+        ]
+    },
+    {
+        "q": "What is 'Pair Matching' in XEvents?",
+        "type": "mcq",
+        "o": [
+            "Matching Start and End events (e.g. Lock Acquire/Release) to calculate duration/unmatched",
+            "Sorting",
+            "Filtering",
+            "Grouping"
+        ]
+    },
+    {
+        "q": "What is 'Histogram' target (XEvents)?",
+        "type": "mcq",
+        "o": [
+            " buckets events into groups based on fields (e.g. Count of waits by Type)",
+            "Chart",
+            "Graph",
+            "Ring buffer"
+        ]
+    },
+    {
+        "q": "What is 'Event Counter' target?",
+        "type": "mcq",
+        "o": [
+            "Simple counter of how many times event fired (Low overhead)",
+            "Timer",
+            "Logger",
+            "Audit"
+        ]
+    },
+    {
+        "q": "What is 'Checkpoint' IO pattern?",
+        "type": "mcq",
+        "o": [
+            "Bursty writes (Flush all dirty pages). Can cause IO freeze. Indirect Checkpoint smooths this.",
+            "Sequential",
+            "Random",
+            "Constant"
+        ]
+    },
+    {
+        "q": "What is 'Lazy Writer'?",
+        "type": "mcq",
+        "o": [
+            "Background thread freeing buffer pages when memory is low (LRU algorithm)",
+            "Eager writer",
+            "Log writer",
+            "Checkpoint"
+        ]
+    },
+    {
+        "q": "Lazy Writer vs Checkpoint?",
+        "type": "mcq",
+        "o": [
+            "Lazy Writer runs on Memory Pressure to free space. Checkpoint runs for Recovery Interval (Durability).",
+            "Same",
+            "Inverse",
+            "Partner"
+        ]
+    },
+    {
+        "q": "What is 'Free List' (Buffer)?",
+        "type": "mcq",
+        "o": [
+            "List of empty/free pages ready for use. If empty, Lazy Writer must work hard.",
+            "Locked list",
+            "Dirty list",
+            "Clean list"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Pool' pressure signs?",
+        "type": "mcq",
+        "o": [
+            "Low PLE, High Lazy Writer activity, High Page Reads/sec",
+            "High PLE",
+            "Low IO",
+            "Fast CPU"
+        ]
+    },
+    {
+        "q": "What is 'Target Recovery Time' impact?",
+        "type": "mcq",
+        "o": [
+            "Lower setting = More frequent aggressive checkpoints (= Higher background IO)",
+            "Less IO",
+            "Slower recovery",
+            "Faster CPU"
+        ]
+    },
+    {
+        "q": "What is 'Files and Filegroups' optimization?",
+        "type": "mcq",
+        "o": [
+            "Spreading data across multiple files/disks (Striping) to increase IO throughput",
+            "Compression",
+            "Encryption",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Multiple Data Files logic?",
+        "type": "mcq",
+        "o": [
+            "Proportional Fill algorithm fills files based on free space. Useful if files are on different physical disks.",
+            "Round robin",
+            "Random",
+            "Sequential"
+        ]
+    },
+    {
+        "q": "What is 'Read-Ahead'?",
+        "type": "mcq",
+        "o": [
+            "Optimization detecting sequential scan and pre-fetching pages from disk (up to 64 pages)",
+            "Read behind",
+            "Write ahead",
+            "Lazy read"
+        ]
+    },
+    {
+        "q": "What is 'Readahead' size?",
+        "type": "mcq",
+        "o": [
+            "Enterprise: Up to 512KB (64 pages). Standard: Variable.",
+            "4KB",
+            "8KB",
+            "1GB"
+        ]
+    },
+    {
+        "q": "What is 'Scatter-Gather' IO?",
+        "type": "mcq",
+        "o": [
+            "Windows API used by SQL to read/write multiple non-contiguous memory blocks in one IO",
+            "Sequential",
+            "Single",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Instant Initialization' check?",
+        "type": "mcq",
+        "o": [
+            "dm_server_services (instant_file_initialization_enabled)",
+            "Registry",
+            "Log",
+            "Try create"
+        ]
+    },
+    {
+        "q": "What is 'Backup Compression' algorithm?",
+        "type": "mcq",
+        "o": [
+            "Proprietary (similar to Gzip). CPU intensive.",
+            "AES",
+            "DES",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Max Transfer Size' (Backup)?",
+        "type": "mcq",
+        "o": [
+            "Size of IO chunks used for backup (Default 1MB). increasing can improve speed.",
+            "4KB",
+            "64KB",
+            "1GB"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Count' (Backup)?",
+        "type": "mcq",
+        "o": [
+            "Number of IO buffers used. Higher = More throughput (Memory usage increases).",
+            "Zero",
+            "One",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'Backup Throughput' limited by?",
+        "type": "mcq",
+        "o": [
+            "Slowest component (Source Disk, CPU compression, Network, or Target Disk)",
+            "Always disk",
+            "Always CPU",
+            "Always RAM"
+        ]
+    },
+    {
+        "q": "What is 'VDI' (Virtual Device Interface)?",
+        "type": "mcq",
+        "o": [
+            "API used by 3rd party backup tools to freeze I/O and backup SQL",
+            "Video",
+            "Driver",
+            "Gui"
+        ]
+    },
+    {
+        "q": "What is 'VSS' (Volume Shadow Copy)?",
+        "type": "mcq",
+        "o": [
+            "Windows snapshot technology used for snapshots/backups (SQL Writer Service coordinates)",
+            "Linux",
+            "Cloud",
+            "Tape"
+        ]
+    },
+    {
+        "q": "What is 'SQL Writer Service'?",
+        "type": "mcq",
+        "o": [
+            "Service allowing VSS to create consistent snapshots of SQL DBs (Freezes IO)",
+            "Reader",
+            "Agent",
+            "Browser"
+        ]
+    },
+    {
+        "q": "What is 'Frozen I/O' message?",
+        "type": "mcq",
+        "o": [
+            "Log message indicating VSS snapshot is taking place (IO paused temporarily)",
+            "Crash",
+            "Error",
+            "Hang"
+        ]
+    },
+    {
+        "q": "What is 'I/O affinity'?",
+        "type": "mcq",
+        "o": [
+            "Binding disk IO completion ports to specific CPUs. Rarely touched.",
+            "Mask",
+            "Bind",
+            "Link"
+        ]
+    },
+    {
+        "q": "What is 'Filtered Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Statistics created with WHERE clause (e.g. IS NOT NULL). Improves estimation for skew.",
+            "Partial stats",
+            "Sampled stats",
+            "Full stats"
+        ]
+    },
+    {
+        "q": "What is 'Incremental Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Stats per partition. Updating stats only scans changed partitions (Faster on huge tables).",
+            "Full scan",
+            "Sample scan",
+            "Global"
+        ]
+    },
+    {
+        "q": "What is 'Auto Create Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Engine automatically creates stats on columns used in predicates (WHERE/JOIN) if missing",
+            "Manual",
+            "Never",
+            "Index only"
+        ]
+    },
+    {
+        "q": "What is '_WA_Sys_'?",
+        "type": "mcq",
+        "o": [
+            "Prefix for auto-created statistics",
+            "Error",
+            "System table",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'DBCC SHOW_STATISTICS'?",
+        "type": "mcq",
+        "o": [
+            "Command to view Header, Density Vector, and Histogram of stats",
+            "View table",
+            "View rows",
+            "View index"
+        ]
+    },
+    {
+        "q": "What is 'STATS_DATE'?",
+        "type": "mcq",
+        "o": [
+            "Function returning last update time of stats",
+            "Current date",
+            "Create date",
+            "Modify date"
+        ]
+    },
+    {
+        "q": "What is 'modification_counter'?",
+        "type": "mcq",
+        "o": [
+            "Column in dm_db_stats_properties showing rows changed since last stats update",
+            "Row count",
+            "Page count",
+            "Error count"
+        ]
+    },
+    {
+        "q": "What is 'Persisted Computed Column'?",
+        "type": "mcq",
+        "o": [
+            "Physical column storing result of calculation (Updated on write). Can be indexed.",
+            "Virtual",
+            "Memory",
+            "Trigger"
+        ]
+    },
+    {
+        "q": "What is 'Non-Persisted Computed Column'?",
+        "type": "mcq",
+        "o": [
+            "Virtual column calculated at runtime (CPU cost on Read). Cannot be indexed (usually).",
+            "Persisted",
+            "Stored",
+            "Physical"
+        ]
+    },
+    {
+        "q": "What is 'Filtered Index' risk?",
+        "type": "mcq",
+        "o": [
+            "If application uses incorrect SET options (e.g. QUOTED_IDENTIFIER OFF), insert fails",
+            "Slow",
+            "Big",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Include Actual Execution Plan' warning?",
+        "type": "mcq",
+        "o": [
+            "Beware large XML plans can consume significant memory and network bandwidth (Do not leave on)",
+            "Safe",
+            "Fast",
+            "No impact"
+        ]
+    },
+    {
+        "q": "What is 'Estimated Subtree Cost'?",
+        "type": "mcq",
+        "o": [
+            "Cumulative optimizer cost estimate for that operator and all its children",
+            "Actual cost",
+            "Time",
+            "Rows"
+        ]
+    },
+    {
+        "q": "Is Cost = Seconds?",
+        "type": "mcq",
+        "o": [
+            "No. It's an arbitrary unit (originally seconds on old hardware). Relative measure only.",
+            "Yes",
+            "Milliseconds",
+            "Minutes"
+        ]
+    },
+    {
+        "q": "What is 'Plan Handle' vs 'Query Hash'?",
+        "type": "mcq",
+        "o": [
+            "Plan Handle points to specific compiled plan. Query Hash points to logic (aggregated).",
+            "Same",
+            "Inverse",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "What is 'Optimize For Sequential Key' mechanism?",
+        "type": "mcq",
+        "o": [
+            "Special throughput optimization for B-Tree inserts (Last Page) detecting contention",
+            "Sorts keys",
+            "Hashes keys",
+            "Randomizes"
+        ]
+    },
+    {
+        "q": "What is 'Soft Deletion'?",
+        "type": "mcq",
+        "o": [
+            "Marking row IsDeleted=1 instead of DELETE. Increases table size/scan time. Requires Filtered Index.",
+            "Hard delete",
+            "Truncate",
+            "Drop"
+        ]
+    },
+    {
+        "q": "What is 'Hard Deletion'?",
+        "type": "mcq",
+        "o": [
+            "Physically removing row (DELETE). Fragmentation / Page Splits / Log overhead.",
+            "Soft delete",
+            "Update",
+            "Select"
+        ]
+    },
+    {
+        "q": "What is 'NOLOCK' side effect on Allocation Scan?",
+        "type": "mcq",
+        "o": [
+            "IAM scan ignores locks; might read page twice or miss page if page splits move it",
+            "Safe",
+            "Consistent",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'READPAST' hint?",
+        "type": "mcq",
+        "o": [
+            "Skips locked rows (Read Committed). Good for Queues.",
+            "Reads dirty",
+            "Waits",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "What is 'XLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces Exclusive Lock on read (holds till transaction end). Serializes access.",
+            "Shared",
+            "Update",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'UPDLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Takes Update Lock on read (Compatible with Share, blocks other Update). Prevents conversion deadlock.",
+            "Exclusive",
+            "Shared",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rowstore'?",
+        "type": "mcq",
+        "o": [
+            "Traditional storage format (Rows on pages). Good for OLTP/Random Access.",
+            "Columnstore",
+            "Text",
+            "Blob"
+        ]
+    },
+    {
+        "q": "What is 'Data Page' size?",
+        "type": "mcq",
+        "o": [
+            "8KB (8192 bytes)",
+            "4KB",
+            "16KB",
+            "64KB"
+        ]
+    },
+    {
+        "q": "What is 'Extent' size?",
+        "type": "mcq",
+        "o": [
+            "64KB (8 pages)",
+            "8KB",
+            "128KB",
+            "1MB"
+        ]
+    },
+    {
+        "q": "What is 'GAM' (Global Allocation Map)?",
+        "type": "mcq",
+        "o": [
+            "Page tracking allocated extents (1 bit per extent)",
+            "SGAM",
+            "PFS",
+            "IAM"
+        ]
+    },
+    {
+        "q": "What is 'SGAM' (Shared Global Allocation Map)?",
+        "type": "mcq",
+        "o": [
+            "Page tracking mixed extents with free pages",
+            "GAM",
+            "PFS",
+            "IAM"
+        ]
+    },
+    {
+        "q": "What is 'PFS' (Page Free Space)?",
+        "type": "mcq",
+        "o": [
+            "Page tracking heuristic free space (0%, 50%, 80%, 100%) and alloc status per page",
+            "GAM",
+            "SGAM",
+            "IAM"
+        ]
+    },
+    {
+        "q": "What is 'IAM' (Index Allocation Map)?",
+        "type": "mcq",
+        "o": [
+            "Page linking heap/index to its extents (Chain)",
+            "GAM",
+            "PFS",
+            "Start"
+        ]
+    },
+    {
+        "q": "What consists of 'Header' (Page)?",
+        "type": "mcq",
+        "o": [
+            "96 bytes (PageID, Type, Prev/Next Page Pointers, LSN, etc)",
+            "Data",
+            "Footer",
+            "Slot"
+        ]
+    },
+    {
+        "q": "What is 'Slot Array' (Page)?",
+        "type": "mcq",
+        "o": [
+            "Offset array at end of page pointing to start of each row (Reverse order)",
+            "Header",
+            "Body",
+            "LOB"
+        ]
+    },
+    {
+        "q": "What is 'Forwarded Record' (Heap)?",
+        "type": "mcq",
+        "o": [
+            "Row moved to new page (due to update), leaving pointer stub. Increases IO (2 reads).",
+            "Ghost",
+            "Index",
+            "Split"
+        ]
+    },
+    {
+        "q": "How to fix Forwarded Records?",
+        "type": "mcq",
+        "o": [
+            "Rebuild Table (ALTER TABLE REBUILD) or Create Clustered Index",
+            "Delete",
+            "Update",
+            "Shrink"
+        ]
+    },
+    {
+        "q": "What is 'Ghost Record' (Index)?",
+        "type": "mcq",
+        "o": [
+            "Logical delete. Row stays on page but marked ghost. Processed by Ghost Cleanup.",
+            "Forwarded",
+            "Stub",
+            "Deleted"
+        ]
+    },
+    {
+        "q": "What is 'Index Depth'?",
+        "type": "mcq",
+        "o": [
+            "Number of levels from Root to Leaf. Deep index = slower Seek.",
+            "Width",
+            "Size",
+            "Pages"
+        ]
+    },
+    {
+        "q": "Typical Index Depth?",
+        "type": "mcq",
+        "o": [
+            "3-5 levels (even for billions of rows). B-Trees are very flat.",
+            "100",
+            "1000",
+            "1"
+        ]
+    },
+    {
+        "q": "What is 'Intermediate Level'?",
+        "type": "mcq",
+        "o": [
+            "Pages between Root and Leaf containing guide pointers",
+            "Data pages",
+            "Log pages",
+            "Alloc pages"
+        ]
+    },
+    {
+        "q": "What is 'Uniquifier'?",
+        "type": "mcq",
+        "o": [
+            "4-byte integer added to Clustered Index Key if it's not unique (Internal)",
+            "GUID",
+            "ID",
+            "Hash"
+        ]
+    },
+    {
+        "q": "Why is Uniquifier bad?",
+        "type": "mcq",
+        "o": [
+            "Adds overhead to every non-clustered index row (which contains CI key)",
+            "Useful",
+            "Required",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'RID' (Row Identifier)?",
+        "type": "mcq",
+        "o": [
+            "FileID:PageID:SlotID (8 bytes). Pointer to row in Heap.",
+            "Key",
+            "Hash",
+            "Name"
+        ]
+    },
+    {
+        "q": "What does Non-Clustered Index point to?",
+        "type": "mcq",
+        "o": [
+            "If Table has CI -> Points to CI Key. If Heap -> Points to RID.",
+            "Always RID",
+            "Always Key",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What happens if CI Key changes?",
+        "type": "mcq",
+        "o": [
+            "All Non-Clustered Indexes must be updated (Expensive). CI Key should be static.",
+            "Nothing",
+            "Fast",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'Index Intersection'?",
+        "type": "mcq",
+        "o": [
+            "Plan using multiple NCI indexes and joining them (Hash Match) to cover query",
+            "Union",
+            "Scan",
+            "Seek"
+        ]
+    },
+    {
+        "q": "What is 'Tipping Point' (Optimizer)?",
+        "type": "mcq",
+        "o": [
+            "Threshold (~25-33% of pages) where optimizer switches from Index Seek to Table Scan",
+            "Crash point",
+            "Error point",
+            "End point"
+        ]
+    },
+    {
+        "q": "Why Scan instead of Seek above Tipping Point?",
+        "type": "mcq",
+        "o": [
+            "Random IO of Lookups becomes slower than Sequential IO of Scan",
+            "Optimizer bug",
+            "Space issue",
+            "Lock issue"
+        ]
+    },
+    {
+        "q": "How to force Seek over Tipping Point?",
+        "type": "mcq",
+        "o": [
+            "FORCESEEK hint (Use processing caution)",
+            "FORCESCAN",
+            "NOLOCK",
+            "INDEX hint"
+        ]
+    },
+    {
+        "q": "What is 'Join Hint'?",
+        "type": "mcq",
+        "o": [
+            "LOOP, HASH, MERGE, REMOTE",
+            "FAST, SLOW",
+            "INNER, OUTER",
+            "LEFT, RIGHT"
+        ]
+    },
+    {
+        "q": "What is 'Index Hint'?",
+        "type": "mcq",
+        "o": [
+            "WITH (INDEX(IndexName)) - Force using specific index",
+            "USE PLAN",
+            "FORCE ORDER",
+            "MAXDOP"
+        ]
+    },
+    {
+        "q": "What is 'Lock Escalation' threshold?",
+        "type": "mcq",
+        "o": [
+            "~5000 locks per instance. Escalates to Table Lock.",
+            "100",
+            "1 million",
+            "10"
+        ]
+    },
+    {
+        "q": "How to disable Lock Escalation?",
+        "type": "mcq",
+        "o": [
+            "ALTER TABLE SET (LOCK_ESCALATION = DISABLE)",
+            "Trace flag",
+            "Impossible",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Partition Level' Lock Escalation?",
+        "type": "mcq",
+        "o": [
+            "Escalates to Partition (HoBT) instead of Table level (Reduces blocking)",
+            "Row",
+            "Page",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Statistics Norecompute'?",
+        "type": "mcq",
+        "o": [
+            "Option ensuring update stats is not auto-triggered (Manual control)",
+            "Auto update",
+            "Force update",
+            "Delete stats"
+        ]
+    },
+    {
+        "q": "What is 'Sample' (Update Stats)?",
+        "type": "mcq",
+        "o": [
+            "Percentage of rows read to build histogram. FULL SCAN is 100%.",
+            "Table size",
+            "Row size",
+            "Log size"
+        ]
+    },
+    {
+        "q": "What is 'Persisted Sample Percent'?",
+        "type": "mcq",
+        "o": [
+            "SQL 2016+ feature fixing snapshot sample rate for future auto-updates",
+            "Variable",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Auto Update Stats Async'?",
+        "type": "mcq",
+        "o": [
+            "Update happens in background worker. Query doesn't wait (uses old stats).",
+            "Sync",
+            "Blocking",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Memory Grant Feedback' (Persistence)?",
+        "type": "mcq",
+        "o": [
+            "SQL 2022 writes feedback to Query Store (persists across restarts)",
+            "Memory only",
+            "Log only",
+            "Lost"
+        ]
+    },
+    {
+        "q": "What is 'DOP Feedback'?",
+        "type": "mcq",
+        "o": [
+            "IQP feature identifying if parallelism helps or hurts, adjusting MAXDOP per query",
+            "Static DOP",
+            "Manual DOP",
+            "Force 1"
+        ]
+    },
+    {
+        "q": "What is 'CE Feedback'?",
+        "type": "mcq",
+        "o": [
+            "IQP checking if Cardinality Estimation assumptions matches runtime, applying hints to fix",
+            "Stats update",
+            "Recompile",
+            "Index rebuild"
+        ]
+    },
+    {
+        "q": "What is 'Parameter Sensitive Plan Optimization' (PSP)?",
+        "type": "mcq",
+        "o": [
+            "SQL 2022 feature storing multiple plans for a single parameterized query based on parameter values",
+            "One plan only",
+            "Recompile always",
+            "Disable cache"
+        ]
+    },
+    {
+        "q": "What is 'Dispatcher' (PSP)?",
+        "type": "mcq",
+        "o": [
+            "Mechanism routing execution to correct plan variant based on incoming parameter cardinality",
+            "Router",
+            "Load balancer",
+            "Listener"
+        ]
+    },
+    {
+        "q": "What is 'Query Store Hint'?",
+        "type": "mcq",
+        "o": [
+            "Ability to apply hints (recompile, maxdop, etc) to a query via Query Store without changing code",
+            "Code change",
+            "Plan guide",
+            "Rule"
+        ]
+    },
+    {
+        "q": "What is 'Degree of Parallelism Feedback'?",
+        "type": "mcq",
+        "o": [
+            "SQL 2022 feature detecting inefficient parallelism and adjusting MAXDOP for future runs",
+            "Manual",
+            "Static",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality Estimation Feedback'?",
+        "type": "mcq",
+        "o": [
+            "Feedback loop identifying model assumptions errors and applying hints (ASSUME_MIN_SELECTIVITY_FOR_FILTER)",
+            "Stats update",
+            "Index fix",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Optimized Plan Forcing'?",
+        "type": "mcq",
+        "o": [
+            "Reduces compilation time for forced plans by storing a compilation replay script",
+            "Slow force",
+            "Hard force",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Managed Instance' (MI)?",
+        "type": "mcq",
+        "o": [
+            "Azure SQL PaaS offering with near 100% surface area compatibility with on-prem SQL (Agent, CLR, Cross-DB)",
+            "Single DB",
+            "Elastic pool",
+            "VM"
+        ]
+    },
+    {
+        "q": "What is 'MI' IO limitations?",
+        "type": "mcq",
+        "o": [
+            "Log throughput limited by file size and tier (General Purpose vs Business Critical)",
+            "Unlimited",
+            "Network only",
+            "CPU only"
+        ]
+    },
+    {
+        "q": "What is 'General Purpose' (MI/Azure SQL)?",
+        "type": "mcq",
+        "o": [
+            "Uses remote storage (Azure Premium Storage) for data/log. Higher latency than Business Critical.",
+            "Local SSD",
+            "Fastest",
+            "No limit"
+        ]
+    },
+    {
+        "q": "What is 'Business Critical' (MI/Azure SQL)?",
+        "type": "mcq",
+        "o": [
+            "Uses local SSD storage (Fast IO) and AlwaysOn Availability Group for HA. Read Scale-Out included.",
+            "Remote storage",
+            "Slowest",
+            "Cheapest"
+        ]
+    },
+    {
+        "q": "What is 'Data Virtualization'?",
+        "type": "mcq",
+        "o": [
+            "Querying external data (Parquet, CSV, Delta) in Data Lake using T-SQL (PolyBase) without moving it",
+            "Importing",
+            "ETL",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'PolyBase'?",
+        "type": "mcq",
+        "o": [
+            "Feature allowing SQL to query Hadoop, Blob Storage, Oracle, etc. via External Tables",
+            "Linked server",
+            "Replication",
+            "Mirror"
+        ]
+    },
+    {
+        "q": "What is 'CETAS'?",
+        "type": "mcq",
+        "o": [
+            "CREATE EXTERNAL TABLE AS SELECT. Exports data from SQL to Data Lake (Parquet).",
+            "Insert",
+            "Select",
+            "Update"
+        ]
+    },
+    {
+        "q": "What is 'Soft NUMA' configuration?",
+        "type": "mcq",
+        "o": [
+            "Automatically partitioning CPUs into logical NUMA nodes to reduce scheduler contention",
+            "Hard NUMA",
+            "Hardware",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Scan' (Buffer Pool)?",
+        "type": "mcq",
+        "o": [
+            "Performance improvement for scanning large buffer pools (e.g. 1TB+) using multiple cores",
+            "Single core",
+            "Slow scan",
+            "Serial"
+        ]
+    },
+    {
+        "q": "What is 'DiskSpd'?",
+        "type": "mcq",
+        "o": [
+            "Microsoft tool to stress test storage subsystem IOPS/Latency capability",
+            "Game",
+            "Editor",
+            "Driver"
+        ]
+    },
+    {
+        "q": "What is 'RAMMap'?",
+        "type": "mcq",
+        "o": [
+            "Sysinternals tool to analyze physical memory usage (Driver locking, etc)",
+            "Map tool",
+            "Disk tool",
+            "Net tool"
+        ]
+    },
+    {
+        "q": "What is 'VMMap'?",
+        "type": "mcq",
+        "o": [
+            "Sysinternals tool to analyze virtual address space usage (VAS) of a process",
+            "RAM tool",
+            "CPU tool",
+            "IO tool"
+        ]
+    },
+    {
+        "q": "What is 'PerfMon' (Performance Monitor)?",
+        "type": "mcq",
+        "o": [
+            "Windows tool for real-time and historical analysis of OS counters (CPU, Memory, Disk)",
+            "SQL tool",
+            "Web tool",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'PAL' (Performance Analysis of Logs)?",
+        "type": "mcq",
+        "o": [
+            "Tool to analyze PerfMon logs and generate HTML report with thresholds/warnings",
+            "Manual",
+            "Trace",
+            "Event"
+        ]
+    },
+    {
+        "q": "What is 'T-SQL Anti-Pattern'?",
+        "type": "mcq",
+        "o": [
+            "Common bad coding practices destroying performance (e.g. Functions in WHERE, Cursors)",
+            "Good code",
+            "Best practice",
+            "Logic"
+        ]
+    },
+    {
+        "q": "What is 'Catch-All Query' (Kitchen Sink)?",
+        "type": "mcq",
+        "o": [
+            "WHERE (@Name IS NULL OR Name = @Name) AND ... Causes plan cache issues / bad scans.",
+            "Optimized",
+            "Fast",
+            "Simple"
+        ]
+    },
+    {
+        "q": "Solution for Catch-All Query?",
+        "type": "mcq",
+        "o": [
+            "Dynamic SQL (Construct query string) or OPTION (RECOMPILE)",
+            "Cursors",
+            "Views",
+            "Triggers"
+        ]
+    },
+    {
+        "q": "What is 'N+1 Select Problem'?",
+        "type": "mcq",
+        "o": [
+            "Executing 1 query for parent, then N queries for children (ORM issue). Use JOIN instead.",
+            "1 query",
+            "Optimized",
+            "Batch"
+        ]
+    },
+    {
+        "q": "What is 'Implicit Transaction' risk?",
+        "type": "mcq",
+        "o": [
+            "Leaving transaction open (blocking resources/log) because Commit was forgotten",
+            "Fast",
+            "Safe",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'GUID' as Primary Key performance?",
+        "type": "mcq",
+        "o": [
+            "Random GUID causes fragmentation (Page Splits). Sequential GUID (newsequentialid) is better.",
+            "Fastest",
+            "Best",
+            "Small"
+        ]
+    },
+    {
+        "q": "What is 'Large Object' (LOB) performance?",
+        "type": "mcq",
+        "o": [
+            "Stored off-row. Requires extra pointer chase. Reduces rows per page in buffer.",
+            "Fast",
+            "Inline",
+            "Small"
+        ]
+    },
+    {
+        "q": "What is 'Varchar(MAX)' vs 'Varchar(N)'?",
+        "type": "mcq",
+        "o": [
+            "Use N if possible. MAX can spill to off-row storage and limits some index operations.",
+            "MAX best",
+            "No diff",
+            "N bad"
+        ]
+    },
+    {
+        "q": "What is 'Forwarded Fetch'?",
+        "type": "mcq",
+        "o": [
+            "Count of rows fetched through forwarded record pointer (Heap). High count = Drag.",
+            "Fast fetch",
+            "Index fetch",
+            "Seek"
+        ]
+    },
+    {
+        "q": "What is 'Spill Level'?",
+        "type": "mcq",
+        "o": [
+            "Level 1 (warning), Level 2 (error). Information in Extended Events.",
+            "Log level",
+            "Error level",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'Execution Context'?",
+        "type": "mcq",
+        "o": [
+            "Data structure holding state for a specific execution of a plan (Parameter values, user)",
+            "Plan",
+            "Query",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'Compiling' vs 'Executing'?",
+        "type": "mcq",
+        "o": [
+            "Compiling = Generating Plan (CPU intensive). Executing = Running Plan.",
+            "Same",
+            "Executing generates",
+            "Compiling runs"
+        ]
+    },
+    {
+        "q": "What is 'Statement Recompile'?",
+        "type": "mcq",
+        "o": [
+            "Only the specific statement in a sproc recompiles (due to temp table change), not entire sproc. (SQL 2005+)",
+            "Full sproc",
+            "Batch",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Engine' vs 'Client' processing?",
+        "type": "mcq",
+        "o": [
+            "Engine is set-based/relational. Client is procedural/display. Don't format dates/sort in UI if DB can do it (or vice versa depending on load).",
+            "Same",
+            "Client is db",
+            "Engine is ui"
+        ]
+    },
+    {
+        "q": "What is 'Row Count Spool'?",
+        "type": "mcq",
+        "o": [
+            "Spool that checks existence (If exists). Optimized scan.",
+            "Table spool",
+            "Lazy spool",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Distinct Sort'?",
+        "type": "mcq",
+        "o": [
+            "Sort operation removing duplicates (DISTINCT)",
+            "Order by",
+            "Group by",
+            "Index"
+        ]
+    },
+    {
+        "q": "What is 'UDDT' (User Defined Data Type)?",
+        "type": "mcq",
+        "o": [
+            "Alias for system type. Can complicate schema changes (binding).",
+            "Performance boost",
+            "New type",
+            "Class"
+        ]
+    },
+    {
+        "q": "What is 'Schema Binding'?",
+        "type": "mcq",
+        "o": [
+            "Option preventing underlying table changes if a View/Function depends on it",
+            "Locking",
+            "Blocking",
+            "Indexing"
+        ]
+    },
+    {
+        "q": "Is Schema Binding required for Indexed Views?",
+        "type": "mcq",
+        "o": [
+            "Yes. Ensures determinism.",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Determinism'?",
+        "type": "mcq",
+        "o": [
+            "Function always returns same result for same input (e.g. ABS). Required for Indexing.",
+            "Randomness",
+            "Time based",
+            "Variable"
+        ]
+    },
+    {
+        "q": "Is 'GETDATE()' deterministic?",
+        "type": "mcq",
+        "o": [
+            "No. Returns different value every call. Cannot be indexed.",
+            "Yes",
+            "Maybe",
+            "Usually"
+        ]
+    },
+    {
+        "q": "What is 'Foreign Key' performance benefit?",
+        "type": "mcq",
+        "o": [
+            "Optimizer uses shared trust to simplify joins (removes redundant joins if referential integrity guaranteed)",
+            "Constraint only",
+            "Slows read",
+            "None"
+        ]
+    },
+    {
+        "q": "FK 'No Check' status?",
+        "type": "mcq",
+        "o": [
+            "Trusted = False. Optimizer ignores it. ALTER TABLE ... WITH CHECK to fix.",
+            "Trusted",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'Cascade Delete' risk?",
+        "type": "mcq",
+        "o": [
+            "Deleting one parent row can trigger massive chain of child deletes (Long transaction / Blocking)",
+            "Fast",
+            "Safe",
+            "Clean"
+        ]
+    },
+    {
+        "q": "What is 'Result Set' size?",
+        "type": "mcq",
+        "o": [
+            "Don't return 1 million rows to UI. Implement Paging (OFFSET/FETCH) in DB.",
+            "Return all",
+            "Filter in UI",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'OFFSET / FETCH'?",
+        "type": "mcq",
+        "o": [
+            "Standard SQL paging syntax (ORDER BY ... OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY)",
+            "Top",
+            "Limit",
+            "Row number"
+        ]
+    },
+    {
+        "q": "What is 'Keyset Pagination'?",
+        "type": "mcq",
+        "o": [
+            "Paging using WHERE ID > LastID (Faster than OFFSET which must scan/skip rows)",
+            "Offset",
+            "Slow paging",
+            "Cursor"
+        ]
+    },
+    {
+        "q": "What is 'Batch Delete' strategy?",
+        "type": "mcq",
+        "o": [
+            "Delete in chunks (TOP 1000) inside loop to avoid log growth and lock escalation",
+            "Delete all",
+            "Truncate",
+            "Drop"
+        ]
+    },
+    {
+        "q": "What is 'Truncate Table'?",
+        "type": "mcq",
+        "o": [
+            "DDL operation deallocating pages (Fast). Resets Identity. Minimal logging.",
+            "Delete",
+            "Drop",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Can Truncate be rolled back?",
+        "type": "mcq",
+        "o": [
+            "Yes, if wrapped in a transaction.",
+            "No",
+            "Never",
+            "Only in Dev"
+        ]
+    },
+    {
+        "q": "What is 'Trace Flag 3226'?",
+        "type": "mcq",
+        "o": [
+            "Suppresses successful backup messages in Error Log (Reduces noise)",
+            "Debug",
+            "Verbose",
+            "Error only"
+        ]
+    },
+    {
+        "q": "What is 'Trace Flag 1222'?",
+        "type": "mcq",
+        "o": [
+            "Captures Deadlock Graph to Error Log (Classic method)",
+            "Lock info",
+            "Block info",
+            "Wait info"
+        ]
+    },
+    {
+        "q": "What is 'DBCC SQLPERF(LOGSPACE)'?",
+        "type": "mcq",
+        "o": [
+            "Shows log size and percent used for all databases",
+            "Data size",
+            "Memory",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'Filegroup Restore'?",
+        "type": "mcq",
+        "o": [
+            "Restoring only specific filegroups (Read-Write) to get DB online fast (Piecemeal)",
+            "Full restore",
+            "Page restore",
+            "Row restore"
+        ]
+    },
+    {
+        "q": "What is 'Piecemeal Restore'?",
+        "type": "mcq",
+        "o": [
+            "Sequence of restoring Primary FG, then others. DB is accessible (partially) earlier.",
+            "Full",
+            "Offline",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Mirrored Backup'?",
+        "type": "mcq",
+        "o": [
+            "Writing backup to multiple destinations simultaneously (Redundancy). FORMAT required.",
+            "Copy",
+            "Mirroring",
+            "Replica"
+        ]
+    },
+    {
+        "q": "What is 'Split Backup' (Striping)?",
+        "type": "mcq",
+        "o": [
+            "Writing single backup across multiple files (Disk 1, Disk 2). Increases Throughput.",
+            "Mirror",
+            "Copy",
+            "Raid"
+        ]
+    },
+    {
+        "q": "What is 'Smart Log Backup'?",
+        "type": "mcq",
+        "o": [
+            "Backing up Log only when used % is high or time has passed (Dynamic scheduling)",
+            "Static",
+            "Hourly",
+            "Daily"
+        ]
+    },
+    {
+        "q": "What is 'Checksum' (Backup)?",
+        "type": "mcq",
+        "o": [
+            "Validates page checksums during backup. Fails if corruption detected.",
+            "Faster",
+            "Skip",
+            "Encrypt"
+        ]
+    },
+    {
+        "q": "What is 'Continue After Error' (Backup)?",
+        "type": "mcq",
+        "o": [
+            "Forces backup to finish even if corruption found (Salvage data)",
+            "Stop",
+            "Fail",
+            "Retry"
+        ]
+    },
+    {
+        "q": "What is 'Tail Log Backup'?",
+        "type": "mcq",
+        "o": [
+            "Final log backup taken (usually NORECOVERY) before restore to capture up-to-the-second data",
+            "Full",
+            "Diff",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Copy-Only Backup'?",
+        "type": "mcq",
+        "o": [
+            "Backup that doesn't break the LSN chain (doesn't affect diff base). Good for ad-hoc.",
+            "Full",
+            "Standard",
+            "Chain break"
+        ]
+    },
+    {
+        "q": "What is 'Differential Backup'?",
+        "type": "mcq",
+        "o": [
+            "Backs up all extents changed since last Full Backup",
+            "Since last Diff",
+            "Log",
+            "File"
+        ]
+    },
+    {
+        "q": "Diff Backup size over time?",
+        "type": "mcq",
+        "o": [
+            "Grows until next Full Backup resets the base",
+            "Static",
+            "Shrinks",
+            "Resets daily"
+        ]
+    },
+    {
+        "q": "What is 'Bulk-Logged Recovery Model'?",
+        "type": "mcq",
+        "o": [
+            "Minimally logs bulk ops (Index Rebuild, Bulk Insert). Faster. Point-in-time recovery risk.",
+            "Full",
+            "Simple",
+            "None"
+        ]
+    },
+    {
+        "q": "Point-in-time recovery in Bulk-Logged?",
+        "type": "mcq",
+        "o": [
+            "Not possible if log contains bulk changes (Can only restore to end of log backup)",
+            "Possible",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Simple Recovery Model'?",
+        "type": "mcq",
+        "o": [
+            "Auto-truncates log on checkpoint. No log backups. No Point-in-time recovery.",
+            "Full",
+            "Bulk",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Full Recovery Model'?",
+        "type": "mcq",
+        "o": [
+            "Log grows until Log Backup. Complete Point-in-time recovery supported.",
+            "Simple",
+            "Fast",
+            "No log"
+        ]
+    },
+    {
+        "q": "What is 'Log Truncation'?",
+        "type": "mcq",
+        "o": [
+            "Marking VLF as inactive/reusable. Does NOT shrink file size.",
+            "Shrink",
+            "Delete",
+            "Drop"
+        ]
+    },
+    {
+        "q": "What is 'Log Shrink'?",
+        "type": "mcq",
+        "o": [
+            "Physically reducing file size (returning space to OS). Causes fragmentation. Avoid Auto-Shrink.",
+            "Truncation",
+            "Checkpoint",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'VLF' (Virtual Log File)?",
+        "type": "mcq",
+        "o": [
+            "Internal unit of the Transaction Log file. Too many VLFs = Slow recovery/start-up.",
+            "Page",
+            "Extent",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is 'High VLF Count' fix?",
+        "type": "mcq",
+        "o": [
+            "Shrink log file, then grow it in large chunks (e.g. 8GB) to create fewer, larger VLFs",
+            "Add file",
+            "Delete file",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Delayed Durability'?",
+        "type": "mcq",
+        "o": [
+            "Commit returns before log flush (Async). Loss of data possible on crash. High throughput.",
+            "Full durability",
+            "Sync",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Hybrid Buffer Pool' requirement?",
+        "type": "mcq",
+        "o": [
+            "PMEM (DAX) hardware mapped to OS",
+            "SSD",
+            "HDD",
+            "USB"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Pool Parallel Scan' threshold?",
+        "type": "mcq",
+        "o": [
+            "Depends on machine size (Large RAM). Default is serial on small machines.",
+            "Always parallel",
+            "Always serial",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Soft NUMA' benefit?",
+        "type": "mcq",
+        "o": [
+            "Better scaling on high core count CPUs (prevents single spinlock bottlenecks)",
+            "Save RAM",
+            "Disk speed",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Threadpool Starvation' sign?",
+        "type": "mcq",
+        "o": [
+            "Connection Timeouts, High THREADPOOL waits, Unresponsive instance",
+            "Slow disk",
+            "Low CPU",
+            "Fast query"
+        ]
+    },
+    {
+        "q": "Fix for Threadpool Starvation?",
+        "type": "mcq",
+        "o": [
+            "Reduce blocking/execution time. Increasing Max Worker Threads is usually a band-aid.",
+            "Add CPU",
+            "Add RAM",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'DAC' (Dedicated Admin Connection)?",
+        "type": "mcq",
+        "o": [
+            "Emergency connection (ADMIN:ServerName) reserved for sysadmin when server is unresponsive",
+            "User conn",
+            "Web conn",
+            "Slow conn"
+        ]
+    },
+    {
+        "q": "How many DAC connections allowed?",
+        "type": "mcq",
+        "o": [
+            "Exactly one per instance",
+            "Unlimited",
+            "10",
+            "100"
+        ]
+    },
+    {
+        "q": "What is 'Resource Governor' Classifier Function?",
+        "type": "mcq",
+        "o": [
+            "UDF that returns the Workload Group name for a session",
+            "Table",
+            "View",
+            "Proc"
+        ]
+    },
+    {
+        "q": "What is 'Pool' vs 'Group' (Resource Governor)?",
+        "type": "mcq",
+        "o": [
+            "Wait stats/Limits are on Pool. Requests are in Groups. Groups belong to Pools.",
+            "Same",
+            "Group has limits",
+            "Pool has requests"
+        ]
+    },
+    {
+        "q": "What is 'CAP_CPU_PERCENT'?",
+        "type": "mcq",
+        "o": [
+            "Hard cap on CPU usage for a RG Pool (Throttles performance)",
+            "Soft cap",
+            "Memory cap",
+            "Disk cap"
+        ]
+    },
+    {
+        "q": "What is 'MIN_CPU_PERCENT'?",
+        "type": "mcq",
+        "o": [
+            "Guaranteed CPU (Reservation) for a pool when contention exists",
+            "Max cpu",
+            "Limit",
+            "Cap"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' Regressed Query?",
+        "type": "mcq",
+        "o": [
+            "Query where recent average duration > historical average duration",
+            "Faster query",
+            "New query",
+            "Fixed query"
+        ]
+    },
+    {
+        "q": "What is 'Force Failover' (Manual)?",
+        "type": "mcq",
+        "o": [
+            "Initiating failover in AG/FCI to test HA or patch primary",
+            "Crash",
+            "Stop",
+            "Break"
+        ]
+    },
+    {
+        "q": "What is 'Automatic Seeding' (AG)?",
+        "type": "mcq",
+        "o": [
+            "Mechanism to automatically initialize secondary replica without manual backup/restore",
+            "Manual",
+            "Log shipping",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Read-Only Routing'?",
+        "type": "mcq",
+        "o": [
+            "Directing read-intent connections to a secondary replica automatically",
+            "Write routing",
+            "Load balancer",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Listener' (AG)?",
+        "type": "mcq",
+        "o": [
+            "Virtual Network Name (VNN) client connects to. Routes to Primary.",
+            "Node",
+            "Cluster",
+            "IP"
+        ]
+    },
+    {
+        "q": "What is 'Witness' (Mirroring/Quorum)?",
+        "type": "mcq",
+        "o": [
+            "3rd instance observing status to enable automatic failover (Tie-breaker)",
+            "Viewer",
+            "Logger",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'Quorum'?",
+        "type": "mcq",
+        "o": [
+            "Voting mechanism ensures cluster typically requires majority (N/2 + 1) to stay up",
+            "Solo",
+            "All",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Quorum'?",
+        "type": "mcq",
+        "o": [
+            "Cluster adjusts vote weights dynamically as nodes drop to keep surviving nodes running",
+            "Static",
+            "Fixed",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Cloud Witness'?",
+        "type": "mcq",
+        "o": [
+            "Using Azure Blob Storage as a Witness vote (Cheap, no VM needed)",
+            "Disk witness",
+            "File share",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Extended Stats'?",
+        "type": "mcq",
+        "o": [
+            "Stats objects created on multiple columns understanding correlation (Fixes 'Assumption of Independence')",
+            "Single col",
+            "Index stats",
+            "Basic"
+        ]
+    },
+    {
+        "q": "When to use Extended Stats?",
+        "type": "mcq",
+        "o": [
+            "When columns are related (City/State, Make/Model) but not in same index",
+            "Always",
+            "Never",
+            "Randomly"
+        ]
+    },
+    {
+        "q": "What is 'Adaptive Join' threshold?",
+        "type": "mcq",
+        "o": [
+            "Row count threshold deciding switch between Nested Loop and Hash Join",
+            "Time",
+            "CPU",
+            "Memory"
+        ]
+    },
+    {
+        "q": "What is 'Batch Mode on Rowstore'?",
+        "type": "mcq",
+        "o": [
+            "SQL 2019 feature allowing Batch Mode (Vector) processing on standard B-Trees (No Columnstore needed)",
+            "Old",
+            "Slow",
+            "Standard"
+        ]
+    },
+    {
+        "q": "Benefit of Batch Mode on Rowstore?",
+        "type": "mcq",
+        "o": [
+            "Significant CPU reduction for Analytical queries on OLTP schema",
+            "Writes",
+            "Inserts",
+            "Single lookup"
+        ]
+    },
+    {
+        "q": "What is 'Compatibility Level'?",
+        "type": "mcq",
+        "o": [
+            "DB setting dictating Optimizer behavior and T-SQL features (e.g. 150 = SQL 2019)",
+            "Version",
+            "Edition",
+            "Patch"
+        ]
+    },
+    {
+        "q": "Best practice for Upgrade and Comp Level?",
+        "type": "mcq",
+        "o": [
+            "Keep old Comp Level after upgrade. Validate. Enable Query Store. Raise Level. Check Regressions.",
+            "Raise immediately",
+            "Never raise",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Legacy Cardinality Estimation' hint?",
+        "type": "mcq",
+        "o": [
+            "QUERYTRACEON 9481 (Forces Old CE) or USE HINT 'FORCE_LEGACY_CARDINALITY_ESTIMATION'",
+            "New CE",
+            "Default",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'MAXDOP 1' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces query to run serially (No parallelism). Fixes CXPACKET issues (Band-aid).",
+            "Parallel",
+            "Fast",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'Parameter Sniffing' fix (Code)?",
+        "type": "mcq",
+        "o": [
+            "Use local variables (prevents sniffing, uses average stats) or OPTION(RECOMPILE)",
+            "Global vars",
+            "Static",
+            "Hardcode"
+        ]
+    },
+    {
+        "q": "Local Variables impact on plan?",
+        "type": "mcq",
+        "o": [
+            "Optimizer uses 'Density Vector' (Average) instead of Histogram (Specific). 'Blind' guess.",
+            "Detailed",
+            "Better",
+            "Specific"
+        ]
+    },
+    {
+        "q": "What is 'OPTIMIZE FOR UNKNOWN'?",
+        "type": "mcq",
+        "o": [
+            "Hint telling optimizer to use average distribution (same as local var trick)",
+            "Specific",
+            "Hard value",
+            "Best"
+        ]
+    },
+    {
+        "q": "What is 'OPTIMIZE FOR (@val = 10)'?",
+        "type": "mcq",
+        "o": [
+            "Hint formatting plan specifically for value 10, regardless of actual input",
+            "Generic",
+            "Unknown",
+            "Average"
+        ]
+    },
+    {
+        "q": "What is 'Plan Guide' types?",
+        "type": "mcq",
+        "o": [
+            "OBJECT (Stored Proc), SQL (Stand-alone), TEMPLATE (Parameterization)",
+            "File",
+            "Table",
+            "Index"
+        ]
+    }
+]

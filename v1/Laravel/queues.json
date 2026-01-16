@@ -1,0 +1,3426 @@
+[
+    {
+        "q": "What is the primary purpose of Laravel Queues?",
+        "type": "mcq",
+        "o": [
+            "To defer time-consuming tasks (like sending emails) to a later time, speeding up web requests.",
+            "To schedule tasks (CRON)",
+            "To cache database queries",
+            "To manage user sessions"
+        ]
+    },
+    {
+        "q": "Which queue driver allows immediate execution for local development?",
+        "type": "mcq",
+        "o": [
+            "sync",
+            "database",
+            "redis",
+            "sqs"
+        ]
+    },
+    {
+        "q": "Command to generate a new Job class?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:job ProcessPodcast",
+            "php artisan make:queue ProcessPodcast",
+            "php artisan create:job ProcessPodcast",
+            "php artisan job:make ProcessPodcast"
+        ]
+    },
+    {
+        "q": "Where are Job classes stored by default?",
+        "type": "mcq",
+        "o": [
+            "app/Jobs",
+            "app/Queues",
+            "app/Tasks",
+            "app/Http/Jobs"
+        ]
+    },
+    {
+        "q": "Which interface marks a class as a queueable job?",
+        "type": "mcq",
+        "o": [
+            "ShouldQueue",
+            "IsQueueable",
+            "QueueableJob",
+            "MustQueue"
+        ]
+    },
+    {
+        "q": "Method to dispatch a job to the queue?",
+        "type": "mcq",
+        "o": [
+            "ProcessPodcast::dispatch($podcast);",
+            "ProcessPodcast::run($podcast);",
+            "Queue::add(new ProcessPodcast($podcast));",
+            "Dispatch::job(new ProcessPodcast($podcast));"
+        ]
+    },
+    {
+        "q": "What explains the `Dispatchable` trait in a Job?",
+        "type": "mcq",
+        "o": [
+            "Provides the static `dispatch` method to easily push the job to the queue.",
+            "Handles serialization",
+            "Interacts with the queue connection",
+            "Marks the job as executable"
+        ]
+    },
+    {
+        "q": "What explains the `InteractsWithQueue` trait?",
+        "type": "mcq",
+        "o": [
+            "Provides methods to control the job within the queue (attempts, release, fail).",
+            "Serializes the job",
+            "Dispatches the job",
+            "Batches the job"
+        ]
+    },
+    {
+        "q": "What explains the `SerializesModels` trait?",
+        "type": "mcq",
+        "o": [
+            "Gracefully serializes Eloquent models (storing ID) and retrieves them when job processes.",
+            "Serializes to JSON",
+            "Serializes to XML",
+            "Encrypts the data"
+        ]
+    },
+    {
+        "q": "Which method contains the logic for processing the job?",
+        "type": "mcq",
+        "o": [
+            "handle()",
+            "process()",
+            "run()",
+            "execute()"
+        ]
+    },
+    {
+        "q": "Command to start a queue worker?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:work",
+            "php artisan queue:start",
+            "php artisan queue:run",
+            "php artisan run:queue"
+        ]
+    },
+    {
+        "q": "What is the `queue:listen` command?",
+        "type": "mcq",
+        "o": [
+            "Runs a worker that reboots the framework for every job (useful for dev code changes) but uses more memory/CPU.",
+            "Listens for new queues",
+            "Debug mode only",
+            "Same as queue:work"
+        ]
+    },
+    {
+        "q": "Where is the default queue configuration file?",
+        "type": "mcq",
+        "o": [
+            "config/queue.php",
+            "config/jobs.php",
+            "config/workers.php",
+            "config/services.php"
+        ]
+    },
+    {
+        "q": "Which environment variable sets the default queue connection?",
+        "type": "mcq",
+        "o": [
+            "QUEUE_CONNECTION",
+            "QUEUE_DRIVER",
+            "DEFAULT_QUEUE",
+            "QUEUE_TYPE"
+        ]
+    },
+    {
+        "q": "Requirement for `database` queue driver?",
+        "type": "mcq",
+        "o": [
+            "A database table (usually `jobs`) created via `queue:table` migration.",
+            "Redis server",
+            "Beanstalkd server",
+            "No requirements"
+        ]
+    },
+    {
+        "q": "Which command creates the migration for the `jobs` table?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:table",
+            "php artisan make:queue-table",
+            "php artisan queue:migration",
+            "php artisan db:queue"
+        ]
+    },
+    {
+        "q": "Difference between `dispatch` and `dispatchSync`?",
+        "type": "mcq",
+        "o": [
+            "Sync runs immediately in current process (no queue). Dispatch pushes to queue.",
+            "No difference",
+            "Sync is for database only",
+            "Dispatch is deprecated"
+        ]
+    },
+    {
+        "q": "How to specify a specific queue for a job?",
+        "type": "mcq",
+        "o": [
+            "Job::dispatch()->onQueue('emails');",
+            "Job::dispatch()->queue('emails');",
+            "Job::dispatch()->to('emails');",
+            "Job::dispatch()->in('emails');"
+        ]
+    },
+    {
+        "q": "How to delay a job execution?",
+        "type": "mcq",
+        "o": [
+            "Job::dispatch()->delay(now()->addMinutes(10));",
+            "Job::dispatch()->wait(10);",
+            "Job::dispatch()->later(10);",
+            "Job::dispatch()->sleep(10);"
+        ]
+    },
+    {
+        "q": "Command to process jobs from specific queues with priority?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:work --queue=high,default",
+            "php artisan queue:work --priority=high,default",
+            "php artisan queue:work --order=high,default",
+            "php artisan queue:process high default"
+        ]
+    },
+    {
+        "q": "What happens if a job fails?",
+        "type": "mcq",
+        "o": [
+            "It is moved to `failed_jobs` table (if configured) or discarded depending on tries.",
+            "It is deleted",
+            "It stops the worker",
+            "It shuts down app"
+        ]
+    },
+    {
+        "q": "Command to see failed jobs?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:failed",
+            "php artisan jobs:failed",
+            "php artisan queue:errors",
+            "php artisan queue:list-failed"
+        ]
+    },
+    {
+        "q": "Command to retry a specific failed job ID?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:retry 5",
+            "php artisan job:retry 5",
+            "php artisan retry:queue 5",
+            "php artisan queue:redo 5"
+        ]
+    },
+    {
+        "q": "Command to retry ALL failed jobs?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:retry all",
+            "php artisan queue:retry --all",
+            "php artisan queue:retry-all",
+            "php artisan retry:all"
+        ]
+    },
+    {
+        "q": "Command to delete all failed jobs?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:flush",
+            "php artisan queue:clear",
+            "php artisan queue:empty",
+            "php artisan clean:queue"
+        ]
+    },
+    {
+        "q": "Command to create the `failed_jobs` table migration?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:failed-table",
+            "php artisan make:failed-table",
+            "php artisan queue:failures",
+            "php artisan db:failed-jobs"
+        ]
+    },
+    {
+        "q": "How to restart queue workers gracefully (e.g. after deployment)?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:restart",
+            "php artisan queue:stop",
+            "php artisan queue:reload",
+            "Kill process ID"
+        ]
+    },
+    {
+        "q": "Flag to specify maximum attempts for a job via command line?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:work --tries=3",
+            "php artisan queue:work --attempts=3",
+            "php artisan queue:work --max=3",
+            "php artisan queue:work --limit=3"
+        ]
+    },
+    {
+        "q": "Flag to specify timeout for a job (execution time)?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:work --timeout=30",
+            "php artisan queue:work --time=30",
+            "php artisan queue:work --max-time=30",
+            "php artisan queue:work --duration=30"
+        ]
+    },
+    {
+        "q": "Property to set tries directly on Job class?",
+        "type": "mcq",
+        "o": [
+            "public $tries = 3;",
+            "public $attempts = 3;",
+            "public $retries = 3;",
+            "protected $maxTries = 3;"
+        ]
+    },
+    {
+        "q": "Property to set timeout directly on Job class?",
+        "type": "mcq",
+        "o": [
+            "public $timeout = 120;",
+            "public $time = 120;",
+            "protected $timeoutSeconds = 120;",
+            "public $maxTime = 120;"
+        ]
+    },
+    {
+        "q": "Method to retry the job indefinitely until a time?",
+        "type": "mcq",
+        "o": [
+            "public function retryUntil() { return now()->addDay(); }",
+            "public $retryUntil = 'tomorrow';",
+            "public function timeoutAt()",
+            "public $expire = 'tomorrow';"
+        ]
+    },
+    {
+        "q": "Method to calculate retry backoff strategy?",
+        "type": "mcq",
+        "o": [
+            "public function backoff() { return [1, 5, 10]; }",
+            "public function delay()",
+            "public function wait()",
+            "public function strategy()"
+        ]
+    },
+    {
+        "q": "Property to delete job if serialized models are missing?",
+        "type": "mcq",
+        "o": [
+            "public $deleteWhenMissingModels = true;",
+            "public $failOnMissingModels = true;",
+            "public $ignoreMissingModels = true;",
+            "public $skipMissingModels = true;"
+        ]
+    },
+    {
+        "q": "What is `release()` used for inside a job?",
+        "type": "mcq",
+        "o": [
+            "Releases the job back to the queue (to be retried later).",
+            "Deletes the job",
+            "Fails the job",
+            "Finishes the job"
+        ]
+    },
+    {
+        "q": "How to release a job for 10 seconds?",
+        "type": "mcq",
+        "o": [
+            "$this->release(10);",
+            "$this->delay(10);",
+            "$this->wait(10);",
+            "$this->retry(10);"
+        ]
+    },
+    {
+        "q": "What is `fail()` used for inside a job?",
+        "type": "mcq",
+        "o": [
+            "Manually fails the job, moving it to failed jobs (if configured).",
+            "Deletes the job",
+            "Releases the job",
+            "Stops the worker"
+        ]
+    },
+    {
+        "q": "Event fired before job is processed?",
+        "type": "mcq",
+        "o": [
+            "JobProcessing",
+            "JobStarting",
+            "JobBefore",
+            "QueueProcessing"
+        ]
+    },
+    {
+        "q": "Event fired after job processed successfully?",
+        "type": "mcq",
+        "o": [
+            "JobProcessed",
+            "JobFinished",
+            "JobDone",
+            "QueueProcessed"
+        ]
+    },
+    {
+        "q": "How to dispatch a chain of jobs?",
+        "type": "mcq",
+        "o": [
+            "Bus::chain([new Job1, new Job2])->dispatch();",
+            "Job1::chain([new Job2]);",
+            "Queue::chain([new Job1, new Job2]);",
+            "Dispatcher::chain([new Job1, new Job2]);"
+        ]
+    },
+    {
+        "q": "What happens if a job in a chain fails?",
+        "type": "mcq",
+        "o": [
+            "The rest of the chain is not run.",
+            "The rest run anyway",
+            "The chain restarts",
+            "The chain pauses"
+        ]
+    },
+    {
+        "q": "Trait to verify uniqueness of a job on execution?",
+        "type": "mcq",
+        "o": [
+            "ShouldBeUnique",
+            "MustBeUnique",
+            "IsUnique",
+            "UniqueJob"
+        ]
+    },
+    {
+        "q": "Where to define specific unique ID logic?",
+        "type": "mcq",
+        "o": [
+            "uniqueId() method in Job.",
+            "id() method",
+            "key() method",
+            "uuid() method"
+        ]
+    },
+    {
+        "q": "How to make a job unique for a certain time?",
+        "type": "mcq",
+        "o": [
+            "uniqueFor() method or $uniqueFor property.",
+            "$uniqueTime",
+            "$lockTime",
+            "$timeout"
+        ]
+    },
+    {
+        "q": "What logic handles the actual job uniqueness lock?",
+        "type": "mcq",
+        "o": [
+            "Cache lock (uses configured cache driver).",
+            "Database lock",
+            "File lock",
+            "Memory lock"
+        ]
+    },
+    {
+        "q": "What is `WithoutOverlapping`?",
+        "type": "mcq",
+        "o": [
+            "A job middleware that prevents job overlapping execution.",
+            "A model trait",
+            "A queue configuration",
+            "A worker flag"
+        ]
+    },
+    {
+        "q": "How to attach middleware to a job?",
+        "type": "mcq",
+        "o": [
+            "middleware() method in Job returning array of middleware objects.",
+            "$middleware property",
+            "Route::middleware()",
+            "In config/queue.php"
+        ]
+    },
+    {
+        "q": "Middleware enabling rate limiting for jobs?",
+        "type": "mcq",
+        "o": [
+            "RateLimited (using Redis rate limiter usually).",
+            "Throttled",
+            "Limited",
+            "SlowDown"
+        ]
+    },
+    {
+        "q": "Config setting for queue connection in `database.php`?",
+        "type": "mcq",
+        "o": [
+            "No, it's in `queue.php`, confusingly, specific connections (like redis) are in `database.php` but queue config refers to them.",
+            "Yes",
+            "Only in database.php",
+            "In app.php"
+        ]
+    },
+    {
+        "q": "Default 'sync' driver behavior?",
+        "type": "mcq",
+        "o": [
+            "Executes job immediately within the request lifecycle.",
+            "Queues to database",
+            "Queues to memory",
+            "Does nothing"
+        ]
+    },
+    {
+        "q": "Purpose of `null` queue driver?",
+        "type": "mcq",
+        "o": [
+            "Discards jobs. Does not execute them.",
+            "Same as sync",
+            "Logs jobs",
+            "Errors out"
+        ]
+    },
+    {
+        "q": "Redis driver advantage over Database?",
+        "type": "mcq",
+        "o": [
+            "Much faster (in-memory), better throughput, supports atomic locks/limiting better.",
+            "Easier to set up",
+            "Persistent storage",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "SQS driver requirement?",
+        "type": "mcq",
+        "o": [
+            "AWS SDK (aws/aws-sdk-php) and credentials.",
+            "Redis",
+            "Nothing",
+            "Supervisor"
+        ]
+    },
+    {
+        "q": "Beanstalkd driver requirement?",
+        "type": "mcq",
+        "o": [
+            "pda/pheanstalk package.",
+            "Redis",
+            "Nothing",
+            "Supervisor"
+        ]
+    },
+    {
+        "q": "Recommended tool to keep `queue:work` running on server?",
+        "type": "mcq",
+        "o": [
+            "Supervisor (Process Monitor).",
+            "Cron",
+            "Screen",
+            "Nohup"
+        ]
+    },
+    {
+        "q": "Dispatching with `onConnection`?",
+        "type": "mcq",
+        "o": [
+            "Job::dispatch()->onConnection('redis');",
+            "Job::dispatch()->connection('redis');",
+            "Job::dispatch()->driver('redis');",
+            "Job::dispatch()->via('redis');"
+        ]
+    },
+    {
+        "q": "Can you pass a closure to dispatch?",
+        "type": "mcq",
+        "o": [
+            "Yes, dispatch(function() { ... }); Uses `CallQueuedClosure`.",
+            "No",
+            "Only in Sync",
+            "Only in Redis"
+        ]
+    },
+    {
+        "q": "What is `Bus::fake()`?",
+        "type": "mcq",
+        "o": [
+            "Testing helper to intercept job dispatching.",
+            "A fake bus",
+            "A simulation tool",
+            "A database mocker"
+        ]
+    },
+    {
+        "q": "How to assert a job was dispatched?",
+        "type": "mcq",
+        "o": [
+            "Bus::assertDispatched(Job::class);",
+            "Queue::assertPushed(Job::class);",
+            "Job::assertSent();",
+            "Dispatch::assert();"
+        ]
+    },
+    {
+        "q": "Command to list all queues?",
+        "type": "mcq",
+        "o": [
+            "Not really a single standard artisan command for all drivers. `horizon` provides dashboard for Redis.",
+            "php artisan queue:list",
+            "php artisan queue:show",
+            "php artisan queue:all"
+        ]
+    },
+    {
+        "q": "How to specify 'retry_after'?",
+        "type": "mcq",
+        "o": [
+            "In `queue.php` connection config (determines how long a job stays 'reserved' before reappearing).",
+            "In .env",
+            "In Job class",
+            "In Command"
+        ]
+    },
+    {
+        "q": "Relationship between `retry_after` and `timeout`?",
+        "type": "mcq",
+        "o": [
+            "`retry_after` (visibility timeout) should be greater than `timeout` (job execution time) to prevent duplicate processing.",
+            "No relation",
+            "timeout > retry_after",
+            "Must be equal"
+        ]
+    },
+    {
+        "q": "What is `InteractsWithQueue::delete()`?",
+        "type": "mcq",
+        "o": [
+            "Manually deletes job from queue. Implicitly called if `handle` finishes without error.",
+            "Fails job",
+            "Releases job",
+            "Pauses job"
+        ]
+    },
+    {
+        "q": "Does `queue:work` pick up code changes?",
+        "type": "mcq",
+        "o": [
+            "No, it boots framework once. Must restart to see code changes.",
+            "Yes",
+            "Yes if debug true",
+            "Yes if local"
+        ]
+    },
+    {
+        "q": "Does `queue:listen` pick up code changes?",
+        "type": "mcq",
+        "o": [
+            "Yes, it forks a new process for each job.",
+            "No",
+            "Only config",
+            "Only .env"
+        ]
+    },
+    {
+        "q": "Flag `--stop-when-empty`?",
+        "type": "mcq",
+        "o": [
+            "Worker stops when queue is empty (useful for Docker containers/Kubernetes jobs).",
+            "Worker pauses",
+            "Worker sleeps",
+            "Worker restarts"
+        ]
+    },
+    {
+        "q": "Max jobs per worker flag?",
+        "type": "mcq",
+        "o": [
+            "--max-jobs=1000",
+            "--jobs=1000",
+            "--count=1000",
+            "--limit=1000"
+        ]
+    },
+    {
+        "q": "Max time per worker flag?",
+        "type": "mcq",
+        "o": [
+            "--max-time=3600 (stops worker process after 1 hour).",
+            "--time=3600",
+            "--duration=3600",
+            "--stop=3600"
+        ]
+    },
+    {
+        "q": "Environment variable used to encrypt jobs?",
+        "type": "mcq",
+        "o": [
+            "APP_KEY (uses app encryption key).",
+            "QUEUE_KEY",
+            "JOB_KEY",
+            "ENCRYPT_KEY"
+        ]
+    },
+    {
+        "q": "Interface `ShouldBeEncrypted`?",
+        "type": "mcq",
+        "o": [
+            "Encrypts job payload in the queue (security).",
+            "Encrypts database",
+            "Encrypts code",
+            "Encrypts logs"
+        ]
+    },
+    {
+        "q": "Job method `failed(Throwable $e)`?",
+        "type": "mcq",
+        "o": [
+            "Called when job fails max attempts. Used to send cleanup/notifications manually.",
+            "Called on every retry",
+            "Called on success",
+            "Called before fail"
+        ]
+    },
+    {
+        "q": "Can you dispatch to multiple queues?",
+        "type": "mcq",
+        "o": [
+            "Not in one `dispatch`. Must dispatch separately or use Fan-out architecture.",
+            "Yes, onQueue(['a','b'])",
+            "Yes, multiple()",
+            "Yes, all()"
+        ]
+    },
+    {
+        "q": "What is `Dispatchable` trait doing internally?",
+        "type": "mcq",
+        "o": [
+            "Wraps `new static(...)` and passes to `Bus::dispatch`.",
+            "Nothing",
+            "Logs dispatch",
+            "Validates dispatch"
+        ]
+    },
+    {
+        "q": "Can you use Constructor injection in Jobs?",
+        "type": "mcq",
+        "o": [
+            "Yes, for payload data. `handle()` is for Service Injection.",
+            "No",
+            "Only for services",
+            "Only for primitives"
+        ]
+    },
+    {
+        "q": "Where to put Service dependencies in Job?",
+        "type": "mcq",
+        "o": [
+            "In `handle()` method signature. Laravel authentic container injects them.",
+            "In __construct",
+            "In propertes",
+            "In static"
+        ]
+    },
+    {
+        "q": "Using `afterCommit` on job dispatch?",
+        "type": "mcq",
+        "o": [
+            "Job::dispatch()->afterCommit(); Waits for open DB transactions to commit before pushing.",
+            "Job::dispatch()->commit();",
+            "Job::dispatch()->wait();",
+            "Job::dispatch()->transaction();"
+        ]
+    },
+    {
+        "q": "Config default for `after_commit`?",
+        "type": "mcq",
+        "o": [
+            "Can be set in `queue.php` to true globally.",
+            "Always false",
+            "Always true",
+            "Non-configurable"
+        ]
+    },
+    {
+        "q": "How to name a batch?",
+        "type": "mcq",
+        "o": [
+            "Bus::batch([...])->name('Import CSV');",
+            "->title()",
+            "->label()",
+            "->id()"
+        ]
+    },
+    {
+        "q": "Batch callback `then()`?",
+        "type": "mcq",
+        "o": [
+            "Runs after all jobs in batch complete successfully.",
+            "Runs after first job",
+            "Runs before batch",
+            "Runs on failure"
+        ]
+    },
+    {
+        "q": "Batch callback `catch()`?",
+        "type": "mcq",
+        "o": [
+            "Runs on first job failure in batch.",
+            "Runs if all fail",
+            "Runs if batch cancelled",
+            "Runs if timeout"
+        ]
+    },
+    {
+        "q": "Batch callback `finally()`?",
+        "type": "mcq",
+        "o": [
+            "Runs when batch finishes (success or fail).",
+            "Runs when cancelled",
+            "Runs always",
+            "Runs never"
+        ]
+    },
+    {
+        "q": "Cancelling a batch?",
+        "type": "mcq",
+        "o": [
+            "$batch->cancel();",
+            "$batch->stop();",
+            "$batch->kill();",
+            "$batch->delete();"
+        ]
+    },
+    {
+        "q": "What happens to remaining jobs when batch cancelled?",
+        "type": "mcq",
+        "o": [
+            "They are not executed (if workers check cancellation).",
+            "They execute anyway",
+            "They fail",
+            "They pause"
+        ]
+    },
+    {
+        "q": "Trait required for Batchable jobs?",
+        "type": "mcq",
+        "o": [
+            "Batchable",
+            "InBatch",
+            "Groupable",
+            "Chainable"
+        ]
+    },
+    {
+        "q": "Check if job is cancelled inside handle()?",
+        "type": "mcq",
+        "o": [
+            "if ($this->batch()->cancelled()) { return; }",
+            "if ($this->cancelled())",
+            "if ($this->stop())",
+            "if ($this->isDead())"
+        ]
+    },
+    {
+        "q": "Migration for `job_batches` table?",
+        "type": "mcq",
+        "o": [
+            "php artisan queue:batches-table",
+            "php artisan make:batches",
+            "php artisan queue:batch",
+            "php artisan db:batches"
+        ]
+    },
+    {
+        "q": "Pruning failed jobs `queue:prune-failed`?",
+        "type": "mcq",
+        "o": [
+            "Deletes failed job records older than X hours.",
+            "Deletes all",
+            "Deletes fixed",
+            "Deletes retrying"
+        ]
+    },
+    {
+        "q": "Pruning batches `queue:prune-batches`?",
+        "type": "mcq",
+        "o": [
+            "Deletes old completed/cancelled batches from database.",
+            "Deletes active",
+            "Deletes failed",
+            "Deletes Pending"
+        ]
+    },
+    {
+        "q": "Command to monitor queue metrics (if configured)?",
+        "type": "mcq",
+        "o": [
+            "queue:monitor (e.g. queue:monitor redis:default).",
+            "queue:stats",
+            "queue:metrics",
+            "queue:check"
+        ]
+    },
+    {
+        "q": "Output of `queue:monitor`?",
+        "type": "mcq",
+        "o": [
+            "Queue size and Wait time.",
+            "Worker count",
+            "Memory usage",
+            "CPU usage"
+        ]
+    },
+    {
+        "q": "Horizon requires which driver?",
+        "type": "mcq",
+        "o": [
+            "Redis",
+            "Database",
+            "SQS",
+            "Sync"
+        ]
+    },
+    {
+        "q": "Dispatching job to specific connection and queue?",
+        "type": "mcq",
+        "o": [
+            "onConnection('sqs')->onQueue('processing')",
+            "connection('sqs', 'processing')",
+            "via('sqs')->to('processing')",
+            "use('sqs')->in('processing')"
+        ]
+    },
+    {
+        "q": "Job middleware `ThrottlesExceptions`?",
+        "type": "mcq",
+        "o": [
+            "Throttles retry attempts when exceptions occur (e.g. for unstable APIs).",
+            "Throttles dispatch",
+            "Throttles constructor",
+            "Throttles logs"
+        ]
+    },
+    {
+        "q": "Job middleware `passThrough` method?",
+        "type": "mcq",
+        "o": [
+            "Does not exist. $job->through([]) is used.",
+            "Exists",
+            "Middleware method",
+            "Constructor"
+        ]
+    },
+    {
+        "q": "Specifying middleware in `dispatch` chain?",
+        "type": "mcq",
+        "o": [
+            "Job::dispatch()->through([new RateLimited]);",
+            "->middleware()",
+            "->pipe()",
+            "->filter()"
+        ]
+    },
+    {
+        "q": "Can middleware modify the job payload?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it captures logic before $next($job).",
+            "No, payload is serialized",
+            "Only on sync",
+            "Only on redis"
+        ]
+    },
+    {
+        "q": "When does `__construct` run?",
+        "type": "mcq",
+        "o": [
+            "At dispatch time (to create object and serialize it).",
+            "At process time",
+            "At queue time",
+            "Never"
+        ]
+    },
+    {
+        "q": "When does `handle` run?",
+        "type": "mcq",
+        "o": [
+            "At process time (when worker picks it up).",
+            "At dispatch time",
+            "At queue time",
+            "Immediately"
+        ]
+    }
+,
+{
+    "q": "What is `JobChaining` useful for?",
+    "type": "mcq",
+    "o": [
+        "Ensuring jobs run strictly sequentially, and if one fails, subsequent ones are skipped.",
+        "Run in parallel",
+        "Grouping jobs",
+        "Logging jobs"
+    ]
+},
+{
+    "q": "How to handle failed job in a chain?",
+    "type": "mcq",
+    "o": [
+        "Use `catch` callback on the chain definition. (Usually chains just stop, catch is more for Batches). Actually chains can use `catch` if defined.",
+        "It mocks it",
+        "It retries",
+        "It ignores"
+    ]
+},
+{
+    "q": "Difference between `chain` and `batch`?",
+    "type": "mcq",
+    "o": [
+        "Chain is sequential (dependent). Batch is parallel (independent) but trackable as a group.",
+        "Only syntax",
+        "Chain is database only",
+        "Batch is redis only"
+    ]
+},
+{
+    "q": "What is `Bus::batch`?",
+    "type": "mcq",
+    "o": [
+        "Creates a new batch instance to dispatch multiple jobs.",
+        "Old syntax",
+        "Fake bus",
+        "Event listener"
+    ]
+},
+{
+    "q": "Can you add jobs to an existing batch?",
+    "type": "mcq",
+    "o": [
+        "Yes, `$batch->add(new Job)` inside a job within the batch.",
+        "No, immutable",
+        "Only before dispatch",
+        "Only if empty"
+    ]
+},
+{
+    "q": "What is the `Batchable` trait for?",
+    "type": "mcq",
+    "o": [
+        "Allows the job to access `$this->batch()` and check cancelled/delete status.",
+        "Marks as batch compatible",
+        "Handles serialization",
+        "Optimizes speed"
+    ]
+},
+{
+    "q": "How to define `retry_after` (visibility timeout) for Redis?",
+    "type": "mcq",
+    "o": [
+        "In `config/queue.php` connections.redis array.",
+        "In .env",
+        "In job class",
+        "In redis.conf"
+    ]
+},
+{
+    "q": "What is `block_for` in Redis queue config?",
+    "type": "mcq",
+    "o": [
+        "How long to block (wait) for a job to appear before polling again (Redis blocking pop). Efficient.",
+        "Blocks writing",
+        "Blocks database",
+        "Blocks app"
+    ]
+},
+{
+    "q": "Recommended `block_for` value?",
+    "type": "mcq",
+    "o": [
+        "Usually 5 seconds or so. Must be less than `retry_after`?",
+        "0",
+        "100",
+        "Infinite"
+    ]
+},
+{
+    "q": "Which exception is thrown if job times out?",
+    "type": "mcq",
+    "o": [
+        "Illuminate\\Queue\\MaxAttemptsExceededException or TimeoutExceededException depending on context.",
+        "JobFailedException",
+        "WorkerStoppedException",
+        "ProcessKilledException"
+    ]
+},
+{
+    "q": "How to handle `MaxAttemptsExceededException`?",
+    "type": "mcq",
+    "o": [
+        "Use `failed()` method in job to handle cleanup.",
+        "Catch in handle",
+        "Catch in dispatch",
+        "Catch in construct"
+    ]
+},
+{
+    "q": "Using `RateLimited` middleware requires?",
+    "type": "mcq",
+    "o": [
+        "A RateLimiter defined in AppServiceProvider (boot) using `RateLimiter::for`.",
+        "Redis only",
+        "Database only",
+        "Nothing"
+    ]
+},
+{
+    "q": "Syntax to use RateLimiter 'backups' in job middleware?",
+    "type": "mcq",
+    "o": [
+        "return [new RateLimited('backups')];",
+        "return ['rate:backups'];",
+        "return [RateLimiter::class];",
+        "return ['limit:backups'];"
+    ]
+},
+{
+    "q": "Middleware `WithoutOverlapping` behavior?",
+    "type": "mcq",
+    "o": [
+        "Acquires an atomic lock based on a key. If locked, releases job back to queue to retry later.",
+        "Fails job",
+        "Deletes job",
+        "Waits synchronously"
+    ]
+},
+{
+    "q": "How to customize `WithoutOverlapping` release time?",
+    "type": "mcq",
+    "o": [
+        "(new WithoutOverlapping)->releaseAfter(10);",
+        "->wait(10)",
+        "->delay(10)",
+        "->retry(10)"
+    ]
+},
+{
+    "q": "How to expire `WithoutOverlapping` lock?",
+    "type": "mcq",
+    "o": [
+        "->expireAfter(60); (Prevents deadlocks if job crashes hard).",
+        "->timeout(60)",
+        "->end(60)",
+        "->kill(60)"
+    ]
+},
+{
+    "q": "Can `WithoutOverlapping` key be dynamic?",
+    "type": "mcq",
+    "o": [
+        "Yes, `new WithoutOverlapping($this->user->id)`.",
+        "No",
+        "Only static strings",
+        "Only integers"
+    ]
+},
+{
+    "q": "What is `ThrottlesExceptions` middleware?",
+    "type": "mcq",
+    "o": [
+        "Retries job on exception but with increasing delays (backoff) automatically managed.",
+        "Fails immediately",
+        "Ignores exceptions",
+        "Logs exceptions"
+    ]
+},
+{
+    "q": "Difference `retryUntil` vs `tries`?",
+    "type": "mcq",
+    "o": [
+        "`tries` relies on a counter. `retryUntil` relies on a timestamp deadline (useful if job is released many times).",
+        "No difference",
+        "One is for redis",
+        "One is for database"
+    ]
+},
+{
+    "q": "If `retryUntil` is used, does `tries` matter?",
+    "type": "mcq",
+    "o": [
+        "Usually `retryUntil` takes precedence for determining *when* to stop retrying.",
+        "Yes",
+        "No",
+        "Combined"
+    ]
+},
+{
+    "q": "What happens if you change Job class name while jobs are queued?",
+    "type": "mcq",
+    "o": [
+        "Unserialization fails. Job fails with 'Class not found'. (Or incomplete class object).",
+        "It works automagically",
+        "Queue clears",
+        "Worker crashes"
+    ]
+},
+{
+    "q": "Best practice for deploying with active queues?",
+    "type": "mcq",
+    "o": [
+        "Put app in maintenance mode -> `queue:restart` -> deploy -> up. Or ensure backward compatibility of Job classes.",
+        "Just deploy",
+        "Delete failed_jobs",
+        "Flush queue"
+    ]
+},
+{
+    "q": "What is `Queue::fake()` used for?",
+    "type": "mcq",
+    "o": [
+        "Testing. Intercepts jobs pushed to queue to assert against them.",
+        "Local dev",
+        "Production",
+        "Staging"
+    ]
+},
+{
+    "q": "Asserting a job was pushed to specific queue?",
+    "type": "mcq",
+    "o": [
+        "Queue::assertPushedOn('high', Job::class);",
+        "Queue::assertQueue('high');",
+        "Job::assertQueue('high');",
+        "Bus::assertpushed('high');"
+    ]
+},
+{
+    "q": "Asserting a job was pushed with chain?",
+    "type": "mcq",
+    "o": [
+        "Queue::assertPushedWithChain(Job::class, [NextJob::class]);",
+        "Queue::assertChain()",
+        "Job::assertChain()",
+        "Bus::assertChain()"
+    ]
+},
+{
+    "q": "Disabling job events for performance?",
+    "type": "mcq",
+    "o": [
+        "Usually not a bottleneck. But `Queue::setEventDispatcher(null)` possible in extreme cases?",
+        "Config disable_events",
+        "Env NO_EVENTS",
+        "Cannot disable"
+    ]
+},
+{
+    "q": "Using `ShortSchedule` (Spatie package)?",
+    "type": "mcq",
+    "o": [
+        "Not core Laravel. Core schedule is min 1 minute. ShortSchedule runs sub-minute loops.",
+        "Core feature",
+        "Laravel 11 feature",
+        "Deprecated"
+    ]
+},
+{
+    "q": "Laravel native sub-minute scheduling?",
+    "type": "mcq",
+    "o": [
+        "Not supported natively by `schedule:run` (cron limitation).",
+        "everySecond()",
+        "everyTenSeconds()",
+        "subMinute()"
+    ]
+},
+{
+    "q": "What is `schedule:work`?",
+    "type": "mcq",
+    "o": [
+        "Runs the scheduler locally (simulates cron every minute) keeping process alive. Good for dev.",
+        "Runs workers",
+        "Runs jobs",
+        "Runs migrations"
+    ]
+},
+{
+    "q": "Horizon `long_wait` setting?",
+    "type": "mcq",
+    "o": [
+        "Defines threshold (seconds) to mark a queue as 'Wait Time' warning status.",
+        "Delays jobs",
+        "Stops workers",
+        "Increases memory"
+    ]
+},
+{
+    "q": "Horizon `balance` strategies?",
+    "type": "mcq",
+    "o": [
+        "simple, auto, false. `auto` balances workers based on queue depth.",
+        "fast, slow",
+        "heavy, light",
+        "tcp, udp"
+    ]
+},
+{
+    "q": "Horizon `memory_limit`?",
+    "type": "mcq",
+    "o": [
+        "Restart worker if memory usage exceeds this (MB).",
+        "Stops job",
+        "Pauses queue",
+        "Fails job"
+    ]
+},
+{
+    "q": "Can you use Queues for file uploads?",
+    "type": "mcq",
+    "o": [
+        "Yes, handling processing logic (resize, s3 upload) in background. The initial upload to server must finish first though.",
+        "No",
+        "Only for images",
+        "Only for videos"
+    ]
+},
+{
+    "q": "Handling large file processing in queues?",
+    "type": "mcq",
+    "o": [
+        "Be aware of memory limits/timeouts. Increase `timeout` and `memory_limit`. Use streams.",
+        "Impossible",
+        "Use sync",
+        "Use database"
+    ]
+},
+{
+    "q": "What is `ShouldBeUniqueUntilProcessing`?",
+    "type": "mcq",
+    "o": [
+        "Lock is released when worker *starts* processing the job.",
+        "Lock released on finish",
+        "Lock never released",
+        "Lock released on dispatch"
+    ]
+},
+{
+    "q": "What is default `ShouldBeUnique` release time?",
+    "type": "mcq",
+    "o": [
+        "When job *finishes* (completes or fails).",
+        "When job starts",
+        "After 1 hour",
+        "Never"
+    ]
+},
+{
+    "q": "Can you interact with Websockets from Queues?",
+    "type": "mcq",
+    "o": [
+        "Yes, broadcasting events from jobs is common.",
+        "No",
+        "Only synchronous",
+        "Impossible"
+    ]
+},
+{
+    "q": "What is `Queue::pop()` for?",
+    "type": "mcq",
+    "o": [
+        "Manually retrieve next job from queue without worker loop. Low level.",
+        "Deletes job",
+        "Counts jobs",
+        "Fails job"
+    ]
+},
+{
+    "q": "Using `Beanstalkd` advantages?",
+    "type": "mcq",
+    "o": [
+        "Simple, strictly FIFO (mostly), support for 'tubes'. Lightweight.",
+        "Complex",
+        "Heavy",
+        "Database based"
+    ]
+},
+{
+    "q": "Using `SQS` FIFO queues requirements?",
+    "type": "mcq",
+    "o": [
+        "Must use `.fifo` suffix in name. Use `DeduplicationId` and `GroupId`.",
+        "No requirements",
+        "Only suffix",
+        "Only GroupId"
+    ]
+},
+{
+    "q": "Laravel support for SQS FIFO?",
+    "type": "mcq",
+    "o": [
+        "Supported. Configuration options available for message group ID generation.",
+        "Not supported",
+        "Through plugin",
+        "Only Standard"
+    ]
+},
+{
+    "q": "What does `dispatchAfterResponse` do?",
+    "type": "mcq",
+    "o": [
+        "Executes job *after* HTTP response is sent to user, but still within the same PHP process (Sync).",
+        "Queues it",
+        "Delays 5 seconds",
+        "Runs before response"
+    ]
+},
+{
+    "q": "Use case for `dispatchAfterResponse`?",
+    "type": "mcq",
+    "o": [
+        "Short tasks that don't warrant a full queue setup but shouldn't block user perceived latency.",
+        "Long running tasks",
+        "Scheduled tasks",
+        "Heavy processing"
+    ]
+},
+{
+    "q": "Does `dispatchAfterResponse` work on `php-fpm`?",
+    "type": "mcq",
+    "o": [
+        "Yes, using fastcgi_finish_request.",
+        "No",
+        "Only Apache",
+        "Only Nginx"
+    ]
+},
+{
+    "q": "Does `dispatchAfterResponse` work on `Octane`?",
+    "type": "mcq",
+    "o": [
+        "Yes, Octane handles the tick after response.",
+        "No",
+        "Only Swoole",
+        "Only RoadRunner"
+    ]
+},
+{
+    "q": "What is the `Sync` driver intended for?",
+    "type": "mcq",
+    "o": [
+        "Development and testing (simplifies stack).",
+        "Production high load",
+        "Video processing",
+        "Remote jobs"
+    ]
+},
+{
+    "q": "Can you access Session in a Job?",
+    "type": "mcq",
+    "o": [
+        "Generally no. Session is HTTP context. Jobs are stateless/background.",
+        "Yes always",
+        "Yes if you pass ID",
+        "Yes via Facade"
+    ]
+},
+{
+    "q": "Passing authenticated user to Job?",
+    "type": "mcq",
+    "o": [
+        "Pass the `$user` model (SerializesModels handles it).",
+        "Auth::user() works inside job (No)",
+        "Pass session ID",
+        "Pass token"
+    ]
+},
+{
+    "q": "What is `Queueable` entity?",
+    "type": "mcq",
+    "o": [
+        "Mailable, Notification, Listener, etc. classes that use `Queueable` trait.",
+        "Only Job",
+        "Only Command",
+        "Only Controller"
+    ]
+},
+{
+    "q": "Queued Event Listeners require?",
+    "type": "mcq",
+    "o": [
+        "Implementing `ShouldQueue` interface on the Listener class.",
+        "Using Queueable trait",
+        "Registering in queue.php",
+        "Nothing"
+    ]
+},
+{
+    "q": "Customizing the connection for a queued listener?",
+    "type": "mcq",
+    "o": [
+        "Define `$connection` property on Listener class.",
+        "In EventServiceProvider",
+        "In Event class",
+        "Global config"
+    ]
+},
+{
+    "q": "Handling failed queued listener?",
+    "type": "mcq",
+    "o": [
+        "Define `failed($event, $exception)` method on Listener.",
+        "Catch in handle",
+        "Cannot handle",
+        "Stops app"
+    ]
+},
+{
+    "q": "Using `Closure` jobs with `catch`?",
+    "type": "mcq",
+    "o": [
+        "queueing closures allows `catch` callback definition in `dispatch(...)->catch(...)`.",
+        "Not supported",
+        "Only for classes",
+        "Only batches"
+    ]
+},
+{
+    "q": "Is `Queue` facade macroable?",
+    "type": "mcq",
+    "o": [
+        "Yes, like most facades.",
+        "No",
+        "Only dispatch",
+        "Only push"
+    ]
+},
+{
+    "q": "What does `Queue::bulk` do?",
+    "type": "mcq",
+    "o": [
+        "Pushes an array of payload data to queue in one go (driver dependent optimization).",
+        "Batches jobs",
+        "Chains jobs",
+        "Clears queue"
+    ]
+},
+{
+    "q": "Job `middleware` method return type?",
+    "type": "mcq",
+    "o": [
+        "Array of objects (middleware instances).",
+        "Array of strings",
+        "Void",
+        "Boolean"
+    ]
+},
+{
+    "q": "Can you retry a job from code?",
+    "type": "mcq",
+    "o": [
+        "Yes, `$this->release(0)` effectively retries it immediately/soon.",
+        "Yes, `$this->retry()`",
+        "No",
+        "Only via artisan"
+    ]
+},
+{
+    "q": "Difference `release` vs `release(0)`?",
+    "type": "mcq",
+    "o": [
+        "Same. Puts job back to available state.",
+        "release() defaults to connection delay",
+        "release() defaults to 60s",
+        "release(0) deletes it"
+    ]
+},
+{
+    "q": "If `maxExceptions` is 3, when does job fail?",
+    "type": "mcq",
+    "o": [
+        "If it throws an unhandled exception 3 times. Unlike `tries` which counts all attempts (success or fail).",
+        "Same as tries",
+        "After 3 seconds",
+        "After 3 mins"
+    ]
+},
+{
+    "q": "Using `maxExceptions` combined with `tries`?",
+    "type": "mcq",
+    "o": [
+        "Both constraints apply. Whichever is hit first fails the job.",
+        "tries overrides",
+        "maxExceptions overrides",
+        "Error"
+    ]
+},
+{
+    "q": "What is the payload of a queued job?",
+    "type": "mcq",
+    "o": [
+        "JSON string containing uuid, job class, serialized data (command), attempts, etc.",
+        "Binary blob",
+        "PHP native serialization",
+        "XML"
+    ]
+},
+{
+    "q": "Can you encrypt the payload?",
+    "type": "mcq",
+    "o": [
+        "Yes, using ShouldBeEncrypted interface.",
+        "No",
+        "Only manually",
+        "Only via HTTPS"
+    ]
+},
+{
+    "q": "Does `queue:clear` trigger job failure events?",
+    "type": "mcq",
+    "o": [
+        "No, it just empties the store.",
+        "Yes",
+        "Logs errors",
+        "Retries first"
+    ]
+},
+{
+    "q": "Safe way to stop workers in Kubernetes?",
+    "type": "mcq",
+    "o": [
+        "Send SIGTERM. Laravel worker catches it, finishes current job, then exits.",
+        "SIGKILL",
+        "Shutdown power",
+        "Delete pod"
+    ]
+},
+{
+    "q": "How long does worker wait after SIGTERM?",
+    "type": "mcq",
+    "o": [
+        "Until current job finishes or `timeout` is reached.",
+        "10 seconds",
+        "Imagine immediate",
+        "Forever"
+    ]
+},
+{
+    "q": "What happens if SIGKILL is sent?",
+    "type": "mcq",
+    "o": [
+        "Process dies immediately. Job might be part-way done (inconsistent state). Job remains 'reserved' until timeout expires, then retrys.",
+        "Graceful exit",
+        "Job completes",
+        "Queue clears"
+    ]
+},
+{
+    "q": "Purpose of `queue.php` 'connections' array?",
+    "type": "mcq",
+    "o": [
+        "Defines available drivers and their settings (e.g. redis host, sqs key).",
+        "Defines queues names",
+        "Defines jobs",
+        "Defines workers"
+    ]
+},
+{
+    "q": "Can you use different drivers for different queues?",
+    "type": "mcq",
+    "o": [
+        "Yes, just configure multiple connections and dispatch to them.",
+        "No",
+        "Only synced",
+        "Only async"
+    ]
+},
+{
+    "q": "What is the `failed_job_provider`?",
+    "type": "mcq",
+    "o": [
+        "Service responsible for storing failed jobs (database implementation by default).",
+        "Notification service",
+        "Retry service",
+        "Log service"
+    ]
+},
+{
+    "q": "Customizing the UUID of a job?",
+    "type": "mcq",
+    "o": [
+        "Usually auto-generated. Implementing uniqueId logic is for locking, not the Job UUID itself.",
+        "Override uuid()",
+        "Set $uuid",
+        "Cannot change"
+    ]
+},
+{
+    "q": "When does `job.uuid` get assigned?",
+    "type": "mcq",
+    "o": [
+        "At dispatch time.",
+        "At process time",
+        "At construct",
+        "Never"
+    ]
+},
+{
+    "q": "How to get the Job ID inside handle?",
+    "type": "mcq",
+    "o": [
+        "$this->job->getJobId();",
+        "$this->id",
+        "$this->getUuid()",
+        "$this->key"
+    ]
+},
+{
+    "q": "Accessing the raw payload inside handle?",
+    "type": "mcq",
+    "o": [
+        "$this->job->getRawBody();",
+        "$this->payload",
+        "$this->json",
+        "$this->data"
+    ]
+},
+{
+    "q": "Is `InteractsWithQueue` required to dispatch?",
+    "type": "mcq",
+    "o": [
+        "No, only to interact *while* in queue (delete, release). Dispatchable is for dispatching.",
+        "Yes",
+        "Yes for sync",
+        "No for redis"
+    ]
+},
+{
+    "q": "Handling API rate limits inside a job?",
+    "type": "mcq",
+    "o": [
+        "Catch 429. Release job with `Retry-After` header value.",
+        "Fail job",
+        "Delete job",
+        "Ignore"
+    ]
+},
+{
+    "q": "Example of releasing with header value?",
+    "type": "mcq",
+    "o": [
+        "$this->release($e->response->header('Retry-After'));",
+        "$this->delay($e)",
+        "$this->wait($e)",
+        "$this->retry($e)"
+    ]
+},
+{
+    "q": "Does `queue:work` support multiple connection flags?",
+    "type": "mcq",
+    "o": [
+        "It runs on *one* connection (default or specified argument). Can handle multiple queues within that connection.",
+        "Yes multiple connections",
+        "No queues",
+        "All connections"
+    ]
+},
+{
+    "q": "Running workers for multiple connections?",
+    "type": "mcq",
+    "o": [
+        "Run separate `queue:work` processes for each connection.",
+        "Use comma list",
+        "Use --all",
+        "Use --multi"
+    ]
+},
+{
+    "q": "Default `tries` value if not set?",
+    "type": "mcq",
+    "o": [
+        "0 (Unlimited/tries until success or crash). NOTE: Laravel docs say 'indefinitely' if not specified.",
+        "1",
+        "3",
+        "5"
+    ]
+},
+{
+    "q": "Default `timeout` value?",
+    "type": "mcq",
+    "o": [
+        "60 seconds usually. Configurable.",
+        "0 (Unlimited)",
+        "300",
+        "10"
+    ]
+},
+{
+    "q": "Where to change default `timeout`?",
+    "type": "mcq",
+    "o": [
+        "In `queue:work` command arguments or supervisor config.",
+        "In job only",
+        "In .env only",
+        "Cannot change"
+    ]
+},
+{
+    "q": "Relationship between PHP `max_execution_time` and queue timeout?",
+    "type": "mcq",
+    "o": [
+        "Queue timeout uses `pcntl` signals to kill process. PHP max_execution_time also applies. Queue timeout should be <= max_execution_time.",
+        "Unrelated",
+        "Timeout is ignored",
+        "PHP limit is ignored"
+    ]
+},
+{
+    "q": "Does `queue:restart` kill active jobs?",
+    "type": "mcq",
+    "o": [
+        "No, it signals workers to die *after* they finish their current job.",
+        "Yes immediately",
+        "Yes forcefully",
+        "Pauses them"
+    ]
+},
+{
+    "q": "Signal used by `queue:restart`?",
+    "type": "mcq",
+    "o": [
+        "It stores a timestamp in Cache. Workers check this timestamp on every loop. If changed, they exit.",
+        "SIGUSR1",
+        "SIGINT",
+        "SIGKILL"
+    ]
+},
+{
+    "q": "Dependency for `queue:restart` to work?",
+    "type": "mcq",
+    "o": [
+        "A configured Cache driver accessible by workers.",
+        "Redis",
+        "Database",
+        "Filesystem"
+    ]
+},
+{
+    "q": "Can you use `queue:restart` with `database` cache driver?",
+    "type": "mcq",
+    "o": [
+        "Yes, as long as cache is working.",
+        "No",
+        "Only file",
+        "Only redis"
+    ]
+},
+{
+    "q": "What is `JobFailed` event payload?",
+    "type": "mcq",
+    "o": [
+        "connectionName, job instance, exception.",
+        "Only job",
+        "Only exception",
+        "Only id"
+    ]
+},
+{
+    "q": "Registering checking logic for ALL jobs?",
+    "type": "mcq",
+    "o": [
+        "Queue::before(function...) or Queue::after(function...).",
+        "Job::before()",
+        "Event::job()",
+        "App::job()"
+    ]
+},
+{
+    "q": "Where to place `Queue::before` callback?",
+    "type": "mcq",
+    "o": [
+        "AppServiceProvider `boot` method.",
+        "routes/web.php",
+        "config/queue.php",
+        "Job class"
+    ]
+},
+{
+    "q": "Difference `Queue::looping` event?",
+    "type": "mcq",
+    "o": [
+        "Fires on every iteration of the worker loop (even if no job). Useful for keeping connections alive/resetting state.",
+        "Fires on job",
+        "Fires on error",
+        "Fires on start"
+    ]
+},
+{
+    "q": "How to keep database connection alive in daemon worker?",
+    "type": "mcq",
+    "o": [
+        "Laravel does this automatically (reconnects if lost).",
+        "Ping loop",
+        "Manual queries",
+        "Restart worker"
+    ]
+},
+{
+    "q": "Dispatching job conditionally?",
+    "type": "mcq",
+    "o": [
+        "Standard PHP `if` condition. `dispatchIf($condition, ...)` also exists.",
+        "dispatchWhen",
+        "dispatchUnless",
+        "dispatchHas"
+    ]
+},
+{
+    "q": "What is `dispatchUnless`?",
+    "type": "mcq",
+    "o": [
+        "Submits job if condition is false.",
+        "Submits if true",
+        "Submits if null",
+        "Submits if failed"
+    ]
+}
+,
+{
+    "q": "How to make a job unique across *all* queues?",
+    "type": "mcq",
+    "o": [
+        "Uniqueness is based on the cache key generated. Takes class name into account. If connection/queue not part of uniqueId, it's global.",
+        "Must use uniqueAcrossQueues trait",
+        "Must use Redis global",
+        "Cannot be global"
+    ]
+},
+{
+    "q": "What happens if a Unique Job lock cannot be acquired?",
+    "type": "mcq",
+    "o": [
+        "The dispatch fails or ignores silently (default).",
+        "Job is queued anyway",
+        "Worker crashes",
+        "System halts"
+    ]
+},
+{
+    "q": "Customizing the failure of unique job dispatch?",
+    "type": "mcq",
+    "o": [
+        "Not straightforward. Usually just doesn't dispatch. Can check `Bus::dispatch` return value?",
+        "Use `failOnNonUnique` property",
+        "Use `throwOnNonUnique`",
+        "Use `strictUnique`"
+    ]
+},
+{
+    "q": "What is `Job::dispatchSync` return value?",
+    "type": "mcq",
+    "o": [
+        "The return value of the `handle` method.",
+        "Void",
+        "The job instance",
+        "Validation result"
+    ]
+},
+{
+    "q": "What is `Job::dispatch` return value?",
+    "type": "mcq",
+    "o": [
+        "PendingDispatch instance.",
+        "The job instance",
+        "Void",
+        "Job ID"
+    ]
+},
+{
+    "q": "Using `PendingDispatch` to chain conditionally?",
+    "type": "mcq",
+    "o": [
+        "$dispatch = Job::dispatch(); if($cond) $dispatch->chain([...]);",
+        "Job::dispatch()->if($cond)",
+        "Job::dispatch()->when($cond)",
+        "Not possible"
+    ]
+},
+{
+    "q": "Horizon: What are `tags` used for?",
+    "type": "mcq",
+    "o": [
+        "Grouping/Filtering jobs in the UI. e.g. 'User:1', 'Invoice:5'.",
+        "Routing to queues",
+        "Security",
+        "Priority"
+    ]
+},
+{
+    "q": "How are Horizon tags generated automatically?",
+    "type": "mcq",
+    "o": [
+        "Horizon inspects the job's attached Eloquent models and uses their class/id.",
+        "Random string",
+        "Job class name only",
+        "Not automatic"
+    ]
+},
+{
+    "q": "Customizing tags for a job?",
+    "type": "mcq",
+    "o": [
+        "Define `tags()` method in Job class returning array of strings.",
+        "Define $tags property",
+        "Define `getTags()`",
+        "In horizon config"
+    ]
+},
+{
+    "q": "Horizon: `failed_jobs` pruning?",
+    "type": "mcq",
+    "o": [
+        "Controlled by `trim` configuration in `horizon.php` (separate from queue:prune-failed usually).",
+        "Manual only",
+        "Never pruned",
+        "Daily"
+    ]
+},
+{
+    "q": "Horizon: `waits` configuration?",
+    "type": "mcq",
+    "o": [
+        "Defines thresholds for 'Wait Time' metric to color code queue status.",
+        "Delays jobs",
+        "Pauses jobs",
+        "Stops jobs"
+    ]
+},
+{
+    "q": "Horizon: `silenced` exclusion?",
+    "type": "mcq",
+    "o": [
+        "Hides specific jobs classes from the 'Completed Jobs' list to reduce noise.",
+        "Prevents execution",
+        "Mutes errors",
+        "Mutes events"
+    ]
+},
+{
+    "q": "Can you run Horizon on `sync` driver?",
+    "type": "mcq",
+    "o": [
+        "No, Horizon is specifically designed for Redis Queue.",
+        "Yes",
+        "Only partially",
+        "Yes in dev"
+    ]
+},
+{
+    "q": "Can you run Horizon on `database` driver?",
+    "type": "mcq",
+    "o": [
+        "No.",
+        "Yes",
+        "Maybe",
+        "With plugins"
+    ]
+},
+{
+    "q": "Authenticating Horizon dashboard access?",
+    "type": "mcq",
+    "o": [
+        "Define logic in `Horizon::auth` callback (AppServiceProvider or HorizonServiceProvider).",
+        "Middleware in routes",
+        "Config password",
+        ".env token"
+    ]
+},
+{
+    "q": "Middleware used by Horizon dashboard?",
+    "type": "mcq",
+    "o": [
+        "web (group). Configurable in `horizon.php` `middleware` array.",
+        "api",
+        "auth",
+        "admin"
+    ]
+},
+{
+    "q": "Encryption: When is payload encrypted?",
+    "type": "mcq",
+    "o": [
+        "Before pushing to Redis/DB (protects data at rest in queue).",
+        "After retrieval",
+        "During processing",
+        "Only if manual"
+    ]
+},
+{
+    "q": "Encryption: When is payload decrypted?",
+    "type": "mcq",
+    "o": [
+        "When worker pops the job, before `unserialize`.",
+        "Inside handle",
+        "Manually",
+        "Never"
+    ]
+},
+{
+    "q": "Cost of using `ShouldBeEncrypted`?",
+    "type": "mcq",
+    "o": [
+        "Performance overhead (CPU) for encryption/decryption + larger payload size.",
+        "None",
+        "Disk space only",
+        "Memory only"
+    ]
+},
+{
+    "q": "Job Chaining: passing data between jobs?",
+    "type": "mcq",
+    "o": [
+        "Not supported natively via return values. Must use external store (DB/Cache) or pass data via constructor of subsequent jobs BEFORE dispatch.",
+        "Automatic piping",
+        "Using $this->next($data)",
+        "Using session"
+    ]
+},
+{
+    "q": "Can you chain a closure job?",
+    "type": "mcq",
+    "o": [
+        "Yes.",
+        "No",
+        "Only as first job",
+        "Only as last job"
+    ]
+},
+{
+    "q": "What happens if a middleware fails (throws exception)?",
+    "type": "mcq",
+    "o": [
+        "The job is not processed. Exception handling rules apply (retries/fail).",
+        "Job processed anyway",
+        "Worker ignores",
+        "Silenced"
+    ]
+},
+{
+    "q": "Does `queue:rest` command exists?",
+    "type": "mcq",
+    "o": [
+        "No. `queue:restart`, `queue:retry` exist.",
+        "Yes, sleeps worker",
+        "Yes, pauses worker",
+        "Yes, clears queue"
+    ]
+},
+{
+    "q": "Queue Event `JobExceptionOccurred`?",
+    "type": "mcq",
+    "o": [
+        "Fired when exception happens. (Might be retried).",
+        "Fired only on fail",
+        "Fired only on fatal",
+        "Fired on timeout"
+    ]
+},
+{
+    "q": "Can multiple workers listen to the same queue?",
+    "type": "mcq",
+    "o": [
+        "Yes, this is how you scale horizontal processing.",
+        "No, conflict",
+        "Only if read-only",
+        "Only Sync"
+    ]
+},
+{
+    "q": "Risk of multiple workers on `database` driver?",
+    "type": "mcq",
+    "o": [
+        "Deadlocks if database locking is poor. Laravel uses `SKIP LOCKED` or transaction locks (handles it well on modern DBs).",
+        "Jobs lost",
+        "Jobs duplicated (high risk if no transaction)",
+        "Corrupt data"
+    ]
+},
+{
+    "q": "Does `sqs` driver support immediate availability?",
+    "type": "mcq",
+    "o": [
+        "Yes. SQS standard is near instant.",
+        "No, 5 min delay",
+        "No, 1 hour delay",
+        "Depends on region"
+    ]
+},
+{
+    "q": "Difference `sqs-plain` vs `sqs`?",
+    "type": "mcq",
+    "o": [
+        "`sqs` assumes Laravel formatted job payload. `sqs-plain` allows processing raw messages from other AWS services (Lambda, SNS) not generated by Laravel.",
+        "No difference",
+        "sqs-plain is faster",
+        "sqs-plain is legacy"
+    ]
+},
+{
+    "q": "How to process `sqs-plain` job?",
+    "type": "mcq",
+    "o": [
+        "Map the queue to a specific Laravel Job class in config. The payload checks are skipped/different.",
+        "Automatically detects",
+        "Use SqsJob class",
+        "Cannot process"
+    ]
+},
+{
+    "q": "What is `queue:forget`?",
+    "type": "mcq",
+    "o": [
+        "Command to remove a specific job ID? Actually `forget` is usually cache. `queue:forget` doesn't exist standard. `queue:retry` or `flush`.",
+        "Deletes valid job",
+        "Deletes queue",
+        "Deletes driver"
+    ]
+},
+{
+    "q": "Can you use Queues to send websocket messages?",
+    "type": "mcq",
+    "o": [
+        "Yes, `Broadcast` event is essentially a queued job processed by the queue worker to publish to Redis/Pusher.",
+        "No",
+        "Direct only",
+        "Sync only"
+    ]
+},
+{
+    "q": "Does `Broadcast` happen on `sync` queue by default?",
+    "type": "mcq",
+    "o": [
+        "Yes, if queue driver is sync. If queue setup, it queues.",
+        "Always sync",
+        "Always async",
+        "Never"
+    ]
+},
+{
+    "q": "Using `after_commit` globally?",
+    "type": "mcq",
+    "o": [
+        "In `config/queue.php`, set `after_commit => true`.",
+        "In .env",
+        "In app.php",
+        "Impossible"
+    ]
+},
+{
+    "q": "Effect of `after_commit` if no transaction open?",
+    "type": "mcq",
+    "o": [
+        "Dispatches immediately.",
+        "Dispatches never",
+        "Throws error",
+        "Waits for transaction"
+    ]
+},
+{
+    "q": "Can you name the table for `database` driver?",
+    "type": "mcq",
+    "o": [
+        "Yes, in `config/queue.php` connections.database.table.",
+        "No, fixed 'jobs'",
+        "No, fixed 'queue'",
+        "Yes in .env only"
+    ]
+},
+{
+    "q": "Can you name the failed jobs table?",
+    "type": "mcq",
+    "o": [
+        "Yes, in `config/queue.php` failed.table.",
+        "No",
+        "Yes in .env",
+        "Yes in migration only"
+    ]
+},
+{
+    "q": "Can you use different failed job tables per connection?",
+    "type": "mcq",
+    "o": [
+        "No, config is global for failed jobs usually. Maybe with custom provider.",
+        "Yes",
+        "Per queue",
+        "Per job"
+    ]
+},
+{
+    "q": "What constitutes a 'long running job'?",
+    "type": "mcq",
+    "o": [
+        "Job taking longer than `timeout` or `retry_after`, triggering fail/retry loops.",
+        "1 second",
+        "10 seconds",
+        "1 minute"
+    ]
+},
+{
+    "q": "Handling signal handling in older PHP versions?",
+    "type": "mcq",
+    "o": [
+        "PCNTL extension required for graceful timeouts/stops.",
+        "Just works",
+        "Impossible",
+        "Use Windows"
+    ]
+},
+{
+    "q": "Windows support for `queue:work` signals?",
+    "type": "mcq",
+    "o": [
+        "Windows doesn't support PCNTL signals same way. `timeout` might not kill strictly.",
+        "Full support",
+        "No support",
+        "Better support"
+    ]
+},
+{
+    "q": "Using `Dispatchable` without arguments?",
+    "type": "mcq",
+    "o": [
+        "Job::dispatch(); (Calls `new Job()`).",
+        "Job::dispatch(null)",
+        "Job::dispatch([])",
+        "Job::dispatch(void)"
+    ]
+},
+{
+    "q": "Can `handle` method return a value?",
+    "type": "mcq",
+    "o": [
+        "Yes, but it's ignored essentially, unless using `dispatchSync` where you might capture it.",
+        "No, void",
+        "Must return int",
+        "Must return bool"
+    ]
+},
+{
+    "q": "What is `Queue::pushRaw`?",
+    "type": "mcq",
+    "o": [
+        "Pushes raw string payload to queue. Bypass serialization.",
+        "Pushes binary",
+        "Pushes file",
+        "Pushes command"
+    ]
+},
+{
+    "q": "What is `Queue::later`?",
+    "type": "mcq",
+    "o": [
+        "Low level method to push delayed job. `delay` uses this internally.",
+        "Pushes to end",
+        "Pushes to archive",
+        "Pushes to log"
+    ]
+},
+{
+    "q": "Testing: `Queue::fake()` affects `sync` driver?",
+    "type": "mcq",
+    "o": [
+        "Yes, it intercepts dispatch calls regardless of driver.",
+        "No",
+        "Only redis",
+        "Only db"
+    ]
+},
+{
+    "q": "Testing: `Queue::assertNothingPushed()`?",
+    "type": "mcq",
+    "o": [
+        "Asserts no jobs were pushed to queue.",
+        "Asserts empty queue",
+        "Asserts worker idle",
+        "Asserts no events"
+    ]
+},
+{
+    "q": "Does `Queue::fake()` execute jobs?",
+    "type": "mcq",
+    "o": [
+        "No! It fakes them. Jobs won't run. Logic inside handle won't execute.",
+        "Yes",
+        "Yes if configured",
+        "Yes if sync"
+    ]
+},
+{
+    "q": "How to execute jobs while `Queue::fake` is active (integration test)?",
+    "type": "mcq",
+    "o": [
+        "Don't use `Queue::fake()`. Or use `Queue::fake()->except([JobToRun::class])`.",
+        "Queue::run()",
+        "Queue::force()",
+        "Queue::real()"
+    ]
+},
+{
+    "q": "Using `except` in Queue Fake?",
+    "type": "mcq",
+    "o": [
+        "Queue::fake()->except(Job::class); allow this job to process normally (sync usually).",
+        "Queue::allow()",
+        "Queue::permit()",
+        "Queue::whiteList()"
+    ]
+},
+{
+    "q": "Can you mock the `Job` class itself?",
+    "type": "mcq",
+    "o": [
+        "Yes, binding a mock to the container, but since jobs are `new`ed up via dispatch helper, it's tricky. Easier to mock dependencies.",
+        "Yes easily",
+        "No",
+        "Use overload"
+    ]
+},
+{
+    "q": "Deleting a batch manually?",
+    "type": "mcq",
+    "o": [
+        "$batch->delete(); Removes from DB.",
+        "$batch->remove()",
+        "$batch->destroy()",
+        "$batch->clear()"
+    ]
+},
+{
+    "q": "Storing arbitrary data in batch?",
+    "type": "mcq",
+    "o": [
+        "Not really natively in `job_batches` table. Maybe create side table or use cache keyed by batch ID.",
+        "Yes in 'data' column",
+        "Yes in 'payload' column",
+        "Yes in 'meta' column"
+    ]
+},
+{
+    "q": "Batch `processedJobs()` count?",
+    "type": "mcq",
+    "o": [
+        "Returns number of processed jobs.",
+        "Returns array",
+        "Returns IDs",
+        "Returns failures"
+    ]
+},
+{
+    "q": "Batch `failedJobs` count?",
+    "type": "mcq",
+    "o": [
+        "Returns number of failed jobs.",
+        "Returns array",
+        "Returns IDs",
+        "Returns exceptions"
+    ]
+},
+{
+    "q": "Batch `progress()`?",
+    "type": "mcq",
+    "o": [
+        "Returns integer percentage (0-100).",
+        "Returns count",
+        "Returns fraction",
+        "Returns string"
+    ]
+},
+{
+    "q": "Batch `finished()`?",
+    "type": "mcq",
+    "o": [
+        "Boolean. True if all jobs handled (success or fail final).",
+        "True if success only",
+        "True if scheduled",
+        "True if dispatched"
+    ]
+}
+,
+{
+    "q": "How to create a custom Queue Driver?",
+    "type": "mcq",
+    "o": [
+        "Implement `Illuminate\\Contracts\\Queue\\Queue` and extend `Illuminate\\Queue\\Connectors\\ConnectorInterface`.",
+        "Extend QueueDriver",
+        "Implement Driver",
+        "Extend Queue"
+    ]
+},
+{
+    "q": "Where to register a custom queue connector?",
+    "type": "mcq",
+    "o": [
+        "In a ServiceProvider using `Queue::extend('driver_name', function() { ... })`.",
+        "In config/queue.php",
+        "In .env",
+        "In composer.json"
+    ]
+},
+{
+    "q": "What method puts a job onto the custom queue?",
+    "type": "mcq",
+    "o": [
+        "push() and pushRaw()",
+        "add()",
+        "insert()",
+        "dispatch()"
+    ]
+},
+{
+    "q": "Job Serialization: `__sleep` usage?",
+    "type": "mcq",
+    "o": [
+        "PHP magic method. Used by `SerializesModels` to determine which properties to keep (e.g. model IDs) versus discard during serialization.",
+        "Pauses the job",
+        "Sleeps execution",
+        "Restores model"
+    ]
+},
+{
+    "q": "Job Serialization: `__wakeup` usage?",
+    "type": "mcq",
+    "o": [
+        "PHP magic method. Used to restore state (like re-fetching models from DB) when job is deserialized.",
+        "Wakes up worker",
+        "Starts job",
+        "Resets try count"
+    ]
+},
+{
+    "q": "What happens if a serialized model is missing in DB during `__wakeup`?",
+    "type": "mcq",
+    "o": [
+        "ModelNotFoundException is thrown, and the job fails.",
+        "It is recreated",
+        "It is ignored",
+        "Passes null"
+    ]
+},
+{
+    "q": "Property `restoreModelTimeout`?",
+    "type": "mcq",
+    "o": [
+        "Doesn't exist standard. But timeouts can occur if DB is locked during wakeup restore.",
+        "Exists",
+        "Sets restore time",
+        "Sets wakeup time"
+    ]
+},
+{
+    "q": "Can you queue a class that does NOT implement `ShouldQueue`?",
+    "type": "mcq",
+    "o": [
+        "Yes, if you use `Queue::push(MyClass::class)`. But `dispatch` helper might behave synchronously if interface missing. Standard Jobs should implement it.",
+        "No",
+        "Only closures",
+        "Only callables"
+    ]
+},
+{
+    "q": "What is `CallQueuedHandler`?",
+    "type": "mcq",
+    "o": [
+        "Internal Laravel class that handles the actual execution of a queued job (calls `dispatch` or `handle` on the job object).",
+        "Middleware",
+        "Driver",
+        "Event"
+    ]
+},
+{
+    "q": "Testing: `Bus::assertBatched`?",
+    "type": "mcq",
+    "o": [
+        "Bus::assertBatched(function ($batch) { return $batch->jobs->count() === 2; });",
+        "Queue::assertBatched()",
+        "Job::assertBatched()",
+        "Batch::assert()"
+    ]
+},
+{
+    "q": "Testing: Retrieving a batch by ID in test?",
+    "type": "mcq",
+    "o": [
+        "Bus::findBatch($id);",
+        "Queue::findBatch()",
+        "Batch::find()",
+        "Job::batch()"
+    ]
+},
+{
+    "q": "Dispatching a batch from within a batch?",
+    "type": "mcq",
+    "o": [
+        "Supported (Nested batches are not strictly 'nested' in structure, but jobs can dispatch new batches).",
+        "Not supported",
+        "Crashes",
+        "Loops infinite"
+    ]
+},
+{
+    "q": "Pruning: `queue:prune-batches --hours=48`?",
+    "type": "mcq",
+    "o": [
+        "Deletes batches finished > 48 hours ago. Default is 24.",
+        "Deletes all",
+        "Deletes 48 batches",
+        "Deletes pending"
+    ]
+},
+{
+    "q": "Horizon: `snapshot` command?",
+    "type": "mcq",
+    "o": [
+        "Run periodically via scheduler (`horizon:snapshot`). Stores metrics (throughput, runtime) for dashboard graphs.",
+        "Takes photo",
+        "Backups redis",
+        "Exports config"
+    ]
+},
+{
+    "q": "Horizon: `auto_scaling` strategy?",
+    "type": "mcq",
+    "o": [
+        "Uses `min_processes` and `max_processes`. Adds workers if wait time increases.",
+        "CPU usage based",
+        "Memory based",
+        "Traffic based"
+    ]
+},
+{
+    "q": "Horizon: `balance_cooldown`?",
+    "type": "mcq",
+    "o": [
+        "How long to wait before scaling again (prevents flapping).",
+        "Cools down CPU",
+        "Stops worker",
+        "Resets stats"
+    ]
+},
+{
+    "q": "Horizon: `balance_max_shift`?",
+    "type": "mcq",
+    "o": [
+        "How many processes to add/remove at once.",
+        "Max workers",
+        "Max queues",
+        "Max time"
+    ]
+},
+{
+    "q": "Can you use different queues for `onFailure` logic?",
+    "type": "mcq",
+    "o": [
+        "Generally `failed_jobs` is one table. But logic inside `failed()` can dispatch new cleanup jobs to specific queues.",
+        "Yes, config failed_queue",
+        "No",
+        "Automatic"
+    ]
+},
+{
+    "q": "What is `Mockery` expectation for `Queue::push`?",
+    "type": "mcq",
+    "o": [
+        "Queue::shouldReceive('push')->once()->with(Job::class);",
+        "Queue::expectPush()",
+        "Queue::spyPush()",
+        "Queue::mockPush()"
+    ]
+},
+{
+    "q": "Dispatching job with custom payload data (non-property)?",
+    "type": "mcq",
+    "o": [
+        "Usually passed to constructor and stored in property. `Queue::push` 2nd arg can modify payload slightly in raw mode, but for class jobs, properties are the way.",
+        "Use withPayload()",
+        "Use data()",
+        "Use meta()"
+    ]
+},
+{
+    "q": "Can a job dispatch itself? (Recursion)",
+    "type": "mcq",
+    "o": [
+        "Yes, useful for polling or long-running steps. Just dispatch `new static(...)` inside handle or `release()`.",
+        "No",
+        "Only once",
+        "Stack overflow immediate"
+    ]
+},
+{
+    "q": "Difference `release` vs dispatching self?",
+    "type": "mcq",
+    "o": [
+        "Release increments attempts (can hit max tries). Dispatching new instance resets attempts count (clean slate).",
+        "No difference",
+        "Release is faster",
+        "Dispatch is faster"
+    ]
+},
+{
+    "q": "Using `Queue::connection('a')->push(...)`?",
+    "type": "mcq",
+    "o": [
+        "Pushes to specific connection 'a'.",
+        "Pushes to 'a' queue on default connection",
+        "Error",
+        "Pushes to 'a' tube"
+    ]
+},
+{
+    "q": "Does `queue:flush` remove active reserved jobs?",
+    "type": "mcq",
+    "o": [
+        "It flushes FAILED jobs. Active queue clearing depends on driver (Redis: `flushdb`, SQS: purge). `queue:flush` is specifically for `failed_jobs` table.",
+        "Yes active too",
+        "No",
+        "Only delayed"
+    ]
+},
+{
+    "q": "How to clear the actual Redis queue (Waiting jobs)?",
+    "type": "mcq",
+    "o": [
+        "php artisan queue:clear redis --queue=default",
+        "queue:flush",
+        "queue:empty",
+        "queue:reset"
+    ]
+},
+{
+    "q": "What is `queue:clear`?",
+    "type": "mcq",
+    "o": [
+        "Deletes all jobs from the queue (not failed jobs). Destructive.",
+        "Deletes failed jobs",
+        "Resets worker",
+        "Restart queue"
+    ]
+},
+{
+    "q": "Handling signal `SIGUSR2` in Laravel worker?",
+    "type": "mcq",
+    "o": [
+        "Pauses the worker (Pause processing).",
+        "Resumes worker",
+        "Restarts worker",
+        "Kills worker"
+    ]
+},
+{
+    "q": "Handling signal `SIGCONT`?",
+    "type": "mcq",
+    "o": [
+        "Resumes paused worker (Continue).",
+        "Pauses worker",
+        "Stops worker",
+        "Debugs worker"
+    ]
+},
+{
+    "q": "Does `sqs` driver support `queue:clear`?",
+    "type": "mcq",
+    "o": [
+        "Yes, it calls SQS PurgeQueue API.",
+        "No",
+        "Only local",
+        "Only via console"
+    ]
+},
+{
+    "q": "What if SQS Purge limit is hit (once per 60s)?",
+    "type": "mcq",
+    "o": [
+        "Command might fail or wait. AWS limitation.",
+        "It forces it",
+        "Laravel ignores it",
+        "Switches to delete"
+    ]
+},
+{
+    "q": "Using `Queue::getRedis()`?",
+    "type": "mcq",
+    "o": [
+        "Returns the underlying Redis instance (Predis/PhpRedis client).",
+        "Returns driver",
+        "Returns config",
+        "Returns connection"
+    ]
+},
+{
+    "q": "Manual Redis queue manipulation?",
+    "type": "mcq",
+    "o": [
+        "Possible via `Redis::connection()`. Be careful with Laravel's internal list packing format.",
+        "Recommended",
+        "Standard",
+        "Impossible"
+    ]
+},
+{
+    "q": "Laravel Redis Queue structures?",
+    "type": "mcq",
+    "o": [
+        "Uses Lists (`RPUSH`, `LPOP`). Also Sorted Sets for delayed/reserved queues.",
+        "Uses Hashes",
+        "Uses Strings",
+        "Uses Streams"
+    ]
+},
+{
+    "q": "Redis `zset` usage in queues?",
+    "type": "mcq",
+    "o": [
+        "Stores delayed jobs (with timestamp score) and reserved jobs (visibility timeout).",
+        "Stores payloads",
+        "Stores failed jobs",
+        "Stores metrics"
+    ]
+},
+{
+    "q": "What moves jobs from 'delayed' zset to available list?",
+    "type": "mcq",
+    "o": [
+        "The queue worker (or scheduler) constantly checks/moves expired items. Actually `queue:work` does the migration checking.",
+        "Cron job",
+        "Redis internally",
+        "Supervisor"
+    ]
+},
+{
+    "q": "Can you define `retry_after` per job?",
+    "type": "mcq",
+    "o": [
+        "Generally `$retryAfter` property or method in Job class overrides connection default?",
+        "Yes, $retryAfter",
+        "Yes, $timeout",
+        "No, connection only"
+    ]
+},
+{
+    "q": "Property `tries` vs `maxExceptions` precedence?",
+    "type": "mcq",
+    "o": [
+        "Whichever reached first fails the job.",
+        "Tries always",
+        "MaxExceptions always",
+        "Undefined"
+    ]
+},
+{
+    "q": "Does `dispatchSync` respect `after_commit`?",
+    "type": "mcq",
+    "o": [
+        "Yes, if configured. It will execute immediately *after* the commit.",
+        "No, executes immediately regardless",
+        "No, queues it",
+        "Executes before commit"
+    ]
+},
+{
+    "q": "Using `DB::transaction` inside `handle`?",
+    "type": "mcq",
+    "o": [
+        "Good practice for atomicity. If exception, rollback, job fails, retry logic handles it.",
+        "Bad practice",
+        "Causes deadlocks",
+        "Not allowed"
+    ]
+},
+{
+    "q": "Job middleware: return value?",
+    "type": "mcq",
+    "o": [
+        "Middleware `handle($job, $next)` must return `$next($job)`.",
+        "Return true",
+        "Return void",
+        "Return string"
+    ]
+},
+{
+    "q": "RateLimited middleware: `dontRelease`?",
+    "type": "mcq",
+    "o": [
+        "->dontRelease(); If limited, fail/discard instead of releasing to retry.",
+        "->release()",
+        "->stop()",
+        "->ignore()"
+    ]
+},
+{
+    "q": "Testing: `Queue::assertPushed` callback args?",
+    "type": "mcq",
+    "o": [
+        "function ($job, $queue, $data). Access public properties of $job.",
+        "function ($job)",
+        "function ($payload)",
+        "function ($id)"
+    ]
+},
+{
+    "q": "What is `Job::dispatchOrAbort`?",
+    "type": "mcq",
+    "o": [
+        "Not standard Laravel.",
+        "Dispatches if condition met",
+        "Aborts app",
+        "Throws exception"
+    ]
+},
+{
+    "q": "Command `queue:forget` (Horizon)?",
+    "type": "mcq",
+    "o": [
+        "Available in Horizon to delete a failed job by ID. `horizon:forget`.",
+        "queue:forget",
+        "job:delete",
+        "horizon:delete"
+    ]
+},
+{
+    "q": "Horizon: `terminate` command?",
+    "type": "mcq",
+    "o": [
+        "php artisan horizon:terminate. Gracefully stops master process and workers.",
+        "horizon:stop",
+        "horizon:kill",
+        "horizon:down"
+    ]
+},
+{
+    "q": "Can you use `dispatchSync` with a Batch?",
+    "type": "mcq",
+    "o": [
+        "Usually batches are for async queues. Sync batching just runs them sequentially immediately.",
+        "No",
+        "Errors",
+        "Queues them"
+    ]
+},
+{
+    "q": "What happens if you serialise a Closure in a Job?",
+    "type": "mcq",
+    "o": [
+        "Standard PHP serialization fails on closures. Take care. `opis/closure` or `laravel/serializable-closure` handles it if using `Queueable` closure.",
+        "It works",
+        "It crashes",
+        "It disappears"
+    ]
+},
+{
+    "q": "Does `make:job` create unit test file?",
+    "type": "mcq",
+    "o": [
+        "No, requires separate `make:test`.",
+        "Yes, in tests/Feature",
+        "Yes, in tests/Unit",
+        "Yes, in tests/Jobs"
+    ]
+}
+,
+{
+    "q": "What is `Queue::size()`?",
+    "type": "mcq",
+    "o": [
+        "Returns the approximate number of jobs in the queue.",
+        "Returns max size",
+        "Returns payload size",
+        "Returns memory size"
+    ]
+},
+{
+    "q": "Does `Queue::size()` work on all drivers?",
+    "type": "mcq",
+    "o": [
+        "Most (Redis, Database, SQS, Beanstalkd). Sync returns 0 always.",
+        "Redis only",
+        "SQS only",
+        "Database only"
+    ]
+},
+{
+    "q": "Manually fetching a job: `Queue::pop()` return type?",
+    "type": "mcq",
+    "o": [
+        "Returns `Illuminate\\Contracts\\Queue\\Job` instance or null.",
+        "Returns payload string",
+        "Returns stdClass",
+        "Returns bool"
+    ]
+},
+{
+    "q": "What must you do after processing a manually popped job?",
+    "type": "mcq",
+    "o": [
+        "Call `$job->delete()` to remove it from the queue.",
+        "Nothing",
+        "Call $job->finish()",
+        "Call $job->done()"
+    ]
+},
+{
+    "q": "What if you don't delete a manually popped job?",
+    "type": "mcq",
+    "o": [
+        "It will eventually be released back to the queue (after timeout/retry_after expiry).",
+        "It is deleted automatically",
+        "It blocks the queue",
+        "It vanishes"
+    ]
+},
+{
+    "q": "Running closure job on specific connection?",
+    "type": "mcq",
+    "o": [
+        "dispatch(function() { ... })->onConnection('redis');",
+        "dispatch(function() { ... }, 'redis');",
+        "Queue::push('redis', function() { ... });",
+        "Not supported"
+    ]
+},
+{
+    "q": "Can you use `dispatch` with `onQueue` for Closures?",
+    "type": "mcq",
+    "o": [
+        "Yes, `dispatch(fn...)` returns PendingDispatch which supports chaining methods.",
+        "No",
+        "Only onConnection",
+        "Only delay"
+    ]
+},
+{
+    "q": "What is `Illuminated\\Console\\Scheduling\\Schedule::job`?",
+    "type": "mcq",
+    "o": [
+        "Schedules a job to be dispatched. `$schedule->job(new Heartbeat)->everyMinute()`.",
+        "Runs job immediately",
+        "Queues job immediately",
+        "Defines job class"
+    ]
+},
+{
+    "q": "Scheduling a job to a specific queue?",
+    "type": "mcq",
+    "o": [
+        "$schedule->job(new Job, 'queue_name', 'connection_name');",
+        "->onQueue('name')",
+        "->queue('name')",
+        "->to('name')"
+    ]
+},
+{
+    "q": "Using `Queue::push` with delay?",
+    "type": "mcq",
+    "o": [
+        "Use `Queue::later(10, Job::class)` instead of push.",
+        "Queue::push()->delay(10)",
+        "Queue::delayedPush(10)",
+        "Queue::add(10)"
+    ]
+},
+{
+    "q": "What is `maintenance_mode` array in `queue.php`?",
+    "type": "mcq",
+    "o": [
+        "Doesn't exist. Maintenance mode behavior is handled by `DownCommand` or `CheckForMaintenanceMode` middleware. Queues usually keep running unless `--force` or checks added.",
+        "Exists to stop queues",
+        "Exists to pause queues",
+        "Exists to retry queues"
+    ]
+},
+{
+    "q": "Worker flag `--force`?",
+    "type": "mcq",
+    "o": [
+        "Forces the worker to run even if the application is in maintenance mode.",
+        "Forces execution ignoring errors",
+        "Forces huge memory",
+        "Forces sync"
+    ]
+},
+{
+    "q": "Does `queue:work` respect maintenance mode by default?",
+    "type": "mcq",
+    "o": [
+        "Yes, it will not process jobs if app is down (unless --force). It checks `App::isDownForMaintenance()`.",
+        "No",
+        "Only on redis",
+        "Only on database"
+    ]
+},
+{
+    "q": "Testing: `Bus::fake` vs `Queue::fake`?",
+    "type": "mcq",
+    "o": [
+        "Bus::fake() swaps the Dispatcher. Queue::fake() swaps the Queue Factory. Effectively typically do the same for simple job dispatch assertions.",
+        "Bus is for commands",
+        "Queue is for database",
+        "Different things completely"
+    ]
+},
+{
+    "q": "Testing: `Queue::assertPushedOn` with delay?",
+    "type": "mcq",
+    "o": [
+        "Use `Queue::assertPushed` callback or check `Queue::assertLater` (if strictly delayed).",
+        "Queue::assertDelayedOn()",
+        "Queue::assertWait()",
+        "Queue::assertTimer()"
+    ]
+},
+{
+    "q": "What is `Job::dispatchAfterResponse` implementation?",
+    "type": "mcq",
+    "o": [
+        "Registers a termination callback with the kernel/application that runs the job.",
+        "Uses sync driver",
+        "Uses redis",
+        "Uses cron"
+    ]
+},
+{
+    "q": "Can you use `dispatchAfterResponse` inside another Job?",
+    "type": "mcq",
+    "o": [
+        "Yes, it will run after the current job finishes processing (if supported by worker loop logic, though functionally acts like sync/now).",
+        "No",
+        "Errors",
+        "Queues forever"
+    ]
+},
+{
+    "q": "Prerequisite for `dispatchAfterResponse`?",
+    "type": "mcq",
+    "o": [
+        "PHP FastCGI (FPM) usually needed to actually send response to client while process continues. On `php artisan serve` it blocks.",
+        "Redis",
+        "Database",
+        "Nginx"
+    ]
+},
+{
+    "q": "Can you define `tries` property as a method?",
+    "type": "mcq",
+    "o": [
+        "Yes, `tries()` method takes precedence over property.",
+        "No",
+        "Only in traits",
+        "Only in interface"
+    ]
+},
+{
+    "q": "Command `queue:listen` memory leaks?",
+    "type": "mcq",
+    "o": [
+        "Less prone to memory leaks because it restarts the script/framework for every job. But higher CPU overhead.",
+        "More prone",
+        "Same as work",
+        "No leaks ever"
+    ]
+},
+{
+    "q": "Config `failed.driver`?",
+    "type": "mcq",
+    "o": [
+        "Usually `database-uuids` (default in Laravel 8+) or `dynamodb`.",
+        "file",
+        "redis",
+        "null"
+    ]
+},
+{
+    "q": "Using `DynamoDb` for failed jobs?",
+    "type": "mcq",
+    "o": [
+        "Supported natively.",
+        "Not supported",
+        "Via plugin",
+        "Via redis"
+    ]
+},
+{
+    "q": "Horizon: `metrics` snapshots retention?",
+    "type": "mcq",
+    "o": [
+        "Configurable in `horizon.php` (e.g. trim snapshots).",
+        "Permanent",
+        "1 hour",
+        "1 day"
+    ]
+},
+{
+    "q": "Horizon: `trim.recent_failed`?",
+    "type": "mcq",
+    "o": [
+        "Minutes to keep recent failed jobs (default 10080 - 7 days).",
+        "Count",
+        "Seconds",
+        "Hours"
+    ]
+},
+{
+    "q": "What is `queue:retry-batch`?",
+    "type": "mcq",
+    "o": [
+        "Retries all failed jobs within a specific batch ID.",
+        "Retries batch logic",
+        "Retries batch callback",
+        "Restarts batch"
+    ]
+},
+{
+    "q": "Can you cancel a batch from `queue` command?",
+    "type": "mcq",
+    "o": [
+        "Yes, `queue:cancel-batch {id}`.",
+        "No, only code",
+        "No, only horizon",
+        "No, only database"
+    ]
+},
+{
+    "q": "What happens if you delete a job class file but it's queued?",
+    "type": "mcq",
+    "o": [
+        "Queued payload contains class name. Worker attempts `unserialize`. Fails with `__PHP_Incomplete_Class` or ClassNotFound error.",
+        "Skips it",
+        "Runs parent",
+        "Nothing"
+    ]
+},
+{
+    "q": "Using `Queue::getConnection()->getPdo()`?",
+    "type": "mcq",
+    "o": [
+        "If using Database driver, yes. Returns PDO instance used by queue.",
+        "Always works",
+        "Never works",
+        "Returns Redis"
+    ]
+},
+{
+    "q": "Limit on `sqs` SQS message size?",
+    "type": "mcq",
+    "o": [
+        "256KB (AWS Limit). Laravel doesn't bypass this. Large payloads fail.",
+        "1MB",
+        "Unlimited",
+        "1GB"
+    ]
+},
+{
+    "q": "Handling payloads larger than SQS limit?",
+    "type": "mcq",
+    "o": [
+        "Store data in S3/DB and pass ID/Key in job payload. (Claim Check Pattern).",
+        "Automatic compression",
+        "Automatic splitting",
+        "Ignore"
+    ]
+},
+{
+    "q": "Compression of queue payloads?",
+    "type": "mcq",
+    "o": [
+        "Not on by default. Can manually compress in `__sleep` or use custom driver.",
+        "Automatic gzip",
+        "Automatic zip",
+        "Always on"
+    ]
+},
+{
+    "q": "What does `queue:table` generate?",
+    "type": "mcq",
+    "o": [
+        "Migration for `jobs` table (id, queue, payload, attempts, reserved_at, available_at, created_at).",
+        "Migration for failed_jobs",
+        "Migration for queues",
+        "Migration for workers"
+    ]
+},
+{
+    "q": "Column `reserved_at` in jobs table?",
+    "type": "mcq",
+    "o": [
+        "Timestamp when a worker picked up the job (locking it). Null if available.",
+        "Created time",
+        "Finished time",
+        "Failed time"
+    ]
+},
+{
+    "q": "How does `database` driver lock jobs?",
+    "type": "mcq",
+    "o": [
+        "Updates `reserved_at` using atomic update (where reserved_at is null). Uses `SKIP LOCKED` in modern SQL for performance.",
+        "Table lock",
+        "Row lock only",
+        "File lock"
+    ]
+},
+{
+    "q": "Can you use different table name for database queue?",
+    "type": "mcq",
+    "o": [
+        "Yes, config `queue.connections.database.table`.",
+        "No",
+        "In env",
+        "In migration"
+    ]
+},
+{
+    "q": "Why use `dispatchSync` in tests?",
+    "type": "mcq",
+    "o": [
+        "To execute logic immediately and assert side-effects without mocking the queue or running a worker process.",
+        "Speed",
+        "Simplicity",
+        "All of above"
+    ]
+},
+{
+    "q": "Is `dispatch_now` same as `dispatchSync`?",
+    "type": "mcq",
+    "o": [
+        "Yes, `dispatch_now` is the deprecated name.",
+        "No",
+        "Similar",
+        "Different"
+    ]
+},
+{
+    "q": "Can you define `middleware` in `dispatch` chain for Job?",
+    "type": "mcq",
+    "o": [
+        "Yes. `Job::dispatch()->middleware([new RateLimited])`? No, middleware is usually defined on the Job class `middleware()` method or array property. Some syntaxes allow chain definition.",
+        "No",
+        "Only constructor",
+        "Only handle"
+    ]
+},
+{
+    "q": "Job `failOnTimeout` property?",
+    "type": "mcq",
+    "o": [
+        "public $failOnTimeout = true; (Fails job immediately on timeout instead of releasing).",
+        "retryOnTimeout",
+        "deleteOnTimeout",
+        "ignoreTimeout"
+    ]
+},
+{
+    "q": "Using `Queue::connection('redis')->size('default')`?",
+    "type": "mcq",
+    "o": [
+        "Gets size of 'default' queue on 'redis' connection.",
+        "Gets total size",
+        "Gets memory",
+        "Gets workers"
+    ]
+},
+{
+    "q": "Does `queue:monitor` work for database driver?",
+    "type": "mcq",
+    "o": [
+        "Yes, counts rows.",
+        "No",
+        "Maybe",
+        "Errors"
+    ]
+},
+{
+    "q": "How to avoid overlapping jobs across multiple servers?",
+    "type": "mcq",
+    "o": [
+        "Use `WithoutOverlapping` middleware with a centralized Cache (Redis/Memcached).",
+        "Use file cache",
+        "Use local cache",
+        "Use array cache"
+    ]
+},
+{
+    "q": "What happens if Cache driver is `array` for Overlapping check?",
+    "type": "mcq",
+    "o": [
+        "It only locks within the same process request (useless for queues usually). Must use shared persistent cache.",
+        "Works fine",
+        "Crashes",
+        "Locks forever"
+    ]
+},
+{
+    "q": "Batch cancellation vs failure?",
+    "type": "mcq",
+    "o": [
+        "Failure happens if a job errors. Cancellation is manual signal to stop processing remainder.",
+        "Same",
+        "Cancellation is auto",
+        "Failure is manual"
+    ]
+},
+{
+    "q": "Events fired by Batch?",
+    "type": "mcq",
+    "o": [
+        "BatchDispatching, BatchDispatched. (Callbacks `then`, `catch`, `finally` are stored in DB).",
+        "BatchRunning",
+        "BatchStopped",
+        "BatchError"
+    ]
+},
+{
+    "q": "Can you use `Notification` as a queued job?",
+    "type": "mcq",
+    "o": [
+        "Yes, implementing `ShouldQueue` on the Notification class queues the sending.",
+        "No",
+        "Only Mailable",
+        "Only Event"
+    ]
+},
+{
+    "q": "Can you use `Mailable` as a queued job?",
+    "type": "mcq",
+    "o": [
+        "Yes, implementing `ShouldQueue` on Mailable queues the sending.",
+        "No",
+        "Only Notification",
+        "Only Event"
+    ]
+}
+]

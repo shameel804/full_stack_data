@@ -1,0 +1,6017 @@
+[
+    {
+        "q": "What is error handling in Express.js?",
+        "type": "mcq",
+        "o": [
+            "Managing and responding to errors in applications",
+            "Error logging",
+            "Error prevention",
+            "Error recovery"
+        ]
+    },
+    {
+        "q": "Error handling middleware has ______ parameters.",
+        "type": "fill_blank",
+        "answers": [
+            "four"
+        ],
+        "other_options": [
+            "three",
+            "two",
+            "five"
+        ]
+    },
+    {
+        "q": "Express recognizes error handlers by parameter count.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the default Express error handler?",
+        "type": "mcq",
+        "o": [
+            "Built-in handler that sends error response",
+            "Custom handler",
+            "No handler",
+            "Third-party handler"
+        ]
+    },
+    {
+        "q": "Default handler sends error in ______ environment.",
+        "type": "fill_blank",
+        "answers": [
+            "development"
+        ],
+        "other_options": [
+            "production",
+            "testing",
+            "staging"
+        ]
+    },
+    {
+        "q": "Production mode hides stack traces by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "How do you create a custom error handler?",
+        "type": "mcq",
+        "o": [
+            "app.use((err, req, res, next) => {...})",
+            "app.error((err) => {...})",
+            "app.catch((err) => {...})",
+            "app.handle((err) => {...})"
+        ]
+    },
+    {
+        "q": "Custom error handlers should be defined ______.",
+        "type": "fill_blank",
+        "answers": [
+            "last"
+        ],
+        "other_options": [
+            "first",
+            "middle",
+            "anywhere"
+        ]
+    },
+    {
+        "q": "Custom handlers can format error responses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handling components:",
+        "type": "match",
+        "left": [
+            "err",
+            "req",
+            "res",
+            "next"
+        ],
+        "right": [
+            "Error object",
+            "Request",
+            "Response",
+            "Next middleware"
+        ]
+    },
+    {
+        "q": "What is next(err) in Express?",
+        "type": "mcq",
+        "o": [
+            "Passes error to error handling middleware",
+            "Skips to next route",
+            "Ends request",
+            "Logs error"
+        ]
+    },
+    {
+        "q": "next() with error argument triggers ______ handler.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "route",
+            "middleware",
+            "default"
+        ]
+    },
+    {
+        "q": "next(err) skips all regular middleware.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is synchronous error handling?",
+        "type": "mcq",
+        "o": [
+            "Express catches errors thrown in sync code",
+            "Manual error catching",
+            "Async error handling",
+            "Promise errors"
+        ]
+    },
+    {
+        "q": "Sync errors in route handlers are ______ caught.",
+        "type": "fill_blank",
+        "answers": [
+            "automatically"
+        ],
+        "other_options": [
+            "manually",
+            "never",
+            "sometimes"
+        ]
+    },
+    {
+        "q": "Thrown errors in sync handlers go to error middleware.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is asynchronous error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in async/await and promises",
+            "Sync error handling",
+            "Callback errors",
+            "Event errors"
+        ]
+    },
+    {
+        "q": "Async errors require ______ or try/catch.",
+        "type": "fill_blank",
+        "answers": [
+            ".catch()"
+        ],
+        "other_options": [
+            ".then()",
+            ".finally()",
+            ".error()"
+        ]
+    },
+    {
+        "q": "Express 4 does not auto-catch async errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get('/async', async (req, res, next) => {\n    try {\n        throw new Error('Async error');\n    } catch (err) {\n        next(err);\n    }\n});\n\napp.use((err, req, res, next) => {\n    res.status(500).json({ error: err.message });\n});",
+        "o": [
+            "500 with {\"error\": \"Async error\"}",
+            "Unhandled rejection",
+            "App crash",
+            "No response"
+        ]
+    },
+    {
+        "q": "Rearrange async error handling steps:",
+        "type": "rearrange",
+        "words": [
+            "Wrap in try-catch",
+            "Catch error",
+            "Call next(err)",
+            "Error middleware handles",
+            "Send response"
+        ]
+    },
+    {
+        "q": "What is express-async-handler?",
+        "type": "mcq",
+        "o": [
+            "Wrapper that catches async errors automatically",
+            "Async route creation",
+            "Error logging",
+            "Promise handling"
+        ]
+    },
+    {
+        "q": "asyncHandler wraps route ______.",
+        "type": "fill_blank",
+        "answers": [
+            "functions"
+        ],
+        "other_options": [
+            "handlers",
+            "middleware",
+            "callbacks"
+        ]
+    },
+    {
+        "q": "express-async-handler eliminates try/catch.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const asyncHandler = require('express-async-handler');\n\napp.get('/data', asyncHandler(async (req, res) => {\n    throw new Error('Database error');\n}));\n\napp.use((err, req, res, next) => {\n    res.status(500).json({ error: err.message });\n});",
+        "o": [
+            "500 with {\"error\": \"Database error\"}",
+            "Unhandled rejection",
+            "App crash",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "What is 404 handling in Express?",
+        "type": "mcq",
+        "o": [
+            "Handling requests to non-existent routes",
+            "Server errors",
+            "Client errors",
+            "Authentication errors"
+        ]
+    },
+    {
+        "q": "404 handlers are placed after all ______.",
+        "type": "fill_blank",
+        "answers": [
+            "routes"
+        ],
+        "other_options": [
+            "middleware",
+            "handlers",
+            "errors"
+        ]
+    },
+    {
+        "q": "404 is a client error, not server error.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get('/exists', (req, res) => res.send('Found'));\n\napp.use((req, res) => {\n    res.status(404).json({ error: 'Not found' });\n});\n\n// GET /missing",
+        "o": [
+            "404 with {\"error\": \"Not found\"}",
+            "200 OK",
+            "500 error",
+            "No response"
+        ]
+    },
+    {
+        "q": "Match HTTP error status codes:",
+        "type": "match",
+        "left": [
+            "400",
+            "401",
+            "403",
+            "404"
+        ],
+        "right": [
+            "Bad Request",
+            "Unauthorized",
+            "Forbidden",
+            "Not Found"
+        ]
+    },
+    {
+        "q": "What is global error catching?",
+        "type": "mcq",
+        "o": [
+            "Catching all unhandled errors in the app",
+            "Local error catching",
+            "Route error catching",
+            "Middleware error catching"
+        ]
+    },
+    {
+        "q": "process.on('uncaughtException') catches ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "uncaught"
+        ],
+        "other_options": [
+            "async",
+            "sync",
+            "all"
+        ]
+    },
+    {
+        "q": "Uncaught exceptions should crash and restart.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is unhandledRejection event?",
+        "type": "mcq",
+        "o": [
+            "Catches unhandled promise rejections",
+            "Catches sync errors",
+            "Catches route errors",
+            "Catches middleware errors"
+        ]
+    },
+    {
+        "q": "Promise rejections without catch trigger ______.",
+        "type": "fill_blank",
+        "answers": [
+            "unhandledRejection"
+        ],
+        "other_options": [
+            "uncaughtException",
+            "error",
+            "warning"
+        ]
+    },
+    {
+        "q": "Node.js 15+ crashes on unhandled rejections.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange global error handling setup:",
+        "type": "rearrange",
+        "words": [
+            "Handle uncaughtException",
+            "Handle unhandledRejection",
+            "Log error",
+            "Clean up",
+            "Exit process"
+        ]
+    },
+    {
+        "q": "What is error logging?",
+        "type": "mcq",
+        "o": [
+            "Recording errors for analysis",
+            "Error display",
+            "Error fixing",
+            "Error prevention"
+        ]
+    },
+    {
+        "q": "Error logs should include stack ______.",
+        "type": "fill_blank",
+        "answers": [
+            "trace"
+        ],
+        "other_options": [
+            "count",
+            "type",
+            "code"
+        ]
+    },
+    {
+        "q": "Production logs should be sent to external services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is winston for error logging?",
+        "type": "mcq",
+        "o": [
+            "Popular logging library for Node.js",
+            "Error handler",
+            "Error formatter",
+            "Error reporter"
+        ]
+    },
+    {
+        "q": "Winston supports multiple log ______.",
+        "type": "fill_blank",
+        "answers": [
+            "transports"
+        ],
+        "other_options": [
+            "levels",
+            "formats",
+            "outputs"
+        ]
+    },
+    {
+        "q": "Winston can log to files and external services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const winston = require('winston');\nconst logger = winston.createLogger({\n    transports: [new winston.transports.Console()]\n});\n\napp.use((err, req, res, next) => {\n    logger.error(err.stack);\n    res.status(500).json({ error: 'Server error' });\n});",
+        "o": [
+            "Logs stack trace to console, returns 500",
+            "Only logs error",
+            "Only returns 500",
+            "Does nothing"
+        ]
+    },
+    {
+        "q": "Match logging levels with their purposes:",
+        "type": "match",
+        "left": [
+            "error",
+            "warn",
+            "info",
+            "debug"
+        ],
+        "right": [
+            "Errors only",
+            "Potential issues",
+            "Important events",
+            "Development info"
+        ]
+    },
+    {
+        "q": "What is pino for error logging?",
+        "type": "mcq",
+        "o": [
+            "Fast JSON logger for Node.js",
+            "Error handler",
+            "Error formatter",
+            "Text logger"
+        ]
+    },
+    {
+        "q": "Pino is faster than ______.",
+        "type": "fill_blank",
+        "answers": [
+            "winston"
+        ],
+        "other_options": [
+            "bunyan",
+            "morgan",
+            "debug"
+        ]
+    },
+    {
+        "q": "Pino outputs JSON logs by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error monitoring with Sentry?",
+        "type": "mcq",
+        "o": [
+            "Real-time error tracking service",
+            "Error logger",
+            "Error handler",
+            "Error formatter"
+        ]
+    },
+    {
+        "q": "Sentry captures errors and sends to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "cloud"
+        ],
+        "other_options": [
+            "console",
+            "file",
+            "database"
+        ]
+    },
+    {
+        "q": "Sentry provides error analytics and alerts.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error monitoring workflow:",
+        "type": "rearrange",
+        "words": [
+            "Install SDK",
+            "Configure DSN",
+            "Capture errors",
+            "View dashboard",
+            "Set up alerts"
+        ]
+    },
+    {
+        "q": "What is custom Error class?",
+        "type": "mcq",
+        "o": [
+            "Extending Error for specific error types",
+            "Error configuration",
+            "Error template",
+            "Error log"
+        ]
+    },
+    {
+        "q": "Custom errors extend ______ class.",
+        "type": "fill_blank",
+        "answers": [
+            "Error"
+        ],
+        "other_options": [
+            "Exception",
+            "Throwable",
+            "ErrorType"
+        ]
+    },
+    {
+        "q": "Custom errors can include status codes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "class NotFoundError extends Error {\n    constructor(message) {\n        super(message);\n        this.statusCode = 404;\n    }\n}\n\napp.get('/item/:id', (req, res, next) => {\n    next(new NotFoundError('Item not found'));\n});\n\napp.use((err, req, res, next) => {\n    res.status(err.statusCode || 500).json({ error: err.message });\n});",
+        "o": [
+            "404 with {\"error\": \"Item not found\"}",
+            "500 with error",
+            "No status code",
+            "App crash"
+        ]
+    },
+    {
+        "q": "Match custom error types with status codes:",
+        "type": "match",
+        "left": [
+            "ValidationError",
+            "NotFoundError",
+            "UnauthorizedError",
+            "ForbiddenError"
+        ],
+        "right": [
+            "400",
+            "404",
+            "401",
+            "403"
+        ]
+    },
+    {
+        "q": "What is operational vs programming error?",
+        "type": "mcq",
+        "o": [
+            "Expected vs unexpected errors",
+            "Sync vs async errors",
+            "Client vs server errors",
+            "Logged vs unlogged errors"
+        ]
+    },
+    {
+        "q": "Operational errors are ______ in normal operation.",
+        "type": "fill_blank",
+        "answers": [
+            "expected"
+        ],
+        "other_options": [
+            "unexpected",
+            "rare",
+            "critical"
+        ]
+    },
+    {
+        "q": "Programming errors indicate bugs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful error response?",
+        "type": "mcq",
+        "o": [
+            "Sending user-friendly error messages",
+            "Error logging",
+            "Error recovery",
+            "Error prevention"
+        ]
+    },
+    {
+        "q": "Hide technical details in ______ environment.",
+        "type": "fill_blank",
+        "answers": [
+            "production"
+        ],
+        "other_options": [
+            "development",
+            "testing",
+            "staging"
+        ]
+    },
+    {
+        "q": "Generic messages prevent information disclosure.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error response best practices:",
+        "type": "rearrange",
+        "words": [
+            "Catch error",
+            "Log details",
+            "Determine status",
+            "Format message",
+            "Send response"
+        ]
+    },
+    {
+        "q": "What is error response format?",
+        "type": "mcq",
+        "o": [
+            "Consistent structure for error responses",
+            "Error text",
+            "Error code",
+            "Error message"
+        ]
+    },
+    {
+        "q": "Standard format includes error and ______.",
+        "type": "fill_blank",
+        "answers": [
+            "message"
+        ],
+        "other_options": [
+            "code",
+            "data",
+            "stack"
+        ]
+    },
+    {
+        "q": "Consistent format helps frontend handle errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is http-errors package?",
+        "type": "mcq",
+        "o": [
+            "Creates HTTP error objects with status codes",
+            "HTTP client",
+            "HTTP server",
+            "HTTP parser"
+        ]
+    },
+    {
+        "q": "createError(404) creates ______ error.",
+        "type": "fill_blank",
+        "answers": [
+            "Not Found"
+        ],
+        "other_options": [
+            "Bad Request",
+            "Server Error",
+            "Unauthorized"
+        ]
+    },
+    {
+        "q": "http-errors integrates well with Express.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const createError = require('http-errors');\n\napp.get('/restricted', (req, res, next) => {\n    next(createError(403, 'Access denied'));\n});\n\napp.use((err, req, res, next) => {\n    res.status(err.status).json({\n        error: err.message,\n        status: err.status\n    });\n});",
+        "o": [
+            "403 with {\"error\": \"Access denied\", \"status\": 403}",
+            "500 error",
+            "No status",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "Match http-errors methods:",
+        "type": "match",
+        "left": [
+            "createError(400)",
+            "createError(401)",
+            "createError(403)",
+            "createError(500)"
+        ],
+        "right": [
+            "Bad Request",
+            "Unauthorized",
+            "Forbidden",
+            "Internal Server Error"
+        ]
+    },
+    {
+        "q": "What is Express 5 async error handling?",
+        "type": "mcq",
+        "o": [
+            "Automatic rejection handling in async routes",
+            "Manual handling required",
+            "No async support",
+            "Same as Express 4"
+        ]
+    },
+    {
+        "q": "Express 5 auto-catches ______ rejections.",
+        "type": "fill_blank",
+        "answers": [
+            "promise"
+        ],
+        "other_options": [
+            "sync",
+            "callback",
+            "event"
+        ]
+    },
+    {
+        "q": "Express 5 eliminates need for asyncHandler.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is try-catch wrapper pattern?",
+        "type": "mcq",
+        "o": [
+            "Wrapping async handlers to catch errors",
+            "Error logging pattern",
+            "Error format pattern",
+            "Error response pattern"
+        ]
+    },
+    {
+        "q": "Wrapper eliminates repetitive ______ blocks.",
+        "type": "fill_blank",
+        "answers": [
+            "try-catch"
+        ],
+        "other_options": [
+            "if-else",
+            "switch",
+            "loop"
+        ]
+    },
+    {
+        "q": "Wrappers improve code readability.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-promise-router?",
+        "type": "mcq",
+        "o": [
+            "Router with built-in promise rejection handling",
+            "Promise manager",
+            "Async router",
+            "Fast router"
+        ]
+    },
+    {
+        "q": "express-promise-router replaces ______ router.",
+        "type": "fill_blank",
+        "answers": [
+            "express.Router"
+        ],
+        "other_options": [
+            "app.router",
+            "custom.router",
+            "async.router"
+        ]
+    },
+    {
+        "q": "Promise-router auto-catches rejections.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is validation error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling invalid input data errors",
+            "Validation library",
+            "Input checking",
+            "Form validation"
+        ]
+    },
+    {
+        "q": "Validation errors typically return ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "400"
+        ],
+        "other_options": [
+            "500",
+            "404",
+            "403"
+        ]
+    },
+    {
+        "q": "Validation errors should include field details.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match validation error components:",
+        "type": "match",
+        "left": [
+            "field",
+            "message",
+            "value",
+            "type"
+        ],
+        "right": [
+            "Affected field",
+            "Error description",
+            "Invalid value",
+            "Validation type"
+        ]
+    },
+    {
+        "q": "What is express-validator error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling validation errors from express-validator",
+            "Custom validator",
+            "Error formatter",
+            "Input sanitizer"
+        ]
+    },
+    {
+        "q": "validationResult extracts ______.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "data",
+            "results",
+            "fields"
+        ]
+    },
+    {
+        "q": "isEmpty() checks if validation passed.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Joi validation error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling Joi schema validation errors",
+            "Joi configuration",
+            "Joi setup",
+            "Joi results"
+        ]
+    },
+    {
+        "q": "Joi errors have ______ array.",
+        "type": "fill_blank",
+        "answers": [
+            "details"
+        ],
+        "other_options": [
+            "errors",
+            "fields",
+            "messages"
+        ]
+    },
+    {
+        "q": "Joi provides detailed error information.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange validation error workflow:",
+        "type": "rearrange",
+        "words": [
+            "Define schema",
+            "Validate input",
+            "Check errors",
+            "Return 400",
+            "Process valid data"
+        ]
+    },
+    {
+        "q": "What is database error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors from database operations",
+            "Database logging",
+            "Database connection",
+            "Database query"
+        ]
+    },
+    {
+        "q": "Database errors include connection and ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "query"
+        ],
+        "other_options": [
+            "schema",
+            "model",
+            "data"
+        ]
+    },
+    {
+        "q": "Duplicate key errors need special handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is MongoDB error handling in Express?",
+        "type": "mcq",
+        "o": [
+            "Catching Mongoose/MongoDB specific errors",
+            "MongoDB connection",
+            "MongoDB queries",
+            "MongoDB config"
+        ]
+    },
+    {
+        "q": "MongoError indicates ______ issues.",
+        "type": "fill_blank",
+        "answers": [
+            "MongoDB"
+        ],
+        "other_options": [
+            "connection",
+            "network",
+            "server"
+        ]
+    },
+    {
+        "q": "ValidationError from Mongoose differs from request validation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is duplicate key error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling unique constraint violations",
+            "Key generation",
+            "Key validation",
+            "Key format"
+        ]
+    },
+    {
+        "q": "Duplicate key error has code ______.",
+        "type": "fill_blank",
+        "answers": [
+            "11000"
+        ],
+        "other_options": [
+            "11001",
+            "10000",
+            "12000"
+        ]
+    },
+    {
+        "q": "Return 409 Conflict for duplicate key errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match database error types:",
+        "type": "match",
+        "left": [
+            "11000",
+            "ConnectionError",
+            "ValidationError",
+            "CastError"
+        ],
+        "right": [
+            "Duplicate key",
+            "Connection failed",
+            "Schema validation",
+            "Invalid type"
+        ]
+    },
+    {
+        "q": "What is PostgreSQL error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling pg/Sequelize specific errors",
+            "PostgreSQL setup",
+            "PostgreSQL queries",
+            "PostgreSQL config"
+        ]
+    },
+    {
+        "q": "PostgreSQL errors have ______ property.",
+        "type": "fill_blank",
+        "answers": [
+            "code"
+        ],
+        "other_options": [
+            "number",
+            "type",
+            "name"
+        ]
+    },
+    {
+        "q": "23505 is unique violation code in PostgreSQL.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connection error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling database connection failures",
+            "Network errors",
+            "Server errors",
+            "Client errors"
+        ]
+    },
+    {
+        "q": "Connection retry logic improves ______.",
+        "type": "fill_blank",
+        "answers": [
+            "reliability"
+        ],
+        "other_options": [
+            "speed",
+            "security",
+            "performance"
+        ]
+    },
+    {
+        "q": "Exponential backoff prevents connection flooding.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange connection retry strategy:",
+        "type": "rearrange",
+        "words": [
+            "Attempt connection",
+            "Catch failure",
+            "Wait with backoff",
+            "Retry",
+            "Log final failure"
+        ]
+    },
+    {
+        "q": "What is timeout error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling requests that take too long",
+            "Timer errors",
+            "Delay errors",
+            "Wait errors"
+        ]
+    },
+    {
+        "q": "Timeout errors return ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "408 or 504"
+        ],
+        "other_options": [
+            "500",
+            "400",
+            "503"
+        ]
+    },
+    {
+        "q": "connect-timeout middleware handles request timeouts.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is rate limit error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling too many requests errors",
+            "Rate configuration",
+            "Rate setting",
+            "Rate tracking"
+        ]
+    },
+    {
+        "q": "Rate limit error returns ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "429"
+        ],
+        "other_options": [
+            "400",
+            "403",
+            "500"
+        ]
+    },
+    {
+        "q": "Retry-After header indicates wait time.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is authentication error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling login and token errors",
+            "Auth setup",
+            "Auth config",
+            "Auth routes"
+        ]
+    },
+    {
+        "q": "Invalid credentials return ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "401"
+        ],
+        "other_options": [
+            "400",
+            "403",
+            "404"
+        ]
+    },
+    {
+        "q": "Avoid revealing which field is wrong.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match authentication error responses:",
+        "type": "match",
+        "left": [
+            "Invalid credentials",
+            "Expired token",
+            "Missing token",
+            "Invalid token"
+        ],
+        "right": [
+            "401 Unauthorized",
+            "401 Unauthorized",
+            "401 Unauthorized",
+            "401 Unauthorized"
+        ]
+    },
+    {
+        "q": "What is JWT error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling token validation errors",
+            "JWT creation",
+            "JWT signing",
+            "JWT refresh"
+        ]
+    },
+    {
+        "q": "JsonWebTokenError indicates ______ token.",
+        "type": "fill_blank",
+        "answers": [
+            "invalid"
+        ],
+        "other_options": [
+            "expired",
+            "missing",
+            "malformed"
+        ]
+    },
+    {
+        "q": "TokenExpiredError requires token refresh.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is authorization error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling permission denied errors",
+            "Auth setup",
+            "Auth validation",
+            "Auth check"
+        ]
+    },
+    {
+        "q": "Forbidden access returns ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "403"
+        ],
+        "other_options": [
+            "401",
+            "400",
+            "404"
+        ]
+    },
+    {
+        "q": "403 differs from 401 in meaning.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange auth error flow:",
+        "type": "rearrange",
+        "words": [
+            "Check token exists",
+            "Verify token",
+            "Check permissions",
+            "Return 401/403",
+            "Allow access"
+        ]
+    },
+    {
+        "q": "What is file upload error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling upload failures and limits",
+            "File processing",
+            "File storage",
+            "File validation"
+        ]
+    },
+    {
+        "q": "LIMIT_FILE_SIZE error from ______.",
+        "type": "fill_blank",
+        "answers": [
+            "multer"
+        ],
+        "other_options": [
+            "express",
+            "formidable",
+            "busboy"
+        ]
+    },
+    {
+        "q": "413 status for payload too large.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is network error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling connection and network failures",
+            "Network config",
+            "Network setup",
+            "Network routing"
+        ]
+    },
+    {
+        "q": "ECONNREFUSED means connection ______.",
+        "type": "fill_blank",
+        "answers": [
+            "refused"
+        ],
+        "other_options": [
+            "timeout",
+            "reset",
+            "closed"
+        ]
+    },
+    {
+        "q": "Network errors should trigger retries.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match network error codes:",
+        "type": "match",
+        "left": [
+            "ECONNREFUSED",
+            "ETIMEDOUT",
+            "ENOTFOUND",
+            "ECONNRESET"
+        ],
+        "right": [
+            "Connection refused",
+            "Timed out",
+            "DNS failure",
+            "Connection reset"
+        ]
+    },
+    {
+        "q": "What is external API error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling third-party API failures",
+            "API creation",
+            "API routing",
+            "API testing"
+        ]
+    },
+    {
+        "q": "External API errors should not expose ______ details.",
+        "type": "fill_blank",
+        "answers": [
+            "internal"
+        ],
+        "other_options": [
+            "external",
+            "client",
+            "user"
+        ]
+    },
+    {
+        "q": "Wrap external calls with error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is circuit breaker pattern?",
+        "type": "mcq",
+        "o": [
+            "Preventing cascade failures from external services",
+            "Circuit diagram",
+            "Electrical pattern",
+            "Network break"
+        ]
+    },
+    {
+        "q": "Open circuit returns fast ______.",
+        "type": "fill_blank",
+        "answers": [
+            "failure"
+        ],
+        "other_options": [
+            "success",
+            "response",
+            "result"
+        ]
+    },
+    {
+        "q": "Circuit breaker improves resilience.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange circuit breaker states:",
+        "type": "rearrange",
+        "words": [
+            "Closed",
+            "Count failures",
+            "Open",
+            "Half-open",
+            "Reset or stay open"
+        ]
+    },
+    {
+        "q": "What is fallback pattern?",
+        "type": "mcq",
+        "o": [
+            "Providing alternative when service fails",
+            "Backup route",
+            "Secondary handler",
+            "Error route"
+        ]
+    },
+    {
+        "q": "Fallback provides ______ data or response.",
+        "type": "fill_blank",
+        "answers": [
+            "cached"
+        ],
+        "other_options": [
+            "empty",
+            "null",
+            "default"
+        ]
+    },
+    {
+        "q": "Fallbacks improve user experience.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error boundary pattern?",
+        "type": "mcq",
+        "o": [
+            "Isolating errors to specific parts of app",
+            "Error box",
+            "Error container",
+            "Error wrapper"
+        ]
+    },
+    {
+        "q": "Boundaries prevent ______ app crashes.",
+        "type": "fill_blank",
+        "answers": [
+            "full"
+        ],
+        "other_options": [
+            "partial",
+            "complete",
+            "total"
+        ]
+    },
+    {
+        "q": "Error boundaries are more relevant in frontend.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error aggregation?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple errors into one response",
+            "Error counting",
+            "Error logging",
+            "Error merging"
+        ]
+    },
+    {
+        "q": "Validation can return ______ errors at once.",
+        "type": "fill_blank",
+        "answers": [
+            "multiple"
+        ],
+        "other_options": [
+            "single",
+            "one",
+            "first"
+        ]
+    },
+    {
+        "q": "Aggregated errors help users fix all issues.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handling patterns:",
+        "type": "match",
+        "left": [
+            "Circuit breaker",
+            "Fallback",
+            "Retry",
+            "Bulkhead"
+        ],
+        "right": [
+            "Prevent cascade",
+            "Alternative path",
+            "Try again",
+            "Isolate failures"
+        ]
+    },
+    {
+        "q": "What is error recovery?",
+        "type": "mcq",
+        "o": [
+            "Automatically recovering from errors",
+            "Error fixing",
+            "Error logging",
+            "Error display"
+        ]
+    },
+    {
+        "q": "Recovery restores ______ operation.",
+        "type": "fill_blank",
+        "answers": [
+            "normal"
+        ],
+        "other_options": [
+            "backup",
+            "safe",
+            "basic"
+        ]
+    },
+    {
+        "q": "Not all errors are recoverable.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful degradation in error handling?",
+        "type": "mcq",
+        "o": [
+            "Reducing functionality instead of failing",
+            "Error reduction",
+            "Performance reduction",
+            "Feature reduction"
+        ]
+    },
+    {
+        "q": "Degradation maintains ______ functionality.",
+        "type": "fill_blank",
+        "answers": [
+            "core"
+        ],
+        "other_options": [
+            "full",
+            "minimal",
+            "basic"
+        ]
+    },
+    {
+        "q": "Better to degrade than fully fail.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange graceful degradation steps:",
+        "type": "rearrange",
+        "words": [
+            "Detect failure",
+            "Identify affected feature",
+            "Disable feature",
+            "Notify user",
+            "Monitor recovery"
+        ]
+    },
+    {
+        "q": "What is error sanitization?",
+        "type": "mcq",
+        "o": [
+            "Removing sensitive data from error responses",
+            "Error cleaning",
+            "Error formatting",
+            "Error logging"
+        ]
+    },
+    {
+        "q": "Sanitization prevents ______ disclosure.",
+        "type": "fill_blank",
+        "answers": [
+            "information"
+        ],
+        "other_options": [
+            "error",
+            "data",
+            "code"
+        ]
+    },
+    {
+        "q": "Stack traces should be hidden in production.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error classification?",
+        "type": "mcq",
+        "o": [
+            "Categorizing errors by type",
+            "Error sorting",
+            "Error naming",
+            "Error counting"
+        ]
+    },
+    {
+        "q": "Classification helps determine ______ handling.",
+        "type": "fill_blank",
+        "answers": [
+            "appropriate"
+        ],
+        "other_options": [
+            "best",
+            "proper",
+            "default"
+        ]
+    },
+    {
+        "q": "Different error types need different responses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error internationalization?",
+        "type": "mcq",
+        "o": [
+            "Translating error messages for different locales",
+            "Error formatting",
+            "Error coding",
+            "Error numbers"
+        ]
+    },
+    {
+        "q": "i18n uses error ______ instead of messages.",
+        "type": "fill_blank",
+        "answers": [
+            "codes"
+        ],
+        "other_options": [
+            "types",
+            "names",
+            "ids"
+        ]
+    },
+    {
+        "q": "Frontend translates error codes to user messages.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handling concerns:",
+        "type": "match",
+        "left": [
+            "Logging",
+            "Response",
+            "Recovery",
+            "Prevention"
+        ],
+        "right": [
+            "Record details",
+            "User message",
+            "Auto-fix",
+            "Validation"
+        ]
+    },
+    {
+        "q": "What is error tracking service?",
+        "type": "mcq",
+        "o": [
+            "Third-party service for error monitoring",
+            "Error database",
+            "Error file",
+            "Error console"
+        ]
+    },
+    {
+        "q": "Sentry, Bugsnag, and ______ are tracking services.",
+        "type": "fill_blank",
+        "answers": [
+            "Rollbar"
+        ],
+        "other_options": [
+            "Winston",
+            "Morgan",
+            "Pino"
+        ]
+    },
+    {
+        "q": "Tracking services provide analytics and alerts.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error sampling?",
+        "type": "mcq",
+        "o": [
+            "Logging only a percentage of errors",
+            "Error selection",
+            "Error filtering",
+            "Error sorting"
+        ]
+    },
+    {
+        "q": "Sampling reduces ______ for high-volume apps.",
+        "type": "fill_blank",
+        "answers": [
+            "costs"
+        ],
+        "other_options": [
+            "errors",
+            "requests",
+            "logs"
+        ]
+    },
+    {
+        "q": "Critical errors should not be sampled.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error tracking setup:",
+        "type": "rearrange",
+        "words": [
+            "Install SDK",
+            "Configure service",
+            "Capture errors",
+            "Set up alerts",
+            "Review dashboard"
+        ]
+    },
+    {
+        "q": "What is error alerting?",
+        "type": "mcq",
+        "o": [
+            "Notifying team of critical errors",
+            "Error display",
+            "Error logging",
+            "Error fixing"
+        ]
+    },
+    {
+        "q": "Alerts can be sent via email, ______, or SMS.",
+        "type": "fill_blank",
+        "answers": [
+            "Slack"
+        ],
+        "other_options": [
+            "console",
+            "log",
+            "file"
+        ]
+    },
+    {
+        "q": "Alert thresholds prevent notification fatigue.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error grouping?",
+        "type": "mcq",
+        "o": [
+            "Combining similar errors together",
+            "Error sorting",
+            "Error filtering",
+            "Error merging"
+        ]
+    },
+    {
+        "q": "Grouping by stack trace identifies ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "unique"
+        ],
+        "other_options": [
+            "all",
+            "common",
+            "rare"
+        ]
+    },
+    {
+        "q": "Grouped errors show occurrence count.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error context?",
+        "type": "mcq",
+        "o": [
+            "Additional information about error occurrence",
+            "Error message",
+            "Error type",
+            "Error code"
+        ]
+    },
+    {
+        "q": "Context includes user ID, request ______, etc.",
+        "type": "fill_blank",
+        "answers": [
+            "data"
+        ],
+        "other_options": [
+            "type",
+            "method",
+            "url"
+        ]
+    },
+    {
+        "q": "Context helps reproduce and debug errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error context elements:",
+        "type": "match",
+        "left": [
+            "userId",
+            "requestId",
+            "environment",
+            "timestamp"
+        ],
+        "right": [
+            "Who",
+            "Which request",
+            "Where",
+            "When"
+        ]
+    },
+    {
+        "q": "What is error breadcrumbs?",
+        "type": "mcq",
+        "o": [
+            "Trail of events leading to error",
+            "Error path",
+            "Error route",
+            "Error history"
+        ]
+    },
+    {
+        "q": "Breadcrumbs show what happened ______ error.",
+        "type": "fill_blank",
+        "answers": [
+            "before"
+        ],
+        "other_options": [
+            "after",
+            "during",
+            "at"
+        ]
+    },
+    {
+        "q": "Breadcrumbs help understand error causes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is source maps for error debugging?",
+        "type": "mcq",
+        "o": [
+            "Mapping minified code to original source",
+            "Error maps",
+            "Stack maps",
+            "Code maps"
+        ]
+    },
+    {
+        "q": "Source maps enable readable ______ traces.",
+        "type": "fill_blank",
+        "answers": [
+            "stack"
+        ],
+        "other_options": [
+            "error",
+            "log",
+            "debug"
+        ]
+    },
+    {
+        "q": "Upload source maps to tracking services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error debugging workflow:",
+        "type": "rearrange",
+        "words": [
+            "Receive alert",
+            "View error details",
+            "Check context",
+            "Follow breadcrumbs",
+            "Fix and deploy"
+        ]
+    },
+    {
+        "q": "What is error prioritization?",
+        "type": "mcq",
+        "o": [
+            "Ranking errors by severity and impact",
+            "Error sorting",
+            "Error filtering",
+            "Error counting"
+        ]
+    },
+    {
+        "q": "High-impact errors affect many ______.",
+        "type": "fill_blank",
+        "answers": [
+            "users"
+        ],
+        "other_options": [
+            "routes",
+            "requests",
+            "responses"
+        ]
+    },
+    {
+        "q": "Not all errors need immediate attention.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error SLA?",
+        "type": "mcq",
+        "o": [
+            "Response time commitment for fixing errors",
+            "Error count",
+            "Error rate",
+            "Error level"
+        ]
+    },
+    {
+        "q": "Critical errors may have ______ SLA.",
+        "type": "fill_blank",
+        "answers": [
+            "strict"
+        ],
+        "other_options": [
+            "loose",
+            "no",
+            "flexible"
+        ]
+    },
+    {
+        "q": "SLAs help prioritize error resolution.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error rate monitoring?",
+        "type": "mcq",
+        "o": [
+            "Tracking percentage of failed requests",
+            "Error counting",
+            "Error logging",
+            "Error display"
+        ]
+    },
+    {
+        "q": "Error rate = errors / total ______.",
+        "type": "fill_blank",
+        "answers": [
+            "requests"
+        ],
+        "other_options": [
+            "time",
+            "users",
+            "routes"
+        ]
+    },
+    {
+        "q": "Spike in error rate indicates problems.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match monitoring metrics:",
+        "type": "match",
+        "left": [
+            "Error rate",
+            "Latency",
+            "Throughput",
+            "Uptime"
+        ],
+        "right": [
+            "Percentage failed",
+            "Response time",
+            "Requests/sec",
+            "Availability"
+        ]
+    },
+    {
+        "q": "What is error budget?",
+        "type": "mcq",
+        "o": [
+            "Acceptable amount of errors over time",
+            "Error cost",
+            "Error limit",
+            "Error maximum"
+        ]
+    },
+    {
+        "q": "Error budget is tied to ______ objectives.",
+        "type": "fill_blank",
+        "answers": [
+            "SLO"
+        ],
+        "other_options": [
+            "SLA",
+            "KPI",
+            "OKR"
+        ]
+    },
+    {
+        "q": "Exhausted budget pauses new deployments.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is chaos engineering for error handling?",
+        "type": "mcq",
+        "o": [
+            "Deliberately injecting failures to test resilience",
+            "Random testing",
+            "Chaos theory",
+            "Destruction testing"
+        ]
+    },
+    {
+        "q": "Chaos engineering reveals ______ failure modes.",
+        "type": "fill_blank",
+        "answers": [
+            "hidden"
+        ],
+        "other_options": [
+            "known",
+            "common",
+            "rare"
+        ]
+    },
+    {
+        "q": "Netflix pioneered chaos engineering.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange chaos engineering steps:",
+        "type": "rearrange",
+        "words": [
+            "Define steady state",
+            "Hypothesize impact",
+            "Inject failure",
+            "Observe results",
+            "Fix weaknesses"
+        ]
+    },
+    {
+        "q": "What is error handling testing?",
+        "type": "mcq",
+        "o": [
+            "Testing that errors are handled correctly",
+            "Error detection",
+            "Error prevention",
+            "Error logging"
+        ]
+    },
+    {
+        "q": "Tests should verify error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "responses"
+        ],
+        "other_options": [
+            "logs",
+            "codes",
+            "types"
+        ]
+    },
+    {
+        "q": "Test both success and failure paths.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is mock error injection?",
+        "type": "mcq",
+        "o": [
+            "Simulating errors in tests",
+            "Error mocking",
+            "Error stubbing",
+            "Error faking"
+        ]
+    },
+    {
+        "q": "Mocks simulate ______ behavior.",
+        "type": "fill_blank",
+        "answers": [
+            "failure"
+        ],
+        "other_options": [
+            "success",
+            "slow",
+            "normal"
+        ]
+    },
+    {
+        "q": "Mock database errors to test handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is supertest for error testing?",
+        "type": "mcq",
+        "o": [
+            "Testing HTTP response including errors",
+            "Super testing",
+            "Performance testing",
+            "Load testing"
+        ]
+    },
+    {
+        "q": "supertest checks ______ codes and bodies.",
+        "type": "fill_blank",
+        "answers": [
+            "status"
+        ],
+        "other_options": [
+            "error",
+            "response",
+            "request"
+        ]
+    },
+    {
+        "q": "expect(res.status).toBe(400) verifies error.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match testing approaches:",
+        "type": "match",
+        "left": [
+            "Unit test",
+            "Integration test",
+            "E2E test",
+            "Chaos test"
+        ],
+        "right": [
+            "Single function",
+            "Combined modules",
+            "Full flow",
+            "Failure injection"
+        ]
+    },
+    {
+        "q": "What is error handling documentation?",
+        "type": "mcq",
+        "o": [
+            "Documenting error responses for API users",
+            "Error logging",
+            "Error display",
+            "Error formatting"
+        ]
+    },
+    {
+        "q": "API docs list possible ______ codes.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "status",
+            "response",
+            "HTTP"
+        ]
+    },
+    {
+        "q": "OpenAPI supports error response documentation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error response contract?",
+        "type": "mcq",
+        "o": [
+            "Consistent structure for all error responses",
+            "Error agreement",
+            "Error promise",
+            "Error format"
+        ]
+    },
+    {
+        "q": "Contract defines ______ and structure.",
+        "type": "fill_blank",
+        "answers": [
+            "fields"
+        ],
+        "other_options": [
+            "types",
+            "codes",
+            "messages"
+        ]
+    },
+    {
+        "q": "Consistent contracts help frontend developers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error documentation elements:",
+        "type": "rearrange",
+        "words": [
+            "Status code",
+            "Error message",
+            "Error code",
+            "Field errors",
+            "Example response"
+        ]
+    },
+    {
+        "q": "What is error handling middleware composition?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple error handlers",
+            "Error merging",
+            "Error stacking",
+            "Error chaining"
+        ]
+    },
+    {
+        "q": "Multiple handlers can process ______ things.",
+        "type": "fill_blank",
+        "answers": [
+            "different"
+        ],
+        "other_options": [
+            "same",
+            "all",
+            "any"
+        ]
+    },
+    {
+        "q": "Specialized handlers improve maintainability.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error normalization?",
+        "type": "mcq",
+        "o": [
+            "Converting all errors to standard format",
+            "Error standard",
+            "Error template",
+            "Error base"
+        ]
+    },
+    {
+        "q": "Normalization unifies ______ error formats.",
+        "type": "fill_blank",
+        "answers": [
+            "different"
+        ],
+        "other_options": [
+            "all",
+            "some",
+            "most"
+        ]
+    },
+    {
+        "q": "Normalize before sending to client.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is boom library?",
+        "type": "mcq",
+        "o": [
+            "HTTP-friendly error objects for hapi/Express",
+            "Error sound",
+            "Error explosion",
+            "Error crash"
+        ]
+    },
+    {
+        "q": "boom.badRequest creates ______ error.",
+        "type": "fill_blank",
+        "answers": [
+            "400"
+        ],
+        "other_options": [
+            "500",
+            "404",
+            "401"
+        ]
+    },
+    {
+        "q": "Boom provides consistent error structure.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error libraries:",
+        "type": "match",
+        "left": [
+            "http-errors",
+            "boom",
+            "http-status",
+            "statuses"
+        ],
+        "right": [
+            "Simple errors",
+            "Rich errors",
+            "Status constants",
+            "Status text"
+        ]
+    },
+    {
+        "q": "What is operational readiness for errors?",
+        "type": "mcq",
+        "o": [
+            "Being prepared to handle production errors",
+            "Error planning",
+            "Error setup",
+            "Error config"
+        ]
+    },
+    {
+        "q": "Runbooks document error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "responses"
+        ],
+        "other_options": [
+            "types",
+            "codes",
+            "causes"
+        ]
+    },
+    {
+        "q": "On-call rotation ensures 24/7 coverage.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is post-mortem for errors?",
+        "type": "mcq",
+        "o": [
+            "Analysis after major incidents",
+            "Error death",
+            "Error end",
+            "Error finish"
+        ]
+    },
+    {
+        "q": "Post-mortems are ______-free.",
+        "type": "fill_blank",
+        "answers": [
+            "blame"
+        ],
+        "other_options": [
+            "error",
+            "cost",
+            "time"
+        ]
+    },
+    {
+        "q": "Post-mortems prevent repeat incidents.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange incident response:",
+        "type": "rearrange",
+        "words": [
+            "Detect incident",
+            "Acknowledge",
+            "Investigate",
+            "Resolve",
+            "Post-mortem"
+        ]
+    },
+    {
+        "q": "What is error handling middleware order?",
+        "type": "mcq",
+        "o": [
+            "Error handlers must be defined last",
+            "Error handlers go first",
+            "Order doesn't matter",
+            "Error handlers go in middle"
+        ]
+    },
+    {
+        "q": "Error handlers after routes catch ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "route"
+        ],
+        "other_options": [
+            "all",
+            "some",
+            "no"
+        ]
+    },
+    {
+        "q": "Multiple error handlers can chain together.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request ID for error tracking?",
+        "type": "mcq",
+        "o": [
+            "Unique identifier for each request",
+            "Request number",
+            "Request index",
+            "Request code"
+        ]
+    },
+    {
+        "q": "Request ID helps correlate ______.",
+        "type": "fill_blank",
+        "answers": [
+            "logs"
+        ],
+        "other_options": [
+            "errors",
+            "requests",
+            "responses"
+        ]
+    },
+    {
+        "q": "Include request ID in error responses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error serialization?",
+        "type": "mcq",
+        "o": [
+            "Converting error to JSON format",
+            "Error storage",
+            "Error transmission",
+            "Error display"
+        ]
+    },
+    {
+        "q": "Error serializer extracts ______ properties.",
+        "type": "fill_blank",
+        "answers": [
+            "safe"
+        ],
+        "other_options": [
+            "all",
+            "public",
+            "private"
+        ]
+    },
+    {
+        "q": "Custom toJSON method controls serialization.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error response elements:",
+        "type": "match",
+        "left": [
+            "error",
+            "message",
+            "code",
+            "details"
+        ],
+        "right": [
+            "Error type",
+            "User message",
+            "Error code",
+            "Additional info"
+        ]
+    },
+    {
+        "q": "What is domain-driven error design?",
+        "type": "mcq",
+        "o": [
+            "Errors that reflect business domain",
+            "DNS errors",
+            "Network errors",
+            "Domain name errors"
+        ]
+    },
+    {
+        "q": "Domain errors like InsufficientFunds are ______.",
+        "type": "fill_blank",
+        "answers": [
+            "meaningful"
+        ],
+        "other_options": [
+            "generic",
+            "technical",
+            "abstract"
+        ]
+    },
+    {
+        "q": "Domain errors improve code readability.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error hierarchy?",
+        "type": "mcq",
+        "o": [
+            "Inheritance tree of error classes",
+            "Error levels",
+            "Error severity",
+            "Error priority"
+        ]
+    },
+    {
+        "q": "Base error class provides common ______.",
+        "type": "fill_blank",
+        "answers": [
+            "functionality"
+        ],
+        "other_options": [
+            "properties",
+            "methods",
+            "fields"
+        ]
+    },
+    {
+        "q": "Specialized errors extend base errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error class hierarchy:",
+        "type": "rearrange",
+        "words": [
+            "Error base",
+            "AppError",
+            "ClientError/ServerError",
+            "NotFoundError/ValidationError/etc"
+        ]
+    },
+    {
+        "q": "What is error factory pattern?",
+        "type": "mcq",
+        "o": [
+            "Creating errors through factory functions",
+            "Error production",
+            "Error manufacturing",
+            "Error building"
+        ]
+    },
+    {
+        "q": "Factory centralizes error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "creation"
+        ],
+        "other_options": [
+            "handling",
+            "logging",
+            "display"
+        ]
+    },
+    {
+        "q": "Factory pattern ensures consistency.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error code system?",
+        "type": "mcq",
+        "o": [
+            "Unique codes for each error type",
+            "HTTP status codes",
+            "Error numbers",
+            "Error levels"
+        ]
+    },
+    {
+        "q": "Error codes like E001 help ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "identify"
+        ],
+        "other_options": [
+            "fix",
+            "log",
+            "display"
+        ]
+    },
+    {
+        "q": "Error codes are useful for documentation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error message template?",
+        "type": "mcq",
+        "o": [
+            "Parameterized error messages",
+            "Error format",
+            "Error structure",
+            "Error pattern"
+        ]
+    },
+    {
+        "q": "Templates use ______ for dynamic values.",
+        "type": "fill_blank",
+        "answers": [
+            "placeholders"
+        ],
+        "other_options": [
+            "variables",
+            "parameters",
+            "arguments"
+        ]
+    },
+    {
+        "q": "Templates like 'User {id} not found' are cleaner.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error design patterns:",
+        "type": "match",
+        "left": [
+            "Factory",
+            "Builder",
+            "Singleton",
+            "Decorator"
+        ],
+        "right": [
+            "Create errors",
+            "Build complex errors",
+            "Log service",
+            "Wrap errors"
+        ]
+    },
+    {
+        "q": "What is error transformation?",
+        "type": "mcq",
+        "o": [
+            "Converting internal errors to API errors",
+            "Error changing",
+            "Error modifying",
+            "Error updating"
+        ]
+    },
+    {
+        "q": "Transform database errors to ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "HTTP"
+        ],
+        "other_options": [
+            "API",
+            "client",
+            "user"
+        ]
+    },
+    {
+        "q": "Transformation hides implementation details.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error wrapping?",
+        "type": "mcq",
+        "o": [
+            "Enclosing original error with additional context",
+            "Error hiding",
+            "Error covering",
+            "Error masking"
+        ]
+    },
+    {
+        "q": "Wrapped errors preserve original ______.",
+        "type": "fill_blank",
+        "answers": [
+            "cause"
+        ],
+        "other_options": [
+            "message",
+            "type",
+            "code"
+        ]
+    },
+    {
+        "q": "cause property in Error enables wrapping.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is async error propagation?",
+        "type": "mcq",
+        "o": [
+            "Passing errors through async call chain",
+            "Sync error passing",
+            "Error forwarding",
+            "Error routing"
+        ]
+    },
+    {
+        "q": "Rejections propagate up ______ chain.",
+        "type": "fill_blank",
+        "answers": [
+            "promise"
+        ],
+        "other_options": [
+            "callback",
+            "event",
+            "function"
+        ]
+    },
+    {
+        "q": "Catching at higher level simplifies handlers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange async error propagation:",
+        "type": "rearrange",
+        "words": [
+            "Error occurs",
+            "Promise rejects",
+            "Propagates up",
+            "Caught by handler",
+            "Response sent"
+        ]
+    },
+    {
+        "q": "What is error suppression?",
+        "type": "mcq",
+        "o": [
+            "Intentionally not throwing expected errors",
+            "Error hiding",
+            "Error ignoring",
+            "Error silencing"
+        ]
+    },
+    {
+        "q": "Suppress non-critical errors with ______.",
+        "type": "fill_blank",
+        "answers": [
+            "logging"
+        ],
+        "other_options": [
+            "throwing",
+            "returning",
+            "passing"
+        ]
+    },
+    {
+        "q": "Never suppress errors silently.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is dead letter queue for errors?",
+        "type": "mcq",
+        "o": [
+            "Queue for messages that fail processing",
+            "Failed queue",
+            "Error queue",
+            "Retry queue"
+        ]
+    },
+    {
+        "q": "DLQ captures ______ that need review.",
+        "type": "fill_blank",
+        "answers": [
+            "failures"
+        ],
+        "other_options": [
+            "messages",
+            "errors",
+            "requests"
+        ]
+    },
+    {
+        "q": "DLQ prevents message loss.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error replay?",
+        "type": "mcq",
+        "o": [
+            "Retrying failed operations",
+            "Error recording",
+            "Error playback",
+            "Error history"
+        ]
+    },
+    {
+        "q": "Replay failed events from ______.",
+        "type": "fill_blank",
+        "answers": [
+            "queue"
+        ],
+        "other_options": [
+            "log",
+            "database",
+            "cache"
+        ]
+    },
+    {
+        "q": "Idempotent operations are safe to replay.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match messaging error handling:",
+        "type": "match",
+        "left": [
+            "Retry",
+            "DLQ",
+            "Circuit breaker",
+            "Timeout"
+        ],
+        "right": [
+            "Try again",
+            "Store failures",
+            "Stop trying",
+            "Limit wait"
+        ]
+    },
+    {
+        "q": "What is error handling in microservices?",
+        "type": "mcq",
+        "o": [
+            "Handling errors across distributed services",
+            "Micro errors",
+            "Small errors",
+            "Local errors"
+        ]
+    },
+    {
+        "q": "Distributed errors need ______ tracing.",
+        "type": "fill_blank",
+        "answers": [
+            "correlation"
+        ],
+        "other_options": [
+            "error",
+            "log",
+            "request"
+        ]
+    },
+    {
+        "q": "Service mesh helps with error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is bulkhead pattern?",
+        "type": "mcq",
+        "o": [
+            "Isolating failures to prevent cascade",
+            "Ship partitions",
+            "Error walls",
+            "Failure boundaries"
+        ]
+    },
+    {
+        "q": "Bulkheads limit ______ scope.",
+        "type": "fill_blank",
+        "answers": [
+            "failure"
+        ],
+        "other_options": [
+            "error",
+            "damage",
+            "impact"
+        ]
+    },
+    {
+        "q": "Thread pools can implement bulkheads.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange resilience patterns priority:",
+        "type": "rearrange",
+        "words": [
+            "Timeout",
+            "Retry",
+            "Circuit breaker",
+            "Bulkhead",
+            "Fallback"
+        ]
+    },
+    {
+        "q": "What is error correlation in distributed systems?",
+        "type": "mcq",
+        "o": [
+            "Linking related errors across services",
+            "Error matching",
+            "Error pairing",
+            "Error grouping"
+        ]
+    },
+    {
+        "q": "Trace ID enables error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "correlation"
+        ],
+        "other_options": [
+            "tracking",
+            "logging",
+            "matching"
+        ]
+    },
+    {
+        "q": "OpenTelemetry provides tracing standards.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is span in error tracing?",
+        "type": "mcq",
+        "o": [
+            "Single operation within a trace",
+            "Time period",
+            "Error duration",
+            "Log range"
+        ]
+    },
+    {
+        "q": "Spans record operation ______ and errors.",
+        "type": "fill_blank",
+        "answers": [
+            "duration"
+        ],
+        "other_options": [
+            "type",
+            "result",
+            "data"
+        ]
+    },
+    {
+        "q": "Failed spans contain error details.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is structured logging for errors?",
+        "type": "mcq",
+        "o": [
+            "Logging in machine-readable format",
+            "Error formatting",
+            "Log organization",
+            "Log structure"
+        ]
+    },
+    {
+        "q": "JSON logs are easily ______.",
+        "type": "fill_blank",
+        "answers": [
+            "searchable"
+        ],
+        "other_options": [
+            "readable",
+            "writable",
+            "storable"
+        ]
+    },
+    {
+        "q": "Structured logs enable automated analysis.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match logging formats:",
+        "type": "match",
+        "left": [
+            "JSON",
+            "Plain text",
+            "Syslog",
+            "GELF"
+        ],
+        "right": [
+            "Machine readable",
+            "Human readable",
+            "Standard format",
+            "Graylog format"
+        ]
+    },
+    {
+        "q": "What is ELK stack for error monitoring?",
+        "type": "mcq",
+        "o": [
+            "Elasticsearch, Logstash, Kibana",
+            "Error Log Keeper",
+            "Extended Log Kit",
+            "Enterprise Log Kit"
+        ]
+    },
+    {
+        "q": "Kibana provides error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "visualization"
+        ],
+        "other_options": [
+            "storage",
+            "collection",
+            "analysis"
+        ]
+    },
+    {
+        "q": "ELK enables centralized log management.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Grafana for error monitoring?",
+        "type": "mcq",
+        "o": [
+            "Visualization and alerting platform",
+            "Log storage",
+            "Error database",
+            "Log collector"
+        ]
+    },
+    {
+        "q": "Grafana dashboards show error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "trends"
+        ],
+        "other_options": [
+            "logs",
+            "details",
+            "traces"
+        ]
+    },
+    {
+        "q": "Grafana integrates with Prometheus.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange observability stack setup:",
+        "type": "rearrange",
+        "words": [
+            "Collect metrics",
+            "Store in database",
+            "Create dashboards",
+            "Set up alerts",
+            "Monitor trends"
+        ]
+    },
+    {
+        "q": "What is health check for error detection?",
+        "type": "mcq",
+        "o": [
+            "Endpoint to verify service status",
+            "Service check",
+            "Status check",
+            "Alive check"
+        ]
+    },
+    {
+        "q": "/health endpoint returns ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "service"
+        ],
+        "other_options": [
+            "server",
+            "app",
+            "API"
+        ]
+    },
+    {
+        "q": "Health checks verify dependencies too.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is liveness probe?",
+        "type": "mcq",
+        "o": [
+            "Check if application is running",
+            "Life check",
+            "Alive check",
+            "Run check"
+        ]
+    },
+    {
+        "q": "Failed liveness probe triggers ______.",
+        "type": "fill_blank",
+        "answers": [
+            "restart"
+        ],
+        "other_options": [
+            "alert",
+            "log",
+            "retry"
+        ]
+    },
+    {
+        "q": "Kubernetes uses liveness probes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is readiness probe?",
+        "type": "mcq",
+        "o": [
+            "Check if application can handle traffic",
+            "Ready check",
+            "Start check",
+            "Load check"
+        ]
+    },
+    {
+        "q": "Failed readiness removes from ______ pool.",
+        "type": "fill_blank",
+        "answers": [
+            "load balancer"
+        ],
+        "other_options": [
+            "server",
+            "cluster",
+            "network"
+        ]
+    },
+    {
+        "q": "Readiness differs from liveness.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match probe types:",
+        "type": "match",
+        "left": [
+            "Liveness",
+            "Readiness",
+            "Startup",
+            "Health"
+        ],
+        "right": [
+            "Is running",
+            "Can serve",
+            "Has started",
+            "Status check"
+        ]
+    },
+    {
+        "q": "What is startup probe?",
+        "type": "mcq",
+        "o": [
+            "Check if application has finished starting",
+            "Boot check",
+            "Init check",
+            "Launch check"
+        ]
+    },
+    {
+        "q": "Startup probe runs only at ______.",
+        "type": "fill_blank",
+        "answers": [
+            "startup"
+        ],
+        "other_options": [
+            "runtime",
+            "shutdown",
+            "restart"
+        ]
+    },
+    {
+        "q": "Slow-starting apps need startup probes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is dependency health check?",
+        "type": "mcq",
+        "o": [
+            "Checking connected service health",
+            "Package check",
+            "Module check",
+            "Import check"
+        ]
+    },
+    {
+        "q": "Check database, cache, API ______.",
+        "type": "fill_blank",
+        "answers": [
+            "connectivity"
+        ],
+        "other_options": [
+            "speed",
+            "size",
+            "data"
+        ]
+    },
+    {
+        "q": "Unhealthy dependencies affect app health.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is self-healing in error handling?",
+        "type": "mcq",
+        "o": [
+            "Automatic recovery from failures",
+            "Manual recovery",
+            "Error fixing",
+            "Bug patching"
+        ]
+    },
+    {
+        "q": "Self-healing restarts failed ______.",
+        "type": "fill_blank",
+        "answers": [
+            "services"
+        ],
+        "other_options": [
+            "requests",
+            "connections",
+            "operations"
+        ]
+    },
+    {
+        "q": "Kubernetes enables self-healing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match container orchestration features:",
+        "type": "match",
+        "left": [
+            "Auto-restart",
+            "Auto-scale",
+            "Rolling update",
+            "Self-heal"
+        ],
+        "right": [
+            "Restart crashed",
+            "Scale on load",
+            "Zero downtime",
+            "Fix failures"
+        ]
+    },
+    {
+        "q": "What is error handling best practices summary?",
+        "type": "mcq",
+        "o": [
+            "Catch, log, respond, monitor",
+            "Ignore errors",
+            "Crash on errors",
+            "Hide all errors"
+        ]
+    },
+    {
+        "q": "Best practices improve ______ and UX.",
+        "type": "fill_blank",
+        "answers": [
+            "reliability"
+        ],
+        "other_options": [
+            "speed",
+            "size",
+            "features"
+        ]
+    },
+    {
+        "q": "Consistent error handling is essential.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling checklist?",
+        "type": "mcq",
+        "o": [
+            "List of error handling requirements",
+            "Error list",
+            "Bug list",
+            "Issue list"
+        ]
+    },
+    {
+        "q": "Checklist ensures nothing is ______.",
+        "type": "fill_blank",
+        "answers": [
+            "missed"
+        ],
+        "other_options": [
+            "done",
+            "added",
+            "removed"
+        ]
+    },
+    {
+        "q": "Review checklist during code reviews.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error handling implementation order:",
+        "type": "rearrange",
+        "words": [
+            "Define error classes",
+            "Create handlers",
+            "Add logging",
+            "Set up monitoring",
+            "Test error paths"
+        ]
+    },
+    {
+        "q": "What is the Node.js error event?",
+        "type": "mcq",
+        "o": [
+            "EventEmitter error event handling",
+            "Error callback",
+            "Error promise",
+            "Error throw"
+        ]
+    },
+    {
+        "q": "Unhandled 'error' events crash ______.",
+        "type": "fill_blank",
+        "answers": [
+            "process"
+        ],
+        "other_options": [
+            "app",
+            "server",
+            "handler"
+        ]
+    },
+    {
+        "q": "Always add error listeners to streams.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is stream error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in readable/writable streams",
+            "Stream creation",
+            "Stream piping",
+            "Stream buffering"
+        ]
+    },
+    {
+        "q": "stream.on('error', handler) catches stream ______.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "data",
+            "end",
+            "close"
+        ]
+    },
+    {
+        "q": "Pipeline handles stream errors automatically.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is pipeline error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in stream pipelines",
+            "Pipeline creation",
+            "Pipeline setup",
+            "Pipeline config"
+        ]
+    },
+    {
+        "q": "stream.pipeline provides final ______.",
+        "type": "fill_blank",
+        "answers": [
+            "callback"
+        ],
+        "other_options": [
+            "stream",
+            "result",
+            "data"
+        ]
+    },
+    {
+        "q": "Pipeline cleans up on error.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match Node.js error patterns:",
+        "type": "match",
+        "left": [
+            "throw",
+            "callback(err)",
+            "reject(err)",
+            "emit('error')"
+        ],
+        "right": [
+            "Sync",
+            "Callback",
+            "Promise",
+            "EventEmitter"
+        ]
+    },
+    {
+        "q": "What is process exit codes?",
+        "type": "mcq",
+        "o": [
+            "Numeric code indicating exit reason",
+            "Process ID",
+            "Process status",
+            "Process signal"
+        ]
+    },
+    {
+        "q": "Exit code 0 means ______.",
+        "type": "fill_blank",
+        "answers": [
+            "success"
+        ],
+        "other_options": [
+            "failure",
+            "error",
+            "crash"
+        ]
+    },
+    {
+        "q": "Non-zero exit codes indicate errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is process.exit usage?",
+        "type": "mcq",
+        "o": [
+            "Terminating process with exit code",
+            "Process restart",
+            "Process pause",
+            "Process continue"
+        ]
+    },
+    {
+        "q": "process.exit(1) indicates ______.",
+        "type": "fill_blank",
+        "answers": [
+            "failure"
+        ],
+        "other_options": [
+            "success",
+            "wait",
+            "retry"
+        ]
+    },
+    {
+        "q": "Avoid process.exit in normal operation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange process termination:",
+        "type": "rearrange",
+        "words": [
+            "SIGTERM received",
+            "Stop accepting",
+            "Complete pending",
+            "Close connections",
+            "Exit process"
+        ]
+    },
+    {
+        "q": "What is SIGTERM handling?",
+        "type": "mcq",
+        "o": [
+            "Graceful shutdown on termination signal",
+            "Signal sending",
+            "Signal creation",
+            "Signal routing"
+        ]
+    },
+    {
+        "q": "process.on('SIGTERM') handles ______.",
+        "type": "fill_blank",
+        "answers": [
+            "shutdown"
+        ],
+        "other_options": [
+            "startup",
+            "restart",
+            "reload"
+        ]
+    },
+    {
+        "q": "Kubernetes sends SIGTERM before SIGKILL.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful shutdown?",
+        "type": "mcq",
+        "o": [
+            "Completing pending work before exit",
+            "Immediate exit",
+            "Force quit",
+            "Hard stop"
+        ]
+    },
+    {
+        "q": "Graceful shutdown closes ______ cleanly.",
+        "type": "fill_blank",
+        "answers": [
+            "connections"
+        ],
+        "other_options": [
+            "files",
+            "processes",
+            "threads"
+        ]
+    },
+    {
+        "q": "Graceful shutdown prevents data loss.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cluster worker error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in cluster workers",
+            "Cluster creation",
+            "Cluster scaling",
+            "Cluster balancing"
+        ]
+    },
+    {
+        "q": "Failed workers can be ______.",
+        "type": "fill_blank",
+        "answers": [
+            "restarted"
+        ],
+        "other_options": [
+            "ignored",
+            "logged",
+            "removed"
+        ]
+    },
+    {
+        "q": "Master process monitors worker health.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match process events:",
+        "type": "match",
+        "left": [
+            "uncaughtException",
+            "unhandledRejection",
+            "SIGTERM",
+            "exit"
+        ],
+        "right": [
+            "Sync error",
+            "Async error",
+            "Terminate",
+            "Process end"
+        ]
+    },
+    {
+        "q": "What is error handling in child processes?",
+        "type": "mcq",
+        "o": [
+            "Handling errors from spawned processes",
+            "Child creation",
+            "Process spawning",
+            "Fork handling"
+        ]
+    },
+    {
+        "q": "child.on('error') catches ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "spawn"
+        ],
+        "other_options": [
+            "exit",
+            "close",
+            "data"
+        ]
+    },
+    {
+        "q": "Check child exit code for success.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling anti-patterns?",
+        "type": "mcq",
+        "o": [
+            "Common mistakes in error handling",
+            "Error patterns",
+            "Error templates",
+            "Error formats"
+        ]
+    },
+    {
+        "q": "Swallowing errors is an ______.",
+        "type": "fill_blank",
+        "answers": [
+            "anti-pattern"
+        ],
+        "other_options": [
+            "pattern",
+            "practice",
+            "approach"
+        ]
+    },
+    {
+        "q": "empty catch blocks are anti-patterns.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange anti-patterns to avoid:",
+        "type": "rearrange",
+        "words": [
+            "Empty catch",
+            "Generic errors",
+            "Hidden failures",
+            "Missing logging",
+            "Inconsistent responses"
+        ]
+    },
+    {
+        "q": "What is error handling performance?",
+        "type": "mcq",
+        "o": [
+            "Performance impact of error handling code",
+            "Fast errors",
+            "Quick recovery",
+            "Speed optimization"
+        ]
+    },
+    {
+        "q": "Try-catch has minimal performance ______.",
+        "type": "fill_blank",
+        "answers": [
+            "overhead"
+        ],
+        "other_options": [
+            "benefit",
+            "impact",
+            "cost"
+        ]
+    },
+    {
+        "q": "Don't avoid try-catch for performance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling security?",
+        "type": "mcq",
+        "o": [
+            "Preventing security issues through errors",
+            "Error encryption",
+            "Error hiding",
+            "Error masking"
+        ]
+    },
+    {
+        "q": "Verbose errors can leak ______ information.",
+        "type": "fill_blank",
+        "answers": [
+            "sensitive"
+        ],
+        "other_options": [
+            "error",
+            "log",
+            "debug"
+        ]
+    },
+    {
+        "q": "Never expose stack traces to users.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error enumeration attack?",
+        "type": "mcq",
+        "o": [
+            "Discovering info through error differences",
+            "Error counting",
+            "Error listing",
+            "Error mapping"
+        ]
+    },
+    {
+        "q": "Use generic errors for ______.",
+        "type": "fill_blank",
+        "answers": [
+            "authentication"
+        ],
+        "other_options": [
+            "validation",
+            "database",
+            "server"
+        ]
+    },
+    {
+        "q": "Invalid username vs password should have same error.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match security considerations:",
+        "type": "match",
+        "left": [
+            "Hide stacks",
+            "Generic auth errors",
+            "Log sanitization",
+            "Rate limiting"
+        ],
+        "right": [
+            "Prevent disclosure",
+            "Prevent enumeration",
+            "Prevent log injection",
+            "Prevent flooding"
+        ]
+    },
+    {
+        "q": "What is error handling conclusion?",
+        "type": "mcq",
+        "o": [
+            "Robust error handling is essential for quality",
+            "Optional feature",
+            "Nice to have",
+            "Low priority"
+        ]
+    },
+    {
+        "q": "Error handling affects ______ and UX.",
+        "type": "fill_blank",
+        "answers": [
+            "reliability"
+        ],
+        "other_options": [
+            "speed",
+            "size",
+            "features"
+        ]
+    },
+    {
+        "q": "Invest time in proper error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-error-handler package?",
+        "type": "mcq",
+        "o": [
+            "Pre-built error handling middleware",
+            "Error creator",
+            "Error logger",
+            "Error formatter"
+        ]
+    },
+    {
+        "q": "express-error-handler provides ______ handlers.",
+        "type": "fill_blank",
+        "answers": [
+            "default"
+        ],
+        "other_options": [
+            "custom",
+            "special",
+            "unique"
+        ]
+    },
+    {
+        "q": "Third-party packages can simplify error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error handling maturity levels:",
+        "type": "rearrange",
+        "words": [
+            "Basic try-catch",
+            "Centralized handler",
+            "Structured errors",
+            "Monitoring",
+            "Automated recovery"
+        ]
+    },
+    {
+        "q": "What is error handling code review?",
+        "type": "mcq",
+        "o": [
+            "Reviewing error handling in code reviews",
+            "Code inspection",
+            "Code analysis",
+            "Code audit"
+        ]
+    },
+    {
+        "q": "Review checklist includes error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "handling"
+        ],
+        "other_options": [
+            "types",
+            "codes",
+            "messages"
+        ]
+    },
+    {
+        "q": "Peer review catches error handling gaps.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling linting?",
+        "type": "mcq",
+        "o": [
+            "Static analysis for error handling issues",
+            "Error formatting",
+            "Error styling",
+            "Error checking"
+        ]
+    },
+    {
+        "q": "ESLint rules enforce error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "patterns"
+        ],
+        "other_options": [
+            "types",
+            "codes",
+            "messages"
+        ]
+    },
+    {
+        "q": "no-unused-catch catches empty handlers.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is TypeScript for error handling?",
+        "type": "mcq",
+        "o": [
+            "Type safety for error objects",
+            "Error types",
+            "Error classes",
+            "Error interfaces"
+        ]
+    },
+    {
+        "q": "TypeScript catches type errors at ______.",
+        "type": "fill_blank",
+        "answers": [
+            "compile time"
+        ],
+        "other_options": [
+            "runtime",
+            "test time",
+            "build time"
+        ]
+    },
+    {
+        "q": "Typed errors improve IDE support.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handling tools:",
+        "type": "match",
+        "left": [
+            "ESLint",
+            "TypeScript",
+            "Jest",
+            "Sentry"
+        ],
+        "right": [
+            "Linting",
+            "Type safety",
+            "Testing",
+            "Monitoring"
+        ]
+    },
+    {
+        "q": "What is error handling in Express middleware chain?",
+        "type": "mcq",
+        "o": [
+            "Errors propagate to next error handler",
+            "Errors stop processing",
+            "Errors are ignored",
+            "Errors crash server"
+        ]
+    },
+    {
+        "q": "Middleware errors skip to error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "handlers"
+        ],
+        "other_options": [
+            "routes",
+            "middlewares",
+            "functions"
+        ]
+    },
+    {
+        "q": "Error middleware has four parameters.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error recovery middleware?",
+        "type": "mcq",
+        "o": [
+            "Middleware that attempts to recover from errors",
+            "Error logging",
+            "Error display",
+            "Error format"
+        ]
+    },
+    {
+        "q": "Recovery can retry or use ______.",
+        "type": "fill_blank",
+        "answers": [
+            "fallback"
+        ],
+        "other_options": [
+            "cache",
+            "backup",
+            "default"
+        ]
+    },
+    {
+        "q": "Not all errors are recoverable.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error transformation middleware?",
+        "type": "mcq",
+        "o": [
+            "Converting errors to standard format",
+            "Error creation",
+            "Error logging",
+            "Error display"
+        ]
+    },
+    {
+        "q": "Transform database errors to ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "API"
+        ],
+        "other_options": [
+            "HTTP",
+            "client",
+            "user"
+        ]
+    },
+    {
+        "q": "Transformation hides implementation details.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error middleware purposes:",
+        "type": "match",
+        "left": [
+            "Logging",
+            "Transformation",
+            "Response",
+            "Recovery"
+        ],
+        "right": [
+            "Record error",
+            "Convert format",
+            "Send message",
+            "Fix issue"
+        ]
+    },
+    {
+        "q": "What is centralized error handler?",
+        "type": "mcq",
+        "o": [
+            "Single handler for all errors",
+            "Distributed handlers",
+            "Multiple handlers",
+            "Local handlers"
+        ]
+    },
+    {
+        "q": "Central handler simplifies error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "management"
+        ],
+        "other_options": [
+            "creation",
+            "display",
+            "logging"
+        ]
+    },
+    {
+        "q": "Centralized handling ensures consistency.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error middleware ordering?",
+        "type": "mcq",
+        "o": [
+            "Error handlers must be last",
+            "Error handlers go first",
+            "Order doesn't matter",
+            "Error handlers in middle"
+        ]
+    },
+    {
+        "q": "Define error handlers after all ______.",
+        "type": "fill_blank",
+        "answers": [
+            "routes"
+        ],
+        "other_options": [
+            "middleware",
+            "handlers",
+            "functions"
+        ]
+    },
+    {
+        "q": "Order affects which handler catches errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange middleware order:",
+        "type": "rearrange",
+        "words": [
+            "Body parser",
+            "Auth middleware",
+            "Route handlers",
+            "404 handler",
+            "Error handler"
+        ]
+    },
+    {
+        "q": "What is error response negotiation?",
+        "type": "mcq",
+        "o": [
+            "Returning format based on Accept header",
+            "Error selection",
+            "Error choice",
+            "Error option"
+        ]
+    },
+    {
+        "q": "Return JSON for API, ______ for browser.",
+        "type": "fill_blank",
+        "answers": [
+            "HTML"
+        ],
+        "other_options": [
+            "text",
+            "XML",
+            "plain"
+        ]
+    },
+    {
+        "q": "Content negotiation improves UX.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error retry with exponential backoff?",
+        "type": "mcq",
+        "o": [
+            "Increasing wait time between retries",
+            "Fixed retry interval",
+            "No waiting",
+            "Immediate retry"
+        ]
+    },
+    {
+        "q": "Backoff prevents server ______.",
+        "type": "fill_blank",
+        "answers": [
+            "overload"
+        ],
+        "other_options": [
+            "crash",
+            "failure",
+            "timeout"
+        ]
+    },
+    {
+        "q": "Add jitter to prevent thundering herd.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is MAX_RETRIES constant?",
+        "type": "mcq",
+        "o": [
+            "Limit on retry attempts",
+            "Maximum errors",
+            "Maximum requests",
+            "Maximum connections"
+        ]
+    },
+    {
+        "q": "Stop retrying after ______ attempts.",
+        "type": "fill_blank",
+        "answers": [
+            "MAX_RETRIES"
+        ],
+        "other_options": [
+            "limit",
+            "max",
+            "threshold"
+        ]
+    },
+    {
+        "q": "Infinite retries can hang requests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match retry strategies:",
+        "type": "match",
+        "left": [
+            "Immediate",
+            "Fixed delay",
+            "Exponential",
+            "Jittered"
+        ],
+        "right": [
+            "No wait",
+            "Same wait",
+            "Increasing wait",
+            "Random wait"
+        ]
+    },
+    {
+        "q": "What is request abort handling?",
+        "type": "mcq",
+        "o": [
+            "Handling when client cancels request",
+            "Request timeout",
+            "Request failure",
+            "Request error"
+        ]
+    },
+    {
+        "q": "req.on('close') detects client ______.",
+        "type": "fill_blank",
+        "answers": [
+            "disconnect"
+        ],
+        "other_options": [
+            "error",
+            "timeout",
+            "failure"
+        ]
+    },
+    {
+        "q": "Stop processing on client abort.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is res.headersSent check?",
+        "type": "mcq",
+        "o": [
+            "Check if headers already sent",
+            "Header validation",
+            "Header creation",
+            "Header format"
+        ]
+    },
+    {
+        "q": "Cannot send error if headers already ______.",
+        "type": "fill_blank",
+        "answers": [
+            "sent"
+        ],
+        "other_options": [
+            "set",
+            "created",
+            "built"
+        ]
+    },
+    {
+        "q": "Call next(err) if headers sent.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange error response check:",
+        "type": "rearrange",
+        "words": [
+            "Catch error",
+            "Check headersSent",
+            "Log error",
+            "Send response or next",
+            "Complete"
+        ]
+    },
+    {
+        "q": "What is error count metric?",
+        "type": "mcq",
+        "o": [
+            "Total number of errors over time",
+            "Error list",
+            "Error log",
+            "Error size"
+        ]
+    },
+    {
+        "q": "Increment counter on each ______.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "request",
+            "response",
+            "call"
+        ]
+    },
+    {
+        "q": "Error count helps identify trends.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error rate percentage?",
+        "type": "mcq",
+        "o": [
+            "Errors divided by total requests",
+            "Error count",
+            "Error sum",
+            "Error total"
+        ]
+    },
+    {
+        "q": "Error rate should be below ______ percent.",
+        "type": "fill_blank",
+        "answers": [
+            "threshold"
+        ],
+        "other_options": [
+            "limit",
+            "max",
+            "target"
+        ]
+    },
+    {
+        "q": "High error rate triggers alerts.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is mean time to recovery (MTTR)?",
+        "type": "mcq",
+        "o": [
+            "Average time to fix issues",
+            "Maximum time",
+            "Minimum time",
+            "Total time"
+        ]
+    },
+    {
+        "q": "Lower MTTR means faster ______.",
+        "type": "fill_blank",
+        "answers": [
+            "recovery"
+        ],
+        "other_options": [
+            "detection",
+            "response",
+            "fix"
+        ]
+    },
+    {
+        "q": "Automation reduces MTTR.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match reliability metrics:",
+        "type": "match",
+        "left": [
+            "MTTR",
+            "MTTF",
+            "MTBF",
+            "Availability"
+        ],
+        "right": [
+            "Recovery time",
+            "Failure time",
+            "Between failures",
+            "Uptime percent"
+        ]
+    },
+    {
+        "q": "What is error budget consumption?",
+        "type": "mcq",
+        "o": [
+            "How much of allowed errors are used",
+            "Error spending",
+            "Error allocation",
+            "Error funding"
+        ]
+    },
+    {
+        "q": "Budget tracks allowed ______.",
+        "type": "fill_blank",
+        "answers": [
+            "failures"
+        ],
+        "other_options": [
+            "errors",
+            "issues",
+            "problems"
+        ]
+    },
+    {
+        "q": "Exhausted budget pauses deployments.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is SLI (Service Level Indicator)?",
+        "type": "mcq",
+        "o": [
+            "Measurable metric of service",
+            "Service level",
+            "Service index",
+            "Service indicator"
+        ]
+    },
+    {
+        "q": "Error rate is common ______.",
+        "type": "fill_blank",
+        "answers": [
+            "SLI"
+        ],
+        "other_options": [
+            "SLO",
+            "SLA",
+            "KPI"
+        ]
+    },
+    {
+        "q": "SLIs are used to calculate SLOs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange SRE concepts:",
+        "type": "rearrange",
+        "words": [
+            "Define SLI",
+            "Set SLO",
+            "Agree SLA",
+            "Monitor SLI",
+            "Alert on breach"
+        ]
+    },
+    {
+        "q": "What is error message guidelines?",
+        "type": "mcq",
+        "o": [
+            "Standards for writing error messages",
+            "Error templates",
+            "Error formats",
+            "Error rules"
+        ]
+    },
+    {
+        "q": "Messages should be ______ and helpful.",
+        "type": "fill_blank",
+        "answers": [
+            "clear"
+        ],
+        "other_options": [
+            "short",
+            "long",
+            "detailed"
+        ]
+    },
+    {
+        "q": "Avoid technical jargon in user messages.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is actionable error message?",
+        "type": "mcq",
+        "o": [
+            "Message that tells user what to do",
+            "Error action",
+            "Error step",
+            "Error instruction"
+        ]
+    },
+    {
+        "q": "Actionable: 'Please ______ and try again.'",
+        "type": "fill_blank",
+        "answers": [
+            "fix input"
+        ],
+        "other_options": [
+            "wait",
+            "refresh",
+            "contact"
+        ]
+    },
+    {
+        "q": "Actionable messages improve UX.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error message tense?",
+        "type": "mcq",
+        "o": [
+            "Past tense for what happened",
+            "Future tense",
+            "Present tense",
+            "Any tense"
+        ]
+    },
+    {
+        "q": "Failed, not 'Will fail' or ______.",
+        "type": "fill_blank",
+        "answers": [
+            "'Fails'"
+        ],
+        "other_options": [
+            "'Is failing'",
+            "'May fail'",
+            "'Could fail'"
+        ]
+    },
+    {
+        "q": "Consistent tense improves clarity.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error message qualities:",
+        "type": "match",
+        "left": [
+            "Clear",
+            "Concise",
+            "Actionable",
+            "Specific"
+        ],
+        "right": [
+            "Easy to understand",
+            "Brief",
+            "Tells what to do",
+            "Describes exact issue"
+        ]
+    },
+    {
+        "q": "What is error localization testing?",
+        "type": "mcq",
+        "o": [
+            "Testing translated error messages",
+            "Local testing",
+            "Region testing",
+            "Language testing"
+        ]
+    },
+    {
+        "q": "Test all supported ______.",
+        "type": "fill_blank",
+        "answers": [
+            "locales"
+        ],
+        "other_options": [
+            "languages",
+            "regions",
+            "countries"
+        ]
+    },
+    {
+        "q": "Translation errors can confuse users.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling for WebSocket?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in WebSocket connections",
+            "Socket errors",
+            "Network errors",
+            "Connection errors"
+        ]
+    },
+    {
+        "q": "ws.on('error') catches WebSocket ______.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "messages",
+            "events",
+            "data"
+        ]
+    },
+    {
+        "q": "WebSocket errors need different handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange WebSocket error handling:",
+        "type": "rearrange",
+        "words": [
+            "Listen error event",
+            "Log error",
+            "Close connection",
+            "Attempt reconnect",
+            "Notify client"
+        ]
+    },
+    {
+        "q": "What is GraphQL error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in GraphQL resolvers",
+            "Query errors",
+            "Schema errors",
+            "Type errors"
+        ]
+    },
+    {
+        "q": "GraphQL errors go in ______ array.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "data",
+            "response",
+            "result"
+        ]
+    },
+    {
+        "q": "GraphQL can return partial data with errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is REST API error format?",
+        "type": "mcq",
+        "o": [
+            "Standard JSON structure for errors",
+            "HTTP format",
+            "Text format",
+            "XML format"
+        ]
+    },
+    {
+        "q": "Common format: {error: string, ______: string}",
+        "type": "fill_blank",
+        "answers": [
+            "message"
+        ],
+        "other_options": [
+            "code",
+            "type",
+            "detail"
+        ]
+    },
+    {
+        "q": "Consistent format helps clients handle errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is RFC 7807 Problem Details?",
+        "type": "mcq",
+        "o": [
+            "Standard format for HTTP API errors",
+            "Problem specification",
+            "Error standard",
+            "Issue format"
+        ]
+    },
+    {
+        "q": "Problem Details includes type and ______.",
+        "type": "fill_blank",
+        "answers": [
+            "title"
+        ],
+        "other_options": [
+            "name",
+            "code",
+            "message"
+        ]
+    },
+    {
+        "q": "RFC 7807 is widely adopted.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match API error standards:",
+        "type": "match",
+        "left": [
+            "RFC 7807",
+            "JSON:API",
+            "Open API",
+            "GraphQL"
+        ],
+        "right": [
+            "Problem Details",
+            "JSON API errors",
+            "Swagger errors",
+            "Errors array"
+        ]
+    },
+    {
+        "q": "What is error handling final checklist?",
+        "type": "mcq",
+        "o": [
+            "Verify all error paths are covered",
+            "Error list",
+            "Bug list",
+            "Issue list"
+        ]
+    },
+    {
+        "q": "Checklist ensures ______ coverage.",
+        "type": "fill_blank",
+        "answers": [
+            "complete"
+        ],
+        "other_options": [
+            "partial",
+            "good",
+            "full"
+        ]
+    },
+    {
+        "q": "Regular audits improve error handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-async-errors package?",
+        "type": "mcq",
+        "o": [
+            "Auto-catches async errors in Express 4",
+            "Error logging",
+            "Error formatting",
+            "Error handling"
+        ]
+    },
+    {
+        "q": "require('express-async-errors') patches ______.",
+        "type": "fill_blank",
+        "answers": [
+            "Express"
+        ],
+        "other_options": [
+            "Node",
+            "Router",
+            "App"
+        ]
+    },
+    {
+        "q": "express-async-errors eliminates asyncHandler.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Boom error library?",
+        "type": "mcq",
+        "o": [
+            "HTTP-friendly error objects",
+            "Error sound",
+            "Crash handler",
+            "Log formatter"
+        ]
+    },
+    {
+        "q": "Boom.notFound creates ______ error.",
+        "type": "fill_blank",
+        "answers": [
+            "404"
+        ],
+        "other_options": [
+            "500",
+            "400",
+            "401"
+        ]
+    },
+    {
+        "q": "Boom provides consistent error structure.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Youch error display?",
+        "type": "mcq",
+        "o": [
+            "Pretty error pages for development",
+            "Error sound",
+            "Error alert",
+            "Error email"
+        ]
+    },
+    {
+        "q": "Youch formats errors for ______.",
+        "type": "fill_blank",
+        "answers": [
+            "development"
+        ],
+        "other_options": [
+            "production",
+            "testing",
+            "staging"
+        ]
+    },
+    {
+        "q": "Youch supports HTML and JSON output.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handling packages:",
+        "type": "match",
+        "left": [
+            "http-errors",
+            "boom",
+            "youch",
+            "express-async-errors"
+        ],
+        "right": [
+            "Simple HTTP errors",
+            "Rich errors",
+            "Dev display",
+            "Async catch"
+        ]
+    },
+    {
+        "q": "What is celebrate validation middleware?",
+        "type": "mcq",
+        "o": [
+            "Joi validation with Express integration",
+            "Party middleware",
+            "Event handler",
+            "Log formatter"
+        ]
+    },
+    {
+        "q": "celebrate automatically returns ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "validation"
+        ],
+        "other_options": [
+            "server",
+            "client",
+            "auth"
+        ]
+    },
+    {
+        "q": "celebrate uses Joi schemas.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express-openapi-validator?",
+        "type": "mcq",
+        "o": [
+            "Validates requests against OpenAPI spec",
+            "API generator",
+            "Doc generator",
+            "Test generator"
+        ]
+    },
+    {
+        "q": "OpenAPI validator returns ______ for invalid requests.",
+        "type": "fill_blank",
+        "answers": [
+            "400"
+        ],
+        "other_options": [
+            "500",
+            "404",
+            "401"
+        ]
+    },
+    {
+        "q": "OpenAPI validator ensures API contract.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange validation middleware usage:",
+        "type": "rearrange",
+        "words": [
+            "Define schema",
+            "Create validator",
+            "Apply to routes",
+            "Handle errors",
+            "Process valid data"
+        ]
+    },
+    {
+        "q": "What is express-rate-limit error?",
+        "type": "mcq",
+        "o": [
+            "Error when request limit exceeded",
+            "Speed error",
+            "Timing error",
+            "Count error"
+        ]
+    },
+    {
+        "q": "Rate limit returns ______ status.",
+        "type": "fill_blank",
+        "answers": [
+            "429"
+        ],
+        "other_options": [
+            "400",
+            "403",
+            "500"
+        ]
+    },
+    {
+        "q": "Custom handler can modify rate limit response.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is helmet security error prevention?",
+        "type": "mcq",
+        "o": [
+            "Headers that prevent security issues",
+            "Error helmet",
+            "Protection error",
+            "Security crash"
+        ]
+    },
+    {
+        "q": "Helmet prevents ______ vulnerabilities.",
+        "type": "fill_blank",
+        "answers": [
+            "common"
+        ],
+        "other_options": [
+            "all",
+            "most",
+            "some"
+        ]
+    },
+    {
+        "q": "Helmet is proactive error prevention.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is CORS error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling cross-origin request errors",
+            "CORS setup",
+            "CORS config",
+            "CORS enable"
+        ]
+    },
+    {
+        "q": "CORS errors are detected by ______.",
+        "type": "fill_blank",
+        "answers": [
+            "browser"
+        ],
+        "other_options": [
+            "server",
+            "proxy",
+            "client"
+        ]
+    },
+    {
+        "q": "CORS middleware can have error callback.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match security middleware with their purposes:",
+        "type": "match",
+        "left": [
+            "helmet",
+            "cors",
+            "rate-limit",
+            "csurf"
+        ],
+        "right": [
+            "Security headers",
+            "Cross-origin",
+            "Request limiting",
+            "CSRF protection"
+        ]
+    },
+    {
+        "q": "What is compression error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in response compression",
+            "Compression setup",
+            "Compression config",
+            "Compression enable"
+        ]
+    },
+    {
+        "q": "Compression errors are usually ______.",
+        "type": "fill_blank",
+        "answers": [
+            "silent"
+        ],
+        "other_options": [
+            "loud",
+            "visible",
+            "critical"
+        ]
+    },
+    {
+        "q": "Monitor compression middleware for errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is static file 404 handling?",
+        "type": "mcq",
+        "o": [
+            "Missing file errors in express.static",
+            "Static config",
+            "File setup",
+            "Directory config"
+        ]
+    },
+    {
+        "q": "Static middleware passes missing files to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "next"
+        ],
+        "other_options": [
+            "error",
+            "handler",
+            "middleware"
+        ]
+    },
+    {
+        "q": "Custom 404 handler catches static file misses.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange static file error handling:",
+        "type": "rearrange",
+        "words": [
+            "Request static file",
+            "Check if exists",
+            "Serve if found",
+            "Call next if not",
+            "404 handler catches"
+        ]
+    },
+    {
+        "q": "What is cookie-parser error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling invalid cookie errors",
+            "Cookie setup",
+            "Cookie config",
+            "Cookie create"
+        ]
+    },
+    {
+        "q": "Malformed cookies throw ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "parsing"
+        ],
+        "other_options": [
+            "syntax",
+            "format",
+            "type"
+        ]
+    },
+    {
+        "q": "Cookie errors should return 400.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is session error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling session store errors",
+            "Session setup",
+            "Session config",
+            "Session create"
+        ]
+    },
+    {
+        "q": "Session store errors can cause ______.",
+        "type": "fill_blank",
+        "answers": [
+            "500 errors"
+        ],
+        "other_options": [
+            "400 errors",
+            "404 errors",
+            "401 errors"
+        ]
+    },
+    {
+        "q": "Redis session errors need special handling.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is passport authentication error?",
+        "type": "mcq",
+        "o": [
+            "Error from passport strategy",
+            "Passport config",
+            "Auth setup",
+            "Login config"
+        ]
+    },
+    {
+        "q": "Passport calls done(err) on ______.",
+        "type": "fill_blank",
+        "answers": [
+            "failure"
+        ],
+        "other_options": [
+            "success",
+            "complete",
+            "finish"
+        ]
+    },
+    {
+        "q": "Custom callback handles passport errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match authentication error scenarios:",
+        "type": "match",
+        "left": [
+            "Invalid password",
+            "User not found",
+            "Session expired",
+            "Token invalid"
+        ],
+        "right": [
+            "401",
+            "401",
+            "401",
+            "401"
+        ]
+    },
+    {
+        "q": "What is multer file type error?",
+        "type": "mcq",
+        "o": [
+            "Error for invalid file types",
+            "File size error",
+            "File count error",
+            "File name error"
+        ]
+    },
+    {
+        "q": "fileFilter returns error for invalid ______.",
+        "type": "fill_blank",
+        "answers": [
+            "types"
+        ],
+        "other_options": [
+            "sizes",
+            "names",
+            "counts"
+        ]
+    },
+    {
+        "q": "Return 400 for file type errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is multer size limit error?",
+        "type": "mcq",
+        "o": [
+            "Error when file exceeds size limit",
+            "Count limit",
+            "Type limit",
+            "Name limit"
+        ]
+    },
+    {
+        "q": "LIMIT_FILE_SIZE error code from ______.",
+        "type": "fill_blank",
+        "answers": [
+            "multer"
+        ],
+        "other_options": [
+            "express",
+            "node",
+            "http"
+        ]
+    },
+    {
+        "q": "Return 413 for size limit errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange file upload error handling:",
+        "type": "rearrange",
+        "words": [
+            "Receive upload",
+            "Check type",
+            "Check size",
+            "Store file",
+            "Handle errors"
+        ]
+    },
+    {
+        "q": "What is body-parser limit error?",
+        "type": "mcq",
+        "o": [
+            "Error when body exceeds limit",
+            "Parse error",
+            "Type error",
+            "Format error"
+        ]
+    },
+    {
+        "q": "PayloadTooLargeError has ______ type.",
+        "type": "fill_blank",
+        "answers": [
+            "entity.too.large"
+        ],
+        "other_options": [
+            "body.too.large",
+            "payload.exceeded",
+            "size.exceeded"
+        ]
+    },
+    {
+        "q": "Return 413 for payload errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is JSON parse error in body-parser?",
+        "type": "mcq",
+        "o": [
+            "Error for invalid JSON body",
+            "Parse config",
+            "JSON setup",
+            "Body config"
+        ]
+    },
+    {
+        "q": "SyntaxError indicates ______ JSON.",
+        "type": "fill_blank",
+        "answers": [
+            "invalid"
+        ],
+        "other_options": [
+            "missing",
+            "empty",
+            "null"
+        ]
+    },
+    {
+        "q": "Return 400 for JSON parse errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is encoding error in body-parser?",
+        "type": "mcq",
+        "o": [
+            "Invalid character encoding error",
+            "Format error",
+            "Type error",
+            "Size error"
+        ]
+    },
+    {
+        "q": "UnsupportedMediaTypeError returns ______.",
+        "type": "fill_blank",
+        "answers": [
+            "415"
+        ],
+        "other_options": [
+            "400",
+            "500",
+            "413"
+        ]
+    },
+    {
+        "q": "415 indicates unsupported content type.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match body-parser error types:",
+        "type": "match",
+        "left": [
+            "SyntaxError",
+            "PayloadTooLargeError",
+            "UnsupportedMediaTypeError",
+            "ParseError"
+        ],
+        "right": [
+            "Invalid JSON",
+            "Body too big",
+            "Wrong content-type",
+            "Parse failure"
+        ]
+    },
+    {
+        "q": "What is mongoose validation error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling schema validation errors",
+            "Mongoose config",
+            "Schema setup",
+            "Model config"
+        ]
+    },
+    {
+        "q": "ValidationError contains ______ property.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "messages",
+            "fields",
+            "details"
+        ]
+    },
+    {
+        "q": "Extract field errors from ValidationError.errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is mongoose CastError?",
+        "type": "mcq",
+        "o": [
+            "Type conversion error",
+            "Cast function",
+            "Type cast",
+            "Model cast"
+        ]
+    },
+    {
+        "q": "CastError occurs with invalid ______.",
+        "type": "fill_blank",
+        "answers": [
+            "ObjectId"
+        ],
+        "other_options": [
+            "String",
+            "Number",
+            "Date"
+        ]
+    },
+    {
+        "q": "Return 400 for CastError.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange mongoose error classification:",
+        "type": "rearrange",
+        "words": [
+            "Check error name",
+            "Identify error type",
+            "Map to HTTP status",
+            "Format response",
+            "Send to client"
+        ]
+    },
+    {
+        "q": "What is sequelize error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling Sequelize ORM errors",
+            "Sequelize config",
+            "Model setup",
+            "Query config"
+        ]
+    },
+    {
+        "q": "SequelizeValidationError contains ______ array.",
+        "type": "fill_blank",
+        "answers": [
+            "errors"
+        ],
+        "other_options": [
+            "messages",
+            "fields",
+            "details"
+        ]
+    },
+    {
+        "q": "Sequelize errors include field names.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is UniqueConstraintError?",
+        "type": "mcq",
+        "o": [
+            "Duplicate key error in Sequelize",
+            "Unique field",
+            "Constraint error",
+            "Key error"
+        ]
+    },
+    {
+        "q": "Return ______ for duplicate errors.",
+        "type": "fill_blank",
+        "answers": [
+            "409"
+        ],
+        "other_options": [
+            "400",
+            "500",
+            "422"
+        ]
+    },
+    {
+        "q": "409 Conflict indicates duplicate.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is ForeignKeyConstraintError?",
+        "type": "mcq",
+        "o": [
+            "Foreign key violation error",
+            "Key error",
+            "Reference error",
+            "Link error"
+        ]
+    },
+    {
+        "q": "FK error means referenced record ______.",
+        "type": "fill_blank",
+        "answers": [
+            "missing"
+        ],
+        "other_options": [
+            "exists",
+            "invalid",
+            "wrong"
+        ]
+    },
+    {
+        "q": "Return 400 for FK violation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match database error types:",
+        "type": "match",
+        "left": [
+            "ValidationError",
+            "CastError",
+            "UniqueConstraintError",
+            "ForeignKeyConstraintError"
+        ],
+        "right": [
+            "Schema validation",
+            "Type conversion",
+            "Duplicate key",
+            "Reference missing"
+        ]
+    },
+    {
+        "q": "What is connection pool exhaustion error?",
+        "type": "mcq",
+        "o": [
+            "No available database connections",
+            "Pool config",
+            "Connection setup",
+            "Pool size"
+        ]
+    },
+    {
+        "q": "Exhaustion causes connection ______.",
+        "type": "fill_blank",
+        "answers": [
+            "timeout"
+        ],
+        "other_options": [
+            "error",
+            "failure",
+            "crash"
+        ]
+    },
+    {
+        "q": "Monitor connection pool metrics.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is query timeout error?",
+        "type": "mcq",
+        "o": [
+            "Query exceeds time limit",
+            "Query size",
+            "Query count",
+            "Query type"
+        ]
+    },
+    {
+        "q": "Set query ______ to prevent long queries.",
+        "type": "fill_blank",
+        "answers": [
+            "timeout"
+        ],
+        "other_options": [
+            "limit",
+            "max",
+            "size"
+        ]
+    },
+    {
+        "q": "Slow queries should be optimized.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange database error handling:",
+        "type": "rearrange",
+        "words": [
+            "Catch database error",
+            "Log full error",
+            "Classify error",
+            "Create API error",
+            "Send response"
+        ]
+    },
+    {
+        "q": "What is Redis error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling Redis connection/command errors",
+            "Redis setup",
+            "Redis config",
+            "Cache config"
+        ]
+    },
+    {
+        "q": "Redis client emits ______ event.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "fail",
+            "crash",
+            "problem"
+        ]
+    },
+    {
+        "q": "Handle Redis offline gracefully.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cache miss handling?",
+        "type": "mcq",
+        "o": [
+            "Handling when cache data not found",
+            "Cache error",
+            "Cache failure",
+            "Cache problem"
+        ]
+    },
+    {
+        "q": "Cache miss should fall back to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "database"
+        ],
+        "other_options": [
+            "error",
+            "default",
+            "null"
+        ]
+    },
+    {
+        "q": "Cache miss is normal, not an error.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is message queue error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors in message processing",
+            "Queue config",
+            "Message setup",
+            "Broker config"
+        ]
+    },
+    {
+        "q": "Failed messages go to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "DLQ"
+        ],
+        "other_options": [
+            "error queue",
+            "fail queue",
+            "retry queue"
+        ]
+    },
+    {
+        "q": "Idempotent handlers enable safe retries.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match infrastructure error handling:",
+        "type": "match",
+        "left": [
+            "Redis",
+            "RabbitMQ",
+            "Elasticsearch",
+            "S3"
+        ],
+        "right": [
+            "Cache errors",
+            "Queue errors",
+            "Search errors",
+            "Storage errors"
+        ]
+    },
+    {
+        "q": "What is external service timeout?",
+        "type": "mcq",
+        "o": [
+            "Third-party service taking too long",
+            "Service error",
+            "Service failure",
+            "Service crash"
+        ]
+    },
+    {
+        "q": "Set request ______ for external calls.",
+        "type": "fill_blank",
+        "answers": [
+            "timeout"
+        ],
+        "other_options": [
+            "limit",
+            "max",
+            "time"
+        ]
+    },
+    {
+        "q": "Use axios timeout or AbortController.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is axios error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling HTTP client errors",
+            "Axios config",
+            "HTTP setup",
+            "Request config"
+        ]
+    },
+    {
+        "q": "error.response exists for ______ errors.",
+        "type": "fill_blank",
+        "answers": [
+            "HTTP"
+        ],
+        "other_options": [
+            "network",
+            "timeout",
+            "abort"
+        ]
+    },
+    {
+        "q": "error.request exists for no response.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange axios error classification:",
+        "type": "rearrange",
+        "words": [
+            "Catch error",
+            "Check error.response",
+            "Check error.request",
+            "Check error.message",
+            "Handle appropriately"
+        ]
+    },
+    {
+        "q": "What is final error handling recommendation?",
+        "type": "mcq",
+        "o": [
+            "Always handle errors properly",
+            "Ignore most errors",
+            "Log only critical",
+            "Hide all errors"
+        ]
+    },
+    {
+        "q": "Proper error handling improves ______.",
+        "type": "fill_blank",
+        "answers": [
+            "reliability"
+        ],
+        "other_options": [
+            "speed",
+            "size",
+            "features"
+        ]
+    },
+    {
+        "q": "Error handling is essential for production apps.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling middleware signature?",
+        "type": "mcq",
+        "o": [
+            "(err, req, res, next) => {}",
+            "(req, res, next) => {}",
+            "(err, req, res) => {}",
+            "(req, res) => {}"
+        ]
+    },
+    {
+        "q": "Error middleware must have ______ parameters.",
+        "type": "fill_blank",
+        "answers": [
+            "four"
+        ],
+        "other_options": [
+            "three",
+            "two",
+            "five"
+        ]
+    },
+    {
+        "q": "Express identifies error handlers by arity.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handler module pattern?",
+        "type": "mcq",
+        "o": [
+            "Separate file for error handling logic",
+            "Inline handlers",
+            "Mixed handlers",
+            "No pattern"
+        ]
+    },
+    {
+        "q": "Extract error handlers to ______ module.",
+        "type": "fill_blank",
+        "answers": [
+            "separate"
+        ],
+        "other_options": [
+            "same",
+            "inline",
+            "main"
+        ]
+    },
+    {
+        "q": "Modular handlers improve maintainability.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handler chain?",
+        "type": "mcq",
+        "o": [
+            "Multiple error handlers in sequence",
+            "Single handler",
+            "No handlers",
+            "Parallel handlers"
+        ]
+    },
+    {
+        "q": "Each handler calls next(____) to pass error.",
+        "type": "fill_blank",
+        "answers": [
+            "err"
+        ],
+        "other_options": [
+            "error",
+            "e",
+            "exception"
+        ]
+    },
+    {
+        "q": "Chain allows specialized error processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match error handler types in chain:",
+        "type": "match",
+        "left": [
+            "Logger",
+            "Transformer",
+            "Responder",
+            "Notifier"
+        ],
+        "right": [
+            "Logs error",
+            "Converts error",
+            "Sends response",
+            "Alerts team"
+        ]
+    },
+    {
+        "q": "What is 500 Internal Server Error?",
+        "type": "mcq",
+        "o": [
+            "Generic server error",
+            "Client error",
+            "Not found error",
+            "Auth error"
+        ]
+    },
+    {
+        "q": "500 errors indicate ______ problems.",
+        "type": "fill_blank",
+        "answers": [
+            "server"
+        ],
+        "other_options": [
+            "client",
+            "network",
+            "user"
+        ]
+    },
+    {
+        "q": "Hide 500 error details in production.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is 502 Bad Gateway?",
+        "type": "mcq",
+        "o": [
+            "Upstream server error",
+            "Server error",
+            "Client error",
+            "Auth error"
+        ]
+    },
+    {
+        "q": "502 occurs when proxy gets invalid ______.",
+        "type": "fill_blank",
+        "answers": [
+            "response"
+        ],
+        "other_options": [
+            "request",
+            "data",
+            "header"
+        ]
+    },
+    {
+        "q": "502 indicates upstream service issues.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is 503 Service Unavailable?",
+        "type": "mcq",
+        "o": [
+            "Server temporarily unavailable",
+            "Server error",
+            "Client error",
+            "Auth error"
+        ]
+    },
+    {
+        "q": "503 with Retry-After header is ______.",
+        "type": "fill_blank",
+        "answers": [
+            "polite"
+        ],
+        "other_options": [
+            "required",
+            "optional",
+            "mandatory"
+        ]
+    },
+    {
+        "q": "503 is appropriate for maintenance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange 5xx error handling:",
+        "type": "rearrange",
+        "words": [
+            "Catch error",
+            "Log details",
+            "Hide from user",
+            "Return generic",
+            "Alert team"
+        ]
+    },
+    {
+        "q": "What is 504 Gateway Timeout?",
+        "type": "mcq",
+        "o": [
+            "Upstream server timeout",
+            "Request timeout",
+            "Connection timeout",
+            "Database timeout"
+        ]
+    },
+    {
+        "q": "504 means upstream took too ______.",
+        "type": "fill_blank",
+        "answers": [
+            "long"
+        ],
+        "other_options": [
+            "much",
+            "many",
+            "little"
+        ]
+    },
+    {
+        "q": "504 is different from 408 Request Timeout.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is idempotent error handling?",
+        "type": "mcq",
+        "o": [
+            "Safe to retry without side effects",
+            "Single execution",
+            "No retries",
+            "Multiple effects"
+        ]
+    },
+    {
+        "q": "Idempotent requests are safe to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "retry"
+        ],
+        "other_options": [
+            "skip",
+            "cancel",
+            "ignore"
+        ]
+    },
+    {
+        "q": "GET, PUT, DELETE are typically idempotent.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error handling performance optimization?",
+        "type": "mcq",
+        "o": [
+            "Efficient error processing",
+            "Error speed",
+            "Error timing",
+            "Error counting"
+        ]
+    },
+    {
+        "q": "Avoid creating errors in ______ path.",
+        "type": "fill_blank",
+        "answers": [
+            "hot"
+        ],
+        "other_options": [
+            "cold",
+            "fast",
+            "slow"
+        ]
+    },
+    {
+        "q": "Error creation has minimal overhead.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match HTTP status code categories:",
+        "type": "match",
+        "left": [
+            "4xx",
+            "5xx",
+            "408",
+            "504"
+        ],
+        "right": [
+            "Client errors",
+            "Server errors",
+            "Client timeout",
+            "Gateway timeout"
+        ]
+    },
+    {
+        "q": "What is error handling final thought?",
+        "type": "mcq",
+        "o": [
+            "Error handling is continuous improvement",
+            "One-time setup",
+            "Optional feature",
+            "Low priority"
+        ]
+    },
+    {
+        "q": "Continuously improve error ______.",
+        "type": "fill_blank",
+        "answers": [
+            "handling"
+        ],
+        "other_options": [
+            "creation",
+            "display",
+            "logging"
+        ]
+    },
+    {
+        "q": "Good error handling is a competitive advantage.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is error-first callback pattern?",
+        "type": "mcq",
+        "o": [
+            "Callback with error as first parameter",
+            "Error at end",
+            "No error param",
+            "Error optional"
+        ]
+    },
+    {
+        "q": "callback(err, ______) is error-first.",
+        "type": "fill_blank",
+        "answers": [
+            "data"
+        ],
+        "other_options": [
+            "result",
+            "response",
+            "value"
+        ]
+    },
+    {
+        "q": "Error-first is legacy Node.js pattern.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is promisify for error handling?",
+        "type": "mcq",
+        "o": [
+            "Convert callback to promise",
+            "Promise creation",
+            "Error conversion",
+            "Callback wrapper"
+        ]
+    },
+    {
+        "q": "util.promisify converts callback to ______.",
+        "type": "fill_blank",
+        "answers": [
+            "promise"
+        ],
+        "other_options": [
+            "async",
+            "await",
+            "function"
+        ]
+    },
+    {
+        "q": "Promises enable try-catch with async/await.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange async evolution:",
+        "type": "rearrange",
+        "words": [
+            "Callbacks",
+            "Promises",
+            "async/await",
+            "Better error handling",
+            "Cleaner code"
+        ]
+    },
+    {
+        "q": "What is Express error handling summary?",
+        "type": "mcq",
+        "o": [
+            "Comprehensive error management strategy",
+            "Simple try-catch",
+            "No handling needed",
+            "Manual logging only"
+        ]
+    },
+    {
+        "q": "Error handling is crucial for ______ apps.",
+        "type": "fill_blank",
+        "answers": [
+            "production"
+        ],
+        "other_options": [
+            "any",
+            "all",
+            "most"
+        ]
+    },
+    {
+        "q": "Invest in proper error handling.",
+        "type": "true_false",
+        "correct": "True"
+    }
+]

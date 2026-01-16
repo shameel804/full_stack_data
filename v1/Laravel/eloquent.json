@@ -1,0 +1,5122 @@
+[
+    {
+        "q": "What does ORM stand for in Laravel's Eloquent ORM?",
+        "type": "mcq",
+        "o": [
+            "Object-Relational Mapper",
+            "Object-Resource Manager",
+            "Oriented-Route Model",
+            "Over-Relational Method"
+        ]
+    },
+    {
+        "q": "Which class do all Eloquent models extend?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Database\\Eloquent\\Model",
+            "Illuminate\\Http\\Model",
+            "Illuminate\\Support\\Model",
+            "Laravel\\Model"
+        ]
+    },
+    {
+        "q": "What is the convention for the table name of a model named `Flight`?",
+        "type": "mcq",
+        "o": [
+            "flights (snake_case, plural)",
+            "flight",
+            "Flight",
+            "flight_table"
+        ]
+    },
+    {
+        "q": "How do you override the default table name in a Model?",
+        "type": "mcq",
+        "o": [
+            "protected $table = 'my_flights';",
+            "public $table = 'my_flights';",
+            "protected $tableName = 'my_flights';",
+            "const TABLE = 'my_flights';"
+        ]
+    },
+    {
+        "q": "What is the default primary key column name assumed by Eloquent?",
+        "type": "mcq",
+        "o": [
+            "id",
+            "flight_id",
+            "pk",
+            "uuid"
+        ]
+    },
+    {
+        "q": "If your primary key is not an auto-incrementing integer, which property should you set to false?",
+        "type": "mcq",
+        "o": [
+            "public $incrementing = false;",
+            "protected $autoIncrement = false;",
+            "public $increments = false;",
+            "protected $id = false;"
+        ]
+    },
+    {
+        "q": "If your primary key is a string (e.g., UUID), what property should you set?",
+        "type": "mcq",
+        "o": [
+            "protected $keyType = 'string';",
+            "protected $type = 'string';",
+            "public $primaryKeyType = 'string';",
+            "const KEY_TYPE = 'string';"
+        ]
+    },
+    {
+        "q": "Which property overrides the default primary key name?",
+        "type": "mcq",
+        "o": [
+            "protected $primaryKey = 'flight_id';",
+            "public $id = 'flight_id';",
+            "protected $key = 'flight_id';",
+            "public $pk = 'flight_id';"
+        ]
+    },
+    {
+        "q": "By default, Eloquent expects which two timestamp columns?",
+        "type": "mcq",
+        "o": [
+            "created_at and updated_at",
+            "created_on and updated_on",
+            "create_time and update_time",
+            "timestamp_created and timestamp_updated"
+        ]
+    },
+    {
+        "q": "How do you disable automatic timestamps in a Model?",
+        "type": "mcq",
+        "o": [
+            "public $timestamps = false;",
+            "protected $timers = false;",
+            "const TIMESTAMPS = false;",
+            "public $dates = false;"
+        ]
+    },
+    {
+        "q": "How to retrieve ALL records from the `flights` table via Flight model?",
+        "type": "mcq",
+        "o": [
+            "Flight::all()",
+            "Flight::get()",
+            "Flight::fetch()",
+            "Flight::list()"
+        ]
+    },
+    {
+        "q": "How to retrieve a record by its primary key?",
+        "type": "mcq",
+        "o": [
+            "Flight::find(1)",
+            "Flight::get(1)",
+            "Flight::search(1)",
+            "Flight::whereId(1)"
+        ]
+    },
+    {
+        "q": "What does `Flight::findOrFail(1)` do if the record doesn't exist?",
+        "type": "mcq",
+        "o": [
+            "Throws a ModelNotFoundException (resulting in 404)",
+            "Returns null",
+            "Returns false",
+            "Returns empty array"
+        ]
+    },
+    {
+        "q": "How to create a new record and save it to the database?",
+        "type": "mcq",
+        "o": [
+            "$flight = new Flight; $flight->name = 'X'; $flight->save();",
+            "Flight::insert(['name' => 'X']);",
+            "Flight::make(['name' => 'X']);",
+            "Flight::new(['name' => 'X']);"
+        ]
+    },
+    {
+        "q": "What method creates and saves a model in one line (Mass Assignment)?",
+        "type": "mcq",
+        "o": [
+            "Flight::create(['name' => 'London'])",
+            "Flight::save(['name' => 'London'])",
+            "Flight::new(['name' => 'London'])",
+            "Flight::add(['name' => 'London'])"
+        ]
+    },
+    {
+        "q": "To use Mass Assignment (`create`, `update`), what property must be defined?",
+        "type": "mcq",
+        "o": [
+            "$fillable (allowlist) or $guarded (blocklist)",
+            "$allow",
+            "$mass",
+            "$columns"
+        ]
+    },
+    {
+        "q": "What does `$fillable = ['name']` mean?",
+        "type": "mcq",
+        "o": [
+            "Only the 'name' attribute can be mass assigned.",
+            "The 'name' attribute is required.",
+            "The 'name' attribute is hidden from JSON.",
+            "The 'name' table exists."
+        ]
+    },
+    {
+        "q": "What does `$guarded = []` mean?",
+        "type": "mcq",
+        "o": [
+            "All attributes are mass assignable (unguarded).",
+            "No attributes are mass assignable.",
+            "Only empty attributes are allowed.",
+            "Security is disabled."
+        ]
+    },
+    {
+        "q": "How to update a retrieved model instance?",
+        "type": "mcq",
+        "o": [
+            "$flight->name = 'Paris'; $flight->save();",
+            "$flight->updateName('Paris');",
+            "Flight::update($flight, ['name' => 'Paris']);",
+            "$flight->commit();"
+        ]
+    },
+    {
+        "q": "How to delete a model instance?",
+        "type": "mcq",
+        "o": [
+            "$flight->delete()",
+            "$flight->remove()",
+            "$flight->destroy()",
+            "$flight->kill()"
+        ]
+    },
+    {
+        "q": "How to delete a record by ID without retrieving it first?",
+        "type": "mcq",
+        "o": [
+            "Flight::destroy(1)",
+            "Flight::delete(1)",
+            "Flight::remove(1)",
+            "Flight::erase(1)"
+        ]
+    },
+    {
+        "q": "What feature allows records to be 'deleted' without removing them from the database?",
+        "type": "mcq",
+        "o": [
+            "Soft Deletes",
+            "Hard Deletes",
+            "Ghost Deletes",
+            "Lazy Deletes"
+        ]
+    },
+    {
+        "q": "What Trait must be used to enable Soft Deletes?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Database\\Eloquent\\SoftDeletes",
+            "Illuminate\\Database\\Eloquent\\Deletable",
+            "Illuminate\\Database\\Eloquent\\Archivable",
+            "Illuminate\\Database\\Eloquent\\Recoverable"
+        ]
+    },
+    {
+        "q": "Which column is added for Soft Deletes?",
+        "type": "mcq",
+        "o": [
+            "deleted_at",
+            "removed_at",
+            "is_deleted",
+            "archived_at"
+        ]
+    },
+    {
+        "q": "How to include soft deleted models in a query?",
+        "type": "mcq",
+        "o": [
+            "Flight::withTrashed()->get()",
+            "Flight::allDeleted()->get()",
+            "Flight::includeTrash()->get()",
+            "Flight::withDeleted()->get()"
+        ]
+    },
+    {
+        "q": "How to restore a soft deleted model?",
+        "type": "mcq",
+        "o": [
+            "$flight->restore()",
+            "$flight->undelete()",
+            "$flight->recover()",
+            "$flight->revive()"
+        ]
+    },
+    {
+        "q": "What relationship is defined by `return $this->hasOne(Phone::class);`?",
+        "type": "mcq",
+        "o": [
+            "One-to-One",
+            "One-to-Many",
+            "Many-to-Many",
+            "Polymorphic"
+        ]
+    },
+    {
+        "q": "What relationship is defined by `return $this->belongsTo(User::class);`?",
+        "type": "mcq",
+        "o": [
+            "Inverse of One-to-One or Many-to-One (The child belongs to a parent)",
+            "Many-to-Many",
+            "Has Many",
+            "Has One Through"
+        ]
+    },
+    {
+        "q": "What relationship is defined by `return $this->hasMany(Comment::class);`?",
+        "type": "mcq",
+        "o": [
+            "One-to-Many (A post has many comments)",
+            "One-to-One",
+            "Many-to-Many",
+            "Polymorphic"
+        ]
+    },
+    {
+        "q": "To define Many-to-Many, which method is used?",
+        "type": "mcq",
+        "o": [
+            "belongsToMany",
+            "hasManyMany",
+            "manyToMany",
+            "sharedWith"
+        ]
+    },
+    {
+        "q": "In a Many-to-Many relationship (User <-> Role), what is the intermediate table name convention?",
+        "type": "mcq",
+        "o": [
+            "role_user (Alphabetical order of singular model names)",
+            "user_role",
+            "users_roles",
+            "roles_users"
+        ]
+    },
+    {
+        "q": "How to retrieve the first model matching the conditions?",
+        "type": "mcq",
+        "o": [
+            "Flight::where('active', 1)->first()",
+            "Flight::where('active', 1)->get()",
+            "Flight::where('active', 1)->one()",
+            "Flight::where('active', 1)->top()"
+        ]
+    },
+    {
+        "q": "How to refresh a model instance with fresh data from the database?",
+        "type": "mcq",
+        "o": [
+            "$flight->refresh()",
+            "$flight->reload()",
+            "$flight->sync()",
+            "$flight->update()"
+        ]
+    },
+    {
+        "q": "What is an Accessor?",
+        "type": "mcq",
+        "o": [
+            "A method to transform an attribute value when retrieving it (e.g., `getFirstNameAttribute`).",
+            "A method to set an attribute value",
+            "A method to access database",
+            "A login method"
+        ]
+    },
+    {
+        "q": "What is a Mutator?",
+        "type": "mcq",
+        "o": [
+            "A method to transform an attribute value before saving it (e.g., `setFirstNameAttribute`).",
+            "A method to mutate DNA",
+            "A method to change database schema",
+            "A read-only property"
+        ]
+    },
+    {
+        "q": "New Syntax (Laravel 9+): How to define Accessor/Mutator?",
+        "type": "mcq",
+        "o": [
+            "protected function name(): Attribute { return Attribute::make(get: fn ($val) => ...); }",
+            "public function getName() { ... }",
+            "protected $accessors = ['name'];",
+            "const MUTATOR_NAME = true;"
+        ]
+    },
+    {
+        "q": "What is a Local Scope?",
+        "type": "mcq",
+        "o": [
+            "A method prefix `scope` (e.g. `scopeActive`) that allows reusable query constraints (`Flight::active()`).",
+            "A global variable",
+            "A private method",
+            "A database view"
+        ]
+    },
+    {
+        "q": "How to apply a Global Scope to a model?",
+        "type": "mcq",
+        "o": [
+            "Override the `booted` method and use `static::addGlobalScope(...)`",
+            "Define `public $globalScope = true;`",
+            "Use `GlobalScope` trait",
+            "Register in kernel"
+        ]
+    },
+    {
+        "q": "How to remove a Global Scope from a query?",
+        "type": "mcq",
+        "o": [
+            "Flight::withoutGlobalScope(AgeScope::class)->get()",
+            "Flight::noScope()->get()",
+            "Flight::ignoreGlobal()->get()",
+            "Flight::unsafe()->get()"
+        ]
+    },
+    {
+        "q": "What does `Flight::chunk(200, function ($flights) { ... })` do?",
+        "type": "mcq",
+        "o": [
+            "Retrieves small chunks of records at a time (memory efficient for large datasets).",
+            "Splits the table",
+            "Deletes in chunks",
+            "Groups by 200"
+        ]
+    },
+    {
+        "q": "What is the return type of `Flight::all()`?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Database\\Eloquent\\Collection",
+            "Array",
+            "String",
+            "Generator"
+        ]
+    },
+    {
+        "q": "How to verify if a model instance exists in the database by checking `exists` property?",
+        "type": "mcq",
+        "o": [
+            "$flight->exists (true/false)",
+            "$flight->has_record",
+            "$flight->is_saved",
+            "$flight->persisted"
+        ]
+    },
+    {
+        "q": "How to specific dynamic connection for a model query?",
+        "type": "mcq",
+        "o": [
+            "Flight::on('mysql_read')->find(1)",
+            "Flight::connection('mysql_read')->find(1)",
+            "Flight::use('mysql_read')->find(1)",
+            "Flight::db('mysql_read')->find(1)"
+        ]
+    },
+    {
+        "q": "What does `$flight->wasChanged('name')` check?",
+        "type": "mcq",
+        "o": [
+            "Checks if the attributes were changed in the very last save operation.",
+            "Checks if name is dirty",
+            "Checks if name matches database",
+            "Checks history"
+        ]
+    },
+    {
+        "q": "What does `$flight->isDirty('name')` check?",
+        "type": "mcq",
+        "o": [
+            "Checks if the attribute has been modified since retrieval but not yet saved.",
+            "Checks if name contains bad words",
+            "Checks if name is null",
+            "Checks if name is validated"
+        ]
+    },
+    {
+        "q": "How to get the original value of an attribute before it was changed?",
+        "type": "mcq",
+        "o": [
+            "$flight->getOriginal('name')",
+            "$flight->old('name')",
+            "$flight->previous('name')",
+            "$flight->initial('name')"
+        ]
+    },
+    {
+        "q": "How to serialize a model to JSON?",
+        "type": "mcq",
+        "o": [
+            "$flight->toJson() or json_encode($flight)",
+            "$flight->serialize()",
+            "$flight->string()",
+            "$flight->export()"
+        ]
+    },
+    {
+        "q": "How to serialize a model to Array?",
+        "type": "mcq",
+        "o": [
+            "$flight->toArray()",
+            "$flight->asList()",
+            "$flight->values()",
+            "(array) $flight"
+        ]
+    },
+    {
+        "q": "Which property hides attributes from Array/JSON serialization?",
+        "type": "mcq",
+        "o": [
+            "protected $hidden = ['password'];",
+            "protected $private = ['password'];",
+            "protected $secret = ['password'];",
+            "protected $invisible = ['password'];"
+        ]
+    },
+    {
+        "q": "Which property exposes computed accessors in Array/JSON serialization?",
+        "type": "mcq",
+        "o": [
+            "protected $appends = ['is_admin'];",
+            "protected $add = ['is_admin'];",
+            "protected $shows = ['is_admin'];",
+            "protected $includes = ['is_admin'];"
+        ]
+    },
+    {
+        "q": "How to convert a standard query builder instance to an Eloquent query?",
+        "type": "mcq",
+        "o": [
+            "Flight::query()->where(...)",
+            "Flight::builder()->where(...)",
+            "Flight::sql()->where(...)",
+            "Flight::start()->where(...)"
+        ]
+    },
+    {
+        "q": "What method creates a model if it doesn't exist, otherwise returns it?",
+        "type": "mcq",
+        "o": [
+            "firstOrCreate(['email' => 'a@b.com'])",
+            "createOrFirst",
+            "findOrNew",
+            "getOrSet"
+        ]
+    },
+    {
+        "q": "What method instantiates a new model instance if not found (but doesn't save yet)?",
+        "type": "mcq",
+        "o": [
+            "firstOrNew(['email' => 'a@b.com'])",
+            "findOrCreate",
+            "newOrFirst",
+            "locateOrMake"
+        ]
+    },
+    {
+        "q": "How to increment a numeric column?",
+        "type": "mcq",
+        "o": [
+            "Flight::where('active', 1)->increment('points');",
+            "Flight::add('points')",
+            "Flight::plus('points')",
+            "Flight::up('points')"
+        ]
+    },
+    {
+        "q": "How to decrement a numeric column?",
+        "type": "mcq",
+        "o": [
+            "Flight::decrement('points', 5);",
+            "Flight::sub('points', 5)",
+            "Flight::minus('points', 5)",
+            "Flight::down('points', 5)"
+        ]
+    },
+    {
+        "q": "What does `updateOrCreate` do?",
+        "type": "mcq",
+        "o": [
+            "Updates an existing record if matching keys are found, otherwise creates a new one.",
+            "Always updates",
+            "Always creates",
+            "Throw error if exists"
+        ]
+    },
+    {
+        "q": "How to cast an attribute to a specific type immediately on access?",
+        "type": "mcq",
+        "o": [
+            "protected $casts = ['is_admin' => 'boolean'];",
+            "protected $types = ['is_admin' => 'boolean'];",
+            "protected $conversions = ['is_admin' => 'boolean'];",
+            "protected $format = ['is_admin' => 'boolean'];"
+        ]
+    },
+    {
+        "q": "Common default cast types supported by Eloquent?",
+        "type": "mcq",
+        "o": [
+            "integer, real, float, double, decimal:digits, string, boolean, object, array, collection, date, datetime, timestamp",
+            "int, bool, str, arr, obj",
+            "number, text, yesno",
+            "bigint, varchar, blob"
+        ]
+    },
+    {
+        "q": "What handles the 'Array' cast?",
+        "type": "mcq",
+        "o": [
+            "Automatically deserializes JSON from database into a PHP array, and serializes array to JSON on save.",
+            "Converts comma separated string",
+            "Converts to linked list",
+            "Converts to heap"
+        ]
+    },
+    {
+        "q": "How to use a custom collection for a specific model?",
+        "type": "mcq",
+        "o": [
+            "Override `newCollection(array $models = [])` method.",
+            "Override `getCollection`",
+            "Set `$collectionClass` property",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "What relationship handles `MorphTo`?",
+        "type": "mcq",
+        "o": [
+            "It is the inverse of a polymorphic relationship (belongs to 'Post' or 'Video').",
+            "It transforms the model",
+            "It maps one to one",
+            "It caches connection"
+        ]
+    },
+    {
+        "q": "Standard columns for a polymorphic relation `imageable`?",
+        "type": "mcq",
+        "o": [
+            "imageable_id and imageable_type",
+            "image_id and image_type",
+            "id and type",
+            "poly_id and poly_type"
+        ]
+    },
+    {
+        "q": "How to eager load relationships to avoid N+1 problem?",
+        "type": "mcq",
+        "o": [
+            "Flight::with('passengers')->get()",
+            "Flight::join('passengers')->get()",
+            "Flight::load('passengers')->get()",
+            "Flight::include('passengers')->get()"
+        ]
+    },
+    {
+        "q": "How to eager load nested relationships?",
+        "type": "mcq",
+        "o": [
+            "Flight::with('passengers.tickets')->get()",
+            "Flight::with('passengers/tickets')->get()",
+            "Flight::with('passengers')->with('tickets')->get()",
+            "Flight::deep('passengers', 'tickets')->get()"
+        ]
+    },
+    {
+        "q": "How to constrain an eager load?",
+        "type": "mcq",
+        "o": [
+            "Flight::with(['passengers' => function ($query) { $query->where('age', '>', 18); }])->get()",
+            "Flight::with('passengers')->where('passengers.age', '>', 18)->get()",
+            "Flight::with('passengers:age>18')->get()",
+            "Cannot constrain eager loads"
+        ]
+    },
+    {
+        "q": "Lazy Eager Loading: How to load a relationship AFTER the model is retrieved?",
+        "type": "mcq",
+        "o": [
+            "$flight->load('passengers')",
+            "$flight->with('passengers')",
+            "$flight->fetch('passengers')",
+            "$flight->hydrate('passengers')"
+        ]
+    },
+    {
+        "q": "How do you check if a relationship is already loaded?",
+        "type": "mcq",
+        "o": [
+            "$flight->relationLoaded('passengers')",
+            "$flight->hasRelation('passengers')",
+            "$flight->isLoaded('passengers')",
+            "$flight->check('passengers')"
+        ]
+    },
+    {
+        "q": "How to query based on relationship existence (Has constraints)?",
+        "type": "mcq",
+        "o": [
+            "Flight::has('passengers')->get() (Only flights with passengers)",
+            "Flight::exist('passengers')->get()",
+            "Flight::withPassengers()->get()",
+            "Flight::joinPassengers()->get()"
+        ]
+    },
+    {
+        "q": "How to query based on relationship ABSENCE?",
+        "type": "mcq",
+        "o": [
+            "Flight::doesntHave('passengers')->get()",
+            "Flight::no('passengers')->get()",
+            "Flight::missing('passengers')->get()",
+            "Flight::without('passengers')->get()"
+        ]
+    },
+    {
+        "q": "How to query specific columns in relationship (whereHas)?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereHas('passengers', function ($q) { $q->where('vip', true); })->get()",
+            "Flight::where('passengers.vip', true)->get()",
+            "Flight::withVipPassengers()->get()",
+            "Flight::joinWhere('passengers', 'vip')->get()"
+        ]
+    },
+    {
+        "q": "How to count the number of related models without loading them?",
+        "type": "mcq",
+        "o": [
+            "Flight::withCount('passengers')->get() (Adds `passengers_count` attribute)",
+            "Flight::count('passengers')->get()",
+            "Flight::relationCount('passengers')",
+            "Flight::size('passengers')"
+        ]
+    },
+    {
+        "q": "What is `touch()` used for?",
+        "type": "mcq",
+        "o": [
+            "It updates the `updated_at` timestamp of the model to now.",
+            "It checks if file exists",
+            "It creates empty record",
+            "It validates model"
+        ]
+    },
+    {
+        "q": "What property updates parent timestamps when child is updated?",
+        "type": "mcq",
+        "o": [
+            "protected $touches = ['post'];",
+            "protected $parents = ['post'];",
+            "protected $updates = ['post'];",
+            "protected $sync = ['post'];"
+        ]
+    },
+    {
+        "q": "How to insert related models using `save`?",
+        "type": "mcq",
+        "o": [
+            "$post->comments()->save($comment);",
+            "$post->save($comment);",
+            "$post->add($comment);",
+            "$post->attach($comment);"
+        ]
+    },
+    {
+        "q": "How to Attach a Many-to-Many relationship (Pivot)?",
+        "type": "mcq",
+        "o": [
+            "$user->roles()->attach($roleId);",
+            "$user->roles()->save($roleId);",
+            "$user->roles()->link($roleId);",
+            "$user->roles()->connect($roleId);"
+        ]
+    },
+    {
+        "q": "How to Detach a Many-to-Many relationship?",
+        "type": "mcq",
+        "o": [
+            "$user->roles()->detach($roleId);",
+            "$user->roles()->delete($roleId);",
+            "$user->roles()->unlink($roleId);",
+            "$user->roles()->remove($roleId);"
+        ]
+    },
+    {
+        "q": "How to Sync Many-to-Many (replace all existing with new list)?",
+        "type": "mcq",
+        "o": [
+            "$user->roles()->sync([1, 2, 3]);",
+            "$user->roles()->replace([1, 2, 3]);",
+            "$user->roles()->update([1, 2, 3]);",
+            "$user->roles()->set([1, 2, 3]);"
+        ]
+    },
+    {
+        "q": "Is the result of `Flight::find(1)` an array or object?",
+        "type": "mcq",
+        "o": [
+            "Object (Instance of Flight model)",
+            "Array",
+            "JSON",
+            "String"
+        ]
+    },
+    {
+        "q": "Can you use UUIDs as primary keys?",
+        "type": "mcq",
+        "o": [
+            "Yes, requires `$incrementing = false`, `$keyType = 'string'` and often a trait/boot method to generate UUID on creation.",
+            "No, only integers",
+            "Yes, strictly handled by database trigger",
+            "Only in Postgres"
+        ]
+    },
+    {
+        "q": "What is `replicate()`?",
+        "type": "mcq",
+        "o": [
+            "Clones the model instance into a new non-existing instance. `$copy = $flight->replicate(); $copy->save();`",
+            "Copies database table",
+            "Mirrors database",
+            "Repeats query"
+        ]
+    },
+    {
+        "q": "What is `withoutEvents()`?",
+        "type": "mcq",
+        "o": [
+            "Executes a callback without firing any model events (creating, saving, etc.).",
+            "Disables broadcasting",
+            "Stops queue workers",
+            "Ignores errors"
+        ]
+    },
+    {
+        "q": "Does `belongsTo` work with non-standard foreign keys?",
+        "type": "mcq",
+        "o": [
+            "Yes, pass 2nd argument: `belongsTo(User::class, 'my_user_id')`",
+            "No, must be user_id",
+            "Only if defined in migration",
+            "Only through helpers"
+        ]
+    },
+    {
+        "q": "How to specify database connection name in model?",
+        "type": "mcq",
+        "o": [
+            "protected $connection = 'sqlite';",
+            "public $db = 'sqlite';",
+            "protected $driver = 'sqlite';",
+            "const DB = 'sqlite';"
+        ]
+    },
+    {
+        "q": "What method returns the Query Builder underlying the Model?",
+        "type": "mcq",
+        "o": [
+            "toBase() (Not standard Eloquent method on model instance, but `getQuery()` exists internally). `Flight::toBase()` starts a raw DB query.",
+            "getDb()",
+            "getSql()",
+            "builder()"
+        ]
+    },
+    {
+        "q": "How to debug the SQL query generated by Eloquent builder?",
+        "type": "mcq",
+        "o": [
+            "Flight::where(...)->toSql() (returns string only) or `dd()` / `dump()` in newer Laravel query chains.",
+            "Flight::where(...)->echo()",
+            "Flight::where(...)->print()",
+            "Flight::where(...)->debug()"
+        ]
+    },
+    {
+        "q": "Basic: Can a Model extend another Model class?",
+        "type": "mcq",
+        "o": [
+            "Yes, typically useful for Single Table Inheritance patterns or shared logic.",
+            "No, must extend Model directly",
+            "No, causes infinite loop",
+            "Only abstract models"
+        ]
+    },
+    {
+        "q": "What methods are fired during Model Lifecycle?",
+        "type": "mcq",
+        "o": [
+            "retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored, replicate",
+            "start, stop, pause",
+            "init, load, unload",
+            "new, old, current"
+        ]
+    },
+    {
+        "q": "Where is the best place to register Model Event listeners simply?",
+        "type": "mcq",
+        "o": [
+            "In the `booted` (or `boot`) static method of the Model.",
+            "In routes.php",
+            "In config",
+            "In view"
+        ]
+    },
+    {
+        "q": "Does `delete()` on a Builder (mass delete) fire `deleting/deleted` model events?",
+        "type": "mcq",
+        "o": [
+            "No, mass delete query doesn't retrieve models, so no events fired. Use iteration to fire events.",
+            "Yes, always",
+            "Yes, but efficiently",
+            "Depends on driver"
+        ]
+    },
+    {
+        "q": "What is `prunable` trait used for?",
+        "type": "mcq",
+        "o": [
+            "Automatically deleting outdated models via scheduled command `model:prune`.",
+            "Trimming whitespace",
+            "Removing relationships",
+            "Optimizing table"
+        ]
+    },
+    {
+        "q": "How to compare two models are the same row?",
+        "type": "mcq",
+        "o": [
+            "$flight->is($anotherFlight) (Checks ID and table and connection)",
+            "$flight == $anotherFlight",
+            "$flight === $anotherFlight",
+            "$flight->equals($anotherFlight)"
+        ]
+    },
+    {
+        "q": "What does `Model::preventLazyLoading()` do?",
+        "type": "mcq",
+        "o": [
+            "Strict mode: Throws exception if you try to access a relationship that wasn't eager loaded. (Good for dev)",
+            "Disables loading entirely",
+            "Makes everything eager",
+            "Logs warnings only"
+        ]
+    },
+    {
+        "q": "Can you use Eloquent without Laravel framework (e.g. Slim)?",
+        "type": "mcq",
+        "o": [
+            "Yes, `illuminate/database` package can be used standalone.",
+            "No, tightly coupled",
+            "Only with Lumen",
+            "Only with Symfony"
+        ]
+    },
+    {
+        "q": "Introduction: Are Eloquent Models Active Record implementation?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No, Data Mapper",
+            "No, Repository",
+            "No, Unit of Work"
+        ]
+    },
+    {
+        "q": "What is `hasManyThrough` used for?",
+        "type": "mcq",
+        "o": [
+            "Accessing a distant relationship through an intermediate model (e.g., Country has many Posts through Users).",
+            "Many to Many",
+            "Looping relationships",
+            "Skipping models"
+        ]
+    },
+    {
+        "q": "Syntax for `hasManyThrough`?",
+        "type": "mcq",
+        "o": [
+            "return $this->hasManyThrough(Distant::class, Intermediate::class);",
+            "return $this->through(Intermediate::class)->has(Distant::class);",
+            "return $this->manyThrough(Distant::class);",
+            "return $this->via(Intermediate::class)->get(Distant::class);"
+        ]
+    },
+    {
+        "q": "What is `hasOneThrough`?",
+        "type": "mcq",
+        "o": [
+            "Accessing a single distant record through an intermediate model (e.g. Mechanic has one CarOwner through Car repairs... no wait, e.g. Supplier has one History through Account).",
+            "Has one relationship skipping validation",
+            "Inverse of hasManyThrough",
+            "Single table inheritance"
+        ]
+    },
+    {
+        "q": "What is a Polymorphic Relationship?",
+        "type": "mcq",
+        "o": [
+            "A model can belong to more than one other type of model on a single association (e.g. Comments can belong to both Posts and Videos).",
+            "A model changes shape",
+            "A model with multiple tables",
+            "A model with multiple databases"
+        ]
+    },
+    {
+        "q": "In a polymorphic relationship `morphTo`, what two columns are required on the child table?",
+        "type": "mcq",
+        "o": [
+            "A 'type' column (string class name) and an 'id' column (integer/uuid).",
+            "Two id columns",
+            "Two type columns",
+            "Just a foreign key"
+        ]
+    },
+    {
+        "q": "What relationship method defines the Parent side of a 1:1 polymorphic relation (e.g. User has one Image)?",
+        "type": "mcq",
+        "o": [
+            "morphOne(Image::class, 'imageable')",
+            "hasOneMorph(Image::class)",
+            "polyOne(Image::class)",
+            "morphs(Image::class)"
+        ]
+    },
+    {
+        "q": "What relationship method defines the Parent side of a 1:N polymorphic relation (e.g. Post has many Comments)?",
+        "type": "mcq",
+        "o": [
+            "morphMany(Comment::class, 'commentable')",
+            "hasManyMorph(Comment::class)",
+            "polyMany(Comment::class)",
+            "morphsMany(Comment::class)"
+        ]
+    },
+    {
+        "q": "What relationship method defines the Child side (e.g. Comment belongs to Post OR Video)?",
+        "type": "mcq",
+        "o": [
+            "morphTo() (Name usually inferred from method name, e.g. `commentable`)",
+            "belongsToMorph()",
+            "morphs()",
+            "polyTo()"
+        ]
+    },
+    {
+        "q": "How to handle Many-to-Many Polymorphic relations (e.g. Tags on Posts and Videos)?",
+        "type": "mcq",
+        "o": [
+            "morphToMany and morphedByMany",
+            "belongsToManyMorph",
+            "manyToManyPoly",
+            "morphManyMany"
+        ]
+    },
+    {
+        "q": "In Many-to-Many Polymorphic, which side uses `morphedByMany`?",
+        "type": "mcq",
+        "o": [
+            "The inverse side (e.g. Tag model uses `morphedByMany(Post::class, 'taggable')`).",
+            "The owning side",
+            "The pivot table",
+            "The controller"
+        ]
+    },
+    {
+        "q": "What is the convention for the pivot table in Many-to-Many Polymorphic?",
+        "type": "mcq",
+        "o": [
+            "Plural of the morph name (e.g. `taggables`). Columns: `tag_id`, `taggable_id`, `taggable_type`.",
+            "post_tag_video",
+            "tags_pivot",
+            "polymorphic_pivot"
+        ]
+    },
+    {
+        "q": "How to query non-static global scopes?",
+        "type": "mcq",
+        "o": [
+            "Global scopes are usually classes implementing `Scope`. Using Closures in `boot` is also common.",
+            "Using private methods",
+            "Using traits only",
+            "Using interfaces"
+        ]
+    },
+    {
+        "q": "Dynamic Scopes: How to define a scope that accepts parameters?",
+        "type": "mcq",
+        "o": [
+            "scopeOfType($query, $type) { return $query->where('type', $type); }",
+            "scopeType($type) { ... }",
+            "dynamicScope($query, $type)",
+            "queryScope($type)"
+        ]
+    },
+    {
+        "q": "How to call a dynamic scope?",
+        "type": "mcq",
+        "o": [
+            "Flight::ofType('international')->get()",
+            "Flight::scopeOfType('international')",
+            "Flight::scope('ofType', 'international')",
+            "Flight::whereScope('international')"
+        ]
+    },
+    {
+        "q": "What is an Model Observer?",
+        "type": "mcq",
+        "o": [
+            "A class that groups event listeners for a model (creating, saved, deleted, etc.).",
+            "A person watching the database",
+            "A log file",
+            "A debugging tool"
+        ]
+    },
+    {
+        "q": "How to register an Observer?",
+        "type": "mcq",
+        "o": [
+            "In `EventServiceProvider` setup or `Model::observe(Observer::class)` in a ServiceProvider boot method.",
+            "In routes.php",
+            "In the model class property",
+            "In composer.json"
+        ]
+    },
+    {
+        "q": "Can you mute events for a single operation?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Model::withoutEvents(function() { ... })`",
+            "No",
+            "Yes, `Model::mute()`",
+            "Yes, `Model::quiet()`"
+        ]
+    },
+    {
+        "q": "What is `saveQuietly()`?",
+        "type": "mcq",
+        "o": [
+            "Saves the model without firing any events. (Available in recent Laravel versions).",
+            "Saves without errors",
+            "Saves without logs",
+            "Saves in background"
+        ]
+    },
+    {
+        "q": "Collections: What does `each` do?",
+        "type": "mcq",
+        "o": [
+            "Iterates over items. If callback returns false, stops iteration. Returns original collection.",
+            "Maps items",
+            "Filters items",
+            "Reduces items"
+        ]
+    },
+    {
+        "q": "Collections: What does `map` do?",
+        "type": "mcq",
+        "o": [
+            "Iterates and returns a NEW collection with modified items.",
+            "Modifies in place",
+            "Returns array",
+            "Filters items"
+        ]
+    },
+    {
+        "q": "Collections: What does `transform` do?",
+        "type": "mcq",
+        "o": [
+            "Iterates and modifies the collection *in place* (mutates it).",
+            "Returns new collection",
+            "Deletes items",
+            "Sorts items"
+        ]
+    },
+    {
+        "q": "Collections: `pluck('name', 'id')`?",
+        "type": "mcq",
+        "o": [
+            "Returns collection of values keyed by the second argument (e.g. [1 => 'Alice', 2 => 'Bob']).",
+            "Returns list of names only",
+            "Returns list of IDs only",
+            "Removes name and id"
+        ]
+    },
+    {
+        "q": "Collections: `filter` vs `reject`?",
+        "type": "mcq",
+        "o": [
+            "Filter keeps items where callback is true. Reject removes items where callback is true.",
+            "Same thing",
+            "Filter modifies, reject creates new",
+            "Reject is faster"
+        ]
+    },
+    {
+        "q": "Higher Order Messages in Collections?",
+        "type": "mcq",
+        "o": [
+            "Short syntax for actions on objects. `$users->each->markAsActive()` instead of closure.",
+            "Messages sent to queue",
+            "Priority messages",
+            "Error messages"
+        ]
+    },
+    {
+        "q": "What is `Date Casting` format customization?",
+        "type": "mcq",
+        "o": [
+            "protected $casts = ['dob' => 'date:Y-m-d']; (Controls serialization format).",
+            "protected $dateFormat = 'Y-m-d';",
+            "public function format()",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "What is `Attribute Casting` (Custom Casts)?",
+        "type": "mcq",
+        "o": [
+            "Classes implementing `CastsAttributes` interface to handle complex get/set logic (e.g. encrypted fields, value objects).",
+            "Type hinting",
+            "Magic methods",
+            "Database triggers"
+        ]
+    },
+    {
+        "q": "How to make a custom cast class?",
+        "type": "mcq",
+        "o": [
+            "Implement methods `get($model, $key, $value, $attributes)` and `set(...)`.",
+            "Implement `cast` and `uncast`",
+            "Extend Cast class",
+            "Use trait Castable"
+        ]
+    },
+    {
+        "q": "What is `Model::query()` equivalent to?",
+        "type": "mcq",
+        "o": [
+            "Used to start a query chain cleanly from static context. Equivalent to `(new Model)->newQuery()`.",
+            "Select *",
+            "Database connection",
+            "Raw SQL"
+        ]
+    },
+    {
+        "q": "Difference between `destroy(1)` and `delete()`?",
+        "type": "mcq",
+        "o": [
+            "Destroy takes ID(s) and deletes them (retrieves then deletes to fire events). Delete is called on an instance or query builder (if builder, no events).",
+            "Destroy is faster",
+            "Delete is faster",
+            "Destroy is soft delete only"
+        ]
+    },
+    {
+        "q": "How to force a hard delete on a SoftDeleted model?",
+        "type": "mcq",
+        "o": [
+            "$flight->forceDelete()",
+            "$flight->hardDelete()",
+            "$flight->permDelete()",
+            "$flight->removeForever()"
+        ]
+    },
+    {
+        "q": "What does `latest()` scope do?",
+        "type": "mcq",
+        "o": [
+            "OrderBy created_at DESC.",
+            "OrderBy updated_at DESC",
+            "OrderBy id DESC",
+            "OrderBy date DESC"
+        ]
+    },
+    {
+        "q": "What does `oldest()` scope do?",
+        "type": "mcq",
+        "o": [
+            "OrderBy created_at ASC.",
+            "OrderBy id ASC",
+            "OrderBy age ASC",
+            "OrderBy date ASC"
+        ]
+    },
+    {
+        "q": "What is `inRandomOrder()`?",
+        "type": "mcq",
+        "o": [
+            "Randomizes results (DB specific, e.g. ORDER BY RAND()). High performance cost on large tables.",
+            "PHP shuffling",
+            "Random paging",
+            "Random sampling"
+        ]
+    },
+    {
+        "q": "How to retrieve the SQL for a relationship query?",
+        "type": "mcq",
+        "o": [
+            "$user->posts()->toSql()",
+            "$user->posts->sql()",
+            "$user->posts()->getSql()",
+            "$user->posts->query()"
+        ]
+    },
+    {
+        "q": "Accessors: If column is `first_name`, what is the legacy accessor method name?",
+        "type": "mcq",
+        "o": [
+            "getFirstNameAttribute",
+            "getFirstName",
+            "accessFirstName",
+            "firstNameAttribute"
+        ]
+    },
+    {
+        "q": "Mutators: If column is `first_name`, what is the legacy mutator method name?",
+        "type": "mcq",
+        "o": [
+            "setFirstNameAttribute",
+            "setFirstName",
+            "mutateFirstName",
+            "firstNameAttributeSet"
+        ]
+    },
+    {
+        "q": "Do Accessors affect database queries?",
+        "type": "mcq",
+        "o": [
+            "No, they compute values after retrieval. You cannot `where` on an accessor directly (unless you use raw SQL or stored generated columns).",
+            "Yes, always",
+            "Yes, if public",
+            "Yes, automatically"
+        ]
+    },
+    {
+        "q": "How to append an accessor to the JSON output of a model?",
+        "type": "mcq",
+        "o": [
+            "Add its snake_case name to `$appends` property. e.g. `protected $appends = ['full_name'];`",
+            "Add to `$fillable`",
+            "Add to `$visible`",
+            "Return it in `toArray`"
+        ]
+    },
+    {
+        "q": "Factory: How to generate 10 fake users?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->count(10)->create()",
+            "User::factory(10)->create()",
+            "Factory::create(User::class, 10)",
+            "make(User::class, 10)"
+        ]
+    },
+    {
+        "q": "Difference between `create()` and `make()` in Factory?",
+        "type": "mcq",
+        "o": [
+            "Create saves to DB. Make creates instances in memory (not saved).",
+            "No difference",
+            "Make is deprecated",
+            "Create is for controllers"
+        ]
+    },
+    {
+        "q": "How to override attributes in Factory?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->create(['name' => 'John']);",
+            "User::factory(['name' => 'John'])->create();",
+            "User::factory()->set('name', 'John')->create();",
+            "User::factory()->override(['name' => 'John']);"
+        ]
+    },
+    {
+        "q": "How to define state methods in Factory (e.g. `suspended`)?",
+        "type": "mcq",
+        "o": [
+            "Return a modified state array. `public function suspended() { return $this->state(fn() => ['status' => 'suspended']); }`",
+            "Use if statements",
+            "Use traits",
+            "Use events"
+        ]
+    },
+    {
+        "q": "What is Database Seeding?",
+        "type": "mcq",
+        "o": [
+            "Populating database with initial/dummy data using Seeders (often calling Factories).",
+            "Creating tables",
+            "Optimizing index",
+            "Backing up data"
+        ]
+    },
+    {
+        "q": "Command to run seeders?",
+        "type": "mcq",
+        "o": [
+            "php artisan db:seed",
+            "php artisan seed:run",
+            "php artisan migrate:seed",
+            "php artisan make:seed"
+        ]
+    },
+    {
+        "q": "How to call specific seeder class?",
+        "type": "mcq",
+        "o": [
+            "php artisan db:seed --class=UserSeeder",
+            "php artisan db:seed UserSeeder",
+            "php artisan seed:only UserSeeder",
+            "php artisan run:seed UserSeeder"
+        ]
+    },
+    {
+        "q": "How to refresh migration and seed?",
+        "type": "mcq",
+        "o": [
+            "php artisan migrate:fresh --seed",
+            "php artisan migrate:refresh --seed",
+            "php artisan db:reset --seed",
+            "php artisan app:reset"
+        ]
+    },
+    {
+        "q": "What is `Pivot` model?",
+        "type": "mcq",
+        "o": [
+            "A model representing the intermediate table in Many-to-Many. Extends `Illuminate\\Database\\Eloquent\\Relations\\Pivot`.",
+            "A standard model",
+            "A controller",
+            "A view"
+        ]
+    },
+    {
+        "q": "How to use a custom Pivot model?",
+        "type": "mcq",
+        "o": [
+            "->using(RoleUser::class) in the relationship definition.",
+            "->pivot(RoleUser::class)",
+            "->model(RoleUser::class)",
+            "->via(RoleUser::class)"
+        ]
+    },
+    {
+        "q": "How to retrieve extra columns from pivot table?",
+        "type": "mcq",
+        "o": [
+            "->withPivot('column1', 'column2') in relationship definition.",
+            "->pivotColumns(...)",
+            "->extra(...)",
+            "->join(...)"
+        ]
+    },
+    {
+        "q": "How to automatically add timestamps to pivot table?",
+        "type": "mcq",
+        "o": [
+            "->withTimestamps() in relationship definition.",
+            "Add timestamps to migration only",
+            "Use `timestamps` column type",
+            "Automatic by default"
+        ]
+    },
+    {
+        "q": "Accessing pivot data in foreach loop?",
+        "type": "mcq",
+        "o": [
+            "$role->pivot->created_at",
+            "$role->created_at",
+            "$role->pivot_created_at",
+            "$role->middle->created_at"
+        ]
+    },
+    {
+        "q": "Renaming the pivot accessor (default `pivot`)?",
+        "type": "mcq",
+        "o": [
+            "->as('subscription') in relationship. Access via `$user->subscription->created_at`.",
+            "->name('subscription')",
+            "->alias('subscription')",
+            "->call('subscription')"
+        ]
+    },
+    {
+        "q": "What is `touches()` used for in relationships?",
+        "type": "mcq",
+        "o": [
+            "Updating parent's timestamp when child changes. defined in child model.",
+            "Updating child timestamp",
+            "Sending notifications",
+            "Validating relation"
+        ]
+    },
+    {
+        "q": "Querying relationship absence with constraints?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereDoesntHave('passengers', function($q){ $q->where('vip', true); })->get() (Flights without VIP passengers)",
+            "Flight::without('passengers')->where('vip', true)",
+            "Flight::notHas('passengers')",
+            "Flight::missingRelation('passengers')"
+        ]
+    },
+    {
+        "q": "Counting related models on retrieval `withCount` result attribute?",
+        "type": "mcq",
+        "o": [
+            "Snake case relation + `_count` (e.g. `passengers_count`)",
+            "Relation + Count",
+            "Count",
+            "Total"
+        ]
+    },
+    {
+        "q": "How to alias `withCount`?",
+        "type": "mcq",
+        "o": [
+            "withCount('passengers as pax_count')",
+            "withCount('passengers', 'pax_count')",
+            "countAs('passengers', 'pax_count')",
+            "aliasCount('passengers', 'pax_count')"
+        ]
+    },
+    {
+        "q": "What does `Model::is($model)` do?",
+        "type": "mcq",
+        "o": [
+            "Checks if two models have same ID, table, and connection.",
+            "Checks if objects are identical instance",
+            "Checks if class is same",
+            "Checks if attributes match"
+        ]
+    },
+    {
+        "q": "Can you mass assign `created_at`?",
+        "type": "mcq",
+        "o": [
+            "Yes, if in `$fillable` (or if unguarding). Eloquent will respect passed value instead of auto-setting it.",
+            "No, always auto-set",
+            "Only if timestamps disabled",
+            "Only on update"
+        ]
+    },
+    {
+        "q": "How to make sure a unique rule ignores the current user during update?",
+        "type": "mcq",
+        "o": [
+            "Rule::unique('users')->ignore($user->id)",
+            "required|unique:users,email, . $user->id",
+            "Both A and B",
+            "unique:users,email,ignore"
+        ]
+    },
+    {
+        "q": "What is `getForeignKey()` on a model?",
+        "type": "mcq",
+        "o": [
+            "Returns the default foreign key name (snake_case_id). e.g. `user_id`.",
+            "Returns value of foreign key",
+            "Returns DB constraint",
+            "Returns relation object"
+        ]
+    },
+    {
+        "q": "What is `getKey()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the value of the primary key.",
+            "Returns name of primary key",
+            "Returns encryption key",
+            "Returns API key"
+        ]
+    },
+    {
+        "q": "What does `fresh()` do vs `refresh()`?",
+        "type": "mcq",
+        "o": [
+            "Fresh returns a NEW instance with data from DB. Refresh hydrates the EXISTING instance in-place.",
+            "Same thing",
+            "Fresh is for caching",
+            "Refresh is for views"
+        ]
+    },
+    {
+        "q": "Can you use Eloquent with MongoDB?",
+        "type": "mcq",
+        "o": [
+            "Yes, via community package `jenssegers/mongodb` (extends Eloquent). Not built-in primarily.",
+            "Yes, built-in",
+            "No, SQL only",
+            "No, Relational only"
+        ]
+    },
+    {
+        "q": "What is `Cross Database` relationship?",
+        "type": "mcq",
+        "o": [
+            "Possible if connection is defined or table name includes database prefix. Eloquent handles it if configured.",
+            "Impossible",
+            "Requires middleware",
+            "Requires raw SQL"
+        ]
+    },
+    {
+        "q": "Does Eloquent support composite primary keys?",
+        "type": "mcq",
+        "o": [
+            "Not natively fully supported for all features (like `save`, `find`). Requires custom traits or workaround packages.",
+            "Yes, fully supported",
+            "Use array in `$primaryKey`",
+            "Use `CompositeKey` trait"
+        ]
+    },
+    {
+        "q": "What is `$visible` property?",
+        "type": "mcq",
+        "o": [
+            "Allowlist for array/JSON serialization. If set, ONLY these attributes are shown. (Opposite of hidden).",
+            "Visible on frontend",
+            "Visible to admin",
+            "Visible in logs"
+        ]
+    },
+    {
+        "q": "What happens if both `$hidden` and `$visible` are set?",
+        "type": "mcq",
+        "o": [
+            "`$visible` takes precedence. `$hidden` is ignored.",
+            "They merge",
+            "Error",
+            "Hidden wins"
+        ]
+    },
+    {
+        "q": "How to set default values for attributes in Model?",
+        "type": "mcq",
+        "o": [
+            "Define `$attributes` array property. `protected $attributes = ['active' => true];`",
+            "In constructor",
+            "In migration",
+            "In factory"
+        ]
+    },
+    {
+        "q": "Are default values in `$attributes` applied on `new Model`?",
+        "type": "mcq",
+        "o": [
+            "Yes, immediately available on new instance.",
+            "No, only on save",
+            "No, only on fetch",
+            "Only if null"
+        ]
+    },
+    {
+        "q": "How to clone a query builder?",
+        "type": "mcq",
+        "o": [
+            "$query->clone()",
+            "clone $query",
+            "$query->copy()",
+            "$query->duplicate()"
+        ]
+    },
+    {
+        "q": "Why clone a query builder?",
+        "type": "mcq",
+        "o": [
+            "To run multiple queries (e.g. `count` then `get`) from the same base constraints without modifying the original object state (since builder is mutable).",
+            "Memory optimization",
+            "Speed",
+            "Thread safety"
+        ]
+    },
+    {
+        "q": "What is `sole()` method?",
+        "type": "mcq",
+        "o": [
+            "Retrieves exactly one record. Throws exception if no records found (ModelNotFound) OR if multiple records found (MultipleRecordsFound).",
+            "Like first()",
+            "Like one()",
+            "Like findFrom()"
+        ]
+    },
+    {
+        "q": "When to use `sole()`?",
+        "type": "mcq",
+        "o": [
+            "When you expect uniqueness logically but DB constraint might not enforce it, and want to fail hard if duplicate data exists.",
+            "Always",
+            "Never",
+            "For performance"
+        ]
+    },
+    {
+        "q": "What is an Anonymous Global Scope?",
+        "type": "mcq",
+        "o": [
+            "Using a closure in `boot` method: `static::addGlobalScope('name', function($q){...})`",
+            "A scope with no name",
+            "A scope for guests",
+            "A scope for testing"
+        ]
+    },
+    {
+        "q": "Can you extend the Eloquent Builder?",
+        "type": "mcq",
+        "o": [
+            "Yes, by overriding `newEloquentBuilder($query)` in Model and returning custom builder instance.",
+            "No",
+            "Via macro only",
+            "Via trait only"
+        ]
+    },
+    {
+        "q": "Benefit of Custom Eloquent Builder?",
+        "type": "mcq",
+        "o": [
+            "Methods correspond to business logic on the builder itself (`User::whereActive()`) instead of scopes, offering better IDE completion and organization.",
+            "Performance",
+            "Security",
+            "None"
+        ]
+    },
+    {
+        "q": "Difference between `belongsToMany` and `hasMany`?",
+        "type": "mcq",
+        "o": [
+            "belongsToMany uses a pivot table (Many-to-Many). hasMany uses a foreign key on the other model (One-to-Many).",
+            "Naming preference",
+            "One direction vs bi-direction",
+            "Complexity"
+        ]
+    },
+    {
+        "q": "How to order results by a relationship count?",
+        "type": "mcq",
+        "o": [
+            "Flight::withCount('passengers')->orderBy('passengers_count', 'desc')->get()",
+            "Flight::orderByCount('passengers')",
+            "Flight::sortByRelation('passengers')",
+            "Hard to do"
+        ]
+    },
+    {
+        "q": "Is `Model::all()` lazy or eager loading?",
+        "type": "mcq",
+        "o": [
+            "It loads only the model records. Relationships are lazy-loaded when accessed, unless `$with` property is set on model.",
+            "Eager always",
+            "Lazy always",
+            "Cached"
+        ]
+    },
+    {
+        "q": "What effect does `protected $with = ['relation'];` have?",
+        "type": "mcq",
+        "o": [
+            "Auto-eager loads 'relation' every time the model is queried.",
+            "Only on `all()`",
+            "Only on `find()`",
+            "Prevents N+1 by default"
+        ]
+    },
+    {
+        "q": "Can you disable `$with` auto-loading?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Model::without('relation')->get()`",
+            "No",
+            "Yes, `Model::noAuto()->get()`",
+            "Yes, `Model::fresh()->get()`"
+        ]
+    },
+    {
+        "q": "Eloquent `value('column')`?",
+        "type": "mcq",
+        "o": [
+            "Gets the value of a single column from the first result.",
+            "Gets array of column",
+            "Gets object",
+            "Gets count"
+        ]
+    },
+    {
+        "q": "Eloquent `pluck('column')`?",
+        "type": "mcq",
+        "o": [
+            "Gets a Collection of all values for that column.",
+            "Gets one value",
+            "Gets distinct values",
+            "Gets key-value pair"
+        ]
+    },
+    {
+        "q": "What is `c` in CRUD (Eloquent context)?",
+        "type": "mcq",
+        "o": [
+            "Create (save, create, insert)",
+            "Call",
+            "Connect",
+            "Cache"
+        ]
+    },
+    {
+        "q": "Intermediate: What does `Model::unguard()` do?",
+        "type": "mcq",
+        "o": [
+            "Temporarily disables mass assignment protection globally (usually used in seeders).",
+            "Disables authentication",
+            "Disables CSRF",
+            "Disables validation"
+        ]
+    },
+    {
+        "q": "How to re-enable guarding?",
+        "type": "mcq",
+        "o": [
+            "Model::reguard()",
+            "Model::guard()",
+            "Model::protect()",
+            "Model::safe()"
+        ]
+    },
+    {
+        "q": "What is an Eloquent API Resource?",
+        "type": "mcq",
+        "o": [
+            "A transformation layer between Eloquent models and JSON responses (extends `JsonResource`).",
+            "A database table",
+            "A routing helper",
+            "A validation rule"
+        ]
+    },
+    {
+        "q": "How to generate a Resource?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:resource UserResource",
+            "php artisan make:api UserResource",
+            "php artisan create:resource UserResource",
+            "php artisan resource:make UserResource"
+        ]
+    },
+    {
+        "q": "Which method in a Resource defines the array structure?",
+        "type": "mcq",
+        "o": [
+            "toArray($request)",
+            "toJson($request)",
+            "serialize($request)",
+            "data($request)"
+        ]
+    },
+    {
+        "q": "How to return a collection of resources?",
+        "type": "mcq",
+        "o": [
+            "UserResource::collection(User::all())",
+            "UserResource::all()",
+            "new UserResource(User::all())",
+            "UserResource::list(User::all())"
+        ]
+    },
+    {
+        "q": "Difference between `JsonResource` and `ResourceCollection`?",
+        "type": "mcq",
+        "o": [
+            "JsonResource represents a single model. ResourceCollection represents a collection of models.",
+            "No difference",
+            "JsonResource is deprecated",
+            "ResourceCollection is for XML"
+        ]
+    },
+    {
+        "q": "How to create a dedicated Resource Collection class?",
+        "type": "mcq",
+        "o": [
+            "php artisan make:resource UserCollection --collection",
+            "php artisan make:collection User",
+            "php artisan new:collection User",
+            "php artisan make:resource --type=collection User"
+        ]
+    },
+    {
+        "q": "How to conditionally include an attribute in a Resource?",
+        "type": "mcq",
+        "o": [
+            "$this->when($condition, $value)",
+            "$this->if($condition, $value)",
+            "if ($condition) { return $value; }",
+            "$this->mergeWhen($condition, $value)"
+        ]
+    },
+    {
+        "q": "How to conditionally include a relationship only if loaded?",
+        "type": "mcq",
+        "o": [
+            "$this->whenLoaded('posts')",
+            "$this->ifLoaded('posts')",
+            "$this->has('posts')",
+            "$this->load('posts')"
+        ]
+    },
+    {
+        "q": "What is `preserveKeys` property in a Resource?",
+        "type": "mcq",
+        "o": [
+            "If true, preserves the original keys of the collection (doesn't reset to numerical indices).",
+            "Preserves database keys",
+            "Preserves encryption keys",
+            "Preserves foreign keys"
+        ]
+    },
+    {
+        "q": "How to wrap the JSON response in a specific key (e.g. 'data')?",
+        "type": "mcq",
+        "o": [
+            "It is wrapped in 'data' by default. Can customize via `public $wrap = 'user';` property.",
+            "Cannot customize",
+            "Use middleware",
+            "Use traits"
+        ]
+    },
+    {
+        "q": "How to remove the 'data' wrapper globally?",
+        "type": "mcq",
+        "o": [
+            "JsonResource::withoutWrapping() in AppServiceProvider.",
+            "JsonResource::unwrap()",
+            "public $wrap = false;",
+            "public $data = null;"
+        ]
+    },
+    {
+        "q": "How to add top-level meta data (pagination links etc) to a Resource response?",
+        "type": "mcq",
+        "o": [
+            "Override `with($request)` method or use `additional(['meta' => ...])` method when returning.",
+            "Override `meta()`",
+            "Use `addMeta()`",
+            "Use `header()`"
+        ]
+    },
+    {
+        "q": "Advanced: What is a `MorphMap` used for?",
+        "type": "mcq",
+        "o": [
+            "Decouples the database internal structure from class names in polymorphic columns. Maps 'post' string to 'App\\Models\\Post'.",
+            "Maps routes",
+            "Maps controllers",
+            "Maps views"
+        ]
+    },
+    {
+        "q": "Where to register `Relation::morphMap`?",
+        "type": "mcq",
+        "o": [
+            "AppServiceProvider::boot()",
+            "routes.php",
+            "config/database.php",
+            "Model constructor"
+        ]
+    },
+    {
+        "q": "What is the benefit of `morphMap`?",
+        "type": "mcq",
+        "o": [
+            "If you rename your model class, data in DB (polymorphic 'type' column) remains valid.",
+            "Faster queries",
+            "Smaller DB size",
+            "Better security"
+        ]
+    },
+    {
+        "q": "How to query JSON columns: `whereJsonContains`?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereJsonContains('options->languages', 'en')->get()",
+            "Flight::where('options->languages', 'includes', 'en')->get()",
+            "Flight::whereJson('options->languages', 'en')->get()",
+            "Flight::hasJson('options', 'en')->get()"
+        ]
+    },
+    {
+        "q": "How to query JSON length?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereJsonLength('options->languages', '>', 1)->get()",
+            "Flight::whereLength('options->languages', '>', 1)->get()",
+            "Flight::jsonCount('options->languages', '>', 1)->get()",
+            "Flight::size('options->languages', '>', 1)->get()"
+        ]
+    },
+    {
+        "q": "Query Builder: What does `when($condition, callback)` do?",
+        "type": "mcq",
+        "o": [
+            "Executes the callback query modification ONLY if condition is truthy. (Cleaner than if/else blocks).",
+            "Always executes",
+            "Executes in future",
+            "Executes if false"
+        ]
+    },
+    {
+        "q": "Query Builder: `tap($callback)`?",
+        "type": "mcq",
+        "o": [
+            "Executes the callback with the query builder instance, then returns the builder instance. Useful for inspecting or side-effects without breaking chain.",
+            "Stops query",
+            "Executes query immediately",
+            "Logs query"
+        ]
+    },
+    {
+        "q": "Subqueries: `addSelect`?",
+        "type": "mcq",
+        "o": [
+            "Adds columns to the existing select clause (useful if adding subquery columns).",
+            "Replaces select",
+            "Selects all",
+            "Selects distinct"
+        ]
+    },
+    {
+        "q": "How to select the latest login date from a related Login model as a column?",
+        "type": "mcq",
+        "o": [
+            "User::addSelect(['last_login' => Login::select('created_at')->whereColumn('user_id', 'users.id')->latest()->take(1)])->get()",
+            "User::withLatest('logins')->get()",
+            "User::joinLogins()->get()",
+            "Cannot do subselects in Eloquent"
+        ]
+    },
+    {
+        "q": "Ordering by a subquery?",
+        "type": "mcq",
+        "o": [
+            "User::orderByDesc(Login::select('created_at')...)->get()",
+            "User::orderBySub(...)",
+            "User::sortSub(...)",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "What is `whereColumn`?",
+        "type": "mcq",
+        "o": [
+            "Compares two columns within the database (e.g. `updated_at` > `created_at`).",
+            "Compares column to value",
+            "Compares column to null",
+            "Compares column to array"
+        ]
+    },
+    {
+        "q": "Is `whereColumn('first_name', 'last_name')` checking equality?",
+        "type": "mcq",
+        "o": [
+            "Yes, checks if first_name equals last_name in the same row.",
+            "No, checks if columns exist",
+            "No, checks if columns are different",
+            "No, syntax error"
+        ]
+    },
+    {
+        "q": "How to retrieve models by their primary keys (array)?",
+        "type": "mcq",
+        "o": [
+            "User::find([1, 2, 3]) (Returns Collection)",
+            "User::get([1, 2, 3])",
+            "User::whereId([1, 2, 3])",
+            "User::findMany([1, 2, 3])"
+        ]
+    },
+    {
+        "q": "What if some IDs in `find([1, 2, 3])` are missing?",
+        "type": "mcq",
+        "o": [
+            "It returns only the found models.",
+            "It throws exception",
+            "It returns nulls for missing",
+            "It returns empty collection"
+        ]
+    },
+    {
+        "q": "What is `findMany`?",
+        "type": "mcq",
+        "o": [
+            "Alias for `find` when passing array.",
+            "Finds relations",
+            "Finds table",
+            "Deprecated"
+        ]
+    },
+    {
+        "q": "How to execute raw SQL efficiently if needed?",
+        "type": "mcq",
+        "o": [
+            "Flight::select(DB::raw('count(*) as count, status'))->groupBy('status')->get()",
+            "Flight::raw('select *')",
+            "Flight::sql('select *')",
+            "Flight::exec('select *')"
+        ]
+    },
+    {
+        "q": "Difference between `whereRaw` and `where`?",
+        "type": "mcq",
+        "o": [
+            "whereRaw accepts a raw SQL string for the WHERE clause (be careful of SQL injection!). `where` constructs it safely.",
+            "whereRaw is safer",
+            "whereRaw is slower",
+            "No difference"
+        ]
+    },
+    {
+        "q": "How to group query conditions (bracket logic)?",
+        "type": "mcq",
+        "o": [
+            "Pass a closure to `where`: `->where(function ($query) { $query->where('a', 1)->orWhere('b', 1); })`",
+            "Use parentheses in string",
+            "Use `group()`",
+            "Use `brackets()`"
+        ]
+    },
+    {
+        "q": "What is `orWhere`?",
+        "type": "mcq",
+        "o": [
+            "Adds an OR condition to the query.",
+            "Adds an AND condition",
+            "Adds a NOT condition",
+            "Adds an XOR condition"
+        ]
+    },
+    {
+        "q": "Can you use `orWhere` inside a scoped closure?",
+        "type": "mcq",
+        "o": [
+            "Yes, commonly used to create groups like `WHERE status = 1 AND (subscribed = 1 OR trial = 1)`.",
+            "No",
+            "Only at top level",
+            "Only in raw queries"
+        ]
+    },
+    {
+        "q": "What is `modelKeys()` on a Collection?",
+        "type": "mcq",
+        "o": [
+            "Returns an array of primary keys for all models in the collection.",
+            "Returns array of all keys",
+            "Returns array of foreign keys",
+            "Returns serialization keys"
+        ]
+    },
+    {
+        "q": "How to reload parent model from a child model?",
+        "type": "mcq",
+        "o": [
+            "$comment->post->fresh() or access relationship again if not cached.",
+            "$comment->parent()",
+            "$comment->loadParent()",
+            "$comment->getOwner()"
+        ]
+    },
+    {
+        "q": "Does `belongsTo` support default models if relation is null?",
+        "type": "mcq",
+        "o": [
+            "Yes, `->withDefault()` on the relationship definition returns empty instance (or array of attributes) instead of null.",
+            "No, returns null",
+            "Yes, `->default()`",
+            "Yes, `->fallback()`"
+        ]
+    },
+    {
+        "q": "How to constrain a `belongsTo` eager load?",
+        "type": "mcq",
+        "o": [
+            "Post::with(['author' => fn($q) => $q->select('id', 'name')])->get()",
+            "Post::with('author:id,name')->get()",
+            "Both A and B",
+            "Cannot constrain belongsTo"
+        ]
+    },
+    {
+        "q": "What is `whereKey($id)`?",
+        "type": "mcq",
+        "o": [
+            "Adds a where clause on the primary key column (handles composite keys too).",
+            "Where key exists",
+            "Where foreign key",
+            "Where index"
+        ]
+    },
+    {
+        "q": "What is `whereKeyNot($id)`?",
+        "type": "mcq",
+        "o": [
+            "Exclude records with given primary key(s).",
+            "Exclude null keys",
+            "Exclude foreign keys",
+            "Exclude duplicates"
+        ]
+    },
+    {
+        "q": "Scopes: Can a scope return values other than the builder?",
+        "type": "mcq",
+        "o": [
+            "No, local scopes should generally return `void` or the Builder instance implicitly. If you return something else, query chaining breaks.",
+            "Yes, checking logic",
+            "Yes, model instances",
+            "Yes, arrays"
+        ]
+    },
+    {
+        "q": "How to remove all global scopes?",
+        "type": "mcq",
+        "o": [
+            "Flight::withoutGlobalScopes()->get()",
+            "Flight::allScopes()->get()",
+            "Flight::scopes(false)->get()",
+            "Flight::raw()->get()"
+        ]
+    },
+    {
+        "q": "How to remove only specific global scopes?",
+        "type": "mcq",
+        "o": [
+            "Flight::withoutGlobalScopes([FirstScope::class, SecondScope::class])->get()",
+            "Flight::exceptScopes(...)",
+            "Flight::skipScopes(...)",
+            "Flight::ignore(...)"
+        ]
+    },
+    {
+        "q": "Comparing Models: `isNot($model)`?",
+        "type": "mcq",
+        "o": [
+            "Checks if two models are NOT the same (ID, table, connection).",
+            "Checks inequality of attributes",
+            "Checks memory address",
+            "Checks type"
+        ]
+    },
+    {
+        "q": "Does `save()` return boolean?",
+        "type": "mcq",
+        "o": [
+            "Yes, true on success.",
+            "No, void",
+            "No, returns model",
+            "No, returns ID"
+        ]
+    },
+    {
+        "q": "Does `push()` save the model and its relationships?",
+        "type": "mcq",
+        "o": [
+            "Yes, saves the model and all its loaded relationships.",
+            "No, only model",
+            "No, only relationships",
+            "Push is for queues"
+        ]
+    },
+    {
+        "q": "How to duplicate a model instance in memory without saving?",
+        "type": "mcq",
+        "o": [
+            "$flight->replicate()",
+            "$flight->clone()",
+            "$flight->copy()",
+            "$flight->duplicate()"
+        ]
+    },
+    {
+        "q": "Can `replicate` exclude specific attributes?",
+        "type": "mcq",
+        "o": [
+            "Yes, pass array of keys to ignore: `$flight->replicate(['token'])`",
+            "No",
+            "Yes, using `$hidden`",
+            "Yes, using `$guarded`"
+        ]
+    },
+    {
+        "q": "What is `Route Route Binding` customization in Model?",
+        "type": "mcq",
+        "o": [
+            "Override `getRouteKeyName()` to use 'slug' instead of 'id' for validation/retrieval in routes.",
+            "Override `route()`",
+            "Override `key()`",
+            "Override `binding()`"
+        ]
+    },
+    {
+        "q": "How to customize Route Binding query logic?",
+        "type": "mcq",
+        "o": [
+            "Override `resolveRouteBinding($value, $field)` method.",
+            "Override `find()`",
+            "Override `get()`",
+            "Override `query()`"
+        ]
+    },
+    {
+        "q": "Preventing accidental updates in Production methods?",
+        "type": "mcq",
+        "o": [
+            "Use `Model::preventSilentlyDiscardingAttributes()` or `Model::preventAccessingMissingAttributes()`.",
+            "Use `Model::freeze()`",
+            "Use `Model::lock()`",
+            "Use `Model::readOnly()`"
+        ]
+    },
+    {
+        "q": "Strict Mode (Laravel 9.35+): Enaling all safety checks?",
+        "type": "mcq",
+        "o": [
+            "Model::shouldBeStrict() (Enables lazy loading prevention, unfillable guarding, missing attribute checks).",
+            "Model::strict()",
+            "Model::safe()",
+            "Model::secure()"
+        ]
+    },
+    {
+        "q": "Where to enable Model strict mode?",
+        "type": "mcq",
+        "o": [
+            "AppServiceProvider `boot` method.",
+            "env file",
+            "config/app.php",
+            "routes/web.php"
+        ]
+    },
+    {
+        "q": "Relationship: `hasOne` syntax?",
+        "type": "mcq",
+        "o": [
+            "return $this->hasOne(Phone::class, 'foreign_key', 'local_key');",
+            "return $this->hasOne(Phone::class, 'local_key', 'foreign_key');",
+            "return $this->one(Phone::class);",
+            "return $this->relate(Phone::class);"
+        ]
+    },
+    {
+        "q": "Relationship: `belongsToMany` custom table name?",
+        "type": "mcq",
+        "o": [
+            "Second argument: `return $this->belongsToMany(Role::class, 'user_roles');`",
+            "Third argument",
+            "First argument",
+            "In pivot model"
+        ]
+    },
+    {
+        "q": "Relationship: `belongsToMany` custom keys?",
+        "type": "mcq",
+        "o": [
+            "3rd arg (foreign key of current model), 4th arg (foreign key of related model).",
+            "3rd arg (related), 4th arg (current)",
+            "Named arguments only",
+            "In array"
+        ]
+    },
+    {
+        "q": "What is `latestOfMany`?",
+        "type": "mcq",
+        "o": [
+            "A `hasOne` or `morphOne` relation that retrieves the *latest* related model from a `hasMany` relation efficiently.",
+            "A query scope",
+            "A collection method",
+            "A helper"
+        ]
+    },
+    {
+        "q": "Syntax for `latestOfMany`?",
+        "type": "mcq",
+        "o": [
+            "return $this->hasOne(Order::class)->latestOfMany();",
+            "return $this->latest(Order::class);",
+            "return $this->oneLatest(Order::class);",
+            "return $this->manyLatest(Order::class);"
+        ]
+    },
+    {
+        "q": "Can `latestOfMany` sort by other columns?",
+        "type": "mcq",
+        "o": [
+            "Yes, `latestOfMany('price')` (Find max price).",
+            "No, only timestamps",
+            "No, only ID",
+            "Yes, but slow"
+        ]
+    },
+    {
+        "q": "What is `oldestOfMany`?",
+        "type": "mcq",
+        "o": [
+            "Retrieves the oldest (min) related model.",
+            "Retrieves first ID",
+            "Retrieves deleted",
+            "Retrieves archived"
+        ]
+    },
+    {
+        "q": "Eloquent `chunkById` vs `chunk`?",
+        "type": "mcq",
+        "o": [
+            "chunkById orders by ID and is safe when updating records in a way that affects chunking (e.g. updating timestamp). chunk uses offset/limit.",
+            "No difference",
+            "chunkById is slower",
+            "chunk is required for UUIDs"
+        ]
+    },
+    {
+        "q": "When processing massive datasets for update, which is better?",
+        "type": "mcq",
+        "o": [
+            "chunkById",
+            "chunk",
+            "get()",
+            "all()"
+        ]
+    },
+    {
+        "q": "Cursor: `Flight::cursor()`?",
+        "type": "mcq",
+        "o": [
+            "Returns a LazyCollection backed by a Generator. Executing single query and yielding results one by one (low memory usage).",
+            "Returns array",
+            "Returns Collection (all in memory)",
+            "Returns raw resource"
+        ]
+    },
+    {
+        "q": "What method on Collection converts it to regular array?",
+        "type": "mcq",
+        "o": [
+            "all() or toArray()",
+            "get()",
+            "list()",
+            "items()"
+        ]
+    },
+    {
+        "q": "What is `dump()` in query chain?",
+        "type": "mcq",
+        "o": [
+            "Dumps the query bindings and SQL, then continues chain.",
+            "Stops execution",
+            "Writes to log",
+            "Deletes data"
+        ]
+    },
+    {
+        "q": "What is `dd()` in query chain?",
+        "type": "mcq",
+        "o": [
+            "Dump and Die. Shows SQL/bindings and exits.",
+            "Data delete",
+            "Deep dive",
+            "Double dump"
+        ]
+    },
+    {
+        "q": "Does `update()` on a model instance require a `save()`?",
+        "type": "mcq",
+        "o": [
+            "No. `$tweet->update(['text' => 'New']);` saves immediately.",
+            "Yes",
+            "Only for mass assignment",
+            "Only for accessors"
+        ]
+    },
+    {
+        "q": "Does `fill()` save the model?",
+        "type": "mcq",
+        "o": [
+            "No. `$tweet->fill(['text' => 'New']);` only sets attributes. Must call `save()`.",
+            "Yes",
+            "Yes, if valid",
+            "Yes, if fillable"
+        ]
+    },
+    {
+        "q": "What happens if you set a non-fillable attribute via `fill`?",
+        "type": "mcq",
+        "o": [
+            "It is silently discarded (unless guarding is disabled).",
+            "Throws exception",
+            "Saves anyway",
+            "Logs warning"
+        ]
+    },
+    {
+        "q": "What is `$dispatchesEvents` property?",
+        "type": "mcq",
+        "o": [
+            "Maps Model lifecycle events to custom Event classes. `protected $dispatchesEvents = ['saved' => UserSaved::class];`",
+            "Disables events",
+            "Queues events",
+            "Lists all events"
+        ]
+    },
+    {
+        "q": "How to handle database transactions with Model callbacks?",
+        "type": "mcq",
+        "o": [
+            "Use `DB::transaction(...)`. No specific model method, but events fire within transaction.",
+            "Model::transaction(...)",
+            "Model::lock(...)",
+            "Model::safe(...)"
+        ]
+    },
+    {
+        "q": "What is `forceFill`?",
+        "type": "mcq",
+        "o": [
+            "Fills attributes ignoring `$fillable` (mass assignment protection).",
+            "Fills required fields",
+            "Fills with random data",
+            "Fills nulls"
+        ]
+    },
+    {
+        "q": "Intermediate: Can you cast to `encrypted`?",
+        "type": "mcq",
+        "o": [
+            "Yes, `protected $casts = ['secret' => 'encrypted'];` (Laravel 8.x+). Auto encrypts/decrypts.",
+            "No, use trait",
+            "No, manual only",
+            "Only in Ent"
+        ]
+    },
+    {
+        "q": "Cast to `collection`?",
+        "type": "mcq",
+        "o": [
+            "Deserializes JSON to a `Illuminate\\Support\\Collection`.",
+            "Deserializes to array",
+            "Deserializes to object",
+            "Deserializes to string"
+        ]
+    },
+    {
+        "q": "Cast to `immutable_date`?",
+        "type": "mcq",
+        "o": [
+            "Casts to `CarbonImmutable` instance.",
+            "Casts to constant string",
+            "Casts to readonly property",
+            "Casts to SQL date"
+        ]
+    },
+    {
+        "q": "Serialization: How to customize date format globally for JSON?",
+        "type": "mcq",
+        "o": [
+            "Override `serializeDate(DateTimeInterface $date)` in Model.",
+            "Set `Carbon::setToStringFormat`",
+            "Set config/app.php",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "What is `makeHidden` used for?",
+        "type": "mcq",
+        "o": [
+            "Excludes attributes from serialization dynamically on a collection or instance. `$users->makeHidden('email');`",
+            "Deletes attribute",
+            "Encrypts attribute",
+            "Hides from database"
+        ]
+    },
+    {
+        "q": "What is `makeVisible`?",
+        "type": "mcq",
+        "o": [
+            "Includes attributes that are usually hidden. `$user->makeVisible('api_token');`",
+            "Shows on screen",
+            "Decrypts attribute",
+            "Shows to everyone"
+        ]
+    },
+    {
+        "q": "Can you use `makeHidden` on a Collection?",
+        "type": "mcq",
+        "o": [
+            "Yes, it propagates to all models in collection.",
+            "No, only single model",
+            "Yes, but slow",
+            "Only via loop"
+        ]
+    },
+    {
+        "q": "Query: `whereBetween`?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereBetween('price', [1, 100])->get()",
+            "Flight::where('price', 'between', 1, 100)",
+            "Flight::whereBetween('price', 1, 100)",
+            "Flight::between('price', 1, 100)"
+        ]
+    },
+    {
+        "q": "Query: `whereNotBetween`?",
+        "type": "mcq",
+        "o": [
+            "Inverse of whereBetween.",
+            "Not supported",
+            "whereOutside",
+            "whereExclude"
+        ]
+    },
+    {
+        "q": "Query: `whereIn`?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereIn('destination_id', [1, 2, 3])->get()",
+            "Flight::where('destination_id', 'in', [1, 2, 3])",
+            "Flight::in('destination_id', [1, 2, 3])",
+            "Flight::filter([1, 2, 3])"
+        ]
+    },
+    {
+        "q": "Query: `whereNull`?",
+        "type": "mcq",
+        "o": [
+            "Flight::whereNull('updated_at')->get()",
+            "Flight::where('updated_at', null)",
+            "Flight::where('updated_at', 'is', null)",
+            "Flight::null('updated_at')"
+        ]
+    },
+    {
+        "q": "Does `update()` return the number of affected rows?",
+        "type": "mcq",
+        "o": [
+            "Yes.",
+            "No, returns boolean",
+            "No, returns models",
+            "No, returns void"
+        ]
+    },
+    {
+        "q": "Does `delete()` return number of deleted rows?",
+        "type": "mcq",
+        "o": [
+            "Yes.",
+            "No, boolean",
+            "No, void",
+            "No, error"
+        ]
+    },
+    {
+        "q": "Pruning: How to customize pruning query?",
+        "type": "mcq",
+        "o": [
+            "Implement `prunable` method returning a builder. `return static::where('created_at', '<', now()->subMonth());`",
+            "Override `delete`",
+            "Use `forceDelete`",
+            "Config file"
+        ]
+    },
+    {
+        "q": "When does pruning happen?",
+        "type": "mcq",
+        "o": [
+            "When `model:prune` command is run (usually scheduled).",
+            "Automatically every minute",
+            "On save",
+            "On delete"
+        ]
+    },
+    {
+        "q": "What is `CastsAttributes` interface used for?",
+        "type": "mcq",
+        "o": [
+            "Creating custom cast classes for Eloquent attributes (implements `get` and `set`).",
+            "Creating events",
+            "Creating policies",
+            "Creating middleware"
+        ]
+    },
+    {
+        "q": "Custom Cast: What parameters does `get` method receive?",
+        "type": "mcq",
+        "o": [
+            "$model, $key, $value, $attributes",
+            "$value only",
+            "$model, $value",
+            "$key, $value"
+        ]
+    },
+    {
+        "q": "How to cast a value to an Object / ValueObject?",
+        "type": "mcq",
+        "o": [
+            "Use a custom cast class that hydrates the ValueObject in `get` and extracts primitives in `set`.",
+            "Use `(object) $value`",
+            "Use `json_decode`",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "What is `InboundCast`?",
+        "type": "mcq",
+        "o": [
+            "A custom cast that only mutates data for storage (one-way). Implements `CastsInboundAttributes`.",
+            "Casts incoming request",
+            "Casts route parameters",
+            "Casts query strings"
+        ]
+    },
+    {
+        "q": "Event: `replicating`?",
+        "type": "mcq",
+        "o": [
+            "Fired when a model is replicated using `replicate()`. Allows modifying the cloned instance before it is returned.",
+            "Fired when database replicates",
+            "Fired on Cache hit",
+            "Fired on clone()"
+        ]
+    },
+    {
+        "q": "Event: `discarded`?",
+        "type": "mcq",
+        "o": [
+            "Fired when a model is soft deleted and then force deleted? No, actually fired when a model is Discarded by `Model::preventSilentlyDiscardingAttributes` violation? No. It's not a standard lifecycle event.",
+            "Standard event",
+            "Does not exist as standard event",
+            "Fired on 404"
+        ]
+    },
+    {
+        "q": "Testing: `assertModelExists($model)`?",
+        "type": "mcq",
+        "o": [
+            "Asserts that the model exists in the database.",
+            "Asserts variable is not null",
+            "Asserts table exists",
+            "Asserts model file exists"
+        ]
+    },
+    {
+        "q": "Testing: `assertModelMissing($model)`?",
+        "type": "mcq",
+        "o": [
+            "Asserts that the model does NOT exist in the database.",
+            "Asserts model is null",
+            "Asserts variable is undefined",
+            "Asserts table is dropped"
+        ]
+    },
+    {
+        "q": "Testing: `assertSoftDeleted($model)`?",
+        "type": "mcq",
+        "o": [
+            "Asserts the model exists but has a non-null `deleted_at`.",
+            "Asserts model is removed",
+            "Asserts model is hidden",
+            "Asserts deleted_at column exists"
+        ]
+    },
+    {
+        "q": "Unique validation ignoring soft deleted records?",
+        "type": "mcq",
+        "o": [
+            "Rule::unique('users')->withoutTrashed()",
+            "Rule::unique('users')->ignoreTrashed()",
+            "unique:users,email,NULL,id,deleted_at,NULL",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "Relationship: `whereBelongsTo($model)`?",
+        "type": "mcq",
+        "o": [
+            "Post::whereBelongsTo($user)->get() (Automatically determines foreign key column based on model/relation).",
+            "Post::belongsTo($user)->get()",
+            "Post::whereOwner($user)->get()",
+            "Post::for($user)->get()"
+        ]
+    },
+    {
+        "q": "Can `whereBelongsTo` handle collections?",
+        "type": "mcq",
+        "o": [
+            "Yes, pass a collection of models to verify if it belongs to ANY of them (Where In).",
+            "No, single model only",
+            "No, throws error",
+            "Yes, but inefficient"
+        ]
+    },
+    {
+        "q": "What is `withoutTouch()`?",
+        "type": "mcq",
+        "o": [
+            "Executes a callback preventing the model from touching its relationships/timestamps. `$post->withoutTouch(fn() => $post->save());`",
+            "Disables touch support",
+            "Disables mobile view",
+            "Ignores touch events"
+        ]
+    },
+    {
+        "q": "How to override keys used for save query (Updates)?",
+        "type": "mcq",
+        "o": [
+            "protected function setKeysForSaveQuery($query) { ... } (Important for composite keys support).",
+            "overrideKeys()",
+            "saveKeys()",
+            "primaryKeys()"
+        ]
+    },
+    {
+        "q": "What is `originalIsEquivalent($key)`?",
+        "type": "mcq",
+        "o": [
+            "Checks if the current attribute value is equivalent to the original value (handling loose comparison logic).",
+            "Checks exact match",
+            "Checks type match",
+            "Checks memory match"
+        ]
+    },
+    {
+        "q": "Queues: `SerializesModels` trait?",
+        "type": "mcq",
+        "o": [
+            "When a job with this trait is queued, it saves the ID of the model property. When dequeued, it automatically fetches the fresh model from DB.",
+            "Serializes entire object to JSON",
+            "Encrypts model",
+            "Compresses model"
+        ]
+    },
+    {
+        "q": "What happens if a queued model is deleted before job runs?",
+        "type": "mcq",
+        "o": [
+            "ModelNotFoundException is thrown (job fails). Can be caught with `deleteWhenMissingModels` property.",
+            "Job runs with null",
+            "Job skips silently",
+            "Job retries indefinitely"
+        ]
+    },
+    {
+        "q": "How to verify if two models are logically equivalent (all attributes)?",
+        "type": "mcq",
+        "o": [
+            "No built-in method, must compare `toArray()`. `is()` only checks Identity (ID/Table).",
+            "$model->isSame($other)",
+            "$model->equals($other)",
+            "$model->matches($other)"
+        ]
+    },
+    {
+        "q": "What is `getMorphClass()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the class name for polymorphic storage (or the mapped string if `morphMap` is used).",
+            "Returns generic object",
+            "Returns table name",
+            "Returns relation name"
+        ]
+    },
+    {
+        "q": "How to constrain a query to models created today?",
+        "type": "mcq",
+        "o": [
+            "User::whereDate('created_at', today())->get()",
+            "User::where('created_at', today())->get()",
+            "User::today()->get()",
+            "User::createdAt(today())->get()"
+        ]
+    },
+    {
+        "q": "How to constrain to created in current month?",
+        "type": "mcq",
+        "o": [
+            "User::whereMonth('created_at', now()->month)->get()",
+            "User::thisMonth()->get()",
+            "User::month()->get()",
+            "User::currentMonth()->get()"
+        ]
+    },
+    {
+        "q": "Using `create` with relationships?",
+        "type": "mcq",
+        "o": [
+            "Not directly supported on the parent `create`. Must create parent, then `save()` child relations.",
+            "User::create(['name'=>'X', 'posts'=>[['title'=>'Y']]])",
+            "Supported natively in all drivers",
+            "Supported via `nested_create`"
+        ]
+    },
+    {
+        "q": "Can you use `firstWhere` as a shortcut?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Flight::firstWhere('active', 1)` is shortcut for `where('active', 1)->first()`.",
+            "No",
+            "Yes, but slower",
+            "Yes, returns array"
+        ]
+    },
+    {
+        "q": "What is `Model::preventAccessingMissingAttributes()`?",
+        "type": "mcq",
+        "o": [
+            "Strict Mode: Throws exception when accessing an attribute that was not retrieved in the query (SELECT specific columns).",
+            "Prevents null access",
+            "Prevents undefined property",
+            "Prevents magic methods"
+        ]
+    },
+    {
+        "q": "How to mass-update records?",
+        "type": "mcq",
+        "o": [
+            "Flight::where('active', 1)->update(['delayed' => 1]); (Returns number of affected rows).",
+            "Flight::updateAll(...)",
+            "Flight::setAll(...)",
+            "Flight::massUpdate(...)"
+        ]
+    },
+    {
+        "q": "Does mass-update fire `saving` / `saved` events?",
+        "type": "mcq",
+        "o": [
+            "No, it runs a direct UPDATE query. No models are hydrated.",
+            "Yes, for each model",
+            "Yes, once",
+            "Yes, if configured"
+        ]
+    },
+    {
+        "q": "How to insert multiple records efficiently (one query)?",
+        "type": "mcq",
+        "o": [
+            "Flight::insert([['name'=>'A'], ['name'=>'B']]);",
+            "Flight::createMany(...)",
+            "Flight::saveMany(...)",
+            "Flight::addMany(...)"
+        ]
+    },
+    {
+        "q": "Does `insert` fire created events?",
+        "type": "mcq",
+        "o": [
+            "No, direct database insert.",
+            "Yes",
+            "Yes, but limited",
+            "Yes, delayed"
+        ]
+    },
+    {
+        "q": "What is `createMany` used for?",
+        "type": "mcq",
+        "o": [
+            "A relationship method. `$user->posts()->createMany([['title'=>'A'], ['title'=>'B']])`. Fires events for each.",
+            "Alias for insert",
+            "Static method on Model",
+            "Bulk create without events"
+        ]
+    },
+    {
+        "q": "How to toggle a boolean column?",
+        "type": "mcq",
+        "o": [
+            "No direct Eloquent method. Must do `$user->active = !$user->active; $user->save();` or `update(['active' => DB::raw('NOT active')])`.",
+            "$user->toggle('active')",
+            "$user->switch('active')",
+            "$user->flip('active')"
+        ]
+    },
+    {
+        "q": "How to check if model uses SoftDeletes trait dynamically?",
+        "type": "mcq",
+        "o": [
+            "in_array(SoftDeletes::class, class_uses_recursive($model))",
+            "$model->hasSoftDeletes()",
+            "$model->isSoftDelete()",
+            "$model->soft()"
+        ]
+    },
+    {
+        "q": "What is `resolveChildRouteBinding`?",
+        "type": "mcq",
+        "o": [
+            "Method to customize implicit scoping of child bindings (Nested Resources).",
+            "Resolves URL",
+            "Resolves controller",
+            "Resolves middleware"
+        ]
+    },
+    {
+        "q": "Can you use standard PHP Enums in Eloquent (Laravel 9+)?",
+        "type": "mcq",
+        "o": [
+            "Yes, declare in `$casts`: `'status' => UserStatus::class`.",
+            "No",
+            "Only string enums",
+            "Only int enums"
+        ]
+    },
+    {
+        "q": "When casting to Enum, what happens if DB value is invalid?",
+        "type": "mcq",
+        "o": [
+            "Throws a ValueError (PHP standard behavior for backing enums) or Exception upon retrieval context.",
+            "Returns null",
+            "Returns default",
+            "Returns string"
+        ]
+    },
+    {
+        "q": "How to encrypt a column without custom cast?",
+        "type": "mcq",
+        "o": [
+            "protected $casts = ['secret' => 'encrypted'];",
+            "protected $encrypted = ['secret'];",
+            "Use Encryptable trait",
+            "Manual encryption only"
+        ]
+    },
+    {
+        "q": "Does `encrypted` cast support array/json?",
+        "type": "mcq",
+        "o": [
+            "Yes, `encrypted:array`, `encrypted:collection`, `encrypted:object` are supported.",
+            "No, strings only",
+            "Yes, but buggy",
+            "No, dangerous"
+        ]
+    },
+    {
+        "q": "What is `Model::withoutTimestamps` callback?",
+        "type": "mcq",
+        "o": [
+            "Executes operations without updating timestamps. `Model::withoutTimestamps(fn() => $user->save());`",
+            "Disables timestamps forever",
+            "Removes columns",
+            "Ignores created_at"
+        ]
+    },
+    {
+        "q": "Can you define `const` in Model class?",
+        "type": "mcq",
+        "o": [
+            "Yes, helpful for defining fixed status values or types.",
+            "No",
+            "Only private",
+            "Only static"
+        ]
+    },
+    {
+        "q": "How to specify default ordering for all queries of a model?",
+        "type": "mcq",
+        "o": [
+            "Add a global scope in `booted`. `static::addGlobalScope('order', fn($q) => $q->orderBy('name'));`",
+            "protected $orderBy = 'name';",
+            "public $sort = 'name';",
+            "Inside `all()`"
+        ]
+    },
+    {
+        "q": "Are Accessors cached?",
+        "type": "mcq",
+        "o": [
+            "No, computed every time accessed. `CastsAttributes` can cache values if implemented manually.",
+            "Yes, automatically",
+            "Yes, if strict",
+            "Yes, in production"
+        ]
+    },
+    {
+        "q": "How to make a `Virtual Attribute` (Attribute that doesn't exist in DB)?",
+        "type": "mcq",
+        "o": [
+            "Just define an Accessor. You can pass values to it via constructor or setters, but it won't save unless mapped to a real column.",
+            "Declare `virtual` keyword",
+            "Use `$virtual` array",
+            "Use `@virtual` annotation"
+        ]
+    },
+    {
+        "q": "Lazy Loading Violation: What exception is threw?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Database\\LazyLoadingViolationException",
+            "LazyLoadError",
+            "RelationNotFound",
+            "QueryException"
+        ]
+    },
+    {
+        "q": "How to silently discard non-fillable attributes?",
+        "type": "mcq",
+        "o": [
+            "It is the default behavior. To prevent it (throw exception), use `Model::preventSilentlyDiscardingAttributes()`.",
+            "Use `silent()`",
+            "Use `discard()`",
+            "Use `ignore()`"
+        ]
+    },
+    {
+        "q": "Can you use `DB::raw` in `orderBy`?",
+        "type": "mcq",
+        "o": [
+            "Yes, `orderByRaw('updated_at - created_at DESC')`",
+            "No",
+            "Use `rawOrder`",
+            "Use `sortRaw`"
+        ]
+    },
+    {
+        "q": "What is `Model::on('connection')`?",
+        "type": "mcq",
+        "o": [
+            "Static method to begin query on a specific connection.",
+            "Turn on model",
+            "Enable features",
+            "Listen to events"
+        ]
+    },
+    {
+        "q": "How to get the database connection object instance from a model?",
+        "type": "mcq",
+        "o": [
+            "$model->getConnection()",
+            "$model->db()",
+            "$model->pdo()",
+            "$model->link()"
+        ]
+    },
+    {
+        "q": "What is `from` method used for?",
+        "type": "mcq",
+        "o": [
+            "Specifies the table to select from (overriding `$table`). `User::select('field')->from('archive_users')->get()`.",
+            "Sends email from",
+            "Imports from",
+            "Inherits from"
+        ]
+    },
+    {
+        "q": "How to force an index in query?",
+        "type": "mcq",
+        "o": [
+            "MySQL: `->from(DB::raw('users USE INDEX (my_index)'))` or specific driver hints.",
+            "->useIndex('name')",
+            "->index('name')",
+            "->force('name')"
+        ]
+    },
+    {
+        "q": "Where should you place complex query logic?",
+        "type": "mcq",
+        "o": [
+            "In Query Scopes or specialized Builder classes. Not in Controllers.",
+            "In Controller",
+            "In View",
+            "In Route"
+        ]
+    },
+    {
+        "q": "What is a `Scope` interface?",
+        "type": "mcq",
+        "o": [
+            "Interface for defining Global Scopes. `apply(Builder $builder, Model $model)`.",
+            "Interface for local scopes",
+            "Interface for policies",
+            "Interface for view"
+        ]
+    },
+    {
+        "q": "Can you `join` in Eloquent?",
+        "type": "mcq",
+        "o": [
+            "Yes, `User::join('posts', 'users.id', '=', 'posts.user_id')->select(...)->get()`.",
+            "No, relationships only",
+            "Yes, but discouraged",
+            "Only left join"
+        ]
+    },
+    {
+        "q": "Downside of using `join` in Eloquent?",
+        "type": "mcq",
+        "o": [
+            "You effectively get a raw result set (attributes overlap). Returned instances might be 'User' models but contain 'Post' columns. And `with` eager loading might not work as expected if primary keys are ambiguous.",
+            "None",
+            "Slower",
+            "Harder to read"
+        ]
+    },
+    {
+        "q": "How to avoid column collision in joins?",
+        "type": "mcq",
+        "o": [
+            "Select specific columns with aliases. `select('users.*', 'posts.title as post_title')`.",
+            "Use `distinct`",
+            "Use `collision(false)`",
+            "Use `prefix`"
+        ]
+    },
+    {
+        "q": "Eloquent: `upsert`?",
+        "type": "mcq",
+        "o": [
+            "Inserts or updates records. `Flight::upsert([['id'=>1, 'price'=>99]], ['id'], ['price'])`.",
+            "Update sort order",
+            "Upload certificate",
+            "Upper case convert"
+        ]
+    },
+    {
+        "q": "Arguments for `upsert`?",
+        "type": "mcq",
+        "o": [
+            "Values(array of arrays), UniqueBy(columns to check uniqueness), Update(columns to update if exists).",
+            "Values, Options",
+            "Table, Values",
+            "Query, Bindings"
+        ]
+    },
+    {
+        "q": "Is `upsert` atomic?",
+        "type": "mcq",
+        "o": [
+            "Yes, typically implemented as `INSERT ... ON DUPLICATE KEY UPDATE` (MySQL) or similar atomic DB instruction.",
+            "No",
+            "Depends on transaction",
+            "Only in Postgres"
+        ]
+    },
+    {
+        "q": "How to prevent updating the `updated_at` column during save?",
+        "type": "mcq",
+        "o": [
+            "$flight->timestamps = false; $flight->save();",
+            "$flight->silentSave()",
+            "$flight->save(false)",
+            "$flight->noTimestamp()"
+        ]
+    },
+    {
+        "q": "What is `touch` on a relationship?",
+        "type": "mcq",
+        "o": [
+            "`$user->posts()->touch()` update updated_at of all related posts.",
+            "Reads all posts",
+            "Creates new post",
+            "Validates posts"
+        ]
+    },
+    {
+        "q": "How to get the 'raw' attribute value (skipping accessor)?",
+        "type": "mcq",
+        "o": [
+            "$model->getAttributes()['key'] or `getRawOriginal('key')`.",
+            "$model->raw('key')",
+            "$model->original('key')",
+            "$model->db('key')"
+        ]
+    },
+    {
+        "q": "What is `$model->wasRecentlyCreated`?",
+        "type": "mcq",
+        "o": [
+            "Boolean. True if the model was inserted during the current request lifecycle.",
+            "True if created < 1min ago",
+            "True if not updated",
+            "True if factory used"
+        ]
+    },
+    {
+        "q": "How to define a default value for a column in migration?",
+        "type": "mcq",
+        "o": [
+            "$table->string('status')->default('draft');",
+            "$table->string('status', 'draft');",
+            "$table->default('status', 'draft');",
+            "$table->value('status', 'draft');"
+        ]
+    },
+    {
+        "q": "If migration has default, do you need `$attributes` in Model?",
+        "type": "mcq",
+        "o": [
+            "Not strictly. But if you create a `new Model` instance in PHP, it won't have the default value until you save/refresh from DB. Using `$attributes` keeps them in sync in memory.",
+            "Yes, strictly required",
+            "No, never",
+            "Only for enums"
+        ]
+    },
+    {
+        "q": "How to paginate Eloquent results?",
+        "type": "mcq",
+        "o": [
+            "Flight::paginate(15)",
+            "Flight::pages(15)",
+            "Flight::limit(15)->page(1)",
+            "Flight::paged(15)"
+        ]
+    },
+    {
+        "q": "What does `simplePaginate` do?",
+        "type": "mcq",
+        "o": [
+            "Pagination with only 'Next' and 'Previous' links (saves count(*) query).",
+            "Simple CSS",
+            "Simple JSON",
+            "One page only"
+        ]
+    },
+    {
+        "q": "How to customize the pagination view?",
+        "type": "mcq",
+        "o": [
+            "$flights->links('view.name')",
+            "$flights->view('name')",
+            "$flights->render('name')",
+            "$flights->html('name')"
+        ]
+    },
+    {
+        "q": "How to append query string parameters to pagination links?",
+        "type": "mcq",
+        "o": [
+            "$flights->appends(['sort' => 'votes'])",
+            "$flights->withQuery(...)",
+            "$flights->query(...)",
+            "$flights->add(...)"
+        ]
+    },
+    {
+        "q": "Where does `paginate()` get the current page number?",
+        "type": "mcq",
+        "o": [
+            "Automatically from the `?page` query string parameter in the Request.",
+            "From session",
+            "From cookie",
+            "From route"
+        ]
+    },
+    {
+        "q": "How to use a different query parameter for page number?",
+        "type": "mcq",
+        "o": [
+            "Flight::paginate(15, ['*'], 'custom_page_param')",
+            "Flight::paginate(15, 'custom_page_param')",
+            "Config file",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "Does `cursorPaginate` allow jumping to page 10?",
+        "type": "mcq",
+        "o": [
+            "No, it assumes strict sequential access (next/prev) based on a cursor string.",
+            "Yes",
+            "Yes, if indexed",
+            "Yes, if cached"
+        ]
+    },
+    {
+        "q": "Benefit of `cursorPaginate`?",
+        "type": "mcq",
+        "o": [
+            "Extreme performance for large datasets (infinite scroll) as it avoids OFFSET/LIMIT slow-down.",
+            "Better UI",
+            "More links",
+            "None"
+        ]
+    },
+    {
+        "q": "Can you eager load with `cursorPaginate`?",
+        "type": "mcq",
+        "o": [
+            "Yes.",
+            "No",
+            "Only belongsTo",
+            "Only hasMany"
+        ]
+    },
+    {
+        "q": "How to check if a collection is empty?",
+        "type": "mcq",
+        "o": [
+            "$collection->isEmpty() or $collection->isNotEmpty()",
+            "$collection->empty()",
+            "$collection->blank()",
+            "$collection->null()"
+        ]
+    },
+    {
+        "q": "How to check if model uses timestamps?",
+        "type": "mcq",
+        "o": [
+            "$model->usesTimestamps()",
+            "$model->hasTimestamps()",
+            "$model->isTimed()",
+            "$model->dated()"
+        ]
+    },
+    {
+        "q": "How to get the table name of a model instance?",
+        "type": "mcq",
+        "o": [
+            "$model->getTable()",
+            "$model->table",
+            "$model->getTableName()",
+            "$model->name()"
+        ]
+    },
+    {
+        "q": "How to get the qualified key name (table.id)?",
+        "type": "mcq",
+        "o": [
+            "$model->getQualifiedKeyName()",
+            "$model->fullKey()",
+            "$model->longKey()",
+            "$model->sqlKey()"
+        ]
+    },
+    {
+        "q": "What is `setConnection` used for?",
+        "type": "mcq",
+        "o": [
+            "Change the connection of a model instance at runtime. `$model->setConnection('mysql2');`",
+            "Connect user",
+            "Set wifi",
+            "Set relationship"
+        ]
+    },
+    {
+        "q": "Can you use `DB::table('users')` to interact with Eloquent soft deletes?",
+        "type": "mcq",
+        "o": [
+            "No, Query Builder doesn't know about Eloquent scopes unless you manually add `whereNull('deleted_at')`.",
+            "Yes, automatically",
+            "Yes, if model exists",
+            "Yes, via magic"
+        ]
+    },
+    {
+        "q": "How to chunk, but updating records to break the chunking?",
+        "type": "mcq",
+        "o": [
+            "Use `chunkById`. Standard `chunk` fails if you update the sorting column (e.g. `updated_at`).",
+            "Use `chunkSafe`",
+            "Use `chunkUpdate`",
+            "Use `batch`"
+        ]
+    },
+    {
+        "q": "What is `tap` in a Factory definition?",
+        "type": "mcq",
+        "o": [
+            "afterMaking / afterCreating hooks. `public function configure() { return $this->afterMaking(...); }`",
+            "Tap gesture",
+            "Select specific",
+            "Debug"
+        ]
+    },
+    {
+        "q": "Factory: `sequence`?",
+        "type": "mcq",
+        "o": [
+            "Usage: `User::factory()->count(2)->state(new Sequence(['admin'=>'Y'], ['admin'=>'N']))->create()` to alternate values.",
+            "Ordered ids",
+            "Video sequence",
+            "DNA sequence"
+        ]
+    },
+    {
+        "q": "Factory: `has` method?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->has(Post::factory()->count(3))->create() (Magic relationship factory).",
+            "Has attribute",
+            "Has permission",
+            "Has column"
+        ]
+    },
+    {
+        "q": "Factory: `for` method?",
+        "type": "mcq",
+        "o": [
+            "Post::factory()->for(User::factory())->create() (Inverse relationship factory).",
+            "Loop",
+            "Iteration",
+            "Duration"
+        ]
+    },
+    {
+        "q": "Can multiple `has` be chained?",
+        "type": "mcq",
+        "o": [
+            "Yes. `User::factory()->hasPosts(3)->hasRoles(2)->create()`.",
+            "No",
+            "Limit 1",
+            "Limit 2"
+        ]
+    },
+    {
+        "q": "How to define Accessor caching in new Attribute syntax?",
+        "type": "mcq",
+        "o": [
+            "Attribute::make(...)->shouldCache()",
+            "Attribute::cache()",
+            "Attribute::remember()",
+            "Attribute::store()"
+        ]
+    },
+    {
+        "q": "What does `Model::setEventDispatcher` do?",
+        "type": "mcq",
+        "o": [
+            "Dependency injection of the dispatcher (internally used by Laravel).",
+            "Triggers event",
+            "Clears events",
+            "Logs events"
+        ]
+    },
+    {
+        "q": "Intermediate: What class handles Relationship definitions?",
+        "type": "mcq",
+        "o": [
+            "Illuminate\\Database\\Eloquent\\Relations\\Relation (Abstract base class)",
+            "Illuminate\\Relation",
+            "Laravel\\Relation",
+            "Eloquent\\Link"
+        ]
+    },
+    {
+        "q": "Which helper function returns a new `Fluent` object?",
+        "type": "mcq",
+        "o": [
+            "fluent()",
+            "obj()",
+            "collect()",
+            "str()"
+        ]
+    },
+    {
+        "q": "How to check if an attribute exists in the model's attributes array?",
+        "type": "mcq",
+        "o": [
+            "array_key_exists('key', $model->getAttributes())",
+            "$model->hasAttribute('key')",
+            "isset($model->key) (triggers accessor)",
+            "$model->exists('key')"
+        ]
+    },
+    {
+        "q": "How to remove an attribute from the model instance?",
+        "type": "mcq",
+        "o": [
+            "unset($model->key)",
+            "$model->remove('key')",
+            "$model->delete('key')",
+            "$model->clear('key')"
+        ]
+    },
+    {
+        "q": "What does `Model::unsetEventDispatcher()` do?",
+        "type": "mcq",
+        "o": [
+            "Disables all event firing for models (global effect if singleton unset). Useful for testing performance.",
+            "Resets dispatcher",
+            "Deletes events",
+            "Stops queue"
+        ]
+    },
+    {
+        "q": "How to get the database name used by the connection?",
+        "type": "mcq",
+        "o": [
+            "$model->getConnection()->getDatabaseName()",
+            "$model->dbName()",
+            "$model->getDatabase()",
+            "$model->schema()"
+        ]
+    },
+    {
+        "q": "Can you use Eloquent with Read/Write separation?",
+        "type": "mcq",
+        "o": [
+            "Yes, configured in `config/database.php`. Eloquent uses 'read' connection for select and 'write' for insert/update automatically.",
+            "No",
+            "Only manual",
+            "Only on AWS"
+        ]
+    },
+    {
+        "q": "How to force usage of 'write' connection for a select query (Sticky)?",
+        "type": "mcq",
+        "o": [
+            "User::on('mysql::write')->find(1) or `useWriteConnection()` internally.",
+            "User::write()->find(1)",
+            "User::forceWrite()->find(1)",
+            "User::master()->find(1)"
+        ]
+    },
+    {
+        "q": "What is `Model::hydrate($items)`?",
+        "type": "mcq",
+        "o": [
+            "Creates a collection of models from plain arrays (raw query results).",
+            "Hydrates water",
+            "Refreshes from DB",
+            "Fills empty models"
+        ]
+    },
+    {
+        "q": "What is `fromQuery($sql, $bindings)`?",
+        "type": "mcq",
+        "o": [
+            "Hydrates models from a raw SQL query string.",
+            "Executes raw query only",
+            "Returns array",
+            "Returns boolean"
+        ]
+    },
+    {
+        "q": "How to use a Custom Collection for a specific model?",
+        "type": "mcq",
+        "o": [
+            "Override `newCollection(array $models)` method in the Model.",
+            "Override `collection()`",
+            "In config file",
+            "Use trait CustomCollection"
+        ]
+    },
+    {
+        "q": "Benefit of Custom Eloquent Collection?",
+        "type": "mcq",
+        "o": [
+            "Add domain-specific methods to groups of models (e.g. `$users->markAllAsActive()`).",
+            "Automatic pagination",
+            "Faster iteration",
+            "Sorting defaults"
+        ]
+    },
+    {
+        "q": "What does `$incrementing = false` do?",
+        "type": "mcq",
+        "o": [
+            "Tells Eloquent that the primary key does not auto-increment (required for UUIDs or string keys).",
+            "Disables ID",
+            "Prevents updates",
+            "Disables loops"
+        ]
+    },
+    {
+        "q": "If using UUIDs, what else must you set besides `$incrementing`?",
+        "type": "mcq",
+        "o": [
+            "protected $keyType = 'string';",
+            "protected $uuid = true;",
+            "protected $primary = 'uuid';",
+            "protected $type = 'uuid';"
+        ]
+    },
+    {
+        "q": "Querying Polymorphic relations: `whereHasMorph`?",
+        "type": "mcq",
+        "o": [
+            "Comment::whereHasMorph('commentable', [Post::class, Video::class], function($q){ ... })",
+            "Comment::whereMorph('commentable', ...)",
+            "Comment::hasMorph(...)",
+            "Comment::withMorph(...)"
+        ]
+    },
+    {
+        "q": "Can `whereHasMorph` handle different constraints for different types?",
+        "type": "mcq",
+        "o": [
+            "Yes, pass a closure that checks `$type` or separate closures for each class.",
+            "No, same constraint for all",
+            "No, only one type allowed",
+            "Yes, but no closures"
+        ]
+    },
+    {
+        "q": "Dynamic Relationship: `resolveRelationUsing`?",
+        "type": "mcq",
+        "o": [
+            "Define a relationship dynamically at runtime (useful for testing or packages). `Model::resolveRelationUsing('posts', fn($m) => ...)`",
+            "Resolves conflict",
+            "Resolves join",
+            "Resolves foreign key"
+        ]
+    },
+    {
+        "q": "What is `Model::preventLazyLoading()`?",
+        "type": "mcq",
+        "o": [
+            "Prevents N+1 problem by throwing exception if a relationship is accessed without eager loading.",
+            "Prevents eager loading",
+            "Prevents loading large data",
+            "Prevents caching"
+        ]
+    },
+    {
+        "q": "How to allow lazy loading only in production?",
+        "type": "mcq",
+        "o": [
+            "Model::preventLazyLoading(!app()->isProduction())",
+            "Model::lazyLoading(false)",
+            "Check env in model",
+            "Use middleware"
+        ]
+    },
+    {
+        "q": "Attribute Casting: `mergeCasts`?",
+        "type": "mcq",
+        "o": [
+            "Merges casts with existing ones (useful in traits).",
+            "Overwrites all casts",
+            "Deletes casts",
+            "Merges attributes"
+        ]
+    },
+    {
+        "q": "How to check if model has a specific cast?",
+        "type": "mcq",
+        "o": [
+            "$model->hasCast('attribute', 'type')",
+            "$model->isCasted('attribute')",
+            "$model->checkCast('attribute')",
+            "in_array('type', $model->casts)"
+        ]
+    },
+    {
+        "q": "What is `createQuietly`?",
+        "type": "mcq",
+        "o": [
+            "Creates a model without firing any events. (Available in recent Laravel versions).",
+            "Creates silently in background",
+            "Creates without returning",
+            "Creates without ID"
+        ]
+    },
+    {
+        "q": "Serialization: `jsonSerialize` vs `toArray`?",
+        "type": "mcq",
+        "o": [
+            "`jsonSerialize` is called when `json_encode` is used. It typically calls `toArray`. Overriding `toArray` is usually enough.",
+            "They are unrelated",
+            "jsonSerialize is deprecated",
+            "toArray is for internal use"
+        ]
+    },
+    {
+        "q": "How to customize the `date` serialization format per attribute?",
+        "type": "mcq",
+        "o": [
+            "Use cast: `'dob' => 'date:Y-m-d'`",
+            "Use accessor",
+            "Use `$dates` array",
+            "Use `getDateFormat`"
+        ]
+    },
+    {
+        "q": "How to change the format of `created_at` and `updated_at` in JSON?",
+        "type": "mcq",
+        "o": [
+            "Override `serializeDate(DateTimeInterface $date)`.",
+            "Use `$dateFormat` property (Changes DB format too, be careful).",
+            "Use casts for them",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "What is the `HasBuilder` interface?",
+        "type": "mcq",
+        "o": [
+            "Allows defining a custom builder factory method `newEloquentBuilder`.",
+            "It is not an interface, just a convention",
+            "Interface for Builder pattern",
+            "Interface for HasMany"
+        ]
+    },
+    {
+        "q": "How to use `QualifyColumn`?",
+        "type": "mcq",
+        "o": [
+            "$model->qualifyColumn('id') returns 'table_name.id'. Useful for joins/scopes.",
+            "Checks if column exists",
+            "Validates column",
+            "Aliases column"
+        ]
+    },
+    {
+        "q": "Can you use `CASE ... WHEN` in Eloquent `select`?",
+        "type": "mcq",
+        "o": [
+            "Yes, using `DB::raw` or `selectRaw`. `User::selectRaw('CASE WHEN x THEN y ELSE z END as type')->get()`.",
+            "No",
+            "Yes, `selectCase(...)`",
+            "Yes, `when(...)`"
+        ]
+    },
+    {
+        "q": "What is `Model::withoutRelations()`?",
+        "type": "mcq",
+        "o": [
+            "Clones the model and unsets all loaded relationships.",
+            "Deletes relations",
+            "Prevents loading",
+            "Hides relations"
+        ]
+    },
+    {
+        "q": "How to check if a relationship is loaded?",
+        "type": "mcq",
+        "o": [
+            "$model->relationLoaded('posts')",
+            "$model->hasRelation('posts')",
+            "$model->isLoaded('posts')",
+            "isset($model->posts)"
+        ]
+    },
+    {
+        "q": "What is `loadMissing`?",
+        "type": "mcq",
+        "o": [
+            "Eager loads relationships ONLY if they are not already loaded. `$user->loadMissing('posts')`.",
+            "Loads broken links",
+            "Loads deleted models",
+            "Loads nulls"
+        ]
+    },
+    {
+        "q": "Difference between `load` and `loadMissing`?",
+        "type": "mcq",
+        "o": [
+            "`load` forces a fresh query even if already loaded. `loadMissing` skips if loaded.",
+            "No difference",
+            "`load` is lazy",
+            "`loadMissing` is eager"
+        ]
+    },
+    {
+        "q": "What is `loadMorph`?",
+        "type": "mcq",
+        "o": [
+            "Eager loads polymorphic relationships for a collection, handling different types efficiently.",
+            "Loads morph map",
+            "Loads mutations",
+            "Loads polymorphism"
+        ]
+    },
+    {
+        "q": "How to filter `loadMorph`?",
+        "type": "mcq",
+        "o": [
+            "Pass array mapping types to closures. `loadMorph('commentable', [Post::class => fn($q) => ...])`",
+            "Not possible",
+            "Use `where`",
+            "Use `filter`"
+        ]
+    },
+    {
+        "q": "What is `Model::discardsMissingAttributes`?",
+        "type": "mcq",
+        "o": [
+            "Property/state that determines if missing attributes are ignored or throw exception (related to 'Strict Mode').",
+            "Discards nulls",
+            "Discards primary key",
+            "Discards timestamps"
+        ]
+    },
+    {
+        "q": "Can you use `cursor` with `map`?",
+        "type": "mcq",
+        "o": [
+            "Yes, returns a LazyCollection which supports `map`, `filter`, etc. without loading all to memory.",
+            "No, cursor is read-only",
+            "No, map requires array",
+            "Only with transform"
+        ]
+    },
+    {
+        "q": "Difference between `LazyCollection` and `Collection`?",
+        "type": "mcq",
+        "o": [
+            "LazyCollection uses Generators (yield) to process data one by one. Collection holds all data in array in memory.",
+            "Lazy is slower",
+            "Collection is immutable",
+            "No difference"
+        ]
+    },
+    {
+        "q": "How to use `remember` in Eloquent (Caching)?",
+        "type": "mcq",
+        "o": [
+            "Removed in Laravel 5. Must use `Cache::remember('key', ttl, fn() => Query->get())` manually or use packages like `laravel-model-caching`.",
+            "$query->remember(60)",
+            "$query->cache(60)",
+            "$query->store(60)"
+        ]
+    },
+    {
+        "q": "What is `Relation::noConstraints(fn)`?",
+        "type": "mcq",
+        "o": [
+            "Executes callback with foreign key constraints disabled on the relation query. (Advanced usage).",
+            "Disables all SQL constraints",
+            "Disables validation",
+            "Disables foreign keys DB side"
+        ]
+    },
+    {
+        "q": "Binding Resolution: `resolveRouteBindingQuery`?",
+        "type": "mcq",
+        "o": [
+            "Method on Model to define the base query for route binding (e.g. adding `withId` check or `withTrashed`).",
+            "Resolves route URL",
+            "Resolves controller method",
+            "Resolves view"
+        ]
+    },
+    {
+        "q": "How to make a model read-only (prevent save/update)?",
+        "type": "mcq",
+        "o": [
+            "Override `save`, `update`, `delete` to throw exception, or use a trait. No native 'read-only' property.",
+            "protected $readonly = true;",
+            "protected $mutable = false;",
+            "Model::readOnly()"
+        ]
+    },
+    {
+        "q": "How to use `with` recursively?",
+        "type": "mcq",
+        "o": [
+            "`with('children.children')` or use common CTE packages (not native recursive loading).",
+            "`withRecursive('children')`",
+            "`connectBy('children')`",
+            "`tree('children')`"
+        ]
+    },
+    {
+        "q": "What is `Model::isIgnoringTouch()`?",
+        "type": "mcq",
+        "o": [
+            "Checks if the model is currently in a `withoutTouch` scope.",
+            "Ignores touch screen",
+            "Ignores validation",
+            "Ignores updates"
+        ]
+    },
+    {
+        "q": "Events: `retrieved`?",
+        "type": "mcq",
+        "o": [
+            "Fired after a model is retrieved from the database.",
+            "Fired before retrieval",
+            "Fired when cached",
+            "Fired when missing"
+        ]
+    },
+    {
+        "q": "Can `retrieved` event mutate the model?",
+        "type": "mcq",
+        "o": [
+            "Yes, often used to calculate temporary fields after fetch.",
+            "No, it's immutable",
+            "No, too late",
+            "No, read only"
+        ]
+    },
+    {
+        "q": "How to check if model is dirty (attributes changed)?",
+        "type": "mcq",
+        "o": [
+            "$model->isDirty()",
+            "$model->hasChanges()",
+            "$model->modified()",
+            "$model->diff()"
+        ]
+    },
+    {
+        "q": "How to check if specific attribute is dirty?",
+        "type": "mcq",
+        "o": [
+            "$model->isDirty('attribute')",
+            "$model->changed('attribute')",
+            "$model->diff('attribute')",
+            "$model->isNew('attribute')"
+        ]
+    },
+    {
+        "q": "How to get original values before changes?",
+        "type": "mcq",
+        "o": [
+            "$model->getOriginal('attribute')",
+            "$model->old('attribute')",
+            "$model->previous('attribute')",
+            "$model->db('attribute')"
+        ]
+    },
+    {
+        "q": "What is `syncOriginal()`?",
+        "type": "mcq",
+        "o": [
+            "Syncs the 'original' array with current attributes (marks model as clean). Automatically called after save.",
+            "Syncs to DB",
+            "Syncs to cloud",
+            "Resets changes"
+        ]
+    },
+    {
+        "q": "Difference between `isDirty` and `wasChanged`?",
+        "type": "mcq",
+        "o": [
+            "`isDirty` checks pending changes BEFORE save. `wasChanged` checks what was updated AFTER save (in valid lifecycle).",
+            "No difference",
+            "isDirty is historical",
+            "wasChanged is future"
+        ]
+    },
+    {
+        "q": "What is `getChanges()`?",
+        "type": "mcq",
+        "o": [
+            "Returns array of attributes that were changed and saved in the last operation.",
+            "Returns all changes ever",
+            "Returns git changes",
+            "Returns log"
+        ]
+    },
+    {
+        "q": "How to use `Arr::get` logic on model attributes?",
+        "type": "mcq",
+        "o": [
+            "Model doesn't support dot notation access natively for JSON columns via `->`. Need `data_get($model, 'json.key')` or accessors.",
+            "$model->get('json.key')",
+            "$model->json->key",
+            "$model->find('json.key')"
+        ]
+    },
+    {
+        "q": "Can you use `where` on a generic Accessor?",
+        "type": "mcq",
+        "o": [
+            "No, because Accessors exist in PHP, not DB. (Unless using `where` on collection after fetch).",
+            "Yes, Eloquent converts it",
+            "Yes, if public",
+            "Yes, via `having`"
+        ]
+    },
+    {
+        "q": "What is `Model::boot()`?",
+        "type": "mcq",
+        "o": [
+            "The static method where standard events and global scopes are often registered. (Called once per request per model class).",
+            "Called every instantiation",
+            "Called on migration",
+            "Called on route"
+        ]
+    },
+    {
+        "q": "What is `Model::booted()`?",
+        "type": "mcq",
+        "o": [
+            "Lightweight alternative to overriding boot. Use `protected static function booted()`.",
+            "Called after all models booted",
+            "Called after request",
+            "Called after response"
+        ]
+    },
+    {
+        "q": "How to generate UUID automatically on creation?",
+        "type": "mcq",
+        "o": [
+            "Use `creating` event in `booted`: `static::creating(fn($m) => $m->id = (string) Str::uuid());` or use a Trait.",
+            "Set `$uuid = true`",
+            "Set type to UUID in migration only",
+            "Automatic in Laravel"
+        ]
+    },
+    {
+        "q": "Intermediate: `HasAttributes` trait?",
+        "type": "mcq",
+        "o": [
+            "Trait that handles all attribute retrieval, setting, casting, and date mutation logic.",
+            "Trait for validation",
+            "Trait for relations",
+            "Trait for events"
+        ]
+    },
+    {
+        "q": "What is `GuardsAttributes` trait?",
+        "type": "mcq",
+        "o": [
+            "Trait handling `$fillable` and `$guarded` logic.",
+            "Security guard",
+            "Authentication",
+            "Authorization"
+        ]
+    },
+    {
+        "q": "What is `HidesAttributes` trait?",
+        "type": "mcq",
+        "o": [
+            "Trait handling `$hidden` and `$visible` (serialization).",
+            "Encryption",
+            "Obfuscation",
+            "Compression"
+        ]
+    },
+    {
+        "q": "How to check if model instance has been deleted (soft or hard)?",
+        "type": "mcq",
+        "o": [
+            "For soft: `$model->trashed()`. For hard: `$model->exists` becomes false after `delete()` (if instance kept).",
+            "$model->isDeleted()",
+            "$model->gone()",
+            "$model->removed()"
+        ]
+    },
+    {
+        "q": "Does `$model->exists` update after `delete()`?",
+        "type": "mcq",
+        "o": [
+            "Yes, it is set to `false`.",
+            "No, stays true",
+            "Becomes null",
+            "Throws error"
+        ]
+    },
+    {
+        "q": "How to refresh a model but lock it for update?",
+        "type": "mcq",
+        "o": [
+            "$model->refresh()->lockForUpdate() (Wait, refresh returns void/instance? `refresh` reloads. Use `User::lockForUpdate()->find($id)`). Correct: `$model = User::lockForUpdate()->find($model->id)`.",
+            "$model->refresh(true)",
+            "$model->lock()",
+            "$model->secureRefresh()"
+        ]
+    },
+    {
+        "q": "Shared lock syntax?",
+        "type": "mcq",
+        "o": [
+            "sharedLock()",
+            "lockShared()",
+            "readLock()",
+            "share()"
+        ]
+    },
+    {
+        "q": "Lock for update syntax?",
+        "type": "mcq",
+        "o": [
+            "lockForUpdate()",
+            "writeLock()",
+            "updateLock()",
+            "exclusive()"
+        ]
+    },
+    {
+        "q": "What is `toBase()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the underlying Query Builder instance (steals generic query from Eloquent). Result is Collection of `stdClass`, not Models. Faster.",
+            "Returns base model",
+            "Returns base class",
+            "Returns database driver"
+        ]
+    },
+    {
+        "q": "Why use `toBase()`?",
+        "type": "mcq",
+        "o": [
+            "Performance. Skips hydration (creating Model objects) and overhead when you only need raw data.",
+            "Simplicity",
+            "Security",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Can you use Eloquent scopes after `toBase()`?",
+        "type": "mcq",
+        "o": [
+            "No, because it returns `Illuminate\\Database\\Query\\Builder`, which doesn't know about Model scopes.",
+            "Yes",
+            "Yes, but limited",
+            "Yes, via magic"
+        ]
+    },
+    {
+        "q": "How to get a raw PDO instance?",
+        "type": "mcq",
+        "o": [
+            "DB::getPdo() or $model->getConnection()->getPdo()",
+            "DB::raw()",
+            "DB::pdo()",
+            "DB::driver()"
+        ]
+    },
+    {
+        "q": "How to log all Eloquent queries?",
+        "type": "mcq",
+        "o": [
+            "DB::listen(function($query){ Log::info($query->sql); });",
+            "DB::log()",
+            "Model::log()",
+            "config log_queries=true"
+        ]
+    },
+    {
+        "q": "Where to put `DB::listen`?",
+        "type": "mcq",
+        "o": [
+            "AppServiceProvider boot method.",
+            "Controller",
+            "Model",
+            "View"
+        ]
+    },
+    {
+        "q": "What is `Model::sole()` exception if not found?",
+        "type": "mcq",
+        "o": [
+            "ModelNotFoundException",
+            "NotFoundException",
+            "SoleException",
+            "MissingException"
+        ]
+    },
+    {
+        "q": "What is `Model::sole()` exception if multiple found?",
+        "type": "mcq",
+        "o": [
+            "MultipleRecordsFoundException",
+            "DuplicateException",
+            "ManyFoundException",
+            "AmbiguousException"
+        ]
+    },
+    {
+        "q": "How to define a 'Through' relationship with custom keys?",
+        "type": "mcq",
+        "o": [
+            "Pass them as 3rd, 4th, 5th, 6th arguments to `hasManyThrough`.",
+            "Array of keys",
+            "Named arguments only",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "Order of keys in `hasManyThrough`?",
+        "type": "mcq",
+        "o": [
+            "Foreign Key on Intermediate, Foreign Key on Target, Local Key on Source, Local Key on Intermediate.",
+            "Target, Intermediate, Source",
+            "Source, Intermediate, Target",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is `touches` array used for in Model?",
+        "type": "mcq",
+        "o": [
+            "List of relationships to touch (update timestamp) when the model is saved. `protected $touches = ['post'];` (on Comment model).",
+            "List of users",
+            "List of files",
+            "List of caches"
+        ]
+    },
+    {
+        "q": "Can `touches` work recursively?",
+        "type": "mcq",
+        "o": [
+            "Yes, if the parent also has `$touches` defined pointing further up.",
+            "No",
+            "Only 1 level",
+            "Only 2 levels"
+        ]
+    },
+    {
+        "q": "Intermediate: `withoutGlobalScope` vs `withoutGlobalScopes`?",
+        "type": "mcq",
+        "o": [
+            "`withoutGlobalScope` removes ONE specific scope (by class or name). `withoutGlobalScopes` removes ALL (or array of specific ones).",
+            "Same thing",
+            "Singular is deprecated",
+            "Plural is deprecated"
+        ]
+    },
+    {
+        "q": "Does `Model::destroy` accept collection?",
+        "type": "mcq",
+        "o": [
+            "Yes, collection, array, or single ID.",
+            "No, only ID",
+            "No, only array",
+            "No, only int"
+        ]
+    },
+    {
+        "q": "How to make sure `destroy` fires events for multiple deletions?",
+        "type": "mcq",
+        "o": [
+            "It does by default! `destroy` retrieves each model and calls `delete` on it individually.",
+            "It doesn't",
+            "Must use loop",
+            "Must use `deleteMany`"
+        ]
+    },
+    {
+        "q": "When using `QueryBuilder` delete (`where(...)->delete()`), do events fire?",
+        "type": "mcq",
+        "o": [
+            "No. Direct SQL delete.",
+            "Yes",
+            "Yes, if configured",
+            "Yes, always"
+        ]
+    },
+    {
+        "q": "How to force events on mass delete?",
+        "type": "mcq",
+        "o": [
+            "Retrieve models first, then delete. `User::where(...)->get()->each->delete()`.",
+            "Use `forceEvents`",
+            "Use `eventDelete`",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "What is `Model::query()->macro(...)`?",
+        "type": "mcq",
+        "o": [
+            "Extends the Builder with custom methods dynamically.",
+            "Creates macro instruction",
+            "Creates shortcut",
+            "Creates alias"
+        ]
+    },
+    {
+        "q": "How to check if a model instance is dirty (specific attributes)?",
+        "type": "mcq",
+        "o": [
+            "$model->isDirty(['name', 'email'])",
+            "$model->dirty(['name'])",
+            "$model->checkDirty(['name'])",
+            "$model->isChanged(['name'])"
+        ]
+    },
+    {
+        "q": "How to check if model uses the `HasFactory` trait?",
+        "type": "mcq",
+        "o": [
+            "in_array(HasFactory::class, class_uses_recursive($model))",
+            "$model->hasFactory()",
+            "$model->factory()",
+            "method_exists($model, 'factory')"
+        ]
+    },
+    {
+        "q": "What does `Model::factory()->count(3)->make()` return?",
+        "type": "mcq",
+        "o": [
+            "Collection of 3 unsaved model instances.",
+            "Array of 3",
+            "3 saved models",
+            "Boolean"
+        ]
+    },
+    {
+        "q": "How to seed a relationship using Factory magic?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->hasPosts(3, ['published' => true])->create()",
+            "User::factory()->withPosts(3)",
+            "User::factory()->posts(3)",
+            "User::factory()->addPosts(3)"
+        ]
+    },
+    {
+        "q": "What is `Model::withoutEvents` return value?",
+        "type": "mcq",
+        "o": [
+            "The return value of the closure passed to it.",
+            "Void",
+            "The model",
+            "Boolean"
+        ]
+    },
+    {
+        "q": "Can you use standard PHP Attributes for Casts in new Laravel?",
+        "type": "mcq",
+        "o": [
+            "Yes, `#[CastsWith(MyCast::class)]` (Depends on version/support). Actually typically defined in `$casts` array.",
+            "Yes, always",
+            "No",
+            "Only for validation"
+        ]
+    },
+    {
+        "q": "Advanced: `WhereMorphRelation`?",
+        "type": "mcq",
+        "o": [
+            "Querying where a morph relation satisfies condition. `whereMorphRelation('taggable', '*', ['name' => 'John'])`.",
+            "Querying morph types",
+            "Querying morph map",
+            "Querying morph id"
+        ]
+    },
+    {
+        "q": "How to update timestamps without changing other data?",
+        "type": "mcq",
+        "o": [
+            "$model->touch()",
+            "$model->updateTimestamps()",
+            "$model->refreshTime()",
+            "$model->setNow()"
+        ]
+    },
+    {
+        "q": "Does `touch` fire events?",
+        "type": "mcq",
+        "o": [
+            "Yes, `saved` and `updated` events (but not `saving`/`updating` sometimes, check docs? Actually yes, it saves the model).",
+            "No",
+            "Only saved",
+            "Only updated"
+        ]
+    },
+    {
+        "q": "How to specify a custom connection for a relationship?",
+        "type": "mcq",
+        "o": [
+            "Usually derived from the related model's connection. Can assume related model defines its connection.",
+            "Argument in `hasMany`",
+            "Link method",
+            "Via pivot"
+        ]
+    },
+    {
+        "q": "Can you run `migrate` for a specific path?",
+        "type": "mcq",
+        "o": [
+            "php artisan migrate --path=/database/migrations/specific",
+            "php artisan migrate:only",
+            "php artisan migrate:file",
+            "php artisan migrate:run"
+        ]
+    },
+    {
+        "q": "What is `Schema::hasTable('users')`?",
+        "type": "mcq",
+        "o": [
+            "Checks if table exists in DB.",
+            "Checks if model exists",
+            "Checks if migration exists",
+            "Checks if data exists"
+        ]
+    },
+    {
+        "q": "What is `Schema::hasColumn('users', 'email')`?",
+        "type": "mcq",
+        "o": [
+            "Checks if column exists.",
+            "Checks value",
+            "Checks index",
+            "Checks type"
+        ]
+    },
+    {
+        "q": "How to drop all tables?",
+        "type": "mcq",
+        "o": [
+            "php artisan migrate:fresh",
+            "php artisan migrate:reset (Rollbacks all)",
+            "php artisan db:wipe (Drops all tables)",
+            "php artisan db:clear"
+        ]
+    },
+    {
+        "q": "Difference between `migrate:fresh` and `migrate:refresh`?",
+        "type": "mcq",
+        "o": [
+            "Fresh drops all tables and runs migrations. Refresh rolls back all migrations (down method) and runs them again.",
+            "No difference",
+            "Fresh is for production",
+            "Refresh is for testing"
+        ]
+    },
+    {
+        "q": "Which is faster: `fresh` or `refresh`?",
+        "type": "mcq",
+        "o": [
+            "Fresh (usually), as it just drops tables without running per-migration logic.",
+            "Refresh",
+            "Same",
+            "Depends on OS"
+        ]
+    },
+    {
+        "q": "What is `stub` publishing in Laravel?",
+        "type": "mcq",
+        "o": [
+            "php artisan stub:publish (Allows customizing the templates used by `make:` commands).",
+            "Publishing assets",
+            "Publishing config",
+            "Publishing views"
+        ]
+    },
+    {
+        "q": "How to customize the default Model stub?",
+        "type": "mcq",
+        "o": [
+            "Edit `stubs/model.stub` after publishing stubs.",
+            "Edit vendor files",
+            "Edit config",
+            "Not possible"
+        ]
+    },
+    {
+        "q": "What is `prunable` trait?",
+        "type": "mcq",
+        "o": [
+            "Trait to automate deleting old models (Pruning).",
+            "Trait for formatting",
+            "Trait for validation",
+            "Trait for logging"
+        ]
+    },
+    {
+        "q": "What is `MassAssignable` trait?",
+        "type": "mcq",
+        "o": [
+            "Internal trait used by Model to handle fillable/guarded. (Typically not used directly).",
+            "Public trait",
+            "For arrays only",
+            "Deprecated"
+        ]
+    },
+    {
+        "q": "Collection: `pipe` method?",
+        "type": "mcq",
+        "o": [
+            "Passes the collection to a closure and returns the result. `$collection->pipe(fn($c) => $c->sum())`.",
+            "Pipes data to file",
+            "Pipes data to shell",
+            "Filters data"
+        ]
+    },
+    {
+        "q": "Collection: `mapWithKeys`?",
+        "type": "mcq",
+        "o": [
+            "Iterates and returns an associative array (formatted as [key => value]). Useful for reshaping for dropdowns.",
+            "Maps keys only",
+            "Maps values only",
+            "Resets keys"
+        ]
+    },
+    {
+        "q": "Collection: `reduce`?",
+        "type": "mcq",
+        "o": [
+            "Reduces the collection to a single value (accumulator). `reduce(fn($carry, $item) => $carry + $item, 0)`.",
+            "Removes items",
+            "Splits items",
+            "Shortens array"
+        ]
+    },
+    {
+        "q": "Collection: `flatMap`?",
+        "type": "mcq",
+        "o": [
+            "Maps each item to a collection/array and then collapses (flattens) them into a single collection.",
+            "Flattens array",
+            "Maps flatly",
+            "Maps without keys"
+        ]
+    },
+    {
+        "q": "Query: `whereRelation`?",
+        "type": "mcq",
+        "o": [
+            "Short for `whereHas('relation', fn($q) => $q->where('col', 'val'))`. `User::whereRelation('posts', 'active', 1)->get()`.",
+            "Where relation exists",
+            "Where relation is null",
+            "Where relation count"
+        ]
+    },
+    {
+        "q": "Query: `doesntHave`?",
+        "type": "mcq",
+        "o": [
+            "Returns models that do NOT have any related records for a given relationship. `Post::doesntHave('comments')->get()`.",
+            "Returns models with null relation",
+            "Returns empty models",
+            "Returns single models"
+        ]
+    },
+    {
+        "q": "Query: `orWhereHas`?",
+        "type": "mcq",
+        "o": [
+            "Adds an OR WHERE EXISTS clause for a relationship.",
+            "OR condition on column",
+            "OR condition on null",
+            "OR condition on hasMany"
+        ]
+    },
+    {
+        "q": "How to enable valid query logging in memory?",
+        "type": "mcq",
+        "o": [
+            "DB::enableQueryLog(); ...queries...; $log = DB::getQueryLog();",
+            "DB::startLog()",
+            "DB::log(true)",
+            "Log::enable()"
+        ]
+    },
+    {
+        "q": "Why is `DB::enableQueryLog()` disabled by default?",
+        "type": "mcq",
+        "o": [
+            "It consumes memory storing every query string and binding. Dangerous in long-running processes (workers).",
+            "Security risk",
+            "Performance CPU",
+            "Disk space"
+        ]
+    },
+    {
+        "q": "Security: `whereRaw('id = ' . $id)`?",
+        "type": "mcq",
+        "o": [
+            "Vulnerable to SQL Injection! Always use bindings: `whereRaw('id = ?', [$id])`.",
+            "Safe if cast to int",
+            "Safe if protected",
+            "Safe in Eloquent"
+        ]
+    },
+    {
+        "q": "What does `DB::select` return?",
+        "type": "mcq",
+        "o": [
+            "Array of `stdClass` objects (not Models).",
+            "Collection of Models",
+            "Array of Arrays",
+            "Boolean"
+        ]
+    },
+    {
+        "q": "How to perform a transaction manually?",
+        "type": "mcq",
+        "o": [
+            "DB::beginTransaction(); ... DB::commit(); ... catch { DB::rollBack(); }",
+            "DB::startTransaction()",
+            "DB::transactionStart()",
+            "Model::transaction()"
+        ]
+    },
+    {
+        "q": "What is `DB::transaction(closure)` benefit?",
+        "type": "mcq",
+        "o": [
+            "Automatically commits on success or rolls back if an exception is thrown inside the closure.",
+            "Faster",
+            "Non-blocking",
+            "Async"
+        ]
+    },
+    {
+        "q": "Can you use deadlock retries with `transaction`?",
+        "type": "mcq",
+        "o": [
+            "Yes, second argument is attempts. `DB::transaction(fn()=>..., 5)`.",
+            "No",
+            "Only on MySQL",
+            "Only on Postgres"
+        ]
+    },
+    {
+        "q": "Model: `getIncrementing()`?",
+        "type": "mcq",
+        "o": [
+            "Returns boolean indicating if IDs are auto-incrementing.",
+            "Returns ID directly",
+            "Returns increment amount",
+            "Returns current sequence"
+        ]
+    },
+    {
+        "q": "Model: `getKeyName()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the name of the primary key column (default 'id').",
+            "Returns value of key",
+            "Returns key type",
+            "Returns index name"
+        ]
+    },
+    {
+        "q": "Model: `getForeignKey()`?",
+        "type": "mcq",
+        "o": [
+            "Get the default foreign key name for the model (e.g. `user_id`).",
+            "Get value of FK",
+            "Get constraint",
+            "Get relationship"
+        ]
+    },
+    {
+        "q": "How to get the 'class name' of a related model instance in a polymorphic relation?",
+        "type": "mcq",
+        "o": [
+            "It's stored in the `*_type` column. Eloquent uses it to instantiate.",
+            "Using `get_class()`",
+            "Using `class_basename()`",
+            "Using `typeof`"
+        ]
+    },
+    {
+        "q": "What is `Model::saving` event?",
+        "type": "mcq",
+        "o": [
+            "Fired BEFORE the model is saved (created or updated). Returning false cancels the save.",
+            "Fired after save",
+            "Fired on read",
+            "Fired on delete"
+        ]
+    },
+    {
+        "q": "What is `Model::saved` event?",
+        "type": "mcq",
+        "o": [
+            "Fired AFTER the model is saved and transaction committed (usually).",
+            "Fired before save",
+            "Fired on error",
+            "Fired on rollback"
+        ]
+    },
+    {
+        "q": "If `creating` event returns false, does `saving` event fire?",
+        "type": "mcq",
+        "o": [
+            "Order is: saving -> creating -> created -> saved. If saving fails, creating is skipped. If creating fails, save is cancelled.",
+            "Order is creating -> saving",
+            "Order is saved -> created",
+            "No specific order"
+        ]
+    },
+    {
+        "q": "How to observe ONLY 'updated' event in Observer?",
+        "type": "mcq",
+        "o": [
+            "Define `updated(Model $model)` method in Observer class. Remove other methods if not needed.",
+            "Use `only('updated')`",
+            "Use `observeUpdated()`",
+            "Use `onUpdate()`"
+        ]
+    },
+    {
+        "q": "What is `Model::clearBootedModels()`?",
+        "type": "mcq",
+        "o": [
+            "Clears the internal static array of booted models. Useful in testing to reset global scopes/events.",
+            "Deletes all models",
+            "Truncates tables",
+            "Clears cache"
+        ]
+    },
+    {
+        "q": "Explaining Query: `->explain()`?",
+        "type": "mcq",
+        "o": [
+            "Returns the database engine's explanation of the query plan (MySQL EXPLAIN, etc).",
+            "Returns english description",
+            "Returns error explanation",
+            "Returns doc link"
+        ]
+    },
+    {
+        "q": "What is `sole()`?",
+        "type": "mcq",
+        "o": [
+            "Retrieves a single record that satisfies the criteria. Fails if 0 or >1 exist.",
+            "Retrieves any one",
+            "Retrieves primary",
+            "Retrieves cached"
+        ]
+    },
+    {
+        "q": "Difference between `find($id)` and `firstWhere('id', $id)`?",
+        "type": "mcq",
+        "o": [
+            "`find` typically uses primary key optimization directly (shortcuts query builder if possible). `firstWhere` builds a query.",
+            "No difference",
+            "firstWhere is deprecated",
+            "find is for arrays"
+        ]
+    },
+    {
+        "q": "How to get the 'raw' array of attributes from a model (ignoring mutators)?",
+        "type": "mcq",
+        "o": [
+            "$model->getAttributes()",
+            "$model->toArray()",
+            "$model->jsonSerialize()",
+            "$model->all()"
+        ]
+    },
+    {
+        "q": "How to get mutated attributes?",
+        "type": "mcq",
+        "o": [
+            "Access them as properties: `$model->attribute_name` (Eloquent automatically calls accessor).",
+            "$model->getMutated()",
+            "$model->callAccessor()",
+            "$model->access()"
+        ]
+    },
+    {
+        "q": "How to check if two models refer to the same database row?",
+        "type": "mcq",
+        "o": [
+            "$model->is($otherModel)",
+            "$model == $otherModel",
+            "$model === $otherModel",
+            "$model->same($otherModel)"
+        ]
+    },
+    {
+        "q": "Why `===` might fail for two model instances of same row?",
+        "type": "mcq",
+        "o": [
+            "Because they are different objects in memory (unless using singleton/repository caching). `is()` checks keys/table.",
+            "It never fails",
+            "Because of types",
+            "Because of timestamps"
+        ]
+    },
+    {
+        "q": "What is `Model::setAppends([])`?",
+        "type": "mcq",
+        "o": [
+            "Overrides the `$appends` array at runtime for the instance (e.g. to disable appending accessors for serialization).",
+            "Adds appends",
+            "Clears attributes",
+            "Sets JSON"
+        ]
+    },
+    {
+        "q": "How to limit eager loaded results?",
+        "type": "mcq",
+        "o": [
+            "Complex. Typically requires a subquery or `map` logic. `with` closures cannot effectively use `limit` on `hasMany` (N+1 limit problem).",
+            "Just usage `->limit(5)` in with closure",
+            "Use `->take(5)` in with",
+            "Use `limitRelations(5)`"
+        ]
+    },
+    {
+        "q": "What package solves N+1 limit problem?",
+        "type": "mcq",
+        "o": [
+            "staudenmeir/eloquent-eager-limit is a popular community package.",
+            "Laravel Native",
+            "Horizon",
+            "Telescope"
+        ]
+    },
+    {
+        "q": "Does `Model::all()` support columns?",
+        "type": "mcq",
+        "o": [
+            "Yes, `Model::all(['name', 'email'])`.",
+            "No, must use `get(['name', 'email'])`",
+            "No, selects * always",
+            "Only ID"
+        ]
+    },
+    {
+        "q": "How to use `cursor` in a `foreach`?",
+        "type": "mcq",
+        "o": [
+            "foreach (Flight::cursor() as $flight) { ... } (Streamed results)",
+            "foreach (Flight::stream() as $flight) { ... }",
+            "foreach (Flight::lazy() as $flight) { ... }",
+            "foreach (Flight::yield() as $flight) { ... }"
+        ]
+    },
+    {
+        "q": "What is `Model::withoutTouching()`?",
+        "type": "mcq",
+        "o": [
+            "Executes code block without updating `updated_at` on the model or its relations.",
+            "Disables touch support",
+            "Lock touch",
+            "Skip touch"
+        ]
+    },
+    {
+        "q": "How to check if model uses `HasUuids`?",
+        "type": "mcq",
+        "o": [
+            "in_array(HasUuids::class, class_uses_recursive($model))",
+            "$model->uuid()",
+            "$model->isUuid()",
+            "$model->hasId()"
+        ]
+    },
+    {
+        "q": "What is `Model::resolveConnection`?",
+        "type": "mcq",
+        "o": [
+            "Resolves the connection instance (often used internally).",
+            "Connects to internet",
+            "Resolves domain",
+            "Resolves conflicts"
+        ]
+    },
+    {
+        "q": "How to get the 'foreign key' name used by `belongsTo`?",
+        "type": "mcq",
+        "o": [
+            "$model->relation()->getForeignKeyName()",
+            "$model->relation()->key()",
+            "$model->relation()->fk()",
+            "$model->relation()->id()"
+        ]
+    },
+    {
+        "q": "What is `HasTimestamps` trait?",
+        "type": "mcq",
+        "o": [
+            "Trait handling automatic timestamp updates.",
+            "Trait for Date casting",
+            "Trait for Timezones",
+            "Trait for SoftDeletes"
+        ]
+    },
+    {
+        "q": "Can you disable timestamps for a single model instance?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$model->timestamps = false;`",
+            "No, global setting",
+            "Yes, `Model::noTimes()`",
+            "Yes, in config"
+        ]
+    },
+    {
+        "q": "What is `Model::unguarded(callback)`?",
+        "type": "mcq",
+        "o": [
+            "Runs the callback with mass assignment protection disabled.",
+            "Runs without validation",
+            "Runs as admin",
+            "Runs safely"
+        ]
+    },
+    {
+        "q": "Difference between `make` and `create` in Factory?",
+        "type": "mcq",
+        "o": [
+            "Make returns instance(s) without saving. Create saves to DB.",
+            "No difference",
+            "Make is deprecated",
+            "Create returns boolean"
+        ]
+    },
+    {
+        "q": "Factory: `raw` method?",
+        "type": "mcq",
+        "o": [
+            "Returns attributes array (not Model instances).",
+            "Returns raw SQL",
+            "Returns raw JSON",
+            "Returns string"
+        ]
+    },
+    {
+        "q": "How to force a specific ID when using factory?",
+        "type": "mcq",
+        "o": [
+            "User::factory()->create(['id' => 999]);",
+            "User::factory()->id(999)->create()",
+            "User::factory()->set(999)->create()",
+            "User::factory()->force(999)"
+        ]
+    },
+    {
+        "q": "What is `ensureHelperLoaded`?",
+        "type": "mcq",
+        "o": [
+            "Internal method/concept, irrelevant... Actually, `ensure` methods on `PendingRequest`? No. In Eloquent: `ensureFactory`? No. Trick question.",
+            "Important method",
+            "Global helper",
+            "Not an Eloquent concept"
+        ]
+    },
+    {
+        "q": "How to use `having` clause in Eloquent?",
+        "type": "mcq",
+        "o": [
+            "->having('account_id', '>', 100)",
+            "->whereHaving(...)",
+            "->has(...)",
+            "->groupHaving(...)"
+        ]
+    },
+    {
+        "q": "When do you need `having` vs `where`?",
+        "type": "mcq",
+        "o": [
+            "Having filters AFTER grouping (aggregates). Where filters BEFORE grouping.",
+            "No difference",
+            "Having is faster",
+            "Where is for strings"
+        ]
+    },
+    {
+        "q": "What is `havingRaw`?",
+        "type": "mcq",
+        "o": [
+            "Raw SQL for HAVING clause. `havingRaw('SUM(price) > 2500')`.",
+            "Raw data",
+            "Safe having",
+            "Group raw"
+        ]
+    },
+    {
+        "q": "How to increment a column value?",
+        "type": "mcq",
+        "o": [
+            "$model->increment('votes'); (Direct update query).",
+            "$model->add('votes')",
+            "$model->count++",
+            "$model->plus('votes')"
+        ]
+    },
+    {
+        "q": "Can `increment` take an amount?",
+        "type": "mcq",
+        "o": [
+            "Yes, `$model->increment('votes', 5);`",
+            "No, only 1",
+            "Yes, 2nd arg is max",
+            "Yes, via array"
+        ]
+    },
+    {
+        "q": "Can `increment` update other columns simultaneously?",
+        "type": "mcq",
+        "o": [
+            "Yes, 3rd argument is array of extra columns. `increment('votes', 1, ['updated_at' => now()])`.",
+            "No",
+            "Only timestamps",
+            "Only string cols"
+        ]
+    },
+    {
+        "q": "What is `decrement`?",
+        "type": "mcq",
+        "o": [
+            "Inverse of increment.",
+            "Remove row",
+            "Divide value",
+            "Reset value"
+        ]
+    },
+    {
+        "q": "How to check if a model attribute is NULL in DB (via accessor context)?",
+        "type": "mcq",
+        "o": [
+            "Check usage of `is_null($value)` inside accessor.",
+            "$model->isNull('key')",
+            "$model->checkNull('key')",
+            "$model->empty('key')"
+        ]
+    },
+    {
+        "q": "Does `firstOrCreate` match `$fillable` logic?",
+        "type": "mcq",
+        "o": [
+            "It checks existence with first array, creates with merged first+second array. Requires fillable for keys.",
+            "No constraint",
+            "Ignore fillable",
+            "Only first array"
+        ]
+    },
+    {
+        "q": "What is `updateOrCreate`?",
+        "type": "mcq",
+        "o": [
+            "Checks if record exists matching first array. If yes, updates with second array. If no, creates with matched+second array.",
+            "Updates only",
+            "Creates only",
+            "Deletes if found"
+        ]
+    },
+    {
+        "q": "What is `Model::Reguard`?",
+        "type": "mcq",
+        "o": [
+            "Re-enables mass assignment protection after unguarding.",
+            "Resets guard",
+            "Reloads guard",
+            "Removes guard"
+        ]
+    },
+    {
+        "q": "Does Eloquent support 'spatial' data types?",
+        "type": "mcq",
+        "o": [
+            "Yes, mostly via `casts` to specific classes or using raw queries/packages (e.g. grimzy/laravel-mysql-spatial). Native support is improving.",
+            "No",
+            "Only standard types",
+            "Only via Mongo"
+        ]
+    },
+    {
+        "q": "What is the `new` keyword doing in `new Model`?",
+        "type": "mcq",
+        "o": [
+            "Instantiates the class in memory. No DB connection yet until save/query.",
+            "Creates table",
+            "Connects DB",
+            "Inserts row"
+        ]
+    },
+    {
+        "q": "How to change the primary key type to string in model?",
+        "type": "mcq",
+        "o": [
+            "protected $keyType = 'string';",
+            "protected $type = 'string';",
+            "protected $pkType = 'string';",
+            "protected $cast = 'string';"
+        ]
+    }
+]

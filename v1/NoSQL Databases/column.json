@@ -1,0 +1,5132 @@
+[
+    {
+        "q": "What is the primary data model of Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Wide Column Store (Partitioned Row Store)",
+            "Key-Value",
+            "Document",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'CQL'?",
+        "type": "mcq",
+        "o": [
+            "Cassandra Query Language",
+            "Cassandra Queue Language",
+            "Column Query Language",
+            "Common Query Logic"
+        ]
+    },
+    {
+        "q": "Does CQL support JOINs?",
+        "type": "mcq",
+        "o": [
+            "No, data should be denormalized",
+            "Yes, fully",
+            "Only inner joins",
+            "Only outer joins"
+        ]
+    },
+    {
+        "q": "What is a 'Keyspace'?",
+        "type": "mcq",
+        "o": [
+            "Top-level container for tables (similar to Database in SQL)",
+            "Key storage",
+            "User space",
+            "Cache space"
+        ]
+    },
+    {
+        "q": "What is a 'Table' (or Column Family)?",
+        "type": "mcq",
+        "o": [
+            "Container for ordered collection of rows",
+            "Spreadsheet",
+            "List",
+            "Array"
+        ]
+    },
+    {
+        "q": "What is a 'Partition Key'?",
+        "type": "mcq",
+        "o": [
+            "Determines which node stores the data (hashing)",
+            "Sorts data",
+            "Visual key",
+            "Encrypted key"
+        ]
+    },
+    {
+        "q": "What is a 'Clustering Key'?",
+        "type": "mcq",
+        "o": [
+            "Determines order of data within a partition",
+            "Clusters servers",
+            "Groups users",
+            "Backups data"
+        ]
+    },
+    {
+        "q": "What defines the 'Primary Key' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Partition Key + Clustering Key(s)",
+            "Only Partition Key",
+            "Only ID",
+            "Only Name"
+        ]
+    },
+    {
+        "q": "PRIMARY KEY ((A), B) means:",
+        "type": "mcq",
+        "o": [
+            "A is Partition Key, B is Clustering Key",
+            "A and B are Partition Keys",
+            "B is Partition Key",
+            "Both are Clustering Keys"
+        ]
+    },
+    {
+        "q": "PRIMARY KEY ((A, B), C) means:",
+        "type": "mcq",
+        "o": [
+            "Composite Partition Key (A, B) and Clustering Key C",
+            "A is Partition, B and C are Clustering",
+            "A, B, C are Partition",
+            "Error"
+        ]
+    },
+    {
+        "q": "In Cassandra, writes are:",
+        "type": "mcq",
+        "o": [
+            "Very fast (append-only log)",
+            "Very slow",
+            "Blocking",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "What is 'Replication Factor' (RF)?",
+        "type": "mcq",
+        "o": [
+            "Number of copies of data stored across the cluster",
+            "Speed factor",
+            "Compression ratio",
+            "Zoom factor"
+        ]
+    },
+    {
+        "q": "Where is RF defined?",
+        "type": "mcq",
+        "o": [
+            "At Keyspace level",
+            "At Table level",
+            "At Row level",
+            "At Node level"
+        ]
+    },
+    {
+        "q": "What is 'SimpleStrategy'?",
+        "type": "mcq",
+        "o": [
+            "Replication strategy for single DC (places replicas on next nodes in ring)",
+            "Simple mode",
+            "Basic strategy",
+            "Fast strategy"
+        ]
+    },
+    {
+        "q": "What is 'NetworkTopologyStrategy'?",
+        "type": "mcq",
+        "o": [
+            "Replication strategy for multi-DC (rack aware)",
+            "Internet strategy",
+            "Cloud strategy",
+            "Complex strategy"
+        ]
+    },
+    {
+        "q": "How to create a Keyspace?",
+        "type": "mcq",
+        "o": [
+            "CREATE KEYSPACE name WITH replication = ...",
+            "MAKE KEYSPACE name",
+            "NEW KEYSPACE name",
+            "ADD KEYSPACE name"
+        ]
+    },
+    {
+        "q": "What is 'Consistency Level' (CL)?",
+        "type": "mcq",
+        "o": [
+            "Number of replicas that must acknowledge a read/write",
+            "Data quality",
+            "Uptime",
+            "Version"
+        ]
+    },
+    {
+        "q": "CL 'ONE' means:",
+        "type": "mcq",
+        "o": [
+            "Success if 1 replica responds (Fastest, lowest consistency)",
+            "Wait for all",
+            "Wait for leader",
+            "Wait for 1 second"
+        ]
+    },
+    {
+        "q": "CL 'QUORUM' means:",
+        "type": "mcq",
+        "o": [
+            "Success if majority (RF/2 + 1) replicas respond",
+            "Wait for 2",
+            "Wait for 3",
+            "Wait for all"
+        ]
+    },
+    {
+        "q": "CL 'ALL' means:",
+        "type": "mcq",
+        "o": [
+            "Success only if all replicas respond (Highest consistency, lowest availability)",
+            "Wait for master",
+            "Wait for client",
+            "Wait for network"
+        ]
+    },
+    {
+        "q": "If any node is down, CL ALL will:",
+        "type": "mcq",
+        "o": [
+            "Fail",
+            "Succeed",
+            "Wait forever",
+            "Switch to ONE"
+        ]
+    },
+    {
+        "q": "What is 'Tunable Consistency'?",
+        "type": "mcq",
+        "o": [
+            "Ability to set CL per query (read/write)",
+            "Audio tuning",
+            "DB tuning",
+            "Auto tuning"
+        ]
+    },
+    {
+        "q": "What happens during a write?",
+        "type": "mcq",
+        "o": [
+            "Written to Commit Log (disk) and Memtable (RAM)",
+            "Written to disk only",
+            "Written to RAM only",
+            "Sent to client"
+        ]
+    },
+    {
+        "q": "What is 'Memtable'?",
+        "type": "mcq",
+        "o": [
+            "In-memory structure where data is written first",
+            "Table of contents",
+            "Cache",
+            "Memory stick"
+        ]
+    },
+    {
+        "q": "What is 'SSTable'?",
+        "type": "mcq",
+        "o": [
+            "Sorted String Table (Immutable data file on disk created from flushed Memtable)",
+            "Super Table",
+            "SpreadSheet Table",
+            "System Table"
+        ]
+    },
+    {
+        "q": "Are SSTables mutable?",
+        "type": "mcq",
+        "o": [
+            "No, they are immutable",
+            "Yes",
+            "Sometimes",
+            "Only if compacted"
+        ]
+    },
+    {
+        "q": "How are updates handled?",
+        "type": "mcq",
+        "o": [
+            "As a new write with a timestamp (Last Write Wins)",
+            "Overwriting file",
+            "Deleting old",
+            "Modifying disk"
+        ]
+    },
+    {
+        "q": "What is a 'Tombstone'?",
+        "type": "mcq",
+        "o": [
+            "Marker indicating a deletion",
+            "Grave",
+            "Crashed node",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Compaction'?",
+        "type": "mcq",
+        "o": [
+            "Merging multiple SSTables into one to discard old/deleted data",
+            "Zipping",
+            "Deleting",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Filter' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Probabilistic check to see if an SSTable might contain a row (avoids disk seek)",
+            "Image filter",
+            "Data filter",
+            "Spam filter"
+        ]
+    },
+    {
+        "q": "What is 'Gossip Protocol'?",
+        "type": "mcq",
+        "o": [
+            "Node-to-node communication to exchange state/health info",
+            "Chatting",
+            "Logging",
+            "User chat"
+        ]
+    },
+    {
+        "q": "Does Cassandra have a Master node?",
+        "type": "mcq",
+        "o": [
+            "No, it is masterless (Peer-to-Peer)",
+            "Yes, one master",
+            "Yes, three masters",
+            "Yes, in cloud"
+        ]
+    },
+    {
+        "q": "Which node acts as Coordinator?",
+        "type": "mcq",
+        "o": [
+            "Any node that receives the client request",
+            "Only seed node",
+            "Only master",
+            "Only fastest"
+        ]
+    },
+    {
+        "q": "What is a 'Seed Node'?",
+        "type": "mcq",
+        "o": [
+            "Contact points for new nodes to join the cluster",
+            "Master node",
+            "Data node",
+            "Backup node"
+        ]
+    },
+    {
+        "q": "Can you scale writes linearly?",
+        "type": "mcq",
+        "o": [
+            "Yes, by adding more nodes",
+            "No",
+            "Only reads",
+            "Only if single thread"
+        ]
+    },
+    {
+        "q": "What is 'Snitch'?",
+        "type": "mcq",
+        "o": [
+            "Determines network topology (which rack/DC a node belongs to)",
+            "Spy",
+            "Logger",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "What is 'GossipingPropertyFileSnitch'?",
+        "type": "mcq",
+        "o": [
+            "Recommended snitch for production (uses gossip + local config)",
+            "Simple snitch",
+            "Cloud snitch",
+            "Rack snitch"
+        ]
+    },
+    {
+        "q": "What is 'Hinted Handoff'?",
+        "type": "mcq",
+        "o": [
+            "Coordinator stores write hint if replica is down, replays it when back up",
+            "Passing ball",
+            "Error handling",
+            "Data loss"
+        ]
+    },
+    {
+        "q": "What if Hinted Handoff window expires?",
+        "type": "mcq",
+        "o": [
+            "Data needs to be repaired (Read Repair or Anti-Entropy Repair)",
+            "Data is lost forever",
+            "Node crashes",
+            "Cluster stops"
+        ]
+    },
+    {
+        "q": "What is 'Read Repair'?",
+        "type": "mcq",
+        "o": [
+            "Coordinator fixes inconsistent replicas during a read operation",
+            "Manual fix",
+            "Auto reboot",
+            "Disk check"
+        ]
+    },
+    {
+        "q": "What is 'nodetool'?",
+        "type": "mcq",
+        "o": [
+            "Command line utility to manage Cassandra",
+            "GUI",
+            "Driver",
+            "Editor"
+        ]
+    },
+    {
+        "q": "What is 'nodetool status'?",
+        "type": "mcq",
+        "o": [
+            "Shows status of cluster nodes (UN = Up Normal, DN = Down)",
+            "Shows logs",
+            "Shows config",
+            "Shows queries"
+        ]
+    },
+    {
+        "q": "What command opens the shell?",
+        "type": "mcq",
+        "o": [
+            "cqlsh",
+            "bash",
+            "ssh",
+            "mongo"
+        ]
+    },
+    {
+        "q": "How to see all keyspaces?",
+        "type": "mcq",
+        "o": [
+            "DESCRIBE KEYSPACES",
+            "SHOW DATABASES",
+            "LIST KEYS",
+            "GET ALL"
+        ]
+    },
+    {
+        "q": "How to see table schema?",
+        "type": "mcq",
+        "o": [
+            "DESCRIBE TABLE name",
+            "SHOW TABLE name",
+            "SCHEMA name",
+            "INFO name"
+        ]
+    },
+    {
+        "q": "Can you query without a partition key?",
+        "type": "mcq",
+        "o": [
+            "Not recommended (Allow Filtering), scans full cluster (slow)",
+            "Yes easily",
+            "Always fast",
+            "No never"
+        ]
+    },
+    {
+        "q": "ALLOW FILTERING is used to:",
+        "type": "mcq",
+        "o": [
+            "Force execution of inefficient query (bad for prod)",
+            "Filter good data",
+            "Speed up",
+            "Secure query"
+        ]
+    },
+    {
+        "q": "What is 'Secondary Index' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Index on a non-primary key column (avoid high cardinality)",
+            "Backup",
+            "Copy",
+            "Mirror"
+        ]
+    },
+    {
+        "q": "Should you use Secondary Index for high cardinality?",
+        "type": "mcq",
+        "o": [
+            "No, performance will degrade",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Materialized View'?",
+        "type": "mcq",
+        "o": [
+            "Table auto-updated by Cassandra to support query by different key",
+            "Virtual View",
+            "Read only",
+            "HTML view"
+        ]
+    },
+    {
+        "q": "What is 'UUID' type?",
+        "type": "mcq",
+        "o": [
+            "Universally Unique Identifier",
+            "User ID",
+            "Unique Index",
+            "Undefined"
+        ]
+    },
+    {
+        "q": "What is 'TIMEUUID'?",
+        "type": "mcq",
+        "o": [
+            "UUID that includes a timestamp (sortable by time)",
+            "Time string",
+            "Date",
+            "Clock"
+        ]
+    },
+    {
+        "q": "How to insert current timestamp?",
+        "type": "mcq",
+        "o": [
+            "toTimestamp(now())",
+            "NOW()",
+            "DATE()",
+            "CURRENT()"
+        ]
+    },
+    {
+        "q": "What is 'Batch' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Group of statements executed atomically (logged batch)",
+            "Bulk insert",
+            "Script",
+            "Loop"
+        ]
+    },
+    {
+        "q": "Is Batch used for performance speedup?",
+        "type": "mcq",
+        "o": [
+            "No (often slower), meant for atomicity across partitions",
+            "Yes",
+            "Always",
+            "Only for reads"
+        ]
+    },
+    {
+        "q": "What is 'Unlogged Batch'?",
+        "type": "mcq",
+        "o": [
+            "Batch without atomicity guarantee log (faster, use for same-partition writes)",
+            "Standard batch",
+            "Slow batch",
+            "Safe batch"
+        ]
+    },
+    {
+        "q": "What is 'Lightweight Transaction' (LWT)?",
+        "type": "mcq",
+        "o": [
+            "Compare and Set (CAS) operations using Paxos (IF NOT EXISTS)",
+            "Fast tx",
+            "No locking",
+            "Async tx"
+        ]
+    },
+    {
+        "q": "LWT syntax example:",
+        "type": "mcq",
+        "o": [
+            "INSERT INTO ... IF NOT EXISTS",
+            "INSERT FAST ...",
+            "INSERT ATOMIC ...",
+            "INSERT LOCK ..."
+        ]
+    },
+    {
+        "q": "Are LWTs fast?",
+        "type": "mcq",
+        "o": [
+            "Slower than standard writes (requires 4 round trips)",
+            "Very fast",
+            "Same speed",
+            "Instant"
+        ]
+    },
+    {
+        "q": "What is 'TTL' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Time To Live (data auto-expires after seconds)",
+            "Time To Load",
+            "Table Type",
+            "Total Time"
+        ]
+    },
+    {
+        "q": "How to set TTL?",
+        "type": "mcq",
+        "o": [
+            "INSERT ... USING TTL 86400",
+            "SET TTL = ...",
+            "CONFIG TTL ...",
+            "EXPIRE ..."
+        ]
+    },
+    {
+        "q": "Can you update TTL?",
+        "type": "mcq",
+        "o": [
+            "Yes, by re-inserting with new TTL",
+            "No",
+            "Only remove",
+            "Only decrease"
+        ]
+    },
+    {
+        "q": "What is 'frozen<type>'?",
+        "type": "mcq",
+        "o": [
+            "Serializes collection/UDT into single value (must update full value)",
+            "Ice",
+            "Lock",
+            "Read only"
+        ]
+    },
+    {
+        "q": "What is 'UDT'?",
+        "type": "mcq",
+        "o": [
+            "User Defined Type",
+            "User Data",
+            "Unique Data",
+            "Update Table"
+        ]
+    },
+    {
+        "q": "How to create UDT?",
+        "type": "mcq",
+        "o": [
+            "CREATE TYPE name (field type, ...)",
+            "CREATE OBJECT",
+            "CREATE STRUCT",
+            "CREATE CLASS"
+        ]
+    },
+    {
+        "q": "What is 'Counter' column?",
+        "type": "mcq",
+        "o": [
+            "Special column for distributed counting (update with + or -)",
+            "Clock",
+            "Timer",
+            "Index"
+        ]
+    },
+    {
+        "q": "Can you mix Counter with other columns?",
+        "type": "mcq",
+        "o": [
+            "No, only in dedicated Counter tables (except PK)",
+            "Yes",
+            "Sometimes",
+            "If frozen"
+        ]
+    },
+    {
+        "q": "Are Counter updates idempotent?",
+        "type": "mcq",
+        "o": [
+            "No, replaying update increments again",
+            "Yes",
+            "Mostly",
+            "If LWT"
+        ]
+    },
+    {
+        "q": "What is 'Static Column'?",
+        "type": "mcq",
+        "o": [
+            "Column shared by all rows in a partition (stored once per partition)",
+            "Constant",
+            "Global",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "How to define Static column?",
+        "type": "mcq",
+        "o": [
+            "name type STATIC",
+            "STATIC name type",
+            "CONST name type",
+            "FIXED name type"
+        ]
+    },
+    {
+        "q": "What is 'Wide Partition'?",
+        "type": "mcq",
+        "o": [
+            "Partition with too many rows (can cause performance issues)",
+            "Big disk",
+            "Wide screen",
+            "Good thing"
+        ]
+    },
+    {
+        "q": "Recommended partition size limit?",
+        "type": "mcq",
+        "o": [
+            "~100MB (soft limit), avoid multi-GB",
+            "1 KB",
+            "10 GB",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'Data Modeling' goal?",
+        "type": "mcq",
+        "o": [
+            "Distribute data evenly across cluster and minimize partitions read per query",
+            "Normalize everything",
+            "Save space",
+            "Use joins"
+        ]
+    },
+    {
+        "q": "Query-driven modeling means:",
+        "type": "mcq",
+        "o": [
+            "Design tables based on queries you need to run",
+            "Design based on objects",
+            "Design based on storage",
+            "Random design"
+        ]
+    },
+    {
+        "q": "Chebotko Diagram is:",
+        "type": "mcq",
+        "o": [
+            "Notation for Cassandra data modeling",
+            "A robot",
+            "A chat",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'vnodes' (Virtual Nodes)?",
+        "type": "mcq",
+        "o": [
+            "Splitting tokens range so one physical node handles many small ranges (better balancing)",
+            "VM",
+            "Cloud",
+            "Fake nodes"
+        ]
+    },
+    {
+        "q": "Default num_tokens (vnodes)?",
+        "type": "mcq",
+        "o": [
+            "256 (historically), now often lower (16 or 4) depending on version",
+            "1",
+            "1000",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'repair'?",
+        "type": "mcq",
+        "o": [
+            "nodetool repair (Synchronizes data between replicas)",
+            "Fix disk",
+            "Reboot",
+            "Update"
+        ]
+    },
+    {
+        "q": "When to run repair?",
+        "type": "mcq",
+        "o": [
+            "Regularly (within gc_grace_seconds window) to prevent zombie data",
+            "Never",
+            "Daily only",
+            "On error"
+        ]
+    },
+    {
+        "q": "What is 'gc_grace_seconds'?",
+        "type": "mcq",
+        "o": [
+            "Time to keep tombstones before GC (default 10 days)",
+            "Garbage collection time",
+            "Grace period",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "If node is down longer than gc_grace_seconds:",
+        "type": "mcq",
+        "o": [
+            "Deleted data may reappear (Zombie data)",
+            "It is fine",
+            "Data is safe",
+            "Nothing happens"
+        ]
+    },
+    {
+        "q": "What is 'ScyllaDB'?",
+        "type": "mcq",
+        "o": [
+            "High-performance C++ rewrite of Cassandra",
+            "A monster",
+            "A virus",
+            "New SQL"
+        ]
+    },
+    {
+        "q": "Is ScyllaDB compatible with Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Yes, drop-in replacement (Same CQL, drivers)",
+            "No",
+            "Partially",
+            "Only read"
+        ]
+    },
+    {
+        "q": "What is 'Speculative Retry'?",
+        "type": "mcq",
+        "o": [
+            "Coordinator retries request on another replica if first is too slow",
+            "Gambling",
+            "Guessing",
+            "Retrying error"
+        ]
+    },
+    {
+        "q": "Where are commit logs stored?",
+        "type": "mcq",
+        "o": [
+            "On disk (separate volume recommended)",
+            "RAM",
+            "Network",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'Write Path'?",
+        "type": "mcq",
+        "o": [
+            "Client -> Coordinator -> Replicas -> CommitLog & Memtable",
+            "Direct to disk",
+            "Client to DB",
+            "Simple path"
+        ]
+    },
+    {
+        "q": "What is 'Read Path'?",
+        "type": "mcq",
+        "o": [
+            "Check Memtable -> Check Row Cache -> Check Bloom Filter -> Check SSTables",
+            "Read disk",
+            "Read RAM",
+            "Read Network"
+        ]
+    },
+    {
+        "q": "What is 'Key Cache'?",
+        "type": "mcq",
+        "o": [
+            "Stores location of keys in SSTables (saves disk seeks)",
+            "Data cache",
+            "Row cache",
+            "Web cache"
+        ]
+    },
+    {
+        "q": "What is 'Row Cache'?",
+        "type": "mcq",
+        "o": [
+            "Stores frequent rows in RAM (off-heap usually)",
+            "Key cache",
+            "Disk cache",
+            "CPU cache"
+        ]
+    },
+    {
+        "q": "Default port for CQL?",
+        "type": "mcq",
+        "o": [
+            "9042",
+            "8080",
+            "5432",
+            "3306"
+        ]
+    },
+    {
+        "q": "Default port for gossip/internode?",
+        "type": "mcq",
+        "o": [
+            "7000",
+            "9000",
+            "8000",
+            "6000"
+        ]
+    },
+    {
+        "q": "Does Cassandra use Master-Slave?",
+        "type": "mcq",
+        "o": [
+            "No, purely Peer-to-Peer",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can you define 'functions' in CQL?",
+        "type": "mcq",
+        "o": [
+            "Yes, UDF (User Defined Functions) in Java/JavaScript",
+            "No",
+            "Only C",
+            "Only Python"
+        ]
+    },
+    {
+        "q": "What is 'Aggregate' in CQL?",
+        "type": "mcq",
+        "o": [
+            "UDA (User Defined Aggregate) to roll up data",
+            "Sum",
+            "Count",
+            "Total"
+        ]
+    },
+    {
+        "q": "What is 'TRUNCATE'?",
+        "type": "mcq",
+        "o": [
+            "Removes all data from a table (snapshots first usually)",
+            "Drop table",
+            "Delete row",
+            "Cut string"
+        ]
+    },
+    {
+        "q": "Is TRUNCATE reversible?",
+        "type": "mcq",
+        "o": [
+            "No (unless restored from snapshot)",
+            "Yes",
+            "Always",
+            "Auto undo"
+        ]
+    },
+    {
+        "q": "What is 'COPY' command in cqlsh?",
+        "type": "mcq",
+        "o": [
+            "Import/Export CSV data",
+            "Copy table",
+            "Duplicate",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Leveled Compaction Strategy' (LCS)?",
+        "type": "mcq",
+        "o": [
+            "Optimized for read-heavy workloads (creates levels of SSTables)",
+            "Optimized for writes",
+            "Optimized for space",
+            "Optimized for RAM"
+        ]
+    },
+    {
+        "q": "What is 'Size Tiered Compaction Strategy' (STCS)?",
+        "type": "mcq",
+        "o": [
+            "Default strategy, optimized for write-heavy workloads (buckets by size)",
+            "Optimized for reads",
+            "Optimized for deletes",
+            "Optimized for SSD"
+        ]
+    },
+    {
+        "q": "What is 'Time Window Compaction Strategy' (TWCS)?",
+        "type": "mcq",
+        "o": [
+            "Optimized for time-series data (buckets by time window)",
+            "Optimized for random data",
+            "Optimized for static data",
+            "Optimized for logs"
+        ]
+    },
+    {
+        "q": "When usage of 'DateTieredCompactionStrategy' (DTCS)?",
+        "type": "mcq",
+        "o": [
+            "Deprecated (replaced by TWCS)",
+            "Recommended",
+            "New standard",
+            "Best for SSD"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Entropy Repair'?",
+        "type": "mcq",
+        "o": [
+            "Process leveraging Merkle Trees to find and fix inconsistencies",
+            "Random repair",
+            "Manual copy",
+            "Disk format"
+        ]
+    },
+    {
+        "q": "What is a 'Merkle Tree'?",
+        "type": "mcq",
+        "o": [
+            "Hash tree used to compare data on replicas efficiently without sending all data",
+            "B-Tree",
+            "Binary Tree",
+            "Red-Black Tree"
+        ]
+    },
+    {
+        "q": "What is 'Incremental Repair'?",
+        "type": "mcq",
+        "o": [
+            "Repairs only data that has changed since last repair",
+            "Full repair",
+            "Skip repair",
+            "Slow repair"
+        ]
+    },
+    {
+        "q": "What is 'Full Repair'?",
+        "type": "mcq",
+        "o": [
+            "Repairs all data in the range (expensive)",
+            "Fast repair",
+            "Small repair",
+            "Virtual repair"
+        ]
+    },
+    {
+        "q": "What is 'JMX' port?",
+        "type": "mcq",
+        "o": [
+            "7199 (used by nodetool and monitoring)",
+            "8080",
+            "9042",
+            "22"
+        ]
+    },
+    {
+        "q": "What is 'cassandra.yaml'?",
+        "type": "mcq",
+        "o": [
+            "Main configuration file for Cassandra",
+            "Log file",
+            "Data file",
+            "User file"
+        ]
+    },
+    {
+        "q": "What is 'jvm.options'?",
+        "type": "mcq",
+        "o": [
+            "Configuration for Java Virtual Machine (Heap, GC settings)",
+            "DB config",
+            "Net config",
+            "OS config"
+        ]
+    },
+    {
+        "q": "Recommended Heap size (max)?",
+        "type": "mcq",
+        "o": [
+            "Usually 32GB (to avoid Compressed Oops penalty), often 8-16GB suffices",
+            "100GB",
+            "1TB",
+            "512MB"
+        ]
+    },
+    {
+        "q": "What is 'Off-Heap Memtable'?",
+        "type": "mcq",
+        "o": [
+            "Storing Memtables in native memory outside JVM Heap (reduces GC pressure)",
+            "On disk",
+            "On Cloud",
+            "On Flash"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Tables' (v4+)?",
+        "type": "mcq",
+        "o": [
+            "Read-only tables exposing metrics/yaml config via CQL",
+            "Fake tables",
+            "Deleted tables",
+            "Temp tables"
+        ]
+    },
+    {
+        "q": "How to see settings via CQL (v4+)?",
+        "type": "mcq",
+        "o": [
+            "SELECT * FROM system_views.settings",
+            "SHOW CONFIG",
+            "GET YAML",
+            "PRINT SETTINGS"
+        ]
+    },
+    {
+        "q": "What is 'Audit Logging'?",
+        "type": "mcq",
+        "o": [
+            "Tracking who did what (queries, logins) - Enterprise/v4 feature",
+            "Error logs",
+            "Debug logs",
+            "System logs"
+        ]
+    },
+    {
+        "q": "What is 'Full Query Logging' (FQL)?",
+        "type": "mcq",
+        "o": [
+            "Logs full CQL requests (useful for replay/benchmark)",
+            "Partial log",
+            "Slow log",
+            "Error log"
+        ]
+    },
+    {
+        "q": "What is 'Cassandra Stress' tool?",
+        "type": "mcq",
+        "o": [
+            "Benchmarking tool included with Cassandra",
+            "Virus",
+            "Game",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "Usage: cassandra-stress write n=1000000",
+        "type": "mcq",
+        "o": [
+            "Writes 1 million rows/ops for testing",
+            "Writes 10 rows",
+            "Deletes data",
+            "Reads data"
+        ]
+    },
+    {
+        "q": "What is 'Profile' in cassandra-stress?",
+        "type": "mcq",
+        "o": [
+            "YAML file defining schema and query patterns for custom benchmark",
+            "User profile",
+            "Login",
+            "Face"
+        ]
+    },
+    {
+        "q": "What is 'Range Slice'?",
+        "type": "mcq",
+        "o": [
+            "Scanning a range of tokens (expensive if across multiple nodes)",
+            "Bread slice",
+            "Partition read",
+            "Single read"
+        ]
+    },
+    {
+        "q": "What is 'Partition Scanner'?",
+        "type": "mcq",
+        "o": [
+            "Iterator over rows in a partition",
+            "Virus scanner",
+            "Code scanner",
+            "Port scanner"
+        ]
+    },
+    {
+        "q": "What is 'Paging' in CQL?",
+        "type": "mcq",
+        "o": [
+            "Fetching results in chunks (Automatic in drivers)",
+            "Memory paging",
+            "Paper paging",
+            "SMS"
+        ]
+    },
+    {
+        "q": "How to disable paging?",
+        "type": "mcq",
+        "o": [
+            "PAGING OFF (in cqlsh), not recommended for large results",
+            "NO PAGE",
+            "FULL SCAN",
+            "ALL DATA"
+        ]
+    },
+    {
+        "q": "What is 'Tracing'?",
+        "type": "mcq",
+        "o": [
+            "TRACING ON (captures query path/timing across nodes)",
+            "Drawing",
+            "Copying",
+            "Mapping"
+        ]
+    },
+    {
+        "q": "Where is trace data stored?",
+        "type": "mcq",
+        "o": [
+            "system_traces keyspace",
+            "system.log",
+            "trace.txt",
+            "console"
+        ]
+    },
+    {
+        "q": "What is 'CDC'?",
+        "type": "mcq",
+        "o": [
+            "Change Data Capture (Log changes for external consumption)",
+            "Center for disease",
+            "Compact disc",
+            "Core data"
+        ]
+    },
+    {
+        "q": "How to enable CDC on table?",
+        "type": "mcq",
+        "o": [
+            "WITH cdc = true",
+            "ENABLE CDC",
+            "CREATE CDC",
+            "SET LOG"
+        ]
+    },
+    {
+        "q": "Where do CDC logs go?",
+        "type": "mcq",
+        "o": [
+            "cdc_raw directory in commitlog path",
+            "bin folder",
+            "lib folder",
+            "tmp folder"
+        ]
+    },
+    {
+        "q": "What is 'Decommission'?",
+        "type": "mcq",
+        "o": [
+            "nodetool decommission (Removes node from ring, streaming data to others)",
+            "Turn off",
+            "Delete",
+            "Format"
+        ]
+    },
+    {
+        "q": "What is 'Drain'?",
+        "type": "mcq",
+        "o": [
+            "nodetool drain (Flushes memtables, stops listening, prepares for shutdown)",
+            "Empty pipe",
+            "Delete all",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Assassinate'?",
+        "type": "mcq",
+        "o": [
+            "nodetool assassinate (Forcefully removes a dead node from ring)",
+            "Kill process",
+            "Kill user",
+            "Stop task"
+        ]
+    },
+    {
+        "q": "What is 'View Building'?",
+        "type": "mcq",
+        "o": [
+            "Background process creating Materialized View data from Base table",
+            "Apartment",
+            "Compilation",
+            "Render"
+        ]
+    },
+    {
+        "q": "What is 'SASI' index?",
+        "type": "mcq",
+        "o": [
+            "SSTable Attached Secondary Index (Supports prefix/contains search, experimental/deprecated)",
+            "Sassy",
+            "Fast index",
+            "Primary index"
+        ]
+    },
+    {
+        "q": "What is 'Storage Attached Index' (SAI)?",
+        "type": "mcq",
+        "o": [
+            "Modern secondary index (DSE/Cassandra 5.0?) optimized for storage/performance",
+            "AI index",
+            "Smart index",
+            "Cloud index"
+        ]
+    },
+    {
+        "q": "What is 'DSE'?",
+        "type": "mcq",
+        "o": [
+            "DataStax Enterprise (Commercial distribution with Search, Graph, Analytics)",
+            "Data Standard",
+            "Disk Storage",
+            "Doctor"
+        ]
+    },
+    {
+        "q": "Does DSE have Solr?",
+        "type": "mcq",
+        "o": [
+            "Yes, integrated for Search",
+            "No",
+            "Maybe",
+            "Paid addon"
+        ]
+    },
+    {
+        "q": "Does DSE have Spark?",
+        "type": "mcq",
+        "o": [
+            "Yes, integrated for Analytics",
+            "No",
+            "Maybe",
+            "Paid addon"
+        ]
+    },
+    {
+        "q": "What is 'Vector Search' (Cassandra 5.0)?",
+        "type": "mcq",
+        "o": [
+            "Support for vector embeddings and ANN search (AI)",
+            "Arrow search",
+            "Line search",
+            "Map search"
+        ]
+    },
+    {
+        "q": "What is 'ANN'?",
+        "type": "mcq",
+        "o": [
+            "Approximate Nearest Neighbor",
+            "Another node",
+            "Artificial Neural Network",
+            "Annual"
+        ]
+    },
+    {
+        "q": "What is 'HNSW'?",
+        "type": "mcq",
+        "o": [
+            "Hierarchical Navigable Small World (Algo for vector index)",
+            "Protocol",
+            "Network",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar'?",
+        "type": "mcq",
+        "o": [
+            "Companion process managing backups/maintenance/CDC (Cassandra Sidecar)",
+            "Motorcycle",
+            "Friend",
+            "Plugin"
+        ]
+    },
+    {
+        "q": "What is 'Medusa'?",
+        "type": "mcq",
+        "o": [
+            "Backup system for Cassandra",
+            "Monster",
+            "Virus",
+            "Snake"
+        ]
+    },
+    {
+        "q": "What is 'Reaper'?",
+        "type": "mcq",
+        "o": [
+            "Tool for managing repairs (Cassandra Reaper)",
+            "Death",
+            "Harvest",
+            "Scythe"
+        ]
+    },
+    {
+        "q": "What is 'Paxos'?",
+        "type": "mcq",
+        "o": [
+            "Consensus protocol used for LWT (Lightweight Transactions)",
+            "Taxes",
+            "Island",
+            "Peace"
+        ]
+    },
+    {
+        "q": "Phases of Paxos LWT?",
+        "type": "mcq",
+        "o": [
+            "Prepare/Promise -> Propose/Accept -> Commit/Ack",
+            "One phase",
+            "Two phase",
+            "Four phase"
+        ]
+    },
+    {
+        "q": "What is 'Serial Consistency'?",
+        "type": "mcq",
+        "o": [
+            "Consistency level for LWT phases (SERIAL or LOCAL_SERIAL)",
+            "Number sequence",
+            "Time checking",
+            "ID checking"
+        ]
+    },
+    {
+        "q": "What is 'Order By' restriction?",
+        "type": "mcq",
+        "o": [
+            "Can only order by Clustering Keys within a Partition",
+            "Can order anything",
+            "No order supported",
+            "Only random"
+        ]
+    },
+    {
+        "q": "ORDER BY time DESC requires:",
+        "type": "mcq",
+        "o": [
+            "CLUSTERING ORDER BY (time DESC) in table definition",
+            "Index on time",
+            "Primary key time",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Can you DROP COLUMN?",
+        "type": "mcq",
+        "o": [
+            "Yes, but leaves null values (tombstones potentially) in old SSTables",
+            "No",
+            "Only if empty",
+            "Only if text"
+        ]
+    },
+    {
+        "q": "Can you RENAME COLUMN?",
+        "type": "mcq",
+        "o": [
+            "Generally no (except Clustering columns in specific versions, rarely used)",
+            "Yes",
+            "Always",
+            "Via GUI"
+        ]
+    },
+    {
+        "q": "What is 'Super Column'?",
+        "type": "mcq",
+        "o": [
+            "Deprecated legacy feature (column containing sub-columns), replaced by Composite Columns/Collections",
+            "Big column",
+            "Fast column",
+            "Primary column"
+        ]
+    },
+    {
+        "q": "What is 'Thrift'?",
+        "type": "mcq",
+        "o": [
+            "Legacy RPC protocol (replaced by native CQL binary protocol)",
+            "Shopping",
+            "Saving",
+            "Library"
+        ]
+    },
+    {
+        "q": "What is 'Native Transport'?",
+        "type": "mcq",
+        "o": [
+            "Modern binary protocol (CQL native protocol)",
+            "HTTP",
+            "FTP",
+            "SMTP"
+        ]
+    },
+    {
+        "q": "Max collection size (List/Set)?",
+        "type": "mcq",
+        "o": [
+            "64KB recommended (performance degrades if large), hard limit 2GB",
+            "Unlimited",
+            "1 TB",
+            "1 Byte"
+        ]
+    },
+    {
+        "q": "When to use 'Set'?",
+        "type": "mcq",
+        "o": [
+            "Unique items, order not guaranteed",
+            "Duplicates allowed",
+            "Ordered",
+            "Key Value"
+        ]
+    },
+    {
+        "q": "When to use 'List'?",
+        "type": "mcq",
+        "o": [
+            "Ordered items, duplicates allowed",
+            "Unique",
+            "Random",
+            "Key Value"
+        ]
+    },
+    {
+        "q": "When to use 'Map'?",
+        "type": "mcq",
+        "o": [
+            "Key-Value pairs",
+            "Only keys",
+            "Only values",
+            "Single value"
+        ]
+    },
+    {
+        "q": "How to append to List?",
+        "type": "mcq",
+        "o": [
+            "SET l = l + ['item']",
+            "APPEND 'item'",
+            "PUSH 'item'",
+            "ADD 'item'"
+        ]
+    },
+    {
+        "q": "How to remove from Set?",
+        "type": "mcq",
+        "o": [
+            "SET s = s - {'item'}",
+            "REMOVE 'item'",
+            "POP 'item'",
+            "DEL 'item'"
+        ]
+    },
+    {
+        "q": "What is 'IN' clause limit?",
+        "type": "mcq",
+        "o": [
+            "Avoid large lists (adds pressure on coordinator), keep under low double digits",
+            "Unlimited",
+            "1000",
+            "0"
+        ]
+    },
+    {
+        "q": "Why avoid 'IN' on Partition Key?",
+        "type": "mcq",
+        "o": [
+            "Coordinator must query multiple nodes/partitions (scatter-gather)",
+            "It errors",
+            "It deletes",
+            "It locks"
+        ]
+    },
+    {
+        "q": "What is 'Token Aware' driver?",
+        "type": "mcq",
+        "o": [
+            "Driver knows which node holds the data and sends request directly (skips coordinator hop)",
+            "Smart driver",
+            "Security driver",
+            "Fast driver"
+        ]
+    },
+    {
+        "q": "What is 'DCAwareRoundRobinPolicy'?",
+        "type": "mcq",
+        "o": [
+            "Load balancing policy preferring nodes in local Data Center",
+            "Random policy",
+            "Global policy",
+            "Round robin"
+        ]
+    },
+    {
+        "q": "What is 'Idempotent Query'?",
+        "type": "mcq",
+        "o": [
+            "Query safely retriable (result doesn't change if executed twice)",
+            "One time",
+            "Unique",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Are Counter updates idempotent?",
+        "type": "mcq",
+        "o": [
+            "No (x = x + 1 runs twice -> +2)",
+            "Yes",
+            "Maybe",
+            "Usually"
+        ]
+    },
+    {
+        "q": "Are normal Upserts idempotent?",
+        "type": "mcq",
+        "o": [
+            "Yes (x = 5 is same if run twice)",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Speculative Execution'?",
+        "type": "mcq",
+        "o": [
+            "Driver side proactive retry",
+            "Server side",
+            "Disk side",
+            "Network side"
+        ]
+    },
+    {
+        "q": "What is 'Multi-DC Replication'?",
+        "type": "mcq",
+        "o": [
+            "Data replicated to another geographic location (Data Center)",
+            "Local copy",
+            "HDD copy",
+            "Tape backup"
+        ]
+    },
+    {
+        "q": "Async replication to remote DC?",
+        "type": "mcq",
+        "o": [
+            "Yes, usually CL=LOCAL_QUORUM used (remote DC gets data eventually)",
+            "No",
+            "Sync only",
+            "Manual"
+        ]
+    },
+    {
+        "q": "CL 'EACH_QUORUM'?",
+        "type": "mcq",
+        "o": [
+            "Quorum in EACH data center required (Strong consistency across DCs, higher latency)",
+            "Any quorum",
+            "One quorum",
+            "Local quorum"
+        ]
+    },
+    {
+        "q": "CL 'LOCAL_QUORUM'?",
+        "type": "mcq",
+        "o": [
+            "Quorum of replicas in the SAME DC as coordinator",
+            "Global quorum",
+            "Any node",
+            "Remote quorum"
+        ]
+    },
+    {
+        "q": "CL 'LOCAL_ONE'?",
+        "type": "mcq",
+        "o": [
+            "One replica in local DC",
+            "Any one",
+            "Remote one",
+            "All local"
+        ]
+    },
+    {
+        "q": "How to add a new node?",
+        "type": "mcq",
+        "o": [
+            "Configure seeds, start, it bootstraps (streams data)",
+            "Copy files",
+            "Restart cluster",
+            "Run command"
+        ]
+    },
+    {
+        "q": "What is 'Bootstrap'?",
+        "type": "mcq",
+        "o": [
+            "Process where new node joins ring and obtains data for its token ranges",
+            "Shoes",
+            "Startup",
+            "Theme"
+        ]
+    },
+    {
+        "q": "Can you change IP of a node?",
+        "type": "mcq",
+        "o": [
+            "Complex process (requires careful seed/config updates, or replace_address)",
+            "Yes easily",
+            "Auto",
+            "Just reboot"
+        ]
+    },
+    {
+        "q": "replace_address_first_boot flag:",
+        "type": "mcq",
+        "o": [
+            "Used to replace a dead node with a fresh one on same IP or new IP",
+            "Boots faster",
+            "Formats disk",
+            "Resets ID"
+        ]
+    },
+    {
+        "q": "What is 'Host ID'?",
+        "type": "mcq",
+        "o": [
+            "UUID identifying a specific node instance",
+            "IP address",
+            "Mac address",
+            "Name"
+        ]
+    },
+    {
+        "q": "What is 'Schema Disagreement'?",
+        "type": "mcq",
+        "o": [
+            "Nodes have different versions of schema (gossip solves it eventually)",
+            "Fight",
+            "Argument",
+            "Crash"
+        ]
+    },
+    {
+        "q": "How to fix schema disagreement?",
+        "type": "mcq",
+        "o": [
+            "Ensure all nodes up, run `nodetool resetlocalschema` if stuck (rare)",
+            "Reboot all",
+            "Delete schema",
+            "Wait 1 year"
+        ]
+    },
+    {
+        "q": "What is 'Disk Failure Policy'?",
+        "type": "mcq",
+        "o": [
+            "Config: stop, stop_paranoid, die, ignore (action on disk error)",
+            "Buy new",
+            "Format",
+            "Chk dsk"
+        ]
+    },
+    {
+        "q": "What is 'Commit Log Sync'?",
+        "type": "mcq",
+        "o": [
+            "periodic (default) or batch (fsync every write)",
+            "Random",
+            "Never",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Periodic sync time?",
+        "type": "mcq",
+        "o": [
+            "10000ms (10s) default",
+            "1ms",
+            "1h",
+            "1 day"
+        ]
+    },
+    {
+        "q": "Batch sync latency?",
+        "type": "mcq",
+        "o": [
+            "Higher latency per write (waits for disk), but zero data loss window",
+            "Lower latency",
+            "Zero",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Concurrent Writes' config?",
+        "type": "mcq",
+        "o": [
+            "Number of write threads (usually 8 x cores)",
+            "1",
+            "Unlimited",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'Concurrent Reads' config?",
+        "type": "mcq",
+        "o": [
+            "Number of read threads (usually 32 x cores)",
+            "1",
+            "Unlimited",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'SEDA' architecture?",
+        "type": "mcq",
+        "o": [
+            "Staged Event Draft Architecture (Splits processing into stages with queues)",
+            "Database",
+            "Storage",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Backpressure'?",
+        "type": "mcq",
+        "o": [
+            "mechanism to slow down clients when server is overwhelmed",
+            "High pressure",
+            "Pump",
+            "Stress"
+        ]
+    },
+    {
+        "q": "What is 'Droppable Messages'?",
+        "type": "mcq",
+        "o": [
+            "Requests dropped if older than timeout (READ, MUTATION, etc.)",
+            "Email",
+            "SMS",
+            "Chat"
+        ]
+    },
+    {
+        "q": "How to see dropped messages?",
+        "type": "mcq",
+        "o": [
+            "nodetool tpstats",
+            "log",
+            "console",
+            "screen"
+        ]
+    },
+    {
+        "q": "What is 'Garbage Collection' (Java GC)?",
+        "type": "mcq",
+        "o": [
+            "Reclaiming unused heap memory (CMS or G1GC)",
+            "Trash",
+            "Delete",
+            "Recycle"
+        ]
+    },
+    {
+        "q": "Stop-The-World (STW) pause:",
+        "type": "mcq",
+        "o": [
+            "App hangs while GC runs (bad for latency)",
+            "World end",
+            "Game over",
+            "Pause button"
+        ]
+    },
+    {
+        "q": "New Gen (Eden) vs Old Gen?",
+        "type": "mcq",
+        "o": [
+            "Short lived objects (New) vs Long lived (Old) in Heap",
+            "People",
+            "Cars",
+            "Houses"
+        ]
+    },
+    {
+        "q": "What implies high Old Gen GC?",
+        "type": "mcq",
+        "o": [
+            "Memory leak or insufficient heap (Major GC)",
+            "Good performance",
+            "Fast",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What implies high usage of ParNew GC?",
+        "type": "mcq",
+        "o": [
+            "High allocation rate (normal, but if too frequent indicates pressure)",
+            "Error",
+            "Idle",
+            "Sleep"
+        ]
+    },
+    {
+        "q": "What is 'Role Based Access Control' (RBAC)?",
+        "type": "mcq",
+        "o": [
+            "Managing permissions via Roles assigned to Users",
+            "Key based",
+            "IP based",
+            "No control"
+        ]
+    },
+    {
+        "q": "How to create a role?",
+        "type": "mcq",
+        "o": [
+            "CREATE ROLE name WITH LOGIN = true",
+            "ADD ROLE name",
+            "NEW ROLE name",
+            "INSERT ROLE name"
+        ]
+    },
+    {
+        "q": "How to grant permission?",
+        "type": "mcq",
+        "o": [
+            "GRANT SELECT ON KEYSPACE ks TO role",
+            "GIVE SELECT",
+            "ALLOW SELECT",
+            "PERMIT SELECT"
+        ]
+    },
+    {
+        "q": "What is 'cassandra' user?",
+        "type": "mcq",
+        "o": [
+            "Default superuser (cassandra/cassandra), should be disabled/changed in prod",
+            "Guest",
+            "Admin",
+            "Root"
+        ]
+    },
+    {
+        "q": "What is 'Authenticator' in yaml?",
+        "type": "mcq",
+        "o": [
+            "Pluggable auth (AllowAllAuthenticator, PasswordAuthenticator)",
+            "Login screen",
+            "Key file",
+            "Protocol"
+        ]
+    },
+    {
+        "q": "What is 'Authorizer' in yaml?",
+        "type": "mcq",
+        "o": [
+            "CassandraAuthorizer stores permissions in system_auth",
+            "AllowAll",
+            "DenyAll",
+            "List"
+        ]
+    },
+    {
+        "q": "Replication factor for system_auth?",
+        "type": "mcq",
+        "o": [
+            "Should be same as all datacenters (RF=3 or more) to prevent lockout",
+            "1",
+            "0",
+            "Any"
+        ]
+    },
+    {
+        "q": "What is 'Client-to-Node Encryption'?",
+        "type": "mcq",
+        "o": [
+            "SSL/TLS for client connections (CQL)",
+            "VPN",
+            "SSH",
+            "Password"
+        ]
+    },
+    {
+        "q": "What is 'Node-to-Node Encryption'?",
+        "type": "mcq",
+        "o": [
+            "SSL/TLS for gossip and internode streaming",
+            "WiFi",
+            "Cable",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'Transparent Data Encryption' (TDE)?",
+        "type": "mcq",
+        "o": [
+            "Encrypting SSTables on disk (DSE/Enterprise)",
+            "Hidden data",
+            "Clear text",
+            "Zip"
+        ]
+    },
+    {
+        "q": "What is 'JNA' (Java Native Access)?",
+        "type": "mcq",
+        "o": [
+            "Library allowing JVM to call native OS methods (essential for production memory mapping)",
+            "Java New API",
+            "Just Not Available",
+            "JavaScript"
+        ]
+    },
+    {
+        "q": "If JNA is missing:",
+        "type": "mcq",
+        "o": [
+            "Cassandra runs slower (cannot lock memory, etc)",
+            "It crashes",
+            "It speeds up",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'RLOC'?",
+        "type": "mcq",
+        "o": [
+            "Read Latency on Coordinator",
+            "Write Latency",
+            "Local Latency",
+            "Remote Latency"
+        ]
+    },
+    {
+        "q": "What is 'WLOC'?",
+        "type": "mcq",
+        "o": [
+            "Write Latency on Coordinator",
+            "Read Latency",
+            "Local Write",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is '99th Percentile' (P99)?",
+        "type": "mcq",
+        "o": [
+            "Latency below which 99% of requests fall (tail latency)",
+            "Average",
+            "Minimum",
+            "Maximum"
+        ]
+    },
+    {
+        "q": "Why is P99 important?",
+        "type": "mcq",
+        "o": [
+            "Shows user experience for worst cases (lag spikes)",
+            "Shows average",
+            "Shows speed",
+            "Shows errors"
+        ]
+    },
+    {
+        "q": "What is 'Histogram' in nodetool?",
+        "type": "mcq",
+        "o": [
+            "Distribution of latencies or partition sizes",
+            "Graph",
+            "History",
+            "Log"
+        ]
+    },
+    {
+        "q": "nodetool tablehistograms:",
+        "type": "mcq",
+        "o": [
+            "Shows scanning stats (SSTables per read, cell count) for a table",
+            "Shows names",
+            "Shows errors",
+            "Shows config"
+        ]
+    },
+    {
+        "q": "What is 'SSTables Per Read'?",
+        "type": "mcq",
+        "o": [
+            "How many files accessed for a read (lower is better, achieved by Bloom Filter/Compaction)",
+            "Higher is better",
+            "Constant",
+            "Zero"
+        ]
+    },
+    {
+        "q": "Ideal SSTables Per Read?",
+        "type": "mcq",
+        "o": [
+            "1 (or close to 1)",
+            "10",
+            "100",
+            "1000"
+        ]
+    },
+    {
+        "q": "What is 'Tombstone Warning Threshold'?",
+        "type": "mcq",
+        "o": [
+            "Warns in log if scan hits too many tombstones (default 1000)",
+            "Stops query",
+            "Deletes data",
+            "Crashes"
+        ]
+    },
+    {
+        "q": "What is 'Tombstone Failure Threshold'?",
+        "type": "mcq",
+        "o": [
+            "Aborts query if tombstone count exceeds limit (default 100,000) to prevent OOM",
+            "Warning only",
+            "Ignore",
+            "Retry"
+        ]
+    },
+    {
+        "q": "What causes 'Tombstone Overwhelming'?",
+        "type": "mcq",
+        "o": [
+            "Frequent deletes/updates and wide partition scans before compaction runs",
+            "Too much data",
+            "Fast disk",
+            "Good model"
+        ]
+    },
+    {
+        "q": "How to clear Tombstones?",
+        "type": "mcq",
+        "o": [
+            "Run compaction (nodetool compact) after gc_grace_seconds",
+            "Restart",
+            "Delete file",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Leveled Compaction' best for?",
+        "type": "mcq",
+        "o": [
+            "Read heavy, high update/delete workloads (minimized read amplification)",
+            "Write heavy only",
+            "Log data",
+            "Time series"
+        ]
+    },
+    {
+        "q": "What is 'Size Tiered' best for?",
+        "type": "mcq",
+        "o": [
+            "Write heavy workloads (less write amplification)",
+            "Read heavy",
+            "Deletes",
+            "Updates"
+        ]
+    },
+    {
+        "q": "What is 'Major Compaction'?",
+        "type": "mcq",
+        "o": [
+            "Triggered manually (nodetool compact), merges ALL SSTables into ONE (Beware: large disk space/IO usage)",
+            "Auto small",
+            "Daily task",
+            "Quick task"
+        ]
+    },
+    {
+        "q": "Should you run Major Compaction on STCS?",
+        "type": "mcq",
+        "o": [
+            "Generally NO (defeats tiering, causes huge file that rarely compacts again)",
+            "Yes daily",
+            "Yes hourly",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Denormalization'?",
+        "type": "mcq",
+        "o": [
+            "Duplicating data into multiple tables to satisfy different query patterns (No JOINs)",
+            "Normalization",
+            "Cleaning",
+            "Reducing"
+        ]
+    },
+    {
+        "q": "What is 'Client-side Join'?",
+        "type": "mcq",
+        "o": [
+            "Fetching data from A, then B within application (slower but necessary sometimes)",
+            "Server join",
+            "DB join",
+            "Trigger join"
+        ]
+    },
+    {
+        "q": "What is 'Driver Execution Profile'?",
+        "type": "mcq",
+        "o": [
+            "Groups settings (timeout, CL, LB policy) for specific query types",
+            "User profile",
+            "OS profile",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "What is 'Prepared Statement'?",
+        "type": "mcq",
+        "o": [
+            "Parsed query cached on server, values bound later (Performance + Security)",
+            "Raw string",
+            "Script",
+            "Function"
+        ]
+    },
+    {
+        "q": "Why use Prepared Statements?",
+        "type": "mcq",
+        "o": [
+            "Reduce parsing overhead and prevent injection",
+            "It is slower",
+            "More readable",
+            "No reason"
+        ]
+    },
+    {
+        "q": "Does driver handle load balancing?",
+        "type": "mcq",
+        "o": [
+            "Yes, chooses coordinator based on policy",
+            "No",
+            "Server does",
+            "Router does"
+        ]
+    },
+    {
+        "q": "What is 'Connection Pooling' (v3 driver)?",
+        "type": "mcq",
+        "o": [
+            "Maintain multiple connections per host",
+            "One connection",
+            "No pool",
+            "Reconnect always"
+        ]
+    },
+    {
+        "q": "What is 'Multiplexing' (v4/Native v3+)?",
+        "type": "mcq",
+        "o": [
+            "Many requests over single connection (Stream IDs)",
+            "One per one",
+            "Slow",
+            "Complex"
+        ]
+    },
+    {
+        "q": "Max requests per connection (Protocol v3+)?",
+        "type": "mcq",
+        "o": [
+            "32768 (signed short constraint on stream ID)",
+            "100",
+            "1",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Slow Query Log'?",
+        "type": "mcq",
+        "o": [
+            "Logs queries exceeding threshold configured in yaml",
+            "Logs all",
+            "Logs errors",
+            "Logs fast"
+        ]
+    },
+    {
+        "q": "What is 'Partition Key Cache'?",
+        "type": "mcq",
+        "o": [
+            "Maps PK hash to offset in SSTable index file",
+            "Data cache",
+            "Result cache",
+            "File cache"
+        ]
+    },
+    {
+        "q": "What is 'Row Cache'?",
+        "type": "mcq",
+        "o": [
+            "Caches entire rows (hot set) in RAM (Good for read-heavy small updates)",
+            "Bad feature",
+            "Slow",
+            "Disk"
+        ]
+    },
+    {
+        "q": "Is Row Cache enabled by default?",
+        "type": "mcq",
+        "o": [
+            "No (uses off-heap, needs tuning)",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Chunk Cache'?",
+        "type": "mcq",
+        "o": [
+            "Caches uncompressed chunks of SSTables (Buffer pool)",
+            "Row cache",
+            "Key cache",
+            "Query cache"
+        ]
+    },
+    {
+        "q": "What is 'Compression'?",
+        "type": "mcq",
+        "o": [
+            "LZ4 (default) or Deflate compressing SSTable blocks",
+            "Zip",
+            "Rar",
+            "None"
+        ]
+    },
+    {
+        "q": "Benefit of compression?",
+        "type": "mcq",
+        "o": [
+            "Saves disk, improves read throughput (less IO)",
+            "Uses CPU",
+            "Slower",
+            "Bad"
+        ]
+    },
+    {
+        "q": "What is 'Nodetool flush'?",
+        "type": "mcq",
+        "o": [
+            "Forces Memtables to write to disk (SSTables)",
+            "Cleans disk",
+            "Deletes memory",
+            "Resets node"
+        ]
+    },
+    {
+        "q": "What is 'Nodetool refresh'?",
+        "type": "mcq",
+        "o": [
+            "Loads newly placed SSTables into running node without restart",
+            "Reloads page",
+            "Restarts node",
+            "Clears cache"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot'?",
+        "type": "mcq",
+        "o": [
+            "Hardlink backup of SSTables at a point in time",
+            "Picture",
+            "Copy paste",
+            "Zip file"
+        ]
+    },
+    {
+        "q": "How to take backup?",
+        "type": "mcq",
+        "o": [
+            "nodetool snapshot",
+            "cp *",
+            "tar",
+            "zip"
+        ]
+    },
+    {
+        "q": "Do snapshots auto-delete?",
+        "type": "mcq",
+        "o": [
+            "No, must clear manually (nodetool clearsnapshot)",
+            "Yes",
+            "After 1 day",
+            "On reboot"
+        ]
+    },
+    {
+        "q": "What is 'User Defined Type' (UDT) nesting?",
+        "type": "mcq",
+        "o": [
+            "UDT inside another UDT or Collection",
+            "Bird nest",
+            "Code block",
+            "Table"
+        ]
+    },
+    {
+        "q": "Can you index a UDT field?",
+        "type": "mcq",
+        "o": [
+            "Yes (Secondary index)",
+            "No",
+            "Only PK",
+            "Only text"
+        ]
+    },
+    {
+        "q": "What is 'Partitioner'?",
+        "type": "mcq",
+        "o": [
+            "Determines distribution of keys (Murmur3Partitioner default)",
+            "Divider",
+            "Wall",
+            "Splitter"
+        ]
+    },
+    {
+        "q": "What is 'ByteOrderedPartitioner'?",
+        "type": "mcq",
+        "o": [
+            "Legacy (ordered keys), causes hot spots (Not recommended)",
+            "Best one",
+            "Fastest",
+            "Newest"
+        ]
+    },
+    {
+        "q": "RandomPartitioner vs Murmur3?",
+        "type": "mcq",
+        "o": [
+            "Random uses MD5, Murmur3 is faster (both scatter keys)",
+            "Random is better",
+            "Murmur is slower",
+            "Same"
+        ]
+    },
+    {
+        "q": "What is a 'Token'?",
+        "type": "mcq",
+        "o": [
+            "Hash value of the partition key determining node assignment",
+            "Coin",
+            "Password",
+            "User"
+        ]
+    },
+    {
+        "q": "Range of tokens (Murmur3)?",
+        "type": "mcq",
+        "o": [
+            "-2^63 to +2^63-1",
+            "0 to 100",
+            "A to Z",
+            "Filesize"
+        ]
+    },
+    {
+        "q": "What is 'ScyllaDB Shard'?",
+        "type": "mcq",
+        "o": [
+            "CPU core owning a specific range of tokens (Shared-Nothing)",
+            "Glass",
+            "Server",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "Cassandra Thread-per-Core vs Staged?",
+        "type": "mcq",
+        "o": [
+            "Cassandra uses Thread Pools (SEDA), Scylla uses Thread-per-Core (Seastar)",
+            "Same",
+            "Cassandra is single thread",
+            "Scylla is slow"
+        ]
+    },
+    {
+        "q": "What is 'JSON' support in CQL?",
+        "type": "mcq",
+        "o": [
+            "INSERT INTO ... JSON '{...}' / SELECT JSON ...",
+            "Native storage",
+            "Document DB",
+            "No support"
+        ]
+    },
+    {
+        "q": "SELECT JSON * returns:",
+        "type": "mcq",
+        "o": [
+            "Each row as a JSON string",
+            "One big JSON",
+            "Binary",
+            "Error"
+        ]
+    },
+    {
+        "q": "Does 'fromJson()' exist?",
+        "type": "mcq",
+        "o": [
+            "Yes, converts string to type",
+            "No",
+            "Maybe",
+            "Use Java"
+        ]
+    },
+    {
+        "q": "What is 'Duration' type?",
+        "type": "mcq",
+        "o": [
+            "Represents period (1h, 2m), 3 components (months, days, nanos)",
+            "Time",
+            "Date",
+            "Double"
+        ]
+    },
+    {
+        "q": "Is Duration sortable?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Smallint'?",
+        "type": "mcq",
+        "o": [
+            "2-byte signed integer",
+            "4-byte",
+            "1-byte",
+            "8-byte"
+        ]
+    },
+    {
+        "q": "What is 'Tinyint'?",
+        "type": "mcq",
+        "o": [
+            "1-byte signed integer",
+            "2-byte",
+            "Bit",
+            "Char"
+        ]
+    },
+    {
+        "q": "What is 'Date' type?",
+        "type": "mcq",
+        "o": [
+            "Date without time (yyyy-mm-dd)",
+            "Timestamp",
+            "TimeUUID",
+            "String"
+        ]
+    },
+    {
+        "q": "What is 'Time' type?",
+        "type": "mcq",
+        "o": [
+            "Time without date (nanosecond precision)",
+            "Clock",
+            "Hour",
+            "Zone"
+        ]
+    },
+    {
+        "q": "What is 'Vector' type (v5)?",
+        "type": "mcq",
+        "o": [
+            "Fixed-size array of floats for embeddings",
+            "List",
+            "Set",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'Counters' consistency?",
+        "type": "mcq",
+        "o": [
+            "Not fully consistent during failures (Read-Repair needed)",
+            "ACID",
+            "Strong",
+            "Perfect"
+        ]
+    },
+    {
+        "q": "Can LWT be used with Counters?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'CAST' function?",
+        "type": "mcq",
+        "o": [
+            "Converts types (CAST(x as int))",
+            "Throw",
+            "Select",
+            "Where"
+        ]
+    },
+    {
+        "q": "What is 'Keyspace Replication' setting?",
+        "type": "mcq",
+        "o": [
+            "Defines which DCs get data and how many copies",
+            "Speed",
+            "User",
+            "Size"
+        ]
+    },
+    {
+        "q": "Alter Keyspace replication:",
+        "type": "mcq",
+        "o": [
+            "ALTER KEYSPACE ... WITH replication = ... (Requires repair after increasing RF)",
+            "Just changes",
+            "Auto moves",
+            "Locked"
+        ]
+    },
+    {
+        "q": "Why run repair after increasing RF?",
+        "type": "mcq",
+        "o": [
+            "To stream data to the new replica nodes (they start empty)",
+            "To delete data",
+            "To compact",
+            "To flush"
+        ]
+    },
+    {
+        "q": "What is 'nodetool cleanup'?",
+        "type": "mcq",
+        "o": [
+            "Removes data token ranges the node no longer owns (after adding new nodes)",
+            "Cleaning",
+            "Deleting log",
+            "Formatting"
+        ]
+    },
+    {
+        "q": "When to run cleanup?",
+        "type": "mcq",
+        "o": [
+            "After scaling out (adding nodes) completes",
+            "Daily",
+            "Never",
+            "Before write"
+        ]
+    },
+    {
+        "q": "What is 'Consistency vs Availability'?",
+        "type": "mcq",
+        "o": [
+            "CAP theorem trade-off (Tunable in Cassandra)",
+            "Speed vs Size",
+            "Cost vs Time",
+            "Space vs Time"
+        ]
+    },
+    {
+        "q": "Cassandra is AP or CP?",
+        "type": "mcq",
+        "o": [
+            "AP (Available, Partition-tolerant) generally, but tunable to CP",
+            "CA",
+            "CP only",
+            "None"
+        ]
+    },
+    {
+        "q": "Strong Consistency Formula:",
+        "type": "mcq",
+        "o": [
+            "R + W > RF (Read Nodes + Write Nodes > Replication Factor)",
+            "R + W = RF",
+            "R = W",
+            "R = 1"
+        ]
+    },
+    {
+        "q": "If R=2, W=2, RF=3:",
+        "type": "mcq",
+        "o": [
+            "4 > 3 (Strong Consistency)",
+            "Weak",
+            "Eventual",
+            "None"
+        ]
+    },
+    {
+        "q": "If R=1, W=1, RF=3:",
+        "type": "mcq",
+        "o": [
+            "2 <= 3 (Eventual Consistency)",
+            "Strong",
+            "Immediate",
+            "ACID"
+        ]
+    },
+    {
+        "q": "What is 'Hinted Handoff' enabled?",
+        "type": "mcq",
+        "o": [
+            "Default true (highly recommended)",
+            "False",
+            "Maybe",
+            "Depends"
+        ]
+    },
+    {
+        "q": "Max hint window?",
+        "type": "mcq",
+        "o": [
+            "3 hours (default), prevent hints piling up forever",
+            "Infinite",
+            "1 min",
+            "1 year"
+        ]
+    },
+    {
+        "q": "What happens if gossip is disabled?",
+        "type": "mcq",
+        "o": [
+            "Node appears down to others, cluster state freezes",
+            "Everything works",
+            "Speed increases",
+            "Writes fail"
+        ]
+    },
+    {
+        "q": "nodetool disablegossip vs stop?",
+        "type": "mcq",
+        "o": [
+            "Disable stops sending gossip (app still runs), Stop shuts down process",
+            "Same",
+            "Stop pauses",
+            "Disable deletes"
+        ]
+    },
+    {
+        "q": "What is 'Internode Compression'?",
+        "type": "mcq",
+        "o": [
+            "Compressing traffic between nodes (all / dc / none)",
+            "Zip",
+            "Rar",
+            "Data shrink"
+        ]
+    },
+    {
+        "q": "Benefit of Internode Compression?",
+        "type": "mcq",
+        "o": [
+            "Reduces network bandwidth (WAN)",
+            "Saves disk",
+            "Saves RAM",
+            "Saves CPU"
+        ]
+    },
+    {
+        "q": "Cost of Internode Compression?",
+        "type": "mcq",
+        "o": [
+            "Higher CPU usage",
+            "Higher RAM",
+            "Disk usage",
+            "Latency"
+        ]
+    },
+    {
+        "q": "What is 'Stream Throughput'?",
+        "type": "mcq",
+        "o": [
+            "Rate limit for streaming data (bootstrap/repair) to protect network",
+            "Water flow",
+            "Video",
+            "Audio"
+        ]
+    },
+    {
+        "q": "Default stream throughput?",
+        "type": "mcq",
+        "o": [
+            "200 Mbps (can be increased)",
+            "Unlimited",
+            "1 Kbps",
+            "0"
+        ]
+    },
+    {
+        "q": "What is 'Compaction Throttling'?",
+        "type": "mcq",
+        "o": [
+            "Limiting IO used by compaction to avoid starving requests",
+            "Stopping compaction",
+            "Deleting files",
+            "Network limit"
+        ]
+    },
+    {
+        "q": "What is 'Tombstone Garbage Collection'?",
+        "type": "mcq",
+        "o": [
+            "Process of permanently removing tombstones during compaction (after grace period)",
+            "Recycling",
+            "Scan",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'SSTable Metadata'?",
+        "type": "mcq",
+        "o": [
+            "Stats stored with SSTable (min/max timestamps, estimated keys, tombstones)",
+            "File name",
+            "Path",
+            "User"
+        ]
+    },
+    {
+        "q": "How to view SSTable metadata?",
+        "type": "mcq",
+        "o": [
+            "sstablemetadata <filename>",
+            "cat file",
+            "vi file",
+            "ls -l"
+        ]
+    },
+    {
+        "q": "What is 'sstableloader'?",
+        "type": "mcq",
+        "o": [
+            "Tool to bulk load existing SSTables into a cluster (streams them)",
+            "Downloader",
+            "Uploader",
+            "Editor"
+        ]
+    },
+    {
+        "q": "What is 'sstablesplit'?",
+        "type": "mcq",
+        "o": [
+            "Tool to split large SSTables into smaller ones (offline)",
+            "Merger",
+            "Zipper",
+            "Compactor"
+        ]
+    },
+    {
+        "q": "What is 'sstableupgrade'?",
+        "type": "mcq",
+        "o": [
+            "Upgrades SSTable format to latest version (nodetool upgradesstables)",
+            "Delete",
+            "Downgrade",
+            "Backup"
+        ]
+    },
+    {
+        "q": "SSTable 'Data file' extension?",
+        "type": "mcq",
+        "o": [
+            "-Data.db",
+            "-Index.db",
+            "-Filter.db",
+            "-Stats.db"
+        ]
+    },
+    {
+        "q": "SSTable 'Index file' extension?",
+        "type": "mcq",
+        "o": [
+            "-Index.db (partition keys -> position)",
+            "-Data.db",
+            "-Log.db",
+            "-Tx.db"
+        ]
+    },
+    {
+        "q": "SSTable 'Filter file' extension?",
+        "type": "mcq",
+        "o": [
+            "-Filter.db (Bloom Filter)",
+            "-Image.db",
+            "-Search.db",
+            "-Map.db"
+        ]
+    },
+    {
+        "q": "SSTable 'Compression Info' file?",
+        "type": "mcq",
+        "o": [
+            "-CompressionInfo.db",
+            "-Zip.db",
+            "-Rar.db",
+            "-Pack.db"
+        ]
+    },
+    {
+        "q": "SSTable 'Statistics' file?",
+        "type": "mcq",
+        "o": [
+            "-Statistics.db",
+            "-Count.db",
+            "-Sum.db",
+            "-Math.db"
+        ]
+    },
+    {
+        "q": "SSTable 'Digest' file?",
+        "type": "mcq",
+        "o": [
+            "-Digest.crc32 (Checksum)",
+            "-Hash.md5",
+            "-Auth.txt",
+            "-Verify.log"
+        ]
+    },
+    {
+        "q": "SSTable 'TOC' file?",
+        "type": "mcq",
+        "o": [
+            "-TOC.txt (Table of Contents - list of files)",
+            "-Index.html",
+            "-List.xml",
+            "-Help.txt"
+        ]
+    },
+    {
+        "q": "What is 'Wide Row' vs 'Wide Partition'?",
+        "type": "mcq",
+        "o": [
+            "Same concept: Partition having many columns/clustering rows (can be millions)",
+            "Different",
+            "Row is physical",
+            "Partition is logical"
+        ]
+    },
+    {
+        "q": "What is 'Skinny Row'?",
+        "type": "mcq",
+        "o": [
+            "Partition with few columns (Classic Key-Value style)",
+            "Small file",
+            "Empty file",
+            "Deleted"
+        ]
+    },
+    {
+        "q": "Limit of columns in a partition?",
+        "type": "mcq",
+        "o": [
+            "~2 billion (theoretical), practical limit much lower (100MB-1GB size)",
+            "Infinite",
+            "100",
+            "1 million"
+        ]
+    },
+    {
+        "q": "What is 'Hot Spot'?",
+        "type": "mcq",
+        "o": [
+            "Partition accessed disproportionately often (causing node overload)",
+            "Fire",
+            "Sun",
+            "Network"
+        ]
+    },
+    {
+        "q": "How to mitigate Hot Spot?",
+        "type": "mcq",
+        "o": [
+            "Design better keys (bucketing), add caching, increase replication",
+            "Delete data",
+            "Restart node",
+            "Format disk"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Partition Key'?",
+        "type": "mcq",
+        "o": [
+            "Artifical key (e.g., date_bucket) added to distribute data evenly",
+            "Plastic key",
+            "Fake key",
+            "User key"
+        ]
+    },
+    {
+        "q": "What is 'Bucketing' time series?",
+        "type": "mcq",
+        "o": [
+            "Partitioning by (sensor_id, day) instead of just sensor_id to keep partitions manageable",
+            "Group all",
+            "Delete old",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Composite Column' (Legacy)?",
+        "type": "mcq",
+        "o": [
+            "Column names made of multiple components (internal impl of clustering keys)",
+            "Mixed type",
+            "Big type",
+            "Array"
+        ]
+    },
+    {
+        "q": "What is 'Static Column' good for?",
+        "type": "mcq",
+        "o": [
+            "Storing metadata about the partition (e.g. User Profile in User Events partition)",
+            "Nothing",
+            "Indexing",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "Can Static Column be part of Primary Key?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Paxos Ballots'?",
+        "type": "mcq",
+        "o": [
+            "Unique identifiers for Paxos proposals (UUID + counter)",
+            "Votes",
+            "Papers",
+            "Boxes"
+        ]
+    },
+    {
+        "q": "What is 'Paxos Contention'?",
+        "type": "mcq",
+        "o": [
+            "Multiple coordinators trying to update same LWT row (performance drops)",
+            "Fight",
+            "Race",
+            "Lock"
+        ]
+    },
+    {
+        "q": "Does LWT guarantee linearizability?",
+        "type": "mcq",
+        "o": [
+            "Yes (Strongest consistency model)",
+            "No",
+            "Eventual",
+            "Causal"
+        ]
+    },
+    {
+        "q": "What is 'Batchlog'?",
+        "type": "mcq",
+        "o": [
+            "System table storing batch data to ensure atomicity (replayed if coordinator fails)",
+            "Error log",
+            "Audit log",
+            "User log"
+        ]
+    },
+    {
+        "q": "Where is Batchlog stored?",
+        "type": "mcq",
+        "o": [
+            "On two other nodes (replicas) before execution",
+            "Coordinator only",
+            "Client only",
+            "Disk only"
+        ]
+    },
+    {
+        "q": "What is 'Batch Replay'?",
+        "type": "mcq",
+        "o": [
+            "Nodes check batchlog for pending batches and execute them",
+            "Video replay",
+            "Undo",
+            "Redo"
+        ]
+    },
+    {
+        "q": "Are batches distinct from transactions?",
+        "type": "mcq",
+        "o": [
+            "Yes, Batch is Atomic but not Isolated (Dirty reads possible)",
+            "No",
+            "Same thing",
+            "Batch is safer"
+        ]
+    },
+    {
+        "q": "What is 'Isolation Level' in Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Generally not ACID Isolated (Read Committed only with LWT/Paging quirks)",
+            "Serializable",
+            "Repeatable Read",
+            "All"
+        ]
+    },
+    {
+        "q": "What is 'Read Repair Chance'?",
+        "type": "mcq",
+        "o": [
+            "Probability of triggering read repair on non-full consistency reads (Defaults 0 in newer/v4)",
+            "100%",
+            "50%",
+            "Random"
+        ]
+    },
+    {
+        "q": "Why set Read Repair Chance to 0?",
+        "type": "mcq",
+        "o": [
+            "Performance (Repairs handled by background process or blocking read repair at CL>ONE)",
+            "To break data",
+            "To save disk",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Blocking Read Repair'?",
+        "type": "mcq",
+        "o": [
+            "Repair triggered if digest mismatch occurs during read (Slower read but fixes data)",
+            "Manual fix",
+            "Scheduled",
+            "Offline"
+        ]
+    },
+    {
+        "q": "What is 'Asynchronous Read Repair'?",
+        "type": "mcq",
+        "o": [
+            "Fire-and-forget repair in background (Legacy/Removed in v4)",
+            "Fast repair",
+            "Good repair",
+            "Slow repair"
+        ]
+    },
+    {
+        "q": "What is 'Speculative Write'?",
+        "type": "mcq",
+        "o": [
+            "Sending write to extra replica to ensure fast ack (Not standard, Client side mostly)",
+            "Guessing",
+            "Fake write",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Coordinator Node' role?",
+        "type": "mcq",
+        "o": [
+            "Proxy requesting data from replicas and returning to client",
+            "Master",
+            "Writer",
+            "Reader"
+        ]
+    },
+    {
+        "q": "Can any node be Coordinator?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No, only seed",
+            "No, only master",
+            "No, only local"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Snitch'?",
+        "type": "mcq",
+        "o": [
+            "Monitors read latencies to prefer fastest replicas",
+            "Static config",
+            "Manual routing",
+            "Random"
+        ]
+    },
+    {
+        "q": "Dynamic snitch update interval?",
+        "type": "mcq",
+        "o": [
+            "Periodically recalculates scores (e.g. 100ms)",
+            "Every request",
+            "Daily",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Badness Threshold'?",
+        "type": "mcq",
+        "o": [
+            "Score penalty for slow nodes in Dynamic Snitch",
+            "Error count",
+            "Warning count",
+            "Virus count"
+        ]
+    },
+    {
+        "q": "What is 'Rack Awareness'?",
+        "type": "mcq",
+        "o": [
+            "Distributing replicas across different racks to survive rack failure",
+            "Hardware info",
+            "Shelf life",
+            "Cooling"
+        ]
+    },
+    {
+        "q": "What is 'Datacenter' (Logical)?",
+        "type": "mcq",
+        "o": [
+            "Group of nodes (can map to physical DC or availability zone)",
+            "Building",
+            "Room",
+            "City"
+        ]
+    },
+    {
+        "q": "What is 'Replication Strategy' change?",
+        "type": "mcq",
+        "o": [
+            "Possible on live cluster (ALTER KEYSPACE + nodetool repair)",
+            "Requires downtime",
+            "Impossible",
+            "Requires reinstall"
+        ]
+    },
+    {
+        "q": "What is 'Token Range'?",
+        "type": "mcq",
+        "o": [
+            "Segment of the Ring assigned to a node",
+            "Coin collection",
+            "Network IP",
+            "Port range"
+        ]
+    },
+    {
+        "q": "What is 'Ring'?",
+        "type": "mcq",
+        "o": [
+            "Circular token space (0 to 2^63-1 to -2^63 to 0)",
+            "Network topology",
+            "Group",
+            "Circle"
+        ]
+    },
+    {
+        "q": "What is 'nodetool ring'?",
+        "type": "mcq",
+        "o": [
+            "Displays token assignments and ownership",
+            "Phone call",
+            "Bell",
+            "Alarm"
+        ]
+    },
+    {
+        "q": "What is 'Ownership'?",
+        "type": "mcq",
+        "o": [
+            "Percentage of token ring a node is responsible for",
+            "Admin rights",
+            "File permission",
+            "License"
+        ]
+    },
+    {
+        "q": "Balanced cluster means?",
+        "type": "mcq",
+        "o": [
+            "Equal ownership % across nodes",
+            "Same RAM",
+            "Same CPU",
+            "Same Name"
+        ]
+    },
+    {
+        "q": "What is 'Pending Ranges'?",
+        "type": "mcq",
+        "o": [
+            "Ranges being moved during bootstrap/decommission",
+            "Future data",
+            "Lost data",
+            "Temp data"
+        ]
+    },
+    {
+        "q": "What is 'Gossip settle'?",
+        "type": "mcq",
+        "o": [
+            "Wait time for all nodes to agree on cluster state",
+            "Sleep",
+            "Shutdown",
+            "Chat"
+        ]
+    },
+    {
+        "q": "What is 'Seed Provider'?",
+        "type": "mcq",
+        "o": [
+            "Class/mechanism to find initial contact points (SimpleSeedProvider, etc.)",
+            "Planter",
+            "Gardener",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'Direct Buffer'?",
+        "type": "mcq",
+        "o": [
+            "NIO buffer allocated outside Java Heap",
+            "Heap buffer",
+            "Stack buffer",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'Slab Allocator'?",
+        "type": "mcq",
+        "o": [
+            "Internal memory manager for Memtables to reduce fragmentation/GC",
+            "Concrete",
+            "Builder",
+            "Constructor"
+        ]
+    },
+    {
+        "q": "What implies 'Dropped Mutations'?",
+        "type": "mcq",
+        "o": [
+            "Node cannot keep up with write rate (Disk or CPU bottleneck)",
+            "Network down",
+            "Disk full",
+            "Bad schema"
+        ]
+    },
+    {
+        "q": "What implies 'Dropped Reads'?",
+        "type": "mcq",
+        "o": [
+            "Node overloaded or disk too slow for read load",
+            "Network down",
+            "Disk full",
+            "Bad schema"
+        ]
+    },
+    {
+        "q": "What is 'Coordinated Omission'?",
+        "type": "mcq",
+        "o": [
+            "Benchmark error where waiting time is not measured correctly (load generator waits)",
+            "Missing data",
+            "Skip",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Latency vs Throughput'?",
+        "type": "mcq",
+        "o": [
+            "Latency = Time per op; Throughput = Ops per second (Trade-off)",
+            "Same",
+            "Speed vs Time",
+            "Size vs Weight"
+        ]
+    },
+    {
+        "q": "What is 'Staged Architecture' benefit?",
+        "type": "mcq",
+        "o": [
+            "Isolation of thread pools (Read doesn't block Write)",
+            "Speed",
+            "Simplicity",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Max Mutation Size'?",
+        "type": "mcq",
+        "o": [
+            "Limit on write size (default half of commitlog segment size, ~16MB)",
+            "Unlimited",
+            "1GB",
+            "1KB"
+        ]
+    },
+    {
+        "q": "What is 'Commit Log Segment'?",
+        "type": "mcq",
+        "o": [
+            "Individual file of commit log (usually 32MB)",
+            "Line",
+            "Page",
+            "Block"
+        ]
+    },
+    {
+        "q": "When is Commit Log segment deleted?",
+        "type": "mcq",
+        "o": [
+            "When all data in it has been flushed to SSTables",
+            "Immediately",
+            "Never",
+            "After 1 hour"
+        ]
+    },
+    {
+        "q": "What is 'Archive Commit Log'?",
+        "type": "mcq",
+        "o": [
+            "Feature to move old commit logs to backup location (Point-in-time recovery)",
+            "Delete",
+            "Zip",
+            "Hide"
+        ]
+    },
+    {
+        "q": "What is 'PITR'?",
+        "type": "mcq",
+        "o": [
+            "Point In Time Recovery (Restore to specific second)",
+            "Pit stop",
+            "Repair",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'Global Row Cache'?",
+        "type": "mcq",
+        "o": [
+            "Shared cache across all Column Families (removed/changed)",
+            "One table",
+            "Local",
+            "User"
+        ]
+    },
+    {
+        "q": "Does Cassandra support 'Stored Procedures'?",
+        "type": "mcq",
+        "o": [
+            "No (Uses UDF/UDA instead)",
+            "Yes",
+            "Maybe",
+            "PL/SQL"
+        ]
+    },
+    {
+        "q": "Does Cassandra support 'Triggers'?",
+        "type": "mcq",
+        "o": [
+            "Yes (Java based), but experimental/performance heavy",
+            "No",
+            "Native",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'Change Event'?",
+        "type": "mcq",
+        "o": [
+            "Notification pushed to driver when monitored table changes (CDC/Triggers)",
+            "Log",
+            "Error",
+            "Alert"
+        ]
+    },
+    {
+        "q": "What is 'Gossip external'?",
+        "type": "mcq",
+        "o": [
+            "Gossip with other DCs",
+            "Internal only",
+            "Client gossip",
+            "Web gossip"
+        ]
+    },
+    {
+        "q": "What is 'Phi Accrual Failure Detector'?",
+        "type": "mcq",
+        "o": [
+            "Algorithm to detect node failure based on probability (Phi score)",
+            "Ping",
+            "Heartbeat",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "Phi level 8 means:",
+        "type": "mcq",
+        "o": [
+            "High confidence node is down (~99.9999% prob of failure)",
+            "Low confidence",
+            "Node up",
+            "Warning"
+        ]
+    },
+    {
+        "q": "Why use Phi Accrual?",
+        "type": "mcq",
+        "o": [
+            "Adapts to network conditions (avoids flaky detection)",
+            "Calculated speed",
+            "Simple",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'Strict Consistency'?",
+        "type": "mcq",
+        "o": [
+            "Guaranteed latest data (CL = ALL or Quorum overlap)",
+            "Maybe data",
+            "Old data",
+            "Fast data"
+        ]
+    },
+    {
+        "q": "What is 'Causal Consistency'?",
+        "type": "mcq",
+        "o": [
+            "Ensures operations related by cause/effect are seen in order",
+            "Random",
+            "Time based",
+            "Strong"
+        ]
+    },
+    {
+        "q": "What is 'Vector Clock'?",
+        "type": "mcq",
+        "o": [
+            "Mechanism to track causality (not natively exposed/main mechanism in C* - uses LWW)",
+            "Wall clock",
+            "Wrist watch",
+            "Alarm"
+        ]
+    },
+    {
+        "q": "What is 'LWW'?",
+        "type": "mcq",
+        "o": [
+            "Last Write Wins (Timestamp based conflict resolution)",
+            "First Write Wins",
+            "Merge",
+            "Error"
+        ]
+    },
+    {
+        "q": "Clock Skew problem:",
+        "type": "mcq",
+        "o": [
+            "If node clocks are out of sync, LWW drops valid data or keeps old data",
+            "Time travel",
+            "Faster queries",
+            "None"
+        ]
+    },
+    {
+        "q": "NTP is critical because:",
+        "type": "mcq",
+        "o": [
+            "Synchronizes clocks to ensure correct LWW behavior",
+            "Logs time",
+            "Schedules backups",
+            "Timeouts"
+        ]
+    },
+    {
+        "q": "Max clock drift allowed?",
+        "type": "mcq",
+        "o": [
+            "Should be minimal (ms), large drift causes data loss/resurrection",
+            "1 hour",
+            "1 day",
+            "Any"
+        ]
+    },
+    {
+        "q": "What is 'Zombie Data'?",
+        "type": "mcq",
+        "o": [
+            "Deleted data reappearing because specific replica missed delete and tombstone expired",
+            "Virus",
+            "Dead node",
+            "Corrupt file"
+        ]
+    },
+    {
+        "q": "How to prevent Zombie Data?",
+        "type": "mcq",
+        "o": [
+            "Run Repair within gc_grace_seconds",
+            "Delete again",
+            "Format disk",
+            "Reinstall"
+        ]
+    },
+    {
+        "q": "What is 'TTL tombstone'?",
+        "type": "mcq",
+        "o": [
+            "Generated when TTL expires (same as delete)",
+            "Log",
+            "Error",
+            "Event"
+        ]
+    },
+    {
+        "q": "What is 'Shadowing'?",
+        "type": "mcq",
+        "o": [
+            "Tombstone hiding an older value",
+            "Copying",
+            "Backing up",
+            "Monitoring"
+        ]
+    },
+    {
+        "q": "What is 'Range Ghost'?",
+        "type": "mcq",
+        "o": [
+            "Deleted row appearing in range scan if tombstone issue (rare)",
+            "Scary",
+            "Bug",
+            "Feature"
+        ]
+    },
+    {
+        "q": "What is 'Wide Partition' warning threshold?",
+        "type": "mcq",
+        "o": [
+            "100MB (warns in log)",
+            "1GB",
+            "10GB",
+            "1KB"
+        ]
+    },
+    {
+        "q": "What is 'Collection' size warning?",
+        "type": "mcq",
+        "o": [
+            "warns if collection > 64KB",
+            "1MB",
+            "1GB",
+            "100B"
+        ]
+    },
+    {
+        "q": "What is 'Java Heap OOM'?",
+        "type": "mcq",
+        "o": [
+            "Out Of Memory Error (Kill node)",
+            "Restart",
+            "Slow down",
+            "Warning"
+        ]
+    },
+    {
+        "q": "On OOM config:",
+        "type": "mcq",
+        "o": [
+            "Exit/Kill JVM (usually standard to prevent corruption)",
+            "Limit CPU",
+            "Ignore",
+            "Log only"
+        ]
+    },
+    {
+        "q": "What is 'Heap Dump'?",
+        "type": "mcq",
+        "o": [
+            "Snapshot of memory on crash (analyze with Eclipse Memory Analyzer)",
+            "Garbage",
+            "File",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Native Memory' usage?",
+        "type": "mcq",
+        "o": [
+            "Memory outside Heap (Off-heap memtables, compression, file buffers)",
+            "Heap",
+            "Stack",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'Metaspace' (Java 8+)?",
+        "type": "mcq",
+        "o": [
+            "Memory for class metadata (replaces PermGen)",
+            "Data",
+            "Heap",
+            "Stack"
+        ]
+    },
+    {
+        "q": "What is 'Code Cache'?",
+        "type": "mcq",
+        "o": [
+            "JIT compiled code storage in native memory",
+            "Source code",
+            "Repo",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'JIT Compiler'?",
+        "type": "mcq",
+        "o": [
+            "Just In Time (Compiles Java bytecode to native during run)",
+            "Interpreter",
+            "Editor",
+            "Debugger"
+        ]
+    },
+    {
+        "q": "What is 'Cqlshrc' file?",
+        "type": "mcq",
+        "o": [
+            "Configuration file for cqlsh client (~/.cassandra/cqlshrc)",
+            "Server config",
+            "Log file",
+            "Key file"
+        ]
+    },
+    {
+        "q": "How to set default keyspace in cqlshrc?",
+        "type": "mcq",
+        "o": [
+            "[cql] keyspace = name",
+            "use name",
+            "default name",
+            "set name"
+        ]
+    },
+    {
+        "q": "How to increase client timeout in cqlsh?",
+        "type": "mcq",
+        "o": [
+            "In cqlshrc [connection] client_timeout = seconds",
+            "wait longer",
+            "retry",
+            "reboot"
+        ]
+    },
+    {
+        "q": "What is 'DESCRIBE FULL SCHEMA'?",
+        "type": "mcq",
+        "o": [
+            "Dumps entire schema creation CQL",
+            "Status",
+            "List",
+            "Info"
+        ]
+    },
+    {
+        "q": "What is 'SOURCE' command in cqlsh?",
+        "type": "mcq",
+        "o": [
+            "Executes CQL commands from a file (SOURCE 'file.cql')",
+            "Imports data",
+            "Load binary",
+            "Compile"
+        ]
+    },
+    {
+        "q": "What is 'CAPTURE' command in cqlsh?",
+        "type": "mcq",
+        "o": [
+            "Captures output to a file",
+            "Screenshot",
+            "Video",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'CONSISTENCY' command in cqlsh?",
+        "type": "mcq",
+        "o": [
+            "Shows or sets current consistency level for session",
+            "Checks config",
+            "Validates data",
+            "Errors"
+        ]
+    },
+    {
+        "q": "What is 'SHOW REPLICAS'?",
+        "type": "mcq",
+        "o": [
+            "Shows replicas for a given token (Not standard CQL, maybe extension)",
+            "List all",
+            "Show IPs",
+            "Show Hosts"
+        ]
+    },
+    {
+        "q": "What is 'nodetool netstats'?",
+        "type": "mcq",
+        "o": [
+            "Shows streaming status (files sending/receiving)",
+            "Internet check",
+            "Ping",
+            "Speedtest"
+        ]
+    },
+    {
+        "q": "What is 'nodetool tpstats'?",
+        "type": "mcq",
+        "o": [
+            "Thread Pool stats (Active, Pending, Blocked, Dropped)",
+            "Time stats",
+            "Temp stats",
+            "Top stats"
+        ]
+    },
+    {
+        "q": "Pending tasks in tpstats means:",
+        "type": "mcq",
+        "o": [
+            "Requests queued waiting for thread (backlog)",
+            "Completed",
+            "Free",
+            "Error"
+        ]
+    },
+    {
+        "q": "Blocked tasks in tpstats means:",
+        "type": "mcq",
+        "o": [
+            "Queue full, requests rejected/blocking caller",
+            "Firewall",
+            "Banned",
+            "Stopped"
+        ]
+    },
+    {
+        "q": "What is 'nodetool compactionstats'?",
+        "type": "mcq",
+        "o": [
+            "Shows progress of active compactions",
+            "Disk usage",
+            "File count",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'nodetool cfstats' / 'tablestats'?",
+        "type": "mcq",
+        "o": [
+            "Detailed Table statistics (latency, space, scanner)",
+            "Config stats",
+            "User stats",
+            "Log stats"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Filter False Positive'?",
+        "type": "mcq",
+        "o": [
+            "Filter says row exists, but it doesn't (wasted disk seek)",
+            "Filter says row missing, but exists",
+            "All true",
+            "All false"
+        ]
+    },
+    {
+        "q": "What is 'False Negative' in Bloom Filter?",
+        "type": "mcq",
+        "o": [
+            "Impossible in standard implementation (if it says 'no', it is definitely 'no')",
+            "Possible",
+            "Frequent",
+            "Rare"
+        ]
+    },
+    {
+        "q": "Bloom Filter FP Chance config?",
+        "type": "mcq",
+        "o": [
+            "bloom_filter_fp_chance (default 0.01 or 0.1 depending on strategy)",
+            "1.0",
+            "0.0",
+            "0.5"
+        ]
+    },
+    {
+        "q": "Lower FP chance means?",
+        "type": "mcq",
+        "o": [
+            "Less wasted seeks, but larger Bloom Filter size in RAM",
+            "More seeks",
+            "Small RAM",
+            "Faster build"
+        ]
+    },
+    {
+        "q": "What is 'Disk Boundaries'?",
+        "type": "mcq",
+        "o": [
+            "Mapping tokens to specific disks (JBOD optimization in v4)",
+            "Partitions",
+            "Format",
+            "Limits"
+        ]
+    },
+    {
+        "q": "What is 'JBOD'?",
+        "type": "mcq",
+        "o": [
+            "Just a Bunch Of Disks (Multiple data directories)",
+            "RAID 0",
+            "RAID 10",
+            "NAS"
+        ]
+    },
+    {
+        "q": "Is RAID recommended for Cassandra?",
+        "type": "mcq",
+        "o": [
+            "RAID 0 (Performance) or JBOD (Isolation). Replication handles redundancy, so RAID 1/5/10 less critical",
+            "RAID 1 mandatory",
+            "RAID 5 recommended",
+            "RAID is bad"
+        ]
+    },
+    {
+        "q": "What is 'ZonedCompactionStrategy'?",
+        "type": "mcq",
+        "o": [
+            "Experimental/Commercial strategy respecting boundaries",
+            "Standard",
+            "Default",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'Guardrails' (v4.1+)?",
+        "type": "mcq",
+        "o": [
+            "Framework to enforce soft/hard limits (e.g. max columns, disallowed operations)",
+            "Rails",
+            "Fences",
+            "Security"
+        ]
+    },
+    {
+        "q": "Guardrail violation action:",
+        "type": "mcq",
+        "o": [
+            "Warn or Fail query",
+            "Kill node",
+            "Delete data",
+            "Ban user"
+        ]
+    },
+    {
+        "q": "What is 'Deny List' in Guardrails?",
+        "type": "mcq",
+        "o": [
+            "Block specific consistency levels or operations",
+            "Block IPs",
+            "Block Ports",
+            "Block Users"
+        ]
+    },
+    {
+        "q": "What is 'Top Partitions' tool?",
+        "type": "mcq",
+        "o": [
+            "nodetool toppartitions (Finds largest/most active partitions)",
+            "Top command",
+            "List",
+            "Sort"
+        ]
+    },
+    {
+        "q": "What is 'SSTable Dump'?",
+        "type": "mcq",
+        "o": [
+            "sstabledump tool (Converts SSTable to JSON for inspection)",
+            "Delete",
+            "Trash",
+            "Print"
+        ]
+    },
+    {
+        "q": "What is 'Mixed Workload'?",
+        "type": "mcq",
+        "o": [
+            "Combination of Reads and Writes",
+            "Only reads",
+            "Only writes",
+            "Idle"
+        ]
+    },
+    {
+        "q": "What is 'Write Amplification'?",
+        "type": "mcq",
+        "o": [
+            "Ratio of bytes written to disk vs bytes written by user (due to compaction)",
+            "Loudness",
+            "Speed",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Read Amplification'?",
+        "type": "mcq",
+        "o": [
+            "Number of disk reads required to satisfy a single query",
+            "Volume",
+            "Speed",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'Space Amplification'?",
+        "type": "mcq",
+        "o": [
+            "Ratio of disk space used vs actual data size (overheads, stale data)",
+            "Zoom",
+            "Expansion",
+            "Growth"
+        ]
+    },
+    {
+        "q": "LCS vs STCS amplification?",
+        "type": "mcq",
+        "o": [
+            "LCS: High Write Amp, Low Read Amp; STCS: Low Write Amp, High Read Amp",
+            "Opposite",
+            "Same",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Memtable Flush Writers'?",
+        "type": "mcq",
+        "o": [
+            "Threads responsible for flushing memtables (default 2 or more)",
+            "Users",
+            "Clients",
+            "Files"
+        ]
+    },
+    {
+        "q": "What is 'Compaction Executors'?",
+        "type": "mcq",
+        "o": [
+            "Threads running compaction tasks",
+            "Killers",
+            "Managers",
+            "Sata"
+        ]
+    },
+    {
+        "q": "What is 'Repair Session'?",
+        "type": "mcq",
+        "o": [
+            "Logical unit of a repair operation identified by UUID",
+            "Logon",
+            "Cookie",
+            "Token"
+        ]
+    },
+    {
+        "q": "What is 'Merkle Tree Depth'?",
+        "type": "mcq",
+        "o": [
+            "Resolution of the hash tree (higher depth = more precise but more CPU/RAM)",
+            "Tree height",
+            "Roots",
+            "Leafs"
+        ]
+    },
+    {
+        "q": "What is 'Streaming' in repair?",
+        "type": "mcq",
+        "o": [
+            "Transferring mismatching data ranges between nodes",
+            "Video",
+            "Audio",
+            "Live"
+        ]
+    },
+    {
+        "q": "What is 'Anticompaction'?",
+        "type": "mcq",
+        "o": [
+            "Process (in incremental repair) separating repaired from unrepaired data into different SSTables",
+            "Explosion",
+            "Expansion",
+            "Big file"
+        ]
+    },
+    {
+        "q": "Repaired SSTables:",
+        "type": "mcq",
+        "o": [
+            "Marked as repaired, not re-repaired in incremental repair",
+            "Deleted",
+            "Locked",
+            "Hidden"
+        ]
+    },
+    {
+        "q": "What is 'Validation Compaction'?",
+        "type": "mcq",
+        "o": [
+            "Phase in repair where Merkle tree is built from SSTables",
+            "Checking",
+            "Verifying",
+            "Signing"
+        ]
+    },
+    {
+        "q": "What is 'Pending Repair'?",
+        "type": "mcq",
+        "o": [
+            "Modern repair mechanism (paxos-like) for safety",
+            "Waiting",
+            "Cancelled",
+            "Future"
+        ]
+    },
+    {
+        "q": "What is 'Preview Repair'?",
+        "type": "mcq",
+        "o": [
+            "nodetool repair --preview (Checks for inconsistencies without fixing)",
+            "Dry run",
+            "Test",
+            "Demo"
+        ]
+    },
+    {
+        "q": "What is 'Full Rebuild'?",
+        "type": "mcq",
+        "o": [
+            "nodetool rebuild (Streams all data for owned ranges from other replicas - used when adding new DC)",
+            "Restart",
+            "Reinstall",
+            "Refresh"
+        ]
+    },
+    {
+        "q": "Rebuild vs Repair?",
+        "type": "mcq",
+        "o": [
+            "Rebuild pulls ALL data (bootstrapping new DC nodes); Repair fixes mismatches",
+            "Same",
+            "Rebuild is faster",
+            "Repair is deletes"
+        ]
+    },
+    {
+        "q": "What is 'Host Replacement'?",
+        "type": "mcq",
+        "o": [
+            "Process of replacing a dead node with new hardware using same IP/Token",
+            "Swapping",
+            "Moving",
+            "Upgrade"
+        ]
+    },
+    {
+        "q": "Can you run Cassandra on Kubernetes?",
+        "type": "mcq",
+        "o": [
+            "Yes (CassKop, K8ssandra)",
+            "No",
+            "Maybe",
+            "Unstable"
+        ]
+    },
+    {
+        "q": "What is 'StatefulSet'?",
+        "type": "mcq",
+        "o": [
+            "K8s workload for stateful apps like Cassandra (Stable identity)",
+            "Deployment",
+            "Pod",
+            "Service"
+        ]
+    },
+    {
+        "q": "What is 'Headless Service'?",
+        "type": "mcq",
+        "o": [
+            "K8s service for peer discovery (DNS per pod)",
+            "No UI",
+            "API",
+            "CLI"
+        ]
+    },
+    {
+        "q": "What is 'Cassandra Operator'?",
+        "type": "mcq",
+        "o": [
+            "Automates management (deploy, repair, backup) in K8s",
+            "Admin",
+            "User",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar Container'?",
+        "type": "mcq",
+        "o": [
+            "Helper container in same Pod (config, backup agent)",
+            "Main app",
+            "Database",
+            "OS"
+        ]
+    },
+    {
+        "q": "What is 'PV/PVC'?",
+        "type": "mcq",
+        "o": [
+            "Persistent Volume (Claim) for storage",
+            "RAM",
+            "CPU",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Local PV'?",
+        "type": "mcq",
+        "o": [
+            "Using local disk for PV (High performance for Cassandra)",
+            "Network disk",
+            "Cloud disk",
+            "Tape"
+        ]
+    },
+    {
+        "q": "Shared Storage (NAS) for Cassandra?",
+        "type": "mcq",
+        "o": [
+            "Not recommended (IO bottleneck, latency)",
+            "Recommended",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'Rack Awareness' in K8s?",
+        "type": "mcq",
+        "o": [
+            "Mapping K8s Zones to Cassandra Racks",
+            "Mapping pods",
+            "Mapping services",
+            "Mapping users"
+        ]
+    },
+    {
+        "q": "What is 'CNI'?",
+        "type": "mcq",
+        "o": [
+            "Container Network Interface",
+            "Container Node",
+            "Container Name",
+            "Core Network"
+        ]
+    },
+    {
+        "q": "Cassandra 4.0 Java version?",
+        "type": "mcq",
+        "o": [
+            "Java 8 or 11",
+            "Java 6",
+            "Java 17 only",
+            "Java 21"
+        ]
+    },
+    {
+        "q": "Cassandra 5.0 (Future) Java version?",
+        "type": "mcq",
+        "o": [
+            "Java 17+",
+            "Java 8",
+            "Java 11",
+            "Java 6"
+        ]
+    },
+    {
+        "q": "What is 'ZGC'?",
+        "type": "mcq",
+        "o": [
+            "Low latency GC (available in newer Java/Cassandra)",
+            "Zip GC",
+            "Zero GC",
+            "Zone GC"
+        ]
+    },
+    {
+        "q": "What is 'Shenandoah'?",
+        "type": "mcq",
+        "o": [
+            "Another low pause GC",
+            "River",
+            "Park",
+            "Mountain"
+        ]
+    },
+    {
+        "q": "What is 'Zero Copy Streaming' (v4)?",
+        "type": "mcq",
+        "o": [
+            "Streaming SSTable whole file without parsing rows (Faster)",
+            "Slow copy",
+            "Deep copy",
+            "Manual copy"
+        ]
+    },
+    {
+        "q": "Netty is used for:",
+        "type": "mcq",
+        "o": [
+            "Asynchronous Event-driven Network App Framework (internode/native protocol)",
+            "Web server",
+            "UI",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Async I/O features in v4?",
+        "type": "mcq",
+        "o": [
+            "Improved threading model using Netty",
+            "Blocking",
+            "Slow",
+            "Removing Netty"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Node (vnode)' tokens?",
+        "type": "mcq",
+        "o": [
+            "Tokens randomly distributed",
+            "Sequential",
+            "Fixed",
+            "Sorted"
+        ]
+    },
+    {
+        "q": "Manual Token Allocation?",
+        "type": "mcq",
+        "o": [
+            "Assigning specific tokens (Legacy or specific optimization)",
+            "Auto",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "Algorithmic Token Allocation (v3+)?",
+        "type": "mcq",
+        "o": [
+            "New algorithm to choose tokens intelligently on bootstrap (better balance)",
+            "Random",
+            "Manual",
+            "Old"
+        ]
+    },
+    {
+        "q": "What is 'allocate_tokens_for_local_replication_factor'?",
+        "type": "mcq",
+        "o": [
+            "Config guides token selection logic based on target RF",
+            "Config RF",
+            "Config Keyspace",
+            "Config Disk"
+        ]
+    },
+    {
+        "q": "What is 'Replication Override'?",
+        "type": "mcq",
+        "o": [
+            "Not standard",
+            "Standard",
+            "Common",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Snitch' fallback?",
+        "type": "mcq",
+        "o": [
+            "If snitch fails, might default (bad)",
+            "Backup snitch",
+            "Switch",
+            "Failover"
+        ]
+    },
+    {
+        "q": "Can you mix Snitches?",
+        "type": "mcq",
+        "o": [
+            "No, all nodes must use same snitch",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'PropertyFileSnitch'?",
+        "type": "mcq",
+        "o": [
+            "Reads topology from cassandra-topology.properties",
+            "Reads yaml",
+            "Reads gossip",
+            "Reads rackdc"
+        ]
+    },
+    {
+        "q": "What is 'RackInferringSnitch'?",
+        "type": "mcq",
+        "o": [
+            "Infers topology from IP (octets) - Dangerous if IP scheme changes",
+            "Smart",
+            "AI",
+            "Best"
+        ]
+    },
+    {
+        "q": "What is 'Ec2Snitch'?",
+        "type": "mcq",
+        "o": [
+            "For AWS EC2 (Single Region)",
+            "Google",
+            "Azure",
+            "Multi-cloud"
+        ]
+    },
+    {
+        "q": "What is 'Ec2MultiRegionSnitch'?",
+        "type": "mcq",
+        "o": [
+            "For AWS EC2 (Multi Region)",
+            "Local",
+            "Simple",
+            "Basic"
+        ]
+    },
+    {
+        "q": "What is 'GoogleCloudSnitch'?",
+        "type": "mcq",
+        "o": [
+            "For GCP",
+            "AWS",
+            "Azure",
+            "Oracle"
+        ]
+    },
+    {
+        "q": "What is 'CloudstackSnitch'?",
+        "type": "mcq",
+        "o": [
+            "For Apache Cloudstack",
+            "Openstack",
+            "Vmware",
+            "KVM"
+        ]
+    },
+    {
+        "q": "What is 'Murmur3'?",
+        "type": "mcq",
+        "o": [
+            "Non-cryptographic hash function (fast, good distribution)",
+            "Crypto",
+            "Slow",
+            "Bad"
+        ]
+    },
+    {
+        "q": "MD5 partitoner used:",
+        "type": "mcq",
+        "o": [
+            "RandomPartitioner (Legacy)",
+            "Murmur3",
+            "ByteOrdered",
+            "OrderPreserving"
+        ]
+    },
+    {
+        "q": "Does Cassandra support Stored Procedures?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes",
+            "PL/SQL",
+            "T-SQL"
+        ]
+    },
+    {
+        "q": "Does Cassandra support Triggers?",
+        "type": "mcq",
+        "o": [
+            "Yes (Basic)",
+            "No",
+            "Advanced",
+            "Complex"
+        ]
+    },
+    {
+        "q": "Does Cassandra support Views?",
+        "type": "mcq",
+        "o": [
+            "Materialized Views only",
+            "Virtual Views",
+            "Standard Views",
+            "All"
+        ]
+    },
+    {
+        "q": "Atomic Batch vs LWT?",
+        "type": "mcq",
+        "o": [
+            "Batch = Atomicity (multiple partition mutations succeed/fail together) but no Isolation; LWT = Linearizable Conditional Update (CAS)",
+            "Same",
+            "Opposite",
+            "None"
+        ]
+    },
+    {
+        "q": "Batch is good for?",
+        "type": "mcq",
+        "o": [
+            "Keeping tables consistent (e.g. updating base table + index table)",
+            "Speed",
+            "Bulk load",
+            "Analytics"
+        ]
+    },
+    {
+        "q": "Is Batch a tool for bulk loading?",
+        "type": "mcq",
+        "o": [
+            "No! Unlogged batch of many partitions overloads coordinator",
+            "Yes",
+            "Always",
+            "Recommended"
+        ]
+    },
+    {
+        "q": "How to bulk load?",
+        "type": "mcq",
+        "o": [
+            "Use DSBulk, sstableloader, or async inserts with driver",
+            "Batch",
+            "Insert loop",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'DSBulk'?",
+        "type": "mcq",
+        "o": [
+            "DataStax Bulk Loader (High performance load/unload tool)",
+            "Slow tool",
+            "Legacy tool",
+            "GUI"
+        ]
+    },
+    {
+        "q": "DSBulk supports?",
+        "type": "mcq",
+        "o": [
+            "CSV, JSON",
+            "XML",
+            "Parquet",
+            "Avro"
+        ]
+    },
+    {
+        "q": "Is DSBulk open source?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Maybe",
+            "Proprietary"
+        ]
+    },
+    {
+        "q": "What is 'SSTable Id'?",
+        "type": "mcq",
+        "o": [
+            "Generation number in filename (incrementing)",
+            "UUID",
+            "Random",
+            "Hash"
+        ]
+    },
+    {
+        "q": "Older SSTable format?",
+        "type": "mcq",
+        "o": [
+            "'ka', 'la', 'ma'...",
+            "v1",
+            "v2",
+            "v3"
+        ]
+    },
+    {
+        "q": "Modern SSTable format?",
+        "type": "mcq",
+        "o": [
+            "'na', 'oa' (BigFormat)",
+            "SmallFormat",
+            "FastFormat",
+            "NewFormat"
+        ]
+    },
+    {
+        "q": "BigFormat introduced:",
+        "type": "mcq",
+        "o": [
+            "Unified index/data structures, 64-bit offsets",
+            "Nothing",
+            "Bugs",
+            "Slowness"
+        ]
+    },
+    {
+        "q": "What is 'UUID' collision chance?",
+        "type": "mcq",
+        "o": [
+            "Extremely low (negligible)",
+            "High",
+            "50%",
+            "10%"
+        ]
+    },
+    {
+        "q": "Type 1 UUID vs Type 4 UUID?",
+        "type": "mcq",
+        "o": [
+            "Type 1 = Time based; Type 4 = Random",
+            "Type 1 = Random",
+            "Same",
+            "Type 4 = Time"
+        ]
+    },
+    {
+        "q": "Cassandra uses Type 1 for?",
+        "type": "mcq",
+        "o": [
+            "TimeUUID (sortable by time)",
+            "IDs",
+            "PK",
+            "FK"
+        ]
+    },
+    {
+        "q": "Cassandra uses Type 4 for?",
+        "type": "mcq",
+        "o": [
+            "Standard UUID",
+            "TimeUUID",
+            "Date",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Frozen Collection'?",
+        "type": "mcq",
+        "o": [
+            "Collection treated as binary blob (immutable parts)",
+            "Ice",
+            "Cold",
+            "Archived"
+        ]
+    },
+    {
+        "q": "Can you update element in Frozen List?",
+        "type": "mcq",
+        "o": [
+            "No, must overwrite whole list",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can you update element in Non-Frozen List?",
+        "type": "mcq",
+        "o": [
+            "Yes (by index etc.)",
+            "No",
+            "Never",
+            "Hard"
+        ]
+    },
+    {
+        "q": "Tuple vs UDT?",
+        "type": "mcq",
+        "o": [
+            "Tuple is anonymous ordered list of types; UDT has named fields",
+            "Same",
+            "Tuple has names",
+            "UDT is ordered"
+        ]
+    },
+    {
+        "q": "Tuple syntax:",
+        "type": "mcq",
+        "o": [
+            "tuple<int, text, float>",
+            "(int, text)",
+            "[int, text]",
+            "{int, text}"
+        ]
+    },
+    {
+        "q": "Can Tuple be nested?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only 1 level",
+            "Only 2 levels"
+        ]
+    },
+    {
+        "q": "What is 'Empty String' vs 'Null'?",
+        "type": "mcq",
+        "o": [
+            "Empty string is a value (bytes of length 0); Null is absence (tombstone)",
+            "Same",
+            "Null is 0",
+            "Empty is Null"
+        ]
+    },
+    {
+        "q": "Does Cassandra store Nulls?",
+        "type": "mcq",
+        "o": [
+            "No, it creates a tombstone (on delete) or simply doesn't store anything (on insert missing)",
+            "Yes",
+            "Always",
+            "Depends"
+        ]
+    },
+    {
+        "q": "Inserting NULL value:",
+        "type": "mcq",
+        "o": [
+            "Creates a tombstone (Deletes the cell)",
+            "Stores NULL",
+            "Stores 0",
+            "Errors"
+        ]
+    },
+    {
+        "q": "Query: WHERE col = NULL",
+        "type": "mcq",
+        "o": [
+            "Invalid in CQL",
+            "Valid",
+            "Works",
+            "Selects nulls"
+        ]
+    },
+    {
+        "q": "How to check for missing data?",
+        "type": "mcq",
+        "o": [
+            "Application logic (result missing key)",
+            "IS NULL",
+            "== NULL",
+            "Basic check"
+        ]
+    },
+    {
+        "q": "Can you filter by 'IS NOT NULL'?",
+        "type": "mcq",
+        "o": [
+            "Only in Materialized Views definition or SASI specific cases (standard CQL limited)",
+            "Always",
+            "Yes",
+            "No"
+        ]
+    },
+    {
+        "q": "Duration syntax:",
+        "type": "mcq",
+        "o": [
+            "P3Y2M (ISO 8601 format) or 12h30m",
+            "12:30",
+            "3 years",
+            "String"
+        ]
+    },
+    {
+        "q": "Blob type input:",
+        "type": "mcq",
+        "o": [
+            "Hex string (0x1234...)",
+            "Binary",
+            "Object",
+            "File"
+        ]
+    },
+    {
+        "q": "Function: toUnixTimestamp()",
+        "type": "mcq",
+        "o": [
+            "Converts valid type to unix epoch long",
+            "Gets time",
+            "Sets time",
+            "Print"
+        ]
+    },
+    {
+        "q": "Function: toDate()",
+        "type": "mcq",
+        "o": [
+            "Converts timeuuid/timestamp to date",
+            "Gets day",
+            "Sets day",
+            "Print"
+        ]
+    },
+    {
+        "q": "What is 'Decimal' type?",
+        "type": "mcq",
+        "o": [
+            "Arbitrary precision number (Java BigDecimal)",
+            "Float",
+            "Double",
+            "Int"
+        ]
+    },
+    {
+        "q": "What is 'Varint' type?",
+        "type": "mcq",
+        "o": [
+            "Arbitrary precision integer (Java BigInteger)",
+            "Int",
+            "Long",
+            "Short"
+        ]
+    },
+    {
+        "q": "Are Blob types searchable?",
+        "type": "mcq",
+        "o": [
+            "No (unless SAI/SASI used, but strictly byte matching)",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'WRITETIME(col)' function?",
+        "type": "mcq",
+        "o": [
+            "Returns the timestamp of when the column was written (microseconds)",
+            "Time taken",
+            "Latency",
+            "Clock"
+        ]
+    },
+    {
+        "q": "What is 'TTL(col)' function?",
+        "type": "mcq",
+        "o": [
+            "Returns remaining seconds to live for the column",
+            "Total time",
+            "Time limit",
+            "Set TTL"
+        ]
+    },
+    {
+        "q": "If WRITETIME returns null?",
+        "type": "mcq",
+        "o": [
+            "Column is null/missing",
+            "Error",
+            "0",
+            "-1"
+        ]
+    },
+    {
+        "q": "Can you select WRITETIME of a primary key?",
+        "type": "mcq",
+        "o": [
+            "No, only regular columns",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Keyspace Durable Writes'?",
+        "type": "mcq",
+        "o": [
+            "Boolean option (default true) - if false, writes skip CommitLog (Data loss risk!)",
+            "Strong consistency",
+            "Replication",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Why disable Durable Writes?",
+        "type": "mcq",
+        "o": [
+            "Temporary staging keyspace or testing (speed boost)",
+            "Production",
+            "Security",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'JMX Authentication'?",
+        "type": "mcq",
+        "o": [
+            "Security for JMX port (password/ssl access to nodetool)",
+            "Login",
+            "User auth",
+            "Key file"
+        ]
+    },
+    {
+        "q": "Default JMX setup:",
+        "type": "mcq",
+        "o": [
+            "Local only (localhost), no auth",
+            "Public",
+            "Remote",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Max Heap Size' config?",
+        "type": "mcq",
+        "o": [
+            "-Xmx in jvm.options",
+            "mem_size",
+            "ram_limit",
+            "heap_max"
+        ]
+    },
+    {
+        "q": "What is 'Min Heap Size' config?",
+        "type": "mcq",
+        "o": [
+            "-Xms in jvm.options (Set same as Xmx to avoid resize)",
+            "mem_min",
+            "ram_min",
+            "heap_min"
+        ]
+    },
+    {
+        "q": "What is 'Tricorder' (Scylla)?",
+        "type": "mcq",
+        "o": [
+            "Internal metrics system in ScyllaDB",
+            "Doctor tool",
+            "Star trek",
+            "Scanner"
+        ]
+    },
+    {
+        "q": "What is 'Workload Prioritization' (DSE)?",
+        "type": "mcq",
+        "o": [
+            "Allocating resources to different tasks (Analytics vs Realtime)",
+            "Task list",
+            "Schedule",
+            "Calendar"
+        ]
+    },
+    {
+        "q": "What is 'NodeSync' (DSE/Scylla)?",
+        "type": "mcq",
+        "o": [
+            "Continuous background repair optimized to minimal overhead",
+            "Sync tool",
+            "Repair tool",
+            "Copy tool"
+        ]
+    },
+    {
+        "q": "What is 'Incremental Backup'?",
+        "type": "mcq",
+        "o": [
+            "Hardlinking flushed SSTables automatically when enabled",
+            "Zip",
+            "Copy",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "Benefit of Incremental Backup?",
+        "type": "mcq",
+        "o": [
+            "Efficiently captures changes as they happen",
+            "Saves disk",
+            "Saves CPU",
+            "Saves RAM"
+        ]
+    },
+    {
+        "q": "Risk of Incremental Backup?",
+        "type": "mcq",
+        "o": [
+            "Can fill up disk rapidly if not managed/moved externally",
+            "Data loss",
+            "Corruption",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Disk Access Mode'?",
+        "type": "mcq",
+        "o": [
+            "mmap or standard io (configured in yaml)",
+            "ssd or hdd",
+            "raid",
+            "loop"
+        ]
+    },
+    {
+        "q": "What is 'Mmap' I/O?",
+        "type": "mcq",
+        "o": [
+            "Mapping file into memory address space (Fast, but uses off-heap/virtual mem)",
+            "Slow",
+            "Copy",
+            "Read"
+        ]
+    },
+    {
+        "q": "OOM Killer refers to:",
+        "type": "mcq",
+        "o": [
+            "Linux kernel process killing apps when RAM exhausted",
+            "Game",
+            "Virus",
+            "Admin"
+        ]
+    },
+    {
+        "q": "How to clear snapshot?",
+        "type": "mcq",
+        "o": [
+            "nodetool clearsnapshot",
+            "rm",
+            "del",
+            "clean"
+        ]
+    },
+    {
+        "q": "Can you limit 'nodetool repair' threads?",
+        "type": "mcq",
+        "o": [
+            "Yes (job threads), prevents overwhelming cluster",
+            "No",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Token Range Mismatch'?",
+        "type": "mcq",
+        "o": [
+            "Data stored on wrong node (needs cleanup/repair)",
+            "Sync error",
+            "Bug",
+            "Feature"
+        ]
+    },
+    {
+        "q": "What is 'Consistency Level ONE' risk?",
+        "type": "mcq",
+        "o": [
+            "Data loss if the single replica accepting write crashes before replication",
+            "None",
+            "Low latency",
+            "High speed"
+        ]
+    }
+]

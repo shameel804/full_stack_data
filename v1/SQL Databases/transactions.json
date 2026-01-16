@@ -1,0 +1,5062 @@
+[
+    {
+        "q": "What is a 'Transaction'?",
+        "type": "mcq",
+        "o": [
+            "A logical unit of work that must succeed or fail as a whole",
+            "A single query",
+            "A connection",
+            "A database"
+        ]
+    },
+    {
+        "q": "What does 'ACID' stand for?",
+        "type": "mcq",
+        "o": [
+            "Atomicity, Consistency, Isolation, Durability",
+            "Access, Code, Index, Data",
+            "Auto, Commit, Insert, Delete",
+            "All, Clean, Input, Done"
+        ]
+    },
+    {
+        "q": "What is 'Atomicity'?",
+        "type": "mcq",
+        "o": [
+            "All or Nothing: Either all statements in transaction commit, or none do",
+            "Correct data",
+            "Separate users",
+            "Saved to disk"
+        ]
+    },
+    {
+        "q": "What is 'Consistency' (ACID)?",
+        "type": "mcq",
+        "o": [
+            "Transaction must take database from one valid state to another (violating no rules)",
+            "Speed",
+            "Uptime",
+            "Replication"
+        ]
+    },
+    {
+        "q": "What is 'Isolation' (ACID)?",
+        "type": "mcq",
+        "o": [
+            "Concurrent transactions cannot see each other's partial/uncommitted work (depending on level)",
+            "Security",
+            "Firewall",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'Durability' (ACID)?",
+        "type": "mcq",
+        "o": [
+            "Once committed, changes are permanent (survive power loss/crash)",
+            "Long lasting hardware",
+            "No bugs",
+            "Fast recovery"
+        ]
+    },
+    {
+        "q": "How does SQL Server ensure Atomicity?",
+        "type": "mcq",
+        "o": [
+            "Write-Ahead Logging and Rollback mechanism",
+            "Backup",
+            "CheckDB",
+            "Testing"
+        ]
+    },
+    {
+        "q": "How does SQL Server ensure Durability?",
+        "type": "mcq",
+        "o": [
+            "Flushing Transaction Log to disk before acknowledging Commit",
+            "UPS",
+            "RAID",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'BEGIN TRANSACTION'?",
+        "type": "mcq",
+        "o": [
+            "Marks the starting point of an explicit transaction",
+            "Ends transaction",
+            "Saves data",
+            "Locks table"
+        ]
+    },
+    {
+        "q": "What is 'COMMIT TRANSACTION'?",
+        "type": "mcq",
+        "o": [
+            "Permanently saves all changes made during the transaction",
+            "Deletes changes",
+            "Pauses transaction",
+            "Restarts transaction"
+        ]
+    },
+    {
+        "q": "What is 'ROLLBACK TRANSACTION'?",
+        "type": "mcq",
+        "o": [
+            "Undoes all changes made since the transaction began",
+            "Saves change",
+            "Repeats change",
+            "Logs change"
+        ]
+    },
+    {
+        "q": "What is 'Implicit Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Mode where SQL Server automatically starts a transaction for each statement (requires manual Commit)",
+            "Auto commit",
+            "Explicit",
+            "No transaction"
+        ]
+    },
+    {
+        "q": "What is 'AutoCommit' (Default)?",
+        "type": "mcq",
+        "o": [
+            "Every individual statement is treated as a transaction and committed immediately on success",
+            "Implicit",
+            "Explicit",
+            "Lazy commit"
+        ]
+    },
+    {
+        "q": "What happens if power fails before COMMIT?",
+        "type": "mcq",
+        "o": [
+            "Recovery process rolls back the uncommitted transaction (Data is safe)",
+            "Data is corrupted",
+            "Data is half written",
+            "Table is locked"
+        ]
+    },
+    {
+        "q": "What happens if power fails after COMMIT but before Checkpoint?",
+        "type": "mcq",
+        "o": [
+            "Recovery process handles 'Redo' from log to ensure data exists (Durability)",
+            "Data lost",
+            "Corruption",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is a 'Savepoint'?",
+        "type": "mcq",
+        "o": [
+            "A marker within a transaction allowing partial rollback to that point",
+            "Backup",
+            "Checkpoint",
+            "Snapshot"
+        ]
+    },
+    {
+        "q": "How do you roll back to a savepoint?",
+        "type": "mcq",
+        "o": [
+            "ROLLBACK TRANSACTION SavepointName",
+            "COMMIT SavepointName",
+            "GOTO SavepointName",
+            "UNDO SavepointName"
+        ]
+    },
+    {
+        "q": "What is 'Nested Transaction'?",
+        "type": "mcq",
+        "o": [
+            "BEGIN TRAN inside another BEGIN TRAN (Inner transactions don't truly commit until outer commits)",
+            "Parallel transaction",
+            "Distributed transaction",
+            "Cross DB"
+        ]
+    },
+    {
+        "q": "What does @@TRANCOUNT return?",
+        "type": "mcq",
+        "o": [
+            "The number of active transactions for the current connection",
+            "Total rows",
+            "Error code",
+            "Time"
+        ]
+    },
+    {
+        "q": "What happens to @@TRANCOUNT on BEGIN TRAN?",
+        "type": "mcq",
+        "o": [
+            "Increments by 1",
+            "Resets to 0",
+            "Nothing",
+            "Errors"
+        ]
+    },
+    {
+        "q": "What happens to @@TRANCOUNT on COMMIT?",
+        "type": "mcq",
+        "o": [
+            "Decrements by 1",
+            "Resets to 0",
+            "Increments",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What happens to @@TRANCOUNT on ROLLBACK?",
+        "type": "mcq",
+        "o": [
+            "Resets to 0 (unless rolling back to savepoint)",
+            "Decrements by 1",
+            "Increments",
+            "Stays same"
+        ]
+    },
+    {
+        "q": "What is 'Dirty Read'?",
+        "type": "mcq",
+        "o": [
+            "Reading data that has been modified by another transaction but not yet committed",
+            "Reading old data",
+            "Reading deleted data",
+            "Reading log"
+        ]
+    },
+    {
+        "q": "What is 'Lost Update'?",
+        "type": "mcq",
+        "o": [
+            "Two transactions read same data and update it; last one overwrites first one's changes silently",
+            "Data deletion",
+            "Crash",
+            "Corruption"
+        ]
+    },
+    {
+        "q": "What is 'Non-Repeatable Read'?",
+        "type": "mcq",
+        "o": [
+            "Reading same row twice in one transaction gets different values (because someone updated it)",
+            "Dirty read",
+            "Phantom read",
+            "Bad read"
+        ]
+    },
+    {
+        "q": "What is 'Phantom Read'?",
+        "type": "mcq",
+        "o": [
+            "Querying a range twice gets different set of rows (because someone inserted/deleted rows)",
+            "Ghost",
+            "Dirty read",
+            "Lost update"
+        ]
+    },
+    {
+        "q": "Which Isolation Level prevents Dirty Reads?",
+        "type": "mcq",
+        "o": [
+            "Read Committed (and higher)",
+            "Read Uncommitted",
+            "None",
+            "All"
+        ]
+    },
+    {
+        "q": "Which Isolation Level allows Dirty Reads?",
+        "type": "mcq",
+        "o": [
+            "Read Uncommitted",
+            "Read Committed",
+            "Serializable",
+            "Snapshot"
+        ]
+    },
+    {
+        "q": "Which Isolation Level prevents Non-Repeatable Reads?",
+        "type": "mcq",
+        "o": [
+            "Repeatable Read (and higher)",
+            "Read Committed",
+            "Read Uncommitted",
+            "All"
+        ]
+    },
+    {
+        "q": "Which Isolation Level prevents Phantoms?",
+        "type": "mcq",
+        "o": [
+            "Serializable (and Snapshot)",
+            "Repeatable Read",
+            "Read Committed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Read Committed' behavior?",
+        "type": "mcq",
+        "o": [
+            "Holds Shared Locks while reading, releases them immediately after read (Default)",
+            "Holds locks till end",
+            "No locks",
+            "Exclusive locks"
+        ]
+    },
+    {
+        "q": "What is 'Repeatable Read' behavior?",
+        "type": "mcq",
+        "o": [
+            "Holds Shared Locks on read data until Transaction ends",
+            "Releases immediately",
+            "No locks",
+            "Range locks"
+        ]
+    },
+    {
+        "q": "What is 'Serializable' behavior?",
+        "type": "mcq",
+        "o": [
+            "Holds Range Locks preventing insertion into query range until Transaction ends",
+            "Row locks",
+            "Page locks",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Isolation'?",
+        "type": "mcq",
+        "o": [
+            "Uses Row Versioning in TempDB so readers see consistent snapshot without blocking writers",
+            "Serialized",
+            "Dirty reads",
+            "Locking"
+        ]
+    },
+    {
+        "q": "What is 'Read Committed Snapshot' (RCSI)?",
+        "type": "mcq",
+        "o": [
+            "Statement-level consistency using versioning (Non-blocking default in Azure SQL)",
+            "Transaction level",
+            "Dirty read",
+            "Strict"
+        ]
+    },
+    {
+        "q": "What is 'Locking'?",
+        "type": "mcq",
+        "o": [
+            "Mechanism to manage access to shared resources (Rows, Pages, Tables) among concurrent users",
+            "Security",
+            "Password",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'Shared Lock' (S)?",
+        "type": "mcq",
+        "o": [
+            "Lock for reading (Select); allows other Shared locks, blocks Exclusive",
+            "Write lock",
+            "Full lock",
+            "Admin lock"
+        ]
+    },
+    {
+        "q": "What is 'Exclusive Lock' (X)?",
+        "type": "mcq",
+        "o": [
+            "Lock for modifying (Update, Delete, Insert); blocks ALL other locks",
+            "Read lock",
+            "Shared lock",
+            "Weak lock"
+        ]
+    },
+    {
+        "q": "What is 'Update Lock' (U)?",
+        "type": "mcq",
+        "o": [
+            "Hybrid; indicates intent to update. Compatible with S, incompatible with U/X. Prevents deadlocks.",
+            "Write lock",
+            "Delete lock",
+            "Insert lock"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock'?",
+        "type": "mcq",
+        "o": [
+            "Cycle where A waits for B, and B waits for A (Resolved by killing one)",
+            "Blocking",
+            "Timeout",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Blocking'?",
+        "type": "mcq",
+        "o": [
+            "Start of a wait chain (A holds lock, B waits). Resolves when A finishes.",
+            "Deadlock",
+            "Crash",
+            "Feature"
+        ]
+    },
+    {
+        "q": "What is 'Log File' (LDF)?",
+        "type": "mcq",
+        "o": [
+            "Physical file storing Transaction Log records",
+            "Data File",
+            "Backup File",
+            "Config File"
+        ]
+    },
+    {
+        "q": "Why is Log File sequential?",
+        "type": "mcq",
+        "o": [
+            "Optimized for write speed (Append only)",
+            "Random access",
+            "Sorted by PK",
+            "Indexed"
+        ]
+    },
+    {
+        "q": "What is 'Log Truncation'?",
+        "type": "mcq",
+        "o": [
+            "Marking inactive VLF space as reusable (Does NOT shrink file size)",
+            "Deleting file",
+            "Shrinking file",
+            "Archiving"
+        ]
+    },
+    {
+        "q": "When does Log Truncation happen in Simple Mode?",
+        "type": "mcq",
+        "o": [
+            "Automatically after Checkpoint",
+            "After Backup",
+            "Never",
+            "After restart"
+        ]
+    },
+    {
+        "q": "When does Log Truncation happen in Full Mode?",
+        "type": "mcq",
+        "o": [
+            "Only after a Transaction Log Backup",
+            "Checkpoint",
+            "Commit",
+            "Never"
+        ]
+    },
+    {
+        "q": "What happens if Log fills up?",
+        "type": "mcq",
+        "o": [
+            "Database becomes read-only or transactions fail (Error 9002)",
+            "It deletes data",
+            "It overwrites data",
+            "It expands C drive"
+        ]
+    },
+    {
+        "q": "What is 'XACT_ABORT' setting?",
+        "type": "mcq",
+        "o": [
+            "Determines if entire transaction is rolled back on run-time error",
+            "Abort button",
+            "Cancel query",
+            "Stop server"
+        ]
+    },
+    {
+        "q": "If XACT_ABORT is OFF (Default), what happens on error?",
+        "type": "mcq",
+        "o": [
+            "Only the statement causing error is rolled back; rest of transaction stays open",
+            "Full rollback",
+            "Commit",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Optimistic Concurrency'?",
+        "type": "mcq",
+        "o": [
+            "Approach assuming conflicts are rare; validates on save (Versioning)",
+            "Pessimistic",
+            "Locking",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What is 'Pessimistic Concurrency'?",
+        "type": "mcq",
+        "o": [
+            "Approach assuming conflicts are likely; uses Locks to prevent access",
+            "Optimistic",
+            "Versioning",
+            "No locks"
+        ]
+    },
+    {
+        "q": "What is 'Row Lock'?",
+        "type": "mcq",
+        "o": [
+            "Locking a single row (RID or Key)",
+            "Page lock",
+            "Table lock",
+            "DB lock"
+        ]
+    },
+    {
+        "q": "What is 'Page Lock'?",
+        "type": "mcq",
+        "o": [
+            "Locking an 8KB page (contains multiple rows)",
+            "Row lock",
+            "Key lock",
+            "Extent lock"
+        ]
+    },
+    {
+        "q": "What is 'Table Lock'?",
+        "type": "mcq",
+        "o": [
+            "Locking the entire table (used for bulk ops or maintenance)",
+            "Row lock",
+            "Index lock",
+            "Page lock"
+        ]
+    },
+    {
+        "q": "What is 'Lock Escalation'?",
+        "type": "mcq",
+        "o": [
+            "Converting many fine-grained locks (Row/Page) into a coarser lock (Table) to save memory",
+            "Upgrading license",
+            "Increasing priority",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "When does Lock Escalation typically happen?",
+        "type": "mcq",
+        "o": [
+            "When transaction holds >5000 locks on a single instance",
+            "Immediately",
+            "Never",
+            "Randomly"
+        ]
+    },
+    {
+        "q": "What is 'Intent Lock' (IS, IX)?",
+        "type": "mcq",
+        "o": [
+            "Hierarchy lock (on Table/Page) signaling that lower-level locks (Row) are being held",
+            "Real lock",
+            "Fake lock",
+            "Weak lock"
+        ]
+    },
+    {
+        "q": "Why Intent Locks?",
+        "type": "mcq",
+        "o": [
+            "To prevent other transactions from locking the whole table while rows are locked",
+            "Just for fun",
+            "Memory usage",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Schema Lock' (Sch-M)?",
+        "type": "mcq",
+        "o": [
+            "Modification lock (DDL); blocks all access to the object",
+            "Shared",
+            "Stability",
+            "Read"
+        ]
+    },
+    {
+        "q": "What is 'Schema Stability Lock' (Sch-S)?",
+        "type": "mcq",
+        "o": [
+            "Taken by queries compiling plans; ensures schema doesn't change during compile",
+            "Modification",
+            "Exclusive",
+            "Write"
+        ]
+    },
+    {
+        "q": "What is 'Update Lock' compatibility?",
+        "type": "mcq",
+        "o": [
+            "Compatible with S, Incompatible with U, X",
+            "Compatible with X",
+            "Compatible with all",
+            "Incompatible with S"
+        ]
+    },
+    {
+        "q": "What is 'Key Monitor'?",
+        "type": "mcq",
+        "o": [
+            "Not a standard term (Key Range Lock is real)",
+            "Screen",
+            "Admin",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Key Range Lock'?",
+        "type": "mcq",
+        "o": [
+            "Protects a range of rows in Serializable isolation to prevent Phantoms",
+            "Row lock",
+            "Page lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "What 'NOLOCK' hint does?",
+        "type": "mcq",
+        "o": [
+            "Forces Read Uncommitted isolation (Dirty Reads allowed, no S locks)",
+            "Full lock",
+            "Table lock",
+            "Safe read"
+        ]
+    },
+    {
+        "q": "What 'READPAST' hint does?",
+        "type": "mcq",
+        "o": [
+            "Skips rows locked by other transactions (Good for queues)",
+            "Waits",
+            "Errors",
+            "Dirty read"
+        ]
+    },
+    {
+        "q": "What 'UPDLOCK' hint does?",
+        "type": "mcq",
+        "o": [
+            "Forces Update (U) lock instead of Shared (S) lock during read",
+            "Read only",
+            "No lock",
+            "Dirty"
+        ]
+    },
+    {
+        "q": "What 'XLOCK' hint does?",
+        "type": "mcq",
+        "o": [
+            "Forces Exclusive (X) lock, holding it till transaction ends",
+            "Shared",
+            "Update",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'TABLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces a Shared lock on the entire table",
+            "Row lock",
+            "Page lock",
+            "No lock"
+        ]
+    },
+    {
+        "q": "What is 'TABLOCKX' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces Exclusive lock on the entire table",
+            "Shared",
+            "Update",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is a 'Distributed Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Transaction spanning multiple servers/resources (Managed by DTC)",
+            "Local",
+            "Simple",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is '2PC' (Two-Phase Commit)?",
+        "type": "mcq",
+        "o": [
+            "Protocol for Distributed Transactions: Prepare Phase -> Commit Phase",
+            "3 step",
+            "1 step",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Prepare Phase'?",
+        "type": "mcq",
+        "o": [
+            "Coordinator asks all participants if they CAN commit. They vote Yes/No.",
+            "Doing work",
+            "Committing",
+            "Rolling back"
+        ]
+    },
+    {
+        "q": "What is 'Commit Phase'?",
+        "type": "mcq",
+        "o": [
+            "If all voted Yes, Coordinator tells everyone to Commit. If one No, Rollback.",
+            "Voting",
+            "Preparing",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What is 'In-Doubt Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Transaction where failure occurred between Prepare and Commit (Status unknown)",
+            "Failed",
+            "Success",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'MSDTC'?",
+        "type": "mcq",
+        "o": [
+            "Microsoft Distributed Transaction Coordinator service",
+            "Database",
+            "Table",
+            "Index"
+        ]
+    },
+    {
+        "q": "What is 'Linked Server'?",
+        "type": "mcq",
+        "o": [
+            "Configuration allowing SQL Server to query external data sources (OLEDB)",
+            "Web server",
+            "File share",
+            "Variable"
+        ]
+    },
+    {
+        "q": "Is a query across Linked Server automatically a Distributed Transaction?",
+        "type": "mcq",
+        "o": [
+            "Only if data modification is involved or explicitly requested (BEGIN DISTRIBUTED TRAN)",
+            "Always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock Priority'?",
+        "type": "mcq",
+        "o": [
+            "Setting (-10 to 10) deciding which victim becomes deadlock victim (Lower priority dies)",
+            "Speed",
+            "CPU",
+            "Memory"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock Graph'?",
+        "type": "mcq",
+        "o": [
+            "XML representation showing processes and resources involved in a deadlock",
+            "Chart",
+            "Pie",
+            "Line"
+        ]
+    },
+    {
+        "q": "What is 'sp_who2'?",
+        "type": "mcq",
+        "o": [
+            "System proc showing current sessions and blocking info (BlkBy column)",
+            "Monitor",
+            "Admin",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'KILL' command?",
+        "type": "mcq",
+        "o": [
+            "Terminates a session (SPID), forcing rollback",
+            "Deletes data",
+            "Stops server",
+            "Restarts"
+        ]
+    },
+    {
+        "q": "Can you KILL a transaction in 'ROLLBACK' state?",
+        "type": "mcq",
+        "o": [
+            "No, it must finish rolling back (status: KILLED/ROLLBACK)",
+            "Yes",
+            "Maybe",
+            "If admin"
+        ]
+    },
+    {
+        "q": "What is 'Lock Timeout'?",
+        "type": "mcq",
+        "o": [
+            "SET LOCK_TIMEOUT ms; prevents indefinite waiting (returns error 1222)",
+            "Forever wait",
+            "No waiting",
+            "Auto kill"
+        ]
+    },
+    {
+        "q": "Default Lock Timeout in SQL Server?",
+        "type": "mcq",
+        "o": [
+            "-1 (Wait forever / Until administrative intervention)",
+            "0",
+            "5 seconds",
+            "1 minute"
+        ]
+    },
+    {
+        "q": "What is 'Latch'?",
+        "type": "mcq",
+        "o": [
+            "Lightweight synchronization object protecting memory structures (Pages, Index internal)",
+            "Heavy lock",
+            "Disk lock",
+            "Row lock"
+        ]
+    },
+    {
+        "q": "Latch vs Lock?",
+        "type": "mcq",
+        "o": [
+            "Locks protected Transactional Consistency (User data); Latches protect Memory Integrity (Internal)",
+            "Same thing",
+            "Latches are slow",
+            "Locks are fast"
+        ]
+    },
+    {
+        "q": "What is 'Spinlock'?",
+        "type": "mcq",
+        "o": [
+            "Processor-level primitive (Busy wait) for very short duration protection",
+            "Sleep wait",
+            "Disk wait",
+            "Network wait"
+        ]
+    },
+    {
+        "q": "What is 'Reader-Writer' conflict?",
+        "type": "mcq",
+        "o": [
+            "Readers blocking Writers and vice-versa (Standard locking problem)",
+            "Deadlock",
+            "CPU issue",
+            "RAM issue"
+        ]
+    },
+    {
+        "q": "What is 'Writer-Writer' conflict?",
+        "type": "mcq",
+        "o": [
+            "Two writers want same resource (One blocks, or Lost Update if unchecked)",
+            "Speed",
+            "Merge",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Conversion Deadlock'?",
+        "type": "mcq",
+        "o": [
+            "Transaction holding S lock tries to upgrade to X, but another holds S and tries to upgrade to X too",
+            "Normal deadlock",
+            "Cycle",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "How to prevent Conversion Deadlock?",
+        "type": "mcq",
+        "o": [
+            "Use UPDLOCK or XLOCK when reading data you intend to modify later",
+            "NOLOCK",
+            "Read Uncommitted",
+            "Snapshot"
+        ]
+    },
+    {
+        "q": "What is the 'Log Writer'?",
+        "type": "mcq",
+        "o": [
+            "Thread responsible for flushing Log Buffer to Log File on disk",
+            "Data writer",
+            "Lazy writer",
+            "Checkpoint"
+        ]
+    },
+    {
+        "q": "What is 'Log Flush'?",
+        "type": "mcq",
+        "o": [
+            "Writing log records from memory to disk (Occurs on Commit or Buffer full)",
+            "Deleting log",
+            "Reading log",
+            "Scanning log"
+        ]
+    },
+    {
+        "q": "What creates 'WRITELOG' wait?",
+        "type": "mcq",
+        "o": [
+            "Waiting for the Log Flush to complete (Disk I/O latency on LDF)",
+            "CPU wait",
+            "Lock wait",
+            "Network wait"
+        ]
+    },
+    {
+        "q": "Can you disable Transaction Log?",
+        "type": "mcq",
+        "o": [
+            "No, it is essential for ACID",
+            "Yes, in Simple mode",
+            "Yes, in TempDB",
+            "Yes, with trace flag"
+        ]
+    },
+    {
+        "q": "What happens if you delete LDF file while server running?",
+        "type": "mcq",
+        "o": [
+            "Access violation; SQL Server holds handle (Can't delete)",
+            "Server crashes",
+            "Data loss",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What happens if LDF is missing on restart?",
+        "type": "mcq",
+        "o": [
+            "Database becomes Suspect (unless clean shutdown allowed rebuild)",
+            "Auto creates",
+            "Truncates",
+            "Ignores"
+        ]
+    },
+    {
+        "q": "What is 'Log Sequence Number' (LSN) usage in Restore?",
+        "type": "mcq",
+        "o": [
+            "Used to chain backups together (First LSN, Last LSN)",
+            "File name",
+            "Datestamp",
+            "GUID"
+        ]
+    },
+    {
+        "q": "What is 'WITH STOPAT'?",
+        "type": "mcq",
+        "o": [
+            "Restore option to stop at specific point in time (using Log Backup)",
+            "Stop server",
+            "Stop query",
+            "Stop user"
+        ]
+    },
+    {
+        "q": "What is 'fn_dblog'?",
+        "type": "mcq",
+        "o": [
+            "Undocumented function to read active Transaction Log content",
+            "View",
+            "Table",
+            "Proc"
+        ]
+    },
+    {
+        "q": "What is 'Lock Compatibility Matrix'?",
+        "type": "mcq",
+        "o": [
+            "Table defining which locks can coexist on a resource (e.g. S is compatible with S, but not X)",
+            "User matrix",
+            "Network matrix",
+            "Hardware list"
+        ]
+    },
+    {
+        "q": "Is Shared (S) lock compatible with Update (U) lock?",
+        "type": "mcq",
+        "o": [
+            "Yes (Readers can read while one process intends to update)",
+            "No",
+            "Only in Snapshot",
+            "Only in TempDB"
+        ]
+    },
+    {
+        "q": "Is Update (U) lock compatible with Update (U) lock?",
+        "type": "mcq",
+        "o": [
+            "No (Only one process can hold U lock to prevent conversion deadlocks)",
+            "Yes",
+            "Maybe",
+            "If admin"
+        ]
+    },
+    {
+        "q": "Is Intent Shared (IS) compatible with Intent Exclusive (IX)?",
+        "type": "mcq",
+        "o": [
+            "Yes (Different parts of the hierarchy might be locked)",
+            "No",
+            "Only locally",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'LCK_M_S' wait type?",
+        "type": "mcq",
+        "o": [
+            "Waiting for a Shared Lock (Blocked by X)",
+            "Waiting for X",
+            "Waiting for Schema",
+            "Waiting for IO"
+        ]
+    },
+    {
+        "q": "What is 'LCK_M_X' wait type?",
+        "type": "mcq",
+        "o": [
+            "Waiting for an Exclusive Lock (Blocked by S, U, or X)",
+            "Waiting for S",
+            "Waiting for CPU",
+            "Waiting for RAM"
+        ]
+    },
+    {
+        "q": "What is 'LCK_M_SCH_M' wait type?",
+        "type": "mcq",
+        "o": [
+            "Waiting for Schema Modification Lock (Blocked by active queries)",
+            "Waiting for Shared",
+            "Waiting for User",
+            "Waiting for Backup"
+        ]
+    },
+    {
+        "q": "What is 'Version Store'?",
+        "type": "mcq",
+        "o": [
+            "Storage in TempDB holding old versions of rows for Snapshot Isolation",
+            "Log file",
+            "Data file",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Snapshot Isolation: Transaction A reads Row 1. Transaction B updates Row 1. What does A see next time?",
+        "type": "mcq",
+        "o": [
+            "Same value as start (A uses version store to see consistent snapshot)",
+            "New value",
+            "Error",
+            "Block"
+        ]
+    },
+    {
+        "q": "Read Committed Snapshot: Transaction A reads Row 1. Transaction B updates Row 1 (Commits). What does A see next time?",
+        "type": "mcq",
+        "o": [
+            "New value (Statement level consistency, sees latest committed)",
+            "Old value",
+            "Error",
+            "Block"
+        ]
+    },
+    {
+        "q": "What is 'Update Conflict' in Snapshot Isolation?",
+        "type": "mcq",
+        "o": [
+            "Error when Trans A tries to update a row that Trans B modified after A started",
+            "Lock wait",
+            "Deadlock",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Ghost Record'?",
+        "type": "mcq",
+        "o": [
+            "Deleted row that is logically marked deleted but physically remains on page (until cleanup)",
+            "Missing row",
+            "Bad row",
+            "Temp row"
+        ]
+    },
+    {
+        "q": "What cleans up Ghost Records?",
+        "type": "mcq",
+        "o": [
+            "Ghost Cleanup Task (Background process)",
+            "User",
+            "Restart",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'PVS' (Persistent Version Store)?",
+        "type": "mcq",
+        "o": [
+            "Feature of ADR: Stores row versions in the user database (not TempDB) for instant rollback",
+            "TempDB store",
+            "Log store",
+            "Cloud store"
+        ]
+    },
+    {
+        "q": "Benefit of ADR for Long Transactions?",
+        "type": "mcq",
+        "o": [
+            "Rollback is instantaneous (logical revert) instead of physical undo from log",
+            "No benefit",
+            "Uses more log",
+            "Locks forever"
+        ]
+    },
+    {
+        "q": "What is 'S-Log' (Secondary Log) in ADR?",
+        "type": "mcq",
+        "o": [
+            "Memory-optimized log stream for non-versioned operations",
+            "Slow log",
+            "Backup log",
+            "Old log"
+        ]
+    },
+    {
+        "q": "What is 'Aborted Transaction' state?",
+        "type": "mcq",
+        "o": [
+            "State where transaction cannot commit and must verify rollback (ADR handles this)",
+            "Committed",
+            "Active",
+            "Running"
+        ]
+    },
+    {
+        "q": "What is 'Delayed Durability' setting?",
+        "type": "mcq",
+        "o": [
+            "COMMIT returns success before Log Flush (reduced latency, potential data loss on crash)",
+            "Full safety",
+            "No log",
+            "Read only"
+        ]
+    },
+    {
+        "q": "When to use Delayed Durability?",
+        "type": "mcq",
+        "o": [
+            "Temp tables, staging data import, non-critical logging (High throughput needed)",
+            "Bank transfers",
+            "Critical data",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Log Buffer'?",
+        "type": "mcq",
+        "o": [
+            "60KB circular buffer in memory holding log records before Flush",
+            "Disk file",
+            "Table",
+            "View"
+        ]
+    },
+    {
+        "q": "What triggers Log Flush?",
+        "type": "mcq",
+        "o": [
+            "COMMIT, Log Buffer Full (60KB), Checkpoint, or Request by other process",
+            "Select",
+            "Update",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'Write-Ahead Logging' (WAL) Rule?",
+        "type": "mcq",
+        "o": [
+            "No modification to data page can be written to disk until associated log record is written",
+            "Write data first",
+            "Write both parallel",
+            "No rule"
+        ]
+    },
+    {
+        "q": "Why WAL?",
+        "type": "mcq",
+        "o": [
+            "Ensures ACID (Recovery can Redo/Undo based on log)",
+            "Speed",
+            "Space",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Log Block'?",
+        "type": "mcq",
+        "o": [
+            "Unit of log storage (Variable size 512B - 60KB) written to disk",
+            "Page",
+            "Extent",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is 'Circular Log'?",
+        "type": "mcq",
+        "o": [
+            "Concept where log wraps around to reuse inactive VLFs (assuming truncation happens)",
+            "Linear log",
+            "Infinite log",
+            "Static log"
+        ]
+    },
+    {
+        "q": "What is 'MinLSN'?",
+        "type": "mcq",
+        "o": [
+            "Oldest active log record required for successful rollback (Start of active transaction)",
+            "Max LSN",
+            "End LSN",
+            "New LSN"
+        ]
+    },
+    {
+        "q": "What is 'Replication LSN'?",
+        "type": "mcq",
+        "o": [
+            "Pointer preventing log truncation until records are replicated",
+            "Backup LSN",
+            "Checkpoint LSN",
+            "Mirror LSN"
+        ]
+    },
+    {
+        "q": "What is 'log_reuse_wait_desc'?",
+        "type": "mcq",
+        "o": [
+            "Column in sys.databases explaining why Log cannot truncate (e.g. LOG_BACKUP, ACTIVE_TRANSACTION)",
+            "Error",
+            "Space used",
+            "Free space"
+        ]
+    },
+    {
+        "q": "log_reuse_wait: 'LOG_BACKUP' means?",
+        "type": "mcq",
+        "o": [
+            "Log is waiting for a Transaction Log Backup to occur (Full/Bulk-Logged model)",
+            "Backup failed",
+            "Disk full",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "log_reuse_wait: 'ACTIVE_TRANSACTION' means?",
+        "type": "mcq",
+        "o": [
+            "A long-running open transaction is holding the MinLSN (preventing truncation)",
+            "Busy server",
+            "Fast server",
+            "Error"
+        ]
+    },
+    {
+        "q": "log_reuse_wait: 'CHECKPOINT' means?",
+        "type": "mcq",
+        "o": [
+            "Waiting for checkpoint (Simple model) or check point has not occurred yet",
+            "Backup",
+            "Restore",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock Priority' default?",
+        "type": "mcq",
+        "o": [
+            "Normal (0)",
+            "High (5)",
+            "Low (-5)",
+            "Max (10)"
+        ]
+    },
+    {
+        "q": "If Deadlock Priorities are equal, who dies?",
+        "type": "mcq",
+        "o": [
+            "Transaction that is 'least expensive' to roll back (Log records used)",
+            "Random",
+            "Oldest",
+            "Newest"
+        ]
+    },
+    {
+        "q": "What is 'Lock Partitioning'?",
+        "type": "mcq",
+        "o": [
+            "Optimizing lock manager by partitioning lock hash table per CPU core (Scalability)",
+            "Split lock",
+            "Table partition",
+            "Row partition"
+        ]
+    },
+    {
+        "q": "What is 'Spinlock Contention'?",
+        "type": "mcq",
+        "o": [
+            "High CPU usage due to threads constantly checking available resource (LOCK_HASH, etc.)",
+            "Disk wait",
+            "Blocking",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "What is 'Latch Contention'?",
+        "type": "mcq",
+        "o": [
+            "Waiting for access to in-memory pages (e.g. PAGELATCH_EX on last page of index)",
+            "Lock wait",
+            "Disk wait",
+            "Network wait"
+        ]
+    },
+    {
+        "q": "Common cause of PAGELATCH_EX on Insert?",
+        "type": "mcq",
+        "o": [
+            "Hot Spot: Many threads inserting into Identity PK (Last page contention)",
+            "Disk slow",
+            "Network slow",
+            "Table full"
+        ]
+    },
+    {
+        "q": "Solution for Last Page Insert Contention?",
+        "type": "mcq",
+        "o": [
+            "Hash Partitioning, Reverse Key Index, or OPTIMIZE_FOR_SEQUENTIAL_KEY (SQL 2019)",
+            "Add disk",
+            "Add RAM",
+            "Remove index"
+        ]
+    },
+    {
+        "q": "What is 'OPTIMIZE_FOR_SEQUENTIAL_KEY'?",
+        "type": "mcq",
+        "o": [
+            "Index option improving high-concurrency inserts into sequential keys (bypasses some latch logic)",
+            "Sort key",
+            "Compress key",
+            "Encrypt key"
+        ]
+    },
+    {
+        "q": "What is 'In-Memory OLTP' locking model?",
+        "type": "mcq",
+        "o": [
+            "Lock-Free (Optimistic Multi-Version Concurrency Control)",
+            "Pessimistic",
+            "Heavy locking",
+            "Page locking"
+        ]
+    },
+    {
+        "q": "Does In-Memory OLTP use Latches?",
+        "type": "mcq",
+        "o": [
+            "No (uses Interlocked operations / Compare-and-Swap)",
+            "Yes",
+            "Sometimes",
+            "Only for log"
+        ]
+    },
+    {
+        "q": "In-Memory OLTP: What happens on write conflict?",
+        "type": "mcq",
+        "o": [
+            "Transaction fails immediately (Error 41302)",
+            "Waits",
+            "Blocks",
+            "Deadlocks"
+        ]
+    },
+    {
+        "q": "What is 'Transaction dependency' (In-Memory)?",
+        "type": "mcq",
+        "o": [
+            "Dependency on Commit: If T2 reads T1's uncommitted data (allowed internally), T2 waits for T1 commit",
+            "Foreign key",
+            "Lock",
+            "Relation"
+        ]
+    },
+    {
+        "q": "What is 'Garbage Collection' (In-Memory)?",
+        "type": "mcq",
+        "o": [
+            "Cooperative process where threads unlink old row versions (cleaning memory)",
+            "Java GC",
+            "Vacuum",
+            "DBCC"
+        ]
+    },
+    {
+        "q": "What is 'Checkpoint File Pair' (CFP)?",
+        "type": "mcq",
+        "o": [
+            "Data and Delta files storing In-Memory table data on disk",
+            "Log file",
+            "Backup",
+            "Temp"
+        ]
+    },
+    {
+        "q": "What is 'Merge Policy' (CFP)?",
+        "type": "mcq",
+        "o": [
+            "Merging adjacent Data/Delta files to free up space (Automatic)",
+            "Delete",
+            "Copy",
+            "Join"
+        ]
+    },
+    {
+        "q": "What is 'DTC' limit in Azure SQL?",
+        "type": "mcq",
+        "o": [
+            "Supported on Managed Instance; limited on Single Database (Elastic Transactions)",
+            "Full support",
+            "No support",
+            "Deprecated"
+        ]
+    },
+    {
+        "q": "What is 'Elastic Database Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Distributed transaction across databases in same Azure SQL Server (Does not use MSDTC)",
+            "Local",
+            "Simulated",
+            "Fake"
+        ]
+    },
+    {
+        "q": "What is 'Service Broker' Transactional?",
+        "type": "mcq",
+        "o": [
+            "Yes, SEND and RECEIVE are part of the detailed transaction (All or Nothing)",
+            "No",
+            "Async only",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Poison Message'?",
+        "type": "mcq",
+        "o": [
+            "Message causing repeated transaction rollback (Queue disables itself after 5 retries)",
+            "Virus",
+            "Bad code",
+            "Spam"
+        ]
+    },
+    {
+        "q": "What happens if you don't commit explicit transaction?",
+        "type": "mcq",
+        "o": [
+            "It remains Open (locks held, log not truncated) until session ends/killed (then Rolls Back)",
+            "Auto commits",
+            "Auto rollsback immediately",
+            "Deletes data"
+        ]
+    },
+    {
+        "q": "What is 'Orphaned Transaction'?",
+        "type": "mcq",
+        "o": [
+            "Transaction left open by application error (client disconnect) holding locks",
+            "Child transaction",
+            "Parent transaction",
+            "System transaction"
+        ]
+    },
+    {
+        "q": "How to find Orphaned Transactions?",
+        "type": "mcq",
+        "o": [
+            "dm_tran_active_transactions, dm_exec_sessions (check open_transaction_count)",
+            "sp_who",
+            "Event viewer",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Bound Session'?",
+        "type": "mcq",
+        "o": [
+            "Two sessions sharing the same transaction/locks (sp_getbindtoken)",
+            "Linked server",
+            "Mirroring",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "What is 'Context_Info'?",
+        "type": "mcq",
+        "o": [
+            "Session-level binary variable (128 bytes) to associate context with transaction",
+            "Global var",
+            "Temp table",
+            "Parameter"
+        ]
+    },
+    {
+        "q": "What is 'SESSION_CONTEXT'?",
+        "type": "mcq",
+        "o": [
+            "Key-Value store for session (Better than Context_Info) used in RLS",
+            "Cookie",
+            "File",
+            "Log"
+        ]
+    },
+    {
+        "q": "What mechanism enables 'Online Index Rebuild'?",
+        "type": "mcq",
+        "o": [
+            "Uses Row Versioning and temporary mapping index to allow access during rebuild",
+            "Locking",
+            "Snapshot",
+            "Full copy"
+        ]
+    },
+    {
+        "q": "Does Online Index Rebuild hold locks?",
+        "type": "mcq",
+        "o": [
+            "Yes, short Schema locks (Sch-M) at Start and End (can be blocked)",
+            "No locks",
+            "Full locks",
+            "Only S locks"
+        ]
+    },
+    {
+        "q": "What is 'Resumable Index Rebuild'?",
+        "type": "mcq",
+        "o": [
+            "Ability to pause/resume index rebuild (SQL 2017+) maintaining progress",
+            "Fast rebuild",
+            "Stop rebuild",
+            "Cancel"
+        ]
+    },
+    {
+        "q": "What is 'WAIT_AT_LOW_PRIORITY'?",
+        "type": "mcq",
+        "o": [
+            "Option for Online Index Rebuild to wait for locks without blocking others (Abort/Kill blockers)",
+            "High priority",
+            "Normal priority",
+            "Real time"
+        ]
+    },
+    {
+        "q": "What is 'Partition switching' lock requirement?",
+        "type": "mcq",
+        "o": [
+            "Requires Schema Modification (Sch-M) lock on both tables (Blocking)",
+            "Shared lock",
+            "No lock",
+            "Row lock"
+        ]
+    },
+    {
+        "q": "What is 'Lock Partitioning' vs 'Partitioning'?",
+        "type": "mcq",
+        "o": [
+            "Lock Partitioning is internal threading optimization; Partitioning is data organization",
+            "Same",
+            "Conflicting",
+            "Similar"
+        ]
+    },
+    {
+        "q": "Can you partition a Transaction Log?",
+        "type": "mcq",
+        "o": [
+            "No, log is a single sequential stream",
+            "Yes",
+            "Maybe",
+            "If multiple files"
+        ]
+    },
+    {
+        "q": "Multiple Log Files performance?",
+        "type": "mcq",
+        "o": [
+            "No benefit (Log is written sequentially). Only useful if disk is full.",
+            "Doubles speed",
+            "Parallel writes",
+            "Better seek"
+        ]
+    },
+    {
+        "q": "What is 'TempDB' transaction logging?",
+        "type": "mcq",
+        "o": [
+            "Minimal logging (enough to rollback, but no Redo needed as TempDB resets on restart)",
+            "Full logging",
+            "No logging",
+            "Bulk logging"
+        ]
+    },
+    {
+        "q": "What is 'Non-Logged' operation?",
+        "type": "mcq",
+        "o": [
+            "Operations not written to log (e.g. TRUNCATE TABLE is logged but minimally page dealloc)",
+            "Select",
+            "Update",
+            "Delete"
+        ]
+    },
+    {
+        "q": "Is 'SELECT INTO' logged?",
+        "type": "mcq",
+        "o": [
+            "Minimally logged in Simple/Bulk-Logged (Page allocations only)",
+            "Fully logged",
+            "Not logged",
+            "Row logged"
+        ]
+    },
+    {
+        "q": "Is 'INSERT INTO ... SELECT' logged?",
+        "type": "mcq",
+        "o": [
+            "Fully logged (unless TABLOCK hint used in Simple/Bulk-Logged)",
+            "Minimally",
+            "No log",
+            "Batch log"
+        ]
+    },
+    {
+        "q": "What is 'Write-Ahead Log' throughput limit?",
+        "type": "mcq",
+        "o": [
+            "Disk I/O latency of the log drive (Sequential write speed)",
+            "CPU speed",
+            "RAM size",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Log Buffer Flushing' trigger (PS)?",
+        "type": "mcq",
+        "o": [
+            "PowerShell? No, persistence. Commit forces flush.",
+            "Script",
+            "Code",
+            "App"
+        ]
+    },
+    {
+        "q": "What is 'Durability' trade-off?",
+        "type": "mcq",
+        "o": [
+            "Performance (Waiting for physical disk write) vs Data Safety",
+            "Space vs Time",
+            "Memory vs CPU",
+            "Cost vs Speed"
+        ]
+    },
+    {
+        "q": "What is 'Hekaton' Durability?",
+        "type": "mcq",
+        "o": [
+            "Schema_Only (Non-durable) vs Schema_And_Data (Durable)",
+            "Full",
+            "Simple",
+            "Bulk"
+        ]
+    },
+    {
+        "q": "What is 'Natively Compiled SP' transaction?",
+        "type": "mcq",
+        "o": [
+            "Atomic Block (BEGIN ATOMIC). Commits or rolls back entirely.",
+            "Standard",
+            "Nested",
+            "Distributed"
+        ]
+    },
+    {
+        "q": "What is 'Retry Logic'?",
+        "type": "mcq",
+        "o": [
+            "Client-side code to retry transaction on failure (Deadlock, Snapshot Conflict)",
+            "Server logic",
+            "Backup",
+            "Restore"
+        ]
+    },
+    {
+        "q": "Why is Retry Logic critical for Snapshot/In-Memory?",
+        "type": "mcq",
+        "o": [
+            "Because they use optimistic locking where conflicts cause failure (abort) instead of blocking",
+            "Performance",
+            "Security",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Transaction Id'?",
+        "type": "mcq",
+        "o": [
+            "BigInt internal identifier for transaction",
+            "GUID",
+            "String",
+            "Date"
+        ]
+    },
+    {
+        "q": "What is 'XMIN' (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "Transaction ID that inserted the row (MVCC visibility)",
+            "Delete ID",
+            "Update ID",
+            "Lock ID"
+        ]
+    },
+    {
+        "q": "What is 'XMAX' (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "Transaction ID that deleted/updated the row (0 if alive)",
+            "Insert ID",
+            "Lock",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Vacuum' (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "Process reclaiming space from dead tuples (XMAX set and old)",
+            "Delete",
+            "Truncate",
+            "Drop"
+        ]
+    },
+    {
+        "q": "What is 'Freeze' (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "Marking old transaction IDs as 'frozen' to prevent ID wraparound",
+            "Locking",
+            "Stopping",
+            "Cold archive"
+        ]
+    },
+    {
+        "q": "What happens if Transaction ID wraps around (Postgres)?",
+        "type": "mcq",
+        "o": [
+            "Data loss (Old transactions appear future/invisible) - Prevented by AutoVacuum",
+            "Crash",
+            "Error",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Undo Log' (Oracle)?",
+        "type": "mcq",
+        "o": [
+            "Stores old values for Rollback and Consistent Read (Snapshot)",
+            "Redo Log",
+            "Archive Log",
+            "Alert Log"
+        ]
+    },
+    {
+        "q": "What is 'Redo Log' (Oracle)?",
+        "type": "mcq",
+        "o": [
+            "Stores changes for Recovery (Roll forward)",
+            "Undo Log",
+            "Temp",
+            "Data"
+        ]
+    },
+    {
+        "q": "What is 'ORA-01555' (Snapshot too old)?",
+        "type": "mcq",
+        "o": [
+            "Undo data overwritten before long-running query could read it",
+            "Disk full",
+            "Deadlock",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "MySQL InnoDB: Default Isolation Level?",
+        "type": "mcq",
+        "o": [
+            "Repeatable Read",
+            "Read Committed",
+            "Read Uncommitted",
+            "Serializable"
+        ]
+    },
+    {
+        "q": "SQL Server: Default Isolation Level?",
+        "type": "mcq",
+        "o": [
+            "Read Committed",
+            "Repeatable Read",
+            "Serializable",
+            "Snapshot"
+        ]
+    },
+    {
+        "q": "Oracle: Default Isolation Level?",
+        "type": "mcq",
+        "o": [
+            "Read Committed",
+            "Serializable",
+            "Read Uncommitted",
+            "Snapshot"
+        ]
+    },
+    {
+        "q": "Postgres: Default Isolation Level?",
+        "type": "mcq",
+        "o": [
+            "Read Committed",
+            "Serializable",
+            "Repeatable Read",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Autocommit'?",
+        "type": "mcq",
+        "o": [
+            "Mode where each statement is a transaction",
+            "Manual",
+            "Explicit",
+            "Safe"
+        ]
+    },
+    {
+        "q": "How to disable Autocommit?",
+        "type": "mcq",
+        "o": [
+            "BEGIN TRANSACTION (or SET IMPLICIT_TRANSACTIONS ON)",
+            "STOP",
+            "END",
+            "DISABLE"
+        ]
+    },
+    {
+        "q": "What is 'VLF Fragmentation'?",
+        "type": "mcq",
+        "o": [
+            "Too many small Virtual Log Files due to frequent small log growths",
+            "Disk frag",
+            "Index frag",
+            "Table frag"
+        ]
+    },
+    {
+        "q": "Ideal VLF count?",
+        "type": "mcq",
+        "o": [
+            "Less than 50 (Subjective, but 10,000 is definitely bad)",
+            "1 million",
+            "Zero",
+            "Two"
+        ]
+    },
+    {
+        "q": "How to fix VLF?",
+        "type": "mcq",
+        "o": [
+            "Backup Log, Shrink Log, Grow Log in large chunks",
+            "Restart",
+            "Reindex",
+            "Update stats"
+        ]
+    },
+    {
+        "q": "What is 'Instant File Initialization' (IFI)?",
+        "type": "mcq",
+        "o": [
+            "Allows data file growth without zeroing out space (Faster)",
+            "Log growth",
+            "Shrink",
+            "Compress"
+        ]
+    },
+    {
+        "q": "Does IFI apply to Log Files?",
+        "type": "mcq",
+        "o": [
+            "No, log must always be zeroed (security/integrity)",
+            "Yes",
+            "Sometimes",
+            "If enabled"
+        ]
+    },
+    {
+        "q": "What is 'Backup Compression'?",
+        "type": "mcq",
+        "o": [
+            "Compressing backup stream (Saves disk, faster IO, higher CPU)",
+            "Zip",
+            "Encrypted",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Backup Striping'?",
+        "type": "mcq",
+        "o": [
+            "Writing backup to multiple files (Parallel IO)",
+            "Mirroring",
+            "Copying",
+            "Redundant"
+        ]
+    },
+    {
+        "q": "What is 'Mirrored Backup'?",
+        "type": "mcq",
+        "o": [
+            "Writing backup to 2 destinations simultaneously (Redundancy)",
+            "Striping",
+            "Copy only",
+            "Diff"
+        ]
+    },
+    {
+        "q": "What is 'Smart Transaction Log Backup'?",
+        "type": "mcq",
+        "o": [
+            "Backing up log based on usage % rather than fixed time",
+            "AI",
+            "Manual",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Managed Instance' Log Rate limit?",
+        "type": "mcq",
+        "o": [
+            "Throttling of log write MB/s based on service tier",
+            "Unlimited",
+            "1MB",
+            "1GB"
+        ]
+    },
+    {
+        "q": "What is 'Group Commit'?",
+        "type": "mcq",
+        "o": [
+            "Optimization where multiple transaction log records are flushed to disk in a single I/O operation",
+            "Batch insert",
+            "Bulk loading",
+            "Parallelism"
+        ]
+    },
+    {
+        "q": "What is 'Commit Latency'?",
+        "type": "mcq",
+        "o": [
+            "Time taken for log flush to complete before acknowledging commit to client",
+            "Network time",
+            "CPU time",
+            "Lock time"
+        ]
+    },
+    {
+        "q": "How does 'Synchronous Replica' affect Commit Latency?",
+        "type": "mcq",
+        "o": [
+            "Increases latency (Primary must wait for Secondary to harden log before acknowledging)",
+            "Decreases latency",
+            "No effect",
+            "Makes it async"
+        ]
+    },
+    {
+        "q": "How does 'Asynchronous Replica' affect Commit Latency?",
+        "type": "mcq",
+        "o": [
+            "Minimal effect (Primary commits without waiting for Secondary acknowledgement)",
+            "Increases latency",
+            "Blocks commit",
+            "Stops commit"
+        ]
+    },
+    {
+        "q": "What is 'HADR_SYNC_COMMIT' wait type?",
+        "type": "mcq",
+        "o": [
+            "Waiting for Synchronous Secondary replica to harden the log",
+            "Disk I/O",
+            "Network I/O",
+            "CPU wait"
+        ]
+    },
+    {
+        "q": "What is 'Log Send Queue'?",
+        "type": "mcq",
+        "o": [
+            "Amount of log (KB) waiting to be sent to secondary replicas",
+            "Backup queue",
+            "Restore queue",
+            "Print queue"
+        ]
+    },
+    {
+        "q": "What is 'Redo Queue'?",
+        "type": "mcq",
+        "o": [
+            "Amount of log (KB) hardened on secondary but not yet applied (Redone) to data pages",
+            "Undo queue",
+            "Send queue",
+            "Backup queue"
+        ]
+    },
+    {
+        "q": "What is 'Transaction Safety' FULL (Mirroring)?",
+        "type": "mcq",
+        "o": [
+            "Synchronous mode (Principal waits for Mirror)",
+            "Async",
+            "Off",
+            "Low"
+        ]
+    },
+    {
+        "q": "What is 'Transaction Safety' OFF (Mirroring)?",
+        "type": "mcq",
+        "o": [
+            "Asynchronous mode (Principal does not wait)",
+            "Sync",
+            "Full",
+            "High"
+        ]
+    },
+    {
+        "q": "What is 'Witness Server'?",
+        "type": "mcq",
+        "o": [
+            "3rd instance in Mirroring/AG providing quorum for automatic failover",
+            "Backup server",
+            "Log server",
+            "Web server"
+        ]
+    },
+    {
+        "q": "What is 'Split Brain' scenario?",
+        "type": "mcq",
+        "o": [
+            "Two nodes both think they are Primary (usually due to network partition)",
+            "Headache",
+            "Corruption",
+            "Merge"
+        ]
+    },
+    {
+        "q": "What prevents Split Brain?",
+        "type": "mcq",
+        "o": [
+            "Quorum (Witness / odd number of votes)",
+            "Fast network",
+            "Administrator",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Resource Governor' interaction with Transactions?",
+        "type": "mcq",
+        "o": [
+            "Can throttle IO/CPU of a session but cannot forcibly rollback unless timeout/kill occurs",
+            "Blocks trans",
+            "Commits trans",
+            "Logs trans"
+        ]
+    },
+    {
+        "q": "What is 'DAC' usage in Deadlock?",
+        "type": "mcq",
+        "o": [
+            "Allows admin to connect and run KILL if normal connections are blocked/maxed out",
+            "Debug",
+            "Trace",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Blocker Script'?",
+        "type": "mcq",
+        "o": [
+            "Script running periodically to capture blocking chains (sp_who2, sys.dm_exec_requests)",
+            "Virus",
+            "Firewall",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'Head Blocker'?",
+        "type": "mcq",
+        "o": [
+            "The session at the top of the blocking chain (holding the lock everyone wants)",
+            "Victim",
+            "Deadlock",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'Blocked Process Report'?",
+        "type": "mcq",
+        "o": [
+            "Trace/XEvent that fires when a process is blocked > N seconds ('blocked process threshold')",
+            "Error report",
+            "Crash dump",
+            "Log"
+        ]
+    },
+    {
+        "q": "How to configure Blocked Process Threshold?",
+        "type": "mcq",
+        "o": [
+            "sp_configure 'blocked process threshold', [seconds]",
+            "SET THRESHOLD",
+            "Registry",
+            "Install option"
+        ]
+    },
+    {
+        "q": "What is 'Key Lock' (Key Range)?",
+        "type": "mcq",
+        "o": [
+            "Lock on a specific key value in an index (RangeS-S, RangeS-U)",
+            "Row lock",
+            "Page lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "What is 'RID Lock'?",
+        "type": "mcq",
+        "o": [
+            "Lock on a Row Identifier (FileID:PageID:SlotID) in a Heap",
+            "Key lock",
+            "Index lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "What is 'HOBT Lock'?",
+        "type": "mcq",
+        "o": [
+            "Lock on Heap or B-Tree (HoBT) - essentially an Object/Partition lock",
+            "Row lock",
+            "Page lock",
+            "Key lock"
+        ]
+    },
+    {
+        "q": "What is 'Application Lock'?",
+        "type": "mcq",
+        "o": [
+            "User-defined lock (sp_getapplock) on a custom resource name (logical serialization)",
+            "System lock",
+            "Row lock",
+            "Table lock"
+        ]
+    },
+    {
+        "q": "Why use sp_getapplock?",
+        "type": "mcq",
+        "o": [
+            "To serialize access to a block of code (critical section) without locking physical data rows",
+            "Encrypt data",
+            "Hide data",
+            "Speed up"
+        ]
+    },
+    {
+        "q": "What is 'Schema Lock' on Compile?",
+        "type": "mcq",
+        "o": [
+            "Sch-S (Stability) ensures underlying table schema doesn't change during compile",
+            "Sch-M",
+            "Exclusive",
+            "Shared"
+        ]
+    },
+    {
+        "q": "What is 'Schema Lock' on ALTER TABLE?",
+        "type": "mcq",
+        "o": [
+            "Sch-M (Modification) - Blocks all access",
+            "Sch-S",
+            "Shared",
+            "Intent"
+        ]
+    },
+    {
+        "q": "What is 'Lock Partitioning' benefit?",
+        "type": "mcq",
+        "o": [
+            "Reduces spinlock contention on the Lock Manager for high-concurrency systems",
+            "Saves disk",
+            "Saves RAM",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Lock Hashing'?",
+        "type": "mcq",
+        "o": [
+            "Mapping resource (Key/Page) to a hash bucket in Lock Manager",
+            "Encryption",
+            "Compression",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Lock Block' (Memory)?",
+        "type": "mcq",
+        "o": [
+            "Data structure in memory representing a Lock request (approx 96 bytes)",
+            "Data page",
+            "Log block",
+            "Buffer"
+        ]
+    },
+    {
+        "q": "What happens if Lock Memory is full?",
+        "type": "mcq",
+        "o": [
+            "Queries fail with 'Insufficient memory to run this query' or attempt lock escalation",
+            "Server stops",
+            "Data loss",
+            "Slowdown"
+        ]
+    },
+    {
+        "q": "What is 'Metadata Locking'?",
+        "type": "mcq",
+        "o": [
+            "Locks on system catalog objects (sys.objects, etc.) during DDL",
+            "User data lock",
+            "Row lock",
+            "Page lock"
+        ]
+    },
+    {
+        "q": "What is 'DDL' Transaction?",
+        "type": "mcq",
+        "o": [
+            "Transaction containing Schema changes (Create/Alter). Can be rolled back in SQL Server.",
+            "Cannot rollback",
+            "Special trans",
+            "Admin trans"
+        ]
+    },
+    {
+        "q": "Can you rollback TRUNCATE TABLE?",
+        "type": "mcq",
+        "o": [
+            "Yes, if wrapped in a Transaction (It is logged as page deallocations)",
+            "No, never",
+            "Only in Oracle",
+            "Only in Postgres"
+        ]
+    },
+    {
+        "q": "Can you rollback DROP TABLE?",
+        "type": "mcq",
+        "o": [
+            "Yes, if wrapped in a Transaction",
+            "No",
+            "Only in Dev",
+            "Only in Prod"
+        ]
+    },
+    {
+        "q": "What is 'Fuzzy Checkpoint'?",
+        "type": "mcq",
+        "o": [
+            "Checkpoint that efficiently flushes dirty pages (doesn't halt system)",
+            "Hard checkpoint",
+            "Soft checkpoint",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Indirect Checkpoint' Target?",
+        "type": "mcq",
+        "o": [
+            "TARGET_RECOVERY_TIME (Seconds). Engine paces flushing to meet this potential recovery time.",
+            "0 seconds",
+            "100 percent",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Recovery Interval' (sp_configure)?",
+        "type": "mcq",
+        "o": [
+            "Legacy setting (Minutes) for max recovery time. Default 0 (Auto - 1 min)",
+            "1 hour",
+            "1 day",
+            "10 seconds"
+        ]
+    },
+    {
+        "q": "What is 'Ghost Cleanup' interval?",
+        "type": "mcq",
+        "o": [
+            "Runs every few seconds/minutes to delete ghost records",
+            "Hourly",
+            "Daily",
+            "Never"
+        ]
+    },
+    {
+        "q": "Can you disable Ghost Cleanup?",
+        "type": "mcq",
+        "o": [
+            "Yes, trace flag 661 (Not recommended - space bloat)",
+            "No",
+            "Maybe",
+            "Partial"
+        ]
+    },
+    {
+        "q": "What is 'Allocation Unit'?",
+        "type": "mcq",
+        "o": [
+            "Logical unit organizing pages (IN_ROW_DATA, LOB_DATA, ROW_OVERFLOW_DATA)",
+            "Disk",
+            "File",
+            "Folder"
+        ]
+    },
+    {
+        "q": "What is 'IN_ROW_DATA'?",
+        "type": "mcq",
+        "o": [
+            "Pages storing standard row data (except LOBs)",
+            "LOB data",
+            "Overflow",
+            "Index"
+        ]
+    },
+    {
+        "q": "What is 'LOB_DATA'?",
+        "type": "mcq",
+        "o": [
+            "Pages storing Large Objects (Text, Image, XML, Max types)",
+            "Standard rows",
+            "Small data",
+            "Keys"
+        ]
+    },
+    {
+        "q": "What is 'ROW_OVERFLOW_DATA'?",
+        "type": "mcq",
+        "o": [
+            "Pages storing variable length columns pushed off-row because row exceeded 8KB",
+            "LOB",
+            "Standard",
+            "Index"
+        ]
+    },
+    {
+        "q": "What is 'IAM Chain'?",
+        "type": "mcq",
+        "o": [
+            "Linked list of IAM pages tracking extents for an allocation unit",
+            "Data chain",
+            "Log chain",
+            "User chain"
+        ]
+    },
+    {
+        "q": "What is 'Single Page Allocation'?",
+        "type": "mcq",
+        "o": [
+            "Allocating 1 page from Mixed Extent (First 8 pages of object)",
+            "Extent alloc",
+            "Bulk alloc",
+            "Big alloc"
+        ]
+    },
+    {
+        "q": "What is 'Uniform Extent Allocation'?",
+        "type": "mcq",
+        "o": [
+            "Allocating 8 pages (1 Extent) at a time (After first 8 pages)",
+            "Single alloc",
+            "Mixed alloc",
+            "Small alloc"
+        ]
+    },
+    {
+        "q": "What is 'Mixed Page Allocation' (T1118)?",
+        "type": "mcq",
+        "o": [
+            "Default behavior (allocate 8 single pages first). TF 1118 forces Uniform immediately.",
+            "Uniform",
+            "Striped",
+            "Mirrored"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Pool' vs 'Plan Cache'?",
+        "type": "mcq",
+        "o": [
+            "Buffer Pool stores Data Pages; Plan Cache stores Execution Plans",
+            "Same",
+            "Inverse",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Procedure Cache'?",
+        "type": "mcq",
+        "o": [
+            "Older name for Plan Cache",
+            "Data cache",
+            "Log cache",
+            "Temp cache"
+        ]
+    },
+    {
+        "q": "What is 'Ad-Hoc Plan'?",
+        "type": "mcq",
+        "o": [
+            "Plan generated for non-parameterized query",
+            "Stored proc",
+            "Prepared",
+            "Static"
+        ]
+    },
+    {
+        "q": "What is 'Parameter Sniffing'?",
+        "type": "mcq",
+        "o": [
+            "Compiling a plan based on the parameter values of the first execution (Good for first run, maybe bad for others)",
+            "Sniffing network",
+            "Security audit",
+            "Logging"
+        ]
+    },
+    {
+        "q": "How to fix Parameter Sniffing?",
+        "type": "mcq",
+        "o": [
+            "Use OPTION (RECOMPILE), or OPTION (OPTIMIZE FOR UNKNOWN), or Local Variables",
+            "Restart server",
+            "Drop procedure",
+            "Rebuild index"
+        ]
+    },
+    {
+        "q": "What is 'OPTIMIZE FOR UNKNOWN'?",
+        "type": "mcq",
+        "o": [
+            "Instructs optimizer to use average density stats instead of specific parameter value",
+            "Recompile",
+            "Use NULL",
+            "Use Zero"
+        ]
+    },
+    {
+        "q": "What is 'OPTIMIZE FOR (@p = val)'?",
+        "type": "mcq",
+        "o": [
+            "Instructs optimizer to optimize for a specific value (skewed distribution)",
+            "Optimize all",
+            "Optimize random",
+            "Optimize fast"
+        ]
+    },
+    {
+        "q": "What is 'Local Variable' effect on Plan?",
+        "type": "mcq",
+        "o": [
+            "Optimizer cannot see value at compile time; uses statistics density (like UNKNOWN)",
+            "Uses value",
+            "Errors",
+            "Sniffs"
+        ]
+    },
+    {
+        "q": "What is 'Recompile' hint?",
+        "type": "mcq",
+        "o": [
+            "New plan generated for every execution (High CPU, optimal plan per value)",
+            "Cached plan",
+            "Saved plan",
+            "Locked plan"
+        ]
+    },
+    {
+        "q": "What is 'Plan Freezing'?",
+        "type": "mcq",
+        "o": [
+            "Forcing a specific XML plan for a query (USE PLAN hint or Query Store Force)",
+            "Cold plan",
+            "Deleting plan",
+            "Hiding plan"
+        ]
+    },
+    {
+        "q": "What is 'Plan Guide'?",
+        "type": "mcq",
+        "o": [
+            "Object that attaches hints to a query without changing application code",
+            "Manual",
+            "Book",
+            "Tutorial"
+        ]
+    },
+    {
+        "q": "What is 'Template Plan'? (Simple Param)",
+        "type": "mcq",
+        "o": [
+            "Shell plan that can be reused with different parameters (Auto-parameterization)",
+            "Full plan",
+            "Ad-hoc",
+            "Unique"
+        ]
+    },
+    {
+        "q": "What is 'Trivial Plan'?",
+        "type": "mcq",
+        "o": [
+            "Simple plan where optimizer finds obvious best path without full optimization cost (SELECT * FROM T WHERE ID=1)",
+            "Complex plan",
+            "Full optimization",
+            "Parallel plan"
+        ]
+    },
+    {
+        "q": "What is 'Full Optimization'?",
+        "type": "mcq",
+        "o": [
+            "Optimizer explores many plan options (Search 0, 1, 2) to find lowest cost",
+            "Trivial",
+            "Basic",
+            "Quick"
+        ]
+    },
+    {
+        "q": "What is 'Timeout' (Optimizer)?",
+        "type": "mcq",
+        "o": [
+            "Optimizer stops searching for better plan if time spent > expected improvement",
+            "Query timeout",
+            "Lock timeout",
+            "Network timeout"
+        ]
+    },
+    {
+        "q": "What is 'Parallelism' (MAXDOP)?",
+        "type": "mcq",
+        "o": [
+            "Splitting a single query across multiple CPU cores",
+            "Serial",
+            "Single thread",
+            "Background"
+        ]
+    },
+    {
+        "q": "What is 'CXPACKET' wait?",
+        "type": "mcq",
+        "o": [
+            "Wait related to Parallelism (Coordinator waiting for threads / Threads waiting for work)",
+            "Lock wait",
+            "IO wait",
+            "Log wait"
+        ]
+    },
+    {
+        "q": "Is High CXPACKET always bad?",
+        "type": "mcq",
+        "o": [
+            "No, only if accompanied by heavy CPU load or skewed distribution",
+            "Yes always",
+            "Never bad",
+            "Ignore it"
+        ]
+    },
+    {
+        "q": "What is 'Cost Threshold for Parallelism'?",
+        "type": "mcq",
+        "o": [
+            "Cost limit (Default 5) above which SQL considers parallel plan",
+            "Time limit",
+            "Row limit",
+            "Memory limit"
+        ]
+    },
+    {
+        "q": "Recommended 'Cost Threshold'?",
+        "type": "mcq",
+        "o": [
+            "Usually 25-50 (Default 5 is too low for modern CPUs)",
+            "0",
+            "5",
+            "1000"
+        ]
+    },
+    {
+        "q": "What is 'MAXDOP 1'?",
+        "type": "mcq",
+        "o": [
+            "Forces serial execution (Single thread)",
+            "Parallel",
+            "Use all cores",
+            "Use half cores"
+        ]
+    },
+    {
+        "q": "What is 'MAXDOP 0'?",
+        "type": "mcq",
+        "o": [
+            "Allows SQL Server to use all available cores (Default)",
+            "No cores",
+            "Single core",
+            "Half cores"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Gather Streams'?",
+        "type": "mcq",
+        "o": [
+            "Operator bringing parallel threads back into a single stream (Coordinator)",
+            "Splitter",
+            "Distributor",
+            "Sorter"
+        ]
+    },
+    {
+        "q": "What is 'Parallel Repartition Streams'?",
+        "type": "mcq",
+        "o": [
+            "Redistributing rows among threads (e.g. for Hash Join)",
+            "Gathering",
+            "Merging",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'SOS_SCHEDULER_YIELD'?",
+        "type": "mcq",
+        "o": [
+            "Thread voluntarily yielding CPU (Quantum exhausted) to let others run (CPU pressure)",
+            "Disk pressure",
+            "Memory pressure",
+            "Lock pressure"
+        ]
+    },
+    {
+        "q": "What is 'User Mode' vs 'Kernel Mode' in SQL?",
+        "type": "mcq",
+        "o": [
+            "SQL OS manages threads in User Mode (Cooperative multitasking) to avoid Context Switch",
+            "Kernel mode only",
+            "Hardware mode",
+            "Admin mode"
+        ]
+    },
+    {
+        "q": "What is 'UMS' / 'SQLOS'?",
+        "type": "mcq",
+        "o": [
+            "SQL Operating System layer (Scheduling, Memory, IO management)",
+            "Windows",
+            "Linux",
+            "Driver"
+        ]
+    },
+    {
+        "q": "What is 'Fiber Mode' (Lightweight Pooling)?",
+        "type": "mcq",
+        "o": [
+            "Legacy option mapping SQL threads to Fibers (Rarely used now)",
+            "Fast mode",
+            "Cloud mode",
+            "Container"
+        ]
+    },
+    {
+        "q": "What is 'Affinity Mask'?",
+        "type": "mcq",
+        "o": [
+            "Binding SQL Server schedulers to specific CPU cores",
+            "Masking data",
+            "Hiding CPU",
+            "Memory mask"
+        ]
+    },
+    {
+        "q": "What is 'NUMA' (Non-Uniform Memory Access)?",
+        "type": "mcq",
+        "o": [
+            "Hardware architecture where CPU has faster access to local RAM node than remote",
+            "UMA",
+            "Cloud",
+            "Disk"
+        ]
+    },
+    {
+        "q": "How does SQL Server use NUMA?",
+        "type": "mcq",
+        "o": [
+            "Partitions schedulers and memory nodes to align with hardware NUMA for performance",
+            "Ignores it",
+            "Disables it",
+            "Simulates it"
+        ]
+    },
+    {
+        "q": "What is 'Soft NUMA'?",
+        "type": "mcq",
+        "o": [
+            "Software partitioning of CPUs into NUMA nodes (when HW NUMA isn't present or needed)",
+            "Hard NUMA",
+            "Fake NUMA",
+            "Cloud NUMA"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Pool Extension'?",
+        "type": "mcq",
+        "o": [
+            "Extending buffer pool to SSD file (Valid for Standard Edition with limited RAM)",
+            "More RAM",
+            "Swap file",
+            "Cloud cache"
+        ]
+    },
+    {
+        "q": "What is 'Resorce Semaphore' wait?",
+        "type": "mcq",
+        "o": [
+            "Waiting for Query Memory Grant (Execution blocked until RAM available)",
+            "CPU wait",
+            "Lock wait",
+            "Latch wait"
+        ]
+    },
+    {
+        "q": "What causes 'RESOURCE_SEMAPHORE'?",
+        "type": "mcq",
+        "o": [
+            "Large queries needing high memory (Sort/Hash) vs Limited Server Memory",
+            "Disk slow",
+            "CPU slow",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Spill to TempDB'?",
+        "type": "mcq",
+        "o": [
+            "When Memory Grant is insufficient, Sort/Hash writes intermediate data to disk (Slow)",
+            "Success",
+            "Fast",
+            "Crash"
+        ]
+    },
+    {
+        "q": "How to detect Spills?",
+        "type": "mcq",
+        "o": [
+            "Profiler (Sort/Hash Warning), XEvents, or Execution Plan (Yellow Warning icon)",
+            "Look at disk",
+            "Look at RAM",
+            "Guess"
+        ]
+    },
+    {
+        "q": "What is 'Estimated Rows' vs 'Actual Rows'?",
+        "type": "mcq",
+        "o": [
+            "Estimate comes from Statistics; Actual is real count. Large diff = Bad Plan.",
+            "Same always",
+            "Random",
+            "User set"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality Estimation'?",
+        "type": "mcq",
+        "o": [
+            "Process of predicting number of rows for query steps to choose plan",
+            "Counting",
+            "Indexing",
+            "Scanning"
+        ]
+    },
+    {
+        "q": "What is 'Legacy CE' vs 'New CE'?",
+        "type": "mcq",
+        "o": [
+            "Changes in estimation logic algorithms (SQL 2014+). Can toggle with Compatibility Level.",
+            "Old vs New DB",
+            "Slow vs Fast",
+            "Row vs Column"
+        ]
+    },
+    {
+        "q": "What is 'Statistics Histogram'?",
+        "type": "mcq",
+        "o": [
+            "Detailed distribution of values in a column (Max 200 steps)",
+            "Chart",
+            "Graph",
+            "Picture"
+        ]
+    },
+    {
+        "q": "What is 'Density Vector'?",
+        "type": "mcq",
+        "o": [
+            "Statistics component tracking uniqueness (average density) of column combinations",
+            "Physics",
+            "Mass",
+            "Weight"
+        ]
+    },
+    {
+        "q": "What is 'Auto Update Statistics'?",
+        "type": "mcq",
+        "o": [
+            "SQL automatically updates stats when ~20% of rows change (Threshold varies by version)",
+            "Daily",
+            "Hourly",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Async Update Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Updates stats in background; query proceeds with old stats (No blocking)",
+            "Blocks query",
+            "Waits",
+            "Fails"
+        ]
+    },
+    {
+        "q": "What is 'Sampled Scan' (Stats)?",
+        "type": "mcq",
+        "o": [
+            "Building stats by reading random subset of pages (Fast, potentially less accurate)",
+            "Full scan",
+            "No scan",
+            "Index scan"
+        ]
+    },
+    {
+        "q": "What is 'Full Scan' (Stats)?",
+        "type": "mcq",
+        "o": [
+            "Building stats by reading all rows (Slow, 100% accurate)",
+            "Sampled",
+            "Quick",
+            "Approx"
+        ]
+    },
+    {
+        "q": "What is 'Filtered Statistics'?",
+        "type": "mcq",
+        "o": [
+            "Stats created with a WHERE clause (Great for skewed/null data)",
+            "Dirty stats",
+            "Bad stats",
+            "Temp stats"
+        ]
+    },
+    {
+        "q": "What is 'Temporary Object'?",
+        "type": "mcq",
+        "o": [
+            "Object created in TempDB (#Local, ##Global, @Variable)",
+            "Permanent",
+            "System",
+            "User"
+        ]
+    },
+    {
+        "q": "Local Temp Table (#T) visibility?",
+        "type": "mcq",
+        "o": [
+            "Visible only to the session that created it",
+            "All sessions",
+            "Admin only",
+            "Public"
+        ]
+    },
+    {
+        "q": "Global Temp Table (##T) visibility?",
+        "type": "mcq",
+        "o": [
+            "Visible to all sessions; destroyed when creator disconnects and zero references",
+            "Creator only",
+            "Permanent",
+            "System"
+        ]
+    },
+    {
+        "q": "Table Variable (@T) visibility?",
+        "type": "mcq",
+        "o": [
+            "Scope of the batch/procedure only (Implicitly dropped at end)",
+            "Session",
+            "Global",
+            "Database"
+        ]
+    },
+    {
+        "q": "Logging difference: #Table vs @Table?",
+        "type": "mcq",
+        "o": [
+            "Both are logged in TempDB; @Table transactions just don't rollback if outer transaction rolls back (scoped)",
+            "No log for @Table",
+            "No log for #Table",
+            "Fully logged"
+        ]
+    },
+    {
+        "q": "Does Table Variable support Indexes?",
+        "type": "mcq",
+        "o": [
+            "Yes, via inline syntax (PrimaryKey/Unique) or (SQL 2014+) inline index syntax",
+            "No",
+            "Only Clustered",
+            "Only Heap"
+        ]
+    },
+    {
+        "q": "Table Variable vs Temp Table performance?",
+        "type": "mcq",
+        "o": [
+            "@Table has no stats (assumes 1 row) - bad for large data. #Table has stats.",
+            "@Table is faster",
+            "Same",
+            "@Table uses RAM only"
+        ]
+    },
+    {
+        "q": "What is 'Write Skew'?",
+        "type": "mcq",
+        "o": [
+            "Anomaly in Snapshot Isolation where two concurrent transactions read overlapping data but update disjoint sets, violating logic",
+            "Dirty read",
+            "Phantom",
+            "Lost update"
+        ]
+    },
+    {
+        "q": "Does Snapshot Isolation prevent Write Skew?",
+        "type": "mcq",
+        "o": [
+            "No (Requires Serializable to prevent)",
+            "Yes",
+            "Sometimes",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Serializable' vs 'Snapshot' (Write Skew)?",
+        "type": "mcq",
+        "o": [
+            "Serializable uses Range Locks (preventing concurrent inserts/reads); Snapshot allows them but risks Skew",
+            "Same behavior",
+            "Snapshot is stricter",
+            "Serializable risks Skew"
+        ]
+    },
+    {
+        "q": "What is 'Transaction Recovery' phases?",
+        "type": "mcq",
+        "o": [
+            "Analysis, Redo, Undo",
+            "Start, Stop, Rollback",
+            "Backup, Restore, Check",
+            "Read, Write, Verify"
+        ]
+    },
+    {
+        "q": "What happens in 'Analysis Phase'?",
+        "type": "mcq",
+        "o": [
+            "Scans log from last checkpoint to end to identify Dirty Pages and Active Transactions",
+            "Replays data",
+            "Undoes data",
+            "Deletes data"
+        ]
+    },
+    {
+        "q": "What happens in 'Redo Phase'?",
+        "type": "mcq",
+        "o": [
+            "Replays all committed operations (and uncommitted) from log to ensure data pages match log (Rolling Forward)",
+            "Undoes data",
+            "Scans log",
+            "Backs up"
+        ]
+    },
+    {
+        "q": "What happens in 'Undo Phase'?",
+        "type": "mcq",
+        "o": [
+            "Rolls back uncommitted transactions identified in Analysis (Writing compensation records)",
+            "Replays data",
+            "Scans log",
+            "Commits"
+        ]
+    },
+    {
+        "q": "What is 'Compensation Log Record' (CLR)?",
+        "type": "mcq",
+        "o": [
+            "Log record written during Undo phase to document the rollback of a change",
+            "Error log",
+            "Active log",
+            "Backup log"
+        ]
+    },
+    {
+        "q": "What is 'Downtime' during Crash Recovery?",
+        "type": "mcq",
+        "o": [
+            "Database is inaccessible until Redo and Undo complete (unless Enterprise Fast Recovery/ADR used)",
+            "Zero",
+            "1 second",
+            "1 hour"
+        ]
+    },
+    {
+        "q": "Impact of Long Running Transaction on Recovery?",
+        "type": "mcq",
+        "o": [
+            "Increases Undo phase duration significantly (Database unavailable longer)",
+            "No impact",
+            "Reduces time",
+            "Corrupts DB"
+        ]
+    },
+    {
+        "q": "How does ADR fix Long Recovery?",
+        "type": "mcq",
+        "o": [
+            "Redo/Undo are logical and instantaneous using persistent version store; no long physical rollback",
+            "Ignored",
+            "Deleted",
+            "Parallel"
+        ]
+    },
+    {
+        "q": "What is 'Torn Page Detection'?",
+        "type": "mcq",
+        "o": [
+            "Mechanism ensuring 8KB page write wasn't interrupted (e.g. power failure after 4KB)",
+            "Virus scan",
+            "Index check",
+            "Log check"
+        ]
+    },
+    {
+        "q": "What is 'Page Checksum'?",
+        "type": "mcq",
+        "o": [
+            "Calculated checksum stored in page header; verified on read. Detects corruption.",
+            "Row count",
+            "Index ID",
+            "CRC"
+        ]
+    },
+    {
+        "q": "What if Checksum fails?",
+        "type": "mcq",
+        "o": [
+            "SQL raises Error 824 (Logical Consistency Error) - IO subsystem corruption suspect",
+            "Retry",
+            "Ignore",
+            "Fix auto"
+        ]
+    },
+    {
+        "q": "What is 'IO Error 823'?",
+        "type": "mcq",
+        "o": [
+            "OS reported IO failure (Hardware/Driver issue)",
+            "Logic error",
+            "Permission error",
+            "Lock error"
+        ]
+    },
+    {
+        "q": "What is 'IO Error 825'?",
+        "type": "mcq",
+        "o": [
+            "Read-Retry success (Hardware had issue but succeeded on retry). Impending doom.",
+            "Good news",
+            "Fast IO",
+            "Normal"
+        ]
+    },
+    {
+        "q": "What is 'Backup with Checksum'?",
+        "type": "mcq",
+        "o": [
+            "Ensures pages read during backup are valid (No corruption in backup)",
+            "Faster backup",
+            "Smaller backup",
+            "Encrypted"
+        ]
+    },
+    {
+        "q": "What is 'Restore with Checksum'?",
+        "type": "mcq",
+        "o": [
+            "Validates checksums before writing pages during restore",
+            "Faster restore",
+            "Skip check",
+            "Force"
+        ]
+    },
+    {
+        "q": "What is 'Continue After Error' (Restore)?",
+        "type": "mcq",
+        "o": [
+            "Attempts to restore corrupt database (Data loss likely, use as last resort)",
+            "Safe mode",
+            "Best practice",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'Tail Log Backup' requirement?",
+        "type": "mcq",
+        "o": [
+            "Must grab tail log before Restore to avoid data loss (if DB is online/recovering)",
+            "Always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Online Restore'?",
+        "type": "mcq",
+        "o": [
+            "Restoring filegroups/pages while rest of DB remains online (Enterprise only)",
+            "Full restore",
+            "Offline",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Page Restore'?",
+        "type": "mcq",
+        "o": [
+            "Restoring specific corrupt pages from backup (Fast fix for corruption)",
+            "Row restore",
+            "Table restore",
+            "Index restore"
+        ]
+    },
+    {
+        "q": "What is 'PAGLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces Page Locking (instead of Lock Escalation or Row Locking)",
+            "Row lock",
+            "Table lock",
+            "No lock"
+        ]
+    },
+    {
+        "q": "What is 'ROWLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces Row Locking (prevents escalation to Page/Table)",
+            "Page lock",
+            "Table lock",
+            "Full lock"
+        ]
+    },
+    {
+        "q": "What is 'READCOMMITTEDLOCK' hint?",
+        "type": "mcq",
+        "o": [
+            "Forces locking implementation of Read Committed (bypasses RCSI if enabled)",
+            "No locks",
+            "Snapshot",
+            "Dirty"
+        ]
+    },
+    {
+        "q": "What is 'Dirty Page'?",
+        "type": "mcq",
+        "o": [
+            "Page in Buffer Pool modified but not yet flushed to disk",
+            "Corrupt page",
+            "Full page",
+            "Empty page"
+        ]
+    },
+    {
+        "q": "What is 'Clean Page'?",
+        "type": "mcq",
+        "o": [
+            "Page in Buffer Pool that acts as exact copy of disk (not modified)",
+            "New page",
+            "Deleted page",
+            "Empty page"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Manager'?",
+        "type": "mcq",
+        "o": [
+            "Component managing RAM usage (Reading/Writing pages, Caching)",
+            "Lock manager",
+            "Disk manager",
+            "Log manager"
+        ]
+    },
+    {
+        "q": "What is 'Page Life Expectancy' (PLE)?",
+        "type": "mcq",
+        "o": [
+            "Seconds a page stays in buffer before being flushed to room for new pages. High = Good.",
+            "Minutes",
+            "Hours",
+            "Days"
+        ]
+    },
+    {
+        "q": "What is 'Memory Pressure' indication?",
+        "type": "mcq",
+        "o": [
+            "Low PLE (< 300s baseline), High Page Reads/sec (Thrashing)",
+            "High PLE",
+            "Low CPU",
+            "Fast disk"
+        ]
+    },
+    {
+        "q": "What is 'External fragmentation'?",
+        "type": "mcq",
+        "o": [
+            "Logical order of pages does not match physical order on disk (Random IO)",
+            "Internal",
+            "RAM frag",
+            "CPU frag"
+        ]
+    },
+    {
+        "q": "What is 'Internal fragmentation'?",
+        "type": "mcq",
+        "o": [
+            "Empty space inside pages (e.g. Page 50% full)",
+            "External",
+            "Disk frag",
+            "File frag"
+        ]
+    },
+    {
+        "q": "How to fix Fragmentation?",
+        "type": "mcq",
+        "o": [
+            "ALTER INDEX REORGANIZE (Online, defrags leaf) or REBUILD (New pages)",
+            "Delete data",
+            "Shrink DB",
+            "Restart"
+        ]
+    },
+    {
+        "q": "REORGANIZE vs REBUILD transaction?",
+        "type": "mcq",
+        "o": [
+            "Reorganize is always online and uses small transactions (stoppable). Rebuild is one big transaction (unless Resumable).",
+            "Same",
+            "Rebuild is faster",
+            "Reorg locks table"
+        ]
+    },
+    {
+        "q": "What is 'Fill Factor' impact on Fragmentation?",
+        "type": "mcq",
+        "o": [
+            "Lower fill factor (e.g. 80%) leaves space prevents page splits on insert (Less fragmentation)",
+            "More fragmentation",
+            "No impact",
+            "Wastes space only"
+        ]
+    },
+    {
+        "q": "What is 'Pad Index'?",
+        "type": "mcq",
+        "o": [
+            "Applies Fill Factor to intermediate index pages (not just leaf)",
+            "Padding data",
+            "Leaf only",
+            "Root only"
+        ]
+    },
+    {
+        "q": "What is 'Database_Transaction_Log_Bytes_Used'?",
+        "type": "mcq",
+        "o": [
+            "DMV counter showing log usage per transaction",
+            "Total logs",
+            "File size",
+            "Disk size"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_tran_database_transactions'?",
+        "type": "mcq",
+        "o": [
+            "DMV showing details of transactions at DB level (State, Log Used, LSNs)",
+            "User details",
+            "Lock details",
+            "Wait details"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_tran_session_transactions'?",
+        "type": "mcq",
+        "o": [
+            "DMV linking Session ID to Transaction ID",
+            "Log details",
+            "Lock details",
+            "Object details"
+        ]
+    },
+    {
+        "q": "What is 'sys.dm_tran_locks'?",
+        "type": "mcq",
+        "o": [
+            "DMV showing active locks (Resource, Mode, Status)",
+            "Log locks",
+            "Deadlocks",
+            "History"
+        ]
+    },
+    {
+        "q": "What is 'Login Timeout'?",
+        "type": "mcq",
+        "o": [
+            "Time client waits for connection establishment (Default 15s)",
+            "Infinite",
+            "Query timeout",
+            "Lock timeout"
+        ]
+    },
+    {
+        "q": "What is 'Command Timeout'?",
+        "type": "mcq",
+        "o": [
+            "Time client waits for query completion (Default 30s usually)",
+            "Infinite",
+            "Login timeout",
+            "Check timeout"
+        ]
+    },
+    {
+        "q": "What happens on Command Timeout?",
+        "type": "mcq",
+        "o": [
+            "Client sends Attention signal (Cancel); SQL Server cancels query and Rolls Back",
+            "Server continues",
+            "Data saved",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Attention' signal?",
+        "type": "mcq",
+        "o": [
+            "TDS packet telling SQL to stop execution",
+            "Hello",
+            "Ping",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Query Governor Cost Limit'?",
+        "type": "mcq",
+        "o": [
+            "Server setting to reject queries with estimated cost > Limit",
+            "Kill query",
+            "Slow query",
+            "Log query"
+        ]
+    },
+    {
+        "q": "What is 'Ad-Hoc Distributed Queries' option?",
+        "type": "mcq",
+        "o": [
+            "Config to allow OPENROWSET/OPENDATASOURCE (Security risk)",
+            "Safe",
+            "Default On",
+            "Performance"
+        ]
+    },
+    {
+        "q": "What is 'OLE Automation' option?",
+        "type": "mcq",
+        "o": [
+            "Config to allow sp_OACreate (COM objects) - High security risk",
+            "Safe",
+            "Modern",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'xp_cmdshell'?",
+        "type": "mcq",
+        "o": [
+            "Extended proc to run OS commands from SQL (Major security risk)",
+            "Safe",
+            "Shell",
+            "Terminal"
+        ]
+    },
+    {
+        "q": "How to secure xp_cmdshell?",
+        "type": "mcq",
+        "o": [
+            "Use Proxy Account for non-sysadmins (Limit privileges)",
+            "Disable it",
+            "Enable all",
+            "Delete it"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Database Ownership Chaining'?",
+        "type": "mcq",
+        "o": [
+            "Allows ownership chain to extend across databases (Security implication)",
+            "Linked server",
+            "Broken chain",
+            "Mirror"
+        ]
+    },
+    {
+        "q": "What is 'Trustworthy' database setting?",
+        "type": "mcq",
+        "o": [
+            "Indicates DB is trusted; allows IMPERSONATE and unsafe CLR assemblies (High risk)",
+            "Secure",
+            "Safe",
+            "ReadOnly"
+        ]
+    },
+    {
+        "q": "What is 'Guest User'?",
+        "type": "mcq",
+        "o": [
+            "User allowing anonymous access if enabled (Security best practice: Disable)",
+            "Admin",
+            "Owner",
+            "System"
+        ]
+    },
+    {
+        "q": "What is 'Public Role'?",
+        "type": "mcq",
+        "o": [
+            "Default role every user belongs to. Permissions granted here apply to everyone.",
+            "Admin role",
+            "Private role",
+            "Hidden role"
+        ]
+    },
+    {
+        "q": "What is 'sysadmin' role?",
+        "type": "mcq",
+        "o": [
+            "Server role with unrestricted access to everything",
+            "User",
+            "Creator",
+            "Reader"
+        ]
+    },
+    {
+        "q": "What is 'db_owner' role?",
+        "type": "mcq",
+        "o": [
+            "Database role with full control over that specific database",
+            "Sysadmin",
+            "Reader",
+            "Writer"
+        ]
+    },
+    {
+        "q": "What is 'db_datareader'?",
+        "type": "mcq",
+        "o": [
+            "Role allowing SELECT on all user tables/views",
+            "Update",
+            "Insert",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'db_datawriter'?",
+        "type": "mcq",
+        "o": [
+            "Role allowing INSERT, UPDATE, DELETE on all user tables",
+            "Select",
+            "Execute",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'db_ddladmin'?",
+        "type": "mcq",
+        "o": [
+            "Role allowing creation/modification of schema objects (No data access by default)",
+            "Data reader",
+            "Data writer",
+            "Owner"
+        ]
+    },
+    {
+        "q": "What is 'EXECUTE AS' clause?",
+        "type": "mcq",
+        "o": [
+            "Impersonates another user context during execution of module",
+            "Login",
+            "Logout",
+            "Switch"
+        ]
+    },
+    {
+        "q": "What is 'EXECUTE AS OWNER'?",
+        "type": "mcq",
+        "o": [
+            "Runs module with permissions of the object owner (avoids granting direct permissions)",
+            "As caller",
+            "As self",
+            "As guest"
+        ]
+    },
+    {
+        "q": "What is 'EXECUTE AS CALLER'?",
+        "type": "mcq",
+        "o": [
+            "Runs module with permissions of the user calling it (Default)",
+            "As owner",
+            "As admin",
+            "As system"
+        ]
+    },
+    {
+        "q": "What is 'Buffer Overflow'?",
+        "type": "mcq",
+        "o": [
+            "Security vulnerability where writing data past buffer end overwrites memory",
+            "Memory leak",
+            "Disk full",
+            "Slow IO"
+        ]
+    },
+    {
+        "q": "What is 'Encryption Hierarchy'?",
+        "type": "mcq",
+        "o": [
+            "Windows -> SMK -> DMK -> Certificate -> Symmetric Key -> Data",
+            "User -> Data",
+            "Data -> Key",
+            "Cert -> Pass"
+        ]
+    },
+    {
+        "q": "What is 'Symmetric Key'?",
+        "type": "mcq",
+        "o": [
+            "Use same key to encrypt and decrypt (Fast, less secure storage)",
+            "Asymmetric",
+            "Cert",
+            "Public key"
+        ]
+    },
+    {
+        "q": "What is 'Asymmetric Key'?",
+        "type": "mcq",
+        "o": [
+            "Public/Private key pair (Slow, secure exchange)",
+            "Symmetric",
+            "AES",
+            "DES"
+        ]
+    },
+    {
+        "q": "What is 'AES_256'?",
+        "type": "mcq",
+        "o": [
+            "Strong encryption algorithm (Advanced Encryption Standard)",
+            "Weak",
+            "Old",
+            "Fastest"
+        ]
+    },
+    {
+        "q": "What is 'DES'?",
+        "type": "mcq",
+        "o": [
+            "Deprecated weak encryption standard",
+            "Strong",
+            "New",
+            "Best"
+        ]
+    },
+    {
+        "q": "What is 'Hash'?",
+        "type": "mcq",
+        "o": [
+            "One-way function transforming input to fixed string (Cannot decrypt)",
+            "Encryption",
+            "Compression",
+            "Encoding"
+        ]
+    },
+    {
+        "q": "What is 'Salt' in Hashing?",
+        "type": "mcq",
+        "o": [
+            "Random data added to input to ensure same password hashes differently",
+            "Pepper",
+            "Sugar",
+            "Spice"
+        ]
+    },
+    {
+        "q": "What is 'Audit' object?",
+        "type": "mcq",
+        "o": [
+            "Server object defining Where to write audit logs (File, EventLog)",
+            "Specification",
+            "Rule",
+            "Trigger"
+        ]
+    },
+    {
+        "q": "What is 'Audit Specification'?",
+        "type": "mcq",
+        "o": [
+            "Defines What events to audit (Select, Update, Login)",
+            "Target",
+            "Destination",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Change Data Capture' (CDC) retention?",
+        "type": "mcq",
+        "o": [
+            "Default 3 days (Cleanup job deletes old)",
+            "Forever",
+            "1 hour",
+            "1 year"
+        ]
+    },
+    {
+        "q": "Does CDC use triggers?",
+        "type": "mcq",
+        "o": [
+            "No, it reads the Transaction Log (Async)",
+            "Yes",
+            "Sometimes",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Trigger' overhead?",
+        "type": "mcq",
+        "o": [
+            "Runs within the transaction scope (Synchronous); slows down DML directly",
+            "Async",
+            "Fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if Trigger fails?",
+        "type": "mcq",
+        "o": [
+            "Original transaction rolls back",
+            "Trigger ignored",
+            "Warning",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Nested Trigger' config?",
+        "type": "mcq",
+        "o": [
+            "Server option controlling if triggers can fire other triggers (Default 1/True)",
+            "Disabled",
+            "Max 10",
+            "Max 5"
+        ]
+    },
+    {
+        "q": "What is 'Recursive Trigger' config?",
+        "type": "mcq",
+        "o": [
+            "Database option controlling direct recursion (Default Off)",
+            "On",
+            "Max 10",
+            "Max 5"
+        ]
+    },
+    {
+        "q": "What is 'Event Notification'?",
+        "type": "mcq",
+        "o": [
+            "Async alternative to DDL Triggers; sends event to Service Broker queue",
+            "Sync",
+            "Log",
+            "Audit"
+        ]
+    },
+    {
+        "q": "What is 'Database Mail'?",
+        "type": "mcq",
+        "o": [
+            "Subsystem to send emails from SQL Server (SMTP)",
+            "Outlook",
+            "Exchange",
+            "Pop3"
+        ]
+    },
+    {
+        "q": "What is 'Service Broker' Priority?",
+        "type": "mcq",
+        "o": [
+            "Prioritizing conversation groups (1-10) so critical messages process first",
+            "FIFO",
+            "LIFO",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Route' (Service Broker)?",
+        "type": "mcq",
+        "o": [
+            "Mapping service name to network address",
+            "Map",
+            "Path",
+            "Way"
+        ]
+    },
+    {
+        "q": "What is 'Remote Service Binding'?",
+        "type": "mcq",
+        "o": [
+            "Security Context used to connect to remote service",
+            "Link",
+            "User",
+            "Pass"
+        ]
+    },
+    {
+        "q": "What is 'Dialog'?",
+        "type": "mcq",
+        "o": [
+            "Conversation between two services (Monologue is one-way)",
+            "Chat",
+            "Talk",
+            "Message"
+        ]
+    },
+    {
+        "q": "What is 'End Conversation'?",
+        "type": "mcq",
+        "o": [
+            "Closes the dialog (Must be done by both sides)",
+            "Stop",
+            "Kill",
+            "Terminate"
+        ]
+    },
+    {
+        "q": "What is 'Fire-and-Forget'?",
+        "type": "mcq",
+        "o": [
+            "Ending conversation immediately after sending message (One way)",
+            "Wait",
+            "Response",
+            "Ack"
+        ]
+    },
+    {
+        "q": "What is 'Poison Message' Handling?",
+        "type": "mcq",
+        "o": [
+            "Disabling queue if 5 consecutive rollbacks occur",
+            "Deleting message",
+            "Logging",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Dead Letter Queue'?",
+        "type": "mcq",
+        "o": [
+            "Queue holding undeliverable messages (Transmission Queue)",
+            "Inbox",
+            "Outbox",
+            "Drafts"
+        ]
+    },
+    {
+        "q": "What is 'Activation Stored Proc'?",
+        "type": "mcq",
+        "o": [
+            "Proc that wakes up to process queue messages (Scales up instances)",
+            "Trigger",
+            "Job",
+            "Task"
+        ]
+    },
+    {
+        "q": "What is 'Max Queue Readers'?",
+        "type": "mcq",
+        "o": [
+            "Limit on concurrent activation procedure instances",
+            "Unlimited",
+            "One",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Conversation Group'?",
+        "type": "mcq",
+        "o": [
+            "Grouping related messages to ensure ordered processing by same reader (locking)",
+            "Batch",
+            "List",
+            "Table"
+        ]
+    },
+    {
+        "q": "What is 'Service Broker Identifier'?",
+        "type": "mcq",
+        "o": [
+            "GUID identifying the database service broker (Must be unique for routing)",
+            "ID",
+            "Name",
+            "Key"
+        ]
+    },
+    {
+        "q": "What happens on Restore regarding Service Broker?",
+        "type": "mcq",
+        "o": [
+            "Broker ID preserved by default; 'NEW_BROKER' option generates new GUID",
+            "Disabled",
+            "Deleted",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'External Activation' (SSB)?",
+        "type": "mcq",
+        "o": [
+            "Triggering an external executable (exe) instead of internal stored proc",
+            "Internal",
+            "Remote",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Service Master Key' backup?",
+        "type": "mcq",
+        "o": [
+            "BACKUP SERVICE MASTER KEY TO FILE (Critical for restoring encryption on new server)",
+            "Auto",
+            "Not needed",
+            "Copy file"
+        ]
+    },
+    {
+        "q": "What is 'Database Master Key' regeneration?",
+        "type": "mcq",
+        "o": [
+            "Required if Service Master Key changes or is restored (OPEN MASTER KEY...)",
+            "Auto",
+            "Never",
+            "Easy"
+        ]
+    },
+    {
+        "q": "What is 'Certificate' backup?",
+        "type": "mcq",
+        "o": [
+            "BACKUP CERTIFICATE (Includes Public Key). Private Key backed up separately with password.",
+            "Copy",
+            "Export",
+            "Save"
+        ]
+    },
+    {
+        "q": "What is 'EKM' (Extensible Key Management)?",
+        "type": "mcq",
+        "o": [
+            "Using Hardware Security Module (HSM) to manage keys (Azure Key Vault)",
+            "Local keys",
+            "Software keys",
+            "Files"
+        ]
+    },
+    {
+        "q": "What is 'Azure Key Vault' integration?",
+        "type": "mcq",
+        "o": [
+            "Storing TDE / Always Encrypted keys in cloud vault (Separation of duties)",
+            "Local",
+            "Disk",
+            "USB"
+        ]
+    },
+    {
+        "q": "What is 'Always Encrypted' driver role?",
+        "type": "mcq",
+        "o": [
+            "Client driver handles encryption/decryption transparently (Column Master Key)",
+            "Server",
+            "Network",
+            "OS"
+        ]
+    },
+    {
+        "q": "What is 'Deterministic Encryption' (Always Encrypted)?",
+        "type": "mcq",
+        "o": [
+            "Same input maps to same output (Allows equality search/indexing)",
+            "Random",
+            "Secure",
+            "Unique"
+        ]
+    },
+    {
+        "q": "What is 'Randomized Encryption' (Always Encrypted)?",
+        "type": "mcq",
+        "o": [
+            "Same input maps to different output (More secure, but prevents equality search/indexing)",
+            "Deterministic",
+            "Less secure",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Secure Enclave'?",
+        "type": "mcq",
+        "o": [
+            "Protected memory region allowing SQL Server to compute on encrypted data (Rich queries on Randomized)",
+            "Disk partition",
+            "Network zone",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'Ledger Database'?",
+        "type": "mcq",
+        "o": [
+            "Database where all tables are Ledger Tables (Tamper-evident)",
+            "Audit DB",
+            "Log DB",
+            "Archive DB"
+        ]
+    },
+    {
+        "q": "What is 'Database Digest'?",
+        "type": "mcq",
+        "o": [
+            "Cryptographic summary of the database at a point in time (Used to verify Ledger)",
+            "Summary",
+            "Report",
+            "Log"
+        ]
+    },
+    {
+        "q": "Where are 'Digest' stored?",
+        "type": "mcq",
+        "o": [
+            "Trusted storage (Azure Blob IMMUTABLE storage / Confidential Ledger)",
+            "Local disk",
+            "TempDB",
+            "Ram"
+        ]
+    },
+    {
+        "q": "What happens if Ledger verification fails?",
+        "type": "mcq",
+        "o": [
+            "Indicates potential tampering (Data doesn't match hash chain)",
+            "Crash",
+            "Stop",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Temporal Table' History Retention?",
+        "type": "mcq",
+        "o": [
+            "Configurable policy to auto-delete old history rows (Manage storage)",
+            "Forever",
+            "1 day",
+            "None"
+        ]
+    },
+    {
+        "q": "Can you Modify History Table directly?",
+        "type": "mcq",
+        "o": [
+            "No, it is read-only (managed by system) unless versioning is turned OFF",
+            "Yes",
+            "Always",
+            "If admin"
+        ]
+    },
+    {
+        "q": "What is 'Data Classification' Taxonomy?",
+        "type": "mcq",
+        "o": [
+            "Labeling scheme (Confidential, GDPR, Public) for columns",
+            "Tree",
+            "List",
+            "Tags"
+        ]
+    },
+    {
+        "q": "What is 'SQL Injection' via Second Order?",
+        "type": "mcq",
+        "o": [
+            "Malicious data inserted previously is executed later when used in dynamic SQL",
+            "Direct",
+            "First order",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Blind SQL Injection'?",
+        "type": "mcq",
+        "o": [
+            "Inferring data by asking True/False questions (e.g. Page loads vs Error/Delay)",
+            "Direct",
+            "Visible",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Error-Based SQL Injection'?",
+        "type": "mcq",
+        "o": [
+            "Forcing DB to output data inside error messages",
+            "Blind",
+            "Silent",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Union-Based SQL Injection'?",
+        "type": "mcq",
+        "o": [
+            "Using UNION operator to combine results of original query with malicious query",
+            "Join",
+            "Merge",
+            "Select"
+        ]
+    },
+    {
+        "q": "What is 'PolyBase' Scale-Out Group?",
+        "type": "mcq",
+        "o": [
+            "Cluster of SQL instances working together to process external data (Head/Compute nodes)",
+            "Single node",
+            "Cloud",
+            "Replica"
+        ]
+    },
+    {
+        "q": "What is 'Hadoop' connectivity (PolyBase)?",
+        "type": "mcq",
+        "o": [
+            "Ability to query HDFS data via T-SQL",
+            "S3",
+            "Blob",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Azure Blob Storage' connectivity?",
+        "type": "mcq",
+        "o": [
+            "Bulk Insert / PolyBase accessing files in cloud container",
+            "Local",
+            "Tape",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Shared Access Signature' (SAS)?",
+        "type": "mcq",
+        "o": [
+            "Token granting limited access to Azure Storage resources (Used in Credentials)",
+            "Password",
+            "User",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'Managed Identity'?",
+        "type": "mcq",
+        "o": [
+            "Identity assigned to Azure resource (SQL Server) to authenticate to other services (No password rotation needed)",
+            "User",
+            "Login",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'Error 9002'?",
+        "type": "mcq",
+        "o": [
+            "The Transaction Log for database is full",
+            "Disk full",
+            "Memory full",
+            "CPU full"
+        ]
+    },
+    {
+        "q": "What is 'Error 1205'?",
+        "type": "mcq",
+        "o": [
+            "Transaction (Process ID) was deadlocked on resources and has been chosen as validation victim",
+            "Timeout",
+            "Blocking",
+            "Connection"
+        ]
+    },
+    {
+        "q": "What is 'Error 1222'?",
+        "type": "mcq",
+        "o": [
+            "Lock request time out period exceeded",
+            "Deadlock",
+            "Block",
+            "Fatal"
+        ]
+    },
+    {
+        "q": "What is 'Error 824'?",
+        "type": "mcq",
+        "o": [
+            "Logical consistency-based I/O error (Checksum failure)",
+            "Hardware error",
+            "Network error",
+            "User error"
+        ]
+    },
+    {
+        "q": "What is 'Error 1105'?",
+        "type": "mcq",
+        "o": [
+            "Could not allocate space for object in database 'X' because 'PRIMARY' filegroup is full",
+            "Log full",
+            "Temp full",
+            "Ram full"
+        ]
+    },
+    {
+        "q": "What is 'DBCC UPDATEUSAGE'?",
+        "type": "mcq",
+        "o": [
+            "Corrects row/page inconsistencies in catalog views (Fixes sp_spaceused)",
+            "Updates stats",
+            "Checks DB",
+            "Shrinks DB"
+        ]
+    },
+    {
+        "q": "What is 'DBCC OPENTRAN'?",
+        "type": "mcq",
+        "o": [
+            "Displays information about the oldest active transaction",
+            "Closes trans",
+            "Kills trans",
+            "Logs trans"
+        ]
+    },
+    {
+        "q": "What is 'DBCC INPUTBUFFER'?",
+        "type": "mcq",
+        "o": [
+            "Displays the last statement sent from a client to a specific SPID",
+            "Output buffer",
+            "Plan cache",
+            "Log buffer"
+        ]
+    },
+    {
+        "q": "What is 'dm_exec_sql_text'?",
+        "type": "mcq",
+        "o": [
+            "DMF converting sql_handle to SQL text",
+            "Table",
+            "View",
+            "Proc"
+        ]
+    },
+    {
+        "q": "What is 'dm_exec_query_plan'?",
+        "type": "mcq",
+        "o": [
+            "DMF converting plan_handle to XML Execution Plan",
+            "Text plan",
+            "Estimated plan",
+            "Cached plan"
+        ]
+    },
+    {
+        "q": "What is 'Query Hash' usage?",
+        "type": "mcq",
+        "o": [
+            "Identifying queries with same logic (even if ad-hoc) to analyze aggregate performance",
+            "Security",
+            "Encryption",
+            "Ranking"
+        ]
+    },
+    {
+        "q": "What is 'Plan Hash' usage?",
+        "type": "mcq",
+        "o": [
+            "Identifying if same query has multiple execution plans",
+            "Security",
+            "Encryption",
+            "Id"
+        ]
+    },
+    {
+        "q": "What is 'Force Plan' (Query Store)?",
+        "type": "mcq",
+        "o": [
+            "Enforcing a specific plan for a Query Hash (Regression fix)",
+            "Hint",
+            "Lock",
+            "Pin"
+        ]
+    },
+    {
+        "q": "What is 'Unforce Plan'?",
+        "type": "mcq",
+        "o": [
+            "Allowing optimizer to choose plan again",
+            "Unlock",
+            "Release",
+            "Reset"
+        ]
+    },
+    {
+        "q": "What is 'Parameterization' (Simple)?",
+        "type": "mcq",
+        "o": [
+            "Auto-parameterizing exact matches only",
+            "Forced",
+            "Complex",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Parameterization' (Forced)?",
+        "type": "mcq",
+        "o": [
+            "Aggressively parameterizing most queries (Reduces compilation, increases risk of bad plans)",
+            "Simple",
+            "None",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'Plan Guide' types?",
+        "type": "mcq",
+        "o": [
+            "OBJECT, SQL, TEMPLATE",
+            "Table, View, Proc",
+            "Index, Key, Constraint",
+            "User, Role, Login"
+        ]
+    },
+    {
+        "q": "What is 'Template Plan Guide'?",
+        "type": "mcq",
+        "o": [
+            "Used to override parameterization behavior (e.g. force parameterization for specific query)",
+            "Simple",
+            "Object",
+            "Sql"
+        ]
+    },
+    {
+        "q": "What is 'Optimize for Ad Hoc Workloads'?",
+        "type": "mcq",
+        "o": [
+            "Reduces memory usage by storing compiled plan stub on 1st run, full plan on 2nd",
+            "Increases memory",
+            "Disables cache",
+            "Clears cache"
+        ]
+    },
+    {
+        "q": "What is 'Query Store' modes?",
+        "type": "mcq",
+        "o": [
+            "OFF, READ_ONLY, READ_WRITE",
+            "On, Off",
+            "Simple, Full",
+            "Active, Passive"
+        ]
+    },
+    {
+        "q": "Why Query Store READ_ONLY?",
+        "type": "mcq",
+        "o": [
+            "Disk space full or max size reached (Stops collecting new data)",
+            "Admin set",
+            "Default",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Max Plans Per Query'?",
+        "type": "mcq",
+        "o": [
+            "Limit on plans stored per query in Query Store (Default 200) to save space",
+            "Unlimited",
+            "One",
+            "Five"
+        ]
+    },
+    {
+        "q": "What is 'Stale Query Threshold'?",
+        "type": "mcq",
+        "o": [
+            "Time before inactive stats are purged from Query Store (Default 30 days)",
+            "1 day",
+            "1 hour",
+            "Forever"
+        ]
+    },
+    {
+        "q": "What is 'Wait Statistics' capture?",
+        "type": "mcq",
+        "o": [
+            "Query Store captures wait stats per query (CPU, IO, Lock, Latch)",
+            "Profiler",
+            "Perfmon",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Automatic Tuning' options?",
+        "type": "mcq",
+        "o": [
+            "FORCE_LAST_GOOD_PLAN (High confidence regression fix)",
+            "Create Index",
+            "Drop Index",
+            "Rebuild"
+        ]
+    },
+    {
+        "q": "What is 'Resumable Online Index Create'?",
+        "type": "mcq",
+        "o": [
+            "SQL 2019+ feature allowing pause/resume of index creation (Log management)",
+            "Rebuild",
+            "Reorg",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Clustered Columnstore' transaction?",
+        "type": "mcq",
+        "o": [
+            "Updates flow to Deltastore (B-Tree) then compressed to Columnstore by Tuple Mover",
+            "Direct write",
+            "No logs",
+            "ReadOnly"
+        ]
+    },
+    {
+        "q": "What is 'Tuple Mover'?",
+        "type": "mcq",
+        "o": [
+            "Background process compressing closed Deltastore groups into Columnstore segments",
+            "Mover",
+            "Archiver",
+            "Cleaner"
+        ]
+    },
+    {
+        "q": "What is 'Bulk Load' to Columnstore?",
+        "type": "mcq",
+        "o": [
+            "Bypasses Deltastore if batch size > 102,400 (Goes direct to compressed segment)",
+            "Slow",
+            "Row by row",
+            "Logged"
+        ]
+    },
+    {
+        "q": "What is 'Trickle Insert'?",
+        "type": "mcq",
+        "o": [
+            "Small inserts going into Deltastore (Rowgroup)",
+            "Bulk",
+            "Fast",
+            "Direct"
+        ]
+    },
+    {
+        "q": "What is 'Deleted Bitmap'?",
+        "type": "mcq",
+        "o": [
+            "Tracks deleted rows in Columnstore (Rows not physically removed immediately)",
+            "Image",
+            "Icon",
+            "Flag"
+        ]
+    },
+    {
+        "q": "What is 'Reorganize' on Columnstore?",
+        "type": "mcq",
+        "o": [
+            "Compresses closed Rowgroups, merges small Rowgroups, removes deleted rows (Online)",
+            "Rebuild",
+            "Shrink",
+            "Sort"
+        ]
+    },
+    {
+        "q": "What is 'Rebuild' on Columnstore?",
+        "type": "mcq",
+        "o": [
+            "Full rewrite of all segments (clears fragmentation completely)",
+            "Reorg",
+            "Sort",
+            "Update"
+        ]
+    },
+    {
+        "q": "What is 'Archive Compression' (Columnstore)?",
+        "type": "mcq",
+        "o": [
+            "Higher compression algorithm (slower access) for cold data",
+            "Zip",
+            "Rar",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'Batch Mode' memory grant?",
+        "type": "mcq",
+        "o": [
+            "Usually larger than Row Mode due to vector processing and hash structures",
+            "Smaller",
+            "Zero",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Batch Mode' Adaptive Memory Grant?",
+        "type": "mcq",
+        "o": [
+            "Learns from previous executions (Spill vs Waste) and adjusts grant size",
+            "Static",
+            "Fixed",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Interleaved Execution' (IQP)?",
+        "type": "mcq",
+        "o": [
+            "Pauses optimization to execute Multi-Statement TVF, gets accurate cardinality, resumes optimization",
+            "Parallel",
+            "Async",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Deferred Compilation'?",
+        "type": "mcq",
+        "o": [
+            "Delays compilation of Table Variable plan until first execution (Fixes 1-row guess)",
+            "Lazy",
+            "Slow",
+            "Late"
+        ]
+    },
+    {
+        "q": "What is 'Approximate Count Distinct'?",
+        "type": "mcq",
+        "o": [
+            "HyperLogLog algorithm for fast unique count on massive datasets",
+            "Count(*)",
+            "Distinct",
+            "Sum"
+        ]
+    },
+    {
+        "q": "What is 'TempDB' Metadata Contention?",
+        "type": "mcq",
+        "o": [
+            "Contention on system tables in TempDB during heavy DDL (Create/Drop temp tables)",
+            "Data contention",
+            "Log contention",
+            "Disk contention"
+        ]
+    },
+    {
+        "q": "Solution for TempDB Metadata Contention?",
+        "type": "mcq",
+        "o": [
+            "Memory-Optimized TempDB Metadata (SQL 2019+ feature)",
+            "More files",
+            "Faster disk",
+            "Less temp tables"
+        ]
+    },
+    {
+        "q": "What is 'Hybrid Buffer Pool'?",
+        "type": "mcq",
+        "o": [
+            "Using PMEM (Persistent Memory) as byte-addressable extension of buffer pool",
+            "SSD",
+            "HDD",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'DaX' (Direct Access)?",
+        "type": "mcq",
+        "o": [
+            "NTFS volume mode allowing direct memory mapping of files (PMEM)",
+            "Driver",
+            "Format",
+            "Protocol"
+        ]
+    },
+    {
+        "q": "What is 'Backup to URL'?",
+        "type": "mcq",
+        "o": [
+            "Backing up directly to Azure Blob Storage",
+            "Web",
+            "FTP",
+            "Email"
+        ]
+    },
+    {
+        "q": "What is 'File-Snapshot Backup'?",
+        "type": "mcq",
+        "o": [
+            "Instant backup using Azure Blob Snapshots (for DB files on Blob)",
+            "Fast",
+            "Slow",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'RPO' (Recovery Point Objective)?",
+        "type": "mcq",
+        "o": [
+            "Max acceptable data loss (Time measured backward from disaster)",
+            "Recovery Time",
+            "Uptime",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'RTO' (Recovery Time Objective)?",
+        "type": "mcq",
+        "o": [
+            "Max acceptable downtime (Time measured forward from disaster to restoration)",
+            "Data loss",
+            "Speed",
+            "Latency"
+        ]
+    },
+    {
+        "q": "What is 'Log Shipping'?",
+        "type": "mcq",
+        "o": [
+            "Automated backup, copy, read-restore of transaction logs to warm standby",
+            "Mirroring",
+            "Replication",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "What is 'Replication' (Transactional)?",
+        "type": "mcq",
+        "o": [
+            "Reading log to capture changes and applying them to subscriber (Row/Object level)",
+            "Copy",
+            "Mirror",
+            "Ship"
+        ]
+    },
+    {
+        "q": "What is 'Distributor'?",
+        "type": "mcq",
+        "o": [
+            "Server storing replication history and transactions (Distribution DB)",
+            "Publisher",
+            "Subscriber",
+            "Agent"
+        ]
+    },
+    {
+        "q": "What is 'Publisher'?",
+        "type": "mcq",
+        "o": [
+            "Source database server in Replication",
+            "Client",
+            "Target",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Subscriber'?",
+        "type": "mcq",
+        "o": [
+            "Destination database server in Replication",
+            "Source",
+            "Distributor",
+            "Master"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Replication'?",
+        "type": "mcq",
+        "o": [
+            "Applying full initial snapshot periodically (No log reading)",
+            "Transactional",
+            "Merge",
+            "Peer"
+        ]
+    },
+    {
+        "q": "What is 'Merge Replication'?",
+        "type": "mcq",
+        "o": [
+            "Bi-directional sync where changes merge (Conflict resolution required)",
+            "One way",
+            "Archive",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Peer-to-Peer Replication'?",
+        "type": "mcq",
+        "o": [
+            "Multi-master topological replication based on Transactional Replication",
+            "Client-Server",
+            "Ring",
+            "Star"
+        ]
+    },
+    {
+        "q": "What is 'Conflict Resolution' (Merge)?",
+        "type": "mcq",
+        "o": [
+            "Rules (Publisher wins / Subscriber wins / Custom) to handle simultaneous updates",
+            "First wins",
+            "Last wins",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Immediate Sync'?",
+        "type": "mcq",
+        "o": [
+            "Option keeping snapshot available for new subscribers to join immediately",
+            "Delay",
+            "Wait",
+            "Offline"
+        ]
+    },
+    {
+        "q": "What is 'Publication'?",
+        "type": "mcq",
+        "o": [
+            "Collection of articles (tables/objects) to be replicated",
+            "Book",
+            "List",
+            "Group"
+        ]
+    },
+    {
+        "q": "What is 'Article'?",
+        "type": "mcq",
+        "o": [
+            "Single object (Table, Proc) in a Publication",
+            "Row",
+            "Column",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Filter' (Replication)?",
+        "type": "mcq",
+        "o": [
+            "Row filter (WHERE) or Column filter restricting data sent to subscriber",
+            "Sort",
+            "Index",
+            "Join"
+        ]
+    },
+    {
+        "q": "What is 'Subscription' type Push?",
+        "type": "mcq",
+        "o": [
+            "Distributor agent runs at Distributor and pushes changes",
+            "Pull",
+            "Manual",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'Subscription' type Pull?",
+        "type": "mcq",
+        "o": [
+            "Subscriber agent runs at Subscriber and pulls changes (Lower load on Distributor)",
+            "Push",
+            "Auto",
+            "Remote"
+        ]
+    },
+    {
+        "q": "What is 'Agent Profile'?",
+        "type": "mcq",
+        "o": [
+            "Configuration settings for Replication Agents (Timeouts, Batch sizes)",
+            "User profile",
+            "Security",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'Tracer Token'?",
+        "type": "mcq",
+        "o": [
+            "Marker injected into log to measure replication latency",
+            "Coin",
+            "Ping",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Validation' (Replication)?",
+        "type": "mcq",
+        "o": [
+            "Process (Rowcount/Checksum) to verify data consistency between Publisher/Subscriber",
+            "Repair",
+            "Resync",
+            "Reinit"
+        ]
+    },
+    {
+        "q": "What is 'Reinitialization'?",
+        "type": "mcq",
+        "o": [
+            "Applying a new Snapshot to subscriber (Resets data)",
+            "Refresh",
+            "Update",
+            "Commit"
+        ]
+    },
+    {
+        "q": "What is 'Schema Change' replication?",
+        "type": "mcq",
+        "o": [
+            "Schema changes (ADD COLUMN) on Publisher are propagated to Subscribers by default",
+            "Ignored",
+            "Blocked",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Identity Range Management'?",
+        "type": "mcq",
+        "o": [
+            "Assigning ranges of Identity values to replicas to avoid collision in bi-directional scenarios",
+            "Auto incr",
+            "Manual",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Log Reader Agent'?",
+        "type": "mcq",
+        "o": [
+            "Job that scans Transaction Log for marked transactions and moves them to Distribution DB",
+            "Snapshot Agent",
+            "Distribution Agent",
+            "Merge Agent"
+        ]
+    },
+    {
+        "q": "What is 'Distribution Agent'?",
+        "type": "mcq",
+        "o": [
+            "Job that applies transactions from Distribution DB to Subscribers",
+            "Log Reader",
+            "Snapshot",
+            "Merge"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Agent'?",
+        "type": "mcq",
+        "o": [
+            "Job that prepares schema and data files (BCP) for initial sync",
+            "Log Reader",
+            "Distributor",
+            "Cleaner"
+        ]
+    },
+    {
+        "q": "What is 'Merge Agent'?",
+        "type": "mcq",
+        "o": [
+            "Job that syncs changes between Publisher and Subscriber in Merge Replication",
+            "Push Agent",
+            "Pull Agent",
+            "Sync Agent"
+        ]
+    },
+    {
+        "q": "What is 'Queue Reader Agent'?",
+        "type": "mcq",
+        "o": [
+            "Used in Transactional Replication with Queued Updating Subscribers (Deprecated)",
+            "Service Broker",
+            "MSMQ",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Backup Failure' risk?",
+        "type": "mcq",
+        "o": [
+            "Log file grows until disk full (if Full Recovery Model)",
+            "Data corruption",
+            "Nothing",
+            "Auto shrink"
+        ]
+    },
+    {
+        "q": "How to verify Backup Integrity?",
+        "type": "mcq",
+        "o": [
+            "RESTORE VERIFYONLY (Checks structure) or RESTORE to test server (Best: Checks data)",
+            "Check file size",
+            "Open file",
+            "Trust"
+        ]
+    },
+    {
+        "q": "What is 'Backup Encryption'?",
+        "type": "mcq",
+        "o": [
+            "Encrypting the backup file itself (AES 256) using Certificate/Keys",
+            "Password only",
+            "Zip",
+            "Hide"
+        ]
+    },
+    {
+        "q": "What is 'Compression' CPU cost?",
+        "type": "mcq",
+        "o": [
+            "Increases CPU usage during backup/restore (Trade-off for smaller IO)",
+            "Decreases CPU",
+            "No change",
+            "Uses GPU"
+        ]
+    },
+    {
+        "q": "What is 'Striped Backup' recovery?",
+        "type": "mcq",
+        "o": [
+            "All stripe files must be present to restore (Missing one = total loss)",
+            "Partial",
+            "Skip",
+            "Any one"
+        ]
+    },
+    {
+        "q": "What is 'Media Header'?",
+        "type": "mcq",
+        "o": [
+            "Information about the backup set stored at start of file/tape",
+            "Footer",
+            "Label",
+            "Tag"
+        ]
+    },
+    {
+        "q": "What is 'Backup Expiration'?",
+        "type": "mcq",
+        "o": [
+            "Date after which backup set can be overwritten (Legacy tape concept)",
+            "File delete",
+            "Auto clean",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Plan'?",
+        "type": "mcq",
+        "o": [
+            "GUI tool to schedule backups, consistency checks, index maintenance",
+            "Script",
+            "Job",
+            "Agent"
+        ]
+    },
+    {
+        "q": "What is 'OLA HALLENGREN' scripts?",
+        "type": "mcq",
+        "o": [
+            "Industry standard open-source maintenance solution (Backups, Integrity, Index)",
+            "Microsoft tool",
+            "Virus",
+            "Game"
+        ]
+    },
+    {
+        "q": "Why use Ola Hallengren vs Maint Plan?",
+        "type": "mcq",
+        "o": [
+            "More flexibility, intelligent index handling (Reorg vs Rebuild), better logging",
+            "Prettier",
+            "Cost",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Agent Job'?",
+        "type": "mcq",
+        "o": [
+            "Scheduled task in SQL Server Agent (steps, schedules, alerts)",
+            "Windows Task",
+            "Cron",
+            "Service"
+        ]
+    },
+    {
+        "q": "What is 'Job Step'?",
+        "type": "mcq",
+        "o": [
+            "Unit of execution in a job (T-SQL, CmdExec, PowerShell, SSIS)",
+            "Phase",
+            "Level",
+            "Task"
+        ]
+    },
+    {
+        "q": "What is 'Operator' (Agent)?",
+        "type": "mcq",
+        "o": [
+            "Email/Pager contact for notifications on job success/failure",
+            "User",
+            "Admin",
+            "Manager"
+        ]
+    },
+    {
+        "q": "What is 'Alert' (Agent)?",
+        "type": "mcq",
+        "o": [
+            "Action triggered by specific Error Number or Severity (e.g. Sev 19+)",
+            "Alarm",
+            "Message",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'WMI Event Alert'?",
+        "type": "mcq",
+        "o": [
+            "Alert triggered by WMI event (e.g. Deadlock Graph)",
+            "SQL Alert",
+            "OS Alert",
+            "Net Alert"
+        ]
+    }
+]

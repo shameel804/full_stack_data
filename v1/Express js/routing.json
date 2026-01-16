@@ -1,0 +1,6036 @@
+[
+    {
+        "q": "Which HTTP method is used to retrieve data in RESTful APIs?",
+        "type": "mcq",
+        "o": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ]
+    },
+    {
+        "q": "What is the output of this Express route handler?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/users', (req, res) => {\n    res.send('User list');\n});\n\n// When GET /users is called",
+        "o": [
+            "User list",
+            "undefined",
+            "Error",
+            "/users"
+        ]
+    },
+    {
+        "q": "The ______ method handles GET requests in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "get"
+        ],
+        "other_options": [
+            "post",
+            "fetch",
+            "retrieve"
+        ]
+    },
+    {
+        "q": "GET requests should modify server data.",
+        "type": "true_false",
+        "correct": "False"
+    },
+    {
+        "q": "Which HTTP method is used to create new resources?",
+        "type": "mcq",
+        "o": [
+            "POST",
+            "GET",
+            "DELETE",
+            "HEAD"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use(express.json());\n\napp.post('/users', (req, res) => {\n    res.status(201).json({ id: 1, name: req.body.name });\n});\n\n// When POST /users with {\"name\":\"John\"} body",
+        "o": [
+            "{\"id\":1,\"name\":\"John\"}",
+            "{\"id\":1}",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "The ______ status code indicates successful resource creation.",
+        "type": "fill_blank",
+        "answers": [
+            "201"
+        ],
+        "other_options": [
+            "200",
+            "204",
+            "202"
+        ]
+    },
+    {
+        "q": "POST requests are idempotent.",
+        "type": "true_false",
+        "correct": "False"
+    },
+    {
+        "q": "Which HTTP method replaces an entire resource?",
+        "type": "mcq",
+        "o": [
+            "PUT",
+            "PATCH",
+            "POST",
+            "UPDATE"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.use(express.json());\n\napp.put('/users/:id', (req, res) => {\n    res.json({ id: req.params.id, ...req.body });\n});\n\n// When PUT /users/5 with {\"name\":\"Jane\",\"age\":25}",
+        "o": [
+            "{\"id\":\"5\",\"name\":\"Jane\",\"age\":25}",
+            "{\"id\":5,\"name\":\"Jane\"}",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "The ______ method partially updates a resource.",
+        "type": "fill_blank",
+        "answers": [
+            "PATCH"
+        ],
+        "other_options": [
+            "PUT",
+            "UPDATE",
+            "MODIFY"
+        ]
+    },
+    {
+        "q": "PUT requests are idempotent.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Which HTTP method removes a resource?",
+        "type": "mcq",
+        "o": [
+            "DELETE",
+            "REMOVE",
+            "POST",
+            "PUT"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.delete('/users/:id', (req, res) => {\n    res.status(204).end();\n});\n\n// When DELETE /users/5 is called",
+        "o": [
+            "No content (204 status)",
+            "{\"deleted\":true}",
+            "Error",
+            "5"
+        ]
+    },
+    {
+        "q": "The ______ status code indicates successful deletion with no content.",
+        "type": "fill_blank",
+        "answers": [
+            "204"
+        ],
+        "other_options": [
+            "200",
+            "201",
+            "202"
+        ]
+    },
+    {
+        "q": "DELETE requests should be idempotent.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What are route parameters in Express?",
+        "type": "mcq",
+        "o": [
+            "Named URL segments that capture values",
+            "Query string values",
+            "Request body fields",
+            "HTTP headers"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/products/:category/:id', (req, res) => {\n    res.json(req.params);\n});\n\n// When GET /products/electronics/42 is called",
+        "o": [
+            "{\"category\":\"electronics\",\"id\":\"42\"}",
+            "{\"category\":\"electronics\"}",
+            "[\"electronics\",\"42\"]",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ object contains route parameters in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "params"
+        ],
+        "other_options": [
+            "query",
+            "body",
+            "route"
+        ]
+    },
+    {
+        "q": "Route parameters are always strings in Express.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What are query strings in Express?",
+        "type": "mcq",
+        "o": [
+            "Key-value pairs after the ? in the URL",
+            "URL path segments",
+            "Request body data",
+            "HTTP headers"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/search', (req, res) => {\n    res.json(req.query);\n});\n\n// When GET /search?term=express&page=2 is called",
+        "o": [
+            "{\"term\":\"express\",\"page\":\"2\"}",
+            "{\"search\":\"term\"}",
+            "express",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ object contains query string parameters.",
+        "type": "fill_blank",
+        "answers": [
+            "query"
+        ],
+        "other_options": [
+            "params",
+            "search",
+            "qs"
+        ]
+    },
+    {
+        "q": "Query parameters are optional in Express routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is a route handler in Express?",
+        "type": "mcq",
+        "o": [
+            "A function that processes requests for a specific route",
+            "A URL path",
+            "An HTTP method",
+            "A middleware function only"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\nconst handler1 = (req, res, next) => {\n    req.step1 = true;\n    next();\n};\n\nconst handler2 = (req, res) => {\n    res.send(req.step1 ? 'Both ran' : 'Only one');\n};\n\napp.get('/', handler1, handler2);\n\n// When GET / is called",
+        "o": [
+            "Both ran",
+            "Only one",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ function passes control to the next handler.",
+        "type": "fill_blank",
+        "answers": [
+            "next"
+        ],
+        "other_options": [
+            "continue",
+            "forward",
+            "pass"
+        ]
+    },
+    {
+        "q": "Multiple handlers can be chained for a single route.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of app.route() in Express?",
+        "type": "mcq",
+        "o": [
+            "Creates chainable route handlers for a single path",
+            "Defines a new router",
+            "Creates route middleware",
+            "Configures routing options"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.route('/books')\n    .get((req, res) => res.send('Get books'))\n    .post((req, res) => res.send('Add book'))\n    .delete((req, res) => res.send('Delete book'));\n\n// When POST /books is called",
+        "o": [
+            "Add book",
+            "Get books",
+            "Delete book",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ method enables method chaining on routes.",
+        "type": "fill_blank",
+        "answers": [
+            "route"
+        ],
+        "other_options": [
+            "chain",
+            "path",
+            "method"
+        ]
+    },
+    {
+        "q": "app.route() reduces code duplication for same-path routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is express.Router() used for?",
+        "type": "mcq",
+        "o": [
+            "Creating modular, mountable route handlers",
+            "Routing HTTP traffic",
+            "Configuring network routes",
+            "Redirecting requests"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst router = express.Router();\n\nrouter.get('/profile', (req, res) => {\n    res.send('User Profile');\n});\n\nconst app = express();\napp.use('/user', router);\n\n// When GET /user/profile is called",
+        "o": [
+            "User Profile",
+            "Error",
+            "undefined",
+            "profile"
+        ]
+    },
+    {
+        "q": "The ______ method mounts a router at a specific path.",
+        "type": "fill_blank",
+        "answers": [
+            "use"
+        ],
+        "other_options": [
+            "mount",
+            "attach",
+            "connect"
+        ]
+    },
+    {
+        "q": "Router instances are mini Express applications.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is optional parameter syntax in Express routes?",
+        "type": "mcq",
+        "o": [
+            ":param?",
+            ":param*",
+            "[:param]",
+            "{param}"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/posts/:year/:month?', (req, res) => {\n    res.json(req.params);\n});\n\n// When GET /posts/2024 is called",
+        "o": [
+            "{\"year\":\"2024\"}",
+            "{\"year\":\"2024\",\"month\":undefined}",
+            "Error",
+            "{\"year\":\"2024\",\"month\":null}"
+        ]
+    },
+    {
+        "q": "The ______ symbol makes a route parameter optional.",
+        "type": "fill_blank",
+        "answers": [
+            "?"
+        ],
+        "other_options": [
+            "*",
+            "+",
+            "-"
+        ]
+    },
+    {
+        "q": "Optional parameters must come after required parameters.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What does app.all() do in Express?",
+        "type": "mcq",
+        "o": [
+            "Matches all HTTP methods for a route",
+            "Matches all routes",
+            "Enables all features",
+            "Returns all data"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.all('/api/*', (req, res, next) => {\n    console.log('API accessed');\n    next();\n});\n\napp.get('/api/data', (req, res) => {\n    res.send('Data');\n});\n\n// When GET /api/data is called",
+        "o": [
+            "Logs 'API accessed', then sends 'Data'",
+            "Only sends 'Data'",
+            "Only logs 'API accessed'",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ method is often used for route-level middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "all"
+        ],
+        "other_options": [
+            "every",
+            "any",
+            "each"
+        ]
+    },
+    {
+        "q": "app.all() can be used to set up authentication for all methods.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the wildcard character in Express routes?",
+        "type": "mcq",
+        "o": [
+            "*",
+            "?",
+            "+",
+            "%"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/files/*', (req, res) => {\n    res.send(req.params[0]);\n});\n\n// When GET /files/documents/report.pdf is called",
+        "o": [
+            "documents/report.pdf",
+            "files/documents/report.pdf",
+            "*",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ character matches any path segment in routes.",
+        "type": "fill_blank",
+        "answers": [
+            "*"
+        ],
+        "other_options": [
+            "?",
+            "+",
+            "."
+        ]
+    },
+    {
+        "q": "Wildcards capture the remaining path as params[0].",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Can Express routes use regular expressions?",
+        "type": "mcq",
+        "o": [
+            "Yes, routes can be regex patterns",
+            "No, only string patterns",
+            "Only for parameters",
+            "Only in middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get(/.*fly$/, (req, res) => {\n    res.send('Matched');\n});\n\n// Does GET /butterfly match?",
+        "o": [
+            "Yes, returns Matched",
+            "No, 404",
+            "Error",
+            "Partial match"
+        ]
+    },
+    {
+        "q": "The ______ symbol matches one or more occurrences in route patterns.",
+        "type": "fill_blank",
+        "answers": [
+            "+"
+        ],
+        "other_options": [
+            "*",
+            "?",
+            "."
+        ]
+    },
+    {
+        "q": "Regex routes don't have named parameters in req.params.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route precedence in Express?",
+        "type": "mcq",
+        "o": [
+            "Routes are matched in the order they are defined",
+            "Routes are matched alphabetically",
+            "Specific routes have priority",
+            "Regex routes have priority"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/:id', (req, res) => res.send('Param'));\napp.get('/special', (req, res) => res.send('Special'));\n\n// When GET /special is called",
+        "o": [
+            "Param (matched first)",
+            "Special",
+            "Both",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ routes should be defined before parameter routes.",
+        "type": "fill_blank",
+        "answers": [
+            "specific"
+        ],
+        "other_options": [
+            "generic",
+            "dynamic",
+            "variable"
+        ]
+    },
+    {
+        "q": "Defining specific routes after parameter routes can cause issues.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is app.param() used for in Express?",
+        "type": "mcq",
+        "o": [
+            "Adding callbacks for route parameters",
+            "Setting default parameters",
+            "Validating parameters",
+            "Creating parameters"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.param('userId', (req, res, next, id) => {\n    req.user = { id: id, name: 'User ' + id };\n    next();\n});\n\napp.get('/users/:userId', (req, res) => {\n    res.json(req.user);\n});\n\n// When GET /users/42 is called",
+        "o": [
+            "{\"id\":\"42\",\"name\":\"User 42\"}",
+            "{\"id\":\"42\"}",
+            "42",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ parameter receives the captured value in app.param().",
+        "type": "fill_blank",
+        "answers": [
+            "id"
+        ],
+        "other_options": [
+            "value",
+            "param",
+            "data"
+        ]
+    },
+    {
+        "q": "app.param() runs before route handlers with matching parameters.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of res.redirect() in Express?",
+        "type": "mcq",
+        "o": [
+            "Redirecting the client to a different URL",
+            "Returning redirect data",
+            "Changing route order",
+            "Forwarding to middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/old-path', (req, res) => {\n    res.redirect(301, '/new-path');\n});\n\n// HTTP status code for permanent redirect",
+        "o": [
+            "301",
+            "302",
+            "200",
+            "404"
+        ]
+    },
+    {
+        "q": "The ______ status code indicates a permanent redirect.",
+        "type": "fill_blank",
+        "answers": [
+            "301"
+        ],
+        "other_options": [
+            "302",
+            "307",
+            "308"
+        ]
+    },
+    {
+        "q": "res.redirect() default status is 302 (temporary).",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the difference between 301 and 302 redirects?",
+        "type": "mcq",
+        "o": [
+            "301 is permanent, 302 is temporary",
+            "301 is temporary, 302 is permanent",
+            "No difference",
+            "301 is faster"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/redirect', (req, res) => {\n    res.redirect('back');\n});\n\n// What does 'back' redirect to?",
+        "o": [
+            "The Referer header URL",
+            "The previous route",
+            "The home page",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ keyword redirects to the referrer URL.",
+        "type": "fill_blank",
+        "answers": [
+            "back"
+        ],
+        "other_options": [
+            "previous",
+            "referer",
+            "origin"
+        ]
+    },
+    {
+        "q": "res.redirect('back') falls back to '/' if no Referer header.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the HTTP methods with their typical use cases:",
+        "type": "match",
+        "left": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ],
+        "right": [
+            "Read data",
+            "Create resource",
+            "Update/Replace resource",
+            "Remove resource"
+        ]
+    },
+    {
+        "q": "What is the purpose of next('route') in Express?",
+        "type": "mcq",
+        "o": [
+            "Skip remaining handlers and go to next matching route",
+            "Go to the next middleware",
+            "Go to error handler",
+            "Restart routing"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\napp.get('/test',\n    (req, res, next) => {\n        if (req.query.skip) return next('route');\n        res.send('First handler');\n    },\n    (req, res) => {\n        res.send('Second handler');\n    }\n);\n\napp.get('/test', (req, res) => {\n    res.send('Fallback');\n});\n\n// When GET /test?skip=true is called",
+        "o": [
+            "Fallback",
+            "First handler",
+            "Second handler",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ argument to next() skips to the next route match.",
+        "type": "fill_blank",
+        "answers": [
+            "route"
+        ],
+        "other_options": [
+            "skip",
+            "next",
+            "continue"
+        ]
+    },
+    {
+        "q": "next('route') only works with app.METHOD() and router.METHOD().",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of router.route() in Express?",
+        "type": "mcq",
+        "o": [
+            "Creating chainable route handlers on a router",
+            "Defining route middleware",
+            "Creating sub-routers",
+            "Configuring router options"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst router = express.Router();\n\nrouter.route('/posts')\n    .get((req, res) => res.send('Get posts'))\n    .post((req, res) => res.send('Create post'));\n\nconst app = express();\napp.use('/api', router);\n\n// Full path for GET posts",
+        "o": [
+            "/api/posts",
+            "/posts",
+            "/api/route/posts",
+            "/router/posts"
+        ]
+    },
+    {
+        "q": "The ______ method on router returns a single route for chaining.",
+        "type": "fill_blank",
+        "answers": [
+            "route"
+        ],
+        "other_options": [
+            "path",
+            "chain",
+            "handler"
+        ]
+    },
+    {
+        "q": "router.route() works identically to app.route().",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What are nested routers in Express?",
+        "type": "mcq",
+        "o": [
+            "Routers mounted within other routers",
+            "Deeply nested routes",
+            "Recursive routes",
+            "Child applications"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst usersRouter = express.Router();\nconst postsRouter = express.Router();\n\npostsRouter.get('/', (req, res) => res.send('User posts'));\n\nusersRouter.use('/:userId/posts', postsRouter);\n\nconst app = express();\napp.use('/users', usersRouter);\n\n// Full path to get user posts",
+        "o": [
+            "/users/:userId/posts",
+            "/users/posts",
+            "/:userId/posts",
+            "/posts"
+        ]
+    },
+    {
+        "q": "The ______ option preserves parent params in nested routers.",
+        "type": "fill_blank",
+        "answers": [
+            "mergeParams"
+        ],
+        "other_options": [
+            "inheritParams",
+            "parentParams",
+            "shareParams"
+        ]
+    },
+    {
+        "q": "Nested routers help organize complex routing hierarchies.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-specific middleware in Express?",
+        "type": "mcq",
+        "o": [
+            "Middleware applied only to specific routes",
+            "Middleware that creates routes",
+            "Global middleware",
+            "Error middleware"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst app = express();\n\nconst checkAuth = (req, res, next) => {\n    if (req.headers.authorization) next();\n    else res.status(401).send('Unauthorized');\n};\n\napp.get('/public', (req, res) => res.send('Public'));\napp.get('/private', checkAuth, (req, res) => res.send('Private'));\n\n// When GET /private without auth header",
+        "o": [
+            "401 Unauthorized",
+            "Private",
+            "Public",
+            "Error"
+        ]
+    },
+    {
+        "q": "The ______ can be passed as an array for multiple middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "middleware"
+        ],
+        "other_options": [
+            "handlers",
+            "functions",
+            "callbacks"
+        ]
+    },
+    {
+        "q": "Route-specific middleware runs only for matching routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the URL components in order:",
+        "type": "rearrange",
+        "words": [
+            "Protocol",
+            "Domain",
+            "Path",
+            "Query string",
+            "Fragment"
+        ]
+    },
+    {
+        "q": "What is the purpose of router.param() in Express?",
+        "type": "mcq",
+        "o": [
+            "Adding parameter preprocessing for router-level params",
+            "Setting router parameters",
+            "Creating URL parameters",
+            "Validating route paths"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require('express');\nconst router = express.Router();\n\nrouter.param('id', (req, res, next, id) => {\n    req.resourceId = parseInt(id);\n    next();\n});\n\nrouter.get('/items/:id', (req, res) => {\n    res.send(typeof req.resourceId);\n});\n\nconst app = express();\napp.use(router);\n\n// When GET /items/42 is called",
+        "o": [
+            "number",
+            "string",
+            "undefined",
+            "object"
+        ]
+    },
+    {
+        "q": "The ______ method on router adds parameter middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "param"
+        ],
+        "other_options": [
+            "params",
+            "parameter",
+            "validate"
+        ]
+    },
+    {
+        "q": "router.param() affects only routes on that router.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/api/v1/users\", (req, res) => res.send(\"v1\"));\napp.get(\"/api/v2/users\", (req, res) => res.send(\"v2\"));\n\n// When GET /api/v2/users is called",
+        "o": [
+            "v2",
+            "v1",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "API versioning in routes helps maintain backward compatibility.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-based API versioning?",
+        "type": "mcq",
+        "o": [
+            "Including version number in URL path",
+            "Using HTTP headers for version",
+            "Query parameter versioning",
+            "Content-Type versioning"
+        ]
+    },
+    {
+        "q": "The ______ pattern includes version in the URL path like /api/v1/.",
+        "type": "fill_blank",
+        "answers": [
+            "URL versioning"
+        ],
+        "other_options": [
+            "header versioning",
+            "query versioning",
+            "content versioning"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst v1Router = express.Router();\nconst v2Router = express.Router();\n\nv1Router.get(\"/users\", (req, res) => res.send(\"v1 users\"));\nv2Router.get(\"/users\", (req, res) => res.send(\"v2 users\"));\n\nconst app = express();\napp.use(\"/api/v1\", v1Router);\napp.use(\"/api/v2\", v2Router);\n\n// Benefit of this pattern?",
+        "o": [
+            "Clean separation of API versions",
+            "Faster routing",
+            "Less code",
+            "Automatic versioning"
+        ]
+    },
+    {
+        "q": "Separate routers for API versions improve code organization.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is resource naming in RESTful routes?",
+        "type": "mcq",
+        "o": [
+            "Using nouns for resource endpoints",
+            "Using verbs for actions",
+            "Random naming",
+            "Abbreviated names"
+        ]
+    },
+    {
+        "q": "The ______ endpoint pattern uses /users instead of /getUsers.",
+        "type": "fill_blank",
+        "answers": [
+            "resource-based"
+        ],
+        "other_options": [
+            "action-based",
+            "verb-based",
+            "method-based"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\n// RESTful resource endpoints\napp.get(\"/books\", (req, res) => res.send(\"List books\"));\napp.get(\"/books/:id\", (req, res) => res.send(\"Get book\"));\napp.post(\"/books\", (req, res) => res.send(\"Create book\"));\napp.put(\"/books/:id\", (req, res) => res.send(\"Update book\"));\napp.delete(\"/books/:id\", (req, res) => res.send(\"Delete book\"));\n\n// What pattern is this?",
+        "o": [
+            "Standard RESTful CRUD routes",
+            "RPC pattern",
+            "GraphQL pattern",
+            "SOAP pattern"
+        ]
+    },
+    {
+        "q": "RESTful routes use HTTP methods to indicate actions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is nested resource routing?",
+        "type": "mcq",
+        "o": [
+            "Routes that show relationships between resources",
+            "Deeply indented routes",
+            "Recursive routes",
+            "Sub-application routes"
+        ]
+    },
+    {
+        "q": "The ______ route pattern shows resource hierarchy: /users/:userId/posts.",
+        "type": "fill_blank",
+        "answers": [
+            "nested"
+        ],
+        "other_options": [
+            "hierarchical",
+            "deep",
+            "compound"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/users/:userId/posts/:postId/comments\", (req, res) => {\n    res.json({\n        userId: req.params.userId,\n        postId: req.params.postId\n    });\n});\n\n// When GET /users/1/posts/5/comments is called",
+        "o": [
+            "{\"userId\":\"1\",\"postId\":\"5\"}",
+            "{\"userId\":\"1\"}",
+            "{\"postId\":\"5\"}",
+            "Error"
+        ]
+    },
+    {
+        "q": "Nested routes should not exceed 3 levels for maintainability.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is HATEOAS in RESTful APIs?",
+        "type": "mcq",
+        "o": [
+            "Hypermedia as the Engine of Application State",
+            "HTTP API Test Environment",
+            "Hypertext Application Transfer",
+            "High Availability Testing"
+        ]
+    },
+    {
+        "q": "The ______ principle includes links to related resources in responses.",
+        "type": "fill_blank",
+        "answers": [
+            "HATEOAS"
+        ],
+        "other_options": [
+            "REST",
+            "HTTP",
+            "API"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/users/:id\", (req, res) => {\n    const user = { id: req.params.id, name: \"John\" };\n    user._links = {\n        self: `/users/${req.params.id}`,\n        posts: `/users/${req.params.id}/posts`\n    };\n    res.json(user);\n});\n\n// What does _links represent?",
+        "o": [
+            "HATEOAS hypermedia links",
+            "Database links",
+            "Route definitions",
+            "Middleware chain"
+        ]
+    },
+    {
+        "q": "HATEOAS allows clients to discover actions through response links.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is pagination in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Returning data in chunks using query parameters",
+            "Creating multiple pages",
+            "HTML pagination",
+            "Route pagination"
+        ]
+    },
+    {
+        "q": "The ______ and ______ query parameters commonly control pagination.",
+        "type": "fill_blank",
+        "answers": [
+            "page",
+            "limit"
+        ],
+        "other_options": [
+            "start",
+            "end"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\nconst items = Array.from({ length: 100 }, (_, i) => ({ id: i + 1 }));\n\napp.get(\"/items\", (req, res) => {\n    const page = parseInt(req.query.page) || 1;\n    const limit = parseInt(req.query.limit) || 10;\n    const start = (page - 1) * limit;\n    const end = start + limit;\n    \n    res.json({\n        data: items.slice(start, end),\n        page,\n        totalPages: Math.ceil(items.length / limit)\n    });\n});\n\n// When GET /items?page=2&limit=10",
+        "o": [
+            "Items 11-20 with pagination metadata",
+            "Items 1-10",
+            "All items",
+            "Error"
+        ]
+    },
+    {
+        "q": "Offset-based pagination can have performance issues with large datasets.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cursor-based pagination?",
+        "type": "mcq",
+        "o": [
+            "Using a pointer to the last item for next page",
+            "Using page numbers",
+            "Using database cursor",
+            "Using mouse cursor"
+        ]
+    },
+    {
+        "q": "The ______ parameter in cursor pagination points to the next page.",
+        "type": "fill_blank",
+        "answers": [
+            "cursor"
+        ],
+        "other_options": [
+            "offset",
+            "page",
+            "index"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/items\", (req, res) => {\n    const cursor = req.query.cursor;\n    const limit = 10;\n    // Get items after cursor...\n    const nextCursor = \"abc123\";\n    res.json({\n        data: [],\n        nextCursor,\n        hasMore: true\n    });\n});\n\n// Advantage of cursor pagination?",
+        "o": [
+            "Consistent results even when data changes",
+            "Faster queries always",
+            "Simpler implementation",
+            "Less data transfer"
+        ]
+    },
+    {
+        "q": "Cursor pagination handles real-time data changes better than offset.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is filtering in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Returning subset of data based on query parameters",
+            "Filtering middleware",
+            "Route filtering",
+            "Request filtering"
+        ]
+    },
+    {
+        "q": "The ______ query parameter pattern supports multiple filters: ?status=active&type=admin.",
+        "type": "fill_blank",
+        "answers": [
+            "attribute-based"
+        ],
+        "other_options": [
+            "single",
+            "combined",
+            "nested"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\nconst users = [\n    { id: 1, status: \"active\", type: \"admin\" },\n    { id: 2, status: \"inactive\", type: \"user\" },\n    { id: 3, status: \"active\", type: \"user\" }\n];\n\napp.get(\"/users\", (req, res) => {\n    let result = users;\n    if (req.query.status) {\n        result = result.filter(u => u.status === req.query.status);\n    }\n    if (req.query.type) {\n        result = result.filter(u => u.type === req.query.type);\n    }\n    res.json(result);\n});\n\n// When GET /users?status=active",
+        "o": [
+            "[{\"id\":1,...},{\"id\":3,...}]",
+            "[{\"id\":1,...}]",
+            "All users",
+            "Error"
+        ]
+    },
+    {
+        "q": "Filtering should be done at the database level for efficiency.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is sorting in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Ordering results based on specified fields",
+            "Sorting middleware order",
+            "Route sorting",
+            "Sorting files"
+        ]
+    },
+    {
+        "q": "The ______ query parameter commonly specifies sort field and direction.",
+        "type": "fill_blank",
+        "answers": [
+            "sort"
+        ],
+        "other_options": [
+            "order",
+            "orderBy",
+            "sortBy"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\nconst items = [\n    { id: 3, name: \"C\" },\n    { id: 1, name: \"A\" },\n    { id: 2, name: \"B\" }\n];\n\napp.get(\"/items\", (req, res) => {\n    const sort = req.query.sort || \"id\";\n    const order = req.query.order === \"desc\" ? -1 : 1;\n    const sorted = [...items].sort((a, b) => \n        (a[sort] > b[sort] ? 1 : -1) * order\n    );\n    res.json(sorted);\n});\n\n// When GET /items?sort=name&order=desc",
+        "o": [
+            "[{...\"C\"},{...\"B\"},{...\"A\"}]",
+            "[{...\"A\"},{...\"B\"},{...\"C\"}]",
+            "Unsorted",
+            "Error"
+        ]
+    },
+    {
+        "q": "Multiple sort fields can be supported with comma separation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is field selection in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Returning only specified fields in response",
+            "Selecting database fields",
+            "Choosing routes",
+            "Field validation"
+        ]
+    },
+    {
+        "q": "The ______ query parameter specifies which fields to include.",
+        "type": "fill_blank",
+        "answers": [
+            "fields"
+        ],
+        "other_options": [
+            "select",
+            "include",
+            "columns"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/users/:id\", (req, res) => {\n    const user = { id: 1, name: \"John\", email: \"john@test.com\", password: \"hash\" };\n    const fields = req.query.fields?.split(\",\") || Object.keys(user);\n    const filtered = {};\n    fields.forEach(f => { if (user[f]) filtered[f] = user[f]; });\n    res.json(filtered);\n});\n\n// When GET /users/1?fields=id,name",
+        "o": [
+            "{\"id\":1,\"name\":\"John\"}",
+            "Full user object",
+            "{\"id\":1}",
+            "Error"
+        ]
+    },
+    {
+        "q": "Field selection reduces response size and improves performance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the query patterns with their purposes:",
+        "type": "match",
+        "left": [
+            "?page=2&limit=10",
+            "?sort=name&order=asc",
+            "?status=active",
+            "?fields=id,name"
+        ],
+        "right": [
+            "Pagination",
+            "Sorting",
+            "Filtering",
+            "Field selection"
+        ]
+    },
+    {
+        "q": "What is search functionality in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Finding resources matching a search term",
+            "Finding routes",
+            "Searching files",
+            "Route discovery"
+        ]
+    },
+    {
+        "q": "The ______ query parameter commonly carries search terms.",
+        "type": "fill_blank",
+        "answers": [
+            "q"
+        ],
+        "other_options": [
+            "search",
+            "query",
+            "term"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\nconst products = [\n    { id: 1, name: \"iPhone 15\" },\n    { id: 2, name: \"Samsung Galaxy\" },\n    { id: 3, name: \"iPhone 14\" }\n];\n\napp.get(\"/products\", (req, res) => {\n    const q = req.query.q?.toLowerCase();\n    if (!q) return res.json(products);\n    const results = products.filter(p => \n        p.name.toLowerCase().includes(q)\n    );\n    res.json(results);\n});\n\n// When GET /products?q=iphone",
+        "o": [
+            "[{\"id\":1,\"name\":\"iPhone 15\"},{\"id\":3,\"name\":\"iPhone 14\"}]",
+            "[{\"id\":1,\"name\":\"iPhone 15\"}]",
+            "All products",
+            "Error"
+        ]
+    },
+    {
+        "q": "Case-insensitive search improves user experience.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route parameter validation?",
+        "type": "mcq",
+        "o": [
+            "Ensuring parameters meet expected format",
+            "Creating parameters",
+            "Setting default values",
+            "Removing parameters"
+        ]
+    },
+    {
+        "q": "The ______ pattern in routes can validate numeric IDs.",
+        "type": "fill_blank",
+        "answers": [
+            ":id([0-9]+)"
+        ],
+        "other_options": [
+            ":id",
+            ":id?",
+            ":id+"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.param(\"id\", (req, res, next, id) => {\n    if (!/^\\d+$/.test(id)) {\n        return res.status(400).json({ error: \"Invalid ID format\" });\n    }\n    next();\n});\n\napp.get(\"/items/:id\", (req, res) => {\n    res.json({ id: req.params.id });\n});\n\n// When GET /items/abc is called",
+        "o": [
+            "400 with {\"error\":\"Invalid ID format\"}",
+            "{\"id\":\"abc\"}",
+            "404",
+            "500"
+        ]
+    },
+    {
+        "q": "Parameter validation should happen before business logic.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route caching?",
+        "type": "mcq",
+        "o": [
+            "Storing route responses to avoid recomputation",
+            "Caching route definitions",
+            "Caching middleware",
+            "Caching parameters"
+        ]
+    },
+    {
+        "q": "The ______ header controls browser caching of responses.",
+        "type": "fill_blank",
+        "answers": [
+            "Cache-Control"
+        ],
+        "other_options": [
+            "Expires",
+            "ETag",
+            "Last-Modified"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\nconst cache = new Map();\n\napp.get(\"/expensive\", (req, res) => {\n    const key = req.originalUrl;\n    if (cache.has(key)) {\n        return res.json(cache.get(key));\n    }\n    const result = { data: \"Computed\", time: Date.now() };\n    cache.set(key, result);\n    res.json(result);\n});\n\n// Second call returns",
+        "o": [
+            "Cached result with same timestamp",
+            "New computation",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "In-memory caching is suitable for single-instance applications.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is rate limiting in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Limiting number of requests per time period",
+            "Limiting route count",
+            "Limiting response size",
+            "Limiting parameters"
+        ]
+    },
+    {
+        "q": "The ______ package provides rate limiting middleware for Express.",
+        "type": "fill_blank",
+        "answers": [
+            "express-rate-limit"
+        ],
+        "other_options": [
+            "rate-limiter",
+            "express-limit",
+            "api-limit"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst rateLimit = require(\"express-rate-limit\");\n\nconst limiter = rateLimit({\n    windowMs: 60000,\n    max: 10,\n    message: { error: \"Too many requests\" }\n});\n\nconst app = express();\napp.use(\"/api\", limiter);\n\n// After 11 requests in 1 minute",
+        "o": [
+            "429 with {\"error\":\"Too many requests\"}",
+            "Normal response",
+            "500 error",
+            "503 error"
+        ]
+    },
+    {
+        "q": "Rate limiting protects against denial of service attacks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route logging?",
+        "type": "mcq",
+        "o": [
+            "Recording request details for debugging and analytics",
+            "Logging route definitions",
+            "Logging errors only",
+            "Logging to file"
+        ]
+    },
+    {
+        "q": "The ______ package provides HTTP request logging for Express.",
+        "type": "fill_blank",
+        "answers": [
+            "morgan"
+        ],
+        "other_options": [
+            "winston",
+            "bunyan",
+            "pino"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst morgan = require(\"morgan\");\nconst app = express();\n\napp.use(morgan(\"combined\"));\n\napp.get(\"/\", (req, res) => res.send(\"OK\"));\n\n// What does morgan log?",
+        "o": [
+            "Method, URL, status, response time, user agent",
+            "Only errors",
+            "Only method and URL",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "The combined format includes more details than common format.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the RESTful resource URL hierarchy:",
+        "type": "rearrange",
+        "words": [
+            "Collection (/users)",
+            "Single resource (/users/1)",
+            "Sub-collection (/users/1/posts)",
+            "Sub-resource (/users/1/posts/5)"
+        ]
+    },
+    {
+        "q": "What is content negotiation in Express?",
+        "type": "mcq",
+        "o": [
+            "Selecting response format based on Accept header",
+            "Negotiating price",
+            "Selecting routes",
+            "Validating content"
+        ]
+    },
+    {
+        "q": "The ______ method in Express performs content negotiation.",
+        "type": "fill_blank",
+        "answers": [
+            "format"
+        ],
+        "other_options": [
+            "negotiate",
+            "accept",
+            "content"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/data\", (req, res) => {\n    res.format({\n        \"text/plain\": () => res.send(\"Text response\"),\n        \"application/json\": () => res.json({ response: \"JSON\" }),\n        default: () => res.status(406).send(\"Not Acceptable\")\n    });\n});\n\n// When Accept: application/xml is sent",
+        "o": [
+            "406 Not Acceptable",
+            "JSON response",
+            "Text response",
+            "Error"
+        ]
+    },
+    {
+        "q": "res.format() uses the Accept header to determine response type.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route documentation?",
+        "type": "mcq",
+        "o": [
+            "Describing API endpoints for developers",
+            "Documenting code comments",
+            "Logging routes",
+            "Route testing"
+        ]
+    },
+    {
+        "q": "The ______ specification is commonly used for API documentation.",
+        "type": "fill_blank",
+        "answers": [
+            "OpenAPI"
+        ],
+        "other_options": [
+            "Blueprint",
+            "RAML",
+            "WADL"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst swaggerUi = require(\"swagger-ui-express\");\nconst swaggerDocument = require(\"./swagger.json\");\n\nconst app = express();\napp.use(\"/api-docs\", swaggerUi.serve, swaggerUi.setup(swaggerDocument));\n\n// What does /api-docs show?",
+        "o": [
+            "Interactive API documentation UI",
+            "JSON schema",
+            "Route listing",
+            "Error page"
+        ]
+    },
+    {
+        "q": "Swagger UI provides interactive API documentation.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route grouping in Express?",
+        "type": "mcq",
+        "o": [
+            "Organizing related routes together",
+            "Combining routes into one",
+            "Grouping by HTTP method",
+            "Route clustering"
+        ]
+    },
+    {
+        "q": "The ______ pattern separates routes by feature or domain.",
+        "type": "fill_blank",
+        "answers": [
+            "modular routing"
+        ],
+        "other_options": [
+            "single file",
+            "flat",
+            "linear"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "// routes/users.js\nconst express = require(\"express\");\nconst router = express.Router();\nrouter.get(\"/\", (req, res) => res.send(\"Users\"));\nmodule.exports = router;\n\n// app.js\nconst usersRoutes = require(\"./routes/users\");\napp.use(\"/users\", usersRoutes);\n\n// Benefit?",
+        "o": [
+            "Modular, maintainable code structure",
+            "Faster performance",
+            "Automatic routing",
+            "Less memory usage"
+        ]
+    },
+    {
+        "q": "Modular routing improves code organization in large applications.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route testing in Express?",
+        "type": "mcq",
+        "o": [
+            "Verifying route handlers work correctly",
+            "Testing route performance",
+            "Checking route syntax",
+            "Route benchmarking"
+        ]
+    },
+    {
+        "q": "The ______ package is commonly used for HTTP assertion testing.",
+        "type": "fill_blank",
+        "answers": [
+            "supertest"
+        ],
+        "other_options": [
+            "jest",
+            "mocha",
+            "chai"
+        ]
+    },
+    {
+        "q": "What is the output of this test?",
+        "type": "mcq",
+        "c": "const request = require(\"supertest\");\nconst express = require(\"express\");\nconst app = express();\n\napp.get(\"/health\", (req, res) => res.status(200).json({ status: \"ok\" }));\n\nrequest(app)\n    .get(\"/health\")\n    .expect(200)\n    .expect(\"Content-Type\", /json/)\n    .then(res => console.log(res.body));",
+        "o": [
+            "{\"status\":\"ok\"}",
+            "200",
+            "json",
+            "Error"
+        ]
+    },
+    {
+        "q": "supertest can test Express apps without starting a server.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route handler separation?",
+        "type": "mcq",
+        "o": [
+            "Putting handler logic in separate controller files",
+            "Multiple handlers per route",
+            "Separating routes by method",
+            "Async handler separation"
+        ]
+    },
+    {
+        "q": "The ______ pattern moves business logic out of route definitions.",
+        "type": "fill_blank",
+        "answers": [
+            "controller"
+        ],
+        "other_options": [
+            "service",
+            "handler",
+            "manager"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "// controllers/userController.js\nexports.getUsers = (req, res) => res.json([{ id: 1 }]);\n\n// routes/users.js\nconst { getUsers } = require(\"../controllers/userController\");\nrouter.get(\"/\", getUsers);\n\n// Benefit?",
+        "o": [
+            "Separation of concerns and reusability",
+            "Faster execution",
+            "Automatic caching",
+            "Type safety"
+        ]
+    },
+    {
+        "q": "Controllers should not contain business logic directly.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.get(\"/users\", async (req, res) => {\n    const users = await getUsers();\n    res.json(users);\n});\n\nasync function getUsers() {\n    return [{ id: 1 }, { id: 2 }];\n}\n\n// When GET /users is called",
+        "o": [
+            "[{\"id\":1},{\"id\":2}]",
+            "Promise pending",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "Async route handlers automatically wait for promises to resolve.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What happens if async handler throws an error in Express 4?",
+        "type": "mcq",
+        "o": [
+            "Error is not caught and may crash server",
+            "Error goes to error middleware",
+            "404 is returned",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "The ______ wrapper catches async errors and passes them to error middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "asyncHandler"
+        ],
+        "other_options": [
+            "errorHandler",
+            "catchAsync",
+            "wrapAsync"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const asyncHandler = fn => (req, res, next) =>\n    Promise.resolve(fn(req, res, next)).catch(next);\n\napp.get(\"/fail\", asyncHandler(async (req, res) => {\n    throw new Error(\"Async failure\");\n}));\n\napp.use((err, req, res, next) => {\n    res.status(500).send(err.message);\n});\n\n// When GET /fail is called",
+        "o": [
+            "500 with Async failure",
+            "Unhandled rejection",
+            "App crashes",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "Express 5 automatically handles async errors.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route prefixing?",
+        "type": "mcq",
+        "o": [
+            "Adding common path prefix to group of routes",
+            "Adding prefix to response",
+            "Naming routes",
+            "Route documentation"
+        ]
+    },
+    {
+        "q": "The ______ method mounts router with a path prefix.",
+        "type": "fill_blank",
+        "answers": [
+            "use"
+        ],
+        "other_options": [
+            "mount",
+            "prefix",
+            "attach"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst apiRouter = express.Router();\n\napiRouter.get(\"/health\", (req, res) => res.send(\"OK\"));\napiRouter.get(\"/status\", (req, res) => res.send(\"Running\"));\n\nconst app = express();\napp.use(\"/api/v1\", apiRouter);\n\n// Full paths available",
+        "o": [
+            "/api/v1/health and /api/v1/status",
+            "/health and /status",
+            "/api/health and /api/status",
+            "/v1/health and /v1/status"
+        ]
+    },
+    {
+        "q": "Route prefixing reduces repetition in route definitions.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is lazy route loading in Express?",
+        "type": "mcq",
+        "o": [
+            "Loading route modules only when needed",
+            "Slow route matching",
+            "Delayed response",
+            "Route caching"
+        ]
+    },
+    {
+        "q": "The ______ pattern loads routes dynamically at runtime.",
+        "type": "fill_blank",
+        "answers": [
+            "dynamic import"
+        ],
+        "other_options": [
+            "static import",
+            "require",
+            "load"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.use(\"/admin\", (req, res, next) => {\n    import(\"./routes/admin.js\")\n        .then(module => module.default(req, res, next))\n        .catch(next);\n});\n\n// What happens on first request to /admin?",
+        "o": [
+            "Admin routes are loaded dynamically",
+            "Error occurs",
+            "Empty response",
+            "Immediate response"
+        ]
+    },
+    {
+        "q": "Lazy loading improves initial startup time.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-level timeout?",
+        "type": "mcq",
+        "o": [
+            "Setting maximum time for a specific route to respond",
+            "Session timeout",
+            "Connection timeout",
+            "Request timeout"
+        ]
+    },
+    {
+        "q": "The ______ middleware can set per-route timeouts.",
+        "type": "fill_blank",
+        "answers": [
+            "connect-timeout"
+        ],
+        "other_options": [
+            "express-timeout",
+            "route-timeout",
+            "request-timeout"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const timeout = require(\"connect-timeout\");\n\napp.get(\"/slow\", timeout(\"5s\"), async (req, res) => {\n    await new Promise(r => setTimeout(r, 10000));\n    if (!req.timedout) res.send(\"Done\");\n});\n\n// When GET /slow is called",
+        "o": [
+            "Request times out after 5 seconds",
+            "Response after 10 seconds",
+            "Immediate response",
+            "Error"
+        ]
+    },
+    {
+        "q": "Different routes can have different timeout values.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-level validation?",
+        "type": "mcq",
+        "o": [
+            "Validating request data at the route level",
+            "Validating route syntax",
+            "Checking route exists",
+            "Validating URL format"
+        ]
+    },
+    {
+        "q": "The ______ package provides robust validation for Express routes.",
+        "type": "fill_blank",
+        "answers": [
+            "express-validator"
+        ],
+        "other_options": [
+            "joi",
+            "yup",
+            "zod"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { body, validationResult } = require(\"express-validator\");\n\napp.post(\"/user\",\n    body(\"email\").isEmail(),\n    body(\"age\").isInt({ min: 18 }),\n    (req, res) => {\n        const errors = validationResult(req);\n        if (!errors.isEmpty()) {\n            return res.status(400).json({ errors: errors.array() });\n        }\n        res.json({ success: true });\n    }\n);\n\n// When posting {\"email\":\"bad\",\"age\":15}",
+        "o": [
+            "400 with validation errors for both fields",
+            "200 success",
+            "500 error",
+            "Empty array"
+        ]
+    },
+    {
+        "q": "Validation should reject invalid input before processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is input sanitization?",
+        "type": "mcq",
+        "o": [
+            "Cleaning and normalizing input data",
+            "Validating input",
+            "Logging input",
+            "Storing input"
+        ]
+    },
+    {
+        "q": "The ______ method removes leading/trailing whitespace in validation.",
+        "type": "fill_blank",
+        "answers": [
+            "trim"
+        ],
+        "other_options": [
+            "strip",
+            "clean",
+            "normalize"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { body } = require(\"express-validator\");\n\napp.post(\"/data\",\n    body(\"name\").trim().escape(),\n    body(\"price\").toFloat(),\n    (req, res) => {\n        res.json({ name: req.body.name, price: req.body.price });\n    }\n);\n\n// When posting {\"name\":\"  Test<script>  \",\"price\":\"9.99\"}",
+        "o": [
+            "{\"name\":\"Test&lt;script&gt;\",\"price\":9.99}",
+            "{\"name\":\"Test<script>\",\"price\":\"9.99\"}",
+            "Error",
+            "Unchanged"
+        ]
+    },
+    {
+        "q": "Sanitization prevents XSS attacks by escaping HTML.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is schema-based validation?",
+        "type": "mcq",
+        "o": [
+            "Defining validation rules as a schema object",
+            "Database schema validation",
+            "JSON schema validation only",
+            "XML schema validation"
+        ]
+    },
+    {
+        "q": "The ______ function creates a validation schema in express-validator.",
+        "type": "fill_blank",
+        "answers": [
+            "checkSchema"
+        ],
+        "other_options": [
+            "schema",
+            "validate",
+            "define"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { checkSchema, validationResult } = require(\"express-validator\");\n\nconst userSchema = {\n    email: {\n        isEmail: true,\n        normalizeEmail: true\n    },\n    password: {\n        isLength: { options: { min: 8 } }\n    }\n};\n\napp.post(\"/register\", checkSchema(userSchema), (req, res) => {\n    const errors = validationResult(req);\n    if (!errors.isEmpty()) return res.status(400).json(errors.array());\n    res.json({ success: true });\n});\n\n// What does checkSchema provide?",
+        "o": [
+            "Declarative validation configuration",
+            "Automatic response",
+            "Database schema",
+            "Route schema"
+        ]
+    },
+    {
+        "q": "Schema-based validation centralizes validation rules.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is custom validation in express-validator?",
+        "type": "mcq",
+        "o": [
+            "Creating custom validation functions",
+            "Customizing error messages only",
+            "Custom routes",
+            "Custom middleware"
+        ]
+    },
+    {
+        "q": "The ______ method adds custom validation logic.",
+        "type": "fill_blank",
+        "answers": [
+            "custom"
+        ],
+        "other_options": [
+            "validate",
+            "check",
+            "verify"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { body } = require(\"express-validator\");\n\napp.post(\"/user\",\n    body(\"username\").custom(async (value) => {\n        const user = await findUserByUsername(value);\n        if (user) throw new Error(\"Username already exists\");\n    }),\n    (req, res) => {\n        // Handle validation result\n    }\n);\n\n// When username already exists",
+        "o": [
+            "Validation error: Username already exists",
+            "Success",
+            "500 error",
+            "No error"
+        ]
+    },
+    {
+        "q": "Custom validators can perform async operations like database checks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is conditional validation?",
+        "type": "mcq",
+        "o": [
+            "Applying validation only when certain conditions are met",
+            "Validation with conditions in results",
+            "Optional validation",
+            "Validation chains"
+        ]
+    },
+    {
+        "q": "The ______ method in express-validator applies conditional validation.",
+        "type": "fill_blank",
+        "answers": [
+            "if"
+        ],
+        "other_options": [
+            "when",
+            "condition",
+            "optional"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { body } = require(\"express-validator\");\n\napp.post(\"/payment\",\n    body(\"cardNumber\")\n        .if(body(\"paymentMethod\").equals(\"card\"))\n        .notEmpty()\n        .isCreditCard(),\n    (req, res) => {\n        // Process payment\n    }\n);\n\n// When paymentMethod is cash, is cardNumber validated?",
+        "o": [
+            "No, validation is skipped",
+            "Yes, always validated",
+            "Error thrown",
+            "Optional validation"
+        ]
+    },
+    {
+        "q": "Conditional validation avoids unnecessary validation checks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the validation methods with their purposes:",
+        "type": "match",
+        "left": [
+            "isEmail()",
+            "isLength()",
+            "isInt()",
+            "custom()"
+        ],
+        "right": [
+            "Email format check",
+            "String length check",
+            "Integer check",
+            "Custom logic"
+        ]
+    },
+    {
+        "q": "What is route-level CORS configuration?",
+        "type": "mcq",
+        "o": [
+            "Configuring CORS for specific routes only",
+            "Global CORS settings",
+            "Cross-origin routing",
+            "Route sharing"
+        ]
+    },
+    {
+        "q": "The ______ middleware enables CORS in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "cors"
+        ],
+        "other_options": [
+            "cross-origin",
+            "access-control",
+            "origin"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const cors = require(\"cors\");\n\nconst corsOptions = {\n    origin: \"https://example.com\",\n    methods: [\"GET\", \"POST\"]\n};\n\napp.get(\"/public\", cors(), (req, res) => res.send(\"Public\"));\napp.get(\"/private\", cors(corsOptions), (req, res) => res.send(\"Private\"));\n\n// /private CORS origin header",
+        "o": [
+            "https://example.com only",
+            "Any origin",
+            "No CORS headers",
+            "Error"
+        ]
+    },
+    {
+        "q": "Different routes can have different CORS configurations.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is preflight request in CORS?",
+        "type": "mcq",
+        "o": [
+            "OPTIONS request sent before actual request",
+            "First request to server",
+            "Request before routing",
+            "Validation request"
+        ]
+    },
+    {
+        "q": "The ______ HTTP method is used for CORS preflight requests.",
+        "type": "fill_blank",
+        "answers": [
+            "OPTIONS"
+        ],
+        "other_options": [
+            "HEAD",
+            "GET",
+            "POST"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const cors = require(\"cors\");\n\napp.options(\"/api/*\", cors());\napp.post(\"/api/data\", cors(), (req, res) => res.json({ ok: true }));\n\n// What happens on cross-origin POST?",
+        "o": [
+            "OPTIONS preflight succeeds, then POST executes",
+            "POST fails",
+            "No preflight needed",
+            "Error"
+        ]
+    },
+    {
+        "q": "Preflight requests are cached using Access-Control-Max-Age header.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route middleware chaining?",
+        "type": "mcq",
+        "o": [
+            "Passing request through multiple middleware functions",
+            "Combining routes",
+            "Linking routers",
+            "Route inheritance"
+        ]
+    },
+    {
+        "q": "The ______ function connects middleware in a chain.",
+        "type": "fill_blank",
+        "answers": [
+            "next"
+        ],
+        "other_options": [
+            "chain",
+            "connect",
+            "link"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const auth = (req, res, next) => {\n    req.user = { id: 1 };\n    next();\n};\n\nconst log = (req, res, next) => {\n    console.log(req.user.id);\n    next();\n};\n\napp.get(\"/protected\", auth, log, (req, res) => {\n    res.json(req.user);\n});\n\n// Console output",
+        "o": [
+            "1",
+            "undefined",
+            "Error",
+            "null"
+        ]
+    },
+    {
+        "q": "Middleware order matters - earlier middleware runs first.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the composition pattern in Express middleware?",
+        "type": "mcq",
+        "o": [
+            "Combining multiple middleware into a single reusable unit",
+            "Creating new middleware",
+            "Modifying middleware",
+            "Removing middleware"
+        ]
+    },
+    {
+        "q": "The ______ function can combine multiple middleware into one.",
+        "type": "fill_blank",
+        "answers": [
+            "compose"
+        ],
+        "other_options": [
+            "combine",
+            "merge",
+            "join"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const compose = (...middlewares) => (req, res, next) => {\n    const dispatch = (i) => {\n        if (i === middlewares.length) return next();\n        middlewares[i](req, res, () => dispatch(i + 1));\n    };\n    dispatch(0);\n};\n\nconst adminMiddleware = compose(auth, checkRole(\"admin\"), logAccess);\n\napp.get(\"/admin\", adminMiddleware, (req, res) => res.send(\"Admin area\"));\n\n// Benefit?",
+        "o": [
+            "Reusable middleware combinations",
+            "Faster execution",
+            "Less memory",
+            "Automatic routing"
+        ]
+    },
+    {
+        "q": "Middleware composition reduces code duplication.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of app.engine() in Express?",
+        "type": "mcq",
+        "o": [
+            "Registering custom template engines",
+            "Setting application engine",
+            "Performance optimization",
+            "Route engine configuration"
+        ]
+    },
+    {
+        "q": "The ______ setting specifies the default template engine.",
+        "type": "fill_blank",
+        "answers": [
+            "view engine"
+        ],
+        "other_options": [
+            "template",
+            "engine",
+            "renderer"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const express = require(\"express\");\nconst app = express();\n\napp.engine(\"html\", require(\"ejs\").renderFile);\napp.set(\"view engine\", \"html\");\napp.set(\"views\", \"./templates\");\n\napp.get(\"/\", (req, res) => {\n    res.render(\"index\", { title: \"Home\" });\n});\n\n// Which file is rendered?",
+        "o": [
+            "./templates/index.html",
+            "./templates/index.ejs",
+            "./views/index.html",
+            "Error"
+        ]
+    },
+    {
+        "q": "Custom template engines can be registered for any file extension.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of res.locals in routes?",
+        "type": "mcq",
+        "o": [
+            "Storing data for the current request/response cycle",
+            "Local storage",
+            "Global variables",
+            "Route configuration"
+        ]
+    },
+    {
+        "q": "The ______ object passes data to templates from routes.",
+        "type": "fill_blank",
+        "answers": [
+            "locals"
+        ],
+        "other_options": [
+            "data",
+            "context",
+            "vars"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.use((req, res, next) => {\n    res.locals.user = { name: \"John\" };\n    next();\n});\n\napp.get(\"/\", (req, res) => {\n    res.render(\"home\");\n});\n\n// In home template, accessed as",
+        "o": [
+            "user.name directly",
+            "res.locals.user.name",
+            "req.user.name",
+            "Cannot access"
+        ]
+    },
+    {
+        "q": "res.locals are automatically available in rendered templates.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the request lifecycle phases:",
+        "type": "rearrange",
+        "words": [
+            "Receive",
+            "Parse",
+            "Route Match",
+            "Handle",
+            "Respond"
+        ]
+    },
+    {
+        "q": "What is the purpose of req.originalUrl vs req.url?",
+        "type": "mcq",
+        "o": [
+            "originalUrl is unchanged, url can be modified by middleware",
+            "They are the same",
+            "url is original, originalUrl is modified",
+            "originalUrl includes protocol"
+        ]
+    },
+    {
+        "q": "The ______ property preserves the original request URL.",
+        "type": "fill_blank",
+        "answers": [
+            "originalUrl"
+        ],
+        "other_options": [
+            "url",
+            "path",
+            "href"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.use(\"/api\", (req, res, next) => {\n    console.log(req.url);\n    console.log(req.originalUrl);\n    next();\n});\n\n// When requesting /api/users",
+        "o": [
+            "/users and /api/users",
+            "/api/users and /api/users",
+            "/users and /users",
+            "Error"
+        ]
+    },
+    {
+        "q": "req.url is relative to the mount point in mounted apps.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is the purpose of req.baseUrl?",
+        "type": "mcq",
+        "o": [
+            "The URL path on which a router was mounted",
+            "The base domain",
+            "The protocol",
+            "The full URL"
+        ]
+    },
+    {
+        "q": "The ______ property shows the mount path of the router.",
+        "type": "fill_blank",
+        "answers": [
+            "baseUrl"
+        ],
+        "other_options": [
+            "mountPath",
+            "prefix",
+            "root"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const router = express.Router();\n\nrouter.get(\"/profile\", (req, res) => {\n    res.send(req.baseUrl);\n});\n\napp.use(\"/user\", router);\n\n// When GET /user/profile is called",
+        "o": [
+            "/user",
+            "/profile",
+            "/user/profile",
+            "Empty string"
+        ]
+    },
+    {
+        "q": "req.baseUrl is empty string when router is at the root.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request body streaming in Express?",
+        "type": "mcq",
+        "o": [
+            "Processing request body without buffering entirely",
+            "Sending body in chunks",
+            "Compressing body",
+            "Encrypting body"
+        ]
+    },
+    {
+        "q": "The ______ event on req fires when body data arrives.",
+        "type": "fill_blank",
+        "answers": [
+            "data"
+        ],
+        "other_options": [
+            "body",
+            "chunk",
+            "receive"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/stream\", (req, res) => {\n    let size = 0;\n    req.on(\"data\", chunk => {\n        size += chunk.length;\n    });\n    req.on(\"end\", () => {\n        res.send(`Received ${size} bytes`);\n    });\n});\n\n// When posting 1000 bytes",
+        "o": [
+            "Received 1000 bytes",
+            "Received 0 bytes",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "Streaming avoids buffering large files in memory.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response streaming in Express?",
+        "type": "mcq",
+        "o": [
+            "Sending response in chunks without buffering",
+            "Receiving streamed data",
+            "Compressing response",
+            "Caching response"
+        ]
+    },
+    {
+        "q": "The ______ method sends partial data without ending response.",
+        "type": "fill_blank",
+        "answers": [
+            "write"
+        ],
+        "other_options": [
+            "send",
+            "chunk",
+            "stream"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/stream\", (req, res) => {\n    res.setHeader(\"Content-Type\", \"text/plain\");\n    let count = 0;\n    const interval = setInterval(() => {\n        res.write(`Count: ${count}\\n`);\n        count++;\n        if (count >= 5) {\n            clearInterval(interval);\n            res.end();\n        }\n    }, 100);\n});\n\n// Client receives",
+        "o": [
+            "5 lines sent in chunks",
+            "All at once",
+            "Nothing until end",
+            "Error"
+        ]
+    },
+    {
+        "q": "Response streaming is useful for real-time data like logs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful error handling in routes?",
+        "type": "mcq",
+        "o": [
+            "Catching errors and providing meaningful responses",
+            "Ignoring errors",
+            "Logging errors only",
+            "Crashing on errors"
+        ]
+    },
+    {
+        "q": "The ______ middleware signature has four parameters for error handling.",
+        "type": "fill_blank",
+        "answers": [
+            "err, req, res, next"
+        ],
+        "other_options": [
+            "req, res, next, err",
+            "error, request, response",
+            "e, r, s, n"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/fail\", (req, res, next) => {\n    next(new Error(\"Route error\"));\n});\n\napp.use((err, req, res, next) => {\n    res.status(500).json({ error: err.message });\n});\n\n// When GET /fail is called",
+        "o": [
+            "500 with {\"error\":\"Route error\"}",
+            "Unhandled error",
+            "Empty response",
+            "App crashes"
+        ]
+    },
+    {
+        "q": "Error middleware must be defined after other routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-level error handling?",
+        "type": "mcq",
+        "o": [
+            "Handling errors within specific routes",
+            "Global error handling only",
+            "Error logging",
+            "Error prevention"
+        ]
+    },
+    {
+        "q": "The ______ block catches synchronous errors in route handlers.",
+        "type": "fill_blank",
+        "answers": [
+            "try-catch"
+        ],
+        "other_options": [
+            "if-else",
+            "while",
+            "switch"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/safe\", (req, res, next) => {\n    try {\n        throw new Error(\"Sync error\");\n    } catch (err) {\n        next(err);\n    }\n});\n\napp.use((err, req, res, next) => {\n    res.status(500).send(err.message);\n});\n\n// When GET /safe is called",
+        "o": [
+            "500 Sync error",
+            "Unhandled error",
+            "App crashes",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "Try-catch catches synchronous but not async errors by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is 404 handling in Express?",
+        "type": "mcq",
+        "o": [
+            "Handling requests that match no routes",
+            "Handling all errors",
+            "Redirecting to home",
+            "Logging missing routes"
+        ]
+    },
+    {
+        "q": "The ______ middleware at the end handles 404 errors.",
+        "type": "fill_blank",
+        "answers": [
+            "catch-all"
+        ],
+        "other_options": [
+            "error",
+            "fallback",
+            "default"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/\", (req, res) => res.send(\"Home\"));\n\napp.use((req, res) => {\n    res.status(404).json({ error: \"Not found\" });\n});\n\n// When GET /unknown is called",
+        "o": [
+            "404 with {\"error\":\"Not found\"}",
+            "Home",
+            "500 error",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "404 handler must come after all other routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route security in Express?",
+        "type": "mcq",
+        "o": [
+            "Protecting routes from unauthorized access",
+            "Encrypting routes",
+            "Hiding route definitions",
+            "Route obfuscation"
+        ]
+    },
+    {
+        "q": "The ______ middleware adds security headers to responses.",
+        "type": "fill_blank",
+        "answers": [
+            "helmet"
+        ],
+        "other_options": [
+            "security",
+            "protect",
+            "guard"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const helmet = require(\"helmet\");\napp.use(helmet());\n\napp.get(\"/\", (req, res) => res.send(\"Secure\"));\n\n// What headers are added?",
+        "o": [
+            "X-Content-Type-Options, X-Frame-Options, etc.",
+            "Authorization",
+            "Custom headers only",
+            "No headers added"
+        ]
+    },
+    {
+        "q": "Helmet sets security-related HTTP headers by default.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route authentication?",
+        "type": "mcq",
+        "o": [
+            "Verifying user identity for route access",
+            "Encrypting routes",
+            "Route validation",
+            "Route logging"
+        ]
+    },
+    {
+        "q": "The ______ header commonly carries authentication tokens.",
+        "type": "fill_blank",
+        "answers": [
+            "Authorization"
+        ],
+        "other_options": [
+            "Auth",
+            "Token",
+            "Bearer"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const auth = (req, res, next) => {\n    const token = req.headers.authorization;\n    if (!token) return res.status(401).json({ error: \"No token\" });\n    try {\n        req.user = verifyToken(token);\n        next();\n    } catch {\n        res.status(403).json({ error: \"Invalid token\" });\n    }\n};\n\napp.get(\"/protected\", auth, handler);\n\n// Without Authorization header",
+        "o": [
+            "401 with {\"error\":\"No token\"}",
+            "403 forbidden",
+            "200 success",
+            "500 error"
+        ]
+    },
+    {
+        "q": "401 indicates authentication required, 403 indicates forbidden.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route authorization?",
+        "type": "mcq",
+        "o": [
+            "Checking if authenticated user has permission",
+            "Verifying identity",
+            "Creating permissions",
+            "Logging access"
+        ]
+    },
+    {
+        "q": "The ______ pattern checks user roles for route access.",
+        "type": "fill_blank",
+        "answers": [
+            "role-based"
+        ],
+        "other_options": [
+            "permission",
+            "access",
+            "level"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const authorize = (...roles) => (req, res, next) => {\n    if (!roles.includes(req.user.role)) {\n        return res.status(403).json({ error: \"Forbidden\" });\n    }\n    next();\n};\n\napp.get(\"/admin\", auth, authorize(\"admin\"), handler);\n\n// When user has role \"user\"",
+        "o": [
+            "403 with {\"error\":\"Forbidden\"}",
+            "Success",
+            "401 unauthorized",
+            "500 error"
+        ]
+    },
+    {
+        "q": "Authorization happens after authentication.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route versioning strategy?",
+        "type": "mcq",
+        "o": [
+            "Managing different API versions simultaneously",
+            "Version control for code",
+            "Route documentation",
+            "Route testing"
+        ]
+    },
+    {
+        "q": "The ______ versioning uses custom header for version.",
+        "type": "fill_blank",
+        "answers": [
+            "header"
+        ],
+        "other_options": [
+            "URL",
+            "query",
+            "content"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/users\", (req, res) => {\n    const version = req.headers[\"api-version\"] || \"1\";\n    if (version === \"2\") {\n        res.json({ data: [], format: \"v2\" });\n    } else {\n        res.json({ users: [] });\n    }\n});\n\n// With API-Version: 2 header",
+        "o": [
+            "{\"data\":[],\"format\":\"v2\"}",
+            "{\"users\":[]}",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "Header versioning keeps URLs cleaner than URL versioning.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the HTTP status codes with their meanings:",
+        "type": "match",
+        "left": [
+            "200",
+            "201",
+            "400",
+            "500"
+        ],
+        "right": [
+            "Success",
+            "Created",
+            "Bad Request",
+            "Server Error"
+        ]
+    },
+    {
+        "q": "What is route-level logging?",
+        "type": "mcq",
+        "o": [
+            "Logging specific route access and behavior",
+            "Global logging only",
+            "Error logging",
+            "Debug logging"
+        ]
+    },
+    {
+        "q": "The ______ package is commonly used for structured logging.",
+        "type": "fill_blank",
+        "answers": [
+            "pino"
+        ],
+        "other_options": [
+            "morgan",
+            "winston",
+            "bunyan"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const pino = require(\"pino\");\nconst logger = pino();\n\napp.get(\"/data\", (req, res) => {\n    logger.info({ path: req.path, method: req.method }, \"Request received\");\n    res.json({ data: [] });\n});\n\n// Log output format",
+        "o": [
+            "JSON with path, method, and message",
+            "Plain text",
+            "XML",
+            "No output"
+        ]
+    },
+    {
+        "q": "Structured logging helps with log analysis and filtering.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route performance monitoring?",
+        "type": "mcq",
+        "o": [
+            "Tracking route response times and metrics",
+            "Improving route speed",
+            "Caching routes",
+            "Route optimization"
+        ]
+    },
+    {
+        "q": "The ______ library exposes Prometheus-style metrics.",
+        "type": "fill_blank",
+        "answers": [
+            "prom-client"
+        ],
+        "other_options": [
+            "metrics",
+            "prometheus",
+            "stats"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const histogram = new Histogram({\n    name: \"http_request_duration\",\n    help: \"Request duration\",\n    labelNames: [\"method\", \"path\"]\n});\n\napp.use((req, res, next) => {\n    const end = histogram.startTimer();\n    res.on(\"finish\", () => end({ method: req.method, path: req.path }));\n    next();\n});\n\n// What metric is recorded?",
+        "o": [
+            "Request duration per method and path",
+            "Request count only",
+            "Response size",
+            "Error count"
+        ]
+    },
+    {
+        "q": "Histograms capture duration distribution with buckets.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route tracing?",
+        "type": "mcq",
+        "o": [
+            "Tracking request flow through distributed services",
+            "Debugging routes",
+            "Route logging",
+            "Route documentation"
+        ]
+    },
+    {
+        "q": "The ______ ID links related spans across services.",
+        "type": "fill_blank",
+        "answers": [
+            "trace"
+        ],
+        "other_options": [
+            "span",
+            "request",
+            "correlation"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const tracer = trace.getTracer(\"app\");\n\napp.get(\"/data\", (req, res) => {\n    const span = tracer.startSpan(\"handleData\");\n    span.setAttribute(\"user.id\", req.user?.id);\n    // ... handle request\n    span.end();\n    res.json({ data: [] });\n});\n\n// What is created?",
+        "o": [
+            "A trace span with user ID attribute",
+            "A log entry",
+            "A metric",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Spans represent units of work in distributed tracing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route documentation using JSDoc?",
+        "type": "mcq",
+        "o": [
+            "Documenting routes with standardized comments",
+            "Automatic route generation",
+            "Route testing",
+            "Route validation"
+        ]
+    },
+    {
+        "q": "The ______ JSDoc tag documents the route path.",
+        "type": "fill_blank",
+        "answers": [
+            "@route"
+        ],
+        "other_options": [
+            "@path",
+            "@endpoint",
+            "@url"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "/**\n * @route GET /users\n * @description Get all users\n * @returns {Array} 200 - List of users\n * @returns {Error} 500 - Server error\n */\napp.get(\"/users\", (req, res) => {\n    res.json([]);\n});\n\n// Purpose of JSDoc comments?",
+        "o": [
+            "Generate API documentation automatically",
+            "Runtime validation",
+            "Route security",
+            "Performance optimization"
+        ]
+    },
+    {
+        "q": "JSDoc comments can generate OpenAPI specifications.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is file download routing?",
+        "type": "mcq",
+        "o": [
+            "Serving files for download from routes",
+            "Uploading files",
+            "File validation",
+            "File compression"
+        ]
+    },
+    {
+        "q": "The ______ method sends a file as an attachment.",
+        "type": "fill_blank",
+        "answers": [
+            "download"
+        ],
+        "other_options": [
+            "send",
+            "sendFile",
+            "attachment"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/download/:filename\", (req, res) => {\n    const path = `/files/${req.params.filename}`;\n    res.download(path, \"download.pdf\", (err) => {\n        if (err) res.status(404).send(\"File not found\");\n    });\n});\n\n// Content-Disposition header value",
+        "o": [
+            "attachment; filename=\"download.pdf\"",
+            "inline",
+            "download",
+            "file"
+        ]
+    },
+    {
+        "q": "res.download() sets Content-Disposition to attachment.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is file upload routing?",
+        "type": "mcq",
+        "o": [
+            "Handling multipart file uploads in routes",
+            "Sending files",
+            "File validation",
+            "File compression"
+        ]
+    },
+    {
+        "q": "The ______ middleware handles multipart/form-data uploads.",
+        "type": "fill_blank",
+        "answers": [
+            "multer"
+        ],
+        "other_options": [
+            "formidable",
+            "busboy",
+            "multipart"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const multer = require(\"multer\");\nconst upload = multer({ dest: \"uploads/\" });\n\napp.post(\"/upload\", upload.single(\"file\"), (req, res) => {\n    res.json({ filename: req.file.filename });\n});\n\n// req.file contains",
+        "o": [
+            "Uploaded file metadata and path",
+            "File contents only",
+            "Original filename only",
+            "Error"
+        ]
+    },
+    {
+        "q": "multer.single() handles single file upload.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the file upload flow:",
+        "type": "rearrange",
+        "words": [
+            "Receive request",
+            "Parse multipart",
+            "Save to disk",
+            "Validate file",
+            "Return response"
+        ]
+    },
+    {
+        "q": "What is multiple file upload?",
+        "type": "mcq",
+        "o": [
+            "Uploading multiple files in single request",
+            "Sequential uploads",
+            "File batching",
+            "Bulk download"
+        ]
+    },
+    {
+        "q": "The ______ method in multer handles multiple files.",
+        "type": "fill_blank",
+        "answers": [
+            "array"
+        ],
+        "other_options": [
+            "multiple",
+            "files",
+            "batch"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const upload = multer({ dest: \"uploads/\" });\n\napp.post(\"/photos\", upload.array(\"photos\", 5), (req, res) => {\n    res.json({ count: req.files.length });\n});\n\n// When uploading 3 files",
+        "o": [
+            "{\"count\":3}",
+            "{\"count\":5}",
+            "Error",
+            "{\"count\":0}"
+        ]
+    },
+    {
+        "q": "multer.array() accepts field name and maximum count.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is webhook routing?",
+        "type": "mcq",
+        "o": [
+            "Handling incoming HTTP callbacks from external services",
+            "Outgoing API calls",
+            "Real-time connections",
+            "Push notifications"
+        ]
+    },
+    {
+        "q": "The ______ header commonly carries webhook signatures.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Signature"
+        ],
+        "other_options": [
+            "Authorization",
+            "X-Webhook",
+            "Signature"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/webhook\", express.raw({ type: \"application/json\" }), (req, res) => {\n    const signature = req.headers[\"x-signature\"];\n    const valid = verifySignature(req.body, signature);\n    if (!valid) return res.status(401).send(\"Invalid\");\n    res.status(200).send(\"OK\");\n});\n\n// Purpose of signature verification?",
+        "o": [
+            "Ensure webhook is from legitimate source",
+            "Compress data",
+            "Encrypt data",
+            "Log requests"
+        ]
+    },
+    {
+        "q": "Webhook signature verification prevents spoofed requests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is GraphQL routing in Express?",
+        "type": "mcq",
+        "o": [
+            "Exposing GraphQL API through Express routes",
+            "Graph database routing",
+            "Visual routing",
+            "Path-based queries"
+        ]
+    },
+    {
+        "q": "The ______ middleware integrates GraphQL with Express.",
+        "type": "fill_blank",
+        "answers": [
+            "express-graphql"
+        ],
+        "other_options": [
+            "graphql-express",
+            "gql-middleware",
+            "apollo"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { graphqlHTTP } = require(\"express-graphql\");\nconst schema = buildSchema(`type Query { hello: String }`);\n\napp.use(\"/graphql\", graphqlHTTP({\n    schema,\n    rootValue: { hello: () => \"Hello world!\" },\n    graphiql: true\n}));\n\n// /graphql endpoint provides",
+        "o": [
+            "GraphQL API with interactive GraphiQL UI",
+            "REST API",
+            "Static files",
+            "Error page"
+        ]
+    },
+    {
+        "q": "GraphiQL provides interactive GraphQL query testing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is SSE (Server-Sent Events) routing?",
+        "type": "mcq",
+        "o": [
+            "Streaming events from server to client",
+            "Sending server errors",
+            "Event logging",
+            "Socket connections"
+        ]
+    },
+    {
+        "q": "The ______ content type is used for Server-Sent Events.",
+        "type": "fill_blank",
+        "answers": [
+            "text/event-stream"
+        ],
+        "other_options": [
+            "application/stream",
+            "text/stream",
+            "event/json"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/events\", (req, res) => {\n    res.setHeader(\"Content-Type\", \"text/event-stream\");\n    res.setHeader(\"Cache-Control\", \"no-cache\");\n    res.setHeader(\"Connection\", \"keep-alive\");\n    \n    setInterval(() => {\n        res.write(`data: ${Date.now()}\\n\\n`);\n    }, 1000);\n});\n\n// SSE message format",
+        "o": [
+            "data: value followed by double newline",
+            "JSON objects",
+            "Plain text",
+            "Binary data"
+        ]
+    },
+    {
+        "q": "SSE connections are one-way from server to client.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is WebSocket integration with Express?",
+        "type": "mcq",
+        "o": [
+            "Bidirectional real-time communication",
+            "One-way streaming",
+            "HTTP requests only",
+            "File transfers"
+        ]
+    },
+    {
+        "q": "The ______ package provides WebSocket for Express.",
+        "type": "fill_blank",
+        "answers": [
+            "ws"
+        ],
+        "other_options": [
+            "websocket",
+            "socket",
+            "realtime"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const WebSocket = require(\"ws\");\nconst server = app.listen(3000);\nconst wss = new WebSocket.Server({ server });\n\nwss.on(\"connection\", (ws) => {\n    ws.on(\"message\", (data) => {\n        ws.send(`Echo: ${data}`);\n    });\n});\n\n// When client sends \"Hello\"",
+        "o": [
+            "Client receives Echo: Hello",
+            "Server receives Hello",
+            "Connection closed",
+            "Error"
+        ]
+    },
+    {
+        "q": "WebSocket allows full-duplex communication.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is proxy routing in Express?",
+        "type": "mcq",
+        "o": [
+            "Forwarding requests to other servers",
+            "Caching responses",
+            "Load balancing",
+            "Route redirection"
+        ]
+    },
+    {
+        "q": "The ______ package enables HTTP proxying in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "http-proxy-middleware"
+        ],
+        "other_options": [
+            "express-proxy",
+            "proxy",
+            "forward"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { createProxyMiddleware } = require(\"http-proxy-middleware\");\n\napp.use(\"/api\", createProxyMiddleware({\n    target: \"http://backend:5000\",\n    changeOrigin: true\n}));\n\n// When GET /api/users is called",
+        "o": [
+            "Request forwarded to http://backend:5000/api/users",
+            "Response from Express",
+            "404 error",
+            "Redirect to backend"
+        ]
+    },
+    {
+        "q": "Proxy middleware can rewrite paths before forwarding.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is API gateway pattern in Express?",
+        "type": "mcq",
+        "o": [
+            "Single entry point routing to multiple microservices",
+            "Database gateway",
+            "Authentication gateway",
+            "File gateway"
+        ]
+    },
+    {
+        "q": "The ______ pattern aggregates multiple backend services behind one API.",
+        "type": "fill_blank",
+        "answers": [
+            "gateway"
+        ],
+        "other_options": [
+            "proxy",
+            "facade",
+            "adapter"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { createProxyMiddleware } = require(\"http-proxy-middleware\");\n\napp.use(\"/users\", createProxyMiddleware({ target: \"http://user-service\" }));\napp.use(\"/orders\", createProxyMiddleware({ target: \"http://order-service\" }));\napp.use(\"/products\", createProxyMiddleware({ target: \"http://product-service\" }));\n\n// What pattern is this?",
+        "o": [
+            "API gateway routing to microservices",
+            "Single service",
+            "Load balancer",
+            "Cache layer"
+        ]
+    },
+    {
+        "q": "API gateways can handle cross-cutting concerns like auth and logging.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route aggregation?",
+        "type": "mcq",
+        "o": [
+            "Combining responses from multiple services",
+            "Grouping routes",
+            "Merging routers",
+            "Route compression"
+        ]
+    },
+    {
+        "q": "The ______ pattern calls multiple services and combines results.",
+        "type": "fill_blank",
+        "answers": [
+            "aggregation"
+        ],
+        "other_options": [
+            "composition",
+            "merging",
+            "joining"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/dashboard\", async (req, res) => {\n    const [user, orders, notifications] = await Promise.all([\n        getUserData(req.user.id),\n        getOrders(req.user.id),\n        getNotifications(req.user.id)\n    ]);\n    res.json({ user, orders, notifications });\n});\n\n// What pattern is used?",
+        "o": [
+            "Response aggregation with parallel requests",
+            "Sequential fetching",
+            "Caching",
+            "Single service"
+        ]
+    },
+    {
+        "q": "Parallel aggregation improves response time vs sequential calls.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route caching with Redis?",
+        "type": "mcq",
+        "o": [
+            "Storing route responses in Redis for faster retrieval",
+            "Caching route definitions",
+            "Redis routing",
+            "Database caching"
+        ]
+    },
+    {
+        "q": "The ______ method in Redis stores cached responses.",
+        "type": "fill_blank",
+        "answers": [
+            "set"
+        ],
+        "other_options": [
+            "put",
+            "store",
+            "save"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const redis = require(\"redis\");\nconst client = redis.createClient();\n\nconst cache = async (req, res, next) => {\n    const cached = await client.get(req.originalUrl);\n    if (cached) return res.json(JSON.parse(cached));\n    res.originalJson = res.json;\n    res.json = async (data) => {\n        await client.setEx(req.originalUrl, 3600, JSON.stringify(data));\n        res.originalJson(data);\n    };\n    next();\n};\n\n// Cache duration",
+        "o": [
+            "3600 seconds (1 hour)",
+            "3600 minutes",
+            "Forever",
+            "No caching"
+        ]
+    },
+    {
+        "q": "Redis caching works across multiple server instances.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cache invalidation in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Removing outdated cached data",
+            "Validating cache data",
+            "Creating cache",
+            "Compressing cache"
+        ]
+    },
+    {
+        "q": "The ______ method removes a key from Redis cache.",
+        "type": "fill_blank",
+        "answers": [
+            "del"
+        ],
+        "other_options": [
+            "remove",
+            "delete",
+            "clear"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.put(\"/users/:id\", async (req, res) => {\n    await updateUser(req.params.id, req.body);\n    await client.del(`/users/${req.params.id}`);\n    await client.del(\"/users\");\n    res.json({ success: true });\n});\n\n// Why invalidate multiple keys?",
+        "o": [
+            "Clear both individual and list cache entries",
+            "Delete user",
+            "Reset server",
+            "Clear all cache"
+        ]
+    },
+    {
+        "q": "Cache invalidation is one of the hardest problems in computing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is rate limiting with sliding window?",
+        "type": "mcq",
+        "o": [
+            "Limiting requests using a moving time window",
+            "Fixed window limiting",
+            "No limiting",
+            "Token bucket"
+        ]
+    },
+    {
+        "q": "The ______ algorithm provides smoother rate limiting than fixed window.",
+        "type": "fill_blank",
+        "answers": [
+            "sliding window"
+        ],
+        "other_options": [
+            "fixed window",
+            "leaky bucket",
+            "token bucket"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const rateLimit = require(\"express-rate-limit\");\n\nconst limiter = rateLimit({\n    windowMs: 15 * 60 * 1000,\n    max: 100,\n    standardHeaders: true,\n    legacyHeaders: false\n});\n\n// X-RateLimit-* headers are",
+        "o": [
+            "Set in responses with remaining requests info",
+            "Not included",
+            "Only on error",
+            "Only for authenticated users"
+        ]
+    },
+    {
+        "q": "standardHeaders enables RateLimit headers per draft-6 spec.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is distributed rate limiting?",
+        "type": "mcq",
+        "o": [
+            "Rate limiting across multiple server instances",
+            "Limiting per route",
+            "Limiting per user",
+            "Client-side limiting"
+        ]
+    },
+    {
+        "q": "The ______ store enables rate limiting across multiple servers.",
+        "type": "fill_blank",
+        "answers": [
+            "Redis"
+        ],
+        "other_options": [
+            "memory",
+            "file",
+            "database"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const RedisStore = require(\"rate-limit-redis\");\n\nconst limiter = rateLimit({\n    store: new RedisStore({ client: redisClient }),\n    windowMs: 60000,\n    max: 100\n});\n\n// Benefit of Redis store?",
+        "o": [
+            "Consistent rate limiting across clustered servers",
+            "Faster limiting",
+            "No persistence",
+            "Memory only"
+        ]
+    },
+    {
+        "q": "In-memory rate limiting fails in multi-instance deployments.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the rate limiting algorithms with their characteristics:",
+        "type": "match",
+        "left": [
+            "Fixed window",
+            "Sliding window",
+            "Token bucket",
+            "Leaky bucket"
+        ],
+        "right": [
+            "Simple but burst-prone",
+            "Smoother rate control",
+            "Allows bursts up to bucket size",
+            "Constant output rate"
+        ]
+    },
+    {
+        "q": "What is request throttling?",
+        "type": "mcq",
+        "o": [
+            "Slowing down requests rather than rejecting them",
+            "Speeding up requests",
+            "Rejecting all requests",
+            "Caching requests"
+        ]
+    },
+    {
+        "q": "The ______ pattern delays requests instead of returning 429.",
+        "type": "fill_blank",
+        "answers": [
+            "throttling"
+        ],
+        "other_options": [
+            "queuing",
+            "buffering",
+            "batching"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const slowDown = require(\"express-slow-down\");\n\nconst speedLimiter = slowDown({\n    windowMs: 15 * 60 * 1000,\n    delayAfter: 100,\n    delayMs: 500\n});\n\napp.use(speedLimiter);\n\n// After 101st request",
+        "o": [
+            "Response delayed by 500ms",
+            "Request rejected",
+            "Normal response",
+            "Error thrown"
+        ]
+    },
+    {
+        "q": "Throttling provides better UX than hard rate limiting.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request queuing in Express?",
+        "type": "mcq",
+        "o": [
+            "Buffering requests when service is busy",
+            "Ordering routes",
+            "Sorting middleware",
+            "Prioritizing requests"
+        ]
+    },
+    {
+        "q": "The ______ pattern processes requests in order during high load.",
+        "type": "fill_blank",
+        "answers": [
+            "queue"
+        ],
+        "other_options": [
+            "stack",
+            "buffer",
+            "pool"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const Queue = require(\"bull\");\nconst requestQueue = new Queue(\"requests\", redisUrl);\n\napp.post(\"/process\", async (req, res) => {\n    const job = await requestQueue.add(req.body);\n    res.json({ jobId: job.id, status: \"queued\" });\n});\n\nrequestQueue.process(async (job) => {\n    return processData(job.data);\n});\n\n// Response behavior",
+        "o": [
+            "Immediate response with job ID, processing async",
+            "Wait for processing",
+            "Error",
+            "No response"
+        ]
+    },
+    {
+        "q": "Queue-based processing decouples request handling from processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is long polling in Express?",
+        "type": "mcq",
+        "o": [
+            "Holding request open until data is available",
+            "Short frequent requests",
+            "WebSocket connection",
+            "Server push"
+        ]
+    },
+    {
+        "q": "The ______ pattern keeps connection open for real-time updates.",
+        "type": "fill_blank",
+        "answers": [
+            "long polling"
+        ],
+        "other_options": [
+            "short polling",
+            "websocket",
+            "SSE"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/updates\", async (req, res) => {\n    const timeout = 30000;\n    const start = Date.now();\n    \n    while (Date.now() - start < timeout) {\n        const update = await checkForUpdate(req.query.since);\n        if (update) return res.json(update);\n        await new Promise(r => setTimeout(r, 1000));\n    }\n    res.status(204).end();\n});\n\n// How long does request stay open?",
+        "o": [
+            "Up to 30 seconds or until data available",
+            "Indefinitely",
+            "1 second",
+            "No waiting"
+        ]
+    },
+    {
+        "q": "Long polling is simpler than WebSocket but less efficient.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is conditional request handling?",
+        "type": "mcq",
+        "o": [
+            "Returning different responses based on request headers",
+            "Conditional middleware",
+            "If-else in handlers",
+            "Route conditions"
+        ]
+    },
+    {
+        "q": "The ______ header enables conditional GET requests.",
+        "type": "fill_blank",
+        "answers": [
+            "If-None-Match"
+        ],
+        "other_options": [
+            "If-Match",
+            "ETag",
+            "Cache-Control"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/resource\", (req, res) => {\n    const etag = generateETag(resourceData);\n    \n    if (req.headers[\"if-none-match\"] === etag) {\n        return res.status(304).end();\n    }\n    \n    res.set(\"ETag\", etag);\n    res.json(resourceData);\n});\n\n// When client has fresh cache",
+        "o": [
+            "304 Not Modified with no body",
+            "200 with full data",
+            "404 Not Found",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "304 responses save bandwidth by not sending unchanged data.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is HEAD request handling?",
+        "type": "mcq",
+        "o": [
+            "Returning headers only without body",
+            "Main request handler",
+            "First request",
+            "Priority request"
+        ]
+    },
+    {
+        "q": "The ______ method handles HEAD requests in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "head"
+        ],
+        "other_options": [
+            "get",
+            "options",
+            "all"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/file\", (req, res) => {\n    res.set(\"Content-Length\", fileSize);\n    res.set(\"Content-Type\", \"application/pdf\");\n    res.send(fileBuffer);\n});\n\n// HEAD /file response",
+        "o": [
+            "Headers only, no body (Express handles GET for HEAD)",
+            "Full file",
+            "Error",
+            "404"
+        ]
+    },
+    {
+        "q": "Express automatically handles HEAD for GET routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is OPTIONS request handling?",
+        "type": "mcq",
+        "o": [
+            "Describing available communication options",
+            "Setting options",
+            "Configuration request",
+            "Test request"
+        ]
+    },
+    {
+        "q": "The ______ header lists allowed methods in OPTIONS response.",
+        "type": "fill_blank",
+        "answers": [
+            "Allow"
+        ],
+        "other_options": [
+            "Methods",
+            "Allowed",
+            "Accept"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.options(\"/api/users\", (req, res) => {\n    res.set(\"Allow\", \"GET, POST, PUT, DELETE\");\n    res.status(204).end();\n});\n\n// OPTIONS /api/users response",
+        "o": [
+            "204 with Allow header listing methods",
+            "200 with body",
+            "404",
+            "405"
+        ]
+    },
+    {
+        "q": "OPTIONS is used for CORS preflight and capability discovery.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange HTTP method safety levels (safest to least safe):",
+        "type": "rearrange",
+        "words": [
+            "GET/HEAD",
+            "OPTIONS",
+            "POST",
+            "PUT/PATCH",
+            "DELETE"
+        ]
+    },
+    {
+        "q": "What is route-level compression?",
+        "type": "mcq",
+        "o": [
+            "Compressing response body for specific routes",
+            "Compressing route definitions",
+            "URL shortening",
+            "Route optimization"
+        ]
+    },
+    {
+        "q": "The ______ header indicates compression encoding used.",
+        "type": "fill_blank",
+        "answers": [
+            "Content-Encoding"
+        ],
+        "other_options": [
+            "Accept-Encoding",
+            "Compression",
+            "Encoding"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const compression = require(\"compression\");\n\nconst shouldCompress = (req, res) => {\n    if (req.path.startsWith(\"/api/stream\")) return false;\n    return compression.filter(req, res);\n};\n\napp.use(compression({ filter: shouldCompress }));\n\n// /api/stream responses",
+        "o": [
+            "Not compressed",
+            "Always compressed",
+            "Error",
+            "Partially compressed"
+        ]
+    },
+    {
+        "q": "Compression can be selectively disabled for certain routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request IP detection behind proxy?",
+        "type": "mcq",
+        "o": [
+            "Getting real client IP from X-Forwarded-For header",
+            "Server IP",
+            "Proxy IP only",
+            "Random IP"
+        ]
+    },
+    {
+        "q": "The ______ setting enables trusting proxy headers.",
+        "type": "fill_blank",
+        "answers": [
+            "trust proxy"
+        ],
+        "other_options": [
+            "proxy trust",
+            "forward trust",
+            "ip trust"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.set(\"trust proxy\", 1);\n\napp.get(\"/ip\", (req, res) => {\n    res.json({\n        ip: req.ip,\n        ips: req.ips\n    });\n});\n\n// Behind one proxy with X-Forwarded-For: client, proxy",
+        "o": [
+            "{\"ip\":\"client\",\"ips\":[\"client\",\"proxy\"]}",
+            "{\"ip\":\"proxy\",\"ips\":[]}",
+            "{\"ip\":\"127.0.0.1\",\"ips\":[]}",
+            "Error"
+        ]
+    },
+    {
+        "q": "req.ip returns first trusted IP from X-Forwarded-For.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-level helmet configuration?",
+        "type": "mcq",
+        "o": [
+            "Applying different security headers per route",
+            "Global helmet only",
+            "Helmet middleware",
+            "Route protection"
+        ]
+    },
+    {
+        "q": "The ______ directive controls framing of the page.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Frame-Options"
+        ],
+        "other_options": [
+            "Content-Security-Policy",
+            "X-XSS-Protection",
+            "X-Content-Type-Options"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const helmet = require(\"helmet\");\n\napp.use(\"/api\", helmet());\n\napp.use(\"/embed\", helmet({\n    frameguard: false\n}));\n\n// /embed versus /api",
+        "o": [
+            "/embed allows framing, /api denies framing",
+            "Both deny framing",
+            "Both allow framing",
+            "Error"
+        ]
+    },
+    {
+        "q": "Different routes can have different security requirements.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is CSRF protection in Express routes?",
+        "type": "mcq",
+        "o": [
+            "Protecting against cross-site request forgery",
+            "Cross-site scripting protection",
+            "SQL injection protection",
+            "Route protection"
+        ]
+    },
+    {
+        "q": "The ______ package provides CSRF protection for Express.",
+        "type": "fill_blank",
+        "answers": [
+            "csurf"
+        ],
+        "other_options": [
+            "csrf",
+            "helmet",
+            "security"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const csrf = require(\"csurf\");\nconst csrfProtection = csrf({ cookie: true });\n\napp.get(\"/form\", csrfProtection, (req, res) => {\n    res.json({ csrfToken: req.csrfToken() });\n});\n\napp.post(\"/form\", csrfProtection, (req, res) => {\n    res.json({ success: true });\n});\n\n// POST without token",
+        "o": [
+            "403 Forbidden - invalid CSRF token",
+            "200 Success",
+            "401 Unauthorized",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "CSRF tokens prevent forged requests from malicious sites.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-specific session handling?",
+        "type": "mcq",
+        "o": [
+            "Managing sessions differently per route",
+            "Global sessions only",
+            "No sessions",
+            "Session storage"
+        ]
+    },
+    {
+        "q": "The ______ middleware enables session management in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "express-session"
+        ],
+        "other_options": [
+            "cookie-session",
+            "session",
+            "connect-session"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const session = require(\"express-session\");\n\napp.use(session({\n    secret: \"key\",\n    resave: false,\n    saveUninitialized: false,\n    cookie: { httpOnly: true, secure: true }\n}));\n\napp.get(\"/login\", (req, res) => {\n    req.session.user = { id: 1 };\n    res.send(\"Logged in\");\n});\n\n// Session cookie properties",
+        "o": [
+            "httpOnly and secure flags set",
+            "No flags",
+            "Only httpOnly",
+            "Only secure"
+        ]
+    },
+    {
+        "q": "httpOnly prevents JavaScript from accessing the session cookie.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cookie-based authentication routing?",
+        "type": "mcq",
+        "o": [
+            "Using cookies to identify authenticated users",
+            "JWT only",
+            "Basic auth",
+            "API keys"
+        ]
+    },
+    {
+        "q": "The ______ parser middleware parses cookies in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "cookie-parser"
+        ],
+        "other_options": [
+            "cookie",
+            "parser",
+            "cookies"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const cookieParser = require(\"cookie-parser\");\napp.use(cookieParser(\"secret\"));\n\napp.get(\"/set\", (req, res) => {\n    res.cookie(\"token\", \"abc123\", { signed: true });\n    res.send(\"Cookie set\");\n});\n\napp.get(\"/get\", (req, res) => {\n    res.json({ token: req.signedCookies.token });\n});\n\n// req.signedCookies vs req.cookies",
+        "o": [
+            "signedCookies contains verified cookies only",
+            "They are the same",
+            "cookies has signed cookies",
+            "Neither has the cookie"
+        ]
+    },
+    {
+        "q": "Signed cookies prevent tampering by verifying signature.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is JWT route protection?",
+        "type": "mcq",
+        "o": [
+            "Validating JWT tokens to protect routes",
+            "Creating JWTs",
+            "Storing JWTs",
+            "Refreshing JWTs"
+        ]
+    },
+    {
+        "q": "The ______ middleware verifies JWTs in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "express-jwt"
+        ],
+        "other_options": [
+            "jsonwebtoken",
+            "jwt",
+            "passport-jwt"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { expressjwt: jwt } = require(\"express-jwt\");\n\napp.use(\"/api\", jwt({ secret: \"key\", algorithms: [\"HS256\"] }));\n\napp.get(\"/api/data\", (req, res) => {\n    res.json({ user: req.auth });\n});\n\n// Without valid token",
+        "o": [
+            "401 Unauthorized",
+            "200 with data",
+            "403 Forbidden",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "express-jwt attaches decoded token to req.auth.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Passport.js in Express routing?",
+        "type": "mcq",
+        "o": [
+            "Authentication middleware for Express",
+            "Passport validation",
+            "Travel booking API",
+            "Document handler"
+        ]
+    },
+    {
+        "q": "The ______ method initializes Passport middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "initialize"
+        ],
+        "other_options": [
+            "start",
+            "begin",
+            "setup"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const passport = require(\"passport\");\nconst LocalStrategy = require(\"passport-local\").Strategy;\n\npassport.use(new LocalStrategy(\n    (username, password, done) => {\n        if (username === \"admin\" && password === \"secret\") {\n            return done(null, { id: 1, username });\n        }\n        return done(null, false, { message: \"Invalid credentials\" });\n    }\n));\n\n// What does done(null, user) indicate?",
+        "o": [
+            "Successful authentication",
+            "Failed authentication",
+            "Error occurred",
+            "Redirect required"
+        ]
+    },
+    {
+        "q": "Passport supports multiple authentication strategies.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is OAuth 2.0 route integration?",
+        "type": "mcq",
+        "o": [
+            "Third-party authentication using OAuth providers",
+            "Internal auth only",
+            "Password hashing",
+            "Session management"
+        ]
+    },
+    {
+        "q": "The ______ strategy enables Google OAuth in Passport.",
+        "type": "fill_blank",
+        "answers": [
+            "passport-google-oauth20"
+        ],
+        "other_options": [
+            "google-auth",
+            "oauth-google",
+            "google-passport"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/auth/google\",\n    passport.authenticate(\"google\", { scope: [\"profile\", \"email\"] })\n);\n\napp.get(\"/auth/google/callback\",\n    passport.authenticate(\"google\", { failureRedirect: \"/login\" }),\n    (req, res) => res.redirect(\"/dashboard\")\n);\n\n// First route does what?",
+        "o": [
+            "Redirects to Google OAuth consent screen",
+            "Logs in user directly",
+            "Shows form",
+            "Returns JSON"
+        ]
+    },
+    {
+        "q": "OAuth callback receives authorization code for token exchange.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is API key authentication?",
+        "type": "mcq",
+        "o": [
+            "Authenticating using a secret key in request",
+            "Keyboard shortcuts",
+            "Public key cryptography",
+            "SSH keys"
+        ]
+    },
+    {
+        "q": "The ______ header commonly carries API keys.",
+        "type": "fill_blank",
+        "answers": [
+            "X-API-Key"
+        ],
+        "other_options": [
+            "Authorization",
+            "API-Key",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const apiKeyAuth = (req, res, next) => {\n    const apiKey = req.headers[\"x-api-key\"];\n    if (!apiKey || !validKeys.includes(apiKey)) {\n        return res.status(401).json({ error: \"Invalid API key\" });\n    }\n    next();\n};\n\napp.use(\"/api\", apiKeyAuth);\n\n// Without API key",
+        "o": [
+            "401 with {\"error\":\"Invalid API key\"}",
+            "200 success",
+            "403 forbidden",
+            "500 error"
+        ]
+    },
+    {
+        "q": "API keys should be transmitted over HTTPS only.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Basic authentication in Express?",
+        "type": "mcq",
+        "o": [
+            "Username:password encoded in Authorization header",
+            "Simple password",
+            "No authentication",
+            "Token-based"
+        ]
+    },
+    {
+        "q": "The ______ scheme is used in Basic auth header.",
+        "type": "fill_blank",
+        "answers": [
+            "Basic"
+        ],
+        "other_options": [
+            "Bearer",
+            "Digest",
+            "Token"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const basic = require(\"express-basic-auth\");\n\napp.use(\"/admin\", basic({\n    users: { admin: \"secretpassword\" },\n    challenge: true,\n    realm: \"Admin Area\"\n}));\n\n// Without credentials, browser shows",
+        "o": [
+            "Login dialog popup",
+            "JSON error",
+            "Redirect to login page",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Basic auth credentials are base64 encoded, not encrypted.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match authentication methods with their characteristics:",
+        "type": "match",
+        "left": [
+            "Session",
+            "JWT",
+            "OAuth",
+            "API Key"
+        ],
+        "right": [
+            "Server-stored state",
+            "Stateless tokens",
+            "Third-party delegation",
+            "Simple secret string"
+        ]
+    },
+    {
+        "q": "What is refresh token routing?",
+        "type": "mcq",
+        "o": [
+            "Endpoint to exchange refresh token for new access token",
+            "Token refresh rate",
+            "Page refresh",
+            "Cache refresh"
+        ]
+    },
+    {
+        "q": "The ______ endpoint issues new access tokens.",
+        "type": "fill_blank",
+        "answers": [
+            "/refresh"
+        ],
+        "other_options": [
+            "/token",
+            "/renew",
+            "/new-token"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/auth/refresh\", (req, res) => {\n    const { refreshToken } = req.body;\n    try {\n        const decoded = jwt.verify(refreshToken, REFRESH_SECRET);\n        const accessToken = jwt.sign(\n            { userId: decoded.userId },\n            ACCESS_SECRET,\n            { expiresIn: \"15m\" }\n        );\n        res.json({ accessToken });\n    } catch {\n        res.status(401).json({ error: \"Invalid refresh token\" });\n    }\n});\n\n// New access token valid for",
+        "o": [
+            "15 minutes",
+            "1 hour",
+            "Forever",
+            "Same as refresh token"
+        ]
+    },
+    {
+        "q": "Refresh tokens should have longer expiry than access tokens.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is token revocation?",
+        "type": "mcq",
+        "o": [
+            "Invalidating tokens before expiry",
+            "Token creation",
+            "Token refresh",
+            "Token storage"
+        ]
+    },
+    {
+        "q": "The ______ list stores revoked tokens for checking.",
+        "type": "fill_blank",
+        "answers": [
+            "blacklist"
+        ],
+        "other_options": [
+            "whitelist",
+            "graylist",
+            "allowlist"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const revokedTokens = new Set();\n\napp.post(\"/auth/logout\", auth, (req, res) => {\n    revokedTokens.add(req.token);\n    res.json({ message: \"Logged out\" });\n});\n\nconst checkRevoked = (req, res, next) => {\n    if (revokedTokens.has(req.token)) {\n        return res.status(401).json({ error: \"Token revoked\" });\n    }\n    next();\n};\n\n// After logout, using same token",
+        "o": [
+            "401 Token revoked",
+            "Success",
+            "New token issued",
+            "Error"
+        ]
+    },
+    {
+        "q": "Token blacklists add state to otherwise stateless JWT auth.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is content type routing?",
+        "type": "mcq",
+        "o": [
+            "Different handlers based on request Content-Type",
+            "Setting response type",
+            "File type routing",
+            "MIME type validation"
+        ]
+    },
+    {
+        "q": "The ______ method checks if content type matches.",
+        "type": "fill_blank",
+        "answers": [
+            "is"
+        ],
+        "other_options": [
+            "type",
+            "match",
+            "check"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/data\", (req, res) => {\n    if (req.is(\"application/json\")) {\n        return res.json({ format: \"json\" });\n    }\n    if (req.is(\"application/xml\")) {\n        return res.send(\"<format>xml</format>\");\n    }\n    res.status(415).send(\"Unsupported Media Type\");\n});\n\n// With Content-Type: text/plain",
+        "o": [
+            "415 Unsupported Media Type",
+            "{\"format\":\"json\"}",
+            "XML response",
+            "Error"
+        ]
+    },
+    {
+        "q": "415 indicates unsupported request content type.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is accept header routing?",
+        "type": "mcq",
+        "o": [
+            "Serving different formats based on client Accept header",
+            "Accepting all requests",
+            "Header validation",
+            "Request filtering"
+        ]
+    },
+    {
+        "q": "The ______ method checks accepted types in Express.",
+        "type": "fill_blank",
+        "answers": [
+            "accepts"
+        ],
+        "other_options": [
+            "accept",
+            "is",
+            "type"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/data\", (req, res) => {\n    const type = req.accepts([\"json\", \"xml\", \"html\"]);\n    switch (type) {\n        case \"json\":\n            return res.json({ data: [] });\n        case \"xml\":\n            return res.type(\"xml\").send(\"<data/>\");\n        case \"html\":\n            return res.send(\"<h1>Data</h1>\");\n        default:\n            return res.status(406).send(\"Not Acceptable\");\n    }\n});\n\n// Accept: application/json",
+        "o": [
+            "{\"data\":[]}",
+            "XML",
+            "HTML",
+            "406"
+        ]
+    },
+    {
+        "q": "req.accepts returns first matching type or false.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is sub-resource routing?",
+        "type": "mcq",
+        "o": [
+            "Nested resources within a parent resource",
+            "Subscription routes",
+            "Secondary routes",
+            "Backup routes"
+        ]
+    },
+    {
+        "q": "The ______ router pattern handles sub-resources.",
+        "type": "fill_blank",
+        "answers": [
+            "nested"
+        ],
+        "other_options": [
+            "sub",
+            "child",
+            "inner"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const commentsRouter = express.Router({ mergeParams: true });\n\ncommentsRouter.get(\"/\", (req, res) => {\n    res.json({ postId: req.params.postId, comments: [] });\n});\n\napp.use(\"/posts/:postId/comments\", commentsRouter);\n\n// GET /posts/5/comments response",
+        "o": [
+            "{\"postId\":\"5\",\"comments\":[]}",
+            "{\"comments\":[]}",
+            "{\"postId\":\"5\"}",
+            "Error"
+        ]
+    },
+    {
+        "q": "mergeParams allows access to parent route parameters.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is bulk operation routing?",
+        "type": "mcq",
+        "o": [
+            "Handling multiple operations in single request",
+            "Large file upload",
+            "Batch download",
+            "Mass delete"
+        ]
+    },
+    {
+        "q": "The ______ endpoint pattern handles bulk operations.",
+        "type": "fill_blank",
+        "answers": [
+            "/bulk"
+        ],
+        "other_options": [
+            "/batch",
+            "/multi",
+            "/all"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/users/bulk\", async (req, res) => {\n    const { users } = req.body;\n    const results = await Promise.allSettled(\n        users.map(user => createUser(user))\n    );\n    res.json({\n        created: results.filter(r => r.status === \"fulfilled\").length,\n        failed: results.filter(r => r.status === \"rejected\").length\n    });\n});\n\n// When 8 of 10 users succeed",
+        "o": [
+            "{\"created\":8,\"failed\":2}",
+            "{\"created\":10}",
+            "Error",
+            "{\"failed\":2}"
+        ]
+    },
+    {
+        "q": "Promise.allSettled continues even if some promises reject.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange REST resource operations (CRUD order):",
+        "type": "rearrange",
+        "words": [
+            "POST /resources (Create)",
+            "GET /resources (Read List)",
+            "GET /resources/:id (Read One)",
+            "PUT /resources/:id (Update)",
+            "DELETE /resources/:id (Delete)"
+        ]
+    },
+    {
+        "q": "What is soft delete routing?",
+        "type": "mcq",
+        "o": [
+            "Marking records as deleted without removing from database",
+            "Temporary delete",
+            "Slow delete",
+            "Partial delete"
+        ]
+    },
+    {
+        "q": "The ______ field commonly marks soft-deleted records.",
+        "type": "fill_blank",
+        "answers": [
+            "deletedAt"
+        ],
+        "other_options": [
+            "deleted",
+            "isDeleted",
+            "removed"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.delete(\"/users/:id\", async (req, res) => {\n    await User.update(\n        { deletedAt: new Date() },\n        { where: { id: req.params.id } }\n    );\n    res.status(204).end();\n});\n\napp.get(\"/users\", async (req, res) => {\n    const users = await User.findAll({\n        where: { deletedAt: null }\n    });\n    res.json(users);\n});\n\n// Deleted users in GET /users?",
+        "o": [
+            "No, filtered out by deletedAt: null",
+            "Yes, all users",
+            "Only deleted",
+            "Error"
+        ]
+    },
+    {
+        "q": "Soft delete allows data recovery and audit trails.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-level database transaction?",
+        "type": "mcq",
+        "o": [
+            "Wrapping route logic in database transaction",
+            "Transaction logging",
+            "Route billing",
+            "Payment routing"
+        ]
+    },
+    {
+        "q": "The ______ method starts a database transaction.",
+        "type": "fill_blank",
+        "answers": [
+            "beginTransaction"
+        ],
+        "other_options": [
+            "startTransaction",
+            "createTransaction",
+            "newTransaction"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.post(\"/transfer\", async (req, res) => {\n    const t = await sequelize.transaction();\n    try {\n        await Account.decrement(\"balance\", { by: 100, where: { id: 1 }, transaction: t });\n        await Account.increment(\"balance\", { by: 100, where: { id: 2 }, transaction: t });\n        await t.commit();\n        res.json({ success: true });\n    } catch (err) {\n        await t.rollback();\n        res.status(500).json({ error: \"Transfer failed\" });\n    }\n});\n\n// If second query fails",
+        "o": [
+            "First query rolled back, no money moved",
+            "First query committed",
+            "Partial transfer",
+            "Undefined state"
+        ]
+    },
+    {
+        "q": "Transactions ensure atomicity of multiple database operations.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is optimistic locking in routes?",
+        "type": "mcq",
+        "o": [
+            "Checking version before update to prevent conflicts",
+            "Locking database rows",
+            "Pessimistic approach",
+            "No locking"
+        ]
+    },
+    {
+        "q": "The ______ field tracks record version for optimistic locking.",
+        "type": "fill_blank",
+        "answers": [
+            "version"
+        ],
+        "other_options": [
+            "lock",
+            "revision",
+            "sequence"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.put(\"/items/:id\", async (req, res) => {\n    const { version, ...data } = req.body;\n    const [updated] = await Item.update(\n        { ...data, version: version + 1 },\n        { where: { id: req.params.id, version } }\n    );\n    if (updated === 0) {\n        return res.status(409).json({ error: \"Conflict - item was modified\" });\n    }\n    res.json({ success: true });\n});\n\n// When another request already updated",
+        "o": [
+            "409 Conflict",
+            "200 Success",
+            "500 Error",
+            "404 Not Found"
+        ]
+    },
+    {
+        "q": "409 Conflict indicates concurrent modification detected.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is idempotency in API routes?",
+        "type": "mcq",
+        "o": [
+            "Multiple identical requests have same effect as single request",
+            "Fast requests",
+            "Secure requests",
+            "Cached requests"
+        ]
+    },
+    {
+        "q": "The ______ key ensures idempotent processing.",
+        "type": "fill_blank",
+        "answers": [
+            "Idempotency-Key"
+        ],
+        "other_options": [
+            "Request-ID",
+            "Unique-ID",
+            "Transaction-ID"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const processedKeys = new Map();\n\napp.post(\"/payment\", async (req, res) => {\n    const idempotencyKey = req.headers[\"idempotency-key\"];\n    \n    if (processedKeys.has(idempotencyKey)) {\n        return res.json(processedKeys.get(idempotencyKey));\n    }\n    \n    const result = await processPayment(req.body);\n    processedKeys.set(idempotencyKey, result);\n    res.json(result);\n});\n\n// Same key sent twice",
+        "o": [
+            "Second request returns cached result without reprocessing",
+            "Payment processed twice",
+            "Error",
+            "409 Conflict"
+        ]
+    },
+    {
+        "q": "Idempotency prevents duplicate operations from retried requests.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is eager loading in route handlers?",
+        "type": "mcq",
+        "o": [
+            "Loading related data in single query",
+            "Fast loading",
+            "Lazy loading opposite",
+            "Preloading routes"
+        ]
+    },
+    {
+        "q": "The ______ option in Sequelize enables eager loading.",
+        "type": "fill_blank",
+        "answers": [
+            "include"
+        ],
+        "other_options": [
+            "eager",
+            "join",
+            "with"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/posts/:id\", async (req, res) => {\n    const post = await Post.findByPk(req.params.id, {\n        include: [\n            { model: User, as: \"author\" },\n            { model: Comment, limit: 10 }\n        ]\n    });\n    res.json(post);\n});\n\n// Number of database queries",
+        "o": [
+            "1 (with JOINs)",
+            "3 separate queries",
+            "Many queries",
+            "No queries"
+        ]
+    },
+    {
+        "q": "Eager loading reduces N+1 query problem.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is field projection in routes?",
+        "type": "mcq",
+        "o": [
+            "Selecting only needed fields from database",
+            "Projecting data to screen",
+            "Field validation",
+            "Field mapping"
+        ]
+    },
+    {
+        "q": "The ______ option limits returned fields in Sequelize.",
+        "type": "fill_blank",
+        "answers": [
+            "attributes"
+        ],
+        "other_options": [
+            "fields",
+            "select",
+            "columns"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/users\", async (req, res) => {\n    const fields = req.query.fields?.split(\",\") || [\"id\", \"name\", \"email\"];\n    const users = await User.findAll({\n        attributes: fields\n    });\n    res.json(users);\n});\n\n// GET /users?fields=id,name",
+        "o": [
+            "Users with only id and name fields",
+            "All user fields",
+            "Error",
+            "Empty array"
+        ]
+    },
+    {
+        "q": "Field projection reduces data transfer and improves performance.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is cursor-based pagination?",
+        "type": "mcq",
+        "o": [
+            "Using last record ID as cursor for next page",
+            "Mouse cursor",
+            "Database cursor",
+            "Text cursor"
+        ]
+    },
+    {
+        "q": "The ______ parameter points to the next page in cursor pagination.",
+        "type": "fill_blank",
+        "answers": [
+            "cursor"
+        ],
+        "other_options": [
+            "page",
+            "offset",
+            "token"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/items\", async (req, res) => {\n    const cursor = req.query.cursor;\n    const limit = 20;\n    \n    const where = cursor ? { id: { [Op.gt]: cursor } } : {};\n    const items = await Item.findAll({ where, limit: limit + 1, order: [[\"id\", \"ASC\"]] });\n    \n    const hasMore = items.length > limit;\n    const data = hasMore ? items.slice(0, -1) : items;\n    const nextCursor = hasMore ? data[data.length - 1].id : null;\n    \n    res.json({ data, nextCursor, hasMore });\n});\n\n// Advantage over offset pagination",
+        "o": [
+            "Consistent results even when data changes",
+            "Simpler",
+            "Faster always",
+            "Less memory"
+        ]
+    },
+    {
+        "q": "Cursor pagination handles real-time inserts/deletes better.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is route-based feature flag?",
+        "type": "mcq",
+        "o": [
+            "Enabling/disabling routes based on feature flags",
+            "Route marking",
+            "Route tagging",
+            "Route versioning"
+        ]
+    },
+    {
+        "q": "The ______ pattern controls route availability dynamically.",
+        "type": "fill_blank",
+        "answers": [
+            "feature flag"
+        ],
+        "other_options": [
+            "feature toggle",
+            "switch",
+            "gate"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const featureFlags = {\n    newSearch: process.env.FEATURE_NEW_SEARCH === \"true\"\n};\n\nconst featureGuard = (flag) => (req, res, next) => {\n    if (!featureFlags[flag]) {\n        return res.status(404).json({ error: \"Feature not available\" });\n    }\n    next();\n};\n\napp.get(\"/search/v2\", featureGuard(\"newSearch\"), searchHandler);\n\n// When FEATURE_NEW_SEARCH=false",
+        "o": [
+            "404 Feature not available",
+            "Search results",
+            "500 Error",
+            "Redirect"
+        ]
+    },
+    {
+        "q": "Feature flags enable gradual rollout of new routes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the pagination types with their characteristics:",
+        "type": "match",
+        "left": [
+            "Offset",
+            "Cursor",
+            "Page number",
+            "Keyset"
+        ],
+        "right": [
+            "Skip N records",
+            "Use last ID",
+            "Human-readable",
+            "Index-based"
+        ]
+    },
+    {
+        "q": "What is A/B testing in routes?",
+        "type": "mcq",
+        "o": [
+            "Routing different users to different implementations",
+            "Testing routes A and B",
+            "Alphabetical testing",
+            "Before/After testing"
+        ]
+    },
+    {
+        "q": "The ______ percentage determines traffic split in A/B tests.",
+        "type": "fill_blank",
+        "answers": [
+            "rollout"
+        ],
+        "other_options": [
+            "split",
+            "ratio",
+            "weight"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const abTest = (variants) => (req, res, next) => {\n    const userId = req.user?.id || req.ip;\n    const hash = createHash(userId);\n    const variant = hash % 100 < 50 ? \"A\" : \"B\";\n    req.variant = variant;\n    variants[variant](req, res, next);\n};\n\napp.get(\"/checkout\", abTest({\n    A: oldCheckoutHandler,\n    B: newCheckoutHandler\n}));\n\n// User assignment is",
+        "o": [
+            "Consistent based on user ID hash",
+            "Random each time",
+            "Round-robin",
+            "Always A first"
+        ]
+    },
+    {
+        "q": "Consistent user assignment ensures same user sees same variant.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is canary release routing?",
+        "type": "mcq",
+        "o": [
+            "Gradually routing traffic to new version",
+            "Yellow warning routes",
+            "Bird watching API",
+            "Fast release"
+        ]
+    },
+    {
+        "q": "The ______ percentage starts small and increases in canary.",
+        "type": "fill_blank",
+        "answers": [
+            "traffic"
+        ],
+        "other_options": [
+            "release",
+            "canary",
+            "version"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "let canaryPercentage = 10;\n\nconst canaryRouter = (v1Handler, v2Handler) => (req, res, next) => {\n    const random = Math.random() * 100;\n    if (random < canaryPercentage) {\n        return v2Handler(req, res, next);\n    }\n    return v1Handler(req, res, next);\n};\n\n// 10% traffic goes to",
+        "o": [
+            "v2 (new version)",
+            "v1 (old version)",
+            "Both",
+            "Neither"
+        ]
+    },
+    {
+        "q": "Canary releases limit blast radius of bugs in new code.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is blue-green deployment routing?",
+        "type": "mcq",
+        "o": [
+            "Switching traffic between two identical environments",
+            "Colored routing",
+            "Environment variables",
+            "Debug mode"
+        ]
+    },
+    {
+        "q": "The ______ environment is the current production in blue-green.",
+        "type": "fill_blank",
+        "answers": [
+            "blue"
+        ],
+        "other_options": [
+            "green",
+            "active",
+            "current"
+        ]
+    },
+    {
+        "q": "What is the output of this configuration?",
+        "type": "mcq",
+        "c": "// Load balancer config\nconst activeEnvironment = process.env.ACTIVE_ENV || \"blue\";\n\napp.use(\"/api\", createProxyMiddleware({\n    target: activeEnvironment === \"blue\" \n        ? \"http://blue-backend:3000\"\n        : \"http://green-backend:3000\"\n}));\n\n// Switching between environments",
+        "o": [
+            "Instant switch by changing ACTIVE_ENV",
+            "Gradual switch",
+            "Restart required",
+            "Database migration"
+        ]
+    },
+    {
+        "q": "Blue-green enables instant rollback by switching back.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is shadow traffic routing?",
+        "type": "mcq",
+        "o": [
+            "Duplicating requests to new version without affecting response",
+            "Dark mode routing",
+            "Hidden routes",
+            "Private endpoints"
+        ]
+    },
+    {
+        "q": "The ______ pattern sends request copies to test new systems.",
+        "type": "fill_blank",
+        "answers": [
+            "shadow"
+        ],
+        "other_options": [
+            "mirror",
+            "duplicate",
+            "copy"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/api/data\", (req, res, next) => {\n    // Fire and forget to shadow service\n    fetch(\"http://shadow-service/api/data\", {\n        method: \"GET\",\n        headers: req.headers\n    }).catch(() => {});\n    next();\n}, mainHandler);\n\n// Client receives",
+        "o": [
+            "Response from mainHandler only",
+            "Response from shadow service",
+            "Both responses",
+            "Error"
+        ]
+    },
+    {
+        "q": "Shadow traffic tests new systems with real production data.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is geographic routing?",
+        "type": "mcq",
+        "o": [
+            "Routing based on user location",
+            "Map API",
+            "GPS tracking",
+            "Location logging"
+        ]
+    },
+    {
+        "q": "The ______ header commonly indicates client location.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Forwarded-For"
+        ],
+        "other_options": [
+            "Location",
+            "GeoIP",
+            "Region"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const geoip = require(\"geoip-lite\");\n\napp.get(\"/content\", (req, res) => {\n    const ip = req.ip;\n    const geo = geoip.lookup(ip);\n    const region = geo?.country || \"US\";\n    \n    res.json({\n        region,\n        content: getLocalizedContent(region)\n    });\n});\n\n// Purpose of geo-routing",
+        "o": [
+            "Serve region-specific content",
+            "Block regions",
+            "Track users",
+            "Compress data"
+        ]
+    },
+    {
+        "q": "Geographic routing improves user experience with local content.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is health check routing?",
+        "type": "mcq",
+        "o": [
+            "Endpoints for monitoring service health",
+            "User health data",
+            "Memory check",
+            "CPU monitoring"
+        ]
+    },
+    {
+        "q": "The ______ endpoint is commonly used for health checks.",
+        "type": "fill_blank",
+        "answers": [
+            "/health"
+        ],
+        "other_options": [
+            "/status",
+            "/ping",
+            "/alive"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/health\", (req, res) => {\n    const health = {\n        status: \"ok\",\n        uptime: process.uptime(),\n        timestamp: Date.now()\n    };\n    res.json(health);\n});\n\napp.get(\"/health/ready\", async (req, res) => {\n    const dbOk = await checkDatabase();\n    const cacheOk = await checkCache();\n    \n    if (dbOk && cacheOk) {\n        res.json({ status: \"ready\" });\n    } else {\n        res.status(503).json({ status: \"not ready\" });\n    }\n});\n\n// Difference between /health and /health/ready",
+        "o": [
+            "Liveness vs readiness probes",
+            "Same purpose",
+            "Admin vs user",
+            "Internal vs external"
+        ]
+    },
+    {
+        "q": "Readiness probes check if service can accept traffic.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is metrics routing?",
+        "type": "mcq",
+        "o": [
+            "Exposing application metrics for monitoring",
+            "Measuring route length",
+            "Performance testing",
+            "Analytics tracking"
+        ]
+    },
+    {
+        "q": "The ______ format is used for Prometheus metrics.",
+        "type": "fill_blank",
+        "answers": [
+            "text/plain"
+        ],
+        "other_options": [
+            "application/json",
+            "text/html",
+            "application/xml"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const promClient = require(\"prom-client\");\n\napp.get(\"/metrics\", async (req, res) => {\n    res.set(\"Content-Type\", promClient.register.contentType);\n    res.send(await promClient.register.metrics());\n});\n\n// Response format",
+        "o": [
+            "Prometheus text format with metrics",
+            "JSON metrics",
+            "HTML dashboard",
+            "Binary data"
+        ]
+    },
+    {
+        "q": "Metrics endpoints should be protected from public access.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange the deployment strategies (safest to fastest):",
+        "type": "rearrange",
+        "words": [
+            "Canary",
+            "Blue-Green",
+            "Rolling",
+            "Recreate"
+        ]
+    },
+    {
+        "q": "What is request ID propagation?",
+        "type": "mcq",
+        "o": [
+            "Passing unique request ID through all services",
+            "ID validation",
+            "User ID tracking",
+            "Session ID"
+        ]
+    },
+    {
+        "q": "The ______ header carries request ID across services.",
+        "type": "fill_blank",
+        "answers": [
+            "X-Request-ID"
+        ],
+        "other_options": [
+            "Request-ID",
+            "Trace-ID",
+            "Correlation-ID"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { v4: uuid } = require(\"uuid\");\n\napp.use((req, res, next) => {\n    req.id = req.headers[\"x-request-id\"] || uuid();\n    res.set(\"x-request-id\", req.id);\n    next();\n});\n\n// When calling downstream service",
+        "o": [
+            "Pass req.id in X-Request-ID header",
+            "Generate new ID",
+            "Skip header",
+            "Use user ID"
+        ]
+    },
+    {
+        "q": "Request ID enables tracing requests across microservices.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is circuit breaker pattern?",
+        "type": "mcq",
+        "o": [
+            "Stopping failed requests to prevent cascade failures",
+            "Electrical routing",
+            "Breaking loops",
+            "Route limiting"
+        ]
+    },
+    {
+        "q": "The ______ state allows limited requests to test recovery.",
+        "type": "fill_blank",
+        "answers": [
+            "half-open"
+        ],
+        "other_options": [
+            "open",
+            "closed",
+            "testing"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const CircuitBreaker = require(\"opossum\");\n\nconst breaker = new CircuitBreaker(fetchFromService, {\n    timeout: 3000,\n    errorThresholdPercentage: 50,\n    resetTimeout: 30000\n});\n\nbreaker.fallback(() => ({ cached: true, data: [] }));\n\napp.get(\"/data\", async (req, res) => {\n    const result = await breaker.fire();\n    res.json(result);\n});\n\n// When circuit is open",
+        "o": [
+            "Returns fallback data immediately",
+            "Waits for timeout",
+            "Throws error",
+            "Retries indefinitely"
+        ]
+    },
+    {
+        "q": "Circuit breakers prevent cascading failures in microservices.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is retry pattern in routes?",
+        "type": "mcq",
+        "o": [
+            "Automatically retrying failed operations",
+            "User retry button",
+            "Route refresh",
+            "Cache retry"
+        ]
+    },
+    {
+        "q": "The ______ backoff increases delay between retries.",
+        "type": "fill_blank",
+        "answers": [
+            "exponential"
+        ],
+        "other_options": [
+            "linear",
+            "constant",
+            "random"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const retry = require(\"async-retry\");\n\napp.get(\"/data\", async (req, res) => {\n    const result = await retry(async (bail) => {\n        const response = await fetch(\"http://flaky-service/data\");\n        if (response.status === 404) bail(new Error(\"Not found\"));\n        if (!response.ok) throw new Error(\"Retry\");\n        return response.json();\n    }, { retries: 3 });\n    \n    res.json(result);\n});\n\n// bail() does what?",
+        "o": [
+            "Stops retrying immediately",
+            "Continues retrying",
+            "Waits longer",
+            "Logs error"
+        ]
+    },
+    {
+        "q": "Not all errors should trigger retries (e.g., 404, 401).",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is timeout pattern in routes?",
+        "type": "mcq",
+        "o": [
+            "Setting maximum time for operations to complete",
+            "Session timeout",
+            "Login timeout",
+            "Cache expiry"
+        ]
+    },
+    {
+        "q": "The ______ method aborts fetch requests after timeout.",
+        "type": "fill_blank",
+        "answers": [
+            "AbortController"
+        ],
+        "other_options": [
+            "Timeout",
+            "Cancel",
+            "Abort"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/data\", async (req, res) => {\n    const controller = new AbortController();\n    const timeout = setTimeout(() => controller.abort(), 5000);\n    \n    try {\n        const response = await fetch(url, { signal: controller.signal });\n        clearTimeout(timeout);\n        res.json(await response.json());\n    } catch (err) {\n        if (err.name === \"AbortError\") {\n            res.status(504).json({ error: \"Gateway Timeout\" });\n        } else {\n            throw err;\n        }\n    }\n});\n\n// After 5 seconds without response",
+        "o": [
+            "504 Gateway Timeout",
+            "Waits indefinitely",
+            "500 Error",
+            "Empty response"
+        ]
+    },
+    {
+        "q": "504 indicates upstream service timeout.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is bulkhead pattern?",
+        "type": "mcq",
+        "o": [
+            "Isolating resources to limit failure impact",
+            "Bulk operations",
+            "Large data handling",
+            "Wall building"
+        ]
+    },
+    {
+        "q": "The ______ controls concurrent requests in bulkhead.",
+        "type": "fill_blank",
+        "answers": [
+            "semaphore"
+        ],
+        "other_options": [
+            "mutex",
+            "lock",
+            "queue"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const Semaphore = require(\"async-sema\");\nconst limit = new Semaphore(5);\n\napp.get(\"/heavy\", async (req, res) => {\n    await limit.acquire();\n    try {\n        const result = await heavyOperation();\n        res.json(result);\n    } finally {\n        limit.release();\n    }\n});\n\n// Maximum concurrent requests",
+        "o": [
+            "5 at a time",
+            "Unlimited",
+            "1 at a time",
+            "10 at a time"
+        ]
+    },
+    {
+        "q": "Bulkhead prevents one slow operation from blocking all resources.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the resilience patterns with their purposes:",
+        "type": "match",
+        "left": [
+            "Circuit Breaker",
+            "Retry",
+            "Timeout",
+            "Bulkhead"
+        ],
+        "right": [
+            "Stop calling failing services",
+            "Handle transient failures",
+            "Prevent hanging requests",
+            "Limit resource usage"
+        ]
+    },
+    {
+        "q": "What is request prioritization?",
+        "type": "mcq",
+        "o": [
+            "Processing important requests before others",
+            "Sorting routes",
+            "Rate limiting",
+            "Load balancing"
+        ]
+    },
+    {
+        "q": "The ______ queue processes high-priority requests first.",
+        "type": "fill_blank",
+        "answers": [
+            "priority"
+        ],
+        "other_options": [
+            "FIFO",
+            "LIFO",
+            "round-robin"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const PriorityQueue = require(\"fastpriorityqueue\");\nconst queue = new PriorityQueue((a, b) => a.priority > b.priority);\n\napp.post(\"/request\", (req, res) => {\n    const priority = req.user?.isPremium ? 10 : 1;\n    queue.add({ priority, data: req.body, res });\n    processQueue();\n});\n\n// Premium user requests",
+        "o": [
+            "Processed before free user requests",
+            "Same as free users",
+            "Rejected",
+            "Cached"
+        ]
+    },
+    {
+        "q": "Request prioritization improves experience for premium users.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is graceful degradation in routes?",
+        "type": "mcq",
+        "o": [
+            "Providing reduced functionality when dependencies fail",
+            "Slow shutdown",
+            "Performance decrease",
+            "Error logging"
+        ]
+    },
+    {
+        "q": "The ______ provides alternative response when primary fails.",
+        "type": "fill_blank",
+        "answers": [
+            "fallback"
+        ],
+        "other_options": [
+            "backup",
+            "cache",
+            "default"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/recommendations\", async (req, res) => {\n    try {\n        const recommendations = await recommendationService.get(req.user.id);\n        res.json(recommendations);\n    } catch {\n        // Graceful degradation\n        const popular = await getPopularItems();\n        res.json({ fallback: true, items: popular });\n    }\n});\n\n// When recommendation service fails",
+        "o": [
+            "Popular items returned as fallback",
+            "500 error",
+            "Empty response",
+            "Cached recommendations"
+        ]
+    },
+    {
+        "q": "Graceful degradation keeps service partially functional.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request deduplication?",
+        "type": "mcq",
+        "o": [
+            "Preventing duplicate request processing",
+            "Removing duplicate data",
+            "Deduplicating routes",
+            "Unique IDs"
+        ]
+    },
+    {
+        "q": "The ______ key identifies duplicate requests.",
+        "type": "fill_blank",
+        "answers": [
+            "Idempotency-Key"
+        ],
+        "other_options": [
+            "Request-ID",
+            "Unique-ID",
+            "Dedupe-Key"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const inFlight = new Map();\n\napp.post(\"/order\", async (req, res) => {\n    const key = req.headers[\"idempotency-key\"];\n    \n    if (inFlight.has(key)) {\n        // Wait for existing request to complete\n        const result = await inFlight.get(key);\n        return res.json(result);\n    }\n    \n    const promise = processOrder(req.body);\n    inFlight.set(key, promise);\n    \n    const result = await promise;\n    res.json(result);\n});\n\n// Duplicate requests",
+        "o": [
+            "Share same response, process once",
+            "Processed twice",
+            "Second rejected",
+            "Both queued"
+        ]
+    },
+    {
+        "q": "Request deduplication prevents duplicate payments.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request coalescing?",
+        "type": "mcq",
+        "o": [
+            "Combining similar concurrent requests into one",
+            "Request merging",
+            "Bulk operations",
+            "Batching"
+        ]
+    },
+    {
+        "q": "The ______ pattern shares result among waiting requests.",
+        "type": "fill_blank",
+        "answers": [
+            "singleflight"
+        ],
+        "other_options": [
+            "coalesce",
+            "merge",
+            "combine"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const pending = new Map();\n\napp.get(\"/price/:symbol\", async (req, res) => {\n    const key = req.params.symbol;\n    \n    if (pending.has(key)) {\n        const result = await pending.get(key);\n        return res.json(result);\n    }\n    \n    const promise = fetchPrice(key);\n    pending.set(key, promise);\n    \n    const result = await promise;\n    pending.delete(key);\n    res.json(result);\n});\n\n// 100 concurrent requests for same symbol",
+        "o": [
+            "1 API call, 100 responses",
+            "100 API calls",
+            "Error",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "Request coalescing reduces load on downstream services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request batching?",
+        "type": "mcq",
+        "o": [
+            "Grouping requests for efficient processing",
+            "Batch files",
+            "Scheduled tasks",
+            "Queue processing"
+        ]
+    },
+    {
+        "q": "The ______ collects requests before processing together.",
+        "type": "fill_blank",
+        "answers": [
+            "DataLoader"
+        ],
+        "other_options": [
+            "Batcher",
+            "Collector",
+            "Aggregator"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const DataLoader = require(\"dataloader\");\n\nconst userLoader = new DataLoader(async (ids) => {\n    const users = await User.findAll({ where: { id: ids } });\n    return ids.map(id => users.find(u => u.id === id));\n});\n\napp.get(\"/users/:id\", async (req, res) => {\n    const user = await userLoader.load(req.params.id);\n    res.json(user);\n});\n\n// Multiple requests within same tick",
+        "o": [
+            "Batched into single database query",
+            "Separate queries",
+            "Cached only",
+            "Error"
+        ]
+    },
+    {
+        "q": "DataLoader batches and caches requests within single tick.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is request queuing?",
+        "type": "mcq",
+        "o": [
+            "Buffering requests for sequential processing",
+            "Priority sorting",
+            "Rate limiting",
+            "Load balancing"
+        ]
+    },
+    {
+        "q": "The ______ queue library provides job queuing for Node.js.",
+        "type": "fill_blank",
+        "answers": [
+            "Bull"
+        ],
+        "other_options": [
+            "Queue",
+            "Jobs",
+            "Worker"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const Queue = require(\"bull\");\nconst emailQueue = new Queue(\"email\");\n\napp.post(\"/send-email\", async (req, res) => {\n    const job = await emailQueue.add(req.body, {\n        attempts: 3,\n        backoff: { type: \"exponential\", delay: 1000 }\n    });\n    res.json({ jobId: job.id, status: \"queued\" });\n});\n\n// Response timing",
+        "o": [
+            "Immediate response, email sent async",
+            "Waits for email to send",
+            "Synchronous processing",
+            "Error if email fails"
+        ]
+    },
+    {
+        "q": "Job queues decouple request handling from processing.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange request processing optimizations (most to least impact):",
+        "type": "rearrange",
+        "words": [
+            "Caching",
+            "Batching",
+            "Coalescing",
+            "Queuing",
+            "Compression"
+        ]
+    },
+    {
+        "q": "What is request streaming?",
+        "type": "mcq",
+        "o": [
+            "Processing request body as stream without full buffering",
+            "Video streaming",
+            "Audio streaming",
+            "Data streaming"
+        ]
+    },
+    {
+        "q": "The ______ event fires when chunk of data arrives.",
+        "type": "fill_blank",
+        "answers": [
+            "data"
+        ],
+        "other_options": [
+            "chunk",
+            "read",
+            "receive"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { pipeline } = require(\"stream/promises\");\nconst { createGzip } = require(\"zlib\");\n\napp.post(\"/upload\", async (req, res) => {\n    const output = fs.createWriteStream(\"/tmp/upload.gz\");\n    await pipeline(req, createGzip(), output);\n    res.json({ message: \"Uploaded and compressed\" });\n});\n\n// Memory usage for large file",
+        "o": [
+            "Minimal - streams without buffering",
+            "Full file in memory",
+            "Double the file size",
+            "Error"
+        ]
+    },
+    {
+        "q": "Streaming handles large files without running out of memory.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response streaming?",
+        "type": "mcq",
+        "o": [
+            "Sending response in chunks as data becomes available",
+            "Large file download",
+            "Video streaming",
+            "Audio output"
+        ]
+    },
+    {
+        "q": "The ______ method sends partial response data.",
+        "type": "fill_blank",
+        "answers": [
+            "write"
+        ],
+        "other_options": [
+            "send",
+            "chunk",
+            "stream"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "app.get(\"/logs\", (req, res) => {\n    res.setHeader(\"Content-Type\", \"text/plain\");\n    \n    const stream = fs.createReadStream(\"/var/log/app.log\");\n    stream.pipe(res);\n});\n\n// How is file sent?",
+        "o": [
+            "Streamed as chunks are read",
+            "Entire file buffered first",
+            "Compressed then sent",
+            "Base64 encoded"
+        ]
+    },
+    {
+        "q": "Piping streams is more memory efficient than buffering.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response transformation?",
+        "type": "mcq",
+        "o": [
+            "Modifying response before sending to client",
+            "Data conversion",
+            "Format change",
+            "Encoding"
+        ]
+    },
+    {
+        "q": "The ______ stream transforms data as it passes through.",
+        "type": "fill_blank",
+        "answers": [
+            "Transform"
+        ],
+        "other_options": [
+            "Modify",
+            "Change",
+            "Convert"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "type": "mcq",
+        "c": "const { Transform } = require(\"stream\");\n\nconst upperCase = new Transform({\n    transform(chunk, encoding, callback) {\n        callback(null, chunk.toString().toUpperCase());\n    }\n});\n\napp.get(\"/upper\", (req, res) => {\n    const input = fs.createReadStream(\"./data.txt\");\n    input.pipe(upperCase).pipe(res);\n});\n\n// File content transformation",
+        "o": [
+            "All text converted to uppercase",
+            "Original text",
+            "Binary output",
+            "Error"
+        ]
+    },
+    {
+        "q": "Transform streams modify data without full buffering.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is backpressure handling in streams?",
+        "type": "mcq",
+        "o": [
+            "Managing flow when consumer is slower than producer",
+            "Pressure measurement",
+            "Compression",
+            "Throttling"
+        ]
+    },
+    {
+        "q": "The ______ event indicates buffer is empty and ready for more data.",
+        "type": "fill_blank",
+        "answers": [
+            "drain"
+        ],
+        "other_options": [
+            "empty",
+            "ready",
+            "flush"
+        ]
+    },
+    {
+        "q": "Ignoring backpressure can cause memory issues.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is response caching with ETag?",
+        "type": "mcq",
+        "o": [
+            "Using entity tags for cache validation",
+            "Cache control",
+            "Expires header",
+            "Memory caching"
+        ]
+    },
+    {
+        "q": "The ______ header contains the entity tag value.",
+        "type": "fill_blank",
+        "answers": [
+            "ETag"
+        ],
+        "other_options": [
+            "Cache-Tag",
+            "Entity",
+            "Tag"
+        ]
+    },
+    {
+        "q": "ETag validation saves bandwidth when content unchanged.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is conditional request handling?",
+        "type": "mcq",
+        "o": [
+            "Processing based on condition headers like If-Match",
+            "Random conditions",
+            "Route conditions",
+            "Error conditions"
+        ]
+    },
+    {
+        "q": "The ______ header makes PUT conditional on ETag match.",
+        "type": "fill_blank",
+        "answers": [
+            "If-Match"
+        ],
+        "other_options": [
+            "If-None-Match",
+            "Match",
+            "Condition"
+        ]
+    },
+    {
+        "q": "412 prevents lost updates from stale data.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is content negotiation?",
+        "type": "mcq",
+        "o": [
+            "Selecting response format based on client preferences",
+            "Negotiating price",
+            "Contract negotiation",
+            "Route negotiation"
+        ]
+    },
+    {
+        "q": "The ______ header indicates client preferred response formats.",
+        "type": "fill_blank",
+        "answers": [
+            "Accept"
+        ],
+        "other_options": [
+            "Content-Type",
+            "Format",
+            "Prefer"
+        ]
+    },
+    {
+        "q": "res.format() uses quality values to select best match.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match the cache headers with their purposes:",
+        "type": "match",
+        "left": [
+            "ETag",
+            "Last-Modified",
+            "Cache-Control",
+            "Vary"
+        ],
+        "right": [
+            "Content hash",
+            "Modification timestamp",
+            "Caching directives",
+            "Cache key factors"
+        ]
+    },
+    {
+        "q": "What is response compression filtering?",
+        "type": "mcq",
+        "o": [
+            "Deciding which responses to compress",
+            "Compressing filters",
+            "Route filtering",
+            "Data filtering"
+        ]
+    },
+    {
+        "q": "The ______ function determines if compression applies.",
+        "type": "fill_blank",
+        "answers": [
+            "filter"
+        ],
+        "other_options": [
+            "check",
+            "decide",
+            "test"
+        ]
+    },
+    {
+        "q": "Images are already compressed and dont benefit from gzip.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is connection keep-alive?",
+        "type": "mcq",
+        "o": [
+            "Reusing TCP connections for multiple requests",
+            "Session persistence",
+            "Health checks",
+            "Heartbeat"
+        ]
+    },
+    {
+        "q": "The ______ header enables HTTP keep-alive connections.",
+        "type": "fill_blank",
+        "answers": [
+            "Connection"
+        ],
+        "other_options": [
+            "Keep-Alive",
+            "Persistent",
+            "Reuse"
+        ]
+    },
+    {
+        "q": "Keep-alive reduces latency by avoiding TCP handshake.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is HTTP/2 in Express?",
+        "type": "mcq",
+        "o": [
+            "Protocol supporting multiplexing and server push",
+            "Express version 2",
+            "Node.js v2",
+            "API v2"
+        ]
+    },
+    {
+        "q": "The ______ module enables HTTP/2 in Node.js.",
+        "type": "fill_blank",
+        "answers": [
+            "http2"
+        ],
+        "other_options": [
+            "https",
+            "http",
+            "spdy"
+        ]
+    },
+    {
+        "q": "HTTP/2 multiplexing sends multiple requests over one connection.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is server push in HTTP/2?",
+        "type": "mcq",
+        "o": [
+            "Server proactively sends resources before client requests",
+            "Push notifications",
+            "WebSocket push",
+            "SSE"
+        ]
+    },
+    {
+        "q": "The ______ method pushes resources in HTTP/2.",
+        "type": "fill_blank",
+        "answers": [
+            "pushStream"
+        ],
+        "other_options": [
+            "push",
+            "send",
+            "stream"
+        ]
+    },
+    {
+        "q": "Server push reduces round trips for critical resources.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is Express 5.0 differences?",
+        "type": "mcq",
+        "o": [
+            "Promise-based APIs and automatic async error handling",
+            "Complete rewrite",
+            "Different syntax",
+            "New templating"
+        ]
+    },
+    {
+        "q": "Express 5 automatically passes async errors to ______ middleware.",
+        "type": "fill_blank",
+        "answers": [
+            "error"
+        ],
+        "other_options": [
+            "next",
+            "catch",
+            "handler"
+        ]
+    },
+    {
+        "q": "Express 5 removes callback-style res.send().",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Rearrange Express versions chronologically:",
+        "type": "rearrange",
+        "words": [
+            "Express 3",
+            "Express 4",
+            "Express 4.x",
+            "Express 5 beta"
+        ]
+    },
+    {
+        "q": "What is route testing with supertest?",
+        "type": "mcq",
+        "o": [
+            "Testing routes without starting server",
+            "Super fast tests",
+            "UI testing",
+            "Load testing"
+        ]
+    },
+    {
+        "q": "The ______ package enables HTTP assertions in tests.",
+        "type": "fill_blank",
+        "answers": [
+            "supertest"
+        ],
+        "other_options": [
+            "superagent",
+            "chai-http",
+            "jest-express"
+        ]
+    },
+    {
+        "q": "supertest chains assertions on HTTP response.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is integration testing for routes?",
+        "type": "mcq",
+        "o": [
+            "Testing routes with real dependencies",
+            "Unit testing",
+            "UI testing",
+            "Performance testing"
+        ]
+    },
+    {
+        "q": "The ______ approach tests full request cycle with database.",
+        "type": "fill_blank",
+        "answers": [
+            "integration"
+        ],
+        "other_options": [
+            "unit",
+            "e2e",
+            "component"
+        ]
+    },
+    {
+        "q": "Integration tests verify components work together correctly.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is mocking in route tests?",
+        "type": "mcq",
+        "o": [
+            "Replacing dependencies with fake implementations",
+            "Making fun of code",
+            "Simulating users",
+            "Fake routes"
+        ]
+    },
+    {
+        "q": "The ______ function creates mock implementations in Jest.",
+        "type": "fill_blank",
+        "answers": [
+            "mock"
+        ],
+        "other_options": [
+            "stub",
+            "fake",
+            "spy"
+        ]
+    },
+    {
+        "q": "Mocking enables testing routes without external services.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is test coverage for routes?",
+        "type": "mcq",
+        "o": [
+            "Measuring how much route code is tested",
+            "Testing all routes",
+            "Route documentation",
+            "Route count"
+        ]
+    },
+    {
+        "q": "The ______ tool measures code coverage in Node.js.",
+        "type": "fill_blank",
+        "answers": [
+            "nyc"
+        ],
+        "other_options": [
+            "istanbul",
+            "coverage",
+            "jest-coverage"
+        ]
+    },
+    {
+        "q": "100 percent coverage does not guarantee bug-free code.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is load testing for routes?",
+        "type": "mcq",
+        "o": [
+            "Testing performance under high traffic",
+            "Loading routes",
+            "Route loading speed",
+            "File loading"
+        ]
+    },
+    {
+        "q": "The ______ tool is commonly used for load testing APIs.",
+        "type": "fill_blank",
+        "answers": [
+            "artillery"
+        ],
+        "other_options": [
+            "jmeter",
+            "locust",
+            "k6"
+        ]
+    },
+    {
+        "q": "Load testing identifies performance bottlenecks.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is stress testing?",
+        "type": "mcq",
+        "o": [
+            "Testing beyond normal capacity to find breaking point",
+            "Normal load testing",
+            "Anxiety testing",
+            "Slow testing"
+        ]
+    },
+    {
+        "q": "The ______ pattern gradually increases load until failure.",
+        "type": "fill_blank",
+        "answers": [
+            "ramp-up"
+        ],
+        "other_options": [
+            "step-up",
+            "increase",
+            "escalate"
+        ]
+    },
+    {
+        "q": "Stress tests reveal how system behaves under extreme load.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "Match testing types with their purposes:",
+        "type": "match",
+        "left": [
+            "Unit",
+            "Integration",
+            "Load",
+            "E2E"
+        ],
+        "right": [
+            "Isolated functions",
+            "Component interaction",
+            "Performance",
+            "Full user flow"
+        ]
+    },
+    {
+        "q": "What is chaos testing for routes?",
+        "type": "mcq",
+        "o": [
+            "Introducing failures to test resilience",
+            "Random testing",
+            "Disordered testing",
+            "Broken tests"
+        ]
+    },
+    {
+        "q": "The ______ approach randomly kills services to test recovery.",
+        "type": "fill_blank",
+        "answers": [
+            "chaos monkey"
+        ],
+        "other_options": [
+            "chaos testing",
+            "failure injection",
+            "kill switch"
+        ]
+    },
+    {
+        "q": "Chaos testing builds confidence in system resilience.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is contract testing?",
+        "type": "mcq",
+        "o": [
+            "Verifying API contracts between services",
+            "Legal contracts",
+            "Service agreements",
+            "User contracts"
+        ]
+    },
+    {
+        "q": "The ______ tool enables consumer-driven contract testing.",
+        "type": "fill_blank",
+        "answers": [
+            "Pact"
+        ],
+        "other_options": [
+            "Contract",
+            "Agreement",
+            "Spec"
+        ]
+    },
+    {
+        "q": "Contract tests prevent breaking changes in APIs.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is API versioning best practice?",
+        "type": "mcq",
+        "o": [
+            "Maintaining backward compatibility while evolving API",
+            "Always breaking changes",
+            "No versioning",
+            "Client decides version"
+        ]
+    },
+    {
+        "q": "The ______ strategy uses URL path for API version.",
+        "type": "fill_blank",
+        "answers": [
+            "URI versioning"
+        ],
+        "other_options": [
+            "header",
+            "query",
+            "content"
+        ]
+    },
+    {
+        "q": "Semantic versioning helps communicate breaking changes.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is API deprecation?",
+        "type": "mcq",
+        "o": [
+            "Marking endpoints for future removal",
+            "Removing immediately",
+            "Hiding endpoints",
+            "Renaming endpoints"
+        ]
+    },
+    {
+        "q": "The ______ header warns clients about deprecation.",
+        "type": "fill_blank",
+        "answers": [
+            "Deprecation"
+        ],
+        "other_options": [
+            "Warning",
+            "Sunset",
+            "Removed"
+        ]
+    },
+    {
+        "q": "Deprecation period gives clients time to migrate.",
+        "type": "true_false",
+        "correct": "True"
+    },
+    {
+        "q": "What is API documentation best practice?",
+        "type": "mcq",
+        "o": [
+            "Keeping docs in sync with implementation",
+            "Separate docs",
+            "No docs needed",
+            "Manual only"
+        ]
+    },
+    {
+        "q": "The ______ specification is the industry standard for API docs.",
+        "type": "fill_blank",
+        "answers": [
+            "OpenAPI"
+        ],
+        "other_options": [
+            "Swagger",
+            "RAML",
+            "Blueprint"
+        ]
+    },
+    {
+        "q": "Documentation-first approach prevents mismatches.",
+        "type": "true_false",
+        "correct": "True"
+    }
+]
