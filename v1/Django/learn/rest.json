@@ -1,0 +1,103 @@
+{
+    "id": "learn_django_rest",
+    "topicId": "rest",
+    "topicTitle": "Django REST Framework",
+    "description": "Build powerful Web APIs with DRF: Serializers, ViewSets, and Routers.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "django_rest_1",
+            "type": "content",
+            "title": "What is DRF? 🔌",
+            "content": "# APIs made easy\n\n**Django REST Framework** is a powerful toolkit for building Web APIs.\n\nIt handles content negotiation (JSON/XML), authentication, permission, and serialization out of the box."
+        },
+        {
+            "id": "django_rest_2",
+            "type": "content",
+            "title": "Serializers",
+            "content": "# Converting Data 🔄\n\nSerializers convert complex data (like QuerySets) into Python datatypes that can be rendered into JSON.\n\n<!-- FULL_CODE_START\nfrom rest_framework import serializers\nfrom .models import Person\n\nclass PersonSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Person\n        fields = '__all__'\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_rest_3",
+            "type": "content",
+            "title": "Deserialization",
+            "content": "# Validation Logic ✅\n\nSerializers also handle deserialization: validating incoming data before saving it to the database.\n\n`serializer.is_valid()` checks types and constraints."
+        },
+        {
+            "id": "django_rest_4",
+            "type": "content",
+            "title": "API Views",
+            "content": "# @api_view Decorator 🖼️\n\nSimple function-based views.\n\n<!-- FULL_CODE_START\n@api_view(['GET', 'POST'])\ndef hello_world(request):\n    if request.method == 'POST':\n        return Response({\"message\": \"Got output!\", \"data\": request.data})\n    return Response({\"message\": \"Hello, World!\"})\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_rest_5",
+            "type": "content",
+            "title": "ViewSets",
+            "content": "# All-in-One 📦\n\nA ViewSet combines logic for a set of related views (list, create, retrieve, update, destroy).\n\n<!-- FULL_CODE_START\nclass UserViewSet(viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_rest_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Terminology.",
+            "quizQuestion": "Which component in DRF is responsible for converting model instances to JSON?",
+            "quizOptions": [
+                "Router",
+                "Serializer",
+                "ViewSet",
+                "Middleware"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_rest_6",
+            "type": "content",
+            "title": "Routers",
+            "content": "# Auto Wiring 🔀\n\nRouters automatically generate URL conf for ViewSets.\n\n<!-- FULL_CODE_START\nfrom rest_framework import routers\nrouter = routers.DefaultRouter()\nrouter.register(r'users', UserViewSet)\n\nurlpatterns = router.urls\nFULL_CODE_END -->\n\nCreates `/users/`, `/users/{id}/`, etc."
+        },
+        {
+            "id": "django_rest_7",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Who are you? 🆔\n\nDRF supports multiple auth schemes:\n- SessionAuthentication (Browser)\n- BasicAuthentication\n- TokenAuthentication\n- JWT (Third party)"
+        },
+        {
+            "id": "django_rest_8",
+            "type": "content",
+            "title": "Permissions",
+            "content": "# Can you do this? 🛑\n\nControl access.\n\n- `AllowAny`\n- `IsAuthenticated`\n- `IsAdminUser`\n- `IsAuthenticatedOrReadOnly`\n\n`permission_classes = [IsAuthenticated]`"
+        },
+        {
+            "id": "django_rest_9",
+            "type": "content",
+            "title": "Pagination",
+            "content": "# Handling Lists 📄\n\nDon't return 1,000,000 rows.\n\nConfigure `PAGE_SIZE` in settings.\n\n`http://api.example.org/users/?page=4`"
+        },
+        {
+            "id": "django_rest_10",
+            "type": "content",
+            "title": "Filtering",
+            "content": "# Search & Sort 🔍\n\nDRF integrates with `django-filter`.\n\n`filterset_fields = ['category', 'in_stock']`\n\n`search_fields = ['username', 'email']`"
+        },
+        {
+            "id": "django_rest_quiz_2",
+            "type": "quiz",
+            "title": "Routing Quiz",
+            "content": "Automation.",
+            "quizQuestion": "What is the primary benefit of using a DRF Router with a ViewSet?",
+            "quizOptions": [
+                "It speeds up the database",
+                "It automatically generates standard URL patterns for CRUD operations",
+                "It encrypts the data",
+                "It creates the HTML templates"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_rest_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: DRF 🚀\n\nBuild APIs fast.\n\n- **Serializer:** Model <-> JSON.\n- **ViewSet:** Logic controller.\n- **Router:** URL Handling.\n- **Permissions:** Security layer.\n\n## Next Steps\nLock it down with **Security Best Practices**!"
+        }
+    ]
+}

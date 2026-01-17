@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_basics",
+    "topicId": "basics",
+    "topicTitle": "React Basics",
+    "description": "Introduction to React, the popular JavaScript library for building user interfaces.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_basics_1",
+            "type": "content",
+            "title": "What is React?",
+            "content": "# React ⚛️\n\nA JavaScript library for building user interfaces.\n\n- **Declarative:** You describe what the UI should look like, React updates it.\n- **Component-Based:** Build encapsulated components that manage their own state.\n- **Learn Once, Write Anywhere:** Web (ReactDOM), Mobile (React Native)."
+        },
+        {
+            "id": "react_basics_2",
+            "type": "content",
+            "title": "Create React App (Vite)",
+            "content": "# Setting Up 🛠️\n\nThe modern way to start a project is using **Vite** (faster than CRA).\n\n```bash\nnpm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm run dev\n```\nThis sets up a dev server, hot reloading, and build tools."
+        },
+        {
+            "id": "react_basics_3",
+            "type": "content",
+            "title": "JSX Syntax",
+            "content": "# JSX 📝\n\nJavaScript XML.\n\nIt allows you to write HTML elements inside JavaScript.\n\n```jsx\nconst element = <h1>Hello, world!</h1>;\n```\n\nUnder the hood, it compiles to `React.createElement('h1', null, 'Hello, world!')`."
+        },
+        {
+            "id": "react_basics_4",
+            "type": "content",
+            "title": "JSX Rules",
+            "content": "# JSX Rules 📏\n\n1.  **Single Parent:** Must return a single parent element (or a Fragment `<>...</>`).\n2.  **className:** Use `className` instead of `class`.\n3.  **CamelCase:** Properties are camelCased (e.g., `onclick` becomes `onClick`).\n4.  **Closing Tags:** All tags must be closed (`<img />`)."
+        },
+        {
+            "id": "react_basics_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Check your JSX.",
+            "quizQuestion": "Which attribute determines the CSS class in JSX?",
+            "quizOptions": [
+                "class",
+                "cssClass",
+                "className",
+                "styleClass"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_basics_5",
+            "type": "content",
+            "title": "Expressions in JSX",
+            "content": "# Dynamic Content 🧠\n\nYou can embed any JavaScript expression in JSX by wrapping it in curly braces `{}`.\n\n```jsx\nconst name = \"Josh\";\nconst element = <h1>Hello, {name}</h1>;\n\nconst total = <p>Total: {5 + 5}</p>;\n```"
+        },
+        {
+            "id": "react_basics_6",
+            "type": "content",
+            "title": "Conditional Rendering",
+            "content": "# Logic in JSX 🔀\n\nYou cannot use `if` statements inside JSX, but you can use the ternary operator.\n\n```jsx\nconst element = (\n  <div>\n    The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.\n  </div>\n);\n```"
+        },
+        {
+            "id": "react_basics_7",
+            "type": "content",
+            "title": "Rendering Elements",
+            "content": "# Rendering to DOM 🖥️\n\nReact applications usually have a single root DOM node.\n\n```jsx\nimport ReactDOM from 'react-dom/client';\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(element);\n```\nReact only updates what's necessary (Virtual DOM)."
+        },
+        {
+            "id": "react_basics_8",
+            "type": "content",
+            "title": "Fragments",
+            "content": "# Fragments 🧩\n\nA common pattern is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.\n\n```jsx\nreturn (\n  <>\n    <td>Hello</td>\n    <td>World</td>\n  </>\n);\n```"
+        },
+        {
+            "id": "react_basics_9",
+            "type": "content",
+            "title": "Mapping Lists",
+            "content": "# Listing Items 📋\n\nUse `.map()` to convert an array of data into an array of elements.\n\n```jsx\nconst numbers = [1, 2, 3];\nconst listItems = numbers.map((number) =>\n  <li key={number.toString()}>\n    {number}\n  </li>\n);\n```\nNote: Always provide a unique `key` prop."
+        },
+        {
+            "id": "react_basics_quiz_2",
+            "type": "quiz",
+            "title": "List Quiz",
+            "content": "Performance key.",
+            "quizQuestion": "What prop is required when rendering a list of elements to help React track changes?",
+            "quizOptions": [
+                "id",
+                "index",
+                "key",
+                "ref"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_basics_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Hello React 💻\n\n<!-- FULL_CODE_START\nimport React from 'react';\nimport ReactDOM from 'react-dom/client';\n\nfunction App() {\n  const user = { firstName: 'Harper', lastName: 'Perez' };\n  \n  const formatName = (u) => {\n    return u.firstName + ' ' + u.lastName;\n  };\n\n  return (\n    <div className=\"welcome-card\">\n      <h1>Hello, {formatName(user)}!</h1>\n      <p>Today is {new Date().toLocaleDateString()}</p>\n    </div>\n  );\n}\n\nconst root = ReactDOM.createRoot(document.getElementById('root'));\nroot.render(<App />);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_basics_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: React Basics 🎓\n\nThe foundation.\n\n- **JSX:** HTML-in-JS.\n- **Embed JavaSript:** `{ expression }`.\n- **Class Name:** Use `className`.\n- **Fragments:** `<> ... </>` to avoid extra divs.\n- **Virtual DOM:** Efficient updates.\n\n## Next Steps\nComponents are the heart of React. Learn about **Components** next!"
+        }
+    ]
+}

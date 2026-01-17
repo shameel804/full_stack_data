@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_ngrx",
+    "topicId": "ngrx",
+    "topicTitle": "State Management (NgRx)",
+    "description": "Master NgRx: The Redux-inspired state management library for Angular apps.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_ngrx_1",
+            "type": "content",
+            "title": "What is NgRx?",
+            "content": "# Redux for Angular 🔄\n\nNgRx is a framework for building reactive applications in Angular.\n\nIt implements the Redux pattern using RxJS observables.\n\nGreat for managing complex, shared state across large applications."
+        },
+        {
+            "id": "ng_ngrx_2",
+            "type": "content",
+            "title": "The Cycle",
+            "content": "# The Data Flow 🌊\n\n1.  **Component:** Dispatches an **Action**.\n2.  **Action:** Describes what happened.\n3.  **Reducer:** Pure function, handles action, updates **State**.\n4.  **Selector:** Slices data from State for Component.\n5.  **Effect:** Handles side effects (API calls)."
+        },
+        {
+            "id": "ng_ngrx_3",
+            "type": "content",
+            "title": "Actions",
+            "content": "# Actions 🎬\n\nEvents that describe state changes.\n\n```typescript\nimport { createAction, props } from '@ngrx/store';\n\nexport const increment = createAction('[Counter] Increment');\n\nexport const loginSuccess = createAction(\n  '[Auth] Login Success',\n  props<{ user: User }>()\n);\n```"
+        },
+        {
+            "id": "ng_ngrx_4",
+            "type": "content",
+            "title": "Reducers",
+            "content": "# Reducers 🛡️\n\nHandle state transitions. Must be pure functions.\n\n```typescript\nexport const counterReducer = createReducer(\n  initialState,\n  on(increment, (state) => ({ ...state, count: state.count + 1 }))\n);\n```"
+        },
+        {
+            "id": "ng_ngrx_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Purity check.",
+            "quizQuestion": "Which NgRx construct is responsible for calculating the new state based on an action?",
+            "quizOptions": [
+                "Selector",
+                "Effect",
+                "Reducer",
+                "Dispatch"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_ngrx_5",
+            "type": "content",
+            "title": "Selectors",
+            "content": "# Selectors 🔍\n\nGet slices of your state. Memoized for performance.\n\n```typescript\nexport const selectCount = createSelector(\n  selectFeature,\n  (state) => state.count\n);\n\n// Usage in Component\nthis.count$ = this.store.select(selectCount);\n```"
+        },
+        {
+            "id": "ng_ngrx_6",
+            "type": "content",
+            "title": "Effects",
+            "content": "# Effects ⚡\n\nHandle side effects (HTTP calls) outside of components.\n\n1.  Listen for action `[Movies] Load Types`.\n2.  Call API.\n3.  Dispatch new action `[Movies] Load Success`.\n\nThis keeps components clean."
+        },
+        {
+            "id": "ng_ngrx_7",
+            "type": "content",
+            "title": "Entity Adapter",
+            "content": "# NgRx Entity 🗂️\n\nBoilerplate reduction for managing collections (lists of items).\n\nProvides helpers like `.addOne`, `.updateMany`, `.removeAll`.\n\nStores data in a normalized format: `{ ids: [], entities: {} }` for fast O(1) lookups."
+        },
+        {
+            "id": "ng_ngrx_8",
+            "type": "content",
+            "title": "Store DevTools",
+            "content": "# Debugging 🐞\n\nInstall `@ngrx/store-devtools`.\n\nAllows you to see every action, every state change, and \"Time Travel\" (replay actions) in the Redux DevTools Chrome extension."
+        },
+        {
+            "id": "ng_ngrx_9",
+            "type": "content",
+            "title": "Component Store",
+            "content": "# ComponentStore 🏢\n\nFor local state management (component-specific) that is too complex for simple variables but doesn't need the global Store.\n\nA lighter version of NgRx, often used for \"isolated\" features."
+        },
+        {
+            "id": "ng_ngrx_quiz_2",
+            "type": "quiz",
+            "title": "Effect Quiz",
+            "content": "Async handling.",
+            "quizQuestion": "What is the primary purpose of NgRx Effects?",
+            "quizOptions": [
+                "To update the UI directly",
+                "To handle side effects like API calls",
+                "To define the state structure",
+                "To validate forms"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_ngrx_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Effect Example 💻\n\n<!-- FULL_CODE_START\n@Injectable()\nexport class MovieEffects {\n  loadMovies$ = createEffect(() => this.actions$.pipe(\n    ofType('[Movies Page] Load Movies'),\n    mergeMap(() => this.moviesService.getAll()\n      .pipe(\n        map(movies => ({ type: '[Movies API] Movies Loaded Success', payload: movies })),\n        catchError(() => EMPTY)\n      ))\n    )\n  );\n\n  constructor(\n    private actions$: Actions,\n    private moviesService: MoviesService\n  ) {}\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_ngrx_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: NgRx 🎓\n\nArchitecture.\n\n- **Store:** Single Source of Truth.\n- **Action:** Event.\n- **Reducer:** State change logic.\n- **Effect:** Async middleware.\n- **Select:** Read data.\n\n## Next Steps\nEnsure your Angular app is robust with **Testing**!"
+        }
+    ]
+}

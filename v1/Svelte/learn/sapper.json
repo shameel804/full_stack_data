@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_sapper",
+    "topicId": "sapper",
+    "topicTitle": "SvelteKit",
+    "description": "Master SvelteKit: The official application framework for building Svelte apps of all sizes.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_kit_1",
+            "type": "content",
+            "title": "Sapper is Dead. Long Live SvelteKit!",
+            "content": "# Evolution 🧬\n\nSapper was the original framework.\n\n**SvelteKit** is the successor. It uses Vite, is faster, and supports Serverless functions out of the box.\n\nUse `npm create svelte@latest my-app` to start."
+        },
+        {
+            "id": "svelte_kit_2",
+            "type": "content",
+            "title": "Routing",
+            "content": "# File-System Routing 📂\n\nRoutes are defined by folders in `src/routes`.\n\n- `src/routes/+page.svelte` -> `/`\n- `src/routes/about/+page.svelte` -> `/about`\n- `src/routes/blog/[slug]/+page.svelte` -> `/blog/hello-world`"
+        },
+        {
+            "id": "svelte_kit_3",
+            "type": "content",
+            "title": "Server Side Rendering",
+            "content": "# SSR by Default 🖥️\n\nSvelteKit renders your page on the server first (HTML), then \"hydrates\" it with JavaScript on the client.\n\nThis is great for SEO and perceived performance."
+        },
+        {
+            "id": "svelte_kit_4",
+            "type": "content",
+            "title": "Loading Data",
+            "content": "# +page.server.js 📡\n\nTo fetch data securely on the server:\n\n```javascript\n// src/routes/blog/+page.server.js\nexport function load() {\n  return {\n    posts: db.getPosts()\n  };\n}\n```\nAccess it in `+page.svelte` via `export let data`."
+        },
+        {
+            "id": "svelte_kit_quiz_1",
+            "type": "quiz",
+            "title": "File Quiz",
+            "content": "Route definition.",
+            "quizQuestion": "In modern SvelteKit, what is the filename for the UI component of a route?",
+            "quizOptions": [
+                "index.svelte",
+                "+page.svelte",
+                "route.svelte",
+                "main.svelte"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_kit_5",
+            "type": "content",
+            "title": "Form Actions",
+            "content": "# Form Actions 📝\n\nHandle form submissions without API endpoints.\n\n```javascript\n// +page.server.js\nexport const actions = {\n  default: async ({ request }) => {\n    const data = await request.formData();\n    // save data\n  }\n};\n```\n\n```html\n<form method=\"POST\">...</form>\n```"
+        },
+        {
+            "id": "svelte_kit_6",
+            "type": "content",
+            "title": "Layouts",
+            "content": "# +layout.svelte 📐\n\nDefine UI that persists across pages (Navbars, Footers).\n\n```html\n<!-- src/routes/+layout.svelte -->\n<nav>...</nav>\n<slot></slot>\n<footer>...</footer>\n```"
+        },
+        {
+            "id": "svelte_kit_7",
+            "type": "content",
+            "title": "Adapters",
+            "content": "# Deploy Anywhere 🚀\n\nSvelteKit uses **adapters** to build for different environments.\n\n- `adapter-auto` (Vercel, Netlify, Cloudflare)\n- `adapter-node` (Node.js server)\n- `adapter-static` (SSG - Static Site Generation)"
+        },
+        {
+            "id": "svelte_kit_8",
+            "type": "content",
+            "title": "API Routes",
+            "content": "# +server.js 🔌\n\nCreate standalone API endpoints (JSON).\n\n```javascript\n// src/routes/api/users/+server.js\nexport function GET() {\n  return new Response(JSON.stringify({ name: 'User' }));\n}\n```\nAccess via `/api/users`."
+        },
+        {
+            "id": "svelte_kit_9",
+            "type": "content",
+            "title": "Stores in SvelteKit",
+            "content": "# App Stores 🏪\n\nSvelteKit provides useful stores.\n\n```javascript\nimport { page, navigating, updated } from '$app/stores';\n\n$page.url.pathname; // Current path\n$page.params; // Route params\n```"
+        },
+        {
+            "id": "svelte_kit_quiz_2",
+            "type": "quiz",
+            "title": "Adapter Quiz",
+            "content": "Deployment.",
+            "quizQuestion": "Which adapter should you use to generate a purely static website (SSG) with SvelteKit?",
+            "quizOptions": [
+                "adapter-node",
+                "adapter-static",
+                "adapter-vercel",
+                "adapter-auto"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_kit_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Loader 💻\n\n<!-- FULL_CODE_START\n// src/routes/movies/+page.server.js\nexport async function load({ fetch }) {\n  const res = await fetch(`https://api.example.com/movies`);\n  const movies = await res.json();\n\n  return { movies };\n}\n\n// src/routes/movies/+page.svelte\n<script>\n  export let data;\n</script>\n\n<h1>Movies</h1>\n<ul>\n  {#each data.movies as movie}\n    <li>{movie.title}</li>\n  {/each}\n</ul>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_kit_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: SvelteKit 🎓\n\nThe Metadata Framework.\n\n- **SSR & SSG:** Fast & SEO friendly.\n- **Routing:** Filesystem based (`+page.svelte`).\n- **Loaders:** Server data fetching (`load`).\n- **Actions:** Form handling.\n- **Adapters:** Deploy everywhere.\n\n## Next Steps\nMove to the backend with **Server-Side Languages**!"
+        }
+    ]
+}

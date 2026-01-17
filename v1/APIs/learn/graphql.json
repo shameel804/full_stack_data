@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_graphql",
+    "topicId": "graphql",
+    "topicTitle": "GraphQL",
+    "description": "Master GraphQL: The query language for APIs that lets you ask for exactly what you need.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "graphql_1",
+            "type": "content",
+            "title": "What is GraphQL?",
+            "content": "# Ask for what you need 🎯\n\nDeveloped by Facebook.\n\nInstead of multiple endpoints (`/users`, `/posts`), there is ONE endpoint (`/graphql`).\n\nYou send a query describing the data structure you want, and the server returns exactly that."
+        },
+        {
+            "id": "graphql_2",
+            "type": "content",
+            "title": "Over-fetching vs Under-fetching",
+            "content": "# Solving REST Problems 💊\n\n- **Over-fetching:** Getting too much data. (REST returns ALL user fields, but you only need the name).\n- **Under-fetching:** Not enough data. (You need User + Posts, but have to make 2 REST calls).\n\nGraphQL solves both."
+        },
+        {
+            "id": "graphql_3",
+            "type": "content",
+            "title": "Schema (SDL)",
+            "content": "# The Contract 📜\n\nStrongly typed schema defines the API.\n\n```graphql\ntype User {\n  id: ID!\n  name: String!\n  posts: [Post]\n}\n\ntype Post {\n  title: String\n}\n\ntype Query {\n  me: User\n}\n```"
+        },
+        {
+            "id": "graphql_4",
+            "type": "content",
+            "title": "Queries",
+            "content": "# Getting Data 📥\n\nLike REST `GET`.\n\n```graphql\nquery {\n  user(id: 1) {\n    name\n    email\n    posts {\n      title\n    }\n  }\n}\n```\nReturns JSON matching the shape of the query."
+        },
+        {
+            "id": "graphql_quiz_1",
+            "type": "quiz",
+            "title": "Method Quiz",
+            "content": "Reading data.",
+            "quizQuestion": "Which GraphQL operation type is used to Fetch data (equivalent to GET)?",
+            "quizOptions": [
+                "mutation",
+                "subscription",
+                "query",
+                "fetch"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "graphql_5",
+            "type": "content",
+            "title": "Mutations",
+            "content": "# Changing Data 📤\n\nLike REST `POST`, `PUT`, `DELETE`.\n\n```graphql\nmutation {\n  createPost(title: \"Hello World\") {\n    id\n    title\n  }\n}\n```"
+        },
+        {
+            "id": "graphql_6",
+            "type": "content",
+            "title": "Resolvers",
+            "content": "# The Logic 🧠\n\nResolvers are functions on the server that fetch the actual data for a field.\n\n```javascript\nconst resolvers = {\n  Query: {\n    user: (parent, args) => db.findUser(args.id)\n  }\n};\n```"
+        },
+        {
+            "id": "graphql_7",
+            "type": "content",
+            "title": "Subscriptions",
+            "content": "# Realtime ⚡\n\nMaintain a persistent connection to the server (usually WebSockets).\n\nReceive updates instantly when data changes.\n\n```graphql\nsubscription {\n  newPost {\n    title\n  }\n}\n```"
+        },
+        {
+            "id": "graphql_8",
+            "type": "content",
+            "title": "GraphiQL / Playground",
+            "content": "# DX Tools 🛠️\n\nAn in-browser IDE to explore the API.\n\nSince the schema is introspective, tools can auto-complete your queries and show documentation automatically."
+        },
+        {
+            "id": "graphql_9",
+            "type": "content",
+            "title": "Pros & Cons",
+            "content": "# Trade-offs ⚖️\n\n- **Pros:** Flexible for frontend, strongly typed, single request.\n- **Cons:** Caching is harder (everything is POST), query complexity can kill performance (N+1 problem)."
+        },
+        {
+            "id": "graphql_quiz_2",
+            "type": "quiz",
+            "title": "Operation Quiz",
+            "content": "Modifying data.",
+            "quizQuestion": "Which operation type should be used to modify server-side data?",
+            "quizOptions": [
+                "query",
+                "mutation",
+                "subscription",
+                "update"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "graphql_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Query Example 💻\n\n<!-- FULL_CODE_START\n# Request\nquery GetUser {\n  user(id: \"123\") {\n    fullName\n    friends(limit: 5) {\n      name\n      avatarUrl\n    }\n  }\n}\n\n# Response\n{\n  \"data\": {\n    \"user\": {\n      \"fullName\": \"John Doe\",\n      \"friends\": [\n        { \"name\": \"Jane\", \"avatarUrl\": \"...\" }\n      ]\n    }\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "graphql_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: GraphQL 🎓\n\nFlexible Data.\n\n- **One Endpoint:** `/graphql`.\n- **Schema:** Strongly typed definition.\n- **Query:** Get data.\n- **Mutation:** Change data.\n- **Resolver:** Server function.\n\n## Next Steps\nPlan your API structure with **API Design**!"
+        }
+    ]
+}

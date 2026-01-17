@@ -1,0 +1,101 @@
+{
+    "id": "learn_svelte_components",
+    "topicId": "components",
+    "topicTitle": "Components",
+    "description": "Building Svelte apps with reusable components, Props, Custom Events, and Slots.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_comp_1",
+            "type": "content",
+            "title": "Using Components",
+            "content": "# Imports 📦\n\nComponents are standard variables.\n\nTo use a component, import it and use it as a tag (uppercase).\n\n```html\n<script>\nimport Nested from './Nested.svelte';\n</script>\n\n<Nested />\n```"
+        },
+        {
+            "id": "svelte_comp_2",
+            "type": "content",
+            "title": "Props",
+            "content": "# Declaring Props ✉️\n\nTo accept data from a parent, export a variable.\n\n```html\n<!-- Child.svelte -->\n<script>\n  export let answer = 42; // Default value\n</script>\n\n<p>The answer is {answer}</p>\n```\n\n```html\n<!-- Parent.svelte -->\n<Child answer={100} />\n```"
+        },
+        {
+            "id": "svelte_comp_3",
+            "type": "content",
+            "title": "Slots",
+            "content": "# Content Projection 🎰\n\nLet parents inject HTML into child components.\n\n```html\n<!-- Box.svelte -->\n<div class=\"box\">\n  <slot></slot>\n</div>\n```\n\n```html\n<!-- Parent.svelte -->\n<Box>\n  <h2>I am inside!</h2>\n</Box>\n```"
+        },
+        {
+            "id": "svelte_comp_4",
+            "type": "content",
+            "title": "Named Slots",
+            "content": "# Multiple Slots 🗄️\n\nPlace content in specific areas.\n\n`Child.svelte`:\n`<slot name=\"header\">Default Header</slot>`\n\n`Parent.svelte`:\n```html\n<Child>\n  <span slot=\"header\">My Header</span>\n</Child>\n```"
+        },
+        {
+            "id": "svelte_comp_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Keyword check.",
+            "quizQuestion": "Which keyword is used to expose a variable as a Prop in Svelte?",
+            "quizOptions": [
+                "public",
+                "prop",
+                "export",
+                "expose"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_comp_5",
+            "type": "content",
+            "title": "Event Dispatching",
+            "content": "# Custom Events 📢\n\nUse `createEventDispatcher` to send messages up.\n\n```javascript\nimport { createEventDispatcher } from 'svelte';\nconst dispatch = createEventDispatcher();\n\nfunction sayHello() {\n  dispatch('message', { text: 'Hello!' });\n}\n```\nListen in parent: `<Child on:message={handleMessage} />`."
+        },
+        {
+            "id": "svelte_comp_6",
+            "type": "content",
+            "title": "Event Forwarding",
+            "content": "# Forwarding 📨\n\nUnlike DOM events, custom events don't bubble.\n\nTo pass an event through a component, just add `on:eventname` without a handler.\n\n```html\n<!-- Inner.svelte -->\n<button on:click>Click me</button>\n```\nNow `Inner` emits a `click` event when the button is pressed."
+        },
+        {
+            "id": "svelte_comp_7",
+            "type": "content",
+            "title": "Context API",
+            "content": "# Context 📡\n\nFor deep data passing without prop drilling.\n\n- `setContext(key, value)`\n- `getContext(key)`\n\nMust be called during component initialization.\n\n```javascript\nimport { getContext } from 'svelte';\nconst theme = getContext('theme');\n```"
+        },
+        {
+            "id": "svelte_comp_8",
+            "type": "content",
+            "title": "Module Context",
+            "content": "# <script context=\"module\"> 🌏\n\nRun code once per *module* (not per instance).\n\nUseful for sharing data between all instances of a component or exporting constants.\n\n```html\n<script context=\"module\">\n  export function alertUser() { alert('Hi') }\n</script>\n```"
+        },
+        {
+            "id": "svelte_comp_9",
+            "type": "content",
+            "title": "Special Elements",
+            "content": "# <svelte:self> 🪞\n\nFor recursive components (e.g., a Folder tree).\n\nUse `<svelte:self>` to include the component inside itself.\n\nAlso `<svelte:component this={selectedComp} />` for dynamic components."
+        },
+        {
+            "id": "svelte_comp_quiz_2",
+            "type": "quiz",
+            "title": "Bubbling Quiz",
+            "content": "Event behavior.",
+            "quizQuestion": "True or False: Svelte custom events bubble up the DOM automatically.",
+            "quizOptions": [
+                "True",
+                "False"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_comp_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Component Example 💻\n\n<!-- FULL_CODE_START\n<!-- Modal.svelte -->\n<script>\n\timport { createEventDispatcher } from 'svelte';\n\n\tconst dispatch = createEventDispatcher();\n\n\tfunction close() {\n\t\tdispatch('close');\n\t}\n</script>\n\n<div class=\"modal-layout\">\n\t<div class=\"modal\">\n\t\t<h1>Hello!</h1>\n\t\t<button on:click={close}>Close Modal</button>\n\t</div>\n</div>\n\n<style>\n\t.modal-layout { background: rgba(0,0,0,0.5); position: fixed; ... }\n</style>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_comp_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Components 🎓\n\nModular UI.\n\n- **Props:** `export let name`.\n- **Slots:** `<slot>`.\n- **Events:** `dispatch('name')`.\n- **Forwarding:** `on:click` (no handler).\n- **Context:** Use for deep data.\n\n## Next Steps\nMaster efficient updates with **Reactivity**!"
+        }
+    ]
+}

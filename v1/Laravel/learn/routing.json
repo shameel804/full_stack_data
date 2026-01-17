@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_routing",
+    "topicId": "routing",
+    "topicTitle": "Advanced Routing",
+    "description": "Master Resource Routes, Model Binding, and Route Caching.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_routing_1",
+            "type": "content",
+            "title": "Resource Controllers",
+            "content": "# CRUD in One Line ⚡\n\nAutomatically create routes for all 7 CRUD actions (index, create, store, show, edit, update, destroy).\n\n`Route::resource('photos', PhotoController::class);`"
+        },
+        {
+            "id": "laravel_routing_2",
+            "type": "content",
+            "title": "Route Model Binding",
+            "content": "# Auto-Injection 💉\n\nLaravel automatically resolves Eloquent models defined in route or controller action signatures.\n\n<!-- FULL_CODE_START\n// Route Definition\nRoute::get('/users/{user}', function (User $user) {\n    return $user->email;\n});\nFULL_CODE_END -->\n\nLaravel finds the User with ID matching `{user}`."
+        },
+        {
+            "id": "laravel_routing_3",
+            "type": "content",
+            "title": "Custom Keys",
+            "content": "# Not just IDs 🔑\n\nBind by other columns (e.g., username/slug).\n\n<!-- FULL_CODE_START\nRoute::get('/posts/{post:slug}', function (Post $post) {\n    return $post;\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_routing_4",
+            "type": "content",
+            "title": "Fallback Routes",
+            "content": "# 404 Handling 🔚\n\nDefine a route that executes when no other route matches.\n\n`Route::fallback(function () { ... });`"
+        },
+        {
+            "id": "laravel_routing_5",
+            "type": "content",
+            "title": "Rate Limiting",
+            "content": "# Throttling 🛑\n\nLimit traffic to routes.\n\n`Route::middleware('throttle:60,1')->group(function () { ... });`\n\nAllows 60 requests per minute."
+        },
+        {
+            "id": "laravel_routing_quiz_1",
+            "type": "quiz",
+            "title": "Binding Quiz",
+            "content": "Mechanics.",
+            "quizQuestion": "What happens if Route Model Binding fails to find a matching model instance?",
+            "quizOptions": [
+                "It returns null",
+                "It automatically throws a 404 HTTP Error",
+                "It creates a new empty model",
+                "It redirects to home"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "laravel_routing_6",
+            "type": "content",
+            "title": "Form Method Spoofing",
+            "content": "# PUT & DELETE 🎭\n\nHTML forms only support GET and POST. To send PUT/DELETE, add a hidden field.\n\n`<form action=\"/foo/bar\" method=\"POST\">`\n`@method('PUT')`\n`@csrf`\n`</form>`"
+        },
+        {
+            "id": "laravel_routing_7",
+            "type": "content",
+            "title": "Redirect Routes",
+            "content": "# Easy Hop 🐰\n\nIf you defined a route that needs to redirect elsewhere.\n\n`Route::redirect('/here', '/there', 301);`"
+        },
+        {
+            "id": "laravel_routing_8",
+            "type": "content",
+            "title": "View Routes",
+            "content": "# Simple Pages 📄\n\nIf a route only returns a view, use the shortcut.\n\n`Route::view('/welcome', 'welcome', ['name' => 'Taylor']);`"
+        },
+        {
+            "id": "laravel_routing_9",
+            "type": "content",
+            "title": "Route Caching",
+            "content": "# Speed Boost 🚀\n\nIn production, register all routes.\n\n`php artisan route:cache`\n\nDrastically speeds up route registration (hundreds of ms saved)."
+        },
+        {
+            "id": "laravel_routing_10",
+            "type": "content",
+            "title": "Current Route",
+            "content": "# Inspection 🕵️\n\nCheck current route info.\n\n`Route::current()`\n`Route::currentRouteName()`\n\nUseful for checking active menu items."
+        },
+        {
+            "id": "laravel_routing_quiz_2",
+            "type": "quiz",
+            "title": "Resource Quiz",
+            "content": "Shortcuts.",
+            "quizQuestion": "How many distinct route definitions does `Route::resource` create by default?",
+            "quizOptions": [
+                "4",
+                "5",
+                "7",
+                "10"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_routing_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Advanced Routing 🗺️\n\nPro features.\n\n- **Resource:** Instant CRUD.\n- **Binding:** Auto-fetch Models.\n- **Spoofing:** `@method('PUT')`.\n- **Caching:** Production speed.\n\n## Next Steps\nProcess logic in **Controllers**!"
+        }
+    ]
+}

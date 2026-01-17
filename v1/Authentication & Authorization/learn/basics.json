@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_basics",
+    "topicId": "basics",
+    "topicTitle": "Auth Basics",
+    "description": "Fundamental concepts: The difference between Authentication and Authorization, and password handling.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_basics_1",
+            "type": "content",
+            "title": "Auth vs Auth",
+            "content": "# The Two A's 🅰️\n\n- **Authentication (AuthN):** Who are you? (Login, Passport)\n- **Authorization (AuthZ):** What are you allowed to do? (Permissions, Ticket)\n\nYou must Authenticate before you can be Authorized."
+        },
+        {
+            "id": "auth_basics_2",
+            "type": "content",
+            "title": "Storing Passwords",
+            "content": "# Rule #1: Don't 🛑\n\n**NEVER** store passwords in plain text.\n\nEven if your database is hacked, user passwords should be safe.\n\nUse **Hashing** to transform the password into a scrambled string."
+        },
+        {
+            "id": "auth_basics_3",
+            "type": "content",
+            "title": "Hashing",
+            "content": "# One-Way Street 🛣️\n\nA hash function turns `password123` into `a8c99...`.\n\nYou cannot turn `a8c99...` back into `password123`.\n\nTo verify: Hash the input password and compare it with the stored hash."
+        },
+        {
+            "id": "auth_basics_4",
+            "type": "content",
+            "title": "Salting",
+            "content": "# Add some Salt 🧂\n\nIf two users have the same password, they shouldn't have the same hash (to prevent Rainbow Table attacks).\n\nA **Salt** is random data added to the password before hashing.\n\n`Hash(\"password123\" + \"random_salt\")`"
+        },
+        {
+            "id": "auth_basics_quiz_1",
+            "type": "quiz",
+            "title": "Security Quiz",
+            "content": "Storage.",
+            "quizQuestion": "Why should you salt passwords before hashing them?",
+            "quizOptions": [
+                "To make them faster to read",
+                "To allow password recovery",
+                "To prevent Rainbow Table attacks",
+                "To make the hash shorter"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_basics_5",
+            "type": "content",
+            "title": "Algorithms",
+            "content": "# Use the Best 🏆\n\nDon't use MD5 or SHA-1 (too fast, broken).\n\nUse slow, purpose-built algorithms:\n\n- **Bcrypt:** Standard.\n- **Argon2:** Winner of hashing competition (Memory hard).\n- **Scrypt:** Older alternative."
+        },
+        {
+            "id": "auth_basics_6",
+            "type": "content",
+            "title": "Session vs Token",
+            "content": "# Stateful vs Stateless 🏛️\n\n- **Session:** Server remembers you (stores session ID in DB/Memory). Client sends Cookie.\n- **Token (JWT):** Server signs data. Client holds the data. No server memory needed."
+        },
+        {
+            "id": "auth_basics_7",
+            "type": "content",
+            "title": "User Identity Flow",
+            "content": "# The Flow 🌊\n\n1.  User sends `username` + `password` (over HTTPS!).\n2.  Server finds user, hashes input, compares with DB.\n3.  If match -> Create Session or Sign Token.\n4.  Return SessionID/Token to client."
+        },
+        {
+            "id": "auth_basics_8",
+            "type": "content",
+            "title": "Password Reset",
+            "content": "# Forgotten Password? ❓\n\nDon't send the old password (you don't know it!).\n\n1.  Generate a temporary, one-time token.\n2.  Email a link with that token to the user.\n3.  User clicks link, enters NEW password."
+        },
+        {
+            "id": "auth_basics_9",
+            "type": "content",
+            "title": "Brute Force Protection",
+            "content": "# Rate Limiting 🧱\n\nStop attackers from guessing passwords.\n\nAfter 5 failed attempts:\n- Lock the account for 30 mins.\n- Or require CAPTCHA.\n- Or exponentially delay the response."
+        },
+        {
+            "id": "auth_basics_quiz_2",
+            "type": "quiz",
+            "title": "Algo Quiz",
+            "content": "Selection.",
+            "quizQuestion": "Which hashing algorithm is recommended for password storage?",
+            "quizOptions": [
+                "MD5",
+                "SHA-256",
+                "Bcrypt",
+                "Base64"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_basics_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Bcrypt Hashing 💻\n\n<!-- FULL_CODE_START\nconst bcrypt = require('bcrypt');\n\nasync function signup(password) {\n  const saltRounds = 10;\n  const hash = await bcrypt.hash(password, saltRounds);\n  // Store 'hash' in DB\n}\n\nasync function login(inputPassword, storedHash) {\n  const match = await bcrypt.compare(inputPassword, storedHash);\n  if (match) {\n    // Success\n  } else {\n    // Fail\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_basics_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Auth Basics 🎓\n\nSafety First.\n\n- **AuthN:** Verification.\n- **AuthZ:** Permissions.\n- **Hashing:** One-way + Salt (Bcrypt).\n- **Flow:** Login -> Token/Session.\n- **Reset:** Email links.\n\n## Next Steps\nMaster modern stateless auth with **JWT**!"
+        }
+    ]
+}

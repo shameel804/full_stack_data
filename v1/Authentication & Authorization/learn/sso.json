@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_sso",
+    "topicId": "sso",
+    "topicTitle": "Single Sign-On",
+    "description": "Streamline user access: Log in once and access multiple applications seamlessly.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_sso_1",
+            "type": "content",
+            "title": "What is SSO?",
+            "content": "# One Key, Many Doors 🔑\n\nSingle Sign-On allows a user to authenticate once and gain access to multiple related, but independent, software systems.\n\nExample: Log into Gmail, and you are automatically logged into YouTube and Drive."
+        },
+        {
+            "id": "auth_sso_2",
+            "type": "content",
+            "title": "Identity Provider (IdP)",
+            "content": "# The Authority 🏛️\n\nThe central system that holds the user directory and verifies credentials.\n\nExample: Okta, Auth0, Microsoft Azure AD, Google Identity."
+        },
+        {
+            "id": "auth_sso_3",
+            "type": "content",
+            "title": "Service Provider (SP)",
+            "content": "# The App 📱\n\nThe application the user wants to access (Slack, Zoom, Salesforce).\n\nThe SP trusts the IdP. \"If Okta says you are John, then you are John.\""
+        },
+        {
+            "id": "auth_sso_4",
+            "type": "content",
+            "title": "SAML",
+            "content": "# Security Assertion Markup Language 📜\n\nThe Enterprise standard (XML-based).\n\n1.  User visits App (SP).\n2.  App redirects to IdP.\n3.  User logins at IdP.\n4.  IdP sends an XML **Assertion** back to App signed with a cert.\n5.  App verifies signature."
+        },
+        {
+            "id": "auth_sso_quiz_1",
+            "type": "quiz",
+            "title": "Standard Quiz",
+            "content": "Enterprise.",
+            "quizQuestion": "Which XML-based standard is most commonly used for Enterprise SSO?",
+            "quizOptions": [
+                "JSON",
+                "SAML",
+                "OIDC",
+                "LDAP"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "auth_sso_5",
+            "type": "content",
+            "title": "OIDC (OpenID Connect)",
+            "content": "# Modern SSO ⚡\n\nBuilt on OAuth 2.0 (JSON-based).\n\nMobile-friendly and simpler than SAML.\n\nUses **ID Tokens** (JWTs) to pass user information.\n\nDominating the consumer web (Google Sign-In)."
+        },
+        {
+            "id": "auth_sso_6",
+            "type": "content",
+            "title": "Federation",
+            "content": "# Trust Bridges 🌉\n\nSSO across different organizations.\n\nAllowing students from University A to access Library Resources at University B using their University A credentials.\n\nRequires a Federation Trust (e.g., Eduroam)."
+        },
+        {
+            "id": "auth_sso_7",
+            "type": "content",
+            "title": "LDAP / Active Directory",
+            "content": "# The Source 🗄️\n\nUnderneath the IdP, there is often a directory.\n\n**LDAP (Lightweight Directory Access Protocol)** is the protocol used to query this user database (Active Directory)."
+        },
+        {
+            "id": "auth_sso_8",
+            "type": "content",
+            "title": "Social Login",
+            "content": "# Consumer SSO 🌐\n\n\"Log in with Facebook/GitHub\".\n\nThis is just OIDC / OAuth 2.0.\n\nFacebook is the IdP. Your app is the SP.\n\nReduces friction: Users hate creating new passwords."
+        },
+        {
+            "id": "auth_sso_9",
+            "type": "content",
+            "title": "Pros & Cons",
+            "content": "# Trade-offs ⚖️\n\n**Pros:**\n- Better UX (fewer logins).\n- Fewer passwords to forget.\n- Centralized control (IT can revoke access to 10 apps at once).\n\n**Cons:**\n- Single Point of Failure (If IdP is down, nobody logs in)."
+        },
+        {
+            "id": "auth_sso_quiz_2",
+            "type": "quiz",
+            "title": "Protocol Quiz",
+            "content": "Modern web.",
+            "quizQuestion": "Which protocol is built on top of OAuth 2.0 and uses JWTs for identity?",
+            "quizOptions": [
+                "SAML",
+                "Kerberos",
+                "LDAP",
+                "OpenID Connect (OIDC)"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "auth_sso_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Passport SAML 💻\n\n<!-- FULL_CODE_START\nconst SamlStrategy = require('passport-saml').Strategy;\n\npassport.use(new SamlStrategy(\n  {\n    path: '/login/callback',\n    entryPoint: 'https://idp.example.com/sso',\n    issuer: 'passport-saml',\n    cert: 'MIICizCCAfQCCQ...'\n  },\n  function(profile, done) {\n    findByEmail(profile.email, function(err, user) {\n      if (err) return done(err);\n      return done(null, user);\n    });\n  }\n));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_sso_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: SSO 🎓\n\nUnified Access.\n\n- **IdP:** The Identity Provider (Okta).\n- **SP:** Service Provider (App).\n- **SAML:** XML Enterprise standard.\n- **OIDC:** JSON Modern standard.\n- **Social:** Login with Google.\n\n## Next Steps\nServe your apps securely with **Web Servers**!"
+        }
+    ]
+}

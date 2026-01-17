@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_queues",
+    "topicId": "queues",
+    "topicTitle": "Queues & Jobs",
+    "description": "Handling background tasks asynchronously.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_queues_1",
+            "type": "content",
+            "title": "Why Queues? ⏳",
+            "content": "# Async Processing\n\nSome tasks take too long for a web request (sending emails, processing videos).\n\nQueues let you offload this work to the background, returning a fast response to the user immediately."
+        },
+        {
+            "id": "laravel_queues_2",
+            "type": "content",
+            "title": "Drivers",
+            "content": "# Storage 💾\n\nWhere are jobs stored?\n\n- **sync:** Runs immediately (for dev).\n- **database:** Stores in DB table.\n- **redis:** Super fast (Production standard).\n- **sqs:** AWS Simple Queue Service."
+        },
+        {
+            "id": "laravel_queues_3",
+            "type": "content",
+            "title": "Creating Jobs",
+            "content": "# The Unit of Work 📦\n\n`php artisan make:job ProcessPodcast`\n\nGenerates a class with a `handle()` method where you put your logic.\n\n`ProcessPodcast::dispatch($podcast);`"
+        },
+        {
+            "id": "laravel_queues_4",
+            "type": "content",
+            "title": "Running the Worker",
+            "content": "# The Processor ⚙️\n\nYou need a process running in the background to pick up jobs.\n\n`php artisan queue:work`\n\nIt polls the queue and executes jobs one by one."
+        },
+        {
+            "id": "laravel_queues_5",
+            "type": "content",
+            "title": "Horizon",
+            "content": "# Dashboard 📊\n\nBeautiful dashboard for Redis queues.\n\nMonitor throughput, runtime, and failures in real-time.\n\nEasily configure how many workers process each queue."
+        },
+        {
+            "id": "laravel_queues_quiz_1",
+            "type": "quiz",
+            "title": "Driver Quiz",
+            "content": "Speed.",
+            "quizQuestion": "Which queue driver is recommended for high-performance production environments?",
+            "quizOptions": [
+                "file",
+                "sync",
+                "redis",
+                "database"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_queues_6",
+            "type": "content",
+            "title": "Job Retries",
+            "content": "# Resilience 🔄\n\nIf a job fails (API down), Laravel can retry it automatically.\n\n`public $tries = 3;`\n\nAfter 3 failures, it goes to the `failed_jobs` table."
+        },
+        {
+            "id": "laravel_queues_7",
+            "type": "content",
+            "title": "Task Scheduling",
+            "content": "# Cron 🕰️\n\nExecute commands periodically (e.g., Daily Report).\n\n`$schedule->command('emails:send')->daily();`\n\nDefined in `app/Console/Kernel.php`."
+        },
+        {
+            "id": "laravel_queues_8",
+            "type": "content",
+            "title": "Events & Listeners",
+            "content": "# Decoupling 🧩\n\nFire an event: `OrderShipped`.\n\nListeners react: `SendEmail`, `UpdateInventory`, `NotifySlack`.\n\nListeners can be queued automatically!"
+        },
+        {
+            "id": "laravel_queues_9",
+            "type": "content",
+            "title": "Batches",
+            "content": "# Grouping 🧺\n\nExecute a batch of jobs and perform an action when ALL of them are finished.\n\n`Bus::batch([...])->then(...)`"
+        },
+        {
+            "id": "laravel_queues_10",
+            "type": "content",
+            "title": "Delayed Dispatch",
+            "content": "# Wait for it ✋\n\nSend an email 10 minutes from now.\n\n`ProcessPodcast::dispatch($podcast)->delay(now()->addMinutes(10));`"
+        },
+        {
+            "id": "laravel_queues_quiz_2",
+            "type": "quiz",
+            "title": "Failure Quiz",
+            "content": "Errors.",
+            "quizQuestion": "Where does a job go if it fails all its retry attempts?",
+            "quizOptions": [
+                "It is deleted",
+                "It goes back to the main queue",
+                "It goes to the failed_jobs table",
+                "It crashes the server"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_queues_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Queues ⏳\n\nAsync power.\n\n- **Jobs:** Tasks.\n- **Workers:** Processors.\n- **Horizon:** Monitor.\n- **Scheduler:** Cron replacement.\n- **Events:** Decoupled reactions.\n\n## Next Steps\nExplore **SQL Databases**!"
+        }
+    ]
+}

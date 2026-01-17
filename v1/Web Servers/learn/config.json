@@ -1,0 +1,103 @@
+{
+    "id": "learn_web_config",
+    "topicId": "config",
+    "topicTitle": "Optimization",
+    "description": "Tune your web server for maximum performance: Gzip compression, Caching headers, and Keep-Alive.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "web_opt_1",
+            "type": "content",
+            "title": "Why Optimize?",
+            "content": "# Speed Wins 🏁\n\nFaster sites have:\n- Higher conversion rates.\n- Better SEO rankings.\n- Lower server costs.\n\nThe Web Server configuration plays a massive role in this speed."
+        },
+        {
+            "id": "web_opt_2",
+            "type": "content",
+            "title": "Gzip / Brotli Compression",
+            "content": "# Shrink it! 📉\n\nCompress text files (HTML, CSS, JS, JSON) before sending them.\n\n- **Gzip:** Standard support everywhere.\n- **Brotli:** Newer, better compression ratio.\n\n Reduces bandwidth usage by 70-80%."
+        },
+        {
+            "id": "web_opt_3",
+            "type": "content",
+            "title": "HTTP Keep-Alive",
+            "content": "# Stay Connected 📞\n\nOpening a TCP connection (and SSL handshake) is expensive.\n\n**Keep-Alive** keeps the connection open for multiple requests (HTML, then CSS, then Image).\n\n`Keep-Alive: timeout=5, max=1000`"
+        },
+        {
+            "id": "web_opt_4",
+            "type": "content",
+            "title": "Client Caching Headers",
+            "content": "# Don't ask again 🙅\n\nTell the browser to store files locally.\n\n- `Cache-Control: max-age=31536000` (Cache for 1 year).\n- `ETag`: A fingerprint of the file. Server checks if it changed. If not, return `304 Not Modified` (Empty body)."
+        },
+        {
+            "id": "web_opt_quiz_1",
+            "type": "quiz",
+            "title": "Header Quiz",
+            "content": "Browser storage.",
+            "quizQuestion": "Which header tells the browser how long to cache a file locally?",
+            "quizOptions": [
+                "Content-Length",
+                "Cache-Control",
+                "Set-Cookie",
+                "Server"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "web_opt_5",
+            "type": "content",
+            "title": "HTTP/2 and HTTP/3",
+            "content": "# Multiplexing 🛣️\n\n- **HTTP/1.1:** Serial requests (Head-of-line blocking).\n- **HTTP/2:** Multiple streams over one connection. Binary protocol.\n- **HTTP/3:** Based on UDP (QUIC). Faster on unreliable networks.\n\nUpdate your server versions to get this for free!"
+        },
+        {
+            "id": "web_opt_6",
+            "type": "content",
+            "title": "SSL Optimization",
+            "content": "# Fast Crypto 🔑\n\n- **Session Resumption:** Don't redo the full handshake if the user returns quickly.\n- **OCSP Stapling:** Server provides validity proof of its cert, saving the browser a check.\n- **HSTS:** Force browser to use HTTPS always."
+        },
+        {
+            "id": "web_opt_7",
+            "type": "content",
+            "title": "Worker Tuning",
+            "content": "# Processes & Threads 🧵\n\nStart enough workers to utilize all CPU cores, but not too many to cause context switching.\n\nNginx: `worker_processes auto;`\n\nAdjust `worker_connections` (e.g., 1024) to handle high concurrency."
+        },
+        {
+            "id": "web_opt_8",
+            "type": "content",
+            "title": "Buffer Sizes",
+            "content": "# Request Limits 📏\n\nProtect against overflows and large uploads.\n\n- `client_max_body_size`: Limit upload size (e.g., 10M).\n- `client_body_buffer_size`: RAM buffer for posts."
+        },
+        {
+            "id": "web_opt_9",
+            "type": "content",
+            "title": "Access Log Buffering",
+            "content": "# IO Savings 📝\n\nWriting to the disk for *every* request is slow.\n\nBuffer the logs:\n`access_log /var/log/nginx/access.log combined buffer=32k flush=1m;`\n\nWrites in chunks effectively reducing Disk IO."
+        },
+        {
+            "id": "web_opt_quiz_2",
+            "type": "quiz",
+            "title": "Protocol Quiz",
+            "content": "Versions.",
+            "quizQuestion": "Which HTTP version introduced multiplexing (multiple streams over one connection)?",
+            "quizOptions": [
+                "HTTP/1.0",
+                "HTTP/1.1",
+                "HTTP/2",
+                "HTTP/3"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "web_opt_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Nginx Optimization 💻\n\n<!-- FULL_CODE_START\nhttp {\n    # Compression\n    gzip on;\n    gzip_types text/plain application/json text/css;\n\n    # Caching\n    sendfile on;\n    tcp_nopush on;\n\n    # Keep Alive\n    keepalive_timeout 65;\n\n    # Hide Version (Security)\n    server_tokens off;\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "web_opt_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Config 🎓\n\nTuning for Speed.\n\n- **Compression:** Gzip/Brotli.\n- **Cache:** Cache-Control headers.\n- **Keep-Alive:** Reuse connections.\n- **HTTP/2:** Multiplexing.\n- **SSL:** OCSP Stapling.\n\n## Next Steps\nScale horizontally with **Load Balancing**!"
+        }
+    ]
+}

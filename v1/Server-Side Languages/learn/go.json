@@ -1,0 +1,103 @@
+{
+    "id": "learn_go",
+    "topicId": "go",
+    "topicTitle": "Go",
+    "description": "Master Golang: Google's language for high-performance systems. Concurrency, Goroutines, and Static Typing.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "go_back_1",
+            "type": "content",
+            "title": "Why Go?",
+            "content": "# Simplicity & Speed 🚀\n\n- **Compiled:** Compiles exceptionally fast to native binary.\n- **GC:** Garbage Collected.\n- **Concurrency:** Built from ground up for multicore utilization.\n- **Simple:** Smallest syntax footprint of modern languages."
+        },
+        {
+            "id": "go_back_2",
+            "type": "content",
+            "title": "Goroutines",
+            "content": "# Lightweight Threads 🧵\n\nA Goroutine is a function executing concurrently.\n\nThey are incredibly cheap (2KB each). You can spin up thousands easily.\n\n```go\ngo myFunction() // Runs in background\n```"
+        },
+        {
+            "id": "go_back_3",
+            "type": "content",
+            "title": "Channels",
+            "content": "# Pipelines 📨\n\nChannels invoke the philosophy: \"Do not communicate by sharing memory; share memory by communicating.\"\n\nThey let goroutines pass data safely.\n\n```go\nch := make(chan int)\ngo func() { ch <- 42 }() // Send\nval := <-ch // Receive\n```"
+        },
+        {
+            "id": "go_back_4",
+            "type": "content",
+            "title": "Interfaces",
+            "content": "# Implicit Interfaces 🎭\n\nNo `implements` keyword.\n\nIf a Type implements the methods of an Interface, it satisfies the interface automatically.\n\nDuck Typing: \"If it walks like a duck and quacks like a duck, it's a duck.\""
+        },
+        {
+            "id": "go_back_quiz_1",
+            "type": "quiz",
+            "title": "Keyword Quiz",
+            "content": "Concurrency start.",
+            "quizQuestion": "Which keyword is used to start a new lightweight thread (Goroutine)?",
+            "quizOptions": [
+                "async",
+                "thread",
+                "go",
+                "start"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "go_back_5",
+            "type": "content",
+            "title": "Error Handling",
+            "content": "# No Exceptions 🚫\n\nGo does not have try/catch.\n\nErrors are values returned from functions.\n\n```go\nf, err := os.Open(\"file.txt\")\nif err != nil {\n    log.Fatal(err)\n}\n```\nIt forces you to handle errors explicitly immediately."
+        },
+        {
+            "id": "go_back_6",
+            "type": "content",
+            "title": "Structs & Methods",
+            "content": "# OOP? Sort of. 🏗️\n\nGo has Structs instead of Classes.\n\n```go\ntype Rect struct {\n    width, height int\n}\n\n// Method on Rect\nfunc (r Rect) Area() int {\n    return r.width * r.height\n}\n```"
+        },
+        {
+            "id": "go_back_7",
+            "type": "content",
+            "title": "Go Modules",
+            "content": "# Dependency Management 📦\n\nStandard since Go 1.11.\n\n`go.mod` file tracks dependencies.\n\n`go get github.com/gin-gonic/gin` adds it to your project."
+        },
+        {
+            "id": "go_back_8",
+            "type": "content",
+            "title": "Standard Library",
+            "content": "# Robust Std Lib 📚\n\nGo has a production-ready HTTP server built-in.\n\n```go\nhttp.HandleFunc(\"/\", handler)\nhttp.ListenAndServe(\":8080\", nil)\n```\nYou often don't need a framework, but **Gin** and **Echo** are popular helpers."
+        },
+        {
+            "id": "go_back_9",
+            "type": "content",
+            "title": "Defer",
+            "content": "# Cleanup 🧹\n\n`defer` schedules a function call to run just before the surrounding function returns.\n\n```go\nf, _ := os.Open(\"file\")\ndefer f.Close() // Guaranteed to run\n// Process file...\n```"
+        },
+        {
+            "id": "go_back_quiz_2",
+            "type": "quiz",
+            "title": "Comm Quiz",
+            "content": "Data transfer.",
+            "quizQuestion": "What is the primary mechanism for Goroutines to exchange data?",
+            "quizOptions": [
+                "Global Variables",
+                "Shared Memory Locks",
+                "Channels",
+                "Sockets"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "go_back_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Concurrent Fetch 💻\n\n<!-- FULL_CODE_START\npackage main\n\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc worker(id int, jobs <-chan int, results chan<- int) {\n\tfor j := range jobs {\n\t\tfmt.Println(\"worker\", id, \"processing job\", j)\n\t\ttime.Sleep(time.Second)\n\t\tresults <- j * 2\n\t}\n}\n\nfunc main() {\n\tjobs := make(chan int, 100)\n\tresults := make(chan int, 100)\n\n\t// Start 3 workers\n\tfor w := 1; w <= 3; w++ {\n\t\tgo worker(w, jobs, results)\n\t}\n\n\t// Send 5 jobs\n\tfor j := 1; j <= 5; j++ {\n\t\tjobs <- j\n\t}\n\tclose(jobs)\n\n\t// Collect results\n\tfor a := 1; a <= 5; a++ {\n\t\t<-results\n\t}\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "go_back_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Go 🎓\n\nSystem Programming.\n\n- **Goroutines:** Cheap concurrency.\n- **Channels:** Safe communication.\n- **Error Handling:** Explicit `if err != nil`.\n- **Structs:** No classes.\n- **Defer:** Cleanup made easy.\n\n## Next Steps\nExplore the Microsoft ecosystem with **.NET**!"
+        }
+    ]
+}

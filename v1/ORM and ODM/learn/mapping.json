@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_mapping",
+    "topicId": "mapping",
+    "topicTitle": "Mapping & Relationships",
+    "description": "How objects connect to each other in the database.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_mapping_1",
+            "type": "content",
+            "title": "One-to-One (1:1)",
+            "content": "# Monogamy 💍\n\nA User has one Profile.\n\nForeign Key (FK) is usually on the 'child' table (`profiles.user_id`).\n\nORM: `user.getProfile()`"
+        },
+        {
+            "id": "orm_mapping_2",
+            "type": "content",
+            "title": "One-to-Many (1:N)",
+            "content": "# Parent & Children 👨‍👧‍👦\n\nA User has many Posts.\n\nForeign Key is on the 'many' side (`posts.user_id`).\n\nORM: `user.getPosts()` returns a List/Collection."
+        },
+        {
+            "id": "orm_mapping_3",
+            "type": "content",
+            "title": "Many-to-Many (N:M)",
+            "content": "# The Pivot Table 👯\n\nUsers have many Roles, Roles have many Users.\n\nRequires a third table (`user_roles`) with two Foreign Keys (`user_id`, `role_id`).\n\nORM: `user.getRoles()` and `role.getUsers()`."
+        },
+        {
+            "id": "orm_mapping_4",
+            "type": "content",
+            "title": "Self-Referencing",
+            "content": "# Trees & Hierarchies 🌳\n\nAn employee manages other employees.\n\nFK points to the same table (`employees.manager_id`).\n\nORM: `employee.getDirectReports()`."
+        },
+        {
+            "id": "orm_mapping_5",
+            "type": "content",
+            "title": "Inheritance Mapping",
+            "content": "# Objects vs Tables 🧬\n\nDatabase tables don't support inheritance natively.\n\nThree strategies:\n1. **Single Table:** All fields in one big table (with `type` column).\n2. **Joined Table:** Base table + Child tables (joined by ID).\n3. **Table Per Class:** Separate independent tables."
+        },
+        {
+            "id": "orm_mapping_quiz_1",
+            "type": "quiz",
+            "title": "Table Quiz",
+            "content": "Structure.",
+            "quizQuestion": "Which relationship type typically requires an intermediate 'pivot' or 'join' table?",
+            "quizOptions": [
+                "One-to-One",
+                "One-to-Many",
+                "Many-to-Many",
+                "Self-Referencing"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_mapping_6",
+            "type": "content",
+            "title": "Polymorphic Relations",
+            "content": "# Shape Shifting 👻\n\nA Comment can belong to a Post OR a Video.\n\nInstead of two FKs, use `commentable_id` and `commentable_type` ('Post' or 'Video').\n\nCommon in Laravel and Rails."
+        },
+        {
+            "id": "orm_mapping_7",
+            "type": "content",
+            "title": "Cascading",
+            "content": "# Ripple Effect 🌊\n\nWhat happens when you delete a Parent?\n\n- `CASCADE`: Delete children too.\n- `SET NULL`: Set children's FK to NULL.\n- `RESTRICT`: Prevent deletion if children exist."
+        },
+        {
+            "id": "orm_mapping_8",
+            "type": "content",
+            "title": "Eager Loading Strategy",
+            "content": "# Fetching Data 🚚\n\n- **Join Fetch:** One big query with JOINs.\n- **Select Fetch:** Two queries (`SELECT * FROM users`, then `SELECT * FROM posts WHERE user_id IN (...)`).\n\nORMs let you choose the strategy."
+        },
+        {
+            "id": "orm_mapping_9",
+            "type": "content",
+            "title": "Composite Keys",
+            "content": "# Multiple IDs 🔑\n\nA primary key made of two columns.\n\nCommon in legacy DBs or pivot tables.\n\nORMs support mapping this to a specific ID class (e.g., `UserId`)."
+        },
+        {
+            "id": "orm_mapping_10",
+            "type": "content",
+            "title": "Embedded Objects",
+            "content": "# Value Objects 💎\n\nStore an object (Address) as columns in the User table (`address_street`, `address_city`).\n\nMaps to a class in Java/C#, but flattens to columns in SQL."
+        },
+        {
+            "id": "orm_mapping_quiz_2",
+            "type": "quiz",
+            "title": "Constraint Quiz",
+            "content": "Actions.",
+            "quizQuestion": "Which cascade option ensures that when a User is deleted, all their Posts are also deleted automatically?",
+            "quizOptions": [
+                "RESTRICT",
+                "SET NULL",
+                "CASCADE",
+                "NO ACTION"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_mapping_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Mapping 🗺️\n\nConnecting dots.\n\n- **Relationships:** 1:1, 1:N, N:N.\n- **Inheritance:** Single Table vs Joined.\n- **Polymorphic:** Dynamic parents.\n- **Cascading:** Clean up.\n\n## Next Steps\nConstruct complex queries with **Query Building**!"
+        }
+    ]
+}

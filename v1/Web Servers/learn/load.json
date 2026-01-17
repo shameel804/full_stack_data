@@ -1,0 +1,103 @@
+{
+    "id": "learn_web_load",
+    "topicId": "load",
+    "topicTitle": "Load Balancing",
+    "description": "Scale your application horizontally: Algorithms, Health Checks, and Sticky Sessions.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "web_load_1",
+            "type": "content",
+            "title": "Why Load Balance?",
+            "content": "# Scale Out 📈\n\nOne server can only handle so much.\n\nTo handle more users, you add more servers (Horizontal Scaling).\n\nThe **Load Balancer** sits in front and distributes traffic across them."
+        },
+        {
+            "id": "web_load_2",
+            "type": "content",
+            "title": "Layer 4 vs Layer 7",
+            "content": "# The Layers 🍰\n\n- **Layer 4 (Transport):** Routes based on IP + Port (TCP/UDP). Very fast. Doesn't see the content.\n- **Layer 7 (Application):** Routes based on URL, Cookies, Headers. Smarter but slower. (Nginx, HAProxy)."
+        },
+        {
+            "id": "web_load_3",
+            "type": "content",
+            "title": "Round Robin",
+            "content": "# Take Turns 🔄\n\nThe default algorithm.\n\nRequest 1 -> Server A\nRequest 2 -> Server B\nRequest 3 -> Server C\nRequest 4 -> Server A\n\nSimple and effective for stateless apps."
+        },
+        {
+            "id": "web_load_4",
+            "type": "content",
+            "title": "Least Connections",
+            "content": "# The Smart Way 🧠\n\nSend traffic to the server with the *fewest* active connections.\n\nGood if some requests take longer than others (e.g., video upload vs text chat)."
+        },
+        {
+            "id": "web_load_quiz_1",
+            "type": "quiz",
+            "title": "Algo Quiz",
+            "content": "Distribution.",
+            "quizQuestion": "Which load balancing algorithm sends the next request to the server with the fewest current users?",
+            "quizOptions": [
+                "Round Robin",
+                "Least Connections",
+                "IP Hash",
+                "Random"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "web_load_5",
+            "type": "content",
+            "title": "Sticky Sessions",
+            "content": "# Session Affinity 🍯\n\nIf your app stores session data in local RAM (BAD practice), User A MUST always go to Server A.\n\nLoad Balancer uses a cookie to remember which server a user belongs to.\n\nAvoid this if possible (Use Redis for sessions instead)."
+        },
+        {
+            "id": "web_load_6",
+            "type": "content",
+            "title": "Health Checks",
+            "content": "# Is it alive? 💓\n\nThe Load Balancer constantly pings backend servers (`GET /health`).\n\nIf Server B returns 500 or timeout, the LB **removes** it from the pool until it recovers.\n\nThis provides **High Availability**."
+        },
+        {
+            "id": "web_load_7",
+            "type": "content",
+            "title": "IP Hash",
+            "content": "# Consistent Hashing 🏷️\n\nUses the client's IP address to determine the server.\n\n`Hash(IP) % 3 Servers`\n\nEnsures a specific user always hits the same server (stateless affinity)."
+        },
+        {
+            "id": "web_load_8",
+            "type": "content",
+            "title": "SSL Termination",
+            "content": "# Offloading 🔓\n\nDecrypting HTTPS takes CPU power.\n\nThe Load Balancer handles the decryption.\nInside your private network, traffic is plain HTTP (faster).\n\nClient --(HTTPS)--> LB --(HTTP)--> App"
+        },
+        {
+            "id": "web_load_9",
+            "type": "content",
+            "title": "Global Load Balancing",
+            "content": "# DNS / CDN 🌍\n\nRoute users to the nearest Data Center.\n\n- US User -> LB in New York\n- UK User -> LB in London\n\nOften handled by DNS services (like Cloudflare)."
+        },
+        {
+            "id": "web_load_quiz_2",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Reliability.",
+            "quizQuestion": "What mechanism ensures traffic is NOT sent to a crashed server?",
+            "quizOptions": [
+                "Round Robin",
+                "Health Checks",
+                "Sticky Sessions",
+                "SSL Termination"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "web_load_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Nginx Upstream 💻\n\n<!-- FULL_CODE_START\nupstream myapp {\n    least_conn;\n    server 10.0.0.1;\n    server 10.0.0.2;\n    server 10.0.0.3 down; # Manually disabled\n}\n\nserver {\n    location / {\n        proxy_pass http://myapp;\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "web_load_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Load Balancing 🎓\n\nScaling Up.\n\n- **Horizontal Scaling:** Add more servers.\n- **Round Robin:** Equal distribution.\n- **Least Conn:** Smart distribution.\n- **Health Checks:** Remove bad servers.\n- **Sticky:** Same server for user.\n\n## Next Steps\nBuild the backend apps yourself with **Express.js**!"
+        }
+    ]
+}

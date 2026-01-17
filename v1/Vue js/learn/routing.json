@@ -1,0 +1,103 @@
+{
+    "id": "learn_vue_routing",
+    "topicId": "routing",
+    "topicTitle": "Vue Router",
+    "description": "Learn to build Single Page Applications with Vue Router: Nested routes, history mode, and navigation guards.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_route_1",
+            "type": "content",
+            "title": "What is Vue Router?",
+            "content": "# Official Router 🚦\n\nVue Router is the official routing library for Vue.js.\n\nIt allows you to map components to routes and control where they render.\n\nInstallation:\n`npm install vue-router@4`"
+        },
+        {
+            "id": "vue_route_2",
+            "type": "content",
+            "title": "Basic Concepts",
+            "content": "# Setup 🛠️\n\n1.  **Router View:** `<router-view>` is where the matched component is rendered.\n2.  **Router Link:** `<router-link to=\"/\">` generates an `<a>` tag but intercepts clicks to avoid page reloads."
+        },
+        {
+            "id": "vue_route_3",
+            "type": "content",
+            "title": "Configuration",
+            "content": "# Defining Routes 🗺️\n\n```javascript\nimport { createRouter, createWebHistory } from 'vue-router'\n\nconst routes = [\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n]\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n})\n\napp.use(router)\n```"
+        },
+        {
+            "id": "vue_route_4",
+            "type": "content",
+            "title": "Dynamic Routes",
+            "content": "# Dynamic Segments 🆔\n\nLike React, use colon to define parameters.\n\nRoute: `{ path: '/users/:id', component: User }`\n\nAccess inside component:\n- **Options API:** `this.$route.params.id`\n- **Composition API:** `useRoute().params.id`"
+        },
+        {
+            "id": "vue_route_quiz_1",
+            "type": "quiz",
+            "title": "Component Quiz",
+            "content": "Render view.",
+            "quizQuestion": "Which component is strictly required to display the content of the current route?",
+            "quizOptions": [
+                "<router-link>",
+                "<router-view>",
+                "<route-render>",
+                "<vue-route>"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "vue_route_5",
+            "type": "content",
+            "title": "Programmatic Navigation",
+            "content": "# Pushing Routes 📍\n\nTo navigate via code:\n\n```javascript\n// Options API\nthis.$router.push('/home')\n\n// Composition API\nconst router = useRouter()\nrouter.push({ name: 'user', params: { userId: '123' } })\n```"
+        },
+        {
+            "id": "vue_route_6",
+            "type": "content",
+            "title": "Nested Routes",
+            "content": "# Nested Views 🪆\n\nComponents can contain their own `<router-view>`.\n\n```javascript\n{\n  path: '/user/:id',\n  component: User,\n  children: [\n    {\n      path: 'profile',\n      component: UserProfile\n    }\n  ]\n}\n```\nURL `/user/123/profile` renders `User` -> `UserProfile`."
+        },
+        {
+            "id": "vue_route_7",
+            "type": "content",
+            "title": "Navigation Guards",
+            "content": "# Route Guards 🛡️\n\nIntercept navigation to check permissions (Auth).\n\n```javascript\nrouter.beforeEach((to, from) => {\n  if (to.meta.requiresAuth && !isLoggedIn) {\n    // redirect to login\n    return { path: '/login' }\n  }\n})\n```"
+        },
+        {
+            "id": "vue_route_8",
+            "type": "content",
+            "title": "History Mode",
+            "content": "# Hash vs Web History 📜\n\n- **Hash Mode:** `/#/about`. Uses URL hash. Easy setup, no server config.\n- **Web History:** `/about`. Looks cleaner (HTML5 API). Requires server to redirect 404s to `index.html`."
+        },
+        {
+            "id": "vue_route_9",
+            "type": "content",
+            "title": "Lazy Loading",
+            "content": "# Code Splitting 💤\n\nLoad route components only when visited.\n\n```javascript\nconst routes = [\n  {\n    path: '/about',\n    component: () => import('./views/About.vue')\n  }\n]\n```\nVue automatically splits this into a separate chunk."
+        },
+        {
+            "id": "vue_route_quiz_2",
+            "type": "quiz",
+            "title": "Guard Quiz",
+            "content": "Interceptor.",
+            "quizQuestion": "Which method is used to run logic BEFORE navigation happens globally?",
+            "quizOptions": [
+                "router.afterEach",
+                "router.beforeEach",
+                "router.onNavigate",
+                "router.middleware"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "vue_route_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Full Router 💻\n\n<!-- FULL_CODE_START\nimport { createRouter, createWebHistory } from 'vue-router'\n\nconst Home = { template: '<div>Home</div>' }\nconst About = { template: '<div>About</div>' }\n\nconst routes = [\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n]\n\nconst router = createRouter({\n  history: createWebHistory(),\n  routes,\n})\n\nconst app = Vue.createApp({})\napp.use(router)\napp.mount('#app')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_route_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Vue Router 🎓\n\nOfficial Solution.\n\n- **Mapping:** URL -> Component.\n- **Links:** `<router-link>`.\n- **View:** `<router-view>`.\n- **Params:** Dynamic IDs.\n- **Guards:** Security checks.\n\n## Next Steps\nManage global state efficiently with **Vuex** (or Pinia)!"
+        }
+    ]
+}

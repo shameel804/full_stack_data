@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_hibernate",
+    "topicId": "hibernate",
+    "topicTitle": "Hibernate",
+    "description": "The most popular Object-Relational Mapping framework for Java.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_hibernate_1",
+            "type": "content",
+            "title": "Java Persistence API (JPA) ☕",
+            "content": "# The Standard\n\nHibernate is the most popular implementation of JPA.\n\nIt allows you to map Plain Old Java Objects (POJOs) to relational database tables using annotations."
+        },
+        {
+            "id": "orm_hibernate_2",
+            "type": "content",
+            "title": "Entities",
+            "content": "# @Entity 🏷️\n\nMarks a class as a database object.\n\n<!-- FULL_CODE_START\n@Entity\n@Table(name = \"users\")\npublic class User {\n    @Id\n    @GeneratedValue\n    private Long id;\n\n    @Column(name = \"full_name\")\n    private String name;\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_hibernate_3",
+            "type": "content",
+            "title": "Session Factory",
+            "content": "# Heavyweight 🏭\n\nCreated once per application start-up. It builds the `Session` objects.\n\nThread-safe and immutable cache of mappings."
+        },
+        {
+            "id": "orm_hibernate_4",
+            "type": "content",
+            "title": "Session (EntityManager)",
+            "content": "# Lightweight ☁️\n\nThe interface between Java app and Hibernate.\n\nUsed to retrieve, save, or remove objects.\n\n`session.save(user);`\n`session.get(User.class, 1L);`"
+        },
+        {
+            "id": "orm_hibernate_5",
+            "type": "content",
+            "title": "JPQL / HQL",
+            "content": "# Object Query Language 🗣️\n\nQuery **Entities**, not Tables.\n\n<!-- FULL_CODE_START\n// HQL\nString hql = \"FROM User u WHERE u.age > 20\";\nList<User> results = session.createQuery(hql).list();\nFULL_CODE_END -->\n\nHibernate translates this to SQL (`SELECT * FROM users ...`)."
+        },
+        {
+            "id": "orm_hibernate_quiz_1",
+            "type": "quiz",
+            "title": "Query Quiz",
+            "content": "Language.",
+            "quizQuestion": "In HQL (Hibernate Query Language), what do you select from?",
+            "quizOptions": [
+                "Database Tables",
+                "Classes / Entities",
+                "JSON Files",
+                "XML Configs"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orm_hibernate_6",
+            "type": "content",
+            "title": "Relationships",
+            "content": "# Annotations 🔗\n\n`@OneToOne`, `@OneToMany`, `@ManyToOne`, `@ManyToMany`.\n\n<!-- FULL_CODE_START\n@OneToMany(mappedBy = \"user\", cascade = CascadeType.ALL)\nprivate List<Post> posts;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_hibernate_7",
+            "type": "content",
+            "title": "Caching",
+            "content": "# Level 1 & 2 🧠\n\n- **Level 1 (Session):** Enabled by default. Caches objects within the current transaction.\n- **Level 2 (SessionFactory):** Optional (e.g., EHCache). Caches objects across sessions/transactions."
+        },
+        {
+            "id": "orm_hibernate_8",
+            "type": "content",
+            "title": "Criteria API",
+            "content": "# Type-Safe Queries 🛡️\n\nBuild queries programmatically specifically to avoid string concatenation and syntax errors.\n\n<!-- FULL_CODE_START\nCriteriaBuilder cb = session.getCriteriaBuilder();\nCriteriaQuery<User> cr = cb.createQuery(User.class);\nRoot<User> root = cr.from(User.class);\ncr.select(root).where(cb.gt(root.get(\"age\"), 20));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_hibernate_9",
+            "type": "content",
+            "title": "Lazy Loading",
+            "content": "# Proxies 👻\n\nHibernate returns a Proxy object instead of the real data for related entities.\n\nThe database is hit ONLY when you access the property (e.g., `user.getPosts()`).\n\n**Warning:** `LazyInitializationException` if session is closed."
+        },
+        {
+            "id": "orm_hibernate_10",
+            "type": "content",
+            "title": "Dirty Checking",
+            "content": "# Auto-Update 🧼\n\nHibernate automatically detects changes to objects loaded in the session.\n\n<!-- FULL_CODE_START\nUser user = session.get(User.class, 1L);\nuser.setName(\"New Name\");\ntransaction.commit(); \n// UPDATE sql runs automatically!\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_hibernate_quiz_2",
+            "type": "quiz",
+            "title": "Cache Quiz",
+            "content": "Performance.",
+            "quizQuestion": "Which Hibernate cache is enabled by default and exists only for the duration of a session?",
+            "quizOptions": [
+                "Second Level Cache",
+                "Query Cache",
+                "First Level Cache",
+                "OS Cache"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_hibernate_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Hibernate 💤\n\nComparison.\n\n- **Entity:** `@Entity` Class.\n- **HQL:** Query Objects.\n- **Criteria:** Type-safe query.\n- **Dirty Checking:** Auto-save.\n\n## Next Steps\nGo schema-less with **Mongoose**!"
+        }
+    ]
+}

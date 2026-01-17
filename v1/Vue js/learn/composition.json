@@ -1,0 +1,103 @@
+{
+    "id": "learn_vue_composition",
+    "topicId": "composition",
+    "topicTitle": "Composition API",
+    "description": "Learn the modern way to write Vue components using setup(), refs, and Composables.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_comp_api_1",
+            "type": "content",
+            "title": "Options vs Composition",
+            "content": "# Two API Styles ☯️\n\n**Options API:** Data, Methods, Mounted are separate options properties. (Good for beginners).\n\n**Composition API:** Define reactive variables and functions freely inside `setup()`. (Better for creating reusable logic and TypeScript support)."
+        },
+        {
+            "id": "vue_comp_api_2",
+            "type": "content",
+            "title": "The setup() Hook",
+            "content": "# setup() ⚙️\n\nThe entry point for Composition API.\n\n```javascript\nsetup(props) {\n  const count = ref(0)\n  function increment() {\n    count.value++\n  }\n\n  // Expose to template\n  return { count, increment }\n}\n```"
+        },
+        {
+            "id": "vue_comp_api_3",
+            "type": "content",
+            "title": "<script setup>",
+            "content": "# Syntactic Sugar 🍬\n\nReturning everything from `setup()` is tedious.\n\nUse `<script setup>` to simplify.\n\n```html\n<script setup>\nimport { ref } from 'vue'\n\n// Automatically exposed to template!\nconst count = ref(0)\n</script>\n```"
+        },
+        {
+            "id": "vue_comp_api_4",
+            "type": "content",
+            "title": "Lifecycle Hooks",
+            "content": "# New Lifecycle ♻️\n\nOptions API hooks (`mounted`, `created`) are renamed with `on` prefix.\n\n- `onMounted(() => ...)`\n- `onUpdated(() => ...)`\n- `onUnmounted(() => ...)`\n\nYou can call them multiple times in the same component."
+        },
+        {
+            "id": "vue_comp_api_quiz_1",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "Naming convention.",
+            "quizQuestion": "What is the Composition API equivalent of the 'mounted' lifecycle hook?",
+            "quizOptions": [
+                "onMount",
+                "onMounted",
+                "setupMounted",
+                "useMounted"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "vue_comp_api_5",
+            "type": "content",
+            "title": "Composables",
+            "content": "# Reuse Logic ♻️\n\nIn Options API, we used Mixins (which were messy).\n\nIn Composition API, we use **Composables** (like Custom Hooks in React).\n\nIt is just a function that returns reactive state.\n\n```javascript\nfunction useMouse() {\n  const x = ref(0)\n  // ... add event listener\n  return { x }\n}\n```"
+        },
+        {
+            "id": "vue_comp_api_6",
+            "type": "content",
+            "title": "Provide / Inject",
+            "content": "# Dependency Injection 💉\n\nAlso available in Composition API.\n\n```javascript\nimport { provide, inject } from 'vue'\n\n// Parent\nprovide('user', 'John')\n\n// Child\nconst user = inject('user')\n```"
+        },
+        {
+            "id": "vue_comp_api_7",
+            "type": "content",
+            "title": "ref vs reactive in Setup",
+            "content": "# Choosing State 🗳️\n\n- **ref:** Safe default. Works for everything. Requires `.value` inside JS (but auto-unwrapped in template).\n- **reactive:** Good for grouping related state (e.g., form fields). No `.value`. Caveat: Cannot destructure easily."
+        },
+        {
+            "id": "vue_comp_api_8",
+            "type": "content",
+            "title": "watch & watchEffect",
+            "content": "# Watching State 👀\n\nUsed exactly the same way as described in the Reactivity chapter, but called inside `setup()`.\n\n```javascript\nwatch(count, (newVal) => {\n  console.log('Changed!')\n})\n```"
+        },
+        {
+            "id": "vue_comp_api_9",
+            "type": "content",
+            "title": "props & context",
+            "content": "# Arguments 📦\n\nIf not using `<script setup>`, `setup()` receives simple arguments:\n\n```javascript\nsetup(props, context) {\n  console.log(props.title)\n  context.emit('close')\n}\n```\n(With `<script setup>`, utilize `defineProps` and `defineEmits`)."
+        },
+        {
+            "id": "vue_comp_api_quiz_2",
+            "type": "quiz",
+            "title": "Macro Quiz",
+            "content": "Define props.",
+            "quizQuestion": "In <script setup>, which macro is used to declare props?",
+            "quizOptions": [
+                "const props = defineProps()",
+                "const props = useProps()",
+                "const props = setupProps()",
+                "const props = createProps()"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "vue_comp_api_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Mouse Tracker 💻\n\n<!-- FULL_CODE_START\nimport { ref, onMounted, onUnmounted } from 'vue'\n\n// Composable\nfunction useMouse() {\n  const x = ref(0)\n  const y = ref(0)\n\n  function update(event) {\n    x.value = event.pageX\n    y.value = event.pageY\n  }\n\n  onMounted(() => window.addEventListener('mousemove', update))\n  onUnmounted(() => window.removeEventListener('mousemove', update))\n\n  return { x, y }\n}\n\nconst { createApp } = Vue\ncreateApp({\n  setup() {\n    const { x, y } = useMouse()\n    return { x, y }\n  },\n  template: `Mouse is at: {{ x }}, {{ y }}`\n}).mount('#app')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_comp_api_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Composition API 🎓\n\nScale up.\n\n- **setup():** The entry point.\n- **<script setup>:** The clean syntax.\n- **onMounted:** Lifecycle hooks.\n- **Composables:** Reusable logic functions (`use...`).\n- **Better TS Support:** Type inference works better than Options API.\n\n## Next Steps\nTake your app to the server with **Server-Side Rendering**!"
+        }
+    ]
+}

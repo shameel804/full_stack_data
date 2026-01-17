@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_basics",
+    "topicId": "basics",
+    "topicTitle": "Svelte Basics",
+    "description": "Introduction to Svelte, the compiler-based framework. Learn how it differs from React/Vue.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_basics_1",
+            "type": "content",
+            "title": "What is Svelte?",
+            "content": "# The Compiler 🏭\n\nSvelte is NOT a library you ship to the browser (like React/Vue).\n\nIt is a **Compiler** that runs at build time.\n\nIt converts your components into highly efficient vanilla JavaScript that surgically updates the DOM."
+        },
+        {
+            "id": "svelte_basics_2",
+            "type": "content",
+            "title": "No Virtual DOM",
+            "content": "# No Virtual DOM 🚫\n\nReact/Vue use a Virtual DOM to diff changes.\n\nSvelte doesn't need it. Because it compiles your code, it knows exactly *where* variables are used and generates code to update *only* those text nodes when variables change."
+        },
+        {
+            "id": "svelte_basics_3",
+            "type": "content",
+            "title": "Component Structure",
+            "content": "# Structure 🧱\n\nA `.svelte` file has 3 parts (just like HTML):\n\n```html\n<script>\n  let name = 'world';\n</script>\n\n<h1>Hello {name}!</h1>\n\n<style>\n  h1 { color: purple; }\n</style>\n```"
+        },
+        {
+            "id": "svelte_basics_4",
+            "type": "content",
+            "title": "Reactivity",
+            "content": "# Assignments are Reactive ⚡\n\nTo update state, just assign a new value.\n\n```javascript\nlet count = 0;\nfunction increment() {\n  count += 1; // Direct assignment triggers update\n}\n```\nNo `useState`, no `this.setState`, no `count.value`."
+        },
+        {
+            "id": "svelte_basics_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Core difference.",
+            "quizQuestion": "How does Svelte differ primarily from React and Vue?",
+            "quizOptions": [
+                "It uses a larger Virtual DOM",
+                "It is valid only on the server",
+                "It is a compiler, not a runtime library",
+                "It requires Python"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_basics_5",
+            "type": "content",
+            "title": "Reactive Declarations",
+            "content": "# The $: Syntax 💲\n\nTo make a variable *depend* on another (like `computed` in Vue):\n\n```javascript\nlet count = 0;\n$: doubled = count * 2;\n$: console.log(count);\n```\nWhenever `count` changes, `doubled` re-calculates automatically."
+        },
+        {
+            "id": "svelte_basics_6",
+            "type": "content",
+            "title": "Logic Blocks",
+            "content": "# If / Else 🔀\n\nLogic lives in the HTML, wrapped in curly braces.\n\n```html\n{#if user.loggedIn}\n  <button on:click={logout}>Log out</button>\n{:else}\n  <button on:click={login}>Log in</button>\n{/if}\n```"
+        },
+        {
+            "id": "svelte_basics_7",
+            "type": "content",
+            "title": "Loops",
+            "content": "# Each Loop 📋\n\nIterate over lists.\n\n```html\n<ul>\n  {#each items as item (item.id)}\n    <li>{item.name}</li>\n  {/each}\n</ul>\n```\nThe `(item.id)` part is the key."
+        },
+        {
+            "id": "svelte_basics_8",
+            "type": "content",
+            "title": "Events",
+            "content": "# Event Listening 👂\n\nUse the `on:` directive.\n\n```html\n<div on:mousemove={handleMousemove}>\n  The mouse is at {m.x} x {m.y}\n</div>\n```\nModifiers: `on:click|preventDefault={handler}`."
+        },
+        {
+            "id": "svelte_basics_9",
+            "type": "content",
+            "title": "Bindings",
+            "content": "# Two-Way Binding 🎀\n\n```html\n<input bind:value={name}>\n```\n\nWhen input changes, `name` updates.\nWhen `name` changes, input updates.\n\nWorks on media elements too: `<video bind:currentTime={time} />`."
+        },
+        {
+            "id": "svelte_basics_quiz_2",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Reactive label.",
+            "quizQuestion": "Which symbol is used to create a reactive statement (computed value) in Svelte?",
+            "quizOptions": [
+                "#",
+                "$:",
+                "@",
+                "&"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_basics_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Counter Element 💻\n\n<!-- FULL_CODE_START\n<script>\n\tlet count = 0;\n\n\tfunction handleClick() {\n\t\tcount += 1;\n\t}\n</script>\n\n<button on:click={handleClick}>\n\tClicked {count} {count === 1 ? 'time' : 'times'}\n</button>\n\n<style>\n\tbutton {\n\t\tcolor: #ff3e00;\n\t\tfont-family: 'Comic Sans MS', cursive;\n\t\tfont-size: 2em;\n\t}\n</style>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_basics_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Svelte Basics 🎓\n\nLess boilerplate.\n\n- **Compiler:** No Virtual DOM.\n- **Reactivity:** Just assign variables (`count += 1`).\n- **Derived:** `$: doubled = count * 2`.\n- **Logic:** `{#if}`, `{#each}`.\n- **Events:** `on:click`.\n\n## Next Steps\nCreate reusable blocks with **Components**!"
+        }
+    ]
+}

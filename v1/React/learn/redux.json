@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_redux",
+    "topicId": "redux",
+    "topicTitle": "State Management (Redux)",
+    "description": "Master Redux Toolkit for managing complex global state, including Actions, Reducers, and Thunks.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_redux_1",
+            "type": "content",
+            "title": "Why Redux?",
+            "content": "# Global State 🌐\n\nWhen your app grows, managing state with just `useState` and passing props down 10 levels (Prop Drilling) becomes a nightmare.\n\nRedux solves this by having a single \"Store\" (truth) that any component can access directly."
+        },
+        {
+            "id": "react_redux_2",
+            "type": "content",
+            "title": "Redux Toolkit (RTK)",
+            "content": "# The Modern Way 🛠️\n\nClassic Redux was complex (boilerplate).\n\n**Redux Toolkit (RTK)** is the official, recommended way to write Redux logic. It simplifies store setup, reducers, and immutable update logic.\n\n`npm install @reduxjs/toolkit react-redux`"
+        },
+        {
+            "id": "react_redux_3",
+            "type": "content",
+            "title": "Three Principles",
+            "content": "# Core Concepts 🧠\n\n1.  **Store:** Holds the state.\n2.  **Action:** A signal that something happened (`{ type: 'counter/increment' }`).\n3.  **Reducer:** A function that takes current state + action and returns NEW state."
+        },
+        {
+            "id": "react_redux_4",
+            "type": "content",
+            "title": "Creating a Slice",
+            "content": "# Slices 🍕\n\nA \"Slice\" is a collection of Redux reducer logic and actions for a single feature.\n\n```javascript\nimport { createSlice } from '@reduxjs/toolkit';\n\nconst counterSlice = createSlice({\n  name: 'counter',\n  initialState: { value: 0 },\n  reducers: {\n    increment: state => { state.value += 1 },\n    decrement: state => { state.value -= 1 }\n  }\n});\n\nexport const { increment, decrement } = counterSlice.actions;\nexport default counterSlice.reducer;\n```"
+        },
+        {
+            "id": "react_redux_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Define the term.",
+            "quizQuestion": "In Redux, what function is responsible for calculating the new state?",
+            "quizOptions": [
+                "Action",
+                "Reducer",
+                "Dispatcher",
+                "Subscriber"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_redux_5",
+            "type": "content",
+            "title": "Configuring Store",
+            "content": "# The Store 🏪\n\nCombine your slices into a store.\n\n```javascript\nimport { configureStore } from '@reduxjs/toolkit';\nimport counterReducer from './counterSlice';\n\nexport const store = configureStore({\n  reducer: {\n    counter: counterReducer,\n  },\n});\n```"
+        },
+        {
+            "id": "react_redux_6",
+            "type": "content",
+            "title": "Provider",
+            "content": "# Providing State 📡\n\nWrap your React app to give it access to the store.\n\n```jsx\nimport { Provider } from 'react-redux';\nimport { store } from './store';\n\n<Provider store={store}>\n  <App />\n</Provider>\n```"
+        },
+        {
+            "id": "react_redux_7",
+            "type": "content",
+            "title": "useSelector",
+            "content": "# Reading Data 👀\n\nUse `useSelector` hook to read data from the store.\n\n```jsx\nimport { useSelector } from 'react-redux';\n\nfunction Counter() {\n  // Extract exactly what you need\n  const count = useSelector((state) => state.counter.value);\n  return <span>{count}</span>;\n}\n```"
+        },
+        {
+            "id": "react_redux_8",
+            "type": "content",
+            "title": "useDispatch",
+            "content": "# Updating Data ✍️\n\nUse `useDispatch` to modify state by dispatching actions.\n\n```jsx\nimport { useDispatch } from 'react-redux';\nimport { increment } from './counterSlice';\n\nconst dispatch = useDispatch();\n\n<button onClick={() => dispatch(increment())}>\n  +\n</button>\n```"
+        },
+        {
+            "id": "react_redux_9",
+            "type": "content",
+            "title": "Async Logic (Thunks)",
+            "content": "# Thunks (Async) ⏳\n\nReducers must be synchronous (pure).\n\nTo fetch data, use `createAsyncThunk`.\n\n```javascript\nexport const fetchUser = createAsyncThunk(\n  'user/fetch',\n  async (userId) => {\n    const response = await fetch(`api/user/${userId}`);\n    return response.json();\n  }\n);\n```\nHandle the `fulfilled`, `pending`, `rejected` states in `extraReducers`."
+        },
+        {
+            "id": "react_redux_quiz_2",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "Select the hook.",
+            "quizQuestion": "Which hook allows you to trigger an action in Redux?",
+            "quizOptions": [
+                "useSelector",
+                "useReducer",
+                "useDispatch",
+                "useStore"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_redux_10",
+            "type": "content",
+            "title": "Redux vs Context",
+            "content": "# When to use what? 🤔\n\n**Use Context for:**\n- Theming (Dark Mode).\n- User Authentication state.\n- Low-frequency updates.\n\n**Use Redux for:**\n- Complex data flows.\n- High-frequency updates.\n- Large apps with many features.\n- Debugging (Redux DevTools are amazing)."
+        },
+        {
+            "id": "react_redux_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Redux 🎓\n\nGlobal State Machine.\n\n- **Store:** Single source of truth.\n- **Slice:** Feature logic (Reducer + Actions).\n- **useSelector:** Read state.\n- **useDispatch:** Write state (via Actions).\n- **RTK:** The modern toolset.\n\n## Next Steps\nFor simpler global state needs, learn the built-in **Context API**!"
+        }
+    ]
+}

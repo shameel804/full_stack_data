@@ -1,0 +1,101 @@
+{
+    "id": "learn_react_state",
+    "topicId": "state",
+    "topicTitle": "State & Props",
+    "description": "Learn how to manage dynamic data in React using State, ensuring your app reacts to user input.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_state_1",
+            "type": "content",
+            "title": "State vs Props",
+            "content": "# State vs Props 🥊\n\n**Props:**\n- Passed from parent.\n- Immutable (Read-only).\n- Like function *arguments*.\n\n**State:**\n- Managed within the component.\n- Mutable (can change).\n- Like local *variables* that trigger a re-render."
+        },
+        {
+            "id": "react_state_2",
+            "type": "content",
+            "title": "Adding State (useState)",
+            "content": "# useState Concept 💭\n\nThe Hook to add state to function components.\n\n`const [state, setState] = useState(initialValue);`\n\n- Returns an array with 2 values:\n  1. The current state value.\n  2. A function to update it."
+        },
+        {
+            "id": "react_state_3",
+            "type": "content",
+            "title": "Using useState",
+            "content": "# useState Example 🔢\n\n```jsx\nimport { useState } from 'react';\n\nfunction Counter() {\n  // count starts at 0\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <p>You clicked {count} times</p>\n      <button onClick={() => setCount(count + 1)}>\n        Click me\n      </button>\n    </div>\n  );\n}\n```"
+        },
+        {
+            "id": "react_state_4",
+            "type": "content",
+            "title": "Updating State",
+            "content": "# How to Update ♻️\n\n**NEVER** modify state directly.\n\nWRONG: `count = 5`\nCORRECT: `setCount(5)`\n\nWhen `setCount` is called, React re-runs the component function and updates the DOM with the new value."
+        },
+        {
+            "id": "react_state_quiz_1",
+            "type": "quiz",
+            "title": "Update Quiz",
+            "content": "Verify rule.",
+            "quizQuestion": "Why must you use the setter function (e.g., setCount) instead of changing the variable directly?",
+            "quizOptions": [
+                "It's faster",
+                "It triggers a re-render",
+                "It saves memory",
+                "It is required by TypeScript"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_state_5",
+            "type": "content",
+            "title": "Previous State",
+            "content": "# Functional Updates 🔄\n\nIf the new state depends on the old state, pass a function to the setter.\n\n```jsx\n// Risky (if rapid updates happen)\nsetCount(count + 1);\n\n// Safe (guarantees latest value)\nsetCount(prevCount => prevCount + 1);\n```"
+        },
+        {
+            "id": "react_state_6",
+            "type": "content",
+            "title": "Object State",
+            "content": "# Objects in State 📦\n\n`useState` does NOT merge objects automatically (unlike `this.setState` in classes).\n\n```jsx\nconst [user, setUser] = useState({ name: \"John\", age: 30 });\n\n// To update age, you must copy the rest!\nsetUser({ ...user, age: 31 });\n```\nThe spread operator `...` is essential here."
+        },
+        {
+            "id": "react_state_7",
+            "type": "content",
+            "title": "Lifting State Up",
+            "content": "# Lifting State Up 🏗️\n\nIf two sibling components need to share the same data, move the state UP to their closest common parent.\n\nThe parent then passes the state (and the setter) down via props."
+        },
+        {
+            "id": "react_state_8",
+            "type": "content",
+            "title": "Controlled Components",
+            "content": "# Forms & Inputs 📝\n\nIn HTML, inputs manage their own state. In React, we want React to control it.\n\n```jsx\nconst [val, setVal] = useState(\"\");\n\n<input \n  value={val} \n  onChange={e => setVal(e.target.value)} \n/>\n```\nThe input's value is now driven by React state."
+        },
+        {
+            "id": "react_state_9",
+            "type": "content",
+            "title": "Class Lifecycle (Old)",
+            "content": "# Lifecycle Methods 🕰️\n\nClass components had specific methods for different times:\n- `componentDidMount`: Runs after first render.\n- `componentDidUpdate`: Runs after update.\n- `componentWillUnmount`: Runs before removal.\n\n(We use `useEffect` for all of these now)."
+        },
+        {
+            "id": "react_state_quiz_2",
+            "type": "quiz",
+            "title": "Object Quiz",
+            "content": "Merging state.",
+            "quizQuestion": "True or False: useState automatically merges object properties when you update them.",
+            "quizOptions": [
+                "True",
+                "False"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_state_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Toggle Switch 💻\n\n<!-- FULL_CODE_START\nimport { useState } from 'react';\n\nfunction Toggle() {\n  const [isOn, setIsOn] = useState(false);\n\n  const toggle = () => {\n    setIsOn(prevIsOn => !prevIsOn);\n  };\n\n  return (\n    <button \n      onClick={toggle}\n      style={{ backgroundColor: isOn ? 'green' : 'red' }}\n    >\n      {isOn ? 'ON' : 'OFF'}\n    </button>\n  );\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_state_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: State 🎓\n\nThe memory of your app.\n\n- **Mutable:** Changes over time.\n- **useState:** The hook to create state.\n- **Re-render:** Updating state updates the UI.\n- **Lifting State:** Share data by moving it up.\n- **Controlled:** Inputs driven by state.\n\n## Next Steps\nUnlock more powers with the other **React Hooks**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_git_hooks",
+    "topicId": "hooks",
+    "topicTitle": "Git Hooks",
+    "description": "Automate scripts to run on specific Git events.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "git_hooks_1",
+            "type": "content",
+            "title": "What are Hooks? 🪝",
+            "content": "# Automations\n\nScripts that Git executes before or after events such as: \n- Commit\n- Push\n- Merge\n\nYou can use them to enforce code quality, run tests, or lint code."
+        },
+        {
+            "id": "git_hooks_2",
+            "type": "content",
+            "title": "Location",
+            "content": "# .git/hooks 📁\n\nHooks are stored in the `.git/hooks` directory of your repo.\n\nThey are simple shell scripts (bash, python, ruby, etc.).\n\nBy default, they are not shared with the team (local only)."
+        },
+        {
+            "id": "git_hooks_3",
+            "type": "content",
+            "title": "pre-commit",
+            "content": "# The Gatekeeper ⛩️\n\nRuns BEFORE a commit is created.\n\nGreat for:\n- Running linters (ESLint, Prettier).\n- Checking for secrets/keys in code.\n- Running unit tests.\n\nIf the script returns a non-zero exit code, the commit is aborted."
+        },
+        {
+            "id": "git_hooks_4",
+            "type": "content",
+            "title": "commit-msg",
+            "content": "# Format Police 👮\n\nRuns after the commit message is entered but before commit is finalized.\n\nUsed to enforce message patterns (e.g., \"Must start with Ticket ID like JIRA-123\")."
+        },
+        {
+            "id": "git_hooks_5",
+            "type": "content",
+            "title": "pre-push",
+            "content": "# Final Check 🚀\n\nRuns before `git push` sends data to the remote.\n\nUse this to run expensive tests (Integration tests) that take too long for pre-commit."
+        },
+        {
+            "id": "git_hooks_quiz_1",
+            "type": "quiz",
+            "title": "Timing Quiz",
+            "content": "Execution.",
+            "quizQuestion": "When does the 'pre-commit' hook run?",
+            "quizOptions": [
+                "After the commit is saved to history",
+                "Before you type the commit message",
+                "After you type the message, but before the commit is finalized",
+                "When you run 'git add'"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "git_hooks_6",
+            "type": "content",
+            "title": "post-merge",
+            "content": "# Aftermath 🧹\n\nRuns after a successful merge.\n\nUseful for automatically installing new dependencies (`npm install`) if `package.json` changed."
+        },
+        {
+            "id": "git_hooks_7",
+            "type": "content",
+            "title": "Sharing Hooks",
+            "content": "# The Problem 🤷\n\nSince `.git/hooks` isn't committed to the repo, how do you share hooks with your team?\n\nSolution: Use a tool like **Husky** (Node.js) or **pre-commit** (Python framework)."
+        },
+        {
+            "id": "git_hooks_8",
+            "type": "content",
+            "title": "Husky",
+            "content": "# JS Ecosystem 🐶\n\nA popular tool to configure Git hooks using package.json or a config file.\n\n`npx husky add .husky/pre-commit \"npm test\"`\n\nEnsures everyone on the team runs the same checks."
+        },
+        {
+            "id": "git_hooks_9",
+            "type": "content",
+            "title": "Bypassing Hooks",
+            "content": "# I know what I'm doing 🕶️\n\nSometimes you need to skip checks (e.g., a WIP commit).\n\n`git commit --no-verify` (or `-n`)\n\nSkips `pre-commit` and `commit-msg` hooks. Use with caution!"
+        },
+        {
+            "id": "git_hooks_10",
+            "type": "content",
+            "title": "Server-Side Hooks",
+            "content": "# Remote Control 📡\n\nHooks that run on the server (GitHub/GitLab).\n\n- `pre-receive`: Reject a push if it doesn't meet criteria (e.g., non-fast-forward).\n- `post-receive`: Trigger a deployment / CI pipeline."
+        },
+        {
+            "id": "git_hooks_quiz_2",
+            "type": "quiz",
+            "title": "Tools Quiz",
+            "content": "Ecosystem.",
+            "quizQuestion": "Which tool is commonly used in JavaScript projects to manage Git hooks?",
+            "quizOptions": [
+                "Docker",
+                "Husky",
+                "Jenkins",
+                "Webpack"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "git_hooks_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Hooks 🪝\n\nAutomation.\n\n- **pre-commit:** Lint/Test.\n- **commit-msg:** Check format.\n- **pre-push:** Safety net.\n- **Husky:** Share configs.\n\n## Next Steps\nBecome a master with **Advanced Git**!"
+        }
+    ]
+}

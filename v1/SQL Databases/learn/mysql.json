@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_mysql",
+    "topicId": "mysql",
+    "topicTitle": "MySQL Specifics",
+    "description": "Learn features specific to the world's most popular open source database.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_mysql_1",
+            "type": "content",
+            "title": "Storage Engines",
+            "content": "# Pluggable Architecture 🔌\n\nMySQL allows you to choose how data is stored for each table.\n\n- **InnoDB:** The default. Supports Transactions (ACID), Foreign Keys, and Row-level locking.\n- **MyISAM:** Older, fast for reads but no transactions and Table-level locking."
+        },
+        {
+            "id": "sql_mysql_2",
+            "type": "content",
+            "title": "AUTO_INCREMENT",
+            "content": "# Identifiers 🆔\n\nMySQL's way of generating unique IDs.\n\n<!-- FULL_CODE_START\nCREATE TABLE users (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    name VARCHAR(50)\n);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_mysql_3",
+            "type": "content",
+            "title": "SHOW Commands",
+            "content": "# Inspection 🕵️\n\nMySQL specific commands to see schema info.\n\n- `SHOW DATABASES;`\n- `SHOW TABLES;`\n- `SHOW CREATE TABLE users;`\n- `DESCRIBE users;`"
+        },
+        {
+            "id": "sql_mysql_4",
+            "type": "content",
+            "title": "LIMIT with Offset",
+            "content": "# Pagination Syntax 📄\n\nMySQL syntax for paging.\n\n`SELECT * FROM users LIMIT 10 OFFSET 5;`\n\nOr the shorthand:\n`SELECT * FROM users LIMIT 5, 10;` (Skip 5, take 10)."
+        },
+        {
+            "id": "sql_mysql_5",
+            "type": "content",
+            "title": "Backticks",
+            "content": "# Quoting Identifiers `\n\nMySQL uses backticks \\` to quote table and column names (e.g., if you use reserved words).\n\n`SELECT \\`select\\` FROM \\`table\\`;`\n\n(Standard SQL uses double quotes \" )."
+        },
+        {
+            "id": "sql_mysql_quiz_1",
+            "type": "quiz",
+            "title": "Engine Quiz",
+            "content": "Architecture.",
+            "quizQuestion": "Which MySQL storage engine is the default and supports ACID transactions?",
+            "quizOptions": [
+                "MyISAM",
+                "Memory",
+                "InnoDB",
+                "CSV"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "sql_mysql_6",
+            "type": "content",
+            "title": "Full-Text Search",
+            "content": "# MATCH ... AGAINST 🔎\n\nNative full-text search capability.\n\n<!-- FULL_CODE_START\nSELECT * FROM articles\nWHERE MATCH(title, body)\nAGAINST('database' IN NATURAL LANGUAGE MODE);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_mysql_7",
+            "type": "content",
+            "title": "Variables",
+            "content": "# User Defined 📦\n\nStore values in session variables.\n\n`SET @my_var = 100;`\n\n`SELECT * FROM items WHERE price > @my_var;`"
+        },
+        {
+            "id": "sql_mysql_8",
+            "type": "content",
+            "title": "INSERT IGNORE",
+            "content": "# Silent Skip 🔇\n\nIf a duplicate key error occurs, just skip the row instead of throwing an error.\n\n`INSERT IGNORE INTO users ...`"
+        },
+        {
+            "id": "sql_mysql_9",
+            "type": "content",
+            "title": "REPLACE INTO",
+            "content": "# Upsert 🔄\n\nIf a row works constraints (Primary Key), delete the old one and insert the new one.\n\n`REPLACE INTO users (id, name) VALUES (1, 'Bob');`"
+        },
+        {
+            "id": "sql_mysql_10",
+            "type": "content",
+            "title": "Group Concat",
+            "content": "# List Aggregation 📝\n\nCombine multiple row values into a single string.\n\n<!-- FULL_CODE_START\nSELECT group_id, GROUP_CONCAT(name)\nFROM students\nGROUP BY group_id;\n-- Result: \"Alice,Bob,Charlie\"\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_mysql_quiz_2",
+            "type": "quiz",
+            "title": "Identifier Quiz",
+            "content": "Syntax.",
+            "quizQuestion": "Which character does MySQL use to quote table and column names?",
+            "quizOptions": [
+                "\" (Double Quote)",
+                "' (Single Quote)",
+                "` (Backtick)",
+                "[ (Bracket)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "sql_mysql_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: MySQL 🐬\n\nThe Popular Choice.\n\n- **Engines:** InnoDB vs MyISAM.\n- **Syntax:** Backticks, `LIMIT`.\n- **Commands:** `SHOW TABLES`.\n- **Features:** `AUTO_INCREMENT`.\n\n## Next Steps\nBreak free from tables with **NoSQL Databases**!"
+        }
+    ]
+}

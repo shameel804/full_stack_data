@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_transactions",
+    "topicId": "transactions",
+    "topicTitle": "Transactions",
+    "description": "Ensure data integrity with ACID compliance.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_transactions_1",
+            "type": "content",
+            "title": "What is a Transaction? 💼",
+            "content": "# All or Nothing ⚛️\n\nA sequence of operations performed as a single logical unit of work.\n\nExample: Transferring money.\n1. Deduct $100 from A.\n2. Add $100 to B.\n\nBOTH must succeed, or NEITHER should happen."
+        },
+        {
+            "id": "sql_transactions_2",
+            "type": "content",
+            "title": "ACID Properties",
+            "content": "# The Rules 📜\n\n- **A**tomicity: All or nothing.\n- **C**onsistency: Valid state transition.\n- **I**solation: Transactions don't interfere.\n- **D**urability: Saved forever."
+        },
+        {
+            "id": "sql_transactions_3",
+            "type": "content",
+            "title": "COMMIT",
+            "content": "# Save It 💾\n\nEnds the transaction and saves all changes permanently.\n\n<!-- FULL_CODE_START\nBEGIN TRANSACTION;\nUPDATE accounts SET bal = bal - 10 WHERE id = 1;\nUPDATE accounts SET bal = bal + 10 WHERE id = 2;\nCOMMIT;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_transactions_4",
+            "type": "content",
+            "title": "ROLLBACK",
+            "content": "# Undo It ↩️\n\nCancels the transaction and undoes all changes made since the start.\n\n<!-- FULL_CODE_START\nBEGIN TRANSACTION;\nDELETE FROM users; -- Oops!\nROLLBACK; -- Phew, data is safe.\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_transactions_quiz_1",
+            "type": "quiz",
+            "title": "ACID Quiz",
+            "content": "Properties.",
+            "quizQuestion": "Which ACID property guarantees that a transaction is treated as a single, indivisible unit?",
+            "quizOptions": [
+                "Durability",
+                "Consistency",
+                "Isolation",
+                "Atomicity"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "sql_transactions_5",
+            "type": "content",
+            "title": "Isolation Levels",
+            "content": "# Invisible Walls 🧱\n\nDetermines how transaction integrity is visible to other users/transactions.\n\n- `READ UNCOMMITTED`: Dirty reads allowed.\n- `READ COMMITTED`: Default for many DBs.\n- `REPEATABLE READ`: Prevents non-repeatable reads.\n- `SERIALIZABLE`: Strictest."
+        },
+        {
+            "id": "sql_transactions_6",
+            "type": "content",
+            "title": "Dirty Read",
+            "content": "# Dangerous 👀\n\nWhen a transaction reads data written by a concurrent uncommitted transaction.\n\nIf the other transaction rolls back, you have invalid data."
+        },
+        {
+            "id": "sql_transactions_7",
+            "type": "content",
+            "title": "Concurrency Control",
+            "content": "# Locking 🔒\n\nDatabases use locks to manage concurrency.\n\n- **Shared Lock:** Others can read, not write.\n- **Exclusive Lock:** No one else can access."
+        },
+        {
+            "id": "sql_transactions_8",
+            "type": "content",
+            "title": "Deadlocks",
+            "content": "# Stuck 🛑\n\nTransaction A holds Lock X and wants Lock Y.\nTransaction B holds Lock Y and wants Lock X.\n\nThe database will usually kill one transaction to let the other proceed."
+        },
+        {
+            "id": "sql_transactions_9",
+            "type": "content",
+            "title": "Durability",
+            "content": "# Power Off 🔌\n\nOnce a transaction commits, it remains committed even in the event of power loss, crashes, or errors.\n\nUsually achieved via Write-Ahead Logging (WAL)."
+        },
+        {
+            "id": "sql_transactions_10",
+            "type": "content",
+            "title": "Savepoints",
+            "content": "# Checkpoints 🚩\n\nPartially rollback a transaction.\n\n<!-- FULL_CODE_START\nSAVEPOINT sp1;\n-- Do risky thing\nROLLBACK TO sp1;\n-- Original state restored, transaction continues\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_transactions_quiz_2",
+            "type": "quiz",
+            "title": "Isolation Quiz",
+            "content": "Levels.",
+            "quizQuestion": "Which isolation level offers the highest data integrity but the lowest concurrency/performance?",
+            "quizOptions": [
+                "Read Uncommitted",
+                "Read Committed",
+                "Repeatable Read",
+                "Serializable"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "sql_transactions_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Transactions 🤝\n\nSafe changes.\n\n- **ACID:** Core principles.\n- **COMMIT:** Finalize.\n- **ROLLBACK:** Revert.\n- **Isolation:** Prevent interference.\n\n## Next Steps\nImprove performance with **Optimization**!"
+        }
+    ]
+}

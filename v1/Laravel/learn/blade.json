@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_blade",
+    "topicId": "blade",
+    "topicTitle": "Blade Templates",
+    "description": "Create beautiful layouts using Laravel's powerful template engine.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_blade_1",
+            "type": "content",
+            "title": "What is Blade? ⚔️",
+            "content": "# Simple & Powerful\n\nLaravel's templating engine.\n\nBlade files use `.blade.php` extension.\n\nUnlike other PHP templating engines, Blade does not restrict you from using plain PHP code in your views."
+        },
+        {
+            "id": "laravel_blade_2",
+            "type": "content",
+            "title": "Displaying Data",
+            "content": "# Curly Braces 🐚\n\nDisplay a variable passed from a route/controller.\n\n`Hello, {{ $name }}.`\n\nAutomatically escapes data to prevent XSS.\n\n`{!! $html !!}` to output raw HTML (careful!)."
+        },
+        {
+            "id": "laravel_blade_3",
+            "type": "content",
+            "title": "Directives",
+            "content": "# Shortcuts 🛣️\n\nStart with `@`.\n\n- `@if`, `@elseif`, `@else`, `@endif`\n- `@foreach`, `@endforeach`\n- `@auth`, `@guest` (Authentication checks)"
+        },
+        {
+            "id": "laravel_blade_4",
+            "type": "content",
+            "title": "Loops",
+            "content": "# The $loop Variable 🔄\n\nInside a loop, you get a special `$loop` variable.\n\n<!-- FULL_CODE_START\n@foreach ($users as $user)\n    @if ($loop->first)\n        This is the first iteration.\n    @endif\n\n    <li>{{ $user->name }}</li>\n@endforeach\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_blade_5",
+            "type": "content",
+            "title": "Layouts & Inheritance",
+            "content": "# Master Pages 🏗️\n\nDefine a `layout.blade.php` with `@yield('content')`.\n\nChild pages use `@extends('layout')` and `@section('content')`.\n\n<!-- FULL_CODE_START\n@extends('layouts.app')\n\n@section('title', 'Page Title')\n\n@section('content')\n    <p>This is my body content.</p>\n@endsection\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_blade_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Escaping.",
+            "quizQuestion": "Which Blade syntax prevents XSS by automatically escaping output?",
+            "quizOptions": [
+                "{!! $var !!}",
+                "{{ $var }}",
+                "<?php echo $var; ?>",
+                "@echo($var)"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "laravel_blade_6",
+            "type": "content",
+            "title": "Components",
+            "content": "# Modern Reusability 🧩\n\nLike Vue/React components but server-side.\n\n`<x-alert type=\"error\" :message=\"$message\" />`\n\nDefined in `resources/views/components/alert.blade.php`."
+        },
+        {
+            "id": "laravel_blade_7",
+            "type": "content",
+            "title": "Included Views",
+            "content": "# Partials 🤏\n\nInclude a smaller view into a larger one.\n\n`@include('shared.errors')`\n\nGreat for headers, footers, or navigation bars."
+        },
+        {
+            "id": "laravel_blade_8",
+            "type": "content",
+            "title": "Stacks",
+            "content": "# Injecting Assets 💉\n\nPush styles or scripts to a stack in the master layout.\n\n<!-- FULL_CODE_START\n// In layout\n<head>\n    @stack('scripts')\n</head>\n\n// In child view\n@push('scripts')\n    <script src=\"/example.js\"></script>\n@endpush\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_blade_9",
+            "type": "content",
+            "title": "Service Injection",
+            "content": "# @inject 💉\n\nRetrieve a service directly in the template.\n\n`@inject('metrics', 'App\\Services\\MetricsService')`\n\n`<div>Monthly Revenue: {{ $metrics->monthlyRevenue() }}</div>`"
+        },
+        {
+            "id": "laravel_blade_10",
+            "type": "content",
+            "title": "Comments",
+            "content": "# Secret Notes 🤫\n\nBlade comments are NOT rendered in the final HTML.\n\n`{{-- This comment will not be present in the rendered HTML --}}`\n\nUnlike `<!-- HTML comments -->` which act essentially as visibility: hidden."
+        },
+        {
+            "id": "laravel_blade_quiz_2",
+            "type": "quiz",
+            "title": "Logic Quiz",
+            "content": "Control structures.",
+            "quizQuestion": "Which directive checks if the user is authenticated?",
+            "quizOptions": [
+                "@if($user)",
+                "@login",
+                "@auth",
+                "@check"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_blade_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Blade 🗡️\n\nFront-end logic.\n\n- **Output:** `{{ }}`.\n- **Directives:** `@if`, `@foreach`.\n- **Layouts:** `@extends`, `@section`.\n- **Components:** `<x-button />`.\n\n## Next Steps\nSecure your app with **Authentication**!"
+        }
+    ]
+}

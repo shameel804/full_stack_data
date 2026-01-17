@@ -1,0 +1,103 @@
+{
+    "id": "learn_spring_boot_services",
+    "topicId": "services",
+    "topicTitle": "Services & DI",
+    "description": "Business logic layer and the power of Dependency Injection.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "spring_boot_services_1",
+            "type": "content",
+            "title": "Why Services?",
+            "content": "# Separation of Concerns ↔️\n\nControllers should only handle HTTP req/res.\n\nBusiness logic (calculations, validations, heavy lifting) belongs in the **Service Layer**."
+        },
+        {
+            "id": "spring_boot_services_2",
+            "type": "content",
+            "title": "@Service Annotation",
+            "content": "# Mark it 🏷️\n\nAnnotate your class to let Spring manage it.\n\n<!-- FULL_CODE_START\n@Service\npublic class UserService {\n    public User register(UserDto dto) {\n        // logic here\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_3",
+            "type": "content",
+            "title": "Dependency Injection (DI)",
+            "content": "# IoC Container 🏺\n\nInversion of Control.\n\nInstead of `new UserService()`, you ask Spring to give you an instance.\n\nSpring manages the lifecycle of these objects (Beans)."
+        },
+        {
+            "id": "spring_boot_services_4",
+            "type": "content",
+            "title": "Constructor Injection",
+            "content": "# Best Practice 🥇\n\n<!-- FULL_CODE_START\n@RestController\npublic class UserController {\n\n    private final UserService userService;\n\n    // Spring automatically injects this\n    public UserController(UserService userService) {\n        this.userService = userService;\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_5",
+            "type": "content",
+            "title": "Field Injection",
+            "content": "# The Easy Way (Avoid) ⚠️\n\n`@Autowired` on fields is simpler but harder to test.\n\n<!-- FULL_CODE_START\n@Autowired\nprivate UserService userService;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_quiz_1",
+            "type": "quiz",
+            "title": "DI Quiz",
+            "content": "Mechanics.",
+            "quizQuestion": "Which method of Dependency Injection is generally recommended for required dependencies?",
+            "quizOptions": [
+                "Field Injection (@Autowired on field)",
+                "Setter Injection",
+                "Constructor Injection",
+                "Interface Injection"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "spring_boot_services_6",
+            "type": "content",
+            "title": "@Transactional",
+            "content": "# All or Nothing ⚛️\n\nEnsure data integrity.\n\nIf an error occurs, roll back ALL database changes in the method.\n\n<!-- FULL_CODE_START\n@Service\npublic class OrderService {\n    @Transactional\n    public void placeOrder(Order order) {\n        paymentService.charge(order);\n        inventoryService.reduceStock(order);\n        // if this crashes, payment checks depend on logic\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_7",
+            "type": "content",
+            "title": "Singleton Scope",
+            "content": "# One Instance 1️⃣\n\nBy default, Spring Beans are Singletons.\n\nSpring creates ONE instance of `UserService` and shares it everywhere.\n\nMake sure your services are stateless!"
+        },
+        {
+            "id": "spring_boot_services_8",
+            "type": "content",
+            "title": "Interfaces",
+            "content": "# Loose Coupling ⛓️\n\nInject interfaces, not implementations.\n\n`public UserController(UserService userService)` where `UserService` is an interface.\n\nAllows easily swapping implementations (e.g., `MockUserService` for testing)."
+        },
+        {
+            "id": "spring_boot_services_9",
+            "type": "content",
+            "title": "Qualifiers",
+            "content": "# Which One? 🤷\n\nIf multiple implementations exist, use `@Qualifier`.\n\n<!-- FULL_CODE_START\npublic UserController(@Qualifier(\"emailService\") NotificationService service)\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_10",
+            "type": "content",
+            "title": "Bean Lifecycle",
+            "content": "# Hooks 🪝\n\n- `@PostConstruct`: Run logic after creation.\n- `@PreDestroy`: Run logic before removal.\n\n<!-- FULL_CODE_START\n@PostConstruct\npublic void init() {\n    System.out.println(\"Service is ready!\");\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_services_quiz_2",
+            "type": "quiz",
+            "title": "Scope Quiz",
+            "content": "Beans.",
+            "quizQuestion": "What is the default scope of a Spring Bean?",
+            "quizOptions": [
+                "Prototype (New instance every time)",
+                "Request (New instance per HTTP request)",
+                "Singleton (One instance per application context)",
+                "Session (New instance per User session)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "spring_boot_services_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Services 🧩\n\nBusiness Logic.\n\n- **@Service:** Component scan marker.\n- **DI:** Constructor Injection preferred.\n- **@Transactional:** Atomic operations.\n- **Singleton:** Default scope.\n\n## Next Steps\nTalk to the database with **Spring Data JPA**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_web_server_basics",
+    "topicId": "basics",
+    "topicTitle": "Web Server Basics",
+    "description": "Understand the role of weird servers in the request/response cycle: HTTP, Virtual Hosts, and Proxies.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "web_basics_1",
+            "type": "content",
+            "title": "What is a Web Server?",
+            "content": "# The Waiter 🤵\n\nSoftware that listens for requests (usually HTTP) and returns content (HTML, JSON, Images).\n\nExamples: Nginx, Apache, IIS.\n\nIt sits between the Internet and your Application Code (Node/Python/PHP)."
+        },
+        {
+            "id": "web_basics_2",
+            "type": "content",
+            "title": "Static vs Dynamic",
+            "content": "# Serving Content 📦\n\n- **Static:** Files that don't change (Images, CSS, simple HTML). Web servers are extremely fast at this.\n- **Dynamic:** Content generated on the fly by code (PHP, Python). The web server passes the request to the App Server."
+        },
+        {
+            "id": "web_basics_3",
+            "type": "content",
+            "title": "HTTP / HTTPS",
+            "content": "# The Protocol 🌐\n\nWeb servers speak HTTP.\n\n- **Port 80:** HTTP (Unencrypted).\n- **Port 443:** HTTPS (Encrypted via TLS/SSL).\n\nThe Web Server handles the SSL termination (decrypting the traffic) so your app doesn't have to."
+        },
+        {
+            "id": "web_basics_4",
+            "type": "content",
+            "title": "Virtual Hosts",
+            "content": "# Many Sites, One Server 🏢\n\nA single server can host multiple websites.\n\nIt checks the `Host` header in the request.\n\n- request to `siteA.com` -> serves `/var/www/siteA`\n- request to `siteB.com` -> serves `/var/www/siteB`"
+        },
+        {
+            "id": "web_basics_quiz_1",
+            "type": "quiz",
+            "title": "Port Quiz",
+            "content": "Networking.",
+            "quizQuestion": "Which default TCP port is used for secure HTTPS traffic?",
+            "quizOptions": [
+                "80",
+                "8080",
+                "443",
+                "22"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "web_basics_5",
+            "type": "content",
+            "title": "Reverse Proxy",
+            "content": "# The Middleman 🛡️\n\nSit in front of your app servers.\n\nClient -> Nginx (Reverse Proxy) -> Node.js App\n\nWhy?\n- Security (Hide backend IP).\n- Load Balancing.\n- SSL Termination.\n- Caching."
+        },
+        {
+            "id": "web_basics_6",
+            "type": "content",
+            "title": "Caching",
+            "content": "# Speed ⚡\n\nWeb servers can cache responses.\n\nIf User A asks for `logo.png`, the server keeps a copy in memory. When User B asks for it, the server returns it instantly without reading the disk."
+        },
+        {
+            "id": "web_basics_7",
+            "type": "content",
+            "title": "Load Balancing",
+            "content": "# Traffic Distribution ⚖️\n\nSpreading requests across multiple backend servers.\n\nClient -> Web Server -> [App 1, App 2, App 3]\n\nEnsures no single app instance gets overwhelmed."
+        },
+        {
+            "id": "web_basics_8",
+            "type": "content",
+            "title": "Forward Proxy",
+            "content": "# The Outbound Broker 📤\n\n- **Reverse Proxy:** Protects Servers (Client doesn't know which server).\n- **Forward Proxy:** Protects Clients (Server doesn't know which client/IP). Used in corporate networks (VPNs)."
+        },
+        {
+            "id": "web_basics_9",
+            "type": "content",
+            "title": "Status Codes",
+            "content": "# The Language of Response 🗣️\n\nThe Web Server handles many codes automatically:\n\n- **404:** File not found.\n- **403:** Permission denied (file permissions).\n- **500:** The underlying app crashed.\n- **301:** Redirect."
+        },
+        {
+            "id": "web_basics_quiz_2",
+            "type": "quiz",
+            "title": "Proxy Quiz",
+            "content": "Architecture.",
+            "quizQuestion": "What type of proxy sits in front of backend servers to provide load balancing and security?",
+            "quizOptions": [
+                "Forward Proxy",
+                "Reverse Proxy",
+                "DNS Proxy",
+                "SOCKS Proxy"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "web_basics_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Simple Nginx Config 💻\n\n<!-- FULL_CODE_START\nserver {\n    listen 80;\n    server_name example.com;\n\n    location / {\n        proxy_pass http://localhost:3000;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n\n    location /static/ {\n        root /var/www/html;\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "web_basics_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Web Servers 🎓\n\nThe Gatekeepers.\n\n- **Listen:** Port 80/443.\n- **Serve:** Static files FAST.\n- **Proxy:** Route dynamic requests to apps.\n- **Virtual Hosts:** Multiple sites per server.\n- **Cache:** Improve performance.\n\n## Next Steps\nConfigure the most popular server in the world: **Nginx**!"
+        }
+    ]
+}

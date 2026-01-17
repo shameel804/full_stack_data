@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_stores",
+    "topicId": "stores",
+    "topicTitle": "Stores",
+    "description": "Manage global state in Svelte using Writable, Readable, and Derived stores.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_store_1",
+            "type": "content",
+            "title": "What is a Store?",
+            "content": "# Shared State 🌐\n\nSometimes you need to access data from multiple unrelated components.\n\nStores are simple objects with a `subscribe` method that allows components to be notified when values change."
+        },
+        {
+            "id": "svelte_store_2",
+            "type": "content",
+            "title": "Writable Stores",
+            "content": "# writable() ✍️\n\nA store you can read and write to.\n\n```javascript\n// stores.js\nimport { writable } from 'svelte/store';\nexport const count = writable(0);\n```\nIt has `set()` and `update()` methods."
+        },
+        {
+            "id": "svelte_store_3",
+            "type": "content",
+            "title": "Using Stores (Manual)",
+            "content": "# Subscribing (Hard way) 😫\n\n```javascript\nimport { count } from './stores.js';\n\nlet countValue;\n\nconst unsubscribe = count.subscribe(value => {\n  countValue = value;\n});\n\nonDestroy(unsubscribe); // Prevent memory leaks!\n```"
+        },
+        {
+            "id": "svelte_store_4",
+            "type": "content",
+            "title": "Auto-Subscription",
+            "content": "# The $ Shortcut (Easy way) 🤩\n\nUse the `$` prefix to read a store value.\n\nSvelte automatically subscribes and **unsubscribes** for you.\n\n```html\n<h1>The count is {$count}</h1>\n<button on:click={() => $count++}>Add</button>\n```"
+        },
+        {
+            "id": "svelte_store_5",
+            "type": "content",
+            "title": "Updating Stores",
+            "content": "# Changing Values 🔄\n\n- `count.set(10)`: Set specifically to 10.\n- `count.update(n => n + 1)`: Update based on current value.\n- `$count = 10`: Direct assignment in component."
+        },
+        {
+            "id": "svelte_store_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Prefix check.",
+            "quizQuestion": "Which character prefix handles automatic subscription/unsubscription for Svelte stores?",
+            "quizOptions": [
+                "@",
+                "#",
+                "$",
+                "_"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_store_6",
+            "type": "content",
+            "title": "Readable Stores",
+            "content": "# readable() 👓\n\nData that the user cannot change (e.g., Mouse Position, Time, Geolocation).\n\n```javascript\nexport const time = readable(new Date(), function start(set) {\n  const interval = setInterval(() => set(new Date()), 1000);\n  return function stop() { clearInterval(interval); };\n});\n```"
+        },
+        {
+            "id": "svelte_store_7",
+            "type": "content",
+            "title": "Derived Stores",
+            "content": "# derived() 📐\n\nCreate a value based on other stores (like `Computed` properties).\n\n```javascript\nexport const doubled = derived(count, $count => $count * 2);\n```\nUpdates automatically when `count` changes."
+        },
+        {
+            "id": "svelte_store_8",
+            "type": "content",
+            "title": "Custom Stores",
+            "content": "# Custom Logic 🛠️\n\nA store is just an object with a `subscribe` method.\n\nYou can wrap a writable store to create domain-specific logic.\n\n```javascript\nfunction createCount() {\n  const { subscribe, set, update } = writable(0);\n  return {\n    subscribe,\n    increment: () => update(n => n + 1),\n    reset: () => set(0)\n  };\n}\n```"
+        },
+        {
+            "id": "svelte_store_9",
+            "type": "content",
+            "title": "Bindings",
+            "content": "# Store Bindings 🎀\n\nYou can bind store values to form inputs directly.\n\n```html\n<input bind:value={$name}>\n```\nWriting in the input updates the global store immediately."
+        },
+        {
+            "id": "svelte_store_quiz_2",
+            "type": "quiz",
+            "title": "Method Quiz",
+            "content": "Updating data.",
+            "quizQuestion": "Which method on a writable store allows you to update the value based on the CURRENT value?",
+            "quizOptions": [
+                "set()",
+                "update()",
+                "change()",
+                "mutate()"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_store_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Full Store Usage 💻\n\n<!-- FULL_CODE_START\n// stores.js\nimport { writable } from 'svelte/store';\nexport const count = writable(0);\n\n// Counter.svelte\n<script>\n  import { count } from './stores.js';\n</script>\n\n<button on:click={() => count.update(n => n - 1)}>\n  -\n</button>\n\n<span>{$count}</span>\n\n<button on:click={() => $count++}>\n  +\n</button>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_store_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Stores 🎓\n\nGlobal State.\n\n- **writable:** Read/Write.\n- **readable:** Read-only.\n- **derived:** Calculated.\n- **$ Syntax:** The magic auto-subscriber.\n- **Custom:** Build your own APIs.\n\n## Next Steps\nAdd polish to your UI with **Transitions & Animations**!"
+        }
+    ]
+}

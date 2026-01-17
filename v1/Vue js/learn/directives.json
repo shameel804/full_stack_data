@@ -1,0 +1,103 @@
+{
+    "id": "learn_vue_directives",
+    "topicId": "directives",
+    "topicTitle": "Directives",
+    "description": "Deep dive into Vue's template power: Conditional rendering, Loop rendering, and Custom Directives.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_dir_1",
+            "type": "content",
+            "title": "What are Directives?",
+            "content": "# Special Attributes 🪄\n\nDirectives are special attributes with the `v-` prefix.\n\nThey apply special reactive behavior to the rendered DOM when the value of the expression changes.\n\nExample: `v-if`, `v-for`, `v-bind`, `v-model`."
+        },
+        {
+            "id": "vue_dir_2",
+            "type": "content",
+            "title": "v-if vs v-show",
+            "content": "# Conditional Rendering 🫣\n\n**v-if:** True conditional rendering. Does NOT render the element if false.\n\n**v-show:** Always renders, but toggles CSS `display: none`.\n\nUse `v-show` if you toggle functionality often (cheaper). Use `v-if` if the condition is unlikely to change (initial load)."
+        },
+        {
+            "id": "vue_dir_3",
+            "type": "content",
+            "title": "v-else & v-else-if",
+            "content": "# Else Logic 🤷\n\nMust follow a `v-if` or `v-else-if` element immediately.\n\n```html\n<div v-if=\"type === 'A'\">A</div>\n<div v-else-if=\"type === 'B'\">B</div>\n<div v-else>Not A/B</div>\n```"
+        },
+        {
+            "id": "vue_dir_4",
+            "type": "content",
+            "title": "v-for",
+            "content": "# List Rendering 📋\n\nLoop through arrays or objects.\n\n```html\n<li v-for=\"item in items\" :key=\"item.id\">\n  {{ item.message }}\n</li>\n```\n**Always provide a unique `:key`** to help Vue track node identity."
+        },
+        {
+            "id": "vue_dir_quiz_1",
+            "type": "quiz",
+            "title": "Loop Quiz",
+            "content": "Key requirement.",
+            "quizQuestion": "Why is the :key attribute important in v-for loops?",
+            "quizOptions": [
+                "It styles the list",
+                "It sorts the list",
+                "It helps Vue track identity for performance",
+                "It is required for arrays only"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "vue_dir_5",
+            "type": "content",
+            "title": "v-for on Object",
+            "content": "# Looping Objects 📦\n\nYou can iterate through properties of an object.\n\n```html\n<div v-for=\"(value, key, index) in myObject\">\n  {{ index }}. {{ key }}: {{ value }}\n</div>\n```"
+        },
+        {
+            "id": "vue_dir_6",
+            "type": "content",
+            "title": "v-for with v-if",
+            "content": "# v-for vs v-if 🥊\n\n**Avoid using them on the same element.**\n\n`v-if` has higher priority than `v-for` in Vue 3 (reverse in Vue 2), meaning `v-if` won't have access to the loop variable.\n\nSolution: Wrap the loop in a `<template>` tag."
+        },
+        {
+            "id": "vue_dir_7",
+            "type": "content",
+            "title": "v-on Modifiers",
+            "content": "# Event Modifiers 🔧\n\nSuffixes to change event behavior.\n\n- `.stop`: `event.stopPropagation()`\n- `.prevent`: `event.preventDefault()`\n- `.once`: Trigger only once\n- `.self`: Trigger only if event.target is self\n\n```html\n<form @submit.prevent=\"onSubmit\"></form>\n```"
+        },
+        {
+            "id": "vue_dir_8",
+            "type": "content",
+            "title": "Key Modifiers",
+            "content": "# Keyboard Events ⌨️\n\nListen for specific keys.\n\n```html\n<!-- Only call submit when Enter is pressed -->\n<input @keyup.enter=\"submit\" />\n```\nCommon aliases: `.enter`, `.tab`, `.delete`, `.esc`, `.space`, `.up`..."
+        },
+        {
+            "id": "vue_dir_9",
+            "type": "content",
+            "title": "Custom Directives",
+            "content": "# Custom Logic 🛠️\n\nCreate your own directives for low-level DOM access.\n\nExample: `v-focus` to focus an input on mount.\n\n```javascript\napp.directive('focus', {\n  mounted(el) {\n    el.focus()\n  }\n})\n```\nUsage: `<input v-focus />`"
+        },
+        {
+            "id": "vue_dir_quiz_2",
+            "type": "quiz",
+            "title": "Modifier Quiz",
+            "content": "Prevent default.",
+            "quizQuestion": "Which modifier prevents the page from reloading on form submit?",
+            "quizOptions": [
+                ".stop",
+                ".prevent",
+                ".norel",
+                ".static"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "vue_dir_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# v-for Loops 💻\n\n<!-- FULL_CODE_START\nconst { createApp } = Vue\n\ncreateApp({\n  data() {\n    return {\n      todos: [\n        { id: 1, text: 'Learn JavaScript' },\n        { id: 2, text: 'Learn Vue' },\n        { id: 3, text: 'Build something awesome' }\n      ]\n    }\n  }\n}).mount('#app')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_dir_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Directives 🎓\n\nTemplate Logic.\n\n- **v-if / v-show:** Visibility.\n- **v-for:** Loops (Need `:key`).\n- **v-on:** Event handling + modifiers (`.prevent`).\n- **v-model:** Two-way binding.\n- **Custom:** `v-my-directive`.\n\n## Next Steps\nUnderstand the magic behind Vue's updates with the **Reactivity System**!"
+        }
+    ]
+}

@@ -1,47 +1,103 @@
 {
-    "id": "func",
+    "id": "learn_js_func",
     "topicId": "func",
     "topicTitle": "Functions",
-    "description": "Learn to define, call, and pass data to functions.",
-    "baseKP": 70,
+    "description": "Learn how to define reusable code blocks with Functions, Arrow Functions, and understand Variable Scope.",
+    "baseKP": 100,
     "slides": [
         {
-            "id": "func_1",
+            "id": "js_func_1",
             "type": "content",
-            "title": "Function Declaration",
-            "content": "# Function Basics 🔧\n\nA function is a block of code designed to perform a particular task.\n\n```javascript\nfunction greet(name) {\n  return \"Hello \" + name;\n}\n\nlet message = greet(\"Alice\");\nconsole.log(message); // \"Hello Alice\"\n```\n\n- `name`: Parameter (input)\n- `return`: Output value\n- Calling the function executes the code inside."
+            "title": "What is a Function?",
+            "content": "# Functions 📦\n\nA **function** is a block of code designed to perform a particular task.\n\nA function is executed when \"something\" invokes it (calls it).\n\n```javascript\nfunction myFunction(p1, p2) {\n  return p1 * p2;\n}\n```\n- **Parameters**: Listed in parentheses.\n- **Arguments**: Values received when invoked."
         },
         {
-            "id": "func_2",
+            "id": "js_func_2",
+            "type": "content",
+            "title": "Function Declarations",
+            "content": "# Function Declaration 🗣️\n\nDeclared with the `function` keyword.\n\nThey are **hoisted**, meaning they can be called before they are declared in the code.\n\n```javascript\nconsole.log(square(5)); // Output: 25\n\nfunction square(n) {\n  return n * n;\n}\n```"
+        },
+        {
+            "id": "js_func_3",
+            "type": "content",
+            "title": "Function Expressions",
+            "content": "# Function Expressions 🤫\n\nA function stored in a variable.\n\nThey are **NOT hoisted**.\n\n```javascript\nconst getRectArea = function(width, height) {\n  return width * height;\n};\n\nconsole.log(getRectArea(3, 4));\n```\nOften called \"anonymous functions\"."
+        },
+        {
+            "id": "js_func_4",
             "type": "content",
             "title": "Arrow Functions",
-            "content": "# Arrow Functions 🏹\n\nModern, shorter syntax (ES6).\n\n```javascript\n// Traditional\nconst add = function(a, b) {\n  return a + b;\n};\n\n// Arrow\nconst add = (a, b) => {\n  return a + b;\n};\n\n// Even shorter (implicit return)\nconst multiply = (a, b) => a * b;\n```\n\nOften used for callbacks and inline functions."
+            "content": "# Arrow Functions 🏹\n\nES6 introduced a shorter syntax.\n\n```javascript\n// Traditional\nhello = function() {\n  return \"Hello World!\";\n}\n\n// Arrow Function\nhello = () => {\n  return \"Hello World!\";\n}\n```\n\nIf the function has only one statement, you can remove the brackets and the `return` keyword:\n`hello = () => \"Hello World!\";`"
         },
         {
-            "id": "func_3",
+            "id": "js_func_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Verify syntax.",
+            "quizQuestion": "Which syntax correctly defines an arrow function?",
+            "quizOptions": [
+                "function name() => {}",
+                "const name -> {}",
+                "const name = () => {}",
+                "name => function {}"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "js_func_5",
             "type": "content",
-            "title": "Scope",
-            "content": "# Scope 🔭\n\nWhere variables are visible.\n\n## Global Scope\nVariables outside any function. Accessible everywhere.\n\n## Function Scope\nVariables inside a function. Not accessible outside.\n\n```javascript\nfunction test() {\n  let secret = 123;\n}\nconsole.log(secret); // Error: secret is not defined\n```\n\n## Block Scope (let/const)\nVariables inside `{}` (like if-statements or loops)."
+            "title": "Scope: Global vs Local",
+            "content": "# Scope 🔭\n\n**Local Scope:** Variables declared within a JavaScript function, become LOCAL to the function.\n\n**Global Scope:** A variable declared outside a function, becomes GLOBAL.\n\n```javascript\nlet carName = \"Volvo\"; // Global variable\n\nfunction myFunction() {\n  let carName = \"Volvo\"; // Local variable\n}\n```"
         },
         {
-            "id": "func_quiz_1",
+            "id": "js_func_6",
+            "type": "content",
+            "title": "Block Scope",
+            "content": "# Block Scope 🧱\n\nBefore ES6 (2015), JavaScript had only Global Scope and Function Scope.\n\nES6 introduced `let` and `const`. These keywords provide **Block Scope**.\n\nVariables declared inside a `{ }` block cannot be accessed from outside the block.\n\n```javascript\n{\n  let x = 2;\n}\n// x can NOT be used here\n```"
+        },
+        {
+            "id": "js_func_7",
+            "type": "content",
+            "title": "Parameters and Defaults",
+            "content": "# Default Parameters 🛡️\n\nES6 allows function parameters to have default values.\n\n```javascript\nfunction myFunction(x, y = 10) {\n  // y is 10 if not passed or undefined\n  return x + y;\n}\n\nmyFunction(5); // 15\n```"
+        },
+        {
+            "id": "js_func_8",
+            "type": "content",
+            "title": "Callback Functions",
+            "content": "# Callbacks 📞\n\nA callback is a function passed as an argument to another function.\n\nThis technique allows a function to call another function ... a callback function can run after another function has finished.\n\n```javascript\nfunction myDisplayer(some) {\n  console.log(some);\n}\n\nfunction myCalculator(num1, num2, myCallback) {\n  let sum = num1 + num2;\n  myCallback(sum);\n}\n\nmyCalculator(5, 5, myDisplayer);\n```"
+        },
+        {
+            "id": "js_func_quiz_2",
             "type": "quiz",
             "title": "Scope Quiz",
-            "content": "Where can a function-scoped variable be accessed?",
-            "quizQuestion": "Where is a variable declared with `let` inside a function accessible?",
+            "content": "Access check.",
+            "quizQuestion": "If you define 'let x = 10' inside an if-block, can you access it outside the block?",
             "quizOptions": [
-                "Anywhere in the file",
-                "Only inside that function",
-                "In other functions",
-                "Nowhere"
+                "Yes",
+                "No",
+                "Only if strictly equal",
+                "Only in strict mode"
             ],
             "correctOptionIndex": 1
         },
         {
-            "id": "func_4",
+            "id": "js_func_9",
+            "type": "content",
+            "title": "Immediately Invoked Expressions",
+            "content": "# IIFE 🏃\n\nImmediately Invoked Function Expressions.\n\nA function that runs as soon as it is defined.\n\n```javascript\n(function () {\n  let secret = \"I am invisible\";\n  console.log(\"I run immediately!\");\n})();\n```\nGreat for data privacy (variables inside don't leak)."
+        },
+        {
+            "id": "js_func_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Arrows in Action 💻\n\n<!-- FULL_CODE_START\nconst numbers = [1, 2, 3, 4, 5];\n\n// Traditional function\nconst squared1 = numbers.map(function(num) {\n  return num * num;\n});\n\n// Arrow function (concise)\nconst squared2 = numbers.map(num => num * num);\n\nconsole.log(\"Original:\", numbers);\nconsole.log(\"Squared:\", squared2);\n\n// Simple calculation\nconst add = (a, b) => a + b;\nconsole.log(\"Sum:\", add(10, 20));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "js_func_11",
             "type": "content",
             "title": "Summary",
-            "content": "# Function Recap 🧠\n\n- ✅ **Declaration**: `function name() {}`\n- ✅ **Arrow**: `const name = () => {}`\n- ✅ **Parameters**: Inputs\n- ✅ **Return**: Outputs\n- ✅ **Scope**: Defines visibility of variables\n\n> 🚀 **Next:** Interact with the page using the **DOM**!"
+            "content": "# Recap: Functions 🎓\n\nReusable logic.\n\n- **Declaration:** `function name() {}` (Hoisted).\n- **Expression:** `const name = function() {}`.\n- **Arrow:** `() => {}` (Modern, concise).\n- **Scope:** Variables live where they are created (Block vs Global).\n- **Callbacks:** Functions calling functions.\n\n## Next Steps\nLearn how to interact with the webpage using **DOM Manipulation**!"
         }
     ]
 }

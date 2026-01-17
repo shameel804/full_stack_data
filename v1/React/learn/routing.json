@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_routing",
+    "topicId": "routing",
+    "topicTitle": "Routing",
+    "description": "Learn how to build Single Page Applications using React Router: Nested routes, Layouts, and Dynamic params.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_route_1",
+            "type": "content",
+            "title": "React Router DOM",
+            "content": "# SPA Routing 🚏\n\nReact is a Single Page Application (SPA).\n\nTo simulate navigation (changing URL without reloading page), we use libraries like `react-router-dom`.\n\nInstallation:\n`npm install react-router-dom`"
+        },
+        {
+            "id": "react_route_2",
+            "type": "content",
+            "title": "Basic Setup",
+            "content": "# The Router 🔌\n\nWrap your entire app in `<BrowserRouter>`.\n\nDefine routes using `<Routes>` and `<Route>`.\n\n```jsx\n<BrowserRouter>\n  <Routes>\n    <Route path=\"/\" element={<Home />} />\n    <Route path=\"/about\" element={<About />} />\n  </Routes>\n</BrowserRouter>\n```"
+        },
+        {
+            "id": "react_route_3",
+            "type": "content",
+            "title": "Navigation",
+            "content": "# Link vs Anchor 🔗\n\nDo NOT use `<a href>` tags.\n\nUse `<Link to>` component.\n\n```jsx\n// Bad (Causes refresh)\n<a href=\"/about\">About</a>\n\n// Good (SPA navigation)\n<Link to=\"/about\">About</Link>\n```"
+        },
+        {
+            "id": "react_route_4",
+            "type": "content",
+            "title": "Dynamic Routes",
+            "content": "# URL Parameters 🆔\n\nCapture values from the URL.\n\nRoute: `<Route path=\"/users/:id\" element={<User />} />`\n\nInside component, use `useParams()` hook:\n\n```jsx\nimport { useParams } from 'react-router-dom';\nfunction User() {\n  let { id } = useParams();\n  return <h1>User ID: {id}</h1>;\n}\n```"
+        },
+        {
+            "id": "react_route_quiz_1",
+            "type": "quiz",
+            "title": "Link Quiz",
+            "content": "Tag selection.",
+            "quizQuestion": "Which component should you use for navigation to prevent full page reloads?",
+            "quizOptions": [
+                "<a>",
+                "<Navigate>",
+                "<Link>",
+                "<GoTo>"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_route_5",
+            "type": "content",
+            "title": "Nested Routes",
+            "content": "# Nested Layouts 🪆\n\nGreat for dashboards where the sidebar stays but content changes.\n\n```jsx\n<Route path=\"dashboard\" element={<DashboardLayout />}>\n  <Route path=\"stats\" element={<Stats />} />\n  <Route path=\"settings\" element={<Settings />} />\n</Route>\n```\nInside `DashboardLayout`, use `<Outlet />` to render the child route."
+        },
+        {
+            "id": "react_route_6",
+            "type": "content",
+            "title": "Programmatic Navigation",
+            "content": "# useNavigate 🧭\n\nNavigate using code (e.g., after form submission).\n\n```jsx\nimport { useNavigate } from 'react-router-dom';\n\nfunction Login() {\n  const navigate = useNavigate();\n  \n  const handleSubmit = () => {\n    // ... login logic\n    navigate('/dashboard');\n  };\n}\n```"
+        },
+        {
+            "id": "react_route_7",
+            "type": "content",
+            "title": "404 Page",
+            "content": "# Not Found Route 🚫\n\nHandle unknown URLs by adding a catch-all route at the end.\n\n```jsx\n<Route path=\"*\" element={<NotFound />} />\n```\nThe `*` matches any path that hasn't been matched yet."
+        },
+        {
+            "id": "react_route_8",
+            "type": "content",
+            "title": "Lazy Loading",
+            "content": "# Code Splitting 💤\n\nDon't load the entire app at once. Load pages as needed.\n\n```jsx\nconst About = React.lazy(() => import('./About'));\n\n// Wrap in Suspense\n<Suspense fallback={<div>Loading...</div>}>\n  <About />\n</Suspense>\n```"
+        },
+        {
+            "id": "react_route_9",
+            "type": "content",
+            "title": "Route Guards",
+            "content": "# Protected Routes 🛡️\n\nPrevent access if not logged in.\n\nCreate a wrapper component:\n```jsx\nfunction RequireAuth({ children }) {\n  const auth = useAuth();\n  if (!auth.user) {\n    return <Navigate to=\"/login\" />;\n  }\n  return children;\n}\n```"
+        },
+        {
+            "id": "react_route_quiz_2",
+            "type": "quiz",
+            "title": "Render Quiz",
+            "content": "Child rendering.",
+            "quizQuestion": "Which component is used to render child routes inside a parent layout?",
+            "quizOptions": [
+                "Children",
+                "Outlet",
+                "Render",
+                "View"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_route_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Full Router 💻\n\n<!-- FULL_CODE_START\nimport { BrowserRouter, Routes, Route, Link } from 'react-router-dom';\n\nfunction App() {\n  return (\n    <BrowserRouter>\n      <nav>\n        <Link to=\"/\">Home</Link> | <Link to=\"/about\">About</Link>\n      </nav>\n      \n      <Routes>\n        <Route path=\"/\" element={<h1>Home Page</h1>} />\n        <Route path=\"/about\" element={<h1>About Us</h1>} />\n        <Route path=\"*\" element={<h1>404 Not Found</h1>} />\n      </Routes>\n    </BrowserRouter>\n  );\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_route_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Routing 🎓\n\nSPA Navigation.\n\n- **Setup:** `<BrowserRouter>` and `<Routes>`.\n- **Links:** `<Link>` prevents refresh.\n- **Params:** `useParams` for `/user/:id`.\n- **Nested:** `<Outlet>` for layouts.\n- **Navigation:** `useNavigate` hook.\n\n## Next Steps\nManage global application state efficiently with **Redux**!"
+        }
+    ]
+}

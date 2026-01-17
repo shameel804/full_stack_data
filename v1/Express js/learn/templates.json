@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_templates",
+    "topicId": "templates",
+    "topicTitle": "Template Engines",
+    "description": "Render dynamic HTML on the server using EJS, Pug, or Handlebars.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_templates_1",
+            "type": "content",
+            "title": "Why Templates?",
+            "content": "# Dynamic HTML 🎨\n\nSometimes you want to serve HTML pages generated on the server (Server-Side Rendering).\n\nTemplate engines allow you to inject data into HTML views before sending them to the client."
+        },
+        {
+            "id": "express_templates_2",
+            "type": "content",
+            "title": "Popular Engines",
+            "content": "# Pick Your Flavor 🍦\n\n- **EJS (Embedded JavaScript):** Uses plain HTML with `<% %>` tags. Simple.\n- **Pug (formerly Jade):** Concise, whitespace-sensitive syntax. No closing tags.\n- **Handlebars:** Logic-less templates. Mustache-style `{{ }}`."
+        },
+        {
+            "id": "express_templates_3",
+            "type": "content",
+            "title": "Setting up EJS",
+            "content": "# Configuration ⚙️\n\nInstall it: `npm install ejs`\n\n<!-- FULL_CODE_START\nconst express = require('express');\nconst app = express();\n\n// Set the view engine to ejs\napp.set('view engine', 'ejs');\n\n// Optional: Set views directory (default is /views)\napp.set('views', './views');\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_templates_4",
+            "type": "content",
+            "title": "Using res.render()",
+            "content": "# Rendering Views 🖼️\n\nIn your route handler:\n\n<!-- FULL_CODE_START\napp.get('/', (req, res) => {\n  // Renders views/index.ejs\n  // Passes an object with data\n  res.render('index', { \n    title: 'Home Settings', \n    user: 'Alice' \n  });\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_templates_5",
+            "type": "content",
+            "title": "EJS Syntax",
+            "content": "# The Tags 🏷️\n\n- `<%= var %>`: Outputs the value (escaped HTML).\n- `<%- var %>`: Outputs unescaped value (careful!).\n- `<% code %>`: Executes JS logic (if statements, loops).\n- `<%# comment %>`: Comments."
+        },
+        {
+            "id": "express_templates_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "EJS specifics.",
+            "quizQuestion": "Which EJS tag would you use to display a variable's value on the page?",
+            "quizOptions": [
+                "<% var %>",
+                "<%= var %>",
+                "<? var ?>",
+                "{{ var }}"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_templates_6",
+            "type": "content",
+            "title": "Loops in EJS",
+            "content": "# Iterating Items 🔄\n\n<!-- FULL_CODE_START\n<ul>\n  <% users.forEach(function(user) { %>\n    <li><%= user.name %></li>\n  <% }); %>\n</ul>\nFULL_CODE_END -->\n\nNotice how the JS flow control uses `<% %>` tags."
+        },
+        {
+            "id": "express_templates_7",
+            "type": "content",
+            "title": "Partials",
+            "content": "# Reusing Components 🧩\n\nInclude common headers or footers.\n\n`views/header.ejs` contains `<nav>...</nav>`.\n\nIn `index.ejs`:\n` <%- include('header'); %> `\n\nDon't repeat yourself!"
+        },
+        {
+            "id": "express_templates_8",
+            "type": "content",
+            "title": "Conditionals",
+            "content": "# Logic in View 🧠\n\n<!-- FULL_CODE_START\n<% if (user) { %>\n    <h2>Welcome, <%= user.name %></h2>\n<% } else { %>\n    <a href=\"/login\">Login</a>\n<% } %>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_templates_9",
+            "type": "content",
+            "title": "Pug Example",
+            "content": "# Minimalist Pug 🐶\n\nSame logic, different look.\n\n<!-- FULL_CODE_START\ndoctype html\nhtml\n  head\n    title= title\n  body\n    h1= message\n    ul\n      each val in list\n        li= val\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_templates_10",
+            "type": "content",
+            "title": "Multiple Engines",
+            "content": "# Mixing? 🍹\n\nYou can technically use multiple engines in one app by rendering with file extensions, but it's best practice to stick to one consistency."
+        },
+        {
+            "id": "express_templates_quiz_2",
+            "type": "quiz",
+            "title": "Engine Quiz",
+            "content": "Characteristics.",
+            "quizQuestion": "Which template engine is known for using indentation and having no closing tags?",
+            "quizOptions": [
+                "EJS",
+                "Handlebars",
+                "Pug",
+                "Mustache"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_templates_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Templates 📑\n\nSeparation of concerns.\n\n- **Setup:** `app.set('view engine', ...)`\n- **Render:** `res.render('view', data)`\n- **EJS:** HTML + JS tags.\n- **Partials:** Reusable snippets.\n\n## Next Steps\nMaster robust **Error Handling**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_optimization",
+    "topicId": "optimization",
+    "topicTitle": "Optimization",
+    "description": "Techniques to make your database faster and scalable.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_optimization_1",
+            "type": "content",
+            "title": "Why Optimize? 🏎️",
+            "content": "# Scale 📈\n\nA query that takes 100ms on 1,000 rows might take 10 seconds on 100,000 rows.\n\nDatabase optimization ensures your application remains responsive as data grows."
+        },
+        {
+            "id": "sql_optimization_2",
+            "type": "content",
+            "title": "Query Plans",
+            "content": "# Understanding Execution 🧭\n\nThe Query Optimizer decides the most efficient way to execute a SQL statement.\n\nUse `EXPLAIN` to see the plan.\n- Avoid `Full Table Scans` on large tables.\n- Look for `Index Usage`."
+        },
+        {
+            "id": "sql_optimization_3",
+            "type": "content",
+            "title": "SELECT *",
+            "content": "# Don't do it 🚫\n\nReturning unnecessary columns increases I/O overhead.\n\nOnly select the columns you need.\n\n`SELECT name, email` instead of `SELECT *`."
+        },
+        {
+            "id": "sql_optimization_4",
+            "type": "content",
+            "title": "N+1 Problem",
+            "content": "# App Level Issue 🕸️\n\nFetching a list of parents, then fetching children for EACH parent individually.\n\n- Bad: 1 query for users + 100 queries for their orders.\n- Good: 1 query for users + 1 query for their orders (`WHERE user_id IN (...)`)."
+        },
+        {
+            "id": "sql_optimization_5",
+            "type": "content",
+            "title": "Normalization",
+            "content": "# Eliminate Redundancy 🧹\n\nOrganize data to minimize duplication.\n\n- **Pros:** Saves space, ensures consistency.\n- **Cons:** Requires more JOINs (can be slower for reads).\n\nSometimes slight *Denormalization* is used for performance."
+        },
+        {
+            "id": "sql_optimization_quiz_1",
+            "type": "quiz",
+            "title": "Select Quiz",
+            "content": "Best practices.",
+            "quizQuestion": "Why should you avoid 'SELECT *' in production applications?",
+            "quizOptions": [
+                "It is valid but deprecated syntax",
+                "It retrieves all columns, wasting network bandwidth and memory",
+                "It locks the entire table",
+                "It prevents indexes from being used"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_optimization_6",
+            "type": "content",
+            "title": "Partitioning",
+            "content": "# Divide and Conquer 🍰\n\nSplitting a large table into smaller, more manageable pieces.\n\n- **Horizontal Partitioning:** Split by rows (e.g., specific years in separate partitions).\n- **Vertical Partitioning:** Split by columns.\n\nQueries on 2023 data only scan the 2023 partition."
+        },
+        {
+            "id": "sql_optimization_7",
+            "type": "content",
+            "title": "Sharding",
+            "content": "# Distributed Data 🌍\n\nSplitting data across multiple physical servers (database instances).\n\nUser ID 1-1000 -> Server A\nUser ID 1001-2000 -> Server B\n\nMassively increases write throughput."
+        },
+        {
+            "id": "sql_optimization_8",
+            "type": "content",
+            "title": "Caching",
+            "content": "# Memory is Fast 🐆\n\nStore frequent query results in a fast key-value store like **Redis**.\n\nIf data doesn't change often, don't ask the SQL DB every time."
+        },
+        {
+            "id": "sql_optimization_9",
+            "type": "content",
+            "title": "Connection Pooling",
+            "content": "# Reuse Connections 🔌\n\nOpening a DB connection is expensive.\n\nUse a pool to keep connections open and reuse them for subsequent requests."
+        },
+        {
+            "id": "sql_optimization_10",
+            "type": "content",
+            "title": "Limit LIMIT",
+            "content": "# Offset Issue 🐢\n\n`LIMIT 10 OFFSET 1000000` is slow because the DB must read and discard 1M rows.\n\nUse Keyset Pagination (`WHERE id > last_seen_id LIMIT 10`) instead of OFFSET."
+        },
+        {
+            "id": "sql_optimization_quiz_2",
+            "type": "quiz",
+            "title": "Scaling Quiz",
+            "content": "Techniques.",
+            "quizQuestion": "What is the practice of distributing data across multiple physical servers called?",
+            "quizOptions": [
+                "Partitioning",
+                "Replication",
+                "Sharding",
+                "Clustering"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "sql_optimization_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Optimization 🚀\n\nMake it fly.\n\n- **EXPLAIN:** Analyze queries.\n- **Indexing:** Essential for speed.\n- **Caching:** Redis.\n- **Sharding:** Horizontal scaling.\n\n## Next Steps\nDive into **PostgreSQL Specifics**!"
+        }
+    ]
+}

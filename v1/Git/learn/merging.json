@@ -1,0 +1,103 @@
+{
+    "id": "learn_git_merging",
+    "topicId": "merging",
+    "topicTitle": "Merging & Conflicts",
+    "description": "Combine work from multiple branches.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "git_merging_1",
+            "type": "content",
+            "title": "Merging 🤝",
+            "content": "# Bringing it Together\n\nOnce a feature branch is done, you want to bring those changes back into `main`.\n\n`git switch main`\n`git merge feature-login`\n\nThis creates a new **Merge Commit** that joins the two histories."
+        },
+        {
+            "id": "git_merging_2",
+            "type": "content",
+            "title": "Fast-Forward Merge",
+            "content": "# Smooth Sailing ⛵\n\nIf `main` hasn't changed while you were working on your feature, Git just moves the `main` pointer forward to your latest commit.\n\nNo separate merge commit is created. Linear history."
+        },
+        {
+            "id": "git_merging_3",
+            "type": "content",
+            "title": "Three-Way Merge",
+            "content": "# Diverged History 🔀\n\nIf `main` HAS changed (someone else pushed code), Git has to do some work.\n\nIt looks at:\n1. Common Ancestor\n2. Tip of `main`\n3. Tip of `feature`\n\nAnd creates a new Merge Commit."
+        },
+        {
+            "id": "git_merging_4",
+            "type": "content",
+            "title": "Merge Conflicts",
+            "content": "# The Dreaded Conflict ⚔️\n\nHappens when two people changed the **same lines** in the **same file**.\n\nGit cannot decide which one is correct.\n\nIt pauses the merge and asks you to fix it manually."
+        },
+        {
+            "id": "git_merging_5",
+            "type": "content",
+            "title": "Resolving Conflicts",
+            "content": "# Manual Fix 🛠️\n\nOpen the conflicted file.\n\n```\n<<<<<<< HEAD\nvar color = \"blue\";\n=======\nvar color = \"red\";\n>>>>>>> feature-login\n```\n\nEdit the code to what it SHOULD be, then remove markers, add, and commit."
+        },
+        {
+            "id": "git_merging_quiz_1",
+            "type": "quiz",
+            "title": "Situation Quiz",
+            "content": "Logic.",
+            "quizQuestion": "When does a merge conflict typically occur?",
+            "quizOptions": [
+                "When changing different files",
+                "When changing the same line in the same file differently",
+                "When creating a new branch",
+                "When pushing to a remote"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "git_merging_6",
+            "type": "content",
+            "title": "Rebasing",
+            "content": "# Rewriting History ✍️\n\nInstead of merging, you can Move your branch to start from the *current* tip of `main`.\n\n`git switch feature`\n`git rebase main`\n\nMakes it look like you started your work *after* the latest changes in main. Cleaner linear history."
+        },
+        {
+            "id": "git_merging_7",
+            "type": "content",
+            "title": "Merge vs Rebase",
+            "content": "# The Debate 🗣️\n\n- **Merge:** Preserves history exactly as it happened. Good for `main`.\n- **Rebase:** Creates a straight, clean line. Good for local feature branches before merging."
+        },
+        {
+            "id": "git_merging_8",
+            "type": "content",
+            "title": "Abort!",
+            "content": "# Panic Button 🚨\n\nIf a merge or rebase goes terribly wrong and you are overwhelmed by conflicts:\n\n`git merge --abort`\n`git rebase --abort`\n\nReturns the repo to the state before you started."
+        },
+        {
+            "id": "git_merging_9",
+            "type": "content",
+            "title": "Squash Merge",
+            "content": "# Compression 📦\n\nTakes all 50 commits from your feature branch and squashes them into ONE single commit on `main`.\n\nKeeps the main history very clean, but loses the granular history of development."
+        },
+        {
+            "id": "git_merging_10",
+            "type": "content",
+            "title": "Cherry Picking",
+            "content": "# Sniper Shot 🎯\n\nPick a specific commit from another branch and apply it to current branch.\n\n`git cherry-pick a1b2c3d`\n\nUseful for hotfixes."
+        },
+        {
+            "id": "git_merging_quiz_2",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Rebase.",
+            "quizQuestion": "What does 'Rebasing' technically do to your commits?",
+            "quizOptions": [
+                "Deletes them",
+                "Merges them into one",
+                "Re-applies them on top of a new base commit",
+                "Sends them to the remote server"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "git_merging_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Merging 🤝\n\nUnifying Code.\n\n- **Merge:** Join branches.\n- **Conflict:** Overlapping edits.\n- **Rebase:** Linear history.\n- **Squash:** Condensed history.\n\n## Next Steps\nShare code with the world using **Remotes & GitHub**!"
+        }
+    ]
+}

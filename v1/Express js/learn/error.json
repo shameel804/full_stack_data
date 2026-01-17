@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_error",
+    "topicId": "error",
+    "topicTitle": "Error Handling",
+    "description": "Catch and process synchronous and asynchronous errors robustly.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_error_1",
+            "type": "content",
+            "title": "Default Handler",
+            "content": "# Built-in Safety Net 🕸️\n\nExpress comes with a default error handler.\n\nIf you throw an error in your sync code, Express catches it and sends a response (HTML stack trace in dev, generic error in prod)."
+        },
+        {
+            "id": "express_error_2",
+            "type": "content",
+            "title": "Synchronous Errors",
+            "content": "# Just Throw It ⚾\n\nFor errors inside synchronous code (not callbacks/promises), Express catches them automatically.\n\n<!-- FULL_CODE_START\napp.get('/', (req, res) => {\n  throw new Error('BROKEN'); // Express handles this\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_3",
+            "type": "content",
+            "title": "Asynchronous Errors",
+            "content": "# Pass to Next ➡️\n\nFor async functions (callbacks), you MUST pass errors to `next()`.\n\n<!-- FULL_CODE_START\napp.get('/', (req, res, next) => {\n  fs.readFile('/file-does-not-exist', (err, data) => {\n    if (err) {\n      next(err); // Must pass to Express\n    }\n    res.send(data);\n  });\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_4",
+            "type": "content",
+            "title": "Async Await Errors",
+            "content": "# Modern async/await ⏳\n\nStarting with Express 5, returned promises are handled automatically. But in Express 4 (common), you need `try...catch`.\n\n<!-- FULL_CODE_START\napp.get('/', async (req, res, next) => {\n  try {\n    const user = await getUser();\n    if (!user) throw new Error('No User');\n    res.send(user);\n  } catch (err) {\n    next(err);\n  }\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_5",
+            "type": "content",
+            "title": "Async Handler Wrapper",
+            "content": "# Clean Code 🧼\n\nAvoid try-catch in every route. Use a wrapper function.\n\n<!-- FULL_CODE_START\nconst asyncHandler = fn => (req, res, next) =>\n  Promise.resolve(fn(req, res, next)).catch(next);\n\napp.get('/', asyncHandler(async (req, res) => {\n  const user = await getUser();\n  res.send(user);\n}));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_quiz_1",
+            "type": "quiz",
+            "title": "Async Quiz",
+            "content": "Mechanics.",
+            "quizQuestion": "In Express 4, what happens if an async function rejects without a catch block passing it to next()?",
+            "quizOptions": [
+                "Express catches it automatically",
+                "The application crashes (UnhandledPromiseRejection)",
+                "It sends a 500 error",
+                "It retries the request"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_error_6",
+            "type": "content",
+            "title": "Custom Error Handler",
+            "content": "# Defining Middleware 🚧\n\nDefine it LAST, after all other `app.use()` and routes.\n\n<!-- FULL_CODE_START\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).send('Something broke!');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_7",
+            "type": "content",
+            "title": "Error Class",
+            "content": "# structured Errors 🏗️\n\nCreate a custom class to standardize errors.\n\n<!-- FULL_CODE_START\nclass AppError extends Error {\n  constructor(message, statusCode) {\n    super(message);\n    this.statusCode = statusCode;\n    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';\n    this.isOperational = true;\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_error_8",
+            "type": "content",
+            "title": "Operational vs Programmer",
+            "content": "# Know the Difference ⚖️\n\n- **Operational Errors:** Valid cases (Invalid input, fail to connect to DB, 404). Handle these gracefully.\n- **Programmer Errors:** Bugs (Reading property of undefined). Fix the code. Crash and restart."
+        },
+        {
+            "id": "express_error_9",
+            "type": "content",
+            "title": "404 vs Error",
+            "content": "# Not Found is Not an Error 🚫\n\nIn Express, a 404 result is not an error object. It's just a lack of matched layout.\n\nHandle it explicitly before the error handler middleware."
+        },
+        {
+            "id": "express_error_10",
+            "type": "content",
+            "title": "Handling Different Environments",
+            "content": "# Dev vs Prod 🏭\n\n- **Development:** Send full stack trace and error details to client.\n- **Production:** Send generic \"Something went wrong\" message. Log details to server logs only."
+        },
+        {
+            "id": "express_error_quiz_2",
+            "type": "quiz",
+            "title": "Order Quiz",
+            "content": "Placement.",
+            "quizQuestion": "Where must the error-handling middleware be defined in the middleware stack?",
+            "quizOptions": [
+                "At the very top",
+                "Immediately after body-parser",
+                "At the very end, after routes",
+                "Anywhere, Express finds it"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_error_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Errors 🚩\n\nDon't let your app crash.\n\n- **Sync:** Thrown errors caught automatically.\n- **Async:** MUST use `next(err)` or wrapper.\n- **Middleware:** `(err, req, res, next)` signature.\n- **Production:** Hide stack traces.\n\n## Next Steps\nSecure your app against hackers with **Security Best Practices**!"
+        }
+    ]
+}

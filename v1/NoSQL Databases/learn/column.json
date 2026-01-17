@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_column",
+    "topicId": "column",
+    "topicTitle": "Column-Family Stores",
+    "description": "Handle massive write throughput with Cassandra.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_column_1",
+            "type": "content",
+            "title": "What is Column-Family? 🏛️",
+            "content": "# Wide Columns\n\nInstead of rows, data is stored in columns.\n\nImagine a 2-dimensional map where each key has a value which is another map.\n\nOptimized for massive write throughput and scalability across many servers (e.g., **Cassandra**)."
+        },
+        {
+            "id": "nosql_column_2",
+            "type": "content",
+            "title": "Data Model",
+            "content": "# Structure 🧱\n\n- **Keyspace:** Like a Database in SQL.\n- **Table (Column Family):** Collection of rows.\n- **Row:** Identifying Key + Columns.\n- **Column:** Name + Value + Timestamp.\n\nRows in the same table can have completely different columns."
+        },
+        {
+            "id": "nosql_column_3",
+            "type": "content",
+            "title": "CQL",
+            "content": "# Cassandra Query Language\n\nLooks a lot like SQL, but behaves differently.\n\n<!-- FULL_CODE_START\nSELECT * FROM users WHERE id = 100;\n\nINSERT INTO users (id, name, email) \nVALUES (100, 'Alice', 'alice@test.com');\nFULL_CODE_END -->\n\nNO JOINs allowed!"
+        },
+        {
+            "id": "nosql_column_4",
+            "type": "content",
+            "title": "Partition Key",
+            "content": "# Distribution 📦\n\nThe most important part of your schema.\n\nDetermines which *node* (server) the data is stored on.\n\n`PRIMARY KEY ((user_id), created_at)` -> `user_id` is the partition key."
+        },
+        {
+            "id": "nosql_column_5",
+            "type": "content",
+            "title": "Clustering Key",
+            "content": "# Sorting 📶\n\nDetermines the order of data *within* a partition.\n\n`PRIMARY KEY ((user_id), created_at)` -> `created_at` is the clustering key.\n\nEfficiently retrieves range queries like \"user X's posts from last week\"."
+        },
+        {
+            "id": "nosql_column_quiz_1",
+            "type": "quiz",
+            "title": "Key Quiz",
+            "content": "Distribution.",
+            "quizQuestion": "Which part of the Primary Key determines the physical node where data is stored?",
+            "quizOptions": [
+                "Clustering Key",
+                "Foreign Key",
+                "Partition Key",
+                "Sort Key"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_column_6",
+            "type": "content",
+            "title": "Consistency Levels",
+            "content": "# Tunable 🎛️\n\nYou can choose per-query consistency.\n\n- `ONE`: Write serves as soon as 1 node acknowledges.\n- `QUORUM`: Write needs acknowledgment from 51% of nodes. (Strong consistency).\n- `ALL`: Needs all nodes."
+        },
+        {
+            "id": "nosql_column_7",
+            "type": "content",
+            "title": "Write Path",
+            "content": "# Append Only 🖊️\n\nWrites are appended to a Commit Log on disk and MemTable in RAM.\n\nLater flushed to SSTables (Immutable data files).\n\nWrites are incredibly fast (O(1))."
+        },
+        {
+            "id": "nosql_column_8",
+            "type": "content",
+            "title": "Tombstones",
+            "content": "# Deletion 🪦\n\nDeletes are actually writes.\n\nA marker (Tombstone) is written to signify data is deleted.\n\nMerged and removed during Compaction."
+        },
+        {
+            "id": "nosql_column_9",
+            "type": "content",
+            "title": "Materialized Views",
+            "content": "# Pre-computed 📸\n\nSince you can't join, you often duplicate data to query it differently.\n\nMaterialized views update automatically when base data changes."
+        },
+        {
+            "id": "nosql_column_10",
+            "type": "content",
+            "title": "Gossip Protocol",
+            "content": "# Chatter 🗣️\n\nNodes communicate with each other peer-to-peer to share state information (which node is up/down).\n\nNo \"Master\" node failure point."
+        },
+        {
+            "id": "nosql_column_quiz_2",
+            "type": "quiz",
+            "title": "Consistency Quiz",
+            "content": "Quorum.",
+            "quizQuestion": "If you have a replication factor of 3, how many nodes must acknowledge a write for 'QUORUM' consistency?",
+            "quizOptions": [
+                "1",
+                "2",
+                "3",
+                "0"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "nosql_column_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Column 🏛️\n\nBig Data Writes.\n\n- **Cassandra:** Masterless.\n- **CQL:** SQL-like syntax.\n- **Partition Key:** Node placement.\n- **Clustering Key:** Sort order.\n\n## Next Steps\nMaster **Querying & Indexing** techniques!"
+        }
+    ]
+}

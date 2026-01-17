@@ -1,0 +1,103 @@
+{
+    "id": "learn_web_apache",
+    "topicId": "apache",
+    "topicTitle": "Apache",
+    "description": "Learn Apache HTTP Server: The versatile, modular web server that powered the early web and is still widely used.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "apache_1",
+            "type": "content",
+            "title": "What is Apache?",
+            "content": "# The Veteran 🎖️\n\nApache HTTP Server (httpd).\n\nReleased in 1995. Played a key role in the initial growth of the World Wide Web.\n\nKnown for its flexibility, modularity, and `.htaccess` file support."
+        },
+        {
+            "id": "apache_2",
+            "type": "content",
+            "title": "Architecture",
+            "content": "# Modules 🧩\n\nApache is process-based (vs Nginx's event-based).\n\nFunctionality is added via **DSO** (Dynamic Shared Objects).\n\n- `mod_rewrite`: URL rewriting.\n- `mod_ssl`: HTTPS support.\n- `mod_proxy`: Proxying."
+        },
+        {
+            "id": "apache_3",
+            "type": "content",
+            "title": ".htaccess",
+            "content": "# Decentralized Config 📄\n\nUnique to Apache.\n\nYou can override server configuration on a per-directory basis using a `.htaccess` file.\n\nGreat for shared hosting where you don't have access to the main config."
+        },
+        {
+            "id": "apache_4",
+            "type": "content",
+            "title": "Directives",
+            "content": "# Instructions 🗣️\n\nConfig is a set of directives.\n\n```apache\nDocumentRoot \"/var/www/html\"\nListen 80\n\n<Directory \"/var/www\">\n    AllowOverride None\n    Require all granted\n</Directory>\n```"
+        },
+        {
+            "id": "apache_quiz_1",
+            "type": "quiz",
+            "title": "Config Quiz",
+            "content": "File name.",
+            "quizQuestion": "Which file allows you to override Apache configuration on a per-directory basis?",
+            "quizOptions": [
+                "nginx.conf",
+                "web.config",
+                ".htaccess",
+                "config.json"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "apache_5",
+            "type": "content",
+            "title": "MPMs",
+            "content": "# Multi-Processing Modules ⚙️\n\nHow Apache handles connections.\n\n1.  **Prefork:** One process per request. Safe for non-thread-safe PHP modules. High memory.\n2.  **Worker:** Multithreaded. Lower memory.\n3.  **Event:** Similar to Nginx. Best for high concurrency."
+        },
+        {
+            "id": "apache_6",
+            "type": "content",
+            "title": "Rewrites (mod_rewrite)",
+            "content": "# URL Magic 🪄\n\nChanging the requested URL on the fly.\n\n```apache\nRewriteEngine On\n# Redirect old.html to new.html\nRewriteRule ^old\\.html$ new.html [R=301,L]\n```"
+        },
+        {
+            "id": "apache_7",
+            "type": "content",
+            "title": "Virtual Hosts",
+            "content": "# Multiple Sites 🏙️\n\n```apache\n<VirtualHost *:80>\n    ServerName example.com\n    DocumentRoot /var/www/example\n</VirtualHost>\n\n<VirtualHost *:80>\n    ServerName blog.com\n    DocumentRoot /var/www/blog\n</VirtualHost>\n```"
+        },
+        {
+            "id": "apache_8",
+            "type": "content",
+            "title": "Security",
+            "content": "# Hardening 🛡️\n\n- Disable directory listing (`Options -Indexes`).\n- Hide server version (`ServerTokens Prod`).\n- Restrict access.\n\n```apache\n<Directory \"/admin\">\n    Require ip 10.0.0.1\n</Directory>\n```"
+        },
+        {
+            "id": "apache_9",
+            "type": "content",
+            "title": "Apache vs Nginx",
+            "content": "# The Rivalry 🥊\n\n- **Apache:** Flexible, `.htaccess`, Dynamic Modules. Slower under massive load.\n- **Nginx:** Faster, Event-driven, Static content king, Reverse Proxy. No `.htaccess`.\n\nCommon setup: Nginx as Proxy -> Apache as App Server."
+        },
+        {
+            "id": "apache_quiz_2",
+            "type": "quiz",
+            "title": "Module Quiz",
+            "content": "Rewriting.",
+            "quizQuestion": "Which Apache module is required for URL rewriting rules?",
+            "quizOptions": [
+                "mod_proxy",
+                "mod_rewrite",
+                "mod_access",
+                "mod_alias"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "apache_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# .htaccess Config 💻\n\n<!-- FULL_CODE_START\n# Enable Rewriting\nRewriteEngine On\n\n# Force HTTPS\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n# Disable Directory Listing\nOptions -Indexes\n\n# Block access to .env files\n<Files .env>\n    Order allow,deny\n    Deny from all\n</Files>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "apache_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Apache 🎓\n\nThe Flexible Giant.\n\n- **Modules:** `mod_rewrite`, `mod_ssl`.\n- **.htaccess:** Per-folder config.\n- **VirtualHosts:** Hosted sites.\n- **MPM:** Prefork vs Worker vs Event.\n- **LAMP Stack:** Linux, Apache, MySQL, PHP.\n\n## Next Steps\nExplore the Windows world with **IIS**!"
+        }
+    ]
+}

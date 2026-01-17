@@ -1,0 +1,4502 @@
+[
+    {
+        "q": "Where are Git hooks stored by default in a repository?",
+        "type": "mcq",
+        "o": [
+            ".git/hooks",
+            ".git/scripts",
+            ".git/config.d",
+            ".hooks"
+        ]
+    },
+    {
+        "q": "What must be true for a hook script to be executed by Git?",
+        "type": "mcq",
+        "o": [
+            "It must be executable and named correctly (no extension usually)",
+            "It must be written in Python",
+            "It must be signed",
+            "It must be in the root directory"
+        ]
+    },
+    {
+        "q": "Which hook is run first when you type 'git commit'?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "prepare-commit-msg",
+            "commit-msg",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "How can you bypass the 'pre-commit' hook?",
+        "type": "mcq",
+        "o": [
+            "git commit --no-verify (or -n)",
+            "git commit --force",
+            "git commit --skip-hooks",
+            "git commit --ignore"
+        ]
+    },
+    {
+        "q": "What is the primary use of the 'pre-commit' hook?",
+        "type": "mcq",
+        "o": [
+            "Checking code style, linters, or trailing whitespace before a commit is created",
+            "Sending emails",
+            "Deploying code",
+            "Updating remote"
+        ]
+    },
+    {
+        "q": "Which hook is invoked to populate the text editor with a default commit message?",
+        "type": "mcq",
+        "o": [
+            "prepare-commit-msg",
+            "pre-commit",
+            "commit-msg",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "Which hook allows you to validate the commit message format (e.g., ensuring a JIRA ticket number)?",
+        "type": "mcq",
+        "o": [
+            "commit-msg",
+            "pre-commit",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "When does the 'post-commit' hook run?",
+        "type": "mcq",
+        "o": [
+            "After the entire commit process is completed",
+            "Before the commit object is created",
+            "During message editing",
+            "When pushing"
+        ]
+    },
+    {
+        "q": "Can 'post-commit' hook abort the commit?",
+        "type": "mcq",
+        "o": [
+            "No, the commit is already done",
+            "Yes, if it returns non-zero",
+            "Yes, if it crashes",
+            "Yes, always"
+        ]
+    },
+    {
+        "q": "Which hook is run after a successful 'git checkout' only if files change?",
+        "type": "mcq",
+        "o": [
+            "post-checkout",
+            "pre-checkout",
+            "after-checkout",
+            "checkout-msg"
+        ]
+    },
+    {
+        "q": "What is 'post-checkout' often used for?",
+        "type": "mcq",
+        "o": [
+            "Updating dependencies, generating docs, or setting up environment for that branch",
+            "Checking logic",
+            "Validating user",
+            "Cleaning screen"
+        ]
+    },
+    {
+        "q": "Which hook runs after a successful 'git merge'?",
+        "type": "mcq",
+        "o": [
+            "post-merge",
+            "pre-merge",
+            "merge-msg",
+            "commit-msg"
+        ]
+    },
+    {
+        "q": "When does 'post-merge' run?",
+        "type": "mcq",
+        "o": [
+            "After a merge is successfully completed (and files updated)",
+            "During conflict resolution",
+            "Before merge starts",
+            "Before fetch"
+        ]
+    },
+    {
+        "q": "Which hook runs before 'git push' sends any data?",
+        "type": "mcq",
+        "o": [
+            "pre-push",
+            "post-push",
+            "update",
+            "pre-receive"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-push' exits with a non-zero status?",
+        "type": "mcq",
+        "o": [
+            "The push is aborted",
+            "The push continues with a warning",
+            "The push switches to force",
+            "The remote ignores it"
+        ]
+    },
+    {
+        "q": "Which server-side hook is the first to run when receiving a push?",
+        "type": "mcq",
+        "o": [
+            "pre-receive",
+            "update",
+            "post-receive",
+            "post-update"
+        ]
+    },
+    {
+        "q": "Does 'pre-receive' handle all branches at once or one by one?",
+        "type": "mcq",
+        "o": [
+            "It receives a list of all refs being pushed on stdin (handles batch)",
+            "One by one",
+            "Only the current branch",
+            "Only tags"
+        ]
+    },
+    {
+        "q": "Which server-side hook runs once for EACH branch/ref being pushed?",
+        "type": "mcq",
+        "o": [
+            "update",
+            "pre-receive",
+            "post-receive",
+            "pre-commit"
+        ]
+    },
+    {
+        "q": "Which server-side hook is typically used for continuous integration triggering or email notifications after push?",
+        "type": "mcq",
+        "o": [
+            "post-receive",
+            "pre-receive",
+            "update",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "What arguments does the 'update' hook receive?",
+        "type": "mcq",
+        "o": [
+            "ref-name, old-object-name, new-object-name",
+            "None",
+            "Only ref-name",
+            "Only user name"
+        ]
+    },
+    {
+        "q": "Why are Git hooks in .git/hooks not committed/pushed by default?",
+        "type": "mcq",
+        "o": [
+            "For security reasons (downloading code and auto-executing it is dangerous)",
+            "They are binary",
+            "They are too large",
+            "They are system specific"
+        ]
+    },
+    {
+        "q": "How can a team share common Git hooks?",
+        "type": "mcq",
+        "o": [
+            "Commit them to a directory (e.g., .githooks) and set 'core.hooksPath', or use a symlink/install script",
+            "Push .git/hooks",
+            "Use git-hooks-share",
+            "Email them"
+        ]
+    },
+    {
+        "q": "What command sets the path for hooks globally or locally?",
+        "type": "mcq",
+        "o": [
+            "git config core.hooksPath <path>",
+            "git config hooks.dir <path>",
+            "git hook set <path>",
+            "git path hooks <path>"
+        ]
+    },
+    {
+        "q": "Which hook is used to rewrite or sanitize the commit message just before it is saved?",
+        "type": "mcq",
+        "o": [
+            "commit-msg (can modify the file in place)",
+            "post-commit",
+            "pre-push",
+            "pre-rebase"
+        ]
+    },
+    {
+        "q": "Does 'git rebase' trigger 'pre-commit' for replayed commits?",
+        "type": "mcq",
+        "o": [
+            "No, standard rebase copies existing commits without invoking pre-commit",
+            "Yes always",
+            "Only for interactive rebase",
+            "Only if conflict"
+        ]
+    },
+    {
+        "q": "Which hook runs during 'git rebase'?",
+        "type": "mcq",
+        "o": [
+            "pre-rebase",
+            "post-rebase",
+            "rebase-msg",
+            "rebase-apply"
+        ]
+    },
+    {
+        "q": "What is 'pre-rebase' used for?",
+        "type": "mcq",
+        "o": [
+            "To prevent rebasing of certain branches (e.g., published history)",
+            "To auto-squash",
+            "To fix conflicts",
+            "To sign commits"
+        ]
+    },
+    {
+        "q": "What language can Git hooks be written in?",
+        "type": "mcq",
+        "o": [
+            "Any scripting language (Bash, Python, Ruby, Perl, etc.) that the system can execute",
+            "Only Bash",
+            "Only Perl",
+            "Only C"
+        ]
+    },
+    {
+        "q": "How does Git know which interpreter to use for a hook?",
+        "type": "mcq",
+        "o": [
+            "Via the shebang line (e.g., #!/bin/sh) at the top of the file",
+            "It assumes Bash",
+            "It checks file extension",
+            "It uses config core.shell"
+        ]
+    },
+    {
+        "q": "What does a non-zero exit code from 'pre-receive' do?",
+        "type": "mcq",
+        "o": [
+            "Rejects the entire push (all refs)",
+            "Rejects only the failing ref",
+            "Warns only",
+            "Detaches head"
+        ]
+    },
+    {
+        "q": "What does a non-zero exit code from 'update' do?",
+        "type": "mcq",
+        "o": [
+            "Rejects only that specific ref update (other refs in the push may succeed)",
+            "Rejects entire push",
+            "Warns only",
+            "Stops server"
+        ]
+    },
+    {
+        "q": "Which hook is invoked when you run 'git gc --auto'?",
+        "type": "mcq",
+        "o": [
+            "pre-auto-gc",
+            "post-gc",
+            "gc-msg",
+            "gc-start"
+        ]
+    },
+    {
+        "q": "What is the 'pre-applypatch' hook?",
+        "type": "mcq",
+        "o": [
+            "Runs after 'git am' applies a patch but before the commit is recorded",
+            "Runs before applying patch",
+            "Runs after fetch",
+            "Runs before diff"
+        ]
+    },
+    {
+        "q": "What is 'post-applypatch' used for?",
+        "type": "mcq",
+        "o": [
+            "Notification after a patch is applied and committed via 'git am'",
+            "Undoing patch",
+            "Editing patch",
+            "Deleting patch"
+        ]
+    },
+    {
+        "q": "Which hook can handle 'git rewrite' operations (like filter-branch)?",
+        "type": "mcq",
+        "o": [
+            "post-rewrite",
+            "pre-rewrite",
+            "rewrite-msg",
+            "modify-head"
+        ]
+    },
+    {
+        "q": "Can hooks accept input via stdin?",
+        "type": "mcq",
+        "o": [
+            "Yes, many hooks (like pre-receive, pre-push, post-rewrite) read lines from stdin",
+            "No, only arguments",
+            "Only environment variables",
+            "Only config files"
+        ]
+    },
+    {
+        "q": "What is the 'fsmonitor-watchman' hook?",
+        "type": "mcq",
+        "o": [
+            "Integrates with file system monitors (like Watchman) to speed up status",
+            "Monitors file size",
+            "Watches user",
+            "Security audit"
+        ]
+    },
+    {
+        "q": "If a hook script is not executable, what does Git do?",
+        "type": "mcq",
+        "o": [
+            "It ignores it silently",
+            "It errors out",
+            "It asks permission",
+            "It tries to execute anyway"
+        ]
+    },
+    {
+        "q": "Which hook is useful for verifying GPG signatures on pushed commits server-side?",
+        "type": "mcq",
+        "o": [
+            "pre-receive or update",
+            "post-receive",
+            "pre-push",
+            "commit-msg"
+        ]
+    },
+    {
+        "q": "What is 'reference-transaction' hook?",
+        "type": "mcq",
+        "o": [
+            "Invoked when reference updates occur (fetch, push, commit, etc.)",
+            "Transaction log",
+            "Bank hook",
+            "Database hook"
+        ]
+    },
+    {
+        "q": "Which hook is triggered by 'git push' on the CLIENT side?",
+        "type": "mcq",
+        "o": [
+            "pre-push",
+            "pre-receive",
+            "update",
+            "post-update"
+        ]
+    },
+    {
+        "q": "What prevents a 'post-receive' hook from outputting to the client?",
+        "type": "mcq",
+        "o": [
+            "Nothing, stdout from post-receive is sent back to the client prefixed with 'remote: '",
+            "It is blocked",
+            "It goes to server log only",
+            "It is discarded"
+        ]
+    },
+    {
+        "q": "Can you define multiple scripts for a single hook (e.g. pre-commit)?",
+        "type": "mcq",
+        "o": [
+            "Not natively by default (only one file named 'pre-commit'); need a wrapper script to run others",
+            "Yes, just number them",
+            "Yes, put in pre-commit.d folder (natively supported in newer git versions only via config or external tools)",
+            "Yes, use extensions"
+        ]
+    },
+    {
+        "q": "What environment variable can bypass hooks?",
+        "type": "mcq",
+        "o": [
+            "Usually none directly, but hooks can check for custom env vars you set",
+            "GIT_NO_HOOKS",
+            "SKIP_HOOKS",
+            "HOOK_OFF"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook?",
+        "type": "mcq",
+        "o": [
+            "Used for delegated handling of ref updates (e.g., Pull Requests mechanisms)",
+            "Process receive",
+            "Procedure call",
+            "Processor"
+        ]
+    },
+    {
+        "q": "If 'pre-commit' modifies files, must it add them to the index?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it wants the changes to be part of the commit being created",
+            "No, git adds them auto",
+            "No, it modifies commit object directly",
+            "It cannot modify files"
+        ]
+    },
+    {
+        "q": "Which hook is often used to check for 'TODO' comments?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "post-commit",
+            "pre-push",
+            "post-merge"
+        ]
+    },
+    {
+        "q": "What happens if 'commit-msg' hook exits non-zero?",
+        "type": "mcq",
+        "o": [
+            "The commit is aborted",
+            "The message is reset",
+            "The commit happens with empty message",
+            "The user is warned"
+        ]
+    },
+    {
+        "q": "Can 'post-rewrite' be triggered by 'git commit --amend'?",
+        "type": "mcq",
+        "o": [
+            "Yes, amending is a rewrite",
+            "No",
+            "Only if message changed",
+            "Only if content changed"
+        ]
+    },
+    {
+        "q": "What arguments does 'pre-push' receive?",
+        "type": "mcq",
+        "o": [
+            "Name of the remote and location (URL)",
+            "List of commits",
+            "User credentials",
+            "Time of push"
+        ]
+    },
+    {
+        "q": "How does 'pre-push' read what is being pushed?",
+        "type": "mcq",
+        "o": [
+            "Reads lines from stdin: <local_ref> <local_sha> <remote_ref> <remote_sha>",
+            "Arguments",
+            "Environment variables",
+            "Config file"
+        ]
+    },
+    {
+        "q": "What is 'push-to-checkout' hook?",
+        "type": "mcq",
+        "o": [
+            "Runs on server when pushing to the currently checked out branch of a non-bare repo",
+            "Runs on client",
+            "Checks out code",
+            "Validates push"
+        ]
+    },
+    {
+        "q": "Which hook is appropriate for notifying a CI server to build?",
+        "type": "mcq",
+        "o": [
+            "post-receive (server side)",
+            "pre-receive",
+            "pre-commit",
+            "post-checkout"
+        ]
+    },
+    {
+        "q": "Can 'post-update' be used to update dumb HTTP server info?",
+        "type": "mcq",
+        "o": [
+            "Yes, traditionally used to run 'git update-server-info'",
+            "No",
+            "Only for SSH",
+            "Only for HTTPS"
+        ]
+    },
+    {
+        "q": "What is the sample hook extension?",
+        "type": "mcq",
+        "o": [
+            ".sample (e.g. pre-commit.sample)",
+            ".example",
+            ".test",
+            ".sh"
+        ]
+    },
+    {
+        "q": "Do sample hooks run by default?",
+        "type": "mcq",
+        "o": [
+            "No, you must rename them (remove .sample) and make them executable",
+            "Yes",
+            "Yes, if in debug mode",
+            "Yes, if configured"
+        ]
+    },
+    {
+        "q": "What is the default interpreter in sample hooks?",
+        "type": "mcq",
+        "o": [
+            "#!/bin/sh",
+            "#!/bin/bash",
+            "#!/usr/bin/python",
+            "#!/usr/bin/perl"
+        ]
+    },
+    {
+        "q": "Which hook helps implement a 'ticket-ID required' policy?",
+        "type": "mcq",
+        "o": [
+            "commit-msg",
+            "pre-commit",
+            "post-commit",
+            "pre-rebase"
+        ]
+    },
+    {
+        "q": "Does 'git clone' copy hooks?",
+        "type": "mcq",
+        "o": [
+            "No, never",
+            "Yes, always",
+            "Only if --hooks is used",
+            "Only if trusted"
+        ]
+    },
+    {
+        "q": "Why doesn't 'git clone' copy hooks?",
+        "type": "mcq",
+        "o": [
+            "Security; preventing execution of arbitrary code upon clone",
+            "Size limitation",
+            "Redundancy",
+            "Complexity"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git merge' is aborted/squashed?",
+        "type": "mcq",
+        "o": [
+            "None specific to the abort itself, but post-merge doesn't run if merge failed",
+            "pre-abort",
+            "post-abort",
+            "merge-stop"
+        ]
+    },
+    {
+        "q": "Can hooks modify the environment variables for the git process?",
+        "type": "mcq",
+        "o": [
+            "No, they run in a subshell/subprocess",
+            "Yes",
+            "Only global vars",
+            "Only GIT_ vars"
+        ]
+    },
+    {
+        "q": "Where does 'git' look for global hooks config?",
+        "type": "mcq",
+        "o": [
+            "core.hooksPath",
+            "global.hooks",
+            "hooks.global",
+            "system.hooks"
+        ]
+    },
+    {
+        "q": "What argument does 'commit-msg' hook get?",
+        "type": "mcq",
+        "o": [
+            "The path to the file containing the commit message",
+            "The message string itself",
+            "The author",
+            "The SHA"
+        ]
+    },
+    {
+        "q": "What argument does 'prepare-commit-msg' hook get?",
+        "type": "mcq",
+        "o": [
+            "Path to message file, source of message (message, template, merge, squash), commit SHA (if amending)",
+            "Just path",
+            "Just SHA",
+            "Just source"
+        ]
+    },
+    {
+        "q": "If 'pre-commit' hook fails, where do you see the output?",
+        "type": "mcq",
+        "o": [
+            "In the terminal (stderr/stdout)",
+            "In .git/logs",
+            "Nowhere",
+            "In system log"
+        ]
+    },
+    {
+        "q": "Can you define 'pre-commit' in .gitattributes?",
+        "type": "mcq",
+        "o": [
+            "No, attributes are for file settings, not hooks",
+            "Yes",
+            "Maybe",
+            "If allowed"
+        ]
+    },
+    {
+        "q": "What tool helps manage hooks in a repo (e.g. for JS projects)?",
+        "type": "mcq",
+        "o": [
+            "Husky",
+            "GitHooks",
+            "Runner",
+            "Manager"
+        ]
+    },
+    {
+        "q": "What is 'git verify-commit' hook equivalent?",
+        "type": "mcq",
+        "o": [
+            "There isn't one named verify-commit; verification usually happens via GPG checks or pre-receive hooks",
+            "It is a hook",
+            "pre-verify",
+            "post-verify"
+        ]
+    },
+    {
+        "q": "Which hook can be used to prevent pushing large files?",
+        "type": "mcq",
+        "o": [
+            "pre-receive (server) or pre-push (client)",
+            "post-receive",
+            "post-commit",
+            "commit-msg"
+        ]
+    },
+    {
+        "q": "Which hook runs after 'git clone'?",
+        "type": "mcq",
+        "o": [
+            "post-checkout (since clone performs a checkout)",
+            "post-clone (does not exist)",
+            "after-clone",
+            "clone-msg"
+        ]
+    },
+    {
+        "q": "Does 'git stash' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes, pre-commit",
+            "Yes, post-commit",
+            "Yes, update"
+        ]
+    },
+    {
+        "q": "Does 'git cherry-pick' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, post-commit (after picking), and potentially pre-commit/commit-msg if not bypassed",
+            "No",
+            "Only pre-commit",
+            "Only post-merge"
+        ]
+    },
+    {
+        "q": "Which hook receives input about the updated refs on server?",
+        "type": "mcq",
+        "o": [
+            "post-receive (via stdin)",
+            "post-update (via args)",
+            "Both (differently)",
+            "None"
+        ]
+    },
+    {
+        "q": "What is the 'sendemail-validate' hook?",
+        "type": "mcq",
+        "o": [
+            "Invoked by 'git send-email' to validate headers/content",
+            "Validates SMTP",
+            "Validates address",
+            "Validates network"
+        ]
+    },
+    {
+        "q": "What is 'p4-pre-submit' hook?",
+        "type": "mcq",
+        "o": [
+            "Used by git-p4 before submitting to Perforce",
+            "Perforce hook",
+            "Submit hook",
+            "Pre 4"
+        ]
+    },
+    {
+        "q": "Can you use hooks to enforce a specific user email domain?",
+        "type": "mcq",
+        "o": [
+            "Yes, via pre-receive (server) or pre-commit (client)",
+            "No",
+            "Only server",
+            "Only client"
+        ]
+    },
+    {
+        "q": "What is 'post-index-change' hook?",
+        "type": "mcq",
+        "o": [
+            "Runs when the index is written to",
+            "Runs when index changes",
+            "Runs after add",
+            "Runs after reset"
+        ]
+    },
+    {
+        "q": "Can you use GUI tools to configure hooks?",
+        "type": "mcq",
+        "o": [
+            "Some wrappers exist, but it's mostly file-system based",
+            "Yes, git-gui has hook manager",
+            "Yes, built-in menu",
+            "No"
+        ]
+    },
+    {
+        "q": "If 'pre-commit' prints to stdout, is it seen?",
+        "type": "mcq",
+        "o": [
+            "Yes, usually displayed by the git command",
+            "No, suppressed",
+            "Only if error",
+            "Only if verbose"
+        ]
+    },
+    {
+        "q": "What is the recommended permission for hook scripts?",
+        "type": "mcq",
+        "o": [
+            "755 (rwxr-xr-x) or just +x",
+            "644",
+            "777",
+            "600"
+        ]
+    },
+    {
+        "q": "Can you write hooks in compiled languages (Go, C, Rust)?",
+        "type": "mcq",
+        "o": [
+            "Yes, as long as the binary is placed/linked in hooks dir and executable",
+            "No, interpreted only",
+            "Only Rust",
+            "Only C"
+        ]
+    },
+    {
+        "q": "Which hook is used to sign a commit with GPG automatically called?",
+        "type": "mcq",
+        "o": [
+            "None; GPG signing is built-in (commit -S), but pre-commit can verify",
+            "pre-sign",
+            "post-sign",
+            "gpg-hook"
+        ]
+    },
+    {
+        "q": "Does 'git archive' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes, pre-archive",
+            "Yes, post-archive",
+            "Yes, compress-msg"
+        ]
+    },
+    {
+        "q": "What happens to hooks when you delete .git directory?",
+        "type": "mcq",
+        "o": [
+            "They are deleted (they live inside .git)",
+            "They remain",
+            "They move to trash",
+            "They are backed up"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git clean' executes?",
+        "type": "mcq",
+        "o": [
+            "None by default",
+            "pre-clean",
+            "post-clean",
+            "clean-msg"
+        ]
+    },
+    {
+        "q": "What is 'git hook run <hookname>'?",
+        "type": "mcq",
+        "o": [
+            "Command to manually test/trigger a hook (git 2.36+)",
+            "Install hook",
+            "Remove hook",
+            "List hook"
+        ]
+    },
+    {
+        "q": "Does 'git reset' trigger 'post-checkout'?",
+        "type": "mcq",
+        "o": [
+            "No",
+            "Yes",
+            "Only hard reset",
+            "Only soft reset"
+        ]
+    },
+    {
+        "q": "Does 'git worktree add' trigger 'post-checkout'?",
+        "type": "mcq",
+        "o": [
+            "Yes, because checking out a new worktree involves checkout",
+            "No",
+            "Sometimes",
+            "Never"
+        ]
+    },
+    {
+        "q": "Can hooks call other git commands?",
+        "type": "mcq",
+        "o": [
+            "Yes, but be careful with locking/infinite loops",
+            "No",
+            "Only read commands",
+            "Only status"
+        ]
+    },
+    {
+        "q": "What issue might arise if a hook calls 'git commit'?",
+        "type": "mcq",
+        "o": [
+            "Infinite recursion (commit triggers hook triggers commit)",
+            "Nothing",
+            "Faster commit",
+            "Better logs"
+        ]
+    },
+    {
+        "q": "How to prevent infinite recursion in hooks?",
+        "type": "mcq",
+        "o": [
+            "Use --no-verify in the script or check for a sentinel environment variable",
+            "Use -f",
+            "Use -q",
+            "Cannot prevent"
+        ]
+    },
+    {
+        "q": "What is the 'multimail' hook script?",
+        "type": "mcq",
+        "o": [
+            "A popular third-party script named 'post-receive-email' or similar for complex email notifications",
+            "Built-in mailer",
+            "Spam filter",
+            "Mail client"
+        ]
+    },
+    {
+        "q": "Does GitHub support custom server-side hooks?",
+        "type": "mcq",
+        "o": [
+            "No (Enterprise might, but cloud doesn't allow arbitrary code); use Actions/Webhooks instead",
+            "Yes, upload to .git/hooks",
+            "Yes, unlimited",
+            "Yes, sandboxed"
+        ]
+    },
+    {
+        "q": "What is a Webhook vs Git Hook?",
+        "type": "mcq",
+        "o": [
+            "Git Hook runs locally/server-side script; Webhook sends HTTP POST to a URL on events",
+            "Same thing",
+            "Webhook is client only",
+            "Git hook is HTTP"
+        ]
+    },
+    {
+        "q": "What can you use if you can't install server-side hooks?",
+        "type": "mcq",
+        "o": [
+            "CI pipelines (Jenkins, GitHub Actions, GitLab CI) to enforce rules",
+            "Give up",
+            "Use client hooks only",
+            "Manual checks"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook modify the commit message?",
+        "type": "mcq",
+        "o": [
+            "No, 'commit-msg' or 'prepare-commit-msg' does that. Pre-commit validates content.",
+            "Yes",
+            "Sometimes",
+            "Only date"
+        ]
+    },
+    {
+        "q": "What happens if you have both 'pre-commit' and 'commit-msg'?",
+        "type": "mcq",
+        "o": [
+            "pre-commit runs first; if succeeds, editor opens (if applicable), then commit-msg runs",
+            "Run in parallel",
+            "commit-msg runs first",
+            "Only one runs"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook used for?",
+        "type": "mcq",
+        "o": [
+            "Allows the server to inspect and process ref updates before they land, often used for code review systems to create synthetic refs",
+            "Receives processor",
+            "Processes receive",
+            "Process log"
+        ]
+    },
+    {
+        "q": "Which hook can tell Git that a reference update happened via 'git update-ref'?",
+        "type": "mcq",
+        "o": [
+            "reference-transaction",
+            "post-update",
+            "pre-commit",
+            "update-ref"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-merge-commit' hook fails?",
+        "type": "mcq",
+        "o": [
+            "The merge commit is aborted",
+            "The merge continues (it's advisory)",
+            "The merge becomes a squash",
+            "The merge halts"
+        ]
+    },
+    {
+        "q": "Can you use 'git config' to disable hooks?",
+        "type": "mcq",
+        "o": [
+            "Not cleanly via a simple 'disable all' flag in config, but you can point core.hooksPath to empty dir",
+            "git config hooks.disable true",
+            "git config core.hooks off",
+            "git config --no-hooks"
+        ]
+    },
+    {
+        "q": "What is the purpose of the 'pre-auto-gc' hook?",
+        "type": "mcq",
+        "o": [
+            "To decide whether 'git gc --auto' should proceed or abort (e.g. on battery power)",
+            "To clean up before GC",
+            "To backup before GC",
+            "To notify user"
+        ]
+    },
+    {
+        "q": "Does 'git am' trigger 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "No, 'git am' applies patches and creates commits directly, skipping pre-commit. It triggers pre-applypatch.",
+            "Yes",
+            "Only for conflicts",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Which hook runs after 'git clone' completes?",
+        "type": "mcq",
+        "o": [
+            "post-checkout (because clone checks out HEAD)",
+            "post-clone",
+            "clone-finished",
+            "after-clone"
+        ]
+    },
+    {
+        "q": "What is the 'post-update' hook commonly used for?",
+        "type": "mcq",
+        "o": [
+            "Updating auxiliary files (like info/refs for dumb HTTP) or notifying services",
+            "Checking update",
+            "Updating working tree",
+            "Updating config"
+        ]
+    },
+    {
+        "q": "Which hook receives the list of updated refs on stdin?",
+        "type": "mcq",
+        "o": [
+            "pre-receive, post-receive, reference-transaction",
+            "update",
+            "post-update",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "What is 'git interpret-trailers' often used with?",
+        "type": "mcq",
+        "o": [
+            "Hooks like commit-msg or prepare-commit-msg to insert metadata trailers (Signed-off-by, etc.)",
+            "pre-commit",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "If you want to validate the AUTHOR identity before allowing a commit, which hook?",
+        "type": "mcq",
+        "o": [
+            "pre-commit (check git config/env)",
+            "commit-msg",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "Can a hook change the contents of the files being committed?",
+        "type": "mcq",
+        "o": [
+            "Yes, pre-commit can edit files and 'git add' them before the commit is finalized",
+            "No, it's read only",
+            "Only if in admin mode",
+            "Only if force"
+        ]
+    },
+    {
+        "q": "What is 'git hook' command used for?",
+        "type": "mcq",
+        "o": [
+            "Managing/running hooks (experimental/newer feature)",
+            "Nothing",
+            "Installing hooks",
+            "Deleting hooks"
+        ]
+    },
+    {
+        "q": "Does 'git pull' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, 'post-merge' if it causes a merge, or 'post-checkout' if fast-forward (depending on git version/situation mostly post-merge)",
+            "No",
+            "Only pre-pull",
+            "Only update"
+        ]
+    },
+    {
+        "q": "What does a non-zero exit from 'post-update' do?",
+        "type": "mcq",
+        "o": [
+            "Nothing, Git merely reports it; the update is already done",
+            "Reverts update",
+            "Stops push",
+            "Corrupts repo"
+        ]
+    },
+    {
+        "q": "What directory permissions are needed for hooks to run?",
+        "type": "mcq",
+        "o": [
+            "Read/Execute on the script file",
+            "Write",
+            "Sticky bit",
+            "Setuid"
+        ]
+    },
+    {
+        "q": "Can 'pre-push' inspect the objects being pushed?",
+        "type": "mcq",
+        "o": [
+            "Yes, it receives the SHA1 of local and remote. Note: objects might not be fully packed yet.",
+            "No, objects are on server",
+            "No, only names",
+            "No, only size"
+        ]
+    },
+    {
+        "q": "What is the 'push-to-checkout' hook's return code meaning?",
+        "type": "mcq",
+        "o": [
+            "0=success (update working tree), non-zero=reject push",
+            "0=reject",
+            "1=success",
+            "Ignored"
+        ]
+    },
+    {
+        "q": "If you use a GUI client (SourceTree, Tower), do hooks run?",
+        "type": "mcq",
+        "o": [
+            "Yes, provided the GUI uses the git binary and environment correctly",
+            "No, GUI skips hooks",
+            "Only pre-commit",
+            "Only post-commit"
+        ]
+    },
+    {
+        "q": "Can you have a hook that runs ONLY for a specific branch?",
+        "type": "mcq",
+        "o": [
+            "Yes, the script must check the branch name (e.g. via symbolic-ref HEAD) and exit 0 if not matching",
+            "No",
+            "Use filename.branch",
+            "Use config"
+        ]
+    },
+    {
+        "q": "Which hook is best for preventing commits to 'master'?",
+        "type": "mcq",
+        "o": [
+            "pre-commit (local) or pre-receive (server)",
+            "post-commit",
+            "commit-msg",
+            "update"
+        ]
+    },
+    {
+        "q": "What is the stdin format for 'pre-receive'?",
+        "type": "mcq",
+        "o": [
+            "<old-value> <new-value> <ref-name> (one line per ref)",
+            "<ref-name> <old> <new>",
+            "<user> <ref> <action>",
+            "JSON"
+        ]
+    },
+    {
+        "q": "How do you test a 'pre-commit' hook without committing?",
+        "type": "mcq",
+        "o": [
+            "Run it manually: ./.git/hooks/pre-commit",
+            "git hook test pre-commit",
+            "git commit --test",
+            "You can't"
+        ]
+    },
+    {
+        "q": "What happens if a hook is a binary file?",
+        "type": "mcq",
+        "o": [
+            "It executes if the OS can run it (and it is executable)",
+            "It fails",
+            "It must be text",
+            "It opens in editor"
+        ]
+    },
+    {
+        "q": "Can 'post-rewrite' hook distinguish between amend and rebase?",
+        "type": "mcq",
+        "o": [
+            "Yes, it receives the command name as argument 1 ('amend' or 'rebase')",
+            "No",
+            "Only rebase",
+            "Only amend"
+        ]
+    },
+    {
+        "q": "What input does 'post-rewrite' receive on stdin?",
+        "type": "mcq",
+        "o": [
+            "List of rewritten commits: <old-sha> <new-sha>",
+            "List of files",
+            "List of refs",
+            "Diff"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git submodule update' is called?",
+        "type": "mcq",
+        "o": [
+            "None specifically for the superproject, but hooks inside the submodule might run (e.g. post-checkout)",
+            "pre-submodule",
+            "post-submodule",
+            "update-submodule"
+        ]
+    },
+    {
+        "q": "Does 'pre-commit' run files through linter automatically?",
+        "type": "mcq",
+        "o": [
+            "Only if you write the script to do so (Git doesn't do it built-in)",
+            "Yes, default behavior",
+            "No, linter is post-commit",
+            "Yes, if language detected"
+        ]
+    },
+    {
+        "q": "What is a common tool to lint only staged files in pre-commit?",
+        "type": "mcq",
+        "o": [
+            "lint-staged (often used with husky)",
+            "git-lint",
+            "staged-lint",
+            "pre-lint"
+        ]
+    },
+    {
+        "q": "Can you use hooks to modify the author date?",
+        "type": "mcq",
+        "o": [
+            "In pre-commit, you can set GIT_AUTHOR_DATE env var, but usually hooks validate rather than mutate env transparently",
+            "Yes, easily",
+            "No",
+            "Only committer date"
+        ]
+    },
+    {
+        "q": "Which hook corresponds to 'git checkout'?",
+        "type": "mcq",
+        "o": [
+            "post-checkout",
+            "pre-checkout (does not exist)",
+            "checkout-hook",
+            "on-checkout"
+        ]
+    },
+    {
+        "q": "What are the arguments for 'post-checkout'?",
+        "type": "mcq",
+        "o": [
+            "<old-head-sha> <new-head-sha> <flag> (flag=1 for branch checkout, 0 for file checkout)",
+            "Just branch name",
+            "Just sha",
+            "None"
+        ]
+    },
+    {
+        "q": "Does 'git switch' trigger 'post-checkout'?",
+        "type": "mcq",
+        "o": [
+            "Yes, switch is a specialized checkout",
+            "No",
+            "Only if flag set",
+            "Only if new branch"
+        ]
+    },
+    {
+        "q": "What is the 'pre-merge-commit' hook?",
+        "type": "mcq",
+        "o": [
+            "Runs before a merge commit is actually created (after resolving/successful merge logic)",
+            "Runs before merge starts",
+            "Runs after merge",
+            "Runs on conflicts"
+        ]
+    },
+    {
+        "q": "Can 'pre-merge-commit' stop a merge?",
+        "type": "mcq",
+        "o": [
+            "Yes, by exiting non-zero",
+            "No",
+            "Only fast-forward",
+            "Only squash"
+        ]
+    },
+    {
+        "q": "Is there a 'pre-fetch' hook?",
+        "type": "mcq",
+        "o": [
+            "No (historically), but some newer versions/features introduce 'pre-fetch' or similar capabilities via maintenance.",
+            "Yes, always",
+            "Yes, strictly",
+            "post-fetch exists"
+        ]
+    },
+    {
+        "q": "What prevents hooks from running in a bare repository?",
+        "type": "mcq",
+        "o": [
+            "Nothing, server-side hooks (pre-receive, etc.) run in bare repos. Client hooks (pre-commit) don't because there's no working tree/commit command usually.",
+            "Bare repos disable hooks",
+            "Config setting",
+            "Permissions"
+        ]
+    },
+    {
+        "q": "Which hook can check if a branch is 'protected' locally?",
+        "type": "mcq",
+        "o": [
+            "pre-commit or pre-push (check branch name)",
+            "post-commit",
+            "update",
+            "protect-hook"
+        ]
+    },
+    {
+        "q": "What happens if a hook script ends with 'exit 1'?",
+        "type": "mcq",
+        "o": [
+            "The associated Git action is aborted",
+            "It continues",
+            "It pauses",
+            "It restarts"
+        ]
+    },
+    {
+        "q": "Which hook is best to notify a chat room (Slack) of a new commit?",
+        "type": "mcq",
+        "o": [
+            "post-commit (local) or post-receive (server shared)",
+            "pre-commit",
+            "prepare-commit-msg",
+            "update"
+        ]
+    },
+    {
+        "q": "Can 'post-commit' modify the commit it just made?",
+        "type": "mcq",
+        "o": [
+            "No, the commit is immutable once created. It would have to create a NEW commit (amend).",
+            "Yes",
+            "Yes, via force",
+            "Yes, via pointers"
+        ]
+    },
+    {
+        "q": "What does 'git commit --no-verify' skip?",
+        "type": "mcq",
+        "o": [
+            "pre-commit and commit-msg hooks",
+            "All hooks",
+            "Only pre-commit",
+            "Only commit-msg"
+        ]
+    },
+    {
+        "q": "Does 'git rebase' run 'post-commit' for each replayed commit?",
+        "type": "mcq",
+        "o": [
+            "Yes, effectively (or post-rewrite at end usually). Actually rebase replays commits, often triggering post-commit for each apply.",
+            "No, never",
+            "Only at end",
+            "Only start"
+        ]
+    },
+    {
+        "q": "Which hook is used to default the commit message to the branch name?",
+        "type": "mcq",
+        "o": [
+            "prepare-commit-msg",
+            "commit-msg",
+            "pre-commit",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "How to debug a failing hook script?",
+        "type": "mcq",
+        "o": [
+            "Add echo statements (prints to stderr/stdout) or 'set -x' in bash",
+            "Use git --debug-hooks",
+            "Use git log hooks",
+            "Check windows logs"
+        ]
+    },
+    {
+        "q": "What is the 'reference-transaction' hook state 'prepared'?",
+        "type": "mcq",
+        "o": [
+            "The transaction is about to happen, but locked",
+            "Finished",
+            "Aborted",
+            "Started"
+        ]
+    },
+    {
+        "q": "What is the 'reference-transaction' hook state 'committed'?",
+        "type": "mcq",
+        "o": [
+            "The ref updates have been applied",
+            "Failed",
+            "Pending",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "Can you use python in hooks on Windows?",
+        "type": "mcq",
+        "o": [
+            "Yes, if python is in PATH and shebang is correct or handled by shell",
+            "No",
+            "Only PowerShell",
+            "Only Batch"
+        ]
+    },
+    {
+        "q": "What is the 'post-merge' flag argument?",
+        "type": "mcq",
+        "o": [
+            "bool: 1 if squash merge, 0 if normal merge",
+            "Usage count",
+            "Merge strategy",
+            "Commit hash"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git revert' is executed?",
+        "type": "mcq",
+        "o": [
+            "pre-commit, commit-msg, post-commit (since revert creates a commit)",
+            "pre-revert",
+            "post-revert",
+            "revert-msg"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git cherry-pick' is executed?",
+        "type": "mcq",
+        "o": [
+            "pre-commit, commit-msg, post-commit (if it creates a commit)",
+            "pre-pick",
+            "post-pick",
+            "pick-msg"
+        ]
+    },
+    {
+        "q": "How to globally ensure every repo has a specific pre-commit hook?",
+        "type": "mcq",
+        "o": [
+            "Set 'git config --global core.hooksPath /path/to/global/hooks'",
+            "Copy it everywhere manually",
+            "Git does it automatically",
+            "Use a virus"
+        ]
+    },
+    {
+        "q": "If core.hooksPath is set, do local .git/hooks run?",
+        "type": "mcq",
+        "o": [
+            "No, the global path overrides local hooks completely (unless the global hook calls the local one)",
+            "Yes, they cascade",
+            "Yes, local runs first",
+            "Yes, global runs first"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' capability 'atomic'?",
+        "type": "mcq",
+        "o": [
+            "All refs are updated or none",
+            "Atomic bomb",
+            "Small",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Which hook is useful for checking if a user has signed the CLA?",
+        "type": "mcq",
+        "o": [
+            "pre-receive (server side check on push)",
+            "post-commit",
+            "pre-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "What is the 'p4-post-changelist' hook?",
+        "type": "mcq",
+        "o": [
+            "Executed by git-p4 after submitting",
+            "Before submit",
+            "During submit",
+            "On error"
+        ]
+    },
+    {
+        "q": "Can you return a message to the user from 'update' hook?",
+        "type": "mcq",
+        "o": [
+            "Yes, write to stdout/stderr and it is relayed to client",
+            "No",
+            "Only via email",
+            "Only via log"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-receive' declines?",
+        "type": "mcq",
+        "o": [
+            "Client sees 'remote: error: ...' and 'pre-receive hook declined'",
+            "Client hangs",
+            "Client crashes",
+            "Client retries"
+        ]
+    },
+    {
+        "q": "Is 'post-receive' blocking for the client?",
+        "type": "mcq",
+        "o": [
+            "Yes, the client waits for it to finish before disconnecting (usually), unless async",
+            "No, it's fire and forget",
+            "Sometimes",
+            "Never"
+        ]
+    },
+    {
+        "q": "What if 'post-receive' takes too long?",
+        "type": "mcq",
+        "o": [
+            "The user's git push command hangs until it finishes",
+            "Timeouts",
+            "Nothing",
+            "Backgrounds"
+        ]
+    },
+    {
+        "q": "How to make 'post-receive' non-blocking?",
+        "type": "mcq",
+        "o": [
+            "Spawn a background process, disown it, and exit the script immediately",
+            "Use --async flag",
+            "Use & everywhere",
+            "Git config fast"
+        ]
+    },
+    {
+        "q": "What determines the current working directory of a hook?",
+        "type": "mcq",
+        "o": [
+            "Usually the top-level of the working tree (for client hooks) or the .git dir (for bare/server hooks)",
+            "Wait anywhere",
+            "Home dir",
+            "Root dir"
+        ]
+    },
+    {
+        "q": "Which hook can be used to prevent 'WIP' commits from being pushed?",
+        "type": "mcq",
+        "o": [
+            "pre-push",
+            "pre-commit",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "Can 'pre-push' hook modify the push?",
+        "type": "mcq",
+        "o": [
+            "No, it can only accept or reject it",
+            "Yes, it can change refs",
+            "Yes, it can change remote",
+            "Yes, it can add tags"
+        ]
+    },
+    {
+        "q": "What signals 'pre-push' to reject the push?",
+        "type": "mcq",
+        "o": [
+            "Exit code non-zero",
+            "Exit code 0",
+            "Print 'error'",
+            "Print 'stop'"
+        ]
+    },
+    {
+        "q": "What is the 'pre-auto-gc' hook?",
+        "type": "mcq",
+        "o": [
+            "Checks if 'git gc --auto' should run",
+            "GC checks",
+            "Auto clean",
+            "Pre clean"
+        ]
+    },
+    {
+        "q": "Which hook works with 'git diff'?",
+        "type": "mcq",
+        "o": [
+            "Usually none directly; diff is read-only. External diff drivers are config, not hooks.",
+            "pre-diff",
+            "post-diff",
+            "diff-hook"
+        ]
+    },
+    {
+        "q": "Can you chain hooks easily?",
+        "type": "mcq",
+        "o": [
+            "Only by writing a master script that calls others",
+            "Yes, git chains them",
+            "Yes, name them 01, 02",
+            "Yes, folder support"
+        ]
+    },
+    {
+        "q": "What is the 'pre-access' hook (theoretical)?",
+        "type": "mcq",
+        "o": [
+            "Not a standard Git hook; maybe feature of Git server software (Gitolite, GitLab)",
+            "Standard hook",
+            "Before login",
+            "After login"
+        ]
+    },
+    {
+        "q": "If 'post-merge' is not executable?",
+        "type": "mcq",
+        "o": [
+            "It is skipped",
+            "Error",
+            "Warning",
+            "Retry"
+        ]
+    },
+    {
+        "q": "Does 'git stash apply' trigger 'post-merge'?",
+        "type": "mcq",
+        "o": [
+            "No, stash apply is not a merge command in that sense (though it uses merge logic)",
+            "Yes",
+            "Only if conflict",
+            "Only if index changes"
+        ]
+    },
+    {
+        "q": "Which hook can validate 'git tag' creation?",
+        "type": "mcq",
+        "o": [
+            "None specific for 'git tag' command client-side (unless signed tag + gpg calls). Server-side 'update' or 'pre-receive' can check tags.",
+            "pre-tag",
+            "post-tag",
+            "tag-msg"
+        ]
+    },
+    {
+        "q": "Can 'update' hook output messages to client?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only errors",
+            "Only success"
+        ]
+    },
+    {
+        "q": "What is a 'bare' repo's hook directory?",
+        "type": "mcq",
+        "o": [
+            "hooks/ (inside the bare repo root)",
+            ".git/hooks",
+            "refs/hooks",
+            "info/hooks"
+        ]
+    },
+    {
+        "q": "Can 'commit-msg' hook see the author?",
+        "type": "mcq",
+        "o": [
+            "Yes, by parsing the commit file or reading env vars/config",
+            "No",
+            "Only email",
+            "Only date"
+        ]
+    },
+    {
+        "q": "which hook is 'git notes copy' related?",
+        "type": "mcq",
+        "o": [
+            "post-rewrite (if notes copying is enabled for rewrites)",
+            "pre-note",
+            "post-note",
+            "copy-note"
+        ]
+    },
+    {
+        "q": "What is the default content of sample hooks?",
+        "type": "mcq",
+        "o": [
+            "Shell script code (often checks for whitespace errors or non-ascii names)",
+            "Empty",
+            "Binary",
+            "Python code"
+        ]
+    },
+    {
+        "q": "How to update hooks in a shared repo automatically?",
+        "type": "mcq",
+        "o": [
+            "Cannot be done via git fetch/pull for security. Must use a package manager or install script.",
+            "git pull --hooks",
+            "git fetch --hooks",
+            "git update hooks"
+        ]
+    },
+    {
+        "q": "What is 'git-sizer'?",
+        "type": "mcq",
+        "o": [
+            "Tool to compute various size metrics (not a hook, but useful to check repo health)",
+            "Resize hook",
+            "Size hook",
+            "Compress hook"
+        ]
+    },
+    {
+        "q": "If 'pre-receive' prints text, what prefix does client see?",
+        "type": "mcq",
+        "o": [
+            "remote: <text>",
+            "server: <text>",
+            "hook: <text>",
+            "error: <text>"
+        ]
+    },
+    {
+        "q": "What is the 'smart HTTP' protocol hook behavior?",
+        "type": "mcq",
+        "o": [
+            "Supports pre-receive, update, post-receive same as SSH",
+            "No hooks",
+            "Only pre-receive",
+            "Only post-receive"
+        ]
+    },
+    {
+        "q": "Can 'dumb HTTP' trigger server hooks?",
+        "type": "mcq",
+        "o": [
+            "No, dumb HTTP is just file access; no git-receive-pack process runs on server",
+            "Yes",
+            "Sometimes",
+            "Only update"
+        ]
+    },
+    {
+        "q": "What if you edit a hook on the server live?",
+        "type": "mcq",
+        "o": [
+            "Immediate effect for next operation",
+            "Requires restart",
+            "Requires recompile",
+            "Requires reload"
+        ]
+    },
+    {
+        "q": "What is the maximum output size of a hook?",
+        "type": "mcq",
+        "o": [
+            "Dependent on system pipe buffers/network",
+            "1KB",
+            "1MB",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "Which hook can block a tag deletion?",
+        "type": "mcq",
+        "o": [
+            "pre-receive or update (checking if new-sha is 0000...)",
+            "pre-tag-delete",
+            "post-tag",
+            "tag-check"
+        ]
+    },
+    {
+        "q": "Can you use hooks to enforce commit message regex?",
+        "type": "mcq",
+        "o": [
+            "Yes, commit-msg hook",
+            "No",
+            "Only length",
+            "Only ascii"
+        ]
+    },
+    {
+        "q": "What is 'git rev-parse --git-path hooks'?",
+        "type": "mcq",
+        "o": [
+            "Command to find the correct hooks directory (respecting core.hooksPath)",
+            "Path parsing",
+            "Hook parsing",
+            "Config parsing"
+        ]
+    },
+    {
+        "q": "What does 'pre-commit' hook do with unstaged changes?",
+        "type": "mcq",
+        "o": [
+            "It sees the working tree as is. If you want to test ONLY staged changes, you must stash unstaged or use 'git diff --cached' in hook.",
+            "Ignores them",
+            "Stashes them auto",
+            "Errors"
+        ]
+    },
+    {
+        "q": "How to test commits that are partial (git commit -p)?",
+        "type": "mcq",
+        "o": [
+            "The 'staged' content is what is committed. Pre-commit should check the index.",
+            "Impossible",
+            "Diff working tree",
+            "Diff HEAD"
+        ]
+    },
+    {
+        "q": "What is the 'fsmonitor-watchman' hook configuration?",
+        "type": "mcq",
+        "o": [
+            "core.fsmonitor config setting points to the hook/script",
+            "fsmonitor.hook",
+            "watchman.hook",
+            "No config"
+        ]
+    },
+    {
+        "q": "What is the primary benefit of 'fsmonitor-watchman' hook?",
+        "type": "mcq",
+        "o": [
+            "Speeds up 'git status' and other commands on large repos by avoiding full scans",
+            "Better security",
+            "Cleaner logs",
+            "Automatic commits"
+        ]
+    },
+    {
+        "q": "Do all hooks need to be shell scripts?",
+        "type": "mcq",
+        "o": [
+            "No, they can be any executable (binary or script with shebang)",
+            "Yes",
+            "Mostly",
+            "Only Perl"
+        ]
+    },
+    {
+        "q": "What if you have a hook named 'pre-commit.sh'?",
+        "type": "mcq",
+        "o": [
+            "Git will ignore it; default hook names must be exact (no extension)",
+            "Git runs it",
+            "Git errors",
+            "Git renames it"
+        ]
+    },
+    {
+        "q": "Which hook can be used to ensure no one commits to a 'release' branch during code freeze?",
+        "type": "mcq",
+        "o": [
+            "pre-commit (local) or pre-receive (server)",
+            "post-commit",
+            "update-freeze",
+            "freeze-hook"
+        ]
+    },
+    {
+        "q": "How can you check if a specific hook is currently active/set?",
+        "type": "mcq",
+        "o": [
+            "Check if the file exists in .git/hooks (or core.hooksPath) and is executable",
+            "git hook status",
+            "git check-hooks",
+            "git config --list-hooks"
+        ]
+    },
+    {
+        "q": "What is 'git config core.hooksPath' default?",
+        "type": "mcq",
+        "o": [
+            "$GIT_DIR/hooks",
+            "~/.git/hooks",
+            "/etc/git/hooks",
+            "None"
+        ]
+    },
+    {
+        "q": "Can you bypass 'update' hook on server?",
+        "type": "mcq",
+        "o": [
+            "Usually no, server hooks are enforced by the server admin. Clients can't bypass unless server admin allows specific flags/users.",
+            "Yes with --no-verify",
+            "Yes with --force",
+            "Yes with --admin"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-receive' prints to stderr?",
+        "type": "mcq",
+        "o": [
+            "The output is relayed to the client (prefixed with remote:)",
+            "Ignored",
+            "Server log only",
+            "Client crashes"
+        ]
+    },
+    {
+        "q": "Which hook is triggered by 'git gc'?",
+        "type": "mcq",
+        "o": [
+            "pre-auto-gc (if triggered automatically)",
+            "pre-gc",
+            "post-gc",
+            "gc-hook"
+        ]
+    },
+    {
+        "q": "What is the 'reference-transaction' hook state 'aborted'?",
+        "type": "mcq",
+        "o": [
+            "The transaction failed or was cancelled",
+            "Rolled back",
+            "Pending",
+            "Waiting"
+        ]
+    },
+    {
+        "q": "Can 'post-merge' hook access the result of the merge?",
+        "type": "mcq",
+        "o": [
+            "Yes, the working tree is already updated. It can check git status or result files.",
+            "No",
+            "Only conflict list",
+            "Only log"
+        ]
+    },
+    {
+        "q": "Which hook runs when you use 'git commit --amend'?",
+        "type": "mcq",
+        "o": [
+            "pre-commit, prepare-commit-msg, commit-msg, post-commit, and post-rewrite ('amend')",
+            "Only post-rewrite",
+            "Only pre-commit",
+            "None"
+        ]
+    },
+    {
+        "q": "Does 'git rebase --continue' trigger 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "Yes, for the commit being applied/re-created",
+            "No",
+            "Sometimes",
+            "Only on conflicts"
+        ]
+    },
+    {
+        "q": "Which hook can you use to auto-generate documentation after merge?",
+        "type": "mcq",
+        "o": [
+            "post-merge",
+            "pre-merge",
+            "update",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "What is 'git cvsexportcommit' hook behavior?",
+        "type": "mcq",
+        "o": [
+            "Calls 'pre-commit', 'msg', 'post-commit' if it creates git commits",
+            "cvs-hook",
+            "export-hook",
+            "None"
+        ]
+    },
+    {
+        "q": "What functionality does 'husky' provide for hooks?",
+        "type": "mcq",
+        "o": [
+            "Easier configuration of hooks via package.json or config files in Node projects",
+            "Binary hooks",
+            "Server hooks",
+            "Cloud hooks"
+        ]
+    },
+    {
+        "q": "If 'pre-push' fails, is data sent?",
+        "type": "mcq",
+        "o": [
+            "No, it runs before objects are transferred (usually)",
+            "Yes, but ignored",
+            "Yes, but deleted",
+            "Partially"
+        ]
+    },
+    {
+        "q": "Can hooks be symlinks?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only absolute",
+            "Only relative"
+        ]
+    },
+    {
+        "q": "What is 'git stash' related hook?",
+        "type": "mcq",
+        "o": [
+            "None officially (no pre-stash or post-stash)",
+            "pre-stash",
+            "post-stash",
+            "stash-hook"
+        ]
+    },
+    {
+        "q": "Does 'git notes add' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "post-commit (creating a note creates a commit in refs/notes/commits)",
+            "pre-note",
+            "note-msg",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Which hook runs for 'git push --delete'?",
+        "type": "mcq",
+        "o": [
+            "pre-push (client), pre-receive/update/post-receive (server) with special '0000...' new-sha",
+            "pre-delete",
+            "post-delete",
+            "delete-check"
+        ]
+    },
+    {
+        "q": "How to detect a branch deletion in 'update' hook?",
+        "type": "mcq",
+        "o": [
+            "Check if new-object-name is 0000000000000000000000000000000000000000",
+            "Check argument 'delete'",
+            "Check env var",
+            "Check status only"
+        ]
+    },
+    {
+        "q": "What is the 'post-index-change' argument '0' (zero)?",
+        "type": "mcq",
+        "o": [
+            "Updating the working tree",
+            "Updating the index only",
+            "Both",
+            "None"
+        ]
+    },
+    {
+        "q": "What is the 'post-index-change' argument '1' (one)?",
+        "type": "mcq",
+        "o": [
+            "Updated the working tree (checkout, etc.)",
+            "Updated index only",
+            "Both",
+            "None"
+        ]
+    },
+    {
+        "q": "Can you invoke a hook from another hook?",
+        "type": "mcq",
+        "o": [
+            "Yes, it's just a script call",
+            "No",
+            "Only if in same dir",
+            "Only if trusted"
+        ]
+    },
+    {
+        "q": "What is the timeout for hooks?",
+        "type": "mcq",
+        "o": [
+            "Effectively none by Git (OS limits apply, or user patience)",
+            "30 seconds",
+            "1 minute",
+            "5 minutes"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook access network?",
+        "type": "mcq",
+        "o": [
+            "Yes, if the environment allows it (e.g. check API validation)",
+            "No, blocked",
+            "Only local checks",
+            "Only http"
+        ]
+    },
+    {
+        "q": "Why is network access in 'pre-commit' discouraged?",
+        "type": "mcq",
+        "o": [
+            "Latency makes committing slow/flaky (requires internet)",
+            "Security risk",
+            "Impossible",
+            "Complexity"
+        ]
+    },
+    {
+        "q": "Which hook can ensure commit messages follow 'Conventional Commits'?",
+        "type": "mcq",
+        "o": [
+            "commit-msg",
+            "pre-commit",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "If 'commit-msg' hook modifies the message, does the user see it?",
+        "type": "mcq",
+        "o": [
+            "No, the user sees their editor; the hook runs *after* user exits editor (message is finalized on disk)",
+            "Yes, reopens editor",
+            "Yes, warning",
+            "Yes, confirmation"
+        ]
+    },
+    {
+        "q": "What is 'git-multimail'?",
+        "type": "mcq",
+        "o": [
+            "A tool often hooked into post-receive for email notifications",
+            "Email client",
+            "Spam tool",
+            "Filter"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook argument?",
+        "type": "mcq",
+        "o": [
+            "None, reads from stdin",
+            "Ref name",
+            "SHA",
+            "User"
+        ]
+    },
+    {
+        "q": "What environment variable contains the directory of the hook being run?",
+        "type": "mcq",
+        "o": [
+            "None standard, usually must rely on $0 path resolution or PWD",
+            "GIT_HOOK_DIR",
+            "HOOK_PATH",
+            "GIT_DIR"
+        ]
+    },
+    {
+        "q": "Does 'git rebase --abort' run hooks?",
+        "type": "mcq",
+        "o": [
+            "No specific abort hook (post-checkout checks out original branch)",
+            "pre-abort",
+            "post-abort",
+            "abort-msg"
+        ]
+    },
+    {
+        "q": "Can you configure hooks to run in parallel?",
+        "type": "mcq",
+        "o": [
+            "No, git runs the specific hook script sequentially/blocking",
+            "Yes",
+            "Only with --parallel",
+            "Only server side"
+        ]
+    },
+    {
+        "q": "What is 'git commit --template' relation to hooks?",
+        "type": "mcq",
+        "o": [
+            "Template provides initial text; prepare-commit-msg hook can also modify/provide text (hook runs after template loaded)",
+            "Template overrides hook",
+            "Hook overrides template",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "What is a 'bare' repository used for?",
+        "type": "mcq",
+        "o": [
+            "Central storage/sharing (no working tree), where server-side hooks run",
+            "Backup only",
+            "Local dev",
+            "Testing"
+        ]
+    },
+    {
+        "q": "Can 'pre-receive' create files on the server?",
+        "type": "mcq",
+        "o": [
+            "Yes, it's a script running on the server filesystem",
+            "No",
+            "Only in memory",
+            "Only logs"
+        ]
+    },
+    {
+        "q": "What happens if you have both global hooks and local hooks?",
+        "type": "mcq",
+        "o": [
+            "If core.hooksPath is set, ONLY global hooks run (local ignored). If not set, ONLY local run.",
+            "Both run",
+            "Local overrides global",
+            "Global appends local"
+        ]
+    },
+    {
+        "q": "How to run BOTH global and local hooks?",
+        "type": "mcq",
+        "o": [
+            "Have the global hook script manually execute the local hook if it exists, or manage via a framework",
+            "Set core.chainHooks true",
+            "Automatic",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "Which hook is useful for checking 'merge conflict markers' in code?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "post-commit",
+            "update",
+            "post-merge"
+        ]
+    },
+    {
+        "q": "Does 'pre-commit' run on 'git commit --amend'?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only if content changes",
+            "Only if message changes"
+        ]
+    },
+    {
+        "q": "If 'pre-commit' modifies a file but doesn't 'git add' it?",
+        "type": "mcq",
+        "o": [
+            "The modification stays in working tree (unstaged) and is NOT part of the commit",
+            "It is added automatically",
+            "It is discarded",
+            "It is error"
+        ]
+    },
+    {
+        "q": "What is 'git citool'?",
+        "type": "mcq",
+        "o": [
+            "Graphical commit tool (triggers hooks properly)",
+            "CI tool",
+            "Check integrity",
+            "Hook manager"
+        ]
+    },
+    {
+        "q": "What is 'post-rewrite' arg 'amend'?",
+        "type": "mcq",
+        "o": [
+            "Indicates the rewrite was caused by amend",
+            "Indicates error",
+            "Indicates success",
+            "Indicates rebase"
+        ]
+    },
+    {
+        "q": "What is 'post-rewrite' arg 'rebase'?",
+        "type": "mcq",
+        "o": [
+            "Indicates rewrite was caused by rebase",
+            "Indicates error",
+            "Indicates success",
+            "Indicates info"
+        ]
+    },
+    {
+        "q": "Which hook can deny a forced push?",
+        "type": "mcq",
+        "o": [
+            "pre-receive or update (check if it is a non-fast-forward update)",
+            "pre-push (client side check)",
+            "post-push",
+            "force-check"
+        ]
+    },
+    {
+        "q": "How to detect a force push in 'pre-receive'?",
+        "type": "mcq",
+        "o": [
+            "Check if new-sha is not a descendant of old-sha (non-fast-forward)",
+            "Check --force flag (not passed to hook)",
+            "Check user",
+            "Check config"
+        ]
+    },
+    {
+        "q": "What is the 'GIT_DIR' env var in hooks?",
+        "type": "mcq",
+        "o": [
+            "Path to the .git directory",
+            "Path to working tree",
+            "Path to hooks",
+            "Path to config"
+        ]
+    },
+    {
+        "q": "What is the 'GIT_WORK_TREE' env var in hooks?",
+        "type": "mcq",
+        "o": [
+            "Path to working tree root (if applicable/set)",
+            "Path to .git",
+            "Path to remote",
+            "Path to temp"
+        ]
+    },
+    {
+        "q": "Can you use 'git rev-list' in hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, very common to inspect commits",
+            "No",
+            "Only in server hooks",
+            "Only in client hooks"
+        ]
+    },
+    {
+        "q": "What is the benefit of 'server-side' hooks over 'client-side'?",
+        "type": "mcq",
+        "o": [
+            "Enforcement. Users can bypass client hooks easily; server hooks protect the central repo.",
+            "Speed",
+            "Ease of use",
+            "GUI support"
+        ]
+    },
+    {
+        "q": "What is the benefit of 'client-side' hooks?",
+        "type": "mcq",
+        "o": [
+            "Immediate feedback to developer before network transfer",
+            "Enforcement",
+            "Central control",
+            "Security"
+        ]
+    },
+    {
+        "q": "Which hook is used for 'git filter-branch'?",
+        "type": "mcq",
+        "o": [
+            "post-rewrite (filter-branch is a rewrite)",
+            "pre-filter",
+            "post-filter",
+            "filter-msg"
+        ]
+    },
+    {
+        "q": "How to install hooks from a repo automatically?",
+        "type": "mcq",
+        "o": [
+            "Use 'git config core.hooksPath .githooks' in setup script or npm postinstall",
+            "git install hooks",
+            "git copy hooks",
+            "Automatic"
+        ]
+    },
+    {
+        "q": "What is 'pre-push' input 'remote_name'?",
+        "type": "mcq",
+        "o": [
+            "The name of the remote (e.g. origin)",
+            "URL",
+            "User",
+            "Branch"
+        ]
+    },
+    {
+        "q": "What is 'pre-push' input 'remote_url'?",
+        "type": "mcq",
+        "o": [
+            "The URL of the remote",
+            "Name",
+            "Config path",
+            "IP"
+        ]
+    },
+    {
+        "q": "Does 'git fetch' trigger 'update' hook?",
+        "type": "mcq",
+        "o": [
+            "No, 'update' is server-side on push. Fetch is client side read.",
+            "Yes",
+            "Yes, post-update",
+            "Yes, pre-fetch"
+        ]
+    },
+    {
+        "q": "What is 'githooks' man page section?",
+        "type": "mcq",
+        "o": [
+            "man githooks (section 5)",
+            "section 1",
+            "section 7",
+            "section 3"
+        ]
+    },
+    {
+        "q": "Can hooks prompt for user input (e.g. read)?",
+        "type": "mcq",
+        "o": [
+            "Yes, but they must read from /dev/tty explicitly if stdin is occupied by git data",
+            "No, impossible",
+            "Only in Windows",
+            "Only in GUI"
+        ]
+    },
+    {
+        "q": "Why might reading stdin in 'pre-commit' fail?",
+        "type": "mcq",
+        "o": [
+            "Because git might not provide stdin pipe or it might be closed; usually pre-commit checks files/status directly",
+            "It is blocked",
+            "It is reserved",
+            "It is encrypted"
+        ]
+    },
+    {
+        "q": "What is 'git commit --verbose' impact on 'prepare-commit-msg'?",
+        "type": "mcq",
+        "o": [
+            "The message file includes the diff; hook sees it",
+            "Hook is skipped",
+            "Hook fails",
+            "Diff is hidden"
+        ]
+    },
+    {
+        "q": "Which hook allows checking ensuring a commit author has a signed CLA?",
+        "type": "mcq",
+        "o": [
+            "pre-receive or update (server)",
+            "pre-add",
+            "post-tag",
+            "applypatch-msg"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-receive' takes too much memory?",
+        "type": "mcq",
+        "o": [
+            "Server OS kills it (OOM); push fails",
+            "Git optimizes it",
+            "Push succeeds",
+            "Warning only"
+        ]
+    },
+    {
+        "q": "Can 'update' hook modify the ref?",
+        "type": "mcq",
+        "o": [
+            "No, it can only accept or reject the update",
+            "Yes, to correct it",
+            "Yes, to revert it",
+            "Yes, to tag it"
+        ]
+    },
+    {
+        "q": "What determines the exit code of the hook script?",
+        "type": "mcq",
+        "o": [
+            "The exit code of the last command executed, or explicit exit N",
+            "Always 0",
+            "Always 1",
+            "Random"
+        ]
+    },
+    {
+        "q": "If 'post-commit' fails, is the commit undone?",
+        "type": "mcq",
+        "o": [
+            "No, post-commit is after the fact (notification only)",
+            "Yes",
+            "Yes, partially",
+            "No, but index reset"
+        ]
+    },
+    {
+        "q": "Which hook typically sends email notifications of pushes?",
+        "type": "mcq",
+        "o": [
+            "post-receive",
+            "pre-receive",
+            "pre-push",
+            "update"
+        ]
+    },
+    {
+        "q": "Can 'pre-push' abort a push to a specific branch only?",
+        "type": "mcq",
+        "o": [
+            "No, pre-push aborts the whole push operation. (Though script could filter, return 0, but users usually want full abort on failure)",
+            "Yes",
+            "Maybe",
+            "Only master"
+        ]
+    },
+    {
+        "q": "What is 'git config advice.ignoredHook'?",
+        "type": "mcq",
+        "o": [
+            "Controls advice when a hook is ignored because it's not executable",
+            "Ignored files",
+            "Ignored commits",
+            "Ignored refs"
+        ]
+    },
+    {
+        "q": "What is 'pre-auto-gc' return code to skip GC?",
+        "type": "mcq",
+        "o": [
+            "None-zero exits skips the auto gc",
+            "0 skips",
+            "100 skips",
+            "-1 skips"
+        ]
+    },
+    {
+        "q": "Which hook defines the default message for 'git commit'?",
+        "type": "mcq",
+        "o": [
+            "prepare-commit-msg",
+            "commit-msg",
+            "pre-commit",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "Can hooks utilize other git commands like 'git show'?",
+        "type": "mcq",
+        "o": [
+            "Yes",
+            "No",
+            "Only plumbing",
+            "Only porcelain"
+        ]
+    },
+    {
+        "q": "What is 'Reference Transaction'?",
+        "type": "mcq",
+        "o": [
+            "A mechanism to ensure ref updates are atomic; exposed via reference-transaction hook",
+            "Bank transfer",
+            "SQL transaction",
+            "File lock"
+        ]
+    },
+    {
+        "q": "Can hooks be disabled for a single command execution?",
+        "type": "mcq",
+        "o": [
+            "Yes, often via --no-verify (for commit/push)",
+            "No",
+            "Only globally",
+            "Only locally"
+        ]
+    },
+    {
+        "q": "What is 'applypatch-msg' hook?",
+        "type": "mcq",
+        "o": [
+            "Checks the commit message file for 'git am'",
+            "Checks patch file",
+            "Checks diff",
+            "Checks author"
+        ]
+    },
+    {
+        "q": "What is 'pre-applypatch' hook?",
+        "type": "mcq",
+        "o": [
+            "Checks the state after patch is applied but before commit is made (like pre-commit for am)",
+            "Before patch applied",
+            "After commit",
+            "On error"
+        ]
+    },
+    {
+        "q": "What is 'post-applypatch' hook?",
+        "type": "mcq",
+        "o": [
+            "Runs after 'git am' commit is finalized (notification)",
+            "Before finalize",
+            "On revert",
+            "On conflict"
+        ]
+    },
+    {
+        "q": "Do hooks run in a specific shell?",
+        "type": "mcq",
+        "o": [
+            "Whatever the shebang specifies (e.g. #!/bin/bash). Git executes the file.",
+            "Always sh",
+            "Always bash",
+            "Always cmd"
+        ]
+    },
+    {
+        "q": "Can you use a compiled binary as a hook?",
+        "type": "mcq",
+        "o": [
+            "Yes, if named correctly and executable",
+            "No",
+            "Only C++",
+            "Only Java"
+        ]
+    },
+    {
+        "q": "What is 'git commit -n'?",
+        "type": "mcq",
+        "o": [
+            "Alias for --no-verify (skip hooks)",
+            "New commit",
+            "Null commit",
+            "Name commit"
+        ]
+    },
+    {
+        "q": "Does 'git push --no-verify' skip 'pre-receive'?",
+        "type": "mcq",
+        "o": [
+            "No, it skips 'pre-push' (client). Server hooks cannot be skipped by client.",
+            "Yes",
+            "Sometimes",
+            "If admin"
+        ]
+    },
+    {
+        "q": "Which hook is useful for checking if a file contains secrets/keys?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "post-commit",
+            "update",
+            "pre-receive"
+        ]
+    },
+    {
+        "q": "What if you remove 'chmod +x' from a hook?",
+        "type": "mcq",
+        "o": [
+            "Git stops executing it",
+            "Git warnings",
+            "Git executes it anyway",
+            "Git deletes it"
+        ]
+    },
+    {
+        "q": "What is 'git reflog' behavior with hooks?",
+        "type": "mcq",
+        "o": [
+            "Reflog updates might trigger reference-transaction hook",
+            "Reflog triggers pre-reflog",
+            "Reflog triggers post-reflog",
+            "None"
+        ]
+    },
+    {
+        "q": "Can 'pre-receive' modify the refs it receives?",
+        "type": "mcq",
+        "o": [
+            "No, it validates them. If it exits 0, git proceeds to update them (unless update hook rejects).",
+            "Yes",
+            "Yes, via return values",
+            "Yes, via stdout"
+        ]
+    },
+    {
+        "q": "What is 'update' hook return code?",
+        "type": "mcq",
+        "o": [
+            "0 to allow the ref update, non-zero to deny",
+            "0 to deny",
+            "1 to allow",
+            "-1 to allow"
+        ]
+    },
+    {
+        "q": "Which hook is run for 'git notes' operations?",
+        "type": "mcq",
+        "o": [
+            "post-commit (creating notes is a commit)",
+            "pre-note",
+            "note-insert",
+            "note-check"
+        ]
+    },
+    {
+        "q": "Does 'git merge' trigger 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it stops for user interaction (no-commit or conflict) and user runs 'git commit'. Also 'pre-merge-commit' is specific.",
+            "Never",
+            "Always",
+            "Only squash"
+        ]
+    },
+    {
+        "q": "What is 'git commit --no-verify' abbreviation?",
+        "type": "mcq",
+        "o": [
+            "-n",
+            "-v",
+            "-f",
+            "-s"
+        ]
+    },
+    {
+        "q": "What is the 'pre-rebase' hook arg 1?",
+        "type": "mcq",
+        "o": [
+            "The upstream from which the series was forked",
+            "The branch being rebased",
+            "The new base",
+            "The SHA"
+        ]
+    },
+    {
+        "q": "What is the 'pre-rebase' hook arg 2?",
+        "type": "mcq",
+        "o": [
+            "The branch being rebased (if valid/applicable)",
+            "The upstream",
+            "The new base",
+            "The SHA"
+        ]
+    },
+    {
+        "q": "Can 'pre-rebase' hook prevent rebase of published branches?",
+        "type": "mcq",
+        "o": [
+            "Yes, by checking if the branch being rebased is 'master' or 'develop' and exiting non-zero",
+            "No",
+            "Only local branches",
+            "Only remote branches"
+        ]
+    },
+    {
+        "q": "What is the 'sendemail-validate' hook arg?",
+        "type": "mcq",
+        "o": [
+            "The name of the file that contains the email to be sent",
+            "The email address",
+            "The subject",
+            "The SMTP server"
+        ]
+    },
+    {
+        "q": "What happens if 'sendemail-validate' exits non-zero?",
+        "type": "mcq",
+        "o": [
+            "git send-email aborts sending that email",
+            "It sends anyway",
+            "It warns",
+            "It retries"
+        ]
+    },
+    {
+        "q": "Can 'fsmonitor-watchman' output version?",
+        "type": "mcq",
+        "o": [
+            "Yes, arg 1 can be valid version number",
+            "No",
+            "Only 1",
+            "Only 2"
+        ]
+    },
+    {
+        "q": "What is 'git update-index --fsmonitor'?",
+        "type": "mcq",
+        "o": [
+            "Configures the index to use the fsmonitor info",
+            "Updates hooks",
+            "Updates monitor",
+            "Updates Watchman"
+        ]
+    },
+    {
+        "q": "Which hook is useful for enforcing file naming conventions?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "post-commit",
+            "post-merge",
+            "update"
+        ]
+    },
+    {
+        "q": "Which hook is useful for enforcing tab vs space indentation?",
+        "type": "mcq",
+        "o": [
+            "pre-commit",
+            "prepare-commit-msg",
+            "commit-msg",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "What is the 'post-update' behavior regarding arguments?",
+        "type": "mcq",
+        "o": [
+            "It receives a variable number of arguments (the names of refs updated)",
+            "Receives 1 argument",
+            "Receives 0 arguments",
+            "Receives array"
+        ]
+    },
+    {
+        "q": "How does 'git receive-pack' communicate with 'post-update'?",
+        "type": "mcq",
+        "o": [
+            "Executes it",
+            "Signals it",
+            "Pipes to it",
+            "Files"
+        ]
+    },
+    {
+        "q": "Can you debug hooks with 'pdb' (Python)?",
+        "type": "mcq",
+        "o": [
+            "Yes, but interactive debugging might be tricky if stdin/stdout are redirected. Use logging or remote debugger.",
+            "No",
+            "Only pdb++",
+            "Only ipdb"
+        ]
+    },
+    {
+        "q": "Which hook runs when 'git pull --rebase' is executed?",
+        "type": "mcq",
+        "o": [
+            "pre-rebase (and potentially pre-commit/etc during replay)",
+            "pre-merge",
+            "post-merge",
+            "update"
+        ]
+    },
+    {
+        "q": "Does 'git stash pop' trigger 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "No, stash pop modifies worktree/index but does not commit.",
+            "Yes",
+            "Yes, if conflict",
+            "Yes, if index"
+        ]
+    },
+    {
+        "q": "What hook ensures 'Change-Id' exists in commit message (Gerrit)?",
+        "type": "mcq",
+        "o": [
+            "commit-msg",
+            "pre-commit",
+            "post-commit",
+            "update"
+        ]
+    },
+    {
+        "q": "Can 'update' hook access the pushed content?",
+        "type": "mcq",
+        "o": [
+            "Yes, via the new-object-name (SHA) which exists in the repo by then",
+            "No",
+            "Only name",
+            "Only old content"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-receive' modifies the refs?",
+        "type": "mcq",
+        "o": [
+            "It shouldn't/can't elegantly. The update process expects refs to be updated by git-receive-pack if hooks pass.",
+            "It works",
+            "It fails",
+            "It loops"
+        ]
+    },
+    {
+        "q": "What is 'git config core.ignoreCase' relevance to hooks?",
+        "type": "mcq",
+        "o": [
+            "Hooks validating filenames must respect/be aware of case sensitivity settings",
+            "None",
+            "Hooks are case insensitive",
+            "Config is ignored"
+        ]
+    },
+    {
+        "q": "Which hook can validate 'git push --tags'?",
+        "type": "mcq",
+        "o": [
+            "pre-receive/update/post-receive (server) or pre-push (client)",
+            "pre-tag",
+            "post-tag",
+            "tag-check"
+        ]
+    },
+    {
+        "q": "What is 'post-rewrite' arg for 'git commit --amend'?",
+        "type": "mcq",
+        "o": [
+            "amend",
+            "rebase",
+            "rewrite",
+            "edit"
+        ]
+    },
+    {
+        "q": "Can you use hooks to enforce linear history (no merges)?",
+        "type": "mcq",
+        "o": [
+            "Yes, check parent count of commits in pre-receive",
+            "No",
+            "Only local",
+            "Only remote"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook argument format?",
+        "type": "mcq",
+        "o": [
+            "Commands on stdin: <old> <new> <ref>",
+            "Args",
+            "JSON",
+            "XML"
+        ]
+    },
+    {
+        "q": "How does 'proc-receive' report status?",
+        "type": "mcq",
+        "o": [
+            "It prints status reports to stdout in specific pkt-line format (extensible)",
+            "Exit code",
+            "Stderr",
+            "Files"
+        ]
+    },
+    {
+        "q": "What is the 'reference-transaction' hook 'committed' state vs 'aborted'?",
+        "type": "mcq",
+        "o": [
+            "Committed means change persists; Aborted means it was rolled back",
+            "Same",
+            "Committed is memory only",
+            "Aborted is disk only"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook be skipped with config?",
+        "type": "mcq",
+        "o": [
+            "No built-in config 'skip-pre-commit', user mostly uses -n flag. Scripts can implement their own skip logic.",
+            "Yes, core.skipPreCommit",
+            "Yes, git config skip",
+            "Yes, user.skip"
+        ]
+    },
+    {
+        "q": "Can 'prepare-commit-msg' suppress the editor?",
+        "type": "mcq",
+        "o": [
+            "No, verify commits usually open editor unless -m provided. The hook just prepares the text.",
+            "Yes",
+            "Yes, exit 1",
+            "Yes, exit 0"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-commit' takes 10 minutes?",
+        "type": "mcq",
+        "o": [
+            "Git waits (no default timeout purely by git)",
+            "Git kills it",
+            "Git backgrounds it",
+            "Git errors"
+        ]
+    },
+    {
+        "q": "Which hook is used for 'git filter-repo' (alternative to filter-branch)?",
+        "type": "mcq",
+        "o": [
+            "Might generally trigger reference-transaction or post-rewrite if configured/supported by tool",
+            "pre-filter",
+            "post-filter",
+            "filter-repo-hook"
+        ]
+    },
+    {
+        "q": "What is 'git maintenance' hooks?",
+        "type": "mcq",
+        "o": [
+            "Maintenance tasks (gc, prefetch) can be automated; not traditional hooks script",
+            "Script",
+            "Bin",
+            "Cron"
+        ]
+    },
+    {
+        "q": "Can you use 'git config --global init.templateDir' to distribute hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, if templateDir has hooks/, they are copied to .git/hooks on 'git init' or 'git clone'",
+            "No",
+            "Only init",
+            "Only clone"
+        ]
+    },
+    {
+        "q": "What is the downside of init.templateDir for hooks?",
+        "type": "mcq",
+        "o": [
+            "Hooks are copied, not linked. Updates to template don't update existing repos.",
+            "None",
+            "Too fast",
+            "Too slow"
+        ]
+    },
+    {
+        "q": "What is the advantage of 'core.hooksPath' over 'init.templateDir'?",
+        "type": "mcq",
+        "o": [
+            "Updates to the central hooks directory apply immediately to all repos using that path",
+            "Copies hooks",
+            "Runs faster",
+            "Runs offline"
+        ]
+    },
+    {
+        "q": "Which hook is safest for doing a 'git push' to another mirror?",
+        "type": "mcq",
+        "o": [
+            "post-receive (async preferable)",
+            "pre-receive",
+            "update",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "Can 'post-merge' hook tell if it was a fast-forward?",
+        "type": "mcq",
+        "o": [
+            "Yes, arg 1 is 1 for squash. But for fast-forward, post-merge DOES NOT RUN in older git. (post-merge runs on successful merge command execution).",
+            "Yes, always runs",
+            "No",
+            "Only true merge"
+        ]
+    },
+    {
+        "q": "When does 'post-merge' run exactly?",
+        "type": "mcq",
+        "o": [
+            "After a 'git merge' that is NOT just a fast-forward (unless forced/squash) and leaves working tree updated",
+            "Always",
+            "Before update",
+            "Before commit"
+        ]
+    },
+    {
+        "q": "What is 'git checkout' of a file hook?",
+        "type": "mcq",
+        "o": [
+            "post-checkout is triggered by 'git checkout' of files too? Actually mainly branch switching. Checking out files updates index/worktree.",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Does 'git restore' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "Generally no specific hook (maybe reference-transaction if HEAD moved/reflog update, post-checkout rarely)",
+            "pre-restore",
+            "post-restore",
+            "restore-msg"
+        ]
+    },
+    {
+        "q": "Can 'pre-push' inspect the commits content deeply?",
+        "type": "mcq",
+        "o": [
+            "Yes, by running git commands on the range of commits provided",
+            "No",
+            "Only subject",
+            "Only author"
+        ]
+    },
+    {
+        "q": "What is 'git rev-list' range for 'pre-push'?",
+        "type": "mcq",
+        "o": [
+            "local_sha...remote_sha (or similar logic to find new commits)",
+            "HEAD",
+            "Master",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'git log --oneline' useful for in hooks?",
+        "type": "mcq",
+        "o": [
+            "Parsing commit logic/history briefly",
+            "Speed",
+            "Size",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is the 'pre-access' hook (Gitolite)?",
+        "type": "mcq",
+        "o": [
+            "Gitolite specific hook to control access rights",
+            "Git standard",
+            "Pre login",
+            "Post login"
+        ]
+    },
+    {
+        "q": "Can hooks send Slack notifications?",
+        "type": "mcq",
+        "o": [
+            "Yes, via curl calls in the script",
+            "No",
+            "Only email",
+            "Only SMS"
+        ]
+    },
+    {
+        "q": "What handles the 'remote: ' prefix for hook output?",
+        "type": "mcq",
+        "o": [
+            "The git transport protocol (receive-pack sends sideband data)",
+            "The hook itself",
+            "The client",
+            "The shell"
+        ]
+    },
+    {
+        "q": "If a hook prints to stdout, what happens in 'git gui'?",
+        "type": "mcq",
+        "o": [
+            "It usually appears in a dialog or result window",
+            "Suppressed",
+            "Crashes",
+            "Hidden"
+        ]
+    },
+    {
+        "q": "Can you use 'git lfs' in hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, git-lfs installs its own hooks (pre-push, post-checkout, post-commit, post-merge) to handle large files",
+            "No",
+            "Only pre-push",
+            "Only post-merge"
+        ]
+    },
+    {
+        "q": "What does 'git lfs' pre-push hook do?",
+        "type": "mcq",
+        "o": [
+            "Uploads LFS objects to the LFS server before the git reference is pushed",
+            "Downloads objects",
+            "Checks size",
+            "Compresses"
+        ]
+    },
+    {
+        "q": "What does 'git lfs' post-checkout hook do?",
+        "type": "mcq",
+        "o": [
+            "Replaces pointer files with actual large files in the working tree",
+            "Deletes pointers",
+            "Creates pointers",
+            "Downloads nothing"
+        ]
+    },
+    {
+        "q": "What happens if you delete 'git lfs' hooks but keep LFS files?",
+        "type": "mcq",
+        "o": [
+            "You see pointer files (text) instead of actual binary content",
+            "Files missing",
+            "Files corrupted",
+            "Files normal"
+        ]
+    },
+    {
+        "q": "How to reinstall standard LFS hooks?",
+        "type": "mcq",
+        "o": [
+            "git lfs install",
+            "git install lfs",
+            "git hook lfs",
+            "git config lfs"
+        ]
+    },
+    {
+        "q": "Does 'git bisect' trigger 'post-checkout'?",
+        "type": "mcq",
+        "o": [
+            "Yes, bisect checks out commits",
+            "No",
+            "Only start",
+            "Only bad"
+        ]
+    },
+    {
+        "q": "What is 'git submodule deinit' hook?",
+        "type": "mcq",
+        "o": [
+            "None",
+            "pre-deinit",
+            "post-deinit",
+            "deinit-msg"
+        ]
+    },
+    {
+        "q": "Can hooks access Git configuration values?",
+        "type": "mcq",
+        "o": [
+            "Yes, via 'git config <key>' command",
+            "No",
+            "Only user.*",
+            "Only core.*"
+        ]
+    },
+    {
+        "q": "What is 'git config --get-regexp' useful for in hooks?",
+        "type": "mcq",
+        "o": [
+            "Finding multiple config values matching a pattern (e.g. valid prefixes)",
+            "Checking email",
+            "Checking user",
+            "Checking remote"
+        ]
+    },
+    {
+        "q": "What is 'pre-receive' VS 'update' granularity?",
+        "type": "mcq",
+        "o": [
+            "Pre-receive runs ONCE per push; Update runs ONCE PER REF in the push",
+            "Pre-receive runs per ref",
+            "Update runs once",
+            "Same"
+        ]
+    },
+    {
+        "q": "Which is better for 'reject entire push if one ref is bad'?",
+        "type": "mcq",
+        "o": [
+            "pre-receive",
+            "update",
+            "post-receive",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "Which is better for 'reject specific ref but allow others'?",
+        "type": "mcq",
+        "o": [
+            "update",
+            "pre-receive",
+            "post-receive",
+            "pre-push"
+        ]
+    },
+    {
+        "q": "Can 'update' hook see all other refs being pushed?",
+        "type": "mcq",
+        "o": [
+            "No, it assumes execution per ref isolated (though could inspect repo state, other refs not updated yet)",
+            "Yes",
+            "Maybe",
+            "Only via stdin"
+        ]
+    },
+    {
+        "q": "What is 'git show-ref' useful for in hooks?",
+        "type": "mcq",
+        "o": [
+            "Checking existence/SHA of references",
+            "Showing logs",
+            "Showing diffs",
+            "Showing config"
+        ]
+    },
+    {
+        "q": "Does 'git rebase' copy notes by default?",
+        "type": "mcq",
+        "o": [
+            "No, requires notes.rewrite.rebase config (often defaults to true in newer git) or post-rewrite hook handling",
+            "Yes",
+            "Never",
+            "Only interactive"
+        ]
+    },
+    {
+        "q": "What is the 'working tree' state during 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "Contains the state of files on disk (staged + unstaged)",
+            "Only staged",
+            "Only unstaged",
+            "Clean"
+        ]
+    },
+    {
+        "q": "How to inspect ONLY staged content in 'pre-commit'?",
+        "type": "mcq",
+        "o": [
+            "git diff --cached --name-only ... or git show :path",
+            "Read files from disk",
+            "git diff",
+            "git log"
+        ]
+    },
+    {
+        "q": "What if 'pre-commit' reads a file from disk that is partially staged?",
+        "type": "mcq",
+        "o": [
+            "It reads the disk version (staged + unstaged changes), potentially validating content that isn't being committed yet",
+            "It reads staged only",
+            "It reads HEAD",
+            "It fails"
+        ]
+    },
+    {
+        "q": "How to solve 'validating unstaged changes' issue in pre-commit?",
+        "type": "mcq",
+        "o": [
+            "Stash keep-index (complex) or use 'git stash -k -u' loop, or use 'git show :file' to lint the index version",
+            "Ignore it",
+            "Forbid unstaged",
+            "Commit everything"
+        ]
+    },
+    {
+        "q": "What does 'husky' do to .git/hooks?",
+        "type": "mcq",
+        "o": [
+            "Updates core.hooksPath to .husky directory (v5+) or overwrites hooks (v4)",
+            "Nothing",
+            "Deletes them",
+            "Copies them"
+        ]
+    },
+    {
+        "q": "Can 'pre-receive' create a new commit?",
+        "type": "mcq",
+        "o": [
+            "Technically yes (it's a script), but it runs on the server. Creating commits on bare repo logic is unusual but possible via low-level plumbing.",
+            "No, bare repo",
+            "Yes, easily",
+            "No, read only"
+        ]
+    },
+    {
+        "q": "What if 'post-receive' creates a commit?",
+        "type": "mcq",
+        "o": [
+            "It modifies the repo on server. Clients won't see it until they fetch.",
+            "It pushes to client",
+            "It fails",
+            "It conflicts"
+        ]
+    },
+    {
+        "q": "What is 'git symbolic-ref HEAD' useful for in hooks?",
+        "type": "mcq",
+        "o": [
+            "Getting the current branch name (e.g. refs/heads/master)",
+            "Getting SHA",
+            "Getting user",
+            "Getting remote"
+        ]
+    },
+    {
+        "q": "Can hooks fail intermittently?",
+        "type": "mcq",
+        "o": [
+            "Yes, if they depend on network or external services",
+            "No, deterministic",
+            "Only on sunday",
+            "Only on windows"
+        ]
+    },
+    {
+        "q": "What practice makes hooks robust?",
+        "type": "mcq",
+        "o": [
+            "Idempotency, fast execution, failure isolation",
+            "Slow execution",
+            "Network dependency",
+            "Hardcoding paths"
+        ]
+    },
+    {
+        "q": "Where to find example hooks?",
+        "type": "mcq",
+        "o": [
+            ".git/hooks/*.sample",
+            "Online",
+            "Git manual",
+            "Bin folder"
+        ]
+    },
+    {
+        "q": "What is 'git rev-parse --is-inside-work-tree'?",
+        "type": "mcq",
+        "o": [
+            "Checks if command is run inside working tree (useful for client hooks)",
+            "Checks git dir",
+            "Checks bare",
+            "Checks config"
+        ]
+    },
+    {
+        "q": "Does 'git init' create .abc.sample hooks?",
+        "type": "mcq",
+        "o": [
+            "No, .sample files",
+            "Yes",
+            "Only .sh",
+            "Only .py"
+        ]
+    },
+    {
+        "q": "What is 'git help hooks'?",
+        "type": "mcq",
+        "o": [
+            "Documentation for hooks",
+            "Hooks manager",
+            "Hooks list",
+            "Hooks installer"
+        ]
+    },
+    {
+        "q": "Can you share hooks via a separate repo?",
+        "type": "mcq",
+        "o": [
+            "Yes, clone it and point core.hooksPath there",
+            "No",
+            "Only copying",
+            "Only submodule"
+        ]
+    },
+    {
+        "q": "What is 'pre-commit' hook default sample content?",
+        "type": "mcq",
+        "o": [
+            "Checks for white space errors, non-ascii filenames",
+            "Empty",
+            "Hello world",
+            "Lint check"
+        ]
+    },
+    {
+        "q": "What is 'commit-msg' hook default sample content?",
+        "type": "mcq",
+        "o": [
+            "Checks for duplicate Signed-off-by lines",
+            "Checks length",
+            "Checks spelling",
+            "Checks emoji"
+        ]
+    },
+    {
+        "q": "What is 'pre-push' hook default sample content?",
+        "type": "mcq",
+        "o": [
+            "Prevents pushing directly to protected branches (example logic)",
+            "Nothing",
+            "Checks remote",
+            "Checks size"
+        ]
+    },
+    {
+        "q": "What is 'fsmonitor-watchman' sample content?",
+        "type": "mcq",
+        "o": [
+            "Perl script interfacing with watchman",
+            "Python script",
+            "Binary",
+            "Empty"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook sample?",
+        "type": "mcq",
+        "o": [
+            "No default sample usually",
+            "Yes",
+            "Maybe",
+            "In contrib"
+        ]
+    },
+    {
+        "q": "Which hook is 'post-rewrite' sample related to?",
+        "type": "mcq",
+        "o": [
+            "copying notes",
+            "amending",
+            "rebasing",
+            "merging"
+        ]
+    },
+    {
+        "q": "Can you write hooks in 'node'?",
+        "type": "mcq",
+        "o": [
+            "Yes, #!/usr/bin/env node",
+            "No",
+            "Only bash",
+            "Only perl"
+        ]
+    },
+    {
+        "q": "What handles the shebang portably?",
+        "type": "mcq",
+        "o": [
+            "#!/usr/bin/env <cmd>",
+            "#!/bin/cmd",
+            "#!/usr/cmd",
+            "#!/cmd"
+        ]
+    },
+    {
+        "q": "Is 'dumb http' push supported by hooks?",
+        "type": "mcq",
+        "o": [
+            "No, dumb http is WebDAV (hooks don't run on server side for it typically, unless wrapped). Smart HTTP runs hooks.",
+            "Yes",
+            "Maybe",
+            "Only update"
+        ]
+    },
+    {
+        "q": "What is 'git http-backend'?",
+        "type": "mcq",
+        "o": [
+            "CGI program for smart HTTP (executes hooks)",
+            "Hooks manager",
+            "Client",
+            "Server"
+        ]
+    },
+    {
+        "q": "Can 'update' hook create files?",
+        "type": "mcq",
+        "o": [
+            "Yes, on server filesystem",
+            "No",
+            "Only in memory",
+            "Only logs"
+        ]
+    },
+    {
+        "q": "What is 'pre-receive' best for?",
+        "type": "mcq",
+        "o": [
+            "Global access control / policy enforcement across all refs",
+            "Ref control",
+            "Log control",
+            "File control"
+        ]
+    },
+    {
+        "q": "What is 'update' best for?",
+        "type": "mcq",
+        "o": [
+            "Per-branch access control",
+            "Global control",
+            "Log control",
+            "File control"
+        ]
+    },
+    {
+        "q": "What is 'pre-commit' best for?",
+        "type": "mcq",
+        "o": [
+            "Code quality checks (lint, style, test)",
+            "Access control",
+            "Policy",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'commit-msg' best for?",
+        "type": "mcq",
+        "o": [
+            "Message formatting, linking to issue tracker",
+            "Code check",
+            "File check",
+            "User check"
+        ]
+    },
+    {
+        "q": "What is 'git verify-tag'?",
+        "type": "mcq",
+        "o": [
+            "Check GPG signature of tags (not a hook itself, but validation tool)",
+            "Hook",
+            "Tag checker",
+            "Format checker"
+        ]
+    },
+    {
+        "q": "What happens if 'pre-receive' receives 100 refs?",
+        "type": "mcq",
+        "o": [
+            "It reads 100 lines from stdin",
+            "It runs 100 times",
+            "It fails",
+            "It hangs"
+        ]
+    },
+    {
+        "q": "Can you use 'git config --global core.hooksPath' to share hooks across projects?",
+        "type": "mcq",
+        "o": [
+            "Yes, all projects on that machine will use the hooks in that path",
+            "No, only per repo",
+            "Only if cloned",
+            "Only if root"
+        ]
+    },
+    {
+        "q": "Does 'core.hooksPath' affect server-side hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, if configured on the server's git config",
+            "No, only client",
+            "Only pre-receive",
+            "Only update"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook output 'ng <ref> <message>'?",
+        "type": "mcq",
+        "o": [
+            "Signals failure to update that specific ref, with a message",
+            "Success",
+            "Warning",
+            "Info"
+        ]
+    },
+    {
+        "q": "What is the 'proc-receive' hook output 'ok <ref>'?",
+        "type": "mcq",
+        "o": [
+            "Signals success for that ref",
+            "Failure",
+            "Warning",
+            "Info"
+        ]
+    },
+    {
+        "q": "Can 'proc-receive' create arbitrary refs?",
+        "type": "mcq",
+        "o": [
+            "Yes, often used for refs/for/master -> refs/changes/12/34 (Gerrit style)",
+            "No",
+            "Only branches",
+            "Only tags"
+        ]
+    },
+    {
+        "q": "What is the 'post-update' hook argument count?",
+        "type": "mcq",
+        "o": [
+            "Variable (list of modified refs)",
+            "Exactly 1",
+            "Exactly 3",
+            "Zero"
+        ]
+    },
+    {
+        "q": "Is 'post-update' run if 'update' hook failed for some refs?",
+        "type": "mcq",
+        "o": [
+            "Yes, for the refs that succeeded (if any)? Actually, post-update runs if at least one ref was updated.",
+            "No",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What if 'update' hook fails for one ref in a push of 5?",
+        "type": "mcq",
+        "o": [
+            "Only that ref is rejected; others proceed (unless pre-receive rejected all)",
+            "All rejected",
+            "All accepted",
+            "Random"
+        ]
+    },
+    {
+        "q": "Which hook runs first: 'pre-receive' or 'update'?",
+        "type": "mcq",
+        "o": [
+            "pre-receive (once)",
+            "update (once per ref)",
+            "Parallel",
+            "Random"
+        ]
+    },
+    {
+        "q": "Which runs first: 'update' or 'post-receive'?",
+        "type": "mcq",
+        "o": [
+            "update",
+            "post-receive",
+            "Parallel",
+            "Random"
+        ]
+    },
+    {
+        "q": "Which runs first: 'post-receive' or 'post-update'?",
+        "type": "mcq",
+        "o": [
+            "post-receive",
+            "post-update",
+            "Parallel",
+            "Random"
+        ]
+    },
+    {
+        "q": "Can hooks interact with CI/CD tools?",
+        "type": "mcq",
+        "o": [
+            "Yes, by triggering API calls (curl) in post-receive",
+            "No",
+            "Only Jenkins",
+            "Only Travis"
+        ]
+    },
+    {
+        "q": "What is the 'push-to-checkout' hook used for in deployment?",
+        "type": "mcq",
+        "o": [
+            "Updating the working tree of a non-bare repo when pushing to it (e.g. pushing to production server)",
+            "Nothing",
+            "Checking out code locally",
+            "Validating push"
+        ]
+    },
+    {
+        "q": "What happens if 'push-to-checkout' fails?",
+        "type": "mcq",
+        "o": [
+            "The push is rejected",
+            "The push accepts but HEAD unchanged",
+            "The push hangs",
+            "The repo corrupts"
+        ]
+    },
+    {
+        "q": "Can you use hooks to prevent 'git push --force'?",
+        "type": "mcq",
+        "o": [
+            "Yes, 'pre-receive' or 'update' can check if it's a non-fast-forward and block it",
+            "No",
+            "Only client side",
+            "Only if config says so"
+        ]
+    },
+    {
+        "q": "Does 'git init' install default hooks?",
+        "type": "mcq",
+        "o": [
+            "It installs .sample hooks",
+            "It installs active hooks",
+            "It installs nothing",
+            "It installs binary hooks"
+        ]
+    },
+    {
+        "q": "How to write a hook that works on Linux and Windows?",
+        "type": "mcq",
+        "o": [
+            "Use #!/bin/sh (Git for Windows includes bash) and avoid OS-specific paths/commands",
+            "Use Batch",
+            "Use PowerShell",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "Can you use 'git rev-parse' to find the top level dir in hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, 'git rev-parse --show-toplevel'",
+            "No",
+            "Only in client",
+            "Only in server"
+        ]
+    },
+    {
+        "q": "What is 'git rev-parse --git-dir'?",
+        "type": "mcq",
+        "o": [
+            "Returns path to .git directory",
+            "Returns path to work tree",
+            "Returns path to hooks",
+            "Returns path to config"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook access staged file content easily?",
+        "type": "mcq",
+        "o": [
+            "Yes, using 'git show :path'",
+            "No, only filesystem",
+            "Only if added",
+            "Only if committed"
+        ]
+    },
+    {
+        "q": "What if you rename a hook script?",
+        "type": "mcq",
+        "o": [
+            "If name doesn't match standard hook name, it won't run",
+            "It runs",
+            "It errors",
+            "It copies"
+        ]
+    },
+    {
+        "q": "Can you define custom hooks (e.g. 'my-hook')?",
+        "type": "mcq",
+        "o": [
+            "Not directly triggered by git events, but can be called by other scripts/aliases",
+            "Yes, git triggers them",
+            "Yes, git config custom",
+            "No"
+        ]
+    },
+    {
+        "q": "What is 'husky' commit-msg hook setup?",
+        "type": "mcq",
+        "o": [
+            "Sets core.hooksPath, and creates commit-msg script calling husky runner",
+            "Magic",
+            "Binary replacement",
+            "Config only"
+        ]
+    },
+    {
+        "q": "What is 'pre-commit' hook output if it fails?",
+        "type": "mcq",
+        "o": [
+            "Printed to user, commit aborted",
+            "Hidden",
+            "Logged to file",
+            "Emailed"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook be interactive?",
+        "type": "mcq",
+        "o": [
+            "Yes, if it opens /dev/tty explicitly (e.g. prompting user 'Are you sure?')",
+            "No",
+            "Only on Mac",
+            "Only on Linux"
+        ]
+    },
+    {
+        "q": "Why is interactive 'pre-commit' risky?",
+        "type": "mcq",
+        "o": [
+            "Breaks GUI clients and automated scripts/CI if they don't expect prompts",
+            "Crash loop",
+            "Security",
+            "Perms"
+        ]
+    },
+    {
+        "q": "How to detect if running in interactive terminal in bash hook?",
+        "type": "mcq",
+        "o": [
+            "Check with 'test -t 1' (stdout is a tty)",
+            "Check $INTERACTIVE",
+            "Check git config",
+            "Check user"
+        ]
+    },
+    {
+        "q": "What is 'pre-push' hook default timeout?",
+        "type": "mcq",
+        "o": [
+            "None",
+            "10s",
+            "30s",
+            "60s"
+        ]
+    },
+    {
+        "q": "What is 'git push --no-verify'?",
+        "type": "mcq",
+        "o": [
+            "Skips pre-push hook",
+            "Skips server hooks",
+            "Skips transfer",
+            "Skips auth"
+        ]
+    },
+    {
+        "q": "Can 'post-commit' trigger a deployment?",
+        "type": "mcq",
+        "o": [
+            "Yes, local deployment or firing a webhook",
+            "No",
+            "Only post-receive",
+            "Only update"
+        ]
+    },
+    {
+        "q": "What is 'git stash' vs hooks?",
+        "type": "mcq",
+        "o": [
+            "Stash is a command; Hooks are event triggers. Unrelated, though usage overlaps in workflows.",
+            "Same",
+            "Stash is a hook",
+            "Hook is stash"
+        ]
+    },
+    {
+        "q": "Does 'git am' calling 'pre-applypatch' allow aborting?",
+        "type": "mcq",
+        "o": [
+            "Yes, if pre-applypatch exits non-zero, the commit is not made (but patch remains applied in worktree)",
+            "No",
+            "Only warnings",
+            "Only reboots"
+        ]
+    },
+    {
+        "q": "What if 'post-applypatch' fails?",
+        "type": "mcq",
+        "o": [
+            "Nothing stops; notification only. 'git am' succeeds.",
+            "Abort",
+            "Undo",
+            "Reset"
+        ]
+    },
+    {
+        "q": "What is the 'reference-transaction' hook 'prepared' state used for?",
+        "type": "mcq",
+        "o": [
+            "Check if the transaction should be allowed (can abort multiple ref updates atomically)",
+            "Logging",
+            "Nothing",
+            "Cleanup"
+        ]
+    },
+    {
+        "q": "Which hook is 'git p4' related?",
+        "type": "mcq",
+        "o": [
+            "p4-pre-submit, p4-prepare-changelist, p4-post-changelist, p4-changelist",
+            "pre-p4",
+            "post-p4",
+            "p4-hook"
+        ]
+    },
+    {
+        "q": "What is 'git instaweb'?",
+        "type": "mcq",
+        "o": [
+            "Not a hook, but launches web browser? Unrelated.",
+            "Hook",
+            "Web hook",
+            "Server"
+        ]
+    },
+    {
+        "q": "Does 'git bundle' trigger hooks?",
+        "type": "mcq",
+        "o": [
+            "No, bundle creation is reading objects. Unbundling is fetching.",
+            "Yes",
+            "Only create",
+            "Only verify"
+        ]
+    },
+    {
+        "q": "Which hook validates a GPG signature on a tag?",
+        "type": "mcq",
+        "o": [
+            "Could be implemented in 'update' or 'pre-receive' or 'pre-push'",
+            "tag-verify",
+            "gpg-verify",
+            "sig-hook"
+        ]
+    },
+    {
+        "q": "What happens if you chmod -x a hook?",
+        "type": "mcq",
+        "o": [
+            "It becomes inactive",
+            "It breaks git",
+            "It runs slowly",
+            "It runs always"
+        ]
+    },
+    {
+        "q": "Can you use symlinks for hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, .git/hooks/pre-commit -> ../../script.sh",
+            "No",
+            "Only hardlinks",
+            "Only copies"
+        ]
+    },
+    {
+        "q": "What is 'git rev-parse --show-toplevel' output in a hook?",
+        "type": "mcq",
+        "o": [
+            "The absolute path to the repo root",
+            "Relative path",
+            "Hook path",
+            "Git dir path"
+        ]
+    },
+    {
+        "q": "Does 'pre-commit' affect 'git stash'?",
+        "type": "mcq",
+        "o": [
+            "No, stash creates commit internally but usually bypasses standard user hooks or calls them carefully? Stash usually does NOT run pre-commit.",
+            "Yes",
+            "Sometimes",
+            "If configured"
+        ]
+    },
+    {
+        "q": "Does 'git merge' with conflict trigger 'post-merge'?",
+        "type": "mcq",
+        "o": [
+            "No, only successful merge triggers it.",
+            "Yes",
+            "Maybe",
+            "If resolved"
+        ]
+    },
+    {
+        "q": "Does 'git merge' --squash trigger 'post-merge'?",
+        "type": "mcq",
+        "o": [
+            "No, squash merge leaves changes in index/worktree but does not commit final merge, so post-merge (which implies merge complete) doesn't run.",
+            "Yes",
+            "Sometimes",
+            "Only if committed"
+        ]
+    },
+    {
+        "q": "Does 'git merge' --squash trigger 'pre-merge-commit'?",
+        "type": "mcq",
+        "o": [
+            "No, because no commit is created automatically. User runs git commit, which triggers pre-commit.",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "Which hook receives 'squash' as arg 2?",
+        "type": "mcq",
+        "o": [
+            "prepare-commit-msg (if source is squash)",
+            "commit-msg",
+            "pre-commit",
+            "post-commit"
+        ]
+    },
+    {
+        "q": "What is 'prepare-commit-msg' arg 3?",
+        "type": "mcq",
+        "o": [
+            "SHA-1 of the commit being amended (if available)",
+            "Branch name",
+            "User name",
+            "None"
+        ]
+    },
+    {
+        "q": "Can 'prepare-commit-msg' abort the commit?",
+        "type": "mcq",
+        "o": [
+            "Yes, exit non-zero",
+            "No",
+            "Only warn",
+            "Only reset"
+        ]
+    },
+    {
+        "q": "What is 'git commit -m' hook behavior?",
+        "type": "mcq",
+        "o": [
+            "Runs prepare-commit-msg, commit-msg, pre-commit. (Actually pre-commit first). Editor suppressed.",
+            "Skips prepare-commit-msg",
+            "Skips commit-msg",
+            "Skips all"
+        ]
+    },
+    {
+        "q": "In 'pre-commit', what represents the changes?",
+        "type": "mcq",
+        "o": [
+            "The index (staging area)",
+            "The working tree",
+            "HEAD",
+            "Remote"
+        ]
+    },
+    {
+        "q": "Can 'pre-commit' hook undo a 'git add'?",
+        "type": "mcq",
+        "o": [
+            "Yes, it can modify index, e.g. git reset file. This affects the commit.",
+            "No",
+            "Only worktree",
+            "Only logs"
+        ]
+    },
+    {
+        "q": "What is 'git log --format=raw' use in hooks?",
+        "type": "mcq",
+        "o": [
+            "Robust parsing of commits",
+            "Pretty printing",
+            "User view",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'git cat-file -p' use in hooks?",
+        "type": "mcq",
+        "o": [
+            "Inspect object content (blob/tree/commit)",
+            "Print file",
+            "Cat file",
+            "Copy file"
+        ]
+    },
+    {
+        "q": "What runs first in 'git pull'?",
+        "type": "mcq",
+        "o": [
+            "Fetch, then Merge/Rebase. Hooks triggered by merge/rebase part.",
+            "Merge then Fetch",
+            "Hook then Pull",
+            "Random"
+        ]
+    },
+    {
+        "q": "Can you use 'git difftool' in hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, but interactive tools block execution",
+            "No",
+            "Only text",
+            "Only binary"
+        ]
+    },
+    {
+        "q": "What is 'git credential' helper?",
+        "type": "mcq",
+        "o": [
+            "Not a hook, manages passwords",
+            "Hook",
+            "Login script",
+            "Auth hook"
+        ]
+    },
+    {
+        "q": "What is the 'smart-http' service name for push?",
+        "type": "mcq",
+        "o": [
+            "git-receive-pack",
+            "git-upload-pack",
+            "git-push-pack",
+            "git-pack"
+        ]
+    },
+    {
+        "q": "What is the 'smart-http' service name for fetch?",
+        "type": "mcq",
+        "o": [
+            "git-upload-pack",
+            "git-receive-pack",
+            "git-pull-pack",
+            "git-fetch-pack"
+        ]
+    },
+    {
+        "q": "Does 'git-upload-pack' use hooks?",
+        "type": "mcq",
+        "o": [
+            "Traditionally no (fetch/clone is read-only). Newer git might have pre-upload-pack? No standard hook for fetch access control commonly used like pre-receive.",
+            "Yes, pre-upload",
+            "Yes, post-upload",
+            "Yes, update"
+        ]
+    },
+    {
+        "q": "How to restrict read access (fetch) via hooks?",
+        "type": "mcq",
+        "o": [
+            "Not standard git hooks. Done via SSH auth, HTTP auth, or Gitolite-layer wrappers.",
+            "pre-fetch hook",
+            "pre-upload hook",
+            "read-hook"
+        ]
+    },
+    {
+        "q": "What is 'pre-receive' input separator?",
+        "type": "mcq",
+        "o": [
+            "Newline",
+            "Space",
+            "Null",
+            "Comma"
+        ]
+    },
+    {
+        "q": "What is 'update' input separator?",
+        "type": "mcq",
+        "o": [
+            "Arguments (spaces)",
+            "Newline",
+            "Null",
+            "Comma"
+        ]
+    },
+    {
+        "q": "What if 'pre-receive' returns 0 but prints 'error'?",
+        "type": "mcq",
+        "o": [
+            "Push succeeds (exit code matters)",
+            "Push fails",
+            "Push warns",
+            "Push hangs"
+        ]
+    },
+    {
+        "q": "Can hooks access 'git config --local'?",
+        "type": "mcq",
+        "o": [
+            "Yes, defaults to local repo config",
+            "No",
+            "Only global",
+            "Only system"
+        ]
+    },
+    {
+        "q": "What is 'git hook' directory structure in 2.29+?",
+        "type": "mcq",
+        "o": [
+            "Still single files by default, but discussion on hooks.d directory exists. Not fully standard enabled by default yet without config.",
+            "hooks.d/",
+            "multi-hooks/",
+            "plugins/"
+        ]
+    },
+    {
+        "q": "How to run multiple 'pre-commit' scripts easily?",
+        "type": "mcq",
+        "o": [
+            "Use a framework like pre-commit.com or husky or write a shell script loop",
+            "Git does it natively",
+            "Number them",
+            "Folder them"
+        ]
+    },
+    {
+        "q": "What is 'pre-commit.com'?",
+        "type": "mcq",
+        "o": [
+            "A framework for managing and maintaining multi-language pre-commit hooks",
+            "Git official site",
+            "Hook database",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Can you use docker in hooks?",
+        "type": "mcq",
+        "o": [
+            "Yes, 'docker run ...'",
+            "No",
+            "Only podman",
+            "Only k8s"
+        ]
+    },
+    {
+        "q": "What is the latency impact of docker in hooks?",
+        "type": "mcq",
+        "o": [
+            "Verification time increases (slow commits)",
+            "None",
+            "Fast",
+            "Instant"
+        ]
+    },
+    {
+        "q": "Can you bypass hooks if you don't have permission?",
+        "type": "mcq",
+        "o": [
+            "Client side: Yes (it's your machine). Server side: No.",
+            "Yes always",
+            "No never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'git commit --allow-empty' hook behavior?",
+        "type": "mcq",
+        "o": [
+            "Hooks run normally. Pre-commit might check for changes and fail if script logic expects changes, but git invokes it.",
+            "Hooks skipped",
+            "Hooks force success",
+            "Hooks force fail"
+        ]
+    },
+    {
+        "q": "Can hooks be versioned?",
+        "type": "mcq",
+        "o": [
+            "Yes, if stored in the repo (e.g. .githooks) and installed/linked",
+            "No",
+            "Only .git/hooks",
+            "Only binary"
+        ]
+    },
+    {
+        "q": "What is the best way to distribute hooks in a team?",
+        "type": "mcq",
+        "o": [
+            "Store in repo, use build system or setup script to configure core.hooksPath",
+            "Email zip",
+            "Wiki page",
+            "Share drive"
+        ]
+    },
+    {
+        "q": "Which hook is 'post-rewrite' default?",
+        "type": "mcq",
+        "o": [
+            "None (sample provided usually handles note copying)",
+            "Copy notes",
+            "Update refs",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'git cherry-pick --continue' behavior with hooks?",
+        "type": "mcq",
+        "o": [
+            "Runs pre-commit/commit-msg for the committed result",
+            "Runs nothing",
+            "Runs update",
+            "Runs pre-receive"
+        ]
+    },
+    {
+        "q": "What is 'git rebase --continue' behavior with hooks?",
+        "type": "mcq",
+        "o": [
+            "Runs pre-commit (if applying) or just moves on? Runs commit-related hooks when committing the patch.",
+            "Runs nothing",
+            "Runs update",
+            "Runs pre-push"
+        ]
+    },
+    {
+        "q": "Does 'pre-push' run on 'git push --dry-run'?",
+        "type": "mcq",
+        "o": [
+            "Yes, helpful for testing hooks",
+            "No",
+            "Sometimes",
+            "Only failure"
+        ]
+    },
+    {
+        "q": "What if 'pre-push' fails on dry-run?",
+        "type": "mcq",
+        "o": [
+            "Dry run reports failure/rejection",
+            "Ignores it",
+            "Succeeds",
+            "Crashes"
+        ]
+    },
+    {
+        "q": "What is the 'pre-receive' hook argument?",
+        "type": "mcq",
+        "o": [
+            "None, inputs via stdin",
+            "List of refs",
+            "Count",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'git help -w hooks'?",
+        "type": "mcq",
+        "o": [
+            "Opens hooks manual in web browser",
+            "Write hooks",
+            "Wait hooks",
+            "Window hooks"
+        ]
+    },
+    {
+        "q": "What is 'git config advice.graftFileDeprecated'?",
+        "type": "mcq",
+        "o": [
+            "Related to shallow clones/grafts, not hooks directly",
+            "Hook advice",
+            "File advice",
+            "None"
+        ]
+    }
+]

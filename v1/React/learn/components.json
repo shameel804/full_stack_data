@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_components",
+    "topicId": "components",
+    "topicTitle": "Components",
+    "description": "Master the building blocks of React: Functional vs Class components, Props, and Composition.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_comp_1",
+            "type": "content",
+            "title": "Components Conceptualized",
+            "content": "# Components 🧱\n\nComponents allow you to split the UI into independent, reusable pieces.\n\nThink of them like custom HTML elements.\n\nExamples: `<Button />`, `<Navbar />`, `<UserCard />`."
+        },
+        {
+            "id": "react_comp_2",
+            "type": "content",
+            "title": "Functional Components",
+            "content": "# Functional Components 𝑓\n\nThe modern standard.\n\nA component is just a Javascript function that returns JSX.\n\n```jsx\nfunction Welcome(props) {\n  return <h1>Hello, {props.name}</h1>;\n}\n\n// Or Arrow syntax\nconst Welcome = ({ name }) => <h1>Hello, {name}</h1>;\n```"
+        },
+        {
+            "id": "react_comp_3",
+            "type": "content",
+            "title": "Class Components",
+            "content": "# Class Components 🏛️\n\nThe older way (pre-Hooks). Still good to know for legacy code.\n\n```jsx\nclass Welcome extends React.Component {\n  render() {\n    return <h1>Hello, {this.props.name}</h1>;\n  }\n}\n```\nMust extend `React.Component` and have a `render()` method."
+        },
+        {
+            "id": "react_comp_4",
+            "type": "content",
+            "title": "Props",
+            "content": "# Props 🎁\n\n\"Props\" stands for properties.\n\nThey are inputs passed **down** from parent to child.\n\n**Props are Read-Only (Immutable).** A component should never modify its own props.\n\n```jsx\n<Welcome name=\"Sara\" />\n```"
+        },
+        {
+            "id": "react_comp_quiz_1",
+            "type": "quiz",
+            "title": "Props Quiz",
+            "content": "Rule check.",
+            "quizQuestion": "Can a component modify the props it receives?",
+            "quizOptions": [
+                "Yes, always",
+                "No, props are read-only",
+                "Only in Class components",
+                "Only if using TypeScript"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_comp_5",
+            "type": "content",
+            "title": "Composition",
+            "content": "# Composition vs Inheritance 🧩\n\nReact favors composition.\n\nInstead of extending classes, we wrap components inside others.\n\n```jsx\nfunction App() {\n  return (\n    <Layout>\n      <Sidebar />\n      <Content />\n    </Layout>\n  );\n}\n```"
+        },
+        {
+            "id": "react_comp_6",
+            "type": "content",
+            "title": "Props.children",
+            "content": "# Children Prop 👶\n\nA special prop that contains whatever you put *between* the opening and closing tags of a component.\n\n```jsx\nfunction Box(props) {\n  return <div className=\"box\">{props.children}</div>;\n}\n\n// Usage\n<Box>\n  <p>I am inside the box!</p>\n</Box>\n```"
+        },
+        {
+            "id": "react_comp_7",
+            "type": "content",
+            "title": "Prop Types",
+            "content": "# PropTypes 🛡️\n\nRuntime type checking for props (before TypeScript took over).\n\n```jsx\nimport PropTypes from 'prop-types';\n\nGreeting.propTypes = {\n  name: PropTypes.string\n};\n```\nEnsures you pass the correct data type."
+        },
+        {
+            "id": "react_comp_8",
+            "type": "content",
+            "title": "Default Props",
+            "content": "# Default Props 🏷️\n\nValues to use if no prop is passed.\n\n```jsx\nfunction Button({ color = \"blue\", text }) {\n  return <button className={color}>{text}</button>;\n}\n\n// Usage\n<Button text=\"Click Me\" /> // color will be \"blue\"\n```"
+        },
+        {
+            "id": "react_comp_9",
+            "type": "content",
+            "title": "Splitting Components",
+            "content": "# When to Split? ✂️\n\nDon't put your whole app in one file.\n\nSplit when:\n1.  **Reusability:** The chunk is used in multiple places (Button, Avatar).\n2.  **Complexity:** The component is getting too big/hard to read.\n3.  **Responsibility:** The chunk does logically different things (Header vs Footer)."
+        },
+        {
+            "id": "react_comp_quiz_2",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Special props.",
+            "quizQuestion": "Which prop accesses the content nested INSIDE a component tag?",
+            "quizOptions": [
+                "props.inner",
+                "props.content",
+                "props.children",
+                "props.nested"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_comp_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Component Tree 💻\n\n<!-- FULL_CODE_START\n// 1. Child Component\nfunction UserAvatar({ imgUrl, name }) {\n  return (\n    <div className=\"avatar\">\n      <img src={imgUrl} alt={name} width=\"50\" />\n      <span>{name}</span>\n    </div>\n  );\n}\n\n// 2. Parent Component\nfunction UserCard() {\n  // Data to pass down\n  const user = {\n    name: \"Alice\",\n    pic: \"https://via.placeholder.com/50\"\n  };\n\n  return (\n    <div className=\"card\">\n      <h2>User Profile</h2>\n      {/* Passing props */}\n      <UserAvatar imgUrl={user.pic} name={user.name} />\n    </div>\n  );\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_comp_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Components 🎓\n\nThe building blocks.\n\n- **Function vs Class:** Prefer functions.\n- **Props:** Data passed down (Immutable).\n- **Children:** `props.children` allows nesting.\n- **Composition:** Combine small components into big ones.\n\n## Next Steps\nMake components interactive with **State & Props**!"
+        }
+    ]
+}

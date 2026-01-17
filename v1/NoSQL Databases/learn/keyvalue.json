@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_keyvalue",
+    "topicId": "keyvalue",
+    "topicTitle": "Key-Value Stores",
+    "description": "Blazing fast in-memory data storage with Redis.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_keyvalue_1",
+            "type": "content",
+            "title": "What is Key-Value? 🔑",
+            "content": "# Simple & Fast ⚡\n\nThe simplest NoSQL model.\n\nEvery item has a **Key** and a **Value**.\n\nLike a giant Python Dictionary or Hash Map.\n\n**Redis** is the most popular example (keeps data in RAM)."
+        },
+        {
+            "id": "nosql_keyvalue_2",
+            "type": "content",
+            "title": "Basic Commands",
+            "content": "# SET & GET 🏓\n\n`SET user:100 \"Alice\"`\n\n`GET user:100` -> \"Alice\"\n\n`DEL user:100`\n\nAtomic operations ensure safety even with concurrency."
+        },
+        {
+            "id": "nosql_keyvalue_3",
+            "type": "content",
+            "title": "Data Structures",
+            "content": "# More than Strings 🧵\n\nRedis supports rich data types:\n\n- **Lists:** Ordered queues.\n- **Sets:** Unique collections.\n- **Hashes:** Maps (Fields/Values).\n- **Sorted Sets:** Sets with scores."
+        },
+        {
+            "id": "nosql_keyvalue_4",
+            "type": "content",
+            "title": "Hashes",
+            "content": "# Objects 🗃️\n\nStore an object under a single key.\n\n`HSET user:100 name \"Alice\" age 30`\n\n`HGETALL user:100`\n\n`HGET user:100 age`"
+        },
+        {
+            "id": "nosql_keyvalue_5",
+            "type": "content",
+            "title": "Lists",
+            "content": "# Queues 🚶\n\nAdd to head or tail.\n\n`LPUSH tasks \"email\"`\n`RPUSH tasks \"cleanup\"`\n\n`LPOP tasks` (Process first item).\n\nGreat for implementation message queues / job queues."
+        },
+        {
+            "id": "nosql_keyvalue_quiz_1",
+            "type": "quiz",
+            "title": "Command Quiz",
+            "content": "Operations.",
+            "quizQuestion": "Which Redis command retrieves the value associated with a specific key?",
+            "quizOptions": [
+                "FETCH",
+                "READ",
+                "GET",
+                "PULL"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_keyvalue_6",
+            "type": "content",
+            "title": "Sets",
+            "content": "# Uniqueness ❄️\n\nUnordered collection of unique strings.\n\n`SADD visitors \"192.168.1.1\"`\n`SADD visitors \"192.168.1.1\"` (Ignored duplicate)\n\n`SMEMBERS visitors`"
+        },
+        {
+            "id": "nosql_keyvalue_7",
+            "type": "content",
+            "title": "Expiration",
+            "content": "# Time to Live ⏳\n\nAutomatically delete keys after a set time.\n\n`SET session:123 \"data\" EX 60` (Expires in 60s).\n\nGreat for caching and temporary sessions."
+        },
+        {
+            "id": "nosql_keyvalue_8",
+            "type": "content",
+            "title": "Pub/Sub",
+            "content": "# Real-time 📡\n\nPublish/Subscribe messaging pattern.\n\n- Client A: `SUBSCRIBE news`\n- Client B: `PUBLISH news \"Hello World!\"`\n\nClient A instantly receives the message."
+        },
+        {
+            "id": "nosql_keyvalue_9",
+            "type": "content",
+            "title": "Sorted Sets",
+            "content": "# Leaderboards 🏆\n\nEvery member has a score.\n\n`ZADD ranking 100 \"Alice\"`\n`ZADD ranking 200 \"Bob\"`\n\n`ZRANGE ranking 0 -1` (Returns ordered list)."
+        },
+        {
+            "id": "nosql_keyvalue_10",
+            "type": "content",
+            "title": "Persistence",
+            "content": "# RDB & AOF 💾\n\nEven though it's in-memory, Redis can save to disk.\n\n- **RDB:** Snapshots at intervals.\n- **AOF (Append Only File):** Logs every write operation."
+        },
+        {
+            "id": "nosql_keyvalue_quiz_2",
+            "type": "quiz",
+            "title": "Feature Quiz",
+            "content": "Use cases.",
+            "quizQuestion": "What is the best use case for the 'Expiration' feature in Redis?",
+            "quizOptions": [
+                "Storing permanent user records",
+                "Caching API responses for a short duration",
+                "Creating long-term backups",
+                "Running heavy analytics"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "nosql_keyvalue_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Key-Value 🔑\n\nSpeed is King.\n\n- **RAM:** In-memory speed.\n- **Structures:** List, Set, Hash.\n- **TTL:** Auto-expiry.\n- **Pub/Sub:** Messaging.\n\n## Next Steps\nVisualize connections with **Graph Databases**!"
+        }
+    ]
+}

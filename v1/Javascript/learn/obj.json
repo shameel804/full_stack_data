@@ -1,47 +1,103 @@
 {
-    "id": "obj",
+    "id": "learn_js_obj",
     "topicId": "obj",
-    "topicTitle": "Objects and Arrays",
-    "description": "Master structured data with Objects and Arrays.",
-    "baseKP": 65,
+    "topicTitle": "Objects & Arrays",
+    "description": "Deep dive into JavaScript's complex data structures: Objects, Arrays, and modern Destructuring techniques.",
+    "baseKP": 100,
     "slides": [
         {
-            "id": "obj_1",
+            "id": "js_obj_1",
             "type": "content",
-            "title": "Objects",
-            "content": "# Objects 🗂️\n\nKey-value pairs to represent entities.\n\n```javascript\nconst car = {\n  brand: \"Tesla\",\n  model: \"Model 3\",\n  year: 2023,\n  start: function() {\n    console.log(\"Vroom!\");\n  }\n};\n\nconsole.log(car.brand); // Dot notation\nconsole.log(car[\"model\"]); // Bracket notation\ncar.start();\n```"
+            "title": "What is an Object?",
+            "content": "# Objects 🗃️\n\nJavascript objects are containers for named values called properties.\n\n```javascript\nconst car = {\n  type: \"Fiat\",\n  model: \"500\",\n  color: \"white\"\n};\n```\n\nAccess properties:\n- `car.type` (Dot notation)\n- `car[\"type\"]` (Bracket notation)"
         },
         {
-            "id": "obj_2",
+            "id": "js_obj_2",
+            "type": "content",
+            "title": "Object Methods",
+            "content": "# Methods ⚙️\n\nObjects can also have methods. Methods are actions that can be performed on objects.\n\nMethods are stored in properties as function definitions.\n\n```javascript\nconst person = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n  fullName: function() {\n    return this.firstName + \" \" + this.lastName;\n  }\n};\n\nconsole.log(person.fullName());\n```\n- `this` refers to the owner of the function (the person object)."
+        },
+        {
+            "id": "js_obj_3",
             "type": "content",
             "title": "Arrays",
-            "content": "# Arrays 📚\n\nOrdered lists of data.\n\n```javascript\nconst fruits = [\"Apple\", \"Banana\", \"Cherry\"];\n\nconsole.log(fruits[0]); // \"Apple\"\nconsole.log(fruits.length); // 3\n\nfruits.push(\"Date\"); // Add to end\nfruits.pop(); // Remove from end\n```"
+            "content": "# Arrays 📋\n\nAn array is a special variable, which can hold more than one value.\n\n```javascript\nconst cars = [\"Saab\", \"Volvo\", \"BMW\"];\n```\n\nAccess Elements:\n- `cars[0]` // Saab\n\nChange Elements:\n- `cars[0] = \"Opel\";`"
         },
         {
-            "id": "obj_3",
+            "id": "js_obj_4",
             "type": "content",
-            "title": "Array Methods",
-            "content": "# High-Order Methods 🛠️\n\nModern ways to loop and transform arrays.\n\n```javascript\nconst nums = [1, 2, 3];\n\n// forEach: Loop\nnums.forEach(n => console.log(n));\n\n// map: Transform (creates new array)\nconst doubled = nums.map(n => n * 2); // [2, 4, 6]\n\n// filter: Select subset\nconst big = nums.filter(n => n > 1); // [2, 3]\n```"
+            "title": "Array Methods: Basic",
+            "content": "# Basic Array Methods 🛠️\n\n- `push()`: Adds a new element to end.\n- `pop()`: Removes the last element.\n- `shift()`: Removes the first element.\n- `unshift()`: Adds new element to beginning.\n- `length`: Returns the number of elements.\n\n```javascript\nlet fruits = [\"Banana\", \"Orange\"];\nfruits.push(\"Apple\"); // [\"Banana\", \"Orange\", \"Apple\"]\n```"
         },
         {
-            "id": "obj_quiz_1",
+            "id": "js_obj_quiz_1",
             "type": "quiz",
-            "title": "Array Quiz",
-            "content": "Which method adds an item to the END of an array?",
-            "quizQuestion": "Which method adds an item to the END of an array?",
+            "title": "Method Quiz",
+            "content": "Add it.",
+            "quizQuestion": "Which method adds an element to the START of an array?",
             "quizOptions": [
-                "append()",
                 "push()",
-                "add()",
+                "pop()",
+                "shift()",
                 "unshift()"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "js_obj_5",
+            "type": "content",
+            "title": "Array Iteration",
+            "content": "# Iterating Arrays 🔄\n\nModern ways to loop.\n\n## forEach()\nCalls a function once for each array element.\n\n```javascript\nconst numbers = [45, 4, 9];\nnumbers.forEach(myFunction);\n\nfunction myFunction(value, index, array) {\n  console.log(value);\n}\n```\n\n## map()\nCreates a new array by performing a function on each array element.\n```javascript\nconst numbers1 = [45, 4, 9];\nconst numbers2 = numbers1.map(value => value * 2);\n```"
+        },
+        {
+            "id": "js_obj_6",
+            "type": "content",
+            "title": "Filter and Reduce",
+            "content": "# Filter & Reduce 🔍\n\n## filter()\nCreates a new array with array elements that pass a test.\n```javascript\nconst ages = [32, 33, 16, 40];\nconst adults = ages.filter(age => age >= 18);\n```\n\n## reduce()\nRuns a function on each array element to produce (reduce it to) a single value.\n```javascript\nconst numbers = [1, 2, 3, 4];\nconst sum = numbers.reduce((total, value) => total + value);\n```"
+        },
+        {
+            "id": "js_obj_7",
+            "type": "content",
+            "title": "Object Destructuring",
+            "content": "# Destructuring Objects 📦\n\nUnpack properties from objects into distinct variables.\n\n```javascript\nconst person = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n  age: 50\n};\n\n// Old way\n// let firstName = person.firstName;\n\n// Destructuring\nconst { firstName, age } = person;\nconsole.log(firstName); // John\n```"
+        },
+        {
+            "id": "js_obj_8",
+            "type": "content",
+            "title": "Array Destructuring",
+            "content": "# Destructuring Arrays 🥡\n\nUnpack values from arrays.\n\n```javascript\nconst fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\n\nconst [first, second] = fruits;\nconsole.log(first); // Banana\n```\n\nSkipping items:\n`const [first, , third] = fruits;`"
+        },
+        {
+            "id": "js_obj_quiz_2",
+            "type": "quiz",
+            "title": "Destructure Quiz",
+            "content": "Unpack it.",
+            "quizQuestion": "How do you extract 'name' from object 'user'?",
+            "quizOptions": [
+                "const [name] = user;",
+                "const {name} = user;",
+                "const user.name;",
+                "const name from user;"
             ],
             "correctOptionIndex": 1
         },
         {
-            "id": "obj_4",
+            "id": "js_obj_9",
+            "type": "content",
+            "title": "Spread Operator",
+            "content": "# Spread Operator ... 🧈\n\nExpands an iterable (like an array) into more elements.\n\n```javascript\nconst q1 = [\"Jan\", \"Feb\", \"Mar\"];\nconst q2 = [\"Apr\", \"May\", \"Jun\"];\nconst halfYear = [...q1, ...q2];\n```\n\nAlso works for Objects (cloning/merging):\n```javascript\nconst obj1 = { foo: 'bar', x: 42 };\nconst obj2 = { foo: 'baz', y: 13 };\nconst mergedObj = { ...obj1, ...obj2 };\n```"
+        },
+        {
+            "id": "js_obj_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Data Processing 💻\n\n<!-- FULL_CODE_START\nconst users = [\n  { id: 1, name: \"Alice\", active: true },\n  { id: 2, name: \"Bob\", active: false },\n  { id: 3, name: \"Charlie\", active: true }\n];\n\n// 1. Filter active users\nconst activeUsers = users.filter(user => user.active);\n\n// 2. Map to get just names\nconst names = activeUsers.map(user => user.name);\n\nconsole.log(\"Active Users:\", names);\n\n// 3. Find specific user\nconst bob = users.find(u => u.name === \"Bob\");\nconsole.log(\"Found Bob:\", bob);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "js_obj_11",
             "type": "content",
             "title": "Summary",
-            "content": "# Data Structs Recap 🏗️\n\n- ✅ **Objects**: Key-Value properties (`{}`) for things\n- ✅ **Arrays**: Ordered lists (`[]`) for collections\n- ✅ **Map/Filter**: Powerful tools for data manipulation\n- ✅ **`this`**: Keyword to access object properties inside methods\n\n> 🚀 **Next:** Level up with modern **ES6+ Features**!"
+            "content": "# Recap: Data Structures 🎓\n\nStore complex data.\n\n- **Objects:** Key-value pairs. Methods with `this`.\n- **Arrays:** Ordered lists. `push`, `pop`.\n- **Iteration:** `map`, `filter`, `reduce` (Functional style).\n- **Modern JS:** Destructuring `{}`/`[]` and Spread `...` make life easier.\n\n## Next Steps\nUnlock modern JavaScript power with **ES6+ Features**!"
         }
     ]
 }

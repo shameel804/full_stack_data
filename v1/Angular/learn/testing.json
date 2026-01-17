@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing",
+    "description": "Ensure your Angular app is bug-free with Unit Testing (Jasmine/Karma) and E2E Testing.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_test_1",
+            "type": "content",
+            "title": "Default Tools",
+            "content": "# The Setup 🧪\n\nAngular setup comes with **Jasmine** (Test Runner/Assertion Library) and **Karma** (Browser Launcher) by default.\n\nCommand: `ng test`\n\nRuns tests in a real Chrome browser window."
+        },
+        {
+            "id": "ng_test_2",
+            "type": "content",
+            "title": "spec.ts Files",
+            "content": "# Test Files 📄\n\nTests live next to your code: `component.spec.ts`.\n\n```typescript\ndescribe('AppComponent', () => {\n  it('should create the app', () => {\n    // Assertion\n    expect(app).toBeTruthy();\n  });\n});\n```"
+        },
+        {
+            "id": "ng_test_3",
+            "type": "content",
+            "title": "TestBed",
+            "content": "# Angular TestBed 🏥\n\nThe most important utility. It creates a dynamic Angular Module just for testing your component.\n\n```typescript\nbeforeEach(async () => {\n  await TestBed.configureTestingModule({\n    declarations: [ AppComponent ],\n    imports: [ RouterTestingModule ]\n  }).compileComponents();\n});\n```"
+        },
+        {
+            "id": "ng_test_4",
+            "type": "content",
+            "title": "Fixture & DebugElement",
+            "content": "# Accessing the DOM 🩺\n\n`ComponentFixture` gives access to the component instance and the template.\n\n```typescript\nconst fixture = TestBed.createComponent(AppComponent);\nconst app = fixture.componentInstance;\nconst compiled = fixture.nativeElement as HTMLElement;\n```"
+        },
+        {
+            "id": "ng_test_quiz_1",
+            "type": "quiz",
+            "title": "Tool Quiz",
+            "content": "Runner check.",
+            "quizQuestion": "Which tool acts as the test runner and assertion library in a standard Angular project?",
+            "quizOptions": [
+                "Karma",
+                "Jasmine",
+                "Protractor",
+                "Cypress"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_test_5",
+            "type": "content",
+            "title": "Change Detection",
+            "content": "# Triggering Updates 🔄\n\nIn tests, automatic change detection is disabled.\n\nYou must trigger it manually to update the view.\n\n```typescript\ncomponent.title = 'New Title';\nfixture.detectChanges(); // Apply changes\nexpect(h1.textContent).toBe('New Title');\n```"
+        },
+        {
+            "id": "ng_test_6",
+            "type": "content",
+            "title": "Mocking Services",
+            "content": "# Mocking Dependencies 🎭\n\nDon't use real services (HTTP) in unit tests.\n\nUse `SpyObj` (Jasmine Spies) to fake them.\n\n```typescript\n// Fake Service\nconst authServiceSpy = jasmine.createSpyObj('AuthService', ['login']);\n// Provide it\nproviders: [{ provide: AuthService, useValue: authServiceSpy }]\n```"
+        },
+        {
+            "id": "ng_test_7",
+            "type": "content",
+            "title": "Async Testing",
+            "content": "# Async Code ⏳\n\nUse `waitForAsync` or `fakeAsync` + `tick` to test asynchronous operations (like Promises or Timeouts).\n\n```typescript\nit('should update after delay', fakeAsync(() => {\n  component.startTimer();\n  tick(1000); // Simulate 1s pass\n  expect(component.time).toBe(1);\n}));\n```"
+        },
+        {
+            "id": "ng_test_8",
+            "type": "content",
+            "title": "E2E Testing",
+            "content": "# End-to-End 🤖\n\nTests the application from the user's perspective (clicking buttons, navigating).\n\nLegacy Tool: **Protractor**.\nModern Tools: **Cypress** or **Playwright**.\n\nRun command: `ng e2e`."
+        },
+        {
+            "id": "ng_test_9",
+            "type": "content",
+            "title": "Code Coverage",
+            "content": "# Coverage Reports ☂️\n\nSee how much of your code is tested.\n\n`ng test --code-coverage`\n\nGenerates an HTML report in the `coverage/` folder."
+        },
+        {
+            "id": "ng_test_quiz_2",
+            "type": "quiz",
+            "title": "Utility Quiz",
+            "content": "Configuration.",
+            "quizQuestion": "Which Angular Testing utility is used to configure the test module (declarations, imports, providers)?",
+            "quizOptions": [
+                "TestBed",
+                "ComponentFixture",
+                "DebugElement",
+                "Injector"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "ng_test_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Unit Test 💻\n\n<!-- FULL_CODE_START\nimport { TestBed } from '@angular/core/testing';\nimport { AppComponent } from './app.component';\n\ndescribe('AppComponent', () => {\n  beforeEach(async () => {\n    await TestBed.configureTestingModule({\n      declarations: [\n        AppComponent\n      ],\n    }).compileComponents();\n  });\n\n  it('should render title', () => {\n    const fixture = TestBed.createComponent(AppComponent);\n    fixture.detectChanges();\n    const compiled = fixture.nativeElement as HTMLElement;\n    expect(compiled.querySelector('.content span')?.textContent).toContain('my-app app is running!');\n  });\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_test_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Testing 🎓\n\nQuality Assurance.\n\n- **Jasmine:** Writes tests (`describe`, `it`).\n- **TestBed:** Configures Dependency Injection.\n- **Fixture:** Controls component (`detectChanges`).\n- **SpyObj:** Mocks dependencies.\n- **E2E:** Cypress (Recommended).\n\n## Next Steps\nYou have conquered the Big Three! Let's simplify things with **Svelte**."
+        }
+    ]
+}

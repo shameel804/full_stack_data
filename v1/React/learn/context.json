@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_context",
+    "topicId": "context",
+    "topicTitle": "Context API",
+    "description": "Learn to manage state globally without external libraries using React's built-in Context API.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_context_1",
+            "type": "content",
+            "title": "What is Context?",
+            "content": "# The Context API 📡\n\nContext provides a way to pass data through the component tree without having to pass props down manually at every level.\n\nGreat for global data:\n- Current authenticated user.\n- Type of language/locale.\n- UI Theme (Dark/Light)."
+        },
+        {
+            "id": "react_context_2",
+            "type": "content",
+            "title": "Prop Drilling Problem",
+            "content": "# Prop Drilling 🕳️\n\nWithout Context, passing data from `App` to a deeply nested `Button` (e.g., App -> Layout -> Header -> UserMenu -> Button) requires passing `user={user}` to every intermediate component.\n\nThis is \"Drilling\". Context solves this teleportation."
+        },
+        {
+            "id": "react_context_3",
+            "type": "content",
+            "title": "Creating Context",
+            "content": "# createContext 🛠️\n\nFirst, create the context object.\n\n```javascript\nimport { createContext } from 'react';\n\nconst ThemeContext = createContext('light'); // Default value\n```"
+        },
+        {
+            "id": "react_context_4",
+            "type": "content",
+            "title": "Provider",
+            "content": "# Provider 📡\n\nWrap the components that need access to the data.\n\n```jsx\n<ThemeContext.Provider value=\"dark\">\n  <Toolbar />\n</ThemeContext.Provider>\n```\n`Toolbar` and ANY of its children can now access the value \"dark\"."
+        },
+        {
+            "id": "react_context_quiz_1",
+            "type": "quiz",
+            "title": "Component Quiz",
+            "content": "Structure.",
+            "quizQuestion": "Which component is required to MAKE data available to the tree?",
+            "quizOptions": [
+                "Consumer",
+                "Provider",
+                "Supplier",
+                "Giver"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_context_5",
+            "type": "content",
+            "title": "Consuming (hooks)",
+            "content": "# useContext 🪝\n\nThe easiest way to read context.\n\n```jsx\nimport { useContext } from 'react';\n\nfunction Button() {\n  const theme = useContext(ThemeContext);\n  return <button className={theme}>I am styled!</button>;\n}\n```\nWhen the Provider updates, this component re-renders automatically."
+        },
+        {
+            "id": "react_context_6",
+            "type": "content",
+            "title": "Multiple Contexts",
+            "content": "# Multiple Contexts 📚\n\nYou can nest Providers to share different types of data.\n\n```jsx\n<AuthContext.Provider value={user}>\n  <ThemeContext.Provider value={theme}>\n    <Layout />\n  </ThemeContext.Provider>\n</AuthContext.Provider>\n```"
+        },
+        {
+            "id": "react_context_7",
+            "type": "content",
+            "title": "Updating Context",
+            "content": "# Dynamic Context 🔄\n\nPass **state** and **updater functions** into the Provider.\n\n```jsx\nfunction App() {\n  const [user, setUser] = useState(null);\n\n  return (\n    // Pass object containing value + setter\n    <UserContext.Provider value={{ user, setUser }}>\n      <Profile />\n    </UserContext.Provider>\n  );\n}\n```"
+        },
+        {
+            "id": "react_context_8",
+            "type": "content",
+            "title": "Performance Caution",
+            "content": "# Performance Warning ⚠️\n\nEvery time the Provider's `value` changes, ALL consumers re-render.\n\nIf you pass a new object `{{ user }}` every time, it triggers re-renders on every parent render.\n\n**Solution:** Use `useMemo` for the value object."
+        },
+        {
+            "id": "react_context_9",
+            "type": "content",
+            "title": "Context vs Redux",
+            "content": "# Context vs Redux 🥊\n\n**Context** is built-in and great for simple, low-frequency updates (Theme, User).\n\n**Redux** is better for complex state logic, middleware, and high-frequency updates.\n\nThey can be used together!"
+        },
+        {
+            "id": "react_context_quiz_2",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "The hook name.",
+            "quizQuestion": "Which hook is used to access the context value?",
+            "quizOptions": [
+                "useProvider",
+                "useContext",
+                "useConsumer",
+                "useGlobal"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_context_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Theme Context 💻\n\n<!-- FULL_CODE_START\nimport { createContext, useContext, useState } from 'react';\n\n// 1. Create Context\nconst ThemeContext = createContext();\n\nfunction ThemeProvider({ children }) {\n  const [theme, setTheme] = useState(\"light\");\n  const toggleTheme = () => setTheme(prev => prev === \"light\" ? \"dark\" : \"light\");\n\n  return (\n    <ThemeContext.Provider value={{ theme, toggleTheme }}>\n      {children}\n    </ThemeContext.Provider>\n  );\n}\n\n// 2. Consume Context\nfunction ThemedButton() {\n  const { theme, toggleTheme } = useContext(ThemeContext);\n  return (\n    <button \n       onClick={toggleTheme} \n       style={{ background: theme === 'light' ? '#fff' : '#333' }}>\n      Toggle Theme\n    </button>\n  );\n}\n\n// 3. Usage\nfunction App() {\n  return (\n    <ThemeProvider>\n      <ThemedButton />\n    </ThemeProvider>\n  );\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_context_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Context 🎓\n\nNo more prop drilling.\n\n- **Create:** `createContext`.\n- **Provide:** Wrap tree with `<Provider value={data}>`.\n- **Consume:** Use `useContext` hook.\n- **Hierarchy:** Data flows down.\n- **Performance:** Watch out for unnecessary re-renders.\n\n## Next Steps\nMake your React apps incredibly fast with **Performance Optimization**!"
+        }
+    ]
+}

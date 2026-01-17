@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_rbac",
+    "topicId": "rbac",
+    "topicTitle": "RBAC",
+    "description": "Role-Based Access Control: The standard way to manage permissions in enterprise applications.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_rbac_1",
+            "type": "content",
+            "title": "What is RBAC?",
+            "content": "# Roles, not People 🎭\n\nInstead of assigning permissions to every single user individually, you assign permissions to a **Role**, and then users to that Role.\n\nUser -> Role -> Permissions"
+        },
+        {
+            "id": "auth_rbac_2",
+            "type": "content",
+            "title": "The Hierarchy",
+            "content": "# Example Structure 🏗️\n\n- **Roles:** Admin, Editor, Viewer.\n- **Permissions:** `create:post`, `edit:post`, `delete:post`, `read:post`.\n\n**Admin:** Has all permissions.\n**Editor:** convert `create`, `edit`.\n**Viewer:** `read` only."
+        },
+        {
+            "id": "auth_rbac_3",
+            "type": "content",
+            "title": "Benefits",
+            "content": "# Why use RBAC? 🚀\n\n- **Scalability:** Easy to manage 10,000 users if they only fit into 3 roles.\n- **Simplicity:** \"Make John an Admin\" is easier than \"Give John permissions A, B, C, D...\"\n- **Security:** Least Privilege Principle."
+        },
+        {
+            "id": "auth_rbac_4",
+            "type": "content",
+            "title": "Principle of Least Privilege",
+            "content": "# Minimum Viable Access 🛡️\n\nGive users the bare minimum permissions they need to do their job.\n\nDon't give everyone Admin rights just because it's easier. It reduces the blast radius if an account is compromised."
+        },
+        {
+            "id": "auth_rbac_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Assignment.",
+            "quizQuestion": "In RBAC, permissions are directly assigned to...",
+            "quizOptions": [
+                "Users",
+                "Groups",
+                "Roles",
+                "Files"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_rbac_5",
+            "type": "content",
+            "title": "ACL (Access Control Lists)",
+            "content": "# The Alternative 📜\n\nACLs list exactly who can access a specific resource.\n\n\"File A: User1 (Read), User2 (Write)\"\n\n**Pros:** Very granular.\n**Cons:** Harder to manage at scale than RBAC."
+        },
+        {
+            "id": "auth_rbac_6",
+            "type": "content",
+            "title": "Implementation Database",
+            "content": "# Schema Design 🗄️\n\nTables:\n1.  `Users` (id, name)\n2.  `Roles` (id, name)\n3.  `Permissions` (id, name)\n4.  `Role_Permissions` (role_id, permission_id)\n5.  `User_Roles` (user_id, role_id)"
+        },
+        {
+            "id": "auth_rbac_7",
+            "type": "content",
+            "title": "Middleware Check",
+            "content": "# The Guard 💂\n\nIn your API, creating a middleware.\n\n```javascript\napp.delete('/posts/:id', requireRole('admin'), deletePost);\n```\nOr better: `requirePermission('delete:post')` allows for more flexibility."
+        },
+        {
+            "id": "auth_rbac_8",
+            "type": "content",
+            "title": "Attribute-Based (ABAC)",
+            "content": "# The Next Level 🧠\n\n**ABAC** grants access based on attributes (Context).\n\n\"Allow access IF user role is Manager AND time is 9am-5pm AND location is Office.\"\n\nMore complex, more powerful."
+        },
+        {
+            "id": "auth_rbac_9",
+            "type": "content",
+            "title": "Multi-Tenancy",
+            "content": "# SaaS World 🏢\n\nIn a SaaS app, User A might be an \"Admin\" for Company X, but have NO access to Company Y.\n\nYour RBAC must check `TenantID` alongside the Role."
+        },
+        {
+            "id": "auth_rbac_quiz_2",
+            "type": "quiz",
+            "title": "Comparison Quiz",
+            "content": "Type check.",
+            "quizQuestion": "Which system allows for rules like 'Access allowed only during business hours'?",
+            "quizOptions": [
+                "RBAC (Role Based)",
+                "ACL (Access Control List)",
+                "ABAC (Attribute Based)",
+                "MAC (Mandatory Access Control)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_rbac_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Middleware Logic 💻\n\n<!-- FULL_CODE_START\nfunction hasPermission(permission) {\n  return (req, res, next) => {\n    const userRole = req.user.role;\n    const rolePermissions = getPermissionsForRole(userRole);\n\n    if (rolePermissions.includes(permission)) {\n      next();\n    } else {\n      res.status(403).send(\"Forbidden\");\n    }\n  };\n}\n\n// Usage\napp.post('/admin', hasPermission('admin:write'), adminHandler);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_rbac_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: RBAC 🎓\n\nOrganized Access.\n\n- **Role:** Collection of permissions.\n- **User:** Assigned a role.\n- **Least Privilege:** Minimizing risk.\n- **ACL:** Granular per resource.\n- **ABAC:** Context aware.\n\n## Next Steps\nAdd another layer of security with **Multi-Factor Authentication**!"
+        }
+    ]
+}

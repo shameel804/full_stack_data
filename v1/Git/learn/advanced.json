@@ -1,0 +1,103 @@
+{
+    "id": "learn_git_advanced",
+    "topicId": "advanced",
+    "topicTitle": "Advanced Git",
+    "description": "Master level tools to recover lost code and debug history.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "git_advanced_1",
+            "type": "content",
+            "title": "git reflog",
+            "content": "# The Time Machine ⏳\n\nGit keeps a log of where your HEAD pointer has been.\n\nEven if you delete a branch or hard reset a commit, the commit still exists in the `reflog` for a few weeks.\n\n`git reflog` -> `git reset --hard HEAD@{5}`"
+        },
+        {
+            "id": "git_advanced_2",
+            "type": "content",
+            "title": "git bisect",
+            "content": "# Binary Search 🔎\n\nFind a bug introduced in history.\n\n1. `git bisect start`\n2. `git bisect bad` (Current commit is broken)\n3. `git bisect good v1.0` (Last known good version)\n\nGit jumps to the middle. You test and say `bad` or `good` until the culprit is found."
+        },
+        {
+            "id": "git_advanced_3",
+            "type": "content",
+            "title": "git blame",
+            "content": "# Finger Pointing 👉\n\nSee who wrote each line of a file and in which commit.\n\n`git blame index.js`\n\nUseful for understanding *why* a line was written (by reading the commit message)."
+        },
+        {
+            "id": "git_advanced_4",
+            "type": "content",
+            "title": "git submodule",
+            "content": "# Inception 🤯\n\nKeep a Git repository *inside* another Git repository.\n\n`git submodule add https://github.com/lib/utils.git`\n\nUseful for shared libraries, but adds complexity to cloning and updating."
+        },
+        {
+            "id": "git_advanced_5",
+            "type": "content",
+            "title": "git worktree",
+            "content": "# Multitasking 🐙\n\nCheckout multiple branches at the same time in different directories.\n\n`git worktree add ../hotfix hotfix-branch`\n\nAllows you to fix a bug without stashing/switching your main workspace."
+        },
+        {
+            "id": "git_advanced_quiz_1",
+            "type": "quiz",
+            "title": "Debug Quiz",
+            "content": "Bisect.",
+            "quizQuestion": "Which command uses binary search to find the specific commit that introduced a bug?",
+            "quizOptions": [
+                "git search",
+                "git debug",
+                "git bisect",
+                "git find"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "git_advanced_6",
+            "type": "content",
+            "title": "Interactive Rebase",
+            "content": "# Polishing History 💅\n\n`git rebase -i HEAD~3`\n\nOpens an editor allowing you to:\n- **pick:** Keep commit.\n- **squash:** Combine with previous.\n- **edit:** Pause and change content.\n- **drop:** Remove commit."
+        },
+        {
+            "id": "git_advanced_7",
+            "type": "content",
+            "title": "git cherry-pick",
+            "content": "# Precision 🤏\n\n`git cherry-pick <commit-hash>`\n\nApply a specific commit from another branch onto your current branch.\n\nUseful when you need a bug fix from `develop` but aren't ready to merge the whole branch."
+        },
+        {
+            "id": "git_advanced_8",
+            "type": "content",
+            "title": "git revert",
+            "content": "# Safe Undo ↩️\n\nInstead of deleting history (`reset`), it creates a NEW commit that does the opposite of the target commit.\n\n`git revert <commit-hash>`\n\nSafe for shared branches."
+        },
+        {
+            "id": "git_advanced_9",
+            "type": "content",
+            "title": "Git Graph",
+            "content": "# Visualization 🕸️\n\n`git log --graph --oneline --all`\n\nDraws an ASCII graph of your branching history in the terminal.\n\n(Or use GUI tools like GitKraken, Sourcetree)."
+        },
+        {
+            "id": "git_advanced_10",
+            "type": "content",
+            "title": "Tagging",
+            "content": "# Bookmarks 📑\n\nMark specific points in history as important (releases).\n\n`git tag v1.0.0`\n`git push origin --tags`\n\nTags are immutable references."
+        },
+        {
+            "id": "git_advanced_quiz_2",
+            "type": "quiz",
+            "title": "Undo Quiz",
+            "content": "Revert.",
+            "quizQuestion": "Which command undoes a commit by creating a NEW commit with the inverse changes?",
+            "quizOptions": [
+                "git undo",
+                "git reset",
+                "git revert",
+                "git checkout"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "git_advanced_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Advanced Git 🚀\n\nSuperpowers.\n\n- **Reflog:** Recovery.\n- **Bisect:** Debugging.\n- **Worktree:** Parallel folders.\n- **Submodules:** Nested repos.\n\n## Next Steps\nYou have mastered **Git**! Keep coding!"
+        }
+    ]
+}

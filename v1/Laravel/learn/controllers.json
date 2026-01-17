@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_controllers",
+    "topicId": "controllers",
+    "topicTitle": "Controllers",
+    "description": "Handle requests, return responses, and utilize Dependency Injection.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_controllers_1",
+            "type": "content",
+            "title": "What is a Controller?",
+            "content": "# The C in MVC 🧠\n\nInstead of defining all logic in `routes/web.php` closures, organize it in Controller classes.\n\n`php artisan make:controller UserController`"
+        },
+        {
+            "id": "laravel_controllers_2",
+            "type": "content",
+            "title": "Basic Controller",
+            "content": "# Structure 🏗️\n\nIn `app/Http/Controllers/UserController.php`:\n\n<!-- FULL_CODE_START\nnamespace App\\Http\\Controllers;\n\nuse App\\Models\\User;\n\nclass UserController extends Controller\n{\n    public function show($id)\n    {\n        return User::findOrFail($id);\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_3",
+            "type": "content",
+            "title": "Single Action Controllers",
+            "content": "# One Job 🎯\n\nIf a controller does ONE thing, define an `__invoke` method.\n\n<!-- FULL_CODE_START\npublic function __invoke()\n{\n    return 'Done';\n}\n// In routes:\nRoute::get('/do', ProvisionServer::class);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_4",
+            "type": "content",
+            "title": "Request Object",
+            "content": "# Dependency Injection 💉\n\nType-hint `Request` to access inputs.\n\n<!-- FULL_CODE_START\nuse Illuminate\\Http\\Request;\n\npublic function store(Request $request)\n{\n    $name = $request->input('name');\n    // or $request->name\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_5",
+            "type": "content",
+            "title": "Validation",
+            "content": "# Easy Check ✅\n\nCall `validate` directly on the request.\n\n<!-- FULL_CODE_START\n$validated = $request->validate([\n    'title' => 'required|unique:posts|max:255',\n    'body' => 'required',\n]);\n// If fails, auto-redirects back with errors.\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_quiz_1",
+            "type": "quiz",
+            "title": "Validation Quiz",
+            "content": "Flow.",
+            "quizQuestion": "What happens automatically if '$request->validate()' fails inside a controller?",
+            "quizOptions": [
+                "It throws a 500 error",
+                "It returns false",
+                "It redirects the user back to the previous location with error messages",
+                "It continues execution but with empty data"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_controllers_6",
+            "type": "content",
+            "title": "Responses",
+            "content": "# Returning Data 📤\n\n- `return 'String'`: Plain text.\n- `return [1, 2, 3]`: JSON.\n- `return view('welcome')`: HTML View.\n- `return response()->json([...])`: Explicit JSON."
+        },
+        {
+            "id": "laravel_controllers_7",
+            "type": "content",
+            "title": "Middleware in Controller",
+            "content": "# Constructor 🚧\n\nApply middleware inside the constructor.\n\n<!-- FULL_CODE_START\npublic function __construct()\n{\n    $this->middleware('auth');\n    $this->middleware('log')->only('index');\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_8",
+            "type": "content",
+            "title": "Resource Controllers",
+            "content": "# Artisan Shortcut ⚡\n\n`php artisan make:controller PhotoController --resource`\n\nCreates a controller with empty methods for all CRUD operations (index, create, store, show, edit, update, destroy)."
+        },
+        {
+            "id": "laravel_controllers_9",
+            "type": "content",
+            "title": "API Resources",
+            "content": "# JSON Transformation 🔄\n\nTransform models into JSON structures.\n\n`return new UserResource(User::find(1));`\n\nAllows you to hide specific fields or format dates consistently."
+        },
+        {
+            "id": "laravel_controllers_10",
+            "type": "content",
+            "title": "Service Injection",
+            "content": "# Logic Abstraction 🔧\n\nInject your own services.\n\n<!-- FULL_CODE_START\npublic function __construct(UserService $users)\n{\n    $this->users = $users;\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_controllers_quiz_2",
+            "type": "quiz",
+            "title": "Type Hint Quiz",
+            "content": "DI.",
+            "quizQuestion": "How do you access the current HTTP request data in a controller method?",
+            "quizOptions": [
+                "Use the global $_GET variable",
+                "Type-hint 'Illuminate\\Http\\Request' in the method signature",
+                "Create a new Request object",
+                "It is not possible"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "laravel_controllers_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Controllers 🎮\n\nTraffic Cops.\n\n- **Methods:** Action logic.\n- **Injection:** `Request $req`.\n- **Validate:** `$req->validate()`.\n- **Return:** Views or JSON.\n\n## Next Steps\nDatabase interactions with **Eloquent ORM**!"
+        }
+    ]
+}

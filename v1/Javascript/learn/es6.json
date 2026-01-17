@@ -1,47 +1,103 @@
 {
-    "id": "es6",
+    "id": "learn_js_es6",
     "topicId": "es6",
     "topicTitle": "ES6+ Features",
-    "description": "Modern JavaScript features: Destructuring, Spread, Template Literals.",
-    "baseKP": 80,
+    "description": "Learn modern JavaScript features introduced in ECMAScript 6 (2015) and beyond.",
+    "baseKP": 100,
     "slides": [
         {
-            "id": "es6_1",
+            "id": "js_es6_1",
+            "type": "content",
+            "title": "What is ES6?",
+            "content": "# Modern JavaScript 🚀\n\nES6 (ECMAScript 2015) was a major update to JavaScript.\n\nKey features:\n- `let` and `const`\n- Arrow Functions\n- Template Literals\n- Destructuring\n- Spread Operator\n- Classes\n- Modules\n- Promises"
+        },
+        {
+            "id": "js_es6_2",
+            "type": "content",
+            "title": "Let and Const",
+            "content": "# Block Scope Variables 🧱\n\n- `var`: Function scoped. Hoisted. Can be problematic.\n- `let`: Block scoped. Reassignable.\n- `const`: Block scoped. Not reassigned (but objects/arrays inside can be mutated).\n\n```javascript\nconst PI = 3.14159;\n// PI = 3; // Error!\n\nif (true) {\n  let x = 10;\n}\n// console.log(x); // Error, x is not defined\n```"
+        },
+        {
+            "id": "js_es6_3",
             "type": "content",
             "title": "Template Literals",
-            "content": "# Template Literals 📜\n\nBackticks (` `) allow variables in strings.\n\n```javascript\nconst name = \"Alice\";\nconst age = 25;\n\n// Old\nconsole.log(\"User \" + name + \" is \" + age);\n\n// ES6\nconsole.log(`User ${name} is ${age}`);\n```\n\nAlso supports multi-line strings!"
+            "content": "# Template Literals 📜\n\nUse backticks ( ` ) instead of quotes.\n\nAllows:\n1.  **Variable Interpolation:** `${variable}`\n2.  **Multi-line strings**\n\n```javascript\nlet firstName = \"John\";\nlet lastName = \"Doe\";\n\nlet text = `Welcome ${firstName}, ${lastName}!`;\n```"
         },
         {
-            "id": "es6_2",
+            "id": "js_es6_4",
             "type": "content",
-            "title": "Destructuring",
-            "content": "# Destructuring ✂️\n\nUnpack values from arrays or objects easily.\n\n```javascript\n// Object\nconst user = { name: \"Bob\", role: \"Admin\" };\nconst { name, role } = user;\nconsole.log(role); // \"Admin\"\n\n// Array\nconst rgb = [255, 0, 0];\nconst [red, green, blue] = rgb;\n```"
+            "title": "Spread Operator",
+            "content": "# Spread Operator ... 🧈\n\nExpands an iterable into individual elements.\n\n```javascript\nconst numbers = [1, 2, 3];\nconsole.log(...numbers);\n// Output: 1 2 3\n\nconst newNumbers = [...numbers, 4, 5];\n// [1, 2, 3, 4, 5]\n```"
         },
         {
-            "id": "es6_3",
-            "type": "content",
-            "title": "Spread and Rest",
-            "content": "# Spread & Rest `...` 🧂\n\n## Spread\nExpands array/object properties.\n```javascript\nconst arr1 = [1, 2];\nconst arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]\n```\n\n## Rest\nCommences remaining arguments into an array.\n```javascript\nfunction sum(...numbers) {\n  return numbers.reduce((a, b) => a + b);\n}\n```"
-        },
-        {
-            "id": "es6_quiz_1",
+            "id": "js_es6_quiz_1",
             "type": "quiz",
-            "title": "ES6 Quiz",
-            "content": "What syntax is used for template literals?",
-            "quizQuestion": "Which character allows string interpolation in JS?",
+            "title": "Syntax Quiz",
+            "content": "Modern strings.",
+            "quizQuestion": "Which character allows variable interpolation in strings?",
             "quizOptions": [
                 "' (Single Quote)",
                 "\" (Double Quote)",
                 "` (Backtick)",
-                "$ (Dollar)"
+                "~ (Tilde)"
             ],
             "correctOptionIndex": 2
         },
         {
-            "id": "es6_4",
+            "id": "js_es6_5",
+            "type": "content",
+            "title": "Rest Parameter",
+            "content": "# Rest Parameter ... 🎒\n\nCollects all remaining arguments into an array.\n\n```javascript\nfunction sum(...args) {\n  let total = 0;\n  for (let arg of args) total += arg;\n  return total;\n}\n\nlet x = sum(4, 9, 16, 25);\n```"
+        },
+        {
+            "id": "js_es6_6",
+            "type": "content",
+            "title": "Modules",
+            "content": "# Modules 📦\n\nModules allow you to break up your code into separate files.\n\nFile: `math.js`\n```javascript\nexport const add = (a, b) => a + b;\n```\n\nFile: `main.js`\n```javascript\nimport { add } from './math.js';\nconsole.log(add(1, 2));\n```\n\nNote: In HTML, use `<script type=\"module\">`."
+        },
+        {
+            "id": "js_es6_7",
+            "type": "content",
+            "title": "Classes",
+            "content": "# Classes 🏛️\n\nA template for creating objects (syntactic sugar over prototypes).\n\n```javascript\nclass Car {\n  constructor(name, year) {\n    this.name = name;\n    this.year = year;\n  }\n  \n  age() {\n    let date = new Date();\n    return date.getFullYear() - this.year;\n  }\n}\n\nlet myCar = new Car(\"Ford\", 2014);\n```"
+        },
+        {
+            "id": "js_es6_8",
+            "type": "content",
+            "title": "Promises",
+            "content": "# Promises 🤞\n\nA Promise is an object representing the eventual completion (or failure) of an asynchronous operation.\n\n```javascript\nlet myPromise = new Promise(function(resolve, reject) {\n  // \"Producing Code\" (May take some time)\n  \n  resolve(); // when successful\n  reject();  // when error\n});\n\n// \"Consuming Code\"\nmyPromise.then(\n  function(value) { /* code if successful */ },\n  function(error) { /* code if some error */ }\n);\n```"
+        },
+        {
+            "id": "js_es6_quiz_2",
+            "type": "quiz",
+            "title": "Modules Quiz",
+            "content": "Import/Export.",
+            "quizQuestion": "Which keyword is used to make a function available to other files?",
+            "quizOptions": [
+                "public",
+                "expose",
+                "export",
+                "share"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "js_es6_9",
+            "type": "content",
+            "title": "Nullish Coalescing",
+            "content": "# Nullish Coalescing ?? 👻\n\nThe `??` operator returns the right-hand side operand when the left-hand side is `null` or `undefined`.\n\nDiffers from `||` which checks for falsy values (like 0 or \"\").\n\n```javascript\nlet name = null;\nlet text = name ?? \"missing\"; // \"missing\"\n\nlet count = 0;\nlet num = count || 10; // 10 (Wrong! 0 is valid)\nlet numCorrect = count ?? 10; // 0 (Correct)\n```"
+        },
+        {
+            "id": "js_es6_10",
+            "type": "content",
+            "title": "Optional Chaining",
+            "content": "# Optional Chaining ?. 🔗\n\nThe `?.` operator accesses an object's property or calls a function. If the object accessed or function called is `undefined` or `null`, it returns `undefined` instead of throwing an error.\n\n```javascript\nconst user = {};\n// console.log(user.address.street); // Error\nconsole.log(user?.address?.street); // undefined\n```"
+        },
+        {
+            "id": "js_es6_11",
             "type": "content",
             "title": "Summary",
-            "content": "# Modern JS Recap 🌟\n\n- ✅ **Template Literals**: `${expression}` inside backticks\n- ✅ **Destructuring**: Extracting vars `{ x } = obj`\n- ✅ **Spread**: Copying/Expanding `...arr`\n- ✅ **Modules**: `import`/`export` (for organizing code)\n\n> 🚀 **Next:** Handle time with **Asynchronous JavaScript**!"
+            "content": "# Recap: ES6+ 🎓\n\nWrite cleaner, safer code.\n\n- **Vars:** `let`/`const` > `var`.\n- **Arrows:** `() =>`.\n- **Strings:** `` `Hello ${name}` ``.\n- **Spread/Rest:** `...`.\n- **Structure:** `class`, `module`.\n- **Safety:** `?.`, `??`.\n\n## Next Steps\nMaster the timeline with **Asynchronous JavaScript**!"
         }
     ]
 }

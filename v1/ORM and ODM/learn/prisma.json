@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_prisma",
+    "topicId": "prisma",
+    "topicTitle": "Prisma",
+    "description": "Next-generation Node.js and TypeScript ORM.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_prisma_1",
+            "type": "content",
+            "title": "What is Prisma? 💎",
+            "content": "# Type-Safe 🛡️\n\nPrisma is a modern ORM for Node.js/TypeScript.\n\nIt features an intuitive data model, automated migrations, and type-safety. \n\nIt consists of **Prisma Client**, **Prisma Migrate**, and **Prisma Studio**."
+        },
+        {
+            "id": "orm_prisma_2",
+            "type": "content",
+            "title": "The Schema File",
+            "content": "# prisma.schema 📄\n\nThe central source of truth.\n\n<!-- FULL_CODE_START\nmodel User {\n  id    Int     @id @default(autoincrement())\n  email String  @unique\n  name  String?\n  posts Post[]\n}\n\nmodel Post {\n  id        Int     @id @default(autoincrement())\n  title     String\n  authorId  Int\n  author    User    @relation(fields: [authorId], references: [id])\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_prisma_3",
+            "type": "content",
+            "title": "Generate Client",
+            "content": "# Code Gen 🏭\n\n`npx prisma generate`\n\nReads your schema and generates a custom TypeScript client tailored to your specific database structure.\n\nProvides auto-completion for your models."
+        },
+        {
+            "id": "orm_prisma_4",
+            "type": "content",
+            "title": "Prisma Client",
+            "content": "# Usage 💻\n\n<!-- FULL_CODE_START\nimport { PrismaClient } from '@prisma/client'\nconst prisma = new PrismaClient()\n\n// Create\nconst user = await prisma.user.create({\n  data: { name: 'Alice', email: 'alice@prisma.io' },\n})\n\n// Find\nconst users = await prisma.user.findMany()\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_prisma_5",
+            "type": "content",
+            "title": "Migrations",
+            "content": "# Sync DB 🔄\n\n`npx prisma migrate dev --name init`\n\nCreates a SQL migration file and applies it to the database to match your schema."
+        },
+        {
+            "id": "orm_prisma_quiz_1",
+            "type": "quiz",
+            "title": "File Quiz",
+            "content": "Configuration.",
+            "quizQuestion": "Which file serves as the single source of truth for your Prisma data model?",
+            "quizOptions": [
+                "schema.sql",
+                "models.ts",
+                "prisma.schema",
+                "config.json"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_prisma_6",
+            "type": "content",
+            "title": "Relations",
+            "content": "# Nested Writes 🐣\n\nCreate a user and their posts in one go.\n\n<!-- FULL_CODE_START\nawait prisma.user.create({\n  data: {\n    email: 'bob@prisma.io',\n    posts: {\n      create: { title: 'Hello World' },\n    },\n  },\n})\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_prisma_7",
+            "type": "content",
+            "title": "Filtering",
+            "content": "# Powerful WHERE 🔎\n\n<!-- FULL_CODE_START\nprisma.post.findMany({\n  where: {\n    OR: [\n      { title: { contains: 'Prisma' } },\n      { author: { email: { endsWith: '@prisma.io' } } },\n    ],\n  },\n})\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_prisma_8",
+            "type": "content",
+            "title": "Introspection",
+            "content": "# Existing DB 🕵️\n\n`npx prisma db pull`\n\nConnect to an existing database and automatically generate the `prisma.schema` file from it."
+        },
+        {
+            "id": "orm_prisma_9",
+            "type": "content",
+            "title": "Prisma Studio",
+            "content": "# GUI 🖥️\n\n`npx prisma studio`\n\nOpens a web-based GUI to view and edit your data visually."
+        },
+        {
+            "id": "orm_prisma_10",
+            "type": "content",
+            "title": "Prisma vs TypeORM",
+            "content": "# Differences ⚖️\n\n- **Prisma:** Dictionary-like API, type-safe generation, separates schema from code.\n- **TypeORM:** Class-based (Classes = Tables), uses decorators, closer to Hibernate."
+        },
+        {
+            "id": "orm_prisma_quiz_2",
+            "type": "quiz",
+            "title": "Feature Quiz",
+            "content": "Visualization.",
+            "quizQuestion": "Which command opens a visual editor for your data in the browser?",
+            "quizOptions": [
+                "prisma view",
+                "prisma ui",
+                "prisma studio",
+                "prisma open"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_prisma_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Prisma 💎\n\nModern & Typed.\n\n- **Schema:** `prisma.schema`.\n- **Generate:** Type-safe client.\n- **Studio:** Visual editor.\n- **Introspection:** Reverse engineer DB.\n\n## Next Steps\nDeep dive into **Mapping & Relationships**!"
+        }
+    ]
+}

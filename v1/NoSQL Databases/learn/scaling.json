@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_scaling",
+    "topicId": "scaling",
+    "topicTitle": "Scaling",
+    "description": "Handling massive growth in NoSQL.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_scaling_1",
+            "type": "content",
+            "title": "The Problem 📈",
+            "content": "# Too Big\n\nTraditional SQL databases scale **Vertically** (Bigger CPU, More RAM).\n\nNoSQL databases are designed to scale **Horizontally** (Add more cheap servers).\n\nScaling is built-in, not an afterthought."
+        },
+        {
+            "id": "nosql_scaling_2",
+            "type": "content",
+            "title": "Sharding",
+            "content": "# Partitioning 🍰\n\nDistributing data across multiple servers (Shards).\n\n**Shard Key:** Determines which server holds a piece of data.\n`User ID 1-1000` -> Server A\n`User ID 1001-2000` -> Server B"
+        },
+        {
+            "id": "nosql_scaling_3",
+            "type": "content",
+            "title": "Replication",
+            "content": "# copying 👯\n\nKeep multiple copies of data on different servers.\n\n- **Primary (Master):** Accepts writes.\n- **Secondary (Replica):** Accepts reads (and takes over if Primary dies).\n\nIncreases Read Scalability and Availability."
+        },
+        {
+            "id": "nosql_scaling_4",
+            "type": "content",
+            "title": "Replica Sets",
+            "content": "# MongoDB Example\n\nA cluster of N nodes.\n\n1 Primary, N-1 Secondaries.\n\nAutomatic failover: If Primary crashes, Secondaries vote and elect a new Primary in seconds."
+        },
+        {
+            "id": "nosql_scaling_5",
+            "type": "content",
+            "title": "Consistent Hashing",
+            "content": "# The Ring 💍\n\nUsed in Cassandra/DynamoDB.\n\nServers are arranged in a ring.\n\nData is hashed to a position on the ring.\n\nAdding/Removing a server only affects its immediate neighbors, minimizing data movement."
+        },
+        {
+            "id": "nosql_scaling_quiz_1",
+            "type": "quiz",
+            "title": "Direction Quiz",
+            "content": "Expansion.",
+            "quizQuestion": "What is 'Horizontal Scaling'?",
+            "quizOptions": [
+                "Buying a bigger, more expensive server",
+                "Adding more servers to the cluster",
+                "Optimizing code",
+                "Deleting old data"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "nosql_scaling_6",
+            "type": "content",
+            "title": "CAP Theorem",
+            "content": "# Trade-offs ⚖️\n\nChoose 2:\n- **Consistency:** Everyone sees same data roughly same time.\n- **Availability:** Always get a response.\n- **Partition Tolerance:** Works even if network cuts.\n\nNoSQL usually picks AP or CP."
+        },
+        {
+            "id": "nosql_scaling_7",
+            "type": "content",
+            "title": "Eventual Consistency",
+            "content": "# BASE Model\n\n**Basically Available, Soft state, Eventual consistency.**\n\nStandard for AP systems (Cassandra).\n\n\"I wrote data to Node A. You might read from Node B and see old data for a few milliseconds, but eventually it will sync.\""
+        },
+        {
+            "id": "nosql_scaling_8",
+            "type": "content",
+            "title": "Read vs Write Scaling",
+            "content": "# Strategies\n\n- **Read Heavy:** Add more replicas (Secondaries/Slaves).\n- **Write Heavy:** Add more Shards (Masters)."
+        },
+        {
+            "id": "nosql_scaling_9",
+            "type": "content",
+            "title": "Geo-Replication",
+            "content": "# Global Speed 🌍\n\nReplicate data to data centers across the world.\n\nUsers read from the data center closest to them (Low Latency).\n\nAlso serves as Disaster Recovery."
+        },
+        {
+            "id": "nosql_scaling_10",
+            "type": "content",
+            "title": "Hotspots",
+            "content": "# Bad Key 🥵\n\nIf you choose a bad Shard Key (e.g., \"Celebrity User ID\"), all traffic goes to ONE server.\n\nGood Shard Key spreads traffic evenly (High cardinality, high randomness)."
+        },
+        {
+            "id": "nosql_scaling_quiz_2",
+            "type": "quiz",
+            "title": "Consistency Quiz",
+            "content": "Synchronization.",
+            "quizQuestion": "What does 'Eventual Consistency' mean?",
+            "quizOptions": [
+                "Data is always immediately consistent everywhere",
+                "Data will never be consistent",
+                "Data might be stale for a moment, but will sync up over time",
+                "Only the admin sees the consistent data"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_scaling_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Scaling 📶\n\nHandling Billions.\n\n- **Sharding:** Writes.\n- **Replication:** Reads.\n- **CAP:** Trade-offs.\n- **Partition:** Horizontal.\n\n## Next Steps\nMap it all with **ORM and ODM**!"
+        }
+    ]
+}

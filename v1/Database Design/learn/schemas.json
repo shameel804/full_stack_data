@@ -1,0 +1,103 @@
+{
+    "id": "learn_design_schemas",
+    "topicId": "schemas",
+    "topicTitle": "Schemas",
+    "description": "Structuring databases for Analytics vs. Transactions.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "design_schemas_1",
+            "type": "content",
+            "title": "OLTP vs OLAP 📊",
+            "content": "# Two Worlds\n\n- **OLTP (Online Transaction Processing):** Apps. Fast writes, normalized (3NF), many small transactions. (e.g., MySQL, Postgres).\n- **OLAP (Online Analytical Processing):** Analytics. Fast reads, denormalized, huge queries. (e.g., Snowflake, Redshift)."
+        },
+        {
+            "id": "design_schemas_2",
+            "type": "content",
+            "title": "Star Schema ⭐",
+            "content": "# The Standard for OLAP\n\nA central **Fact Table** surrounded by **Dimension Tables**.\n\nLooks like a star in the diagram.\n\nSimple, fast for aggregations."
+        },
+        {
+            "id": "design_schemas_3",
+            "type": "content",
+            "title": "Fact Table",
+            "content": "# The Action 🎬\n\nStores quantitative data (numbers) about a business process.\n\nE.g., `SalesFact`.\n- `product_id` (FK)\n- `date_id` (FK)\n- `store_id` (FK)\n- `amount_sold`\n- `units_sold`"
+        },
+        {
+            "id": "design_schemas_4",
+            "type": "content",
+            "title": "Dimension Table",
+            "content": "# The Context 📝\n\nStores descriptive attributes related to the facts.\n\nE.g., `ProductDim`.\n- `product_id` (PK)\n- `product_name`\n- `category`\n- `brand`"
+        },
+        {
+            "id": "design_schemas_5",
+            "type": "content",
+            "title": "Snowflake Schema ❄️",
+            "content": "# Normalized Dimensions\n\nLike a Star Schema, but the dimensions are normalized into multiple tables.\n\n`Sales` -> `Product` -> `Category` -> `Department`.\n\nSaves space, but harder to query (more joins)."
+        },
+        {
+            "id": "design_schemas_quiz_1",
+            "type": "quiz",
+            "title": "Structure Quiz",
+            "content": "Concepts.",
+            "quizQuestion": "In a Star Schema, which table contains the measurable, numerical data?",
+            "quizOptions": [
+                "Dimension Table",
+                "Lookup Table",
+                "Fact Table",
+                "Index Table"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "design_schemas_6",
+            "type": "content",
+            "title": "Galaxy Schema 🌌",
+            "content": "# Fact Constellation\n\nMultiple Fact tables sharing the same Dimension tables.\n\nE.g., `SalesFact` and `InventoryFact` both use `ProductDim` and `TimeDim`."
+        },
+        {
+            "id": "design_schemas_7",
+            "type": "content",
+            "title": "Slowly Changing Dimensions (SCD)",
+            "content": "# Time Travel ⏳\n\nHow to handle when a dimension changes (e.g., user moves city)?\n\n- **Type 1:** Overwrite (History lost).\n- **Type 2:** Add new row with version/dates (Preserve history). Most common.\n- **Type 3:** Add new column (Previous City)."
+        },
+        {
+            "id": "design_schemas_8",
+            "type": "content",
+            "title": "Data Mart",
+            "content": "# Subset 🥧\n\nA slice of a Data Warehouse focused on a specific business line.\n\nE.g., Marketing Data Mart, Finance Data Mart.\n\nEasier for specific teams to consume."
+        },
+        {
+            "id": "design_schemas_9",
+            "type": "content",
+            "title": "ETL vs ELT",
+            "content": "# Moving Data 🚚\n\n- **ETL:** Extract, Transform, Load. (Old school).\n- **ELT:** Extract, Load, Transform. (Modern, loading raw data into warehouse first then transforming)."
+        },
+        {
+            "id": "design_schemas_10",
+            "type": "content",
+            "title": "Schema on Read",
+            "content": "# Data Lake 🌊\n\nDump raw files (JSON, CSV, Parquet) into storage (S3).\n\nDefine the schema ONLY when you query it (e.g., using Hive or Athena).\n\nUltimate flexibility."
+        },
+        {
+            "id": "design_schemas_quiz_2",
+            "type": "quiz",
+            "title": "History Quiz",
+            "content": "SCD.",
+            "quizQuestion": "Which SCD Type preserves history by creating a new database row for every change?",
+            "quizOptions": [
+                "Type 1",
+                "Type 2",
+                "Type 3",
+                "Type 0"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "design_schemas_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Schemas 📊\n\nAnalytics Design.\n\n- **OLAP:** Fast reads.\n- **Star:** Fact center.\n- **Snowflake:** Normalized star.\n- **SCD:** Tracking changes.\n\n## Next Steps\nScale up with **Partitioning**!"
+        }
+    ]
+}

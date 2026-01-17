@@ -1,0 +1,103 @@
+{
+    "id": "learn_vue_reactivity",
+    "topicId": "reactivity",
+    "topicTitle": "Reactivity System",
+    "description": "Understand how Vue converts plain JavaScript objects into reactive data, tracking changes and updating the DOM.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_react_1",
+            "type": "content",
+            "title": "Ref vs Reactive",
+            "content": "# Reactive Data ⚡\n\nIn Vue 3, we declare reactive state using `ref()` or `reactive()`.\n\n- **ref():** For primitives (numbers, strings). Access value via `.value`.\n- **reactive():** For objects. No `.value` needed.\n\n```javascript\nconst count = ref(0)\nconst state = reactive({ count: 0 })\n```"
+        },
+        {
+            "id": "vue_react_2",
+            "type": "content",
+            "title": "Proxies",
+            "content": "# How it Works 🧠\n\nVue 3 uses JavaScript **Proxies** to intercept access to your objects.\n\nWhen you *get* a property, Vue \"tracks\" it.\nWhen you *set* a property, Vue \"triggers\" updates for any effects (like DOM rendering) that depend on it."
+        },
+        {
+            "id": "vue_react_3",
+            "type": "content",
+            "title": "Watchers",
+            "content": "# Watchers 👀\n\nPerform side effects when data changes (e.g., API call after search input).\n\n```javascript\nwatch(searchText, (newValue, oldValue) => {\n  fetchResults(newValue)\n})\n```\nYou can watch a `ref`, a getter function, or an array of sources."
+        },
+        {
+            "id": "vue_react_4",
+            "type": "content",
+            "title": "Computed vs Methods",
+            "content": "# Computed Caching 💾\n\n**Computed:** Cached based on dependencies. Only re-runs if `message` changes.\n`{{ reversedMessage }}`\n\n**Methods:** Runs EVERY time a re-render happens.\n`{{ reverseMessage() }}`\n\nUse Computed for expensive operations."
+        },
+        {
+            "id": "vue_react_quiz_1",
+            "type": "quiz",
+            "title": "Data Type Quiz",
+            "content": "Ref vs Reactive.",
+            "quizQuestion": "Which reactivity function requires you to access the underlying data using .value?",
+            "quizOptions": [
+                "reactive()",
+                "computed()",
+                "ref()",
+                "watch()"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "vue_react_5",
+            "type": "content",
+            "title": "watchEffect",
+            "content": "# watchEffect 🕵️\n\nAutomatically tracks dependencies.\n\nUnlike `watch` (where you specify *what* to watch), `watchEffect` runs the function immediately and tracks anything used inside it.\n\n```javascript\nwatchEffect(() => {\n  console.log(count.value) // tracks count automatically\n})\n```"
+        },
+        {
+            "id": "vue_react_6",
+            "type": "content",
+            "title": "Deep Reactivity",
+            "content": "# Deep Watching 🌊\n\nBy default, `ref` and `reactive` are deep. Changing a nested property triggers updates.\n\nHowever, `watch()` on a ref is shallow by default. To watch nested properties of an object ref, use `{ deep: true }`.\n\n```javascript\nwatch(state, cb, { deep: true })\n```"
+        },
+        {
+            "id": "vue_react_7",
+            "type": "content",
+            "title": "Reactivity Caveats",
+            "content": "# Destructuring 💔\n\nDestructuring a `reactive` object breaks reactivity because you pull out a plain primitive value.\n\n```javascript\nconst state = reactive({ count: 0 })\nlet { count } = state // count is now just a number, disconnected from Vue\n```\n**Fix:** Use `toRefs(state)` to convert properties into refs."
+        },
+        {
+            "id": "vue_react_8",
+            "type": "content",
+            "title": "readonly",
+            "content": "# Readonly State 🔒\n\nYou can create a readonly proxy of an object.\n\n```javascript\nconst original = reactive({ count: 0 })\nconst copy = readonly(original)\n\ncopy.count++ // Warning! Set operation failed.\n```\nUseful for preventing child components from mutating injected state."
+        },
+        {
+            "id": "vue_react_9",
+            "type": "content",
+            "title": "nextTick",
+            "content": "# nextTick ⏱️\n\nVue updates the DOM asynchronously.\n\nIf you change data and immediately check the DOM, it won't be updated yet.\n\n```javascript\ncount.value++\nawait nextTick()\n// Now the DOM is updated\n```"
+        },
+        {
+            "id": "vue_react_quiz_2",
+            "type": "quiz",
+            "title": "Performance Quiz",
+            "content": "Caching mechanism.",
+            "quizQuestion": "What is the main performance benefit of 'Computed' properties over 'Methods'?",
+            "quizOptions": [
+                "They are faster to write",
+                "They are asynchronous",
+                "They are cached",
+                "They are read-only"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "vue_react_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Watcher Example 💻\n\n<!-- FULL_CODE_START\nconst { createApp, ref, watch } = Vue\n\ncreateApp({\n  setup() {\n    const question = ref('')\n    const answer = ref('Questions usually contain a question mark. ;-)')\n\n    // Watch for changes in question\n    watch(question, async (newQuestion) => {\n      if (newQuestion.indexOf('?') > -1) {\n        answer.value = 'Thinking...'\n        try {\n          const res = await fetch('https://yesno.wtf/api')\n          answer.value = (await res.json()).answer\n        } catch (error) {\n          answer.value = 'Error! Could not reach the API. ' + error\n        }\n      }\n    })\n\n    return { question, answer }\n  }\n}).mount('#app')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_react_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Reactivity 🎓\n\nData drives the View.\n\n- **ref:** For single values (`.value`).\n- **reactive:** For objects.\n- **Proxies:** The engine under the hood.\n- **Computed:** Cached derived state.\n- **Watchers:** Side effects.\n- **Destructuring:** Be careful! Use `toRefs`.\n\n## Next Steps\nBuild Single Page Apps using **Vue Router**!"
+        }
+    ]
+}

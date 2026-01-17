@@ -1,0 +1,103 @@
+{
+    "id": "learn_design_normalization",
+    "topicId": "normalization",
+    "topicTitle": "Normalization",
+    "description": "Organize data to reduce redundancy and improve integrity.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "design_normalization_1",
+            "type": "content",
+            "title": "What is Normalization? 🧹",
+            "content": "# Clean Up\n\nThe process of organizing data in a database.\n\n**Goals:**\n1. Eliminate redundant data (duplication).\n2. Ensure data dependencies make sense.\n\nResult: Smaller database, fewer anomalies."
+        },
+        {
+            "id": "design_normalization_2",
+            "type": "content",
+            "title": "First Normal Form (1NF)",
+            "content": "# Atomic Values ⚛️\n\n- No repeating groups or arrays.\n- Each cell must contain a single value.\n\n**Bad:** `Colors: \"Red, Blue, Green\"`\n**Good:** Separate rows or a child table for colors."
+        },
+        {
+            "id": "design_normalization_3",
+            "type": "content",
+            "title": "Second Normal Form (2NF)",
+            "content": "# No Partial Dependencies 🌓\n\n- Must be in 1NF.\n- All non-key attributes must depend on the **entire** Primary Key.\n\nIf you have a composite PK (Order ID + Product ID), Product Name shouldn't be in this table (it depends only on Product ID)."
+        },
+        {
+            "id": "design_normalization_4",
+            "type": "content",
+            "title": "Third Normal Form (3NF)",
+            "content": "# No Transitive Dependencies 🔗\n\n- Must be in 2NF.\n- Non-key attributes must rely ONLY on the Primary Key, not on other non-key attributes.\n\n**Bad:** `User`, `ZipCode`, `City`. City depends on ZipCode, not User.\n**Good:** Move `ZipCode` and `City` to a separate table."
+        },
+        {
+            "id": "design_normalization_5",
+            "type": "content",
+            "title": "Boyce-Codd Normal Form (BCNF)",
+            "content": "# 3.5NF 🎓\n\nA slightly stronger version of 3NF.\n\nEvery determinant must be a candidate key.\n\nHandles rare edge cases where 3NF allows redundancy."
+        },
+        {
+            "id": "design_normalization_quiz_1",
+            "type": "quiz",
+            "title": "Form Quiz",
+            "content": "Rules.",
+            "quizQuestion": "Which Normal Form requires that data is 'atomic' (no comma-separated lists in a cell)?",
+            "quizOptions": [
+                "1NF",
+                "2NF",
+                "3NF",
+                "BCNF"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "design_normalization_6",
+            "type": "content",
+            "title": "Anomalies",
+            "content": "# Problems Solved 🐛\n\nNormalization prevents:\n- **Update Anomaly:** Updating one copy of data but missing another.\n- **Insertion Anomaly:** Unable to add data because a parent is missing.\n- **Deletion Anomaly:** Deleting data unintentionally causes loss of other data."
+        },
+        {
+            "id": "design_normalization_7",
+            "type": "content",
+            "title": "Denormalization",
+            "content": "# Intentional Mess 🧂\n\nSometimes we break the rules for performance.\n\nAdding redundant data to avoid expensive JOINs.\n\nE.g., Storing `total_order_value` on the Order table instead of calculating it from OrderItems every time."
+        },
+        {
+            "id": "design_normalization_8",
+            "type": "content",
+            "title": "Star Schema",
+            "content": "# Data Warehouse ⭐️\n\nUsed in analytics (OLAP).\n\n- **Fact Table:** Central table with measurements (Sales).\n- **Dimension Tables:** Descriptive attributes (Time, Product, Store).\n\nOptimized for reading, not writing."
+        },
+        {
+            "id": "design_normalization_9",
+            "type": "content",
+            "title": "When to Stop?",
+            "content": "# 3NF is Enough ✋\n\nFor most applications, 3NF is the sweet spot.\n\nGoing to 4NF or 5NF introduces complexity (too many tables) that often outweighs the benefits."
+        },
+        {
+            "id": "design_normalization_10",
+            "type": "content",
+            "title": "Drawbacks",
+            "content": "# Trade-offs ⚖️\n\nA fully normalized database requires many JOINs to reconstruct data.\n\nThis increases CPU usage and query complexity.\n\nBalance normalization with query performance needs."
+        },
+        {
+            "id": "design_normalization_quiz_2",
+            "type": "quiz",
+            "title": "Strategy Quiz",
+            "content": "Optimization.",
+            "quizQuestion": "What is the primary reason to 'Denormalize' a database?",
+            "quizOptions": [
+                "To save disk space",
+                "To improve read performance by reducing JOINs",
+                "To ensure higher data consistency",
+                "To make the schema look simpler"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "design_normalization_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Normalization 🧹\n\nOrganize logic.\n\n- **1NF:** Atomic.\n- **2NF:** No partial dependencies.\n- **3NF:** No transitive dependencies.\n- **Denormalization:** Performance optimization.\n\n## Next Steps\nVisualize it with **ER Diagrams**!"
+        }
+    ]
+}

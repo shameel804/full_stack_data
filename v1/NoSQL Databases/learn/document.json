@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_document",
+    "topicId": "document",
+    "topicTitle": "Document Stores",
+    "description": "Store data as JSON-like documents. Learn MongoDB basics.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_document_1",
+            "type": "content",
+            "title": "What is a Document Store? 📄",
+            "content": "# MongoDB 🍃\n\nThe most popular NoSQL database.\n\nData is stored in **BSON** (Binary JSON) documents.\n\nDocuments are grouped into **Collections** (similar to SQL Tables, but schema-less)."
+        },
+        {
+            "id": "nosql_document_2",
+            "type": "content",
+            "title": "The Document Structure",
+            "content": "# JSON-like 📦\n\n````json\n{\n  \"_id\": \"507f1f77bcf86cd799439011\",\n  \"name\": \"Alice\",\n  \"age\": 30,\n  \"skills\": [\"JS\", \"Python\"]\n}\n````\n\nSupports nested objects and arrays."
+        },
+        {
+            "id": "nosql_document_3",
+            "type": "content",
+            "title": "Inserting Data",
+            "content": "# Create ➕\n\n`db.users.insertOne({ name: \"Bob\", age: 25 })`\n\n`db.users.insertMany([{ name: \"Carly\" }, { name: \"Dan\" }])`\n\nIf the collection `users` doesn't exist, it's created automatically."
+        },
+        {
+            "id": "nosql_document_4",
+            "type": "content",
+            "title": "Querying Data",
+            "content": "# Find 🔎\n\n`db.users.find({ name: \"Alice\" })`\n\n`db.users.find({ age: { $gt: 20 } })` (Greater than 20)\n\n`db.users.findOne({ _id: ... })`"
+        },
+        {
+            "id": "nosql_document_5",
+            "type": "content",
+            "title": "Embedding vs Referencing",
+            "content": "# Data Modeling 📐\n\n- **Embedding:** Store address INSIDE the user document. Good for 1-to-few.\n- **Referencing:** Store `address_id` in user doc. Good for 1-to-many/many-to-many."
+        },
+        {
+            "id": "nosql_document_quiz_1",
+            "type": "quiz",
+            "title": "Format Quiz",
+            "content": "Storage.",
+            "quizQuestion": "What binary format does MongoDB use to store documents?",
+            "quizOptions": [
+                "JSON",
+                "XML",
+                "BSON",
+                "Protobuf"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_document_6",
+            "type": "content",
+            "title": "Updating Data",
+            "content": "# Atomic Operators ⚛️\n\n`db.users.updateOne({ name: \"Bob\" }, { $set: { age: 26 } })`\n\n`$inc` (increment), `$push` (add to array), `$unset` (remove field)."
+        },
+        {
+            "id": "nosql_document_7",
+            "type": "content",
+            "title": "Indexing",
+            "content": "# Speed ⚡\n\nLike SQL, you can create indexes to speed up queries.\n\n`db.users.createIndex({ name: 1 })`\n\nCan also index fields inside nested objects or arrays."
+        },
+        {
+            "id": "nosql_document_8",
+            "type": "content",
+            "title": "Aggregation Pipeline",
+            "content": "# Advanced Queries 🔧\n\nProcess data through stages.\n\n1. `$match` (Filter)\n2. `$group` (Aggregate)\n3. `$sort`\n\nSimilar to SQL `GROUP BY` but more powerful."
+        },
+        {
+            "id": "nosql_document_9",
+            "type": "content",
+            "title": "Replication",
+            "content": "# High Availability 🛡️\n\nMongoDB uses **Replica Sets**.\n\nA primary node receives writes, and multiple secondary nodes replicate data. If primary fails, a secondary is elected new primary."
+        },
+        {
+            "id": "nosql_document_10",
+            "type": "content",
+            "title": "Sharding",
+            "content": "# Big Data 🌍\n\nDistribute a single collection across multiple machines (Shards) based on a **Shard Key**.\n\nAllows MongoDB to scale to Petabytes of data."
+        },
+        {
+            "id": "nosql_document_quiz_2",
+            "type": "quiz",
+            "title": "Operator Quiz",
+            "content": "Updates.",
+            "quizQuestion": "Which operator is used to increment a numeric value in an existing document?",
+            "quizOptions": [
+                "$add",
+                "$sum",
+                "$inc",
+                "$plus"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_document_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Document Stores 🍃\n\nJSON power.\n\n- **BSON:** Binary storage.\n- **Collections:** Groups of docs.\n- **CRUD:** `insertOne`, `find`, `updateOne`.\n- **Pipeline:** Aggregation.\n\n## Next Steps\nCache data fast with **Key-Value Stores**!"
+        }
+    ]
+}

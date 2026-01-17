@@ -1,0 +1,109 @@
+{
+    "id": "learn_express_basics",
+    "topicId": "basics",
+    "topicTitle": "Setup & Routing",
+    "description": "Initialize an Express app, handle routes, and serve responses.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_basics_1",
+            "type": "content",
+            "title": "What is Express?",
+            "content": "# Fast, Unopinionated, Minimalist 🚀\n\n**Express.js** is the most popular web framework for Node.js.\n\nIt simplifies creating servers, handling routes, and managing middleware.\n\nIt doesn't force a strict structure (unopinionated)."
+        },
+        {
+            "id": "express_basics_2",
+            "type": "content",
+            "title": "Installation",
+            "content": "# npm install express 📦\n\nInitialize your project:\n`npm init -y`\n\nInstall Express:\n`npm install express`\n\nCreate `index.js`."
+        },
+        {
+            "id": "express_basics_3",
+            "type": "content",
+            "title": "Hello World",
+            "content": "# Your First Server 🖥️\n\n<!-- FULL_CODE_START\nconst express = require('express');\nconst app = express();\nconst port = 3000;\n\napp.get('/', (req, res) => {\n  res.send('Hello World!');\n});\n\napp.listen(port, () => {\n  console.log(`Example app listening on port ${port}`);\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_4",
+            "type": "content",
+            "title": "Routing Basics",
+            "content": "# app.METHOD(PATH, HANDLER) 🚦\n\n- `METHOD`: HTTP method (get, post, put, delete)\n- `PATH`: The route on the server ('/', '/about')\n- `HANDLER`: Function executed when route matches."
+        },
+        {
+            "id": "express_basics_5",
+            "type": "content",
+            "title": "Route Parameters",
+            "content": "# Dynamic Routes 🆔\n\nCapture values from the URL.\n\n<!-- FULL_CODE_START\napp.get('/users/:userId/books/:bookId', (req, res) => {\n  res.send(req.params);\n});\n// GET /users/34/books/8989\n// req.params: { \"userId\": \"34\", \"bookId\": \"8989\" }\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_6",
+            "type": "content",
+            "title": "Query Parameters",
+            "content": "# Search Params 🔍\n\nAccess everything after `?` in the URL.\n\n<!-- FULL_CODE_START\napp.get('/search', (req, res) => {\n  // GET /search?q=tacos&limit=5\n  console.log(req.query.q); // \"tacos\"\n  console.log(req.query.limit); // \"5\"\n  res.send('Searching...');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_quiz_1",
+            "type": "quiz",
+            "title": "Routing Quiz",
+            "content": "Params vs Query.",
+            "quizQuestion": "How do you access the value '123' in the route '/users/123' defined as '/users/:id'?",
+            "quizOptions": [
+                "req.query.id",
+                "req.body.id",
+                "req.params.id",
+                "req.id"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_basics_7",
+            "type": "content",
+            "title": "Serving Static Files",
+            "content": "# express.static 📁\n\nServe images, CSS, and JS files.\n\n<!-- FULL_CODE_START\napp.use(express.static('public'));\n// Now files in 'public' are accessible:\n// http://localhost:3000/images/kitten.jpg\n// http://localhost:3000/css/style.css\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_8",
+            "type": "content",
+            "title": "Response Methods",
+            "content": "# Sending Back Data 📤\n\n- `res.send()`: Generic send (HTML, Buffer, string).\n- `res.json()`: Sends JSON and sets proper Content-Type header.\n- `res.sendFile()`: Sends a file content.\n- `res.status(404)`: Sets the HTTP status code."
+        },
+        {
+            "id": "express_basics_9",
+            "type": "content",
+            "title": "POST Requests",
+            "content": "# Handling JSON Body 📦\n\nNeed middleware to parse JSON bodies.\n\n<!-- FULL_CODE_START\napp.use(express.json()); // Essential middleware\n\napp.post('/user', (req, res) => {\n  console.log(req.body.name);\n  res.send('User created');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_10",
+            "type": "content",
+            "title": "Route Paths",
+            "content": "# Flexible Matching 🧩\n\nPaths can be strings, string patterns, or regex.\n\n- `app.get('/ab?cd')`: Matches acd or abcd.\n- `app.get(/a/)`: Matches anything with an 'a'."
+        },
+        {
+            "id": "express_basics_quiz_2",
+            "type": "quiz",
+            "title": "Setup Quiz",
+            "content": "Middleware.",
+            "quizQuestion": "What middleware is required to access data in `req.body` for JSON requests?",
+            "quizOptions": [
+                "express.static()",
+                "express.json()",
+                "express.urlencoded()",
+                "None, it works automatically"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_basics_11",
+            "type": "content",
+            "title": "Route Handlers",
+            "content": "# Chaining Handlers 🔗\n\nYou can have multiple callback functions.\n\n<!-- FULL_CODE_START\nconst cb0 = (req, res, next) => {\n  console.log('CB0');\n  next();\n}\n\nconst cb1 = (req, res, next) => {\n  console.log('CB1');\n  next();\n}\n\napp.get('/example/b', [cb0, cb1], (req, res, next) => {\n  res.send('Hello from B!');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_basics_12",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Express Basics 🚂\n\nMinimalist Node framework.\n\n- **Route:** `app.get('/', ...)`\n- **Params:** `req.params`\n- **Query:** `req.query`\n- **Body:** `req.body` (needs `express.json()`)\n- **Static:** `app.use(express.static(...))`\n\n## Next Steps\nDeep dive into **Middleware**!"
+        }
+    ]
+}

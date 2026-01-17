@@ -1,0 +1,103 @@
+{
+    "id": "learn_web_iis",
+    "topicId": "iis",
+    "topicTitle": "IIS",
+    "description": "Internet Information Services: Microsoft's extensible web server for Windows.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "iis_1",
+            "type": "content",
+            "title": "What is IIS?",
+            "content": "# The Windows Server 🪟\n\n**Internet Information Services.**\n\nBuilt into Windows Server.\n\nDeeply integrated with the Microsoft ecosystem (ASP.NET, Active Directory, SQL Server)."
+        },
+        {
+            "id": "iis_2",
+            "type": "content",
+            "title": "Architecture",
+            "content": "# Kernel Mode 🏎️\n\nIIS runs partly in **Kernel Mode** (`http.sys`) for extreme speed in handling HTTP requests before they even reach user space.\n\nThis makes it very stable and fast on Windows."
+        },
+        {
+            "id": "iis_3",
+            "type": "content",
+            "title": "Application Pools",
+            "content": "# Isolation 🛡️\n\nA critical concept.\n\nEach website runs in its own **App Pool**.\n\nIf one site crashes (due to bad code), it does NOT bring down other sites on the server. They are separate processes (`w3wp.exe`)."
+        },
+        {
+            "id": "iis_4",
+            "type": "content",
+            "title": "Management",
+            "content": "# GUI & CLI 🎛️\n\n- **IIS Manager:** Visual interface to configure everything.\n- **PowerShell:** Automate everything.\n\n`Import-Module WebAdministration; New-WebSite ...`"
+        },
+        {
+            "id": "iis_quiz_1",
+            "type": "quiz",
+            "title": "Feature Quiz",
+            "content": "Isolation.",
+            "quizQuestion": "Which IIS feature ensures that a crash in one website does not affect others?",
+            "quizOptions": [
+                "Replication",
+                "Application Pools",
+                "Virtual Directories",
+                "ISAPI Filters"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "iis_5",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Windows Auth 🆔\n\nIIS shines here.\n\n- **Anonymous:** Public access.\n- **Windows Authentication:** Auto-login users on an Intranet utilizing Active Directory (Kerberos/NTLM).\n- **Basic/Digest:** Simple prompts."
+        },
+        {
+            "id": "iis_6",
+            "type": "content",
+            "title": "ISAPI & Modules",
+            "content": "# Extensibility 🧩\n\nIIS uses Modules (Native C++ or Managed .NET) to process requests.\n\n- **StaticFileModule:** Serves images.\n- **AspNetCoreModule:** Forwards requests to .NET Core apps."
+        },
+        {
+            "id": "iis_7",
+            "type": "content",
+            "title": "web.config",
+            "content": "# Configuration 📄\n\nXML file in the site root (similar to `.htaccess` but XML).\n\n```xml\n<configuration>\n  <system.webServer>\n    <rewrite>\n      <rules>...</rules>\n    </rewrite>\n  </system.webServer>\n</configuration>\n```"
+        },
+        {
+            "id": "iis_8",
+            "type": "content",
+            "title": "ARR (Application Request Routing)",
+            "content": "# Load Balancer 🧱\n\nAn extension that turns IIS into a Reverse Proxy and Load Balancer.\n\nAllows IIS to forward traffic to other servers (even Linux ones)."
+        },
+        {
+            "id": "iis_9",
+            "type": "content",
+            "title": "Security",
+            "content": "# Request Filtering 🚫\n\nBuilt-in security module.\n\nCan block specific file extensions (`.mdb`), URLs, or HTTP verbs.\n\nGreat for preventing SQL injection or protecting sensitive files."
+        },
+        {
+            "id": "iis_quiz_2",
+            "type": "quiz",
+            "title": "Config Quiz",
+            "content": "File format.",
+            "quizQuestion": "What file format does IIS use for its configuration files (web.config)?",
+            "quizOptions": [
+                "JSON",
+                "YAML",
+                "XML",
+                "INI"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "iis_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# web.config Redirect 💻\n\n<!-- FULL_CODE_START\n<!-- Redirect HTTP to HTTPS -->\n<configuration>\n <system.webServer>\n  <rewrite>\n   <rules>\n    <rule name=\"Redirect to HTTPS\" stopProcessing=\"true\">\n     <match url=\"(.*)\" />\n     <conditions>\n      <add input=\"{HTTPS}\" pattern=\"^OFF$\" />\n     </conditions>\n     <action type=\"Redirect\" url=\"https://{HTTP_HOST}/{R:1}\" redirectType=\"Permanent\" />\n    </rule>\n   </rules>\n  </rewrite>\n </system.webServer>\n</configuration>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "iis_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: IIS 🎓\n\nWindows Power.\n\n- **Kernel Mode:** Fast http.sys.\n- **App Pools:** Process isolation.\n- **web.config:** XML configuration.\n- **Windows Auth:** Intranet single sign-on.\n- **Management:** GUI + PowerShell.\n\n## Next Steps\nTune your servers with **Configuration & Optimization**!"
+        }
+    ]
+}

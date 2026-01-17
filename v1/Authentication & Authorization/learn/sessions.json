@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_sessions",
+    "topicId": "sessions",
+    "topicTitle": "Sessions & Cookies",
+    "description": "Understand the traditional way of handling authentication state on the web.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_sess_1",
+            "type": "content",
+            "title": "Stateful Auth",
+            "content": "# The Classic Way 🏛️\n\nUnlike JWT (Stateless), Sessions are **Stateful**.\n\nThe server remembers that \"User 123 is logged in\".\n\nThis record is kept in memory, a file, or a database (like Redis)."
+        },
+        {
+            "id": "auth_sess_2",
+            "type": "content",
+            "title": "How it Works",
+            "content": "# The Handshake 🤝\n\n1.  User logs in.\n2.  Server creates a Session ID (`sess_abc123`) and stores user data linked to it.\n3.  Server sends the Session ID to the browser in a **Cookie**.\n4.  Browser automatically sends the Cookie with every subsequent request."
+        },
+        {
+            "id": "auth_sess_3",
+            "type": "content",
+            "title": "Cookies",
+            "content": "# The Carrier 🍪\n\nA small piece of data stored in the browser.\n\nCookies are automatically attached to requests to the domain they belong to.\n\n`Set-Cookie: session_id=123; Path=/; HttpOnly`"
+        },
+        {
+            "id": "auth_sess_4",
+            "type": "content",
+            "title": "Secure Cookies",
+            "content": "# Protecting the Cookie 🛡️\n\n3 Flags you MUST use:\n\n1.  **HttpOnly:** JS cannot read it (Protects against XSS).\n2.  **Secure:** Only sent over HTTPS.\n3.  **SameSite:** Strict/Lax. Prevents CSRF attacks."
+        },
+        {
+            "id": "auth_sess_quiz_1",
+            "type": "quiz",
+            "title": "Security Quiz",
+            "content": "Cookie flags.",
+            "quizQuestion": "Which cookie flag prevents client-side JavaScript (document.cookie) from accessing the cookie?",
+            "quizOptions": [
+                "Secure",
+                "SameSite",
+                "HttpOnly",
+                "Domain"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_sess_5",
+            "type": "content",
+            "title": "Session Fixation",
+            "content": "# The Attack 🦠\n\nAttacker sets a known Session ID in victim's browser.\n\nVictim logs in using that ID.\n\nAttacker now knows the valid Session ID and can hijack the account.\n\n**Fix:** Regenerate Session ID upon login."
+        },
+        {
+            "id": "auth_sess_6",
+            "type": "content",
+            "title": "Session Storage",
+            "content": "# Where to keep it? 🗄️\n\n- **Memory:** Fast, but lost on restart. Bad for scaling.\n- **File:** Slow, hard to scale.\n- **Database (Redis/Memcached):** Fast, persistent, scalable. The Industry Standard."
+        },
+        {
+            "id": "auth_sess_7",
+            "type": "content",
+            "title": "CSRF",
+            "content": "# Cross-Site Request Forgery 🎭\n\nAttacker tricks user into clicking a link that performs an action on your site (typically via image tags or hidden forms).\n\nSince browser sends cookies automatically, the request looks authenticated!\n\n**Fix:** Anti-CSRF Tokens & `SameSite` cookies."
+        },
+        {
+            "id": "auth_sess_8",
+            "type": "content",
+            "title": "Session vs JWT",
+            "content": "# Comparison ⚔️\n\n- **Session:** Server control (instant revoke), but server memory cost.\n- **JWT:** Scalable (no server memory), but hard to revoke.\n\nUse Sessions for Monoliths/Sensative apps (Banks). Use JWT for Microservices/Mobile."
+        },
+        {
+            "id": "auth_sess_9",
+            "type": "content",
+            "title": "Pros & Cons",
+            "content": "# Trade-offs ⚖️\n\n**Pros:**\n- Easy logout/ban.\n- Smaller payload (just an ID).\n- Cookie security flags.\n\n**Cons:**\n- Server overhead.\n- Harder to scale horizontally (need central Redis/Sticky Sessions)."
+        },
+        {
+            "id": "auth_sess_quiz_2",
+            "type": "quiz",
+            "title": "Attack Quiz",
+            "content": "Forgery.",
+            "quizQuestion": "What attack exploits the fact that browsers automatically send cookies with requests?",
+            "quizOptions": [
+                "XSS",
+                "SQL Injection",
+                "CSRF",
+                "Phishing"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_sess_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Express Session 💻\n\n<!-- FULL_CODE_START\nconst session = require('express-session');\nconst RedisStore = require('connect-redis')(session);\n\napp.use(session({\n  store: new RedisStore({ client: redisClient }),\n  secret: 'my-secret',\n  resave: false,\n  saveUninitialized: false,\n  cookie: {\n    secure: true,\n    httpOnly: true,\n    maxAge: 1000 * 60 * 60 // 1 hour\n  }\n}));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_sess_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Sessions 🎓\n\nStateful & Secure.\n\n- **Cookie:** Transport mechanism.\n- **HttpOnly:** Prevent XSS access.\n- **Redis:** Best place to store sessions.\n- **CSRF:** The token vulnerability.\n- **Fixation:** Regenerate ID on login.\n\n## Next Steps\nControl who access what with **RBAC**!"
+        }
+    ]
+}

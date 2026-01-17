@@ -1,0 +1,103 @@
+{
+    "id": "learn_design_keys",
+    "topicId": "keys",
+    "topicTitle": "Keys & Constraints",
+    "description": "Enforce data integrity rules at the database level.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "design_keys_1",
+            "type": "content",
+            "title": "Primary Key (PK) 🔑",
+            "content": "# Identity\n\nA column (or set of columns) that uniquely identifies a row in a table.\n\n- Must contain unique values.\n- Cannot contain `NULL`.\n- Each table should have ONE primary key."
+        },
+        {
+            "id": "design_keys_2",
+            "type": "content",
+            "title": "Foreign Key (FK) 🔗",
+            "content": "# Relationships\n\nA column that creates a link between two tables.\n\nThe FK in one table points to the PK in another table.\n\nEnforces **Referential Integrity** (cannot point to a non-existent user)."
+        },
+        {
+            "id": "design_keys_3",
+            "type": "content",
+            "title": "Unique Constraint 🦄",
+            "content": "# No Duplicates\n\nEnsures that all values in a column are different.\n\nE.g., `email` address. Users can change it (unlike PK), but no two users can have the same email."
+        },
+        {
+            "id": "design_keys_4",
+            "type": "content",
+            "title": "Check Constraint ✅",
+            "content": "# Validation Logic\n\nEnsures that all values in a column satisfy a specific condition.\n\n`CHECK (age >= 18)`\n`CHECK (price > 0)`\n\nDatabase rejects data that violates this rule."
+        },
+        {
+            "id": "design_keys_5",
+            "type": "content",
+            "title": "Not Null Constraint 🚫",
+            "content": "# Mandatory Data\n\nEnsures a column cannot have a `NULL` value.\n\nE.g., A user MUST have a username."
+        },
+        {
+            "id": "design_keys_quiz_1",
+            "type": "quiz",
+            "title": "Constraint Quiz",
+            "content": "Rules.",
+            "quizQuestion": "Which constraint ensures that a column's value matches a valid Primary Key in another table?",
+            "quizOptions": [
+                "Unique Key",
+                "Foreign Key",
+                "Primary Key",
+                "Check Key"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "design_keys_6",
+            "type": "content",
+            "title": "Default Constraint ⏩",
+            "content": "# Fallback Value\n\nProvides a default value for a column when none is specified.\n\n`created_at DEFAULT CURRENT_TIMESTAMP`\n`status DEFAULT 'active'`"
+        },
+        {
+            "id": "design_keys_7",
+            "type": "content",
+            "title": "Composite Key 🧩",
+            "content": "# Combined Power\n\nA Primary Key made of two or more columns.\n\nE.g., In table `Enrollments`: `student_id` is not unique, `course_id` is not unique. But (`student_id`, `course_id`) pair IS unique."
+        },
+        {
+            "id": "design_keys_8",
+            "type": "content",
+            "title": "On Delete actions ♻️",
+            "content": "# FK Behavior\n\nWhat happens to the child row when the parent is deleted?\n\n- `CASCADE`: Delete child.\n- `SET NULL`: Orphan child.\n- `RESTRICT`: Fail deletion."
+        },
+        {
+            "id": "design_keys_9",
+            "type": "content",
+            "title": "Index vs Constraint",
+            "content": "# Nuance 🧐\n\n- **Constraint:** Logic rule (No duplicates).\n- **Index:** Data structure for speed (B-Tree).\n\nA Unique Constraint *automatically creates* a Unique Index."
+        },
+        {
+            "id": "design_keys_10",
+            "type": "content",
+            "title": "Dropping Constraints",
+            "content": "# Modification 🛠️\n\n`ALTER TABLE users DROP CONSTRAINT check_age;`\n\nUse with caution on production databases with existing data."
+        },
+        {
+            "id": "design_keys_quiz_2",
+            "type": "quiz",
+            "title": "Definition Quiz",
+            "content": "Types.",
+            "quizQuestion": "Can a Primary Key contain NULL values?",
+            "quizOptions": [
+                "Yes, always.",
+                "Yes, but only one.",
+                "No, never.",
+                "Depends on the database engine."
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "design_keys_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Keys 🔑\n\nEnforcing Truth.\n\n- **PK:** Identify.\n- **FK:** Connect.\n- **Unique:** Dedup.\n- **Check:** Validate.\n\n## Next Steps\nOrganize tables with **Schemas**!"
+        }
+    ]
+}

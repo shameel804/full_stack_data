@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_queries",
+    "topicId": "queries",
+    "topicTitle": "Aggregates & Subqueries",
+    "description": "Master advanced selection with Grouping, Aggregation functions, and Subqueries.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_queries_1",
+            "type": "content",
+            "title": "Aggregate Functions",
+            "content": "# Math on Rows 🧮\n\nPerform calculations on a set of values to return a single value.\n\n- `COUNT(*)`\n- `SUM(price)`\n- `AVG(age)`\n- `MAX(score)`\n- `MIN(price)`"
+        },
+        {
+            "id": "sql_queries_2",
+            "type": "content",
+            "title": "COUNT",
+            "content": "# How many? 🔢\n\n<!-- FULL_CODE_START\nSELECT COUNT(*) FROM users;\n\nSELECT COUNT(email) FROM users; -- Ignores NULLs\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_3",
+            "type": "content",
+            "title": "GROUP BY",
+            "content": "# Buckets 🪣\n\nGroup rows that have the same values into summary rows.\n\n<!-- FULL_CODE_START\nSELECT country, COUNT(*)\nFROM users\nGROUP BY country;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_4",
+            "type": "content",
+            "title": "HAVING",
+            "content": "# Filter Groups 🔎\n\n`WHERE` filters rows BEFORE grouping.\n`HAVING` filters groups AFTER grouping.\n\n<!-- FULL_CODE_START\nSELECT country, COUNT(*)\nFROM users\nGROUP BY country\nHAVING COUNT(*) > 5;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_5",
+            "type": "content",
+            "title": "Subqueries",
+            "content": "# Query in Query 🐢\n\nA query nested inside another query.\n\n<!-- FULL_CODE_START\nSELECT * FROM products\nWHERE price > (\n    SELECT AVG(price) FROM products\n);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_quiz_1",
+            "type": "quiz",
+            "title": "Filter Quiz",
+            "content": "Timing.",
+            "quizQuestion": "Which clause is used to filter the results of a GROUP BY aggregation?",
+            "quizOptions": [
+                "WHERE",
+                "HAVING",
+                "FILTER",
+                "LIMIT"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_queries_6",
+            "type": "content",
+            "title": "IN Operator",
+            "content": "# List Matching 📋\n\nCheck if a value matches any value in a list (or subquery).\n\n<!-- FULL_CODE_START\nSELECT * FROM users\nWHERE id IN (1, 3, 5);\n\nSELECT * FROM users \nWHERE id IN (SELECT user_id FROM admins);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_7",
+            "type": "content",
+            "title": "EXISTS",
+            "content": "# Check Existence 👻\n\nReturns true if the subquery returns any records.\n\n<!-- FULL_CODE_START\nSELECT name FROM suppliers\nWHERE EXISTS (\n    SELECT product_name FROM products \n    WHERE products.supplier_id = suppliers.supplier_id \n    AND price < 20\n);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_8",
+            "type": "content",
+            "title": "Any / All",
+            "content": "# Comparison ⚖️\n\n- `ANY`: True if any of the subquery values meet the condition.\n- `ALL`: True if ALL of the subquery values meet the condition.\n\n`WHERE price > ALL (SELECT price FROM old_products)`"
+        },
+        {
+            "id": "sql_queries_9",
+            "type": "content",
+            "title": "Common Table Expressions (CTE)",
+            "content": "# WITH Clause 🏗️\n\nDefine a temporary named result set.\n\n<!-- FULL_CODE_START\nWITH RegionalSales AS (\n    SELECT region, SUM(amount) as total_sales\n    FROM orders\n    GROUP BY region\n)\nSELECT * FROM RegionalSales WHERE total_sales > 1000;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_queries_10",
+            "type": "content",
+            "title": "String Functions",
+            "content": "# Text Magic ✍️\n\n- `CONCAT(a, b)`: Join strings.\n- `SUBSTRING(str, start, len)`: Extract part.\n- `UPPER(str)` / `LOWER(str)`: Case conversion.\n- `LENGTH(str)`: Character count."
+        },
+        {
+            "id": "sql_queries_quiz_2",
+            "type": "quiz",
+            "title": "CTE Quiz",
+            "content": "Syntax.",
+            "quizQuestion": "Which keyword is used to define a Common Table Expression (CTE)?",
+            "quizOptions": [
+                "DEFINE",
+                "TEMP",
+                "WITH",
+                "ALIAS"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "sql_queries_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Calculations 🧠\n\nAdvanced selects.\n\n- **Aggregates:** `SUM`, `COUNT`.\n- **Grouping:** `GROUP BY`, `HAVING`.\n- **Nested:** Subqueries (`IN`, `EXISTS`).\n- **CTE:** `WITH` tables.\n\n## Next Steps\nSpeed it up with **Indexes**!"
+        }
+    ]
+}

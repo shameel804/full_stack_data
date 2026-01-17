@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_indexes",
+    "topicId": "indexes",
+    "topicTitle": "Indexes",
+    "description": "Speed up data retrieval using B-Trees, Hash indexes, and more.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_indexes_1",
+            "type": "content",
+            "title": "What is an Index? 📖",
+            "content": "# The Book Index\n\nImagine finding a specific word in a book.\n\n- **Without Index:** Read every page (Full Table Scan).\n- **With Index:** Look up the page number in the back (Index Seek).\n\nAn index is a data structure (usually B-Tree) that speeds up reads."
+        },
+        {
+            "id": "sql_indexes_2",
+            "type": "content",
+            "title": "Creating an Index",
+            "content": "# Speed It Up 🏃\n\n<!-- FULL_CODE_START\nCREATE INDEX idx_lastname \nON users (lastname);\nFULL_CODE_END -->\n\nNow queries like `WHERE lastname = 'Smith'` will be much faster."
+        },
+        {
+            "id": "sql_indexes_3",
+            "type": "content",
+            "title": "Clustered Index",
+            "content": "# The Order 🗂️\n\n- **Clustered Index:** The physical order of rows in the table. There can be only ONE per table (usually the Primary Key).\n- **Non-Clustered Index:** A separate structure pointing to the data rows."
+        },
+        {
+            "id": "sql_indexes_4",
+            "type": "content",
+            "title": "Composite Indexes",
+            "content": "# Multi-Column 👯\n\nIndex on multiple columns.\n\n`CREATE INDEX idx_name_age ON users (lastname, age);`\n\nEffective for `WHERE lastname='Smith' AND age=30`. The order matters!"
+        },
+        {
+            "id": "sql_indexes_5",
+            "type": "content",
+            "title": "Unique Index",
+            "content": "# No Duplicates 🚫\n\nEnforces uniqueness.\n\n`CREATE UNIQUE INDEX idx_email ON users (email);`\n\nSimilar to a UNIQUE constraint."
+        },
+        {
+            "id": "sql_indexes_quiz_1",
+            "type": "quiz",
+            "title": "Count Quiz",
+            "content": "Structure.",
+            "quizQuestion": "How many Clustered Indexes can a single table have?",
+            "quizOptions": [
+                "1",
+                "Unlimited",
+                "It depends on the number of columns",
+                "0"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "sql_indexes_6",
+            "type": "content",
+            "title": "The Cost of Indexes",
+            "content": "# Not Free 💸\n\nIndexes take up disk space.\n\nThey speed up reads (SELECT) but **slow down writes** (INSERT, UPDATE, DELETE).\n\nEvery time you write data, the database must rewrite the indexes."
+        },
+        {
+            "id": "sql_indexes_7",
+            "type": "content",
+            "title": "When to Index?",
+            "content": "# Best Practices 🧠\n\nIndex columns that:\n- Are frequently used in `WHERE`, `JOIN`, or `ORDER BY` clauses.\n- Have high cardinality (many unique values).\n\nDon't index columns like 'Gender' (low cardinality) unless necessary."
+        },
+        {
+            "id": "sql_indexes_8",
+            "type": "content",
+            "title": "Covering Index",
+            "content": "# Efficient ⚡\n\nIf the index contains ALL data needed for the query, the DB doesn't even need to touch the table (Clustered Index read).\n\n`SELECT lastname FROM users WHERE lastname = 'Smith';` (Served purely from `idx_lastname`)."
+        },
+        {
+            "id": "sql_indexes_9",
+            "type": "content",
+            "title": "EXPLAIN",
+            "content": "# Query Plan 🗺️\n\nUse `EXPLAIN` to see if your query is using an index.\n\n`EXPLAIN SELECT * FROM users WHERE id = 1;`\n\nLook for 'Index Scan' or 'Index Seek' vs 'Seq Scan' (Sequential/Full)."
+        },
+        {
+            "id": "sql_indexes_10",
+            "type": "content",
+            "title": "Rebuilding Indexes",
+            "content": "# Maintenance 🛠️\n\nIndexes can become fragmented over time (gaps from deletions).\n\nPeriodically reindex/rebuild to optimize performance."
+        },
+        {
+            "id": "sql_indexes_quiz_2",
+            "type": "quiz",
+            "title": "Trade-off Quiz",
+            "content": "Performance.",
+            "quizQuestion": "What is the primary downside of having too many indexes on a table?",
+            "quizOptions": [
+                "Slower SELECT queries",
+                "Slower INSERT/UPDATE operations",
+                "It confuses the query optimizer",
+                "It makes the table read-only"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_indexes_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Indexes 📑\n\nSpeed vs Space.\n\n- **Create:** `CREATE INDEX`.\n- **Clustered:** Physical sort.\n- **Composite:** Multi-column.\n- **Trade-off:** Faster reads, slower writes.\n\n## Next Steps\nEnsure consistency with **Transactions**!"
+        }
+    ]
+}

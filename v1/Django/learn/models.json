@@ -1,0 +1,103 @@
+{
+    "id": "learn_django_models",
+    "topicId": "models",
+    "topicTitle": "Models & ORM",
+    "description": "Define database schemas using Python classes and query data effortlessly.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "django_models_1",
+            "type": "content",
+            "title": "What is a Model?",
+            "content": "# Blueprint 🗺️\n\nA Model is the single, definitive source of information about your data.\n\nIt contains the essential fields and behaviors of the data you’re storing.\n\nUsually, each model maps to a single database table."
+        },
+        {
+            "id": "django_models_2",
+            "type": "content",
+            "title": "Defining a Model",
+            "content": "# Python Classes 🐍\n\nIn `models.py`:\n\n<!-- FULL_CODE_START\nfrom django.db import models\n\nclass Person(models.Model):\n    first_name = models.CharField(max_length=30)\n    last_name = models.CharField(max_length=30)\nFULL_CODE_END -->\n\nThis creates a `myapp_person` table."
+        },
+        {
+            "id": "django_models_3",
+            "type": "content",
+            "title": "Migrations",
+            "content": "# Propagate Changes 🌊\n\n1. **Make Changes:** Edit `models.py`.\n2. **Create Migrations:** `python manage.py makemigrations` (Creates a script of changes).\n3. **Apply Migrations:** `python manage.py migrate` (Runs the script on DB)."
+        },
+        {
+            "id": "django_models_4",
+            "type": "content",
+            "title": "Field Types",
+            "content": "# Data Types 🗃️\n\n- `CharField`: Small text.\n- `TextField`: Large text.\n- `IntegerField`: Numbers.\n- `DateTimeField`: Dates & times.\n- `BooleanField`: True/False.\n- `EmailField`: Validates email."
+        },
+        {
+            "id": "django_models_5",
+            "type": "content",
+            "title": "Relationships",
+            "content": "# Connecting Tables 🔗\n\n- **ForeignKey:** 1-to-many (e.g., Author has many Books).\n- **ManyToManyField:** Many-to-many (e.g., Pizza toppings).\n- **OneToOneField:** 1-to-1 (e.g., User Profile)."
+        },
+        {
+            "id": "django_models_quiz_1",
+            "type": "quiz",
+            "title": "Relation Quiz",
+            "content": "Connections.",
+            "quizQuestion": "Which field type would you use to link a 'Comment' to a specific 'Post' so that one post can have many comments?",
+            "quizOptions": [
+                "ManyToManyField",
+                "OneToOneField",
+                "ForeignKey",
+                "CharField"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "django_models_6",
+            "type": "content",
+            "title": "The ORM",
+            "content": "# No SQL Needed 🚫\n\nDjango's **Object-Relational Mapper** lets you interact with the DB using Python code.\n\n`Entry.objects.all()` instead of `SELECT * FROM blog_entry;`."
+        },
+        {
+            "id": "django_models_7",
+            "type": "content",
+            "title": "Creating Objects",
+            "content": "# Insert Data 💾\n\n<!-- FULL_CODE_START\n# Method 1\np = Person(first_name=\"John\", last_name=\"Doe\")\np.save()\n\n# Method 2\nPerson.objects.create(first_name=\"Jane\", last_name=\"Doe\")\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_models_8",
+            "type": "content",
+            "title": "Querying Objects",
+            "content": "# Retrieve Data 🔎\n\n- `Person.objects.all()`: Get everyone.\n- `Person.objects.get(id=1)`: Get one (error if multiple/none).\n- `Person.objects.filter(last_name='Doe')`: Get all Does."
+        },
+        {
+            "id": "django_models_9",
+            "type": "content",
+            "title": "Updating & Deleting",
+            "content": "# Modify Data ✏️\n\n<!-- FULL_CODE_START\n# Update\np = Person.objects.get(id=1)\np.first_name = 'Johnny'\np.save()\n\n# Delete\np.delete()\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_models_10",
+            "type": "content",
+            "title": "Meta Options",
+            "content": "# Fine Tuning 🎛️\n\nUse the `Meta` inner class.\n\n<!-- FULL_CODE_START\nclass Person(models.Model):\n    # fields...\n    class Meta:\n        ordering = ['last_name']\n        verbose_name_plural = \"People\"\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_models_quiz_2",
+            "type": "quiz",
+            "title": "Migration Quiz",
+            "content": "Workflow.",
+            "quizQuestion": "What is the primary purpose of `makemigrations`?",
+            "quizOptions": [
+                "To apply changes to the database immediately",
+                "To create a Python file describing changes to your models",
+                "To delete the database",
+                "To create a superuser"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_models_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Models 🧱\n\nData Structure.\n\n- **Class:** Maps to Table.\n- **Fields:** Map to Columns.\n- **Migrations:** Version control for DB.\n- **ORM:** Pythonic database access.\n\n## Next Steps\nDisplay your data with **Views & URLs**!"
+        }
+    ]
+}

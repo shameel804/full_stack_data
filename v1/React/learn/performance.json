@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_performance",
+    "topicId": "performance",
+    "topicTitle": "Performance Optimization",
+    "description": "Techniques to make your React applications faster: Memoization, Lazy Loading, and Code Splitting.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_perf_1",
+            "type": "content",
+            "title": "Why Performance Matters",
+            "content": "# Speed = User Experience 🚀\n\nReact is fast by default, but complex apps can become sluggish.\n\nCommon issues:\n- **Wasted Renders:** Components updating when they don't need to.\n- **Large Bundle Size:** Downloading unused code.\n- **Blocking the Main Thread:** Heavy calculations."
+        },
+        {
+            "id": "react_perf_2",
+            "type": "content",
+            "title": "React.memo",
+            "content": "# Memoization (Components) 🧠\n\nBy default, if a Parent re-renders, all Children re-render.\n\nUse `React.memo` to skip re-rendering a component if its props haven't changed.\n\n```jsx\nconst MyComponent = React.memo(function MyComponent(props) {\n  /* only renders if props change */\n});\n```"
+        },
+        {
+            "id": "react_perf_3",
+            "type": "content",
+            "title": "useMemo",
+            "content": "# useMemo Hook 🗄️\n\nMemoize **expensive calculations**.\n\n```jsx\nconst sortedList = useMemo(() => {\n  return sortHugeArray(list);\n}, [list]);\n```\nThis ensures `sortHugeArray` only runs when `list` changes, not on every render. "
+        },
+        {
+            "id": "react_perf_4",
+            "type": "content",
+            "title": "useCallback",
+            "content": "# useCallback Hook 📞\n\nMemoize **functions**.\n\nIf you pass a function as a prop to a `React.memo` component, it will still re-render because a new function is created on every render.\n\n`useCallback` caches the function instance.\n\n```jsx\nconst handleClick = useCallback(() => {\n  doSomething(a, b);\n}, [a, b]);\n```"
+        },
+        {
+            "id": "react_perf_quiz_1",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "Select the hook.",
+            "quizQuestion": "Which hook is best for caching the RESULT of a heavy calculation?",
+            "quizOptions": [
+                "useMemo",
+                "useCallback",
+                "useEffect",
+                "useRef"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "react_perf_5",
+            "type": "content",
+            "title": "Code Splitting",
+            "content": "# Code Splitting ✂️\n\nDon't ship one giant `bundle.js`.\n\nSplit your code so users only download what they need.\n\nMost common way: Route-based splitting using `React.lazy`.\n\n```jsx\nconst Profile = React.lazy(() => import('./Profile'));\n```"
+        },
+        {
+            "id": "react_perf_6",
+            "type": "content",
+            "title": "Lazy Loading Images",
+            "content": "# Lazy Images 🖼️\n\nDon't load images that are off-screen.\n\nBrowser native support:\n```jsx\n<img src=\"large-image.jpg\" loading=\"lazy\" />\n```\nThis simple attribute creates a huge performance boost."
+        },
+        {
+            "id": "react_perf_7",
+            "type": "content",
+            "title": "React Profiler",
+            "content": "# The Profiler 🕵️\n\nUse the **React DevTools** \"Profiler\" tab to record interaction.\n\nIt shows:\n- Which components rendered.\n- Why they rendered (e.g., \"props changed\").\n- How long it took.\n\nThis is the #1 tool for debugging specific slowness."
+        },
+        {
+            "id": "react_perf_8",
+            "type": "content",
+            "title": "Virtualization",
+            "content": "# Virtual Lists 📜\n\nRendering 10,000 items in a DOM list is slow.\n\nUse \"Virtualization\" (or \"Windowing\") to only render the items currently visible in the viewport.\n\nPopular library: `react-window` or `react-virtualized`."
+        },
+        {
+            "id": "react_perf_9",
+            "type": "content",
+            "title": "Throttling & Debouncing",
+            "content": "# Event Optimization ⏱️\n\nDon't handle every single event if they happen fast (e.g., scroll, resize, typing).\n\n- **Debounce:** Wait until user stops typing to Search.\n- **Throttle:** Only fire scroll event once every 100ms."
+        },
+        {
+            "id": "react_perf_quiz_2",
+            "type": "quiz",
+            "title": "Tool Quiz",
+            "content": "Debugging tool.",
+            "quizQuestion": "Where can you find the exact reason why a component re-rendered?",
+            "quizOptions": [
+                "Console Logs",
+                "Network Tab",
+                "React DevTools Profiler",
+                "Elements Panel"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_perf_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Memo Example 💻\n\n<!-- FULL_CODE_START\nimport React, { useState, useMemo } from 'react';\n\nfunction App() {\n  const [count, setCount] = useState(0);\n  const [text, setText] = useState('');\n\n  // Expensive calculation\n  const expensiveValue = useMemo(() => {\n    console.log('Calculating...');\n    let total = 0;\n    for (let i = 0; i < 1000000; i++) {\n      total += i;\n    }\n    return total;\n  }, []); // Empty array = run once\n\n  return (\n    <div>\n      <h2>Computed: {expensiveValue}</h2>\n      <button onClick={() => setCount(count + 1)}>Count: {count}</button>\n      <input value={text} onChange={e => setText(e.target.value)} />\n    </div>\n  );\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_perf_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Performance 🎓\n\nMake it snappy.\n\n- **Render less:** `React.memo`.\n- **Compute less:** `useMemo`.\n- **Load less:** Code Splitting (`React.lazy`).\n- **Debug:** Use the Profiler.\n\n## Next Steps\nEnsure your app works correctly with **Testing**!"
+        }
+    ]
+}

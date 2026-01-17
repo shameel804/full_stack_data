@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_versioning",
+    "topicId": "versioning",
+    "topicTitle": "Versioning",
+    "description": "Strategies for evolving your API without breaking existing clients: SemVer and Deprecation.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "api_ver_1",
+            "type": "content",
+            "title": "Why Version?",
+            "content": "# Change is Inevitable 🍂\n\nYou need to add features, fix bugs, or change data structures.\n\nSimultaneously, you have old mobile apps or partners using the *current* structure.\n\nVersioning allows both to exist."
+        },
+        {
+            "id": "api_ver_2",
+            "type": "content",
+            "title": "Strategy: URI Versioning",
+            "content": "# URI Path 🛣️\n\nThe most common and explicit method.\n\n`https://api.example.com/v1/users`\n`https://api.example.com/v2/users`\n\n**Pros:** easy to see, easy to cache, explore in browser.\n**Cons:** technically different resources."
+        },
+        {
+            "id": "api_ver_3",
+            "type": "content",
+            "title": "Strategy: Header Versioning",
+            "content": "# Custom Headers 🎩\n\nKeep the URL clean.\n\n`GET /users`\n`Accept-Version: v1`\n\n**Pros:** cleaner URLs.\n**Cons:** harder to test in browser, caching logic gets complex (Vary header needed)."
+        },
+        {
+            "id": "api_ver_4",
+            "type": "content",
+            "title": "Strategy: Media Type",
+            "content": "# Content Negotiation 🤝\n\nThe \"RESTful\" way.\n\n`Accept: application/vnd.example.v1+json`\n\n**Pros:** very granular (version resource representation, not whole API).\n**Cons:** complex for clients to construct."
+        },
+        {
+            "id": "api_ver_quiz_1",
+            "type": "quiz",
+            "title": "Method Quiz",
+            "content": "Common usage.",
+            "quizQuestion": "Which versioning strategy is generally considered the easiest for developers to see and use?",
+            "quizOptions": [
+                "Header Versioning",
+                "URI Versioning (/v1/resource)",
+                "Media Type Versioning",
+                "Query Param Versioning"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "api_ver_5",
+            "type": "content",
+            "title": "Semantic Versioning",
+            "content": "# SemVer 🏷️\n\nFormat: `MAJOR.MINOR.PATCH` (e.g., 2.1.5)\n\n- **MAJOR:** Breaking changes (v1 -> v2).\n- **MINOR:** New features, backward compatible.\n- **PATCH:** Bug fixes, backward compatible.\n\nAPIs usually only expose MAJOR in the URL (v1, v2)."
+        },
+        {
+            "id": "api_ver_6",
+            "type": "content",
+            "title": "Backward Compatibility",
+            "content": "# Don't Break It 🧱\n\n**Non-Breaking Changes:**\n- Adding a new field to JSON.\n- Adding a new endpoint.\n\n**Breaking Changes:**\n- Renaming/Removing a field.\n- Changing a field type (String -> Int).\n- Making an optional param required."
+        },
+        {
+            "id": "api_ver_7",
+            "type": "content",
+            "title": "Deprecation Policy",
+            "content": "# Sunset 🌅\n\n1.  **Announce:** Tell users v1 is deprecated.\n2.  **Warning:** Add `Warning` header to v1 responses. \"299 - Deprecated API\".\n3.  **Sunset:** Shutdown date (usually 6-12 months notice)."
+        },
+        {
+            "id": "api_ver_8",
+            "type": "content",
+            "title": "Query Param Versioning",
+            "content": "# Query Parameter ❓\n\n`GET /users?v=1`\n\n**Pros:** Easy to implement, defaults easily (`if (!v) v=1`).\n**Cons:** Can be messy in logs/analytics."
+        },
+        {
+            "id": "api_ver_9",
+            "type": "content",
+            "title": "Documentation",
+            "content": "# Keep Docs Updated 📚\n\nMaintain separate docs for v1 and v2.\n\nClearly label deprecated fields in the v1 docs.\n\nIf possible, offer a migration guide."
+        },
+        {
+            "id": "api_ver_quiz_2",
+            "type": "quiz",
+            "title": "Change Quiz",
+            "content": "Impact.",
+            "quizQuestion": "Which of the following is considered a BREAKING change?",
+            "quizOptions": [
+                "Adding a new optional parameter",
+                "Adding a new response field",
+                "Renaming an existing response field",
+                "Improving performance"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_ver_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Express Versioning 💻\n\n<!-- FULL_CODE_START\nconst express = require('express');\nconst app = express();\n\n// V1 Router\nconst v1Router = express.Router();\nv1Router.get('/users', (req, res) => res.json({ version: 'v1' }));\n\n// V2 Router\nconst v2Router = express.Router();\nv2Router.get('/users', (req, res) => res.json({ version: 'v2' }));\n\n// Mount them\napp.use('/api/v1', v1Router);\napp.use('/api/v2', v2Router);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "api_ver_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Versioning 🎓\n\nLong-Term Health.\n\n- **URI:** `/v1/` (Visible).\n- **Header:** `Accept-Version` (Clean).\n- **SemVer:** Major.Minor.Patch.\n- **Compatibility:** Add, don't remove.\n- **Deprecate:** Warn before killing.\n\n## Next Steps\nSecure users with **Authentication & Authorization**!"
+        }
+    ]
+}

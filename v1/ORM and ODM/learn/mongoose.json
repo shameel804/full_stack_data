@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_mongoose",
+    "topicId": "mongoose",
+    "topicTitle": "Mongoose",
+    "description": "Elegant MongoDB object modeling for Node.js.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_mongoose_1",
+            "type": "content",
+            "title": "Why Mongoose? 🦁",
+            "content": "# Structure for NoSQL\n\nMongoDB is schema-less, but applications often need structure.\n\nMongoose provides a strict schema solution on top of MongoDB.\n\nIt handles validation, casting, and default values."
+        },
+        {
+            "id": "orm_mongoose_2",
+            "type": "content",
+            "title": "Defining Schemas",
+            "content": "# The Blueprint 📝\n\n<!-- FULL_CODE_START\nconst mongoose = require('mongoose');\n\nconst userSchema = new mongoose.Schema({\n  name: String,\n  age: { type: Number, min: 18 },\n  email: { type: String, required: true },\n  created: { type: Date, default: Date.now }\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_mongoose_3",
+            "type": "content",
+            "title": "Models",
+            "content": "# The Constructor 🏗️\n\nCompile a schema into a Model.\n\n`const User = mongoose.model('User', userSchema);`\n\nNow `User` is a class you can use to create documents.\n\n`const bob = new User({ name: 'Bob' });`"
+        },
+        {
+            "id": "orm_mongoose_4",
+            "type": "content",
+            "title": "CRUD",
+            "content": "# Easy Methods 🛠️\n\n- Create: `await User.create({ ... })`\n- Read: `await User.find({ age: { $gt: 20 } })`\n- Update: `await User.updateOne({ ... }, { ... })`\n- Delete: `await User.deleteOne({ ... })`"
+        },
+        {
+            "id": "orm_mongoose_5",
+            "type": "content",
+            "title": "Validation",
+            "content": "# Built-in Checks ✅\n\nMongoose validates data *before* saving to MongoDB.\n\nIf you try to save a string to a number field, Mongoose throws an error."
+        },
+        {
+            "id": "orm_mongoose_quiz_1",
+            "type": "quiz",
+            "title": "Validation Quiz",
+            "content": "Logic.",
+            "quizQuestion": "Where does Mongoose validation occur?",
+            "quizOptions": [
+                "Inside the MongoDB database engine",
+                "In the Node.js application layer",
+                "In the web browser",
+                "On the file system"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orm_mongoose_6",
+            "type": "content",
+            "title": "Populate",
+            "content": "# The JOIN of NoSQL 🔗\n\nReplace a reference (ID) with the actual document.\n\n<!-- FULL_CODE_START\nconst post = await Post.findOne({ title: 'Hello' })\n  .populate('author');\n\nconsole.log(post.author.name); // Works!\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_mongoose_7",
+            "type": "content",
+            "title": "Middleware",
+            "content": "# Hooks 🪝\n\nRun functions before or after operations.\n\n<!-- FULL_CODE_START\nuserSchema.pre('save', async function(next) {\n  this.password = await hash(this.password);\n  next();\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_mongoose_8",
+            "type": "content",
+            "title": "Virtuals",
+            "content": "# Fake Properties 👻\n\nProperties that don't exist in the DB but exist on the object.\n\n<!-- FULL_CODE_START\nuserSchema.virtual('fullName').get(function() {\n  return this.firstName + ' ' + this.lastName;\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_mongoose_9",
+            "type": "content",
+            "title": "Methods & Statics",
+            "content": "# Custom Logic 🧠\n\n- **Methods:** Act on an instance (`user.checkPassword()`).\n- **Statics:** Act on the Model (`User.findByEmail()`)."
+        },
+        {
+            "id": "orm_mongoose_10",
+            "type": "content",
+            "title": "Discriminators",
+            "content": "# Inheritance 🧬\n\nStore multiple types of documents in one collection with slightly different schemas.\n\n`const Event = mongoose.model('Event', schema);`\n`const Concert = Event.discriminator('Concert', concertSchema);`"
+        },
+        {
+            "id": "orm_mongoose_quiz_2",
+            "type": "quiz",
+            "title": "Reference Quiz",
+            "content": "Relationships.",
+            "quizQuestion": "Which method is used to replace stored IDs with actual documents from other collections?",
+            "quizOptions": [
+                "join()",
+                "merge()",
+                "populate()",
+                "lookup()"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_mongoose_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Mongoose 🍃\n\nOrder to Chaos.\n\n- **Schema:** Structure.\n- **Model:** Constructor.\n- **Populate:** Relationships.\n- **Middleware:** Hooks.\n\n## Next Steps\nTry the modern Typescript ORM, **Prisma**!"
+        }
+    ]
+}

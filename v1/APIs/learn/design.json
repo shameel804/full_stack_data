@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_design",
+    "topicId": "design",
+    "topicTitle": "API Design",
+    "description": "Learn to design clean, consistent, and usable APIs. Covers naming, error handling, and documentation.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "api_design_1",
+            "type": "content",
+            "title": "Rule #1: Consistency",
+            "content": "# Be Predictable 🔮\n\nIf you use `camelCase` for one endpoint, use it for all.\n\nIf `POST` returns 201 Created on users, it should return 201 Created on posts.\n\nPredictability = Usability."
+        },
+        {
+            "id": "api_design_2",
+            "type": "content",
+            "title": "Naming Conventions",
+            "content": "# Plural Nouns 📚\n\n- Good: `/users`, `/products`, `/orders`\n- Bad: `/user`, `/product_list`, `/getOrders`\n\nUse nouns to represent resources, and plural nouns generally read better (`GET /users/5` vs `GET /user/5`)."
+        },
+        {
+            "id": "api_design_3",
+            "type": "content",
+            "title": "URL Structure",
+            "content": "# Hierarchy 🌳\n\nShow relationships naturally.\n\n`GET /users/123/orders`\n\nThis clearly means \"Get the orders belonging to user 123\".\n\nAvoid deep nesting. `/users/1/orders/99/items/5` is hard to read. Use `/orders/99/items` instead."
+        },
+        {
+            "id": "api_design_4",
+            "type": "content",
+            "title": "Error Handling",
+            "content": "# Be Specific 🚨\n\nDon't just return 200 OK for everything.\n\nUse proper codes: 400, 401, 403, 404, 500.\n\nReturn clear JSON details:\n```json\n{\n  \"error\": \"DuplicateEmail\",\n  \"message\": \"Email already exists.\"\n}\n```"
+        },
+        {
+            "id": "api_design_quiz_1",
+            "type": "quiz",
+            "title": "Naming Quiz",
+            "content": "Best practice.",
+            "quizQuestion": "What is the recommended naming convention for resource endpoints?",
+            "quizOptions": [
+                "Verbs (e.g., /getUser)",
+                "Singular Nouns (e.g., /user)",
+                "Plural Nouns (e.g., /users)",
+                "Adjectives (e.g., /active)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_design_5",
+            "type": "content",
+            "title": "Versioning",
+            "content": "# Future Proofing 🔮\n\nAPIs change. Don't break existing clients.\n\nVersion your API from day 1.\n\n- URL: `https://api.com/v1/users` (Most common)\n- Header: `Accept-Version: v1`"
+        },
+        {
+            "id": "api_design_6",
+            "type": "content",
+            "title": "Filtering & Sorting",
+            "content": "# Standardize Params 🔍\n\nDecide heavily on a convention for filtering.\n\n- `sort=name` vs `sort_by=name`\n- `order=asc` vs `sort=+name`\n- `limit=10` vs `take=10`\n\nPick one standard and document it."
+        },
+        {
+            "id": "api_design_7",
+            "type": "content",
+            "title": "Documentation",
+            "content": "# OpenAPI (Swagger) 📜\n\nThe standard for documenting REST APIs.\n\nWrite a YAML/JSON file describing endpoints, inputs, and outputs.\n\nTools generate interactive documentation sites automatically."
+        },
+        {
+            "id": "api_design_8",
+            "type": "content",
+            "title": "Partial Responses",
+            "content": "# Field Selection 🤏\n\nAllow clients to pick fields to save bandwidth (like GraphQL Lite).\n\n`GET /users?fields=id,name,email`\n\nGoogle APIs use this pattern heavily."
+        },
+        {
+            "id": "api_design_9",
+            "type": "content",
+            "title": "Rate Limiting Headers",
+            "content": "# Communicate Limits 🛑\n\nTell the client how many requests they have left.\n\n- `X-RateLimit-Limit`: 100\n- `X-RateLimit-Remaining`: 99\n- `X-RateLimit-Reset`: 1609459200 (Unix TS)"
+        },
+        {
+            "id": "api_design_quiz_2",
+            "type": "quiz",
+            "title": "Doc Quiz",
+            "content": "Standard.",
+            "quizQuestion": "Which specification is the industry standard for describing REST APIs?",
+            "quizOptions": [
+                "SOAP",
+                "WSDL",
+                "OpenAPI (Swagger)",
+                "Postman"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_design_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Consistent Error 💻\n\n<!-- FULL_CODE_START\n// Good Error Response Format\n{\n  \"success\": false,\n  \"error\": {\n    \"code\": 404,\n    \"type\": \"ResourceNotFound\",\n    \"message\": \"User with ID 123 not found.\",\n    \"documentation\": \"https://api.com/docs/errors/404\"\n  },\n  \"requestId\": \"abc-123\"\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "api_design_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Design 🎓\n\nUsability First.\n\n- **Consistency:** Be predictable.\n- **Nouns:** `/v1/resources`.\n- **Errors:** Use status codes & details.\n- **Docs:** OpenAPI/Swagger.\n- **Pagination:** Essential for lists.\n\n## Next Steps\nLock the doors with **API Security**!"
+        }
+    ]
+}

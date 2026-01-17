@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_postgres",
+    "topicId": "postgres",
+    "topicTitle": "PostgreSQL Specifics",
+    "description": "Advanced features unique to the World's Most Advanced Open Source Relational Database.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_postgres_1",
+            "type": "content",
+            "title": "Welcome to Postgres 🐘",
+            "content": "# Not just SQL\n\nPostgreSQL is an object-relational database (ORDBMS).\n\nKnown for reliability, feature robustness, and performance.\n\nIt supports advanced data types like Arrays, JSONB, and Geometric types."
+        },
+        {
+            "id": "sql_postgres_2",
+            "type": "content",
+            "title": "JSONB",
+            "content": "# NoSQL in SQL 🍬\n\nStore JSON documents efficiently with binary storage and indexing.\n\n<!-- FULL_CODE_START\nSELECT info->>'name' \nFROM orders \nWHERE info @> '{\"completed\": true}';\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_postgres_3",
+            "type": "content",
+            "title": "Array Types",
+            "content": "# Lists in Cells 📋\n\nStore arrays directly in a column.\n\n`integer[]` or `text[]`.\n\n<!-- FULL_CODE_START\nINSERT INTO contacts (emails)\nVALUES ('{\"me@test.com\", \"work@test.com\"}');\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_postgres_4",
+            "type": "content",
+            "title": "Window Functions",
+            "content": "# Row Comparisons 🪟\n\nPerform calculations across a set of table rows that are somehow related to the current row.\n\n`RANK()`, `ROW_NUMBER()`, `LEAD()`, `LAG()`.\n\n<!-- FULL_CODE_START\nSELECT name, salary, \nRANK() OVER (ORDER BY salary DESC)\nFROM employees;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_postgres_5",
+            "type": "content",
+            "title": "Full Text Search",
+            "content": "# Built-in Search 🔍\n\nNo need for Elasticsearch for basic needs.\n\nUse `tsvector` and `tsquery`.\n\n`SELECT * FROM docs WHERE body_tsvector @@ to_tsquery('postgres');`"
+        },
+        {
+            "id": "sql_postgres_quiz_1",
+            "type": "quiz",
+            "title": "JSON Quiz",
+            "content": "Data Types.",
+            "quizQuestion": "Which PostgreSQL data type is recommended for storing JSON because it supports indexing and is strictly validated?",
+            "quizOptions": [
+                "json",
+                "jsonb",
+                "text",
+                "varchar"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_postgres_6",
+            "type": "content",
+            "title": "Extensions",
+            "content": "# Power Up 🔋\n\nadd functionality to Postgres.\n\n- `PostGIS`: Geospatial data.\n- `pg_trgm`: Fuzzy string matching.\n- `citext`: Case-insensitive text.\n\n`CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";`"
+        },
+        {
+            "id": "sql_postgres_7",
+            "type": "content",
+            "title": "Inheritance",
+            "content": "# Object Oriented 🧬\n\nTables can inherit column from a parent table.\n\n`CREATE TABLE capitals() INHERITS (cities);`\n\nSearching 'cities' also finds 'capitals'."
+        },
+        {
+            "id": "sql_postgres_8",
+            "type": "content",
+            "title": "Range Types",
+            "content": "# Intervals 📅\n\nStore ranges of data natively.\n\n- `int4range`\n- `daterange`\n- `tsrange` (timestamp range)\n\nEasy to check if a value falls within a range or if ranges overlap."
+        },
+        {
+            "id": "sql_postgres_9",
+            "type": "content",
+            "title": "Lateral Joins",
+            "content": "# Loop Joins ➰\n\nAllows subqueries in the FROM clause to reference columns provided by preceding items in the FROM clause.\n\nGreat for 'Top N per group' queries."
+        },
+        {
+            "id": "sql_postgres_10",
+            "type": "content",
+            "title": "MVCC",
+            "content": "# Concurrency 🚅\n\nMulti-Version Concurrency Control.\n\nReaders don't block writers, and writers don't block readers. Optimized for high concurrency."
+        },
+        {
+            "id": "sql_postgres_quiz_2",
+            "type": "quiz",
+            "title": "Feature Quiz",
+            "content": "Standard.",
+            "quizQuestion": "Which popular extension adds support for geographic objects to the PostgreSQL database?",
+            "quizOptions": [
+                "GeoJSON",
+                "PostGIS",
+                "EarthData",
+                "SpatialDB"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_postgres_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Postgres 🐘\n\nAdvanced Capabilities.\n\n- **JSONB:** Binary JSON.\n- **Window Functions:** `OVER` clause.\n- **Extensions:** PostGIS.\n- **Arrays:** Store lists.\n\n## Next Steps\nCompare with **MySQL Specifics**!"
+        }
+    ]
+}

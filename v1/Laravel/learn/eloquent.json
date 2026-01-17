@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_eloquent",
+    "topicId": "eloquent",
+    "topicTitle": "Eloquent ORM",
+    "description": "Interact with your database using Laravel's active record implementation.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_eloquent_1",
+            "type": "content",
+            "title": "What is Eloquent?",
+            "content": "# Active Record 💿\n\nEloquent is an ORM that maps each database table to a Model class.\n\n`App\\Models\\User` maps to `users` table.\n\nInteract with data using Python-like syntax in PHP."
+        },
+        {
+            "id": "laravel_eloquent_2",
+            "type": "content",
+            "title": "Defining a Model",
+            "content": "# Minimal Config 🤏\n\n<!-- FULL_CODE_START\nnamespace App\\Models;\n\nuse Illuminate\\Database\\Eloquent\\Model;\n\nclass Flight extends Model\n{\n    // Assumes table is 'flights'\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_eloquent_3",
+            "type": "content",
+            "title": "Retrieving Models",
+            "content": "# Fluent Query Builder 🌊\n\n- `Flight::all()`\n- `Flight::where('active', 1)->orderBy('name')->take(10)->get()`\n- `Flight::find(1)` (Find by primary key)"
+        },
+        {
+            "id": "laravel_eloquent_4",
+            "type": "content",
+            "title": "Mass Assignment",
+            "content": "# Fillable Property 🛡️\n\nTo use `Flight::create(['name' => 'London'])`, you MUST define `$fillable`.\n\n<!-- FULL_CODE_START\nprotected $fillable = ['name', 'active', 'price'];\nFULL_CODE_END -->\n\nPrevents users from maliciously updating fields like `is_admin`."
+        },
+        {
+            "id": "laravel_eloquent_5",
+            "type": "content",
+            "title": "Relationships (1:1 & 1:N)",
+            "content": "# Connecting Data 🔗\n\n<!-- FULL_CODE_START\nclass User extends Model {\n    public function posts() {\n        return $this->hasMany(Post::class);\n    }\n}\n\n// Usage\n$user->posts->each(function($post) { ... });\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_eloquent_quiz_1",
+            "type": "quiz",
+            "title": "Security Quiz",
+            "content": "Protection.",
+            "quizQuestion": "Which property protects against Mass Assignment vulnerabilities by creating an allow-list of attributes?",
+            "quizOptions": [
+                "$guarded",
+                "$fillable",
+                "$allowed",
+                "$secure"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "laravel_eloquent_6",
+            "type": "content",
+            "title": "Accessors & Mutators",
+            "content": "# Getters & Setters 🎁\n\nTransform data when retrieving or setting.\n\n<!-- FULL_CODE_START\n// Accessor: getFirstNameAttribute\npublic function getFirstNameAttribute($value)\n{\n    return ucfirst($value);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_eloquent_7",
+            "type": "content",
+            "title": "Scopes",
+            "content": "# Reusable Logic 🔭\n\nEncapsulate common queries.\n\n<!-- FULL_CODE_START\npublic function scopeActive($query)\n{\n    return $query->where('active', 1);\n}\n\n// Usage\nUser::active()->get();\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_eloquent_8",
+            "type": "content",
+            "title": "Migrations",
+            "content": "# Version Control for DB 📜\n\nCreate tables with code.\n\n`php artisan make:migration create_users_table`\n\n<!-- FULL_CODE_START\nSchema::create('users', function (Blueprint $table) {\n    $table->id();\n    $table->string('name');\n    $table->timestamps();\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_eloquent_9",
+            "type": "content",
+            "title": "Soft Deletes",
+            "content": "# Trash 🗑️\n\nDon't actually delete data, just mark it as deleted.\n\nUse `SoftDeletes` trait.\n\n`$flight->delete()` sets `deleted_at` timestamp.\n`Flight::withTrashed()->get()` to see them."
+        },
+        {
+            "id": "laravel_eloquent_10",
+            "type": "content",
+            "title": "Factories & Seeders",
+            "content": "# Fake Data 🏭\n\nGenerate dummy data for testing.\n\n`User::factory()->count(50)->create();`\n\nGreat for populating your local DB quickly."
+        },
+        {
+            "id": "laravel_eloquent_quiz_2",
+            "type": "quiz",
+            "title": "Relationship Quiz",
+            "content": "Syntax.",
+            "quizQuestion": "Which Model method defines a 'Many-to-Many' relationship?",
+            "quizOptions": [
+                "hasMany",
+                "belongsTo",
+                "belongsToMany",
+                "hasOne"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_eloquent_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Eloquent 🧱\n\nWorking with Data.\n\n- **Model:** Maps to table.\n- **Relationships:** `hasMany`, `belongsTo`.\n- **Scopes:** Reusable filters.\n- **Migrations:** Schema definition.\n\n## Next Steps\nDisplay data with **Blade Templates**!"
+        }
+    ]
+}

@@ -1,47 +1,103 @@
 {
-    "id": "control",
+    "id": "learn_js_control",
     "topicId": "control",
     "topicTitle": "Control Structures",
-    "description": "Make decisions and repeat actions with loops and conditionals.",
-    "baseKP": 60,
+    "description": "Master flow control in JavaScript using If-Else conditions, Switches, and Loops (For, While).",
+    "baseKP": 100,
     "slides": [
         {
-            "id": "control_1",
+            "id": "js_control_1",
             "type": "content",
-            "title": "If-Else",
-            "content": "# Conditionals 🔀\n\nExecute code only if a condition is true.\n\n```javascript\nlet age = 18;\n\nif (age >= 18) {\n  console.log(\"Adult\");\n} else if (age >= 13) {\n  console.log(\"Teenager\");\n} else {\n  console.log(\"Child\");\n}\n```"
+            "title": "Conditional Statements",
+            "content": "# If Statements 🛤️\n\nConditional statements are used to perform different actions based on different conditions.\n\n- `if`: executes code if condition is true\n- `else`: executes code if condition is false\n- `else if`: specifies a new condition to test\n\n```javascript\nif (time < 12) {\n  greeting = \"Good morning\";\n} else if (time < 18) {\n  greeting = \"Good day\";\n} else {\n  greeting = \"Good evening\";\n}\n```"
         },
         {
-            "id": "control_2",
+            "id": "js_control_2",
             "type": "content",
             "title": "Switch Statement",
-            "content": "# Switch 🔛\n\nCleaner for checking many values of one variable.\n\n```javascript\nlet day = \"Monday\";\n\nswitch (day) {\n  case \"Monday\":\n    console.log(\"Start of week\");\n    break;\n  case \"Friday\":\n    console.log(\"Weekend soon!\");\n    break;\n  default:\n    console.log(\"Mid-week\");\n}\n```\n\n> ⚠️ **Note:** Don't forget `break`, or it will fall through to the next case!"
+            "content": "# Switch Statement 🔀\n\nselects one of many code blocks to be executed.\n\n```javascript\nswitch (new Date().getDay()) {\n  case 0:\n    day = \"Sunday\";\n    break;\n  case 1:\n    day = \"Monday\";\n    break;\n  default:\n    day = \"Unknown\";\n}\n```\n- `break`: Stops execution inside the switch block.\n- `default`: Runs if no case matches."
         },
         {
-            "id": "control_3",
-            "type": "content",
-            "title": "Loops",
-            "content": "# Loops 🔁\n\n## For Loop\nRun code a specific number of times.\n```javascript\nfor (let i = 0; i < 5; i++) {\n  console.log(i); // 0, 1, 2, 3, 4\n}\n```\n\n## While Loop\nRun while condition is true.\n```javascript\nlet i = 0;\nwhile (i < 5) {\n  console.log(i);\n  i++;\n}\n```\n\n## Do-While\nRuns at least once.\n```javascript\ndo {\n  console.log(\"Running\");\n} while (false);\n```"
-        },
-        {
-            "id": "control_quiz_1",
+            "id": "js_control_quiz_1",
             "type": "quiz",
-            "title": "Loop Quiz",
-            "content": "Which statement stops a loop?",
-            "quizQuestion": "Which keyword immediately terminates a loop?",
+            "title": "Switch Quiz",
+            "content": "Control flow.",
+            "quizQuestion": "What happens if you forget the 'break' statement in a switch case?",
             "quizOptions": [
-                "stop",
-                "return",
-                "break",
-                "exit"
+                "It throws an error",
+                "It stops the switch",
+                "It continues to the next case (fall-through)",
+                "It restarts the loop"
             ],
             "correctOptionIndex": 2
         },
         {
-            "id": "control_4",
+            "id": "js_control_3",
+            "type": "content",
+            "title": "For Loop",
+            "content": "# For Loop 🔁\n\nLoops can execute a block of code a number of times.\n\n`for (initialization; condition; increment)`\n\n```javascript\nfor (let i = 0; i < 5; i++) {\n  text += \"The number is \" + i + \"<br>\";\n}\n```"
+        },
+        {
+            "id": "js_control_4",
+            "type": "content",
+            "title": "For In Loop",
+            "content": "# For...In Loop 🔑\n\nThe `for...in` statement loops through the **properties** of an Object.\n\n```javascript\nconst person = {fname:\"John\", lname:\"Doe\", age:25};\n\nfor (let x in person) {\n  console.log(person[x]);\n}\n```\n> ⚠️ Do not use `for...in` over an Array if index order is important."
+        },
+        {
+            "id": "js_control_5",
+            "type": "content",
+            "title": "For Of Loop",
+            "content": "# For...Of Loop 🍎\n\nThe `for...of` statement loops through the **values** of an iterable object (Arrays, Strings, Maps).\n\n```javascript\nconst cars = [\"BMW\", \"Volvo\", \"Mini\"];\n\nfor (let car of cars) {\n  console.log(car);\n}\n```"
+        },
+        {
+            "id": "js_control_6",
+            "type": "content",
+            "title": "While Loop",
+            "content": "# While Loop 🔄\n\nThe `while` loop loops through a block of code as long as a specified condition is true.\n\n```javascript\nwhile (i < 10) {\n  console.log(\"Count: \" + i);\n  i++;\n}\n```\n> ⚠️ Be careful! If you forget to increment the variable, the loop will never end (Infinite Loop)."
+        },
+        {
+            "id": "js_control_7",
+            "type": "content",
+            "title": "Do While Loop",
+            "content": "# Do...While Loop ↩️\n\nA variant of the while loop. This loop will execute the code block **once**, before checking if the condition is true, then it will repeat the loop as long as the condition is true.\n\n```javascript\ndo {\n  console.log(\"Number: \" + i);\n  i++;\n} while (i < 10);\n```"
+        },
+        {
+            "id": "js_control_quiz_2",
+            "type": "quiz",
+            "title": "Loop Quiz",
+            "content": "Pick the loop.",
+            "quizQuestion": "Which loop is best for iterating over the VALUES of an array?",
+            "quizOptions": [
+                "for...in",
+                "for...of",
+                "while",
+                "do...while"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "js_control_8",
+            "type": "content",
+            "title": "Break and Continue",
+            "content": "# Break and Continue 🛑\n\n- `break`: Jumps out of a loop.\n- `continue`: Jumps over one iteration in the loop.\n\n```javascript\nfor (let i = 0; i < 10; i++) {\n  if (i === 3) { continue; }\n  if (i === 8) { break; }\n  console.log(i);\n}\n// Output: 0, 1, 2, 4, 5, 6, 7\n```"
+        },
+        {
+            "id": "js_control_9",
+            "type": "content",
+            "title": "Ternary Operator",
+            "content": "# Ternary Operator ❓\n\nA shorthand for the `if...else` statement.\n\n`condition ? exprIfTrue : exprIfFalse`\n\n```javascript\nlet age = 20;\nlet voteable = (age < 18) ? \"Too young\" : \"Old enough\";\n```"
+        },
+        {
+            "id": "js_control_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Loop Demo 💻\n\n<!-- FULL_CODE_START\n// Calculate sum of numbers from 1 to 10\nlet sum = 0;\n\nfor (let i = 1; i <= 10; i++) {\n    sum += i;\n}\n\nconsole.log(\"Sum of 1-10 is: \" + sum);\n\n// Even numbers using continue\nconsole.log(\"Even numbers:\");\nfor (let i = 0; i < 10; i++) {\n    if (i % 2 !== 0) continue;\n    console.log(i);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "js_control_11",
             "type": "content",
             "title": "Summary",
-            "content": "# Control Recap 🎮\n\n- ✅ **If/Else**: Basic logic branching\n- ✅ **Switch**: Clean multi-choice logic\n- ✅ **For**: Counting loops\n- ✅ **While**: Conditional loops\n- ✅ **Break/Continue**: Control loop flow\n\n> 🚀 **Next:** Write reusable code with **Functions**!"
+            "content": "# Recap: Control Flow 🎓\n\nDirect the traffic of your code.\n\n- **If/Else:** Make decisions.\n- **Switch:** Multiple choice selection.\n- **For:** Repeat `n` times.\n- **For...Of:** Iterate values.\n- **While:** Repeat until condition.\n- **Break/Continue:** Emergency exit or skip.\n\n## Next Steps\nLearn how to package logic into reusable blocks with **Functions**!"
         }
     ]
 }

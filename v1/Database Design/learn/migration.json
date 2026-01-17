@@ -1,0 +1,103 @@
+{
+    "id": "learn_design_migration",
+    "topicId": "migration",
+    "topicTitle": "Migrations",
+    "description": "Version control for your database schema.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "design_migration_1",
+            "type": "content",
+            "title": "Why Migrations? 🔄",
+            "content": "# Code for DB\n\nDatabases evolve.\n\nYou add columns, create tables, or change types.\n\nMigrations track these changes in code files, allowing you to synchronize your database schema across dev, staging, and production teams."
+        },
+        {
+            "id": "design_migration_2",
+            "type": "content",
+            "title": "Structure",
+            "content": "# Up & Down ↕️\n\nA migration file typically has two methods:\n\n- **Up (Apply):** The changes to make (e.g., `CREATE TABLE users`).\n- **Down (Revert):** The reverse action (e.g., `DROP TABLE users`).\n\nAllows you to rollback if things go wrong."
+        },
+        {
+            "id": "design_migration_3",
+            "type": "content",
+            "title": "State Tracking",
+            "content": "# The History Table 📜\n\nThe migration tool creates a hidden table (e.g., `alembic_version`, `flyway_schema_history`) to record which migrations have already run.\n\nEnsures you don't run the same change twice."
+        },
+        {
+            "id": "design_migration_4",
+            "type": "content",
+            "title": "Workflow",
+            "content": "# The Process 🔁\n\n1. `generate migration add_email_to_users` (Creates file).\n2. Edit file to define schema change.\n3. `migrate up` (Applies change locally).\n4. Commit file to Git.\n5. CI/CD runs `migrate up` on production."
+        },
+        {
+            "id": "design_migration_5",
+            "type": "content",
+            "title": "Flyway",
+            "content": "# SQL Based 🪰\n\nA popular Java/General tool.\n\nYou write pure SQL files: `V1__Create_User.sql`.\n\nSimple and powerful, works with any language."
+        },
+        {
+            "id": "design_migration_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Revert.",
+            "quizQuestion": "Which method in a migration file is responsible for undoing the changes?",
+            "quizOptions": [
+                "Commit",
+                "Up",
+                "Run",
+                "Down"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "design_migration_6",
+            "type": "content",
+            "title": "Liquibase",
+            "content": "# XML/YAML/JSON 💧\n\nDescribes changes in a database-agnostic format.\n\n`<createTable tableName=\"users\">`\n\nLiquibase translates this to the correct SQL for MySQL, Postgres, Oracle, etc."
+        },
+        {
+            "id": "design_migration_7",
+            "type": "content",
+            "title": "Knex.js",
+            "content": "# JS migrations 🟨\n\nPopular in Node.js.\n\n`knex.schema.createTable('users', ...)`\n\nWritten in JavaScript, runs asynchronously."
+        },
+        {
+            "id": "design_migration_8",
+            "type": "content",
+            "title": "Zero Downtime Migrations",
+            "content": "# The Holy Grail 🏆\n\nChanging DB without stopping the app.\n\n**Pattern:**\n1. Add new column (nullable).\n2. Deploy code that writes to both old and new.\n3. Backfill old data to new column.\n4. Deploy code that reads from new.\n5. Drop old column."
+        },
+        {
+            "id": "design_migration_9",
+            "type": "content",
+            "title": "Seeding vs Migration",
+            "content": "# Schema vs Data 🧱\n\n- **Migration:** CHanges Structure (add table).\n- **Seeding:** Adds Initial Data (insert admin user).\n\nDon't mix them! Migrations run on prod, seeds usually don't (or run only once)."
+        },
+        {
+            "id": "design_migration_10",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Safety First ⛑️\n\n- Never edit a migration file after it has been committed/run on prod. Create a NEW migration to fix it.\n- Always backup before migrating.\n- Test migrations on a staging copy of production data."
+        },
+        {
+            "id": "design_migration_quiz_2",
+            "type": "quiz",
+            "title": "Workflow Quiz",
+            "content": "Production.",
+            "quizQuestion": "How should you correct a mistake in a migration that has already been deployed to production?",
+            "quizOptions": [
+                "Edit the original migration file to fix the error",
+                "Manually change the database schema via SQL",
+                "Create a new migration file that reverts or fixes the change",
+                "Delete the database and start over"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "design_migration_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Migrations 🦆\n\nTime travel for DBs.\n\n- **Version Control:** Track schema.\n- **Up/Down:** Apply/Revert.\n- **Tools:** Flyway, Liquibase, Knex.\n- **Zero Downtime:** Careful steps.\n\n## Next Steps\nVersion control your CODE with **Git**!"
+        }
+    ]
+}

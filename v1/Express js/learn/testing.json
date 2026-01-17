@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing Express",
+    "description": "Integration testing routes with Supertest and Jest/Mocha.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_testing_1",
+            "type": "content",
+            "title": "Why Test?",
+            "content": "# Confidence 🧪\n\nEnsure your API works as expected without manually clicking buttons.\n\n- **Unit Tests:** Test individual functions.\n- **Integration Tests:** Test HTTP endpoints and middleware chain."
+        },
+        {
+            "id": "express_testing_2",
+            "type": "content",
+            "title": "Tools of the Trade",
+            "content": "# The Stack 🛠️\n\n- **Jest / Mocha:** The test runner and assertion library.\n- **Supertest:** A library to test HTTP servers. Simulates requests."
+        },
+        {
+            "id": "express_testing_3",
+            "type": "content",
+            "title": "Supertest Setup",
+            "content": "# Installation 📦\n\n`npm install --save-dev jest supertest`\n\nSeparate your `app` definition from the `listen` call.\n\n`app.js`: exports `app`.\n`server.js`: imports `app` and calls `app.listen()`."
+        },
+        {
+            "id": "express_testing_4",
+            "type": "content",
+            "title": "Writing a Test",
+            "content": "# First Test Case 📝\n\n<!-- FULL_CODE_START\nconst request = require('supertest');\nconst app = require('./app');\n\ndescribe('GET /', () => {\n  it('responds with json', async () => {\n    const response = await request(app)\n      .get('/')\n      .expect('Content-Type', /json/)\n      .expect(200);\n      \n    expect(response.body.message).toEqual('Hello');\n  });\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_testing_5",
+            "type": "content",
+            "title": "Testing POST",
+            "content": "# Sending Data 📤\n\nUse `.send()` to mock a body.\n\n<!-- FULL_CODE_START\nit('creates a user', async () => {\n  const res = await request(app)\n    .post('/users')\n    .send({ name: 'john' });\n    \n  expect(res.statusCode).toEqual(201);\n  expect(res.body).toHaveProperty('id');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_testing_quiz_1",
+            "type": "quiz",
+            "title": "Tool Quiz",
+            "content": "Libraries.",
+            "quizQuestion": "Which library is specifically designed to simulate HTTP requests to your Express app for testing?",
+            "quizOptions": [
+                "Jest",
+                "Express-Test",
+                "Supertest",
+                "Nodemon"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_testing_6",
+            "type": "content",
+            "title": "Testing Auth",
+            "content": "# Mocking Auth 🔐\n\nIf endpoints require tokens, send headers.\n\n<!-- FULL_CODE_START\nconst token = 'mock-jwt-token';\nawait request(app)\n  .get('/protected')\n  .set('Authorization', `Bearer ${token}`)\n  .expect(200);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_testing_7",
+            "type": "content",
+            "title": "Mocking Databases",
+            "content": "# Don't Touch Prod 🛑\n\nUse an in-memory database (like **MongoDB Memory Server**) or mock the DB layer.\n\nTests should be isolated and repeatable."
+        },
+        {
+            "id": "express_testing_8",
+            "type": "content",
+            "title": "Setup and Teardown",
+            "content": "# Clean Slate 🧼\n\nUse `beforeAll` and `afterAll` hooks.\n\n<!-- FULL_CODE_START\nbeforeAll(async () => {\n  await db.connect();\n});\n\nafterAll(async () => {\n  await db.disconnect();\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_testing_9",
+            "type": "content",
+            "title": "Code Coverage",
+            "content": "# How Much? 📊\n\nJest has built-in coverage.\n\n`npm test -- --coverage`\n\nShows which lines of code were executed during tests. Aim for high coverage on logic."
+        },
+        {
+            "id": "express_testing_10",
+            "type": "content",
+            "title": "Common Pitfalls",
+            "content": "# Watch Out ⚠️\n\n- **Open Handles:** If tests hang, ensure `app.listen` isn't running in tests, or DB connection isn't closed.\n- **Environment:** Use `NODE_ENV=test` to suppress logs or skip rate limits."
+        },
+        {
+            "id": "express_testing_quiz_2",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Isolation.",
+            "quizQuestion": "Why is it important to separate 'app.js' (setup) from 'server.js' (listen) for testing?",
+            "quizOptions": [
+                "It makes the code faster",
+                "Supertest creates its own temporary server connection, so we don't want the real one listening on a port",
+                "It is required by Jest to work",
+                "It reduces the file size"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_testing_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Testing Express 🧪\n\nAutomated Verification.\n\n- **Supertest:** Simulate HTTP.\n- **Jest:** Assertions & mock.\n- **Headers:** `.set()` for Auth.\n- **Hooks:** Clean up DB.\n\n## Next Steps\nMaster the **Django** framework!"
+        }
+    ]
+}

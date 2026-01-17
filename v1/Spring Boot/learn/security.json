@@ -1,0 +1,103 @@
+{
+    "id": "learn_spring_boot_security",
+    "topicId": "security",
+    "topicTitle": "Spring Security",
+    "description": "Secure your app with Authentication, Authorization, and JWTs.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "spring_boot_security_1",
+            "type": "content",
+            "title": "What is Spring Security? 🔒",
+            "content": "# The Standard 🛡️\n\nA powerful and highly customizable authentication and access-control framework.\n\nIt handles:\n- **Authentication:** Who are you?\n- **Authorization:** What can you do?\n- Protection against common attacks (CSRF, Session Fixation)."
+        },
+        {
+            "id": "spring_boot_security_2",
+            "type": "content",
+            "title": "Setup",
+            "content": "# Add Dependency ➕\n\n`spring-boot-starter-security`\n\nBy default, it secures ALL endpoints with Basic Auth and generates a random password at startup. Safe by default!"
+        },
+        {
+            "id": "spring_boot_security_3",
+            "type": "content",
+            "title": "SecurityFilterChain",
+            "content": "# Configuration ⚙️\n\nConfigure HTTP security.\n\n<!-- FULL_CODE_START\n@Bean\npublic SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n    http\n        .csrf(csrf -> csrf.disable())\n        .authorizeHttpRequests(auth -> auth\n            .requestMatchers(\"/public/**\").permitAll()\n            .anyRequest().authenticated()\n        )\n        .httpBasic(withDefaults());\n    return http.build();\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_security_4",
+            "type": "content",
+            "title": "UserDetailsService",
+            "content": "# Loading Users 👤\n\nImplement this interface to load user data from your database (via JPA).\n\n<!-- FULL_CODE_START\n@Service\npublic class MyUserDetailsService implements UserDetailsService {\n    @Autowired\n    private UserRepository repo;\n\n    @Override\n    public UserDetails loadUserByUsername(String username) {\n        // Fetch user and convert to Spring Security UserDetails\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_security_5",
+            "type": "content",
+            "title": "Password Encoding",
+            "content": "# BCrypt 🔑\n\nNever store plain passwords.\n\n<!-- FULL_CODE_START\n@Bean\npublic PasswordEncoder passwordEncoder() {\n    return new BCryptPasswordEncoder();\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_security_quiz_1",
+            "type": "quiz",
+            "title": "Interface Quiz",
+            "content": "Core components.",
+            "quizQuestion": "Which interface MUST you implement to customize how users are loaded from the database?",
+            "quizOptions": [
+                "AuthenticationManager",
+                "UserDetailsService",
+                "JwtFilter",
+                "SecurityFilter"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "spring_boot_security_6",
+            "type": "content",
+            "title": "Method Security",
+            "content": "# Annotations 🏷️\n\nSecure individual methods.\n\nEnable with `@EnableMethodSecurity`.\n\n`@PreAuthorize(\"hasRole('ADMIN')\")`\n`public void deleteUser(Long id) { ... }`"
+        },
+        {
+            "id": "spring_boot_security_7",
+            "type": "content",
+            "title": "JWT Integration",
+            "content": "# Stateless Auth 🎫\n\nFor REST APIs, disable sessions and use JWT Filter.\n\n1. Intercept Request.\n2. Validate JWT.\n3. Create `UsernamePasswordAuthenticationToken`.\n4. Set `SecurityContextHolder`."
+        },
+        {
+            "id": "spring_boot_security_8",
+            "type": "content",
+            "title": "Roles vs Authorities",
+            "content": "# Granularity 📏\n\n- **Role:** High-level group (`ROLE_ADMIN`).\n- **Authority:** Specific permission (`READ_Create`).\n\nSpring Security maps them to `CalledGrantedAuthority`. Roles usually handled as `ROLE_NAME`."
+        },
+        {
+            "id": "spring_boot_security_9",
+            "type": "content",
+            "title": "CORS",
+            "content": "# Cross-Origin 🌐\n\nMust be configured in Spring Security if using it.\n\n`http.cors(Customizer.withDefaults())`\n\nAnd define a `CorsConfigurationSource` bean."
+        },
+        {
+            "id": "spring_boot_security_10",
+            "type": "content",
+            "title": "Testing Security",
+            "content": "# Mock User 🧪\n\nUse `@WithMockUser` in tests.\n\n<!-- FULL_CODE_START\n@Test\n@WithMockUser(username = \"admin\", roles = {\"USER\", \"ADMIN\"})\npublic void testRestrictedEndpoint() {\n    // ...\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_security_quiz_2",
+            "type": "quiz",
+            "title": "Annotation Quiz",
+            "content": "Access Control.",
+            "quizQuestion": "Which annotation allows checking permissions BEFORE the method is entered?",
+            "quizOptions": [
+                "@PostAuthorize",
+                "@PreAuthorize",
+                "@Secure",
+                "@RolesAllowed"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "spring_boot_security_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Security 🛡️\n\nRock solid protection.\n\n- **Filter Chain:** Configure URL access.\n- **UserDetailService:** Load users.\n- **PasswordEncoder:** BCrypt.\n- **Method Security:** `@PreAuthorize`.\n\n## Next Steps\nExplore the **Laravel** framework!"
+        }
+    ]
+}

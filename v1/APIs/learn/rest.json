@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_rest",
+    "topicId": "rest",
+    "topicTitle": "RESTful APIs",
+    "description": "Master REST (Representational State Transfer): The architectural style that powers the modern web.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "rest_1",
+            "type": "content",
+            "title": "What is REST?",
+            "content": "# Representational State Transfer 🏛️\n\nAn architectural style, not a protocol.\n\nKey constraints:\n1.  **Client-Server:** Separated concerns.\n2.  **Stateless:** No session state on server.\n3.  **Cacheable:** Responses explicitly allow caching.\n4.  **Uniform Interface:** Resources identified by URLs."
+        },
+        {
+            "id": "rest_2",
+            "type": "content",
+            "title": "Resources",
+            "content": "# Nouns, not Verbs 📦\n\nIn REST, you manipulate **Resources**.\n\n- Bad: `/getAllUsers`, `/createUser`\n- Good: `/users` (GET to get all, POST to create)\n\nURLs should name the *thing*, HTTP methods describe the *action*."
+        },
+        {
+            "id": "rest_3",
+            "type": "content",
+            "title": "CRUD Mapping",
+            "content": "# Create, Read, Update, Delete 📝\n\n- **Create:** `POST /users`\n- **Read:** `GET /users` (list), `GET /users/1` (detail)\n- **Update:** `PUT /users/1` (replace), `PATCH /users/1` (modify)\n- **Delete:** `DELETE /users/1`"
+        },
+        {
+            "id": "rest_4",
+            "type": "content",
+            "title": "Nesting Resources",
+            "content": "# Relationships 🔗\n\nShow hierarchy in the URL.\n\nget comments for a specific post:\n\n`GET /posts/1/comments`\n\nIdeally, keep nesting shallow (max 2 levels deep). Use `/comments?postId=1` for deeper filtering."
+        },
+        {
+            "id": "rest_quiz_1",
+            "type": "quiz",
+            "title": "Naming Quiz",
+            "content": "URL Design.",
+            "quizQuestion": "Which URL follows REST best practices for retrieving a specific product?",
+            "quizOptions": [
+                "/getProduct?id=123",
+                "/products/get/123",
+                "/products/123",
+                "/item/123/fetch"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "rest_5",
+            "type": "content",
+            "title": "Statelessness",
+            "content": "# No Memory 🧠\n\nEach request must contain ALL information needed to understand it (including Auth token).\n\nThe server should not rely on session memory between requests.\n\nThis makes scaling easy (just add more servers)."
+        },
+        {
+            "id": "rest_6",
+            "type": "content",
+            "title": "Pagination",
+            "content": "# Handling Large Lists 📄\n\nDon't return 1 million users.\n\nUse query params:\n\n`GET /users?page=2&limit=20`\n\nReturn metadata:\n```json\n{\n  \"data\": [...],\n  \"page\": 2,\n  \"total\": 1000\n}\n```"
+        },
+        {
+            "id": "rest_7",
+            "type": "content",
+            "title": "Filtering & Sorting",
+            "content": "# Refining Data 🔍\n\nUse Query Strings.\n\n- Filter: `/users?role=admin`\n- Sort: `/users?sort=-created_at` (descending)\n- Search: `/users?q=john`"
+        },
+        {
+            "id": "rest_8",
+            "type": "content",
+            "title": "HATEOAS",
+            "content": "# Hypermedia... What? 🔗\n\n**H**ypermedia **A**s **T**he **E**ngine **O**f **A**pplication **S**tate.\n\nA fancy way of saying: The API should tell you what you can do next.\n\n```json\n{\n  \"id\": 1,\n  \"name\": \"Alice\",\n  \"links\": [\n    { \"rel\": \"self\", \"href\": \"/users/1\" },\n    { \"rel\": \"delete\", \"href\": \"/users/1\" }\n  ]\n}\n```"
+        },
+        {
+            "id": "rest_9",
+            "type": "content",
+            "title": "Idempotency",
+            "content": "# Safe Retries 🔁\n\n- **Idempotent:** Making the same request multiple times has the SAME effect.\n- `GET`, `PUT`, `DELETE` are idempotent.\n- `POST` is NOT (it creates a new resource every time)."
+        },
+        {
+            "id": "rest_quiz_2",
+            "type": "quiz",
+            "title": "Safety Quiz",
+            "content": "Request methods.",
+            "quizQuestion": "Which HTTP method is NOT idempotent (i.e., sending it twice changes state twice)?",
+            "quizOptions": [
+                "PUT",
+                "DELETE",
+                "POST",
+                "HEAD"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "rest_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# RESTful Response 💻\n\n<!-- FULL_CODE_START\n// GET /users?limit=2\n{\n  \"data\": [\n    {\n      \"id\": 101,\n      \"name\": \"Alice\",\n      \"role\": \"admin\"\n    },\n    {\n      \"id\": 102,\n      \"name\": \"Bob\",\n      \"role\": \"user\"\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 2,\n    \"page\": 1,\n    \"next\": \"/users?limit=2&page=2\"\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "rest_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: REST 🎓\n\nStandard Architecture.\n\n- **Resources:** URLs are nouns.\n- **Methods:** Verbs (GET/POST...).\n- **Stateless:** Every req stands alone.\n- **CRUD:** Map methods to actions.\n- **Pagination:** Don't overload the client.\n\n## Next Steps\nQuery exactly what you need with **GraphQL**!"
+        }
+    ]
+}

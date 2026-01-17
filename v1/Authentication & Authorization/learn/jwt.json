@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_jwt",
+    "topicId": "jwt",
+    "topicTitle": "JWT",
+    "description": "Master JSON Web Tokens: The standard for stateless authentication in modern web and mobile apps.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_jwt_1",
+            "type": "content",
+            "title": "What is JWT?",
+            "content": "# JSON Web Token 🎫\n\nA compact, URL-safe means of representing claims to be transferred between two parties.\n\nBasically: A signed JSON object that proves who you are.\n\nLooking like: `xxxxx.yyyyy.zzzzz`"
+        },
+        {
+            "id": "auth_jwt_2",
+            "type": "content",
+            "title": "Structure",
+            "content": "# Three Parts 🧩\n\nSeparated by dots (`.`):\n\n1.  **Header:** Algorithm & Token Type (default HS256).\n2.  **Payload:** The data (User ID, Role, Expiry).\n3.  **Signature:** The security verification."
+        },
+        {
+            "id": "auth_jwt_3",
+            "type": "content",
+            "title": "The Payload",
+            "content": "# Claims 📦\n\nBase64 encoded JSON.\n\n```json\n{\n  \"sub\": \"1234567890\",\n  \"name\": \"John Doe\",\n  \"iat\": 1516239022\n}\n```\n**Warning:** The payload is NOT encrypted. Anyone can read it. Do not put secrets (passwords) here!"
+        },
+        {
+            "id": "auth_jwt_4",
+            "type": "content",
+            "title": "The Signature",
+            "content": "# The Seal 🛡️\n\nCreated by taking the encoded header, encoded payload, a **secret**, and the algorithm.\n\n```javascript\nHMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  secret)\n```\nOnly the server knows the secret."
+        },
+        {
+            "id": "auth_jwt_quiz_1",
+            "type": "quiz",
+            "title": "Structure Quiz",
+            "content": "Secret storage.",
+            "quizQuestion": "Where is the secret key used to sign the JWT stored?",
+            "quizOptions": [
+                "In the token payload",
+                "On the client (browser)",
+                "On the server only",
+                "In the database per user"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_jwt_5",
+            "type": "content",
+            "title": "Statelessness",
+            "content": "# Why use it? 🚀\n\nThe server authenticates the user by verifying the signature.\n\nIt does NOT need to check the database.\n\nPerfect for Microservices: User logs in on Auth Service, gets token, and sends token to Order Service. Order Service verifies signature."
+        },
+        {
+            "id": "auth_jwt_6",
+            "type": "content",
+            "title": "Access vs Refresh",
+            "content": "# Token Types 🔄\n\n- **Access Token:** Short live (15 mins). Grants access to resources.\n- **Refresh Token:** Long lived (7 days). Used to get a new Access Token.\n\nIf Access Token is stolen, damage is limited to 15 mins."
+        },
+        {
+            "id": "auth_jwt_7",
+            "type": "content",
+            "title": "Security Best Practices",
+            "content": "# Be Safe 🛡️\n\n1.  Always use HTTPS.\n2.  Set a short expiration (`exp`).\n3.  Don't accept `alg: none` header.\n4.  Store tokens securely (HttpOnly Cookies preferred over LocalStorage to prevent XSS)."
+        },
+        {
+            "id": "auth_jwt_8",
+            "type": "content",
+            "title": "Revocation",
+            "content": "# The Problem 🚫\n\nSince JWTs are stateless, you can't easy \"logout\" or ban a user instantly (server doesn't track them).\n\n**Solution:** Blacklist the specific JTI (Token ID) in a fast database (Redis) until it expires."
+        },
+        {
+            "id": "auth_jwt_9",
+            "type": "content",
+            "title": "Algorithms",
+            "content": "# HS256 vs RS256 🔏\n\n- **HS256:** Symmetric. Same secret to sign and verify. Good for single monolithic app.\n- **RS256:** Asymmetric. Private key to sign, Public key to verify. Good for Microservices (Auth service signs, others verify)."
+        },
+        {
+            "id": "auth_jwt_quiz_2",
+            "type": "quiz",
+            "title": "Logic Quiz",
+            "content": "Expiration.",
+            "quizQuestion": "Why should Access Tokens have a short lifespan?",
+            "quizOptions": [
+                "To switch algorithms frequently",
+                "To save database usage",
+                "To limit the window of damage if stolen",
+                "To force users to memorize passwords"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_jwt_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Signing Code 💻\n\n<!-- FULL_CODE_START\nconst jwt = require('jsonwebtoken');\n\n// Create Token\nconst token = jwt.sign(\n  { id: user.id, role: user.role },\n  process.env.JWT_SECRET,\n  { expiresIn: '15m' }\n);\n\n// Verify Token\ntry {\n  const decoded = jwt.verify(token, process.env.JWT_SECRET);\n  console.log(decoded.id); // Valid\n} catch (err) {\n  console.log(\"Invalid token\");\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_jwt_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: JWT 🎓\n\nStateless Auth.\n\n- **Structure:** Header.Payload.Signature.\n- **Payload:** User info (visible!).\n- **Signature:** Proof of origin.\n- **Scalable:** No DB required for checks.\n- **Refresh:** Short access, long refresh.\n\n## Next Steps\nLet users login with Google/Facebook using **OAuth**!"
+        }
+    ]
+}

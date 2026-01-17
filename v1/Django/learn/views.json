@@ -1,0 +1,103 @@
+{
+    "id": "learn_django_views",
+    "topicId": "views",
+    "topicTitle": "Views & URLs",
+    "description": "Handle requests and return responses using Function-Based and Class-Based Views.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "django_views_1",
+            "type": "content",
+            "title": "What is a View?",
+            "content": "# The Logic Layer 🧠\n\nA View is a Python function (or class) that takes a Web Request and returns a Web Response.\n\nIt contains the business logic of your application."
+        },
+        {
+            "id": "django_views_2",
+            "type": "content",
+            "title": "Function-Based Views (FBV)",
+            "content": "# Simple & Explicit 📜\n\n`views.py`:\n\n<!-- FULL_CODE_START\nfrom django.http import HttpResponse\n\ndef my_view(request):\n    return HttpResponse(\"Hello World\")\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_3",
+            "type": "content",
+            "title": "URL Configuration",
+            "content": "# The Dispatcher 🚦\n\n`urls.py` maps URLs to views.\n\n<!-- FULL_CODE_START\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('hello/', views.my_view),\n]\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_4",
+            "type": "content",
+            "title": "Dynamic URLs",
+            "content": "# Capturing Values 🎣\n\nUse angle brackets to capture parameters.\n\n<!-- FULL_CODE_START\n# urls.py\npath('post/<int:id>/', views.post_detail)\n\n# views.py\ndef post_detail(request, id):\n    return HttpResponse(f\"Post ID: {id}\")\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_5",
+            "type": "content",
+            "title": "Rendering Templates",
+            "content": "# Returning HTML 🖼️\n\nUse the `render()` shortcut.\n\n<!-- FULL_CODE_START\nfrom django.shortcuts import render\n\ndef home(request):\n    return render(request, 'home.html', {'name': 'Alice'})\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_quiz_1",
+            "type": "quiz",
+            "title": "Config Quiz",
+            "content": "Routing.",
+            "quizQuestion": "Which file is responsible for mapping URL patterns to view functions?",
+            "quizOptions": [
+                "models.py",
+                "views.py",
+                "urls.py",
+                "settings.py"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "django_views_6",
+            "type": "content",
+            "title": "Class-Based Views (CBV)",
+            "content": "# OOP Approach 🏗️\n\nDjango provides generic views for common tasks.\n\n<!-- FULL_CODE_START\nfrom django.views import View\n\nclass MyView(View):\n    def get(self, request):\n        return HttpResponse('Hello from Class')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_7",
+            "type": "content",
+            "title": "Generic Views",
+            "content": "# Write Less Code ⚡\n\n`ListView`, `DetailView`, `CreateView`, etc.\n\n<!-- FULL_CODE_START\nfrom django.views.generic import ListView\nfrom .models import Person\n\nclass PersonList(ListView):\n    model = Person\n    template_name = 'person_list.html'\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_8",
+            "type": "content",
+            "title": "Shortcuts",
+            "content": "# Helper Functions 🛠️\n\n- `render()`: Renders a template.\n- `redirect()`: Returns an HTTP redirect.\n- `get_object_or_404()`: Gets an object or raises 404."
+        },
+        {
+            "id": "django_views_9",
+            "type": "content",
+            "title": "Namespaces",
+            "content": "# Organizing URLs 🏷️\n\nIf you have multiple apps, use `app_name`.\n\n`urls.py`: `app_name = 'polls'`\n\nTemplate: `{% url 'polls:detail' %}`"
+        },
+        {
+            "id": "django_views_10",
+            "type": "content",
+            "title": "Decorators",
+            "content": "# Modifying Views 🎀\n\nRestrict access easily.\n\n<!-- FULL_CODE_START\nfrom django.contrib.auth.decorators import login_required\n\n@login_required\ndef profile(request):\n    return render(request, 'profile.html')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_views_quiz_2",
+            "type": "quiz",
+            "title": "View Quiz",
+            "content": "Shortcuts.",
+            "quizQuestion": "Which shortcut function returns a 404 error if an object with the given criteria usually found by 'get()' does not exist?",
+            "quizOptions": [
+                "get_or_fail()",
+                "find_object_or_404()",
+                "get_object_or_404()",
+                "fetch_or_die()"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "django_views_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Views 🕵️\n\nThe Controller logic.\n\n- **FBV:** Simple functions.\n- **CBV:** Reusable classes (`ListView`).\n- **URLs:** Map paths to views (`urls.py`).\n- **Shortcuts:** `render`, `redirect`.\n\n## Next Steps\nDisplay data beautifully with **Templates**!"
+        }
+    ]
+}

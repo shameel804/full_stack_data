@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_components",
+    "topicId": "components",
+    "topicTitle": "Components & Templates",
+    "description": "Deep dive into Angular Components: Data Binding, Input/Output, Lifecycle Hooks, and ViewEncapsulation.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_comp_1",
+            "type": "content",
+            "title": "Inputs",
+            "content": "# @Input() 📥\n\nHow to pass data FROM Parent TO Child (Props in React).\n\n```typescript\n// child.component.ts\n@Input() item: string = '';\n```\n\n```html\n<!-- parent.component.html -->\n<app-child [item]=\"parentData\"></app-child>\n```"
+        },
+        {
+            "id": "ng_comp_2",
+            "type": "content",
+            "title": "Outputs",
+            "content": "# @Output() 📤\n\nHow to pass event FROM Child TO Parent.\n\n```typescript\n// child.component.ts\n@Output() deleteRequest = new EventEmitter<string>();\n\ndelete() {\n  this.deleteRequest.emit('itemId');\n}\n```\n\n```html\n<!-- parent.component.html -->\n<app-child (deleteRequest)=\"onDelete($event)\"></app-child>\n```"
+        },
+        {
+            "id": "ng_comp_3",
+            "type": "content",
+            "title": "Two-Way Binding",
+            "content": "# Banana in a Box [()] 🍌\n\nCombines Property Binding `[]` and Event Binding `()`.\n\nUsually used with forms (`ngModel`).\n\n```html\n<input [(ngModel)]=\"name\" />\n```\nUpdates the `name` property when user types within the input, and updates input if `name` variable changes."
+        },
+        {
+            "id": "ng_comp_4",
+            "type": "content",
+            "title": "Component Lifecycle",
+            "content": "# Lifecycle Hooks 🪝\n\n- `ngOnChanges`: When input properties change.\n- `ngOnInit`: Component initialized (Best place for API calls).\n- `ngDoCheck`: Custom change detection.\n- `ngAfterViewInit`: View fully initialized.\n- `ngOnDestroy`: Cleanup before removal."
+        },
+        {
+            "id": "ng_comp_quiz_1",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "Initialization.",
+            "quizQuestion": "Which lifecycle hook is the best place to fetch initial data from an API?",
+            "quizOptions": [
+                "constructor",
+                "ngOnInit",
+                "ngAfterViewInit",
+                "ngOnChanges"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_comp_5",
+            "type": "content",
+            "title": "View Encapsulation",
+            "content": "# Styles Scoping 🎨\n\nBy default (`Emulated`), styles defined in component CSS apply ONLY to that component.\n\n- `Emulated` (Default): Adds unique attributes to elements.\n- `None`: Styles are global (Use with caution).\n- `ShadowDom`: Uses native Shadow DOM."
+        },
+        {
+            "id": "ng_comp_6",
+            "type": "content",
+            "title": "Content Projection",
+            "content": "# ng-content 📦\n\nAngular's version of \"Slots\" or \"Children\".\n\n```html\n<!-- wrapper.component.html -->\n<div class=\"box\">\n  <ng-content></ng-content>\n</div>\n```\n\n```html\n<!-- Usage -->\n<app-wrapper>\n  <p>I am inside the box!</p>\n</app-wrapper>\n```"
+        },
+        {
+            "id": "ng_comp_7",
+            "type": "content",
+            "title": "Template Reference Variables",
+            "content": "# References #️⃣\n\nAccess a DOM element or component instance directly in the template.\n\n```html\n<input #phoneInput placeholder=\"phone number\" />\n<button (click)=\"call(phoneInput.value)\">Call</button>\n```\n`#phoneInput` creates a reference to that input element."
+        },
+        {
+            "id": "ng_comp_8",
+            "type": "content",
+            "title": "HostBinding & HostListener",
+            "content": "# Host Interaction 🏠\n\n- `@HostBinding`: Bind a property to the *host* element (the component tag itself).\n- `@HostListener`: Listen for events on the host element.\n\n```typescript\n@HostListener('click') onClick() {\n  alert('Component clicked!');\n}\n```"
+        },
+        {
+            "id": "ng_comp_9",
+            "type": "content",
+            "title": "Standalone Components",
+            "content": "# Standalone 🦄\n\nSince Angular 14+, you can create components that don't need `NgModules`.\n\n```typescript\n@Component({\n  standalone: true,\n  imports: [CommonModule],\n  // ...\n})\n```\nThis simplifies the learning curve significantly."
+        },
+        {
+            "id": "ng_comp_quiz_2",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Event emission.",
+            "quizQuestion": "Which class is used to emit custom events from a child component?",
+            "quizOptions": [
+                "EventDispatcher",
+                "CustomEvent",
+                "EventEmitter",
+                "OutputEmitter"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_comp_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Child Component 💻\n\n<!-- FULL_CODE_START\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'app-counter',\n  template: `\n    <div class=\"counter\">\n      <button (click)=\"decrement()\">-</button>\n      <span>{{ count }}</span>\n      <button (click)=\"increment()\">+</button>\n    </div>\n  `\n})\nexport class CounterComponent {\n  @Input() count = 0;\n  @Output() countChange = new EventEmitter<number>();\n\n  increment() {\n    this.count++;\n    this.countChange.emit(this.count);\n  }\n  decrement() {\n    this.count--;\n    this.countChange.emit(this.count);\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_comp_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Components 🎓\n\nPowerful & Structured.\n\n- **@Input() / @Output():** Communication.\n- **Lifecycle:** `ngOnInit` is key.\n- **Encapsulation:** Styles are scoped.\n- **ng-content:** Content projection.\n- **Standalone:** The future of Angular.\n\n## Next Steps\nManipulate the DOM with **Directives**!"
+        }
+    ]
+}

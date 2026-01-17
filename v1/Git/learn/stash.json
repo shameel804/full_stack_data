@@ -1,0 +1,103 @@
+{
+    "id": "learn_git_stash",
+    "topicId": "stash",
+    "topicTitle": "Stashing & Cleaning",
+    "description": "Save your messy work for later or wipe it out.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "git_stash_1",
+            "type": "content",
+            "title": "Why Stash? 📦",
+            "content": "# Context Switching\n\nYou are halfway through a feature, but you need to switch branches to fix a critical bug.\n\nYou can't switch/pull with dirty changes.\n\nOption A: Commit half-broken code (Bad).\nOption B: Stash it (Good)."
+        },
+        {
+            "id": "git_stash_2",
+            "type": "content",
+            "title": "git stash",
+            "content": "# Save for Later\n\n`git stash`\n\nTakes all your modified tracked files and staged changes, saves them on a stack, and reverts your working directory to the clean HEAD state."
+        },
+        {
+            "id": "git_stash_3",
+            "type": "content",
+            "title": "pop vs apply",
+            "content": "# Retrieve 🤲\n\n- `git stash pop`: Applies the top stash and **removes** it from the stack.\n- `git stash apply`: Applies the top stash but **keeps** it in the stack (useful if you want to apply it to multiple branches)."
+        },
+        {
+            "id": "git_stash_4",
+            "type": "content",
+            "title": "Stashing Untracked Files",
+            "content": "# New Files 📄\n\nBy default, stash only saves tracked (modified) files.\n\n`git stash -u` (or `--include-untracked`) saves new files too."
+        },
+        {
+            "id": "git_stash_5",
+            "type": "content",
+            "title": "Listing Stashes",
+            "content": "# The Stack 📚\n\n`git stash list`\n\nShows all saved stashes.\n\n`stash@{0}: WIP on main...`\n`stash@{1}: WIP on feature...`"
+        },
+        {
+            "id": "git_stash_quiz_1",
+            "type": "quiz",
+            "title": "Command Quiz",
+            "content": "Retrieval.",
+            "quizQuestion": "Which command restores the stashed changes AND deletes the stash from the list?",
+            "quizOptions": [
+                "git stash apply",
+                "git stash pop",
+                "git stash drop",
+                "git stash restore"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "git_stash_6",
+            "type": "content",
+            "title": "Cleaning Up",
+            "content": "# Trash 🗑️\n\nSometimes you just want to destroy untracked files (build artifacts, temp files).\n\n`git clean`\n\nWARNING: This is permanent. No trash bin."
+        },
+        {
+            "id": "git_stash_7",
+            "type": "content",
+            "title": "Safe Clean",
+            "content": "# Dry Run 🏜️\n\nAlways check what will be deleted first!\n\n`git clean -n` (Dry run). Shows you the list of files that WOULD be deleted."
+        },
+        {
+            "id": "git_stash_8",
+            "type": "content",
+            "title": "Force Clean",
+            "content": "# Nuke it ☢️\n\nTo actually delete files:\n\n`git clean -f` (Force delete files)\n`git clean -fd` (Force delete files AND directories)"
+        },
+        {
+            "id": "git_stash_9",
+            "type": "content",
+            "title": "Undoing Local Changes",
+            "content": "# Reset ↩️\n\nDiscard changes to a file and revert to HEAD state.\n\n`git checkout -- filename` (Old)\n`git restore filename` (New, recommended)"
+        },
+        {
+            "id": "git_stash_10",
+            "type": "content",
+            "title": "Unstaging",
+            "content": "# Unbox 📤\n\nYou added a file to staging by mistake.\n\n`git reset HEAD filename` (Old)\n`git restore --staged filename` (New)\n\nMoves file from Staging back to Working Directory."
+        },
+        {
+            "id": "git_stash_quiz_2",
+            "type": "quiz",
+            "title": "Safety Quiz",
+            "content": "Cleanup.",
+            "quizQuestion": "What does 'git clean -n' do?",
+            "quizOptions": [
+                "Deletes new files immediately",
+                "Deletes git history",
+                "Shows a list of files that would be deleted (dry run)",
+                "Compiles the project code"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "git_stash_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Stash & Clean 🧹\n\nTidy workspace.\n\n- **Stash:** Save temporary work.\n- **Pop:** Restore work.\n- **Clean:** Delete untracked files.\n- **Restore:** Undo changes.\n\n## Next Steps\nAutomate actions with **Git Hooks**!"
+        }
+    ]
+}

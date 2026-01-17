@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_graph",
+    "topicId": "graph",
+    "topicTitle": "Graph Databases",
+    "description": "Model complex relationships naturally with Neo4j.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_graph_1",
+            "type": "content",
+            "title": "It's All About Connections 🕸️",
+            "content": "# Relational? No.\n\nIronically, relational databases (SQL) struggle with complex relationships (many JOINS).\n\n**Graph Databases** treat relationships as first-class citizens.\n\nGreat for Social Networks, Fraud Detection, and Recommendation Engines."
+        },
+        {
+            "id": "nosql_graph_2",
+            "type": "content",
+            "title": "The Data Model",
+            "content": "# Nodes & Edges 🔵 ➡️ 🔴\n\n- **Nodes:** The entities (e.g., Alice, Movie).\n- **Relationships (Edges):** The lines connecting them (e.g., LIKES, ACTED_IN).\n- **Properties:** Key-value pairs stored on both nodes and relationships."
+        },
+        {
+            "id": "nosql_graph_3",
+            "type": "content",
+            "title": "Cypher Query Language",
+            "content": "# SQL for Graphs 📜\n\nNeo4j uses **Cypher**.\n\nIt uses ASCII art to represent patterns.\n\n`MATCH (p:Person)-[:LIKES]->(m:Movie)`"
+        },
+        {
+            "id": "nosql_graph_4",
+            "type": "content",
+            "title": "Creating Data",
+            "content": "# CREATE 🔨\n\n<!-- FULL_CODE_START\nCREATE (alice:Person {name: 'Alice', age: 30})\nCREATE (matrix:Movie {title: 'The Matrix'})\nCREATE (alice)-[:LOVES]->(matrix)\nFULL_CODE_END -->"
+        },
+        {
+            "id": "nosql_graph_5",
+            "type": "content",
+            "title": "Matching Patterns",
+            "content": "# FIND 🔎\n\nWho loves The Matrix?\n\n<!-- FULL_CODE_START\nMATCH (p:Person)-[:LOVES]->(m:Movie)\nWHERE m.title = 'The Matrix'\nRETURN p.name\nFULL_CODE_END -->"
+        },
+        {
+            "id": "nosql_graph_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Cypher.",
+            "quizQuestion": "In Cypher, how are nodes represented graphically in the query?",
+            "quizOptions": [
+                "[Square Brackets]",
+                "{Curly Braces}",
+                "(Parentheses)",
+                "<Angle Brackets>"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_graph_6",
+            "type": "content",
+            "title": "Variable Length Paths",
+            "content": "# Friends of Friends 🤝\n\nFind connections up to 3 hops away.\n\n`MATCH (me:Person)-[:FRIEND*1..3]-(other)`\n\nThis is incredibly expensive and difficult in SQL."
+        },
+        {
+            "id": "nosql_graph_7",
+            "type": "content",
+            "title": "Shortest Path",
+            "content": "# Navigation 🗺️\n\nFind the shortest connections between two nodes.\n\n`MATCH p=shortestPath((alice)-[*]-(bob))`"
+        },
+        {
+            "id": "nosql_graph_8",
+            "type": "content",
+            "title": "Properties on Relationships",
+            "content": "# Rich Context 🏷️\n\nRelationships can store data too.\n\n`[:RATED {score: 5}]`\n\nAlice RATED The Matrix with a score of 5."
+        },
+        {
+            "id": "nosql_graph_9",
+            "type": "content",
+            "title": "Labels",
+            "content": "# Tagging 🏷️\n\nA node can have multiple labels.\n\n`CREATE (n:Person:Actor:Director)`\n\nHelps group nodes for faster index lookups."
+        },
+        {
+            "id": "nosql_graph_10",
+            "type": "content",
+            "title": "DELETE",
+            "content": "# Detach Delete 💣\n\nYou cannot delete a node if it has relationships attached.\n\n`MATCH (n) DETACH DELETE n` (Deletes node and all its relationships)."
+        },
+        {
+            "id": "nosql_graph_quiz_2",
+            "type": "quiz",
+            "title": "Constraint Quiz",
+            "content": "Deletions.",
+            "quizQuestion": "Why might a DELETE operation fail on a node in a graph database?",
+            "quizOptions": [
+                "The node is too large",
+                "The node has existing relationships connected to it",
+                "The node is currently being read",
+                "Graph databases don't support delete"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "nosql_graph_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Graph 🕸️\n\nConnect everything.\n\n- **Nodes:** Entities `(a)`.\n- **Edges:** Relationships `-[r]->`.\n- **Cypher:** ASCII-art query syntax.\n- **Use Case:** Recommendation engines.\n\n## Next Steps\nScale massively with **Column-Family Stores**!"
+        }
+    ]
+}

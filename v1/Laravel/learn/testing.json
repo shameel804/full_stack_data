@@ -1,0 +1,103 @@
+{
+    "id": "learn_laravel_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing",
+    "description": "Ensure your application works correctly with PHPUnit and PEST.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "laravel_testing_1",
+            "type": "content",
+            "title": "Why Test? 🧪",
+            "content": "# Confidence 🤝\n\nLaravel is built with testing in mind.\n\nSupport for testing with **PHPUnit** is included out of the box, and a `phpunit.xml` file is already set up for your application.\n\nYou can also use **Pest**, a more modern testing framework."
+        },
+        {
+            "id": "laravel_testing_2",
+            "type": "content",
+            "title": "Running Tests",
+            "content": "# Artisan Command 🏃\n\n`php artisan test`\n\nRuns all your tests and gives you a nice summary report."
+        },
+        {
+            "id": "laravel_testing_3",
+            "type": "content",
+            "title": "Unit vs Feature",
+            "content": "# The Difference ⚖️\n\n- **Unit Tests:** Test a small, isolated piece of code (e.g., a single method). Very fast.\n- **Feature Tests:** Test larger chunks of code, like an HTTP request hitting a controller and talking to the DB."
+        },
+        {
+            "id": "laravel_testing_4",
+            "type": "content",
+            "title": "HTTP Tests",
+            "content": "# Fluent Testing API 🌊\n\n<!-- FULL_CODE_START\npublic function test_basic_request()\n{\n    $response = $this->get('/');\n\n    $response->assertStatus(200);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_testing_5",
+            "type": "content",
+            "title": "Acting As User",
+            "content": "# Authentication 🔑\n\nSimulate a logged-in user.\n\n<!-- FULL_CODE_START\n$user = User::factory()->create();\n\n$response = $this->actingAs($user)\n                 ->get('/dashboard');\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_testing_6",
+            "type": "content",
+            "title": "Database Testing",
+            "content": "# RefreshDatabase 🔄\n\nUse the `RefreshDatabase` trait.\n\nIt automatically mimics a fresh database for EVERY test case (runs migrations inside a transaction usually).\n\nEnsures tests don't pollute each other."
+        },
+        {
+            "id": "laravel_testing_quiz_1",
+            "type": "quiz",
+            "title": "Utility Quiz",
+            "content": "Traits.",
+            "quizQuestion": "Which trait should you include in your test class to reset the database state between tests?",
+            "quizOptions": [
+                "ResetDatabase",
+                "CleanSlate",
+                "RefreshDatabase",
+                "WipeTables"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "laravel_testing_7",
+            "type": "content",
+            "title": "Asserting Views",
+            "content": "# View Data 👁️\n\nCheck if a view was returned with specific data.\n\n<!-- FULL_CODE_START\n$response->assertViewIs('welcome');\n$response->assertViewHas('name', 'Taylor');\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_testing_8",
+            "type": "content",
+            "title": "Asserting JSON",
+            "content": "# API Checks 🧱\n\n<!-- FULL_CODE_START\n$response->assertJson([\n    'created' => true,\n]);\n\n$response->assertJsonPath('user.email', 'test@example.com');\nFULL_CODE_END -->"
+        },
+        {
+            "id": "laravel_testing_9",
+            "type": "content",
+            "title": "Mocking code",
+            "content": "# Fakes 🎭\n\nLaravel allows you to easily mock Events, Jobs, Mail, Notification, Storage, etc.\n\n`Bus::fake();`\n`Storage::fake('photos');`"
+        },
+        {
+            "id": "laravel_testing_10",
+            "type": "content",
+            "title": "Dusk",
+            "content": "# Browser Testing 🕸️\n\n**Laravel Dusk** provides an expressive, easy-to-use browser automation and testing API.\n\nTests interactions using a real Chrome driver (clicks, types input, etc.)."
+        },
+        {
+            "id": "laravel_testing_quiz_2",
+            "type": "quiz",
+            "title": "Assertion Quiz",
+            "content": "API Testing.",
+            "quizQuestion": "Which assertion verifies that the HTTP status code is 200 OK?",
+            "quizOptions": [
+                "assertOk()",
+                "assertSuccess()",
+                "assertValid()",
+                "assert200()"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "laravel_testing_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Testing 🧪\n\nSleep well at night.\n\n- **Unit vs Feature:** Scope.\n- **actingAs:** Impersonate.\n- **RefreshDatabase:** Clean slate.\n- **Mocking:** Fake external services.\n\n## Next Steps\nDive deep into **SQL Databases**!"
+        }
+    ]
+}

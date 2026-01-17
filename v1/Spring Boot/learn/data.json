@@ -1,0 +1,103 @@
+{
+    "id": "learn_spring_boot_data",
+    "topicId": "data",
+    "topicTitle": "Spring Data JPA",
+    "description": "Interact with databases using JPA Repositories and simplified queries.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "spring_boot_data_1",
+            "type": "content",
+            "title": "What is Spring Data JPA?",
+            "content": "# Magic Queries ✨\n\nAbstractions over JPA (Hibernate).\n\nIt drastically reduces the amount of boilerplate code required to implement data access layers.\n\nNo more `EntityManager` code."
+        },
+        {
+            "id": "spring_boot_data_2",
+            "type": "content",
+            "title": "Entities",
+            "content": "# The Model 🧱\n\n<!-- FULL_CODE_START\n@Entity\npublic class User {\n    @Id\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\n    private Long id;\n    private String name;\n    private String email;\n    // getters and setters\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_data_3",
+            "type": "content",
+            "title": "Repositories",
+            "content": "# The Interface 🔌\n\nCreate an interface extending `JpaRepository`.\n\n<!-- FULL_CODE_START\npublic interface UserRepository extends JpaRepository<User, Long> {\n}\nFULL_CODE_END -->\n\nSpring automatically provides an implementation at runtime."
+        },
+        {
+            "id": "spring_boot_data_4",
+            "type": "content",
+            "title": "CRUD Operations",
+            "content": "# Built-in Methods 🛠️\n\nJust by extending, you get:\n\n- `.save(user)`\n- `.findById(id)`\n- `.findAll()`\n- `.deleteById(id)`\n- `.count()`"
+        },
+        {
+            "id": "spring_boot_data_5",
+            "type": "content",
+            "title": "Derived Queries",
+            "content": "# Method Naming 📛\n\nSpring parses method names to create queries.\n\n`List<User> findByName(String name);`\n\n`User findByEmailAndActiveTrue(String email);`\n\n`List<User> findByAgeGreaterThan(int age);`"
+        },
+        {
+            "id": "spring_boot_data_quiz_1",
+            "type": "quiz",
+            "title": "Magic Quiz",
+            "content": "Mechanism.",
+            "quizQuestion": "How does Spring Data implement the repository interfaces you define?",
+            "quizOptions": [
+                "You must implement them manually",
+                "It uses Java Proxy mechanics to generate code at runtime",
+                "It compiles XML configurations",
+                "It connects to a cloud service"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "spring_boot_data_6",
+            "type": "content",
+            "title": "@Query",
+            "content": "# Custom SQL 🗃️\n\nFor complex queries, use JPQL or Native SQL.\n\n<!-- FULL_CODE_START\n@Query(\"SELECT u FROM User u WHERE u.email LIKE %?1%\")\nList<User> searchByEmail(String email);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_data_7",
+            "type": "content",
+            "title": "Pagination & Sorting",
+            "content": "# Handling Large Data 📚\n\nRepositories support `Pageable`.\n\n<!-- FULL_CODE_START\nPage<User> findAll(Pageable pageable);\n\n// Usage\nrepo.findAll(PageRequest.of(0, 10, Sort.by(\"name\")));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_data_8",
+            "type": "content",
+            "title": "Relationships",
+            "content": "# Connecting Entities 🔗\n\n- `@OneToMany`\n- `@ManyToOne`\n- `@ManyToMany`\n\n<!-- FULL_CODE_START\n@ManyToOne\n@JoinColumn(name = \"department_id\")\nprivate Department department;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_data_9",
+            "type": "content",
+            "title": "Projections",
+            "content": "# Lightweight Views 🍃\n\nFetch only needed columns.\n\nDefine an Interface with getters.\n\n`interface UserNameOnly { String getName(); }`\n\n`List<UserNameOnly> findByNameStartingWith(String prefix);`"
+        },
+        {
+            "id": "spring_boot_data_10",
+            "type": "content",
+            "title": "Auditing",
+            "content": "# Auto Timestamps 🕒\n\n- `@EnableJpaAuditing` configuration.\n- `@CreatedDate`: Auto set on insert.\n- `@LastModifiedDate`: Auto set on update."
+        },
+        {
+            "id": "spring_boot_data_quiz_2",
+            "type": "quiz",
+            "title": "Query Quiz",
+            "content": "Naming.",
+            "quizQuestion": "What would be the correct method name to find users by their 'lastName' property?",
+            "quizOptions": [
+                "getUsersByLastName",
+                "fetchLastName",
+                "findByLastName",
+                "queryLastName"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "spring_boot_data_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Spring Data 💾\n\nZero boilerplate.\n\n- **Entities:** Annotate with `@Entity`.\n- **Repository:** Extend `JpaRepository`.\n- **Queries:** `findByName(name)`.\n- **Custom:** `@Query` annotation.\n\n## Next Steps\nSecure your app with **Spring Security**!"
+        }
+    ]
+}

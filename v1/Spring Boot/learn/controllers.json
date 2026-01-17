@@ -1,0 +1,103 @@
+{
+    "id": "learn_spring_boot_controllers",
+    "topicId": "controllers",
+    "topicTitle": "REST Controllers",
+    "description": "Handle HTTP requests using Spring MVC annotations.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "spring_boot_controllers_1",
+            "type": "content",
+            "title": "What is a Controller?",
+            "content": "# The Entry Point 🚪\n\nControllers handle incoming HTTP requests and return responses.\n\nIn Spring Boot, we typically build REST APIs using `@RestController`."
+        },
+        {
+            "id": "spring_boot_controllers_2",
+            "type": "content",
+            "title": "@RestController",
+            "content": "# Annotate It ✍️\n\n<!-- FULL_CODE_START\n@RestController\n@RequestMapping(\"/api/users\")\npublic class UserController {\n    // methods here\n}\nFULL_CODE_END -->\n\n`@RestController` implies `@Controller` + `@ResponseBody` (returns data vs view)."
+        },
+        {
+            "id": "spring_boot_controllers_3",
+            "type": "content",
+            "title": "Mapping Methods",
+            "content": "# HTTP Verbs 🚦\n\n- `@GetMapping`\n- `@PostMapping`\n- `@PutMapping`\n- `@DeleteMapping`\n- `@PatchMapping`"
+        },
+        {
+            "id": "spring_boot_controllers_4",
+            "type": "content",
+            "title": "Hello World REST",
+            "content": "# Simple Endpoint 👋\n\n<!-- FULL_CODE_START\n@GetMapping(\"/hello\")\npublic String sayHello() {\n    return \"Hello World!\";\n}\nFULL_CODE_END -->\n\nReturns plain text 'Hello World!'."
+        },
+        {
+            "id": "spring_boot_controllers_5",
+            "type": "content",
+            "title": "Path Variables",
+            "content": "# Dynamic URLs 🆔\n\nUse `{id}` in the path and `@PathVariable` in the method.\n\n<!-- FULL_CODE_START\n@GetMapping(\"/{id}\")\npublic User getUser(@PathVariable Long id) {\n    return userService.findById(id);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_controllers_quiz_1",
+            "type": "quiz",
+            "title": "Annotation Quiz",
+            "content": "Basics.",
+            "quizQuestion": "Which annotation combination is equivalent to @RestController?",
+            "quizOptions": [
+                "@Controller + @Service",
+                "@Controller + @ResponseBody",
+                "@Service + @Bean",
+                "@Component + @Autowired"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "spring_boot_controllers_6",
+            "type": "content",
+            "title": "Request Parameters",
+            "content": "# Query Strings 🔍\n\nHandle `/search?query=java`.\n\n<!-- FULL_CODE_START\n@GetMapping(\"/search\")\npublic List<User> search(@RequestParam String query) {\n    return userService.search(query);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_controllers_7",
+            "type": "content",
+            "title": "Request Body",
+            "content": "# POST Payload 📦\n\nReceive JSON from client.\n\n<!-- FULL_CODE_START\n@PostMapping\npublic User createUser(@RequestBody User user) {\n    return userService.save(user);\n}\nFULL_CODE_END -->\n\nSpring automatically converts JSON -> Java Object."
+        },
+        {
+            "id": "spring_boot_controllers_8",
+            "type": "content",
+            "title": "Response Entity",
+            "content": "# Full Control 🎮\n\nReturn HTTP Status codes and headers.\n\n<!-- FULL_CODE_START\n@GetMapping(\"/{id}\")\npublic ResponseEntity<User> get(@PathVariable Long id) {\n    User user = userService.findById(id);\n    if (user == null) return ResponseEntity.notFound().build();\n    return ResponseEntity.ok(user);\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_controllers_9",
+            "type": "content",
+            "title": "Validation",
+            "content": "# Safe Input 🛡️\n\nUse `@Valid` to trigger Bean Validation.\n\n<!-- FULL_CODE_START\n@PostMapping\npublic User create(@Valid @RequestBody User user) {\n    // ...\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_controllers_10",
+            "type": "content",
+            "title": "Exception Handling",
+            "content": "# Global Handler 🌍\n\n`@ControllerAdvice` handles exceptions across all controllers.\n\n<!-- FULL_CODE_START\n@ControllerAdvice\npublic class GlobalExceptionHandler {\n    @ExceptionHandler(UserNotFoundException.class)\n    public ResponseEntity<String> handle(Exception e) {\n        return ResponseEntity.status(404).body(e.getMessage());\n    }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "spring_boot_controllers_quiz_2",
+            "type": "quiz",
+            "title": "Input Quiz",
+            "content": "Data Binding.",
+            "quizQuestion": "Which annotation is used to map the HTTP request body (JSON) to a Java object?",
+            "quizOptions": [
+                "@RequestParam",
+                "@PathVariable",
+                "@RequestBody",
+                "@ResponseBody"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "spring_boot_controllers_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Controllers 🎮\n\nHandling Requests.\n\n- **@RestController:** Use for APIs.\n- **Mapping:** `@GetMapping`, `@PostMapping`.\n- **Input:** `@PathVariable`, `@RequestParam`, `@RequestBody`.\n- **Output:** `ResponseEntity`.\n\n## Next Steps\nAbstract logic with **Services & Dependency Injection**!"
+        }
+    ]
+}

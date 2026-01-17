@@ -1,0 +1,103 @@
+{
+    "id": "learn_design_partitioning",
+    "topicId": "partitioning",
+    "topicTitle": "Partitioning",
+    "description": "Splitting massive tables for performance and manageability.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "design_partitioning_1",
+            "type": "content",
+            "title": "Why Partition? ✂️",
+            "content": "# Divide and Conquer\n\nWhen a table gets too big (e.g., billions of rows), queries get slow.\n\nPartitioning breaks a large table into smaller, manageable pieces (physical files) while logically acting as one table."
+        },
+        {
+            "id": "design_partitioning_2",
+            "type": "content",
+            "title": "Horizontal Partitioning",
+            "content": "# Row Splitting ↔️\n\nSplitting rows into different tables/files.\n\nE.g., `Sales_2023`, `Sales_2024`.\n\nAlso known as \"Sharding\" when distributed across different servers."
+        },
+        {
+            "id": "design_partitioning_3",
+            "type": "content",
+            "title": "Vertical Partitioning",
+            "content": "# Column Splitting ↕️\n\nSplitting columns into different tables.\n\nE.g., Separating standard `User` info (ID, name) from heavy BLOB data (`profile_picture_base64`) into `UserDetails`."
+        },
+        {
+            "id": "design_partitioning_4",
+            "type": "content",
+            "title": "Range Partitioning",
+            "content": "# By Value 🔢\n\nAssign rows to partitions based on column values falling within a given range.\n\n- Partition A: ID 1-1000\n- Partition B: ID 1001-2000\n\nGreat for Time-Series data (dates)."
+        },
+        {
+            "id": "design_partitioning_5",
+            "type": "content",
+            "title": "List Partitioning",
+            "content": "# By Category 📋\n\nAssign rows based on discrete values.\n\n- Partition East: 'NY', 'MA', 'FL'\n- Partition West: 'CA', 'WA', 'NV'\n\nGreat for regional data."
+        },
+        {
+            "id": "design_partitioning_quiz_1",
+            "type": "quiz",
+            "title": "Type Quiz",
+            "content": "Methods.",
+            "quizQuestion": "Which partitioning strategy is best suited for keeping data from separate years in separate physical files?",
+            "quizOptions": [
+                "Hash Partitioning",
+                "Range Partitioning",
+                "Modtitioning",
+                "Key Partitioning"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "design_partitioning_6",
+            "type": "content",
+            "title": "Hash Partitioning",
+            "content": "# Random Distribution 🎲\n\nAssign rows based on a hash function of the key.\n\n`Hash(User_ID) % 4` -> 4 Partitions.\n\nEnsures even distribution of data, preventing hotspots."
+        },
+        {
+            "id": "design_partitioning_7",
+            "type": "content",
+            "title": "Partition Pruning",
+            "content": "# Optimization ⚡\n\nThe Query Optimizer detects which partition holds the data and skips scanning the others.\n\n`SELECT * FROM Sales WHERE year = 2023` -> Only scans Partition A. Fastest query possible."
+        },
+        {
+            "id": "design_partitioning_8",
+            "type": "content",
+            "title": "Sharding (Distributed)",
+            "content": "# Across Servers 🌍\n\nPartitioning moves data to separate files on ONE server.\n\nSharding moves data to COMPLETELY DIFFERENT servers.\n\nUnlimited scaling, but adds network complexity and makes JOINs hard."
+        },
+        {
+            "id": "design_partitioning_9",
+            "type": "content",
+            "title": "Shard Key",
+            "content": "# The Decision 🔑\n\nChoosing the right shard key is critical.\n\n- **Bad Key:** All heavy users on one shard (Hotspot).\n- **Good Key:** Traffic evenly distributed across all shards."
+        },
+        {
+            "id": "design_partitioning_10",
+            "type": "content",
+            "title": "Global ID Generation",
+            "content": "# Unique IDs 🆔\n\nIf you have 5 database servers, you can't use simple Auto-Increment (ID 1 will exist on all servers).\n\nSolutions: UUIDs or Snowflake IDs (Time + Machine ID + Sequence)."
+        },
+        {
+            "id": "design_partitioning_quiz_2",
+            "type": "quiz",
+            "title": "Architecture Quiz",
+            "content": "Sharding.",
+            "quizQuestion": "What is the main downside of Sharding compared to simple Partitioning?",
+            "quizOptions": [
+                "Limited storage space",
+                "Increased complexity (No JOINs, network latency)",
+                "Slower writes",
+                "Requires more RAM"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "design_partitioning_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Partitioning ✂️\n\nBreaking it down.\n\n- **Horizontal:** Sharding.\n- **Vertical:** Splitting columns.\n- **Range:** By Date.\n- **Hash:** Even spread.\n\n## Next Steps\nManage changes with **Migrations**!"
+        }
+    ]
+}

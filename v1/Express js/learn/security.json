@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_security",
+    "topicId": "security",
+    "topicTitle": "Security Best Practices",
+    "description": "Secure your Express app with Helmet, CORS, and Rate Limiting.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_security_1",
+            "type": "content",
+            "title": "Don't Trust Users",
+            "content": "# Security First 🛡️\n\nWeb apps are targets.\n\nCommon threats:\n- Cross-Site Scripting (XSS)\n- SQL Injection\n- Brute Force attacks\n- Man-in-the-Middle (MITM)"
+        },
+        {
+            "id": "express_security_2",
+            "type": "content",
+            "title": "Use Helmet",
+            "content": "# Helmet ⛑️\n\n`helmet` is a collection of middleware functions that set security-related HTTP headers.\n\n<!-- FULL_CODE_START\nconst helmet = require('helmet');\napp.use(helmet());\nFULL_CODE_END -->\n\nSets headers like `X-DNS-Prefetch-Control`, `X-Frame-Options`, `Strict-Transport-Security`, etc."
+        },
+        {
+            "id": "express_security_3",
+            "type": "content",
+            "title": "Disable X-Powered-By",
+            "content": "# Hide Your Tech 🙈\n\nBy default, Express sends `X-Powered-By: Express`. Attackers use this to target known vulnerabilities.\n\n`app.disable('x-powered-by');`\n\n(Helmet does this automatically)."
+        },
+        {
+            "id": "express_security_4",
+            "type": "content",
+            "title": "CORS",
+            "content": "# Cross-Origin Resource Sharing 🌐\n\nControl which domains can access your API.\n\n<!-- FULL_CODE_START\nconst cors = require('cors');\n// Allow everyone (Dangerous for sensitive APIs)\napp.use(cors());\n// Restrict to specific domain\napp.use(cors({ origin: 'https://mysite.com' }));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_security_5",
+            "type": "content",
+            "title": "Rate Limiting",
+            "content": "# Stop Spam ✋\n\nPrevent brute-force and DoS attacks.\n\n<!-- FULL_CODE_START\nconst rateLimit = require('express-rate-limit');\nconst limiter = rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 minutes\n  max: 100 // limit each IP to 100 requests per windowMs\n});\napp.use(limiter);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_security_quiz_1",
+            "type": "quiz",
+            "title": "Header Quiz",
+            "content": "Protection.",
+            "quizQuestion": "Which header does Helmet primarily help manage to secure your app?",
+            "quizOptions": [
+                "Content-Type",
+                "Authorization",
+                "HTTP Security Headers (e.g., X-Frame-Options)",
+                "User-Agent"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_security_6",
+            "type": "content",
+            "title": "Input Validation",
+            "content": "# Sanitization 🧼\n\nNever trust `req.body` or `req.query` directly.\n\nUse libraries like `express-validator` or `joi` to validate and sanitize input.\n\nPrevents SQL Injection and XSS."
+        },
+        {
+            "id": "express_security_7",
+            "type": "content",
+            "title": "CSURF",
+            "content": "# CSRF Protection 🕵️\n\nCross-Site Request Forgery.\n\nUse mechanisms like `csurf` (middleware) or SameSite cookies to ensure requests come from your own frontend forms."
+        },
+        {
+            "id": "express_security_8",
+            "type": "content",
+            "title": "Cookie Security",
+            "content": "# Secure Cookies 🍪\n\nWhen using cookies (e.g., for sessions):\n- `secure: true`: Only send over HTTPS.\n- `httpOnly: true`: Prevent JS access (XSS protection).\n- `sameSite: 'strict'`: Prevent CSRF."
+        },
+        {
+            "id": "express_security_9",
+            "type": "content",
+            "title": "Environment Variables",
+            "content": "# No Secrets in Code 🤫\n\nNever commit API keys or DB passwords.\n\nUse `dotenv`.\n\n`const port = process.env.PORT || 3000;`\n\nEnsure `.env` is in your `.gitignore`."
+        },
+        {
+            "id": "express_security_10",
+            "type": "content",
+            "title": "HTTPS",
+            "content": "# Encrypt Everything 🔒\n\nAlways use TLS/SSL in production.\n\nUse Let's Encrypt for free certs.\n\nredirect HTTP traffic to HTTPS."
+        },
+        {
+            "id": "express_security_quiz_2",
+            "type": "quiz",
+            "title": "Deps Quiz",
+            "content": "Supply Chain.",
+            "quizQuestion": "Why should you regularly audit your npm dependencies (`npm audit`)?",
+            "quizOptions": [
+                "To make the app faster",
+                "To find and fix known security vulnerabilities in packages",
+                "To update to the latest breaking changes",
+                "To remove unused variables"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_security_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Security 🛡️\n\nLayered defense.\n\n- **Helmet:** Secure headers.\n- **CORS:** Origin control.\n- **Rate Limit:** Anti-spam/DoS.\n- **Validation:** Sanitize inputs.\n- **Env:** Secrets management.\n\n## Next Steps\nEnsure it works with **Testing Express**!"
+        }
+    ]
+}

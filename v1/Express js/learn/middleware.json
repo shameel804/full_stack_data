@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_middleware",
+    "topicId": "middleware",
+    "topicTitle": "Middleware",
+    "description": "Understand the core of Express: Functions that run between request and response.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_middleware_1",
+            "type": "content",
+            "title": "What is Middleware?",
+            "content": "# The Middleman 🤹\n\nMiddleware functions have access to:\n- Request object (`req`)\n- Response object (`res`)\n- Next function (`next`)\n\nThey sit **between** the raw request and the final route handler."
+        },
+        {
+            "id": "express_middleware_2",
+            "type": "content",
+            "title": "What Can It Do?",
+            "content": "# Superpowers 🦸\n\n- Execute code.\n- Modify `req` and `res` objects.\n- End the request-response cycle.\n- Call the `next` middleware."
+        },
+        {
+            "id": "express_middleware_3",
+            "type": "content",
+            "title": "Writing Middleware",
+            "content": "# Simple Logger 📝\n\n<!-- FULL_CODE_START\nconst myLogger = function (req, res, next) {\n  console.log('LOGGED');\n  next(); // IMPORTANT: Pass control\n};\n\napp.use(myLogger);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_middleware_4",
+            "type": "content",
+            "title": "Application-Level",
+            "content": "# Global vs Specific 🌐\n\n`app.use()` applies middleware to **all** requests.\n\n`app.use('/user', authMiddleware)` applies it only to routes starting with `/user`."
+        },
+        {
+            "id": "express_middleware_5",
+            "type": "content",
+            "title": "The 'next' Function",
+            "content": "# Don't Hang! 🛑\n\nIf middleware doesn't end the cycle (like `res.send`), it MUST call `next()`.\n\nOtherwise, the request will hang and eventually timeout."
+        },
+        {
+            "id": "express_middleware_quiz_1",
+            "type": "quiz",
+            "title": "Flow Quiz",
+            "content": "Control Flow.",
+            "quizQuestion": "What happens if a middleware function does NOT call 'next()' and does NOT send a response?",
+            "quizOptions": [
+                "It crashes the server",
+                "It skips to the next route automatically",
+                "The request hangs indefinitely",
+                "It sends a 404 error"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_middleware_6",
+            "type": "content",
+            "title": "Built-in Middleware",
+            "content": "# Out of the Box 📦\n\nExpress comes with some built-ins:\n- `express.static`: Serves static files.\n- `express.json`: Parses JSON payloads.\n- `express.urlencoded`: Parses URL-encoded payloads."
+        },
+        {
+            "id": "express_middleware_7",
+            "type": "content",
+            "title": "Third-Party Middleware",
+            "content": "# npm ecosystem 🌍\n\nUse community modules:\n- `morgan`: HTTP request logger.\n- `cors`: Enable Cross-Origin requests.\n- `helmet`: Secure HTTP headers.\n\n`npm install morgan`"
+        },
+        {
+            "id": "express_middleware_8",
+            "type": "content",
+            "title": "Router-Level Middleware",
+            "content": "# Scoped Logic 🔭\n\nAttach middleware to a Router instance.\n\n<!-- FULL_CODE_START\nconst router = express.Router();\n\n// Specific to this router\nrouter.use((req, res, next) => {\n  console.log('Router Time:', Date.now());\n  next();\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_middleware_9",
+            "type": "content",
+            "title": "Error-Handling Middleware",
+            "content": "# The Special One ⚠️\n\nMust have **4 arguments**: `(err, req, res, next)`.\n\n<!-- FULL_CODE_START\napp.use((err, req, res, next) => {\n  console.error(err.stack);\n  res.status(500).send('Something broke!');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_middleware_10",
+            "type": "content",
+            "title": "Configurable Middleware",
+            "content": "# Flexible Functions ⚙️\n\nCreate functions that return middleware.\n\n<!-- FULL_CODE_START\nconst myMiddleware = (option) => {\n  return (req, res, next) => {\n    if (option) console.log(\"Option on\");\n    next();\n  }\n};\napp.use(myMiddleware(true));\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_middleware_quiz_2",
+            "type": "quiz",
+            "title": "Error Quiz",
+            "content": "Signatures.",
+            "quizQuestion": "How many arguments must an error-handling middleware function have?",
+            "quizOptions": [
+                "2 (req, res)",
+                "3 (req, res, next)",
+                "4 (err, req, res, next)",
+                "5 (err, req, res, next, app)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_middleware_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Middleware 🧬\n\nThe glue of Express.\n\n- **Chain:** Execute in order.\n- **Control:** Modify request, check auth/validation.\n- **Next:** `next()` moves to the next link.\n- **Types:** App-level, Router-level, Error-handling, Built-in, Third-party.\n\n## Next Steps\nRender HTML with **Template Engines**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_routing",
+    "topicId": "routing",
+    "topicTitle": "Routing",
+    "description": "Learn client-side routing in Svelte using popular libraries like Svelte Navigator or svelte-routing.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_route_1",
+            "type": "content",
+            "title": "Routing in Svelte",
+            "content": "# No Native Router 🤷\n\nCore Svelte does NOT include a router (unlike Angular or Vue).\n\nOptions:\n1.  **SvelteKit:** The official app framework (Filesystem routing).\n2.  **Svelte Navigator:** Popular client-side router (like React Router).\n3.  **svelte-routing:** Another common choice."
+        },
+        {
+            "id": "svelte_route_2",
+            "type": "content",
+            "title": "Svelte Navigator Setup",
+            "content": "# Setup 🛠️\n\n`npm install svelte-navigator`\n\nWrap your app in `<Router>`.\n\n```html\n<script>\n  import { Router, Link, Route } from \"svelte-navigator\";\n  import Home from \"./Home.svelte\";\n</script>\n\n<Router>\n  <Route path=\"/\" component={Home} />\n</Router>\n```"
+        },
+        {
+            "id": "svelte_route_3",
+            "type": "content",
+            "title": "Links",
+            "content": "# Navigation 🔗\n\nUse the `<Link>` component to navigate without reloading.\n\n```html\n<nav>\n  <Link to=\"/\">Home</Link>\n  <Link to=\"/about\">About</Link>\n</nav>\n```"
+        },
+        {
+            "id": "svelte_route_4",
+            "type": "content",
+            "title": "Route Parameters",
+            "content": "# Dynamic Routes 🆔\n\nDefine parameters using colon `:id`.\n\n```html\n<Route path=\"user/:id\" component={UserProfile} />\n```\n\nInside `UserProfile.svelte`, export the prop named `id`.\n\n```javascript\nexport let id; // Automatically injected!\n```"
+        },
+        {
+            "id": "svelte_route_quiz_1",
+            "type": "quiz",
+            "title": "Parameter Quiz",
+            "content": "Access method.",
+            "quizQuestion": "In Svelte Navigator, how can a component access the route parameter ':id'?",
+            "quizOptions": [
+                "By importing 'useParams'",
+                "By exporting a prop named 'id'",
+                "By reading 'window.location'",
+                "By using '$page.params'"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_route_5",
+            "type": "content",
+            "title": "Programmatic Navigation",
+            "content": "# useNavigate 🧭\n\nTo navigate via code (e.g., after login).\n\n```javascript\nimport { useNavigate } from \"svelte-navigator\";\n\nconst navigate = useNavigate();\n\nfunction login() {\n  // ... logic\n  navigate(\"/dashboard\", { replace: true });\n}\n```"
+        },
+        {
+            "id": "svelte_route_6",
+            "type": "content",
+            "title": "Route Guards",
+            "content": "# Protection 🛡️\n\nWrap routes in a `PrivateRoute` component.\n\n```html\n<!-- PrivateRoute.svelte -->\n<script>\n  import { useNavigate, useLocation } from \"svelte-navigator\";\n  export let component;\n\n  // Check auth logic here...\n</script>\n```"
+        },
+        {
+            "id": "svelte_route_7",
+            "type": "content",
+            "title": "Code Splitting",
+            "content": "# Lazy Loading 💤\n\nUse dynamic imports in standard Svelte components.\n\n```html\n{#await import('./Admin.svelte') then module}\n  <svelte:component this={module.default} />\n{/await}\n```\nMost routers support a simplified syntax for this."
+        },
+        {
+            "id": "svelte_route_8",
+            "type": "content",
+            "title": "Page Transitions",
+            "content": "# Animating Routes 🕺\n\nCombine Routing with Svelte Transitions.\n\nWrap the route content in a `div` with `in:fade`.\n\n(Note: This requires keying the router view to ensure the DOM elements are destroyed/recreated)."
+        },
+        {
+            "id": "svelte_route_9",
+            "type": "content",
+            "title": "SvelteKit Routing",
+            "content": "# SvelteKit (Preview) 📂\n\nIf using SvelteKit (Framework):\n- `src/routes/about.svelte` -> `/about`\n- `src/routes/blog/[slug].svelte` -> `/blog/hello-world`\n\nIt handles SSR and CSR automatically."
+        },
+        {
+            "id": "svelte_route_quiz_2",
+            "type": "quiz",
+            "title": "Hook Quiz",
+            "content": "Navigation function.",
+            "quizQuestion": "Which hook returns a function to navigate programmatically?",
+            "quizOptions": [
+                "useHistory",
+                "useRouter",
+                "useNavigate",
+                "useGo"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_route_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Basic Router 💻\n\n<!-- FULL_CODE_START\n<script>\n  import { Router, Route, Link } from \"svelte-navigator\";\n  import Home from \"./Home.svelte\";\n  import About from \"./About.svelte\";\n</script>\n\n<Router>\n  <nav>\n    <Link to=\"/\">Home</Link>\n    <Link to=\"/about\">About</Link>\n  </nav>\n\n  <div>\n    <Route path=\"/\" component={Home} />\n    <Route path=\"about\" component={About} />\n  </div>\n</Router>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_route_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Routing 🎓\n\nNavigation.\n\n- **No Native Router:** Use `svelte-navigator` or `SvelteKit`.\n- **Router:** Wraps the app.\n- **Route:** Maps URL to Component.\n- **Link:** `<a>` tag replacement.\n- **Params:** Export `let id`.\n\n## Next Steps\nScale up with the meta-framework **Sapper/SvelteKit**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_mfa",
+    "topicId": "mfa",
+    "topicTitle": "Multi-Factor Authentication",
+    "description": "Secure accounts by requiring more than just a password: TOTP, Email codes, and Biometrics.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_mfa_1",
+            "type": "content",
+            "title": "What is MFA?",
+            "content": "# Something you... 🔐\n\nSecurity increases when you combine factors:\n\n1.  **Know:** Password, PIN.\n2.  **Have:** Phone, YubiKey.\n3.  **Are:** Fingerprint, FaceID.\n\nTwo-Factor (2FA) = Combining 2 of these."
+        },
+        {
+            "id": "auth_mfa_2",
+            "type": "content",
+            "title": "TOTP",
+            "content": "# Google Authenticator 📱\n\n**Time-Based One-Time Password.**\n\nShared secret (QR Code) creates a 6-digit code that changes every 30 seconds.\n\nSecure because it requires the physical device and generates codes offline."
+        },
+        {
+            "id": "auth_mfa_3",
+            "type": "content",
+            "title": "SMS 2FA",
+            "content": "# The Weakest Link 📱\n\nSending a code via SMS.\n\n**Vulnerable:** SIM Swapping attacks allow hackers to steal your phone number and receive your codes.\n\nNIST (National Institute of Standards and Technology) now discourages SMS 2FA."
+        },
+        {
+            "id": "auth_mfa_4",
+            "type": "content",
+            "title": "Email Codes",
+            "content": "# Better than nothing 📧\n\nSending a code/link to email.\n\nDependent on email security. If email is hacked, 2FA is bypassed.\n\nCommonly used for \"Magic Links\" (Passwordless login)."
+        },
+        {
+            "id": "auth_mfa_quiz_1",
+            "type": "quiz",
+            "title": "Method Quiz",
+            "content": "Security level.",
+            "quizQuestion": "Which 2FA method is generally considered the LEAST secure due to 'SIM Swapping'?",
+            "quizOptions": [
+                "TOTP App (Google Auth)",
+                "Hardware Key (YubiKey)",
+                "SMS Text Message",
+                "Biometrics"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_mfa_5",
+            "type": "content",
+            "title": "Hardware Keys",
+            "content": "# FIDO / WebAuthn 🔑\n\nPhysical USB keys (YubiKey).\n\nThe gold standard for security.\n\nCryptographically proves origin and is phishing-resistant (you can't accidentally plug it into a fake website)."
+        },
+        {
+            "id": "auth_mfa_6",
+            "type": "content",
+            "title": "Recovery Codes",
+            "content": "# Don't get locked out 🆘\n\nIf a user loses their phone (TOTP), they lose access.\n\nAlways generate **Backup Codes** during setup. \"Print these and verify them in a safe place.\"\n\nEach code works only once."
+        },
+        {
+            "id": "auth_mfa_7",
+            "type": "content",
+            "title": "Biometrics",
+            "content": "# FaceID / TouchID 👆\n\nConvenient and fast.\n\nUsually local to the device involved (unlocks a key stored in the secure enclave).\n\nPrivacy concern: Can't change your fingerprint if it gets stolen (though raw data is rarely stored)."
+        },
+        {
+            "id": "auth_mfa_8",
+            "type": "content",
+            "title": "Implementation Flow",
+            "content": "# The Logic 🧠\n\n1.  User enters Password.\n2.  Password Correct -> Check if `mfa_enabled = true`.\n3.  If true -> Return `200 OK` with payload `mfa_required: true` (Don't send token yet!).\n4.  User enters Code.\n5.  Verify Code (TOTP) -> Return Access Token."
+        },
+        {
+            "id": "auth_mfa_9",
+            "type": "content",
+            "title": "TOTP Generation",
+            "content": "# Under the hood ⚙️\n\nAlgorithm: HMAC-SHA1.\n\nInput: Secret Key + Current Time (rounded to 30s).\n\nOutput: Hash -> Truncated to 6 digits.\n\nBoth server and phone do this math math independently."
+        },
+        {
+            "id": "auth_mfa_quiz_2",
+            "type": "quiz",
+            "title": "Scenario Quiz",
+            "content": "Lost device.",
+            "quizQuestion": "What is the primary fallback mechanism if a user loses their 2FA device?",
+            "quizOptions": [
+                "Call the CEO",
+                "Use defined Backup/Recovery Codes",
+                "Create a new account",
+                "Disable 2FA via email"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "auth_mfa_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# TOTP Verify 💻\n\n<!-- FULL_CODE_START\nconst speakeasy = require('speakeasy');\n\nfunction verifyCode(userSecret, userToken) {\n  const verified = speakeasy.totp.verify({\n    secret: userSecret,\n    encoding: 'base32',\n    token: userToken // 123456\n  });\n  return verified;\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_mfa_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: MFA 🎓\n\nDouble Defense.\n\n- **Factors:** Know, Have, Are.\n- **TOTP:** Rolling codes (Best balance).\n- **SMS:** Avoid if possible.\n- **WebAuthn:** Hardware keys (Best security).\n- **Backup:** Recovery codes are essential.\n\n## Next Steps\nUnify access with **Single Sign-On (SSO)**!"
+        }
+    ]
+}

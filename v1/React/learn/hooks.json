@@ -1,0 +1,101 @@
+{
+    "id": "learn_react_hooks",
+    "topicId": "hooks",
+    "topicTitle": "React Hooks",
+    "description": "Deep dive into the Hook ecosystem: useEffect, useContext, useReducer, and Custom Hooks.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_hooks_1",
+            "type": "content",
+            "title": "What are Hooks?",
+            "content": "# Hooks 🪝\n\nHooks let you use state and other React features without writing a class.\n\nRules of Hooks:\n1.  **Only Call at the Top Level:** Don't call Hooks inside loops, conditions, or nested functions.\n2.  **Only Call from React Functions:** Components or custom hooks."
+        },
+        {
+            "id": "react_hooks_2",
+            "type": "content",
+            "title": "useEffect",
+            "content": "# useEffect ⚡\n\nThe most important hook after useState.\n\nIt handles \"Side Effects\":\n- Fetching data.\n- Subscribing to events.\n- Manually changing the DOM.\n\nIt effectively replaces `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`."
+        },
+        {
+            "id": "react_hooks_3",
+            "type": "content",
+            "title": "useEffect Syntax",
+            "content": "# Dependency Array 🧊\n\n`useEffect(callback, dependencies)`\n\n- `[]`: Runs ONLY once (Mount).\n- `[count]`: Runs on Mount AND when `count` changes.\n- `undefined` (No array): Runs on EVERY render (Bad performance).\n\n```jsx\nuseEffect(() => {\n  document.title = `Count: ${count}`;\n}, [count]);\n```"
+        },
+        {
+            "id": "react_hooks_4",
+            "type": "content",
+            "title": "useEffect Cleanup",
+            "content": "# Cleanup Function 🧹\n\nIf your effect creates a messy subscription (like a timer or event listener), return a function to clean it up.\n\n```jsx\nuseEffect(() => {\n  const timer = setInterval(tick, 1000);\n  \n  // Run when component unmounts\n  return () => clearInterval(timer);\n}, []);\n```"
+        },
+        {
+            "id": "react_hooks_quiz_1",
+            "type": "quiz",
+            "title": "Dependency Quiz",
+            "content": "Effect timing.",
+            "quizQuestion": "How do you make useEffect run ONLY once (like componentDidMount)?",
+            "quizOptions": [
+                "Pass no arguments",
+                "Pass an empty array []",
+                "Pass [null]",
+                "Pass [true]"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_hooks_5",
+            "type": "content",
+            "title": "useContext",
+            "content": "# useContext 📡\n\nAvoid Prop Drilling.\n\nInstead of passing data down 5 levels of components, use Context to teleport it.\n\n```jsx\nconst ThemeContext = React.createContext('light');\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Toolbar />\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Toolbar() {\n  const theme = useContext(ThemeContext);\n  return <div>{theme}</div>; // \"dark\"\n}\n```"
+        },
+        {
+            "id": "react_hooks_6",
+            "type": "content",
+            "title": "useReducer",
+            "content": "# useReducer ⚙️\n\nAn alternative to `useState` for complex state logic.\n\nIt works like Redux: `(state, action) => newState`.\n\n```jsx\nconst [state, dispatch] = useReducer(reducer, initialState);\n```\nGreat when the next state depends on previous state in complicated ways."
+        },
+        {
+            "id": "react_hooks_7",
+            "type": "content",
+            "title": "useRef",
+            "content": "# useRef 📌\n\nCreate a persistent variable that persists across renders BUT does **not** trigger a re-render when changed.\n\nCommon use: Accessing a DOM element directly.\n\n```jsx\nconst inputRef = useRef(null);\n// ... <input ref={inputRef} />\ninputRef.current.focus();\n```"
+        },
+        {
+            "id": "react_hooks_8",
+            "type": "content",
+            "title": "Custom Hooks",
+            "content": "# Custom Hooks 📦\n\nExtract component logic into reusable functions.\n\nMust start with `use` (e.g., `useFetch`, `useWindowSize`).\n\n```jsx\nfunction useWindowWidth() {\n  const [width, setWidth] = useState(window.innerWidth);\n  // ... useEffect listener logic\n  return width;\n}\n```"
+        },
+        {
+            "id": "react_hooks_quiz_2",
+            "type": "quiz",
+            "title": "Ref Quiz",
+            "content": "Render behavior.",
+            "quizQuestion": "Does changing the .current value of a useRef trigger a re-render?",
+            "quizOptions": [
+                "Yes",
+                "No"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "react_hooks_9",
+            "type": "content",
+            "title": "Hooks ecosystem",
+            "content": "# Other Hooks 🧰\n\n- `useMemo`: Memoize a value (Performance).\n- `useCallback`: Memoize a function (Performance).\n- `useLayoutEffect`: Runs synchronously after all DOM mutations.\n- `useId`: Generate unique IDs."
+        },
+        {
+            "id": "react_hooks_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Fetch Hook 💻\n\n<!-- FULL_CODE_START\nimport { useState, useEffect } from 'react';\n\n// Custom Hook\nfunction useFetch(url) {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    fetch(url)\n      .then(res => res.json())\n      .then(data => {\n        setData(data);\n        setLoading(false);\n      });\n  }, [url]);\n\n  return { data, loading };\n}\n\n// Usage\nfunction App() {\n  const { data, loading } = useFetch('https://api.example.com/user');\n  \n  if (loading) return <p>Loading...</p>;\n  return <p>User: {data.name}</p>;\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_hooks_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Hooks 🎓\n\nSuperpowers for functions.\n\n- **useEffect:** Side effects & lifecycle.\n- **useContext:** Global data without drilling.\n- **useRef:** DOM access & persistent values.\n- **Custom Hooks:** Reusable logic (`use...`).\n\n## Next Steps\nNavigate between pages in your Single Page App with **Routing**!"
+        }
+    ]
+}

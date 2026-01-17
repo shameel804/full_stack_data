@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_sqlalchemy",
+    "topicId": "sqlalchemy",
+    "topicTitle": "SQLAlchemy",
+    "description": "Python's powerhouse toolkit and ORM. Flexible and powerful.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_sqlalchemy_1",
+            "type": "content",
+            "title": "Welcome to SQLAlchemy 🐍",
+            "content": "# Two Layers\n\nSQLAlchemy consists of two distinct parts:\n\n1. **Core:** SQL Expression Language (Low level, close to SQL).\n2. **ORM:** Object Relational Mapper (High level, automates mapping)."
+        },
+        {
+            "id": "orm_sqlalchemy_2",
+            "type": "content",
+            "title": "Defining Models",
+            "content": "# Declarative Base\n\n<!-- FULL_CODE_START\nfrom sqlalchemy import Column, Integer, String\nfrom sqlalchemy.orm import declarative_base\n\nBase = declarative_base()\n\nclass User(Base):\n    __tablename__ = 'users'\n    id = Column(Integer, primary_key=True)\n    name = Column(String)\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_sqlalchemy_3",
+            "type": "content",
+            "title": "Sessions",
+            "content": "# The Workspace 💼\n\nThe `Session` is the handle to the database.\n\nIt tracks changes to objects (Unit of Work pattern) and flushes them to the DB upon commit.\n\n`session.add(new_user)`\n`session.commit()`"
+        },
+        {
+            "id": "orm_sqlalchemy_4",
+            "type": "content",
+            "title": "Querying",
+            "content": "# Filtering 🔎\n\n<!-- FULL_CODE_START\n# Get all users named 'Ed'\nusers = session.query(User).filter_by(name='Ed').all()\n\n# Complex filters\nusers = session.query(User).filter(User.age > 20).all()\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_sqlalchemy_5",
+            "type": "content",
+            "title": "Relationships",
+            "content": "# Linking 🔗\n\nUse `relationship()` to define connections.\n\n<!-- FULL_CODE_START\nclass User(Base):\n    # ...\n    addresses = relationship(\"Address\", back_populates=\"user\")\n\nclass Address(Base):\n    # ...\n    user_id = Column(Integer, ForeignKey('users.id'))\n    user = relationship(\"User\", back_populates=\"addresses\")\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_sqlalchemy_quiz_1",
+            "type": "quiz",
+            "title": "Pattern Quiz",
+            "content": "Concepts.",
+            "quizQuestion": "What design pattern does SQLAlchemy's Session implement to track changes?",
+            "quizOptions": [
+                "Singleton",
+                "Unit of Work",
+                "Observer",
+                "Factory"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orm_sqlalchemy_6",
+            "type": "content",
+            "title": "Joins",
+            "content": "# explicit IS better than implicit 🤝\n\nSQLAlchemy allows explicit joins.\n\n`session.query(User).join(Address).filter(Address.email == 'ed@google.com').all()`"
+        },
+        {
+            "id": "orm_sqlalchemy_7",
+            "type": "content",
+            "title": "Eager Loading",
+            "content": "# Solving N+1 🐇\n\nUse `joinedload` to fetch related data in one query.\n\n<!-- FULL_CODE_START\nfrom sqlalchemy.orm import joinedload\n\nquery = session.query(User).options(joinedload(User.addresses))\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_sqlalchemy_8",
+            "type": "content",
+            "title": "Transactions",
+            "content": "# Automatic 🛡️\n\nA session is basically a transaction in progress.\n\n`session.commit()` persists changes.\n`session.rollback()` reverts uncommitted changes.\n\nEnsures data integrity effortlessly."
+        },
+        {
+            "id": "orm_sqlalchemy_9",
+            "type": "content",
+            "title": "Alembic",
+            "content": "# Migrations 🏗️\n\nSQLAlchemy doesn't do migrations built-in. You use **Alembic**.\n\n`alembic revision --autogenerate -m \"Added users table\"`\n`alembic upgrade head`"
+        },
+        {
+            "id": "orm_sqlalchemy_10",
+            "type": "content",
+            "title": "AsyncIO",
+            "content": "# Modern Python ⚡\n\nSQLAlchemy 1.4+ supports `async` / `await`.\n\n<!-- FULL_CODE_START\nresult = await session.execute(select(User))\nusers = result.scalars().all()\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_sqlalchemy_quiz_2",
+            "type": "quiz",
+            "title": "Tool Quiz",
+            "content": "Ecosystem.",
+            "quizQuestion": "Which tool is commonly used with SQLAlchemy for handling database migrations?",
+            "quizOptions": [
+                "Flask-Migrate",
+                "Django Migrations",
+                "Alembic",
+                "SQLMigrate"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "orm_sqlalchemy_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: SQLAlchemy 🏺\n\nThe Python Standard.\n\n- **Session:** Unit of work.\n- **Declarative:** Class mapping.\n- **Alembic:** Migrations.\n- **Core vs ORM:** Flexibility.\n\n## Next Steps\nExplore Java's giant **Hibernate**!"
+        }
+    ]
+}

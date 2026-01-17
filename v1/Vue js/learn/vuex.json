@@ -1,0 +1,101 @@
+{
+    "id": "learn_vue_vuex",
+    "topicId": "vuex",
+    "topicTitle": "State Management (Vuex/Pinia)",
+    "description": "Managing global state in Vue applications using Vuex and its modern successor, Pinia.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_vuex_1",
+            "type": "content",
+            "title": "Global State",
+            "content": "# Why State Management? 🌐\n\nWhen multiple components need to share data:\n- Propping drilling is tedious.\n- Event emitting is chaotic.\n\n**Solution:** A centralized Store pattern. All components read from and write to one place."
+        },
+        {
+            "id": "vue_vuex_2",
+            "type": "content",
+            "title": "Vuex Concepts",
+            "content": "# Core Concepts (Vuex) 🏛️\n\n1.  **State:** The data (object).\n2.  **Getters:** Computed properties for store (derived state).\n3.  **Mutations:** Synchronous functions to change state.\n4.  **Actions:** Asynchronous functions that commit mutations."
+        },
+        {
+            "id": "vue_vuex_3",
+            "type": "content",
+            "title": "Mutations",
+            "content": "# Mutations ✍️\n\nThe **ONLY** way to change state in Vuex is by committing a mutation.\n\n```javascript\nmutations: {\n  increment (state) {\n    state.count++\n  }\n}\n// Usage\nstore.commit('increment')\n```\nMust be synchronous for devtools tracking."
+        },
+        {
+            "id": "vue_vuex_4",
+            "type": "content",
+            "title": "Actions",
+            "content": "# Actions 🎬\n\nActions can contain arbitrary asynchronous operations (API calls).\n\n```javascript\nactions: {\n  async incrementAsync ({ commit }) {\n    await sleep(1000)\n    commit('increment')\n  }\n}\n// Usage\nstore.dispatch('incrementAsync')\n```"
+        },
+        {
+            "id": "vue_vuex_quiz_1",
+            "type": "quiz",
+            "title": "Vuex Quiz",
+            "content": "Rule check.",
+            "quizQuestion": "In Vuex, which functions MUST be synchronous?",
+            "quizOptions": [
+                "Actions",
+                "Mutations",
+                "Getters",
+                "Dispatchers"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "vue_vuex_5",
+            "type": "content",
+            "title": "Modules",
+            "content": "# Modules 📦\n\nFor large apps, one store object gets huge.\n\nModules let you split the store:\n```javascript\nconst moduleA = { state: ... }\nconst moduleB = { state: ... }\n\nconst store = createStore({\n  modules: {\n    a: moduleA,\n    b: moduleB\n  }\n})\n```"
+        },
+        {
+            "id": "vue_vuex_6",
+            "type": "content",
+            "title": "Enter Pinia",
+            "content": "# Pinia 🍍\n\nVuex 5 is... Pinia.\n\nIt is now the official recommendation over Vuex 4.\n\nKey differences:\n- **No Mutations:** Just modify state directly.\n- **No Modules:** Just import different stores.\n- **TypeScript:** Much better inference."
+        },
+        {
+            "id": "vue_vuex_7",
+            "type": "content",
+            "title": "Pinia Example",
+            "content": "# Creating a Store (Pinia) 🛒\n\n```javascript\nimport { defineStore } from 'pinia'\n\nexport const useCounterStore = defineStore('counter', {\n  state: () => ({ count: 0 }),\n  actions: {\n    increment() {\n      this.count++\n    }\n  }\n})\n```"
+        },
+        {
+            "id": "vue_vuex_8",
+            "type": "content",
+            "title": "Using Pinia",
+            "content": "# Simplicity ✨\n\nUsing Pinia is like using a normal object.\n\n```javascript\nimport { useCounterStore } from './stores/counter'\n\nconst counter = useCounterStore()\n\ncounter.count++ // Auto-tracked!\ncounter.increment() // Action\n```"
+        },
+        {
+            "id": "vue_vuex_9",
+            "type": "content",
+            "title": "DevTools",
+            "content": "# Time Travel 🕵️‍♀️\n\nBoth Vuex and Pinia integrate with Vue DevTools.\n\n- Inspect state tree.\n- See mutation history.\n- \"Time travel\" debugging (revert state to previous points)."
+        },
+        {
+            "id": "vue_vuex_quiz_2",
+            "type": "quiz",
+            "title": "Pinia Quiz",
+            "content": "Direct mutation.",
+            "quizQuestion": "True or False: In Pinia, you can modify the state directly without writing a mutation.",
+            "quizOptions": [
+                "True",
+                "False"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "vue_vuex_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Vuex Store 💻\n\n<!-- FULL_CODE_START\nimport { createStore } from 'vuex'\n\n// Create a new store instance.\nconst store = createStore({\n  state () {\n    return {\n      count: 0\n    }\n  },\n  mutations: {\n    increment (state) {\n      state.count++\n    }\n  }\n})\n\nstore.commit('increment')\nconsole.log(store.state.count) // -> 1\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_vuex_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Vuex & Pinia 🎓\n\nCentralized Data.\n\n- **Vuex:** State, Getters, Mutations (Sync), Actions (Async).\n- **Pinia:** The modern successor. Simpler API, no mutations, TypeScript friendly.\n- **Use it when:** Your app is medium-to-large.\n\n## Next Steps\nUnlock the full power of Vue 3 with the **Composition API**!"
+        }
+    ]
+}

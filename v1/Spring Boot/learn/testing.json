@@ -1,0 +1,103 @@
+{
+    "id": "learn_springboot_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing",
+    "description": "Ensure your Spring Boot app works correctly.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "springboot_test_1",
+            "type": "content",
+            "title": "Spring Boot Test 🧪",
+            "content": "# starter-test\n\n`spring-boot-starter-test` includes everything you need:\n- **JUnit 5:** The standard test framework.\n- **Mockito:** For mocking dependencies.\n- **AssertJ:** Fluent assertions (`assertThat`).\n- **Hamcrest:** Matcher objects."
+        },
+        {
+            "id": "springboot_test_2",
+            "type": "content",
+            "title": "@SpringBootTest",
+            "content": "# Integration Test 🔌\n\nLoads the COMPLETE application context.\n\nSimulates starting the whole app.\n\nGreat for identifying configuration issues, but slow."
+        },
+        {
+            "id": "springboot_test_3",
+            "type": "content",
+            "title": "@WebMvcTest",
+            "content": "# Slice Test 🍰\n\nLoads ONLY the web layer (Controllers).\n\nMocks the Service and Repository layers.\n\nFocused and much faster than `@SpringBootTest`."
+        },
+        {
+            "id": "springboot_test_4",
+            "type": "content",
+            "title": "@DataJpaTest",
+            "content": "# Repository Test 💾\n\nLoads only JPA components.\n\nConfigures an in-memory database (H2) automatically.\n\nRolls back transactions after each test (clean slate)."
+        },
+        {
+            "id": "springboot_test_5",
+            "type": "content",
+            "title": "MockMvc",
+            "content": "# Fake Requests 🎭\n\nUsed to send HTTP requests to your controllers without starting a real server.\n\n`mockMvc.perform(get(\"/users\"))`\n`  .andExpect(status().isOk())`"
+        },
+        {
+            "id": "springboot_test_quiz_1",
+            "type": "quiz",
+            "title": "Annotation Quiz",
+            "content": "Scope.",
+            "quizQuestion": "Which annotation is used to test ONLY the Controller layer?",
+            "quizOptions": [
+                "@SpringBootTest",
+                "@DataJpaTest",
+                "@WebMvcTest",
+                "@Test"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "springboot_test_6",
+            "type": "content",
+            "title": "@MockBean",
+            "content": "# Mocking dependencies 🃏\n\nReplaces a real bean in the Spring Context with a Mockito mock.\n\nGreat for isolating the component you are testing from its dependencies (e.g., Mocking `UserService` while testing `UserController`)."
+        },
+        {
+            "id": "springboot_test_7",
+            "type": "content",
+            "title": "TestContainers",
+            "content": "# Real Dependencies 🐳\n\nInstead of H2 (fake DB), use Docker to spin up a REAL Postgres/MySQL container for tests.\n\nEnsures your tests run against the exact same technology as production."
+        },
+        {
+            "id": "springboot_test_8",
+            "type": "content",
+            "title": "SpyBean",
+            "content": "# Spying 🕵️\n\nWraps a real bean to track interactions (verify methods were called) without completely replacing its logic."
+        },
+        {
+            "id": "springboot_test_9",
+            "type": "content",
+            "title": "AssertJ",
+            "content": "# Fluent Assertions 💬\n\nReadable test code.\n\n`assertThat(user.getName()).isEqualTo(\"John\");`\n`assertThat(list).hasSize(5).contains(\"A\");`"
+        },
+        {
+            "id": "springboot_test_10",
+            "type": "content",
+            "title": "JSONPath",
+            "content": "# Parse JSON 🔍\n\nUsed with MockMvc to inspector specific fields in the JSON response.\n\n`.andExpect(jsonPath(\"$.name\").value(\"John\"))`"
+        },
+        {
+            "id": "springboot_test_quiz_2",
+            "type": "quiz",
+            "title": "Tool Quiz",
+            "content": "Environment.",
+            "quizQuestion": "What tool allows running real databases (like Postgres) in Docker containers during tests?",
+            "quizOptions": [
+                "TestContainers",
+                "Mockito",
+                "H2",
+                "JUnit"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "springboot_test_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Testing 🧪\n\nFail fast.\n\n- **@SpringBootTest:** Full integ.\n- **@WebMvcTest:** Controllers.\n- **@MockBean:** Mock dependencies.\n- **TestContainers:** Real env.\n\n## Next Steps\nScale up with **Microservices**!"
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_routing",
+    "topicId": "routing",
+    "topicTitle": "Routing",
+    "description": "Navigate between views using the Angular Router: Routes, Lazy Loading, and Guards.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_route_1",
+            "type": "content",
+            "title": "Setup",
+            "content": "# AppRoutingModule 🚦\n\nRouting is usually defined in a separate module `app-routing.module.ts`.\n\n```typescript\nconst routes: Routes = [\n  { path: 'heroes', component: HeroesComponent }\n];\n```\nIt is included in your AppModule: `imports: [AppRoutingModule]`."
+        },
+        {
+            "id": "ng_route_2",
+            "type": "content",
+            "title": "Navigation",
+            "content": "# Moving Around 🚶\n\n**Template:** Use `routerLink` directive.\n```html\n<a routerLink=\"/heroes\">Heroes</a>\n```\n\n**Code:** Use `Router` service.\n```typescript\nthis.router.navigate(['/heroes']);\n```"
+        },
+        {
+            "id": "ng_route_3",
+            "type": "content",
+            "title": "Router Outlet",
+            "content": "# The Viewport 📺\n\n`<router-outlet>` tells Angular **where** to display the component for the current URL.\n\n```html\n<h1>My App</h1>\n<nav>...</nav>\n<router-outlet></router-outlet> <!-- Content changes here -->\n```"
+        },
+        {
+            "id": "ng_route_4",
+            "type": "content",
+            "title": "Route Parameters",
+            "content": "# Dynamic URLs 🆔\n\nRoute: `{ path: 'hero/:id', component: HeroDetailComponent }`.\n\nAccessing the ID in component:\n\n```typescript\nconstructor(private route: ActivatedRoute) {}\n\nngOnInit() {\n  // Using snapshot (static)\n  const id = this.route.snapshot.paramMap.get('id');\n  \n  // OR Using observable (dynamic)\n  this.route.paramMap.subscribe(params => {\n    this.id = params.get('id');\n  });\n}\n```"
+        },
+        {
+            "id": "ng_route_quiz_1",
+            "type": "quiz",
+            "title": "Directive Quiz",
+            "content": "Link creation.",
+            "quizQuestion": "Which directive is used in templates to create a navigation link to a route?",
+            "quizOptions": [
+                "ngLink",
+                "routerLink",
+                "routePath",
+                "navTo"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_route_5",
+            "type": "content",
+            "title": "Child Routes",
+            "content": "# Children 👶\n\nNest routes to create sub-layouts.\n\n```typescript\n{\n  path: 'settings',\n  component: SettingsComponent,\n  children: [\n    { path: 'profile', component: ProfileComponent },\n    { path: 'password', component: PasswordComponent }\n  ]\n}\n```\n`SettingsComponent` must contain its own `<router-outlet>`."
+        },
+        {
+            "id": "ng_route_6",
+            "type": "content",
+            "title": "Lazy Loading",
+            "content": "# Lazy Loading 💤\n\nLoad a module/component only when the user visits the route. Crucial for performance.\n\n```typescript\n{\n  path: 'admin',\n  loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)\n}\n```"
+        },
+        {
+            "id": "ng_route_7",
+            "type": "content",
+            "title": "Route Guards",
+            "content": "# Security 🛡️\n\nProtect routes using Guards (CanActivate).\n\n```typescript\n{\n  path: 'admin',\n  component: AdminComponent,\n  canActivate: [AuthGuard]\n}\n```\nThe `AuthGuard` service implements `CanActivate` and returns `true` or `false` (or a UrlTree to redirect)."
+        },
+        {
+            "id": "ng_route_8",
+            "type": "content",
+            "title": "Resolvers",
+            "content": "# Resolvers 🤝\n\nPre-fetch data BEFORE the route is activated.\n\nThis ensures the component has data ready when it loads, preventing \"pop-in\" or empty states.\n\n```typescript\nresolve: {\n  hero: HeroResolver\n}\n```"
+        },
+        {
+            "id": "ng_route_9",
+            "type": "content",
+            "title": "Wildcard Route",
+            "content": "# 404 Page ❓\n\nHandle unknown URLs.\n\nMust be the **last** route in the configuration array.\n\n```typescript\n{ path: '**', component: PageNotFoundComponent }\n```"
+        },
+        {
+            "id": "ng_route_quiz_2",
+            "type": "quiz",
+            "title": "Parameter Quiz",
+            "content": "Service check.",
+            "quizQuestion": "Which service allows you to read the route parameters (like :id) of the CURRENTLY active route?",
+            "quizOptions": [
+                "Router",
+                "ActivatedRoute",
+                "Location",
+                "NavigationEnd"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_route_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Route Config 💻\n\n<!-- FULL_CODE_START\nimport { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport { HomeComponent } from './home.component';\nimport { AboutComponent } from './about.component';\n\nconst routes: Routes = [\n  { path: '', redirectTo: '/home', pathMatch: 'full' },\n  { path: 'home', component: HomeComponent },\n  { path: 'about', component: AboutComponent },\n  { path: '**', component: HomeComponent } // 404 redirect\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_route_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Routing 🎓\n\nClient-side navigation.\n\n- **RouterOutlet:** The placeholder.\n- **RouterLink:** The links.\n- **ActivatedRoute:** Get params (`:id`).\n- **Guards:** `CanActivate`.\n- **Lazy Loading:** `loadChildren`.\n\n## Next Steps\nHandle user input like a pro with **Forms**!"
+        }
+    ]
+}

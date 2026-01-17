@@ -1,0 +1,103 @@
+{
+    "id": "learn_springboot_micro",
+    "topicId": "micro",
+    "topicTitle": "Microservices",
+    "description": "Building distributed systems with Spring Cloud.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "springboot_micro_1",
+            "type": "content",
+            "title": "Monolith vs Microservices 🏛️",
+            "content": "# One vs Many\n\n- **Monolith:** One giant app (WAR file). Simple to deploy but hard to scale parts.\n- **Microservices:** Many small services communicating via APIs. Complex to manage but easy to scale independently."
+        },
+        {
+            "id": "springboot_micro_2",
+            "type": "content",
+            "title": "Spring Cloud ☁️",
+            "content": "# The Toolbox\n\nA framework built on top of Spring Boot to handle common distributed system patterns:\n- Service Discovery\n- Config Management\n- Circuit Breakers\n- API Gateway"
+        },
+        {
+            "id": "springboot_micro_3",
+            "type": "content",
+            "title": "Service Discovery",
+            "content": "# Who are you? 🔍\n\nIn a dynamic cloud, IP addresses change.\n\n**Eureka Server:** A phonebook where services register themselves.\n\nServices ask Eureka: \"Where is the Payment Service?\" instead of hardcoding IPs."
+        },
+        {
+            "id": "springboot_micro_4",
+            "type": "content",
+            "title": "Config Server",
+            "content": "# Central Config 🗃️\n\nManage configurations for ALL services in one Git repository.\n\nServices fetch their config from the **Config Server** at startup.\n\nChange config in Git -> Refresh services live."
+        },
+        {
+            "id": "springboot_micro_5",
+            "type": "content",
+            "title": "Types of Communication",
+            "content": "# Talking 🗣️\n\n- **Synchronous:** REST Template / Feign Client (I wait for you to answer).\n- **Asynchronous:** Kafka / RabbitMQ (I send a message and forget, you process it later)."
+        },
+        {
+            "id": "springboot_micro_quiz_1",
+            "type": "quiz",
+            "title": "Architecture Quiz",
+            "content": "Discovery.",
+            "quizQuestion": "Which component acts as the 'phonebook' for service locations in Spring Cloud?",
+            "quizOptions": [
+                "Config Server",
+                "API Gateway",
+                "Eureka Server",
+                "Circuit Breaker"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "springboot_micro_6",
+            "type": "content",
+            "title": "API Gateway",
+            "content": "# The Doorman 🚪\n\n**Spring Cloud Gateway**.\n\nSingle entry point for all clients.\n\nHandles routing, security, rate limiting, and analytics before forwarding requests to internal services."
+        },
+        {
+            "id": "springboot_micro_7",
+            "type": "content",
+            "title": "Feign Client",
+            "content": "# Declarative REST 📜\n\nInstead of writing `RestTemplate` boilerplate.\n\nDefine an interface:\n`@GetMapping(\"/users/{id}\") User getUser(@PathVariable Long id);`\n\nSpring implements it automatically."
+        },
+        {
+            "id": "springboot_micro_8",
+            "type": "content",
+            "title": "Circuit Breaker",
+            "content": "# Resilience ⚡\n\n**Resilience4j**.\n\nIf the 'Payment Service' is down, stop calling it to prevent cascading failures.\n\nOpen the circuit -> Return fallback/cached response -> Retry later."
+        },
+        {
+            "id": "springboot_micro_9",
+            "type": "content",
+            "title": "Distributed Tracing",
+            "content": "# Detective Work 🕵️\n\n**Zipkin** and **Sleuth** (Micrometer Tracing).\n\nAssigns a Trace ID to a request so you can track its journey across 10 different microservices logs."
+        },
+        {
+            "id": "springboot_micro_10",
+            "type": "content",
+            "title": "Saga Pattern",
+            "content": "# Distributed Transactions 🤝\n\nTransactions across multiple services are hard.\n\nSaga = Sequence of local transactions.\n\nIf one fails, execute compensating transactions (undo steps) to rollback."
+        },
+        {
+            "id": "springboot_micro_quiz_2",
+            "type": "quiz",
+            "title": "Reliability Quiz",
+            "content": "Failure.",
+            "quizQuestion": "What pattern prevents a failure in one service from crashing the entire system?",
+            "quizOptions": [
+                "Service Discovery",
+                "Circuit Breaker",
+                "Load Balancer",
+                "API Gateway"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "springboot_micro_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Microservices ☁️\n\nDistributed power.\n\n- **Eureka:** Discovery.\n- **Gateway:** Entry.\n- **Config:** Centralized.\n- **Circuit Breaker:** Resilience.\n- **Tracing:** Debugging.\n\n## Next Steps\nMaster the **Laravel** ecosystem!"
+        }
+    ]
+}

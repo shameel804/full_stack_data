@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_security",
+    "topicId": "security",
+    "topicTitle": "API Security",
+    "description": "Secure your APIs against threats. Covers Authentication, Authorization, TLS, and common vulnerabilities.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "api_sec_1",
+            "type": "content",
+            "title": "CIA Triad",
+            "content": "# The Core Goals 🛡️\n\n1.  **Confidentiality:** Only authorized users can see data.\n2.  **Integrity:** Data hasn't been tampered with.\n3.  **Availability:** The API is up and running (Anti-DDoS)."
+        },
+        {
+            "id": "api_sec_2",
+            "type": "content",
+            "title": "Authentication (AuthN)",
+            "content": "# Who are you? 🆔\n\nVerifying identity.\n\n- **API Keys:** Simple string passed in header. Good for machine-to-machine.\n- **Basic Auth:** Username/Password (base64 encoded). Weak.\n- **OAuth 2.0 / OpenID Connect:** The industry standard for user delegation."
+        },
+        {
+            "id": "api_sec_3",
+            "type": "content",
+            "title": "Authorization (AuthZ)",
+            "content": "# What can you do? 👮\n\nVerifying permissions.\n\n- **Role Based (RBAC):** Admin vs User.\n- **Scopes:** Granular permissions like `read:messages` but not `delete:messages`."
+        },
+        {
+            "id": "api_sec_4",
+            "type": "content",
+            "title": "JWT (JSON Web Tokens)",
+            "content": "# Stateless Auth 🎫\n\nA token containing user info, signed by the server.\n\nClient sends it in `Authorization: Bearer <token>` header.\n\nServer validates signature. No database lookup needed!"
+        },
+        {
+            "id": "api_sec_quiz_1",
+            "type": "quiz",
+            "title": "Token Quiz",
+            "content": "Structure.",
+            "quizQuestion": "Which part of a JWT ensures that the token has not been tampered with?",
+            "quizOptions": [
+                "Header",
+                "Payload",
+                "Signature",
+                "Footer"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_sec_5",
+            "type": "content",
+            "title": "HTTPS / TLS",
+            "content": "# Encryption in Transit 🔒\n\n**NEVER** expose an API over plain HTTP.\n\nUse HTTPS (TLS) to encrypt traffic between client and server, preventing Man-in-the-Middle attacks where attackers steal tokens."
+        },
+        {
+            "id": "api_sec_6",
+            "type": "content",
+            "title": "CORS",
+            "content": "# Cross-Origin Resource Sharing 🌐\n\nBrowser security mechanism.\n\nPrevents malicious site A from calling API on site B via the user's browser.\n\nServer must set headers: `Access-Control-Allow-Origin: https://trusted-site.com`."
+        },
+        {
+            "id": "api_sec_7",
+            "type": "content",
+            "title": "Rate Limiting",
+            "content": "# Availability 🚧\n\nPrevent abuse and DDoS.\n\nLimit requests per IP or per User.\n\n\"You can only make 100 requests per minute.\"\nReturns HTTP 429 Too Many Requests."
+        },
+        {
+            "id": "api_sec_8",
+            "type": "content",
+            "title": "Input Validation",
+            "content": "# Trust No One 🕵️\n\nValidate ALL input.\n\n- **SQL Injection:** Malicious SQL code in input.\n- **XSS:** Malicious scripts.\n\nUse libraries (like Joi, Zod) to enforce schemas."
+        },
+        {
+            "id": "api_sec_9",
+            "type": "content",
+            "title": "OWASP Top 10 API",
+            "content": "# Common Threats 🦠\n\n1.  **Broken Object Level Auth (BOLA):** User A accessing User B's resource (`/users/B` -> success).\n2.  **Broken Authentication:** Weak passwords, session hijacking.\n3.  **Mass Assignment:** User updating `isAdmin: true` via API."
+        },
+        {
+            "id": "api_sec_quiz_2",
+            "type": "quiz",
+            "title": "Attack Quiz",
+            "content": "Vulnerability.",
+            "quizQuestion": "What type of attack involves an attacker sending malicious SQL commands in an API request?",
+            "quizOptions": [
+                "XSS (Cross-Site Scripting)",
+                "CSRF (Cross-Site Request Forgery)",
+                "SQL Injection",
+                "DDoS"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_sec_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Security Headers 💻\n\n<!-- FULL_CODE_START\n// Express.js example using Helmet middleware\nconst express = require('express');\nconst helmet = require('helmet');\nconst rateLimit = require('express-rate-limit');\n\nconst app = express();\n\n// 1. Set secure HTTP headers\napp.use(helmet());\n\n// 2. Rate Limiting\nconst limiter = rateLimit({\n  windowMs: 15 * 60 * 1000, // 15 minutes\n  max: 100 // limit each IP to 100 requests per window\n});\napp.use(limiter);\nFULL_CODE_END -->"
+        },
+        {
+            "id": "api_sec_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Security 🎓\n\nDefense in Depth.\n\n- **HTTPS:** Encrypt everything.\n- **AuthN/AuthZ:** Verify identity and access.\n- **Rate Limiting:** Prevent abuse.\n- **Input Validation:** Sanitize data.\n- **CORS:** Browser protection.\n\n## Next Steps\nManage traffic flow with **Rate Limiting & Throttling**!"
+        }
+    ]
+}

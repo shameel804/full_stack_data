@@ -1,0 +1,103 @@
+{
+    "id": "learn_api_rate",
+    "topicId": "rate",
+    "topicTitle": "Rate Limiting",
+    "description": "Protect your API from abuse and ensuring fair usage with Rate Limiting algorithms and Throttling.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "api_rate_1",
+            "type": "content",
+            "title": "Why Limit?",
+            "content": "# Traffic Control 🚦\n\n1.  **Prevent Abuse:** Stop scraping bots and DDoS.\n2.  **Manage Costs:** APIs cost money (server time, DB reads).\n3.  **Fairness:** Ensure one heavy user doesn't degrade performance for others."
+        },
+        {
+            "id": "api_rate_2",
+            "type": "content",
+            "title": "Strategies",
+            "content": "# Limiting Strategies 🛑\n\n- **User-Based:** Limit by User ID (Token).\n- **IP-Based:** Limit by IP address (Good for anonymous APIs).\n- **Endpoint-Based:** Strict limits on expensive endpoints (`/report`), loose limits on cheap ones (`/health`)."
+        },
+        {
+            "id": "api_rate_3",
+            "type": "content",
+            "title": "Throttling vs Limiting",
+            "content": "# The Difference 📉\n\n- **Rate Limiting:** \"You have used 1000/1000 requests. Stop.\"\n- **Throttling:** \"Slow down.\" Delays processing or queues requests instead of rejecting them immediately, smoothing out spikes."
+        },
+        {
+            "id": "api_rate_4",
+            "type": "content",
+            "title": "Algorithm: Fixed Window",
+            "content": "# Fixed Window 🖼️\n\n\"100 requests per hour.\"\n\nReset at XX:00.\n\n**Problem:** A user can make 100 requests at 1:59 and 100 at 2:01. That's 200 requests in 2 minutes (a burst)."
+        },
+        {
+            "id": "api_rate_quiz_1",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Terminology.",
+            "quizQuestion": "What is the primary goal of throttling (vs simple rate limiting)?",
+            "quizOptions": [
+                "To ban users permanently",
+                "To encrypt data",
+                "To smooth out traffic spikes",
+                "To increase bandwidth"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_rate_5",
+            "type": "content",
+            "title": "Algorithm: Sliding Window",
+            "content": "# Sliding Window 🪟\n\nSolves the burst issue.\n\nTracks timestamps of requests.\n\n\"100 requests in the *last* 60 minutes.\"\n\nMore accurate but computationally more expensive to store/calculate."
+        },
+        {
+            "id": "api_rate_6",
+            "type": "content",
+            "title": "Algorithm: Token Bucket",
+            "content": "# Token Bucket 🪣\n\nA bucket gets tokens added at a fixed rate (e.g., 1 per second). Max capacity is capped.\n\nEach request consumes a token.\n\nAllows for **short bursts** (until bucket is empty), but enforces a long-term average rate."
+        },
+        {
+            "id": "api_rate_7",
+            "type": "content",
+            "title": "Algorithm: Leaky Bucket",
+            "content": "# Leaky Bucket 💧\n\nRequests enter a queue (bucket).\n\nThey are processed (leaked) at a constant rate.\n\nIf the queue is full, new requests are dropped.\n\nEnsures a perfectly smooth output rate."
+        },
+        {
+            "id": "api_rate_8",
+            "type": "content",
+            "title": "Implementation",
+            "content": "# Where to Limit? 📍\n\n1.  **Application Level:** Code middleware (Express/Django). Flexible but uses app resources.\n2.  **API Gateway:** (Kong, Nginx, AWS API Gateway). Efficient, protects the backend completely."
+        },
+        {
+            "id": "api_rate_9",
+            "type": "content",
+            "title": "Headers",
+            "content": "# Communicating Limits 📡\n\nStandard headers to inform clients:\n\n- `X-RateLimit-Limit`\n- `X-RateLimit-Remaining`\n- `X-RateLimit-Reset`\n- `Retry-After`: Seconds to wait before retrying."
+        },
+        {
+            "id": "api_rate_quiz_2",
+            "type": "quiz",
+            "title": "Algo Quiz",
+            "content": "Bursting.",
+            "quizQuestion": "Which algorithm allows for short bursts of traffic up to a maximum capacity?",
+            "quizOptions": [
+                "Fixed Window",
+                "Leaky Bucket",
+                "Token Bucket",
+                "Round Robin"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "api_rate_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Redis Sliding Window 💻\n\n<!-- FULL_CODE_START\n// Conceptual Redis implementation\nconst now = Date.now();\nconst windowStart = now - 60000; // 1 minute ago\n\n// Remove old requests\nredis.zremrangebyscore('requests:' + ip, 0, windowStart);\n\n// Count recent requests\nconst count = redis.zcard('requests:' + ip);\n\nif (count < LIMIT) {\n  redis.zadd('requests:' + ip, now, now);\n  next();\n} else {\n  res.status(429).send(\"Too Many Requests\");\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "api_rate_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Rate Limiting 🎓\n\nTraffic Control.\n\n- **Fixed Window:** Simple, bursty.\n- **Sliding Window:** Accurate, smooth.\n- **Token Bucket:** Allows bursts.\n- **Gateway:** Best place to enforce.\n- **429:** The status code.\n\n## Next Steps\nHandle changes gracefully with **Versioning**!"
+        }
+    ]
+}

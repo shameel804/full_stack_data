@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_rxjs",
+    "topicId": "rxjs",
+    "topicTitle": "RxJS & Observables",
+    "description": "Master Reactive Extensions for JavaScript (RxJS) to handle asynchronous data streams in Angular.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_rxjs_1",
+            "type": "content",
+            "title": "What is RxJS?",
+            "content": "# Reactive Extensions ⚡\n\nRxJS is a library for reactive programming using **Observables**.\n\nThink of an Observable as an array that arrives over time.\n\nAngular relies heavily on RxJS for HTTP, Forms, and Routing."
+        },
+        {
+            "id": "ng_rxjs_2",
+            "type": "content",
+            "title": "Observable vs Promise",
+            "content": "# The Difference 🥊\n\n**Promise:**\n- Handles a single event.\n- Runs immediately (Eager).\n- Cannot be cancelled.\n\n**Observable:**\n- Handles a stream of events (0 to many).\n- Runs only when subscribed (Lazy).\n- Can be cancelled (Unsubscribe)."
+        },
+        {
+            "id": "ng_rxjs_3",
+            "type": "content",
+            "title": "Subscription Management",
+            "content": "# Memory Leaks 💧\n\nIf you manually `.subscribe()` in a component, you MUST `.unsubscribe()` when the component is destroyed.\n\n```typescript\nngOnDestroy() {\n  this.mySubscription.unsubscribe();\n}\n```"
+        },
+        {
+            "id": "ng_rxjs_4",
+            "type": "content",
+            "title": "Async Pipe",
+            "content": "# The Async Pipe 🚿\n\nThe BEST way to handle observables.\n\nIt subscribes automatically when the component loads and unsubscribes when it is destroyed.\n\n```html\n<div *ngFor=\"let item of items$ | async\">\n  {{ item.name }}\n</div>\n```\n(Convention: append `$` to observable variables)."
+        },
+        {
+            "id": "ng_rxjs_quiz_1",
+            "type": "quiz",
+            "title": "Pipe Quiz",
+            "content": "Cleanup check.",
+            "quizQuestion": "What is the primary benefit of using the 'async' pipe in templates?",
+            "quizOptions": [
+                "It makes data load faster",
+                "It automatically manages subscriptions (sub/unsub)",
+                "It converts JSON to XML",
+                "It enables caching"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_rxjs_5",
+            "type": "content",
+            "title": "Operators",
+            "content": "# Operators 🔧\n\nFunctions that transform data in the stream.\n\nUse `.pipe()` to chain them.\n\n```typescript\nimport { map, filter } from 'rxjs/operators';\n\nmyObs$.pipe(\n  filter(x => x > 10),\n  map(x => x * 2)\n).subscribe(...)\n```"
+        },
+        {
+            "id": "ng_rxjs_6",
+            "type": "content",
+            "title": "Common Operators",
+            "content": "# Must Know Operators 🧰\n\n- `map`: Transform values.\n- `tap`: Side effects (log data) without changing it.\n- `filter`: Filter values.\n- `switchMap`: Switch to a new observable (cancel previous). Great for Type-ahead search."
+        },
+        {
+            "id": "ng_rxjs_7",
+            "type": "content",
+            "title": "Subjects",
+            "content": "# Subjects 📢\n\nA Subject is both an Observable (you can subscribe) and an Observer (you can emit data).\n\n```typescript\nconst subject = new Subject<number>();\n\nsubject.subscribe(v => console.log(v));\nsubject.next(1); // Emits 1\n```"
+        },
+        {
+            "id": "ng_rxjs_8",
+            "type": "content",
+            "title": "BehaviorSubject",
+            "content": "# BehaviorSubject 🧠\n\nA Subject that requires an initial value and always emits the current value to new subscribers.\n\nPerfect for holding state (like \"Current User\").\n\n```typescript\nconst user$ = new BehaviorSubject('Guest');\n```"
+        },
+        {
+            "id": "ng_rxjs_9",
+            "type": "content",
+            "title": "ForkJoin",
+            "content": "# Combining Streams 🤝\n\n`forkJoin` is like `Promise.all`.\n\nWait for multiple observables to complete, then emit the final values as an array.\n\n```typescript\nforkJoin([\n  http.get('/users'),\n  http.get('/books')\n]).subscribe(([users, books]) => ...)\n```"
+        },
+        {
+            "id": "ng_rxjs_quiz_2",
+            "type": "quiz",
+            "title": "Operator Quiz",
+            "content": "Transformation.",
+            "quizQuestion": "Which operator is used to perform side-effects (like logging) without modifying the stream data?",
+            "quizOptions": [
+                "map",
+                "tap",
+                "scan",
+                "reduce"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_rxjs_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Typeahead Search 💻\n\n<!-- FULL_CODE_START\nimport { Component, OnInit } from '@angular/core';\nimport { FormControl } from '@angular/forms';\nimport { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';\nimport { SearchService } from './search.service';\n\n@Component({ ... })\nexport class SearchComponent implements OnInit {\n  searchControl = new FormControl();\n  results$ = this.searchControl.valueChanges.pipe(\n    debounceTime(300),        // Wait 300ms after typing stops\n    distinctUntilChanged(),   // Ignore if same value\n    switchMap(term =>         // Cancel old request, start new\n      this.searchService.search(term)\n    )\n  );\n\n  constructor(private searchService: SearchService) {}\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_rxjs_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: RxJS 🎓\n\nStream Processing.\n\n- **Observable:** Stream of events.\n- **Subscribe:** Start listening.\n- **Operators:** Map, Filter, SwitchMap.\n- **Async Pipe:** Handle subs automatically.\n- **Subjects:** Multicast data.\n\n## Next Steps\nManage complex application state using **NgRx** (Redux for Angular)!"
+        }
+    ]
+}

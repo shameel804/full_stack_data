@@ -1,0 +1,103 @@
+{
+    "id": "learn_sql_joins",
+    "topicId": "joins",
+    "topicTitle": "Joins",
+    "description": "Combine rows from two or more tables based on a related column.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "sql_joins_1",
+            "type": "content",
+            "title": "Why Join? 🔗",
+            "content": "# Relational Data\n\nData is often split across multiple tables to avoid duplication (Normalization).\n\n**Joins** allow you to query data from multiple tables as if they were one."
+        },
+        {
+            "id": "sql_joins_2",
+            "type": "content",
+            "title": "INNER JOIN",
+            "content": "# The Default 🤝\n\nReturns records that have matching values in **BOTH** tables.\n\n<!-- FULL_CODE_START\nSELECT users.name, orders.amount\nFROM users\nINNER JOIN orders ON users.id = orders.user_id;\nFULL_CODE_END -->\n\nIf a user has no orders, they won't appear."
+        },
+        {
+            "id": "sql_joins_3",
+            "type": "content",
+            "title": "LEFT JOIN",
+            "content": "# All From Left ⬅️\n\nReturns all records from the left table, and matched records from the right.\n\nIf no match, the right side will be NULL.\n\n<!-- FULL_CODE_START\nSELECT users.name, orders.amount\nFROM users\nLEFT JOIN orders ON users.id = orders.user_id;\nFULL_CODE_END -->\n\nUsers with no orders will appear with NULL amount."
+        },
+        {
+            "id": "sql_joins_4",
+            "type": "content",
+            "title": "RIGHT JOIN",
+            "content": "# All From Right ➡️\n\nReturns all records from the right table, and matched records from the left.\n\nExact opposite of LEFT JOIN."
+        },
+        {
+            "id": "sql_joins_5",
+            "type": "content",
+            "title": "FULL OUTER JOIN",
+            "content": "# Everything 🌐\n\nReturns all records when there is a match in **EITHER** left or right table.\n\nNote: MySQL does not support FULL OUTER JOIN directly (use UNION). PostgreSQL does."
+        },
+        {
+            "id": "sql_joins_quiz_1",
+            "type": "quiz",
+            "title": "Join Quiz",
+            "content": "Behavior.",
+            "quizQuestion": "Which JOIN returns all rows from the first table, even if there are no matches in the second table?",
+            "quizOptions": [
+                "INNER JOIN",
+                "LEFT JOIN",
+                "RIGHT JOIN",
+                "CROSS JOIN"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_joins_6",
+            "type": "content",
+            "title": "CROSS JOIN",
+            "content": "# Cartesian Product ✖️\n\nReturns all possible combinations of rows from both tables.\n\nIf Table A has 10 rows and Table B has 5 rows, result is 50 rows.\n\nUsually not what you want unless generating combinations."
+        },
+        {
+            "id": "sql_joins_7",
+            "type": "content",
+            "title": "Self Join",
+            "content": "# Me, Myself & I 🪞\n\nA regular join, but the table is joined with itself.\n\nUse aliases to distinguish the two instances.\n\n<!-- FULL_CODE_START\nSELECT A.name as Employee, B.name as Manager\nFROM employees A, employees B\nWHERE A.manager_id = B.id;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_joins_8",
+            "type": "content",
+            "title": "Multiple Joins",
+            "content": "# Chaining ⛓️\n\nYou can chain multiple joins.\n\n<!-- FULL_CODE_START\nSELECT *\nFROM users\nJOIN orders ON users.id = orders.user_id\nJOIN items ON orders.id = items.order_id;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_joins_9",
+            "type": "content",
+            "title": "Aliases",
+            "content": "# Short Names 🏷️\n\nUse `AS` to make queries readable.\n\n<!-- FULL_CODE_START\nSELECT u.name, o.date\nFROM users AS u\nJOIN orders AS o ON u.id = o.user_id;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "sql_joins_10",
+            "type": "content",
+            "title": "UNION",
+            "content": "# Stacking Results 🥞\n\nCombines the result-set of two or more SELECT statements.\n\nColumns must match.\n\n`SELECT city FROM suppliers UNION SELECT city FROM customers;`"
+        },
+        {
+            "id": "sql_joins_quiz_2",
+            "type": "quiz",
+            "title": "Type Quiz",
+            "content": "Combinations.",
+            "quizQuestion": "What is the result of a CROSS JOIN between a table with 5 rows and a table with 4 rows?",
+            "quizOptions": [
+                "9 rows",
+                "20 rows",
+                "1 row",
+                "0 rows"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sql_joins_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Joins 🔗\n\nConnect your data.\n\n- **INNER:** Matches only.\n- **LEFT:** All left + matches.\n- **FULL:** Everything.\n- **CROSS:** All combinations.\n\n## Next Steps\nSummarize data with **Aggregates**!"
+        }
+    ]
+}

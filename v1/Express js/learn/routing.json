@@ -1,0 +1,103 @@
+{
+    "id": "learn_express_routing",
+    "topicId": "routing",
+    "topicTitle": "Advanced Routing",
+    "description": "Modularize your app with express.Router, chaining, and regex paths.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "express_routing_1",
+            "type": "content",
+            "title": "express.Router",
+            "content": "# Modular Routes 📂\n\nIsolate routes into separate files.\n\n`routes/users.js`:\n<!-- FULL_CODE_START\nconst express = require('express');\nconst router = express.Router();\n\nrouter.get('/', (req, res) => {\n  res.send('User list');\n});\n\nmodule.exports = router;\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_2",
+            "type": "content",
+            "title": "Mounting Routers",
+            "content": "# Connecting Modules 🔗\n\nIn your main `app.js`:\n\n<!-- FULL_CODE_START\nconst usersRouter = require('./routes/users');\n\n// Mount the router on a path\napp.use('/users', usersRouter);\n// Now handles /users/\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_3",
+            "type": "content",
+            "title": "app.route()",
+            "content": "# Chained Route Handlers ⛓️\n\nAvoid duplicate route names.\n\n<!-- FULL_CODE_START\napp.route('/book')\n  .get((req, res) => {\n    res.send('Get a random book');\n  })\n  .post((req, res) => {\n    res.send('Add a book');\n  })\n  .put((req, res) => {\n    res.send('Update the book');\n  });\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_4",
+            "type": "content",
+            "title": "Response Methods Detail",
+            "content": "# More than send() 📬\n\n- `res.download()`: Prompt a file download.\n- `res.redirect('/go-here')`: Redirects request.\n- `res.render('index')`: Renders a view template.\n- `res.end()`: End process without data (fast)."
+        },
+        {
+            "id": "express_routing_quiz_1",
+            "type": "quiz",
+            "title": "Method Quiz",
+            "content": "Responses.",
+            "quizQuestion": "Which method would you use to force the browser to download a file?",
+            "quizOptions": [
+                "res.send()",
+                "res.download()",
+                "res.file()",
+                "res.json()"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "express_routing_5",
+            "type": "content",
+            "title": "Regex Paths",
+            "content": "# Advanced Patterns 🧠\n\nMatch complex URLs.\n\n<!-- FULL_CODE_START\n// Matches /butterfly or /dragonfly\napp.get(/.*fly$/, (req, res) => {\n  res.send('Processing fly request');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_6",
+            "type": "content",
+            "title": "Request Object",
+            "content": "# Handy Properties 🧰\n\n- `req.ip`: Client IP address.\n- `req.path`: URL path.\n- `req.secure`: Boolean (HTTPS?).\n- `req.xhr`: Boolean (Ajax request?)."
+        },
+        {
+            "id": "express_routing_7",
+            "type": "content",
+            "title": "Multiple Callback Functions",
+            "content": "# Middleware Array 🧵\n\nYou can pass an array of callbacks.\n\n<!-- FULL_CODE_START\nconst log = (req, res, next) => { console.log('Hit'); next(); }\nconst auth = (req, res, next) => { next(); }\n\napp.get('/admin', [log, auth], (req, res) => {\n  res.send('Admin Area');\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_8",
+            "type": "content",
+            "title": "app.all()",
+            "content": "# Catch All Methods 🥅\n\nExecutes for GET, POST, PUT, DELETE, etc.\n\n<!-- FULL_CODE_START\napp.all('/secret', (req, res, next) => {\n  console.log('Accessing secret section ...');\n  next(); // pass control to the next handler\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_9",
+            "type": "content",
+            "title": "Route Parameters Advanced",
+            "content": "# Hyphens and Dots ➖\n\nExpress routes handle standard URL characters nicely.\n\n- `/plantae/:genus.:species`\n- `/flights/:from-:to`\n\nVery useful for SEO friendly URLs."
+        },
+        {
+            "id": "express_routing_10",
+            "type": "content",
+            "title": "404 Handling",
+            "content": "# The Last Route 🔚\n\nIf no route matches, Express sends `Cannot GET /...`\n\nAdd a catch-all at the END:\n\n<!-- FULL_CODE_START\napp.use((req, res, next) => {\n  res.status(404).send(\"Sorry can't find that!\");\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "express_routing_quiz_2",
+            "type": "quiz",
+            "title": "Router Quiz",
+            "content": "Cleanup.",
+            "quizQuestion": "Where should you place the 404 handler middleware?",
+            "quizOptions": [
+                "At the very top",
+                "Inside the route",
+                "At the very bottom",
+                "In a separate file only"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "express_routing_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Advanced Routing 🗺️\n\nStructure your app.\n\n- **Router:** Organize routes into modules.\n- **Chaining:** `app.route().get().post()`.\n- **Regex:** Powerful pattern matching.\n- **404:** Handle missing pages at the end.\n\n## Next Steps\nLearn the power of **Middleware**!"
+        }
+    ]
+}

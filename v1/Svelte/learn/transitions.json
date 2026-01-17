@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_transitions",
+    "topicId": "transitions",
+    "topicTitle": "Transitions",
+    "description": "Add polish to your UI with Svelte's built-in transition engine: fade, fly, slide, and custom animations.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_trans_1",
+            "type": "content",
+            "title": "Built-in Transitions",
+            "content": "# Easy Animation ✨\n\nSvelte has an animation engine built-in.\n\nJust import `fade`, `fly`, `slide`, `scale`, `draw`, `crossfade` from `svelte/transition`.\n\nUse the `transition:` directive on any element."
+        },
+        {
+            "id": "svelte_trans_2",
+            "type": "content",
+            "title": "Fade Example",
+            "content": "# The Fade 🌫️\n\n```html\n<script>\n  import { fade } from 'svelte/transition';\n  let visible = true;\n</script>\n\n{#if visible}\n  <div transition:fade>\n    Fades in and out\n  </div>\n{/if}\n```"
+        },
+        {
+            "id": "svelte_trans_3",
+            "type": "content",
+            "title": "Parameters",
+            "content": "# Configuring ⚙️\n\nYou can pass parameters like `duration`, `delay`, and `easing`.\n\n```html\n<p transition:fly=\"{{ y: 200, duration: 2000 }}\">\n  Flies up from bottom\n</p>\n```"
+        },
+        {
+            "id": "svelte_trans_4",
+            "type": "content",
+            "title": "In and Out",
+            "content": "# Directional ↔️\n\nSometimes you want different animations for entering and leaving.\n\nUse `in:` and `out:` instead of `transition:`.\n\n```html\n<p in:fly=\"{{ y: 200 }}\" out:fade>\n  Flies in, Fades out\n</p>\n```"
+        },
+        {
+            "id": "svelte_trans_quiz_1",
+            "type": "quiz",
+            "title": "Directive Quiz",
+            "content": "Property check.",
+            "quizQuestion": "Which directive applies the transition BOTH when entering and leaving the DOM?",
+            "quizOptions": [
+                "animate:",
+                "move:",
+                "transition:",
+                "motion:"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_trans_5",
+            "type": "content",
+            "title": "Custom Transitions",
+            "content": "# Custom CSS 🎨\n\nCreate your own efficiently.\n\n```javascript\nfunction spin(node, { duration }) {\n  return {\n    duration,\n    css: t => {\n      const eased = elasticOut(t);\n      return `transform: scale(${eased}) rotate(${eased * 1080}deg)`;\n    }\n  };\n}\n```"
+        },
+        {
+            "id": "svelte_trans_6",
+            "type": "content",
+            "title": "Events",
+            "content": "# Transition Events 📢\n\nYou can listen for when animations start and end.\n\n- `on:introstart`\n- `on:introend`\n- `on:outrostart`\n- `on:outroend`\n\n```html\n<p transition:fade on:introend=\"{() => console.log('Done!')}\">\n```"
+        },
+        {
+            "id": "svelte_trans_7",
+            "type": "content",
+            "title": "Local Transitions",
+            "content": "# local modifier 🏠\n\nBy default, transitions play when a parent block is added/removed.\n\nUse `local` to only play when the element ITSELF is added/removed, ignoring parent changes.\n\n```html\n<div transition:slide|local>\n```"
+        },
+        {
+            "id": "svelte_trans_8",
+            "type": "content",
+            "title": "Deferred Transitions",
+            "content": "# Crossfade 🎭\n\nCreate the illusion of an element moving from one list to another.\n\nUse `crossfade` to pair an element being removed from A with an element being added to B.\n\nDoes magic with absolute positioning and transforms."
+        },
+        {
+            "id": "svelte_trans_9",
+            "type": "content",
+            "title": "The animate Directive",
+            "content": "# FLIP Animation 🤸\n\nWhen re-ordering a list, items usually jump instantly.\n\nUse `animate:flip` to make them slide to their new positions.\n\n```html\n<li animate:flip=\"{{ duration: 500 }}\">\n```\n(Must serve inside a keyed each block)."
+        },
+        {
+            "id": "svelte_trans_quiz_2",
+            "type": "quiz",
+            "title": "Key Requirement Quiz",
+            "content": "Flip animation.",
+            "quizQuestion": "To use 'animate:flip', your loop MUST be...",
+            "quizOptions": [
+                "Asynchronous",
+                "Keyed (using (id))",
+                "Filtered",
+                "Sorted"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_trans_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Slide Toggle 💻\n\n<!-- FULL_CODE_START\n<script>\n\timport { slide } from 'svelte/transition';\n\tlet visible = true;\n</script>\n\n<label>\n\t<input type=\"checkbox\" bind:checked={visible}>\n\tToggle visibility\n</label>\n\n{#if visible}\n\t<div transition:slide>\n\t\t<img src=\"https://svelte.dev/svelte-logo-horizontal.svg\" >\n\t</div>\n{/if}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_trans_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Transitions 🎓\n\nProfessional Polish.\n\n- **Directives:** `transition:`, `in:`, `out:`.\n- **Presets:** `fade`, `fly`, `slide`, `scale`.\n- **Custom:** Define CSS keyframes in JS.\n- **Animate:** `animate:flip` for reordering lists.\n- **Events:** Listen for start/end.\n\n## Next Steps\nBuild full applications with **Routing**!"
+        }
+    ]
+}

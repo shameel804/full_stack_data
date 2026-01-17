@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_forms",
+    "topicId": "forms",
+    "topicTitle": "Forms",
+    "description": "Master Angular Forms: The easy Template-driven approach vs. the powerful Reactive Forms approach.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_form_1",
+            "type": "content",
+            "title": "Two Approaches",
+            "content": "# Template vs Reactive 🥊\n\n1.  **Template-Driven:** Logic is in the HTML template. Simple, ideal for simple forms. Uses `FormsModule`.\n2.  **Reactive Forms:** Logic is in the Component class. Explicit, testable, scalable. Uses `ReactiveFormsModule`."
+        },
+        {
+            "id": "ng_form_2",
+            "type": "content",
+            "title": "Template-Driven Setup",
+            "content": "# Template Approach 📝\n\nMust import `FormsModule`.\n\nUse `[(ngModel)]` for two-way binding directly to a property.\n\n```html\n<input [(ngModel)]=\"user.name\" name=\"name\" required>\n```\nAngular automatically creates a FormControl for this input."
+        },
+        {
+            "id": "ng_form_3",
+            "type": "content",
+            "title": "Reactive Forms Setup",
+            "content": "# Reactive Approach 🏗️\n\nMust import `ReactiveFormsModule`.\n\nDefine the form model in the class:\n\n```typescript\nemail = new FormControl('');\n```\n\nBind it in the template:\n```html\n<input [formControl]=\"email\">\n```"
+        },
+        {
+            "id": "ng_form_4",
+            "type": "content",
+            "title": "FormGroups",
+            "content": "# FormGroup 📦\n\nGroup multiple controls together.\n\n```typescript\nloginForm = new FormGroup({\n  username: new FormControl(''),\n  password: new FormControl('')\n});\n```\n\n```html\n<form [formGroup]=\"loginForm\">\n  <input formControlName=\"username\">\n</form>\n```"
+        },
+        {
+            "id": "ng_form_quiz_1",
+            "type": "quiz",
+            "title": "Module Quiz",
+            "content": "Import check.",
+            "quizQuestion": "Which module must be imported to use 'formControlName' in your templates?",
+            "quizOptions": [
+                "FormsModule",
+                "ReactiveFormsModule",
+                "BrowserModule",
+                "HttpModule"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_form_5",
+            "type": "content",
+            "title": "FormBuilder",
+            "content": "# FormBuilder 🛠️\n\nSyntactic sugar to create forms faster.\n\n```typescript\nconstructor(private fb: FormBuilder) {}\n\nngOnInit() {\n  this.myForm = this.fb.group({\n    firstName: [''],\n    lastName: ['']\n  });\n}\n```"
+        },
+        {
+            "id": "ng_form_6",
+            "type": "content",
+            "title": "Validators",
+            "content": "# Validation 🛡️\n\nBuilt-in validators: `required`, `minLength`, `email`, `pattern`.\n\n```typescript\nthis.email = new FormControl('', [\n  Validators.required,\n  Validators.email\n]);\n```\nCheck validity: `this.email.valid` or `this.email.errors`."
+        },
+        {
+            "id": "ng_form_7",
+            "type": "content",
+            "title": "Displaying Errors",
+            "content": "# UI Feedback 🚨\n\nDisplay errors only if the control is \"touched\" or \"dirty\".\n\n```html\n<div *ngIf=\"email.invalid && (email.dirty || email.touched)\">\n  <div *ngIf=\"email.errors?.['required']\">Email is required.</div>\n</div>\n```"
+        },
+        {
+            "id": "ng_form_8",
+            "type": "content",
+            "title": "Custom Validators",
+            "content": "# Custom Logic 👮\n\nA validator is just a function that returns `null` (valid) or an object (invalid).\n\n```typescript\nexport function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {\n  return (control: AbstractControl): ValidationErrors | null => {\n    const forbidden = nameRe.test(control.value);\n    return forbidden ? { forbiddenName: { value: control.value } } : null;\n  };\n}\n```"
+        },
+        {
+            "id": "ng_form_9",
+            "type": "content",
+            "title": "FormArray",
+            "content": "# FormArray 📚\n\nManage a list of controls (e.g., dynamic list of skills).\n\n```typescript\nthis.skills = this.fb.array([]);\n\naddSkill() {\n  this.skills.push(this.fb.control(''));\n}\n```"
+        },
+        {
+            "id": "ng_form_quiz_2",
+            "type": "quiz",
+            "title": "Status Quiz",
+            "content": "User interaction.",
+            "quizQuestion": "Which property indicates that the user has visited the control and then blurred (left) it?",
+            "quizOptions": [
+                "dirty",
+                "touched",
+                "invalid",
+                "pristine"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ng_form_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Reactive Form 💻\n\n<!-- FULL_CODE_START\nimport { Component } from '@angular/core';\nimport { FormBuilder, Validators } from '@angular/forms';\n\n@Component({\n  selector: 'app-profile-editor',\n  template: `\n    <form [formGroup]=\"profileForm\" (ngSubmit)=\"onSubmit()\">\n      <label>First Name: </label>\n      <input formControlName=\"firstName\">\n      \n      <button type=\"submit\" [disabled]=\"!profileForm.valid\">Submit</button>\n    </form>\n  `\n})\nexport class ProfileEditorComponent {\n  profileForm = this.fb.group({\n    firstName: ['', Validators.required],\n    lastName: ['']\n  });\n\n  constructor(private fb: FormBuilder) { }\n\n  onSubmit() {\n    console.warn(this.profileForm.value);\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_form_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Forms 🎓\n\nHandling input.\n\n- **Template-Driven:** Good for simple stuff (`[(ngModel)]`).\n- **Reactive:** Good for complex logic (`FormControl`).\n- **Validators:** Enforce rules.\n- **FormGroup:** Group controls.\n- **FormBuilder:** Helper utility.\n\n## Next Steps\nMaster asynchronous data streams with **RxJS & Observables**!"
+        }
+    ]
+}

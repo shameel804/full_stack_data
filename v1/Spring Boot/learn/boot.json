@@ -1,0 +1,103 @@
+{
+    "id": "learn_springboot_boot",
+    "topicId": "boot",
+    "topicTitle": "Auto-Configuration",
+    "description": "How Spring Boot magically configures your app.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "springboot_boot_1",
+            "type": "content",
+            "title": "The Magic 🪄",
+            "content": "# Opinionated Defaults\n\nSpring Boot looks at your classpath (libraries you added) and automatically configures beans for you.\n\nAdded `h2-database`? It configures an in-memory DB.\nAdded `spring-web`? It configures Tomcat and Spring MVC."
+        },
+        {
+            "id": "springboot_boot_2",
+            "type": "content",
+            "title": "@EnableAutoConfiguration",
+            "content": "# The Switch 🔛\n\nThis annotation (included in `@SpringBootApplication`) tells Spring Boot to start the auto-configuration process."
+        },
+        {
+            "id": "springboot_boot_3",
+            "type": "content",
+            "title": "Starters 🚀",
+            "content": "# Dependency Bundles\n\n`spring-boot-starter-web`\n\nIncludes all dependencies you need for a web app (Tomcat, Jackson, Validation).\n\nSimplifies your `pom.xml` or `build.gradle`."
+        },
+        {
+            "id": "springboot_boot_4",
+            "type": "content",
+            "title": "Externalized Configuration",
+            "content": "# properties vs yaml 📄\n\nSettings are pulled from:\n1. Command line args\n2. Java System properties\n3. `application.properties` (or `.yml`)\n4. Environment variables\n\n`server.port=8081`"
+        },
+        {
+            "id": "springboot_boot_5",
+            "type": "content",
+            "title": "Profiles",
+            "content": "# Environments 🌍\n\nDifferent settings for Dev, Test, and Prod.\n\n`application-dev.properties`\n`application-prod.properties`\n\nActivate with `-Dspring.profiles.active=prod`."
+        },
+        {
+            "id": "springboot_boot_quiz_1",
+            "type": "quiz",
+            "title": "Config Quiz",
+            "content": "Environments.",
+            "quizQuestion": "Which file would Spring Boot load if the active profile is set to 'prod'?",
+            "quizOptions": [
+                "application.properties",
+                "application-prod.properties",
+                "prod.xml",
+                "settings.json"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "springboot_boot_6",
+            "type": "content",
+            "title": "@Value",
+            "content": "# Injection 💉\n\nInject values from properties files into Java fields.\n\n```java\n@Value(\"${app.name}\")\nprivate String appName;\n```"
+        },
+        {
+            "id": "springboot_boot_7",
+            "type": "content",
+            "title": "@ConfigurationProperties",
+            "content": "# Type-Safe Config 🛡️\n\nBind a group of properties to a POJO.\n\n`app.mail.host`, `app.mail.port` -> `MailConfig` class.\n\nBetter than scattering `@Value` everywhere."
+        },
+        {
+            "id": "springboot_boot_8",
+            "type": "content",
+            "title": "Actuator",
+            "content": "# Monitoring 🩺\n\n`spring-boot-starter-actuator`\n\nExposes endpoints to monitor your app:\n- `/actuator/health`: System up/down.\n- `/actuator/info`: Git commit info.\n- `/actuator/metrics`: CPU, memory usage."
+        },
+        {
+            "id": "springboot_boot_9",
+            "type": "content",
+            "title": "Custom Starters",
+            "content": "# Reusability 📦\n\nYou can create your own starters! (e.g., `company-logging-starter`).\n\nEncapsulates common company configurations and libraries to share across teams."
+        },
+        {
+            "id": "springboot_boot_10",
+            "type": "content",
+            "title": "Disabling Auto-Config",
+            "content": "# Override 🛑\n\nIf auto-config gets in your way (e.g., you want your OWN DataSource, not the automatic one):\n\n`@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })`"
+        },
+        {
+            "id": "springboot_boot_quiz_2",
+            "type": "quiz",
+            "title": "Monitoring Quiz",
+            "content": "Health.",
+            "quizQuestion": "Which Actuator endpoint specifically checks if the application is running?",
+            "quizOptions": [
+                "/status",
+                "/actuator/health",
+                "/ping",
+                "/check"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "springboot_boot_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Boot Magic ✨\n\nZero config setup.\n\n- **Starters:** Dependencies.\n- **AutoConfig:** Intelligent defaults.\n- **Profiles:** Env specific.\n- **Actuator:** Health checks.\n\n## Next Steps\nEnsure quality with **Testing**!"
+        }
+    ]
+}

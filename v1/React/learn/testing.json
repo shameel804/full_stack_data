@@ -1,0 +1,103 @@
+{
+    "id": "learn_react_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing",
+    "description": "Ensure your app works as expected using Jest and React Testing Library (RTL).",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "react_test_1",
+            "type": "content",
+            "title": "Why Test?",
+            "content": "# Confidence 🤝\n\nTesting gives you confidence that your code works and that new changes don't break old features (Regression).\n\nTools:\n- **Jest:** The test runner (finds tests, runs them, checks assertions).\n- **React Testing Library (RTL):** Render components and interact with them like a user."
+        },
+        {
+            "id": "react_test_2",
+            "type": "content",
+            "title": "React Testing Library",
+            "content": "# Philosophy 🧠\n\n\"The more your tests resemble the way your software is used, the more confidence they can give you.\"\n\nDon't test internal state (e.g., \"state.count is 5\").\nTest what the user sees (e.g., \"The screen says '5'\")."
+        },
+        {
+            "id": "react_test_3",
+            "type": "content",
+            "title": "First Test",
+            "content": "# Basic Test 🧪\n\n`App.test.js`\n\n```jsx\nimport { render, screen } from '@testing-library/react';\nimport App from './App';\n\ntest('renders learn react link', () => {\n  render(<App />);\n  const linkElement = screen.getByText(/learn react/i);\n  expect(linkElement).toBeInTheDocument();\n});\n```"
+        },
+        {
+            "id": "react_test_4",
+            "type": "content",
+            "title": "Querying Elements",
+            "content": "# Finding Elements 🔎\n\nAccess the rendered UI using `screen`.\n\nPriority of queries:\n1.  `getByRole`: ('button', 'heading') - Most accessible.\n2.  `getByLabelText`: For form inputs.\n3.  `getByText`: For non-interactive text.\n4.  `getByTestId`: Last resort (add `data-testid` to HTML)."
+        },
+        {
+            "id": "react_test_5",
+            "type": "content",
+            "title": "User Interactions",
+            "content": "# Firing Events 👆\n\nUse `fireEvent` or the newer `userEvent` API to simulate clicks and typing.\n\n```jsx\nimport { fireEvent } from '@testing-library/react';\n\n// simulate click\nfireEvent.click(screen.getByText('Submit'));\n```"
+        },
+        {
+            "id": "react_test_quiz_1",
+            "type": "quiz",
+            "title": "Query Quiz",
+            "content": "Select the best query.",
+            "quizQuestion": "Which query is preferred by RTL because it encourages accessibility?",
+            "quizOptions": [
+                "getByTestId",
+                "getByClassName",
+                "getByRole",
+                "querySelector"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_test_6",
+            "type": "content",
+            "title": "Async Testing",
+            "content": "# Async Tests ⏳\n\nIf elements appear after a fetch, use `findBy...` (which waits) instead of `getBy...` (which fails immediately).\n\n```jsx\ntest('loads user', async () => {\n  render(<UserProfile />);\n  // Waits up to 1000ms\n  const userObj = await screen.findByText('Alice');\n  expect(userObj).toBeInTheDocument();\n});\n```"
+        },
+        {
+            "id": "react_test_7",
+            "type": "content",
+            "title": "Mocking API Calls",
+            "content": "# Mocking ✨\n\nDon't make real API calls in tests (slow, unreliable).\n\nMock the `fetch` function or use **MSW (Mock Service Worker)** to intercept network requests and return fake data instantly."
+        },
+        {
+            "id": "react_test_8",
+            "type": "content",
+            "title": "Snapshot Testing",
+            "content": "# Snapshots 📸\n\nTake a picture of the DOM structure.\n\n`expect(tree).toMatchSnapshot();`\n\nIf you change the UI later, the test fails. You can then check if the change was intentional (Update Snapshot) or a bug."
+        },
+        {
+            "id": "react_test_9",
+            "type": "content",
+            "title": "Code Coverage",
+            "content": "# Coverage ☂️\n\nA metric showing what % of your code ran during tests.\n\n`npm test -- --coverage`\n\nAim for high coverage on critical paths, but don't obsess over 100%."
+        },
+        {
+            "id": "react_test_quiz_2",
+            "type": "quiz",
+            "title": "Async Quiz",
+            "content": "Waiting for elements.",
+            "quizQuestion": "Which prefix should you use to search for an element that might not be on screen yet?",
+            "quizOptions": [
+                "getBy",
+                "queryBy",
+                "findBy",
+                "searchFor"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "react_test_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Counter Test 💻\n\n<!-- FULL_CODE_START\nimport { render, screen, fireEvent } from '@testing-library/react';\nimport Counter from './Counter';\n\ntest('increments counter', () => {\n  render(<Counter />);\n  \n  // Check initial state\n  const counterText = screen.getByText('Count: 0');\n  expect(counterText).toBeInTheDocument();\n  \n  // Click button\n  const button = screen.getByText('Increment');\n  fireEvent.click(button);\n  \n  // Check updated state\n  expect(screen.getByText('Count: 1')).toBeInTheDocument();\n});\nFULL_CODE_END -->"
+        },
+        {
+            "id": "react_test_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Testing 🎓\n\nSleep better at night.\n\n- **Jest:** The runner.\n- **RTL:** Render and interact.\n- **getByRole:** Best way to find elements.\n- **findBy...:** For async elements.\n- **Mocking:** Fake external dependencies.\n\n## Next Steps\nYou have mastered React! Time to explore another framework: **Vue.js**."
+        }
+    ]
+}

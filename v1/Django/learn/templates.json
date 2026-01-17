@@ -1,0 +1,103 @@
+{
+    "id": "learn_django_templates",
+    "topicId": "templates",
+    "topicTitle": "Templates",
+    "description": "Master the Django Template Language (DTL): Inheritance, Tags, and Filters.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "django_templates_1",
+            "type": "content",
+            "title": "Django Template Language (DTL)",
+            "content": "# Dynamic HTML 🎨\n\nDTL allows you to generate HTML dynamically.\n\nIt's designed to be comfortable for those used to HTML.\n\nVariables: `{{ variable }}`\nTags: `{% tag %}`"
+        },
+        {
+            "id": "django_templates_2",
+            "type": "content",
+            "title": "Variables",
+            "content": "# Display Data 📊\n\nOutput a value passed from the view.\n\n`{{ user.username }}`\n\nIf the variable is a dictionary, lookup by key. If object, lookup by attribute. If list, lookup by index (`{{ list.0 }}`)."
+        },
+        {
+            "id": "django_templates_3",
+            "type": "content",
+            "title": "Tags",
+            "content": "# Logic 🧠\n\nPerform loops, if statements, etc.\n\n<!-- FULL_CODE_START\n<ul>\n{% for athlete in athlete_list %}\n    <li>{{ athlete.name }}</li>\n{% endfor %}\n</ul>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_templates_4",
+            "type": "content",
+            "title": "Filters",
+            "content": "# Modify Data 🛠️\n\nTransform variables before display using a pipe `|`.\n\n- `{{ name|lower }}`: Lowercase.\n- `{{ bio|truncatewords:30 }}`: First 30 words.\n- `{{ date|date:\"D d M Y\" }}`: Format date."
+        },
+        {
+            "id": "django_templates_5",
+            "type": "content",
+            "title": "Inheritance",
+            "content": "# The Power Move ⚡\n\nDon't repeat HTML structure.\n\n1. Create `base.html` with blocks.\n2. Child templates `extend` it.\n\n<!-- FULL_CODE_START\n{# base.html #}\n<body>\n    {% block content %}{% endblock %}\n</body>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_templates_6",
+            "type": "content",
+            "title": "Extending Base",
+            "content": "# Child Template 👶\n\n<!-- FULL_CODE_START\n{% extends \"base.html\" %}\n\n{% block content %}\n    <h1>Welcome Home</h1>\n{% endblock %}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "django_templates_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "DTL.",
+            "quizQuestion": "Which syntax is used to execute a loop or logical check in Django templates?",
+            "quizOptions": [
+                "{{ ... }}",
+                "<% ... %>",
+                "{% ... %}",
+                "[[ ... ]]"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "django_templates_7",
+            "type": "content",
+            "title": "Includes",
+            "content": "# Components 🧩\n\nLoad a snippet of HTML into another template.\n\n`{% include \"nav.html\" %}`\n\nUseful for headers, footers, and sidebars."
+        },
+        {
+            "id": "django_templates_8",
+            "type": "content",
+            "title": "Static Files",
+            "content": "# CSS & Images 🖼️\n\nServe assets.\n\n1. `{% load static %}` at top.\n2. `<img src=\"{% static 'images/logo.png' %}\">`\n\nDjango handles URLs automatically."
+        },
+        {
+            "id": "django_templates_9",
+            "type": "content",
+            "title": "URL Names",
+            "content": "# No Hardcoded Links 🔗\n\nUse the `url` tag with the view name.\n\n`href=\"{% url 'post_detail' post.id %}\"`\n\nIf you change the URL in `urls.py`, the link updates automatically."
+        },
+        {
+            "id": "django_templates_10",
+            "type": "content",
+            "title": "Custom Tags",
+            "content": "# Extending DTL 🔌\n\nYou can create your own tags and filters in python files inside `templatetags/` directory of your app."
+        },
+        {
+            "id": "django_templates_quiz_2",
+            "type": "quiz",
+            "title": "Linking Quiz",
+            "content": "Best Practices.",
+            "quizQuestion": "Why should you use the `{% url %}` tag instead of hardcoding paths like `/about/`?",
+            "quizOptions": [
+                "It is required by HTML5",
+                "It makes the page load faster",
+                "It prevents broken links if you change the URL pattern in urls.py",
+                "It improves SEO ranking"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "django_templates_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Templates 📑\n\nPresentation Layer.\n\n- **Var:** `{{ }}`\n- **Tags:** `{% %}`\n- **Filters:** `|`\n- **Inheritance:** `block` and `extends`.\n\n## Next Steps\nHandle user inputs with **Forms**!"
+        }
+    ]
+}

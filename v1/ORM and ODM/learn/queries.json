@@ -1,0 +1,103 @@
+{
+    "id": "learn_orm_queries",
+    "topicId": "queries",
+    "topicTitle": "Query Building",
+    "description": "Construct complex queries using methods instead of strings.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orm_queries_1",
+            "type": "content",
+            "title": "Query Builders 🏗️",
+            "content": "# Fluent Interface\n\nA way to build SQL queries programmatically by chaining methods.\n\n`db.table('users').where('age', '>', 18).orderBy('name').get()`\n\nIndependent of the underlying database syntax."
+        },
+        {
+            "id": "orm_queries_2",
+            "type": "content",
+            "title": "Raw SQL",
+            "content": "# Sometimes you need it ⚠️\n\nORMs allow you to drop down to raw SQL when the query builder is too restrictive or slow.\n\n`db.raw('SELECT * FROM users WHERE YEAR(created_at) = 2023')`\n\nBe careful of SQL Injection!"
+        },
+        {
+            "id": "orm_queries_3",
+            "type": "content",
+            "title": "Dynamic Queries",
+            "content": "# Conditional Logic 🔀\n\nAdd clauses based on user input.\n\n<!-- FULL_CODE_START\nquery = User.query();\nif (request.has('search')) {\n    query.where('name', 'like', '%' + search + '%');\n}\nif (request.has('sort')) {\n    query.orderBy(sort);\n}\nresults = query.get();\nFULL_CODE_END -->"
+        },
+        {
+            "id": "orm_queries_4",
+            "type": "content",
+            "title": "Scopes / Specifications",
+            "content": "# Reusable Filters ♻️\n\nDefine common queries in one place.\n\n`User.active().vip().get()`\n\nKeeps your controller code clean."
+        },
+        {
+            "id": "orm_queries_5",
+            "type": "content",
+            "title": "Subqueries in ORM",
+            "content": "# Nesting 🐢\n\nMost ORMs support subqueries or \"where exists\".\n\n`User.whereHas('posts', function(q) { q.where('likes', '>', 100); }).get()`\n\n(Find users who have at least one post with > 100 likes)."
+        },
+        {
+            "id": "orm_queries_quiz_1",
+            "type": "quiz",
+            "title": "Safety Quiz",
+            "content": "Security.",
+            "quizQuestion": "Why is using a Query Builder generally safer than concatenation strings for SQL?",
+            "quizOptions": [
+                "It is faster",
+                "It uses parameterized queries to prevent SQL Injection",
+                "It is easier to read",
+                "It supports more databases"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orm_queries_6",
+            "type": "content",
+            "title": "Pagination",
+            "content": "# Paging Data 📄\n\nORMs make pagination trivial.\n\n`User.paginate(10)`\n\nAutomatically handles LIMIT and OFFSET and returns metadata (total pages, current page)."
+        },
+        {
+            "id": "orm_queries_7",
+            "type": "content",
+            "title": "Aggregates",
+            "content": "# Doing Math 🧮\n\n`User.count()`\n`Order.sum('amount')`\n`Product.avg('price')`\n\nRuns the aggregate query on the DB, not in memory."
+        },
+        {
+            "id": "orm_queries_8",
+            "type": "content",
+            "title": "Select N+1 Problem",
+            "content": "# The Silent Killer 🥷\n\nIterating over N items and performing a query for each.\n\n**Bad:** Loop users -> `user.posts` (1 + N queries).\n**Good:** Eager load `User.with('posts').get()` (2 queries)."
+        },
+        {
+            "id": "orm_queries_9",
+            "type": "content",
+            "title": "Pluck / Select",
+            "content": "# Optimization 🤏\n\nRetrieve only specific values, not full objects.\n\n`User.pluck('email')` -> `['a@a.com', 'b@b.com']`\n\nGreat for populating dropdowns or checking existence."
+        },
+        {
+            "id": "orm_queries_10",
+            "type": "content",
+            "title": "Soft Deletes Scope",
+            "content": "# Global Scopes 🌍\n\nORMs usually filter out 'soft deleted' items by default.\n\nYou have to explicitly say `User.withTrashed().get()` to see them."
+        },
+        {
+            "id": "orm_queries_quiz_2",
+            "type": "quiz",
+            "title": "Performance Quiz",
+            "content": "Optimization.",
+            "quizQuestion": "Which method is the standard solution to the N+1 problem in most ORMs?",
+            "quizOptions": [
+                "Lazy Loading",
+                "Eager Loading",
+                "Caching",
+                "Indexing"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orm_queries_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Queries 🏗️\n\nBuilding Blocks.\n\n- **Methods:** Chainable.\n- **Dynamic:** Conditional logic.\n- **Safety:** Parameter binding.\n- **N+1:** Eager loading.\n\n## Next Steps\nMaster the art of **Database Design**!"
+        }
+    ]
+}

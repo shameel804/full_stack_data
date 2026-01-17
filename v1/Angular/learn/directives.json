@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_directives",
+    "topicId": "directives",
+    "topicTitle": "Directives",
+    "description": "Master Angular Directives: Structural (ngIf, ngFor), Attribute (ngClass, ngStyle), and how to create your own.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_dir_1",
+            "type": "content",
+            "title": "Types of Directives",
+            "content": "# Three Flavors 🍨\n\n1.  **Components:** Directives with a template.\n2.  **Structural Directives:** Change the DOM layout by adding and removing DOM elements (`*`).\n3.  **Attribute Directives:** Change the appearance or behavior of an existing element."
+        },
+        {
+            "id": "ng_dir_2",
+            "type": "content",
+            "title": "*ngIf",
+            "content": "# *ngIf 🔀\n\nConditionally includes a template.\n\n```html\n<div *ngIf=\"isLoggedIn; else loginBlock\">\n  Welcome back!\n</div>\n<ng-template #loginBlock>\n  Please login.\n</ng-template>\n```\nThe `*` indicates it's structural syntax."
+        },
+        {
+            "id": "ng_dir_3",
+            "type": "content",
+            "title": "*ngFor",
+            "content": "# *ngFor 📋\n\nRepeat a node for each item in a list.\n\n```html\n<li *ngFor=\"let hero of heroes; let i = index\">\n  {{ i + 1 }} - {{ hero.name }}\n</li>\n```"
+        },
+        {
+            "id": "ng_dir_4",
+            "type": "content",
+            "title": "*ngSwitch",
+            "content": "# *ngSwitch 🎛️\n\nLike Javascript `switch` statement.\n\n```html\n<div [ngSwitch]=\"role\">\n  <div *ngSwitchCase=\"'admin'\">Admin Controls</div>\n  <div *ngSwitchCase=\"'user'\">User Profile</div>\n  <div *ngSwitchDefault>Guest</div>\n</div>\n```"
+        },
+        {
+            "id": "ng_dir_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Asterisk meaning.",
+            "quizQuestion": "What does the asterisk (*) prefix indicate in Angular directives like *ngIf?",
+            "quizOptions": [
+                "It is important",
+                "It is asynchronous",
+                "It is structural (changes DOM)",
+                "It is discouraged"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_dir_5",
+            "type": "content",
+            "title": "ngClass",
+            "content": "# [ngClass] 💅\n\nAdd or remove CSS classes dynamically.\n\n```html\n<div [ngClass]=\"{ 'active': isActive, 'error': hasError }\">\n  Hello\n</div>\n```\nClasses are added if the boolean value is `true`."
+        },
+        {
+            "id": "ng_dir_6",
+            "type": "content",
+            "title": "ngStyle",
+            "content": "# [ngStyle] 🖌️\n\nSet inline styles dynamically.\n\n```html\n<div [ngStyle]=\"{ 'font-size': isLarge ? '20px' : '12px' }\">\n  Dynamic Font\n</div>\n```"
+        },
+        {
+            "id": "ng_dir_7",
+            "type": "content",
+            "title": "Custom Attribute Directive",
+            "content": "# Creating Directives 🛠️\n\nUse `@Directive` decorator.\n\n```typescript\n@Directive({\n  selector: '[appHighlight]'\n})\nexport class HighlightDirective {\n  constructor(private el: ElementRef) {\n    el.nativeElement.style.backgroundColor = 'yellow';\n  }\n}\n```\nUsage: `<p appHighlight>Highlight me!</p>`"
+        },
+        {
+            "id": "ng_dir_8",
+            "type": "content",
+            "title": "HostListener in Directives",
+            "content": "# Interactivity 🖱️\n\nDirectives can listen to events on their host element.\n\n```typescript\n@HostListener('mouseenter') onMouseEnter() {\n  this.highlight('yellow');\n}\n\n@HostListener('mouseleave') onMouseLeave() {\n  this.highlight(null);\n}\n```"
+        },
+        {
+            "id": "ng_dir_9",
+            "type": "content",
+            "title": "Structural Directives (Under hood)",
+            "content": "# <ng-template> 📦\n\nThe `*` syntax is sugar.\n\n`*ngIf=\"cond\"` expands to:\n\n```html\n<ng-template [ngIf]=\"cond\">\n  <div>...</div>\n</ng-template>\n```\nAngular only renders the template if the directive tells it to."
+        },
+        {
+            "id": "ng_dir_quiz_2",
+            "type": "quiz",
+            "title": "Class Quiz",
+            "content": "Dynamic styling.",
+            "quizQuestion": "Which directive should you use to conditionally add MULTIPLE CSS classes based on boolean expressions?",
+            "quizOptions": [
+                "class",
+                "ngStyle",
+                "ngClass",
+                "ngIf"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_dir_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Color Directive 💻\n\n<!-- FULL_CODE_START\nimport { Directive, ElementRef, Input, OnInit } from '@angular/core';\n\n@Directive({\n  selector: '[appColor]'\n})\nexport class ColorDirective implements OnInit {\n  @Input() appColor = '';\n\n  constructor(private el: ElementRef) {}\n\n  ngOnInit() {\n    this.el.nativeElement.style.color = this.appColor || 'blue';\n  }\n}\n\n// Usage in HTML:\n// <p appColor=\"red\">I am red!</p>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_dir_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Directives 🎓\n\nDOM Manipulation.\n\n- **Structural (*):** `*ngIf`, `*ngFor`. Add/remove elements.\n- **Attribute ([]):** `[ngClass]`, `[ngStyle]`. Change look.\n- **Custom:** `@Directive` to encapsulate behavior.\n- **HostListener:** React to user events.\n\n## Next Steps\nManage data and logic efficiently with **Services & Dependency Injection**!"
+        }
+    ]
+}

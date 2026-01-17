@@ -1,0 +1,103 @@
+{
+    "id": "learn_svelte_reactivity",
+    "topicId": "reactivity",
+    "topicTitle": "Reactivity",
+    "description": "Deep dive into Svelte's reactive statements, dependency tracking, and motion (tweened/spring).",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "svelte_react_1",
+            "type": "content",
+            "title": "Reactive Assignments",
+            "content": "# Triggering Updates ⚡\n\nSvelte's reactivity is triggered by **assignments**.\n\n```javascript\ncount = count + 1; // Update!\n```\n\n**Gotcha:** Array methods like `.push()` do NOT trigger updates automatically because they mutate the object without a new assignment.\n\nFix: `numbers = [...numbers, newNumber];` OR `numbers.push(1); numbers = numbers;`"
+        },
+        {
+            "id": "svelte_react_2",
+            "type": "content",
+            "title": "Reactive Statements",
+            "content": "# The $: Label 🏷️\n\nTop-level statements labeled with `$` run whenever values they depend on change.\n\n```javascript\n$: doubled = count * 2;\n$: console.log('the count is ' + count);\n```\nSvelte analyzes the code at compile time to see that `doubled` depends on `count`."
+        },
+        {
+            "id": "svelte_react_3",
+            "type": "content",
+            "title": "Reactive Blocks",
+            "content": "# Grouping Logic 📦\n\nYou can put a block of code behind `$: `.\n\n```javascript\n$: {\n  console.log('Multiple statements');\n  console.log('Running together');\n  alert('Count changed to ' + count);\n}\n```"
+        },
+        {
+            "id": "svelte_react_4",
+            "type": "content",
+            "title": "Conditional Dependencies",
+            "content": "# Smart Tracking 🧠\n\nSvelte only updates if the dependency actually changes.\n\n```javascript\n$: if (count > 10) {\n  alert('High count!');\n}\n```\nThe `if` block executes every time `count` changes, but the `alert` only fires if the condition is met."
+        },
+        {
+            "id": "svelte_react_quiz_1",
+            "type": "quiz",
+            "title": "Array Quiz",
+            "content": "Triggers.",
+            "quizQuestion": "Why does 'arr.push(1)' NOT trigger a re-render in Svelte by default?",
+            "quizOptions": [
+                "Svelte hates arrays",
+                "It is not an assignment (=)",
+                "It is too fast",
+                "It is asynchronous"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "svelte_react_5",
+            "type": "content",
+            "title": "Motion (Tweened)",
+            "content": "# Tweened Values 🎬\n\nSvelte has built-in stores for generic motion.\n\n`tweened` creates a writable store that updates its value smoothly over time.\n\n```javascript\nimport { tweened } from 'svelte/motion';\nimport { cubicOut } from 'svelte/easing';\n\nconst progress = tweened(0, {\n  duration: 400,\n  easing: cubicOut\n});\n// Usage: $progress = 50;\n```"
+        },
+        {
+            "id": "svelte_react_6",
+            "type": "content",
+            "title": "Motion (Spring)",
+            "content": "# Spring Physics 🪀\n\n`spring` works like `tweened` but uses physical parameters (stiffness/damping) instead of duration.\n\n```javascript\nimport { spring } from 'svelte/motion';\n\nlet coords = spring({ x: 0, y: 0 }, {\n  stiffness: 0.1,\n  damping: 0.25\n});\n```\nGreat for moving UI elements naturally."
+        },
+        {
+            "id": "svelte_react_7",
+            "type": "content",
+            "title": "Reactive Declarations in Components",
+            "content": "# Inside Functions? ⛔\n\nCan I use `$: ` inside a function or an if-block?\n\n**No.** Reactive declarations must be at the **top level** of your script.\n\nSvelte's compiler looks for them there specifically."
+        },
+        {
+            "id": "svelte_react_8",
+            "type": "content",
+            "title": "Dependency Order",
+            "content": "# Order Matters... Sometimes 🧩\n\nDependencies should usually be defined before they are used, but Svelte is smart enough to re-order reactive statements topologically.\n\n```javascript\n$: b = a + 1;\nlet a = 1; // This works fine.\n```"
+        },
+        {
+            "id": "svelte_react_9",
+            "type": "content",
+            "title": "Flash of Undefined",
+            "content": "# Async Data ⏳\n\nIf reactivity depends on async data, ensure you handle the loading state.\n\nUse `{#await}` blocks in templates to handle promises elegantly."
+        },
+        {
+            "id": "svelte_react_quiz_2",
+            "type": "quiz",
+            "title": "Motion Quiz",
+            "content": "Physics based.",
+            "quizQuestion": "Which motion function allows you to configure 'stiffness' and 'damping'?",
+            "quizOptions": [
+                "tweened",
+                "animate",
+                "spring",
+                "bounce"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "svelte_react_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Progress Bar 💻\n\n<!-- FULL_CODE_START\n<script>\nimport { tweened } from 'svelte/motion';\nimport { cubicOut } from 'svelte/easing';\n\nconst progress = tweened(0, {\n  duration: 1000,\n  easing: cubicOut\n});\n</script>\n\n<progress value={$progress}></progress>\n\n<button on:click={() => progress.set(0)}>0%</button>\n<button on:click={() => progress.set(0.5)}>50%</button>\n<button on:click={() => progress.set(1)}>100%</button>\nFULL_CODE_END -->"
+        },
+        {
+            "id": "svelte_react_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Reactivity 🎓\n\nUpdates & Motion.\n\n- **Assignment:** Triggers update.\n- **$:** Reactive label.\n- **Arrays:** Need reassignment (`arr = arr`).\n- **Motion:** `tweened` and `spring` for smooth values.\n\n## Next Steps\nShare state across your app with **Stores**!"
+        }
+    ]
+}

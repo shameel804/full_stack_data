@@ -1,0 +1,103 @@
+{
+    "id": "learn_nosql_querying",
+    "topicId": "querying",
+    "topicTitle": "Querying & Indexing",
+    "description": "Retrieve data efficiently from non-relational stores.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "nosql_querying_1",
+            "type": "content",
+            "title": "It's Not SQL 🚫",
+            "content": "# Different Paradigms\n\nQuerying NoSQL is vastly different from SQL `SELECT *`.\n\nYou often query by **Primary Key** only.\n\nSecondary lookups require special setup."
+        },
+        {
+            "id": "nosql_querying_2",
+            "type": "content",
+            "title": "Secondary Indexes",
+            "content": "# Finding by other fields 🔎\n\nIn Key-Value or Column stores, you can primarily lookup by ID.\n\nTo search by `email`, you must create a specific **Secondary Index** (often called GSI or Materialized View)."
+        },
+        {
+            "id": "nosql_querying_3",
+            "type": "content",
+            "title": "MapReduce",
+            "content": "# Big Data Processing 🗺️\n\nA programming model for processing large data sets.\n\n- **Map:** Trace each item and extract info.\n- **Reduce:** Aggregate results.\n\nHistoric way of querying (e.g., Hadoop, early MongoDB)."
+        },
+        {
+            "id": "nosql_querying_4",
+            "type": "content",
+            "title": "Aggregation Frameworks",
+            "content": "# Modern Pipeling 🔧\n\nMongoDB and others use pipelines instead of MapReduce now.\n\nProcess data in stages (Match -> Group -> Project) efficiently on the server side."
+        },
+        {
+            "id": "nosql_querying_5",
+            "type": "content",
+            "title": "Inverted Index",
+            "content": "# Text Search 📚\n\nUsed by Search Engines (Elasticsearch).\n\nMapping: `Word -> [Document IDs]`\n\nInstead of scanning every doc for \"apple\", look up \"apple\" in index to instantly find docs 1, 5, and 9."
+        },
+        {
+            "id": "nosql_querying_quiz_1",
+            "type": "quiz",
+            "title": "Search Quiz",
+            "content": "Indexing.",
+            "quizQuestion": "Which data structure is primarily used by search engines (like Elasticsearch) for efficient full-text search?",
+            "quizOptions": [
+                "B-Tree",
+                "Hash Map",
+                "Inverted Index",
+                "Linked List"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "nosql_querying_6",
+            "type": "content",
+            "title": "Geospatial Indexing",
+            "content": "# Location Data 📍\n\nFind \"restaurants near me\".\n\nUses **Quadtrees** or **Geohashes** to index 2D coordinates effectively.\n\nMongoDB supports `2dsphere` indexes."
+        },
+        {
+            "id": "nosql_querying_7",
+            "type": "content",
+            "title": "Scan vs Query",
+            "content": "# Efficiency 🐢 vs 🐇\n\n- **Query:** Uses an index to find specific items. Fast.\n- **Scan:** Reads every item in the table. Slow and expensive (DynamoDB consumes massive throughput)."
+        },
+        {
+            "id": "nosql_querying_8",
+            "type": "content",
+            "title": "Design for Query",
+            "content": "# Access Patterns First 🧠\n\nIn NoSQL, you design your schema based on how you will **read** the data.\n\nAnswer questions like \"Will I need to fetch user by email?\" BEFORE creating the table."
+        },
+        {
+            "id": "nosql_querying_9",
+            "type": "content",
+            "title": "Materialized Views (NoSQL)",
+            "content": "# Duplication 👯\n\nData is often denormalized/duplicated into another table to support a specific query pattern.\n\nE.g., `Users` table (lookup by ID) AND `UsersByEmail` table (lookup by Email)."
+        },
+        {
+            "id": "nosql_querying_10",
+            "type": "content",
+            "title": "Streaming Changes",
+            "content": "# CDC 🌊\n\nChange Data Capture.\n\nListen to changes in the database (DynamoDB Streams, MongoDB Change Streams) to trigger indexing in other systems (like sending data to Elasticsearch)."
+        },
+        {
+            "id": "nosql_querying_quiz_2",
+            "type": "quiz",
+            "title": "Design Quiz",
+            "content": "Philosophy.",
+            "quizQuestion": "Which approach is most common when designing NoSQL schemas?",
+            "quizOptions": [
+                "Normalize data to 3rd Normal Form first",
+                "Design based on query access patterns",
+                "Create tables for every noun",
+                "Ignore schema completely"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "nosql_querying_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Querying 🔎\n\nThink backwards.\n\n- **Indexes:** GSI, Inverted, Geo.\n- **Pipelines:** Aggregation values.\n- **Design:** Access patterns first.\n- **Streams:** React to changes.\n\n## Next Steps\nAbstract db logic with **ORM and ODM**!"
+        }
+    ]
+}

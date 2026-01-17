@@ -1,0 +1,103 @@
+{
+    "id": "learn_auth_oauth",
+    "topicId": "oauth",
+    "topicTitle": "OAuth 2.0",
+    "description": "Learn OAuth 2.0: The industry-standard protocol for authorization (Login with Google, Facebook, etc).",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "auth_oauth_1",
+            "type": "content",
+            "title": "What is OAuth?",
+            "content": "# Delegation 🤝\n\nOAuth 2.0 is a protocol that allows a user to grant a third-party application access to their resources on another service (like Google) *without* sharing their password.\n\nExample: \"Login with Google\"."
+        },
+        {
+            "id": "auth_oauth_2",
+            "type": "content",
+            "title": "Roles",
+            "content": "# The Players 🎭\n\n1.  **Resource Owner:** The User.\n2.  **Client:** The App (Your website).\n3.  **Authorization Server:** The Provider (Google Auth server).\n4.  **Resource Server:** The API (Google Photos API)."
+        },
+        {
+            "id": "auth_oauth_3",
+            "type": "content",
+            "title": "Grant Types",
+            "content": "# How to get Access? 🔑\n\nWays to retrieve a token:\n\n1.  **Authorization Code Flow:** (Standard for Web Apps).\n2.  **Implicit Flow:** (Legacy, for SPA, now deprecated).\n3.  **Client Credentials:** (Machine-to-Machine).\n4.  **Password Grant:** (Legacy, avoid)."
+        },
+        {
+            "id": "auth_oauth_4",
+            "type": "content",
+            "title": "Authorization Code Flow",
+            "content": "# The Standard Flow 🌊\n\n1.  **User** clicks \"Login with Google\".\n2.  **Client** redirects user to **Google**.\n3.  User logs in and approves access.\n4.  **Google** redirects user back to **Client** with a `code`.\n5.  **Client** exchanges `code` for `access_token`."
+        },
+        {
+            "id": "auth_oauth_quiz_1",
+            "type": "quiz",
+            "title": "Role Quiz",
+            "content": "Terminology.",
+            "quizQuestion": "In an OAuth flow, who is the 'Resource Owner'?",
+            "quizOptions": [
+                "The Application (Client)",
+                "The Auth Server (Google)",
+                "The End User",
+                "The Database"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "auth_oauth_5",
+            "type": "content",
+            "title": "Scopes",
+            "content": "# Granular Access 🔍\n\nScopes define WHAT the app can do.\n\n`scope=email profile photos.readonly`\n\nThe user sees: \"This app wants to view your photos\". They can approve or deny specific scopes."
+        },
+        {
+            "id": "auth_oauth_6",
+            "type": "content",
+            "title": "Implicit Flow (Deprecated)",
+            "content": "# Don't use this ⛔\n\nPreviously used for SPAs (React/Angular).\n\nIt returned the `access_token` directly in the URL fragment.\n\n**Weakness:** Access token is exposed in browser history and easier to steal. Use Auth Code with PKCE instead."
+        },
+        {
+            "id": "auth_oauth_7",
+            "type": "content",
+            "title": "PKCE",
+            "content": "# Proof Key for Code Exchange 🛡️\n\npronounced \"pixy\".\n\nAn extension to Auth Code Flow for mobile/SPA apps.\n\nIt adds a secret code verifier created on the fly to prevent authorization code interception attacks."
+        },
+        {
+            "id": "auth_oauth_8",
+            "type": "content",
+            "title": "OpenID Connect (OIDC)",
+            "content": "# AuthN on top of AuthZ 🆔\n\nOAuth is for Authorization (Access).\nOIDC is a layer on top for Authentication (Identity).\n\nIt adds an `id_token` (JWT) which contains user info (name, email)."
+        },
+        {
+            "id": "auth_oauth_9",
+            "type": "content",
+            "title": "Client Credentials",
+            "content": "# Machine to Machine 🤖\n\nNo user involved. E.g., Your backend talking to Stripe API.\n\nApp sends `client_id` + `client_secret` to get a token.\n\nSimple and secure for server-side operations."
+        },
+        {
+            "id": "auth_oauth_quiz_2",
+            "type": "quiz",
+            "title": "Flow Quiz",
+            "content": "Security.",
+            "quizQuestion": "Which flow is recommended for modern Single Page Applications (SPAs) and Mobile Apps?",
+            "quizOptions": [
+                "Implicit Flow",
+                "Authorization Code with PKCE",
+                "Password Grant",
+                "Client Credentials"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "auth_oauth_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# OAuth Steps 💻\n\n<!-- FULL_CODE_START\n// 1. Redirect to Provider\nGET https://google.com/auth?client_id=123&scope=email&response_type=code&redirect_uri=/callback\n\n// 2. Provider Redirects Back\nGET https://myapp.com/callback?code=AUTH_CODE_HERE\n\n// 3. Exchange Code (Server Side)\nPOST https://google.com/token\nBody: { code: \"AUTH_CODE_HERE\", client_secret: \"SECRET\" }\nResponse: { access_token: \"TOKEN\", id_token: \"JWT\" }\nFULL_CODE_END -->"
+        },
+        {
+            "id": "auth_oauth_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: OAuth 🎓\n\nModern Delegated Auth.\n\n- **Roles:** User, Client, Server.\n- **Flows:** Auth Code (Gold Standard).\n- **Scopes:** Permission limits.\n- **PKCE:** Security for mobile/web.\n- **OIDC:** Identity layer (ID Token).\n\n## Next Steps\nManage state the traditional way with **Sessions & Cookies**!"
+        }
+    ]
+}

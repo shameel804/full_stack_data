@@ -1,0 +1,103 @@
+{
+    "id": "learn_node",
+    "topicId": "node",
+    "topicTitle": "Node.js",
+    "description": "Introduction to Node.js, the event-driven JavaScript runtime built on Chrome's V8 engine.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "node_1",
+            "type": "content",
+            "title": "What is Node.js?",
+            "content": "# JS on Server 🖥️\n\nNode.js is not a language; it's a **runtime environment**.\n\nIt allows you to run JavaScript outside the browser (on the server).\n\nBuilt on Chrome's V8 JavaScript Engine and written in C++."
+        },
+        {
+            "id": "node_2",
+            "type": "content",
+            "title": "Key Features",
+            "content": "# Why Node? 🚀\n\n1.  **Non-blocking I/O:** Doesn't wait for file/DB reads to finish.\n2.  **Event-Driven:** Uses callbacks to handle results.\n3.  **Single-Threaded:** (With an Event Loop) Lightweight and efficient for I/O-heavy apps."
+        },
+        {
+            "id": "node_3",
+            "type": "content",
+            "title": "Modules System",
+            "content": "# CommonJS 📦\n\nNode used `require()` for years (CommonJS).\n\n```javascript\n// math.js\nmodule.exports = { add: (a,b) => a+b };\n\n// app.js\nconst math = require('./math');\nconsole.log(math.add(1, 2));\n```\nModern Node also supports ES Modules (`import/export`) if configured."
+        },
+        {
+            "id": "node_4",
+            "type": "content",
+            "title": "Core Modules",
+            "content": "# Built-in Tools 🧰\n\nNode comes with powerful libraries.\n\n- `fs`: File System (read/write files).\n- `http`: Create servers.\n- `path`: Handle file paths.\n- `os`: Operating System info.\n- `events`: Event Emitter."
+        },
+        {
+            "id": "node_quiz_1",
+            "type": "quiz",
+            "title": "Module Quiz",
+            "content": "Import syntax.",
+            "quizQuestion": "Which function is used to import modules in the traditional CommonJS system?",
+            "quizOptions": [
+                "import()",
+                "include()",
+                "require()",
+                "fetch()"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "node_5",
+            "type": "content",
+            "title": "The Event Loop",
+            "content": "# How it Works 🔄\n\nNode is single-threaded but handles concurrency via the **Event Loop**.\n\nIt offloads blocking tasks (I/O) to the C++ kernel threads (`libuv`). When the task is done, the callback is pushed to the queue to be executed."
+        },
+        {
+            "id": "node_6",
+            "type": "content",
+            "title": "NPM",
+            "content": "# Node Package Manager 📦\n\nThe largest software registry in the world.\n\n- `npm init`: Creates `package.json`.\n- `npm install express`: Installs a package.\n- `npm run start`: Runs a script defined in package.json."
+        },
+        {
+            "id": "node_7",
+            "type": "content",
+            "title": "Creating a Server",
+            "content": "# Raw HTTP 🌐\n\n```javascript\nconst http = require('http');\n\nconst server = http.createServer((req, res) => {\n  res.statusCode = 200;\n  res.end('Hello World');\n});\n\nserver.listen(3000);\n```\nMost people use frameworks like **Express** instead of raw `http`."
+        },
+        {
+            "id": "node_8",
+            "type": "content",
+            "title": "Asynchronous Programming",
+            "content": "# Avoiding Hell 🔥\n\nEvolution of async handling:\n\n1.  **Callbacks:** `fs.readFile(path, (err, data) => ...)` (Callback Hell).\n2.  **Promises:** `.then().catch()`.\n3.  **Async/Await:** `const data = await fs.readFile(path)` (Cleanest)."
+        },
+        {
+            "id": "node_9",
+            "type": "content",
+            "title": "Streams",
+            "content": "# Streams 🌊\n\nHandle large data efficiently.\n\nInstead of reading a 1GB file into memory entirely, read it in chunks.\n\n- **Readable:** Read from (fs.createReadStream).\n- **Writable:** Write to (fs.createWriteStream).\n- **Pipe:** Connect them (`read.pipe(write)`)."
+        },
+        {
+            "id": "node_quiz_2",
+            "type": "quiz",
+            "title": "Concept Quiz",
+            "content": "Architecture.",
+            "quizQuestion": "Node.js is primarily described as...",
+            "quizOptions": [
+                "Multi-threaded and blocking",
+                "Single-threaded and non-blocking",
+                "Synchronous and stateless",
+                "Compiled and strictly typed"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "node_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Async File Read 💻\n\n<!-- FULL_CODE_START\nconst fs = require('fs').promises;\n\nasync function readFile() {\n  try {\n    const data = await fs.readFile('example.txt', 'utf8');\n    console.log(data);\n  } catch (err) {\n    console.error('Error reading file:', err);\n  }\n}\n\nreadFile();\nFULL_CODE_END -->"
+        },
+        {
+            "id": "node_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Node.js 🎓\n\nJS Everywhere.\n\n- **Runtime:** V8 Engine.\n- **Non-blocking:** Async I/O.\n- **Event Loop:** The engine heart.\n- **Modules:** `require` or `import`.\n- **NPM:** Dependency management.\n\n## Next Steps\nExplore other backends like **Python**!"
+        }
+    ]
+}

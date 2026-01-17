@@ -1,0 +1,103 @@
+{
+    "id": "learn_vue_components",
+    "topicId": "components",
+    "topicTitle": "Components",
+    "description": "Master Vue Components: Single File Components (SFCs), Props, Events, and Slots.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "vue_comp_1",
+            "type": "content",
+            "title": "Component Basics",
+            "content": "# Reusable Instances 🧱\n\nComponents are reusable Vue instances with a name.\n\nThey allow us to define custom elements:\n\n```html\n<button-counter></button-counter>\n```\nWe can use the same component as many times as we want."
+        },
+        {
+            "id": "vue_comp_2",
+            "type": "content",
+            "title": "Single File Components",
+            "content": "# .vue Files 📄\n\nVue uses a dedicated file format (`.vue`) that encapsulates the Template, Logic, and Styles in one file.\n\n```html\n<script>\n  export default { data() { return { msg: 'Hello' } } }\n</script>\n\n<template>\n  <p>{{ msg }}</p>\n</template>\n\n<style>\n  p { color: red; }\n</style>\n```"
+        },
+        {
+            "id": "vue_comp_3",
+            "type": "content",
+            "title": "Props",
+            "content": "# Passing Data Down 🎁\n\nProps are custom attributes.\n\n```javascript\n// Child\nprops: ['title']\n```\n\n```html\n<!-- Parent -->\n<BlogPost title=\"My Journey with Vue\" />\n```\nUse `:title=\"post.title\"` to pass dynamic values."
+        },
+        {
+            "id": "vue_comp_4",
+            "type": "content",
+            "title": "Prop Validation",
+            "content": "# Prop Types 🛡️\n\nIt is good practice to specify requirements for props.\n\n```javascript\nprops: {\n  title: String,\n  likes: {\n    type: Number,\n    default: 0\n  },\n  author: {\n    type: Object,\n    required: true\n  }\n}\n```"
+        },
+        {
+            "id": "vue_comp_quiz_1",
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "File extension.",
+            "quizQuestion": "What is the file extension for Single File Components in Vue?",
+            "quizOptions": [
+                ".js",
+                ".jsx",
+                ".vue",
+                ".html"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "vue_comp_5",
+            "type": "content",
+            "title": "Emitting Events",
+            "content": "# Sending Messages Up 📢\n\nProps go DOWN. Events go UP.\n\nTo communicate with a parent, the child emits an event.\n\n```javascript\n// Child\nthis.$emit('enlarge-text', 0.1)\n```\n\n```html\n<!-- Parent -->\n<blog-post @enlarge-text=\"onEnlargeText\"></blog-post>\n```"
+        },
+        {
+            "id": "vue_comp_6",
+            "type": "content",
+            "title": "Slots",
+            "content": "# Slots 🎰\n\nSlots allow you to pass specific content (HTML) into a component.\n\n```html\n<!-- Child Template -->\n<button class=\"btn\">\n  <slot></slot> <!-- Content appears here -->\n</button>\n\n<!-- Parent Usage -->\n<FancyButton> Click Me! </FancyButton>\n```"
+        },
+        {
+            "id": "vue_comp_7",
+            "type": "content",
+            "title": "Named Slots",
+            "content": "# Multi-Slot Layouts 🍱\n\nYou can have multiple slots named `header`, `main`, `footer`.\n\n```html\n<Layout>\n  <template v-slot:header>\n    <h1>Header Content</h1>\n  </template>\n</Layout>\n```\nShorthand for `v-slot:` is `#`. (e.g., `#header`)."
+        },
+        {
+            "id": "vue_comp_8",
+            "type": "content",
+            "title": "Dynamic Components",
+            "content": "# Switching Components 🔀\n\nUse the special `<component>` tag to dynamically switch between components.\n\n```html\n<component :is=\"currentComponent\"></component>\n```\nCombine with `<KeepAlive>` to cache the inactive component instances."
+        },
+        {
+            "id": "vue_comp_9",
+            "type": "content",
+            "title": "Provide / Inject",
+            "content": "# Deep Data Passing 📡\n\nLike React Context.\n\nInstead of prop drilling through 5 layers:\n\n1.  **Parent:** `provide: { user: 'John' }`\n2.  **Great-Grandchild:** `inject: ['user']`"
+        },
+        {
+            "id": "vue_comp_quiz_2",
+            "type": "quiz",
+            "title": "Slot Quiz",
+            "content": "Shorthand.",
+            "quizQuestion": "What is the shorthand syntax for named slots (v-slot)?",
+            "quizOptions": [
+                ":",
+                "@",
+                "#",
+                "$"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "vue_comp_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Component Event 💻\n\n<!-- FULL_CODE_START\nconst app = Vue.createApp({\n  data() {\n    return { posts: [{ id: 1, title: 'My journey with Vue' }] }\n  }\n})\n\napp.component('blog-post', {\n  props: ['title'],\n  template: `\n    <div class=\"blog-post\">\n      <h3>{{ title }}</h3>\n      <button @click=\"$emit('enlarge')\">Enlarge text</button>\n    </div>\n  `\n})\n\napp.mount('#app')\nFULL_CODE_END -->"
+        },
+        {
+            "id": "vue_comp_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Components 🎓\n\nBuilding Blocks.\n\n- **.vue files:** Template + Script + Style.\n- **Props:** Parent -> Child.\n- **Emits:** Child -> Parent.\n- **Slots:** Content Injection.\n- **Provide/Inject:** Deep data passing.\n\n## Next Steps\nMaster the power of **Directives**!"
+        }
+    ]
+}

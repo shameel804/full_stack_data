@@ -1,0 +1,103 @@
+{
+    "id": "learn_angular_services",
+    "topicId": "services",
+    "topicTitle": "Services & DI",
+    "description": "Learn to separate business logic from UI using Services and Angular's powerful Dependency Injection system.",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ng_serv_1",
+            "type": "content",
+            "title": "What is a Service?",
+            "content": "# Business Logic 🧠\n\nComponents should handle the VIEW (UI).\n\nServices should handle DATA and LOGIC.\n\nExamples: Fetching data from API, validating user input, logging, sharing state between unrelated components."
+        },
+        {
+            "id": "ng_serv_2",
+            "type": "content",
+            "title": "Creating a Service",
+            "content": "# @Injectable() 💉\n\nGenerated with `ng g service hero`.\n\n```typescript\nimport { Injectable } from '@angular/core';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class HeroService {\n  getHeroes() { return ['Superman', 'Batman']; }\n}\n```"
+        },
+        {
+            "id": "ng_serv_3",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# DI System 🏗️\n\nAngular has a built-in DI framework.\n\nInstead of `new HeroService()`, you ask for it in the constructor.\n\n```typescript\nconstructor(private heroService: HeroService) {}\n```\nAngular automatically finds the instance and provides it."
+        },
+        {
+            "id": "ng_serv_4",
+            "type": "content",
+            "title": "Singleton Services",
+            "content": "# Singletons 1️⃣\n\nWhen `providedIn: 'root'` is used, the service is a **Singleton**.\n\nThis means the SAME instance is shared across the entire application.\n\nIf Component A changes a value in the service, Component B sees the update."
+        },
+        {
+            "id": "ng_serv_quiz_1",
+            "type": "quiz",
+            "title": "DI Quiz",
+            "content": "Decorator check.",
+            "quizQuestion": "Which decorator marks a class as a participant in the Dependency Injection system?",
+            "quizOptions": [
+                "@Component",
+                "@Service",
+                "@Injectable",
+                "@Provider"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_serv_5",
+            "type": "content",
+            "title": "HttpClient",
+            "content": "# Fetching Data 🌐\n\nAngular's `HttpClient` returns **Observables** (from RxJS).\n\n```typescript\nconstructor(private http: HttpClient) {}\n\ngetUsers() {\n  return this.http.get<User[]>('/api/users');\n}\n```\nDon't forget to import `HttpClientModule` in `app.module.ts`."
+        },
+        {
+            "id": "ng_serv_6",
+            "type": "content",
+            "title": "Subscribing",
+            "content": "# usage in Component 📺\n\nObservables are lazy. Nothing happens until you `.subscribe()`.\n\n```typescript\nngOnInit() {\n  this.userService.getUsers().subscribe(data => {\n    this.users = data;\n  });\n}\n```"
+        },
+        {
+            "id": "ng_serv_7",
+            "type": "content",
+            "title": "Providers",
+            "content": "# Custom Providers 🔌\n\nYou can configure HOW the injection works.\n\n```typescript\nproviders: [\n  { provide: Logger, useClass: BetterLogger }\n]\n```\nThis tells Angular: \"When a component asks for `Logger`, give it `BetterLogger` instead.\""
+        },
+        {
+            "id": "ng_serv_8",
+            "type": "content",
+            "title": "Hierarchy",
+            "content": "# Injector Tree 🌲\n\nDependency injection is hierarchical.\n\n- **Root Injector:** Global (AppModule).\n- **Component Injector:** If you provide a service in a Component's `providers: []` array, a NEW instance is created just for that component and its children."
+        },
+        {
+            "id": "ng_serv_9",
+            "type": "content",
+            "title": "Interceptors",
+            "content": "# Interceptors 🕵️\n\nA powerful HTTP feature.\n\nIntercept all outgoing requests (e.g., to add an Auth Token header) or incoming responses (to catch global 401 errors).\n\nImplement `HttpInterceptor` interface."
+        },
+        {
+            "id": "ng_serv_quiz_2",
+            "type": "quiz",
+            "title": "Singleton Quiz",
+            "content": "Scope.",
+            "quizQuestion": "What is the scope of a service provided in 'root'?",
+            "quizOptions": [
+                "Component Level",
+                "Module Level",
+                "Application Level (Singleton)",
+                "Method Level"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ng_serv_10",
+            "type": "content",
+            "title": "Code Example",
+            "content": "# Data Service 💻\n\n<!-- FULL_CODE_START\nimport { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class DataService {\n  private apiUrl = 'https://api.example.com/items';\n\n  constructor(private http: HttpClient) { }\n\n  getItems(): Observable<any[]> {\n    return this.http.get<any[]>(this.apiUrl);\n  }\n}\nFULL_CODE_END -->"
+        },
+        {
+            "id": "ng_serv_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Recap: Services 🎓\n\nLogic Layer.\n\n- **@Injectable:** Makes class injectable.\n- **providedIn: 'root':** Singleton.\n- **Constructor Injection:** `private srv: Service`.\n- **HttpClient:** Returns Observables.\n- **Interceptors:** Global HTTP handling.\n\n## Next Steps\nMaster client-side navigation with **Routing**!"
+        }
+    ]
+}
