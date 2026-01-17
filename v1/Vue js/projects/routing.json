@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Defining Dynamic Routes",
+        "ques": "How do you define a **Dynamic Route** in Vue Router to create a profile page for any user (e.g., `/user/alice`, `/user/bob`)?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "const routes = [\n  {\n    path: '/user/:username', // The colon denotes a param\n    component: UserProfile\n  }\n]"
+        },
+        "explanation": "You can then access the `username` inside the component via `this.$route.params.username`."
+    },
+    {
+        "title": "Navigation Guards",
+        "ques": "What is a **Global Navigation Guard** (`beforeEach`) often used for?",
+        "answer": {
+            "type": "text",
+            "content": "**`router.beforeEach`** is a function that runs before every route navigation.\n\n**Use Case:** It is the standard place to check **Authentication**. If the user is trying to access a protected route and isn't logged in, the guard redirects them to the login page."
+        },
+        "explanation": "Guards are the bouncers of your application routes."
+    },
+    {
+        "title": "Lazy Loading Routes",
+        "ques": "How does **Lazy Loading** work in Vue Router to improve performance?",
+        "answer": {
+            "type": "text",
+            "content": "Lazy loading delays the loading of a route's component until the user actually visits that route.\n\n**Syntax:** Instead of importing the component at the top, you use a dynamic import function.\n`component: () => import('./views/About.vue')`"
+        },
+        "explanation": "This signals Webpack to split this component into a separate chunk."
+    },
+    {
+        "title": "History Mode vs Hash Mode",
+        "ques": "What is the difference between **Hash Mode** (`/#/home`) and **History Mode** (`/home`) in Vue Router?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Hash Mode:** Uses the URL hash (`#`) to simulate a full URL so the page won't be reloaded when the URL changes. It's uglier but works without server configuration.\n*   **History Mode:** Uses the HTML5 History API to look like a 'real' URL. It's prettier but requires the server to be configured to fallback to `index.html` on 404 errors."
+        },
+        "explanation": "Always prefer History mode for production apps, but remember to configure your Nginx/Apache server."
+    }
+]

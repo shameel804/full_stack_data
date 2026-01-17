@@ -1,0 +1,40 @@
+[
+    {
+        "title": "Using `useState` Hook",
+        "ques": "How do you declare a state variable named `count` initialized to `0` using the `useState` hook?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "const [count, setCount] = useState(0);"
+        },
+        "explanation": "`useState` returns an array with two elements: the current state value (`count`) and a function to update it (`setCount`)."
+    },
+    {
+        "title": "Lifecycle Methods in Classes",
+        "ques": "Name the three phases of a React component's **lifecycle** (in Class components) and give one example method for each.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Mounting:** When the component is first created and inserted into the DOM. (e.g., `componentDidMount`)\n2.  **Updating:** When props or state change. (e.g., `componentDidUpdate`)\n3.  **Unmounting:** When the component is removed from the DOM. (e.g., `componentWillUnmount`)"
+        },
+        "explanation": "Even if you use Hooks, understanding the lifecycle concept (creation, update, destruction) is crucial for managing side effects."
+    },
+    {
+        "title": "State Updates are Asynchronous",
+        "ques": "React state updates are often **asynchronous**. What does this mean if you try to log the state immediately after setting it?\n`setCount(count + 1); console.log(count);`",
+        "answer": {
+            "type": "text",
+            "content": "It means the `console.log` will likely print the **old** value, not the new one.\n\nReact 'schedules' the update to happen later for performance reasons. The state variable `count` will only reflect the new value in the *next* render cycle, not immediately in the current function execution."
+        },
+        "explanation": "This is a common source of bugs for beginners. To react to a state change, use `useEffect`, not a sequential log."
+    },
+    {
+        "title": "Conditional Rendering",
+        "ques": "Show how to use the **ternary operator** to conditionally render a 'Login' button if `isLoggedIn` is false, and a 'Logout' button if it is true.",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "{isLoggedIn ? <LogoutButton /> : <LoginButton />}"
+        },
+        "explanation": "Ternary operators are the cleanest way to switch between two UI states in JSX."
+    }
+]

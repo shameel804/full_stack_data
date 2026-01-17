@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Redux Core: Actions & Reducers",
+        "ques": "In Redux, explain the relationship between an **Action** and a **Reducer**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Action:** A plain JavaScript object describing *what happened* (e.g., `{ type: 'ADD_TODO', payload: 'Buy milk' }`). It is 'dispatched' to the store.\n*   **Reducer:** A pure function that takes the **current state** and an **action**, and returns the **new state**.\n\n**Relationship:** The reducer listens for dispatched actions and decides how to update the state based on the action's type."
+        },
+        "explanation": "Redux relies on this strict unidirectional flow: Action -> Dispatch -> Reducer -> Store -> View."
+    },
+    {
+        "title": "Middleware",
+        "ques": "What is the purpose of **Middleware** in Redux?",
+        "answer": {
+            "type": "text",
+            "content": "**Middleware** provides a third-party extension point between dispatching an action and the moment it reaches the reducer.\n\n**Purpose:** It is used for tasks like:\n1.  **Logging:** Logging every action (e.g., redux-logger).\n2.  **Async Logic:** intercepting actions to make API calls before dispatching the final success/failure action (e.g., Redux Thunk).\n3.  **Crash Reporting:** Catching errors."
+        },
+        "explanation": "Middleware allows Redux to handle side effects, which pure reducers cannot do."
+    },
+    {
+        "title": "Redux Thunk",
+        "ques": "Why do we need a middleware like **Redux Thunk** to handle asynchronous API calls?",
+        "answer": {
+            "type": "text",
+            "content": "By default, Redux actions must be plain objects, and reducers must be synchronous.\n\n**Redux Thunk** allows you to dispatch a **function** instead of an object. This function receives `dispatch` as an argument, allowing you to:\n1.  Start an async operation (like `fetch`).\n2.  Wait for the response.\n3.  `dispatch` a plain object action (like `FETCH_SUCCESS`) with the data once it arrives."
+        },
+        "explanation": "Thunks are the standard way to handle async logic in Redux apps."
+    },
+    {
+        "title": "Redux Saga",
+        "ques": "Briefly mention how **Redux Saga** differs from Redux Thunk using the concept of **Generator Functions**.",
+        "answer": {
+            "type": "text",
+            "content": "**Redux Saga** uses ES6 **Generator Functions** (`function*`) to make asynchronous code look synchronous.\n\n**Difference:** Instead of chaining callbacks or promises (like in Thunk), Sagas listen for actions and 'pause' execution (using `yield`) until an effect (like an API call) completes. This makes testing easier and complex flows (like cancellation or debouncing) much simpler to manage."
+        },
+        "explanation": "Saga is more powerful but has a steeper learning curve than Thunk."
+    }
+]

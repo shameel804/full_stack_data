@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Context Providers & Consumers",
+        "ques": "In the Context API, what are the roles of the **Provider** and the **Consumer**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Provider:** Wraps a section of the component tree and accepts a `value` prop. It makes this data available to all its descendants.\n*   **Consumer:** A component that subscribes to the Context changes. (In modern React, the `useContext` hook is preferred over the `<Consumer>` render prop component)."
+        },
+        "explanation": "Think of the Provider as a broadcaster and the Consumer/useContext as the receiver."
+    },
+    {
+        "title": "Context with Hooks",
+        "ques": "Write a snippet showing how to consume a `ThemeContext` using the `useContext` hook.",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "import { useContext } from 'react';\nimport { ThemeContext } from './ThemeContext';\n\nfunction ThemedButton() {\n  const theme = useContext(ThemeContext);\n  return <button style={{ background: theme.background, color: theme.foreground }}>I am styled!</button>;\n}"
+        },
+        "explanation": "`useContext` simplified Context consumption significantly compared to the old render props pattern."
+    },
+    {
+        "title": "Multiple Contexts",
+        "ques": "Why might you structure an application with **Multiple Contexts** (e.g., `UserContext`, `ThemeContext`) instead of one giant global context?",
+        "answer": {
+            "type": "text",
+            "content": "**Performance:** When a Context value changes, **every** component consuming that Context re-renders.\n\nIf you bundle everything (User + Theme + Notifications) into one Context, updating the 'Theme' will needlessly re-render components that only care about the 'User'. Splitting them ensures components only update when the specific data they depend on changes."
+        },
+        "explanation": "Granular contexts prevent unnecessary re-renders, acting as a manual form of performance optimization."
+    },
+    {
+        "title": "Context vs Redux",
+        "ques": "When should you stick to **Context** and when should you reach for **Redux** (or similar state libraries)?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Use Context:** For low-frequency updates (like theme, language, user authentication) needed by many components. Simple prop-drilling solutions.\n*   **Use Redux/Zustand:** For high-frequency updates, complex state logic, or when you need powerful debugging tools (DevTools) and middleware capabilities."
+        },
+        "explanation": "Context is a dependency injection mechanism, not a state management library. Redux is for state management."
+    }
+]

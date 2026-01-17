@@ -1,0 +1,38 @@
+[
+    {
+        "title": "React Router DOM Basics",
+        "ques": "What is the specialized function of the **`Link`** component in `react-router-dom` compared to a standard HTML `<a>` tag?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`<a>` tag:** Performs a full page refresh. It requests a new HTML document from the server, resetting all React state.\n*   **`Link` component:** Handles navigation **client-side**. It modifies the URL URL history and renders the new component *without* reloading the page, preserving the application state and providing a smoother user experience."
+        },
+        "explanation": "This client-side navigation is the defining feature of a Single Page Application (SPA)."
+    },
+    {
+        "title": "Nested Routes",
+        "ques": "How do **Nested Routes** help in structuring a complex application layout (like a Dashboard)?",
+        "answer": {
+            "type": "text",
+            "content": "**Nested Routes** allow a parent route (e.g., `/dashboard`) to render a consistent layout (sidebar, header) while a child route (e.g., `/dashboard/settings`) renders specific content inside an `<Outlet />` within that layout.\n\nThis mirrors the nested UI structure in the URL structure, keeping the layout code localized to the parent component."
+        },
+        "explanation": "The `<Outlet />` component was a key addition in React Router v6 to simplify this pattern."
+    },
+    {
+        "title": "Route Guards (Protected Routes)",
+        "ques": "What is a **Route Guard** (or Protected Route) and how is it typically implemented in React?",
+        "answer": {
+            "type": "text",
+            "content": "A **Route Guard** prevents unauthorized users from accessing specific routes (e.g., `/admin`).\n\n**Implementation:** It is typically a wrapper component that checks a condition (like `isLoggedIn` or `userRole`).\n*   **If authorized:** It renders the `children` (the protected page).\n*   **If unauthorized:** It redirects the user using `<Navigate to='/login' />`."
+        },
+        "explanation": "Security on the frontend is about UX (hiding links they can't use). True security must always be enforced on the backend."
+    },
+    {
+        "title": "Lazy Loading Routes",
+        "ques": "How does **Lazy Loading** routes (using `React.lazy` and `Suspense`) improve application performance?",
+        "answer": {
+            "type": "text",
+            "content": "By default, React bundles the entire application into one massive JavaScript file.\n\n**Lazy Loading** splits the code (`Code Splitting`). Code for a specific route (like `/settings`) is only downloaded from the server **when the user actually visits that route**.\n\n**Improvement:** This drastically reduces the initial load time of the application, as the user downloads only what is needed for the first screen."
+        },
+        "explanation": "For large apps, code splitting is not optional; it's essential for maintaining fast Web Vitals scores."
+    }
+]

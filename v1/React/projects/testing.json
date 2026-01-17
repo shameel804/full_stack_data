@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Memoization with `React.memo`",
+        "ques": "What does `React.memo` do for functional components, and how does it optimize performance?",
+        "answer": {
+            "type": "text",
+            "content": "**`React.memo`** checks a component's props.\n\n**Optimization:** If the props have not changed, React **skips rendering** the component and uses the last rendered result. This prevents unnecessary re-renders of child components when the parent re-renders."
+        },
+        "explanation": "This is equivalent to `PureComponent` for class components. Use it for heavy components that render often with the same props."
+    },
+    {
+        "title": "useMemo vs useCallback",
+        "ques": "Explain the difference between **`useMemo`** and **`useCallback`**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **`useMemo`:** Memoizes a **value**. It re-calculates the value only when dependencies change. (e.g., filtering a large list).\n*   **`useCallback`:** Memoizes a **function definition**. It ensures the function object remains referentially stable between renders unless dependencies change. This is crucial when passing functions to `React.memo` components to prevent breaking their memoization."
+        },
+        "explanation": "Remember: `useCallback(fn, deps)` is equivalent to `useMemo(() => fn, deps)`."
+    },
+    {
+        "title": "Code Splitting",
+        "ques": "What is **Code Splitting** in React, and which tool usually handles the bundling?",
+        "answer": {
+            "type": "text",
+            "content": "**Code Splitting** is the practice of splitting your code into various bundles which can then be loaded on demand or in parallel.\n\n**Bundler:** Tools like **Webpack** (or Rollup/Vite) handle this process. In React, you trigger it using `React.lazy()` and dynamic `import()` syntax."
+        },
+        "explanation": "It prevents the 'megabundle' problem where users have to download 10MB of JS just to see the landing page."
+    },
+    {
+        "title": "React Profiler",
+        "ques": "What information does the **React Profiler** (in DevTools) provide to help with optimization?",
+        "answer": {
+            "type": "text",
+            "content": "The **React Profiler** records performance information for each commit (render).\n\n**Key Info:**\n1.  **Who rendered:** Which components rendered.\n2.  **Why regarding:** Why they rendered (e.g., \"hooks changed\", \"parent rendered\", \"props changed\").\n3.  **Duration:** How long the render took.\n\nThis helps identify components that render too often or take too long."
+        },
+        "explanation": "Don't guess where bottlenecks are. Measure them."
+    }
+]

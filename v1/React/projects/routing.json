@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Managing Side Effects with `useEffect`",
+        "ques": "What is the **`useEffect`** hook used for? Give two examples of 'side effects'.",
+        "answer": {
+            "type": "text",
+            "content": "**`useEffect`** is used to perform side effects in functional components. It replaces lifecycle methods like `componentDidMount`, `componentDidUpdate`, and `componentWillUnmount`.\n\n**Examples of Side Effects:**\n1.  **Fetching data** from an API after the component renders.\n2.  **Subscribing** to events (like window resize) or modifying the DOM directly (changing document title)."
+        },
+        "explanation": "If it involves stepping outside the pure rendering logic of React, it belongs in a `useEffect`."
+    },
+    {
+        "title": "Sharing Data with `useContext`",
+        "ques": "How does **`useContext`** solve the prop drilling problem?",
+        "answer": {
+            "type": "text",
+            "content": "**`useContext`** allows components to consume data from a Context provider directly, bypassing intermediate components.\n\n**Mechanism:** You wrap a parent tree in a `<MyContext.Provider value={...}>`. Any child component, no matter how deep, can call `useContext(MyContext)` to read that value without it being passed down as a prop through every level."
+        },
+        "explanation": "Context is perfect for 'global' data like themes, user authentication protocols, or language settings."
+    },
+    {
+        "title": "Logic Reuse with Custom Hooks",
+        "ques": "What is a **Custom Hook** and what naming convention must it follow?",
+        "answer": {
+            "type": "text",
+            "content": "A **Custom Hook** is a JavaScript function that uses other React Hooks inside it to encapsulate reusable logic.\n\n**Naming Convention:** It **must start with 'use'** (e.g., `useFetch`, `useWindowSize`). This convention allows React to check for violations of the Rules of Hooks (like calling hooks conditionally)."
+        },
+        "explanation": "Custom hooks allow you to extract component logic into reusable functions, just like you extract common code into utility functions."
+    },
+    {
+        "title": "Complex State with `useReducer`",
+        "ques": "When might you choose **`useReducer`** over **`useState`**?",
+        "answer": {
+            "type": "text",
+            "content": "You should choose **`useReducer`** when:\n1.  **Complex State Logic:** The next state depends on the previous state in complex ways (like a nested object).\n2.  **Multiple Sub-values:** The state object contains many different fields that change together.\n3.  **Predictability:** You want to decouple the update logic (reducer) from the event handler (component) using the Action/Dispatch pattern (similar to Redux)."
+        },
+        "explanation": "`useReducer` is the powerhouse hook for complex state management, often used alongside Context."
+    }
+]

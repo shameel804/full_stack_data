@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Vue Reactivity System",
+        "ques": "Briefly explain how Vue 2's reactivity system (using **Object.defineProperty**) differs from Vue 3's (using **Proxy**).",
+        "answer": {
+            "type": "text",
+            "content": "*   **Vue 2:** Used `Object.defineProperty` to convert data properties into getters/setters. It had limitations (couldn't detect property addition/deletion or array index setting).\n*   **Vue 3:** Uses ES6 **Proxy**. It wraps the entire object, allowing it to interpret *all* operations (additions, deletions, array changes) without the old caveats."
+        },
+        "explanation": "The Proxy-based system is more robust and performant but requires modern browser support."
+    },
+    {
+        "title": "Watchers",
+        "ques": "When should you use a **Watcher** (`watch`) instead of a Computed Property?",
+        "answer": {
+            "type": "text",
+            "content": "Use data **Watchers** when you need to perform **asynchronous** or **expensive** operations in response to changing data.\n\n**Example:** Making an API call when a search query changes, or setting a timer. Computed properties cannot deal with async logic."
+        },
+        "explanation": "Watchers are for 'side effects' of data changes."
+    },
+    {
+        "title": "Computed vs Methods",
+        "ques": "Can you use a **Method** to display derived data in a template? If so, why does a **Computed Property** exist?",
+        "answer": {
+            "type": "text",
+            "content": "Yes, you can call a method `{{ calculateTotal() }}`.\n\n**Difference:** As referenced before, **Computed Properties are cached**. A method will execute *every single time* the component re-renders, even if the relevant data hasn't changed. Computed properties only re-evaluate when necessary."
+        },
+        "explanation": "If the operation is computationally expensive (looping a huge array), always use computed."
+    },
+    {
+        "title": "Reactivity Caveats (Vue 2)",
+        "ques": "In Vue 2, why doesn't `this.myArray[index] = newValue` trigger a view update, and how do you fix it?",
+        "answer": {
+            "type": "text",
+            "content": "**Reason:** JavaScript's `Object.defineProperty` cannot detect direct assignment to an array index.\n\n**Fix:** You must use the `Vue.set` method (or `this.$set`).\n`this.$set(this.myArray, index, newValue)`"
+        },
+        "explanation": "This is the most infamous 'gotcha' in Vue 2, completely resolved in Vue 3."
+    }
+]

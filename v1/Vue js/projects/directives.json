@@ -1,0 +1,38 @@
+[
+    {
+        "title": "v-if vs v-show",
+        "ques": "Compare **`v-if`** and **`v-show`**. When would you use one over the other?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`v-if`:** Conditionally renders the element. If false, the element is **removed from the DOM** entirely. Higher toggle cost.\n*   **`v-show`:** Always renders the element but toggles its CSS `display` property (none/block). Higher initial render cost.\n\n**Usage:** Use `v-show` for elements that toggle frequently (like a dropdown menu). Use `v-if` for elements that are rarely switched."
+        },
+        "explanation": "`v-if` is 'lazy'; `v-show` is just CSS switching."
+    },
+    {
+        "title": "Loops with v-for",
+        "ques": "When using **`v-for`**, why is it critical to provide a unique **`:key`** attribute?",
+        "answer": {
+            "type": "text",
+            "content": "The **`:key`** attribute gives each item a unique identity.\n\n**Reason:** It helps Vue's virtual DOM algorithm identify which items have changed, been added, or been removed. Without keys, Vue uses a 'minimize movement' algorithm that can lead to rendering bugs with component state or form inputs."
+        },
+        "explanation": "Always use a unique ID (like `user.id`), not the array index, as the key."
+    },
+    {
+        "title": "Event Handling with v-on",
+        "ques": "What are **Event Modifiers** in Vue (like `.prevent` or `.stop`) used for?",
+        "answer": {
+            "type": "text",
+            "content": "**Event Modifiers** provide a clean way to handle common DOM event details directly in the template.\n\n*   `.prevent`: Calls `event.preventDefault()` (e.g., stopping a form submit reload).\n*   `.stop`: Calls `event.stopPropagation()` (stopping event bubbling).\n\nUsage: `<form @submit.prevent=\"onSubmit\">`"
+        },
+        "explanation": "Modifiers keep your methods pure logic, separating DOM event details from business logic."
+    },
+    {
+        "title": "Custom Directives",
+        "ques": "What is a **Custom Directive** and give an example of a use case for one.",
+        "answer": {
+            "type": "text",
+            "content": "A **Custom Directive** (e.g., `v-focus`) allows you to encapsulate low-level DOM access behavior.\n\n**Use Case:** creating a `v-focus` directive that automatically focuses an input element when the page loads. Vue doesn't have a built-in prop for this behavior, so a custom directive manipulating `el.focus()` in the `mounted` hook is the solution."
+        },
+        "explanation": "Use components for UI structure, and directives for low-level DOM manipulations."
+    }
+]
