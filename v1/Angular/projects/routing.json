@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Router Module",
+        "ques": "What are the two main directives provided by `RouterModule` to enable navigation in HTML?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **`routerLink`:** Used on anchor tags (instead of `href`) to navigate to a route without reloading the page.\n    `<a routerLink=\"/home\">Home</a>`\n2.  **`router-outlet`:** A placeholder tag that marks the spot in the DOM where the routed component's view should be displayed."
+        },
+        "explanation": "`router-outlet` is like a dynamic window where Angular swaps components based on the URL."
+    },
+    {
+        "title": "Route Parameters",
+        "ques": "How do you define a route with a parameter (like an ID) and how do you access it in the component?",
+        "answer": {
+            "type": "text",
+            "content": "**Definition:** `{ path: 'user/:id', component: UserComponent }`\n\n**Access:** You inject `ActivatedRoute` into the component.\n`this.route.snapshot.paramMap.get('id')` (for static access) or `this.route.paramMap.subscribe(...)` (for reactive updates)."
+        },
+        "explanation": "Use the subscription method if the user might navigate from `/user/1` to `/user/2` without destroying the component."
+    },
+    {
+        "title": "Child Routes",
+        "ques": "What is the primary use case for **Child Routes** in Angular routing?",
+        "answer": {
+            "type": "text",
+            "content": "**Child Routes** are used to create nested UIs. \n\n**Example:** A 'Dashboard' page needs a consistent sidebar and header, but the main content area changes between 'Overview', 'Settings', and 'Reports'.\nThe parent component (Dashboard) has its own `<router-outlet>`, and the child routes render their components inside that outlet."
+        },
+        "explanation": "This mirrors the component tree structure in the URL structure."
+    },
+    {
+        "title": "Route Guards (CanActivate)",
+        "ques": "What does the **`CanActivate`** guard do?",
+        "answer": {
+            "type": "text",
+            "content": "**`CanActivate`** is an interface for a class (Guard) that decides if a route can be activated.\n\n**Logic:** It returns `true` (allow navigation) or `false` (block navigation). It is commonly used to protect routes that require the user to be logged in."
+        },
+        "explanation": "Normally, if it returns false, you also redirect the user to a Login page."
+    }
+]

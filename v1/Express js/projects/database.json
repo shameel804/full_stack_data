@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Connecting to MongoDB",
+        "ques": "Which popular ODM (Object Data Modeling) library is commonly used to connect Express to **MongoDB**?",
+        "answer": {
+            "type": "text",
+            "content": "**Mongoose.**\n\nIt provides schema validation, model building, and query building logic on top of the native MongoDB driver, making it easier to work with data in a structured way."
+        },
+        "explanation": "`npm install mongoose`"
+    },
+    {
+        "title": "Connecting to SQL (Postgres/MySQL)",
+        "ques": "For SQL databases, you can use raw definitions or an ORM like **Sequelize** or **TypeORM**. What is a query builder like **Knex.js**?",
+        "answer": {
+            "type": "text",
+            "content": "**Knex.js** is a 'middle ground' SQL query builder.\n\nIt allows you to write SQL-like queries in JavaScript (`knex('users').where('id', 1)`) that work across multiple database types (Postgres, MySQL, SQLite), but it doesn't impose a heavy object-relational mapping layer like full ORMs do."
+        },
+        "explanation": "Popular for developers who just want to write SQL without writing SQL."
+    },
+    {
+        "title": "Repository Pattern",
+        "ques": "Why is it good practice to separate database logic from your Express Route Handlers (Controller logic)?",
+        "answer": {
+            "type": "text",
+            "content": "**Separation of Concerns.**\n\nRoutes should handle HTTP (requests, responses, status codes). Database logic (queries) should live in a **Service** or **Repository** layer.\n\n**Benefit:** You can test your DB logic independently, and if you change databases, you don't have to rewrite your controllers."
+        },
+        "explanation": "Keep controllers 'skinny'."
+    },
+    {
+        "title": "Environment Variables for DB Config",
+        "ques": "Where should you store your Database Connection String?",
+        "answer": {
+            "type": "text",
+            "content": "In a **.env** file (accessed via `process.env.DB_URI`).\n\n**NEVER** commit it to Git."
+        },
+        "explanation": "Use the `dotenv` package to load these variables locally."
+    }
+]

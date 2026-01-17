@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Naming Conventions",
+        "ques": "Why is it important to use consistent **Naming Conventions** (like camelCase vs snake_case) in API design?",
+        "answer": {
+            "type": "text",
+            "content": "Consistency reduces confusion for developers consuming the API.\n\n**Standard:** JSON typically uses **camelCase** (`firstName`).\n**Standard:** URL path segments typically use **kebab-case** (`/user-profiles`).\n\nMixing styles (e.g., returning `first_name` in one endpoint and `lastName` in another) frustrates users."
+        },
+        "explanation": "Predictability is a key metric of API quality."
+    },
+    {
+        "title": "Error Handling Response",
+        "ques": "When an API error occurs, why should you return a structured JSON response (e.g., `{ \"error\": \"...\" }`) along with the HTTP status code?",
+        "answer": {
+            "type": "text",
+            "content": "An HTTP status code (like 400 Bad Request) tells *what* category of error happened, but not *why*.\n\n**Structured Body:** A JSON body like `{ \"code\": \"INVALID_EMAIL\", \"message\": \"Email format is incorrect\" }` allows the client application to display a meaningful error message to the user."
+        },
+        "explanation": "Never let a stack trace leak out to the client in production."
+    },
+    {
+        "title": "Documentation (Swagger/OpenAPI)",
+        "ques": "What is **Swagger** (OpenAPI) and why is it beneficial for API design?",
+        "answer": {
+            "type": "text",
+            "content": "**Swagger/OpenAPI** is a specification for describing RESTful APIs.\n\n**Benefit:** It generates interactive documentation automatically. Developers can try out endpoints directly in the browser, seeing exactly what parameters are required and what the response looks like, without writing any code."
+        },
+        "explanation": "If it isn't documented, it doesn't exist."
+    },
+    {
+        "title": "Versioning Strategy",
+        "ques": "Why should you build **Versioning** (e.g., `/v1/`) into your API URL from day one?",
+        "answer": {
+            "type": "text",
+            "content": "APIs change. If you change the data structure in a way that breaks existing clients (Breaking Change), you need a way to support the old clients while offering new features.\n\n**Strategy:** `/v1/users` works for old apps. `/v2/users` works for the new app. Without this, you are stuck supporting legacy mistakes forever."
+        },
+        "explanation": "The only constant in software is change."
+    }
+]

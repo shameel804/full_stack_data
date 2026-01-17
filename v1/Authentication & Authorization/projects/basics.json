@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Authentication vs Authorization",
+        "ques": "What is the fundamental difference between **Authentication (AuthN)** and **Authorization (AuthZ)**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Authentication (Who are you?):** Verifying the identity of a user (e.g., logging in with password or FaceID).\n*   **Authorization (What can you do?):** Verifying what resources the authenticated user is allowed to access (e.g., an Admin can delete posts, a User cannot)."
+        },
+        "explanation": "You can be authenticated but not authorized (e.g., a logged-in user trying to access the admin panel)."
+    },
+    {
+        "title": "Password Hashing",
+        "ques": "Why must you **never** store passwords in plain text, and what should you do instead?",
+        "answer": {
+            "type": "text",
+            "content": "**Risk:** If your database is leaked (which happens), all user accounts are compromised immediately.\n\n**Solution:** **Hash** the passwords using a slow, salted algorithm (like **bcrypt** or Argon2). Hashing is one-way; you cannot retrieve the original password, only verify if a login attempt matches the hash."
+        },
+        "explanation": "MD5 and SHA-1 are fast hashes and are NOT secure for passwords."
+    },
+    {
+        "title": "Salt",
+        "ques": "What is a **Salt** in password hashing and what attack does it prevent?",
+        "answer": {
+            "type": "text",
+            "content": "A **Salt** is a random string added to the password *before* hashing.\n\n**Prevents:** **Rainbow Table Attacks**. Without a salt, `hash('password123')` is always the same string. Attackers have pre-computed tables of these hashes. Salting ensures that even if two users have the same password, their database hashes are completely different."
+        },
+        "explanation": "Modern hashing libraries (bcrypt) handle salting automatically."
+    },
+    {
+        "title": "Session vs Token",
+        "ques": "Briefly compare **Session-based** auth vs **Token-based** auth.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Session:** Server stores state (in memory/DB). Client sends a cookie (Session ID). Server checks ID against its storage. (Stateful).\n*   **Token (JWT):** Server signs a token containing user data. Client sends token. Server verifies signature. No server-side storage needed. (Stateless)."
+        },
+        "explanation": "Tokens are preferred for mobile apps and microservices; Sessions are robust for traditional monoliths."
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "title": "Svelte Routing Ecosystem",
+        "ques": "Does Svelte core come with a built-in router like Angular?",
+        "answer": {
+            "type": "text",
+            "content": "**No.** Svelte core is purely a component compiler.\n\n**Options:**\n1.  **SvelteKit:** The official application framework (like Next.js) which handles filesystem-based routing.\n2.  **Svelte Navigator / svelte-routing:** Third-party libraries that mimic React Router for simple SPAs."
+        },
+        "explanation": "Most modern Svelte development happens in SvelteKit."
+    },
+    {
+        "title": "Route Parameters in SvelteKit",
+        "ques": "In **SvelteKit**, how do you define a route that accepts a dynamic parameter (like a `slug`)?",
+        "answer": {
+            "type": "text",
+            "content": "You use **square brackets** in the filename or directory name.\n\n**Example:** `src/routes/blog/[slug].svelte` (or `+page.svelte` in newer versions).\n\nThis tells SvelteKit that `[slug]` is a dynamic segment."
+        },
+        "explanation": "This filesystem-based routing is intuitive and mirrors the URL structure."
+    },
+    {
+        "title": "Page Transitions",
+        "ques": "How can you implement **Page Transitions** in Svelte (navigating from one route to another)?",
+        "answer": {
+            "type": "text",
+            "content": "You typically use a layout component with a `:key` block (referencing the current URL path) wrapping the slot.\n\n**Code:**\n`{#key $page.url.pathname}`\n  `<div in:fade out:fade>`\n    `<slot />`\n  `</div>`\n`{/key}`\nThis forces the content container to destroy (fade out) and recreate (fade in) when the route changes."
+        },
+        "explanation": "The simple combination of the key block and transitions creates seamless app navigation."
+    }
+]

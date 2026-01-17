@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Virtual Hosts",
+        "ques": "What is the concept of **Virtual Hosting** in web server configuration?",
+        "answer": {
+            "type": "text",
+            "content": "**Virtual Hosting** allows a single web server (one IP address) to host **multiple different websites** (domain names).\n\nThe server inspects the `Host` HTTP header of the incoming request to decide which directory (site) to serve."
+        },
+        "explanation": "Without this, you'd need a separate physical server for every website."
+    },
+    {
+        "title": "MIME Types",
+        "ques": "Why must a web server be configured with correct **MIME Types**?",
+        "answer": {
+            "type": "text",
+            "content": "The **MIME Type** (Content-Type header) tells the browser how to handle the file.\n\n**Example:** If you send a `.css` file but label it `text/plain`, the browser won't apply the styles. If you send a `.json` file as `text/html`, Javascript might not parse it correctly."
+        },
+        "explanation": "Servers usually have a `types.conf` file mapping extensions to types."
+    },
+    {
+        "title": "Root vs Alias",
+        "ques": "In Nginx config, what is the difference between **`root`** and **`alias`**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`root`:** Appends the request URI to the path. `location /img/ { root /var/www; }` -> `/var/www/img/file.jpg`.\n*   **`alias`:** Replaces the location part. `location /img/ { alias /var/www/images/; }` -> `/var/www/images/file.jpg`."
+        },
+        "explanation": "Use `alias` when the file system path doesn't match the URL path structure."
+    },
+    {
+        "title": "Environment Variables",
+        "ques": "Why is it bad practice to hardcode secrets (DB passwords) in the server configuration file?",
+        "answer": {
+            "type": "text",
+            "content": "Configuration files are often checked into version control (Git).\n\n**Best Practice:** Use **Environment Variables** to inject sensitive values at runtime. Nginx and Apache have modules/syntax to read system environment variables."
+        },
+        "explanation": "Keep your secrets separate from your config."
+    }
+]

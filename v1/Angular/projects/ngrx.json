@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Store",
+        "ques": "In the Redux pattern (NgRx), what is the **Store**?",
+        "answer": {
+            "type": "text",
+            "content": "The **Store** is a client-side database that holds the **state** of your application. It acts as the 'single source of truth'. Components can **select** data from the store and **dispatch** actions to modify it."
+        },
+        "explanation": "The store makes state predictable and easy to debug."
+    },
+    {
+        "title": "Actions and Reducers",
+        "ques": "Briefly describe the flow: Action -> Reducer -> Store in NgRx.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Action:** A component dispatches an Action (e.g., `LoadUsers`). It describes *what* happened.\n2.  **Reducer:** A pure function that takes the current state and the action, and returns a **new** state based on that action.\n3.  **Store:** The Store updates itself with this new state and notifies all subscribed components."
+        },
+        "explanation": "Reducers never modify the state directly; they compute a new one (immutability)."
+    },
+    {
+        "title": "Effects",
+        "ques": "What are NgRx **Effects** used for?",
+        "answer": {
+            "type": "text",
+            "content": "**Effects** handle **side effects** (like HTTP requests) in isolation from components and reducers.\n\n**Flow:** An Effect listens for a specific Action (e.g., `Login`). It performs the API call. On success, it dispatches a new Action (e.g., `LoginSuccess`) with the data. On failure, it dispatches a failure Action."
+        },
+        "explanation": "Effects keep your components pure and focused only on the UI."
+    },
+    {
+        "title": "Selectors",
+        "ques": "Why should you use data **Selectors** instead of accessing the store state directly?",
+        "answer": {
+            "type": "text",
+            "content": "**Selectors** are pure functions used to obtain a slice of store state.\n\n**Benefits:**\n1.  **Memoization:** They cache the result. If the input state hasn't changed, they return the cached value instantly without recalculation.\n2.  **Decoupling:** If you restructure your Store, you only update the Selector, not every component that uses that data."
+        },
+        "explanation": "Memoized selectors are crucial for performance in large NgRx apps."
+    }
+]

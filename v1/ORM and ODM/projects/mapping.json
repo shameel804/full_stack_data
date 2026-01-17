@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Inheritance Mapping",
+        "ques": "Does a Relational Database support Class Inheritance natively?",
+        "answer": {
+            "type": "text",
+            "content": "**No.**\n\nSQL tables don't inherit from other tables.\n\n**ORM Mapping Strategies:**\n1.  **Single Table:** One big table for Parent+Children, with a discriminator column.\n2.  **Joined Table:** Separate tables for Parent and Child, joined by ID.\n3.  **Table Per Class:** Duplicate columns in separate tables."
+        },
+        "explanation": "Single Table is fastest; Joined is most normalized."
+    },
+    {
+        "title": "Embedded Objects",
+        "ques": "How do you map an 'Address' object that is part of a 'User' class but doesn't need its own table?",
+        "answer": {
+            "type": "text",
+            "content": "Use **Embedding** (or Value Types).\n\nIf `User` has `Address` fields (street, city), the ORM flattens them into the `users` table as columns `address_street`, `address_city`.\n\n**JPA:** `@Embeddable` class and `@Embedded` field."
+        },
+        "explanation": "Great for grouping related columns."
+    },
+    {
+        "title": "Many-to-Many Mapping",
+        "ques": "How does an ORM handle a Many-to-Many relationship (e.g., Students <-> Courses) under the hood?",
+        "answer": {
+            "type": "text",
+            "content": "It creates a hidden **Junction Table** (or Pivot Table).\n\nThe ORM manages this intermediate table (e.g., `student_courses` containing `student_id`, `course_id`) automatically. You just interact with `student.getCourses()`."
+        },
+        "explanation": "Usually enabled via `@ManyToMany`."
+    },
+    {
+        "title": "Bidirectional Mapping",
+        "ques": "What is the danger of a **Bidirectional** relationship (User has Posts, Post has User) in JSON serialization?",
+        "answer": {
+            "type": "text",
+            "content": "**Infinite Recursion.**\n\nUser -> Posts -> User -> Posts...\n\n**Fix:** Use `@JsonIgnore` (Jackson) or DTOs to break the cycle during serialization so the API response doesn't crash."
+        },
+        "explanation": "Common 'StackOverflowError' cause."
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Spring Data JPA",
+        "ques": "What is the primary goal of **Spring Data JPA**?",
+        "answer": {
+            "type": "text",
+            "content": "To significantly reduce the amount of boilerplate code required to implement data access layers for various persistence stores.\n\nIt builds on top of the JPA (Jakarta Persistence API) standard."
+        },
+        "explanation": "You write interfaces, and Spring generates the implementation details."
+    },
+    {
+        "title": "Repository Interface",
+        "ques": "How do you create a Data Access Object (DAO) for a `User` entity without writing SQL?",
+        "answer": {
+            "type": "code",
+            "lang": "java",
+            "content": "public interface UserRepository extends JpaRepository<User, Long> {\n}"
+        },
+        "explanation": "Just by extending `JpaRepository`, you instantly get methods like `save()`, `findById()`, `findAll()`, and `delete()`."
+    },
+    {
+        "title": "Derived Query Methods",
+        "ques": "How can you create a custom query to find users by email just by naming a method?",
+        "answer": {
+            "type": "text",
+            "content": "Define a method in your interface named **`findByEmail(String email)`**.\n\nSpring Data parses the method name and automatically generates the SQL query: `SELECT * FROM user WHERE email = ?`."
+        },
+        "explanation": "This feature is called 'Query Creation from Method Names'."
+    },
+    {
+        "title": "Entity",
+        "ques": "What annotation marks a Class as a Database Table mapping?",
+        "answer": {
+            "type": "text",
+            "content": "**`@Entity`** (from `javax.persistence` or `jakarta.persistence`).\n\nYou also typically need **`@Id`** to mark the primary key."
+        },
+        "explanation": "This is part of the standard JPA specification, not specific to Spring."
+    }
+]

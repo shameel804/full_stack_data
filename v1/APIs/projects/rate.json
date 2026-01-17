@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Throttling Algorithms",
+        "ques": "Explain the **Token Bucket** algorithm for rate limiting.",
+        "answer": {
+            "type": "text",
+            "content": "**Token Bucket:**\n1.  Imagine a bucket that gets filled with tokens at a constant rate (e.g., 1 token per second).\n2.  Every time a user makes a request, they must take a token from the bucket.\n3.  If the bucket is empty, the request is rejected.\n\n**Feature:** This allows for short **bursts** of traffic (using up accumulated tokens) while maintaining a steady average rate."
+        },
+        "explanation": "This is friendlier to real-world traffic patterns than strict 'Fixed Window' counters."
+    },
+    {
+        "title": "HTTP 429",
+        "ques": "What HTTP status code should you return when a user hits the rate limit?",
+        "answer": {
+            "type": "text",
+            "content": "**429 Too Many Requests**.\n\nIt is also good practice to include a `Retry-After` header telling the client how many seconds to wait before trying again."
+        },
+        "explanation": "Standardization helps automated clients handle backoff gracefully."
+    },
+    {
+        "title": "Implementation Layers",
+        "ques": "Where is the best place to implement Rate Limiting: Application Code (PHP/Node) or Infrastructure (Nginx/API Gateway)?",
+        "answer": {
+            "type": "text",
+            "content": "**Infrastructure** (e.g., Nginx, Redis, or API Gateway).\n\n**Why:** It stops the request **before** it hits your expensive application logic or database. Handling it in app code consumes resources just to say 'No'."
+        },
+        "explanation": "Fail fast, fail cheap."
+    },
+    {
+        "title": "Client-Side Throttling",
+        "ques": "Why should a client application also implement throttling (Debouncing)?",
+        "answer": {
+            "type": "text",
+            "content": "To provide a better **User Experience** and save bandwidth.\n\n**Example:** In a search bar, don't send an API request for every keystroke. Wait until the user stops typing for 300ms (Debounce). This prevents hitting the server's rate limit unnecessarily."
+        },
+        "explanation": "Be a polite API citizen."
+    }
+]

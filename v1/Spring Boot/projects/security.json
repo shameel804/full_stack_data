@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Spring Security Filter Chain",
+        "ques": "How does Spring Security typically enforce protection in a web application?",
+        "answer": {
+            "type": "text",
+            "content": "It uses a **Chain of Servlet Filters**.\n\nIncoming requests pass through a series of filters (e.g., `UsernamePasswordAuthenticationFilter`, `CsrfFilter`, `AuthorizationFilter`) that intercept the request, perform authentication/authorization logic, and either allow the request to proceed to your Controller or reject it (401/403)."
+        },
+        "explanation": "It wraps your standard servlet container."
+    },
+    {
+        "title": "Configuring Security",
+        "ques": "What class do you typically extend to customize Spring Security (e.g., allowing public access to `/login`)?",
+        "answer": {
+            "type": "text",
+            "content": "You create a configuration class annotated with **`@EnableWebSecurity`** that defines a **`SecurityFilterChain`** bean.\n\n**Code:**\n`http.authorizeHttpRequests(auth -> auth.requestMatchers(\"/login\").permitAll().anyRequest().authenticated())`"
+        },
+        "explanation": "Note: `WebSecurityConfigurerAdapter` is deprecated in modern Spring Boot versions."
+    },
+    {
+        "title": "UserDetailsService",
+        "ques": "What is the core interface you implement to load user data from your database for authentication?",
+        "answer": {
+            "type": "text",
+            "content": "**`UserDetailsService`**.\n\nIt has one method: `loadUserByUsername(String username)`. You implement this to query your database (e.g., via `UserRepository`) and return a `UserDetails` object containing the password and authorities."
+        },
+        "explanation": "This bridges your custom DB schema with Spring Security's internal logic."
+    },
+    {
+        "title": "Method Security",
+        "ques": "How can you secure a specific method so only Admins can call it?",
+        "answer": {
+            "type": "text",
+            "content": "Enable method security with `@EnableMethodSecurity` and use the **`@PreAuthorize`** annotation.\n\n**Example:**\n`@PreAuthorize(\"hasRole('ADMIN')\")`\n`public void deleteUser(Long id) { ... }`"
+        },
+        "explanation": "This works on any bean method, not just Controllers."
+    }
+]

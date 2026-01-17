@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Resource Controllers",
+        "ques": "What command generates a **Resource Controller** with methods for all standard CRUD operations?",
+        "answer": {
+            "type": "text",
+            "content": "`php artisan make:controller PhotoController --resource`\n\nThis generates a class with empty methods: `index`, `create`, `store`, `show`, `edit`, `update`, `destroy`."
+        },
+        "explanation": "It corresponds perfectly to `Route::resource('photos', PhotoController::class)`."
+    },
+    {
+        "title": "Request Validation",
+        "ques": "What is the most common way to validate incoming form data inside a controller method?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "$validated = $request->validate([\n    'title' => 'required|max:255',\n    'body' => 'required',\n]);"
+        },
+        "explanation": "If validation fails, Laravel **automatically redirects** the user back to the form with error messages. You don't need to write the `if (fail) redirect` logic manually."
+    },
+    {
+        "title": "Dependency Injection",
+        "ques": "How do you access the current HTTP **Request** object in a controller method?",
+        "answer": {
+            "type": "text",
+            "content": "Type-hint it in the method signature.\n\n`public function store(Request $request) { ... }`\n\nLaravel's Service Container automatically injects the current request instance."
+        },
+        "explanation": "Don't forget to import `Illuminate\\Http\\Request`."
+    },
+    {
+        "title": "Route Model Binding",
+        "ques": "Explain **Route Model Binding** in a controller method like `show(User $user)`.",
+        "answer": {
+            "type": "text",
+            "content": "Laravel automatically allows you to resolve Eloquent models defined in routes.\n\n**Route:** `Route::get('/users/{user}', ...)`\n**Controller:** `public function show(User $user)`\n\nIf you pass ID `1` in the URL, Laravel automatically fetches the User with ID 1 from the database and injects it. If not found, it throws a 404."
+        },
+        "explanation": "This saves you from writing `User::find($id)` repeatedly."
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Middleware Concept",
+        "ques": "What is **Middleware** in Express?",
+        "answer": {
+            "type": "text",
+            "content": "Middleware functions are functions that have access to the request (`req`), response (`res`), and the **next** function in the cycle.\n\nThey can:\n1.  Execute any code.\n2.  Modify the request and response objects.\n3.  End the request/response cycle.\n4.  Call `next()` to pass control to the next middleware."
+        },
+        "explanation": "Express is essentially a series of middleware function calls."
+    },
+    {
+        "title": "The `next()` Function",
+        "ques": "What happens if a middleware function does **not** call `next()` and does not send a response?",
+        "answer": {
+            "type": "text",
+            "content": "The application will **hang**.\n\nThe request will remain pending indefinitely (until it times out) because Express doesn't know what to do next. You must always either terminate the request (`res.send`) or pass it on (`next()`)."
+        },
+        "explanation": "This is a common source of bugs."
+    },
+    {
+        "title": "Built-in Middleware (Body Parser)",
+        "ques": "Which built-in middleware is required to parse JSON data sent in a POST request body?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "app.use(express.json());"
+        },
+        "explanation": "Without this line, `req.body` will be undefined."
+    },
+    {
+        "title": "Third-Party Middleware (Morgan)",
+        "ques": "What is **Morgan** commonly used for in Express apps?",
+        "answer": {
+            "type": "text",
+            "content": "**Morgan** is a logger middleware.\n\n**Usage:** `app.use(morgan('dev'))`\n\nIt logs details of every incoming request (Method, URL, Status Code, Response Time) to the console, which is invaluable for debugging."
+        },
+        "explanation": "Other common middleware: `cors`, `helmet`, `cookie-parser`."
+    }
+]

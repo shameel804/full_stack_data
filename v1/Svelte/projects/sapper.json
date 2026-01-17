@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Sapper vs SvelteKit",
+        "ques": "What is the relationship between **Sapper** and **SvelteKit**?",
+        "answer": {
+            "type": "text",
+            "content": "**Sapper** was the original application framework for Svelte (inspired by Next.js).\n**SvelteKit** is the **successor** to Sapper. It is built on Vite (instead of Webpack/Rollup), offering much faster builds and Hot Module Replacement. Sapper is now deprecated."
+        },
+        "explanation": "If you are starting a new project, use SvelteKit."
+    },
+    {
+        "title": "Adapters",
+        "ques": "What is the role of **Adapters** in SvelteKit?",
+        "answer": {
+            "type": "text",
+            "content": "**Adapters** allow you to deploy your SvelteKit app to different platforms with zero code changes.\n\n**Examples:**\n*   `adapter-auto` (Attempts to detect platform)\n*   `adapter-node` (For traditional Node.js servers)\n*   `adapter-static` (For SSG like GitHub Pages)\n*   `adapter-vercel/netlify` (For serverless functions)"
+        },
+        "explanation": "This abstraction makes SvelteKit apps truly portable."
+    },
+    {
+        "title": "EndPoints (API Routes)",
+        "ques": "How do you create an **API Endpoint** in SvelteKit to handle a POST request?",
+        "answer": {
+            "type": "text",
+            "content": "You create a file ending in `.js` (or `.ts`) typically named `+server.js` alongside your page.\n\n**Function:** You export a function named matching the HTTP method (e.g., `POST`).\n\n`export function POST({ request }) { ... return json({...}) }`"
+        },
+        "explanation": "This allows your frontend and backend api logic to live side-by-side."
+    },
+    {
+        "title": "Load Function",
+        "ques": "What is the purpose of the **`load`** function in SvelteKit pages?",
+        "answer": {
+            "type": "text",
+            "content": "The **`load`** function runs **before** the page is rendered (both on the server during SSR and on the client during navigation).\n\n**Use:** It fetches the data required for the page. The return value is passed as `data` props to the page component."
+        },
+        "explanation": "It ensures the component doesn't render until its data is ready, preventing loading spinners."
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "@SpringBootTest",
+        "ques": "What does the **`@SpringBootTest`** annotation do?",
+        "answer": {
+            "type": "text",
+            "content": "It boots up the **entire Application Context** for integration testing.\n\nIt scans for `@SpringBootApplication`, starts the embedded server (if configured), and injects all beans, simulating a real running environment."
+        },
+        "explanation": "This is heavy and slow; use it for integration tests, not unit tests."
+    },
+    {
+        "title": "@MockBean",
+        "ques": "When testing a Service, how do you mock its dependencies (like a Repository) so you don't hit the real database?",
+        "answer": {
+            "type": "text",
+            "content": "Use **`@MockBean`**.\n\nThis replaces the real bean in the Spring Context with a Mockito mock. You can then define its behavior (e.g., `when(repo.findById(1)).thenReturn(...)`)."
+        },
+        "explanation": "It allows you to test the Service logic in isolation."
+    },
+    {
+        "title": "MockMvc",
+        "ques": "What tool allows you to test Controllers without actually starting a full HTTP server?",
+        "answer": {
+            "type": "text",
+            "content": "**MockMvc**.\n\nIt allows you to send mock HTTP requests to your controllers and assert the response status, headers, and body content.\n\n`mockMvc.perform(get(\"/users\")).andExpect(status().isOk())`"
+        },
+        "explanation": "Use `@WebMvcTest` to auto-configure MockMvc."
+    },
+    {
+        "title": "DataJpaTest",
+        "ques": "What is **`@DataJpaTest`** used for?",
+        "answer": {
+            "type": "text",
+            "content": "It is a **slice test** for the Persistence Layer.\n\nIt configures an in-memory database (H2), scans for `@Entity` classes and Spring Data repositories, and **ignores** the Web layer (Controllers), making it much faster than `@SpringBootTest`."
+        },
+        "explanation": "Perfect for testing custom repository queries."
+    }
+]

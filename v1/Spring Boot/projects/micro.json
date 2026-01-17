@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Monolith vs Microservices",
+        "ques": "What is the key difference between a **Monolithic** and a **Microservices** architecture?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Monolith:** Entire application (UI, Business Logic, Data Access) is built and deployed as a **single unit** (one JAR/WAR).\n*   **Microservices:** Application is broken into small, independent services (User Service, Order Service) that communicate over a network (HTTP/REST or Messaging) and can be deployed/scaled individually."
+        },
+        "explanation": "Microservices offer agility but introduce distributed system complexity."
+    },
+    {
+        "title": "Service Discovery (Eureka)",
+        "ques": "In a dynamic microservices environment, why do you need **Service Discovery** (like Eureka or Consul)?",
+        "answer": {
+            "type": "text",
+            "content": "Services often have dynamic IP addresses (especially in the cloud).\n\n**Service Discovery** acts as a phone book. Service A says \"I need to call Service B\". It asks the Discovery Server \"Where is Service B?\", and the Discovery Server returns the current IP address."
+        },
+        "explanation": "Hardcoding URLs (`http://localhost:8081`) doesn't work in the cloud."
+    },
+    {
+        "title": "API Gateway",
+        "ques": "What is the role of an **API Gateway** (like Spring Cloud Gateway)?",
+        "answer": {
+            "type": "text",
+            "content": "It acts as the **single entry point** for all client traffic.\n\nInstead of the client calling 10 different microservices directly, it calls the Gateway. The Gateway handles routing, authentication, rate limiting, and load balancing, then forwards the request to the appropriate internal service."
+        },
+        "explanation": "It creates a unified interface for the outside world."
+    },
+    {
+        "title": "Circuit Breaker",
+        "ques": "What problem does the **Circuit Breaker** pattern (Resilience4j) solve?",
+        "answer": {
+            "type": "text",
+            "content": "It prevents **Cascading Failures**.\n\nIf Service A calls Service B, and Service B is slow/down, Service A might run out of threads waiting for it. A Circuit Breaker detects that B is failing and 'opens the circuit', immediately failing requests to B without waiting, protecting Service A's resources."
+        },
+        "explanation": "Fail fast, recover fast."
+    }
+]

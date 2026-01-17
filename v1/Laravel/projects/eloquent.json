@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Eloquent ORM",
+        "ques": "What is **Eloquent** and how does it relate to database tables?",
+        "answer": {
+            "type": "text",
+            "content": "**Eloquent** is Laravel's Object-Relational Mapper (ORM).\n\n**Relation:** Each database table has a corresponding **Model** class. For example, the `users` table maps to the `User` model. You interact with the `User` class to query the `users` table."
+        },
+        "explanation": "It implements the Active Record pattern."
+    },
+    {
+        "title": "Mass Assignment",
+        "ques": "What is the **Mass Assignment Vulnerability** and how does the `$fillable` property prevent it?",
+        "answer": {
+            "type": "text",
+            "content": "**Vulnerability:** A user sends a malicious field (e.g., `is_admin=1`) in a form request. If you pass the entire request to `User::create($request->all())`, they become an admin.\n\n**Protection:** The `$fillable` array in the Model defines a **whitelist** of attributes that act as the only ones allowed to be mass-assigned. `is_admin` would be ignored."
+        },
+        "explanation": "Alternatively, you can use `$guarded` to blacklist fields."
+    },
+    {
+        "title": "Relationships",
+        "ques": "How do you define a **One-to-Many** relationship (e.g., a User has many Posts) in Eloquent?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "// In User.php\npublic function posts()\n{\n    return $this->hasMany(Post::class);\n}"
+        },
+        "explanation": "You can then get them via `$user->posts`."
+    },
+    {
+        "title": "Migrations",
+        "ques": "What is the purpose of **Migrations** in Laravel?",
+        "answer": {
+            "type": "text",
+            "content": "Migrations are like **Version Control** for your database schema.\n\nInstead of manually creating tables in SQL (which teammates can't see), you write PHP code (`Schema::create...`) that defines the table structure. Running `php artisan migrate` applies these changes consistently across all developer machines and production servers."
+        },
+        "explanation": "It allows you to evolve your database schema over time."
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "title": "INNER JOIN",
+        "ques": "What does an **INNER JOIN** return?",
+        "answer": {
+            "type": "text",
+            "content": "It returns records that have matching values in **both** tables.\n\n**Analogy:** Venn Diagram intersection. If a Customer has no Orders, they don't show up. If an Order has no Customer (invalid), it doesn't show up."
+        },
+        "explanation": "The most common join type."
+    },
+    {
+        "title": "LEFT JOIN",
+        "ques": "What is the difference between Inner Join and **LEFT JOIN**?",
+        "answer": {
+            "type": "text",
+            "content": "**LEFT JOIN** returns **all** records from the left table (e.g., Customers), and the matched records from the right table (Orders).\n\n**Result:** If a Customer has no Orders, the customer *still* appears in the result, but the Order columns will be **NULL**."
+        },
+        "explanation": "Use this to find 'Customers who have never placed an order' (where Order ID is NULL)."
+    },
+    {
+        "title": "Join Syntax",
+        "ques": "Write a query to join `users` and `posts` on `users.id` = `posts.user_id`.",
+        "answer": {
+            "type": "code",
+            "lang": "sql",
+            "content": "SELECT users.name, posts.title \nFROM users \nINNER JOIN posts ON users.id = posts.user_id;"
+        },
+        "explanation": "Always specify the table name to avoid ambiguous column errors."
+    },
+    {
+        "title": "CROSS JOIN",
+        "ques": "What is a **CROSS JOIN** (Cartesian Product)?",
+        "answer": {
+            "type": "text",
+            "content": "It matches **every** row from the first table with **every** row from the second table.\n\n**Result:** If Table A has 10 rows and Table B has 10 rows, the result is 100 rows. Usually not what you want unless generating combinations."
+        },
+        "explanation": "Often happens accidentally if you forget the `ON` clause."
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "@Service Annotation",
+        "ques": "What is the purpose of the **`@Service`** annotation?",
+        "answer": {
+            "type": "text",
+            "content": "It marks a Java class as a **Service** component in the Service Layer.\n\n**Function:** It holds the **Business Logic** of the application. It acts as a specialized `@Component`, allowing Spring to auto-detect it during classpath scanning and inject it into Controllers."
+        },
+        "explanation": "Technically functionality is same as `@Component`, but semantic meaning is different."
+    },
+    {
+        "title": "Dependency Injection (Autowired)",
+        "ques": "How do you inject a Service into a Controller?",
+        "answer": {
+            "type": "text",
+            "content": "The recommended way is **Constructor Injection**.\n\n**Example:**\n`@RestController`\n`public class UserController {`\n`  private final UserService userService;`\n`  public UserController(UserService service) { this.userService = service; }`\n`}`"
+        },
+        "explanation": "Constructor injection ensures the class cannot be instantiated without its dependencies (immutability)."
+    },
+    {
+        "title": "Scope (Singleton)",
+        "ques": "By default, what is the **Scope** of a Service bean in Spring?",
+        "answer": {
+            "type": "text",
+            "content": "**Singleton.**\n\nOnly one instance of the Service class is created per Spring application context. This single instance is shared and injected wherever it is needed."
+        },
+        "explanation": "Therefore, services should generally be **stateless**."
+    },
+    {
+        "title": "Transactional",
+        "ques": "What does **`@Transactional`** do when placed on a Service method?",
+        "answer": {
+            "type": "text",
+            "content": "It wraps the method execution in a database **Transaction**.\n\n**Behavior:** If the method completes successfully, the changes are committed to the DB. If the method throws a RuntimeException, all changes made within that method are **Rolled Back** automatically."
+        },
+        "explanation": "Crucial for data integrity (e.g., deducting money from sender AND adding to receiver)."
+    }
+]

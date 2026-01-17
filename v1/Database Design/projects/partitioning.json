@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Horizontal Partitioning (Sharding)",
+        "ques": "What is **Horizontal Partitioning**?",
+        "answer": {
+            "type": "text",
+            "content": "Splitting a table's **rows** into multiple tables (or servers).\n\n**Example:** User IDs 1-1,000,000 go to Table A. User IDs 1,000,001-2,000,000 go to Table B.\n\nThis is essential for dealing with massive datasets that don't fit on one disk."
+        },
+        "explanation": "Also known as Sharding."
+    },
+    {
+        "title": "Vertical Partitioning",
+        "ques": "What is **Vertical Partitioning**?",
+        "answer": {
+            "type": "text",
+            "content": "Splitting a table's **columns** into multiple tables.\n\n**Example:** A `Users` table has `name`, `email` (small, frequently accessed) and `bio`, `profile_pic_blob` (large, rarely accessed). Splitting them ensures that `SELECT * FROM users` is fast and doesn't load heavy blobs unnecessarily."
+        },
+        "explanation": "Optimization for IO."
+    },
+    {
+        "title": "Range Partitioning",
+        "ques": "When would you use **Range Partitioning**?",
+        "answer": {
+            "type": "text",
+            "content": "For time-series data.\n\n**Example:** Partitioning a `Logs` table by month. `Jan_Logs`, `Feb_Logs`.\n\n**Benefit:** To delete old data (Data Retention Policy), you simply `DROP TABLE Jan_Logs` (instant) instead of `DELETE FROM logs WHERE date < ...` (very slow)."
+        },
+        "explanation": "Huge maintenance win."
+    },
+    {
+        "title": "Hash Partitioning",
+        "ques": "What is **Hash Partitioning**?",
+        "answer": {
+            "type": "text",
+            "content": "A strategy where a hash function is applied to the Partition Key (e.g., User ID) to determine which partition the data goes to.\n\n**Benefit:** evenly distributes data across partitions to prevent 'hot spots'."
+        },
+        "explanation": "Ensures uniform load."
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Props",
+        "ques": "How do you declare a **Prop** in a Svelte component so that a parent component can pass data to it?",
+        "answer": {
+            "type": "text",
+            "content": "You simply **export** a variable in the `<script>` block.\n\n**Syntax:**\n`export let answer = 'default value';`\n\nThe parent can then use it: `<Question answer=\"42\" />`"
+        },
+        "explanation": "The `export` keyword makes the variable 'public' to the component's consumer."
+    },
+    {
+        "title": "Slots",
+        "ques": "How do you create a component that accepts **children** elements (nested content) inside it?",
+        "answer": {
+            "type": "text",
+            "content": "You use the `<slot />` tag inside the component's markup.\n\n**Example:**\n`<!-- Box.svelte -->`\n`<div class=\"box\"><slot /></div>`\n\n**Usage:**\n`<Box><h1>Hello</h1></Box>`"
+        },
+        "explanation": "This works identically to Web Components and Vue slots."
+    },
+    {
+        "title": "Event Forwarding",
+        "ques": "In Svelte, if you want a component to forward a standard DOM event (like `click`) to its parent without writing a handler, how do you do it?",
+        "answer": {
+            "type": "text",
+            "content": "You add the event directive **without a value**.\n\n**Example:** `<button on:click>Click Me</button>`\n\nThis tells Svelte: 'Any click event on this button should be dispatched to the component that uses me'."
+        },
+        "explanation": "This feature eliminates the boilerplate of `on:click={e => dispatch('click', e)}`."
+    },
+    {
+        "title": "Context API",
+        "ques": "Svelte has `setContext` and `getContext`. Where must these functions be called?",
+        "answer": {
+            "type": "text",
+            "content": "They must be called during **component initialization** (i.e., at the top level of the `<script>` block, not inside a function or timeout).\n\nThis couples the context to the component hierarchy at creation time."
+        },
+        "explanation": "Context is great for passing data deeply without prop drilling."
+    }
+]

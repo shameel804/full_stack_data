@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Cherry-Picking",
+        "ques": "What does `git cherry-pick [commit-hash]` do?",
+        "answer": {
+            "type": "text",
+            "content": "It takes a specific commit from one branch and applies it **onto** your current branch.\n\n**Use Case:** You fixed a bug on `feature-branch` but you want *only that fix* on `main` right now, without merging the rest of the unfinished feature."
+        },
+        "explanation": "It creates a new commit ID."
+    },
+    {
+        "title": "Git Bisect",
+        "ques": "What is `git bisect` used for?",
+        "answer": {
+            "type": "text",
+            "content": "It uses a **Binary Search** algorithm to find the commit that introduced a bug.\n\nYou tell Git: \"This commit is bad, that commit (weeks ago) was good.\" Git checks out the middle commit. You test it. If good, it searches the newer half. If bad, it searches the older half."
+        },
+        "explanation": "Finds the culprit in minutes instead of hours."
+    },
+    {
+        "title": "Reset Hard vs Soft",
+        "ques": "What is the difference between `git reset --hard` and `git reset --soft`?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`--hard`:** Moves HEAD back **and** destroys all changes in your Staging Area and Working Directory. (Dangerous).\n*   **`--soft`:** Moves HEAD back but keeps your changes in the Staging Area, so you can re-commit them."
+        },
+        "explanation": "Use Soft to squash the last 3 commits into 1."
+    },
+    {
+        "title": "Reflog",
+        "ques": "You accidentally deleted a branch or hard-reset a commit. Is it lost forever?",
+        "answer": {
+            "type": "text",
+            "content": "**Usually No.**\n\n`git reflog` tracks every movement of HEAD. Even if a commit is not reachable by any branch, it is still in the Reflog for a few days (gc period). You can find the SHA hash and check it out again."
+        },
+        "explanation": "The safety net of Git."
+    }
+]

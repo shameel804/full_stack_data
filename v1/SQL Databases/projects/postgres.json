@@ -1,0 +1,38 @@
+[
+    {
+        "title": "JSON Support",
+        "ques": "PostgreSQL is often called an 'Object-Relational' database. What feature makes it similar to NoSQL?",
+        "answer": {
+            "type": "text",
+            "content": "**Native JSONB support.**\n\nYou can store unstructured JSON documents in a column (type `jsonb`) and **query specific keys** inside that JSON efficiently using indexes (GIN index), effectively giving you the best of SQL and NoSQL worlds."
+        },
+        "explanation": "Many startups use Postgres for everything because of this."
+    },
+    {
+        "title": "Extensions",
+        "ques": "What is a powerful feature of Postgres that allows for custom functionality?",
+        "answer": {
+            "type": "text",
+            "content": "**Extensions.**\n\n**Example:** `PostGIS` turns Postgres into a world-class geospatial database. `pg_trgm` enables fuzzy string searching. Extensions can add new data types, functions, and index types."
+        },
+        "explanation": "You enable them with `CREATE EXTENSION name;`."
+    },
+    {
+        "title": "MVCC",
+        "ques": "What is **MVCC** used for in Postgres?",
+        "answer": {
+            "type": "text",
+            "content": "**Multi-Version Concurrency Control.**\n\nIt allows multiple readers and writers to access the database simultaneously without blocking each other. Writers don't block readers, and readers don't block writers. Postgres keeps multiple 'versions' of a row to ensure each transaction sees a consistent snapshot."
+        },
+        "explanation": "This is why `COUNT(*)` is slow in Postgres (it has to check visibility of every row)."
+    },
+    {
+        "title": "Sequences",
+        "ques": "How does Postgres traditionally handle auto-incrementing IDs?",
+        "answer": {
+            "type": "text",
+            "content": "It uses a **Sequence** object (e.g., `SERIAL` or `BIGSERIAL` type).\n\nModern Postgres (v10+) recommends using `GENERATED ALWAYS AS IDENTITY` which complies with the SQL standard."
+        },
+        "explanation": "MySQL uses `AUTO_INCREMENT`."
+    }
+]

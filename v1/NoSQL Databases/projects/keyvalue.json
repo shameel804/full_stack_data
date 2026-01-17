@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Key-Value Model",
+        "ques": "What is the structure of a **Key-Value** store?",
+        "answer": {
+            "type": "text",
+            "content": "It is a simple **Associative Array** (Map/Dictionary). You save a value against a unique key.\n\n`set('user:100', 'Alice')`\n`get('user:100')` -> 'Alice'.\n\nThe value is often opaque (a blob) to the database."
+        },
+        "explanation": "Simplicity allows for extreme speed."
+    },
+    {
+        "title": "Redis",
+        "ques": "Why is **Redis** (Remote Dictionary Server) so fast?",
+        "answer": {
+            "type": "text",
+            "content": "It stores all data in **RAM** (In-Memory).\n\nThis eliminates disk I/O latency, allowing it to perform millions of operations per second with sub-millisecond response times."
+        },
+        "explanation": "Often used as a Cache."
+    },
+    {
+        "title": "Use Cases",
+        "ques": "Aside from caching, what is Redis commonly used for?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Session Management:** Storing user session tokens (with TTL expiry).\n2.  **Leaderboards:** Using Sorted Sets to rank millions of players in real-time.\n3.  **Queues:** Using Lists (commands `LPUSH`, `RPOP`)."
+        },
+        "explanation": "It supports complex data structures like Lists, Sets, Hashes."
+    },
+    {
+        "title": "Persistence",
+        "ques": "If Redis is in-memory, what happens if the power goes out?",
+        "answer": {
+            "type": "text",
+            "content": "By default, you lose data.\n\n**Solution:** Configure persistence.\n1.  **RDB (Snapshot):** Saves the dataset to disk every X minutes.\n2.  **AOF (Append Only File):** Logs every write operation to disk as it happens (slower but safer)."
+        },
+        "explanation": "You can use both."
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Blade Templating",
+        "ques": "What makes **Blade** different from standard PHP templates?",
+        "answer": {
+            "type": "text",
+            "content": "Blade allows you to use its concise syntax (like `{{ $var }}` or `@if`) while still compiling down to plain PHP code.\n\n**Key Feature:** Blade template files (`.blade.php`) are pre-compiled and cached until they are modified, meaning they add essentially **zero overhead** to your application."
+        },
+        "explanation": "Standard PHP inside HTML is messy; Blade is clean."
+    },
+    {
+        "title": "Directives",
+        "ques": "How do you loop through a `$users` collection in Blade?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "@foreach ($users as $user)\n    <p>This is user {{ $user->id }}</p>\n@endforeach"
+        },
+        "explanation": "Other helpful directives: `@forelse`, `@if`, `@auth`."
+    },
+    {
+        "title": "Layouts and Inheritance",
+        "ques": "How do you create a master layout (e.g., `app.blade.php`) and make other pages extend it?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Directives:** In the master layout, define a section with `@yield('content')`.\n2.  **Child:** In 'home.blade.php', use `@extends('layouts.app')` and `@section('content') ... @endsection`.\n\nThis injects the child's content into the master layout's placeholder."
+        },
+        "explanation": "This solves the problem of repeating the header/footer on every page."
+    },
+    {
+        "title": "Components",
+        "ques": "What is a **Blade Component** (e.g., `<x-alert>`)?",
+        "answer": {
+            "type": "text",
+            "content": "It is a reusable piece of UI (like an Alert box or a Button).\n\n**Syntax:** If you create `resources/views/components/alert.blade.php`, you can use it anywhere via the tag `<x-alert type=\"error\" message=\"Failed!\" />`. It promotes UI consistency like React/Vue components."
+        },
+        "explanation": "Modern Blade heavily emphasizes components over partials."
+    }
+]

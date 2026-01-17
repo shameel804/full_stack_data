@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Error First Callback",
+        "ques": "In Node.js style callbacks (and often in Express), what is the 'Error-First' convention?",
+        "answer": {
+            "type": "text",
+            "content": "The convention is that the **first argument** of the callback function is reserved for an error object.\n\n`function(err, result) { ... }`\n\nIf `err` is null, the operation succeeded. If `err` is set, an error occurred."
+        },
+        "explanation": "This is standard across the Node ecosystem."
+    },
+    {
+        "title": "Default Error Handler",
+        "ques": "What happens if you throw an error in a synchronous route handler and don't catch it?",
+        "answer": {
+            "type": "text",
+            "content": "Express catches it automatically and passes it to the **Default Error Handler**, which sends a 500 response with the stack trace (in development) to the client.\n\n**Note:** For *asynchronous* errors (in async/await) in Express 4, you MUST pass them to `next(err)` manually or they will crash the app (Express 5 fixes this)."
+        },
+        "explanation": "Always try/catch your async routes."
+    },
+    {
+        "title": "Custom Error Handling Middleware",
+        "ques": "How do you define a custom **Error Handling Middleware** in Express, and how does it differ from regular middleware?",
+        "answer": {
+            "type": "text",
+            "content": "It has **4 arguments** instead of 3.\n\n`app.use((err, req, res, next) => { ... })`\n\nExpress recognizes it as an error handler purely by the number of arguments (arity). It must be defined **after** all other middleware and routes."
+        },
+        "explanation": "If you leave out the 4th argument `next`, it will be treated as regular middleware."
+    },
+    {
+        "title": "Sending Error Responses",
+        "ques": "What is the best practice for sending an error response from your custom handler?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "res.status(err.status || 500).json({\n  error: {\n    message: err.message || 'Internal Server Error'\n  }\n});"
+        },
+        "explanation": "Always set the status code explicitly; otherwise, it defaults to 200 (OK) which is confusing."
+    }
+]

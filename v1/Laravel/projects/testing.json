@@ -1,0 +1,39 @@
+[
+    {
+        "title": "PHPUnit / Pest",
+        "ques": "What is the default testing framework in Laravel, and what is its configuration file?",
+        "answer": {
+            "type": "text",
+            "content": "**PHPUnit** is the default (though **Pest** is becoming popular).\n\n**Config:** `phpunit.xml`. It defines the test suites (Feature vs Unit) and environment variables (e.g., setting `DB_CONNECTION` to `sqlite` for in-memory testing)."
+        },
+        "explanation": "Laravel is built with testing in mind."
+    },
+    {
+        "title": "Feature Tests vs Unit Tests",
+        "ques": "What is the difference between a **Feature Test** and a **Unit Test** in Laravel?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Unit Test:** Tests a small, isolated piece of code (like a single method) without booting the Laravel application or hitting the database.\n*   **Feature Test:** Tests a larger slice of the application (like an HTTP request). It boots the Laravel app, hits a route, and asserts the response/database state."
+        },
+        "explanation": "Most of your tests will likely be Feature tests."
+    },
+    {
+        "title": "HTTP Tests",
+        "ques": "How do you test a POST request to create a user?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "$response = $this->post('/users', [\n    'name' => 'Sally',\n]);\n\n$response->assertStatus(201);"
+        },
+        "explanation": "Laravel provides a fluent API for making requests and asserting responses."
+    },
+    {
+        "title": "RefreshDatabase",
+        "ques": "What does the **`RefreshDatabase`** trait do in a test class?",
+        "answer": {
+            "type": "text",
+            "content": "It ensures a clean state for every test method.\n\n**Mechanism:** It migrates the database before the test runs and uses **Database Transactions** to roll back changes after each test finishes. This ensures Test A doesn't leave data that breaks Test B."
+        },
+        "explanation": "Essential for reliable testing."
+    }
+]

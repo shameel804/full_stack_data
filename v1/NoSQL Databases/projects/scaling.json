@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Sharding",
+        "ques": "What is **Sharding**?",
+        "answer": {
+            "type": "text",
+            "content": "Sharding is partitioning a large database across multiple servers (nodes).\n\nInstead of one server holding 1TB of data, you have 10 servers holding 100GB each. A **Shard Key** determines which server a piece of data lives on."
+        },
+        "explanation": "Essential for horizontal scaling."
+    },
+    {
+        "title": "Replication Factor",
+        "ques": "In a distributed DB, what does a **Replication Factor (RF)** of 3 mean?",
+        "answer": {
+            "type": "text",
+            "content": "It means every piece of data is stored on **3 different servers**.\n\n**Benefit:** If one server dies, you have 2 other copies. If two servers die, you still have 1 copy. This guarantees high availability and durability."
+        },
+        "explanation": "Standard for production clusters."
+    },
+    {
+        "title": "Consistent Hashing",
+        "ques": "What algorithm allows adding/removing servers in a cluster with minimal data movement?",
+        "answer": {
+            "type": "text",
+            "content": "**Consistent Hashing.**\n\nWhen a new node joins the cluster, only keys that map to its position on the 'ring' need to be moved to it. Without this, resizing a cluster would require reshuffling nearly all data."
+        },
+        "explanation": "Used by DynamoDB, Cassandra, Rippled."
+    },
+    {
+        "title": "Read Repair",
+        "ques": "What is **Read Repair** in Cassandra?",
+        "answer": {
+            "type": "text",
+            "content": "When you read data, the coordinator node checks all replicas.\n\nIf one replica has outdated data (due to a missed write), the coordinator sends the correct data to it in the background to bring it back in sync ('repairing' it)."
+        },
+        "explanation": "Self-healing mechanism."
+    }
+]

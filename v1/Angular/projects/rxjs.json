@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Observables",
+        "ques": "What is an **Observable** in RxJS and how does it differ from a Promise?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Promise:** Handles a **single** asynchronous event (resolve/reject) and cannot be cancelled.\n*   **Observable:** Represents a **stream** of multiple events over time (like user clicks, or a websocket feed). It is **lazy** (won't start until you subscribe) and can be **cancelled** (by unsubscribing)."
+        },
+        "explanation": "Observables are the backbone of reactive programming in Angular."
+    },
+    {
+        "title": "Subscribing",
+        "ques": "Why is it important to **unsubscribe** from Observables in Angular components?",
+        "answer": {
+            "type": "text",
+            "content": "If you subscribe to an infinite stream (like an interval or DOM event) and don't unsubscribe when the component is destroyed (`ngOnDestroy`), the subscription keeps running in the background.\n\n**Consequence:** This causes **Memory Leaks** and unexpected behavior (e.g., code running for a component that no longer exists)."
+        },
+        "explanation": "Use the `async` pipe in templates to handle subscription/unsubscription automatically."
+    },
+    {
+        "title": "Operators (map, filter)",
+        "ques": "What are RxJS **Operators** (like `map` and `filter`) used for?",
+        "answer": {
+            "type": "text",
+            "content": "**Operators** allow you to transform, filter, and combine streams of data.\n\n*   **`map`:** Transforms each value emitted (e.g., getting just the `id` from a user object).\n*   **`filter`:** Emits only values that pass a condition (e.g., ignoring null values).\n\nUsage: `.pipe( filter(x => x > 10), map(x => x * 2) )`"
+        },
+        "explanation": "The `.pipe()` method is where you chain these operators together."
+    },
+    {
+        "title": "Async Pipe",
+        "ques": "What is the **Async Pipe** (`| async`) and why is it recommended?",
+        "answer": {
+            "type": "text",
+            "content": "The **Async Pipe** subscribes to an Observable (or Promise) directly in the template and returns the latest emitted value.\n\n**Recommendation:** It automatically handles **unsubscribing** when the component is destroyed, preventing memory leaks and reducing the amount of boilerplate code in your TypeScript file."
+        },
+        "explanation": "It's the cleanest way to display data from an Observable."
+    }
+]

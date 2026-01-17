@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Structural Directives (*ngIf)",
+        "ques": "What does a **Structural Directive** do? Explain how `*ngIf` changes the DOM.",
+        "answer": {
+            "type": "text",
+            "content": "**Structural Directives** modify the layout by adding, removing, or manipulating elements in the DOM.\n\n**`*ngIf`:** If the expression evaluates to false, Angular **physically removes** the element (and its children) from the DOM. It does not just hide it with CSS."
+        },
+        "explanation": "The `*` asterisk serves as semantic sugar indicating that the directive alters the document structure."
+    },
+    {
+        "title": "Iterating with *ngFor",
+        "ques": "How do you loop through an array of items named `users` to display a list using `*ngFor`?",
+        "answer": {
+            "type": "code",
+            "lang": "html",
+            "content": "<ul>\n  <li *ngFor=\"let user of users\">\n    {{ user.name }}\n  </li>\n</ul>"
+        },
+        "explanation": "Similar to a `foreach` loop, `let user` creates a template variable accessible inside the list item."
+    },
+    {
+        "title": "Attribute Directives (ngClass)",
+        "ques": "What is the purpose of an **Attribute Directive**? Give an example using `[ngClass]`.",
+        "answer": {
+            "type": "text",
+            "content": "**Attribute Directives** change the appearance or behavior of an existing element.\n\n**`[ngClass]`:** Dynamically adds or removes CSS classes based on an expression.\n`<div [ngClass]=\"{'active': isActive, 'error': hasError}\">...</div>`\nHere, the class `active` is added only if the component property `isActive` is true."
+        },
+        "explanation": "Other common attribute directives include `ngStyle` and `ngModel`."
+    },
+    {
+        "title": "Custom Directives",
+        "ques": "When creating a **Custom Directive** (e.g., `appHighlight`), how do you access the host element to modify its style?",
+        "answer": {
+            "type": "text",
+            "content": "You inject **`ElementRef`** into the directive's constructor.\n\n**Example:**\n`constructor(private el: ElementRef) { el.nativeElement.style.backgroundColor = 'yellow'; }`"
+        },
+        "explanation": "Directives are powerful for encapsulating DOM manipulation logic that can be reused across multiple components."
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Go Concurrency (Goroutines)",
+        "ques": "What is a **Goroutine** and how does it differ from a standard OS thread?",
+        "answer": {
+            "type": "text",
+            "content": "A **Goroutine** is a lightweight thread managed by the Go runtime, not the OS.\n\n**Difference:** They are extremely cheap to create (Stack size starts at ~2KB). You can easily run **thousands** or millions of goroutines concurrently on a single machine, whereas creating thousands of OS threads would crash the system."
+        },
+        "explanation": "You start one simply by adding the keyword `go`: `go myFunction()`."
+    },
+    {
+        "title": "Channels",
+        "ques": "How do Goroutines communicate with each other safely?",
+        "answer": {
+            "type": "text",
+            "content": "They use **Channels**.\n\n**Concept:** Channels are typed pipes that allow one goroutine to send data and another to receive it. This synchronization mechanism avoids race conditions without explicit locks (mutexes).\n\"Do not communicate by sharing memory; share memory by communicating.\""
+        },
+        "explanation": "Channels are the core of Go's concurrency model (CSP)."
+    },
+    {
+        "title": "Error Handling",
+        "ques": "Go does not have Exceptions (try/catch). How is **Error Handling** typically done?",
+        "answer": {
+            "type": "code",
+            "lang": "go",
+            "content": "result, err := someFunction()\nif err != nil {\n    // handle error\n    return err\n}"
+        },
+        "explanation": "Errors are values. This forces developers to handle errors explicitly where they occur, rather than letting them bubble up unexpectedly."
+    },
+    {
+        "title": "Static Typing and compilation",
+        "ques": "Go is a **statically typed, compiled** language. What is a major benefit of the resulting binary?",
+        "answer": {
+            "type": "text",
+            "content": "Go produces a **single, static binary**.\n\n**Benefit:** This binary contains all necessary dependencies. You can drop this single file onto a server and run it without installing a runtime (like Java JVM or Python interpreter) or external libraries. This makes deployment incredibly simple."
+        },
+        "explanation": "This is why Go is the language of the cloud (Kubernetes, Docker)."
+    }
+]

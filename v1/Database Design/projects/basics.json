@@ -1,0 +1,38 @@
+[
+    {
+        "title": "One-to-One",
+        "ques": "Describe a **One-to-One** relationship scenario.",
+        "answer": {
+            "type": "text",
+            "content": "A User has ONE Profile, and a Profile belongs to ONE User.\n\nOften implemented by putting a `user_id` unique Foreign Key on the `profiles` table."
+        },
+        "explanation": "Often you can just merge these into a single table."
+    },
+    {
+        "title": "One-to-Many",
+        "ques": "Describe a **One-to-Many** relationship.",
+        "answer": {
+            "type": "text",
+            "content": "A User has MANY Posts. A Post belongs to ONE User.\n\nImplemented by putting a `user_id` Foreign Key on the `posts` table (the 'Many' side holds the key)."
+        },
+        "explanation": "The most common relationship."
+    },
+    {
+        "title": "Many-to-Many",
+        "ques": "How do you physically store a **Many-to-Many** relationship (e.g., A Student fits into many Classes, a Class has many Students)?",
+        "answer": {
+            "type": "text",
+            "content": "You need a **Junction Table** (Associative Table).\n\n`student_classes`: `(student_id, class_id)`.\n\nYou cannot store a list of IDs in a single column in a standard Relational DB."
+        },
+        "explanation": "This resolves the relationship into two One-to-Many relationships."
+    },
+    {
+        "title": "Self-Referencing Relationship",
+        "ques": "Give an example of a **Self-Referencing** relationship.",
+        "answer": {
+            "type": "text",
+            "content": "**Employee Manager Hierarchy.**\n\nAn Employee table has a column `manager_id`. This `manager_id` is a Foreign Key that points back to the `id` of *another* row in the *same* Employee table."
+        },
+        "explanation": "Used for tree structures (categories, org charts)."
+    }
+]

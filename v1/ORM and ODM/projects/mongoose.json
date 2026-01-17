@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Schemas",
+        "ques": "MongoDB is schema-less, so why does **Mongoose** force you to define a **Schema**?",
+        "answer": {
+            "type": "text",
+            "content": "To provide **Application-Level Structure** and Validation.\n\nMongoose ensures that even though the DB *can* accept anything, your App *only* inserts valid data (e.g., ensuring `email` is a string and `age` is a number)."
+        },
+        "explanation": "`const userSchema = new mongoose.Schema({...})`"
+    },
+    {
+        "title": "Middleware (Hooks)",
+        "ques": "What are Mongoose **Pre/Post Hooks** used for?",
+        "answer": {
+            "type": "text",
+            "content": "They are functions that run before or after a certain operation (like `save`, `find`, `validate`).\n\n**Common Use Case:** Hashing a password inside a `pre('save')` hook before storing the user in the database."
+        },
+        "explanation": "Keeps encryption logic inside the model."
+    },
+    {
+        "title": "Virtuals",
+        "ques": "What is a Mongoose **Virtual Property**?",
+        "answer": {
+            "type": "text",
+            "content": "It is a property that you can get/set on a document but **is not persisted** to MongoDB.\n\n**Example:** `fullName` can be a virtual that returns `firstName + ' ' + lastName`. It exists in your code but not in the database."
+        },
+        "explanation": "Useful for computed values."
+    },
+    {
+        "title": "Population",
+        "ques": "Since MongoDB has no Joins, how does Mongoose simulate them?",
+        "answer": {
+            "type": "text",
+            "content": "Via **Population** (`.populate()`).\n\nYou store a reference (ObjectId) to another document. When you query, call `.populate('author')`, and Mongoose runs a second query to fetch the author details and replaces the ID with the actual object."
+        },
+        "explanation": "It's client-side joining (inside the Node process)."
+    }
+]

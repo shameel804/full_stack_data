@@ -1,0 +1,39 @@
+[
+    {
+        "title": "REST Controller",
+        "ques": "What is the difference between **`@Controller`** and **`@RestController`**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`@Controller`:** Used for traditional MVC where you return a View (HTML page name).\n*   **`@RestController`:** A specialized version that includes `@Controller` and `@ResponseBody`. It assumes that **every** method returns data (JSON/XML) rather than a view name, which is perfect for building REST APIs."
+        },
+        "explanation": "Using `@RestController` saves you from adding `@ResponseBody` to every single method."
+    },
+    {
+        "title": "Request Mapping",
+        "ques": "How do you map an HTTP GET request to the URL `/hello` inside a controller?",
+        "answer": {
+            "type": "code",
+            "lang": "java",
+            "content": "@GetMapping(\"/hello\")\npublic String sayHello() {\n    return \"Hello World\";\n}"
+        },
+        "explanation": "`@GetMapping` is a shortcut for `@RequestMapping(method = RequestMethod.GET)`."
+    },
+    {
+        "title": "Path Variables",
+        "ques": "How do you extract a value from the URL (e.g., `/users/{id}`) in a controller method?",
+        "answer": {
+            "type": "text",
+            "content": "Use the **`@PathVariable`** annotation.\n\n**Example:**\n`@GetMapping(\"/users/{id}\")`\n`public User getUser(@PathVariable String id) { ... }`"
+        },
+        "explanation": "If the variable name matches the path segment name, you don't need arguments."
+    },
+    {
+        "title": "Request Body",
+        "ques": "How do you bind the JSON body of a POST request to a Java object?",
+        "answer": {
+            "type": "text",
+            "content": "Use the **`@RequestBody`** annotation.\n\n**Example:**\n`public User createUser(@RequestBody User newUser) { ... }`\n\nSpring (via Jackson) will automatically deserialize the incoming JSON into the `User` object."
+        },
+        "explanation": "If deserialization fails (e.g., type mismatch), a 400 Bad Request is returned."
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Semantic Versioning (SemVer)",
+        "ques": "In Semantic Versioning (v1.0.0), what specifically necessitates incrementing the **Major** version (v2.0.0)?",
+        "answer": {
+            "type": "text",
+            "content": "You increment the **Major** version when you make **incompatible API changes** (Breaking Changes).\n\n**Example:** Removing an endpoint, renaming a required parameter, or changing the response format drastically. Minor updates are for new features (backwards compatible), and Patch updates are for bug fixes."
+        },
+        "explanation": "SemVer is a promise of compatibility."
+    },
+    {
+        "title": "Deprecation Strategy",
+        "ques": "What is the purpose of the `Deprecation` header or flag in an API?",
+        "answer": {
+            "type": "text",
+            "content": "It warns users that a field or endpoint is going away soon.\n\n**Response:** The API still works, but returns a warning (via header `Sunset: <date>` or a `deprecated: true` field) so developers can migrate their code before it breaks."
+        },
+        "explanation": "Never delete an endpoint without warning. That's how you lose customers."
+    },
+    {
+        "title": "Backward Compatibility",
+        "ques": "What does it mean to maintain **Backward Compatibility**?",
+        "answer": {
+            "type": "text",
+            "content": "It means that newer versions of the API **must not break** clients that were built for the older version.\n\n**Example:** If you add a new required field to a POST request, you break compatibility. If you make that new field *optional*, you maintain compatibility."
+        },
+        "explanation": "Breaking changes are expensive for everyone. Avoid them."
+    },
+    {
+        "title": "URL vs Header Versioning",
+        "ques": "Compare **URL Versioning** (`/v1/resource`) vs **Header Versioning** (`Accept: application/vnd.myapi.v1+json`).",
+        "answer": {
+            "type": "text",
+            "content": "*   **URL Versioning:** Easier to see and debug (browser address bar). Treats v1 and v2 as different resources.\n*   **Header Versioning:** cleaner URLs (`/resource`). conceptually purer (the resource is the same, just the representation changes). Harder to test in a browser.\n\n**Verdict:** URL versioning is more pragmatic and widely used."
+        },
+        "explanation": "Pragmatism wins. Stripe, Twitter, and Facebook all use URL versioning."
+    }
+]

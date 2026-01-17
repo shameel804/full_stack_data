@@ -1,0 +1,40 @@
+[
+    {
+        "title": "Route Methods",
+        "ques": "How do you define a route that handles a **POST** request to `/users`?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "app.post('/users', (req, res) => {\n  res.send('Create a user');\n});"
+        },
+        "explanation": "Express has methods for all HTTP verbs: `app.get()`, `app.put()`, `app.delete()`."
+    },
+    {
+        "title": "Route Parameters",
+        "ques": "How do you capture a **dynamic parameter** (like an ID) from the URL `/users/123`?",
+        "answer": {
+            "type": "text",
+            "content": "You define the route with a colon: `app.get('/users/:id', ...)`.\n\nYou access the value via **`req.params`**.\n`const userId = req.params.id;`"
+        },
+        "explanation": "`req.params` contains route parameters; `req.query` contains URL query string parameters (`?id=123`)."
+    },
+    {
+        "title": "Wildcard Route",
+        "ques": "How do you create a 'Catch-All' route (for 404 pages) that matches **everything**?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "app.get('*', (req, res) => {\n  res.send('404 Not Found');\n});"
+        },
+        "explanation": "This must be placed **after** all other routes, otherwise it will match everything before the specific routes can run."
+    },
+    {
+        "title": "Express Router",
+        "ques": "As your app grows, why should you use **`express.Router()`**?",
+        "answer": {
+            "type": "text",
+            "content": "**`express.Router()`** allows you to create modular, mountable route handlers.\n\n**Benefit:** Instead of putting 50 routes in `app.js`, you can create a `users.js` router file and a `posts.js` router file, and mount them: `app.use('/users', userRouter);`."
+        },
+        "explanation": "It helps organize your application into mini-applications."
+    }
+]

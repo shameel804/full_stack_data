@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Reactivity via Assignment",
+        "ques": "Svelte's reactivity is triggered by **Assignment**. What does this mean for updating an array or object?",
+        "answer": {
+            "type": "text",
+            "content": "To trigger an update, the variable name must appear on the left side of an assignment operator (`=`).\n\n**Implication:** Running `myArray.push(1)` **won't** trigger a re-render. You must do `myArray = [...myArray, 1]` OR `myArray.push(1); myArray = myArray;` to notify Svelte that it changed."
+        },
+        "explanation": "This is a key difference from Proxy-based systems. Svelte instruments the assignment statements."
+    },
+    {
+        "title": "Dollar Syntax $: Statements",
+        "ques": "Can you use the `$: ` syntax to run arbitrary code (side effects), not just variable declarations?",
+        "answer": {
+            "type": "text",
+            "content": "**Yes.**\n\n**Example:** `$: console.log('Count is ' + count);`\nThis statement will run any time `count` changes. It acts like `useEffect` with auto-tracking dependencies."
+        },
+        "explanation": "If a statement starts with `$:` it is reactive."
+    },
+    {
+        "title": "Tweened and Spring Stores",
+        "ques": "What are **tweened** and **spring** stores used for in Svelte?",
+        "answer": {
+            "type": "text",
+            "content": "They are built-in motion stores for **animation**.\n\n**Function:** When you set a new value (e.g., changing a graph bar height from 10 to 50), these stores don't jump instantly. They output a series of values over time (interpolating) to create a smooth transition (`tweened`) or a bouncy physics-based motion (`spring`)."
+        },
+        "explanation": "Svelte treats animation as a first-class citizen."
+    },
+    {
+        "title": "Reactive Statements Ordering",
+        "ques": "Does the order of `$: ` statements matter in Svelte?",
+        "answer": {
+            "type": "text",
+            "content": "**No.**\nSvelte's compiler analyzes the dependency graph. If statement B depends on a variable computed in statement A, Svelte ensures that A runs before B, regardless of their position in the code."
+        },
+        "explanation": "This is 'topological sort', eliminating the need to carefully order your code."
+    }
+]

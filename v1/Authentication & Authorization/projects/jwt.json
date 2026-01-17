@@ -1,0 +1,38 @@
+[
+    {
+        "title": "JWT Structure",
+        "ques": "What are the three parts of a **JSON Web Token (JWT)** string, usually separated by dots (`.`)?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Header:** Meta-data describing the algorithm type (e.g., HS256).\n2.  **Payload:** The actual data (Claims) (e.g., user ID, expiration time).\n3.  **Signature:** A hash of the Header + Payload + Secret Key. This ensures integrity."
+        },
+        "explanation": "A token typically looks like `xxxxx.yyyyy.zzzzz`."
+    },
+    {
+        "title": "Data Security in JWT",
+        "ques": "Is the information inside a JWT **encrypted** by default?",
+        "answer": {
+            "type": "text",
+            "content": "**No, it is only Base64 encoded.**\n\n**Implication:** Anyone who intercepts the token can base64 decode it and read the payload. Therefore, **NEVER** put sensitive information (like passwords or social security numbers) inside a JWT payload. The signature only protects against *modification*, not *reading*."
+        },
+        "explanation": "You can paste any JWT into `jwt.io` to see its contents."
+    },
+    {
+        "title": "Token Storage",
+        "ques": "Where is the most secure place to store a JWT on the client side (browser)?",
+        "answer": {
+            "type": "text",
+            "content": "The **HttpOnly Cookie** is generally considered safer than LocalStorage.\n\n**Reason:** LocalStorage is accessible by JavaScript, meaning if your site has an XSS vulnerability, an attacker can steal the token. HttpOnly cookies cannot be accessed by JavaScript, blocking this attack vector."
+        },
+        "explanation": "Security is a trade-off; cookies have their own issues (CSRF), but are generally preferred for auth tokens."
+    },
+    {
+        "title": "Refresh Tokens",
+        "ques": "What is the purpose of a **Refresh Token** alongside an Access Token?",
+        "answer": {
+            "type": "text",
+            "content": "**Access Tokens** usually have a short lifespan (e.g., 15 minutes) for security.\n\n**Refresh Tokens** have a long lifespan (e.g., 7 days).\n\n**Flow:** When the access token expires, the client sends the refresh token to the server to get a *new* access token without asking the user to log in again. If a refresh token is compromised, it can be revoked on the server."
+        },
+        "explanation": "This limits the window of opportunity if an access token is stolen."
+    }
+]

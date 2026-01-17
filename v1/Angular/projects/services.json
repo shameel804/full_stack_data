@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Dependency Injection (DI)",
+        "ques": "What is **Dependency Injection** in Angular and why is it useful?",
+        "answer": {
+            "type": "text",
+            "content": "**Dependency Injection (DI)** is a design pattern where a class requests dependencies (services) from an external source rather than creating them itself.\n\n**Utility:** Components don't create service instances (e.g., `new UserService()`). Instead, Angular's DI system passes the singleton instance to the component constructor. This promotes loose coupling, reusability, and easier testing (mocking services)."
+        },
+        "explanation": "If you've ever used `@Injectable` or put a service in a constructor, you are using DI."
+    },
+    {
+        "title": "Injectable Decorator",
+        "ques": "Why do services need the **`@Injectable()`** decorator, specifically with `providedIn: 'root'`?",
+        "answer": {
+            "type": "text",
+            "content": "**`@Injectable()`** marks a class as a participant in the DI system.\n\n**`providedIn: 'root'`:** This syntax registers the service as a **singleton** at the application root level. It means one shared instance of the service is created for the entire app, and Angular can optimize it by removing it from the bundle if it isn't used (tree-shaking)."
+        },
+        "explanation": "Before version 6, we had to manually add services to the `providers` array in `AppModule`."
+    },
+    {
+        "title": "HTTP Client",
+        "ques": "Which Angular module must be imported to make HTTP requests, and what represents the response of an `http.get()` call?",
+        "answer": {
+            "type": "text",
+            "content": "**Module:** `HttpClientModule` (usually imported in `AppModule`).\n\n**Response:** The `http.get()` method returns an **Observable**. Unlike a Promise (which fires once), Observables are lazy and provide a powerful stream of events that can be cancelled, retried, or modified using RxJS operators."
+        },
+        "explanation": "Angular's deep integration with RxJS is one of its distinguishing features."
+    },
+    {
+        "title": "Singleton Services",
+        "ques": "If you provide a service in a component's `providers` array instead of the root module, what happens to the service instance?",
+        "answer": {
+            "type": "text",
+            "content": "It will **NOT** be a singleton for the whole app.\n\n**Result:** A **new, separate instance** of that service will be created for *every instance* of that component. The component and its children will share this local instance, but it will be different from the instance used by the rest of the app."
+        },
+        "explanation": "Be careful with this. It's a common cause of 'why is my data not syncing?' bugs."
+    }
+]

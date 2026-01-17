@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Core Concepts: State and Mutations",
+        "ques": "In Vuex, what is the **State** and why must it be changed only via **Mutations**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **State:** The single source of truth (a JavaScript object) that holds the data for your entire application.\n*   **Mutations:** Synchronous transactions that modify the state.\n\n**Reason:** By enforcing that state can ONLY be changed by committing a mutation, Vuex ensures that every state change is trackable, explicit, and debuggable via DevTools."
+        },
+        "explanation": "Never change `this.$store.state` directly. Always `commit` a mutation."
+    },
+    {
+        "title": "Actions vs Mutations",
+        "ques": "What is the critical difference between **Actions** and **Mutations** regarding asynchronous operations?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Mutations:** Must be **synchronous**. (You cannot wait for a timer or API call inside a mutation).\n*   **Actions:** Can be **asynchronous**. They are functions that can fetch data from an API, wait for the response, and *then* commit a mutation to update the state."
+        },
+        "explanation": "Actions describe *business logic* (e.g., 'login user'). Mutations describe *state primitives* (e.g., 'set user token')."
+    },
+    {
+        "title": "Getters",
+        "ques": "What is a **Getter** in Vuex and how is it similar to a Computed Property?",
+        "answer": {
+            "type": "text",
+            "content": "**Getters** are functions that return a derived state based on the store's state.\n\n**Similarity:** Like computed properties, getters are **cached** based on their dependencies. They only re-evaluate when the underlying state they depend on changes. They are perfect for filtering lists or calculating totals from the state store."
+        },
+        "explanation": "Getters prevent code duplication. Instead of filtering a list in 5 different components, you do it once in a getter."
+    },
+    {
+        "title": "Modules",
+        "ques": "How do **Vuex Modules** help scale a large application?",
+        "answer": {
+            "type": "text",
+            "content": "As an app grows, a single store object can become bloated.\n\n**Modules** allow you to divide the store into separate chunks (e.g., a `users` module, a `products` module). Each module has its own local state, mutations, actions, and getters. Vuex then combines them into the single global state tree."
+        },
+        "explanation": "Namespacing modules (`namespaced: true`) is highly recommended to avoid naming collisions."
+    }
+]

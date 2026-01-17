@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Template-Driven vs Reactive Forms",
+        "ques": "What is the main difference between **Template-Driven** and **Reactive Forms** regarding where logic is defined?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Template-Driven:** The logic resides mainly in the **HTML template**. You use directives like `ngModel` to create the form model implicitly. (Simpler, good for basic forms).\n*   **Reactive Forms:** The logic resides explicitly in the **Component Class**. You create the tree of `FormControl` and `FormGroup` changes in TypeScript and bind them to the HTML. (More robust, scalable, and testable)."
+        },
+        "explanation": "Reactive forms are generally preferred for complex enterprise applications."
+    },
+    {
+        "title": "FormGroup and FormControl",
+        "ques": "In a Reactive Form, describe the relationship between a **FormGroup** and a **FormControl**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **FormControl:** Tracks the value and validation status of an **individual** form input (like a text box for 'Email').\n*   **FormGroup:** Tracks the status of a **collection** of FormControls. If one control in the group is invalid, the entire group is considered invalid."
+        },
+        "explanation": "This composite structure allows you to build complex forms with nested validation sections."
+    },
+    {
+        "title": "Validators",
+        "ques": "How do you add a **Required** validation to a Reactive Form control?",
+        "answer": {
+            "type": "code",
+            "lang": "typescript",
+            "content": "email: new FormControl('', [Validators.required, Validators.email])"
+        },
+        "explanation": "Validators are just simple functions that return null (if valid) or an error object (if invalid)."
+    },
+    {
+        "title": "ngModel (Template-Driven)",
+        "ques": "What three things must be in place to use **`[(ngModel)]`** for two-way binding in a form input?",
+        "answer": {
+            "type": "text",
+            "content": "1.  Import `FormsModule` in your module.\n2.  Use the `[(ngModel)]` syntax on the input.\n3.  Give the input a `name` attribute (e.g., `name=\"email\"`). This is required for the form to track the control."
+        },
+        "explanation": "Forgetting the `name` attribute is the #1 error beginners face with template-driven forms."
+    }
+]

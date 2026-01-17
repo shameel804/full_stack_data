@@ -1,0 +1,39 @@
+[
+    {
+        "title": "Writable Stores",
+        "ques": "How do you create a **Writable Store** `count` and update its value?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "import { writable } from 'svelte/store';\n\nexport const count = writable(0);\n\n// To update:\ncount.set(10);\ncount.update(n => n + 1);"
+        },
+        "explanation": "Writable stores are the standard way to hold shared state in Svelte apps."
+    },
+    {
+        "title": "Auto-subscription",
+        "ques": "What is the **Auto-subscription** syntax for stores used in Svelte components?",
+        "answer": {
+            "type": "text",
+            "content": "You can reference a store value directly by prefixing the store name with **`$`**.\n\n**Example:** `<h1>The count is {$count}</h1>`\n\n**Benefit:** Svelte automatically handles the subscription when the component mounts and the unsubscription when it destroys, preventing memory leaks."
+        },
+        "explanation": "This simple syntax removes a huge amount of boilerplate compared to other frameworks."
+    },
+    {
+        "title": "Readable Stores",
+        "ques": "When would you use a **Readable Store**?",
+        "answer": {
+            "type": "text",
+            "content": "Use a **Readable Store** when the data is managed externally (e.g., mouse position, time, or geolocation) and you want to prevent other parts of the app from manually setting the value.\n\nIt allows subscribers to read the value, but only the internal function that created the store can update it."
+        },
+        "explanation": "This ensures a clear 'one-way' data flow from the source."
+    },
+    {
+        "title": "Derived Stores",
+        "ques": "What is a **Derived Store**?",
+        "answer": {
+            "type": "text",
+            "content": "A **Derived Store** creates a new store based on the value of one or more other stores.\n\n**Example:**\n`export const elapsed = derived(time, $time => Math.round($time - start));`\nIt updates automatically whenever the input store changes."
+        },
+        "explanation": "Analogous to 'computed properties' but for global state."
+    }
+]

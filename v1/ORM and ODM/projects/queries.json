@@ -1,0 +1,38 @@
+[
+    {
+        "title": "JPQL / HQL",
+        "ques": "What makes **JPQL (Java Persistence Query Language)** portable?",
+        "answer": {
+            "type": "text",
+            "content": "JPQL queries operate on **Entity Classes**, not database tables.\n\n`SELECT u FROM User u` works regardless of whether the actual table is named `users`, `tbl_users`, or `app_users` in the underlying DB. The ORM handles the translation."
+        },
+        "explanation": "It avoids hardcoded SQL reliance."
+    },
+    {
+        "title": "Criteria API",
+        "ques": "When would you use the **Criteria API** instead of writing a query string?",
+        "answer": {
+            "type": "text",
+            "content": "When constructing **Dynamic Queries**.\n\nIf you have a search form with 10 optional filters, building a string (`\"WHERE 1=1\" + if(name) \"AND name=...\"`) is error-prone. The Criteria API allows you to build the query programmatically using objects in a type-safe way."
+        },
+        "explanation": "Verbose but safer."
+    },
+    {
+        "title": "Native Queries",
+        "ques": "What is a **Native Query** in an ORM context?",
+        "answer": {
+            "type": "text",
+            "content": "It is a raw SQL query executed directly by the database.\n\n**Use Case:** When the ORM generated SQL is inefficient, or you need to use a vendor-specific feature (like Oracle Recursive CTEs) that JPQL doesn't support."
+        },
+        "explanation": "Use sparingly, as it breaks portability."
+    },
+    {
+        "title": "Projections",
+        "ques": "What is a **DTO Projection** and why use it?",
+        "answer": {
+            "type": "text",
+            "content": "Instead of selecting the entire Entity (all 50 columns), you write a query that selects specific columns and maps them directly into a lightweight Data Transfer Object (DTO).\n\n`SELECT new com.example.UserDTO(u.name, u.email) FROM User u`"
+        },
+        "explanation": "Massive performance boost for read-only views."
+    }
+]

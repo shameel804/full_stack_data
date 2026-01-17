@@ -1,0 +1,38 @@
+[
+    {
+        "title": "JPA Implementation",
+        "ques": "What is the relationship between **Hibernate** and **JPA**?",
+        "answer": {
+            "type": "text",
+            "content": "**JPA (Jakarta Persistence API)** is a *Specification* (a set of interfaces).\n**Hibernate** is an *Implementation* (the actual code) of that specification.\n\nYou use JPA annotations (`@Entity`, `@Id`) but Hibernate runs under the hood to do the work."
+        },
+        "explanation": "You can swap Hibernate for EclipseLink, but no one does."
+    },
+    {
+        "title": "HQL",
+        "ques": "What is **HQL**?",
+        "answer": {
+            "type": "text",
+            "content": "**Hibernate Query Language.**\n\nIt is an object-oriented SQL.\n`SELECT e FROM Employee e`\n\nInstead of table names, you use Class names. Hibernate translates HQL into the correct SQL dialect (MySQL, Oracle, etc.)."
+        },
+        "explanation": "This makes your app database-agnostic."
+    },
+    {
+        "title": "Caching",
+        "ques": "Hibernate has two levels of caching. What is the **First-Level Cache**?",
+        "answer": {
+            "type": "text",
+            "content": "It is the **Session Cache**.\n\nIt is enabled by default. If you request the same entity (ID 1) twice within the same Session/Transaction, Hibernate returns the object from memory the second time without hitting the DB."
+        },
+        "explanation": "Second-Level cache (EhCache/Redis) is optional and spans processes."
+    },
+    {
+        "title": "Dirty Checking",
+        "ques": "How does Hibernate know which objects to update when you commit a transaction?",
+        "answer": {
+            "type": "text",
+            "content": "**Dirty Checking.**\n\nHibernate keeps a snapshot of the object when it was loaded. When you commit, it compares the current object state with the snapshot. If fields differ, it automatically generates an UPDATE statement."
+        },
+        "explanation": "You don't need to call `update()` manually."
+    }
+]

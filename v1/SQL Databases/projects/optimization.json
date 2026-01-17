@@ -1,0 +1,38 @@
+[
+    {
+        "title": "EXPLAIN Command",
+        "ques": "What is the **EXPLAIN** command used for?",
+        "answer": {
+            "type": "text",
+            "content": "It allows you to analyze **how** the database engine executes a query.\n\nRunning `EXPLAIN SELECT ...` shows the execution plan: whether it uses an index (Index Scan) or checks every row (Full Table Scan). It is the first step in performance tuning."
+        },
+        "explanation": "If you see 'Seq Scan' on a large table, you probably need an index."
+    },
+    {
+        "title": "N+1 Problem",
+        "ques": "What is the **N+1 Optimization** problem common in ORMs?",
+        "answer": {
+            "type": "text",
+            "content": "It happens when you fetch a list of Parent records (1 query) and then iterate over them to fetch their Children (N queries).\n\n**Example:** Fetch 100 posts (1 query), then for each post, query the author (100 queries). Total = 101 queries.\n**Fix:** Eager Loading (JOIN or 'IN' clause) to fetch all authors in 1 extra query."
+        },
+        "explanation": "This kills performance silently."
+    },
+    {
+        "title": "Normalization vs Denormalization",
+        "ques": "When might you choose **Denormalization** (adding redundant data) over strict Normalization?",
+        "answer": {
+            "type": "text",
+            "content": "**For Read Performance.**\n\nIf you have to JOIN 5 tables to show a user's profile, it might be slow. Storing the most accessed fields (like `user_name`) directly on the `posts` table (redundantly) eliminates the need for the JOIN, making reads instant at the cost of slower writes (data must be updated in two places)."
+        },
+        "explanation": "Optimization is often a trade-off."
+    },
+    {
+        "title": "Connection Pooling",
+        "ques": "Why is **Connection Pooling** important for high-traffic applications?",
+        "answer": {
+            "type": "text",
+            "content": "Opening a new database connection (TCP-Handshake + Auth) is expensive and slow.\n\n**Pooling:** A pool of open connections is kept alive. When an app needs to query, it borrows an existing connection, uses it, and returns it to the pool, avoiding the overhead of creating/destroying connections repeatedly."
+        },
+        "explanation": "Crucial for scaling queries per second."
+    }
+]

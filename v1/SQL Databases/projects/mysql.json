@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Storage Engines",
+        "ques": "MySQL has a pluggable **Storage Engine** architecture. What are the two most common engines?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **InnoDB:** The default. Supports Transactions (ACID), Foreign Keys, and Row-Level Locking. **ALWAYS use this.**\n2.  **MyISAM:** Older. Fast for reads but notoriously bad for data integrity (no transactions) and uses Table-Level Locking (slow writes)."
+        },
+        "explanation": "MyISAM is obsolete for modern apps."
+    },
+    {
+        "title": "Replication",
+        "ques": "Postgres uses physical replication (WAL). What does MySQL traditionally use?",
+        "answer": {
+            "type": "text",
+            "content": "**Logical Replication via Binary Log (binlog).**\n\nMySQL records every data change event (INSERT, UPDATE) in a `binlog` file. Replicas read this file and re-execute the statements to stay in sync."
+        },
+        "explanation": "Flexible but can sometimes break if statements are non-deterministic."
+    },
+    {
+        "title": "AUTO_INCREMENT",
+        "ques": "What keyword is used in MySQL to create a self-incrementing Primary Key?",
+        "answer": {
+            "type": "text",
+            "content": "**`AUTO_INCREMENT`**.\n\nExample: `id INT PRIMARY KEY AUTO_INCREMENT`."
+        },
+        "explanation": "It handles ID generation automatically."
+    },
+    {
+        "title": "Limitations",
+        "ques": "Compared to Postgres, what is a historical limitation of MySQL regarding joins?",
+        "answer": {
+            "type": "text",
+            "content": "MySQL traditionally did **not** support **Full Outer Joins**.\n\nYou had to simulate it by UNION-ing a Left Join and a Right Join.\n(Note: MySQL 8.0 has added many modern features like CTEs and Window Functions, closing the gap)."
+        },
+        "explanation": "Postgres is generally considered more feature-rich."
+    }
+]

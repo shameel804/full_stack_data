@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Event-Driven Architecture",
+        "ques": "Why is **Nginx** generally faster and more scalable than Apache for handling static content and high concurrency?",
+        "answer": {
+            "type": "text",
+            "content": "Nginx uses an **Asynchronous, Event-Driven** architecture.\n\n**Mechanism:** Instead of creating a new thread for every request, it uses a small number of worker processes that handle thousands of connections using a non-blocking loop. This keeps memory usage low and constant, even under high load."
+        },
+        "explanation": "It was specifically designed to solve the C10k problem."
+    },
+    {
+        "title": "Reverse Proxy",
+        "ques": "What is a **Reverse Proxy** and why is Nginx commonly used as one?",
+        "answer": {
+            "type": "text",
+            "content": "A **Reverse Proxy** sits in front of backend servers (like a Node.js or Python app) and forwards client requests to them.\n\n**Uses:** load balancing, caching, SSL termination, and security. Nginx excels at this role due to its high performance and robust proxying features."
+        },
+        "explanation": "You rarely expose a Node.js server directly to the internet; you put Nginx in front of it."
+    },
+    {
+        "title": "Configuration Block (server)",
+        "ques": "In `nginx.conf`, what does a `server { ... }` block typcially define?",
+        "answer": {
+            "type": "text",
+            "content": "A **`server`** block relates to a Virtual Host.\n\nIt defines the configuration for a specific **domain name** (e.g., `server_name example.com;`) and port (e.g., `listen 80;`). It tells Nginx how to handle requests for that specific website."
+        },
+        "explanation": "You can host multiple different websites on a single Nginx instance using multiple server blocks."
+    },
+    {
+        "title": "Location Block",
+        "ques": "What is the purpose of a **`location`** block inside a server block?",
+        "answer": {
+            "type": "text",
+            "content": "**`location`** matches request URIs.\n\n**Example:** `location /images/ { ... }`\n\nIt allows you to define specific rules for different parts of your site (e.g., serving static files from one folder, proxying API requests to another backend)."
+        },
+        "explanation": "Nginx's power lies in its flexible location matching rules."
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "title": "OAuth 2.0 Roles",
+        "ques": "In an OAuth flow (like 'Log in with Google'), who is the **Resource Owner** and who is the **Client**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Resource Owner:** The User (You). You own your data (gmail contacts, profile photos).\n*   **Client:** The Application trying to access the data (e.g., The Quizz App). It is asking for permission to act on your behalf."
+        },
+        "explanation": "There are 4 distinct roles: Owner, Client, Authorization Server, Resource Server."
+    },
+    {
+        "title": "Authorization Code Flow",
+        "ques": "Why is the **Authorization Code Flow** preferred over the Implicit Flow for backend web apps?",
+        "answer": {
+            "type": "text",
+            "content": "In the **Code Flow**, the user's browser never sees the Access Token directly.\n\n**Mechanism:** The browser gets a temporary 'code', which is sent to the backend server. The backend server exchanges this code (plus a Client Secret) for the Access Token. This keeps the token secure on the server, away from the browser."
+        },
+        "explanation": "Implicit flow (returning token in URL) is now essentially deprecated for most use cases."
+    },
+    {
+        "title": "Scopes",
+        "ques": "What are OAuth **Scopes**?",
+        "answer": {
+            "type": "text",
+            "content": "**Scopes** define the **permissions** being requested.\n\n**Example:** `scope: 'read_user_profile'` or `scope: 'offline_access'`.\n\nWhen a user logs in, the consent screen says 'This app wants to: Read your profile'. These bullet points correspond directly to the scopes requested."
+        },
+        "explanation": "Always request the minimum scope necessary."
+    },
+    {
+        "title": "OpenID Connect (OIDC)",
+        "ques": "OAuth 2.0 is for authorization. What layer is added on top of it to handle **Authentication** (Identity)?",
+        "answer": {
+            "type": "text",
+            "content": "**OpenID Connect (OIDC)**.\n\n**Addition:** It adds a standardize **ID Token** (a JWT) to the response. While existing OAuth tokens handle *access*, the ID Token contains information about the *user* (name, email, profile picture) in a standard format."
+        },
+        "explanation": "If you want to 'Log In' users, you are likely using OIDC."
+    }
+]

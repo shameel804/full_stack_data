@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Core Components",
+        "ques": "SQLAlchemy (Python) has two parts: The **Core** and the **ORM**. What is the difference?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Core:** A SQL Expression Language. It allows you to write SQL using Python functions (`select([user_table])`). It's close to the metal.\n*   **ORM:** A high-level abstraction that maps Python classes to tables. You work with `Session` and objects."
+        },
+        "explanation": "You can mix both in the same project."
+    },
+    {
+        "title": "Session",
+        "ques": "What is the role of the **Session** in SQLAlchemy?",
+        "answer": {
+            "type": "text",
+            "content": "The **Session** creates a staging area for all your changes.\n\nWhen you add objects (`session.add(user)`), nothing hits the DB yet. The changes are piled up and only sent to the DB when you call `session.commit()` (flush)."
+        },
+        "explanation": "It implements the Unit of Work pattern."
+    },
+    {
+        "title": "Declarative Base",
+        "ques": "How do you define a model in SQLAlchemy ORM?",
+        "answer": {
+            "type": "text",
+            "content": "You create a class that inherits from **`declarative_base()`**.\n\n`class User(Base):`\n`    __tablename__ = 'users'`\n`    id = Column(Integer, primary_key=True)`"
+        },
+        "explanation": "This is the standard declarative style."
+    },
+    {
+        "title": "Lazy Loading",
+        "ques": "How does SQLAlchemy handle relationships by default?",
+        "answer": {
+            "type": "text",
+            "content": "It uses **Lazy Loading**.\n\nIf you access `user.addresses`, it fires a SELECT query at that exact moment. This can lead to the N+1 problem. You can change this using `relationship(..., lazy='joined')`."
+        },
+        "explanation": "Be careful with loops."
+    }
+]

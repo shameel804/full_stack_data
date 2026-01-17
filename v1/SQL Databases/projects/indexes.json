@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Purpose of Indexes",
+        "ques": "Why do we add **Indexes** to database columns?",
+        "answer": {
+            "type": "text",
+            "content": "To **speed up read operations** (SELECT queries).\n\n**Analogy:** Without an index, finding a row is like reading every page of a book (Full Table Scan) to find a word. With an index, you look at the Index/Glossary at the back, get the page number, and go straight there."
+        },
+        "explanation": "Indexes drastically reduce query time from seconds to milliseconds."
+    },
+    {
+        "title": "Trade-off",
+        "ques": "If indexes make reads faster, what is the **downside**?",
+        "answer": {
+            "type": "text",
+            "content": "They make **Write operations** (INSERT, UPDATE, DELETE) **slower**.\n\n**Reason:** Every time you change data, the database has to update the Table *and* update the Index structure. Also, indexes consume extra Disk Space."
+        },
+        "explanation": "Don't index every column. Only index columns you frequently search or filter by."
+    },
+    {
+        "title": "B-Tree",
+        "ques": "What is the most common data structure used for database indexes?",
+        "answer": {
+            "type": "text",
+            "content": "**B-Tree (Balanced Tree).**\n\nIt keeps data sorted and allows for searches, sequential access, insertions, and deletions in logarithmic time (O(log n))."
+        },
+        "explanation": "This works for =, >, <, >=, <= range queries."
+    },
+    {
+        "title": "Composite Index",
+        "ques": "What is a **Composite Index** and when does column order matter?",
+        "answer": {
+            "type": "text",
+            "content": "An index on **multiple columns** (e.g., `(Last_Name, First_Name)`).\n\n**Order Matters:** It works like a phone book sorted by Last Name, then First Name. You can use it to search by `Last Name` alone, or `Last Name AND First Name`. You **cannot** efficiently use it to search by `First Name` alone."
+        },
+        "explanation": "This is the 'Leftmost Prefix' rule."
+    }
+]

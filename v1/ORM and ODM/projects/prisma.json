@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Prisma Schema",
+        "ques": "What is the single source of truth in a **Prisma** project?",
+        "answer": {
+            "type": "text",
+            "content": "The **`prisma.schema`** file.\n\nIt defines your database connection, generator settings, and your data models using a custom DSL (Domain Specific Language).\n`model User { id Int @id ... }`"
+        },
+        "explanation": "You don't define models in JS/TS classes."
+    },
+    {
+        "title": "Type Safety",
+        "ques": "How does Prisma provide better Type Safety than other ORMs?",
+        "answer": {
+            "type": "text",
+            "content": "It **generates** a bespoke TypeScript Client based on your schema.\n\nIf you have a customized query `select: { name: true }`, the return type is automatically adjusted to *only* contain `name`. Accessing `.email` will throw a compile-time error."
+        },
+        "explanation": "It eliminates generic `any` types."
+    },
+    {
+        "title": "Introspection",
+        "ques": "What does `prisma db pull` (Introspection) do?",
+        "answer": {
+            "type": "text",
+            "content": "It reads an **existing database** schema (tables/columns) and automatically generates/updates the `prisma.schema` file to match it.\n\nThis is great for adding Prisma to legacy projects with an existing DB."
+        },
+        "explanation": "Reverse engineering your DB."
+    },
+    {
+        "title": "Prisma Client",
+        "ques": "Prisma Client uses a **Query Engine**. What language is this engine written in?",
+        "answer": {
+            "type": "text",
+            "content": "**Rust.**\n\nPrisma Client (JS/TS) talks to a binary engine written in Rust. This creates a high-performance abstraction layer that handles connection pooling and query construction."
+        },
+        "explanation": "This architecture is unique to Prisma."
+    }
+]

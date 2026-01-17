@@ -1,0 +1,38 @@
+[
+    {
+        "title": "The `setup` Function",
+        "ques": "What is the role of the **`setup`** function in the Vue 3 Composition API?",
+        "answer": {
+            "type": "text",
+            "content": "**`setup`** is the entry point for using the Composition API.\n\n**Execution:** It runs **before** the component is created (before `created` or `mounted` hooks). It is where you define reactive state, computed properties, and methods, and then **return** them to make them available to the template."
+        },
+        "explanation": "In `<script setup>`, this boilerplate is handled automatically, making the code much cleaner."
+    },
+    {
+        "title": "ref vs reactive",
+        "ques": "When defining reactive state, when would you use **`ref()`** versus **`reactive()`**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`ref()`:** Used for **primitive values** (strings, numbers, booleans) or when you need to replace the entire object. You access the value via `.value` in JavaScript.\n*   **`reactive()`:** Used for **objects and arrays**. It creates a deeply reactive proxy of the original object. You access properties directly without `.value`."
+        },
+        "explanation": "`ref` is generally safer and more versatile because it handles both primitives and objects consistently."
+    },
+    {
+        "title": "Lifecycle Hooks",
+        "ques": "How do Lifecycle Hooks (like `mounted`) change when using the Composition API inside `setup`?",
+        "answer": {
+            "type": "text",
+            "content": "Instead of being options on the component object (e.g., `mounted: function() {}`), they are imported as functions with an `on` prefix.\n\n**Mapping:**\n*   `mounted` -> `onMounted(() => { ... })`\n*   `updated` -> `onUpdated(() => { ... })`\n*   `destroyed` -> `onUnmounted(() => { ... })`"
+        },
+        "explanation": "This allows you to group lifecycle logic with the code it relates to, rather than splitting it by hook type."
+    },
+    {
+        "title": "Provide / Inject",
+        "ques": "How does **`provide`** and **`inject`** help avoid prop drilling in the Composition API?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`provide(key, value)`:** Called in a parent component to expose data to its entire subtree.\n*   **`inject(key)`:** Called in any child/grandchild component to retrieve that data.\n\nThis creates a dependency injection system where components communicate without passing props through every layer of the hierarchy."
+        },
+        "explanation": "This is very similar to React Context."
+    }
+]

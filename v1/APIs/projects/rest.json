@@ -1,0 +1,38 @@
+[
+    {
+        "title": "REST Principles",
+        "ques": "What does **REST** stand for, and what does it mean to be 'Stateless'?",
+        "answer": {
+            "type": "text",
+            "content": "**REST** = **Representational State Transfer**.\n\n**Stateless:** The server does NOT store any state about the client session on the server side. Every request from the client must contain all the information necessary to understand and process the request (including authentication)."
+        },
+        "explanation": "Statelessness is what allows REST APIs to scale easily across multiple servers."
+    },
+    {
+        "title": "Resources and URIs",
+        "ques": "In REST, how should **Resources** be named in the URI? Give an example.",
+        "answer": {
+            "type": "text",
+            "content": "Resources should be **Nouns**, not verbs.\n\n*   **Good:** `/products` or `/products/123`\n*   **Bad:** `/getProducts` or `/deleteProduct/123`\n\nThe action (verb) is defined by the HTTP Method (GET, DELETE), efficiently separating the 'what' (Resource) from the 'action' (Method)."
+        },
+        "explanation": "URL design is the face of your API."
+    },
+    {
+        "title": "HATEOAS",
+        "ques": "What is **HATEOAS** (Hypermedia as the Engine of Application State)?",
+        "answer": {
+            "type": "text",
+            "content": "**HATEOAS** is a constraint of REST application architecture.\n\n**Concept:** The API response should include **links** to other related resources or actions. This allows the client to navigate the API dynamically without knowing all endpoints hardcoded in advance.\n\n**Example response:**\n`{ \"id\": 1, \"name\": \"Item\", \"links\": { \"self\": \"/items/1\", \"delete\": \"/items/1\" } }`"
+        },
+        "explanation": "True REST APIs are like browsing the web; you follow links."
+    },
+    {
+        "title": "Pagination",
+        "ques": "Why is **Pagination** critical for a REST API endpoint like `/users`?",
+        "answer": {
+            "type": "text",
+            "content": "Without pagination, a GET request to `/users` could try to return millions of rows, crashing the server or timing out the client.\n\n**Pagination** limits the result set (e.g., `?limit=20&offset=0`) ensuring performance and manageability."
+        },
+        "explanation": "Always set a default limit on list endpoints."
+    }
+]

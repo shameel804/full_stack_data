@@ -1,0 +1,38 @@
+[
+    {
+        "title": "1NF (First Normal Form)",
+        "ques": "What is the rule of **1NF** regarding lists?",
+        "answer": {
+            "type": "text",
+            "content": "No repeating groups or arrays. **Atomicity.**\n\n**Bad:** Column `phone_numbers` = \"555-1234, 555-9876\"\n**Good:** A separate `phone_numbers` table where each number is a separate row linked to the user."
+        },
+        "explanation": "Every column must hold a single value."
+    },
+    {
+        "title": "2NF (Second Normal Form)",
+        "ques": "What does **2NF** remove?",
+        "answer": {
+            "type": "text",
+            "content": "It removes **Partial Dependency**.\n\nIt applies only to tables with a **Composite Key**. All non-key columns must depend on the *entire* primary key, not just part of it.\n\n**Example:** In specific `(Student, Course)` table, `CourseName` depends only on `Course`, not `Student`, so it should move to a separate `Courses` table."
+        },
+        "explanation": "Table must be in 1NF first."
+    },
+    {
+        "title": "3NF (Third Normal Form)",
+        "ques": "What does **3NF** remove?",
+        "answer": {
+            "type": "text",
+            "content": "It removes **Transitive Dependency**.\n\nAll columns must depend DIRECTLY on the Primary Key.\n\n**Bad:** `(Order_ID, Customer_ID, Customer_City)` -> `Customer_City` depends on `Customer_ID`, not `Order_ID`. Move `Customer_City` to the `Customers` table."
+        },
+        "explanation": "3NF is usually 'Normalized Enough' for most apps."
+    },
+    {
+        "title": "Denormalization",
+        "ques": "Why would you intentionally break Normalization rules?",
+        "answer": {
+            "type": "text",
+            "content": "**Performance.**\n\nJoining 10 tables in 3NF is slow. Storing redundant data (like keeping `total_price` on the `Order` table instead of calculating it from `OrderItems` every time) speeds up reads significantly."
+        },
+        "explanation": "Read Optimized vs Write Optimized."
+    }
+]

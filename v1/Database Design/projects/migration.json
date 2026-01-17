@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Database Migration",
+        "ques": "What is a **Database Migration**?",
+        "answer": {
+            "type": "text",
+            "content": "A codified way to **evolve** your database schema over time.\n\nEach migration file (e.g., `2023_01_01_create_users.sql`) contains instructions to apply a change (Up) and revert it (Down). It allows teams to sync database states."
+        },
+        "explanation": "Tools: Flyway, Liquibase, Laravel Migrations."
+    },
+    {
+        "title": "Zero-Downtime Migration",
+        "ques": "How do you rename a column from `username` to `email` without downtime?",
+        "answer": {
+            "type": "text",
+            "content": "Detailed 4-step process:\n1.  **Add** the new column `email`.\n2.  Update code to **write to both** columns (dual-write).\n3.  **Backfill** old data from `username` to `email`.\n4.  Update code to read from `email` and remove `username` column."
+        },
+        "explanation": "Never just rename; it breaks running code instantly."
+    },
+    {
+        "title": "Rollback",
+        "ques": "Why is it important for every migration to have a **Down** (rollback) method?",
+        "answer": {
+            "type": "text",
+            "content": "If a deployment fails or introduces a critical bug, you must be able to revert the database to its previous state immediately to restore service availability."
+        },
+        "explanation": "Testing rollbacks is as important as testing migrations."
+    },
+    {
+        "title": "Seeding",
+        "ques": "What is **Database Seeding**?",
+        "answer": {
+            "type": "text",
+            "content": "Populating the database with initial data.\n\n**Types:**\n1.  **Static Data:** Roles, Countries, configuration (Production).\n2.  **Dummy Data:** Fake users and posts for development/testing environments."
+        },
+        "explanation": "Automates setup for new developers."
+    }
+]

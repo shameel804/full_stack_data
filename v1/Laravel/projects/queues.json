@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Job Queues",
+        "ques": "Why should you offload tasks like 'Sending an Email' to a **Queue**?",
+        "answer": {
+            "type": "text",
+            "content": "**Performance.**\n\nSending an email might take 2-3 seconds. If you do it during the HTTP request, the user has to wait 3 seconds to see the 'Success' page.\n\nBy dispatching a **Job** to a queue, the HTTP response returns instantly (100ms), and a background worker processes the email later."
+        },
+        "explanation": "Queues make your app feel snappy."
+    },
+    {
+        "title": "Dispatching Jobs",
+        "ques": "How do you send a job class `SendWelcomeEmail` to the queue?",
+        "answer": {
+            "type": "text",
+            "content": "Use the static `dispatch` method.\n\n`SendWelcomeEmail::dispatch($user);`\n\nAlternatively, you can delay it: `...->delay(now()->addMinutes(10));`."
+        },
+        "explanation": "It's Fire and Forget."
+    },
+    {
+        "title": "Queue Connections",
+        "ques": "Laravel supports multiple **Queue Drivers**. Name a few common ones.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **sync:** (Default) Runs immediately (no queue). Good for local dev.\n2.  **database:** Stores jobs in a database table.\n3.  **redis:** High-performance, in-memory queue.\n4.  **sqs:** Amazon Simple Queue Service."
+        },
+        "explanation": "Switching drivers is just a config change in `.env`."
+    },
+    {
+        "title": "Workers",
+        "ques": "What command starts the process that actually listens for and executes queued jobs?",
+        "answer": {
+            "type": "text",
+            "content": "`php artisan queue:work`\n\nThis is a long-running process. It must be kept alive (using a tool like Supervisor) on your production server."
+        },
+        "explanation": "If this process stops, your emails stop sending."
+    }
+]

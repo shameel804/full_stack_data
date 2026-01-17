@@ -1,0 +1,40 @@
+[
+    {
+        "title": "Basic Route",
+        "ques": "How do you define a simple **GET** route in `routes/web.php` that returns the string 'Hello'?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "Route::get('/hello', function () {\n    return 'Hello';\n});"
+        },
+        "explanation": "The `Route` facade is the entry point for all routing."
+    },
+    {
+        "title": "Named Routes",
+        "ques": "Why is it best practice to give your routes a **name**?",
+        "answer": {
+            "type": "text",
+            "content": "**Reason:** Decoupling.\n\n**Definition:** `Route::get('/user/profile', ...)->name('profile');`\n**Usage:** `route('profile')` generates the URL.\n\nIf you later change the URL path from `/user/profile` to `/account/me`, you only change it in the routes file. All your links using `route('profile')` update automatically."
+        },
+        "explanation": "Never hardcode URLs in your views or controllers."
+    },
+    {
+        "title": "Route Parameters",
+        "ques": "How do you capture a dynamic ID from the URL `/post/1` passed to a closure?",
+        "answer": {
+            "type": "code",
+            "lang": "php",
+            "content": "Route::get('/post/{id}', function ($id) {\n    return 'Post ' . $id;\n});"
+        },
+        "explanation": "The argument name `$id` typically matches the route parameter `{id}`."
+    },
+    {
+        "title": "Route Groups",
+        "ques": "How can you apply a middleware (like 'auth') to **multiple routes** at once?",
+        "answer": {
+            "type": "text",
+            "content": "Use a **Route Group**.\n\n`Route::middleware(['auth'])->group(function () { ... routes ... });`\n\nAny route defined inside the closure will inevitably have the authenticator check run before it executes."
+        },
+        "explanation": "You can also group by `prefix` (e.g., `/admin`) or `namespace`."
+    }
+]
