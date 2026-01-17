@@ -2,102 +2,76 @@
     "id": "learn_js_events",
     "topicId": "events",
     "topicTitle": "JavaScript Events",
-    "description": "Learn how to make your web pages interactive by handling user actions like clicks, inputs, and mouse movements.",
+    "description": "Learn how to make your website interactive by responding to user actions like clicks, keypresses, and form submissions.",
     "baseKP": 100,
     "slides": [
         {
             "id": "js_events_1",
             "type": "content",
             "title": "What are Events?",
-            "content": "# Events 📣\n\nJavascript's interaction with HTML is handled through events that occur when the user or the browser manipulates a page.\n\nExamples:\n- User clicks a button.\n- User presses a key.\n- Web page finishes loading.\n- Form is submitted."
+            "content": "# Events 🔔\n\nHTML events are \"things\" that happen to HTML elements.\n\nWhen JS is used in HTML pages, JS can \"react\" on these events.\n\nExamples:\n- An HTML button was clicked\n- The page has finished loading\n- An input field was changed"
         },
         {
             "id": "js_events_2",
             "type": "content",
-            "title": "HTML Event Attributes",
-            "content": "# Inline Handlers 🏷️\n\nA handler can be attached directly in HTML (not recommended for large apps).\n\n```html\n<button onclick=\"alert('Hello')\">Click me</button>\n\n<button onclick=\"myFunction()\">Call Function</button>\n```"
+            "title": "Onclick Event",
+            "content": "# The onclick Event 🖱️\n\nExecute code when an element is clicked.\n\n```html\n<button onclick=\"alert('Hello!')\">Click Me</button>\n```\n\nOr using JS function:\n\n```html\n<button onclick=\"myFunction()\">Click Me</button>\n<script>\nfunction myFunction() {\n  alert(\"Button clicked!\");\n}\n</script>\n```"
         },
         {
             "id": "js_events_3",
             "type": "content",
-            "title": "Event Listeners",
-            "content": "# addEventListener 👂\n\nThe modern standard way to handle events. It attaches an event handler to the specified element without overwriting existing event handlers.\n\n```javascript\nelement.addEventListener(\"click\", function() {\n  alert(\"Hello World!\");\n});\n```\n- Syntax: `element.addEventListener(event, function, useCapture);`"
+            "title": "Common Mouse Events",
+            "content": "# Mouse Events 🐭\n\n- `onclick`: The user clicks an HTML element.\n- `onmouseover`: The user moves the mouse over an element.\n- `onmouseout`: The user moves the mouse away from an element.\n- `onmousedown`: The user presses a mouse button over an element.\n\n```html\n<div onmouseover=\"this.style.backgroundColor='red'\">\n  Hover over me!\n</div>\n```"
         },
         {
             "id": "js_events_4",
             "type": "content",
-            "title": "Removing Listeners",
-            "content": "# removeEventListener 🛑\n\nTo remove an event handler, you must use a named function (not an anonymous one) during addition.\n\n```javascript\nfunction myFunction() {\n  alert(\"Clicked!\");\n}\n\n// Add\nbtn.addEventListener(\"click\", myFunction);\n\n// Remove\nbtn.removeEventListener(\"click\", myFunction);\n```"
-        },
-        {
-            "id": "js_events_quiz_1",
-            "type": "quiz",
-            "title": "Method Quiz",
-            "content": "Check your methods.",
-            "quizQuestion": "Which method attaches an event handler?",
-            "quizOptions": [
-                "attachEvent",
-                "handleEvent",
-                "addEventListener",
-                "onEvent"
-            ],
-            "correctOptionIndex": 2
+            "title": "Keyboard Events",
+            "content": "# Keyboard Events ⌨️\n\n- `onkeydown`: The user pushes a keyboard key.\n- `onkeyup`: The user releases a key.\n- `onkeypress`: The user presses a key (deprecated in modern standards, use keydown).\n\n```javascript\n// Log key pressed\ndocument.addEventListener('keydown', function(event) {\n    console.log(`Key pressed: ${event.key}`);\n});\n```"
         },
         {
             "id": "js_events_5",
             "type": "content",
-            "title": "Common Events",
-            "content": "# Common Events 📜\n\n- `click`: User clicks an element.\n- `mouseover` / `mouseout`: Mouse enters/leaves.\n- `keydown` / `keyup`: Key pressed/released.\n- `submit`: Form submitted.\n- `change`: Input value changed.\n- `load`: Page/Image finished loading."
+            "title": "Form Events",
+            "content": "# Form Events 📝\n\n- `onchange`: An HTML element has been changed (e.g., input, select).\n- `onsubmit`: The form is submitted.\n- `onfocus`: An element gets focus.\n- `onblur`: An element loses focus.\n\n```html\n<input type=\"text\" onchange=\"upperCase()\">\n```"
         },
         {
             "id": "js_events_6",
             "type": "content",
-            "title": "The Event Object",
-            "content": "# Event Object 📦\n\nWhen an event occurs, the browser passes an **event object** to the handler function. It contains details about the event.\n\n```javascript\nbtn.addEventListener(\"click\", function(event) {\n  console.log(event.target); // The element clicked\n  console.log(event.type);   // \"click\"\n});\n```"
+            "title": "Event Listeners",
+            "content": "# addEventListener 👂\n\nThe `addEventListener()` method attaches an event handler to an element without overwriting existing event handlers.\n\nSyntax: `element.addEventListener(event, function, useCapture);`\n\n```javascript\ndocument.getElementById(\"myBtn\").addEventListener(\"click\", function() {\n  alert(\"Hello World!\");\n});\n```\n\n> 💡 **Best Practice:** Use this method instead of inline attributes (e.g., `onclick`). It separates JS from HTML."
         },
         {
             "id": "js_events_7",
-            "type": "content",
-            "title": "Event Bubbling",
-            "content": "# Bubbling vs Capturing 🫧\n\nHow events travel through the DOM.\n\n**Bubbling (Default):** Event triggers on the innermost element first, then bubbles up to the outer elements.\n\n`UseCapture = false`\n\n**Capturing:** Event triggers on the outermost element first, then trickles down.\n\n`UseCapture = true`"
-        },
-        {
-            "id": "js_events_8",
-            "type": "content",
-            "title": "Prevent Default",
-            "content": "# preventDefault() ✋\n\nStops the default action of an element from happening.\n\nExample: Prevent a link from opening the URL.\n\n```javascript\ndocument.querySelector(\"a\").addEventListener(\"click\", function(event) {\n  event.preventDefault();\n});\n```"
-        },
-        {
-            "id": "js_events_9",
-            "type": "content",
-            "title": "Event Delegation",
-            "content": "# Event Delegation 👮\n\nInstead of attaching listeners to every child, attach one to the parent.\n\nUseful for dynamically added elements.\n\n```javascript\n// List with many items\ndocument.getElementById(\"myList\").addEventListener(\"click\", function(e) {\n  if (e.target.tagName === \"LI\") {\n    alert(\"List item clicked!\");\n  }\n});\n```"
-        },
-        {
-            "id": "js_events_quiz_2",
             "type": "quiz",
-            "title": "Flow Quiz",
-            "content": "Track the event.",
-            "quizQuestion": "In Bubbling, which element receives the event first?",
+            "title": "Listener Quiz",
+            "content": "Check syntax.",
+            "quizQuestion": "Which method is the cleaner way to attach events?",
             "quizOptions": [
-                "The outermost parent",
-                "The innermost target",
-                "The document body",
-                "Randomly"
+                "attachEvent",
+                "addEventListener",
+                "onEvent",
+                "listen"
             ],
             "correctOptionIndex": 1
         },
         {
-            "id": "js_events_10",
+            "id": "js_events_8",
             "type": "content",
-            "title": "Code Example",
-            "content": "# Key Logger 💻\n\n<!-- FULL_CODE_START\n<!DOCTYPE html>\n<html>\n<body>\n\n<p>Press any key inside the input field:</p>\n<input type=\"text\" id=\"myInput\" placeholder=\"Type here...\">\n<p id=\"output\"></p>\n\n<script>\nconst input = document.getElementById(\"myInput\");\nconst output = document.getElementById(\"output\");\n\ninput.addEventListener(\"keydown\", function(event) {\n  output.innerText = \"You pressed: \" + event.key;\n  \n  if (event.key === \"Enter\") {\n     output.style.color = \"red\";\n     output.innerText += \" (Submitted!)\";\n  } else {\n     output.style.color = \"black\";\n  }\n});\n</script>\n\n</body>\n</html>\nFULL_CODE_END -->"
+            "title": "The Event Object",
+            "content": "# The Event Object 📦\n\nWhen an event occurs, the browser creates an **Event object**, puts details into it, and passes it as an argument to the handler.\n\n```javascript\nbutton.addEventListener(\"click\", function(event) {\n  console.log(event.target); // The clicked element\n  console.log(event.type);   // \"click\"\n});\n```"
         },
         {
-            "id": "js_events_11",
+            "id": "js_events_9",
+            "type": "content",
+            "title": "Prevent Default",
+            "content": "# preventDefault() ✋\n\nPrevents the default action of the element.\n\nExample: Prevent a link from opening the URL or a form from submitting.\n\n```javascript\ndocument.getElementById(\"myAnchor\").addEventListener(\"click\", function(event){\n  event.preventDefault();\n});\n```"
+        },
+        {
+            "id": "js_events_10",
             "type": "content",
             "title": "Summary",
-            "content": "# Recap: Events 🎓\n\nMake it interactive.\n\n- **Listen:** `addEventListener`.\n- **Types:** Click, Key, Mouse, Form.\n- **Object:** Access `event.target`.\n- **Control:** `preventDefault()` stops native behavior.\n- **Flow:** Bubbling (up) vs Capturing (down).\n\n## Next Steps\nLearn how to structure complex data with **Objects & Arrays**!"
+            "content": "# Summary 🔔\n\nEvents make pages dynamic.\n\n## Key Takeaways\n\n- ✅ **Mouse/KeyBoard:** React to user input.\n- ✅ **addEventListener:** Cleanly attach handlers.\n- ✅ **Event Object:** Getting details about the event.\n- ✅ **preventDefault:** Stop default browser behavior.\n\nNext, let's structure our data with **Objects**! 📦"
         }
     ]
 }

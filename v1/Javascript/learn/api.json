@@ -1,103 +1,85 @@
 {
     "id": "learn_js_api",
     "topicId": "api",
-    "topicTitle": "Web APIs",
-    "description": "Unlock browsers' powerful features: Fetch data, store local data, and access geolocation.",
+    "topicTitle": "Web APIs & Storage",
+    "description": "Interact with servers using Fetch and JSON, and store data locally in the browser.",
     "baseKP": 100,
     "slides": [
         {
             "id": "js_api_1",
             "type": "content",
-            "title": "What are Web APIs?",
-            "content": "# Web APIs 🌐\n\nA Web API is a developer's dream.\n\nIt can extend the functionality of the browser.\n- **Browser APIs:** Built into your web browser (DOM, Fetch, Geolocation).\n- **Third Party APIs:** Provided by third parties (Twitter, Google Maps)."
+            "title": "What is an API?",
+            "content": "# Web APIs 🌐\n\n**API** stands for **A**pplication **P**rogramming **I**nterface.\n\nIt's a set of rules that allows your JS code to communicate with other software (like a backend server or browser features).\n\nCommon Browser APIs:\n- **Fetch API:** Server requests.\n- **Geolocation API:** User location.\n- **Storage API:** Save data."
         },
         {
             "id": "js_api_2",
             "type": "content",
-            "title": "Local Storage",
-            "content": "# Local Storage 📦\n\nThe way to store data in the browser (no expiration).\n\n```javascript\n// Store\nlocalStorage.setItem(\"lastname\", \"Smith\");\n\n// Retrieve\nlet name = localStorage.getItem(\"lastname\");\n\n// Remove\nlocalStorage.removeItem(\"lastname\");\n```\nData is stored as Strings. Use `JSON.stringify` and `JSON.parse` for objects."
+            "title": "JSON",
+            "content": "# JSON 📋\n\n**J**ava**S**cript **O**bject **N**otation is a lightweight data interchange format.\n\nIt is plain text written with object notation.\n\n```javascript\n// JS Object\nconst obj = { name: \"John\", age: 30 };\n\n// Convert to JSON String\nconst myJSON = JSON.stringify(obj);\n// '{\"name\":\"John\",\"age\":30}'\n\n// Parse JSON String back to Object\nconst newObj = JSON.parse(myJSON);\n```"
         },
         {
             "id": "js_api_3",
             "type": "content",
-            "title": "Session Storage",
-            "content": "# Session Storage ⏳\n\nSimilar to local storage, but expires when the session ends (tab closed).\n\n```javascript\nsessionStorage.setItem(\"lastname\", \"Smith\");\n```"
+            "title": "Fetch API",
+            "content": "# The Fetch API 🐕\n\nThe Fetch API provides an interface for fetching resources (across the network).\n\nIt returns a **Promise**.\n\n```javascript\nfetch('https://api.example.com/data')\n  .then(response => response.json()) // Parse JSON\n  .then(data => console.log(data))\n  .catch(error => console.error(error));\n```"
         },
         {
             "id": "js_api_4",
-            "type": "content",
-            "title": "Geolocation API",
-            "content": "# Geolocation 📍\n\nGet the user's geographical position.\n\nNote: For privacy reasons, the user is asked for permission to report location information.\n\n```javascript\nnavigator.geolocation.getCurrentPosition(success, error);\n\nfunction success(position) {\n  const lat = position.coords.latitude;\n  const lng = position.coords.longitude;\n  console.log(`Lat: ${lat}, Lng: ${lng}`);\n}\n```"
-        },
-        {
-            "id": "js_api_quiz_1",
             "type": "quiz",
-            "title": "Storage Quiz",
-            "content": "Data persistence.",
-            "quizQuestion": "Which storage mechanisms persists data even after the browser is closed?",
+            "title": "Fetch Quiz",
+            "content": "Check fetch understanding.",
+            "quizQuestion": "What does fetch() return?",
             "quizOptions": [
-                "Session Storage",
-                "Local Storage",
-                "Cookie Storage",
-                "Cache Storage"
+                "The data directly",
+                "A Promise",
+                "XML",
+                "A String"
             ],
             "correctOptionIndex": 1
         },
         {
             "id": "js_api_5",
             "type": "content",
-            "title": "Fetch API",
-            "content": "# Fetch API 🐕\n\nThe interface for fetching resources (including across the network).\n\nReplaces `XMLHttpRequest`.\n\n```javascript\nfetch('https://api.example.com/items')\n  .then(response => response.json())\n  .then(data => console.log(data));\n```"
+            "title": "Local Storage",
+            "content": "# Web Storage API 💾\n\nAllows you to store data locally within the user's browser.\n\n## localStorage\nStores data with no expiration date.\n\n```javascript\n// Save\nlocalStorage.setItem(\"lastname\", \"Smith\");\n\n// Retrieve\nlet name = localStorage.getItem(\"lastname\");\n\n// Remove\nlocalStorage.removeItem(\"lastname\");\n```\n**Note:** Values are always Strings!"
         },
         {
             "id": "js_api_6",
             "type": "content",
-            "title": "JSON Basics",
-            "content": "# JSON 📄\n\nJavaScript Object Notation. Standard format for transmitting data.\n\n- Data is in name/value pairs.\n- Data is separated by commas.\n- Curly braces hold objects.\n- Square brackets hold arrays.\n\n```json\n{\"firstName\":\"John\", \"lastName\":\"Doe\"}\n```"
+            "title": "Session Storage",
+            "content": "# sessionStorage ⏳\n\nSimilar to `localStorage`, but stores data for only one session.\n\nThe data is deleted when the user closes the specific browser tab.\n\n```javascript\nsessionStorage.setItem(\"key\", \"value\");\n```"
         },
         {
             "id": "js_api_7",
             "type": "content",
-            "title": "Parsing JSON",
-            "content": "# JSON Methods 🛠️\n\nConvert between JSON strings and JS Objects.\n\n```javascript\nconst obj = { name: \"John\", age: 30 };\n\n// Object to String (for storage/sending)\nconst myJSON = JSON.stringify(obj);\n\n// String to Object (reading/receiving)\nconst myObj = JSON.parse(myJSON);\n```"
+            "title": "Geolocation API",
+            "content": "# Geolocation API 📍\n\nLocate the user's position.\n\n```javascript\nif (navigator.geolocation) {\n  navigator.geolocation.getCurrentPosition(showPosition);\n} else {\n  console.log(\"Geolocation is not supported.\");\n}\n\nfunction showPosition(position) {\n  console.log(\"Lat: \" + position.coords.latitude);\n  console.log(\"Long: \" + position.coords.longitude);\n}\n```\nRequires user permission."
         },
         {
             "id": "js_api_8",
-            "type": "content",
-            "title": "History API",
-            "content": "# History API 🔙\n\nInteract with the browser's session history.\n\n```javascript\n// Go back\nwindow.history.back();\n\n// Go forward\nwindow.history.forward();\n\n// Go to specific point\nwindow.history.go(-2);\n```\nCrucial for Single Page Applications (SPAs)."
+            "type": "quiz",
+            "title": "Storage Quiz",
+            "content": "Check persistence.",
+            "quizQuestion": "Which storage keeps data even after the browser is closed?",
+            "quizOptions": [
+                "sessionStorage",
+                "localStorage",
+                "cookieStorage",
+                "tempStorage"
+            ],
+            "correctOptionIndex": 1
         },
         {
             "id": "js_api_9",
             "type": "content",
-            "title": "Notification API",
-            "content": "# Notifications 🔔\n\nDisplay native system notifications.\n\nRequires permission.\n\n```javascript\nNotification.requestPermission().then(permission => {\n  if (permission === \"granted\") {\n    new Notification(\"Hello World!\");\n  }\n});\n```"
-        },
-        {
-            "id": "js_api_quiz_2",
-            "type": "quiz",
-            "title": "Format Quiz",
-            "content": "Data types.",
-            "quizQuestion": "What data type does Local Storage store?",
-            "quizOptions": [
-                "Objects",
-                "Arrays",
-                "Strings only",
-                "Binary"
-            ],
-            "correctOptionIndex": 2
+            "title": "Async Fetch",
+            "content": "# Async/Await with Fetch 🤝\n\nThe modern way to call APIs.\n\n```javascript\nasync function getUser() {\n  try {\n    const response = await fetch('https://api.example.com/user');\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(\"Could not fetch user:\", error);\n  }\n}\n```"
         },
         {
             "id": "js_api_10",
             "type": "content",
-            "title": "Code Example",
-            "content": "# Local Storage Manager 💻\n\n<!-- FULL_CODE_START\n// Check if supported\nif (typeof(Storage) !== \"undefined\") {\n  // Store\n  localStorage.setItem(\"theme\", \"Dark Mode\");\n  \n  // Retrieve\n  const theme = localStorage.getItem(\"theme\");\n  console.log(\"Saved Theme: \" + theme);\n  \n  // Complex Data\n  const settings = { volume: 50, lang: \"en\" };\n  localStorage.setItem(\"settings\", JSON.stringify(settings));\n  \n  // Retrieve Complex Data\n  const loadedSettings = JSON.parse(localStorage.getItem(\"settings\"));\n  console.log(\"Volume:\", loadedSettings.volume);\n} else {\n  console.log(\"No Web Storage support.\");\n}\nFULL_CODE_END -->"
-        },
-        {
-            "id": "js_api_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Web APIs 🎓\n\nPower up your app.\n\n- **Storage:** `localStorage` (persistent), `sessionStorage` (temp).\n- **Network:** `fetch()` for API calls.\n- **Data:** `JSON.parse` / `stringify`.\n- **Features:** Geolocation, History, Notifications.\n\n## Next Steps\nCongratulations! You've mastered Javascript. Next: **UI/UX Tools**!"
+            "content": "# Summary 🌐\n\nConnecting and Storing.\n\n## Key Takeaways\n\n- ✅ **JSON:** The language of data exchange.\n- ✅ **Fetch:** The modern way to make HTTP requests.\n- ✅ **localStorage:** Save user preferences purely in the browser.\n- ✅ **Geolocation:** Get real-world context.\n\nCongratulations! You have completed the **JavaScript** module. You are now a web developer! 🎉"
         }
     ]
 }

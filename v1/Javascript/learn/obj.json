@@ -1,103 +1,77 @@
 {
     "id": "learn_js_obj",
     "topicId": "obj",
-    "topicTitle": "Objects & Arrays",
-    "description": "Deep dive into JavaScript's complex data structures: Objects, Arrays, and modern Destructuring techniques.",
+    "topicTitle": "JavaScript Objects",
+    "description": "Understand object-oriented concepts in JavaScript: objects, properties, methods, and the 'this' keyword.",
     "baseKP": 100,
     "slides": [
         {
             "id": "js_obj_1",
             "type": "content",
             "title": "What is an Object?",
-            "content": "# Objects 🗃️\n\nJavascript objects are containers for named values called properties.\n\n```javascript\nconst car = {\n  type: \"Fiat\",\n  model: \"500\",\n  color: \"white\"\n};\n```\n\nAccess properties:\n- `car.type` (Dot notation)\n- `car[\"type\"]` (Bracket notation)"
+            "content": "# Objects 📦\n\nIn real life, a car is an object.\n- **Properties:** weight, color.\n- **Methods:** start, stop.\n\nIn JS, objects are variables too, but they can contain many values.\n\n```javascript\nconst car = {type:\"Fiat\", model:\"500\", color:\"white\"};\n```"
         },
         {
             "id": "js_obj_2",
             "type": "content",
-            "title": "Object Methods",
-            "content": "# Methods ⚙️\n\nObjects can also have methods. Methods are actions that can be performed on objects.\n\nMethods are stored in properties as function definitions.\n\n```javascript\nconst person = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n  fullName: function() {\n    return this.firstName + \" \" + this.lastName;\n  }\n};\n\nconsole.log(person.fullName());\n```\n- `this` refers to the owner of the function (the person object)."
+            "title": "Properties",
+            "content": "# Accessing Properties 🔑\n\nTwo ways to access properties:\n\n1. **Dot Notation** (Common)\n```javascript\ncar.type;\n```\n\n2. **Bracket Notation**\n```javascript\ncar[\"type\"];\n```\nBracket notation is useful when the property name is stored in a variable."
         },
         {
             "id": "js_obj_3",
             "type": "content",
-            "title": "Arrays",
-            "content": "# Arrays 📋\n\nAn array is a special variable, which can hold more than one value.\n\n```javascript\nconst cars = [\"Saab\", \"Volvo\", \"BMW\"];\n```\n\nAccess Elements:\n- `cars[0]` // Saab\n\nChange Elements:\n- `cars[0] = \"Opel\";`"
+            "title": "Object Methods",
+            "content": "# Methods ⚙️\n\nA method is a function stored as a property.\n\n```javascript\nconst person = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n  fullName: function() {\n    return this.firstName + \" \" + this.lastName;\n  }\n};\n\n// Call it (don't forget parenthesis!)\nconsole.log(person.fullName());\n```"
         },
         {
             "id": "js_obj_4",
-            "type": "content",
-            "title": "Array Methods: Basic",
-            "content": "# Basic Array Methods 🛠️\n\n- `push()`: Adds a new element to end.\n- `pop()`: Removes the last element.\n- `shift()`: Removes the first element.\n- `unshift()`: Adds new element to beginning.\n- `length`: Returns the number of elements.\n\n```javascript\nlet fruits = [\"Banana\", \"Orange\"];\nfruits.push(\"Apple\"); // [\"Banana\", \"Orange\", \"Apple\"]\n```"
-        },
-        {
-            "id": "js_obj_quiz_1",
             "type": "quiz",
             "title": "Method Quiz",
-            "content": "Add it.",
-            "quizQuestion": "Which method adds an element to the START of an array?",
+            "content": "Invocation syntax.",
+            "quizQuestion": "How do you call the method 'start' of object 'car'?",
             "quizOptions": [
-                "push()",
-                "pop()",
-                "shift()",
-                "unshift()"
-            ],
-            "correctOptionIndex": 3
-        },
-        {
-            "id": "js_obj_5",
-            "type": "content",
-            "title": "Array Iteration",
-            "content": "# Iterating Arrays 🔄\n\nModern ways to loop.\n\n## forEach()\nCalls a function once for each array element.\n\n```javascript\nconst numbers = [45, 4, 9];\nnumbers.forEach(myFunction);\n\nfunction myFunction(value, index, array) {\n  console.log(value);\n}\n```\n\n## map()\nCreates a new array by performing a function on each array element.\n```javascript\nconst numbers1 = [45, 4, 9];\nconst numbers2 = numbers1.map(value => value * 2);\n```"
-        },
-        {
-            "id": "js_obj_6",
-            "type": "content",
-            "title": "Filter and Reduce",
-            "content": "# Filter & Reduce 🔍\n\n## filter()\nCreates a new array with array elements that pass a test.\n```javascript\nconst ages = [32, 33, 16, 40];\nconst adults = ages.filter(age => age >= 18);\n```\n\n## reduce()\nRuns a function on each array element to produce (reduce it to) a single value.\n```javascript\nconst numbers = [1, 2, 3, 4];\nconst sum = numbers.reduce((total, value) => total + value);\n```"
-        },
-        {
-            "id": "js_obj_7",
-            "type": "content",
-            "title": "Object Destructuring",
-            "content": "# Destructuring Objects 📦\n\nUnpack properties from objects into distinct variables.\n\n```javascript\nconst person = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n  age: 50\n};\n\n// Old way\n// let firstName = person.firstName;\n\n// Destructuring\nconst { firstName, age } = person;\nconsole.log(firstName); // John\n```"
-        },
-        {
-            "id": "js_obj_8",
-            "type": "content",
-            "title": "Array Destructuring",
-            "content": "# Destructuring Arrays 🥡\n\nUnpack values from arrays.\n\n```javascript\nconst fruits = [\"Banana\", \"Orange\", \"Apple\", \"Mango\"];\n\nconst [first, second] = fruits;\nconsole.log(first); // Banana\n```\n\nSkipping items:\n`const [first, , third] = fruits;`"
-        },
-        {
-            "id": "js_obj_quiz_2",
-            "type": "quiz",
-            "title": "Destructure Quiz",
-            "content": "Unpack it.",
-            "quizQuestion": "How do you extract 'name' from object 'user'?",
-            "quizOptions": [
-                "const [name] = user;",
-                "const {name} = user;",
-                "const user.name;",
-                "const name from user;"
+                "car.start",
+                "car.start()",
+                "car[start]",
+                "start(car)"
             ],
             "correctOptionIndex": 1
         },
         {
+            "id": "js_obj_5",
+            "type": "content",
+            "title": "This Keyword",
+            "content": "# The 'this' Keyword 👈\n\nIn an object method, `this` refers to the **object** itself.\n\nIn the previous example, `this.firstName` means the `firstName` property of **this object** (person).\n\n> ⚠️ **Note:** `this` works differently in arrow functions!"
+        },
+        {
+            "id": "js_obj_6",
+            "type": "content",
+            "title": "Constructors",
+            "content": "# Object Constructors 🏗️\n\nSometimes we need a \"blueprint\" for creating many objects of the same type.\n\n```javascript\nfunction Person(first, last, age) {\n  this.firstName = first;\n  this.lastName = last;\n  this.age = age;\n}\n\nconst myFather = new Person(\"John\", \"Doe\", 50);\nconst myMother = new Person(\"Jane\", \"Doe\", 48);\n```"
+        },
+        {
+            "id": "js_obj_7",
+            "type": "content",
+            "title": "Looping Objects",
+            "content": "# Looping Objects 🔄\n\nUse the `for...in` loop to iterate over properties.\n\n```javascript\nconst person = {fname:\"John\", lname:\"Doe\", age:25};\n\nlet txt = \"\";\nfor (let x in person) {\n  txt += person[x] + \" \";\n}\n```"
+        },
+        {
+            "id": "js_obj_8",
+            "type": "content",
+            "title": "Adding/Deleting Properties",
+            "content": "# Modifying Objects ✏️\n\nObjects are mutable.\n\n## Add Property\n```javascript\nperson.nationality = \"English\";\n```\n\n## Delete Property\n```javascript\ndelete person.age;\n```"
+        },
+        {
             "id": "js_obj_9",
             "type": "content",
-            "title": "Spread Operator",
-            "content": "# Spread Operator ... 🧈\n\nExpands an iterable (like an array) into more elements.\n\n```javascript\nconst q1 = [\"Jan\", \"Feb\", \"Mar\"];\nconst q2 = [\"Apr\", \"May\", \"Jun\"];\nconst halfYear = [...q1, ...q2];\n```\n\nAlso works for Objects (cloning/merging):\n```javascript\nconst obj1 = { foo: 'bar', x: 42 };\nconst obj2 = { foo: 'baz', y: 13 };\nconst mergedObj = { ...obj1, ...obj2 };\n```"
+            "title": "Object.values/keys",
+            "content": "# Conversion to Array 📋\n\nSometimes you need an array form.\n\n- `Object.keys(obj)`: Returns array of keys.\n- `Object.values(obj)`: Returns array of values.\n- `Object.entries(obj)`: Returns array of [key, value] pairs.\n\n```javascript\nObject.keys(person); // [\"fname\", \"lname\", \"age\"]\n```"
         },
         {
             "id": "js_obj_10",
             "type": "content",
-            "title": "Code Example",
-            "content": "# Data Processing 💻\n\n<!-- FULL_CODE_START\nconst users = [\n  { id: 1, name: \"Alice\", active: true },\n  { id: 2, name: \"Bob\", active: false },\n  { id: 3, name: \"Charlie\", active: true }\n];\n\n// 1. Filter active users\nconst activeUsers = users.filter(user => user.active);\n\n// 2. Map to get just names\nconst names = activeUsers.map(user => user.name);\n\nconsole.log(\"Active Users:\", names);\n\n// 3. Find specific user\nconst bob = users.find(u => u.name === \"Bob\");\nconsole.log(\"Found Bob:\", bob);\nFULL_CODE_END -->"
-        },
-        {
-            "id": "js_obj_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Data Structures 🎓\n\nStore complex data.\n\n- **Objects:** Key-value pairs. Methods with `this`.\n- **Arrays:** Ordered lists. `push`, `pop`.\n- **Iteration:** `map`, `filter`, `reduce` (Functional style).\n- **Modern JS:** Destructuring `{}`/`[]` and Spread `...` make life easier.\n\n## Next Steps\nUnlock modern JavaScript power with **ES6+ Features**!"
+            "content": "# Summary 📦\n\nObjects store related data.\n\n## Key Takeaways\n\n- ✅ **Properties:** `obj.prop` stores values.\n- ✅ **Methods:** Functions inside objects.\n- ✅ **this:** Refers to the owner object.\n- ✅ **Constructor:** Useful for creating instance stamps (`new Person`).\n\nNext, let's look at modern **ES6+ Features**! 🚀"
         }
     ]
 }

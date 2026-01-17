@@ -2,82 +2,70 @@
     "id": "learn_js_dom",
     "topicId": "dom",
     "topicTitle": "DOM Manipulation",
-    "description": "Learn how to access, change, and update the HTML Document Object Model (DOM) using JavaScript.",
+    "description": "Learn to interact with the webpage by selecting elements and modifying HTML/CSS dynamically.",
     "baseKP": 100,
     "slides": [
         {
             "id": "js_dom_1",
             "type": "content",
             "title": "What is the DOM?",
-            "content": "# The Document Object Model 🌳\n\nThe DOM is a tree structure representation of your HTML.\n\nJavaScript can access the DOM to:\n- Change all HTML elements\n- Change HTML attributes\n- Change CSS styles\n- Remove existing elements\n- Add new elements"
+            "content": "# The DOM 🌳\n\nThe **D**ocument **O**bject **M**odel is a programming interface for HTML.\n\nWhen a web page is loaded, the browser creates a DOM of the page. It looks like a tree of objects.\n\nJS can use the DOM to change content, attributes, and styles."
         },
         {
             "id": "js_dom_2",
             "type": "content",
             "title": "Selecting Elements",
-            "content": "# Finding Elements 🔎\n\nHow to grab an element to work with:\n\n- `document.getElementById(\"id\")`: Best performance.\n- `document.getElementsByClassName(\"class\")`\n- `document.getElementsByTagName(\"tag\")`\n- `document.querySelector(\".class\")`: Returns the **first** match.\n- `document.querySelectorAll(\"div\")`: Returns **all** matches (as a NodeList)."
+            "content": "# Selecting Elements 🎯\n\nTo manipulate elements, you first need to find them.\n\n## Methods\n- `document.getElementById('id')`\n- `document.getElementsByClassName('class')`\n- `document.getElementsByTagName('tag')`\n- `document.querySelector('.class')` (Returns first match)\n- `document.querySelectorAll('div')` (Returns all matches)\n\n```javascript\nconst btn = document.getElementById(\"submit-btn\");\n```"
         },
         {
             "id": "js_dom_3",
-            "type": "content",
-            "title": "Changing HTML Content",
-            "content": "# Changing Content 📝\n\nThe easiest way to modify the content of an HTML element is by using the `innerHTML` or `innerText` property.\n\n```javascript\ndocument.getElementById(\"p1\").innerHTML = \"New text!\";\n```\n\n- `innerHTML`: Parses HTML tags (can lead to XSS if user input involved).\n- `innerText`: Better for plain text (ignores hidden elements).\n- `textContent`: Raw text content."
+            "type": "quiz",
+            "title": "Selector Quiz",
+            "content": "Check DOM methods.",
+            "quizQuestion": "Which method returns a single element by its ID?",
+            "quizOptions": [
+                "getElementByClass",
+                "getElementById",
+                "querySelector",
+                "querySelectorAll"
+            ],
+            "correctOptionIndex": 1
         },
         {
             "id": "js_dom_4",
             "type": "content",
-            "title": "Changing Attributes",
-            "content": "# Changing Attributes 🏷️\n\nYou can change the value of an attribute (like `src` or `href`).\n\n```javascript\ndocument.getElementById(\"myImage\").src = \"landscape.jpg\";\n\n// Or using setAttribute\nconst link = document.querySelector(\"a\");\nlink.setAttribute(\"href\", \"https://google.com\");\n```"
-        },
-        {
-            "id": "js_dom_quiz_1",
-            "type": "quiz",
-            "title": "Selector Quiz",
-            "content": "Pick the element.",
-            "quizQuestion": "Which method returns a list of elements, not just one?",
-            "quizOptions": [
-                "getElementById",
-                "querySelector",
-                "querySelectorAll",
-                "getElement"
-            ],
-            "correctOptionIndex": 2
+            "title": "Changing HTML Content",
+            "content": "# Changing Content 📝\n\nThe easiest way to modify content is using the `innerHTML` property.\n\n```javascript\ndocument.getElementById(\"demo\").innerHTML = \"Hello World!\";\n```\n\nUse `innerText` or `textContent` if you only want to set text (safer against XSS attacks)."
         },
         {
             "id": "js_dom_5",
             "type": "content",
-            "title": "Changing CSS Styles",
-            "content": "# Changing Styles 🎨\n\nYou can change CSS styles directly via the `.style` property.\n\nNote: Use camelCase for property names (`backgroundColor` instead of `background-color`).\n\n```javascript\ndocument.getElementById(\"p2\").style.color = \"blue\";\ndocument.getElementById(\"p2\").style.fontSize = \"20px\";\n```"
+            "title": "Changing Styles",
+            "content": "# Changing CSS 🎨\n\nYou can modify the style of an element using the `style` property.\n\n```javascript\nconst element = document.getElementById(\"p1\");\nelement.style.color = \"blue\";\nelement.style.fontSize = \"24px\";\n```\n(Note: CSS property `font-size` becomes camelCase `fontSize` in JS.)"
         },
         {
             "id": "js_dom_6",
             "type": "content",
-            "title": "CSS Classes",
-            "content": "# Class List 🏫\n\nA cleaner way to change styles is to add/remove CSS classes.\n\n```javascript\nconst element = document.getElementById(\"myDiv\");\n\n// Add a class\nelement.classList.add(\"active\");\n\n// Remove a class\nelement.classList.remove(\"hidden\");\n\n// Toggle a class (add if missing, remove if present)\nelement.classList.toggle(\"dark-mode\");\n```"
+            "title": "Changing Attributes",
+            "content": "# Changing Attributes 🏷️\n\nYou can get or set HTML attributes.\n\n```javascript\nconst img = document.getElementById(\"myImage\");\n\n// Change the source of an image\nimg.src = \"landscape.jpg\";\n\n// Or use setAttribute\nimg.setAttribute(\"alt\", \"New description\");\n```"
         },
         {
             "id": "js_dom_7",
             "type": "content",
-            "title": "Creating Elements",
-            "content": "# Creating Nodes 🏗️\n\nTo add a new element to the HTML DOM, you must create the element (element node) first, and then append it to an existing element.\n\n```javascript\nconst para = document.createElement(\"p\");\nconst node = document.createTextNode(\"This is new.\");\npara.appendChild(node);\n\nconst element = document.getElementById(\"div1\");\nelement.appendChild(para);\n```"
+            "title": "Creating and Removing Elements",
+            "content": "# DOM Nodes 🌲\n\nYou can add or remove elements dynamically.\n\n## Create\n```javascript\nconst para = document.createElement(\"p\");\npara.innerText = \"This is new.\";\ndocument.body.appendChild(para);\n```\n\n## Remove\n```javascript\nconst elm = document.getElementById(\"p1\");\nelm.remove();\n```"
         },
         {
             "id": "js_dom_8",
-            "type": "content",
-            "title": "Removing Elements",
-            "content": "# Removing Elements 🗑️\n\nTo remove an HTML element, you use `.remove()` on the element itself.\n\n```javascript\nconst elm = document.getElementById(\"p1\");\nelm.remove();\n```\n\nOlder way (remove child from parent):\n```javascript\nconst parent = document.getElementById(\"div1\");\nconst child = document.getElementById(\"p1\");\nparent.removeChild(child);\n```"
-        },
-        {
-            "id": "js_dom_quiz_2",
             "type": "quiz",
-            "title": "Style Quiz",
-            "content": "Style format.",
-            "quizQuestion": "How do you set 'background-color' using JavaScript Style property?",
+            "title": "Create Element Quiz",
+            "content": "Check syntax.",
+            "quizQuestion": "Which method marks the beginning of creating a new element?",
             "quizOptions": [
-                "style.background-color",
-                "style.backgroundColor",
-                "style.background_color",
-                "style.bgColor"
+                "document.add()",
+                "document.createElement()",
+                "document.make()",
+                "document.newElement()"
             ],
             "correctOptionIndex": 1
         },
@@ -85,19 +73,13 @@
             "id": "js_dom_9",
             "type": "content",
             "title": "Traversing the DOM",
-            "content": "# Moving Around 🗺️\n\nNavigating between nodes.\n\n- `parentNode`\n- `childNodes[n]`\n- `firstChild`\n- `lastChild`\n- `nextElementSibling`\n- `previousElementSibling`\n\n```javascript\nconst parent = document.getElementById(\"child\").parentNode;\n```"
+            "content": "# Traversing the Tree 🪜\n\nYou can move between nodes.\n\n- `parentNode`\n- `childNodes[n]`\n- `firstChild`\n- `lastChild`\n- `nextSibling`\n\n```javascript\nconst parent = document.getElementById(\"child\").parentNode;\n```"
         },
         {
             "id": "js_dom_10",
             "type": "content",
-            "title": "Code Example",
-            "content": "# DOM Interactive 💻\n\n<!-- FULL_CODE_START\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1 id=\"header\">Hello World!</h1>\n<button onclick=\"changeText()\">Change Text</button>\n<button onclick=\"changeColor()\">Change Color</button>\n\n<script>\nfunction changeText() {\n  const header = document.getElementById(\"header\");\n  header.innerText = \"Hello JavaScript!\";\n}\n\nfunction changeColor() {\n  const header = document.getElementById(\"header\");\n  // Toggle red class logic simulation\n  if (header.style.color === \"red\") {\n     header.style.color = \"black\";\n  } else {\n     header.style.color = \"red\";\n  }\n}\n</script>\n\n</body>\n</html>\nFULL_CODE_END -->"
-        },
-        {
-            "id": "js_dom_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: DOM 🎓\n\nControl the page structure.\n\n- **Select:** `getElementById`, `querySelector`.\n- **Modify:** `innerHTML`, `style`, `setAttribute`.\n- **Classes:** `classList.add/remove/toggle`.\n- **Structure:** `createElement`, `appendChild`, `remove`.\n\n## Next Steps\nMake your page react to user actions with **Events**!"
+            "content": "# Summary 📄\n\nThe DOM is how JS talks to HTML.\n\n## Key Takeaways\n\n- ✅ **Selectors:** `getElementById`, `querySelector`.\n- ✅ **Content:** `innerHTML`.\n- ✅ **Styles:** `element.style.property`.\n- ✅ **Structure:** `createElement`, `appendChild`, `remove`.\n\nNext, let's react to user actions with **Events**! 🖱️"
         }
     ]
 }

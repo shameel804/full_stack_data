@@ -2,102 +2,84 @@
     "id": "learn_css_query",
     "topicId": "query",
     "topicTitle": "Media Queries",
-    "description": "Learn how to make your website responsive and adaptable to different devices and screen sizes.",
+    "description": "Create responsive websites that look great on mobiles, tablets, and desktops using Media Queries.",
     "baseKP": 100,
     "slides": [
         {
             "id": "css_query_1",
             "type": "content",
-            "title": "What is Responsive Design?",
-            "content": "# Responsive Design 📱\n\nResponsive Web Design makes your web page look good on all devices.\n\nResponsive web design uses only HTML and CSS.\n\nResponsive web design is not a program or a JavaScript.\n\nIt relies heavily on **Media Queries** to apply different styles based on viewport size."
+            "title": "Responsive Web Design",
+            "content": "# Responsive Design 📱\n\nResponsive Web Design makes web pages render well on a variety of devices and window or screen sizes.\n\nIt is about using CSS and HTML to resize, hide, shrink, enlarge, or move the content to make it look good on any screen.\n\nThe core of this is the **Media Query**."
         },
         {
             "id": "css_query_2",
             "type": "content",
-            "title": "The Viewport Meta Tag",
-            "content": "# The Viewport Tag 🏷️\n\nA critical step for responsive design.\n\nExample:\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\n- `width=device-width`: Sets the width of the page to follow the screen-width of the device.\n- `initial-scale=1.0`: Sets the initial zoom level when the page is first loaded."
+            "title": "The @media Rule",
+            "content": "# The @media Rule 📏\n\nMedia queries let you define diverse style rules for different media types/devices.\n\nThey check things like:\n- width and height of the viewport\n- width and height of the device\n- orientation (is the tablet/phone in landscape or portrait mode?)\n- resolution\n\n```css\n@media screen and (max-width: 600px) {\n  body {\n    background-color: lightblue;\n  }\n}\n```"
         },
         {
             "id": "css_query_3",
             "type": "content",
-            "title": "Media Query Syntax",
-            "content": "# Media Query Syntax 📏\n\nMedia queries allow you to apply CSS styles only if a certain condition is true.\n\n```css\n@media only screen and (max-width: 600px) {\n  body {\n    background-color: lightblue;\n  }\n}\n```\nIf the browser window is 600px or smaller, the background color will be lightblue."
+            "title": "Breakpoints",
+            "content": "# Breakpoints 🧱\n\nPixels where the layout changes are called \"breakpoints\".\n\nCommon Breakpoints:\n- **Mobile:** max-width: 600px\n- **Tablet:** max-width: 768px\n- **Laptop:** max-width: 992px\n- **Large:** min-width: 1200px\n\n```css\n/* On screens that are 600px wide or less */\n@media screen and (max-width: 600px) {\n  .column {\n    width: 100%;\n  }\n}\n```"
         },
         {
             "id": "css_query_4",
-            "type": "content",
-            "title": "Breakpoints",
-            "content": "# Common Breakpoints 🧱\n\nWidths where the layout changes.\n\n```css\n/* Extra small devices (phones, 600px and down) */\n@media only screen and (max-width: 600px) {...}\n\n/* Small devices (portrait tablets and large phones, 600px and up) */\n@media only screen and (min-width: 600px) {...}\n\n/* Medium devices (landscape tablets, 768px and up) */\n@media only screen and (min-width: 768px) {...}\n\n/* Large devices (laptops/desktops, 992px and up) */\n@media only screen and (min-width: 992px) {...}\n\n/* Extra large devices (large laptops and desktops, 1200px and up) */\n@media only screen and (min-width: 1200px) {...}\n```"
+            "type": "quiz",
+            "title": "MediaQuery Quiz",
+            "content": "Check syntax.",
+            "quizQuestion": "Which part defines the condition?",
+            "quizOptions": [
+                "@media",
+                "screen",
+                "(max-width: 600px)",
+                "body {}"
+            ],
+            "correctOptionIndex": 2
         },
         {
             "id": "css_query_5",
             "type": "content",
-            "title": "Mobile First",
-            "content": "# Mobile First Strategy 📲\n\nDesign for mobile first, then scale up.\n\nThis means using `min-width` queries.\n\n```css\n/* Default styles for mobile */\n.col { width: 100%; }\n\n/* Tablet (768px+) */\n@media (min-width: 768px) {\n  .col { width: 50%; }\n}\n\n/* Desktop (1024px+) */\n@media (min-width: 1024px) {\n  .col { width: 33.33%; }\n}\n```"
-        },
-        {
-            "id": "css_query_quiz_1",
-            "type": "quiz",
-            "title": "Logic Quiz",
-            "content": "Apply the rule.",
-            "quizQuestion": "If I use '@media (max-width: 500px)', when will the styles apply?",
-            "quizOptions": [
-                "When the screen is wider than 500px",
-                "When the screen is exactly 500px",
-                "When the screen is 500px or narrower",
-                "Never"
-            ],
-            "correctOptionIndex": 2
+            "title": "Mobile First Design",
+            "content": "# Mobile First 📱\n\n\"Mobile  First\" means designing for mobile before designing for desktop or any other device. This makes the page display faster on smaller devices.\n\nInstead of changing styles when the width gets *smaller* (`max-width`), we change them when the width gets *larger* (`min-width`).\n\n```css\n/* Default (Mobile) styles */\n.col { width: 100%; }\n\n/* Tablet */\n@media only screen and (min-width: 600px) {\n  .col { width: 50%; }\n}\n\n/* Desktop */\n@media only screen and (min-width: 768px) {\n  .col { width: 33.33%; }\n}\n```"
         },
         {
             "id": "css_query_6",
             "type": "content",
             "title": "Orientation",
-            "content": "# Orientation 🧭\n\nYou can distinct between portrait and landscape mode.\n\n```css\n@media only screen and (orientation: landscape) {\n  body {\n    background-color: lightblue;\n  }\n}\n```"
+            "content": "# Orientation 🔄\n\nMedia queries can also be used to change layout depending on the orientation of the browser.\n\n```css\n@media only screen and (orientation: landscape) {\n  body {\n    background-color: lightblue;\n  }\n}\n```\n\nUseful for hiding/showing elements when a user rotates their phone."
         },
         {
             "id": "css_query_7",
             "type": "content",
             "title": "Hiding Elements",
-            "content": "# Hiding Elements 🙈\n\nSometimes you want to hide elements on smaller screens (like a large sidebar).\n\n```css\n/* Hide sidebar on screens smaller than 700px */\n@media screen and (max-width: 700px) {\n  .sidebar {\n    display: none;\n  }\n}\n```"
+            "content": "# Hiding Elements 🙈\n\nSometimes you want to hide elements on smaller screens (like a large sidebar).\n\n```css\n@media screen and (max-width: 600px) {\n  .sidebar {\n    display: none;\n  }\n}\n```\n\nThis completely removes it from the layout."
         },
         {
             "id": "css_query_8",
             "type": "content",
-            "title": "Changing Font Sizes",
-            "content": "# Responsive Typography 🔠\n\nAdjust text size for readability.\n\n```css\nfont-size: 16px;\n\n@media screen and (min-width: 800px) {\n  div.content {\n    font-size: 20px;\n  }\n}\n```\n\nAlso consider using viewport units: `font-size: 3vw;` (3% of viewport width)."
+            "title": "Responsive Text",
+            "content": "# Responsive Typography 🔠\n\nYou can use media queries to adjust font sizes.\n\n```css\nh1 {\n  font-size: 80px;\n}\n\n@media screen and (max-width: 600px) {\n  h1 {\n    font-size: 30px;\n  }\n}\n```\n\nOr use viewport units: `font-size: 10vw;` (10% of viewport width)."
         },
         {
             "id": "css_query_9",
-            "type": "content",
-            "title": "Flexbox Direction Change",
-            "content": "# Responsive Flexbox 🧘\n\nA common pattern: Row on desktop, Column on mobile.\n\n```css\n.container {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 600px) {\n  .container {\n    flex-direction: row;\n  }\n}\n```"
-        },
-        {
-            "id": "css_query_quiz_2",
             "type": "quiz",
-            "title": "Viewport Quiz",
-            "content": "Scale it.",
-            "quizQuestion": "What html tag is essential for responsive behavior on mobile browsers?",
+            "title": "Strategy Quiz",
+            "content": "Design philosophy.",
+            "quizQuestion": "What is 'Mobile First'?",
             "quizOptions": [
-                "<responsive>",
-                "<meta name=\"viewport\">",
-                "<mobile>",
-                "<scale>"
+                "Designing only for mobile",
+                "Designing for mobile then adding styles for larger screens",
+                "Designing for desktop then shrinking it",
+                "Using only phones to code"
             ],
             "correctOptionIndex": 1
         },
         {
             "id": "css_query_10",
             "type": "content",
-            "title": "Media Features",
-            "content": "# Advanced Media Features 🕵️\n\nModern CSS allows checking for more than width.\n\n- `prefers-color-scheme: dark`: Check if user wants Dark Mode.\n- `hover: hover`: Check if device has a cursor (mouse vs touch).\n\n```css\n@media (prefers-color-scheme: dark) {\n  body {\n    background-color: black;\n    color: white;\n  }\n}\n```"
-        },
-        {
-            "id": "css_query_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Media Queries 🎓\n\nOne site, every device.\n\n- **Rule:** `@media only screen and (condition) { ... }`\n- **Breakpoints:** `min-width` (mobile-first) vs `max-width`.\n- **Viewport Tag:** Requires `<meta name=\"viewport\" ...>`.\n- **Adapt:** Columns -> Rows, Hide elements, Scale text.\n\n## Next Steps\nMaster the final piece of CSS magic: **Pseudo-classes & Elements**!"
+            "content": "# Summary 📏\n\nResponsive design is mandatory today.\n\n## Key Takeaways\n\n- ✅ **@media:** The rule that makes it possible.\n- ✅ **Breakpoints:** Key widths where layout shifts (e.g., 768px).\n- ✅ **Mobile First:** Start small, expand up using `min-width`.\n- ✅ **Flexbox/Grid:** Combine with media queries for powerful layouts.\n\nNext, explore the magic of **Pseudo-classes**! 👻"
         }
     ]
 }

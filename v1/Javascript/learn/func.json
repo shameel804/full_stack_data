@@ -2,102 +2,84 @@
     "id": "learn_js_func",
     "topicId": "func",
     "topicTitle": "Functions",
-    "description": "Learn how to define reusable code blocks with Functions, Arrow Functions, and understand Variable Scope.",
+    "description": "Master reusable code blocks with function declarations, expressions, arrow functions, and scoping rules.",
     "baseKP": 100,
     "slides": [
         {
             "id": "js_func_1",
             "type": "content",
             "title": "What is a Function?",
-            "content": "# Functions 📦\n\nA **function** is a block of code designed to perform a particular task.\n\nA function is executed when \"something\" invokes it (calls it).\n\n```javascript\nfunction myFunction(p1, p2) {\n  return p1 * p2;\n}\n```\n- **Parameters**: Listed in parentheses.\n- **Arguments**: Values received when invoked."
+            "content": "# Functions 🔧\n\nA function is a block of code designed to perform a particular task.\n\nIt is executed when something invokes it (calls it).\n\n```javascript\nfunction greet(name) {\n  return \"Hello \" + name;\n}\n\nlet message = greet(\"Alice\");\nconsole.log(message); // \"Hello Alice\"\n```"
         },
         {
             "id": "js_func_2",
             "type": "content",
             "title": "Function Declarations",
-            "content": "# Function Declaration 🗣️\n\nDeclared with the `function` keyword.\n\nThey are **hoisted**, meaning they can be called before they are declared in the code.\n\n```javascript\nconsole.log(square(5)); // Output: 25\n\nfunction square(n) {\n  return n * n;\n}\n```"
+            "content": "# Function Declaration 🗣️\n\nDeclared with the `function` keyword.\n\nDeclarations are **hoisted**, meaning you can call them before they are defined.\n\n```javascript\n// This works!\nsayHi();\n\nfunction sayHi() {\n  console.log(\"Hi!\");\n}\n```"
         },
         {
             "id": "js_func_3",
             "type": "content",
             "title": "Function Expressions",
-            "content": "# Function Expressions 🤫\n\nA function stored in a variable.\n\nThey are **NOT hoisted**.\n\n```javascript\nconst getRectArea = function(width, height) {\n  return width * height;\n};\n\nconsole.log(getRectArea(3, 4));\n```\nOften called \"anonymous functions\"."
+            "content": "# Function Expression 🤐\n\nA function can also be defined using an expression and stored in a variable.\n\nThese are **not** hoisted.\n\n```javascript\nconst x = function (a, b) {\n    return a * b\n};\n\nlet z = x(4, 3);\n```"
         },
         {
             "id": "js_func_4",
-            "type": "content",
-            "title": "Arrow Functions",
-            "content": "# Arrow Functions 🏹\n\nES6 introduced a shorter syntax.\n\n```javascript\n// Traditional\nhello = function() {\n  return \"Hello World!\";\n}\n\n// Arrow Function\nhello = () => {\n  return \"Hello World!\";\n}\n```\n\nIf the function has only one statement, you can remove the brackets and the `return` keyword:\n`hello = () => \"Hello World!\";`"
-        },
-        {
-            "id": "js_func_quiz_1",
             "type": "quiz",
-            "title": "Syntax Quiz",
-            "content": "Verify syntax.",
-            "quizQuestion": "Which syntax correctly defines an arrow function?",
+            "title": "Types Quiz",
+            "content": "Check your function knowledge.",
+            "quizQuestion": "Which type of function is hoisted?",
             "quizOptions": [
-                "function name() => {}",
-                "const name -> {}",
-                "const name = () => {}",
-                "name => function {}"
-            ],
-            "correctOptionIndex": 2
-        },
-        {
-            "id": "js_func_5",
-            "type": "content",
-            "title": "Scope: Global vs Local",
-            "content": "# Scope 🔭\n\n**Local Scope:** Variables declared within a JavaScript function, become LOCAL to the function.\n\n**Global Scope:** A variable declared outside a function, becomes GLOBAL.\n\n```javascript\nlet carName = \"Volvo\"; // Global variable\n\nfunction myFunction() {\n  let carName = \"Volvo\"; // Local variable\n}\n```"
-        },
-        {
-            "id": "js_func_6",
-            "type": "content",
-            "title": "Block Scope",
-            "content": "# Block Scope 🧱\n\nBefore ES6 (2015), JavaScript had only Global Scope and Function Scope.\n\nES6 introduced `let` and `const`. These keywords provide **Block Scope**.\n\nVariables declared inside a `{ }` block cannot be accessed from outside the block.\n\n```javascript\n{\n  let x = 2;\n}\n// x can NOT be used here\n```"
-        },
-        {
-            "id": "js_func_7",
-            "type": "content",
-            "title": "Parameters and Defaults",
-            "content": "# Default Parameters 🛡️\n\nES6 allows function parameters to have default values.\n\n```javascript\nfunction myFunction(x, y = 10) {\n  // y is 10 if not passed or undefined\n  return x + y;\n}\n\nmyFunction(5); // 15\n```"
-        },
-        {
-            "id": "js_func_8",
-            "type": "content",
-            "title": "Callback Functions",
-            "content": "# Callbacks 📞\n\nA callback is a function passed as an argument to another function.\n\nThis technique allows a function to call another function ... a callback function can run after another function has finished.\n\n```javascript\nfunction myDisplayer(some) {\n  console.log(some);\n}\n\nfunction myCalculator(num1, num2, myCallback) {\n  let sum = num1 + num2;\n  myCallback(sum);\n}\n\nmyCalculator(5, 5, myDisplayer);\n```"
-        },
-        {
-            "id": "js_func_quiz_2",
-            "type": "quiz",
-            "title": "Scope Quiz",
-            "content": "Access check.",
-            "quizQuestion": "If you define 'let x = 10' inside an if-block, can you access it outside the block?",
-            "quizOptions": [
-                "Yes",
-                "No",
-                "Only if strictly equal",
-                "Only in strict mode"
+                "Function Expression",
+                "Function Declaration",
+                "Arrow Function",
+                "Anonymous Function"
             ],
             "correctOptionIndex": 1
         },
         {
-            "id": "js_func_9",
+            "id": "js_func_5",
             "type": "content",
-            "title": "Immediately Invoked Expressions",
-            "content": "# IIFE 🏃\n\nImmediately Invoked Function Expressions.\n\nA function that runs as soon as it is defined.\n\n```javascript\n(function () {\n  let secret = \"I am invisible\";\n  console.log(\"I run immediately!\");\n})();\n```\nGreat for data privacy (variables inside don't leak)."
+            "title": "Arrow Functions",
+            "content": "# Arrow Functions 🏹\n\nIntroduced in ES6, arrow functions allow a shorter syntax.\n\n```javascript\n// Old way\nconst hello = function() {\n  return \"Hello World!\";\n}\n\n// Arrow Function\nconst hello = () => {\n  return \"Hello World!\";\n}\n\n// Even Shorter (Implicit Return)\nconst hello = () => \"Hello World!\";\n```\n\n> ⚠️ **Note:** They do not have their own `this` binding."
+        },
+        {
+            "id": "js_func_6",
+            "type": "content",
+            "title": "Parameters and Arguments",
+            "content": "# Parameters vs Arguments 📥\n\n- **Parameters:** The names listed in the function definition.\n- **Arguments:** The real values passed to the function.\n\n```javascript\n// name is a parameter\nfunction welcome(name) {\n  console.log(name);\n}\n\n// \"John\" is an argument\nwelcome(\"John\");\n```\n\n## Default Parameters (ES6)\n```javascript\nfunction myFunction(x, y = 10) {\n  return x + y;\n}\n```"
+        },
+        {
+            "id": "js_func_7",
+            "type": "content",
+            "title": "Function Scope",
+            "content": "# Scope 🔭\n\nScope determines the accessibility (visibility) of variables.\n\n## Local Scope\nVariables declared within a JavaScript function become **local** to the function.\n\n```javascript\nfunction myFunction() {\n  let carName = \"Volvo\";\n  // code here CAN use carName\n}\n// code here can NOT use carName\n```"
+        },
+        {
+            "id": "js_func_8",
+            "type": "content",
+            "title": "Global Scope",
+            "content": "# Global Scope 🌍\n\nA variable declared outside a function becomes **global**.\n\n```javascript\nlet carName = \"Volvo\";\n// code here can use carName\n\nfunction myFunction() {\n  // code here can also use carName\n}\n```\n\n> ⚠️ **Warning:** Avoid polluting the global scope. It can lead to naming conflicts."
+        },
+        {
+            "id": "js_func_9",
+            "type": "quiz",
+            "title": "Scope Quiz",
+            "content": "Check visibility.",
+            "quizQuestion": "Where can a local variable be accessed?",
+            "quizOptions": [
+                "Anywhere in the code",
+                "Only inside the function where it is defined",
+                "Only outside functions",
+                "In other files"
+            ],
+            "correctOptionIndex": 1
         },
         {
             "id": "js_func_10",
             "type": "content",
-            "title": "Code Example",
-            "content": "# Arrows in Action 💻\n\n<!-- FULL_CODE_START\nconst numbers = [1, 2, 3, 4, 5];\n\n// Traditional function\nconst squared1 = numbers.map(function(num) {\n  return num * num;\n});\n\n// Arrow function (concise)\nconst squared2 = numbers.map(num => num * num);\n\nconsole.log(\"Original:\", numbers);\nconsole.log(\"Squared:\", squared2);\n\n// Simple calculation\nconst add = (a, b) => a + b;\nconsole.log(\"Sum:\", add(10, 20));\nFULL_CODE_END -->"
-        },
-        {
-            "id": "js_func_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Functions 🎓\n\nReusable logic.\n\n- **Declaration:** `function name() {}` (Hoisted).\n- **Expression:** `const name = function() {}`.\n- **Arrow:** `() => {}` (Modern, concise).\n- **Scope:** Variables live where they are created (Block vs Global).\n- **Callbacks:** Functions calling functions.\n\n## Next Steps\nLearn how to interact with the webpage using **DOM Manipulation**!"
+            "content": "# Summary 🔧\n\nFunctions are the building blocks of applications.\n\n## Key Takeaways\n\n- ✅ **Declarations:** `function foo() {}` (Hoisted).\n- ✅ **Expressions:** `const foo = function() {}`.\n- ✅ **Arrow Functions:** `const foo = () => {}` (Concise).\n- ✅ **Scope:** Local (inside function) vs Global (outside).\n\nNext, let's interact with the webpage using the **DOM**! 📄"
         }
     ]
 }

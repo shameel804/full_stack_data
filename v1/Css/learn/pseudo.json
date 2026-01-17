@@ -2,102 +2,84 @@
     "id": "learn_css_pseudo",
     "topicId": "pseudo",
     "topicTitle": "Pseudo-classes & Elements",
-    "description": "Learn to style specific states of an element (like hover) and insert content using CSS pseudo-elements.",
+    "description": "Unlock advanced styling with pseudo-classes like hover and pseudo-elements like before and after.",
     "baseKP": 100,
     "slides": [
         {
             "id": "css_pseudo_1",
             "type": "content",
-            "title": "What are Pseudo-classes?",
-            "content": "# Pseudo-classes 👻\n\nA pseudo-class is used to define a special state of an element.\n\nUsed to:\n- Style an element when a user mouses over it.\n- Style visited and unvisited links differently.\n- Style an element when it gets focus.\n\nSyntax: `selector:pseudo-class { ... }`"
+            "title": "What are they?",
+            "content": "# Pseudo-classes vs Elements 🎭\n\n## Pseudo-class (:)\nA keyword added to a selector that specifies a special **state** of the selected element(s).\n- Example: `:hover` (when mouse is over it)\n\n## Pseudo-element (::)\nA keyword added to a selector that lets you style a specific **part** of the selected element(s).\n- Example: `::first-line` (the first line of text)"
         },
         {
             "id": "css_pseudo_2",
             "type": "content",
-            "title": "Interaction States",
-            "content": "# Interaction States 👆\n\n- `:hover`: styling when the mouse is over the element.\n- `:active`: styling when the element is being clicked.\n- `:focus`: styling when the element has input focus (clicked or tabbed to).\n\n```css\nbutton:hover {\n  background-color: blue;\n  color: white;\n}\n\ninput:focus {\n  border: 2px solid blue;\n  outline: none;\n}\n```"
+            "title": ":hover and :active",
+            "content": "# Interaction States 🖱️\n\n## :hover\nSelects an element when you mouse over it.\n```css\na:hover {\n  color: orange;\n}\n```\n\n## :active\nSelects an element the moment it is clicked.\n```css\nbutton:active {\n  background-color: red;\n}\n```\n\n## :focus\nSelects an element when it has focus (clicked or tabbed to).\n```css\ninput:focus {\n  background-color: yellow;\n}\n```"
         },
         {
             "id": "css_pseudo_3",
-            "type": "content",
-            "title": "Structural Pseudo-classes",
-            "content": "# Structural Selectors 🏗️\n\nSelect elements based on their position in the document tree.\n\n- `:first-child`: Selects specific element that is the first child of its parent.\n- `:last-child`: Selects the last child.\n- `:nth-child(n)`: Selects the nth child (e.g., `2`, `odd`, `even`).\n\n```css\n/* Stripe Effect */\ntr:nth-child(even) {\n  background-color: #f2f2f2;\n}\n```"
-        },
-        {
-            "id": "css_pseudo_4",
-            "type": "content",
-            "title": "Link States",
-            "content": "# Link States 🔗\n\nThe 4 states of a link (order matters: LVHA):\n\n1.  `a:link` (unvisited)\n2.  `a:visited`\n3.  `a:hover`\n4.  `a:active`\n\n```css\na:visited {\n  color: purple;\n}\n```"
-        },
-        {
-            "id": "css_pseudo_quiz_1",
             "type": "quiz",
-            "title": "State Quiz",
-            "content": "When does it apply?",
-            "quizQuestion": "Which pseudo-class applies while you are holding the mouse button down?",
+            "title": "Interaction Quiz",
+            "content": "Check states.",
+            "quizQuestion": "Which pseudo-class triggers when you click and hold?",
             "quizOptions": [
                 ":hover",
                 ":focus",
                 ":active",
-                ":selected"
+                ":visited"
             ],
             "correctOptionIndex": 2
         },
         {
+            "id": "css_pseudo_4",
+            "type": "content",
+            "title": "Structural Pseudo-classes",
+            "content": "# Structural Classes 🏗️\n\nTarget elements based on their position in the HTML structure.\n\n## :first-child\nSelects every `<p>` element that is the first child of its parent.\n```css\np:first-child {\n  color: blue;\n}\n```\n\n## :last-child\nSelects the last child.\n\n## :nth-child(n)\nSelects the nth child (e.g., all even rows).\n```css\ntr:nth-child(even) {\n  background-color: #f2f2f2;\n}\ntr:nth-child(3) {\n  color: red;\n}\n```"
+        },
+        {
             "id": "css_pseudo_5",
             "type": "content",
-            "title": "Pseudo-elements",
-            "content": "# Pseudo-elements 🧩\n\nA pseudo-element is used to style specified parts of an element.\n\n- `::first-line`: Style the first line of a text.\n- `::first-letter`: Style the first letter.\n- `::before`: Insert content before.\n- `::after`: Insert content after.\n\nSyntax: `selector::pseudo-element { ... }` (double colon is the modern standard)."
+            "title": "::before and ::after",
+            "content": "# ::before and ::after ✨\n\nInsert content before or after an element's content.\n\nRequired property: `content`.\n\n```css\nh1::before {\n  content: \"🌟 \";\n}\n\np::after {\n  content: \" - Read more\";\n  color: blue;\n}\n```\n\nOften used for icons, decorative shapes, or clearing floats."
         },
         {
             "id": "css_pseudo_6",
             "type": "content",
-            "title": "::before and ::after",
-            "content": "# ::before & ::after 🪄\n\nThese are powerful! You can inject content purely with CSS.\n\nYou MUST specify the `content` property.\n\n```css\nh1::before {\n  content: \"🦄 \";\n}\n\n.price::after {\n  content: \" USD\";\n  color: gray;\n  font-size: 0.8em;\n}\n```"
+            "title": "::first-letter & line",
+            "content": "# Text Pseudo-elements 🔡\n\n## ::first-letter\nStyles the first letter of a block element.\n```css\np::first-letter {\n  font-size: 200%;\n  color: #8A2BE2;\n}\n```\n\n## ::first-line\nStyles the first line of a block element.\n```css\np::first-line {\n  background-color: yellow;\n}\n```"
         },
         {
             "id": "css_pseudo_7",
             "type": "content",
-            "title": "Visual Effects with Pseudo-elements",
-            "content": "# Creative Shapes 🎨\n\nThey are often used for visual effects without adding HTML markup (shapes, tooltips, underlines).\n\n```css\n/* Animated Underline */\na::after {\n  content: '';\n  display: block;\n  width: 0;\n  height: 2px;\n  background: blue;\n  transition: width .3s;\n}\na:hover::after {\n  width: 100%;\n}\n```"
+            "title": "::selection",
+            "content": "# ::selection 🖍️\n\nMatches the portion of an element that is selected by a user (highlighted text).\n\nOnly a few properties apply: color, background, cursor, and outline.\n\n```css\n::selection {\n  color: red;\n  background: yellow;\n}\n```"
         },
         {
             "id": "css_pseudo_8",
             "type": "content",
-            "title": "::selection",
-            "content": "# ::selection 🖍️\n\nMatches the portion of an element that is selected by a user (drag-highlighted).\n\n```css\n::selection {\n  color: red;\n  background: yellow;\n}\n```\nNote: You can only apply a few properties (color, background, cursor, outline)."
+            "title": ":not()",
+            "content": "# The :not() Selector 🚫\n\nSelects every element that is NOT a specific element/selector.\n\n```css\n/* Style all p elements that do NOT have class=\"intro\" */\np:not(.intro) {\n  color: red;\n}\n```\n\nGreat for applying general styles and excluding special cases."
         },
         {
-            "id": "css_pseudo_quiz_2",
+            "id": "css_pseudo_9",
             "type": "quiz",
-            "title": "Content Quiz",
-            "content": "Required property.",
-            "quizQuestion": "Which property is mandatory for ::before and ::after to work?",
+            "title": "Selector Quiz",
+            "content": "Advanced selection.",
+            "quizQuestion": "How do you select every OTHER row in a table?",
             "quizOptions": [
-                "display",
-                "content",
-                "value",
-                "text"
+                "tr:every-other",
+                "tr:nth-child(2n)",
+                "tr:odd-rows",
+                "tr:select(2)"
             ],
             "correctOptionIndex": 1
         },
         {
-            "id": "css_pseudo_9",
-            "type": "content",
-            "title": "Negation Pseudo-class",
-            "content": "# :not() 🙅\n\nSelects every element that is NOT the specified element/selector.\n\n```css\n/* Style all inputs EXCEPT submit buttons */\ninput:not([type=\"submit\"]) {\n  border: 1px solid #ccc;\n}\n```"
-        },
-        {
             "id": "css_pseudo_10",
             "type": "content",
-            "title": "Code Example",
-            "content": "# Demo: Tooltip 💻\n\n<!-- FULL_CODE_START\n<!DOCTYPE html>\n<html>\n<head>\n<style>\n/* Tooltip container */\n.tooltip {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n}\n\n/* Tooltip text */\n.tooltip .tooltiptext {\n  visibility: hidden;\n  width: 120px;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  padding: 5px 0;\n  border-radius: 6px;\n \n  /* Position the tooltip text - see examples below! */\n  position: absolute;\n  z-index: 1;\n}\n\n/* Show the tooltip text when you mouse over the tooltip container */\n.tooltip:hover .tooltiptext {\n  visibility: visible;\n}\n</style>\n</head>\n<body>\n\n<div class=\"tooltip\">Hover over me\n  <span class=\"tooltiptext\">Tooltip text</span>\n</div>\n\n</body>\n</html>\nFULL_CODE_END -->"
-        },
-        {
-            "id": "css_pseudo_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Pseudo-Classes 🎓\n\nState and structure.\n\n- **Classes (`:`):** `:hover`, `:active`, `:focus`, `:first-child`, `:nth-child`.\n- **Elements (`::`):** `::before`, `::after` (require `content`), `::first-line`.\n- **Power:** Create complex interactions and visuals without changing HTML.\n\n## Next Steps\nCongratulations! You've completed the CSS course. Next up: **JavaScript Programming**!"
+            "content": "# Summary 🎭\n\nPseudo-selectors give you surgical precision.\n\n## Key Takeaways\n\n- ✅ **:hover, :active, :focus** handle user interaction.\n- ✅ **:first-child, :nth-child** handle structure.\n- ✅ **::before, ::after** insert decorative content.\n- ✅ **::selection** customizes highlighting.\n\nCongratulations! You've completed the CSS module. You can now style the web! 🎓"
         }
     ]
 }

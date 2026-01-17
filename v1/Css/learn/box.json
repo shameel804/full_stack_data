@@ -1,127 +1,85 @@
 {
     "id": "learn_css_box",
     "topicId": "box",
-    "topicTitle": "Box Model",
-    "description": "Master the fundamental layout concept of CSS: Content, Padding, Border, and Margin.",
+    "topicTitle": "CSS Box Model",
+    "description": "Understand margins, borders, padding, and content - the foundation of CSS layout.",
     "baseKP": 100,
     "slides": [
         {
             "id": "css_box_1",
             "type": "content",
-            "title": "What is the Box Model?",
-            "content": "# The Box Model 📦\n\nAll HTML elements can be considered as boxes.\n\nThe CSS Box Model is essentially a box that wraps around every HTML element. It consists of:\n- **Margins**\n- **Borders**\n- **Padding**\n- **Content**\n\nIt allows us to place a border around elements and space elements in relation to other elements."
+            "title": "The Box Model",
+            "content": "# The Box Model 📦\n\nIn CSS, the term \"box model\" is used when talking about design and layout.\n\n**All HTML elements can be considered as boxes.**\n\n## Parts of the Box\nFrom inside out:\n1. **Content:** The text or image.\n2. **Padding:** Transparent area around the content.\n3. **Border:** Goes around the padding and content.\n4. **Margin:** Transparent area outside the border.\n\n```css\ndiv {\n  width: 300px;\n  border: 15px solid green;\n  padding: 50px;\n  margin: 20px;\n}\n```"
         },
         {
             "id": "css_box_2",
             "type": "content",
-            "title": "Box Model Diagram",
-            "content": "# Anatomy of a Box 🦴\n\nFrom inside out:\n\n1.  **Content** - The content of the box, where text and images appear.\n2.  **Padding** - Clears an area around the content. The padding is transparent.\n3.  **Border** - A border that goes around the padding and content.\n4.  **Margin** - Clears an area outside the border. The margin is transparent.\n\n```css\ndiv {\n  width: 300px;\n  border: 15px solid green;\n  padding: 50px;\n  margin: 20px;\n}\n```"
+            "title": "Content Area",
+            "content": "# 1. Content Area 📄\n\nThe content of the box, where text and images appear.\n\n- `width` and `height` properties set the size of this area directly.\n\n```css\ndiv {\n  width: 300px;\n  height: 200px;\n}\n```\n\n*(Note: By default, padding and border are added ON TOP of this width. We'll fix this later with `box-sizing`.)*"
         },
         {
             "id": "css_box_3",
             "type": "content",
-            "title": "Content Area",
-            "content": "# Content 📄\n\nThe content area is where your text, images, or other elements reside.\n\nIts specific size can be set with `width`, `min-width`, `max-width`, `height`, `min-height`, and `max-height` properties.\n\n```css\n.box {\n  width: 100px;\n  height: 100px;\n}\n```"
+            "title": "Padding",
+            "content": "# 2. Padding ☁️\n\nPadding clears an area around the content (inside the border). It is transparent.\n\n- `padding-top`\n- `padding-right`\n- `padding-bottom`\n- `padding-left`\n\n## Shorthand\n`padding: 25px 50px 75px 100px;`\n(Top, Right, Bottom, Left - Clockwise 🕙)\n\n`padding: 25px;` (All sides)"
         },
         {
             "id": "css_box_4",
             "type": "content",
-            "title": "Padding",
-            "content": "# Padding 🌫️\n\nPadding adds space **inside** the border, pushing the content away from the edge.\n\nIt inherits the background color of the element.\n\n```css\n/* Individual sides */\npadding-top: 10px;\npadding-right: 20px;\npadding-bottom: 30px;\npadding-left: 40px;\n\n/* Shorthand: top right bottom left */\npadding: 10px 20px 30px 40px;\n```"
+            "title": "Broaders",
+            "content": "# 3. Borders 🖼️\n\nA border goes around the padding and content.\n\n## Border Style\nRequired property!\n`border-style: solid;` (dotted, dashed, double, groove, ridge, inset, outset, none, hidden)\n\n## Border Width and Color\n`border-width: 5px;`\n`border-color: red;`\n\n## Shorthand\n`border: 5px solid red;`\n(width style color)"
         },
         {
             "id": "css_box_5",
-            "type": "content",
-            "title": "Border",
-            "content": "# Border 🖼️\n\nThe border wraps the content and padding.\n\n```css\nborder: 5px solid red;\n```\n\nThe size of the border **adds** to the total width/height of the element (unless `box-sizing: border-box` is used).\n\nStyles: `solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset`, `none`, `hidden`."
-        },
-        {
-            "id": "css_box_6",
-            "type": "content",
-            "title": "Margin",
-            "content": "# Margin ↔️\n\nMargin creates clear space **outside** the border, pushing other elements away.\n\nMargins are transparent and do not have a background color.\n\n**Collapsing Margins:** Top and bottom margins of distinct elements can merge into a single margin that is equal to the largest of the two margins."
-        },
-        {
-            "id": "css_box_quiz_1",
             "type": "quiz",
-            "title": "Spacing Quiz",
-            "content": "Where is the space?",
-            "quizQuestion": "Which property adds space INSIDE the border?",
+            "title": "Border Quiz",
+            "content": "Check syntax.",
+            "quizQuestion": "Which shorthand order is correct?",
             "quizOptions": [
-                "spacing",
-                "margin",
-                "padding",
-                "gap"
+                "border: solid 5px red;",
+                "border: 5px red solid;",
+                "border: 5px solid red;",
+                "border: red 5px solid;"
             ],
             "correctOptionIndex": 2
         },
         {
+            "id": "css_box_6",
+            "type": "content",
+            "title": "Margins",
+            "content": "# 4. Margins ↔️\n\nMargins clear an area outside the border. The margin is transparent.\n\n- `margin-top`\n- `margin-right`\n- `margin-bottom`\n- `margin-left`\n\n## Auto Margin\n`margin: auto;` horizontally centers the element within its container.\n\n```css\ndiv {\n  width: 300px;\n  margin: auto;\n}\n```\n\n## Margin Collapse\nSometimes top and bottom margins of adjacent elements collapse into a single margin (the largest of the two)."
+        },
+        {
             "id": "css_box_7",
             "type": "content",
-            "title": "Total Width Calculation",
-            "content": "# Calculating Width 🧮\n\nBy default (`box-sizing: content-box`):\n\n**Total Element Width** = width + left padding + right padding + left border + right border + left margin + right margin\n\nExample:\n```css\ndiv {\n  width: 300px;\n  padding: 10px;\n  border: 5px solid gray;\n  margin: 0;\n}\n```\n**Total visible width** = 300px + 20px (padding) + 10px (border) = **330px**"
+            "title": "Box Sizing",
+            "content": "# Box Sizing 📐\n\nBy default, `width` + `padding` + `border` = Total Width.\nThis is annoying!\n\n## border-box\nUsing `box-sizing: border-box;`, the padding and border are included in the width and height.\n\n```css\n* {\n  box-sizing: border-box;\n}\n```\n\nNow, if you set `width: 300px`, the *total* width is 300px, no matter the padding/border. This is best practice!"
         },
         {
             "id": "css_box_8",
-            "type": "content",
-            "title": "Box Sizing",
-            "content": "# box-sizing: border-box 📦\n\nThis is a life-saver property!\n\nUse `box-sizing: border-box` to include padding and border **in** the element's total width and height.\n\n```css\n* {\n  box-sizing: border-box;\n}\n\ndiv {\n  width: 300px;\n  padding: 10px;\n  border: 5px solid gray;\n}\n```\nWith this, the rendered width (including padding and border) will be exactly **300px**. The content width shrinks to accommodate."
+            "type": "quiz",
+            "title": "Box Sizing Quiz",
+            "content": "Why use border-box?",
+            "quizQuestion": "What does box-sizing: border-box do?",
+            "quizOptions": [
+                "Adds a border to the box",
+                "Includes padding and border in the element's total width",
+                "Removes margins",
+                "Makes the box square"
+            ],
+            "correctOptionIndex": 1
         },
         {
             "id": "css_box_9",
             "type": "content",
-            "title": "Margin Auto",
-            "content": "# Centering with Margin 🎯\n\nTo horizontally center a block element (like a `<div>`), set a specific width and `margin: auto`.\n\n```css\ndiv {\n  width: 50%;\n  margin: 0 auto;\n}\n```\n\n- The element will take up the specified width, and the remaining space will be split equally between the left and right margins."
+            "title": "Total Width Calculation",
+            "content": "# Calculating Width (Standard) 🧮\n\nIf `box-sizing: content-box` (default):\n\n```css\ndiv {\n  width: 320px;\n  padding: 10px;\n  border: 5px solid gray;\n  margin: 0;\n}\n```\n\nTotal Element Width = 320px (width) + 20px (left+right padding) + 10px (left+right border) = **350px**.\n\nThis is why `border-box` is preferred—it keeps the width at 320px."
         },
         {
             "id": "css_box_10",
             "type": "content",
-            "title": "Box Shadow",
-            "content": "# Box Shadow 🌑\n\nAdds shadow effects around an element's frame.\n\nSyntax: `h-offset v-offset blur spread color`\n\n```css\ndiv {\n  box-shadow: 10px 10px 5px grey;\n}\n```\n\nCan calculate multiple shadows separated by commas."
-        },
-        {
-            "id": "css_box_11",
-            "type": "content",
-            "title": "Border Radius",
-            "content": "# Border Radius 🔴\n\nRounds the corners of an element's outer border edge.\n\n```css\n/* Rounded corners */\nbutton {\n  border-radius: 8px;\n}\n\n/* Circle (if width = height) */\n.avatar {\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n}\n```"
-        },
-        {
-            "id": "css_box_quiz_2",
-            "type": "quiz",
-            "title": "Sizing Quiz",
-            "content": "Understand sizing.",
-            "quizQuestion": "With 'box-sizing: border-box', if width is 100px and padding is 10px, what is the total width?",
-            "quizOptions": [
-                "100px",
-                "120px",
-                "80px",
-                "110px"
-            ],
-            "correctOptionIndex": 0
-        },
-        {
-            "id": "css_box_12",
-            "type": "content",
-            "title": "Outline vs Border",
-            "content": "# Outline 📏\n\nAn outline is a line drawn outside the element's border.\n\nDifference from border:\n- Outlines do NOT take up space.\n- They may be non-rectangular.\n\n```css\np {\n  border: 1px solid black;\n  outline: 2px solid red;\n}\n```\nOften used for accessibility (focus rings)."
-        },
-        {
-            "id": "css_box_13",
-            "type": "content",
-            "title": "Max-Width",
-            "content": "# Max-Width ↔️\n\nSetting `max-width` is crucial for responsive design.\n\nUsing `width: 500px` creates a horizontal scrollbar on small screens (< 500px).\n\nUsing `max-width: 500px` means the element can be up to 500px, but will shrink to fit smaller screens.\n\n```css\nimg {\n  max-width: 100%;\n  height: auto;\n}\n```"
-        },
-        {
-            "id": "css_box_14",
-            "type": "content",
-            "title": "Review Example",
-            "content": "# Practical Example 💻\n\nCombining everything.\n\n<!-- FULL_CODE_START\n<!DOCTYPE html>\n<html>\n<head>\n<style>\n.card {\n  /* Box Model Basics */\n  width: 300px;\n  padding: 20px;\n  border: 1px solid #ddd;\n  margin: 20px auto; /* Centered */\n  \n  /* Modern Box Sizing */\n  box-sizing: border-box;\n  \n  /* Visuals */\n  background-color: white;\n  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);\n  border-radius: 8px;\n  text-align: center;\n  font-family: Arial, sans-serif;\n}\n\n.card:hover {\n  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);\n}\n\nbody {\n  background-color: #f1f1f1;\n}\n</style>\n</head>\n<body>\n\n<h2>Product Card</h2>\n\n<div class=\"card\">\n  <img src=\"img_avatar.png\" alt=\"Avatar\" style=\"width:100%; border-radius: 50%; max-width: 100px;\">\n  <h3>John Doe</h3>\n  <p>Architect & Engineer</p>\n</div>\n\n</body>\n</html>\nFULL_CODE_END -->"
-        },
-        {
-            "id": "css_box_15",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Box Model 🎓\n\nEvery element is a box!\n\n- **Content:** The core.\n- **Padding:** Personal space (inside).\n- **Border:** The wall.\n- **Margin:** Social distance (outside).\n- **`box-sizing: border-box`:** Makes layout math easy.\n\n## Next Steps\nNow that you know how a single box works, let's learn how to place them where we want with **CSS Positioning**!"
+            "content": "# Summary 📦\n\nThe Box Model is key to layout.\n\n## Key Takeaways\n\n- ✅ **Content:** The core.\n- ✅ **Padding:** Space inside border.\n- ✅ **Border:** The line around padding.\n- ✅ **Margin:** Space outside border.\n- ✅ **box-sizing: border-box** is a lifesaver for layout sanity.\n\nNext, explore **Positioning** to move these boxes around! 📍"
         }
     ]
 }

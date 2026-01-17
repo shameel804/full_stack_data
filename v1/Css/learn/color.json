@@ -2,102 +2,84 @@
     "id": "learn_css_color",
     "topicId": "color",
     "topicTitle": "Colors & Backgrounds",
-    "description": "Master color theory in CSS: Hex, RGB, HSL, alpha transparency, gradients, and advanced background blending.",
+    "description": "Master color theory in CSS including Hex, RGB, HSL, gradients, and background images.",
     "baseKP": 100,
     "slides": [
         {
             "id": "css_color_1",
             "type": "content",
-            "title": "Color Formats",
-            "content": "# Color Formats 🎨\n\nCSS supports multiple color formats.\n\n- **Keywords:** `red`, `blue`, `transparent`.\n- **Hex:** `#RRGGBB` (e.g., `#ff0000`).\n- **RGB:** `rgb(255, 0, 0)`.\n- **RGBA:** `rgba(255, 0, 0, 0.5)` (adding Alpha/Opacity).\n- **HSL:** `hsl(0, 100%, 50%)` (Hue, Saturation, Lightness).\n- **HSLA:** `hsla(0, 100%, 50%, 0.5)`."
+            "title": "CSS Colors",
+            "content": "# CSS Colors 🌈\n\nColors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.\n\n## Color Names\n140 standard color names are supported.\n`color: Tomato;`\n`color: DodgerBlue;`\n`color: MediumSeaGreen;`"
         },
         {
             "id": "css_color_2",
             "type": "content",
-            "title": "Understanding Hex",
-            "content": "# Hexadecimal Colors #️⃣\n\nA hexadecimal color is specified with: `#RRGGBB`.\n\nRR (red), GG (green) and BB (blue) are hexadecimal integers between 00 and FF specifying the intensity of the color.\n\n- `#000000` = Black\n- `#FFFFFF` = White\n- `#FF0000` = Red\n- `#00FF00` = Green\n- `#0000FF` = Blue"
+            "title": "In Depth: RGB and HEX",
+            "content": "# RGB & HEX 🧮\n\n## RGB (Red, Green, Blue)\nValues between 0 and 255.\n`rgb(255, 0, 0)` is Red (max red, no green/blue).\n\n## HEX (Hexadecimal)\nA 6-digit code `#RRGGBB`.\n`#FF0000` is Red.\n`#000000` is Black.\n`#FFFFFF` is White.\n\n```css\nh1 { color: #f2f2f2; }\np { background-color: rgb(255, 99, 71); }\n```"
         },
         {
             "id": "css_color_3",
-            "type": "content",
-            "title": "RGB vs HSL",
-            "content": "# RGB vs HSL 🌈\n\n## RGB (Red, Green, Blue)\nMixing light directly. Hard to guess the code for \"lighter red\".\n\n## HSL (Hue, Saturation, Lightness)\nMore intuitive for humans.\n- **Hue:** Degree on color wheel (0=Red, 120=Green, 240=Blue).\n- **Saturation:** 0% (Gray) to 100% (Full Color).\n- **Lightness:** 0% (Black) to 100% (White).\n\nEasier to create color palettes (keep Hue, change Lightness)."
-        },
-        {
-            "id": "css_color_4",
-            "type": "content",
-            "title": "Opacity and Alpha",
-            "content": "# Opacity & Alpha 👻\n\n## Opacity Property\nSets opacity for the **whole element** (including text).\n```css\ndiv {\n  opacity: 0.5;\n}\n```\n\n## RGBA / HSLA\nSets opacity for **only the color** (background or text), leaving children opaque.\n```css\ndiv {\n  background-color: rgba(255, 0, 0, 0.5);\n}\n```"
-        },
-        {
-            "id": "css_color_quiz_1",
             "type": "quiz",
-            "title": "Format Quiz",
-            "content": "Identify the proper format.",
-            "quizQuestion": "Which color format allows for transparency without affecting child elements?",
+            "title": "Hex Quiz",
+            "content": "Decode the hex.",
+            "quizQuestion": "Which color is #000000?",
             "quizOptions": [
-                "Hex",
-                "RGB",
-                "RGBA",
-                "Opacity property"
+                "White",
+                "Red",
+                "Black",
+                "Blue"
             ],
             "correctOptionIndex": 2
         },
         {
+            "id": "css_color_4",
+            "type": "content",
+            "title": "Transparency (Alpha)",
+            "content": "# Transparency (Opacity) 👻\n\n## RGBA\nThe **A** stands for Alpha (opacity). From 0.0 (transparent) to 1.0 (opaque).\n\n`rgba(255, 99, 71, 0.5)` (50% transparent)\n\n## Opacity Property\nSets opacity for the entire element *including* its content!\n\n```css\ndiv {\n  opacity: 0.5;\n}\n```"
+        },
+        {
             "id": "css_color_5",
             "type": "content",
-            "title": "Linear Gradients",
-            "content": "# Linear Gradients 🏁\n\nA linear gradient goes down/up/left/right/diagonally.\n\nSyntax: `background-image: linear-gradient(direction, color1, color2, ...);`\n\n```css\n/* Top to Bottom (default) */\nbackground-image: linear-gradient(red, yellow);\n\n/* Left to Right */\nbackground-image: linear-gradient(to right, red, yellow);\n\n/* Diagonal */\nbackground-image: linear-gradient(to bottom right, red, yellow);\n```"
+            "title": "Background Color",
+            "content": "# Background Color 🎨\n\nThe `background-color` property sets the background color of an element.\n\n```css\nbody {\n  background-color: lightblue;\n}\n```\n\nThe background of an element covers the total size, including padding and border (but not margin)."
         },
         {
             "id": "css_color_6",
             "type": "content",
-            "title": "Radial Gradients",
-            "content": "# Radial Gradients ⭕\n\nA radial gradient is defined by its center.\n\nSyntax: `background-image: radial-gradient(shape size at position, start-color, ..., last-color);`\n\n```css\nbackground-image: radial-gradient(red, yellow, green);\n```\n\nShapes: `circle` or `ellipse` (default)."
+            "title": "Background Image",
+            "content": "# Background Images 🖼️\n\nThe `background-image` property specifies an image to use as the background.\n\nBy default, the image repeats so it covers the entire element.\n\n```css\nbody {\n  background-image: url(\"paper.gif\");\n}\n```\n\n> 💡 **Tip:** Avoid text over busy images for readability."
         },
         {
             "id": "css_color_7",
             "type": "content",
-            "title": "Background Image Controls",
-            "content": "# Background Controls 🎛️\n\n- `background-repeat`: `repeat-x`, `repeat-y`, `no-repeat`.\n- `background-attachment`: `scroll` (default) or `fixed` (parallax effect).\n- `background-position`: `center`, `top right`, `50% 50%`.\n- `background-size`: `auto`, `contain` (fully visible), `cover` (fill area)."
+            "title": "Background Repeat & Attachment",
+            "content": "# Controlling Backgrounds 🔧\n\n## No Repeat\n`background-repeat: no-repeat;` (Shows image only once)\n\n## Position\n`background-position: center;` (Centers the image)\n\n## Attachment\n`background-attachment: fixed;`\nThe background image stays fixed (does not scroll with the rest of the page).\n\n## Cover\n`background-size: cover;`\nResize the background image to cover the entire container (might crop)."
         },
         {
             "id": "css_color_8",
             "type": "content",
-            "title": "Background Shorthand",
-            "content": "# Background Shorthand ✍️\n\nOrder matters (mostly).\n\n`color image position/size repeat origin clip attachment`\n\n```css\nbody {\n  background: #ffffff url(\"img_tree.png\") no-repeat right top;\n}\n```"
+            "title": "CSS Gradients",
+            "content": "# Gradients 🌈\n\nGradients let you display smooth transitions between two or more specified colors.\n\n## Linear Gradient (Down/Up/Left/Right/Diagonal)\n\n```css\n#grad {\n  background-image: linear-gradient(to right, red, yellow);\n}\n```\n\n## Radial Gradient (From center)\n\n```css\n#grad {\n  background-image: radial-gradient(red, yellow, green);\n}\n```"
         },
         {
             "id": "css_color_9",
-            "type": "content",
-            "title": "Multiple Backgrounds",
-            "content": "# Multiple Backgrounds 📚\n\nYou can specify multiple background images, separated by commas.\n\nThe first image is closest to the user (on top).\n\n```css\nbody {\n  background-image: url(img_flwr.gif), url(paper.gif);\n  background-position: right bottom, left top;\n  background-repeat: no-repeat, repeat;\n}\n```"
-        },
-        {
-            "id": "css_color_quiz_2",
             "type": "quiz",
             "title": "Gradient Quiz",
-            "content": "Which function?",
-            "quizQuestion": "Which property is used to define a gradient?",
+            "content": "Gradient types.",
+            "quizQuestion": "Which property creates a linear gradient?",
             "quizOptions": [
                 "background-color",
                 "background-image",
-                "color-gradient",
-                "fill-style"
+                "gradient-color",
+                "color"
             ],
             "correctOptionIndex": 1
         },
         {
             "id": "css_color_10",
             "type": "content",
-            "title": "CSS Variables (Custom Properties)",
-            "content": "# CSS Variables 🧪\n\nDefine colors once, use everywhere. Theme changes made easy.\n\n```css\n:root {\n  --main-bg-color: coral;\n  --main-txt-color: white;\n}\n\n#div1 {\n  background-color: var(--main-bg-color);\n  color: var(--main-txt-color);\n}\n```"
-        },
-        {
-            "id": "css_color_11",
-            "type": "content",
             "title": "Summary",
-            "content": "# Recap: Colors & Backgrounds 🎓\n\nBring your site to life.\n\n- **Formats:** Hex, RGB, HSL.\n- **Transparency:** Alpha channel (RGBA/HSLA).\n- **Gradients:** Linear and Radial.\n- **Backgrounds:** `cover` size, `fixed` attachment, and multiple images.\n- **Variables:** Maintainable color schemes.\n\n## Next Steps\nAdd motion to your elements with **Transitions & Animations**!"
+            "content": "# Summary 🎨\n\nColors define the mood of your site.\n\n## Key Takeaways\n\n- ✅ **Color Models:** Names, Hex, RGB, RGBA (transparency).\n- ✅ **Backgrounds:** Color or Image.\n- ✅ **Sizing:** `background-size: cover` is often what you want for heroes.\n- ✅ **Gradients:** Use `linear-gradient` for modern looks without images.\n\nNext, let's bring the site to life with **Transitions & Animations**! 🎬"
         }
     ]
 }
