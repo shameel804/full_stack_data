@@ -1,0 +1,5110 @@
+[
+    {
+        "q": "What is the primary philosophy of 'React Testing Library'?",
+        "type": "mcq",
+        "o": [
+            "Tests should resemble how software is used (interact with DOM nodes like a user would)",
+            "Test implementation details",
+            "Test component state directly",
+            "Test internal methods"
+        ]
+    },
+    {
+        "q": "Which tool is typically used as the *Test Runner* in Create React App?",
+        "type": "mcq",
+        "o": [
+            "Jest",
+            "Mocha",
+            "Jasmine",
+            "Karma"
+        ]
+    },
+    {
+        "q": "What is `screen.debug()` used for?",
+        "type": "mcq",
+        "o": [
+            "Prints the current state of the DOM (HTML) to the console for debugging",
+            "Debugs JS code",
+            "Pauses execution",
+            "Opens browser"
+        ]
+    },
+    {
+        "q": "What is the recommended priority for queries in RTL?",
+        "type": "mcq",
+        "o": [
+            "getByRole > getByLabelText > getByPlaceholderText > getByText > getByDisplayValue",
+            "getByTestId first",
+            "querySelector first",
+            "class name first"
+        ]
+    },
+    {
+        "q": "Why is `getByRole` preferred?",
+        "type": "mcq",
+        "o": [
+            "It queries elements exposed in the Accessibility Tree, ensuring the app is accessible to screen readers",
+            "It is faster",
+            "It is shorter",
+            "It looks nicer"
+        ]
+    },
+    {
+        "q": "What matches `getByRole('button')`?",
+        "type": "mcq",
+        "o": [
+            "<button>, <input type='button'>, <input type='submit'>, or elements with role='button'",
+            "Only <button>",
+            "Only <div>",
+            "Only links"
+        ]
+    },
+    {
+        "q": "How to wait for an element to appear asynchronously?",
+        "type": "mcq",
+        "o": [
+            "Use `await findBy*` queries (e.g. `await screen.findByText(...)`)",
+            "Use `getBy*` inside setTimeout",
+            "Use `queryBy*`",
+            "Use `waitFor` with getBy (also valid)"
+        ]
+    },
+    {
+        "q": "What does `queryBy*` return if not found?",
+        "type": "mcq",
+        "o": [
+            "null",
+            "Throws error",
+            "undefined",
+            "False"
+        ]
+    },
+    {
+        "q": "What does `getBy*` return if not found?",
+        "type": "mcq",
+        "o": [
+            "Throws an error containing the current DOM structure",
+            "null",
+            "undefined",
+            "False"
+        ]
+    },
+    {
+        "q": "When should you use `queryBy*`?",
+        "type": "mcq",
+        "o": [
+            "Only when asserting that an element is *NOT* present (e.g. `expect(...).not.toBeInTheDocument()`)",
+            "Always",
+            "For async",
+            "For buttons"
+        ]
+    },
+    {
+        "q": "What is `fireEvent` in RTL?",
+        "type": "mcq",
+        "o": [
+            "Utility to dispatch DOM events (click, change, etc.) to simulate user interaction",
+            "Fires lasers",
+            "Deletes element",
+            "Styles element"
+        ]
+    },
+    {
+        "q": "What is `user-event` library?",
+        "type": "mcq",
+        "o": [
+            "Companion library to RTL that simulates full user interactions (typing, hovering) more realistically than fireEvent",
+            "User database",
+            "Login tool",
+            "Profile tool"
+        ]
+    },
+    {
+        "q": "Difference: `fireEvent.change` vs `userEvent.type`?",
+        "type": "mcq",
+        "o": [
+            "`userEvent.type` triggers hover, click, focus, and keydown/keyup events for each character. `fireEvent` just emits the change.",
+            "No difference",
+            "fireEvent is better",
+            "userEvent is slower (true but unrelated)"
+        ]
+    },
+    {
+        "q": "How to test a click?",
+        "type": "mcq",
+        "o": [
+            "`await userEvent.click(element)`",
+            "`element.click()`",
+            "`click(element)`",
+            "`trigger('click')`"
+        ]
+    },
+    {
+        "q": "What defines a 'Unit Test' in React?",
+        "type": "mcq",
+        "o": [
+            "Testing a component in isolation, mocking its dependencies/children",
+            "Testing whole app",
+            "Testing database",
+            "Testing API"
+        ]
+    },
+    {
+        "q": "What defines an 'Integration Test' in React?",
+        "type": "mcq",
+        "o": [
+            "Testing how multiple components work together (e.g. Parent + Child + ReduxStore)",
+            "Testing unit",
+            "Testing methods",
+            "Testing styles"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot Testing'?",
+        "type": "mcq",
+        "o": [
+            "Comparing rendered output (JSON/HTML string) against a saved file to detect unexpected changes",
+            "Taking screenshot",
+            "Camera photo",
+            "Video recording"
+        ]
+    },
+    {
+        "q": "Command to update Snapshots in Jest?",
+        "type": "mcq",
+        "o": [
+            "jest -u (or Press 'u' in watch mode)",
+            "jest -update",
+            "jest --fix",
+            "jest --save"
+        ]
+    },
+    {
+        "q": "What is `renderHook` used for?",
+        "type": "mcq",
+        "o": [
+            "Testing custom hooks that don't render UI directly",
+            "Rendering app",
+            "Rendering api",
+            "Rendering styles"
+        ]
+    },
+    {
+        "q": "Where does `renderHook` come from?",
+        "type": "mcq",
+        "o": [
+            "`@testing-library/react` (since v13.1, previously separate package)",
+            "Jest",
+            "React",
+            "Dom"
+        ]
+    },
+    {
+        "q": "How to assert text content?",
+        "type": "mcq",
+        "o": [
+            "`expect(element).toHaveTextContent('hello')`",
+            "`expect(element.text).toBe('hello')`",
+            "`assert(element, 'hello')`",
+            "`element == 'hello'`"
+        ]
+    },
+    {
+        "q": "What is `jest-dom`?",
+        "type": "mcq",
+        "o": [
+            "Library extending Jest matches with DOM-specific assertions (toBeInTheDocument, toHaveStyle, etc.)",
+            "DOM library",
+            "React library",
+            "Browser engine"
+        ]
+    },
+    {
+        "q": "How to check if element is disabled?",
+        "type": "mcq",
+        "o": [
+            "`expect(element).toBeDisabled()`",
+            "`expect(element.disabled).toBe(true)`",
+            "`check(element)`",
+            "`verify(element)`"
+        ]
+    },
+    {
+        "q": "How to mock a function with Jest?",
+        "type": "mcq",
+        "o": [
+            "`const mockFn = jest.fn()`",
+            "`const mockFn = new Function()`",
+            "`const mockFn = mock()`",
+            "`const mockFn = fake()`"
+        ]
+    },
+    {
+        "q": "How to check if mock was called?",
+        "type": "mcq",
+        "o": [
+            "`expect(mockFn).toHaveBeenCalled()`",
+            "`mockFn.called()`",
+            "`assert(mockFn)`",
+            "`verify(mockFn)`"
+        ]
+    },
+    {
+        "q": "How to mock a module?",
+        "type": "mcq",
+        "o": [
+            "`jest.mock('module-name')`",
+            "`import 'module-name'`",
+            "`require('module-name')`",
+            "`mock('module-name')`"
+        ]
+    },
+    {
+        "q": "What does `act(...)` do?",
+        "type": "mcq",
+        "o": [
+            "Ensures all updates related to a unit of work (rendering, effects, timers) are processed before assertions run",
+            "Action",
+            "Actor",
+            "Activity"
+        ]
+    },
+    {
+        "q": "Do you need manual `act()` with RTL?",
+        "type": "mcq",
+        "o": [
+            "Generally No. RTL helpers (render, screen, userEvent) wrap calls in `act()` automatically.",
+            "Yes always",
+            "Maybe",
+            "Only for clicks"
+        ]
+    },
+    {
+        "q": "When might you see 'not wrapped in act' warning?",
+        "type": "mcq",
+        "o": [
+            "When a state update happens asynchronously (fetch, timeout) *after* your test has finished or outside your await chain",
+            "Always",
+            "Never",
+            "Only in classes"
+        ]
+    },
+    {
+        "q": "What is `waitFor`?",
+        "type": "mcq",
+        "o": [
+            "Async helper that retries a callback until it stops throwing or timeout is reached",
+            "Pauses test",
+            "Sleeps",
+            "Delays"
+        ]
+    },
+    {
+        "q": "Default timeout for `waitFor`?",
+        "type": "mcq",
+        "o": [
+            "1000ms (1 second)",
+            "5000ms",
+            "100ms",
+            "10s"
+        ]
+    },
+    {
+        "q": "How to test a context provider?",
+        "type": "mcq",
+        "o": [
+            "Render the Provider with a test consumer (or real child) and assert values in the consumer",
+            "Cannot test context",
+            "Mock context",
+            "Use Redux"
+        ]
+    },
+    {
+        "q": "How to provide Wrapper for `render` (e.g. ThemeProvider)?",
+        "type": "mcq",
+        "o": [
+            "`render(<Component />, { wrapper: MyProviders })`",
+            "Wrap manually every time",
+            "Use global",
+            "Use setup"
+        ]
+    },
+    {
+        "q": "What is `cleanup` phase?",
+        "type": "mcq",
+        "o": [
+            "Unmounting components after each test to prevent side effects affecting other tests. RTL does this automatically.",
+            "Deleting files",
+            "Cleaning RAM",
+            "Formatting code"
+        ]
+    },
+    {
+        "q": "How to debug a specific element?",
+        "type": "mcq",
+        "o": [
+            "`screen.debug(element)`",
+            "`console.log(element)`",
+            "`print(element)`",
+            "`debug(element)`"
+        ]
+    },
+    {
+        "q": "What matches `getByText(/hello/i)`?",
+        "type": "mcq",
+        "o": [
+            "Text node containing 'Hello' (case insensitive regex)",
+            "Exact 'hello'",
+            "Nothing",
+            "Error"
+        ]
+    },
+    {
+        "q": "How to select element by Accessibility Label?",
+        "type": "mcq",
+        "o": [
+            "`getByLabelText('Label Name')`",
+            "`getByAltText`",
+            "`getByRole`",
+            "`getByTitle`"
+        ]
+    },
+    {
+        "q": "How to select element by Placeholder?",
+        "type": "mcq",
+        "o": [
+            "`getByPlaceholderText('Placeholder...')`",
+            "`getByValue`",
+            "`getByText`",
+            "`getByType`"
+        ]
+    },
+    {
+        "q": "How to select element by Test ID?",
+        "type": "mcq",
+        "o": [
+            "`getByTestId('my-id')` (Requires `data-testid='my-id'` in JSX)",
+            "`getElementById`",
+            "`querySelector('#id')`",
+            "`getById`"
+        ]
+    },
+    {
+        "q": "Is `data-testid` good practice?",
+        "type": "mcq",
+        "o": [
+            "Use as last resort (escape hatch) if no semantic query (Role, Text, Label) is possible",
+            "First choice",
+            "Never use",
+            "Only choice"
+        ]
+    },
+    {
+        "q": "What is `jest.spyOn`?",
+        "type": "mcq",
+        "o": [
+            "Creates a mock function similar to jest.fn but also tracks calls to `object[methodName]`",
+            "Spyware",
+            "Hacking",
+            "Logging"
+        ]
+    },
+    {
+        "q": "How to mock `fetch` globally?",
+        "type": "mcq",
+        "o": [
+            "`global.fetch = jest.fn(() => Promise.resolve(...))`",
+            "`mock fetch`",
+            "`jest.fetch`",
+            "`network.mock`"
+        ]
+    },
+    {
+        "q": "What is `MSW` (Mock Service Worker)?",
+        "type": "mcq",
+        "o": [
+            "Library intercepting network requests at network level (Service Worker) to mock API responses in tests",
+            "Microservice",
+            "Microsoft",
+            "Middleware"
+        ]
+    },
+    {
+        "q": "Advantage of MSW?",
+        "type": "mcq",
+        "o": [
+            "Tests use real fetch/axios. Same mocks can be used for Browser logic and Node tests.",
+            "Faster",
+            "Simpler",
+            "Smaller"
+        ]
+    },
+    {
+        "q": "How to test component throwing error?",
+        "type": "mcq",
+        "o": [
+            "Suppress console.error, wrap render in Error Boundary, or assert spyOn check",
+            "Cannot test",
+            "Let it crash",
+            "Use try catch"
+        ]
+    },
+    {
+        "q": "What is TDD?",
+        "type": "mcq",
+        "o": [
+            "Test Driven Development: Write failing test -> Write code to pass -> Refactor",
+            "Test Debug Deploy",
+            "Time Driven Dev",
+            "Type Driven Dev"
+        ]
+    },
+    {
+        "q": "What is 'Red-Green-Refactor'?",
+        "type": "mcq",
+        "o": [
+            "The TDD cycle. Red (Fail), Green (Pass), Refactor (Clean up).",
+            "Traffic light",
+            "Color theory",
+            "Design pattern"
+        ]
+    },
+    {
+        "q": "Can you test `useEffect` directly?",
+        "type": "mcq",
+        "o": [
+            "No, you test the *outcome* (DOM change, API call) that the effect produces",
+            "Yes with unit test",
+            "Yes with renderEffect",
+            "Yes with shallow"
+        ]
+    },
+    {
+        "q": "How to simulate timer (setTimeout)?",
+        "type": "mcq",
+        "o": [
+            "`jest.useFakeTimers()` + `jest.advanceTimersByTime(ms)`",
+            "Wait manually",
+            "Sleep loop",
+            "Async wait"
+        ]
+    },
+    {
+        "q": "What is `runOnlyPendingTimers`?",
+        "type": "mcq",
+        "o": [
+            "Jest helper to execute currently pending timers (fast forward)",
+            "Delete timers",
+            "Pause timers",
+            "Slow timers"
+        ]
+    },
+    {
+        "q": "What is 'Shallow Rendering' (Enzyme concept)?",
+        "type": "mcq",
+        "o": [
+            "Rendering only the component, not its children. Discouraged in modern React testing (RTL).",
+            "Fast rendering",
+            "Simple rendering",
+            "Deep rendering"
+        ]
+    },
+    {
+        "q": "Why is Shallow Rendering discouraged?",
+        "type": "mcq",
+        "o": [
+            "Tests become coupled to implementation details (internal structure) instead of user behavior. False confidence.",
+            "It is slow",
+            "It is buggy",
+            "It is old"
+        ]
+    },
+    {
+        "q": "What matches `getAllByRole`?",
+        "type": "mcq",
+        "o": [
+            "Returns an ARRAY of elements matching the role. Throws if none found.",
+            "Single element",
+            "First element",
+            "Last element"
+        ]
+    },
+    {
+        "q": "What matches `queryAllBy*`?",
+        "type": "mcq",
+        "o": [
+            "Returns array of elements or empty array `[]` if none found (does not throw)",
+            "Null",
+            "False",
+            "Error"
+        ]
+    },
+    {
+        "q": "How to test checking a checkbox?",
+        "type": "mcq",
+        "o": [
+            "`await userEvent.click(checkbox)`",
+            "`checkbox.checked = true`",
+            "`fireEvent.check`",
+            "`setChecked(true)`"
+        ]
+    },
+    {
+        "q": "How to verify checkbox state?",
+        "type": "mcq",
+        "o": [
+            "`expect(checkbox).toBeChecked()`",
+            "`expect(checkbox.value).toBe(true)`",
+            "`expect(checkbox).toBe(true)`",
+            "`assert(checkbox)`"
+        ]
+    },
+    {
+        "q": "What is `within` helper?",
+        "type": "mcq",
+        "o": [
+            "Scopes queries to a specific element: `within(form).getByRole('button')`",
+            "Global query",
+            "Outer query",
+            "Sibling query"
+        ]
+    },
+    {
+        "q": "How to clear input field?",
+        "type": "mcq",
+        "o": [
+            "`await userEvent.clear(input)`",
+            "`input.value = ''`",
+            "`fireEvent.clear`",
+            "`type(input, '')`"
+        ]
+    },
+    {
+        "q": "How to upload file in test?",
+        "type": "mcq",
+        "o": [
+            "`await userEvent.upload(input, file)`",
+            "`input.files = [file]`",
+            "`fireEvent.upload`",
+            "`attachFile`"
+        ]
+    },
+    {
+        "q": "What is `describe` block?",
+        "type": "mcq",
+        "o": [
+            "Groups related tests (it/test blocks) together. Can have nested scopes.",
+            "Single test",
+            "Documentation",
+            "Comment"
+        ]
+    },
+    {
+        "q": "What is `beforeEach`?",
+        "type": "mcq",
+        "o": [
+            "Hook running before every test in the current describe block (setup)",
+            "After test",
+            "Before all",
+            "After all"
+        ]
+    },
+    {
+        "q": "What is `afterAll`?",
+        "type": "mcq",
+        "o": [
+            "Hook running once after all tests in the block complete (teardown)",
+            "Before all",
+            "Before each",
+            "After each"
+        ]
+    },
+    {
+        "q": "Why clean up mocks in `afterEach`?",
+        "type": "mcq",
+        "o": [
+            "To ensure mock state (call counts) doesn't leak between tests",
+            "Save memory",
+            "Faster",
+            "Better logs"
+        ]
+    },
+    {
+        "q": "What is `mockClear` vs `mockReset`?",
+        "type": "mcq",
+        "o": [
+            "Clear clears call history. Reset clears history AND implementation (returns undefined).",
+            "Same",
+            "Clear is stronger",
+            "Reset is weaker"
+        ]
+    },
+    {
+        "q": "How to assert element style?",
+        "type": "mcq",
+        "o": [
+            "`expect(el).toHaveStyle({ display: 'none' })`",
+            "`el.style == 'none'`",
+            "`assert(style)`",
+            "`checkStyle`"
+        ]
+    },
+    {
+        "q": "How to check if element has class?",
+        "type": "mcq",
+        "o": [
+            "`expect(el).toHaveClass('active')`",
+            "`expect(el.className).toBe('active')`",
+            "`el.classList`",
+            "`hasClass`"
+        ]
+    },
+    {
+        "q": "What is `test.only`?",
+        "type": "mcq",
+        "o": [
+            "Runs ONLY that specific test (skips others). Good for debugging.",
+            "Runs last",
+            "Runs first",
+            "Runs slow"
+        ]
+    },
+    {
+        "q": "What is `test.skip`?",
+        "type": "mcq",
+        "o": [
+            "Skips the test. Marked as pending.",
+            "Deletes test",
+            "Fails test",
+            "Passes test"
+        ]
+    },
+    {
+        "q": "What is `test.todo`?",
+        "type": "mcq",
+        "o": [
+            "Placeholder for a future test. Shows up in summary as todo.",
+            "Failing test",
+            "Bug",
+            "Comment"
+        ]
+    },
+    {
+        "q": "How to mock named exports?",
+        "type": "mcq",
+        "o": [
+            "`jest.mock('path', () => ({ MyComp: () => <div>Mock</div> }))`",
+            "Direct assignment",
+            "Cannot do it",
+            "Use default"
+        ]
+    },
+    {
+        "q": "How to mock default export?",
+        "type": "mcq",
+        "o": [
+            "`jest.mock('path', () => ({ __esModule: true, default: () => ... }))`",
+            "`module.default = ...`",
+            "`export default ...`",
+            "Use named"
+        ]
+    },
+    {
+        "q": "What is `__mocks__` folder?",
+        "type": "mcq",
+        "o": [
+            "Folder for manual mocks that Jest automatically uses when mocking the corresponding module",
+            "Backup",
+            "Cache",
+            "Output"
+        ]
+    },
+    {
+        "q": "What is `snapshotSerializers` config?",
+        "type": "mcq",
+        "o": [
+            "List of modules to format snapshot output (e.g. emotion-jest-serializer to format styles)",
+            "Printers",
+            "Loggers",
+            "Parsers"
+        ]
+    },
+    {
+        "q": "How to check if element has focus?",
+        "type": "mcq",
+        "o": [
+            "`expect(element).toHaveFocus()`",
+            "`element.focused`",
+            "`document.activeElement`",
+            "`checkFocus`"
+        ]
+    },
+    {
+        "q": "How to tabbing (keyboard nav) test?",
+        "type": "mcq",
+        "o": [
+            "`await userEvent.tab()` loops through focusable elements",
+            "Press Tab key",
+            "Focus() method",
+            "Click()"
+        ]
+    },
+    {
+        "q": "What is `rerender` function?",
+        "type": "mcq",
+        "o": [
+            "Helper returned by `render`. Updates props of the rendered component without unmounting.",
+            "Reloads page",
+            "Refreshes app",
+            "Mounts new"
+        ]
+    },
+    {
+        "q": "When to use `rerender`?",
+        "type": "mcq",
+        "o": [
+            "To test how component reacts to prop updates (e.g. `useEffect` running on prop change)",
+            "Always",
+            "Never",
+            "For styles"
+        ]
+    },
+    {
+        "q": "What is `prettyDOM`?",
+        "type": "mcq",
+        "o": [
+            "Helper to format DOM element string for debugging (used by screen.debug)",
+            "Beautifier",
+            "CSS tool",
+            "HTML tool"
+        ]
+    },
+    {
+        "q": "What is `logRoles`?",
+        "type": "mcq",
+        "o": [
+            "Helper to print DOM tree with ARIA roles to console. Helps find correct `getByRole` query.",
+            "Access logs",
+            "Security logs",
+            "Error logs"
+        ]
+    },
+    {
+        "q": "Does Jest run tests in parallel?",
+        "type": "mcq",
+        "o": [
+            "Yes, it uses worker processes to run test files in parallel",
+            "No, serial",
+            "Only in cloud",
+            "Only async"
+        ]
+    },
+    {
+        "q": "What is `testEnvironment: 'jsdom'`?",
+        "type": "mcq",
+        "o": [
+            "Configures Jest to use JSDOM (browser environment simulation in Node) for DOM APIs to work",
+            "Node env",
+            "Browser env",
+            "Linux env"
+        ]
+    },
+    {
+        "q": "Is JSDOM a real browser?",
+        "type": "mcq",
+        "o": [
+            "No, it's a JS implementation of web standards. No layout/paint engine (layout calc is mocked/limited).",
+            "Yes chrome",
+            "Yes firefox",
+            "Yes headless"
+        ]
+    },
+    {
+        "q": "How to test responsive checks (`window.innerWidth`)?",
+        "type": "mcq",
+        "o": [
+            "Mock/Resize window properties and dispatch 'resize' event (JSDOM handles it)",
+            "Resize monitor",
+            "Zoom out",
+            "Cannot do it"
+        ]
+    },
+    {
+        "q": "What is 'Code Coverage' report?",
+        "type": "mcq",
+        "o": [
+            "Metric showing % of code executed during tests (Statements, Branches, Functions, Lines)",
+            "Code quality",
+            "Code style",
+            "Code speed"
+        ]
+    },
+    {
+        "q": "Jest flag for coverage?",
+        "type": "mcq",
+        "o": [
+            "`--coverage`",
+            "`--report`",
+            "`--check`",
+            "`--scan`"
+        ]
+    },
+    {
+        "q": "What is 'Branch Coverage'?",
+        "type": "mcq",
+        "o": [
+            "Did tests execute both 'if' AND 'else' paths?",
+            "Git branch",
+            "Tree branch",
+            "Feature branch"
+        ]
+    },
+    {
+        "q": "How to test `portal`?",
+        "type": "mcq",
+        "o": [
+            "RTL queries work on `document.body` by default, so portals (usually appended to body) are found automatically",
+            "Special portal query",
+            "Cannot test",
+            "Mock portal"
+        ]
+    },
+    {
+        "q": "How to test 'copy to clipboard'?",
+        "type": "mcq",
+        "o": [
+            "Mock `navigator.clipboard.writeText` before test",
+            "It works natively",
+            "Use Ctrl+C",
+            "Cannot test"
+        ]
+    },
+    {
+        "q": "How to test localStorage?",
+        "type": "mcq",
+        "o": [
+            "JSDOM polyfills it, or mock `window.localStorage.setItem` to assert calls",
+            "Check file",
+            "Check db",
+            "Use cookie"
+        ]
+    },
+    {
+        "q": "What is strict mode 'double invoke' purpose in tests?",
+        "type": "mcq",
+        "o": [
+            "Happens in Dev/Test env to catch side-effects. Tests should pass despite this.",
+            "It is bug",
+            "It is slow",
+            "It is optional"
+        ]
+    },
+    {
+        "q": "How to mock `Date.now` or `new Date`?",
+        "type": "mcq",
+        "o": [
+            "`jest.useFakeTimers()` + `jest.setSystemTime(new Date('2023-01-01'))`",
+            "Mock object",
+            "Override global",
+            "Wait for date"
+        ]
+    },
+    {
+        "q": "What is Cypress?",
+        "type": "mcq",
+        "o": [
+            "End-to-End (E2E) testing framework running in real browser (Chrome/Electron)",
+            "Unit tester",
+            "Node runner",
+            "Linter"
+        ]
+    },
+    {
+        "q": "Cypress vs RTL?",
+        "type": "mcq",
+        "o": [
+            "Cypress tests the fully running app (integration/E2E). RTL tests components in memory (unit/integration).",
+            "Same",
+            "Cypress is faster",
+            "RTL is E2E"
+        ]
+    },
+    {
+        "q": "What is `cy.visit('/')`?",
+        "type": "mcq",
+        "o": [
+            "Navigates the test browser to root URL",
+            "Visits API",
+            "Visits file",
+            "Checks DOM"
+        ]
+    },
+    {
+        "q": "Does Cypress use `await`?",
+        "type": "mcq",
+        "o": [
+            "No, commands are chained (fluent API) and queued automatically. `cy.get().click()`",
+            "Yes always",
+            "Using Promise",
+            "Using callbacks"
+        ]
+    },
+    {
+        "q": "What is Playwright?",
+        "type": "mcq",
+        "o": [
+            "E2E testing framework by MS. Supports multiple browsers (Chromium, Firefox, WebKit). Uses async/await.",
+            "Play actor",
+            "Writer",
+            "Plugin"
+        ]
+    },
+    {
+        "q": "How to debug tests in VSCode?",
+        "type": "mcq",
+        "o": [
+            "Use 'Jest Runner' extension or Launch Config to break points in test files",
+            "Print statements",
+            "Read code",
+            "Ask AI"
+        ]
+    },
+    {
+        "q": "What implies flaky test?",
+        "type": "mcq",
+        "o": [
+            "Test passes sometimes, fails others (race conditions, network timing, non-isolated state). Bad.",
+            "Always fails",
+            "Always passes",
+            "Slow test"
+        ]
+    }
+,
+{
+    "q": "What is `React.act` return type?",
+    "type": "mcq",
+    "o": [
+        "It returns a Thenable (Promise-like) if callback is async, or void if sync (in legacy React)",
+        "Always number",
+        "Always string",
+        "Always boolean"
+    ]
+},
+{
+    "q": "Why assert `expect(console.error).not.toHaveBeenCalled()`?",
+    "type": "mcq",
+    "o": [
+        "To ensure no React warnings (like missing keys, prop types) or unhandled errors occurred during render",
+        "To check logs",
+        "To verify logic",
+        "To stop test"
+    ]
+},
+{
+    "q": "How to debug Jest timeout issues?",
+    "type": "mcq",
+    "o": [
+        "Increase timeout per test (`test('name', fn, 10000)`), check for non-resolving promises/timers",
+        "Restart computer",
+        "Use faster CPU",
+        "Delete usage"
+    ]
+},
+{
+    "q": "What is `jest.spyOn(object, methodName, accessType?)`?",
+    "type": "mcq",
+    "o": [
+        "Creates a mock function similar to jest.fn but also tracks calls to `object[methodName]`",
+        "It is deprecated",
+        "It is unsafe",
+        "It is slow"
+    ]
+},
+{
+    "q": "Difference: `mockReturnValue` vs `mockImplementation`?",
+    "type": "mcq",
+    "o": [
+        "returnValue gives static value. Implementation takes a function (dynamic logic based on args).",
+        "Same",
+        "Implementation is slower",
+        "returnValue is deprecated"
+    ]
+},
+{
+    "q": "What is `jest.requireActual`?",
+    "type": "mcq",
+    "o": [
+        "Used inside `jest.mock` to import the original module (partial mocking)",
+        "Requires actual DOM",
+        "Requires actual DB",
+        "Throws error"
+    ]
+},
+{
+    "q": "How to partial mock a module?",
+    "type": "mcq",
+    "o": [
+        "`jest.mock('mod', () => ({ ...jest.requireActual('mod'), myOverride: ... }))`",
+        "Use partial keyword",
+        "Cannot do it",
+        "Copy paste code"
+    ]
+},
+{
+    "q": "What is 'Visual Regression Testing'?",
+    "type": "mcq",
+    "o": [
+        "Comparing pixel screenshots of rendered components against baseline to catch visual bugs (e.g. Percy, Chromatic)",
+        "Snapshot testing",
+        "Unit testing",
+        "Performance testing"
+    ]
+},
+{
+    "q": "Does Jest do pixel diffs?",
+    "type": "mcq",
+    "o": [
+        "Not out of box. Needs plugins (jest-image-snapshot) and Puppeteer/JSDOM canvas support.",
+        "Yes natively",
+        "No never",
+        "Only colors"
+    ]
+},
+{
+    "q": "What is `accessibility` testing library?",
+    "type": "mcq",
+    "o": [
+        "`jest-axe`. Asserts no accessibility violations in rendered HTML.",
+        "axe-core",
+        "jest-a11y",
+        "aria-test"
+    ]
+},
+{
+    "q": "How to use `expect(container).toHaveNoViolations()`?",
+    "type": "mcq",
+    "o": [
+        "Import `toHaveNoViolations` from jest-axe, extend expect, run `await axe(container)`",
+        "Just run it",
+        "Use RTL",
+        "Use userEvent"
+    ]
+},
+{
+    "q": "What is 'White Box' vs 'Black Box' testing?",
+    "type": "mcq",
+    "o": [
+        "White box knows internals (state/methods). Black box tests public interface (props/DOM). RTL encourages Black Box.",
+        "Colors",
+        "Boxes",
+        "Design"
+    ]
+},
+{
+    "q": "What is 'Prop Testing'?",
+    "type": "mcq",
+    "o": [
+        "Verifying component renders correctly given specific props (part of Unit testing)",
+        "Testing airplanes",
+        "Testing database",
+        "Testing cables"
+    ]
+},
+{
+    "q": "How to test 'Custom Event' handler prop?",
+    "type": "mcq",
+    "o": [
+        "Pass `jest.fn()` as prop, trigger event via UI (click), assert mock was called",
+        "Manually call prop",
+        "Check state",
+        "Check style"
+    ]
+},
+{
+    "q": "What is `wrapper.debug()` in Enzyme (Legacy)?",
+    "type": "mcq",
+    "o": [
+        "Similar to RTL `screen.debug()`. Prints component tree.",
+        "Starts debugger",
+        "Opens devtools",
+        "Errors"
+    ]
+},
+{
+    "q": "Why Enzyme `mount` vs `shallow`?",
+    "type": "mcq",
+    "o": [
+        "Mount renders full DOM (integration). Shallow renders one level. RTL `render` is like `mount`.",
+        "Mount is slower",
+        "Shallow is better",
+        "Same"
+    ]
+},
+{
+    "q": "How to find element by text strictly?",
+    "type": "mcq",
+    "o": [
+        "`getByText('Submit', { exact: true })` (default)",
+        "`getByTextStrict`",
+        "`findStrict`",
+        "`get('Submit')`"
+    ]
+},
+{
+    "q": "How to find element ignoring case?",
+    "type": "mcq",
+    "o": [
+        "`getByText(/submit/i)` or `getByText('Submit', { exact: false })`",
+        "`getByTextIgnoreCase`",
+        "`findAny`",
+        "`search('Submit')`"
+    ]
+},
+{
+    "q": "What is `screen.getAllByRole('button')` return type?",
+    "type": "mcq",
+    "o": [
+        "Array of HTMLElement",
+        "Single element",
+        "NodeList",
+        "Promise"
+    ]
+},
+{
+    "q": "If `getAllBy` finds nothing?",
+    "type": "mcq",
+    "o": [
+        "Throws error",
+        "Returns empty array",
+        "Returns null",
+        "Returns undefined"
+    ]
+},
+{
+    "q": "If `queryAllBy` finds nothing?",
+    "type": "mcq",
+    "o": [
+        "Returns empty array `[]` (Useful for asserting 0 elements)",
+        "Throws error",
+        "Returns null",
+        "Returns false"
+    ]
+},
+{
+    "q": "How to assert element count?",
+    "type": "mcq",
+    "o": [
+        "`expect(screen.getAllByRole('item')).toHaveLength(5)`",
+        "`expect(count).toBe(5)`",
+        "`assert(5)`",
+        "`verify(5)`"
+    ]
+},
+{
+    "q": "How to assert 0 elements exist?",
+    "type": "mcq",
+    "o": [
+        "`expect(screen.queryByText('Gone')).toBeNull()` or `not.toBeInTheDocument()`",
+        "`getAllByText('Gone').length = 0`",
+        "`getByText('Gone') == null`",
+        "`assertEmpty`"
+    ]
+},
+{
+    "q": "What is `test.each`?",
+    "type": "mcq",
+    "o": [
+        "Runs the same test multiple times with different data (Data Driven Testing)",
+        "Loop test",
+        "Map test",
+        "Filter test"
+    ]
+},
+{
+    "q": "Syntax for `test.each` table?",
+    "type": "mcq",
+    "o": [
+        "`test.each`([ [1, 2], [2, 3] ])('add %i + 1 = %i', (a, expected) => ...)`",
+        "Markdown table",
+        "SQL table",
+        "Excel"
+    ]
+},
+{
+    "q": "What is `jest.config.js`?",
+    "type": "mcq",
+    "o": [
+        "Configuration file for Jest (transform, testEnvironment, setupFiles, moduleNameMapper)",
+        "Test code",
+        "Build script",
+        "Readme"
+    ]
+},
+{
+    "q": "What is `transform` config used for?",
+    "type": "mcq",
+    "o": [
+        "To specify how to process non-JS files (e.g. `babel-jest` for JSX, `ts-jest` for TS) before testing",
+        "Animation",
+        "CSS transform",
+        "Move file"
+    ]
+},
+{
+    "q": "What is `moduleNameMapper`?",
+    "type": "mcq",
+    "o": [
+        "Maps module paths (aliases) or mocks static assets (styles/images) to stubs",
+        "Map component",
+        "Routes",
+        "Navigation"
+    ]
+},
+{
+    "q": "How to handle CSS imports in Jest?",
+    "type": "mcq",
+    "o": [
+        "Map them to `identity-obj-proxy` or a dummy mock in `moduleNameMapper` (since Node can't parse CSS)",
+        "Ignore them",
+        "Parse them",
+        "Load them"
+    ]
+},
+{
+    "q": "What happens if you don't mock CSS modules in Jest?",
+    "type": "mcq",
+    "o": [
+        "SyntaxError: Unexpected token (Jest tries to parse CSS as JS)",
+        "Nothing",
+        "Works fine",
+        "Warning"
+    ]
+},
+{
+    "q": "How to mock `react-router-dom` `useNavigate`?",
+    "type": "mcq",
+    "o": [
+        "Mock the module: `const nav = jest.fn(); jest.mock('react-router-dom', () => ({ useNavigate: () => nav }))`",
+        "Use real router",
+        "Use `window.location`",
+        "Cannot mock"
+    ]
+},
+{
+    "q": "Do you need `BrowserRouter` in tests?",
+    "type": "mcq",
+    "o": [
+        "Yes, if component uses Link/Route/Hooks. Use `MemoryRouter` for tests (in-memory history, no browser URL).",
+        "No",
+        "Always Browser",
+        "HashRouter"
+    ]
+},
+{
+    "q": "Why `MemoryRouter` for tests?",
+    "type": "mcq",
+    "o": [
+        "It is isolated, allows setting `initialEntries` (start URL) easily. Doesn't affect global window history.",
+        "Faster",
+        "Simpler",
+        "Required"
+    ]
+},
+{
+    "q": "How to test 404 page?",
+    "type": "mcq",
+    "o": [
+        "Render app with `MemoryRouter initialEntries={['/bad-route']}`",
+        "Type url",
+        "Click link",
+        "Use real browser"
+    ]
+},
+{
+    "q": "What is `setupFilesAfterEnv`?",
+    "type": "mcq",
+    "o": [
+        "List of scripts to run *after* test environment is set up but *before* tests (e.g. `import '@testing-library/jest-dom'`)",
+        "Cleanup scripts",
+        "Global teardown",
+        "Env vars"
+    ]
+},
+{
+    "q": "How to assert a Promise rejection?",
+    "type": "mcq",
+    "o": [
+        "`await expect(promise).rejects.toThrow()`",
+        "`expect(promise).toThrow()`",
+        "`catch(e)`",
+        "`assert(error)`"
+    ]
+},
+{
+    "q": "How to assert a Promise resolution?",
+    "type": "mcq",
+    "o": [
+        "`await expect(promise).resolves.toBe(value)`",
+        "`expect(promise).toBe(v)`",
+        "`then(v)`",
+        "`assert(v)`"
+    ]
+},
+{
+    "q": "Can tests be async?",
+    "type": "mcq",
+    "o": [
+        "Yes, pass `async () => { await ... }` to `test` or `it`",
+        "No",
+        "Only describes",
+        "Only hooks"
+    ]
+},
+{
+    "q": "What if you forget `await` in test?",
+    "type": "mcq",
+    "o": [
+        "Test might finish before promise resolves (false positive) or fail with unhandled rejection later",
+        "Nothing",
+        "Works fine",
+        "Auto awaits"
+    ]
+},
+{
+    "q": "How to debug 'Element not found'?",
+    "type": "mcq",
+    "o": [
+        "Check `screen.debug()`, check async timing (need waitFor?), check query correctness (typo, casing)",
+        "Cry",
+        "Restart",
+        "Guess"
+    ]
+},
+{
+    "q": "What implies `Unable to find an element with the text`?",
+    "type": "mcq",
+    "o": [
+        "`getByText` failed. Element is not in DOM (yet/anymore) or text mismatch.",
+        "Success",
+        "Warning",
+        "Pass"
+    ]
+},
+{
+    "q": "What implies `Found multiple elements with the text`?",
+    "type": "mcq",
+    "o": [
+        "`getByText` failed because it expects EXACTLY ONE match. Use `getAllByText` or refine query.",
+        "Good",
+        "Success",
+        "Pass"
+    ]
+},
+{
+    "q": "How to select first of multiple matches?",
+    "type": "mcq",
+    "o": [
+        "`screen.getAllByRole('button')[0]` (Though usually better to use more specific query like name)",
+        "`getByRole('button', { index: 0 })` (not standard)",
+        "`first()`",
+        "`one()`"
+    ]
+},
+{
+    "q": "What is `name` option in `getByRole`?",
+    "type": "mcq",
+    "o": [
+        "Filters by accessible name (e.g. button text or aria-label). `getByRole('button', { name: /save/i })`",
+        "Tag name",
+        "Class name",
+        "ID name"
+    ]
+},
+{
+    "q": "Why utilize `name` option in `getByRole`?",
+    "type": "mcq",
+    "o": [
+        "It promotes robustness (matches visible text) and uniqueness without ambiguity",
+        "Faster",
+        "Slower",
+        "Required"
+    ]
+},
+{
+    "q": "What is `hidden: true` option?",
+    "type": "mcq",
+    "o": [
+        "Allows querying elements hidden from accessibility tree (display: none, aria-hidden). Default is `false` (only visible).",
+        "Hide element",
+        "Show element",
+        "Delete element"
+    ]
+},
+{
+    "q": "Can RTL find `display: none` elements?",
+    "type": "mcq",
+    "o": [
+        "Not by default with `getByRole`. Use `{ hidden: true }`.",
+        "Yes always",
+        "Never",
+        "Only by ID"
+    ]
+},
+{
+    "q": "How to test `hover` state?",
+    "type": "mcq",
+    "o": [
+        "`await userEvent.hover(element)`",
+        "`fireEvent.mouseOver`",
+        "`element.hover()`",
+        "`trigger('hover')`"
+    ]
+},
+{
+    "q": "Does hover trigger CSS `:hover` in JSDOM?",
+    "type": "mcq",
+    "o": [
+        "No, JSDOM doesn't handle layout/paint styles (pseudo classes). You can test JS events (onMouseEnter), not styles.",
+        "Yes",
+        "Maybe",
+        "With plugin"
+    ]
+},
+{
+    "q": "How to test IntersectionObserver?",
+    "type": "mcq",
+    "o": [
+        "Mock the API (assign `window.IntersectionObserver = class { observe() {}, ... }`) and trigger callbacks manually",
+        "Works natively",
+        "Use real browser",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is 'MutationObserver'?",
+    "type": "mcq",
+    "o": [
+        "DOM API watching for changes. RTL uses it internally for `waitFor` and `findBy`.",
+        "Mutant",
+        "X-Men",
+        "Watcher"
+    ]
+},
+{
+    "q": "How to suppress console warnings in specific test?",
+    "type": "mcq",
+    "o": [
+        "`jest.spyOn(console, 'warn').mockImplementation(() => {})`",
+        "`console.off()`",
+        "`quiet: true`",
+        "`silent: true`"
+    ]
+},
+{
+    "q": "What is 'happy path' testing?",
+    "type": "mcq",
+    "o": [
+        "Testing the default, successful user flow (e.g. fill form -> submit -> success)",
+        "Testing errors",
+        "Testing edge cases",
+        "Testing limits"
+    ]
+},
+{
+    "q": "What is 'edge case' testing?",
+    "type": "mcq",
+    "o": [
+        "Testing boundaries, empty states, error states, large inputs",
+        "Happy path",
+        "Simple path",
+        "Fast path"
+    ]
+},
+{
+    "q": "How to unmount manually?",
+    "type": "mcq",
+    "o": [
+        "`const { unmount } = render(...); unmount();`",
+        "`screen.unmount()`",
+        "`cleanup()`",
+        "`destroy()`"
+    ]
+},
+{
+    "q": "Why unmount manually?",
+    "type": "mcq",
+    "o": [
+        "To test cleanup logic (useEffect return) specifically",
+        "To save RAM",
+        "To fail test",
+        "To reset JSDOM"
+    ]
+},
+{
+    "q": "What is `globalSetup`/`globalTeardown` in Jest?",
+    "type": "mcq",
+    "o": [
+        "Scripts running ONCE before/after all test suites (e.g. spinning up test DB container)",
+        "Per file",
+        "Per test",
+        "Per describe"
+    ]
+},
+{
+    "q": "Can you use Hooks inside tests (e.g. `useMemo`)?",
+    "type": "mcq",
+    "o": [
+        "No, hooks must be inside components. Use `renderHook(() => useMemo(...))`",
+        "Yes",
+        "Maybe",
+        "Only useState"
+    ]
+},
+{
+    "q": "How to test Redux connected component?",
+    "type": "mcq",
+    "o": [
+        "Wrap component in `<Provider store={store}>` (use custom render helper to inject store)",
+        "Mock connect",
+        "Mock useSelector",
+        "Cannot test"
+    ]
+},
+{
+    "q": "Why create custom render helper?",
+    "type": "mcq",
+    "o": [
+        "To automatically wrap rendered components with all global providers (Theme, Redux, Router) in every test",
+        "To complicate things",
+        "To slow down",
+        "To isolate"
+    ]
+},
+{
+    "q": "What is `waitForElementToBeRemoved`?",
+    "type": "mcq",
+    "o": [
+        "Async helper awaiting element disappearance (e.g. loading spinner)",
+        "Removes element",
+        "Hides element",
+        "Deletes element"
+    ]
+},
+{
+    "q": "Usage: `await waitForElementToBeRemoved(() => screen.getByText('Loading'))`?",
+    "type": "mcq",
+    "o": [
+        "Correct. Waits until callback throws error (element gone).",
+        "Incorrect",
+        "Use queryBy",
+        "Use findBy"
+    ]
+},
+{
+    "q": "Can you use `await screen.findByText` twice?",
+    "type": "mcq",
+    "o": [
+        "Yes, e.g. check for 'Loading', then check for 'Success' message",
+        "No, only once",
+        "Only for different elements",
+        "Only for errors"
+    ]
+},
+{
+    "q": "What is `jest.resetModules()`?",
+    "type": "mcq",
+    "o": [
+        "Clears cache of required modules. Ensures next require/import gets fresh module execution.",
+        "Resets mocks",
+        "Resets DOM",
+        "Resets Jest"
+    ]
+},
+{
+    "q": "When to use `resetModules`?",
+    "type": "mcq",
+    "o": [
+        "When testing module initialization side-effects or simulating different env vars per test",
+        "Always",
+        "Never",
+        "For UI"
+    ]
+},
+{
+    "q": "How to run a single test file?",
+    "type": "mcq",
+    "o": [
+        "`npm test -- filename` or `jest filename`",
+        "`jest run file`",
+        "`npm start file`",
+        "`node file`"
+    ]
+},
+{
+    "q": "What is Watch Mode?",
+    "type": "mcq",
+    "o": [
+        "`jest --watch`. Reruns tests related to changed files on extra save.",
+        "Clock",
+        "Timer",
+        "Observer"
+    ]
+},
+{
+    "q": "How does Jest know which tests are related?",
+    "type": "mcq",
+    "o": [
+        "Dependency graph (static analysis of imports) + Git status",
+        "Guessing",
+        "Running all",
+        "Magic"
+    ]
+},
+{
+    "q": "What is `test.concurrent`?",
+    "type": "mcq",
+    "o": [
+        "Experimental running of tests within a single file in parallel (careful with shared state!)",
+        "Default",
+        "Safe",
+        "Slow"
+    ]
+},
+{
+    "q": "Safe way to simulate user typing 'ABC'?",
+    "type": "mcq",
+    "o": [
+        "`await userEvent.type(input, 'ABC')`",
+        "`fireEvent.change(input, { target: { value: 'ABC' } })` (Less realistic)",
+        "`input.value = 'ABC'`",
+        "`type('ABC')`"
+    ]
+},
+{
+    "q": "Does `userEvent.type` handle selection range?",
+    "type": "mcq",
+    "o": [
+        "Yes, behaves like real typing (appends at cursor, replaces selection)",
+        "No",
+        "Only appends",
+        "Only replaces"
+    ]
+},
+{
+    "q": "How to select drop-down option?",
+    "type": "mcq",
+    "o": [
+        "`await userEvent.selectOptions(select, 'value')`",
+        "`click option`",
+        "`select.value = 'value'`",
+        "`fireEvent.select`"
+    ]
+},
+{
+    "q": "How to test drag and drop?",
+    "type": "mcq",
+    "o": [
+        "Complex. RTL lacks full native DnD support. Use specialized libs or fire mouse events (down, move, up) manually.",
+        "userEvent.drag",
+        "fireEvent.drag",
+        "drag()"
+    ]
+},
+{
+    "q": "What is 'Chaos Engineering' in tests?",
+    "type": "mcq",
+    "o": [
+        "Introducing random failures (delays, errors) to ensure resilience. Not standard unit testing.",
+        "Bad code",
+        "Random testing",
+        "Fuzzing"
+    ]
+},
+{
+    "q": "What is 'Fuzz Testing'?",
+    "type": "mcq",
+    "o": [
+        "Feeding invalid/random data to inputs to find crashes",
+        "Fuzzy match",
+        "Blur test",
+        "Linting"
+    ]
+},
+{
+    "q": "Relationship: Jest and Babel?",
+    "type": "mcq",
+    "o": [
+        "`babel-jest` is automatically used if Babel config exists. Transpiles tests/source to Node-compatible JS.",
+        "Unrelated",
+        "Enemies",
+        "Alternatives"
+    ]
+},
+{
+    "q": "Jest support for ESM modules?",
+    "type": "mcq",
+    "o": [
+        "Experimental/Partial. Often requires `NODE_OPTIONS=--experimental-vm-modules` or using transforms.",
+        "Full support",
+        "No support",
+        "Default"
+    ]
+},
+{
+    "q": "Why `.test.js` or `.spec.js`?",
+    "type": "mcq",
+    "o": [
+        "Standard conventions Jest looks for by default",
+        "Required ext",
+        "Optional",
+        "Style"
+    ]
+},
+{
+    "q": "Can you define custom matchers?",
+    "type": "mcq",
+    "o": [
+        "Yes, `expect.extend({ toBeCustom(received, expected) { ... } })`",
+        "No",
+        "Maybe",
+        "Only plugins"
+    ]
+},
+{
+    "q": "What is a 'Fixture'?",
+    "type": "mcq",
+    "o": [
+        "Fixed state/data used as a baseline for running tests (e.g. strict sample JSON)",
+        "Light",
+        "Repair",
+        "Tool"
+    ]
+},
+{
+    "q": "When to use Snapshot vs Assertion?",
+    "type": "mcq",
+    "o": [
+        "Assertion for specific logic (2+2=4). Snapshot for complex output structure (UI rendering) correctness.",
+        "Always snapshot",
+        "Always assert",
+        "Random"
+    ]
+},
+{
+    "q": "Risk of Snapshots?",
+    "type": "mcq",
+    "o": [
+        "Developers mindlessly update them ('u') without verifying changes, masking bugs",
+        "Disk space",
+        "Slow",
+        "Complex"
+    ]
+},
+{
+    "q": "How to snapshot large objects partially?",
+    "type": "mcq",
+    "o": [
+        "`expect(obj).toMatchSnapshot({ date: expect.any(Date) })`",
+        "Filters",
+        "Cannot",
+        "Slice string"
+    ]
+},
+{
+    "q": "What is `test.environment` comment?",
+    "type": "mcq",
+    "o": [
+        "`/** @jest-environment jsdom */` at top of file overrides default env for that file",
+        "Comment code",
+        "Docs",
+        "Lint ignore"
+    ]
+},
+{
+    "q": "Difference: `toBe` vs `toEqual`?",
+    "type": "mcq",
+    "o": [
+        "`toBe` checks reference (strict ===). `toEqual` checks deep equality (value).",
+        "Same",
+        "toBe is deep",
+        "toEqual is ref"
+    ]
+},
+{
+    "q": "Does `toEqual` ignore undefined props?",
+    "type": "mcq",
+    "o": [
+        "Yes, usually treats `{ a: 1, b: undefined }` same as `{ a: 1 }` depending on version/config, but generally strict value check.",
+        "No",
+        "Always",
+        "Unknown"
+    ]
+},
+{
+    "q": "What is `expect.objectContaining`?",
+    "type": "mcq",
+    "o": [
+        "Matches object subset. `expect(user).toEqual(expect.objectContaining({ id: 1 }))`",
+        "Exact match",
+        "Keys only",
+        "Values only"
+    ]
+},
+{
+    "q": "What is `expect.stringMatching`?",
+    "type": "mcq",
+    "o": [
+        "Matches string against regex. `expect(s).toEqual(expect.stringMatching(/hello/))`",
+        "Exact string",
+        "Length check",
+        "Type check"
+    ]
+},
+{
+    "q": "What is `expect.any(Constructor)`?",
+    "type": "mcq",
+    "o": [
+        "Matches any instance of constructor. `expect(id).toEqual(expect.any(Number))`",
+        "Any value",
+        "Any object",
+        "Wildcard"
+    ]
+},
+{
+    "q": "What is 'Regression Testing'?",
+    "type": "mcq",
+    "o": [
+        "Verifying that recent changes haven't broken existing functionality",
+        "Testing past",
+        "Testing future",
+        "Testing stats"
+    ]
+},
+{
+    "q": "What is 'Smoke Testing'?",
+    "type": "mcq",
+    "o": [
+        "Basic checks to ensure critical functions work (app launches). 'Did it catch fire?'",
+        "Fire drill",
+        "Performance",
+        "Unit"
+    ]
+},
+{
+    "q": "What is 'Sanity Testing'?",
+    "type": "mcq",
+    "o": [
+        "Quick check after build to verify a fix works before full regression suite",
+        "Mental check",
+        "Smoke test",
+        "Full test"
+    ]
+},
+{
+    "q": "How to test an infinite loop component?",
+    "type": "mcq",
+    "o": [
+        "Tests will likely timeout and fail. Don't write infinite loops.",
+        "Wait forever",
+        "Pass",
+        "Skip"
+    ]
+},
+{
+    "q": "Why do async tests fail with 'Network Error'?",
+    "type": "mcq",
+    "o": [
+        "JSDOM has no real network. Must mock fetch/axios/XHR.",
+        "Internet down",
+        "Firewall",
+        "Server down"
+    ]
+},
+{
+    "q": "How to 'automock' in Jest?",
+    "type": "mcq",
+    "o": [
+        "`jest.enableAutomock()`. Automatically mocks all imported modules. Often too aggressive.",
+        "Magic",
+        "Config",
+        "Plugin"
+    ]
+},
+{
+    "q": "What is `jest.isolateModules`?",
+    "type": "mcq",
+    "o": [
+        "Scoped block where modules are fresh loaded. `jest.isolateModules(() => { const m = require('m'); ... })`",
+        "Sandbox",
+        "Container",
+        "VM"
+    ]
+},
+{
+    "q": "Best practice for test file location?",
+    "type": "mcq",
+    "o": [
+        "Co-location (`MyComp.test.js` next to `MyComp.js`) or `__tests__` folder. Co-location preferred for visibility.",
+        "Separate folder",
+        "Desktop",
+        "Root"
+    ]
+}
+,
+{
+    "q": "What is `React.act` behavior in concurrent React 18?",
+    "type": "mcq",
+    "o": [
+        "`act` recursively flushes effects and microtasks. It might need `await` if the update triggers a transition or suspense fallback.",
+        "Sync only",
+        "Disabled",
+        "Legacy"
+    ]
+},
+{
+    "q": "How to test Suspense fallback?",
+    "type": "mcq",
+    "o": [
+        "Render component that suspends (mocks promise not resolving immediately). Assert fallback presence. Then resolve promise. Assert content.",
+        "Cannot test",
+        "Use Error Boundary",
+        "Use Timeout"
+    ]
+},
+{
+    "q": "How to simulate 'offline' mode in tests?",
+    "type": "mcq",
+    "o": [
+        "Mock `navigator.onLine` getter and dispatch 'offline' event on window",
+        "Unplug cable",
+        "Disable wifi",
+        "Close app"
+    ]
+},
+{
+    "q": "How to test `scroll` event listener?",
+    "type": "mcq",
+    "o": [
+        "`fireEvent.scroll(window, { target: { scrollY: 100 } })`",
+        "Scroll mouse",
+        "`window.scrollTo`",
+        "`scroll(100)`"
+    ]
+},
+{
+    "q": "What is `jest.mocked()` helper (TS)?",
+    "type": "mcq",
+    "o": [
+        "Helper to cast a function to `JestMock` type for typescript intellisense on mock methods (mockReturnValue, etc)",
+        "Creates mock",
+        "Clears mock",
+        "Deletes mock"
+    ]
+},
+{
+    "q": "How to test Error Boundary?",
+    "type": "mcq",
+    "o": [
+        "create a `Bomb` component that throws error. Render inside ErrorBoundary. Assert fallback UI. Suppress console.error.",
+        "Cannot test",
+        "Use try catch",
+        "Use Redux"
+    ]
+},
+{
+    "q": "What is `test.todo` best use case?",
+    "type": "mcq",
+    "o": [
+        "Writing test titles during planning phase without implementation. Reminds you what to cover.",
+        "Skipping failures",
+        "Ignoring bugs",
+        "Documentation"
+    ]
+},
+{
+    "q": "How to mock `Math.random`?",
+    "type": "mcq",
+    "o": [
+        "`jest.spyOn(Math, 'random').mockReturnValue(0.5)`",
+        "`Math.random = 0.5`",
+        "`mock random`",
+        "`seed(123)`"
+    ]
+},
+{
+    "q": "What is `toHaveBeenCalledWith`?",
+    "type": "mcq",
+    "o": [
+        "Asserts that a mock function was called with specific arguments",
+        "Called anytime",
+        "Called once",
+        "Called last"
+    ]
+},
+{
+    "q": "What is `toReturnWith`?",
+    "type": "mcq",
+    "o": [
+        "Asserts that a mock function returned a specific value",
+        "Throw error",
+        "Return promise",
+        "Return undefined"
+    ]
+},
+{
+    "q": "How to test ref persistence?",
+    "type": "mcq",
+    "o": [
+        "Render, update component, check if ref.current value remains stable (same instance)",
+        "Cannot test ref",
+        "Mock ref",
+        "Use state"
+    ]
+},
+{
+    "q": "What implies `jest.fn().mockName('myFunc')`?",
+    "type": "mcq",
+    "o": [
+        "Sets internal name of mock. Useful for clearer error messages ('Expected myFunc to be called').",
+        "Renames file",
+        "Renames variable",
+        "Nothing"
+    ]
+},
+{
+    "q": "What is `jest.retryTimes(n)`?",
+    "type": "mcq",
+    "o": [
+        "Configures Jest to retry failing tests n times before marking as failed (helps with flaky tests, but masking root cause)",
+        "Speed up",
+        "Parallel run",
+        "Memory limit"
+    ]
+},
+{
+    "q": "How to debug Jest memory leak?",
+    "type": "mcq",
+    "o": [
+        "Run with `--detectLeaks --runInBand` and observe heap usage. Look for undeleted event listeners or global mocks.",
+        "Restart PC",
+        "More RAM",
+        "Delete tests"
+    ]
+},
+{
+    "q": "What is `test.failing`?",
+    "type": "mcq",
+    "o": [
+        "Marks a test as expected to fail. Passes if it fails. Fails if it passes.",
+        "Skips",
+        "Todo",
+        "Only"
+    ]
+},
+{
+    "q": "How to mock a CSS media query?",
+    "type": "mcq",
+    "o": [
+        "Mock `window.matchMedia` implementation to return matches: true/false based on query string",
+        "Resize window",
+        "Change CSS",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test dragging multiple items?",
+    "type": "mcq",
+    "o": [
+        "Simulate dragstart on A, dragenter on B, drop on B. Ensure dataTransfer mock is handled if logic depends on it.",
+        "Just click",
+        "Just hover",
+        "Just drop"
+    ]
+},
+{
+    "q": "Can you test `canvas` with standard JSDOM?",
+    "type": "mcq",
+    "o": [
+        "Limited. `jest-canvas-mock` adds some support. Real visual checks require E2E or snapshotting to image.",
+        "Yes fully",
+        "No never",
+        "Only 2d"
+    ]
+},
+{
+    "q": "What is 'Contract Testing'?",
+    "type": "mcq",
+    "o": [
+        "Verifying that API consumer and provider agree on format (e.g. PACT). Ensures frontend doesn't break when backend changes.",
+        "Legal test",
+        "Performance",
+        "Unit"
+    ]
+},
+{
+    "q": "What is 'Property Based Testing'?",
+    "type": "mcq",
+    "o": [
+        "Generating thousands of random inputs (using libs like `fast-check`) to verify properties (invariants) always hold",
+        "Checking props",
+        "Real estate",
+        "CSS properties"
+    ]
+},
+{
+    "q": "How to test Internationalization (i18n)?",
+    "type": "mcq",
+    "o": [
+        "Mock the translation function `t('key')` to return 'key' or fixed string. Or use a test provider with fake translations.",
+        "Detect language",
+        "Translate file",
+        "Ignore it"
+    ]
+},
+{
+    "q": "What is `global.navigator.userAgent` mocking?",
+    "type": "mcq",
+    "o": [
+        "Overriding userAgent string to test browser-specific logic (e.g. 'isMobile' check)",
+        "Tracking user",
+        "Hacking",
+        "Spoofing"
+    ]
+},
+{
+    "q": "How to test `iframe` content?",
+    "type": "mcq",
+    "o": [
+        "Difficult in JSDOM (limited iframe support). Better suited for Cypress/Playwright.",
+        "Easy",
+        "Native",
+        "Same as div"
+    ]
+},
+{
+    "q": "What is `testPathIgnorePatterns`?",
+    "type": "mcq",
+    "o": [
+        "Config to ignore certain paths (e.g. node_modules, build output) from test discovery",
+        "Ignored results",
+        "Ignored errors",
+        "Ignored code"
+    ]
+},
+{
+    "q": "What is `collectCoverageFrom`?",
+    "type": "mcq",
+    "o": [
+        "Glob pattern specifying which files should be included in coverage report (even if not tested)",
+        "Output dir",
+        "Source dir",
+        "Test dir"
+    ]
+},
+{
+    "q": "Why `moduleNameMapper` for absolute imports?",
+    "type": "mcq",
+    "o": [
+        "Maps `@/components` alias to `<rootDir>/src/components` so Jest can resolve imports",
+        "Formatting",
+        "Linting",
+        "Sorting"
+    ]
+},
+{
+    "q": "Can you debug with `node --inspect-brk node_modules/.bin/jest`?",
+    "type": "mcq",
+    "o": [
+        "Yes, attaches debugger (Chrome DevTools) to Jest process. useful for debugging tests logic.",
+        "No",
+        "Only VSCode",
+        "Only Firefox"
+    ]
+},
+{
+    "q": "What is `jest-extended`?",
+    "type": "mcq",
+    "o": [
+        "Library adding more matchers (toBeArray, toBeBoolean, toBeAfter, etc.)",
+        "Plugin",
+        "Config",
+        "Theme"
+    ]
+},
+{
+    "q": "How to Assert called order?",
+    "type": "mcq",
+    "o": [
+        "`expect(mockFn).toHaveBeenCalledBefore(otherMockFn)` (using jest-extended) or check `mock.invocationCallOrder`",
+        "Cannot check",
+        "Order random",
+        "Check time"
+    ]
+},
+{
+    "q": "How to test a 'controlled input' behavior?",
+    "type": "mcq",
+    "o": [
+        "Type into input, assert value prop changed (or state updated). If onChange handler is broken, input won't update.",
+        "Check type",
+        "Check style",
+        "Check focus"
+    ]
+},
+{
+    "q": "What implies `Warning: An update to App inside a test was not wrapped in act`?",
+    "type": "mcq",
+    "o": [
+        "You triggered a state update (often async) that you didn't await for. The test finished while React was still working.",
+        "Code error",
+        "React broke",
+        "Jest broke"
+    ]
+},
+{
+    "q": "How to fix 'not wrapped in act' for async effect?",
+    "type": "mcq",
+    "o": [
+        "Ensure you `await waitFor` the result of that effect (e.g. text appearing) before test ends",
+        "Use `act` manually",
+        "Ignore it",
+        "Delete effect"
+    ]
+},
+{
+    "q": "How to test file download?",
+    "type": "mcq",
+    "o": [
+        "Mock `URL.createObjectURL` and `HTMLAnchorElement.prototype.click`. Assert anchor href and click call.",
+        "Check download folder",
+        "Check disk",
+        "Use network"
+    ]
+},
+{
+    "q": "What is `identity-obj-proxy`?",
+    "type": "mcq",
+    "o": [
+        "Mocks CSS Modules imports. `import s from 's.css'; s.foo` returns string 'foo' instead of undefined.",
+        "Proxy server",
+        "VPN",
+        "Identity thief"
+    ]
+},
+{
+    "q": "How to verify strict props type (TypeScript)?",
+    "type": "mcq",
+    "o": [
+        "Not done at runtime (Jest). Done by TSC check before running tests. Testing runtime prop-types library is separate.",
+        "Jest check",
+        "RTL check",
+        "Browser check"
+    ]
+},
+{
+    "q": "What is 'Snapshot diffing'?",
+    "type": "mcq",
+    "o": [
+        "Using `snapshot-diff` library to compare two values/components and snapshot ONLY the difference",
+        "Git diff",
+        "Pixel diff",
+        "Text diff"
+    ]
+},
+{
+    "q": "Why Snapshot Diffing?",
+    "type": "mcq",
+    "o": [
+        "Reduces noise in snapshot files. Instead of snapshotting full component, snapshot 'renders X when prop is Y' vs default.",
+        "Faster",
+        "Pretty",
+        "Required"
+    ]
+},
+{
+    "q": "How to test Service Worker?",
+    "type": "mcq",
+    "o": [
+        "Hard in JSDOM. Use E2E framework or mock the ServiceWorkerContainer API.",
+        "Easy",
+        "Native",
+        "Just wait"
+    ]
+},
+{
+    "q": "What is `jest.mock` vs `jest.doMock`?",
+    "type": "mcq",
+    "o": [
+        "`mock` is hoisted (runs before imports). `doMock` is not hoisted (can be used inside tests + requires isolateModules/resetModules).",
+        "Same",
+        "doMock is deprecated",
+        "mock is slower"
+    ]
+},
+{
+    "q": "Why use `jest.doMock`?",
+    "type": "mcq",
+    "o": [
+        "When you need to mock a module differently for creating different test scenarios within same file (rare)",
+        "Always",
+        "For style",
+        "For speed"
+    ]
+},
+{
+    "q": "How to test dynamic imports (`React.lazy`)?",
+    "type": "mcq",
+    "o": [
+        "It requires `Suspsense`. In test, wait for lazy component to load (`findBy`). Ensure test environment supports dynamic import.",
+        "Cannot test",
+        "Mock lazy",
+        "Make it sync"
+    ]
+},
+{
+    "q": "How to mock `next/router` via `useRouter`?",
+    "type": "mcq",
+    "o": [
+        "`jest.mock('next/router', () => ({ useRouter: jest.fn() }))`. Then `useRouter.mockReturnValue({ push: jest.fn() })`.",
+        "Use real router",
+        "Link tag",
+        "Cannot mock"
+    ]
+},
+{
+    "q": "What makes a test High Value?",
+    "type": "mcq",
+    "o": [
+        "Tests critical user flows, is resilient to refactors (implementation agnostic), and fails only when product is broken",
+        "Many assertions",
+        "Long code",
+        "Coverage 100%"
+    ]
+},
+{
+    "q": "Is 100% Coverage the goal?",
+    "type": "mcq",
+    "o": [
+        "No. It generally leads to diminishing returns and brittle tests testing implementation details. Aim for high confidence.",
+        "Yes always",
+        "Required by law",
+        "Guarantees no bugs"
+    ]
+},
+{
+    "q": "How to assert class component state?",
+    "type": "mcq",
+    "o": [
+        "Discouraged (White Box). If needed, Enzyme allowed `wrapper.state()`. RTL does not support direct state access.",
+        "RTL .state",
+        "Jest .state",
+        "React .state"
+    ]
+},
+{
+    "q": "How to test a 'Thunk' action creator?",
+    "type": "mcq",
+    "o": [
+        "It returns a function `dispatch => ...`. Call it with a mock dispatch and assert dispatch logic.",
+        "Call directly",
+        "Mock thunk",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test Redux Saga?",
+    "type": "mcq",
+    "o": [
+        "Sagas yield objects (instructions). You can iterate generator and assert yielded effects (`redux-saga-test-plan` simplifies this).",
+        "Run real saga",
+        "Use thunk",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test 'Click Outside' hook?",
+    "type": "mcq",
+    "o": [
+        "Render element. Trigger `userEvent.click(document.body)`. Assert element closed/handler called.",
+        "Click element",
+        "Click window",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `test.skip` vs `test.only` danger?",
+    "type": "mcq",
+    "o": [
+        "Committing `test.only` prevents other tests from running in CI (false pass). Use strict lint rules to prevent this.",
+        "No danger",
+        "Makes CI slow",
+        "Breaks build"
+    ]
+},
+{
+    "q": "How to check if element is visible?",
+    "type": "mcq",
+    "o": [
+        "`expect(el).toBeVisible()`. Checks display, visibility, opacity, hidden attribute, details element open state.",
+        "Check style",
+        "Check dom",
+        "Check z-index"
+    ]
+}
+,
+{
+    "q": "What is `React.Children` map vs regular map?",
+    "type": "mcq",
+    "o": [
+        "React.Children.map flattens the children prop (handling nested arrays/fragments) and handles null/undefined automatically",
+        "Regular map is faster",
+        "Regular map is better",
+        "No difference"
+    ]
+},
+{
+    "q": "What is 'Mock function property'? `mockFn.mock.calls`?",
+    "type": "mcq",
+    "o": [
+        "Array containing arguments for every call to the mock function `[[arg1, arg2], [arg1_call2]]`",
+        "Return values",
+        "Instances",
+        "Errors"
+    ]
+},
+{
+    "q": "What is `mockFn.mock.instances`?",
+    "type": "mcq",
+    "o": [
+        "Array of `this` context for each call (if instantiated with `new`)",
+        "Functions",
+        "Prototypes",
+        "Constructors"
+    ]
+},
+{
+    "q": "How to clear only one mock?",
+    "type": "mcq",
+    "o": [
+        "`mockFn.mockClear()`",
+        "`jest.clearAllMocks()`",
+        "`jest.resetModules()`",
+        "`mockFn.off()`"
+    ]
+},
+{
+    "q": "What implies `ReferenceError: document is not defined` in test?",
+    "type": "mcq",
+    "o": [
+        "Test is running in 'node' environment instead of 'jsdom'. Change testEnvironment config.",
+        "Document is missing",
+        "HTML error",
+        "React error"
+    ]
+},
+{
+    "q": "How to test `window.scrollTo` calls?",
+    "type": "mcq",
+    "o": [
+        "Mock it first (JSDOM doesn't implement it). `window.scrollTo = jest.fn()`. Then assert calls.",
+        "It tests natively",
+        "Check scrollY",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest-watch-typeahead`?",
+    "type": "mcq",
+    "o": [
+        "Plugin to filter tests by filename or test name pattern with autocomplete in watch mode",
+        "Type checker",
+        "TS plugin",
+        "UI plugin"
+    ]
+},
+{
+    "q": "How to assert strict array equality order?",
+    "type": "mcq",
+    "o": [
+        "`expect(arr).toEqual([1, 2, 3])` (Order matters in standard equality check)",
+        "Order ignored",
+        "Contains",
+        "Match set"
+    ]
+},
+{
+    "q": "How to ignore array order?",
+    "type": "mcq",
+    "o": [
+        "Convert to Set or sort both before expect, or `expect(arr).toEqual(expect.arrayContaining([1, 2]))`",
+        "Ignore order",
+        "Loose equal",
+        "Weak equal"
+    ]
+},
+{
+    "q": "What is 'Test Isolation'?",
+    "type": "mcq",
+    "o": [
+        "Each test runs independently. State (DOM, Mocks, Variables) is reset so test A doesn't affect test B.",
+        "Quarantine",
+        "Sandbox",
+        "Docker"
+    ]
+},
+{
+    "q": "Does RTL clean document body automatically?",
+    "type": "mcq",
+    "o": [
+        "Yes, `cleanup` runs after each test (if testing-library/react is imported globally or setupFilesAfterEnv)",
+        "No",
+        "Manually only",
+        "Sometimes"
+    ]
+},
+{
+    "q": "What is `screen.queryByText` useful for if not asserting absence?",
+    "type": "mcq",
+    "o": [
+        "Generally not useful. Use `getByText` for presence assertions (better error message).",
+        "Checking props",
+        "Checking style",
+        "Checking class"
+    ]
+},
+{
+    "q": "What is 'Monkey Patching' in tests?",
+    "type": "mcq",
+    "o": [
+        "Temporarily modifying a global/module method logic for a test. `Original = Obj.fn; Obj.fn = Mock; ... restore()`",
+        "Mock patching",
+        "Refactoring",
+        "Code splitting"
+    ]
+},
+{
+    "q": "Why is `jest.spyOn` better than simple monkey patch?",
+    "type": "mcq",
+    "o": [
+        "It allows easy `mockRestore()` to original implementation automatically",
+        "It is faster",
+        "It is standard",
+        "All of above"
+    ]
+},
+{
+    "q": "How to mock `useLocation` from 'react-router-dom'?",
+    "type": "mcq",
+    "o": [
+        "`jest.mock(...)`, then customize `useLocation` mock return value per test to simulate different URLs",
+        "Use window.location",
+        "Use MemoryRouter",
+        "Navigate"
+    ]
+},
+{
+    "q": "What is `test.each` 'tagged template literal' syntax?",
+    "type": "mcq",
+    "o": [
+        "`test.each` `table...` `('text', ({a, b}) => ...)`",
+        "SQL query",
+        "String format",
+        "Not supported"
+    ]
+},
+{
+    "q": "What is 'Flaky Test' common cause - Animations?",
+    "type": "mcq",
+    "o": [
+        "Test asserts presence before animation completes. Use `waitFor` or disable animations in test env.",
+        "JS Error",
+        "Memory leak",
+        "Network"
+    ]
+},
+{
+    "q": "How to disable animations for tests?",
+    "type": "mcq",
+    "o": [
+        "Mock animation library or inject global CSS `* { transition: none !important; animation: none !important; }`",
+        "Delete them",
+        "Use fast CPU",
+        "Ignore"
+    ]
+},
+{
+    "q": "What is `jest-circus`?",
+    "type": "mcq",
+    "o": [
+        "The default test runner mechanism in Jest (replaced Jasmine). Handles describe/test execution order.",
+        "A clown",
+        "Performance tool",
+        "UI tool"
+    ]
+},
+{
+    "q": "How to debug unhandled promise rejection in tests?",
+    "type": "mcq",
+    "o": [
+        "Add listener to `process.on('unhandledRejection')` or ensure `expect.assertions(n)` matches logic",
+        "Ignore",
+        "Log everything",
+        "Restart"
+    ]
+},
+{
+    "q": "What is `expect.assertions(number)`?",
+    "type": "mcq",
+    "o": [
+        "Verifies that a certain number of assertions were called. Essential for testing async code (callbacks/promises) to ensure test didn't exit early.",
+        "Counts tests",
+        "Counts files",
+        "Limits time"
+    ]
+},
+{
+    "q": "What is `expect.hasAssertions()`?",
+    "type": "mcq",
+    "o": [
+        "Ensures at least one assertion was called in the test",
+        "Checks syntax",
+        "Checks lint",
+        "Checks coverage"
+    ]
+},
+{
+    "q": "What is 'Mocking the implementation'?",
+    "type": "mcq",
+    "o": [
+        "Replacing the inner logic of a function to do something else (e.g. return immediately) during test",
+        "Mocking return",
+        "Mocking type",
+        "Mocking props"
+    ]
+},
+{
+    "q": "How to mock resolved value once?",
+    "type": "mcq",
+    "o": [
+        "`mockFn.mockResolvedValueOnce(val)`",
+        "`mockFn.once(val)`",
+        "`mockFn.return(val)`",
+        "`mockFn.resolve(val)`"
+    ]
+},
+{
+    "q": "Why use `mockResolvedValueOnce`?",
+    "type": "mcq",
+    "o": [
+        "To simulate different responses in sequence (e.g. Success then Error retry)",
+        "Performance",
+        "Memory",
+        "Style"
+    ]
+},
+{
+    "q": "What is `moduleDirectories` jest config?",
+    "type": "mcq",
+    "o": [
+        "Directories Jest searches for modules (defaults to `node_modules`). Add 'src' for absolute imports.",
+        "Output dir",
+        "Test dir",
+        "Cache dir"
+    ]
+},
+{
+    "q": "How to mock `Date` globally but keep ability to use real Date?",
+    "type": "mcq",
+    "o": [
+        "Save `RealDate = Date`. Override `global.Date`. Restore in teardown.",
+        "Cannot do it",
+        "Use Moment",
+        "Use Dayjs"
+    ]
+},
+{
+    "q": "What is `jest.useRealTimers()`?",
+    "type": "mcq",
+    "o": [
+        "Restores original timer functions (setTimeout) if `useFakeTimers` was called",
+        "Enables real time",
+        "Disables jest",
+        "Resets clock"
+    ]
+},
+{
+    "q": "Can you combine TDD and BDD?",
+    "type": "mcq",
+    "o": [
+        "Yes. BDD (Behavior Driven) describes 'Given/When/Then' (specs) which you implement via TDD cycle.",
+        "No",
+        "Mutually exclusive",
+        "Different languages"
+    ]
+},
+{
+    "q": "What corresponds to 'Given' in Jest?",
+    "type": "mcq",
+    "o": [
+        "`beforeEach` setup or initial render",
+        "Expect",
+        "Act",
+        "Suite"
+    ]
+},
+{
+    "q": "What corresponds to 'When' in Jest?",
+    "type": "mcq",
+    "o": [
+        "Triggering action (fireEvent/userEvent)",
+        "Setup",
+        "Assert",
+        "Mock"
+    ]
+},
+{
+    "q": "What corresponds to 'Then' in Jest?",
+    "type": "mcq",
+    "o": [
+        "`expect(...)` assertions",
+        "Setup",
+        "Action",
+        "Mock"
+    ]
+},
+{
+    "q": "What is `jest.mock` 'virtual' option?",
+    "type": "mcq",
+    "o": [
+        "Allows mocking modules that don't exist on disk (virtual: true).",
+        "Virtual DOM",
+        "Virtual Machine",
+        "Memory leak"
+    ]
+},
+{
+    "q": "How to test component that measures DOM (`getBoundingClientRect`)?",
+    "type": "mcq",
+    "o": [
+        "JSDOM mocks return all 0s. You must mock `getBoundingClientRect` on the element prototype or specific instance.",
+        "Works naturally",
+        "Use offset",
+        "Cannot test"
+    ]
+},
+{
+    "q": "Simulating window resize?",
+    "type": "mcq",
+    "o": [
+        "`window.innerWidth = 500; fireEvent(window, new Event('resize'));`",
+        "Resize browser",
+        "Drag corner",
+        "Use CSS"
+    ]
+},
+{
+    "q": "How to assert strict equality of objects?",
+    "type": "mcq",
+    "o": [
+        "`expect(a).toBe(b)` (Requires same reference)",
+        "`expect(a).toEqual(b)`",
+        "`expect(a).toBeSame(b)`",
+        "`expect(a) == b`"
+    ]
+},
+{
+    "q": "What is `jest.requireMock`?",
+    "type": "mcq",
+    "o": [
+        "Returns the mock module instead of actual (useful if you need to access mock state explicitly)",
+        "Requires actual",
+        "Requires file",
+        "Throws error"
+    ]
+},
+{
+    "q": "What is 'Snapshot Property Matchers'?",
+    "type": "mcq",
+    "o": [
+        "Matching dynamic fields (IDs, Dates) in snapshot with `expect.any(String)` to avoid snapshot churn",
+        "Matching props",
+        "Matching style",
+        "Matching colors"
+    ]
+},
+{
+    "q": "How to test error thrown in async function?",
+    "type": "mcq",
+    "o": [
+        "`await expect(asyncFn()).rejects.toThrow('Error')`",
+        "`expect(asyncFn).toThrow()`",
+        "`try catch`",
+        "`onError`"
+    ]
+},
+{
+    "q": "How to test 'unmount' cleanup?",
+    "type": "mcq",
+    "o": [
+        "Render, then `unmount()`. Assert side effects (e.g. console log, external subscription) were cleared.",
+        "Check DOM empty",
+        "Check memory",
+        "Check CPU"
+    ]
+},
+{
+    "q": "What is `prettier` integration with Jest?",
+    "type": "mcq",
+    "o": [
+        "Snapshot serialization often uses prettier to format the snapshot string for readability",
+        "Code formatter",
+        "Linter",
+        "Runner"
+    ]
+},
+{
+    "q": "Jest 'bail' config?",
+    "type": "mcq",
+    "o": [
+        "Stop running tests after `n` failures. Fast fail.",
+        "Bails out",
+        "Skips file",
+        "Retries"
+    ]
+},
+{
+    "q": "What is 'Coverage Threshold'?",
+    "type": "mcq",
+    "o": [
+        "Configuration ensuring build fails if coverage drops below %",
+        "Max coverage",
+        "Min latency",
+        "Max files"
+    ]
+},
+{
+    "q": "Is Jest opinionated?",
+    "type": "mcq",
+    "o": [
+        "Yes, batteries-included (runner, assertion lib, mocking lib, coverage). Unlike Mocha which needs plugins.",
+        "No",
+        "Minimalist",
+        "Micro"
+    ]
+},
+{
+    "q": "What is `React Test Renderer`?",
+    "type": "mcq",
+    "o": [
+        "Package `react-test-renderer` to render React components to pure JS objects (no DOM). Used for snapshots before RTL.",
+        "RTL",
+        "Enzyme",
+        "Legacy"
+    ]
+},
+{
+    "q": "What is 'Wait For Expect' pattern?",
+    "type": "mcq",
+    "o": [
+        "Using `await waitFor(() => expect(...))` to retry assertion until it passes (for async UI updates)",
+        "Sleep",
+        "Timeout",
+        "Delay"
+    ]
+},
+{
+    "q": "Can component have multiple `useEffect` in test?",
+    "type": "mcq",
+    "o": [
+        "Yes, they run in order. Jest/JSDOM simulates this correctly.",
+        "No",
+        "Only one",
+        "Only sync"
+    ]
+},
+{
+    "q": "How to test `Memoized` component re-renders?",
+    "type": "mcq",
+    "o": [
+        "Use a profiler or render count mock. Verify render count doesn't increase when non-dependent props change.",
+        "Check HTML",
+        "Check visual",
+        "Cannot check"
+    ]
+},
+{
+    "q": "What is `displayName` in Jest config?",
+    "type": "mcq",
+    "o": [
+        "Label for the test suite (useful in monorepos running multiple projects)",
+        "User name",
+        "Project name",
+        "File name"
+    ]
+},
+{
+    "q": "What is `projects` in Jest config?",
+    "type": "mcq",
+    "o": [
+        "Array of config objects to run Jest on multiple projects (client/server) in one runner",
+        "File list",
+        "Folder list",
+        "Tasks"
+    ]
+}
+,
+{
+    "q": "What is `test.timeout`?",
+    "type": "mcq",
+    "o": [
+        "Configuration to set default timeout (5000ms). Can be set per test/file.",
+        "Global timer",
+        "Pause test",
+        "Skip test"
+    ]
+},
+{
+    "q": "How to debug 'Jest has detected open handles'?",
+    "type": "mcq",
+    "o": [
+        "Use `--detectOpenHandles`. Usually means a server/db connection or interval wasn't closed in `afterAll`.",
+        "Ignore it",
+        "Force exit",
+        "Use fewer tests"
+    ]
+},
+{
+    "q": "What is `forceExit` flag?",
+    "type": "mcq",
+    "o": [
+        "`--forceExit`. Forces Jest to terminate even if handles are open. Band-aid solution.",
+        "Good practice",
+        "Standard",
+        "Required"
+    ]
+},
+{
+    "q": "How to mock `process.env` safely?",
+    "type": "mcq",
+    "o": [
+        "Save `OLD_ENV = process.env`. `beforeEach(() => process.env = { ...OLD_ENV })`. `afterAll(() => process.env = OLD_ENV)`.",
+        "Just set it",
+        "Cannot mock",
+        "Use .env"
+    ]
+},
+{
+    "q": "What is `jest.config.ts` support?",
+    "type": "mcq",
+    "o": [
+        "Jest supports TS config out of box (via ts-node). Useful for type-checking config.",
+        "No support",
+        "Requires plugin",
+        "Beta"
+    ]
+},
+{
+    "q": "How to test 'focus trap' (Modal)?",
+    "type": "mcq",
+    "o": [
+        "Tab through elements. Assert focus cycles inside modal and doesn't escape to background.",
+        "Check z-index",
+        "Check visibility",
+        "Check opacity"
+    ]
+},
+{
+    "q": "How to mock `IntersectionObserver` firing?",
+    "type": "mcq",
+    "o": [
+        "Expose the callback stored in the mock instances, then call it manually with `isIntersecting: true`.",
+        "Scroll down",
+        "Resize window",
+        "Wait"
+    ]
+},
+{
+    "q": "What is `testEnvironmentOptions`?",
+    "type": "mcq",
+    "o": [
+        "Options passed to JSDOM (e.g. `url` to set location.href, `userAgent`).",
+        "Cli args",
+        "Env vars",
+        "Global vars"
+    ]
+},
+{
+    "q": "How to test component using `useId` (React 18)?",
+    "type": "mcq",
+    "o": [
+        "IDs should be stable in snapshot if hydrating correctly. If mismatch, check `hydrateRoot` usage or mock `useId` if strict stability needed across test runs.",
+        "Cannot test",
+        "Use random",
+        "Use index"
+    ]
+},
+{
+    "q": "What is `jest.mocked(fn)` type utility?",
+    "type": "mcq",
+    "o": [
+        "Casts `fn` to `JestMock` type in TypeScript tests. `jest.mocked(myImport).mockReturnValue(...)`",
+        "Creates mock",
+        "Runs mock",
+        "Resets mock"
+    ]
+},
+{
+    "q": "How to assert call order of two independent mocks?",
+    "type": "mcq",
+    "o": [
+        "Compare `mockFn1.mock.invocationCallOrder[0]` < `mockFn2.mock.invocationCallOrder[0]`",
+        "Cannot check",
+        "Check logs",
+        "Check time"
+    ]
+},
+{
+    "q": "What is the purpose of `setupFiles` vs `setupFilesAfterEnv`?",
+    "type": "mcq",
+    "o": [
+        "`setupFiles` runs BEFORE test framework (Jasmine/Circus) is installed. `setupFilesAfterEnv` runs AFTER (can use `beforeEach`, `expect`).",
+        "Same",
+        "AfterEnv runs first",
+        "Files runs last"
+    ]
+},
+{
+    "q": "How to test 'print' style?",
+    "type": "mcq",
+    "o": [
+        "Difficult in JSDOM. E2E (snapshot) or checking `@media print` styles in code coverage.",
+        "Print page",
+        "Check PDF",
+        "Check console"
+    ]
+},
+{
+    "q": "How to mock a library only for one test file?",
+    "type": "mcq",
+    "o": [
+        "`jest.mock('lib')` at the top of that file. It is scoped to that file's suite.",
+        "Global config",
+        "CLI arg",
+        "Cannot do it"
+    ]
+},
+{
+    "q": "What is `globalThis` in Jest?",
+    "type": "mcq",
+    "o": [
+        "The global object (window in jsdom, global in node). Useful for setting global mocks.",
+        "Undefined",
+        "Restricted",
+        "Local var"
+    ]
+},
+{
+    "q": "How to test `cookie` logic?",
+    "type": "mcq",
+    "o": [
+        "JSDOM supports `document.cookie` basic get/set. Or assert call to cookie library wrapper.",
+        "Check browser",
+        "Check file",
+        "Check network"
+    ]
+},
+{
+    "q": "What implies `ReferenceError: TextEncoder is not defined`?",
+    "type": "mcq",
+    "o": [
+        "JSDOM missing older globals often needed by libs. Add polyfill in setup file `global.TextEncoder = TextEncoder`.",
+        "Syntax error",
+        "Bug in test",
+        "Bug in code"
+    ]
+},
+{
+    "q": "How to test `Canvas` `getContext('2d')` calls?",
+    "type": "mcq",
+    "o": [
+        "Mock `HTMLCanvasElement.prototype.getContext`. Return a dummy context object with mocked methods (fillRect, etc).",
+        "Draw image",
+        "Screenshot",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest-when` library?",
+    "type": "mcq",
+    "o": [
+        "Extension allowing conditional mocks: `when(fn).calledWith(1).mockReturnValue(2)`",
+        "Date library",
+        "Promise library",
+        "Assert library"
+    ]
+},
+{
+    "q": "How to verify Accessibility (A11y) focus order?",
+    "type": "mcq",
+    "o": [
+        "Tab through and check `document.activeElement` matches expectations in sequence.",
+        "Check tabindex",
+        "Check visual",
+        "Check HTML"
+    ]
+},
+{
+    "q": "How to test `ResizeObserver`?",
+    "type": "mcq",
+    "o": [
+        "Mock it globally. `window.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} }`",
+        "Resize window",
+        "Zoom",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `scrollTo` behavior (smooth)?",
+    "type": "mcq",
+    "o": [
+        "Assert `window.scrollTo` was called with `{ behavior: 'smooth' }`",
+        "Watch scroll",
+        "Check CSS",
+        "Check FPS"
+    ]
+},
+{
+    "q": "How to mock `fs` (FileSystem) in Node tests?",
+    "type": "mcq",
+    "o": [
+        "`jest.mock('fs')` (Jest can auto-mock core modules) or use `memfs` (in-memory fs)",
+        "Read real files",
+        "Write temp files",
+        "Cannot mock"
+    ]
+},
+{
+    "q": "What is `jest.createMockFromModule`?",
+    "type": "mcq",
+    "o": [
+        "Generates a mocked version of the module structure (auto-mock), preserving exports structure but replacing functions with spies.",
+        "Creates real module",
+        "Creates file",
+        "Creates types"
+    ]
+},
+{
+    "q": "How to test component 'memoization' effectiveness?",
+    "type": "mcq",
+    "o": [
+        "Pass a heavy prop. Spy on the child's render (or use Profiler in test) and assert call count didn't increase on parent re-render.",
+        "Check speed",
+        "Check CPU",
+        "Check RAM"
+    ]
+},
+{
+    "q": "What is `moduleFileExtensions`?",
+    "type": "mcq",
+    "o": [
+        "Config array of extensions Jest looks for (`js`, `jsx`, `ts`, `tsx`, `json`)",
+        "Plugins",
+        "Linters",
+        "Outputs"
+    ]
+},
+{
+    "q": "How to assert error message in try/catch?",
+    "type": "mcq",
+    "o": [
+        "`expect(error.message).toBe('msg')` or `expect(error).toBeInstanceOf(Error)`",
+        "Check console",
+        "Check alert",
+        "Check log"
+    ]
+},
+{
+    "q": "Did `enzyme` support React Hooks?",
+    "type": "mcq",
+    "o": [
+        "Poorly. `shallow` didn't execute `useEffect`. Major reason for migration to RTL.",
+        "Yes perfectly",
+        "Better than RTL",
+        "Same"
+    ]
+},
+{
+    "q": "What is 'Testing Trophy' (Kent C Dodds)?",
+    "type": "mcq",
+    "o": [
+        "Testing philosophy prioritizing Integration tests (body), followed by Unit (base) and E2E (top). Static analysis at bottom.",
+        "Pyramid",
+        "Diamond",
+        "Cone"
+    ]
+},
+{
+    "q": "Why prioritize Integration over Unit?",
+    "type": "mcq",
+    "o": [
+        "Gives more confidence that parts work together, less brittle to refactoring internal units.",
+        "Use less code",
+        "Runs faster",
+        "Easier"
+    ]
+},
+{
+    "q": "What is 'Code Coverage' vs 'Use Case Coverage'?",
+    "type": "mcq",
+    "o": [
+        "Code coverage counts lines executed. Use case coverage checks if user scenarios are satisfied. Latter is more valuable.",
+        "Same",
+        "Code coverage better",
+        "Both useless"
+    ]
+},
+{
+    "q": "How to test `audio` or `video` play?",
+    "type": "mcq",
+    "o": [
+        "Mock `play()` and `pause()` on `HTMLMediaElement.prototype` (JSDOM methods are stubs). Assert calls.",
+        "Listen audio",
+        "Watch video",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `Geolocation` API?",
+    "type": "mcq",
+    "o": [
+        "Mock `navigator.geolocation.getCurrentPosition`. Trigger success/error callbacks manually.",
+        "Move laptop",
+        "Use VPN",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest-environment-jsdom` versioning?",
+    "type": "mcq",
+    "o": [
+        "Jest 28+ decoupled `jsdom` env into separate package. Must install explicitly.",
+        "Built-in always",
+        "Deprecated",
+        "Removed"
+    ]
+},
+{
+    "q": "How to run tests in 'Band' (Serial)?",
+    "type": "mcq",
+    "o": [
+        "`--runInBand` or `-i`. Useful for debugging or restricted resource environments (CI limits).",
+        "`--serial`",
+        "`--one`",
+        "`--single`"
+    ]
+},
+{
+    "q": "What is 'Snapshot Resolver'?",
+    "type": "mcq",
+    "o": [
+        "Config to customize where snapshots are stored (e.g. moving them out of source folder)",
+        "Resolves promise",
+        "Resolves conflict",
+        "Deletes snapshot"
+    ]
+},
+{
+    "q": "How to test 'Right Click' (Context Menu)?",
+    "type": "mcq",
+    "o": [
+        "`fireEvent.contextMenu(element)` or `userEvent.pointer({ keys: '[MouseRight]' })`",
+        "`click({ button: 2 })`",
+        "`rightClick()`",
+        "`trigger('menu')`"
+    ]
+},
+{
+    "q": "How to test 'Double Click'?",
+    "type": "mcq",
+    "o": [
+        "`userEvent.dblClick(element)` or `fireEvent.doubleClick`",
+        "`click() click()`",
+        "`click({ times: 2 })`",
+        "`trigger('dbclick')`"
+    ]
+},
+{
+    "q": "How to test 'meta key' (Cmd/Ctrl) + click?",
+    "type": "mcq",
+    "o": [
+        "`userEvent.click(element, { ctrlKey: true, metaKey: true })`",
+        "`fireEvent` only",
+        "`press('Ctrl')`",
+        "`hold('Cmd')`"
+    ]
+},
+{
+    "q": "What is strict mode 'side-effect' detection?",
+    "type": "mcq",
+    "o": [
+        "Strict Mode runs render twice. If your render function mutates external variable, result will be inconsistent/wrong.",
+        "Detects network",
+        "Detects disk",
+        "Detects error"
+    ]
+},
+{
+    "q": "How to test `Portal` mounting location?",
+    "type": "mcq",
+    "o": [
+        "Assert `baseElement` (document.body) contains the modal text, while `container` (render root) does not (optional).",
+        "Check ID",
+        "Check Z-index",
+        "Cannot check"
+    ]
+},
+{
+    "q": "How to test `flushSync` updates?",
+    "type": "mcq",
+    "o": [
+        "RTL handles it mostly. If manual, wrap in `act`. Assert DOM state immediately after.",
+        "Wait",
+        "Use timeout",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `test.skip` vs commenting out?",
+    "type": "mcq",
+    "o": [
+        "`test.skip` keeps the test visible in report as skipped (reminding you it exists). Code is still parsed.",
+        "Same",
+        "Commenting better",
+        "Skip deletes it"
+    ]
+},
+{
+    "q": "How to assert array contains subset?",
+    "type": "mcq",
+    "o": [
+        "`expect(arr).toEqual(expect.arrayContaining([val1]))`",
+        "`expect(arr).toContain(val1)` (for single item)",
+        "`expect(arr).has(val1)`",
+        "`assert(arr, val1)`"
+    ]
+},
+{
+    "q": "Does `expect(obj).toHaveProperty('a.b')` work?",
+    "type": "mcq",
+    "o": [
+        "Yes, `toHaveProperty` supports dot notation for nested paths",
+        "No",
+        "Only shallow",
+        "Only array"
+    ]
+},
+{
+    "q": "How to test 'file input' clear?",
+    "type": "mcq",
+    "o": [
+        "`userEvent.clear` might not work on file input manually. Usually set value to empty string.",
+        "Delete element",
+        "Reset form",
+        "Cannot clear"
+    ]
+},
+{
+    "q": "What is `jest.unmock('mod')`?",
+    "type": "mcq",
+    "o": [
+        "Explicitly tells Jest NOT to mock a module (if automocking is on). Usually default is unmocked.",
+        "Reinstate mock",
+        "Delete mock",
+        "Run mock"
+    ]
+},
+{
+    "q": "How to test `matchMedia` changes?",
+    "type": "mcq",
+    "o": [
+        "Mock `addEventListener` in matchMedia mock, then fire the change handler manually",
+        "Resize window",
+        "Zoom",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What are 'Test Doubles'?",
+    "type": "mcq",
+    "o": [
+        "Umbrella term for Mocks, Stubs, Spies, Fakes, Dummies",
+        "Two tests",
+        "Duplicates",
+        "Clones"
+    ]
+},
+{
+    "q": "Mock vs Stub?",
+    "type": "mcq",
+    "o": [
+        "Stub provides canned answers (state verification). Mock verifies interactions (behavior verification).",
+        "Same",
+        "Stub is real",
+        "Mock is fake"
+    ]
+}
+,
+{
+    "q": "What is 'Spy'?",
+    "type": "mcq",
+    "o": [
+        "Wraps real implementation but records calls/arguments. `jest.spyOn`.",
+        "Replaces implementation",
+        "Deletes implementation",
+        "Ignores implementation"
+    ]
+},
+{
+    "q": "What is 'Fake'?",
+    "type": "mcq",
+    "o": [
+        "Simplified working implementation (e.g. In-memory database instead of real SQL).",
+        "Mock",
+        "Stub",
+        "Spy"
+    ]
+},
+{
+    "q": "What is 'Dummy'?",
+    "type": "mcq",
+    "o": [
+        "Object passed around but never actually used (e.g. to fill parameter list)",
+        "Smart object",
+        "Real object",
+        "Test runner"
+    ]
+},
+{
+    "q": "How to test 'print' button click?",
+    "type": "mcq",
+    "o": [
+        "Spy on `window.print`. Click button. Assert spy called.",
+        "Check printed paper",
+        "Check pdf",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test complex form validation?",
+    "type": "mcq",
+    "o": [
+        "Fill invalid data, assert error messages. Fill valid data, assert no errors/submit called. (Integration test)",
+        "Check HTML",
+        "Check CSS",
+        "Unit test functions"
+    ]
+},
+{
+    "q": "How to test 'Debounced' search?",
+    "type": "mcq",
+    "o": [
+        "Use fake timers. Type input. Fast forward timer `advanceTimersByTime`. Assert search API called once.",
+        "Wait manually",
+        "Use real timer",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to debug 'Jest timeout' in async test?",
+    "type": "mcq",
+    "o": [
+        "Check if you forgot to `resolve` a promise, or `await` a result. Infinite loops or network hang.",
+        "Increase timeout only",
+        "Ignore",
+        "Delete test"
+    ]
+},
+{
+    "q": "What is `test.todo` output?",
+    "type": "mcq",
+    "o": [
+        "Purple 'todo' count in summary. Does not fail build.",
+        "Red fail",
+        "Green pass",
+        "Yellow warn"
+    ]
+},
+{
+    "q": "Can you use `async` with `describe`?",
+    "type": "mcq",
+    "o": [
+        "No. `describe` blocks are synchronous (collection phase). Only `test`, `beforeEach` etc can be async.",
+        "Yes",
+        "Sometimes",
+        "With flag"
+    ]
+},
+{
+    "q": "What happens if `describe` is async?",
+    "type": "mcq",
+    "o": [
+        "Jest ignores the promise. Tests defined inside might not run or run weirdly.",
+        "Works fine",
+        "Throws error",
+        "Slows down"
+    ]
+},
+{
+    "q": "How to mock `Date` to a fixed timestamp in modern Jest?",
+    "type": "mcq",
+    "o": [
+        "`jest.useFakeTimers().setSystemTime(new Date('2020-01-01'))`",
+        "Mock Date class",
+        "Mock now()",
+        "Mock getTime()"
+    ]
+},
+{
+    "q": "How to verify 'unmount' cleaned up event listener?",
+    "type": "mcq",
+    "o": [
+        "Spy on `removeEventListener`. Unmount. Assert spy called with correct args.",
+        "Check memory",
+        "Check DOM",
+        "Ignore"
+    ]
+},
+{
+    "q": "What is `workerIdleMemoryLimit`?",
+    "type": "mcq",
+    "o": [
+        "Restart worker if memory exceeds limit. Avoids OOM crashes in large suites.",
+        "Limits CPU",
+        "Limits Time",
+        "Limits Files"
+    ]
+},
+{
+    "q": "How to assert computed style?",
+    "type": "mcq",
+    "o": [
+        "`expect(window.getComputedStyle(el).color).toBe('red')`",
+        "`el.style.color`",
+        "`checkColor`",
+        "`verifyColor`"
+    ]
+},
+{
+    "q": "What is `testURL` (legacy)?",
+    "type": "mcq",
+    "o": [
+        "Old Jest config to set JSDOM URL. Now prefer `testEnvironmentOptions: { url: ... }`.",
+        "URL to test",
+        "API url",
+        "Website"
+    ]
+},
+{
+    "q": "How to test component depending on `navigator.language`?",
+    "type": "mcq",
+    "o": [
+        "Use `Object.defineProperty(navigator, 'language', { value: 'fr', configurable: true })`",
+        "Change OS lang",
+        "Change browser lang",
+        "Cannot test"
+    ]
+},
+{
+    "q": "Does JSDOM support `matchMedia`?",
+    "type": "mcq",
+    "o": [
+        "No. It throws or fails unless mocked manually.",
+        "Yes",
+        "Partially",
+        "Only mobile"
+    ]
+},
+{
+    "q": "How to test `audio.play` failing?",
+    "type": "mcq",
+    "o": [
+        "Mock `play` to return `Promise.reject()`. Assert error handling in component.",
+        "Remove audio file",
+        "Mute volume",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is 'Snapshot Interaction'?",
+    "type": "mcq",
+    "o": [
+        "Snapshotting the component *after* user interaction to verify UI state change (e.g. menu open)",
+        "Video",
+        "Gif",
+        "Log"
+    ]
+},
+{
+    "q": "How to test 'Meta Tag' changes (Helmet)?",
+    "type": "mcq",
+    "o": [
+        "Use `react-helmet` (or similar) test helpers, or check `document.title` / `document.head` in test.",
+        "Check browser tab",
+        "Check server",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to verify component throws during render?",
+    "type": "mcq",
+    "o": [
+        "`expect(() => render(<Comp />)).toThrow()` - Note: Prevent React logging error to console to keep test clean (spyOn/mock).",
+        "It catches automatically",
+        "It crashes",
+        "It passes"
+    ]
+},
+{
+    "q": "What is `silent` reporter?",
+    "type": "mcq",
+    "o": [
+        "Prevents printing to console during tests. Useful for clean CI logs.",
+        "Mutes errors",
+        "Mutes failures",
+        "Mutes jest"
+    ]
+},
+{
+    "q": "How to test 'long press'?",
+    "type": "mcq",
+    "o": [
+        "MouseDown -> Advance Timer (delay) -> MouseUp. Check handler.",
+        "UserEvent.longPress (if available)",
+        "Hold click",
+        "Wait"
+    ]
+},
+{
+    "q": "What is `global.gc()`?",
+    "type": "mcq",
+    "o": [
+        "Exposed garbage collector (if node run with --expose-gc). Used in memory leak tests.",
+        "Global config",
+        "Global cache",
+        "Grid control"
+    ]
+},
+{
+    "q": "How to mock `localStorage` getItem to return null?",
+    "type": "mcq",
+    "o": [
+        "`jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(null)`",
+        "Clear storage",
+        "Delete file",
+        "Reset"
+    ]
+},
+{
+    "q": "How to assert `localStorage.setItem` arguments?",
+    "type": "mcq",
+    "o": [
+        "`expect(localStorage.setItem).toHaveBeenCalledWith('key', 'value')`",
+        "Check file",
+        "Check db",
+        "Check variable"
+    ]
+},
+{
+    "q": "What is 'Inversion of Control' in testing?",
+    "type": "mcq",
+    "o": [
+        "Components receiving dependencies (services/stores) via props/context allow easy swapping with mocks during tests.",
+        "Upside down",
+        "Dependency hell",
+        "Spaghetti code"
+    ]
+},
+{
+    "q": "What is `jest.spyOn` 'get' access type?",
+    "type": "mcq",
+    "o": [
+        "`jest.spyOn(object, 'prop', 'get')`. Spies on getter execution.",
+        "Get method",
+        "Get request",
+        "Get file"
+    ]
+},
+{
+    "q": "How to spy on `window.location.href` assign?",
+    "type": "mcq",
+    "o": [
+        "Use `Object.defineProperty` to add setter spy (JSDOM location is tricky). Or use `delete window.location` trick (legacy).",
+        "Spy href",
+        "Mock href",
+        "Cannot spy"
+    ]
+},
+{
+    "q": "How to test `dangerouslySetInnerHTML`?",
+    "type": "mcq",
+    "o": [
+        "Render. Assert `innerHTML` or contained element presence. Be careful with XSS if testing untrusted input logic.",
+        "Scan virus",
+        "Parse HTML",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest.requireActual` useful for in `__mocks__`?",
+    "type": "mcq",
+    "o": [
+        "To extend original implementation instead of replacing fully. e.g. adding one tracked method.",
+        "Requiring file",
+        "Requiring node_modules",
+        "Safety"
+    ]
+},
+{
+    "q": "How to debug 'Jest worker' out of memory?",
+    "type": "mcq",
+    "o": [
+        "Use `workerIdleMemoryLimit`, decrease `maxWorkers`, or inspect leak with heap dump.",
+        "Add RAM",
+        "Restart",
+        "Disable workers"
+    ]
+},
+{
+    "q": "What is `test.concurrent.each`?",
+    "type": "mcq",
+    "o": [
+        "Runs paramaterized tests in parallel. High throughput for data-heavy tests.",
+        "Serial each",
+        "Map each",
+        "Loop each"
+    ]
+},
+{
+    "q": "How to test 'onBlur'?",
+    "type": "mcq",
+    "o": [
+        "Focus element, then `userEvent.tab()` (focus moves next) or click body. Assert blur handler.",
+        "Blur screen",
+        "Remove glasses",
+        "Close eyes"
+    ]
+},
+{
+    "q": "How to test 'onSubmit'?",
+    "type": "mcq",
+    "o": [
+        "`fireEvent.submit(form)` or click submit button. Assert handler.",
+        "Click enter",
+        "Send request",
+        "Reload page"
+    ]
+},
+{
+    "q": "Why prefer `userEvent.click` over `fireEvent.submit`?",
+    "type": "mcq",
+    "o": [
+        "Checks if button is disabled/hidden. Fires full event sequence (focus, mouseup, click, submit). More realistic.",
+        "Faster",
+        "Less code",
+        "Simpler"
+    ]
+},
+{
+    "q": "What implies `TypeError: window.matchMedia is not a function`?",
+    "type": "mcq",
+    "o": [
+        "JSDOM missing matchMedia. You must mock it in `setupFilesAfterEnv`.",
+        "Browser outdated",
+        "Code outdated",
+        "React outdated"
+    ]
+},
+{
+    "q": "How to test component state reset?",
+    "type": "mcq",
+    "o": [
+        "Interact to change state. Trigger reset (button/prop). Assert state returned to initial.",
+        "Reload page",
+        "Restart app",
+        "Clear cache"
+    ]
+},
+{
+    "q": "What is 'Characterization Test'?",
+    "type": "mcq",
+    "o": [
+        "Writing tests for legacy code to document *current* behavior (even bugs) before refactoring. Safely Lock-in behavior.",
+        "Character creation",
+        "RPG test",
+        "Unit test"
+    ]
+},
+{
+    "q": "What is 'Approval Testing'?",
+    "type": "mcq",
+    "o": [
+        "Similar to snapshot testing. Verifying output matches 'approved' master version. Often used for text/pdf generation.",
+        "Manager check",
+        "QA check",
+        "Code review"
+    ]
+},
+{
+    "q": "How to test `React.memo` prop comparison logic?",
+    "type": "mcq",
+    "o": [
+        "Pass custom `areEqual` function. Test the function directly (Unit). Or integration verify re-render.",
+        "Snapshot",
+        "Performance tab",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `useReducer`?",
+    "type": "mcq",
+    "o": [
+        "Export reducer function. Test it purely (Unit: `reducer(state, action) => newState`). Or integration via component.",
+        "Must render",
+        "Must click",
+        "Must mock"
+    ]
+},
+{
+    "q": "Why test reducer separately?",
+    "type": "mcq",
+    "o": [
+        "Pure functions are easiest to test. Covers all state transitions without UI overhead.",
+        "Faster",
+        "Simpler",
+        "Cleaner"
+    ]
+},
+{
+    "q": "How to test `refs` pointing to DOM?",
+    "type": "mcq",
+    "o": [
+        "Render. Access ref.current. Assert it is an instance of HTMLElement.",
+        "Check null",
+        "Check undefined",
+        "Check string"
+    ]
+},
+{
+    "q": "How to test `clipboard` paste?",
+    "type": "mcq",
+    "o": [
+        "`userEvent.paste(input, 'text')`. Triggers paste event.",
+        "Ctrl+V",
+        "Right click paste",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `history.replaceState`?",
+    "type": "mcq",
+    "o": [
+        "Spy on `window.history.replaceState`. Assert args.",
+        "Check url",
+        "Check browser",
+        "Cannot spy"
+    ]
+},
+{
+    "q": "What is 'Opaque Response'?",
+    "type": "mcq",
+    "o": [
+        "Fetch/ServiceWorker concept (no-cors). Cannot read status/body code in test properly if not mocked correctly.",
+        "Hidden",
+        "Secret",
+        "Encrypted"
+    ]
+},
+{
+    "q": "How to test `React.StrictMode` logs?",
+    "type": "mcq",
+    "o": [
+        "Suppress console.log (spy). Strict mode logs double render warnings (dev only). Not usually tested explicitly.",
+        "Enable in test",
+        "Disable in test",
+        "Ignore"
+    ]
+},
+{
+    "q": "What is `jest.runAllTimers`?",
+    "type": "mcq",
+    "o": [
+        "Exhausts all macrotask queue timers. Dangerous if recursive timers exist (infinite loop).",
+        "Run once",
+        "Run fast",
+        "Run safe"
+    ]
+},
+{
+    "q": "What is `pnpm test`?",
+    "type": "mcq",
+    "o": [
+        "Running script 'test' with pnpm package manager. Just an alias.",
+        "Special test",
+        "Faster test",
+        "Better test"
+    ]
+}
+,
+{
+    "q": "What is `React.Profiler` testing API?",
+    "type": "mcq",
+    "o": [
+        "Currently minimal support in standard test renderers. Usually tested via manual mocks of `performance.now` or tracing production builds.",
+        "Fully supported",
+        "Native",
+        "Easy"
+    ]
+},
+{
+    "q": "How to test 'race condition' in async list?",
+    "type": "mcq",
+    "o": [
+        "Trigger two fetches. Resolve the second one FIRST. Resolve first one LATER. Assert component shows result of SECOND (latest) fetch.",
+        "Resolve in order",
+        "Fail both",
+        "Ignore"
+    ]
+},
+{
+    "q": "How to fix race condition bug in test?",
+    "type": "mcq",
+    "o": [
+        "Use `cleanup` flag variable or `AbortController` in `useEffect`. If test shows old data, fix implemented.",
+        "Use timeout",
+        "Use sleep",
+        "Use lock"
+    ]
+},
+{
+    "q": "What is 'Visual testing' vs 'Functional testing'?",
+    "type": "mcq",
+    "o": [
+        "Visual checks pixels (CSS/Layout layout). Functional checks behavior (JS logic/DOM structure). Jest/RTL is Functional.",
+        "Same",
+        "Visual is better",
+        "Functional is faster"
+    ]
+},
+{
+    "q": "How to test 'Print' mode visibility?",
+    "type": "mcq",
+    "o": [
+        "Set `window.matchMedia('print').matches = true`. Assert elements shown/hidden.",
+        "Print to PDF",
+        "Check printer",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest.mock` factory argument?",
+    "type": "mcq",
+    "o": [
+        "The second argument `() => ({ ... })`. Returns the mocked module content.",
+        "Path",
+        "Options",
+        "Name"
+    ]
+},
+{
+    "q": "What if mock factory accesses outer variable?",
+    "type": "mcq",
+    "o": [
+        "Fails. `jest.mock` is hoisted above imports. Variables must be defined inside factory or start with `mock` prefix.",
+        "Works fine",
+        "Warning",
+        "Slows down"
+    ]
+},
+{
+    "q": "Why `mock` prefix allowed?",
+    "type": "mcq",
+    "o": [
+        "Jest exception to hoisting rule. Allows `const mockData = ...; jest.mock(..., () => mockData)`.",
+        "Magic",
+        "Bug",
+        "Legacy"
+    ]
+},
+{
+    "q": "How to test `Promise.all` logic?",
+    "type": "mcq",
+    "o": [
+        "Mock multiple promises. Resolve all. Assert final state. Reject one. Assert catch state.",
+        "Wait 1 sec",
+        "Check loops",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `test.ifError(value)`?",
+    "type": "mcq",
+    "o": [
+        "Fails test if `value` is truthy. Useful for callbacks `(err) => test.ifError(err)`.",
+        "Skip if error",
+        "Ignore error",
+        "Log error"
+    ]
+},
+{
+    "q": "How to test component 'recursive' rendering limits?",
+    "type": "mcq",
+    "o": [
+        "Render deep structure. Assert it stops or renders correctly. Watch out for StackOverflow in JSDOM.",
+        "Infinite loop",
+        "Crash node",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest-pnp-resolver`?",
+    "type": "mcq",
+    "o": [
+        "Resolver for Yarn PnP (Plug'n'Play) environments where node_modules doesn't exist.",
+        "Plugin",
+        "Promise",
+        "Performance"
+    ]
+},
+{
+    "q": "How to test 'WebSocket'?",
+    "type": "mcq",
+    "o": [
+        "Use `jest-websocket-mock` or mock `global.WebSocket`. Assert messages sent/received.",
+        "Connect to real WS",
+        "Use HTTP",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to assert specific call argument at index?",
+    "type": "mcq",
+    "o": [
+        "`expect(mockFn.mock.calls[callIndex][argIndex]).toBe(value)`",
+        "`mockFn.args(i)`",
+        "`mockFn.get(i)`",
+        "Cannot do it"
+    ]
+},
+{
+    "q": "What is 'Snapshot Property Matchers' for dynamic usage?",
+    "type": "mcq",
+    "o": [
+        "`expect(v).toMatchSnapshot({ id: expect.any(String) })`. Useful for UUIDs generated during render.",
+        "Ignore props",
+        "Delete props",
+        "Sort props"
+    ]
+},
+{
+    "q": "How to test component utilizing `ResizeObserver` loop limit?",
+    "type": "mcq",
+    "o": [
+        "Difficult. Usually ignored in JSDOM (muted). In E2E, check browser console for 'ResizeObserver loop limit exceeded'.",
+        "Crash test",
+        "Fail test",
+        "Pass always"
+    ]
+},
+{
+    "q": "What is `jest.requireActual` use case in `jest.mock`?",
+    "type": "mcq",
+    "o": [
+        "Preserving parts of the module. `return { ...jest.requireActual('mod'), mockedMethod: ... }`",
+        "Require real file",
+        "Require node",
+        "Debugging"
+    ]
+},
+{
+    "q": "Can you verify 'Memoization' via `toBe`?",
+    "type": "mcq",
+    "o": [
+        "Yes. `expect(result1).toBe(result2)` verifies object reference is identical (memoized).",
+        "No",
+        "Only deep equal",
+        "Never"
+    ]
+},
+{
+    "q": "How to test `Context` updates without rendering unrelated children?",
+    "type": "mcq",
+    "o": [
+        "Mock the child components to exclude them from render tree/snapshot, isolating the Context Provider logic.",
+        "Cannot isolate",
+        "Render everything",
+        "Use enzymes"
+    ]
+},
+{
+    "q": "What implies `jest.fn().mockImplementationOnce` chain?",
+    "type": "mcq",
+    "o": [
+        "Defining specific behavior for 1st call, then 2nd call, etc. `.mockImplementationOnce(A).mockImplementationOnce(B)`",
+        "Only one call",
+        "Resetting",
+        "Recursion"
+    ]
+},
+{
+    "q": "How to test `AbortController` signal?",
+    "type": "mcq",
+    "o": [
+        "Pass signal to fetch mock. Trigger abort. Assert fetch rejected with AbortError or cleanup logic ran.",
+        "Stop test",
+        "Cancel jest",
+        "Pause"
+    ]
+},
+{
+    "q": "What is 'Code Coverage' branch metrics?",
+    "type": "mcq",
+    "o": [
+        "Percentage of control structure branches (if/else/switch cases) executed. Hardest to get to 100%.",
+        "Git branches",
+        "Tree branches",
+        "Leaf nodes"
+    ]
+},
+{
+    "q": "How to test `React.lazy` failure?",
+    "type": "mcq",
+    "o": [
+        "Mock dynamic import to reject. Assert Error Boundary catches it.",
+        "Delete file",
+        "Rename file",
+        "Make syntax error"
+    ]
+},
+{
+    "q": "How to stub Global variable?",
+    "type": "mcq",
+    "o": [
+        "`global.MyVar = 'test'`. Better to use `jest.replaceProperty` (Jest 29+) or save/restore.",
+        "Cannot stub",
+        "Use local",
+        "Use window"
+    ]
+},
+{
+    "q": "What is `testEnvironment` 'node'?",
+    "type": "mcq",
+    "o": [
+        "Runs test in Node environment (no DOM globals like window/document). Faster startup. Good for utility functions.",
+        "Runs in chrome",
+        "Runs in docker",
+        "Legacy"
+    ]
+},
+{
+    "q": "Can you mix 'node' and 'jsdom' tests?",
+    "type": "mcq",
+    "o": [
+        "Yes, set `testEnvironment` in jest config (default) or override per file with docblock.",
+        "No",
+        "Only one",
+        "Crash"
+    ]
+},
+{
+    "q": "How to test 'Scroll Restoration'?",
+    "type": "mcq",
+    "o": [
+        "Mock `window.scrollTo`. Navigate. Assert call with saved coordinates.",
+        "Scroll mouse",
+        "Check visual",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `requestAnimationFrame`?",
+    "type": "mcq",
+    "o": [
+        "Use `jest.useFakeTimers()` (modern Jest mocks RAF automatically) or `jest-raf-stub`.",
+        "Wait 16ms",
+        "Use interval",
+        "Ignore"
+    ]
+},
+{
+    "q": "What is 'Strict Mock'?",
+    "type": "mcq",
+    "o": [
+        "A mock that throws if any un-configured method is called. Ensures precise behavior verification.",
+        "Strict mode",
+        "Type checks",
+        "Formatting"
+    ]
+},
+{
+    "q": "How to test `process.on('uncaughtException')`?",
+    "type": "mcq",
+    "o": [
+        "Difficult in Jest runner itself. Often needs a separate child process test or specific mocking of process.",
+        "Throw error",
+        "Crash jest",
+        "Write hook"
+    ]
+},
+{
+    "q": "What is `expect.anything()`?",
+    "type": "mcq",
+    "o": [
+        "Matches anything except null/undefined.",
+        "Matches all",
+        "Matches strings",
+        "Matches objects"
+    ]
+},
+{
+    "q": "How to test 'Content-Type' header logic?",
+    "type": "mcq",
+    "o": [
+        "Spy on fetch. Assert `headers` argument contains correct content-type.",
+        "Check network tab",
+        "Check server",
+        "Check file"
+    ]
+},
+{
+    "q": "How to test `Image.onload`?",
+    "type": "mcq",
+    "o": [
+        "Create Image mock. Trigger onload manually. `const img = new Image(); img.onload();`",
+        "Load real image",
+        "Wait",
+        "Check screen"
+    ]
+},
+{
+    "q": "What is `waait` library (deprecated)?",
+    "type": "mcq",
+    "o": [
+        "Simple promise delay. Replaced by `await new Promise(r => setTimeout(r))` or `act`.",
+        "Wait library",
+        "Async library",
+        "Testing library"
+    ]
+},
+{
+    "q": "How to assert error instance type specifically?",
+    "type": "mcq",
+    "o": [
+        "`expect(err).toBeInstanceOf(TypeError)`",
+        "`expect(err.name).toBe('TypeError')`",
+        "`expect(err).toBe('TypeError')`",
+        "`typeof err`"
+    ]
+},
+{
+    "q": "How to test 'Click hijacking'?",
+    "type": "mcq",
+    "o": [
+        "Assert z-indexes or visually via E2E. Unit test overlays preventing click on under-elements using custom event bubbling checks.",
+        "Click hard",
+        "Click fast",
+        "Hack it"
+    ]
+},
+{
+    "q": "What is `jest.fn` default return?",
+    "type": "mcq",
+    "o": [
+        "undefined",
+        "null",
+        "void",
+        "false"
+    ]
+},
+{
+    "q": "How to mock return value 'this' (chaining)?",
+    "type": "mcq",
+    "o": [
+        "`mockFn.mockReturnThis()`",
+        "`return this`",
+        "`mockValue(this)`",
+        "`chain()`"
+    ]
+},
+{
+    "q": "How to test `postMessage` (cross-window)?",
+    "type": "mcq",
+    "o": [
+        "Mock `window.postMessage`. Assert dispatch directly. Use `window.addEventListener('message')` to receive.",
+        "Send email",
+        "Send sms",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `test.concurrent.skip`?",
+    "type": "mcq",
+    "o": [
+        "Skip a concurrent test.",
+        "Skip all",
+        "Skip file",
+        "Skip suite"
+    ]
+},
+{
+    "q": "How to test 'focus-visible'?",
+    "type": "mcq",
+    "o": [
+        "Hard in JSDOM (styling logic). Use E2E visual regression for outlines.",
+        "Check boolean",
+        "Check CSS",
+        "Check class"
+    ]
+},
+{
+    "q": "How to verify 'ARIA' strict compliance?",
+    "type": "mcq",
+    "o": [
+        "Use `jest-axe` `toHaveNoViolations()`. Checks tree for ARIA rules.",
+        "Read code",
+        "Use screen reader",
+        "Manual check"
+    ]
+},
+{
+    "q": "How to test 'Sticky Headers'?",
+    "type": "mcq",
+    "o": [
+        "Scroll. Check bounding client rect (mocked). Assert position fixed/sticky class applied.",
+        "Use glue",
+        "Check visual",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `snapshotFormat` config?",
+    "type": "mcq",
+    "o": [
+        "Options for formatting snapshots (e.g. `printBasicPrototype`, `escapeString`).",
+        "Output path",
+        "File ext",
+        "Indentation"
+    ]
+},
+{
+    "q": "How to test `Worker` instantiation?",
+    "type": "mcq",
+    "o": [
+        "Mock global Worker class. spy on constructor and `postMessage`.",
+        "Run worker",
+        "Use thread",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test 'Pinch to Zoom'?",
+    "type": "mcq",
+    "o": [
+        "Trigger touch events (touchstart multiple touches, touchmove spread). Calculate scale logic in test.",
+        "Zoom screen",
+        "Check viewport",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest.disableAutomock()`?",
+    "type": "mcq",
+    "o": [
+        "Disables automatic mocking. Not needed unless automock: true is in config.",
+        "Enable mocks",
+        "Clear mocks",
+        "Reset mocks"
+    ]
+},
+{
+    "q": "How to test 'Prefers Reduced Motion'?",
+    "type": "mcq",
+    "o": [
+        "Mock `matchMedia('(prefers-reduced-motion: reduce)')`. Assert animation styles disabled or different classes.",
+        "Change settings",
+        "Shake screen",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test `MutationObserver` disconnect?",
+    "type": "mcq",
+    "o": [
+        "Spy on `disconnect`. Unmount component. Assert spy called.",
+        "Check DOM",
+        "Wait",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What implies 'Test suite failed to run: Cannot find module'?",
+    "type": "mcq",
+    "o": [
+        "Import path error, missing dependency, or incorrect `moduleNameMapper` config.",
+        "Test failed",
+        "Code failed",
+        "Timeout"
+    ]
+}
+,
+{
+    "q": "What is `test.retry` inside a test?",
+    "type": "mcq",
+    "o": [
+        "Not standard API. Use `jest.retryTimes` configuration for suite or file.",
+        "Retry this",
+        "Repeat loop",
+        "While loop"
+    ]
+},
+{
+    "q": "How to verify that a state update happened inside a 'transition' (concurrent)?",
+    "type": "mcq",
+    "o": [
+        "Difficult to inspect transition object directly. Verify behavior: e.g. 'isPending' state appearance or suspension behavior using `act`.",
+        "Check transition",
+        "Check state",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest.mock` vs `jest.setMock`?",
+    "type": "mcq",
+    "o": [
+        "`setMock` is strict/explicit (legacy). `mock` is more flexible/hoisted. Prefer `mock`.",
+        "Same",
+        "setMock is better",
+        "setMock is faster"
+    ]
+},
+{
+    "q": "How to test 'BeforeUnload' event?",
+    "type": "mcq",
+    "o": [
+        "Dispatch 'beforeunload' on window. Assert `event.returnValue` was set or `preventDefault` called.",
+        "Close tab",
+        "Close window",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `errorOnDeprecated`?",
+    "type": "mcq",
+    "o": [
+        "Jest config to throw (fail test) if deprecated APIs are used (e.g. from React).",
+        "Log error",
+        "Warning",
+        "Ignore"
+    ]
+},
+{
+    "q": "How to test component 'displayName'?",
+    "type": "mcq",
+    "o": [
+        "`expect(Component.displayName).toBe('Name')`. Unit test on class/function directly.",
+        "Check React DevTools",
+        "Check render",
+        "Check DOM"
+    ]
+},
+{
+    "q": "What is `jest-diff`?",
+    "type": "mcq",
+    "o": [
+        "Utility used by Jest to print pretty diff strings (green/red) on failure. Can be used standalone.",
+        "Git diff",
+        "Compare files",
+        "Merge tool"
+    ]
+},
+{
+    "q": "How to test custom 'Hook' throwing error?",
+    "type": "mcq",
+    "o": [
+        "`const { result } = renderHook(() => useHook()); expect(result.error).toEqual(...)` (if hook catches) or `expect(() => renderHook(...)).toThrow()`",
+        "Try catch block",
+        "Assert error",
+        "Log"
+    ]
+},
+{
+    "q": "What implies `TypeError: Cannot read property 'style' of null` in test?",
+    "type": "mcq",
+    "o": [
+        "Tried to access style on an element that wasn't found (null). Check query.",
+        "CSS missing",
+        "Style missing",
+        "React error"
+    ]
+},
+{
+    "q": "How to debug 'Async callback was not invoked within timeout'?",
+    "type": "mcq",
+    "o": [
+        "Callback passed to `done` or async function never finished. Promise stuck pending. Check network mocks/timers.",
+        "Increase limit",
+        "Ignore",
+        "Retry"
+    ]
+},
+{
+    "q": "What is `setupFiles` limitation?",
+    "type": "mcq",
+    "o": [
+        "Run before test framework. CANNOT use `jest.fn`, `expect`, etc inside them.",
+        "Slow",
+        "No imports",
+        "No console"
+    ]
+},
+{
+    "q": "How to test `WebAssembly` load?",
+    "type": "mcq",
+    "o": [
+        "Mock `WebAssembly.instantiate`. JSDOM support is often missing or basic.",
+        "Load wasm",
+        "Compile c++",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What calls `componentWillUnmount` in test?",
+    "type": "mcq",
+    "o": [
+        "`unmount()` helper from RTL/Enzyme. Or re-rendering parent without the child.",
+        "Deleting line",
+        "Closing file",
+        "Ending test"
+    ]
+},
+{
+    "q": "How to test 'defaultProps'?",
+    "type": "mcq",
+    "o": [
+        "Render without props. Assert values from defaultProps are present in DOM or props (Unit).",
+        "Check logic",
+        "Check syntax",
+        "Check types"
+    ]
+},
+{
+    "q": "What is `jest-resolve`?",
+    "type": "mcq",
+    "o": [
+        "Internal package used by Jest to resolve module paths. Supports custom resolvers.",
+        "Resolve promise",
+        "Resolve bug",
+        "Resolve conflict"
+    ]
+},
+{
+    "q": "How to test `pointer-events: none` logic?",
+    "type": "mcq",
+    "o": [
+        "Hard in JSDOM (event bubbling ignores CSS). `userEvent` might respect it if `skipPointerEventsCheck` is false. Usually E2E check.",
+        "Click it",
+        "Touch it",
+        "Move it"
+    ]
+},
+{
+    "q": "How to test `dataset` (data- attributes)?",
+    "type": "mcq",
+    "o": [
+        "`expect(element).toHaveAttribute('data-id', '123')` or `element.dataset.id`",
+        "Check props",
+        "Check state",
+        "Check styles"
+    ]
+},
+{
+    "q": "What is a 'Stub' in Sinon terms?",
+    "type": "mcq",
+    "o": [
+        "Function with pre-programmed behavior (like Jest mock implementation).",
+        "Mock",
+        "Spy",
+        "Fake"
+    ]
+},
+{
+    "q": "Can Jest run TS files directly?",
+    "type": "mcq",
+    "o": [
+        "No, requires transformation (ts-jest or babel-jest) to JS first.",
+        "Yes",
+        "Usually",
+        "Always"
+    ]
+},
+{
+    "q": "What is `slowTestThreshold`?",
+    "type": "mcq",
+    "o": [
+        "Config (seconds) to mark test as slow (highlighted in red in summary).",
+        "Fails test",
+        "Skips test",
+        "Deletes test"
+    ]
+},
+{
+    "q": "How to test 'XML Parsing'?",
+    "type": "mcq",
+    "o": [
+        "Use `DOMParser` (supported in JSDOM). Parse string, assert XML document structure.",
+        "Check text",
+        "Check json",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `test.skip` alias?",
+    "type": "mcq",
+    "o": [
+        "`xit` (exclude it) or `xtest`",
+        "`sit`",
+        "`nit`",
+        "`qit`"
+    ]
+},
+{
+    "q": "What is `test.only` alias?",
+    "type": "mcq",
+    "o": [
+        "`fit` (focus it) or `ftest`",
+        "`lit`",
+        "`bit`",
+        "`oit`"
+    ]
+},
+{
+    "q": "How to test 'Shadow DOM'?",
+    "type": "mcq",
+    "o": [
+        "JSDOM has basic support. Access `element.shadowRoot`. Queries might need specific config or `within(shadowRoot)`.",
+        "Easy",
+        "Native",
+        "No support"
+    ]
+},
+{
+    "q": "What implies 'Jest: Timeout - Async callback was not invoked'?",
+    "type": "mcq",
+    "o": [
+        "Promise/Done callback never finished within limit.",
+        "Syntax error",
+        "Memory leak",
+        "Success"
+    ]
+},
+{
+    "q": "How to verify function called with ANY string?",
+    "type": "mcq",
+    "o": [
+        "`expect(fn).toHaveBeenCalledWith(expect.any(String))`",
+        "`expect(fn).toHaveBeenCalledWithString()`",
+        "`expect(fn).toHaveBeenCalledWith('*')`",
+        "`expect(fn).toHaveBeenCalledWith(String)`"
+    ]
+},
+{
+    "q": "How to verify function called with partial object match?",
+    "type": "mcq",
+    "o": [
+        "`expect(fn).toHaveBeenCalledWith(expect.objectContaining({a: 1}))`",
+        "`expect(fn).toHaveBeenCalledWith({a: 1})` (Exact fail)",
+        "`expect(fn).toHaveBeenCalledPartially({a: 1})`",
+        "`expect(fn).toHaveBeenCalledWithMatch({a: 1})`"
+    ]
+},
+{
+    "q": "What is `jest.fn` .mock.results?",
+    "type": "mcq",
+    "o": [
+        "Array of objects `{ type: 'return'|'throw', value: ... }` for each call.",
+        "Return values only",
+        "Errors only",
+        "Inputs only"
+    ]
+},
+{
+    "q": "How to test `dragover` event?",
+    "type": "mcq",
+    "o": [
+        "`fireEvent.dragOver(dropZone, { dataTransfer: ... })`",
+        "Drag mouse",
+        "Hold click",
+        "Cannot test"
+    ]
+},
+{
+    "q": "How to test 'Select All' text?",
+    "type": "mcq",
+    "o": [
+        "`userEvent.type(input, '{selectall}')` or selection API mocks.",
+        "Ctrl+A",
+        "Drag select",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest-serializer-vue`?",
+    "type": "mcq",
+    "o": [
+        "Snapshot serializer for Vue components (irrelevant for React but conceptually similar formatters exist).",
+        "React tool",
+        "Angular tool",
+        "Node tool"
+    ]
+},
+{
+    "q": "How to mock `URLSearchParams`?",
+    "type": "mcq",
+    "o": [
+        "Usually natively available in Node 10+ / JSDOM. If not, polyfill global.",
+        "Mock string",
+        "Mock query",
+        "Mock regex"
+    ]
+},
+{
+    "q": "How to assert element does NOT have class?",
+    "type": "mcq",
+    "o": [
+        "`expect(el).not.toHaveClass('active')`",
+        "`expect(el.class).toBe('')`",
+        "`assert(!class)`",
+        "`checkClass`"
+    ]
+},
+{
+    "q": "What is 'Screenshot Testing'?",
+    "type": "mcq",
+    "o": [
+        "Capturing actual image of component. Diffing against baseline image. (e.g. Storybook test-runner, specialized tools).",
+        "Snapshot testing",
+        "Unit testing",
+        "Logging"
+    ]
+},
+{
+    "q": "How to test `SpeechSynthesis` (Text to Speech)?",
+    "type": "mcq",
+    "o": [
+        "Mock `window.speechSynthesis.speak`. Assert call.",
+        "Listen audio",
+        "Use mic",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `jest.isolateModulesAsync`?",
+    "type": "mcq",
+    "o": [
+        "Run async callback with isolated modules registry.",
+        "Sync version",
+        "Faster version",
+        "Slower version"
+    ]
+},
+{
+    "q": "How to test `BroadcastChannel`?",
+    "type": "mcq",
+    "o": [
+        "Mock the class. Simulate message event on channel instance.",
+        "Send signal",
+        "Use radio",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What implies 'Test suite failed to run: Your test suite must contain at least one test'?",
+    "type": "mcq",
+    "o": [
+        "You have a test file with no `test` or `it` blocks (or all skipped).",
+        "Empty file",
+        "Good file",
+        "Passed"
+    ]
+},
+{
+    "q": "How to test `Intl.DateTimeFormat`?",
+    "type": "mcq",
+    "o": [
+        "Natively supported in Node (with full-icu or newer versions). Verify formatted output string.",
+        "Mock it",
+        "Use Moment",
+        "Use date props"
+    ]
+},
+{
+    "q": "How to mock `crypto.randomUUID`?",
+    "type": "mcq",
+    "o": [
+        "`Object.defineProperty(global.crypto, 'randomUUID', { value: jest.fn().mockReturnValue('uuid') })`",
+        "Mock random",
+        "Mock uuid",
+        "Mock math"
+    ]
+},
+{
+    "q": "What is `reporters` config?",
+    "type": "mcq",
+    "o": [
+        "List of reporters (default, github-actions, summary, etc) to output test results.",
+        "Journalists",
+        "Loggers",
+        "Printers"
+    ]
+},
+{
+    "q": "How to test 'Network Offline' detection hook?",
+    "type": "mcq",
+    "o": [
+        "Trigger 'offline' event on window. Assert hook state matches false.",
+        "Unplug cable",
+        "Turn off wifi",
+        "Close app"
+    ]
+},
+{
+    "q": "What is `jest.requireActual` return?",
+    "type": "mcq",
+    "o": [
+        "The real module exports.",
+        "Mocked exports",
+        "Undefined",
+        "Error"
+    ]
+},
+{
+    "q": "What is 'Snapshot Update' command?",
+    "type": "mcq",
+    "o": [
+        "`jest -u` or `npm test -- -u`",
+        "`jest -s`",
+        "`jest -f`",
+        "`jest -x`"
+    ]
+},
+{
+    "q": "How to test `FormData` append?",
+    "type": "mcq",
+    "o": [
+        "Form submission logic. Spy on fetch body (which is FormData). Check entries.",
+        "Check API",
+        "Check HTML",
+        "Check logs"
+    ]
+},
+{
+    "q": "What is `global.setImmediate` usage in test?",
+    "type": "mcq",
+    "o": [
+        "Often used to flush microtasks in legacy tests. `await new Promise(setImmediate)`.",
+        "Timeout",
+        "Interval",
+        "Animation"
+    ]
+},
+{
+    "q": "How to test `Notification` API?",
+    "type": "mcq",
+    "o": [
+        "Mock `window.Notification`. Assert permission request or constructor call.",
+        "Show alert",
+        "Show popup",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `resetMocks: true` in config?",
+    "type": "mcq",
+    "o": [
+        "Automatically resets mock state (calls) before every test. Safer default.",
+        "Clears implementations",
+        "Resets modules",
+        "Resets nothing"
+    ]
+},
+{
+    "q": "What is `restoreMocks: true` in config?",
+    "type": "mcq",
+    "o": [
+        "Automatically restores original implementations (for spies) before every test.",
+        "Clears calls",
+        "Resets memory",
+        "Resets DOM"
+    ]
+},
+{
+    "q": "How to test 'Copy' button behavior?",
+    "type": "mcq",
+    "o": [
+        "Mock `navigator.clipboard.writeText`. Click button. Assert writeText called with expected string.",
+        "Ctrl+C",
+        "Check clipboard",
+        "Assume works"
+    ]
+},
+{
+    "q": "What represents the 'Arrange' phase in test?",
+    "type": "mcq",
+    "o": [
+        "Setting up mocks, rendering components, defining props.",
+        "Clicking",
+        "Asserting",
+        "Cleaning"
+    ]
+},
+{
+    "q": "What represents the 'Act' phase in test?",
+    "type": "mcq",
+    "o": [
+        "Performing user interactions (click, type) or executing function.",
+        "Setup",
+        "Assert",
+        "Clean"
+    ]
+},
+{
+    "q": "What represents the 'Assert' phase in test?",
+    "type": "mcq",
+    "o": [
+        "Checking expectations (toBe, toEqual, toBeInTheDocument).",
+        "Setup",
+        "Act",
+        "Clean"
+    ]
+},
+{
+    "q": "What is `jest-extended` usage?",
+    "type": "mcq",
+    "o": [
+        "Setup `expect.extend(matchers)` in `setupFilesAfterEnv` to make new matchers available globally.",
+        "Plugin",
+        "Config",
+        "CLI"
+    ]
+},
+{
+    "q": "How to test 'Battery Status' API?",
+    "type": "mcq",
+    "o": [
+        "Mock `navigator.getBattery`. Return promise resolving to mock battery manager object.",
+        "Drain battery",
+        "Charge battery",
+        "Cannot test"
+    ]
+}
+,
+{
+    "q": "What is `test.skip` vs `xtest`?",
+    "type": "mcq",
+    "o": [
+        "Aliases for the same thing. `xtest` is a shorthand for `test.skip`.",
+        "Different logic",
+        "One is faster",
+        "One is slower"
+    ]
+},
+{
+    "q": "How to verify that a mock was NOT called?",
+    "type": "mcq",
+    "o": [
+        "`expect(mockFn).not.toHaveBeenCalled()`",
+        "`expect(mockFn).toBe(0)`",
+        "`expect(mockFn).toBeNull()`",
+        "`assert(!mockFn)`"
+    ]
+},
+{
+    "q": "What is `jest.fn().mockReturnValueOnce` chaining order?",
+    "type": "mcq",
+    "o": [
+        "First call returns first value, second call returns second value, subsequent calls return default (undefined or last implementation).",
+        "Random order",
+        "Reverse order",
+        "All same"
+    ]
+},
+{
+    "q": "How to test component that registers global event listener?",
+    "type": "mcq",
+    "o": [
+        "Spy on `window.addEventListener`. Mount. Assert spy called. Unmount. Assert `removeEventListener` called.",
+        "Click window",
+        "Resize window",
+        "Cannot test"
+    ]
+},
+{
+    "q": "What is `waitFor` interval option?",
+    "type": "mcq",
+    "o": [
+        "How often Jest expects to check the condition (default 50ms).",
+        "Total timeout",
+        "Delay",
+        "Speed"
+    ]
+},
+{
+    "q": "How to debug 'Jest worker' crash?",
+    "type": "mcq",
+    "o": [
+        "Run sequentially (`--runInBand`). Use node `--inspect`. Check memory usage.",
+        "Restart",
+        "Upgrade Jest",
+        "Ignore"
+    ]
+},
+{
+    "q": "What is `test.failing`?",
+    "type": "mcq",
+    "o": [
+        "Marks test as expecting to fail. If it throws, it passes. If it doesn't throw, it fails.",
+        "Fails always",
+        "Skips",
+        "Todo"
+    ]
+},
+{
+    "q": "How to assert object equality ignoring specific field?",
+    "type": "mcq",
+    "o": [
+        "`expect(obj).toEqual(expect.objectContaining({ ...expected, ignoredField: expect.anything() }))`",
+        "Delete field",
+        "Ignore",
+        "Stringify"
+    ]
+},
+{
+    "q": "What is `jest.replaceProperty` (Jest 29+)?",
+    "type": "mcq",
+    "o": [
+        "Replaces object property (getter/value) and restores it automatically. Cleaner than `Object.defineProperty`.",
+        "SpyOn",
+        "Mock",
+        "Patch"
+    ]
+},
+{
+    "q": "How to test 'online' status change?",
+    "type": "mcq",
+    "o": [
+        "Dispatch `online`/`offline` event on window. Assert component reaction.",
+        "Unplug net",
+        "Disable wifi",
+        "Cannot test"
+    ]
+}
+]

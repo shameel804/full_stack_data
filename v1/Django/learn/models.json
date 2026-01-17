@@ -1,103 +1,73 @@
 {
     "id": "learn_django_models",
     "topicId": "models",
-    "topicTitle": "Models & ORM",
-    "description": "Define database schemas using Python classes and query data effortlessly.",
-    "baseKP": 100,
+    "topicTitle": "Models",
+    "description": "Design your database schema with Django Models",
+    "baseKP": 65,
     "slides": [
         {
             "id": "django_models_1",
             "type": "content",
-            "title": "What is a Model?",
-            "content": "# Blueprint 🗺️\n\nA Model is the single, definitive source of information about your data.\n\nIt contains the essential fields and behaviors of the data you’re storing.\n\nUsually, each model maps to a single database table."
+            "title": "ORM Basics",
+            "content": "# The ORM 🪄\n\n**Object-Relational Mapping (ORM)** allows you to interact with your database using Python code instead of raw SQL.\n\n| Python Code | SQL Generated |\n|-------------|---------------|\n| `User.objects.all()` | `SELECT * FROM auth_user;` |\n| `user.save()` | `INSERT INTO ...` or `UPDATE ...` |\n\n## Advantages\n- **Portability**: Code works with SQLite, Postgres, MySQL without changes.\n- **Security**: Automatically escapes queries preventing SQL injection.\n- **Productivity**: Write less code to do more."
         },
         {
             "id": "django_models_2",
             "type": "content",
-            "title": "Defining a Model",
-            "content": "# Python Classes 🐍\n\nIn `models.py`:\n\n<!-- FULL_CODE_START\nfrom django.db import models\n\nclass Person(models.Model):\n    first_name = models.CharField(max_length=30)\n    last_name = models.CharField(max_length=30)\nFULL_CODE_END -->\n\nThis creates a `myapp_person` table."
+            "title": "Defining Models",
+            "content": "# Defining Models 🧱\n\nA model is a Python class that inherits from `django.db.models.Model`. Each attribute represents a database field.\n\n```django\nfrom django.db import models\n\nclass Book(models.Model):\n    title = models.CharField(max_length=200)\n    author = models.CharField(max_length=100)\n    publication_date = models.DateField()\n    price = models.DecimalField(max_digits=5, decimal_places=2)\n    in_stock = models.BooleanField(default=True)\n\n    def __str__(self):\n        return self.title\n```\n> 💡 **Tip**: Defining `__str__` is crucial for readable representations in the Admin panel and shell!"
         },
         {
             "id": "django_models_3",
             "type": "content",
-            "title": "Migrations",
-            "content": "# Propagate Changes 🌊\n\n1. **Make Changes:** Edit `models.py`.\n2. **Create Migrations:** `python manage.py makemigrations` (Creates a script of changes).\n3. **Apply Migrations:** `python manage.py migrate` (Runs the script on DB)."
+            "title": "Field Types",
+            "content": "# Common Field Types 📝\n\n- **CharField**: Short text strings. Requires `max_length`.\n- **TextField**: Large text, infinite length.\n- **IntegerField**: Integers.\n- **BooleanField**: True/False.\n- **DateTimeField**: Date and Time.\n  - `auto_now_add=True`: Set to now on creation (unchangeable).\n  - `auto_now=True`: Update to now on every save.\n- **EmailField**, **URLField**: Validates format.\n\n## Field Options\n- `null=True`: Allows database NULL.\n- `blank=True`: Allows empty value in Forms.\n- `choices=...`: Restrict values to a list.\n- `unique=True`: No duplicates allowed."
         },
         {
             "id": "django_models_4",
             "type": "content",
-            "title": "Field Types",
-            "content": "# Data Types 🗃️\n\n- `CharField`: Small text.\n- `TextField`: Large text.\n- `IntegerField`: Numbers.\n- `DateTimeField`: Dates & times.\n- `BooleanField`: True/False.\n- `EmailField`: Validates email."
+            "title": "Migrations",
+            "content": "# Database Migrations 🚛\n\nMigrations are Django's way of propagating changes you make to your models into your database schema.\n\n## The Workflow\n\n1. **Modify** your `models.py`.\n2. **Generate** migration files:\n   ```bash\n   python manage.py makemigrations\n   ```\n   This creates a file in `migrations/` describing the changes.\n3. **Apply** the changes:\n   ```bash\n   python manage.py migrate\n   ```\n   This executes the necessary SQL commands.\n\n> ⚠️ **Warning**: Always commit your migration files to Git!"
+        },
+        {
+            "id": "django_models_quiz_1",
+            "type": "quiz",
+            "title": "Migration Quiz",
+            "content": "Test your process knowledge",
+            "quizQuestion": "Which command actualy modifies the database schema?",
+            "quizOptions": [
+                "makemigrations",
+                "migrate",
+                "sqlmigrate",
+                "syncdb"
+            ],
+            "correctOptionIndex": 1
         },
         {
             "id": "django_models_5",
             "type": "content",
             "title": "Relationships",
-            "content": "# Connecting Tables 🔗\n\n- **ForeignKey:** 1-to-many (e.g., Author has many Books).\n- **ManyToManyField:** Many-to-many (e.g., Pizza toppings).\n- **OneToOneField:** 1-to-1 (e.g., User Profile)."
-        },
-        {
-            "id": "django_models_quiz_1",
-            "type": "quiz",
-            "title": "Relation Quiz",
-            "content": "Connections.",
-            "quizQuestion": "Which field type would you use to link a 'Comment' to a specific 'Post' so that one post can have many comments?",
-            "quizOptions": [
-                "ManyToManyField",
-                "OneToOneField",
-                "ForeignKey",
-                "CharField"
-            ],
-            "correctOptionIndex": 2
+            "content": "# Model Relationships 🔗\n\nRelational databases are all about... relations!\n\n## 1. Many-to-One (ForeignKey)\nExample: A Car belongs to one Manufacturer.\n```django\nmanufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)\n```\n*`on_delete=models.CASCADE` means if Manufacturer is deleted, delete their Cars too.*\n\n## 2. Many-to-Many\nExample: A Pizza has many Toppings, a Topping is on many Pizzas.\n```django\ntoppings = models.ManyToManyField(Topping)\n```\n\n## 3. One-to-One\nExample: A User has one Profile.\n```django\nprofile = models.OneToOneField(User, on_delete=models.CASCADE)\n```"
         },
         {
             "id": "django_models_6",
             "type": "content",
-            "title": "The ORM",
-            "content": "# No SQL Needed 🚫\n\nDjango's **Object-Relational Mapper** lets you interact with the DB using Python code.\n\n`Entry.objects.all()` instead of `SELECT * FROM blog_entry;`."
-        },
-        {
-            "id": "django_models_7",
-            "type": "content",
-            "title": "Creating Objects",
-            "content": "# Insert Data 💾\n\n<!-- FULL_CODE_START\n# Method 1\np = Person(first_name=\"John\", last_name=\"Doe\")\np.save()\n\n# Method 2\nPerson.objects.create(first_name=\"Jane\", last_name=\"Doe\")\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_models_8",
-            "type": "content",
-            "title": "Querying Objects",
-            "content": "# Retrieve Data 🔎\n\n- `Person.objects.all()`: Get everyone.\n- `Person.objects.get(id=1)`: Get one (error if multiple/none).\n- `Person.objects.filter(last_name='Doe')`: Get all Does."
-        },
-        {
-            "id": "django_models_9",
-            "type": "content",
-            "title": "Updating & Deleting",
-            "content": "# Modify Data ✏️\n\n<!-- FULL_CODE_START\n# Update\np = Person.objects.get(id=1)\np.first_name = 'Johnny'\np.save()\n\n# Delete\np.delete()\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_models_10",
-            "type": "content",
-            "title": "Meta Options",
-            "content": "# Fine Tuning 🎛️\n\nUse the `Meta` inner class.\n\n<!-- FULL_CODE_START\nclass Person(models.Model):\n    # fields...\n    class Meta:\n        ordering = ['last_name']\n        verbose_name_plural = \"People\"\nFULL_CODE_END -->"
+            "title": "Querying Data",
+            "content": "# Basic Queries 🔎\n\nDjango gives you a `Manager` usually named `objects`.\n\n```django\n# CREATE\np = Person(name=\"Fred\", age=30)\np.save()\n# OR\nPerson.objects.create(name=\"Fred\", age=30)\n\n# READ\nall_people = Person.objects.all()\nspecific = Person.objects.get(id=1)  # Throws error if not found\nfiltered = Person.objects.filter(age__gt=20) # Age > 20\n\n# UPDATE\np.age = 31\np.save()\n\n# DELETE\np.delete()\n```"
         },
         {
             "id": "django_models_quiz_2",
             "type": "quiz",
-            "title": "Migration Quiz",
-            "content": "Workflow.",
-            "quizQuestion": "What is the primary purpose of `makemigrations`?",
+            "title": "Relationship Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "What argument is required for ForeignKey to specify behavior when the referenced object is deleted?",
             "quizOptions": [
-                "To apply changes to the database immediately",
-                "To create a Python file describing changes to your models",
-                "To delete the database",
-                "To create a superuser"
+                "on_delete",
+                "on_remove",
+                "cascade_option",
+                "delete_behavior"
             ],
-            "correctOptionIndex": 1
-        },
-        {
-            "id": "django_models_11",
-            "type": "content",
-            "title": "Summary",
-            "content": "# Recap: Models 🧱\n\nData Structure.\n\n- **Class:** Maps to Table.\n- **Fields:** Map to Columns.\n- **Migrations:** Version control for DB.\n- **ORM:** Pythonic database access.\n\n## Next Steps\nDisplay your data with **Views & URLs**!"
+            "correctOptionIndex": 0
         }
     ]
 }

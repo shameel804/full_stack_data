@@ -1,0 +1,73 @@
+{
+    "id": "learn_django_urls",
+    "topicId": "urls",
+    "topicTitle": "URLs and Views",
+    "description": "Master URL routing and View creation in Django",
+    "baseKP": 60,
+    "slides": [
+        {
+            "id": "django_urls_1",
+            "type": "content",
+            "title": "URL Routing Logic",
+            "content": "# URL Routing 🗺️\n\nWhen a user requests a page, Django needs to know which view logic to execute. This mapping happens in `urls.py`.\n\n## How it works:\n1. Django looks at `ROOT_URLCONF` in `settings.py`.\n2. It loads the `urlpatterns` list from that file.\n3. It runs through each URL pattern, in order, and stops at the first one that matches the requested URL.\n4. It imports and calls the given view function.\n\n```django\n# urls.py\nfrom django.urls import path\nfrom . import views\n\nurlpatterns = [\n    path('home/', views.home),\n    path('about/', views.about),\n]\n```"
+        },
+        {
+            "id": "django_urls_2",
+            "type": "content",
+            "title": "Creating Views",
+            "content": "# Creating Views 🖼️\n\nA view is a Python function (or class) that takes a Web request and returns a Web response.\n\n## Review: The Request-Response Cycle\n\n```django\nfrom django.http import HttpResponse\n\n# 1. Takes a 'request' object\ndef home(request):\n    # 2. Does logic\n    # 3. Returns a 'response' object\n    return HttpResponse(\"Hello, World!\")\n```\n\nNormally, instead of returning raw strings, we return **HTML Templates**:\n```django\nfrom django.shortcuts import render\n\ndef home(request):\n    return render(request, 'home.html', {'key': 'value'})\n```"
+        },
+        {
+            "id": "django_urls_quiz_1",
+            "type": "quiz",
+            "title": "Views Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "What must every Django view function receive as its first argument?",
+            "quizOptions": [
+                "The template name",
+                "A request object",
+                "The user ID",
+                "The database connection"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_urls_3",
+            "type": "content",
+            "title": "Path Converters",
+            "content": "# Path Converters 🔍\n\nOften you need to capture values from the URL, like a blog post ID or username.\n\n## Syntax: `<type:name>`\n\n```django\nurlpatterns = [\n    # Matches integers like /posts/5/\n    path('posts/<int:post_id>/', views.post_detail),\n    \n    # Matches strings (excluding /) like /profile/john/\n    path('profile/<str:username>/', views.profile),\n    \n    # Matches paths (including /) like /files/images/logo.png\n    path('files/<path:file_path>/', views.serve_file),\n]\n```\n\nThe captured value is passed to the view:\n```django\ndef post_detail(request, post_id):\n    # post_id is an integer here\n    return HttpResponse(f\"Viewing post {post_id}\")\n```"
+        },
+        {
+            "id": "django_urls_4",
+            "type": "content",
+            "title": "URL Dispatcher & Includes",
+            "content": "# Organizing URLs 🗂️\n\nInstead of putting every URL in the main project `urls.py`, we should decouple them into their respective apps.\n\n## Using `include()`\n\n**project/urls.py**:\n```django\nfrom django.urls import include, path\n\nurlpatterns = [\n    # Forward any request starting with 'blog/' to blog.urls\n    path('blog/', include('blog.urls')),\n    path('shop/', include('shop.urls')),\n]\n```\n\n**blog/urls.py**:\n```django\nfrom django.urls import path\nfrom . import views\n\n# Only handles the part AFTER 'blog/'\nurlpatterns = [\n    path('', views.index),      # Matches /blog/\n    path('new/', views.create), # Matches /blog/new/\n]\n```"
+        },
+        {
+            "id": "django_urls_5",
+            "type": "content",
+            "title": "FBV vs CBV",
+            "content": "# Function vs Class Based Views ⚖️\n\n## Function-Based Views (FBV)\nSimple, explicit, easy to read. Great for custom logic.\n```django\ndef my_view(request):\n    if request.method == 'POST':\n        # Handle post\n    return render(request, 'template.html')\n```\n\n## Class-Based Views (CBV)\nObject-oriented, reusable, less code for common patterns (CRUD).\n```django\nfrom django.views.generic import ListView\nfrom .models import Article\n\nclass ArticleList(ListView):\n    model = Article\n    template_name = 'article_list.html'\n```\n\n> 💡 **Tip**: Start with FBVs to learn. Use CBVs when you find yourself writing the same code over and over."
+        },
+        {
+            "id": "django_urls_quiz_2",
+            "type": "quiz",
+            "title": "CBV Quiz",
+            "content": "Test your knowledge",
+            "quizQuestion": "Which generic CBV is best for displaying a list of database objects?",
+            "quizOptions": [
+                "DetailView",
+                "ListView",
+                "CreateView",
+                "FormView"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_urls_6",
+            "type": "content",
+            "title": "URL Naming & Naming Spacing",
+            "content": "# Reverse Resolution ↩️\n\nNever hardcode URLs in your templates or code! Use **names**.\n\n**urls.py**:\n```django\npath('article/<int:id>/', views.detail, name='article-detail')\n```\n\n**Template**:\n```html\n<!-- BAD -->\n<a href=\"/article/{{ article.id }}/\">Read</a>\n\n<!-- GOOD -->\n<a href=\"{% url 'article-detail' article.id %}\">Read</a>\n```\n\n## Namespacing\nWhen multiple apps have the same view names (e.g., both have `detail`), use namespaces.\n\n**urls.py**:\n```django\napp_name = 'blog'\nurlpatterns = [...]\n```\n**Usage**:\n`{% url 'blog:detail' id %}`"
+        }
+    ]
+}

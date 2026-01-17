@@ -2,102 +2,60 @@
     "id": "learn_django_templates",
     "topicId": "templates",
     "topicTitle": "Templates",
-    "description": "Master the Django Template Language (DTL): Inheritance, Tags, and Filters.",
-    "baseKP": 100,
+    "description": "Understand the Django Template Language (DTL)",
+    "baseKP": 55,
     "slides": [
         {
             "id": "django_templates_1",
             "type": "content",
-            "title": "Django Template Language (DTL)",
-            "content": "# Dynamic HTML 🎨\n\nDTL allows you to generate HTML dynamically.\n\nIt's designed to be comfortable for those used to HTML.\n\nVariables: `{{ variable }}`\nTags: `{% tag %}`"
+            "title": "Template Language Basics",
+            "content": "# Django Template Language 📝\n\nDjango templates are just HTML files with special syntax to inject logic and data.\n\n## Variables `{{ }}`\nOutput a value from the context.\n```html\n<h1>Hello, {{ user.username }}!</h1>\n<p>Score: {{ user.profile.score }}</p>\n```\n\n## Tags `{% %}`\nControl logic (loops, conditions).\n```html\n{% if user.is_authenticated %}\n    <p>Welcome back!</p>\n{% else %}\n    <a href=\"/login\">Log in</a>\n{% endif %}\n```\n\n## Filters `|`\nModify variables for display.\n```html\n{{ name|upper }}      <!-- 'john' -> 'JOHN' -->\n{{ date|date:\"Y-m-d\" }} <!-- Formats date -->\n```"
         },
         {
             "id": "django_templates_2",
             "type": "content",
-            "title": "Variables",
-            "content": "# Display Data 📊\n\nOutput a value passed from the view.\n\n`{{ user.username }}`\n\nIf the variable is a dictionary, lookup by key. If object, lookup by attribute. If list, lookup by index (`{{ list.0 }}`)."
-        },
-        {
-            "id": "django_templates_3",
-            "type": "content",
-            "title": "Tags",
-            "content": "# Logic 🧠\n\nPerform loops, if statements, etc.\n\n<!-- FULL_CODE_START\n<ul>\n{% for athlete in athlete_list %}\n    <li>{{ athlete.name }}</li>\n{% endfor %}\n</ul>\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_templates_4",
-            "type": "content",
-            "title": "Filters",
-            "content": "# Modify Data 🛠️\n\nTransform variables before display using a pipe `|`.\n\n- `{{ name|lower }}`: Lowercase.\n- `{{ bio|truncatewords:30 }}`: First 30 words.\n- `{{ date|date:\"D d M Y\" }}`: Format date."
-        },
-        {
-            "id": "django_templates_5",
-            "type": "content",
-            "title": "Inheritance",
-            "content": "# The Power Move ⚡\n\nDon't repeat HTML structure.\n\n1. Create `base.html` with blocks.\n2. Child templates `extend` it.\n\n<!-- FULL_CODE_START\n{# base.html #}\n<body>\n    {% block content %}{% endblock %}\n</body>\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_templates_6",
-            "type": "content",
-            "title": "Extending Base",
-            "content": "# Child Template 👶\n\n<!-- FULL_CODE_START\n{% extends \"base.html\" %}\n\n{% block content %}\n    <h1>Welcome Home</h1>\n{% endblock %}\nFULL_CODE_END -->"
+            "title": "Common Tags",
+            "content": "# Essential Tags 🏷️\n\n## For Loop\nIterate over lists or querysets.\n```html\n<ul>\n{% for item in items %}\n    <li>{{ item.name }} - ${{ item.price }}</li>\n{% empty %}\n    <li>No items found.</li>\n{% endfor %}\n</ul>\n```\n> 💡 **Tip**: The `{% empty %}` block runs if the list is empty!\n\n## URL Tag\nGenerate links dynamically.\n```html\n<a href=\"{% url 'app:view_name' id=5 %}\">Link</a>\n```\n\n## CSRF Token\nRequired for security in forms.\n```html\n<form method=\"post\">\n    {% csrf_token %}\n    ...\n</form>\n```"
         },
         {
             "id": "django_templates_quiz_1",
             "type": "quiz",
             "title": "Syntax Quiz",
-            "content": "DTL.",
-            "quizQuestion": "Which syntax is used to execute a loop or logical check in Django templates?",
+            "content": "Test your syntax knowledge",
+            "quizQuestion": "Which syntax is used to output a variable's value?",
             "quizOptions": [
-                "{{ ... }}",
-                "<% ... %>",
-                "{% ... %}",
-                "[[ ... ]]"
+                "{% variable %}",
+                "{{ variable }}",
+                "[[ variable ]]",
+                "(( variable ))"
             ],
-            "correctOptionIndex": 2
+            "correctOptionIndex": 1
         },
         {
-            "id": "django_templates_7",
+            "id": "django_templates_3",
             "type": "content",
-            "title": "Includes",
-            "content": "# Components 🧩\n\nLoad a snippet of HTML into another template.\n\n`{% include \"nav.html\" %}`\n\nUseful for headers, footers, and sidebars."
+            "title": "Template Inheritance",
+            "content": "# Template Inheritance 🧬\n\nThe most powerful feature of DTL! It allows you to build a base \"skeleton\" template containing common elements (nav, footer) and define **blocks** that child templates can override.\n\n**base.html**:\n```html\n<html>\n<body>\n    <nav>...</nav>\n    <div class=\"content\">\n        {% block content %}{% endblock %}\n    </div>\n    <footer>...</footer>\n</body>\n</html>\n```\n\n**home.html**:\n```html\n{% extends \"base.html\" %}\n\n{% block content %}\n    <h1>Home Page</h1>\n    <p>This replaces the block in base!</p>\n{% endblock %}\n```"
         },
         {
-            "id": "django_templates_8",
+            "id": "django_templates_4",
             "type": "content",
-            "title": "Static Files",
-            "content": "# CSS & Images 🖼️\n\nServe assets.\n\n1. `{% load static %}` at top.\n2. `<img src=\"{% static 'images/logo.png' %}\">`\n\nDjango handles URLs automatically."
-        },
-        {
-            "id": "django_templates_9",
-            "type": "content",
-            "title": "URL Names",
-            "content": "# No Hardcoded Links 🔗\n\nUse the `url` tag with the view name.\n\n`href=\"{% url 'post_detail' post.id %}\"`\n\nIf you change the URL in `urls.py`, the link updates automatically."
-        },
-        {
-            "id": "django_templates_10",
-            "type": "content",
-            "title": "Custom Tags",
-            "content": "# Extending DTL 🔌\n\nYou can create your own tags and filters in python files inside `templatetags/` directory of your app."
+            "title": "Handling Static Files",
+            "content": "# Static Files 🖼️\n\nStatic files are images, CSS, and JavaScript that don't change dynamically.\n\n## Setup\n1. Make sure `django.contrib.staticfiles` is in `INSTALLED_APPS`.\n2. Define `STATIC_URL = '/static/'` in `settings.py`.\n\n## Usage in Templates\nAlways load the `static` tag library first.\n\n```html\n{% load static %}\n\n<html>\n<head>\n    <!-- CSS -->\n    <link rel=\"stylesheet\" href=\"{% static 'css/style.css' %}\">\n</head>\n<body>\n    <!-- Image -->\n    <img src=\"{% static 'images/logo.png' %}\" alt=\"Logo\">\n</body>\n</html>\n```"
         },
         {
             "id": "django_templates_quiz_2",
             "type": "quiz",
-            "title": "Linking Quiz",
-            "content": "Best Practices.",
-            "quizQuestion": "Why should you use the `{% url %}` tag instead of hardcoding paths like `/about/`?",
+            "title": "Static Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "What template tag must you load to use the {% static %} tag?",
             "quizOptions": [
-                "It is required by HTML5",
-                "It makes the page load faster",
-                "It prevents broken links if you change the URL pattern in urls.py",
-                "It improves SEO ranking"
+                "{% load assets %}",
+                "{% load staticfiles %}",
+                "{% load static %}",
+                "No need to load anything"
             ],
             "correctOptionIndex": 2
-        },
-        {
-            "id": "django_templates_11",
-            "type": "content",
-            "title": "Summary",
-            "content": "# Recap: Templates 📑\n\nPresentation Layer.\n\n- **Var:** `{{ }}`\n- **Tags:** `{% %}`\n- **Filters:** `|`\n- **Inheritance:** `block` and `extends`.\n\n## Next Steps\nHandle user inputs with **Forms**!"
         }
     ]
 }

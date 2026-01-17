@@ -2,102 +2,66 @@
     "id": "learn_django_forms",
     "topicId": "forms",
     "topicTitle": "Forms",
-    "description": "Handle user input safely, perform validation, and save data to models.",
-    "baseKP": 100,
+    "description": "Handling user input securely and efficiently",
+    "baseKP": 60,
     "slides": [
         {
             "id": "django_forms_1",
             "type": "content",
             "title": "Why Django Forms?",
-            "content": "# Handling Input is Hard 🤯\n\nYou need to:\n- Render HTML inputs.\n- Validate data on the server.\n- Redisplay forms with errors.\n- Convert data types.\n- Secure against XSS and CSRF.\n\nDjango Forms do ALL of this for you."
+            "content": "# Why Form Libraries? 🛡️\n\nHandling HTML forms manually is hard and dangerous.\n\n1. **Rendering**: You have to write `<input>` tags repeatedly.\n2. **Validation**: Checking if email is valid, passwords match, etc.\n3. **Security**: Protecting against malicious input (CSRF, XSS).\n4. **Data Type Conversion**: Converting string \"2023-01-01\" to a Python date object.\n\nDjango Forms handles ALL of this for you!"
         },
         {
             "id": "django_forms_2",
             "type": "content",
-            "title": "Defining a Form",
-            "content": "# Just Like Models 📋\n\nIn `forms.py`:\n\n<!-- FULL_CODE_START\nfrom django import forms\n\nclass ContactForm(forms.Form):\n    subject = forms.CharField(max_length=100)\n    message = forms.CharField(widget=forms.Textarea)\n    sender = forms.EmailField()\nFULL_CODE_END -->"
+            "title": "Building a Form",
+            "content": "# Creating a Form Class 📝\n\nSimilar to Models, defined in `forms.py`.\n\n```django\nfrom django import forms\n\nclass ContactForm(forms.Form):\n    subject = forms.CharField(max_length=100)\n    message = forms.CharField(widget=forms.Textarea)\n    sender = forms.EmailField()\n    cc_myself = forms.BooleanField(required=False)\n```\n\n## In the View:\n```django\ndef contact(request):\n    if request.method == 'POST':\n        form = ContactForm(request.POST)\n        if form.is_valid():\n            # Cleaned data is now safe to use\n            subject = form.cleaned_data['subject']\n            # ... send email ...\n            return redirect('success')\n    else:\n        form = ContactForm()\n    return render(request, 'contact.html', {'form': form})\n```"
         },
         {
             "id": "django_forms_3",
             "type": "content",
-            "title": "Rendering in Template",
-            "content": "# Displaying It 🖼️\n\n<!-- FULL_CODE_START\n<form method=\"post\">\n    {% csrf_token %}\n    {{ form.as_p }}\n    <button type=\"submit\">Send</button>\n</form>\nFULL_CODE_END -->\n\n`as_p` renders fields wrapped in `<p>` tags."
+            "title": "Rendering Forms",
+            "content": "# Rendering in Templates 🎨\n\n```html\n<form method=\"post\">\n    {% csrf_token %}\n    <!-- Render entire form -->\n    {{ form.as_p }}\n    \n    <button type=\"submit\">Send</button>\n</form>\n```\n\n## Rendering Options:\n- `{{ form.as_p }}`: Wrap fields in `<p>` tags.\n- `{{ form.as_table }}`: Wrap in `<tr>` tags.\n- `{{ form.as_ul }}`: Wrap in `<li>` tags.\n- **Manual**: Access `{{ form.field_name }}` directly for custom styling."
         },
         {
             "id": "django_forms_4",
             "type": "content",
-            "title": "Processing Views",
-            "content": "# View Logic 🧠\n\n<!-- FULL_CODE_START\ndef contact(request):\n    if request.method == 'POST':\n        form = ContactForm(request.POST)\n        if form.is_valid():\n            # Process data in form.cleaned_data\n            return redirect('success')\n    else:\n        form = ContactForm()\n    return render(request, 'contact.html', {'form': form})\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_forms_5",
-            "type": "content",
-            "title": "Validation",
-            "content": "# Clean Data 🧼\n\n`form.is_valid()` runs validation.\n\nAccess sanitized data via `form.cleaned_data['subject']`.\n\nIf invalid, the form rerenders with error messages automatically."
+            "title": "Form Validation",
+            "content": "# Form Validation ✅\n\nValidation happens when you call `form.is_valid()`.\n\n## Built-in Validation\n- Checks types (EmailField ensures `@`).\n- Checks `required=True`.\n- Checks max/min lengths.\n\n## Custom Validation\nDefine a method `clean_<fieldname>`:\n```django\ndef clean_sender(self):\n    data = self.cleaned_data['sender']\n    if \"@gmail.com\" not in data:\n        raise forms.ValidationError(\"Only Gmail allowed!\")\n    return data\n```"
         },
         {
             "id": "django_forms_quiz_1",
             "type": "quiz",
-            "title": "Security Quiz",
-            "content": "Protection.",
-            "quizQuestion": "Which template tag is REQUIRED inside a POST form to prevent Cross-Site Request Forgery?",
+            "title": "Validation Quiz",
+            "content": "Test your knowledge",
+            "quizQuestion": "Where is the sanitized data stored after form.is_valid() returns True?",
             "quizOptions": [
-                "{% csrf_protection %}",
-                "{% csrf_token %}",
-                "{% secure_form %}",
-                "{% form_token %}"
+                "form.data",
+                "form.validated_data",
+                "form.cleaned_data",
+                "form.sanitized"
             ],
-            "correctOptionIndex": 1
+            "correctOptionIndex": 2
         },
         {
-            "id": "django_forms_6",
+            "id": "django_forms_5",
             "type": "content",
             "title": "ModelForms",
-            "content": "# Dry (Don't Repeat Yourself) 🌵\n\nCreate forms directly from Models.\n\n<!-- FULL_CODE_START\nfrom django.forms import ModelForm\nfrom .models import Person\n\nclass PersonForm(ModelForm):\n    class Meta:\n        model = Person\n        fields = ['first_name', 'last_name']\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_forms_7",
-            "type": "content",
-            "title": "Saving ModelForms",
-            "content": "# Easy Save 💾\n\nSince it's tied to a model, you can just call `.save()`.\n\n<!-- FULL_CODE_START\nif form.is_valid():\n    form.save() # Creates or updates the Person instance\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_forms_8",
-            "type": "content",
-            "title": "Widgets",
-            "content": "# Custom Inputs 🎨\n\nChange how a field is rendered (e.g., date picker, password input).\n\n`password = forms.CharField(widget=forms.PasswordInput)`"
-        },
-        {
-            "id": "django_forms_9",
-            "type": "content",
-            "title": "Cleaning Data",
-            "content": "# Custom Validation 🛡️\n\nAdd `clean_<fieldname>` methods to your form class.\n\n<!-- FULL_CODE_START\ndef clean_email(self):\n    data = self.cleaned_data['email']\n    if not data.endswith('@example.com'):\n         raise forms.ValidationError(\"Only example.com emails!\")\n    return data\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_forms_10",
-            "type": "content",
-            "title": "Formsets",
-            "content": "# Multiple Forms 📚\n\nA layer of abstraction to work with multiple forms on the same page.\n\n`ArticleFormSet = formset_factory(ArticleForm)`"
+            "content": "# ModelForms 🚀\n\nIf your form maps directly to a Model (e.g., a form to create a User), don't duplicate code! Use `ModelForm`.\n\n```django\nfrom django import forms\nfrom .models import Article\n\nclass ArticleForm(forms.ModelForm):\n    class Meta:\n        model = Article\n        fields = ['title', 'content', 'pub_date']\n        # Or use fields = '__all__'\n```\n\n**Saving is magical:**\n```django\nif form.is_valid():\n    form.save()  # Creates specific Article instance in DB!\n```"
         },
         {
             "id": "django_forms_quiz_2",
             "type": "quiz",
-            "title": "Saving Quiz",
-            "content": "ModelForms.",
-            "quizQuestion": "What is the main advantage of using a `ModelForm` over a regular `Form`?",
+            "title": "ModelForm Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "Which inner class is mandatory in a ModelForm to link it to a model?",
             "quizOptions": [
-                "It looks better",
-                "It automatically generates form fields based on the Model definition and can save directly to the DB",
-                "It doesn't require CSRF tokens",
-                "It runs faster"
+                "class Config:",
+                "class Meta:",
+                "class Link:",
+                "class Settings:"
             ],
             "correctOptionIndex": 1
-        },
-        {
-            "id": "django_forms_11",
-            "type": "content",
-            "title": "Summary",
-            "content": "# Recap: Forms 📝\n\nSafe input handling.\n\n- **Forms:** Define fields and validation.\n- **ModelForms:** Generate forms from Models.\n- **Render:** `{{ form.as_p }}`\n- **Validate:** `form.is_valid()`.\n\n## Next Steps\nManage your site with the built-in **Admin Interface**!"
         }
     ]
 }

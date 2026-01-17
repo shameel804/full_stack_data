@@ -1,103 +1,41 @@
 {
     "id": "learn_django_admin",
     "topicId": "admin",
-    "topicTitle": "Admin Interface",
-    "description": "Customize the powerful built-in Django administrative interface.",
-    "baseKP": 100,
+    "topicTitle": "Django Admin",
+    "description": "Master the powerful built-in Admin interface",
+    "baseKP": 60,
     "slides": [
         {
             "id": "django_admin_1",
             "type": "content",
-            "title": "The Killer Feature 🦄",
-            "content": "# Instant Backend ⚡\n\nDjango reads your Models and automatically generates a professional, production-ready admin interface.\n\nGreat for content management, user testing, and admin tasks."
+            "title": "The Admin Panel",
+            "content": "# The Admin Interface 🎛️\n\nOne of Djangos killer features. It reads your models and provides a quick, professional interface for trusted users (staff) to manage content.\n\n## Getting In\n1. Ensure `django.contrib.admin` is installed.\n2. Create a superuser:\n   ```bash\n   python manage.py createsuperuser\n   ```\n3. Go to `/admin/` and login.\n\n> 💡 **Tip**: Allows non-technical staff to add/update content without SQL!"
         },
         {
             "id": "django_admin_2",
             "type": "content",
             "title": "Registering Models",
-            "content": "# Making it Visible 👀\n\nIn `admin.py`:\n\n<!-- FULL_CODE_START\nfrom django.contrib import admin\nfrom .models import Person\n\nadmin.site.register(Person)\nFULL_CODE_END -->"
+            "content": "# Configuration ⚙️\n\nTo see your models in the admin, you must register them in `admin.py`.\n\n## Basic Registration\n```django\nfrom django.contrib import admin\nfrom .models import Book\n\nadmin.site.register(Book)\n```\n\n## Custom Registration\nUse the decorator `@admin.register` to customize the list view.\n```django\n@admin.register(Book)\nclass BookAdmin(admin.ModelAdmin):\n    list_display = ('title', 'author', 'price')\n    search_fields = ('title',)\n```"
         },
         {
             "id": "django_admin_3",
             "type": "content",
-            "title": "Customizing the List",
-            "content": "# ModelAdmin 🛠️\n\nControl how the list view looks.\n\n<!-- FULL_CODE_START\nclass PersonAdmin(admin.ModelAdmin):\n    list_display = ('first_name', 'last_name', 'email')\n    list_filter = ('is_staff', 'date_joined')\n    search_fields = ('first_name', 'last_name')\n\nadmin.site.register(Person, PersonAdmin)\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_admin_4",
-            "type": "content",
-            "title": "Decorators",
-            "content": "# Clean Registration ✨\n\nYou can use the `@admin.register` decorator.\n\n<!-- FULL_CODE_START\n@admin.register(Person)\nclass PersonAdmin(admin.ModelAdmin):\n    list_display = ('name', 'age')\nFULL_CODE_END -->"
-        },
-        {
-            "id": "django_admin_5",
-            "type": "content",
-            "title": "Inline Admin",
-            "content": "# Nested Forms 📑\n\nEdit a Parent and its Children on one page (e.g., An Order and its Line Items).\n\n`TabularInline` or `StackedInline`."
+            "title": "Customizing Admin",
+            "content": "# Customizing the List View 📋\n\nMake the admin useful!\n\n- `list_display`: Which fields show up as columns.\n- `list_filter`: Add a sidebar filter (e.g., filter by Date or Boolean).\n- `search_fields`: Add a search bar.\n- `prepopulated_fields`: Auto-fill slugs from titles.\n\n```django\nclass ArticleAdmin(admin.ModelAdmin):\n    list_display = ['title', 'status', 'published_at']\n    list_filter = ['status']\n    search_fields = ['title', 'content']\n```"
         },
         {
             "id": "django_admin_quiz_1",
             "type": "quiz",
-            "title": "Display Quiz",
-            "content": "Configuration.",
-            "quizQuestion": "Which ModelAdmin attribute controls which columns are shown in the list of change view?",
+            "title": "Admin Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "Which attribute adds a sidebar to filter objects in the admin list view?",
             "quizOptions": [
-                "fields",
                 "list_display",
-                "columns",
-                "show_fields"
+                "search_fields",
+                "list_filter",
+                "filter_horizontal"
             ],
-            "correctOptionIndex": 1
-        },
-        {
-            "id": "django_admin_6",
-            "type": "content",
-            "title": "Actions",
-            "content": "# Batch Processing 📦\n\nAdd custom actions to the dropdown menu (e.g., \"Mark selected as published\").\n\nFunctions that take `(modeladmin, request, queryset)`."
-        },
-        {
-            "id": "django_admin_7",
-            "type": "content",
-            "title": "Overriding Templates",
-            "content": "# Full Control 🎨\n\nYou can override the HTML templates for the admin site to change the branding, layout, or functionality.\n\nPut templates in `templates/admin/`."
-        },
-        {
-            "id": "django_admin_8",
-            "type": "content",
-            "title": "Permissions",
-            "content": "# Access Control 🛡️\n\nThe admin respects user permissions.\n\n- `has_add_permission`\n- `has_change_permission`\n- `has_delete_permission`\n\nOverride these methods in ModelAdmin to restrict access."
-        },
-        {
-            "id": "django_admin_9",
-            "type": "content",
-            "title": "Read-Only Fields",
-            "content": "# Do Not Touch 🚫\n\nMake specific fields uneditable.\n\n`readonly_fields = ('created_at',)`\n\nUseful for timestamps or audit logs."
-        },
-        {
-            "id": "django_admin_10",
-            "type": "content",
-            "title": "Ordering",
-            "content": "# Sorting 📶\n\nDefault sorting for the admin list.\n\n`ordering = ('-created_at',)` (Newest first)."
-        },
-        {
-            "id": "django_admin_quiz_2",
-            "type": "quiz",
-            "title": "Search Quiz",
-            "content": "Finding data.",
-            "quizQuestion": "How do you enable a search box for your model in the admin interface?",
-            "quizOptions": [
-                "It is enabled by default",
-                "Set 'search_fields' in ModelAdmin",
-                "Set 'enable_search = True'",
-                "Install a search plugin"
-            ],
-            "correctOptionIndex": 1
-        },
-        {
-            "id": "django_admin_11",
-            "type": "content",
-            "title": "Summary",
-            "content": "# Recap: Admin Site 🎩\n\nYour management dashboard.\n\n- **Register:** `admin.site.register()`\n- **Customize:** `list_display`, `list_filter`.\n- **Inlines:** Edit related objects.\n- **Actions:** Bulk updates.\n\n## Next Steps\nBuild APIs with the **Django REST Framework**!"
+            "correctOptionIndex": 2
         }
     ]
 }

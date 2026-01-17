@@ -1,0 +1,41 @@
+{
+    "id": "learn_django_cache",
+    "topicId": "cache",
+    "topicTitle": "Caching",
+    "description": "Speed up your application with Caching strategies",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "django_cache_1",
+            "type": "content",
+            "title": "Why Cache?",
+            "content": "# The Need for Speed ⚡\n\nGenerating dynamic pages is expensive (DB queries, template rendering). Caching saves the result of these expensive operations so future requests are instant.\n\n## Backend Types\n- **Memcached**: Pure memory, fastest.\n- **Redis**: Fast, persistent, advanced data types.\n- **Database**: Stores cache in SQL table.\n- **LocMem**: Local memory (good for dev).\n- **Dummy**: No caching (good for dev)."
+        },
+        {
+            "id": "django_cache_2",
+            "type": "content",
+            "title": "Per-Site & Per-View",
+            "content": "# Caching Strategies 📐\n\n## Per-Site Cache\nCache the entire website. Add `UpdateCacheMiddleware` (first) and `FetchFromCacheMiddleware` (last) to settings.\n\n## Per-View Cache\nMost common. Cache specific views.\n```django\nfrom django.views.decorators.cache import cache_page\n\n@cache_page(60 * 15) # Cache for 15 minutes\ndef my_view(request):\n    ...\n```"
+        },
+        {
+            "id": "django_cache_3",
+            "type": "content",
+            "title": "Template Fragment Caching",
+            "content": "# Fragment Caching 🧩\n\nIf only part of a page is expensive (e.g., a sidebar with complex stats), cache just that part in the template!\n\n```html\n{% load cache %}\n\n<!-- Cache for 500 seconds -->\n{% cache 500 sidebar %}\n    <div class=\"sidebar\">\n        ...\n    </div>\n{% endcache %}\n```"
+        },
+        {
+            "id": "django_cache_quiz_1",
+            "type": "quiz",
+            "title": "Cache Quiz",
+            "content": "Test your strategy knowledge",
+            "quizQuestion": "Which caching strategy is best if only a small sidebar on your page is expensive to calculate?",
+            "quizOptions": [
+                "Per-site cache",
+                "Per-view cache",
+                "Template fragment cache",
+                "Browser caching"
+            ],
+            "correctOptionIndex": 2
+        }
+    ]
+}

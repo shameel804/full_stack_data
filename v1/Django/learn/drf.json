@@ -1,0 +1,41 @@
+{
+    "id": "learn_django_drf",
+    "topicId": "drf",
+    "topicTitle": "REST Framework (DRF)",
+    "description": "Build powerful Web APIs with Django REST Framework",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "django_drf_1",
+            "type": "content",
+            "title": "What is DRF?",
+            "content": "# Django REST Framework 🌍\n\nA powerful toolkit for building Web APIs. While Django renders HTML for browsers, DRF returns **JSON** for mobile apps (like Flutter!) and React frontends.\n\n## Why DRF?\n- **Serialization**: Converts complex QuerySets to JSON easily.\n- **Authentication**: OAuth1, OAuth2, JWT support out of the box.\n- **Browsable API**: A huge usability win for developers to test endpoints."
+        },
+        {
+            "id": "django_drf_2",
+            "type": "content",
+            "title": "Serializers",
+            "content": "# Serializers 📦\n\nSerializers work like Django Forms but for APIs. They convert Model instances to JSON (Serialization) and JSON to Model instances (Deserialization).\n\n```django\nfrom rest_framework import serializers\nfrom .models import User\n\nclass UserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = User\n        fields = ['id', 'username', 'email']\n```"
+        },
+        {
+            "id": "django_drf_3",
+            "type": "content",
+            "title": "Views and Routers",
+            "content": "# Views & ViewSets 🛣️\n\n## APIView\nLike a standard Django View, but receives `Request` (DRF) and returns `Response`.\n\n## ViewSets\nCombine logic for list, create, retrieve, update, destroy into one class.\n```django\nclass UserViewSet(viewsets.ModelViewSet):\n    queryset = User.objects.all()\n    serializer_class = UserSerializer\n```\n\n## Routers\nAutomatically generate URLs for ViewSets.\n```django\nrouter = DefaultRouter()\nrouter.register(r'users', UserViewSet)\nurlpatterns = router.urls\n```"
+        },
+        {
+            "id": "django_drf_quiz_1",
+            "type": "quiz",
+            "title": "DRF Quiz",
+            "content": "Test your API knowledge",
+            "quizQuestion": "What is the primary purpose of a Serializer?",
+            "quizOptions": [
+                "To authenticate users",
+                "To convert complex data (Models) to native Python datatypes/JSON",
+                "To route URLs to views",
+                "To save data to the database"
+            ],
+            "correctOptionIndex": 1
+        }
+    ]
+}

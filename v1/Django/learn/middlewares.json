@@ -1,0 +1,41 @@
+{
+    "id": "learn_django_middlewares",
+    "topicId": "middlewares",
+    "topicTitle": "Middlewares",
+    "description": "Understand the hooks into Django's request/response processing",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "django_mid_1",
+            "type": "content",
+            "title": "What is Middleware?",
+            "content": "# Structure of Middleware 🌉\n\nMiddleware is a framework of hooks into Django's request/response processing. It's a light, low-level \"plugin\" system.\n\nEx: `AuthenticationMiddleware`, `CsrfViewMiddleware`.\n\n## How it works\nIt's like an onion 🧅. The request passes through each middleware layer to the view, and the response passes back out through them."
+        },
+        {
+            "id": "django_mid_2",
+            "type": "content",
+            "title": "Creating Custom Middleware",
+            "content": "# Custom Middleware 🛠️\n\nA middleware is a class that implements `__call__`.\n\n```django\nclass SimpleMiddleware:\n    def __init__(self, get_response):\n        self.get_response = get_response\n\n    def __call__(self, request):\n        # Code to be executed for each request before\n        # the view (and later middleware) are called.\n        print(\"Before View\")\n\n        response = self.get_response(request)\n\n        # Code to be executed for each request/response after\n        # the view is called.\n        print(\"After View\")\n\n        return response\n```\n\n> 💡 **Tip**: Don't forget to add `'path.to.SimpleMiddleware'` to `MIDDLEWARE` in settings!"
+        },
+        {
+            "id": "django_mid_quiz_1",
+            "type": "quiz",
+            "title": "Flow Quiz",
+            "content": "Check your understanding",
+            "quizQuestion": "When is the code AFTER 'self.get_response(request)' executed?",
+            "quizOptions": [
+                "Before the view is called",
+                "After the view has processed the request",
+                "Only if an error occurs",
+                "Never"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "django_mid_3",
+            "type": "content",
+            "title": "Default Middleware",
+            "content": "# Common Built-ins 📦\n\n- **SecurityMiddleware**: Handles SSL redirection, XSS headers.\n- **SessionMiddleware**: Manages user sessions across requests.\n- **CommonMiddleware**: URL rewriting and other common niceties.\n- **CsrfViewMiddleware**: Protects against Cross-Site Request Forgery.\n- **AuthenticationMiddleware**: Associates users with requests using sessions."
+        }
+    ]
+}
