@@ -1,0 +1,4529 @@
+[
+    {
+        "q": "What is 'Vertical Scaling' (Scaling Up)?",
+        "o": [
+            "Increasing the specifications (CPU/RAM) of a single server",
+            "Adding more servers",
+            "Deleting servers",
+            "Moving to cloud"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal Scaling' (Scaling Out)?",
+        "o": [
+            "Adding more instances/servers to the pool to handle load",
+            "Increasing CPU of one server",
+            "Increasing RAM of one server",
+            "Changing OS"
+        ]
+    },
+    {
+        "q": "What is the primary benefit of Horizontal Scaling?",
+        "o": [
+            "High availability and virtually unlimited growth potential",
+            "Simpler to manage",
+            "No network overhead",
+            "Cheaper software licenses"
+        ]
+    },
+    {
+        "q": "What is the primary limitation of Vertical Scaling?",
+        "o": [
+            "Hardware limits (you eventually hit a 'ceiling' on max specs)",
+            "Complexity",
+            "Network latency",
+            "Disk space"
+        ]
+    },
+    {
+        "q": "What is 'Auto Scaling'?",
+        "o": [
+            "Process of automatically adjusting compute resources based on demand",
+            "Manual adjustment",
+            "Fixed resources",
+            "Scheduled maintenance"
+        ]
+    },
+    {
+        "q": "What is an 'Auto Scaling Group' (ASG) in AWS?",
+        "o": [
+            "A logical collection of EC2 instances managed for scalability and health",
+            "A database cluster",
+            "A security group",
+            "A load balancer"
+        ]
+    },
+    {
+        "q": "What is 'Minimum Capacity' in ASG?",
+        "o": [
+            "The minimum number of instances the ASG must maintain at all times",
+            "Max instances",
+            "Desired instances",
+            "Start instances"
+        ]
+    },
+    {
+        "q": "What is 'Maximum Capacity' in ASG?",
+        "o": [
+            "The upper limit of instances the ASG is allowed to launch",
+            "Min instances",
+            "Average instances",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Desired Capacity' in ASG?",
+        "o": [
+            "The number of instances the ASG attempts to maintain currently",
+            "Future capacity",
+            "Past capacity",
+            "Total capacity"
+        ]
+    },
+    {
+        "q": "What is a 'Launch Configuration' (Legacy)?",
+        "o": [
+            "A template that an ASG uses to launch EC2 instances (AMI, Instance Type, Key Pair)",
+            "A missile code",
+            "A startup script",
+            "A config file"
+        ]
+    },
+    {
+        "q": "What is a 'Launch Template'?",
+        "o": [
+            "A newer, versioned template for launching instances (supports T2/T3 unlimited, Spot, etc.)",
+            "Old config",
+            "Script file",
+            "HTML file"
+        ]
+    },
+    {
+        "q": "Why use Launch Template over Launch Configuration?",
+        "o": [
+            "It supports versioning, multiple instance types, and spot/on-demand mix",
+            "It is slower",
+            "It is simpler",
+            "It is deprecated"
+        ]
+    },
+    {
+        "q": "What is 'Self-Healing' in ASG?",
+        "o": [
+            "Replacing unhealthy instances automatically to maintain desired capacity",
+            "Fixing bugs",
+            "Healing users",
+            "Restarting PC"
+        ]
+    },
+    {
+        "q": "What triggers an ASG replacement?",
+        "o": [
+            "Instance failing a health check (EC2 or ELB)",
+            "User login",
+            "High CPU",
+            "Low RAM"
+        ]
+    },
+    {
+        "q": "What is 'ELB Health Check' for ASG?",
+        "o": [
+            "ASG uses Load Balancer health checks (application layer) to determine instance health",
+            "Ping check",
+            "Disk check",
+            "File check"
+        ]
+    },
+    {
+        "q": "What is 'EC2 Health Check' for ASG?",
+        "o": [
+            "Checks underlying hardware/system status (running vs stopped/terminated)",
+            "App status",
+            "Web status",
+            "Code status"
+        ]
+    },
+    {
+        "q": "What is 'Scale Out' event?",
+        "o": [
+            "Launching new instances in response to increased demand",
+            "Terminating instances",
+            "Stopping instances",
+            "Rebooting"
+        ]
+    },
+    {
+        "q": "What is 'Scale In' event?",
+        "o": [
+            "Terminating instances in response to decreased demand",
+            "Launching instances",
+            "Buying servers",
+            "Starting"
+        ]
+    },
+    {
+        "q": "What is 'Cooldown Period'?",
+        "o": [
+            "Time to wait after a scaling activity before starting another (prevents oscillation)",
+            "Freezing time",
+            "Lunch break",
+            "Sleep mode"
+        ]
+    },
+    {
+        "q": "Default Cooldown Period in AWS ASG?",
+        "o": [
+            "300 seconds (5 minutes)",
+            "60 seconds",
+            "1 hour",
+            "10 seconds"
+        ]
+    },
+    {
+        "q": "What happens during Cooldown?",
+        "o": [
+            "ASG pauses scaling activities (alarms are ignored)",
+            "Instance reboots",
+            "Network stops",
+            "Disk formats"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Scaling'?",
+        "o": [
+            "Scaling in response to live changes in resource utilization (CloudWatch alarms)",
+            "Fixed scaling",
+            "Manual scaling",
+            "Random scaling"
+        ]
+    },
+    {
+        "q": "What is 'Scheduled Scaling'?",
+        "o": [
+            "Scaling based on a predictable schedule (e.g. 9 AM Monday scale up)",
+            "Random scaling",
+            "Dynamic scaling",
+            "Reactionary"
+        ]
+    },
+    {
+        "q": "What is 'Predictive Scaling'?",
+        "o": [
+            "Using ML to predict future traffic and scale ahead of time",
+            "Guessing",
+            "Dynamic scaling",
+            "Manual scaling"
+        ]
+    },
+    {
+        "q": "What is 'Manual Scaling'?",
+        "o": [
+            "Manually changing the Desired Capacity of the ASG",
+            "Auto scaling",
+            "Bot scaling",
+            "Script scaling"
+        ]
+    },
+    {
+        "q": "What metric is most commonly used for scaling web servers?",
+        "o": [
+            "CPU Utilization or Request Count",
+            "Disk space",
+            "Disk IO",
+            "Fan speed"
+        ]
+    },
+    {
+        "q": "What is 'Termination Policy'?",
+        "o": [
+            "Rules deciding which instance to terminate during scale-in (e.g. OldestLaunchConfiguration)",
+            "Firing policy",
+            "Deletion rule",
+            "Kill switch"
+        ]
+    },
+    {
+        "q": "Default Termination Policy favors limiting what?",
+        "o": [
+            "Availability Zone imbalance (it tries to balance AZs first)",
+            "Cost",
+            "Performance",
+            "Age"
+        ]
+    },
+    {
+        "q": "What is 'OldestInstance' termination policy?",
+        "o": [
+            "Terminates the oldest instance in the group",
+            "Terminates new",
+            "Terminates random",
+            "Terminates fast"
+        ]
+    },
+    {
+        "q": "What is 'NewestInstance' termination policy?",
+        "o": [
+            "Terminates the newest instance in the group",
+            "Terminates old",
+            "Terminates random",
+            "Terminates slow"
+        ]
+    },
+    {
+        "q": "What is 'OldestLaunchConfiguration' policy?",
+        "o": [
+            "Terminates instances running on the oldest Launch Config (helps update fleet)",
+            "Oldest time",
+            "Oldest CPU",
+            "Oldest OS"
+        ]
+    },
+    {
+        "q": "What is 'ClosestToNextInstanceHour' policy?",
+        "o": [
+            "Terminates instances closest to the next billing hour (cost optimization for hourly billing)",
+            "Closest to death",
+            "Closest to start",
+            "Closest to end"
+        ]
+    },
+    {
+        "q": "How does ASG handle AZ rebalancing?",
+        "o": [
+            "It launches a new instance in the under-represented AZ before terminating one in the over-represented AZ",
+            "It terminates first",
+            "It does nothing",
+            "It stops all"
+        ]
+    },
+    {
+        "q": "What is 'Lifecycle Hook'?",
+        "o": [
+            "Mechanism to pause an instance at launch/termination to run custom actions (scripts)",
+            "Fishing hook",
+            "Code hook",
+            "Event loop"
+        ]
+    },
+    {
+        "q": "What are the two main Lifecycle Hook states?",
+        "o": [
+            "Pending:Wait (Launch) and Terminating:Wait (Terminate)",
+            "Start and Stop",
+            "Run and Pause",
+            "Up and Down"
+        ]
+    },
+    {
+        "q": "What happens when Lifecycle Hook timeout expires?",
+        "o": [
+            "The action defined in 'Default Result' is taken (CONTINUE or ABANDON)",
+            "It crashes",
+            "It waits forever",
+            "It reboots"
+        ]
+    },
+    {
+        "q": "What is 'Target Tracking Scaling Policy'?",
+        "o": [
+            "Select a metric and a target value (e.g. CPU 50%), ASG keeps it there",
+            "Step scaling",
+            "Simple scaling",
+            "Manual scaling"
+        ]
+    },
+    {
+        "q": "What is 'Step Scaling Policy'?",
+        "o": [
+            "Define steps based on alarm severity (e.g. if CPU > 50 add 1, if CPU > 80 add 3)",
+            "Target tracking",
+            "Simple scaling",
+            "Walk scaling"
+        ]
+    },
+    {
+        "q": "What is 'Simple Scaling Policy'?",
+        "o": [
+            "Single adjustment based on a single alarm (e.g. add 1 unit if alarm breaches)",
+            "Target tracking",
+            "Smart scaling",
+            "Complex scaling"
+        ]
+    },
+    {
+        "q": "Why is Target Tracking preferred over Simple Scaling?",
+        "o": [
+            "It is easier to configure and automatically handles scale-in/scale-out logic",
+            "It is cheaper",
+            "It is faster",
+            "It is manual"
+        ]
+    },
+    {
+        "q": "What is 'Warm Pool'?",
+        "o": [
+            "A pool of pre-initialized instances ready to be moved to service instantly (reduces boot lag)",
+            "Hot bath",
+            "Swimming pool",
+            "Cache"
+        ]
+    },
+    {
+        "q": "Instances in Warm Pool are in what state?",
+        "o": [
+            "Stopped (usually) or Running, but effectively paused to save cost",
+            "Terminated",
+            "Active",
+            "Deleted"
+        ]
+    },
+    {
+        "q": "What is 'Instance Refresh'?",
+        "o": [
+            "Feature to automatically update instances in ASG to a new launch template (rolling update)",
+            "Reload page",
+            "F5",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'MinHealthyPercentage' during Instance Refresh?",
+        "o": [
+            "Minimum % of capacity that must remain healthy during the rolling update",
+            "Max percentage",
+            "Zero",
+            "Half"
+        ]
+    },
+    {
+        "q": "What is 'Spot Instance'?",
+        "o": [
+            "Unused EC2 capacity available at steep discount, but can be interrupted",
+            "Reserved instance",
+            "On-demand",
+            "Dedicated"
+        ]
+    },
+    {
+        "q": "How much notice does a Spot Instance get before termination?",
+        "o": [
+            "2 minutes",
+            "10 minutes",
+            "1 hour",
+            "No notice"
+        ]
+    },
+    {
+        "q": "Can you mix Spot and On-Demand in one ASG?",
+        "o": [
+            "Yes, using a Mixed Instances Policy in Launch Template",
+            "No",
+            "Only in separate ASGs",
+            "With a load balancer"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Rebalancing' for Spot?",
+        "o": [
+            "ASG attempts to replace Spot instances that are at elevated risk of interruption proactively",
+            "Balance beam",
+            "Money balance",
+            "Weight balance"
+        ]
+    },
+    {
+        "q": "What is 'Standby' state?",
+        "o": [
+            "Instance is in Service but removed from Load Balancer for troubleshooting/maintenance",
+            "Sleep",
+            "Hibernate",
+            "Off"
+        ]
+    },
+    {
+        "q": "Does Standby instance count towards Desired Capacity?",
+        "o": [
+            "Yes, it is still part of the ASG management",
+            "No",
+            "Sometimes",
+            "Only if running"
+        ]
+    },
+    {
+        "q": "What is 'Detach Instance'?",
+        "o": [
+            "Removing an instance from ASG management (it becomes standalone EC2)",
+            "Delete instance",
+            "Stop instance",
+            "Hide instance"
+        ]
+    },
+    {
+        "q": "What occurs when you detach an instance from ASG?",
+        "o": [
+            "ASG sees capacity drop and launches a replacement (if below desired)",
+            "ASG crashes",
+            "Instance terminates",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Attach Instance'?",
+        "o": [
+            "Adding an existing EC2 instance to an ASG (must match criteria)",
+            "Glue instance",
+            "Copy instance",
+            "Move instance"
+        ]
+    },
+    {
+        "q": "What happens if attached instance increases capacity above Max?",
+        "o": [
+            "The request fails",
+            "ASG increases Max",
+            "ASG deletes random instance",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Suspended Process'?",
+        "o": [
+            "Pausing specific ASG activities (e.g. Launch, Terminate, HealthCheck)",
+            "Frozen process",
+            "Dead process",
+            "Zombie"
+        ]
+    },
+    {
+        "q": "Why suspend 'AZRebalance'?",
+        "o": [
+            "To prevent ASG from launching/terminating instances just to balance zones (e.g. during trouble)",
+            "To save money",
+            "To be faster",
+            "To stop logs"
+        ]
+    },
+    {
+        "q": "Why suspend 'AddToLoadBalancer'?",
+        "o": [
+            "To launch instances but not put them in traffic yet (e.g. for testing)",
+            "To fix LB",
+            "To break LB",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "What is 'ELB Grace Period'?",
+        "o": [
+            "Time allowed for instance to startup/warmup before ASG checks its ELB health status",
+            "Free time",
+            "Bonus time",
+            "Extra time"
+        ]
+    },
+    {
+        "q": "Default ELB Grace Period?",
+        "o": [
+            "0 seconds (if not configured) or user defined (e.g. 300s)",
+            "1 hour",
+            "1 day",
+            "1 week"
+        ]
+    },
+    {
+        "q": "If ELB Grace Period is too short, what happens?",
+        "o": [
+            "Instance might be terminated as unhealthy before it fully starts (Loop)",
+            "It starts faster",
+            "Nothing",
+            "Warning log"
+        ]
+    },
+    {
+        "q": "What is 'Stateless App' importance for Autoscaling?",
+        "o": [
+            "Allows any instance to handle any request; crucial for scaling in/out without data loss",
+            "Not important",
+            "Stateful is better",
+            "Database only"
+        ]
+    },
+    {
+        "q": "Where should session state be stored?",
+        "o": [
+            "External store (Redis, Memcached, DB)",
+            "On the instance disk",
+            "In memory of instance",
+            "In cookie"
+        ]
+    },
+    {
+        "q": "What is 'Connection Draining' (Deregistration Delay)?",
+        "o": [
+            "Load Balancer waits for in-flight requests to complete before deregistering instance",
+            "Closing ports",
+            "Deleting connections",
+            "Flushing buffer"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' (K8s)?",
+        "o": [
+            "Component that adjusts size of K8s cluster (nodes) based on pending pods",
+            "Pod scaler",
+            "App scaler",
+            "Docker scaler"
+        ]
+    },
+    {
+        "q": "What is 'HPA' (Horizontal Pod Autoscaler)?",
+        "o": [
+            "Scales number of pod replicas based on metrics (CPU/Memory)",
+            "Node scaler",
+            "Disk scaler",
+            "Net scaler"
+        ]
+    },
+    {
+        "q": "What is 'VPA' (Vertical Pod Autoscaler)?",
+        "o": [
+            "Adjusts CPU/Memory requests/limits for pods automatically",
+            "Replica scaler",
+            "Count scaler",
+            "Node scaler"
+        ]
+    },
+    {
+        "q": "What is 'Karpenter'?",
+        "o": [
+            "Just-in-time node provisioning (autoscaling) for Kubernetes (AWS)",
+            "Carpenter",
+            "Builder",
+            "Worker"
+        ]
+    },
+    {
+        "q": "How does Karpenter differ from Cluster Autoscaler?",
+        "o": [
+            "It launches nodes directly (no ASG needed) and optimizes bin-packing faster",
+            "It is slower",
+            "It uses ASG",
+            "It is older"
+        ]
+    },
+    {
+        "q": "What is 'Over-provisioning'?",
+        "o": [
+            "Keeping extra capacity running to handle sudden spikes safely",
+            "Under scaling",
+            "Failing",
+            "Efficiency"
+        ]
+    },
+    {
+        "q": "What is 'Bin Packing'?",
+        "o": [
+            "Fitting as many containers/pods onto a node as possible to maximize utilization",
+            "Trash compaction",
+            "Sorting",
+            "Recycling"
+        ]
+    },
+    {
+        "q": "What is 'Thrashing' (Flapping)?",
+        "o": [
+            "Rapidly adding and removing resources due to unstable metrics/thresholds",
+            "Hitting",
+            "Beating",
+            "Moving"
+        ]
+    },
+    {
+        "q": "How to prevent Thrashing?",
+        "o": [
+            "Use cooldown periods, hysteresis (gap between scale-out and scale-in thresholds)",
+            "Scale faster",
+            "Scale slower",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What is 'Scale-In Protection'?",
+        "o": [
+            "Setting on instance preventing ASG from terminating it during scale-in",
+            "Firewall",
+            "Shield",
+            "Armor"
+        ]
+    },
+    {
+        "q": "When to use Scale-In Protection?",
+        "o": [
+            "For long-running jobs (batch processing) that shouldn't be interrupted",
+            "Web servers",
+            "Stateless apps",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Blue/Green Deployment' with ASG?",
+        "o": [
+            "Creating a new ASG (Green) and switching traffic from old ASG (Blue)",
+            "Colors",
+            "Painting",
+            "Testing"
+        ]
+    },
+    {
+        "q": "How to perform Blue/Green with ASG?",
+        "o": [
+            "Attach new ASG to Load Balancer, wait for health, detach old ASG",
+            "Update Launch Template",
+            "Restart ASG",
+            "Change IP"
+        ]
+    },
+    {
+        "q": "What is 'Target Group'?",
+        "o": [
+            "Logical grouping of targets (instances/IPs) for routing traffic from ALB",
+            "Security group",
+            "User group",
+            "Admin group"
+        ]
+    },
+    {
+        "q": "Can multiple ASGs attach to one Target Group?",
+        "o": [
+            "Yes",
+            "No",
+            "Only if in same AZ",
+            "Only if same type"
+        ]
+    },
+    {
+        "q": "Can one ASG attach to multiple Target Groups?",
+        "o": [
+            "Yes",
+            "No",
+            "Only 2",
+            "Only 3"
+        ]
+    },
+    {
+        "q": "What is a 'Metric Math' alarm?",
+        "o": [
+            "Alarm based on calculation of multiple metrics (e.g. SQS messages / InServiceInstances)",
+            "Calculus",
+            "Algebra",
+            "Geometry"
+        ]
+    },
+    {
+        "q": "Why scale based on SQS queue depth?",
+        "o": [
+            "To handle backlog of async background jobs",
+            "For web traffic",
+            "For memory usage",
+            "For CPU usage"
+        ]
+    },
+    {
+        "q": "The formula for 'Backlog per Instance'?",
+        "o": [
+            "ApproximateNumberOfMessagesVisible / InServiceInstances",
+            "Messages * Instances",
+            "Messages + Instances",
+            "Messages - Instances"
+        ]
+    },
+    {
+        "q": "What is 'Scaling Plan' (AWS Auto Scaling)?",
+        "o": [
+            "Service to manage scaling for multiple resources (EC2, DynamoDB, Aurora) centrally",
+            "Map",
+            "Blueprint",
+            "Document"
+        ]
+    },
+    {
+        "q": "What is 'Database Sharding'?",
+        "o": [
+            "Splitting a large database into smaller, faster, easily managed parts (shards)",
+            "Replication",
+            "Backup",
+            "Mirroring"
+        ]
+    },
+    {
+        "q": "What is 'Read Replica'?",
+        "o": [
+            "Read-only copy of DB to offload read traffic (Horizontal scaling for reads)",
+            "Write replica",
+            "Master DB",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Can Read Replicas be promoted to Standalone/Master?",
+        "o": [
+            "Yes, usually",
+            "No, never",
+            "Only on Tuesdays",
+            "If you pay"
+        ]
+    },
+    {
+        "q": "What allows 'Serverless' databases to scale?",
+        "o": [
+            "The cloud provider manages capacity automatically (e.g. DynamoDB On-Demand, Aurora Serverless)",
+            "Magic",
+            "Download RAM",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "What is 'Provisioned Concurrency' (Lambda)?",
+        "o": [
+            "Pre-initialized execution environments to eliminate cold starts (Scaling)",
+            "Reserved",
+            "On-demand",
+            "Spot"
+        ]
+    },
+    {
+        "q": "What is 'Application Auto Scaling'?",
+        "o": [
+            "API used to scale non-EC2 resources (ECS, DynamoDB, Lambda, etc.)",
+            "EC2 Auto Scaling",
+            "Manual API",
+            "Old API"
+        ]
+    },
+    {
+        "q": "What is 'Service Quota' limits?",
+        "o": [
+            "Hard/Soft limits on resources (e.g. max 20 instances) that stop scaling if hit",
+            "No limit",
+            "Unlimited",
+            "Suggestions"
+        ]
+    },
+    {
+        "q": "How to check if ASG is stuck?",
+        "o": [
+            "Check 'Scaling History' or 'Activity History' for failures",
+            "Reboot",
+            "Delete",
+            "Wait"
+        ]
+    },
+    {
+        "q": "Common cause for 'Launching a new EC2 instance' failure?",
+        "o": [
+            "Insufficient Capacity Error (ICE) inside AWS, or Account Limits",
+            "Rain",
+            "Wind",
+            "Sun"
+        ]
+    },
+    {
+        "q": "Common cause for 'Instance immediate termination'?",
+        "o": [
+            "Health check failure, User Data script error, or IAM role issues",
+            "Fast boot",
+            "Good health",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Impatience' in scaling?",
+        "o": [
+            "Scaling up too fast before previous actions take effect (leads to over-provisioning)",
+            "Waiting",
+            "Sleeping",
+            "Resting"
+        ]
+    },
+    {
+        "q": "What is 'Placement Group' - Spread?",
+        "o": [
+            "Places instances on distinct hardware to reduce correlated failures",
+            "Cluster",
+            "Partition",
+            "Pack"
+        ]
+    },
+    {
+        "q": "What is 'Placement Group' - Cluster?",
+        "o": [
+            "Packs instances close together for low latency (HPC)",
+            "Spread",
+            "Partition",
+            "Distribute"
+        ]
+    },
+    {
+        "q": "What is 'Placement Group' - Partition?",
+        "o": [
+            "Spreads instances across logical partitions (racks)",
+            "Spread",
+            "Cluster",
+            "Pack"
+        ]
+    },
+    {
+        "q": "What is the AWS CLI command to update an ASG?",
+        "o": [
+            "aws autoscaling update-auto-scaling-group",
+            "aws asg update",
+            "aws ec2 update-asg",
+            "aws scaling set"
+        ]
+    },
+    {
+        "q": "What is 'ScaleInCooldown'?",
+        "o": [
+            "A specific cooldown setting that applies only to scale-in activities",
+            "Scale out cooldown",
+            "General cooldown",
+            "Launch cooldown"
+        ]
+    },
+    {
+        "q": "Does 'Default Cooldown' apply to Target Tracking policies?",
+        "o": [
+            "No, Target Tracking policies have their own built-in warmup/cooldown mechanism",
+            "Yes",
+            "Only for scale out",
+            "Only for scale in"
+        ]
+    },
+    {
+        "q": "What format does AWS Scheduled Scaling use for recurrence?",
+        "o": [
+            "Unix Cron syntax (Minute Hour DayOfMonth Month DayOfWeek)",
+            "XML",
+            "JSON",
+            "Text"
+        ]
+    },
+    {
+        "q": "What is 'PutScheduledUpdateGroupAction'?",
+        "o": [
+            "API call to create or update a scheduled scaling action",
+            "Delete action",
+            "Run action",
+            "List action"
+        ]
+    },
+    {
+        "q": "Can you schedule a one-time scaling action?",
+        "o": [
+            "Yes, by specifying a StartTime without a Recurrence",
+            "No, strictly recurring",
+            "Only via Console",
+            "Only via Terraform"
+        ]
+    },
+    {
+        "q": "What is 'EstimatedInstanceWarmup'?",
+        "o": [
+            "Time until a newly launched instance initiates its own health checks (used by Step Scaling)",
+            "Cooldown",
+            "Boot time",
+            "Ping time"
+        ]
+    },
+    {
+        "q": "How does Step Scaling differ from Simple Scaling regarding alarms?",
+        "o": [
+            "Step Scaling continues to respond to additional alarms even during warmup (aggregating)",
+            "Simple uses steps",
+            "No difference",
+            "Step is slower"
+        ]
+    },
+    {
+        "q": "What is 'Metric Aggregation Type' in Step Scaling?",
+        "o": [
+            "How metrics are aggregated (Average, Minimum, Maximum) to compare against threshold",
+            "Sum",
+            "Count",
+            "List"
+        ]
+    },
+    {
+        "q": "What happens if multiple Step Scaling policies are triggered?",
+        "o": [
+            "ASG chooses the policy that provides the largest capacity change (Scale Out > Scale In)",
+            "It errors",
+            "It freezes",
+            "Random choice"
+        ]
+    },
+    {
+        "q": "What is 'Spot Allocation Strategy' - 'capacity-optimized'?",
+        "o": [
+            "Selects Spot pools that are least likely to be interrupted (best for availability)",
+            "Cheapest",
+            "Fastest",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Spot Allocation Strategy' - 'lowest-price'?",
+        "o": [
+            "Selects the cheapest Spot pools (best for cost savings)",
+            "Capacity optimized",
+            "Most stable",
+            "Newest"
+        ]
+    },
+    {
+        "q": "What is 'Spot Allocation Strategy' - 'price-capacity-optimized'?",
+        "o": [
+            "Balances price and capacity availability (recommended default)",
+            "Worst price",
+            "Worst capacity",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'On-Demand Base' setting?",
+        "o": [
+            "The minimum number of On-Demand instances to launch before using Spot",
+            "Max base",
+            "Spot base",
+            "Zero base"
+        ]
+    },
+    {
+        "q": "What is 'On-Demand Percentage Above Base'?",
+        "o": [
+            "The percentage of On-Demand instances vs Spot for capacity beyond the Base",
+            "Spot percentage",
+            "Free percentage",
+            "Reserved percentage"
+        ]
+    },
+    {
+        "q": "What is 'ReuseOnScaleIn' in Warm Pool?",
+        "o": [
+            "Policy to return instances to the Warm Pool on scale-in instead of terminating them",
+            "Terminate always",
+            "Delete",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'Pool State' - 'Hibernated'?",
+        "o": [
+            "Instances in Warm Pool are hibernated (RAM saved to disk) to save cost and start faster",
+            "Running",
+            "Stopped",
+            "Terminated"
+        ]
+    },
+    {
+        "q": "What is 'Instance Refresh' - 'Checkpoint'?",
+        "o": [
+            "Percentage of completion where the refresh pauses for verification",
+            "Save game",
+            "Stop point",
+            "End"
+        ]
+    },
+    {
+        "q": "What is 'Instance Refresh' - 'SkipMatching'?",
+        "o": [
+            "Ignores instances that already explicitly match the desired configuration (saves time)",
+            "Replace all",
+            "Refresh all",
+            "Delete all"
+        ]
+    },
+    {
+        "q": "What is 'Auto Scaling Event' - 'EC2_INSTANCE_LAUNCH'?",
+        "o": [
+            "Event emitted when ASG launches an instance",
+            "Termination event",
+            "Failure event",
+            "Stop event"
+        ]
+    },
+    {
+        "q": "What is 'Auto Scaling Event' - 'EC2_INSTANCE_TERMINATE_ERROR'?",
+        "o": [
+            "Event emitted when ASG fails to terminate an instance",
+            "Launch error",
+            "Success",
+            "Warning"
+        ]
+    },
+    {
+        "q": "How to notify SNS topic on ASG events?",
+        "o": [
+            "Configure 'Notifications' in ASG settings",
+            "Use Lambda",
+            "Use CloudTrail",
+            "Use S3"
+        ]
+    },
+    {
+        "q": "What is 'Launch Template Versioning'?",
+        "o": [
+            "Ability to create multiple versions of a template and set one as Default or Latest",
+            "No versions",
+            "Single file",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Can you use a specific Launch Template version in ASG?",
+        "o": [
+            "Yes, you can pin to a specific version (e.g. v1) or use $Latest / $Default",
+            "No",
+            "Only Latest",
+            "Only Default"
+        ]
+    },
+    {
+        "q": "What is 'User Data' in Launch Template?",
+        "o": [
+            "Script run on first boot (used for installing software/configuration)",
+            "User profile",
+            "Login data",
+            "Cookies"
+        ]
+    },
+    {
+        "q": "Is User Data re-executed on reboot?",
+        "o": [
+            "No, only on first launch (unless configured specifically with cloud-init)",
+            "Yes, always",
+            "Every hour",
+            "On shutdown"
+        ]
+    },
+    {
+        "q": "What is 'IAM Role' in Launch Template?",
+        "o": [
+            "Instance Profile granting permissions to the EC2 instance (e.g. access S3)",
+            "User role",
+            "Admin role",
+            "Group"
+        ]
+    },
+    {
+        "q": "What is 'Block Device Mapping'?",
+        "o": [
+            "Configuration of EBS volumes attached to the instance",
+            "Network map",
+            "IP map",
+            "Route map"
+        ]
+    },
+    {
+        "q": "What is 'DeleteOnTermination' setting for EBS?",
+        "o": [
+            "Determines if the volume is deleted when the instance terminates (True/False)",
+            "Keep always",
+            "Encrypt",
+            "Format"
+        ]
+    },
+    {
+        "q": "What is 'EBS Optimization'?",
+        "o": [
+            "Dedicated bandwidth for EBS I/O (prevents network contention)",
+            "Compression",
+            "Encryption",
+            "Defragmentation"
+        ]
+    },
+    {
+        "q": "What is 'T2/T3 Unlimited'?",
+        "o": [
+            "Allows burstable instances to sustain high CPU indefinitely (for a fee)",
+            "Limited CPU",
+            "Fixed CPU",
+            "Slow CPU"
+        ]
+    },
+    {
+        "q": "What is 'Metadata Options' (IMDSv2)?",
+        "o": [
+            "Enforcing Instance Metadata Service Version 2 (Token-based) for security",
+            "v1 only",
+            "No metadata",
+            "Open access"
+        ]
+    },
+    {
+        "q": "What is 'Resource Tagging' in ASG?",
+        "o": [
+            "Applying tags to the ASG itself",
+            "Graffiti",
+            "Labeling",
+            "Naming"
+        ]
+    },
+    {
+        "q": "What is 'Propagate Tags' option?",
+        "o": [
+            "Automatically applying tags from the ASG to the instances it launches",
+            "Copy file",
+            "Move file",
+            "Sync file"
+        ]
+    },
+    {
+        "q": "What is 'Service-Linked Role' for Auto Scaling?",
+        "o": [
+            "Predefined IAM role allowing ASG to call other AWS services (EC2, ELB, CloudWatch)",
+            "User role",
+            "Custom role",
+            "Guest role"
+        ]
+    },
+    {
+        "q": "What is 'Scaling Cooldown' vs 'Health Check Grace Period'?",
+        "o": [
+            "Cooldown is for pausing scaling actions; Grace Period is for delaying health checks on start",
+            "Same thing",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Terminating:Wait' hook used for?",
+        "o": [
+            "To upload logs or drain connections before instance is killed",
+            "To install software",
+            "To boot",
+            "To sleep"
+        ]
+    },
+    {
+        "q": "What is 'Pending:Wait' hook used for?",
+        "o": [
+            "To download data, register with external system, or warm up cache before traffic starts",
+            "To stop",
+            "To delete",
+            "To crash"
+        ]
+    },
+    {
+        "q": "How to complete a Lifecycle Hook action manually?",
+        "o": [
+            "aws autoscaling complete-lifecycle-action --result CONTINUE",
+            "aws asg stop",
+            "aws hook end",
+            "wait"
+        ]
+    },
+    {
+        "q": "What is 'Launch Configuration' status?",
+        "o": [
+            "Deprecated (use Launch Templates)",
+            "Active",
+            "Recommended",
+            "New"
+        ]
+    },
+    {
+        "q": "What is 'Target Value' in Target Tracking?",
+        "o": [
+            "The specific metric value ASG tries to maintain (e.g. 1000 requests/instance)",
+            "Max value",
+            "Min value",
+            "Startup value"
+        ]
+    },
+    {
+        "q": "Can Target Tracking scale in and out?",
+        "o": [
+            "Yes, it creates both alarms automatically",
+            "No, only out",
+            "No, only in",
+            "Only flat"
+        ]
+    },
+    {
+        "q": "Can you disable scale-in for Target Tracking?",
+        "o": [
+            "Yes, by checking 'Disable Scale In'",
+            "No",
+            "Only via API",
+            "Only via CLI"
+        ]
+    },
+    {
+        "q": "What is 'Scaling Adjustment'?",
+        "o": [
+            "The amount to change capacity by (e.g. +1, -2, +10%)",
+            "Speed",
+            "Time",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Adjustment Type' - 'ChangeInCapacity'?",
+        "o": [
+            "Adds or subtracts a specific number of instances (Current + N)",
+            "Sets total",
+            "Sets percent",
+            "Sets max"
+        ]
+    },
+    {
+        "q": "What is 'Adjustment Type' - 'ExactCapacity'?",
+        "o": [
+            "Sets the capacity to a specific number (Total = N)",
+            "Adds N",
+            "Subtracts N",
+            "Percent N"
+        ]
+    },
+    {
+        "q": "What is 'Adjustment Type' - 'PercentChangeInCapacity'?",
+        "o": [
+            "Changes capacity by a percentage (Current + N%)",
+            "Exact number",
+            "Fixed number",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Min Adjustment Magnitude'?",
+        "o": [
+            "Minimum number of instances to scale by when using Percentage (prevents adding 0 instances)",
+            "Max magnitude",
+            "Speed",
+            "Force"
+        ]
+    },
+    {
+        "q": "What is 'ASG Rebalancing'?",
+        "o": [
+            "Process of maintaining equal number of instances across Availability Zones",
+            "Load balancing",
+            "Cost balancing",
+            "Weight balancing"
+        ]
+    },
+    {
+        "q": "If an AZ becomes unhealthy, what does ASG do?",
+        "o": [
+            "Stops launching in that AZ and attempts to launch in others",
+            "Stops everything",
+            "Deletes all",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Instance Protection'?",
+        "o": [
+            "Prevents specific instances from being terminated during scale-in",
+            "Firewall",
+            "Backup",
+            "Lock"
+        ]
+    },
+    {
+        "q": "How to enable Instance Protection via CLI?",
+        "o": [
+            "aws autoscaling set-instance-protection --protected-from-scale-in",
+            "aws ec2 protect",
+            "aws asg lock",
+            "aws guard on"
+        ]
+    },
+    {
+        "q": "Does Instance Protection prevent manual termination?",
+        "o": [
+            "No, only scale-in automated termination",
+            "Yes",
+            "Sometimes",
+            "Always"
+        ]
+    },
+    {
+        "q": "Does Instance Protection prevent health check replacement?",
+        "o": [
+            "No, unhealthy instances are still replaced",
+            "Yes",
+            "Maybe",
+            "If forced"
+        ]
+    },
+    {
+        "q": "What is 'Predictive Scaling' - 'Forecast'?",
+        "o": [
+            "The predicted load generated by ML model based on history",
+            "Weather",
+            "Stock",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Predictive Scaling' - 'Pre-launch'?",
+        "o": [
+            "Launching instances before the predicted load arrives",
+            "Post-launch",
+            "Late launch",
+            "Never launch"
+        ]
+    },
+    {
+        "q": "What is 'Load Forecast' metric?",
+        "o": [
+            "Metric representing the total load on the group (e.g. Total Requests)",
+            "CPU",
+            "RAM",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'Scaling Metric'?",
+        "o": [
+            "Metric representing the load per instance (e.g. Requests Per Instance)",
+            "Total load",
+            "Forecast",
+            "History"
+        ]
+    },
+    {
+        "q": "What is 'Scheduled Action' Recurrence '0 9 * * 1'?",
+        "o": [
+            "Every Monday at 9:00 AM",
+            "Every day",
+            "Every hour",
+            "Every month"
+        ]
+    },
+    {
+        "q": "What is 'Scheduled Action' Recurrence '0 0 1 * *'?",
+        "o": [
+            "First day of every month at midnight",
+            "Every day",
+            "Every Monday",
+            "Every year"
+        ]
+    },
+    {
+        "q": "What is 'Placement Group' - 'Partition' count limit?",
+        "o": [
+            "7 partitions per AZ",
+            "10",
+            "100",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'HPC'?",
+        "o": [
+            "High Performance Computing (often uses Cluster Placement Groups)",
+            "Home PC",
+            "Hyper PC",
+            "Hard PC"
+        ]
+    },
+    {
+        "q": "What is 'EFA'?",
+        "o": [
+            "Elastic Fabric Adapter (network interface for HPC, low latency)",
+            "Elastic IP",
+            "Ethernet",
+            "Wifi"
+        ]
+    },
+    {
+        "q": "Can EFA be used in ASG?",
+        "o": [
+            "Yes, defined in Launch Template",
+            "No",
+            "Only manual",
+            "Only spot"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Reservation'?",
+        "o": [
+            "Reserving EC2 capacity in a specific AZ for a duration (guarantees launch)",
+            "Booking",
+            "Ticket",
+            "Seat"
+        ]
+    },
+    {
+        "q": "Can ASG use Capacity Reservations?",
+        "o": [
+            "Yes, via Launch Template (targeting a reservation group)",
+            "No",
+            "Maybe",
+            "Only spot"
+        ]
+    },
+    {
+        "q": "What is 'ODCR'?",
+        "o": [
+            "On-Demand Capacity Reservation",
+            "Old Data",
+            "Optical character",
+            "Order"
+        ]
+    },
+    {
+        "q": "What is 'ASG Metrics' collection?",
+        "o": [
+            "Enabling 1-minute metrics for the ASG itself in CloudWatch (GroupMinSize, GroupMaxSize, etc.)",
+            "Logging",
+            "Tracing",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "Is ASG Metrics collection enabled by default?",
+        "o": [
+            "No, must be enabled explicitly",
+            "Yes",
+            "Sometimes",
+            "Only in Prod"
+        ]
+    },
+    {
+        "q": "What is 'GroupInServiceInstances' metric?",
+        "o": [
+            "Number of instances running and healthy in the ASG",
+            "Total instances",
+            "Pending instances",
+            "Terminating instances"
+        ]
+    },
+    {
+        "q": "What is 'GroupPendingInstances' metric?",
+        "o": [
+            "Number of instances in Pending state (launching/lifecycle)",
+            "Running",
+            "Stopped",
+            "Deleted"
+        ]
+    },
+    {
+        "q": "What is 'GroupTerminatingInstances' metric?",
+        "o": [
+            "Number of instances in Terminating state",
+            "Running",
+            "Pending",
+            "Stopped"
+        ]
+    },
+    {
+        "q": "What is 'GroupStandbyInstances' metric?",
+        "o": [
+            "Number of instances in Standby state",
+            "Running",
+            "Active",
+            "Healthy"
+        ]
+    },
+    {
+        "q": "What is 'GroupTotalInstances' metric?",
+        "o": [
+            "Total count of instances (InService + Pending + Terminating + Standby)",
+            "Only running",
+            "Only healthy",
+            "Only pending"
+        ]
+    },
+    {
+        "q": "What is 'WarmPoolMinSize'?",
+        "o": [
+            "Minimum number of instances to keep in the Warm Pool",
+            "Max size",
+            "Total size",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'WarmPoolMaxSize'?",
+        "o": [
+            "Maximum number of instances in the Warm Pool",
+            "Min size",
+            "Desired size",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'Instance Refresh' - 'Rollback'?",
+        "o": [
+            "Automatic rollback if the refresh fails health checks or alarms trigger",
+            "Undo",
+            "Restart",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Termination Policy' - 'AllocationStrategy'?",
+        "o": [
+            "Terminates instances to align with the Mixed Instances Policy allocation strategy",
+            "Random",
+            "Oldest",
+            "Newest"
+        ]
+    },
+    {
+        "q": "What is 'Launch Template Data' override?",
+        "o": [
+            "Overriding specific parameters (e.g. Instance Type) in the ASG configuration",
+            "Deleting data",
+            "Copying data",
+            "Hiding data"
+        ]
+    },
+    {
+        "q": "What is a 'Launch Template' version limit?",
+        "o": [
+            "5000 versions (soft limit)",
+            "10 versions",
+            "100 versions",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "What is 'Default Version' of Launch Template?",
+        "o": [
+            "The version used if no specific version is requested (can be static)",
+            "Latest",
+            "Oldest",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Latest Version' of Launch Template?",
+        "o": [
+            "The most recently created version number",
+            "Default",
+            "First",
+            "Best"
+        ]
+    },
+    {
+        "q": "What is the 'Metrics Server' in Kubernetes?",
+        "o": [
+            "Aggregator of resource usage data (CPU/Memory) used by HPA and VPA",
+            "Database",
+            "Logging tool",
+            "DNS server"
+        ]
+    },
+    {
+        "q": "What API does HPA use to fetch CPU/Memory metrics?",
+        "o": [
+            "metrics.k8s.io (Resource Metrics API)",
+            "custom.metrics.k8s.io",
+            "external.metrics.k8s.io",
+            "api.k8s.io"
+        ]
+    },
+    {
+        "q": "What is the HPA algorithm formula?",
+        "o": [
+            "desiredReplicas = ceil[currentReplicas * ( currentMetricValue / desiredMetricValue )]",
+            "desired = current + 1",
+            "desired = current * 2",
+            "desired = current / 2"
+        ]
+    },
+    {
+        "q": "What is 'HPA Stabilization Window'?",
+        "o": [
+            "Time window to observe metrics before scaling (prevents flapping/thrashing)",
+            "View window",
+            "Time limit",
+            "Scale limit"
+        ]
+    },
+    {
+        "q": "Default HPA scale-down stabilization window?",
+        "o": [
+            "5 minutes (300s)",
+            "1 minute",
+            "10 minutes",
+            "1 hour"
+        ]
+    },
+    {
+        "q": "What is 'Custom Metrics API'?",
+        "o": [
+            "API allowing HPA to scale on non-resource metrics (e.g. HTTP requests, Queue length) via adapter",
+            "Standard API",
+            "Private API",
+            "Old API"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Adapter'?",
+        "o": [
+            "Component that exposes Prometheus metrics as Custom Metrics API for HPA",
+            "Connector",
+            "Plugin",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "What is 'VPA' - 'Off' mode?",
+        "o": [
+            "VPA only provides recommendations but does not change Pod resources",
+            "Disabled",
+            "Manual",
+            "Paused"
+        ]
+    },
+    {
+        "q": "What is 'VPA' - 'Initial' mode?",
+        "o": [
+            "VPA applies resources only during Pod creation (admission), never updates running pods",
+            "First run",
+            "Startup",
+            "Boot"
+        ]
+    },
+    {
+        "q": "What is 'VPA' - 'Auto' mode?",
+        "o": [
+            "VPA updates pods during creation and may evict running pods to update resource limits",
+            "Magic",
+            "Dangerous",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'VPA' - 'Recreate' mode?",
+        "o": [
+            "VPA evicts running pods whenever recommendations change significantly (rarely used)",
+            "Destroy",
+            "Kill",
+            "Restart"
+        ]
+    },
+    {
+        "q": "Why avoid using HPA and VPA on CPU/Memory simultaneously?",
+        "o": [
+            "They can interfere (VPA increases limit -> HPA sees lower usage -> HPA scales down -> Loop)",
+            "It is illegal",
+            "It crashes K8s",
+            "It works fine"
+        ]
+    },
+    {
+        "q": "When CAN you use HPA and VPA together?",
+        "o": [
+            "When HPA scales on custom metrics (e.g. QPS) and VPA manages CPU/Mem",
+            "Never",
+            "Always",
+            "On Sundays"
+        ]
+    },
+    {
+        "q": "What triggers 'Cluster Autoscaler' (CA) scale-up?",
+        "o": [
+            "Pods stuck in 'Pending' state due to insufficient resources (insufficient cpu/mem on nodes)",
+            "High CPU",
+            "High RAM",
+            "User request"
+        ]
+    },
+    {
+        "q": "What triggers 'Cluster Autoscaler' scale-down?",
+        "o": [
+            "Nodes being underutilized (e.g. < 50%) for a duration and pods can be moved elsewhere",
+            "Low CPU",
+            "Low RAM",
+            "Night time"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' - 'Expander'?",
+        "o": [
+            "Strategy to select which node group to expand when multiple options exist",
+            "Growth",
+            "Zoom",
+            "Enlarger"
+        ]
+    },
+    {
+        "q": "What is 'Expander' - 'random'?",
+        "o": [
+            "Randomly selects a node group to expand",
+            "Fair",
+            "Simple",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Expander' - 'most-pods'?",
+        "o": [
+            "Selects node group that can schedule the most pending pods",
+            "Max pods",
+            "Best fit",
+            "Greedy"
+        ]
+    },
+    {
+        "q": "What is 'Expander' - 'least-waste'?",
+        "o": [
+            "Selects node group that leaves the least amount of unused CPU/Memory after scheduling",
+            "Green",
+            "Efficient",
+            "Eco"
+        ]
+    },
+    {
+        "q": "What is 'Expander' - 'priority'?",
+        "o": [
+            "Selects node group based on user-defined priority configuration",
+            "Ranked",
+            "Ordered",
+            "First"
+        ]
+    },
+    {
+        "q": "What is 'Expander' - 'price'?",
+        "o": [
+            "Selects the cheapest node group (requires pricing data integration, e.g. AWS/GCP)",
+            "Cost",
+            "Cheap",
+            "Budget"
+        ]
+    },
+    {
+        "q": "What is 'PodDisruptionBudget' (PDB)?",
+        "o": [
+            "Limits the number of concurrent voluntarily disruptions (evictions) for an application",
+            "Money",
+            "Cost limit",
+            "Error limit"
+        ]
+    },
+    {
+        "q": "Why is PDB important for Autoscaling?",
+        "o": [
+            "Prevents Cluster Autoscaler from draining too many nodes at once causing outages",
+            "Saves money",
+            "Speeds up",
+            " Stops scaling"
+        ]
+    },
+    {
+        "q": "What is 'KEDA'?",
+        "o": [
+            "Kubernetes Event-driven Autoscaling (scales workloads based on event sources)",
+            "Key Data",
+            "K8s Data",
+            "Kernel"
+        ]
+    },
+    {
+        "q": "What is 'ScaledObject' in KEDA?",
+        "o": [
+            "CRD defining how to scale a specific Deployment/StatefulSet",
+            "Scale file",
+            "Config",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'ScaledJob' in KEDA?",
+        "o": [
+            "CRD for scaling Kubernetes Jobs (1 event = 1 job)",
+            "Job scaler",
+            "Batch scaler",
+            "Work scaler"
+        ]
+    },
+    {
+        "q": "What is 'KEDA Scaler'?",
+        "o": [
+            "Connectors to event sources (Kafka, RabbitMQ, SQS, Prometheus, etc.)",
+            "Ruler",
+            "Meter",
+            "Sensor"
+        ]
+    },
+    {
+        "q": "What is KEDA 'activationThreshold'?",
+        "o": [
+            "Metric value required to scale from 0 to 1 replica (0->1 scaling)",
+            "Start value",
+            "Trigger",
+            "Wake up"
+        ]
+    },
+    {
+        "q": "Does KEDA replace HPA?",
+        "o": [
+            "No, it manages the HPA resource behind the scenes (feeds it metrics)",
+            "Yes",
+            "Partially",
+            "For Jobs only"
+        ]
+    },
+    {
+        "q": "What is 'Goldilocks'?",
+        "o": [
+            "Tool that creates VPA in recommendation mode to suggest resource requests/limits",
+            "Bear",
+            "Porridge",
+            "Girl"
+        ]
+    },
+    {
+        "q": "What is 'Overprovisioning' using 'Pause Pods'?",
+        "o": [
+            "Running low-priority 'pause' pods to occupy space; they are preempted when real pods need space (buffer)",
+            "Waiting",
+            "Sleeping",
+            "Placeholder"
+        ]
+    },
+    {
+        "q": "What is 'Descheduler'?",
+        "o": [
+            "Tool to evict pods that violate policies (e.g. node utilization) to rebalance cluster",
+            "Scheduler",
+            "Balancer",
+            "Mover"
+        ]
+    },
+    {
+        "q": "How does Descheduler help autoscaling?",
+        "o": [
+            "Moves pods from underutilized nodes to help Cluster Autoscaler scale down empty nodes",
+            "It adds nodes",
+            "It removes pods",
+            "It deletes nodes"
+        ]
+    },
+    {
+        "q": "What is 'External Metrics' support in HPA?",
+        "o": [
+            "Scaling based on metrics outside the cluster (e.g. cloud provider LB stats)",
+            "Outside",
+            "Far",
+            "Remote"
+        ]
+    },
+    {
+        "q": "What is 'Object Metrics' support in HPA?",
+        "o": [
+            "Scaling based on metrics describing K8s objects (e.g. Ingress hits)",
+            "File metrics",
+            "Item metrics",
+            "Thing metrics"
+        ]
+    },
+    {
+        "q": "What is 'Behavior' field in HPA v2?",
+        "o": [
+            "Configures separate scale-up and scale-down behaviors (stabilization, limits)",
+            "Action",
+            "Mode",
+            "Style"
+        ]
+    },
+    {
+        "q": "How to prevent rapid scale down in HPA v2?",
+        "o": [
+            "Set 'scaleDown.stabilizationWindowSeconds' to a high value",
+            "Disable down",
+            "Freeze",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'selectPolicy' in HPA behavior?",
+        "o": [
+            "Determines which policy to apply if multiple match (Min/Max/Disabled)",
+            "Choose",
+            "Pick",
+            "Vote"
+        ]
+    },
+    {
+        "q": "What is 'ReplicaSet' role in scaling?",
+        "o": [
+            "Ensures the specified number of pod replicas are running (HPA updates this)",
+            "Copy set",
+            "Clone set",
+            "Backup set"
+        ]
+    },
+    {
+        "q": "Does HPA work with DaemonSets?",
+        "o": [
+            "No, DaemonSets run one pod per node automatically",
+            "Yes",
+            "Sometimes",
+            "With flag"
+        ]
+    },
+    {
+        "q": "Does HPA work with StatefulSets?",
+        "o": [
+            "Yes, it can scale the 'replicas' field of a StatefulSet",
+            "No",
+            "Only up",
+            "Only down"
+        ]
+    },
+    {
+        "q": "What is 'Scale Subresource'?",
+        "o": [
+            "A uniform interface (/scale) that allows HPA to work with CRDs (Custom Resources)",
+            "API endpoint",
+            "Command",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' - 'scan-interval'?",
+        "o": [
+            "How often the CA checks for unschedulable pods (default 10s)",
+            "1 minute",
+            "1 hour",
+            "1 second"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' - 'scale-down-delay-after-add'?",
+        "o": [
+            "How long to wait after scale up before considering scale down (default 10m)",
+            "1 hour",
+            "5 min",
+            "1 min"
+        ]
+    },
+    {
+        "q": "What happens if Cluster Autoscaler hits max nodes?",
+        "o": [
+            "It stops adding nodes; pods remain Pending",
+            "It crashes",
+            "It deletes pods",
+            "It ignores limit"
+        ]
+    },
+    {
+        "q": "What is 'Managed Node Group' autoscaling?",
+        "o": [
+            "Cloud provider manages the underlying ASG logic for K8s nodes",
+            "Manual",
+            "Self hosted",
+            "Private"
+        ]
+    },
+    {
+        "q": "Can Cluster Autoscaler scale to 0?",
+        "o": [
+            "Yes, if configured (min=0) and workloads support it (e.g. for dev envs)",
+            "No",
+            "Only to 1",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Ignore DaemonSets utilization' option in CA?",
+        "o": [
+            "CA ignores DaemonSet pods when calculating node utilization for scale down",
+            "Ignore all",
+            "Ignore system",
+            "Ignore user"
+        ]
+    },
+    {
+        "q": "What is 'Safe To Evict' annotation?",
+        "o": [
+            "cluster-autoscaler.kubernetes.io/safe-to-evict=true (Allows CA to evict pod even if it has local storage issues)",
+            "Do not touch",
+            "Keep safe",
+            "Lock"
+        ]
+    },
+    {
+        "q": "Why might CA fail to scale down a node?",
+        "o": [
+            "Node contains pods with local storage, PDB violation, or kube-system pods not managed by DS/Mirror",
+            "It likes the node",
+            "Random",
+            "Bug"
+        ]
+    },
+    {
+        "q": "What is 'Cloud Provider' interface in CA?",
+        "o": [
+            "The abstraction layer CA uses to talk to AWS ASG, GCE MIG, Azure VMSS",
+            "Driver",
+            "Plugin",
+            "Mod"
+        ]
+    },
+    {
+        "q": "What is 'Autopilot' (GKE)?",
+        "o": [
+            "Fully managed K8s where Google handles node scaling/provisioning (No node management)",
+            "Aircraft",
+            "Self driving",
+            "Robot"
+        ]
+    },
+    {
+        "q": "What is 'Fargate' (EKS)?",
+        "o": [
+            "Serverless compute engine for containers (Scaling is per-pod, no nodes to manage)",
+            "Gate",
+            "Target",
+            "Door"
+        ]
+    },
+    {
+        "q": "How does Fargate scaling work?",
+        "o": [
+            "Each pod runs on its own micro-VM; 1 pod = 1 node effectively (No bin packing)",
+            "Cluster scaling",
+            "ASG",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Scaling' limitation in K8s (In-Place)?",
+        "o": [
+            "In-place vertical scaling (resizing pod without restart) is a new/alpha feature, historically required restart",
+            "Not possible",
+            "Easy",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'Resize Policy' for Container?",
+        "o": [
+            "Defines if restart is required when resources (cpu/mem) resume",
+            "Policy",
+            "Rule",
+            "Law"
+        ]
+    },
+    {
+        "q": "What is 'cgroup' role in scaling?",
+        "o": [
+            "Enforces resource limits (CPU/Memory) on the process level for the container",
+            "Group",
+            "User",
+            "Role"
+        ]
+    },
+    {
+        "q": "What happens if a container exceeds Memory Limit?",
+        "o": [
+            "OOMKilled (Out of Memory Killed)",
+            "Throttled",
+            "Slows down",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What happens if a container exceeds CPU Limit?",
+        "o": [
+            "Throttled (CPU time restricted)",
+            "Killed",
+            "Restarted",
+            "Deleted"
+        ]
+    },
+    {
+        "q": "Why prefer 'Requests' over 'Limits' for HPA?",
+        "o": [
+            "HPA (metrics-server) usually calculates usage percentage based on Requests",
+            "Limits are better",
+            "Both equal",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Target Average Utilization'?",
+        "o": [
+            "HPA target type: Average percentage of requested resource across all pods",
+            "Max value",
+            "Min value",
+            "Total value"
+        ]
+    },
+    {
+        "q": "What is 'Target Average Value'?",
+        "o": [
+            "HPA target type: Average raw value (e.g. 100m CPU) across all pods",
+            "Percent",
+            "Ratio",
+            "Count"
+        ]
+    },
+    {
+        "q": "Can you scale based on 'Object' metric from another namespace?",
+        "o": [
+            "No, HPA can only access metrics in the same namespace",
+            "Yes",
+            "With admin",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Mirror Pod'?",
+        "o": [
+            "Static pod represented in API server; cannot be scaled by HPA/CA",
+            "Reflection",
+            "Copy",
+            "Ghost"
+        ]
+    },
+    {
+        "q": "How to scale a deployment to 0 manually?",
+        "o": [
+            "kubectl scale deployment name --replicas=0",
+            "kubectl stop",
+            "kubectl delete",
+            "kubectl pause"
+        ]
+    },
+    {
+        "q": "What is 'Karpenter' - 'Provisioner'?",
+        "o": [
+            "CRD defining constraints for nodes launched by Karpenter (instance types, zones)",
+            "Rules",
+            "Creator",
+            "Maker"
+        ]
+    },
+    {
+        "q": "What is 'Karpenter' - 'ttlSecondsAfterEmpty'?",
+        "o": [
+            "Time to wait before terminating an empty node (cost saving)",
+            "Delay",
+            "Wait",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "What is 'Karpenter' - 'consolidation'?",
+        "o": [
+            "Feature to actively move pods to cheaper/fewer nodes to save cost",
+            "Merging",
+            "Packing",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'Multiple HPA' on same target?",
+        "o": [
+            "Bad practice; controllers will fight/thrash trying to set replicas",
+            "Good practice",
+            "High availability",
+            "Redundancy"
+        ]
+    },
+    {
+        "q": "What is 'AverageValue' metric type?",
+        "o": [
+            "Target value is averaged across all pods (Value / Pods)",
+            "Sum total",
+            "Max value",
+            "Min value"
+        ]
+    },
+    {
+        "q": "What is 'Value' metric type?",
+        "o": [
+            "Target value is global (e.g. total queue size) not averaged",
+            "Average",
+            "Per pod",
+            "Ratio"
+        ]
+    },
+    {
+        "q": "What is 'ContainerResource' metric source?",
+        "o": [
+            "HPA v2beta2+ feature to scale based on resource usage of a specific container in a pod",
+            "Pod resource",
+            "Node resource",
+            "Cluster resource"
+        ]
+    },
+    {
+        "q": "Why scale based on 'ContainerResource'?",
+        "o": [
+            "Useful for sidecars (e.g. service mesh proxy) where only main container usage matters",
+            "Simpler",
+            "Faster",
+            "Better"
+        ]
+    },
+    {
+        "q": "What is 'Metric Name' converter in Prometheus Adapter?",
+        "o": [
+            "Rules to rename Prometheus metric names to K8s custom metric style",
+            "Translator",
+            "Map",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'Series Query' in Prometheus Adapter?",
+        "o": [
+            "PromQL query to discover available metrics",
+            "Search",
+            "Find",
+            "Loop"
+        ]
+    },
+    {
+        "q": "What is 'Resource' association in Prometheus Adapter?",
+        "o": [
+            "Mapping Prometheus labels to K8s resources (namespace, pod, service)",
+            "Link",
+            "Join",
+            "Tie"
+        ]
+    },
+    {
+        "q": "What is 'HPA' - 'MinReplicas' default?",
+        "o": [
+            "1",
+            "0",
+            "2",
+            "10"
+        ]
+    },
+    {
+        "q": "What is 'HPA' - 'MaxReplicas'?",
+        "o": [
+            "The upper limit, HPA will never scale beyond this even if metric demands it",
+            "Target",
+            "Goal",
+            "Suggestion"
+        ]
+    },
+    {
+        "q": "How to debug HPA issues?",
+        "o": [
+            "kubectl describe hpa <name>",
+            "kubectl logs hpa",
+            "check internet",
+            "reboot node"
+        ]
+    },
+    {
+        "q": "What does 'Scanning' mean in HPA describe output?",
+        "o": [
+            "HPA is trying to fetch metrics",
+            "HPA is waiting",
+            "HPA is scaling",
+            "HPA is reading"
+        ]
+    },
+    {
+        "q": "What does 'Unknown' metric mean in HPA?",
+        "o": [
+            "HPA cannot read the metric (Metrics Server down or adapter issue)",
+            "Metric is 0",
+            "Metric is high",
+            "Metric is low"
+        ]
+    },
+    {
+        "q": "What is 'ScalingActive' condition in HPA?",
+        "o": [
+            "Indicates if HPA is enabled and able to scale",
+            "Scaling now",
+            "Scaling done",
+            "Scaling pending"
+        ]
+    },
+    {
+        "q": "What is 'AbleToScale' condition in HPA?",
+        "o": [
+            "Indicates if HPA is prevented from scaling (e.g. backoff, max limit)",
+            "Ready",
+            "Set",
+            "Go"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal' vs 'Vertical' conflict?",
+        "o": [
+            "If HPA scales on CPU and VPA changes CPU requests, they can create a feedback loop",
+            "No conflict",
+            "They help",
+            "They ignore"
+        ]
+    },
+    {
+        "q": "What is 'Golden Rule' of K8s Autoscaling?",
+        "o": [
+            "Set Requests equal to what component needs, limits higher for safety",
+            "Requests = Limits",
+            "No limits",
+            "No requests"
+        ]
+    },
+    {
+        "q": "Why set Requests = Limits (QoS Guaranteed)?",
+        "o": [
+            "For critical components to avoid eviction/throttling; simpler for autoscaling reasoning",
+            "To save money",
+            "To go fast",
+            "To be lazy"
+        ]
+    },
+    {
+        "q": "What is 'BestEffort' QoS?",
+        "o": [
+            "No requests/limits set; first to be evicted under pressure (bad for stable scaling)",
+            "Guaranteed",
+            "Burstable",
+            "Critical"
+        ]
+    },
+    {
+        "q": "What is 'Burstable' QoS?",
+        "o": [
+            "Requests set, Limits higher or unset; allows using extra node capacity",
+            "BestEffort",
+            "Static",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Topology Spread Constraints'?",
+        "o": [
+            "K8s feature to spread pods across zones/nodes (affects how CA scales/selects nodes)",
+            "Anti-affinity",
+            "Affinity",
+            "Taint"
+        ]
+    },
+    {
+        "q": "Can CA handle mixed instance types in one group?",
+        "o": [
+            "It assumes all nodes in a group have same capacity; mixing types can confuse bin-packing simulation",
+            "Yes perfectly",
+            "No issues",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Autoscaling' - 'Scale Down Disable' (Command)?",
+        "o": [
+            "CA flag to disable scale down globally",
+            "Delete flag",
+            "Stop flag",
+            "Start flag"
+        ]
+    },
+    {
+        "q": "What is 'Scale Up' speed?",
+        "o": [
+            "Limited by cloud provider node creation time (minutes)",
+            "Instant",
+            "Microseconds",
+            "Hours"
+        ]
+    },
+    {
+        "q": "What is 'Node Pools' pattern?",
+        "o": [
+            "Using different ASGs for different workloads (GPU, High Mem, General)",
+            "Swimming",
+            "Sharing",
+            "Mixing"
+        ]
+    },
+    {
+        "q": "What is 'Spot Instances' with Cluster Autoscaler?",
+        "o": [
+            "Using a separate node group for Spot with labels/taints to schedule interruptible workloads",
+            "Use production",
+            "Use critical",
+            "Use none"
+        ]
+    },
+    {
+        "q": "What is 'On-Demand' fallback for Spot in K8s?",
+        "o": [
+            "Using 'priority expander' to try Spot group first, then On-Demand group if Spot fails",
+            "Magic",
+            "Automatic",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Proportional Autoscaler'?",
+        "o": [
+            "Scales replicas based on number of nodes/cores in cluster (e.g. DNS, Ingress Controller)",
+            "HPA",
+            "VPA",
+            "CA"
+        ]
+    },
+    {
+        "q": "When to use Cluster Proportional Autoscaler?",
+        "o": [
+            "For system components that need to scale with cluster size, not load",
+            "For web apps",
+            "For DBs",
+            "For batches"
+        ]
+    },
+    {
+        "q": "What is 'Ladder' scaling in CPA?",
+        "o": [
+            "Step function mapping cluster size to replicas (e.g. 1 node->1, 10 nodes->2)",
+            "Linear",
+            "Exponential",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Linear' scaling in CPA?",
+        "o": [
+            "Replicas = cores * params + min",
+            "Step",
+            "Ladder",
+            "Flat"
+        ]
+    },
+    {
+        "q": "What is 'Addon Resizer' (Legacy)?",
+        "o": [
+            "Predecessor to VPA for system components",
+            "VPA v2",
+            "HPA v2",
+            "CA v2"
+        ]
+    },
+    {
+        "q": "What is 'Taint' impact on Autoscaling?",
+        "o": [
+            "Nodes with taints won't accept pods unless they have tolerations; CA accounts for this",
+            "No impact",
+            "Stops scaling",
+            "Starts scaling"
+        ]
+    },
+    {
+        "q": "What is 'Node Affinity' impact on Autoscaling?",
+        "o": [
+            "CA uses affinity to decide which node group matches pending pods requirements",
+            "No impact",
+            "Random",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'RDS Storage Auto Scaling'?",
+        "o": [
+            "Automatically increases allocated storage (EBS) when free space is low",
+            "Increases CPU",
+            "Increases RAM",
+            "Deletes data"
+        ]
+    },
+    {
+        "q": "Can RDS Storage Auto Scaling decrease storage?",
+        "o": [
+            "No, only increases",
+            "Yes",
+            "Sometimes",
+            "If empty"
+        ]
+    },
+    {
+        "q": "What is the cooldown for RDS Storage Auto Scaling?",
+        "o": [
+            "6 hours (minimum time between modifications)",
+            "1 hour",
+            "5 minutes",
+            "1 day"
+        ]
+    },
+    {
+        "q": "How does 'Aurora Auto Scaling' work?",
+        "o": [
+            "Adds/Removes Read Replicas based on CPU or Connection Count",
+            "Scales storage only",
+            "Scales max connections",
+            "Scales memory"
+        ]
+    },
+    {
+        "q": "What is 'Aurora Serverless v2'?",
+        "o": [
+            "Database that scales compute capacity (ACUs) instantly in fine-grained increments",
+            "Manual scaling",
+            "Fixed capacity",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'ACU' in Aurora Serverless?",
+        "o": [
+            "Aurora Capacity Unit (approx 2GB RAM + CPU)",
+            "AWS Compute Unit",
+            "Auto Unit",
+            "Active Unit"
+        ]
+    },
+    {
+        "q": "Does Aurora Serverless drop connections when scaling?",
+        "o": [
+            "No, scaling is non-disruptive (in v2)",
+            "Yes, always",
+            "Sometimes",
+            "Only on scale down"
+        ]
+    },
+    {
+        "q": "What is 'DynamoDB Auto Scaling' (Provisioned)?",
+        "o": [
+            "Uses Application Auto Scaling to adjust Read/Write Capacity Units (RCU/WCU)",
+            "Uses EC2 ASG",
+            "Uses K8s HPA",
+            "Uses Lambda"
+        ]
+    },
+    {
+        "q": "What is 'DynamoDB On-Demand'?",
+        "o": [
+            "Pricing model that instantly accommodates traffic spikes without capacity planning",
+            "Provisioned",
+            "Reserved",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "Which is cheaper: DynamoDB On-Demand or Provisioned (if predictable)?",
+        "o": [
+            "Provisioned (with Auto Scaling)",
+            "On-Demand",
+            "Both same",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'Read Replica' lag?",
+        "o": [
+            "Time delay between a write on Master and its appearance on Replica",
+            "Network lag",
+            "Disk lag",
+            "CPU lag"
+        ]
+    },
+    {
+        "q": "How to handle Replica Lag in scaling?",
+        "o": [
+            "Monitor lag metric; stop routing to lagged replicas or use eventual consistency logic",
+            "Ignore it",
+            "Reboot",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Sharding' (Partitioning)?",
+        "o": [
+            "Distributing data across multiple databases (shards) to overcome single-node limits",
+            "Replication",
+            "Backup",
+            "Mirroring"
+        ]
+    },
+    {
+        "q": "What is 'Shard Key'?",
+        "o": [
+            "The value used to determine which shard a row belongs to (e.g. UserID)",
+            "Password",
+            "API Key",
+            "SSH Key"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal Partitioning'?",
+        "o": [
+            "Splitting rows of a table across multiple tables/databases",
+            "Vertical partitioning",
+            "Normalization",
+            "Indexing"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Partitioning'?",
+        "o": [
+            "Splitting columns of a table into separate tables/databases (e.g. large blobs separate)",
+            "Horizontal partitioning",
+            "Sharding",
+            "Clustering"
+        ]
+    },
+    {
+        "q": "What is 'Key Based Sharding' (Hash)?",
+        "o": [
+            "Using a hash of the key (Hash(ID) % N) to distribute data evenly",
+            "Range based",
+            "Directory based",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Range Based Sharding'?",
+        "o": [
+            "Assigning ranges of keys to shards (e.g. IDs 1-1000 on Shard A)",
+            "Hash based",
+            "Directory based",
+            "Mod based"
+        ]
+    },
+    {
+        "q": "Issue with Range Based Sharding?",
+        "o": [
+            "Hotspots (e.g. all new users go to the newest shard)",
+            "Complex lookup",
+            "Slow hash",
+            "Data loss"
+        ]
+    },
+    {
+        "q": "What is 'Directory Based Sharding'?",
+        "o": [
+            "Using a lookup table service to map keys to shards flexibly",
+            "Hard coded",
+            "Static",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Resharding'?",
+        "o": [
+            "Moving data between shards to rebalance load or add capacity",
+            "Deleting shards",
+            "Formatting",
+            "Backing up"
+        ]
+    },
+    {
+        "q": "What is 'Consistent Hashing'?",
+        "o": [
+            "Algorithm (Ring) that minimizes data movement when adding/removing nodes",
+            "Mod hashing",
+            "Random hashing",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'Database Federation'?",
+        "o": [
+            "Functional splitting: Usage of distinct databases for different functions (User DB, Order DB)",
+            "Sharding",
+            "Replication",
+            "Clustering"
+        ]
+    },
+    {
+        "q": "What is 'Connection Pooling' role in scaling?",
+        "o": [
+            "Reusing active DB connections to prevent overhead of handshake storms during high load",
+            "Saving memory",
+            "Saving disk",
+            "Security"
+        ]
+    },
+    {
+        "q": "What happens if DB runs out of connections?",
+        "o": [
+            "TooManyConnections error; app fails",
+            "It scales up",
+            "It works slower",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'RDS Proxy'?",
+        "o": [
+            "Managed DB proxy that handles connection pooling and failover for RDS/Aurora",
+            "VPN",
+            "Firewall",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "How does RDS Proxy help Lambda scaling?",
+        "o": [
+            "Prevents thousands of concurrent Lambdas from exhausting DB connections",
+            "Speeds up code",
+            "Saves cost",
+            "Adds RAM"
+        ]
+    },
+    {
+        "q": "What is 'Write Splitting'?",
+        "o": [
+            "Directing write queries to Master and read queries to Replicas",
+            "Sharding",
+            "Mirroring",
+            "Duplexing"
+        ]
+    },
+    {
+        "q": "Who handles Write Splitting?",
+        "o": [
+            "The application logic or a specialized driver/proxy",
+            "The database itself",
+            "The OS",
+            "The network"
+        ]
+    },
+    {
+        "q": "What is 'CQRS' (Command Query Responsibility Segregation)?",
+        "o": [
+            "Pattern separating read and write models (often different DBs optimized for each)",
+            "Sharding",
+            "Indexing",
+            "Caching"
+        ]
+    },
+    {
+        "q": "What is 'ElastiCache' (Redis/Memcached)?",
+        "o": [
+            "Managed in-memory caching service to offload DB reads",
+            "Database",
+            "Load balancer",
+            "Router"
+        ]
+    },
+    {
+        "q": "How to scale Memcached?",
+        "o": [
+            "Horizontal scaling (adding nodes) is easy as it is multithreaded and shared-nothing",
+            "Vertical only",
+            "Complex",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "How to scale Redis Cluster?",
+        "o": [
+            "Add shards; Redis Cluster distributes slots (16384 total) across nodes",
+            "Add RAM only",
+            "Add CPU only",
+            "Cannot scale"
+        ]
+    },
+    {
+        "q": "What is 'Cache Stampede' (Thundering Herd)?",
+        "o": [
+            "Many processes trying to regenerate the same detailed cache key simultaneously",
+            "Slow cache",
+            "Full cache",
+            "Empty cache"
+        ]
+    },
+    {
+        "q": "How to prevent Cache Stampede?",
+        "o": [
+            "Locking, Probabilistic Early Expiration, or collapsing requests",
+            "Delete cache",
+            "Reboot",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Read Through' cache?",
+        "o": [
+            "App asks cache; if miss, CACHE fetches from DB and returns data (App unaware of DB)",
+            "Write through",
+            "Cache aside",
+            "Write back"
+        ]
+    },
+    {
+        "q": "What is 'Cache Aside' (Lazy Loading)?",
+        "o": [
+            "App asks cache; if miss, APP fetches from DB and updates cache",
+            "Read through",
+            "Write through",
+            "Write back"
+        ]
+    },
+    {
+        "q": "What is 'Write Through' cache?",
+        "o": [
+            "App writes to cache, cache synchronously writes to DB",
+            "Write back",
+            "Read through",
+            "Cache aside"
+        ]
+    },
+    {
+        "q": "What is 'Write Behind' (Write Back)?",
+        "o": [
+            "App writes to cache; cache asynchronously writes to DB (Risk of data loss)",
+            "Write through",
+            "Read through",
+            "Cache aside"
+        ]
+    },
+    {
+        "q": "What is 'Global Datastore' (Redis)?",
+        "o": [
+            "Replicating Redis Cluster across regions for low latency reads and DR",
+            "Backup",
+            "Archive",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Auto Scaling' for ElastiCache?",
+        "o": [
+            "Automatically adding/removing shards or replicas based on Check/Set limits",
+            "No support",
+            "Manual only",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Eviction Policy' role in scaling?",
+        "o": [
+            "Determines what to delete when cache is full (LRU, LFU, TTL) to make space",
+            "Scaling policy",
+            "Security policy",
+            "Network policy"
+        ]
+    },
+    {
+        "q": "What is 'TTL' (Time To Live)?",
+        "o": [
+            "Mechanism to expire cache entries automatically to ensure freshness",
+            "Time to load",
+            "Time to lock",
+            "Time to leave"
+        ]
+    },
+    {
+        "q": "What is 'CDN' (Content Delivery Network)?",
+        "o": [
+            "Distributed network of servers delivering static content closer to users (Offloads origin)",
+            "Database",
+            "Backend",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "How does CDN help scaling?",
+        "o": [
+            "Reduces load on web servers by caching assets at the edge",
+            "Increases load",
+            "Slows down",
+            "Adds complexity"
+        ]
+    },
+    {
+        "q": "What is 'Origin Shield' (CloudFront)?",
+        "o": [
+            "Extra caching layer between Edge locations and Origin to reduce origin load",
+            "Shield",
+            "Firewall",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Anycast'?",
+        "o": [
+            "Routing traffic to the nearest server with the same IP address (Global scaling)",
+            "Multicast",
+            "Unicast",
+            "Broadcast"
+        ]
+    },
+    {
+        "q": "What is 'Geo-DNS'?",
+        "o": [
+            "DNS routing based on user's geographic location (Route 53 Geolocation)",
+            "Simple DNS",
+            "Fast DNS",
+            "Slow DNS"
+        ]
+    },
+    {
+        "q": "What is 'Latency Based Routing'?",
+        "o": [
+            "Routing to the region with lowest network latency for the user",
+            "Geo routing",
+            "Weight routing",
+            "Failover"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Region' Active-Active?",
+        "o": [
+            "Running app in multiple regions simultaneously serving traffic (Highest availability)",
+            "Active-Passive",
+            "Cold standby",
+            "Pilot light"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Region' Active-Passive?",
+        "o": [
+            "One region serves traffic; other is standby for failover",
+            "Active-Active",
+            "Hot standby",
+            "All active"
+        ]
+    },
+    {
+        "q": "What is 'Pilot Light' DR strategy?",
+        "o": [
+            "Minimal version of env running (DB sync), scales up only during disaster",
+            "Full copy",
+            "Backup",
+            "Light bulb"
+        ]
+    },
+    {
+        "q": "What is 'Warm Standby' DR strategy?",
+        "o": [
+            "Scaled-down functional version running, ready to scale up quickly",
+            "Pilot light",
+            "Cold standby",
+            "Active active"
+        ]
+    },
+    {
+        "q": "What is 'RPO' (Recovery Point Objective)?",
+        "o": [
+            "Max acceptable data loss measured in time",
+            "Recovery time",
+            "Recovery plan",
+            "Recovery cost"
+        ]
+    },
+    {
+        "q": "What is 'RTO' (Recovery Time Objective)?",
+        "o": [
+            "Max acceptable downtime before being back online",
+            "Data loss",
+            "Data size",
+            "Data speed"
+        ]
+    },
+    {
+        "q": "What is 'Throttling'?",
+        "o": [
+            "Intentionally limiting the rate of requests to protect underlying systems",
+            "Speeding up",
+            "Caching",
+            "Scaling"
+        ]
+    },
+    {
+        "q": "What is 'Exponential Backoff'?",
+        "o": [
+            "Retrying failed requests with increasing wait times (1s, 2s, 4s, 8s) to prevent congestion",
+            "Linear backoff",
+            "Immediate retry",
+            "No retry"
+        ]
+    },
+    {
+        "q": "What is 'Jitter' in backoff?",
+        "o": [
+            "Adding random variance to backoff time to prevent Thundering Herd on recovery",
+            "Shaking",
+            "Noise",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Bulkhead' pattern?",
+        "o": [
+            "Isolating failures to one component so they don't crash the whole system (Ship analogy)",
+            "Firewall",
+            "Gateway",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' pattern?",
+        "o": [
+            "Stopping calls to a failing service immediately to allow it to recover",
+            "Switch",
+            "Fuse",
+            "Wire"
+        ]
+    },
+    {
+        "q": "What is 'Rate Limiting'?",
+        "o": [
+            "Rejecting requests exceeding a defined threshold (e.g. 100 req/sec)",
+            "Throttling",
+            "Blocking",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "Token Bucket algorithm is used for?",
+        "o": [
+            "Rate Limiting",
+            "Encryption",
+            "Compression",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'Leaky Bucket' algorithm?",
+        "o": [
+            "Rate limiting algorithm where requests are processed at a constant rate",
+            "Water bucket",
+            "Token bucket",
+            "Hash bucket"
+        ]
+    },
+    {
+        "q": "What is 'Shedding Load'?",
+        "o": [
+            "Dropping less important requests when system is overloaded to save critical ones",
+            "Crashing",
+            "Scaling",
+            "Expanding"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation'?",
+        "o": [
+            "Reducing functionality (e.g. disable recommendations) to keep core service running under load",
+            "Crashing",
+            "Stopping",
+            "Failing"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Engineering'?",
+        "o": [
+            "Intentionally injecting failures (e.g. killing instances) to test resilience/scaling",
+            "Testing",
+            "Destruction",
+            "Building"
+        ]
+    },
+    {
+        "q": "Tool for Chaos Engineering?",
+        "o": [
+            "Chaos Monkey (Netflix)",
+            "Gorilla",
+            "Banana",
+            "Kong"
+        ]
+    },
+    {
+        "q": "What is 'Game Day'?",
+        "o": [
+            "Simulator event where teams practice responding to failures/scaling events",
+            "Holiday",
+            "Party",
+            "Meeting"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Planning'?",
+        "o": [
+            "Estimating future resource needs to ensure availability (pre-scaling)",
+            "Guessing",
+            "Coding",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What is 'Load Testing'?",
+        "o": [
+            "Simulating expected usage to verify system behavior",
+            "Stress testing",
+            "Unit testing",
+            "Integration testing"
+        ]
+    },
+    {
+        "q": "What is 'Stress Testing'?",
+        "o": [
+            "Testing beyond breaking point to see how system fails",
+            "Load testing",
+            "Easy testing",
+            "Quick testing"
+        ]
+    },
+    {
+        "q": "What is 'Soak Testing'?",
+        "o": [
+            "Running load for a long duration to find leaks/degradation",
+            "Water test",
+            "Quick test",
+            "Dry test"
+        ]
+    },
+    {
+        "q": "Tool for Load Testing?",
+        "o": [
+            "Locust / JMeter / K6",
+            "Word",
+            "Excel",
+            "Paint"
+        ]
+    },
+    {
+        "q": "What is '12 Factor App' - Disposability?",
+        "o": [
+            "Detailed: Maximize robustness with fast startup and graceful shutdown (makes scaling easy)",
+            "Trash",
+            "Recycle",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is '12 Factor App' - Concurrency?",
+        "o": [
+            "Scale out via the process model (running multiple copies)",
+            "Threads",
+            "Locks",
+            "Async"
+        ]
+    },
+    {
+        "q": "What is 'Sticky Sessions' (Session Affinity)?",
+        "o": [
+            "Routing a user to the same server for session duration (Bad for scaling)",
+            "Good for scaling",
+            "Necessary",
+            "Recommended"
+        ]
+    },
+    {
+        "q": "Why avoid Sticky Sessions?",
+        "o": [
+            "Causes uneven load distribution and complicates scale-in/updates",
+            "It is slow",
+            "It is insecure",
+            "It is simple"
+        ]
+    },
+    {
+        "q": "What is 'Shared Nothing Architecture'?",
+        "o": [
+            "Nodes share no memory/disk; communication only via network (deal for horizontal scaling)",
+            "Shared everything",
+            "Shared disk",
+            "Shared RAM"
+        ]
+    },
+    {
+        "q": "What is 'Eventual Consistency'?",
+        "o": [
+            "Updates propagate eventually; reads might be stale temporarily (trade-off for availability/partition tolerance)",
+            "Strong consistency",
+            "Immediate",
+            "Atomic"
+        ]
+    },
+    {
+        "q": "CAP Theorem stands for?",
+        "o": [
+            "Consistency, Availability, Partition Tolerance",
+            "CPU, App, Power",
+            "Code, API, Port",
+            "Cloud, App, Platform"
+        ]
+    },
+    {
+        "q": "In CAP, you can only pick?",
+        "o": [
+            "2 (CP or AP, since P is unavoidable in distributed systems)",
+            "3",
+            "1",
+            "0"
+        ]
+    },
+    {
+        "q": "Which DBs are typically AP (Available, Partition Tolerant)?",
+        "o": [
+            "Cassandra, DynamoDB (defaults)",
+            "MySQL",
+            "Postgres",
+            "Oracle"
+        ]
+    },
+    {
+        "q": "Which DBs are typically CP (Consistent, Partition Tolerant)?",
+        "o": [
+            "MongoDB (default), HBase, Redis",
+            "Cassandra",
+            "DynamoDB",
+            "Riak"
+        ]
+    },
+    {
+        "q": "What is 'PACELC' theorem?",
+        "o": [
+            "Extension of CAP: If Partition (P) -> Trade A or C; Else (E) -> Trade Latency (L) or Consistency (C)",
+            "CAP 2.0",
+            "New CAP",
+            "Math"
+        ]
+    },
+    {
+        "q": "What is 'Gossip Protocol'?",
+        "o": [
+            "Node-to-node communication for cluster state sync (Cassandra/Dynamo)",
+            "Chat",
+            "Email",
+            "SMS"
+        ]
+    },
+    {
+        "q": "What is 'Hinted Handoff'?",
+        "o": [
+            "If a node is down, neighbor holds write temporarily and replays it when node returns",
+            "Drop write",
+            "Fail write",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Entropy' (Read Repair)?",
+        "o": [
+            "Comparing replicas during read and fixing inconsistencies in background",
+            "Repair shop",
+            "Maintenance",
+            "Fixing"
+        ]
+    },
+    {
+        "q": "What is 'Vector Clock'?",
+        "o": [
+            "Timestamp mechanism to detect conflicts in distributed updates",
+            "Wall clock",
+            "Alarm",
+            "Watch"
+        ]
+    },
+    {
+        "q": "What is 'Quorum' (R/W)?",
+        "o": [
+            "Minimum number of nodes that must acknowledge a read/write for it to be successful (e.g. N/2 + 1)",
+            "Majority",
+            "All",
+            "One"
+        ]
+    },
+    {
+        "q": "What is 'Tunable Consistency'?",
+        "o": [
+            "Ability to choose Consistency level per query (ONE, QUORUM, ALL)",
+            "Fixed",
+            "Static",
+            "Immutability"
+        ]
+    },
+    {
+        "q": "What is 'Lambda' - 'Concurrent Executions'?",
+        "o": [
+            "The number of instances of your function running at one time",
+            "Total executions",
+            "Per minute",
+            "Per hour"
+        ]
+    },
+    {
+        "q": "What is the default Lambda concurrency limit per account?",
+        "o": [
+            "1000",
+            "100",
+            "Unlimited",
+            "500"
+        ]
+    },
+    {
+        "q": "What happens when Lambda concurrency limit is reached?",
+        "o": [
+            "Throttling (429 Too Many Requests); calls are rejected or queued depending on source",
+            "Scale up",
+            "Crash",
+            "Billing increase"
+        ]
+    },
+    {
+        "q": "What is 'Unreserved Concurrency'?",
+        "o": [
+            "The pool of concurrency available to any function that hasn't reserved its own",
+            "Reserved pool",
+            "Private pool",
+            "Public pool"
+        ]
+    },
+    {
+        "q": "What is 'Reserved Concurrency'?",
+        "o": [
+            "Guarantees a specific number of concurrent instances for a function (and acts as a Max Limit)",
+            "Min limit",
+            "Average limit",
+            "No limit"
+        ]
+    },
+    {
+        "q": "What is 'Provisioned Concurrency'?",
+        "o": [
+            "Keeps a specific number of instances initialized and ready to respond (Eliminates Cold Starts)",
+            "Reserved",
+            "On demand",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is a 'Cold Start'?",
+        "o": [
+            "Latency incurred when a new environment is spun up to handle a request (init code runs)",
+            "Fast start",
+            "Hot start",
+            "Slow network"
+        ]
+    },
+    {
+        "q": "How to reduce Cold Starts?",
+        "o": [
+            "Use Provisioned Concurrency, keep functions warm, or use lighter runtimes (e.g. Go/Rust over Java)",
+            "Increase timeout",
+            "Increase RAM",
+            "Add layers"
+        ]
+    },
+    {
+        "q": "What is 'Burst Concurrency'?",
+        "o": [
+            "The rate at which Lambda can scale up concurrency (e.g. +500/min in some regions)",
+            "Total limit",
+            "Daily limit",
+            "Cost limit"
+        ]
+    },
+    {
+        "q": "How does API Gateway scale?",
+        "o": [
+            "Automatically scales to handle traffic, but has a soft limit (default 10k RPS)",
+            "Manual scaling",
+            "Fixed",
+            "Load balancer"
+        ]
+    },
+    {
+        "q": "What is API Gateway 'Throttling' settings?",
+        "o": [
+            "Rate Limit (steady state) and Burst Limit (bucket size) applied per stage or method",
+            "Speed limit",
+            "Size limit",
+            "Time limit"
+        ]
+    },
+    {
+        "q": "What is 'Usage Plan' in API Gateway?",
+        "o": [
+            "Defines throttling and quota limits for specific API Keys",
+            "Billing plan",
+            "Map",
+            "Design"
+        ]
+    },
+    {
+        "q": "What is SQS 'Standard Queue' scaling?",
+        "o": [
+            "Unlimited throughput (nearly infinite scaling)",
+            "300/s limit",
+            "Fixed",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is SQS 'FIFO Queue' scaling limit?",
+        "o": [
+            "300 TPS without batching (3000 with batching) per message group ID (High throughput mode available)",
+            "Unlimited",
+            "100/s",
+            "10/s"
+        ]
+    },
+    {
+        "q": "What is 'Message Group ID' in FIFO?",
+        "o": [
+            "Tag grouping messages that must be processed in order relative to each other (Scaling unit)",
+            "Random ID",
+            "User ID",
+            "Queue ID"
+        ]
+    },
+    {
+        "q": "How does Lambda scale with SQS?",
+        "o": [
+            "Poller scales up based on queue depth (up to 1000 concurrent batches)",
+            "1 poll at a time",
+            "Fixed rate",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Kinesis' scaling unit?",
+        "o": [
+            "Shard (1MB/s write, 2MB/s read capacity per shard)",
+            "Stream",
+            "Partition",
+            "Topic"
+        ]
+    },
+    {
+        "q": "How to scale Kinesis Data Stream?",
+        "o": [
+            "Split Shards (to increase capacity) or Merge Shards (to decrease)",
+            "Add CPU",
+            "Add RAM",
+            "Add Nodes"
+        ]
+    },
+    {
+        "q": "What is 'Provisioned Mode' in Kinesis?",
+        "o": [
+            "You manually specify shard count",
+            "Auto scaling",
+            "On demand",
+            "Serverless"
+        ]
+    },
+    {
+        "q": "What is 'On-Demand Mode' in Kinesis?",
+        "o": [
+            "AWS automatically manages shards based on throughput (pay per GB)",
+            "Manual",
+            "Fixed",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'Enhanced Fan-Out' (Kinesis)?",
+        "o": [
+            "Dedicated 2MB/s read throughput per consumer (pushes data via HTTP/2)",
+            "Shared limit",
+            "Slow read",
+            "Batch read"
+        ]
+    },
+    {
+        "q": "What is 'Lambda@Edge'?",
+        "o": [
+            "Runs Lambda functions at CloudFront Edge locations (Global scaling closest to user)",
+            "Local Lambda",
+            "VPC Lambda",
+            "Regional"
+        ]
+    },
+    {
+        "q": "Difference: Lambda@Edge vs CloudFront Functions?",
+        "o": [
+            "L@E: Max 5-30s duration, Node/Python (External calls ok); CF Functions: Sub-ms, JS only (No external)",
+            "No difference",
+            "L@E is faster",
+            "CF Functions heavy"
+        ]
+    },
+    {
+        "q": "What is 'EventBridge' scaling?",
+        "o": [
+            "Highly scalable event bus (soft limit on PutEvents TPS)",
+            "Queue",
+            "Topic",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh' (Istio/Linkerd)?",
+        "o": [
+            "Infrastructure layer handling service-to-service communication (mTLS, retries, tracing) via sidecars",
+            "VPN",
+            "Firewall",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "How does Service Mesh help scaling?",
+        "o": [
+            "Offloads load balancing, circuit breaking, and retry logic from app code",
+            "Use more RAM",
+            "Use more CPU",
+            "Magic"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar Pattern'?",
+        "o": [
+            "Running a helper container (proxy) alongside the main container in the same Pod",
+            "Side car",
+            "Trailer",
+            "Backpack"
+        ]
+    },
+    {
+        "q": "Overhead of Sidecars at scale?",
+        "o": [
+            "Resource usage (CPU/Mem per pod) and slight network latency",
+            "Zero",
+            "Huge",
+            "Negative"
+        ]
+    },
+    {
+        "q": "What is 'Ambassador Pattern'?",
+        "o": [
+            "Container that proxies network connections to external services for the main app",
+            "Diplomat",
+            "Gateway",
+            "Router"
+        ]
+    },
+    {
+        "q": "What is 'Adapter Pattern' (Container)?",
+        "o": [
+            "Container that transforms output of main app to a standard format (e.g. log normalization)",
+            "Converter",
+            "Plug",
+            "Wire"
+        ]
+    },
+    {
+        "q": "What is 'Envoy Proxy'?",
+        "o": [
+            "High performance C++ proxy used as the data plane in many service meshes",
+            "Java proxy",
+            "Go proxy",
+            "Python proxy"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Tracing' (Jaeger/Zipkin)?",
+        "o": [
+            "Tracking a request path across multiple microservices to identify latency bottlenecks",
+            "Logging",
+            "Metrics",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "What is a 'Span'?",
+        "o": [
+            "A logical unit of work in a trace (has start/end time, metadata)",
+            "Trace",
+            "Log",
+            "Metric"
+        ]
+    },
+    {
+        "q": "What is a 'Trace'?",
+        "o": [
+            "A tree of Spans representing a single request flow",
+            "Log",
+            "Error",
+            "Metric"
+        ]
+    },
+    {
+        "q": "Sampling Rate in Tracing?",
+        "o": [
+            "Percentage of requests to record (100% is too expensive at scale)",
+            "100%",
+            "0%",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Head-Based Sampling'?",
+        "o": [
+            "Decision to sample is made at the start of the request (Root span)",
+            "Tail based",
+            "Random",
+            "Middle"
+        ]
+    },
+    {
+        "q": "What is 'Tail-Based Sampling'?",
+        "o": [
+            "Decision to keep trace is made after request completes (e.g. keep only errors or slow reqs)",
+            "Head based",
+            "Start",
+            "First"
+        ]
+    },
+    {
+        "q": "What is 'Backpressure'?",
+        "o": [
+            "System signaling upstream producers to slow down when it cannot keep up",
+            "Forward pressure",
+            "Speed up",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "How to implement Backpressure?",
+        "o": [
+            "Bounded queues (rejecting when full), TCP Window size, Reactive Streams",
+            "Infinite queues",
+            "Logs",
+            "Email"
+        ]
+    },
+    {
+        "q": "What is 'Saga Pattern'?",
+        "o": [
+            "Pattern for managing distributed transactions (sequence of local transactions with compensating actions)",
+            "Epic",
+            "Story",
+            "Book"
+        ]
+    },
+    {
+        "q": "What is 'Choreography' Saga?",
+        "o": [
+            "Services communicate events directly to trigger next steps (Decentralized)",
+            "Orchestration",
+            "Centralized",
+            "Managed"
+        ]
+    },
+    {
+        "q": "What is 'Orchestration' Saga?",
+        "o": [
+            "Central coordinator (e.g. Step Functions) tells each service what to do",
+            "Choreography",
+            "Peer to peer",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Compensating Transaction'?",
+        "o": [
+            "Action to undo/revert a previous step if a Saga fails",
+            "Retry",
+            "Commit",
+            "Rollback"
+        ]
+    },
+    {
+        "q": "What is 'Strangler Fig Pattern'?",
+        "o": [
+            "Gradually migrating a legacy monolith to microservices by replacing pieces one by one",
+            "Big Bang",
+            "Rewrite",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Corruption Layer' (ACL)?",
+        "o": [
+            "Layer that translates between two different domain models (Legacy vs New) to keep new clean",
+            "Firewall",
+            "Proxy",
+            "VPN"
+        ]
+    },
+    {
+        "q": "What is 'BFF' (Backend For Frontend)?",
+        "o": [
+            "Separate backend service tailored for a specific frontend (Mobile vs Web)",
+            "Gateway",
+            "Proxy",
+            "Friend"
+        ]
+    },
+    {
+        "q": "What is 'Service Discovery'?",
+        "o": [
+            "Mechanism for services to find the network location (IP:Port) of other services",
+            "DNS",
+            "Map",
+            "Search"
+        ]
+    },
+    {
+        "q": "What is 'Client-Side Discovery'?",
+        "o": [
+            "Client queries registry (e.g. Eureka) and picks an instance to call",
+            "Server side",
+            "LB",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Server-Side Discovery'?",
+        "o": [
+            "Client calls a Load Balancer; LB queries registry and forwards traffic",
+            "Client side",
+            "Direct",
+            "P2P"
+        ]
+    },
+    {
+        "q": "What is 'Consul'?",
+        "o": [
+            "Tool for Service Discovery and Key/Value configuration",
+            "Database",
+            "Cache",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Zookeeper'?",
+        "o": [
+            " centralized service for maintaining configuration, naming, and synchronization",
+            "Animal",
+            "Game",
+            "Web"
+        ]
+    },
+    {
+        "q": "What is 'Etcd'?",
+        "o": [
+            "Distributed key-value store used by Kubernetes for all cluster data",
+            "Database",
+            "File system",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Raft' consensus algorithm?",
+        "o": [
+            "Protocol for distributed consensus (Leader election, Log replication) - used by Etcd/Consul",
+            "Paxos",
+            "Boat",
+            "Vote"
+        ]
+    },
+    {
+        "q": "What is 'Paxos'?",
+        "o": [
+            "Family of protocols for solving consensus in a network of unreliable processors (Older/Complex)",
+            "Raft",
+            "Simple",
+            "New"
+        ]
+    },
+    {
+        "q": "What is 'Split Brain'?",
+        "o": [
+            "Cluster partitions into two sub-clusters, both believing they are the master (Data corruption risk)",
+            "Headache",
+            "Merge",
+            "Sync"
+        ]
+    },
+    {
+        "q": "What is 'Fencing' in clusters?",
+        "o": [
+            "Mechanism to isolate a malfunctioning node (Shut it down/Cut network) to prevent data corruption",
+            "Wall",
+            "Border",
+            "Gate"
+        ]
+    },
+    {
+        "q": "What is 'STONITH'?",
+        "o": [
+            "Shoot The Other Node In The Head (Fencing technique - force reboot)",
+            "Protocol",
+            "Game",
+            "Movie"
+        ]
+    },
+    {
+        "q": "What is 'Idempotency'?",
+        "o": [
+            "Property where performing an operation multiple times has same effect as once (Crucial for retries)",
+            "Unique",
+            "Random",
+            "Fast"
+        ]
+    },
+    {
+        "q": "How to achieve Idempotency?",
+        "o": [
+            "Using unique request IDs (Idempotency Keys) and checking if processed",
+            "Retry logic",
+            "Timeouts",
+            "Locks"
+        ]
+    },
+    {
+        "q": "What is 'Dead Letter Queue' (DLQ)?",
+        "o": [
+            "Queue where messages are moved after max retry attempts fail",
+            "Trash",
+            "Archive",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Poison Pill' message?",
+        "o": [
+            "Message that consistently crashes the consumer",
+            "Virus",
+            "Spam",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Blue/Green Deployment'?",
+        "o": [
+            "Running two identical envs (Blue=Live, Green=New); switch traffic when Green is ready",
+            "Canary",
+            "Rolling",
+            "Big bang"
+        ]
+    },
+    {
+        "q": "What is 'Canary Deployment'?",
+        "o": [
+            "Releasing update to a small % of users first, then expanding if stable",
+            "Blue Green",
+            "Bird",
+            "Test"
+        ]
+    },
+    {
+        "q": "What is 'Rolling Update'?",
+        "o": [
+            "Updating instances one by one (or batch) - zero downtime but mixed versions temporarily",
+            "Stop start",
+            "Reboot",
+            "Reinstall"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag' (Toggle)?",
+        "o": [
+            "Conditional code to enable/disable features at runtime (Decouples deploy from release)",
+            "Switch",
+            "Variable",
+            "Comment"
+        ]
+    },
+    {
+        "q": "What is 'Dark Launch'?",
+        "o": [
+            "Releasing feature to production but hiding it from users (often with Shadow Traffic)",
+            "Night launch",
+            "Secret",
+            "Beta"
+        ]
+    },
+    {
+        "q": "What is 'Shadow Traffic' (Mirroring)?",
+        "o": [
+            "Sending copy of live traffic to the new version to test performance (response ignored)",
+            "Dark traffic",
+            "Copy traffic",
+            "Fake traffic"
+        ]
+    },
+    {
+        "q": "What is 'A/B Testing'?",
+        "o": [
+            "Showing two variants (A and B) to different user groups to compare metrics (Conversion etc.)",
+            "Testing",
+            "Beta",
+            "Release"
+        ]
+    },
+    {
+        "q": "What is 'Conway's Law'?",
+        "o": [
+            "Systems defined by organizations constrainted to produce designs that differ copies of the communication structures",
+            "Code law",
+            "Design law",
+            "Team law"
+        ]
+    },
+    {
+        "q": "Implication of Conway's Law on Scaling?",
+        "o": [
+            "To have independent scaling services, you need independent loosely coupled teams",
+            "Hire more",
+            "Fire more",
+            "Ignore teams"
+        ]
+    },
+    {
+        "q": "What is 'Inverse Conway Maneuver'?",
+        "o": [
+            "Designing the team structure to match the desired architecture",
+            "Reorg",
+            "Hiring",
+            "Firing"
+        ]
+    },
+    {
+        "q": "What is 'Two-Pizza Team' (Amazon)?",
+        "o": [
+            "Team size should be small enough to be fed by two pizzas (optimizes communication)",
+            "Food rule",
+            "Party rule",
+            "Lunch"
+        ]
+    },
+    {
+        "q": "What is 'Server-Sent Events' (SSE)?",
+        "o": [
+            "One-way persistent channel from server to client (HTTP based)",
+            "Websocket",
+            "Pooling",
+            "Push"
+        ]
+    },
+    {
+        "q": "WebSockets vs SSE?",
+        "o": [
+            "WebSockets = Bidirectional; SSE = Server-to-Client only",
+            "No difference",
+            "SSE heavier",
+            "WS slower"
+        ]
+    },
+    {
+        "q": "Scaling WebSockets challenges?",
+        "o": [
+            "Stateful connections; require sticky sessions or a pub/sub backend (Redis) to broadcast across nodes",
+            "Easy",
+            "Stateless",
+            "No challenge"
+        ]
+    },
+    {
+        "q": "What is 'Long Polling'?",
+        "o": [
+            "Client holds request open; Server waits until data is available to respond (Simulated push)",
+            "Short polling",
+            "Push",
+            "Socket"
+        ]
+    },
+    {
+        "q": "What is 'Short Polling'?",
+        "o": [
+            "Client asks periodically 'Is there new data?' (Repeated requests)",
+            "Long polling",
+            "Push",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Webhook'?",
+        "o": [
+            "User-defined HTTP callback triggered by an event (Push notification for servers)",
+            "API",
+            "Poll",
+            "Script"
+        ]
+    },
+    {
+        "q": "How to secure Webhooks?",
+        "o": [
+            "Verify signature (HMAC) sent in header",
+            "Password",
+            "IP Allow",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rate Limit' - 'Sliding Window'?",
+        "o": [
+            "More accurate than Fixed Window; accounts for boundary bursts",
+            "Fixed",
+            "Simple",
+            "Bad"
+        ]
+    },
+    {
+        "q": "What is 'Geofencing'?",
+        "o": [
+            "Restrict access or actions based on geographic boundary",
+            "Fence",
+            "Wall",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'Data Residency'?",
+        "o": [
+            "Requirement that data is stored in a specific geographic location (GDPR etc.)",
+            "Data home",
+            "Storage",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'Sharding' - 'Lookup Svc' SPOF risk?",
+        "o": [
+            "If the directory service goes down, no one can find their shard (needs HA)",
+            "No risk",
+            "Low risk",
+            "Safe"
+        ]
+    },
+    {
+        "q": "How to mitigate 'Hot partition'?",
+        "o": [
+            "Use 'Salt' (append random number to key) to spread writes",
+            "Cool it",
+            "Delete it",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Write Amplification'?",
+        "o": [
+            "One logical write resulting in multiple physical I/O writes (SSD/DB indexes)",
+            "Loud write",
+            "Big write",
+            "Fast write"
+        ]
+    },
+    {
+        "q": "What is 'Read Amplification'?",
+        "o": [
+            "One logical read requiring multiple physical reads (e.g. scattered data)",
+            "Loud read",
+            "Big read",
+            "Fast read"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Filter'?",
+        "o": [
+            "Probabilistic data structure to test if element is in set (False positives possible, False negatives impossible)",
+            "Filter",
+            "Search",
+            "Map"
+        ]
+    },
+    {
+        "q": "Bloom Filter use in Databases?",
+        "o": [
+            "Skip disk lookups if key definitely doesn't exist (Saves I/O)",
+            "Index",
+            "Sort",
+            "Compress"
+        ]
+    },
+    {
+        "q": "What is 'Merkle Tree'?",
+        "o": [
+            "Hash tree used to verify data consistency efficiently (Dynamo/Cassandra sync)",
+            "Binary tree",
+            "B tree",
+            "Red Black"
+        ]
+    },
+    {
+        "q": "What is 'LSM Tree' (Log Structured Merge)?",
+        "o": [
+            "DB storage structure optimized for high write throughput (Cassandra, RocksDB)",
+            "B+ Tree",
+            "B Tree",
+            "Hash"
+        ]
+    },
+    {
+        "q": "What is 'B+ Tree'?",
+        "o": [
+            "Standard DB index structure optimized for read performance (MySQL, Postgres)",
+            "LSM",
+            "Hash",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'WAL' (Write Ahead Log)?",
+        "o": [
+            "Log where changes are written before applying to DB file (Durability)",
+            "Log file",
+            "Audit",
+            "History"
+        ]
+    },
+    {
+        "q": "What is 'ACID'?",
+        "o": [
+            "Atomicity, Consistency, Isolation, Durability (Transactions)",
+            "Base",
+            "Chem",
+            "Db"
+        ]
+    },
+    {
+        "q": "What is 'BASE'?",
+        "o": [
+            "Basically Available, Soft state, Eventual consistency (NoSQL)",
+            "Acid",
+            "Solid",
+            "Liquid"
+        ]
+    },
+    {
+        "q": "What is 'Database Migration' - 'Dual Write'?",
+        "o": [
+            "Writing to both Old and New DB during migration to keep sync",
+            "Copy",
+            "Move",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Change Data Capture' (CDC)?",
+        "o": [
+            "Pattern to identify and capture changes in DB to stream elsewhere (Debezium)",
+            "Backup",
+            "Log",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Outbox Pattern'?",
+        "o": [
+            "Saving event to DB in same transaction as data, then relaying to Message Bus (Guarantees delivery)",
+            "Inbox",
+            "Mail",
+            "Queue"
+        ]
+    },
+    {
+        "q": "What is 'Reference Architecture'?",
+        "o": [
+            "Template solution for a common problem (e.g. AWS Ref Arch)",
+            "Code",
+            "Diagram",
+            "Drawing"
+        ]
+    },
+    {
+        "q": "What is 'Well-Architected Framework'?",
+        "o": [
+            "Set of best practices (Operational Excellence, Security, Reliability, Performance, Cost, Sustainability)",
+            "Good code",
+            "Rules",
+            "Laws"
+        ]
+    },
+    {
+        "q": "What is 'Shared Responsibility Model'?",
+        "o": [
+            "Cloud Provider secures 'of' the cloud; Customer secures 'in' the cloud",
+            "All cloud",
+            "All user",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cost Optimization' in scaling?",
+        "o": [
+            "Rightsizing, using Spot, auto-scaling to zero, reserveds",
+            "Cheap",
+            "Free",
+            "Budget"
+        ]
+    },
+    {
+        "q": "What is 'FinOps'?",
+        "o": [
+            "Financial Operations; practice of bringing financial accountability to cloud spend",
+            "Accounting",
+            "Banking",
+            "Money"
+        ]
+    },
+    {
+        "q": "What is 'Sustainability' in Cloud?",
+        "o": [
+            "Minimizing environmental impact (running efficiently, using renewable regions)",
+            "Green",
+            "Eco",
+            "Clean"
+        ]
+    },
+    {
+        "q": "What is 'AWS Global Accelerator'?",
+        "o": [
+            "Network service using AWS global backbone to route traffic to optimally localized endpoints (Static Anycast IP)",
+            "CDN",
+            "VPN",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "Difference: Global Accelerator vs CloudFront?",
+        "o": [
+            "GA sends arbitrary TCP/UDP traffic via AWS Backbone; CloudFront caches HTTP at edge",
+            "No difference",
+            "GA is slower",
+            "CF is TCP only"
+        ]
+    },
+    {
+        "q": "What is 'ALB' (Application Load Balancer)?",
+        "o": [
+            "Layer 7 load balancer (HTTP/HTTPS, Path/Host routing, WAF integration)",
+            "Layer 4",
+            "TCP only",
+            "UDP only"
+        ]
+    },
+    {
+        "q": "What is 'NLB' (Network Load Balancer)?",
+        "o": [
+            "Layer 4 load balancer (TCP/UDP, TLS Passthrough, Static IP, Millions of RPS)",
+            "Layer 7",
+            "HTTP only",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'GWLB' (Gateway Load Balancer)?",
+        "o": [
+            "Load balancer for deploying virtual appliances (Firewalls, IDS/IPS) transparently",
+            "Web GW",
+            "API GW",
+            "NAT GW"
+        ]
+    },
+    {
+        "q": "What is 'Round Robin' Algorithm?",
+        "o": [
+            "Distributing requests sequentially to each server in the list (1, 2, 3, 1, 2, 3)",
+            "Random",
+            "Hash",
+            "Slowest"
+        ]
+    },
+    {
+        "q": "What is 'Weighted Round Robin'?",
+        "o": [
+            "Round robin where some servers receive more requests based on assigned weight (Capacity)",
+            "Random",
+            "Equal",
+            "Fair"
+        ]
+    },
+    {
+        "q": "What is 'Least Connections' Algorithm?",
+        "o": [
+            "Sending request to server with fewest active connections (Good for long-lived sessions)",
+            "Round robin",
+            "Random",
+            "Fastest"
+        ]
+    },
+    {
+        "q": "What is 'Least Response Time' Algorithm?",
+        "o": [
+            "Sending request to server with lowest latency/TTFB",
+            "Round robin",
+            "Slowest",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'IP Hash' Algorithm?",
+        "o": [
+            "Hashing client IP to select server (Ensures client always hits same server unless topology changes)",
+            "Random",
+            "Round robin",
+            "Fair"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Zone Load Balancing'?",
+        "o": [
+            "Distributing traffic evenly across all registered instances in all enabled AZs (vs per AZ)",
+            "Local only",
+            "Private",
+            "Isolation"
+        ]
+    },
+    {
+        "q": "What is 'Connection Draining' (Deregistration Delay)?",
+        "o": [
+            "Allowing in-flight requests to complete before closing connection to a deregistering instance",
+            "Instant kill",
+            "Force stop",
+            "Abort"
+        ]
+    },
+    {
+        "q": "What is 'Sticky Session' Cookie?",
+        "o": [
+            "Cookie generated by LB (or App) to bind user to specific instance",
+            "Tracking cookie",
+            "Ads cookie",
+            "Auth cookie"
+        ]
+    },
+    {
+        "q": "What is 'Duration-Based' Stickiness?",
+        "o": [
+            "Cookie has a set expiration time",
+            "Forever",
+            "Session end",
+            "Browser close"
+        ]
+    },
+    {
+        "q": "What is 'Application-Based' Stickiness?",
+        "o": [
+            "LB uses an application_generated cookie to decide stickiness",
+            "LB generated",
+            "Random",
+            "Time based"
+        ]
+    },
+    {
+        "q": "What is 'TLS Termination'?",
+        "o": [
+            "Decryption of SSL/TLS at the Load Balancer (offloads CPU from backend servers)",
+            "Encryption",
+            "Blocking",
+            "Tunneling"
+        ]
+    },
+    {
+        "q": "What is 'SNI' (Server Name Indication)?",
+        "o": [
+            "TLS extension allowing multiple SSL certificates (domains) on one IP address (ALB supports this)",
+            "Single cert",
+            "No cert",
+            "DNS cert"
+        ]
+    },
+    {
+        "q": "What is 'X-Forwarded-For'?",
+        "o": [
+            "HTTP Header containing the original Client IP (since LB replaces Source IP)",
+            "Destination IP",
+            "Proxy IP",
+            "Server IP"
+        ]
+    },
+    {
+        "q": "What is 'X-Forwarded-Proto'?",
+        "o": [
+            "Header indicating protocol (http/https) used by client",
+            "Port",
+            "Host",
+            "User agent"
+        ]
+    },
+    {
+        "q": "What is 'Slow Start' mode in LB?",
+        "o": [
+            "Gradually increasing traffic to a new target to allow it to warm up",
+            "Fast start",
+            "Immediate",
+            "Full load"
+        ]
+    },
+    {
+        "q": "What is 'VPC Endpoint' (PrivateLink)?",
+        "o": [
+            "Interface to connect to AWS services privately without Internet Gateway",
+            "VPN",
+            "TGW",
+            "Peering"
+        ]
+    },
+    {
+        "q": "How does PrivateLink help scaling?",
+        "o": [
+            "Scalable/private access to services; avoids NAT Gateway bottlenecks",
+            "Speeds up internet",
+            "Saves RAM",
+            "Compresses"
+        ]
+    },
+    {
+        "q": "What is 'Gateway Endpoint'?",
+        "o": [
+            "Specific route table entry for S3 and DynamoDB (Free, private access)",
+            "Interface endpoint",
+            "VPN",
+            "NAT"
+        ]
+    },
+    {
+        "q": "What is 'Interface Endpoint'?",
+        "o": [
+            "ENI with private IP for accessing services (SQS, SNS, Kinesis, etc.)",
+            "Gateway",
+            "Route",
+            "Public IP"
+        ]
+    },
+    {
+        "q": "What is 'Transit Gateway'?",
+        "o": [
+            "Central hub for connecting multiple VPCs and on-prem networks (Simplifies peering topology)",
+            "Router",
+            "Switch",
+            "Hub"
+        ]
+    },
+    {
+        "q": "What is 'VPC Peering' scaling limit?",
+        "o": [
+            "Mesh complexity (N^2 connections); TGW solves this",
+            "Unlimited",
+            "Speed",
+            "Slower"
+        ]
+    },
+    {
+        "q": "What is 'Route 53' - 'Health Checks'?",
+        "o": [
+            "Periodic checks to endpoints; if failed, Route 53 routes traffic away (DNS Failover)",
+            "Ping",
+            "Doctor",
+            "Scan"
+        ]
+    },
+    {
+        "q": "What is 'Active-Active' Failover?",
+        "o": [
+            "All resources healthy and serving; DNS returns multiple IPs",
+            "Active Passive",
+            "Backup",
+            "Standby"
+        ]
+    },
+    {
+        "q": "What is 'Active-Passive' Failover?",
+        "o": [
+            "Primary resource serves traffic; Secondary is on standby",
+            "Active active",
+            "Round robin",
+            "Random"
+        ]
+    }
+]

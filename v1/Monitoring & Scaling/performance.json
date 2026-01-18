@@ -1,0 +1,4637 @@
+[
+    {
+        "q": "What is 'Latency'?",
+        "o": [
+            "Time taken for a request to travel from sender to receiver and be processed",
+            "Bandwidth",
+            "Throughput",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Throughput'?",
+        "o": [
+            "Number of units of work (requests, bytes) processed per unit of time",
+            "Latency",
+            "Delay",
+            "Distance"
+        ]
+    },
+    {
+        "q": "Latency vs Throughput analogy?",
+        "o": [
+            "Latency = Travel time of one car; Throughput = Number of cars passing per hour",
+            "Same thing",
+            "Opposite",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "What is 'Bandwidth'?",
+        "o": [
+            "Maximum theoretical throughput of a channel (Capacity)",
+            "Speed",
+            "Delay",
+            "Packet size"
+        ]
+    },
+    {
+        "q": "Can you have High Bandwidth but High Latency?",
+        "o": [
+            "Yes (e.g. sending a truck full of hard drives; huge data, slow delivery)",
+            "No",
+            "Impossible",
+            "Only in cloud"
+        ]
+    },
+    {
+        "q": "What is 'Response Time'?",
+        "o": [
+            "Total time from client sending request until receiving the response (Network + Server time)",
+            "Server time only",
+            "Network time only",
+            "DB time only"
+        ]
+    },
+    {
+        "q": "What is 'Processing Time' (Service Time)?",
+        "o": [
+            "Time the server actually spends working on the request (excluding network/queue wait)",
+            "Wait time",
+            "Queue time",
+            "Total time"
+        ]
+    },
+    {
+        "q": "What is 'Queue Time'?",
+        "o": [
+            "Time a request waits in line before being processed",
+            "Working time",
+            "Network time",
+            "Total time"
+        ]
+    },
+    {
+        "q": "Formula: Response Time = ?",
+        "o": [
+            "Queue Time + Processing Time + Network Latency",
+            "Processing Time only",
+            "Queue Time only",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Concurrency'?",
+        "o": [
+            "Number of requests being processed or in-progress simultaneously",
+            "Speed",
+            "Volume",
+            "Size"
+        ]
+    },
+    {
+        "q": "Little's Law relates?",
+        "o": [
+            "Concurrency = Throughput * Latency (L = Lambda * W)",
+            "E = mc2",
+            "Speed = Distance / Time",
+            "Force = Mass * Accel"
+        ]
+    },
+    {
+        "q": "If Throughput = 100 req/sec and Latency = 0.5s, then Concurrency = ?",
+        "o": [
+            "50 requests (on average)",
+            "200 requests",
+            "10 requests",
+            "100 requests"
+        ]
+    },
+    {
+        "q": "What is 'Utilization'?",
+        "o": [
+            "Percentage of time a resource is busy processing work",
+            "Idle time",
+            "Free space",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Saturation'?",
+        "o": [
+            "When a resource is 100% utilized and extra work starts queuing",
+            "Empty",
+            "Dry",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Relationship: Utilization vs Latency?",
+        "o": [
+            "As utilization approaches 100%, latency increases exponentially (Knee of the curve)",
+            "Linear increase",
+            "No effect",
+            "Latency drops"
+        ]
+    },
+    {
+        "q": "Why does Latency spike at high utilization?",
+        "o": [
+            "Queue time dominates; requests spend more time waiting than working",
+            "Processors get tired",
+            "Electrons slow down",
+            "Code breaks"
+        ]
+    },
+    {
+        "q": "What is a 'Bottleneck'?",
+        "o": [
+            "The resource with the lowest throughput limit that constrains the entire system",
+            "Fastest part",
+            "Widest part",
+            "Empty part"
+        ]
+    },
+    {
+        "q": "What is 'Amdahl's Law'?",
+        "o": [
+            "Theoretical speedup of a task is limited by the serial part of the task (can't parallelize everything)",
+            "Everything is infinite",
+            "No limits",
+            "Scaling is linear"
+        ]
+    },
+    {
+        "q": "What is 'Universal Scalability Law' (USL)?",
+        "o": [
+            "Extension of Amdahl's Law accounting for Coherency/Contention penalties (Performance degrades after a point)",
+            "Newtons law",
+            "Moores law",
+            "Cole's law"
+        ]
+    },
+    {
+        "q": "What is 'Contention'?",
+        "o": [
+            "Multiple processes fighting for the same resource (Lock/Bus) - slows things down",
+            "Cooperation",
+            "Sharing",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Coherency' cost?",
+        "o": [
+            "Cost of keeping data consistent across distributed nodes (Syncing)",
+            "Free",
+            "Fast",
+            "Zero"
+        ]
+    },
+    {
+        "q": "Why rely on 'Percentiles' instead of 'Averages'?",
+        "o": [
+            "Averages hide outliers; Percentiles (p99) show what slow users are experiencing",
+            "Average is better",
+            "Percentiles are hard",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'p50' (Median)?",
+        "o": [
+            "50% of requests are faster than this value; 50% are slower",
+            "Average",
+            "Max",
+            "Min"
+        ]
+    },
+    {
+        "q": "What is 'p90'?",
+        "o": [
+            "90% of requests are faster than this value (Worst 10% are slower)",
+            "Best 90%",
+            "Average",
+            "Total"
+        ]
+    },
+    {
+        "q": "What is 'p99'?",
+        "o": [
+            "99% of requests are faster; represents the experience of the slowest 1%",
+            "Everyone",
+            "Nobody",
+            "Average"
+        ]
+    },
+    {
+        "q": "What is 'p99.9' (Three Nines)?",
+        "o": [
+            "Worst 1 in 1000 requests",
+            "Worst 1 in 100",
+            "Worst 1 in 10",
+            "Average"
+        ]
+    },
+    {
+        "q": "Why is 'Max' (p100) often ignored?",
+        "o": [
+            "Can be a single freak outlier (e.g. startup warmed up) not representative of steady state",
+            "It is always 0",
+            "It is small",
+            "It is fake"
+        ]
+    },
+    {
+        "q": "What is 'Tail Latency'?",
+        "o": [
+            "The high latency experienced by the small percentage of slowest requests (the 'tail' of the distribution)",
+            "Fastest request",
+            "Average request",
+            "First request"
+        ]
+    },
+    {
+        "q": "Why does Tail Latency matter in microservices?",
+        "o": [
+            "One slow service in a chain of 10 slows down the entire user request (Fan-out amplifies tail)",
+            "It doesn't",
+            "Only average matters",
+            "Only fast matters"
+        ]
+    },
+    {
+        "q": "What is 'Fan-out' effect on latency?",
+        "o": [
+            "If a request hits 100 servers, the chance of hitting a slow one increases drastically",
+            "Decreases latency",
+            "No change",
+            "Speeds up"
+        ]
+    },
+    {
+        "q": "What is 'Jitter' in latency?",
+        "o": [
+            "Variation in latency over time (Stable vs Unstable)",
+            "Video",
+            "Audio",
+            "Color"
+        ]
+    },
+    {
+        "q": "What is 'TTFB' (Time To First Byte)?",
+        "o": [
+            "Time from request start until the first byte of response is received (Server responsiveness)",
+            "Total time",
+            "Download time",
+            "Process time"
+        ]
+    },
+    {
+        "q": "What is 'TTL'?",
+        "o": [
+            "Time To Live: How long a record/cache/packet remains valid",
+            "Time To Load",
+            "Time To Leave",
+            "Time To Loop"
+        ]
+    },
+    {
+        "q": "What is 'IOPS'?",
+        "o": [
+            "Input/Output Operations Per Second (Standard disk performance metric)",
+            "Internet",
+            "Protocol",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Throughput vs IOPS?",
+        "o": [
+            "Throughput = MB/s (Volume); IOPS = Actions/s (Frequency)",
+            "Same",
+            "Opposite",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "Large Block Size favors?",
+        "o": [
+            "Throughput (MB/s) - fewer ops to move data",
+            "IOPS",
+            "Latency",
+            "Random"
+        ]
+    },
+    {
+        "q": "Small Block Size favors?",
+        "o": [
+            "IOPS (Many small actions)",
+            "Throughput",
+            "Bandwidth",
+            "Volume"
+        ]
+    },
+    {
+        "q": "What is 'Random I/O'?",
+        "o": [
+            "Reading/Writing data scattered across disk (Slower on HDD, fine on SSD)",
+            "Sequential",
+            "Fast",
+            "Ordered"
+        ]
+    },
+    {
+        "q": "What is 'Sequential I/O'?",
+        "o": [
+            "Reading/Writing contiguous blocks (Fastest for all disks)",
+            "Random",
+            "Scattered",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Load Average' (Linux)?",
+        "o": [
+            "Average number of processes running or waiting for CPU/Disk over 1, 5, 15 mins",
+            "CPU percent",
+            "RAM usage",
+            "Network speed"
+        ]
+    },
+    {
+        "q": "Load Average 1.0 on single core means?",
+        "o": [
+            "CPU is perfectly utilized (100% busy, no queue)",
+            "Idle",
+            "Overloaded",
+            "Broken"
+        ]
+    },
+    {
+        "q": "Load Average 4.0 on quad core means?",
+        "o": [
+            "Perfectly utilized (1.0 per core)",
+            "Overloaded",
+            "Idle",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Load Average 10.0 on single core?",
+        "o": [
+            "Severely overloaded (9 processes waiting for every 1 running)",
+            "Fine",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What contributes to Load Average?",
+        "o": [
+            "Processes in 'Running' (CPU) or 'Uninterruptible Sleep' (Disk I/O) states",
+            "Sleeping processes",
+            "Zombie processes",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Context Switch'?",
+        "o": [
+            "CPU saving state of one process to run another (Overhead)",
+            "Hardware switch",
+            "Button",
+            "Network switch"
+        ]
+    },
+    {
+        "q": "Voluntary Context Switch?",
+        "o": [
+            "Process gives up CPU to wait for resource (I/O, Lock)",
+            "Forced",
+            "Crash",
+            "Kill"
+        ]
+    },
+    {
+        "q": "Involuntary Context Switch?",
+        "o": [
+            "Scheduler forces process off CPU (Time slice expired / Higher priority woke up)",
+            "Process choice",
+            "Asking",
+            "Waiting"
+        ]
+    },
+    {
+        "q": "High Involuntary Context Switching indicates?",
+        "o": [
+            "CPU Contention (Too many threads fighting for CPU)",
+            "I/O Wait",
+            "Idle",
+            "Good performance"
+        ]
+    },
+    {
+        "q": "What is 'False Sharing' (CPU Cache)?",
+        "o": [
+            "Threads on different cores updating variables on same cache line (Invalidates cache unnecessarily)",
+            "Sharing data",
+            "Good sharing",
+            "Network sharing"
+        ]
+    },
+    {
+        "q": "What is 'Cache Miss'?",
+        "o": [
+            "CPU/App cannot find data in fast Cache (L1/L2/RAM); must fetch from slow Slow (RAM/Disk)",
+            "Hit",
+            "Found",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Hit Rate'?",
+        "o": [
+            "Percentage of accesses served from Cache (Goal: High)",
+            "Miss rate",
+            "Error rate",
+            "Loss"
+        ]
+    },
+    {
+        "q": "What is 'Cold Cache'?",
+        "o": [
+            "Cache is empty (e.g. after restart), everything is a Miss (Performance drop)",
+            "Frozen",
+            "Fast",
+            "Full"
+        ]
+    },
+    {
+        "q": "What is 'Warming the Cache'?",
+        "o": [
+            "Artificially loading data into cache before serving real traffic",
+            "Deleting cache",
+            "Cooling",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "What is 'Thrashing'?",
+        "o": [
+            "System spending more time managing resources (Swapping/GC) than doing work",
+            "Working",
+            "Running",
+            "Speeding"
+        ]
+    },
+    {
+        "q": "What is 'Memory Leak'?",
+        "o": [
+            "Program allocates memory but fails to release it (Usage grows indefinitely)",
+            "Water leak",
+            "Pipe leak",
+            "Space leak"
+        ]
+    },
+    {
+        "q": "Symptom of Memory Leak?",
+        "o": [
+            "'Sawtooth' pattern growing higher, or linear growth until OOM Crash",
+            "Constant usage",
+            "Low usage",
+            "Fast speed"
+        ]
+    },
+    {
+        "q": "What is 'OOM Killer'?",
+        "o": [
+            "Kernel process that kills applications to recover memory when RAM is exhausted",
+            "Murderer",
+            "Virus",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'Swap' space?",
+        "o": [
+            "Disk space used as overflow RAM (Very slow compared to RAM)",
+            "Trade",
+            "Exchange",
+            "Fast RAM"
+        ]
+    },
+    {
+        "q": "What is 'Swapping' (Paging)?",
+        "o": [
+            "Moving data between RAM and Swap Disk",
+            "Trading",
+            "Killing",
+            "Running"
+        ]
+    },
+    {
+        "q": "Why avoid Swapping in production Datastores?",
+        "o": [
+            "Disk is 1000x slower than RAM; performance falls off a cliff",
+            "It is fast",
+            "It is free",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Resident Set Size' (RSS)?",
+        "o": [
+            "Amount of RAM effectively used by a process (excluding Swap)",
+            "Virtual memory",
+            "Disk usage",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Memory' (VSZ)?",
+        "o": [
+            "Total address space allocated (RAM + Swap + Shared + Unused)",
+            "Real memory",
+            "Physical memory",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'Buffer/Cache' RAM?",
+        "o": [
+            "RAM used by OS to cache disk blocks (Freeable instantly if apps need it)",
+            "Used RAM",
+            "App RAM",
+            "Wasted RAM"
+        ]
+    },
+    {
+        "q": "OS reports 'Free RAM' is low, but 'Available' is high?",
+        "o": [
+            "Normal; OS uses unused RAM for file caching (Good)",
+            "Panic",
+            "Memory leak",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'User Time' (CPU)?",
+        "o": [
+            "Time spent executing application code (User space)",
+            "Kernel time",
+            "Idle time",
+            "Wait time"
+        ]
+    },
+    {
+        "q": "What is 'System Time' (Kernel Time)?",
+        "o": [
+            "Time spent executing kernel code (Syscalls, Drivers, TCP/IP)",
+            "User time",
+            "App time",
+            "Idle"
+        ]
+    },
+    {
+        "q": "High System Time indicates?",
+        "o": [
+            "Heavy I/O, Context Switching, inefficient Syscalls",
+            "Complex app logic",
+            "Code loop",
+            "Math calculation"
+        ]
+    },
+    {
+        "q": "What is 'Run Queue'?",
+        "o": [
+            "Line of processes ready to run but waiting for a CPU core",
+            "Disk queue",
+            "Network queue",
+            "Printer queue"
+        ]
+    },
+    {
+        "q": "What is 'Block Device'?",
+        "o": [
+            "Device reading/writing data in blocks (HDDs, SSDs)",
+            "Character device",
+            "Keyboard",
+            "Mouse"
+        ]
+    },
+    {
+        "q": "What is 'Network Saturation'?",
+        "o": [
+            "Reaching the bandwidth limit of the link (Packets queue or drop)",
+            "Wet cable",
+            "Full disk",
+            "Full RAM"
+        ]
+    },
+    {
+        "q": "Packet Loss causes?",
+        "o": [
+            "Retransmissions (TCP), lowering throughput and increasing latency",
+            "Faster speed",
+            "Less data",
+            "Lower latency"
+        ]
+    },
+    {
+        "q": "What is 'Round Trip Time' (RTT)?",
+        "o": [
+            "Time for a packet to go to destination and acknowledgment to return",
+            "One way",
+            "Half time",
+            "Flight time"
+        ]
+    },
+    {
+        "q": "Speed of Light limitation?",
+        "o": [
+            "Adds fixed latency (~1ms per 300km fiber); NY to London is min ~70ms",
+            "No limit",
+            "Faster",
+            "Zero latency"
+        ]
+    },
+    {
+        "q": "CDM (Content Delivery Network) helps performance by?",
+        "o": [
+            "Reducing physical distance (RTT) by serving content from edge location near user",
+            "Magic",
+            "Compression only",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Compression' (Gzip/Brotli)?",
+        "o": [
+            "Reducing payload size to improve transport speed (CPU tradeoff)",
+            "Deleting",
+            "Hiding",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "Compression helps when?",
+        "o": [
+            "Network is the bottleneck (Bandwidth constrained)",
+            "CPU is bottleneck",
+            "Latency is 0",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Minification'?",
+        "o": [
+            "Removing whitespace/comments from code (JS/CSS) to reduce size",
+            "Zipping",
+            "Compiling",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'Serialization' cost?",
+        "o": [
+            "CPU time spent converting Objects to JSON/Bytes for transport",
+            "Network time",
+            "Disk time",
+            "Free"
+        ]
+    },
+    {
+        "q": "Protocol Overhead?",
+        "o": [
+            "Extra bytes (Headers, Handshakes) required by protocol beyond actual data",
+            "Payload",
+            "Body",
+            "Content"
+        ]
+    },
+    {
+        "q": "HTTP/2 vs HTTP/1.1 Performance?",
+        "o": [
+            "HTTP/2 supports Multiplexing (Multiple requests over 1 connection), reducing latency",
+            "Slower",
+            "Same",
+            "Heavier"
+        ]
+    },
+    {
+        "q": "What is 'Head-of-Line Blocking' in HTTP/1.1?",
+        "o": [
+            "One slow request blocks the connection; subsequent requests wait",
+            "Fast",
+            "Parallel",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'Connection Pool'?",
+        "o": [
+            "Reusing open DB/Net connections to avoid TCP Handshake overhead cost",
+            "Swimming pool",
+            "New connections",
+            "Closing connections"
+        ]
+    },
+    {
+        "q": "Cost of opening TCP connection?",
+        "o": [
+            "3-way Handshake (SYN, SYN-ACK, ACK) = 1.5 RTT minimum",
+            "Zero",
+            "Fast",
+            "Free"
+        ]
+    },
+    {
+        "q": "Cost of SSL/TLS Handshake?",
+        "o": [
+            "Additional RTTs for crypto exchange + CPU for math",
+            "Zero",
+            "Fast",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is 'Keep-Alive'?",
+        "o": [
+            "Keeping TCP connection open for subsequent HTTP requests",
+            "Closing",
+            "Reset",
+            "Killing"
+        ]
+    },
+    {
+        "q": "What is 'Browser Cache'?",
+        "o": [
+            "Storing assets locally on user device to avoid network fetch entirely",
+            "Server cache",
+            "DB cache",
+            "CDN"
+        ]
+    },
+    {
+        "q": "What is 'ETag'?",
+        "o": [
+            "Hash of file content; Client sends it to check if file changed (304 Not Modified)",
+            "Price tag",
+            "Name",
+            "Label"
+        ]
+    },
+    {
+        "q": "304 Not Modified means?",
+        "o": [
+            "Server says 'Your cached version is still good'; no body sent (Fast)",
+            "Error",
+            "Not found",
+            "New file"
+        ]
+    },
+    {
+        "q": "What is 'Race Condition'?",
+        "o": [
+            "System behavior depends on timing of uncontrollable events (Bugs)",
+            "Car race",
+            "Speed",
+            "Fast code"
+        ]
+    },
+    {
+        "q": "What is 'Critical Section'?",
+        "o": [
+            "Part of code accessing shared resource that must be atomic (Locked)",
+            "Important part",
+            "Main function",
+            "Header"
+        ]
+    },
+    {
+        "q": "Lock Contention reduces?",
+        "o": [
+            "Concurrency (Serializes execution)",
+            "Latency",
+            "Errors",
+            "Cost"
+        ]
+    },
+    {
+        "q": "Amdahl's Law prevents?",
+        "o": [
+            "Infinite scaling by adding more cores (Serial portion limits max speedup)",
+            "Bugs",
+            "Crashes",
+            "Errors"
+        ]
+    },
+    {
+        "q": "Scalability vs Performance?",
+        "o": [
+            "Performance = Speed (Latency) for one unit; Scalability = Handling more units (Throughput)",
+            "Same thing",
+            "Opposite",
+            "Synonyms"
+        ]
+    },
+    {
+        "q": "What is the 'USE Method'?",
+        "o": [
+            "Methodology for analyzing resource bottlenecks: Utilization, Saturation, Errors",
+            "User, System, External",
+            "Universal Scaling Equation",
+            "Use only"
+        ]
+    },
+    {
+        "q": "Who created the USE Method?",
+        "o": [
+            "Brendan Gregg",
+            "Linus Torvalds",
+            "Google",
+            "Amazon"
+        ]
+    },
+    {
+        "q": "USE Method focus?",
+        "o": [
+            "Resources (CPUs, Disks, Buses) - Start with the hardware and check each one",
+            "Requests",
+            "Users",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'USE - Utilization'?",
+        "o": [
+            "Percentage of time the resource was busy",
+            "Errors",
+            "Queue length",
+            "Throughput"
+        ]
+    },
+    {
+        "q": "What is 'USE - Saturation'?",
+        "o": [
+            "Degree to which the resource has extra work queued (Queue length)",
+            "Busy time",
+            "Error count",
+            "Total work"
+        ]
+    },
+    {
+        "q": "What is 'USE - Errors'?",
+        "o": [
+            "Count of error events (e.g. disk read errors)",
+            "Latency",
+            "Speed",
+            "Logs"
+        ]
+    },
+    {
+        "q": "If CPU Utilization is 50% but Saturation is High?",
+        "o": [
+            "You might have a single-threaded bottleneck (1 core at 100%, others at 0%) or lock contention",
+            "System is fine",
+            "Add more RAM",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is the 'RED Method'?",
+        "o": [
+            "Methodology for monitoring microservices: Rate, Errors, Duration",
+            "Red color",
+            "Stop",
+            "Read, Edit, Delete"
+        ]
+    },
+    {
+        "q": "Who created the RED Method?",
+        "o": [
+            "Tom Wilkie (Grafana Labs)",
+            "Brendan Gregg",
+            "SRE Book",
+            "Netflix"
+        ]
+    },
+    {
+        "q": "RED Method focus?",
+        "o": [
+            "Services (Request-driven) - What the user experiences",
+            "Resources",
+            "Hardware",
+            "Kernel"
+        ]
+    },
+    {
+        "q": "What is 'RED - Rate'?",
+        "o": [
+            "Number of requests per second (Throughput)",
+            "Money",
+            "Speed",
+            "Percent"
+        ]
+    },
+    {
+        "q": "What is 'RED - Errors'?",
+        "o": [
+            "Number (or percentage) of failed requests",
+            "Logs",
+            "Bugs",
+            "Crashes"
+        ]
+    },
+    {
+        "q": "What is 'RED - Duration'?",
+        "o": [
+            "Distribution of latency (Response time)",
+            "Time taken",
+            "Length",
+            "Size"
+        ]
+    },
+    {
+        "q": "RED vs USE usage?",
+        "o": [
+            "Use RED for Services (App monitoring); Use USE for Infrastructure (Host monitoring)",
+            "Use USE for everything",
+            "Use RED for everything",
+            "Random"
+        ]
+    },
+    {
+        "q": "What are the 'Four Golden Signals'?",
+        "o": [
+            "Latency, Traffic, Errors, Saturation (Google SRE Book)",
+            "RED + 1",
+            "USE + 1",
+            "Metrics, Logs, Traces, Events"
+        ]
+    },
+    {
+        "q": "Golden Signals: Traffic?",
+        "o": [
+            "Demand placed on system (Throughput/Bandwidth)",
+            "Cars",
+            "People",
+            "Data center"
+        ]
+    },
+    {
+        "q": "Golden Signals: Latency?",
+        "o": [
+            "Time to service a request (Distinguish between success and error latency!)",
+            "Wait time",
+            "Ping",
+            "Delay"
+        ]
+    },
+    {
+        "q": "Why separate Error Latency from Success Latency?",
+        "o": [
+            "Errors can be very fast (500 Instantly) or very slow (Timeout); averaging them blurs the picture",
+            "No reason",
+            "It is fun",
+            "More graphs"
+        ]
+    },
+    {
+        "q": "Golden Signals: Errors?",
+        "o": [
+            "Rate of requests that fail (Explicit 500s, Implicit Policy violations)",
+            "Bugs",
+            "Mistakes",
+            "Logs"
+        ]
+    },
+    {
+        "q": "Golden Signals: Saturation?",
+        "o": [
+            "How full the service is (Focus on the most constrained resource)",
+            "Wetness",
+            "Color",
+            "Fullness"
+        ]
+    },
+    {
+        "q": "What is 'APDEX'?",
+        "o": [
+            "Application Performance Index (Standard to measure user satisfaction with response time)",
+            "Index",
+            "Graph",
+            "Metric"
+        ]
+    },
+    {
+        "q": "Apdex Score range?",
+        "o": [
+            "0.0 (Worst) to 1.0 (Best)",
+            "0 to 100",
+            "-1 to 1",
+            "1 to 5"
+        ]
+    },
+    {
+        "q": "Apdex 'T' (Threshold)?",
+        "o": [
+            "Target response time defined by business (e.g. 0.5s)",
+            "Time",
+            "Total",
+            "Top"
+        ]
+    },
+    {
+        "q": "Apdex Buckets?",
+        "o": [
+            "Satisfied (< T), Tolerating (> T but < 4T), Frustrated (> 4T or Error)",
+            "Good, Bad",
+            "Fast, Slow",
+            "Happy, Sad"
+        ]
+    },
+    {
+        "q": "Apdex Formula?",
+        "o": [
+            "(Satisfied + (Tolerating / 2)) / Total Samples",
+            "Satisfied / Total",
+            "Total / Satisfied",
+            "Random"
+        ]
+    },
+    {
+        "q": "Why divide Tolerating by 2 in Apdex?",
+        "o": [
+            "Gives partial credit for slow but successful requests",
+            "Math reasons",
+            "To be mean",
+            "Simplicity"
+        ]
+    },
+    {
+        "q": "What is 'Availability Monitoring' (Blackbox)?",
+        "o": [
+            "Testing system from OUTSIDE (Synthetics, Ping checks)",
+            "Whitebox",
+            "Inside",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Whitebox Monitoring'?",
+        "o": [
+            "Monitoring based on internal metrics exposed by the app (e.g. JVM stats, HTTP counters)",
+            "Blackbox",
+            "Outside",
+            "Ping"
+        ]
+    },
+    {
+        "q": "Whitebox vs Blackbox?",
+        "o": [
+            "Whitebox = Why it's broken (Debugging); Blackbox = Is it broken? (User perspective)",
+            "Same",
+            "Opposite",
+            "Colors"
+        ]
+    },
+    {
+        "q": "What is 'TSDB'?",
+        "o": [
+            "Time Series Database (Optimized for storing timestamped metric data)",
+            "SQL",
+            "NoSQL",
+            "Graph DB"
+        ]
+    },
+    {
+        "q": "Examples of TSDB?",
+        "o": [
+            "Prometheus, InfluxDB, VictoriaMetrics, TimescaleDB",
+            "MySQL, Postgres",
+            "Redis, Memcached",
+            "Neo4j"
+        ]
+    },
+    {
+        "q": "Why not use MySQL for metrics?",
+        "o": [
+            "TSDBs are optimized for high write volume and compression of time-series data (Float64)",
+            "MySQL is faster",
+            "MySQL is better",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality' in metrics?",
+        "o": [
+            "The number of unique combinations of label values",
+            "Size",
+            "Count",
+            "Volume"
+        ]
+    },
+    {
+        "q": "High Cardinality Explosion?",
+        "o": [
+            "Including UserID or IP in labels creates billions of time series -> Crashes TSDB/Huge Bill",
+            "Good data",
+            "More info",
+            "Better query"
+        ]
+    },
+    {
+        "q": "What is 'Downsampling'?",
+        "o": [
+            "Reducing resolution of old data (e.g. keeping 1h averages instead of 1m raw data)",
+            "Deleting",
+            "Compressing",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "Why Downsample?",
+        "o": [
+            "To save storage space for long-term retention",
+            "To lose data",
+            "To speed up writes",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Retention Policy'?",
+        "o": [
+            "How long to keep data before deleting it (e.g. 14 days for raw, 1 year for aggregated)",
+            "Backup",
+            "Security",
+            "Privacy"
+        ]
+    },
+    {
+        "q": "What is 'Pull Model' (Prometheus)?",
+        "o": [
+            "Monitoring server scrapes (requests) metrics from the application endpoint",
+            "Push model",
+            "Agent model",
+            "Log model"
+        ]
+    },
+    {
+        "q": "What is 'Push Model' (Influx/Graphite)?",
+        "o": [
+            "Application sends (pushes) metrics to the monitoring server",
+            "Pull model",
+            "Scrape model",
+            "Read model"
+        ]
+    },
+    {
+        "q": "Pull vs Push pros/cons?",
+        "o": [
+            "Pull: Easier to tell if app is down (scrape fails); Push: Good for short-lived jobs (batch)",
+            "Push is better",
+            "Pull is better",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is 'Pushgateway'?",
+        "o": [
+            "Component for Push jobs to send metrics to, so Prometheus can Pull from it",
+            "Proxy",
+            "Router",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Instrumentation'?",
+        "o": [
+            "Adding code to application to expose metrics (Counters, Gauges, Histograms)",
+            "Music",
+            "Tools",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "What is a 'Counter' metric?",
+        "o": [
+            "Value that only goes up (e.g. Total Requests, Total Errors). Reset on restart.",
+            "Gauge",
+            "Histogram",
+            "Summary"
+        ]
+    },
+    {
+        "q": "What is a 'Gauge' metric?",
+        "o": [
+            "Value that can go up and down (e.g. Memory Usage, Temperature, Running Threads)",
+            "Counter",
+            "Histogram",
+            "Summary"
+        ]
+    },
+    {
+        "q": "What is a 'Histogram' metric?",
+        "o": [
+            "Samples observations into buckets (e.g. Request Duration: <0.1s, <0.5s, <1s)",
+            "Counter",
+            "Gauge",
+            "Summary"
+        ]
+    },
+    {
+        "q": "What is a 'Summary' metric?",
+        "o": [
+            "Calculates quantiles on the client-side (Harder to aggregate than histograms)",
+            "Counter",
+            "Gauge",
+            "Histogram"
+        ]
+    },
+    {
+        "q": "Histogram vs Summary?",
+        "o": [
+            "Histogram allows server-side aggregation (rate then quantile); Summary does not",
+            "Summary is better",
+            "Histogram is worse",
+            "Same"
+        ]
+    },
+    {
+        "q": "What is 'rate()' function used for?",
+        "o": [
+            "Calculating per-second rate from a Counter (handling resets automatically)",
+            "Gauge",
+            "Histogram",
+            "Sum"
+        ]
+    },
+    {
+        "q": "Can you use rate() on a Gauge?",
+        "o": [
+            "No! Rate expects a monotonic counter. Use deriv() for gauges.",
+            "Yes",
+            "Sometimes",
+            "Ideally"
+        ]
+    },
+    {
+        "q": "What is 'Metric Dimensions' (Attributes/Labels)?",
+        "o": [
+            "Metadata key-value pairs (env=prod, region=us-east) allowing slicing/dicing",
+            "Size",
+            "Length",
+            "Width"
+        ]
+    },
+    {
+        "q": "What is 'Aggregation'?",
+        "o": [
+            "Combining multiple time series into one (e.g. avg by (service) (cpu_usage))",
+            "Splitting",
+            "Deleting",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "What is 'Granularity' (Resolution)?",
+        "o": [
+            "The interval between data points (1s vs 1m vs 1h)",
+            "Sand",
+            "Texture",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Aliasing' (Sampling error)?",
+        "o": [
+            "Missing peaks/valleys because sampling rate is too low (Nyquist theorem)",
+            "Name change",
+            "Fake name",
+            "Spying"
+        ]
+    },
+    {
+        "q": "What is 'Overhead' of monitoring?",
+        "o": [
+            "CPU/Network cost of collecting/sending metrics (Should be < 1-2%)",
+            "Cost",
+            "Roof",
+            "Limit"
+        ]
+    },
+    {
+        "q": "What is 'Bpf' (eBPF)?",
+        "o": [
+            "Technology allowing sandboxed programs in Linux kernel (Low overhead observability)",
+            "Virus",
+            "Language",
+            "Database"
+        ]
+    },
+    {
+        "q": "Benefit of eBPF for monitoring?",
+        "o": [
+            "Can measure TCP stats, Disk I/O, etc. without modifying application code",
+            "No benefit",
+            "Harder",
+            "Slower"
+        ]
+    },
+    {
+        "q": "What is 'Profiling'?",
+        "o": [
+            "Analyzing program execution to find which functions consume most CPU/RAM",
+            "Testing",
+            "Monitoring",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Continuous Profiling'?",
+        "o": [
+            "Always-on profiling (low overhead sampling) to catch issues in production",
+            "One time",
+            "Dev only",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is a 'Flame Graph'?",
+        "o": [
+            "Visualization of stack traces; width = CPU usage time (Finding hot paths)",
+            "Fire",
+            "Chart",
+            "Error log"
+        ]
+    },
+    {
+        "q": "What is 'Code Instrumentation' vs 'Agent'?",
+        "o": [
+            "Instrumentation = Manual SDK calls; Agent = Auto-instrumentation (Bytecode manipulation)",
+            "Same",
+            "Opposite",
+            "Different"
+        ]
+    },
+    {
+        "q": "What is 'RUM'?",
+        "o": [
+            "Real User Monitoring (Recording metrics from actual user browsers/devices)",
+            "Drink",
+            "Run",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Monitoring' vs RUM?",
+        "o": [
+            "Synthetics = Robot testing (Predictable); RUM = Real Humans (Messy/Varied)",
+            "Same",
+            "Opposite",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What provides the 'Baseline'?",
+        "o": [
+            "Historical performance data (What is normal for 9 AM Monday?)",
+            "Zero",
+            "Max",
+            "Min"
+        ]
+    },
+    {
+        "q": "What is 'Trend Analysis'?",
+        "o": [
+            "Identifying long-term patterns (e.g. data growth 10% month-over-month)",
+            "Spike check",
+            "Alerting",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "What is 'Seasonality'?",
+        "o": [
+            "Repeating patterns (Daily traffic cycle, Black Friday peak)",
+            "Weather",
+            "Salt",
+            "Food"
+        ]
+    },
+    {
+        "q": "Scaling based on Seasonality?",
+        "o": [
+            "Predictive Auto-scaling: Scale out BEFORE the 9 AM rush begins",
+            "Reactive",
+            "Manual",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'SLO Burn Rate' alert?",
+        "o": [
+            "Alerting when error budget is consumed too fast (e.g. 14x normal rate)",
+            "Fire",
+            "Heat",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Why is Burn Rate better than static threshold?",
+        "o": [
+            "Adapts to traffic volume and focuses on total impact on reliability budget",
+            "Simpler",
+            "Faster",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'MTBF'?",
+        "o": [
+            "Mean Time Between Failures (Reliability)",
+            "Mean Time Bad Failures",
+            "Max Time Between Failures",
+            "Min Time Between Failures"
+        ]
+    },
+    {
+        "q": "What is 'MTTR'?",
+        "o": [
+            "Mean Time To Recovery/Repair (Availability/Ops Speed)",
+            "Mean Time To Run",
+            "Max Time To Repair",
+            "Min Time To Repair"
+        ]
+    },
+    {
+        "q": "What is 'MTTF'?",
+        "o": [
+            "Mean Time To Failure (For non-repairable items like hard drives)",
+            "Mean Time To Fix",
+            "Max Time To Failure",
+            "Min Time To Failure"
+        ]
+    },
+    {
+        "q": "What is 'MTTA'?",
+        "o": [
+            "Mean Time To Acknowledge (Responsiveness)",
+            "Mean Time To Ask",
+            "Max Time To Ack",
+            "Min Time To Ack"
+        ]
+    },
+    {
+        "q": "Ops Goal: Reduce ___?",
+        "o": [
+            "MTTR (Repair faster)",
+            "MTBF",
+            "Uptime",
+            "Availability"
+        ]
+    },
+    {
+        "q": "Ops Goal: Increase ___?",
+        "o": [
+            "MTBF (Fail less often)",
+            "MTTR",
+            "Downtime",
+            "Latency"
+        ]
+    },
+    {
+        "q": "CPU: What is 'iowait' time?",
+        "o": [
+            "Time checking processor is idle while waiting for disk/network I/O to complete",
+            "Network wait",
+            "User wait",
+            "App wait"
+        ]
+    },
+    {
+        "q": "High 'iowait' usually indicates?",
+        "o": [
+            "Disk bottleneck (Slow disk or too many requests); CPU is bored waiting for data",
+            "CPU bottleneck",
+            "Network bottleneck",
+            "RAM bottleneck"
+        ]
+    },
+    {
+        "q": "CPU: What is 'steal' time (Cloud/VMs)?",
+        "o": [
+            "Time the hypervisor stole CPU cycles from your VM to serve other noisy neighbors",
+            "Theft",
+            "Security breach",
+            "Idle"
+        ]
+    },
+    {
+        "q": "High 'steal' time implies?",
+        "o": [
+            "Noisy Neighbor problem (Physical host is overloaded); Move to another host",
+            "Virus",
+            "Hacker",
+            "Bad code"
+        ]
+    },
+    {
+        "q": "CPU: What is 'nice' time?",
+        "o": [
+            "Time running user processes with positive 'nice' value (Lower priority)",
+            "Kind time",
+            "Good time",
+            "Kernel time"
+        ]
+    },
+    {
+        "q": "What is 'Priority Inversion'?",
+        "o": [
+            "Low priority task holds a lock needed by High priority task, blocking the High priority task",
+            "Reversing",
+            "U-turn",
+            "Good scheduling"
+        ]
+    },
+    {
+        "q": "CPU: What is 'interrupt' (irq) time?",
+        "o": [
+            "Time servicing hardware interrupts (e.g. Network card receiving packets)",
+            "Software error",
+            "App crash",
+            "User click"
+        ]
+    },
+    {
+        "q": "High 'softirq' on one core?",
+        "o": [
+            "Network card flooding interrupts to one CPU; fix with RPS/RFS (Receive Packet Steering)",
+            "Disk issue",
+            "RAM issue",
+            "App issue"
+        ]
+    },
+    {
+        "q": "Memory: What is 'Page Fault'?",
+        "o": [
+            "CPU asks for address not in MMU; OS must find it (Mapping Virtual to Physical)",
+            "Crash",
+            "Book error",
+            "Paper error"
+        ]
+    },
+    {
+        "q": "What is 'Minor Page Fault'?",
+        "o": [
+            "Standard memory allocation (Page is in RAM but MMU doesn't know address yet). Very cheap.",
+            "Disk access",
+            "Crash",
+            "Swap"
+        ]
+    },
+    {
+        "q": "What is 'Major Page Fault'?",
+        "o": [
+            "Page is NOT in RAM; must be fetched from Disk (Swap or File). Very expensive.",
+            "Minor error",
+            "Small delay",
+            "CPU cache miss"
+        ]
+    },
+    {
+        "q": "High Major Page Faults indicates?",
+        "o": [
+            "Memory Pressure (Swapping) or heavy file reading without cache",
+            "CPU speed",
+            "Network speed",
+            "Good performance"
+        ]
+    },
+    {
+        "q": "What is 'Garbage Collection' (GC)?",
+        "o": [
+            "Automated process of finding and freeing unused memory (Java, Go, Python)",
+            "Trash pickup",
+            "File delete",
+            "Log rotation"
+        ]
+    },
+    {
+        "q": "What is 'Stop-The-World' (STW) pause?",
+        "o": [
+            "GC freezes the entire application to safely clean memory; request latency spikes",
+            "Crash",
+            "Reboot",
+            "Sleep"
+        ]
+    },
+    {
+        "q": "How to reduce GC pauses?",
+        "o": [
+            "Tune Heap Size, use better GC algorithm (G1GC, ZGC), reduce object allocation rate",
+            "Add disk",
+            "Add network",
+            "Restart often"
+        ]
+    },
+    {
+        "q": "Disk: What is 'Queue Depth'?",
+        "o": [
+            "Number of I/O requests waiting to be served by the disk controller",
+            "Pit depth",
+            "Ocean depth",
+            "File size"
+        ]
+    },
+    {
+        "q": "Why is Queue Depth > 1 good for SSDs?",
+        "o": [
+            "SSDs are parallel; they need multiple requests to saturate internal channels",
+            "Bad",
+            "Slower",
+            "Confusion"
+        ]
+    },
+    {
+        "q": "Disk: 'Service Time' vs 'Response Time' (Await)?",
+        "o": [
+            "Service Time = Disk working; Await = Service Time + Queue Time (What app sees)",
+            "Same",
+            "Opposite",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is 'Throughput' vs 'Bandwidth' limit?",
+        "o": [
+            "You can hit IOPS limit (small files) way before Bandwidth limit (checking checking file cable)",
+            "Same",
+            "Random",
+            "No limit"
+        ]
+    },
+    {
+        "q": "Network: What is 'TCP Window Size'?",
+        "o": [
+            "Amount of data sender can send before waiting for ACK (Flow control)",
+            "Screen size",
+            "Glass size",
+            "Packet size"
+        ]
+    },
+    {
+        "q": "What is 'Bandwidth-Delay Product'?",
+        "o": [
+            "Bandwidth * RTT; Amount of data 'in flight' to fill the pipe fully",
+            "Cost",
+            "Speed",
+            "Latency"
+        ]
+    },
+    {
+        "q": "If Window Size < Bandwidth-Delay Product?",
+        "o": [
+            "You cannot utilize full bandwidth (Stop-and-Wait inefficiency)",
+            "Good",
+            "Fast",
+            "Low latency"
+        ]
+    },
+    {
+        "q": "What is 'TCP Slow Start'?",
+        "o": [
+            "Algorithm doubling window size every RTT to probe bandwidth capacity safely",
+            "Booting",
+            "Loading",
+            "Crashing"
+        ]
+    },
+    {
+        "q": "Why is 'New Connection' slow?",
+        "o": [
+            "Handshake latency + TCP Slow Start ramping up speed",
+            "Old is better",
+            "Cables are cold",
+            "CPU is slow"
+        ]
+    },
+    {
+        "q": "What is 'Congestion Control'?",
+        "o": [
+            "Preventing internet collapse by reducing send rate when Packet Loss is detected",
+            "Traffic jam",
+            "Police",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'Goodput'?",
+        "o": [
+            "Application-level throughput (excluding headers, retransmissions, overhead)",
+            "Throughput",
+            "Badput",
+            "Input"
+        ]
+    },
+    {
+        "q": "What is 'Headroom'?",
+        "o": [
+            "Spare capacity available before saturation (Safety margin for spikes)",
+            "Ceiling",
+            "Hat",
+            "Space"
+        ]
+    },
+    {
+        "q": "Why keep 30-50% Headroom?",
+        "o": [
+            "To handle traffic bursts, failover (one node down -> others take load), and background jobs",
+            "Waste money",
+            "No reason",
+            "Looks good"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Scaling' (Scale Up)?",
+        "o": [
+            "Adding more CPU/RAM to existing server (Easier management, single point of failure)",
+            "Scale Out",
+            "Cloning",
+            "Sharding"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal Scaling' (Scale Out)?",
+        "o": [
+            "Adding more servers (Complex management, better redundancy/infinite scale)",
+            "Scale Up",
+            "Upgrading",
+            "Replacing"
+        ]
+    },
+    {
+        "q": "Load Balancer metric: 'Active Connections'?",
+        "o": [
+            "Number of currently open sessions (Capacity limit)",
+            "Closed connections",
+            "Dead connections",
+            "Total history"
+        ]
+    },
+    {
+        "q": "Load Balancer metric: 'Surge Queue'?",
+        "o": [
+            "Requests queued at LB because backends are maxed out (Bad sign)",
+            "Fast lane",
+            "VIP",
+            "Good sign"
+        ]
+    },
+    {
+        "q": "Database metric: 'Connection Pool Saturation'?",
+        "o": [
+            "All DB connections are in use; new threads block waiting for a connection",
+            "Pool is empty",
+            "Swimming",
+            "Leak"
+        ]
+    },
+    {
+        "q": "Database metric: 'Replication Lag'?",
+        "o": [
+            "Time delay between write on Primary and appearance on Replica (Consistency risk)",
+            "Ping",
+            "Latency",
+            "Travel time"
+        ]
+    },
+    {
+        "q": "Database metric: 'Full Table Scans'?",
+        "o": [
+            "Queries reading every row instead of using Index (High I/O, High CPU)",
+            "Index scan",
+            "Fast",
+            "Optimized"
+        ]
+    },
+    {
+        "q": "What is 'Cache Hit Ratio'?",
+        "o": [
+            "Hits / (Hits + Misses). Goal usually > 90% or 99%.",
+            "Misses / Hits",
+            "Total / Hits",
+            "Random"
+        ]
+    },
+    {
+        "q": "If Hit Ratio drops suddenly?",
+        "o": [
+            "DB load spikes (Thundering Herd) as requests fall through to backend",
+            "DB load drops",
+            "Nothing happens",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is 'Eviction' (Cache)?",
+        "o": [
+            "Removing items from cache to make room for new ones (LRU policy)",
+            "Deleting",
+            "Moving",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "What is 'LRU'?",
+        "o": [
+            "Least Recently Used (Standard eviction policy: discard oldest unused item)",
+            "FIFO",
+            "LIFO",
+            "Random"
+        ]
+    },
+    {
+        "q": "JVM Metric: 'Heap Usage'?",
+        "o": [
+            "Memory used by Java Objects (Eden, Survivor, Old Gen)",
+            "Stack",
+            "Code",
+            "Disk"
+        ]
+    },
+    {
+        "q": "JVM Metric: 'Thread Count'?",
+        "o": [
+            "Number of active threads (High count -> Context Switch overhead / Lock Contention)",
+            "Process count",
+            "Core count",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Go Metric: 'Goroutines'?",
+        "o": [
+            "Lightweight threads managed by Go runtime (Can have millions, unlike OS threads)",
+            "Processes",
+            "Heavy threads",
+            "Systems"
+        ]
+    },
+    {
+        "q": "Node.js Metric: 'Event Loop Lag'?",
+        "o": [
+            "Time checking loop is blocked by synchronous CPU code (Performance killer)",
+            "Fast loop",
+            "Good loop",
+            "Async"
+        ]
+    },
+    {
+        "q": "Apache/Nginx: 'Worker Processes'?",
+        "o": [
+            "OS processes handling requests (Nginx uses async event model; Apache uses threads/prefork)",
+            "Users",
+            "Databases",
+            "Files"
+        ]
+    },
+    {
+        "q": "Linux 'uptime' load average numbers represent?",
+        "o": [
+            "1 minute, 5 minute, 15 minute averages",
+            "1 sec, 5 sec, 15 sec",
+            "1 hour, 5 hour, 15 hour",
+            "Create, Update, Delete"
+        ]
+    },
+    {
+        "q": "Command 'top' shows?",
+        "o": [
+            "Real-time view of running processes, CPU, RAM usage",
+            "Disk files",
+            "Network packets",
+            "User history"
+        ]
+    },
+    {
+        "q": "Command 'vmstat' shows?",
+        "o": [
+            "Virtual Memory statistics (Swap, I/O, System/User CPU breakdown)",
+            "Video",
+            "Volume",
+            "Version"
+        ]
+    },
+    {
+        "q": "Command 'iostat' shows?",
+        "o": [
+            "Disk I/O statistics (TPS, Read/s, Write/s, Await, Util%)",
+            "Internet",
+            "Input",
+            "Integer"
+        ]
+    },
+    {
+        "q": "Command 'netstat' / 'ss' shows?",
+        "o": [
+            "Network connections, routing tables, interface stats",
+            "Net worth",
+            "Nice stats",
+            "Names"
+        ]
+    },
+    {
+        "q": "Command 'free -h' shows?",
+        "o": [
+            "Memory usage (Total, Used, Free, Buff/Cache, Swap) in human readable format",
+            "Free disk",
+            "Cost",
+            "CPU"
+        ]
+    },
+    {
+        "q": "Command 'df -h' shows?",
+        "o": [
+            "Disk Filesystem usage (Size, Used, Avail, Mount)",
+            "Delete file",
+            "Define function",
+            "Data frame"
+        ]
+    },
+    {
+        "q": "Command 'sar'?",
+        "o": [
+            "System Activity Reporter (Historical metrics for CPU, Memory, I/O)",
+            "Search",
+            "Save",
+            "Source"
+        ]
+    },
+    {
+        "q": "Command 'tcpdump' / 'wireshark'?",
+        "o": [
+            "Packet Analyzer (Capture and inspect actual network packets - Debugging)",
+            "Traffic jam",
+            "Flooding",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "Command 'strace'?",
+        "o": [
+            "Trace System Calls made by a process (Debug what a process is doing)",
+            "Trace route",
+            "Stack trace",
+            "String trace"
+        ]
+    },
+    {
+        "q": "Command 'dmesg'?",
+        "o": [
+            "Display kernel ring buffer messages (Hardware errors, Driver logs, OOM kills)",
+            "Message",
+            "Disk message",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'Inode' usage?",
+        "o": [
+            "Number of file metadata structures (You can run out of Inodes even if Disk Space is free!)",
+            "Node.js",
+            "Internet node",
+            "Input node"
+        ]
+    },
+    {
+        "q": "Running out of Inodes happens by?",
+        "o": [
+            "Creating millions of tiny files (0 bytes)",
+            "Large files",
+            "Videos",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'Clock Drift'?",
+        "o": [
+            "Servers' internal clocks getting out of sync (Breaks logs, auth, distributed DBs)",
+            "Time travel",
+            "Fast clock",
+            "Slow clock"
+        ]
+    },
+    {
+        "q": "Solution for Clock Drift?",
+        "o": [
+            "NTP (Network Time Protocol)",
+            "Manual set",
+            "Ignore",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'C10k Problem'?",
+        "o": [
+            "Challenge of handling 10,000 concurrent connections (Historical milestone, solved by epoll/kqueue/async)",
+            "10k errors",
+            "10k dollars",
+            "10k lines of code"
+        ]
+    },
+    {
+        "q": "What is 'Backpressure'?",
+        "o": [
+            "System pushing back against load (e.g. queue full, rejecting requests) to prevent collapse",
+            "Peer pressure",
+            "Air pressure",
+            "Vacuum"
+        ]
+    },
+    {
+        "q": "What is 'Load Shedding'?",
+        "o": [
+            "Intentionally dropping excess requests to keep the system alive for remaining users",
+            "Deleting data",
+            "Crashing",
+            "Scaling"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Tracing'?",
+        "o": [
+            "Process of tracking a single request as it propagates across multiple microservices/systems",
+            "Logging",
+            "Network routing",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "What is a 'Trace'?",
+        "o": [
+            "The complete journey of a request (composed of multiple Spans)",
+            "Single event",
+            "Error log",
+            "Metric"
+        ]
+    },
+    {
+        "q": "What is a 'Span'?",
+        "o": [
+            "A single unit of work within a Trace (e.g. 'DB Query', 'HTTP Call to Service B')",
+            "Bridge",
+            "Length",
+            "Duration"
+        ]
+    },
+    {
+        "q": "What is 'Trace context propagation'?",
+        "o": [
+            "Passing TraceID and SpanID in HTTP headers (e.g. W3C Trace Context) between services",
+            "Copying files",
+            "Sending email",
+            "Broadcasting"
+        ]
+    },
+    {
+        "q": "What is 'OpenTelemetry'?",
+        "o": [
+            "Open standard (CNCF) for generating and collecting traces, metrics, and logs (Vendor neutral)",
+            "Closed source",
+            "Proprietary",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Span Attributes' (Tags)?",
+        "o": [
+            "Key-value pairs added to a span (e.g. http.method=GET, db.statement='SELECT *')",
+            "Colors",
+            "Sizes",
+            "Weights"
+        ]
+    },
+    {
+        "q": "What is 'Sampling' in Tracing?",
+        "o": [
+            "Recording only a percentage of traces (e.g. 1% or 0.1%) to reduce storage/performance cost",
+            "Recording all",
+            "Deleting all",
+            "Eating"
+        ]
+    },
+    {
+        "q": "What is 'Head-based Sampling'?",
+        "o": [
+            "Decision to sample is made at the START of the request (Root span)",
+            "Tail based",
+            "Random",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Tail-based Sampling'?",
+        "o": [
+            "Decision to keep trace is made at the END (Allows keeping 100% of Errors/Slow traces)",
+            "Head based",
+            "Start based",
+            "Middle based"
+        ]
+    },
+    {
+        "q": "Pros of Tail-based Sampling?",
+        "o": [
+            "Catches the 'interesting' traces (errors/latency outliers) without storing boring success ones",
+            "Cheaper buffer",
+            "Less memory",
+            "Simpler"
+        ]
+    },
+    {
+        "q": "Cons of Tail-based Sampling?",
+        "o": [
+            "Requires buffering ALL spans in memory until trace completes (High Resource Usage)",
+            "Misses errors",
+            "Slows app",
+            "None"
+        ]
+    },
+    {
+        "q": "What is a 'Waterfall View' (Gantt Chart)?",
+        "o": [
+            "Visualization of a Trace showing spans as bars over time (Critical Path analysis)",
+            "Pie chart",
+            "Bar graph",
+            "Line chart"
+        ]
+    },
+    {
+        "q": "What is the 'Critical Path'?",
+        "o": [
+            "Sequence of spans that directly determines the total duration (Shortening others won't help)",
+            "Shortest path",
+            "Longest path",
+            "Random path"
+        ]
+    },
+    {
+        "q": "Async operations affect Critical Path how?",
+        "o": [
+            "They run in parallel (background), so they usually do NOT extend the critical path (User waits less)",
+            "They block",
+            "They slow down",
+            "They crash"
+        ]
+    },
+    {
+        "q": "What is 'High Cardinality' problem in Tracing?",
+        "o": [
+            "Too many unique Span names or Attribute values makes aggregation impossible/expensive",
+            "Too few",
+            "Too fast",
+            "Too slow"
+        ]
+    },
+    {
+        "q": "What is 'APM' (Application Performance Monitoring)?",
+        "o": [
+            "Tooling (Datadog, New Relic, Dynatrace) focusing on Code-level performance + Tracing",
+            "Infrastructure only",
+            "Logging only",
+            "Security only"
+        ]
+    },
+    {
+        "q": "What is 'Database N+1 Problem'?",
+        "o": [
+            "Executing 1 query to fetch Parent, then N queries to fetch Children (Performance Killer)",
+            "Math problem",
+            "N-1",
+            "Optimization"
+        ]
+    },
+    {
+        "q": "How to detect N+1 Problem?",
+        "o": [
+            "APM/Tracing showing a sequence of identical fast SELECT queries in a loop",
+            "High CPU",
+            "Low RAM",
+            "Slow network"
+        ]
+    },
+    {
+        "q": "How to fix N+1 Problem?",
+        "o": [
+            "Batch fetching (JOINs or 'WHERE IN (...)') to load children in 1 query",
+            "Add index",
+            "Add cache",
+            "Restart DB"
+        ]
+    },
+    {
+        "q": "What is 'Unindexed Query'?",
+        "o": [
+            "SQL query scanning full table because no suitable index exists (High Latency/CPU/Disk)",
+            "Faster query",
+            "Cached query",
+            "Simple query"
+        ]
+    },
+    {
+        "q": "How to spot Unindexed Query in APM?",
+        "o": [
+            "Long duration span for DB call + DB metrics showing 'Full Scans' spike",
+            "Short span",
+            "No span",
+            "Error span"
+        ]
+    },
+    {
+        "q": "What is 'Slow Query Log'?",
+        "o": [
+            "Database feature logging all queries taking longer than X ms (Goldmine for tuning)",
+            "Error log",
+            "General log",
+            "Binary log"
+        ]
+    },
+    {
+        "q": "What is 'EXPLAIN' plan?",
+        "o": [
+            "Database command showing how it intends to execute a query (Indexes used, Scan type)",
+            "Documentation",
+            "Wiki",
+            "Tutorial"
+        ]
+    },
+    {
+        "q": "What is 'Lock Wait Timeout'?",
+        "o": [
+            "Transaction gave up waiting for a lock held by another transaction (Deadlock prevention)",
+            "Crash",
+            "Success",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock'?",
+        "o": [
+            "Two transactions each holding a lock the other needs; neither can proceed",
+            "Traffic jam",
+            "Fast lock",
+            "Open lock"
+        ]
+    },
+    {
+        "q": "What is 'Polling'?",
+        "o": [
+            "Client repeatedly asking server 'Is data ready?' (Inefficient)",
+            "Voting",
+            "Pushing",
+            "Streaming"
+        ]
+    },
+    {
+        "q": "What is 'Long Polling'?",
+        "o": [
+            "Client asks; Server holds connection open until data is ready (Better than polling)",
+            "Polling forever",
+            "Short polling",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "What is 'WebSocket'?",
+        "o": [
+            "Full-duplex persistent connection (Server can push to Client instantly)",
+            "One way",
+            "Stateless",
+            "HTTP"
+        ]
+    },
+    {
+        "q": "Performance: Polling vs WebSocket?",
+        "o": [
+            "WebSockets reduce latency and network overhead (headers) for real-time apps",
+            "Polling is faster",
+            "Same",
+            "Polling uses less RAM"
+        ]
+    },
+    {
+        "q": "What is 'Keep-Alive' timeout?",
+        "o": [
+            "How long a connection stays open without activity before server closes it",
+            "Forever",
+            "Never",
+            "1 second"
+        ]
+    },
+    {
+        "q": "What is 'Connection Leak'?",
+        "o": [
+            "Application failing to close/return connections to pool (Eventually pool exhausts)",
+            "Water leak",
+            "Memory leak",
+            "Data leak"
+        ]
+    },
+    {
+        "q": "Symptom of Connection Leak?",
+        "o": [
+            "Pool Active Count climbs to Max and stays there; App freezes/timeouts",
+            "Pool is empty",
+            "App is fast",
+            "Low CPU"
+        ]
+    },
+    {
+        "q": "What is 'Thundering Herd'?",
+        "o": [
+            "Many processes waking up simultaneously to handle 1 event (Resource spike)",
+            "Cows",
+            "Storm",
+            "Noise"
+        ]
+    },
+    {
+        "q": "Also 'Thundering Herd' (Cache)?",
+        "o": [
+            "Cache expires -> Thousands of requests hit DB simultaneously for same key",
+            "Cache hit",
+            "DB idle",
+            "Network idle"
+        ]
+    },
+    {
+        "q": "Solution to Cache Thundering Herd?",
+        "o": [
+            "Probabilistic Early Expiration (Jitter) or Singleflight (Coalescing reqs)",
+            "Delete cache",
+            "Disable cache",
+            "More databases"
+        ]
+    },
+    {
+        "q": "What is 'Jitter' (Retry)?",
+        "o": [
+            "Adding random delay to retry attempts to prevent synchronized hammering of server",
+            "Shaking",
+            "Video",
+            "Audio"
+        ]
+    },
+    {
+        "q": "What is 'Exponential Backoff'?",
+        "o": [
+            "Increasing wait time between retries (1s, 2s, 4s, 8s) to let system recover",
+            "Linear",
+            "Constant",
+            "Immediate"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker'?",
+        "o": [
+            "Pattern to detect failures and stop calling a failing service (Fail fast / Prevent cascade)",
+            "Fuse",
+            "Switch",
+            "Wire"
+        ]
+    },
+    {
+        "q": "Circuit State: 'Open'?",
+        "o": [
+            "Calls are blocked immediately (Fail fast); Service is assumed down",
+            "Calls pass through",
+            "Calls are queued",
+            "Success"
+        ]
+    },
+    {
+        "q": "Circuit State: 'Closed'?",
+        "o": [
+            "Normal operation; calls pass through to service",
+            "Blocked",
+            "Tripped",
+            "Broken"
+        ]
+    },
+    {
+        "q": "Circuit State: 'Half-Open'?",
+        "o": [
+            "Testing if service is back (Allow 1 request; if success -> Close, else -> Open)",
+            "Broken",
+            "Fixed",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "What is 'Bulkhead' pattern?",
+        "o": [
+            "Isolating resources (pools) so failure in one part doesn't sink the whole ship",
+            "Wall",
+            "Door",
+            "Window"
+        ]
+    },
+    {
+        "q": "Example of Bulkhead?",
+        "o": [
+            "Separate Thread Pools for 'User Service' and 'Payment Service'",
+            "One pool for all",
+            "No pools",
+            "Sharing everything"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation'?",
+        "o": [
+            "System continues to maintain basic functionality when some parts fail (e.g. show Cached items instead of Live)",
+            "Crash",
+            "Stop",
+            "Error page"
+        ]
+    },
+    {
+        "q": "What is 'Failover'?",
+        "o": [
+            "Switching to a standby system (Backup DB/Server) when Primary fails",
+            "Falling",
+            "Crashing",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "Active-Active vs Active-Passive?",
+        "o": [
+            "Active-Active: Both handle traffic (Load Balanced); Active-Passive: Backup waits idle",
+            "Same",
+            "Unrelated",
+            "Random"
+        ]
+    },
+    {
+        "q": "What represents specific time when system is slowest?",
+        "o": [
+            "Peak Hours (Designing for Peak Capacity vs Average Capacity)",
+            "Night",
+            "Weekend",
+            "Holiday"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Planning'?",
+        "o": [
+            "Estimating future resource needs based on growth trends and business limits",
+            "Guessing",
+            "Buying",
+            "Selling"
+        ]
+    },
+    {
+        "q": "What is 'Load Testing'?",
+        "o": [
+            "Simulating expected traffic to verify system behavior",
+            "Stress testing",
+            "Unit testing",
+            "Integration testing"
+        ]
+    },
+    {
+        "q": "What is 'Stress Testing'?",
+        "o": [
+            "Testing beyond breaking point to see HOW it fails (Graceful vs Crash)",
+            "Load testing",
+            "Unit testing",
+            "Manual testing"
+        ]
+    },
+    {
+        "q": "What is 'Soak Testing' (Endurance)?",
+        "o": [
+            "Running load for long duration (e.g. 24h) to find Memory Leaks/Resource exhaustion",
+            "Fast test",
+            "Spike test",
+            "Unit test"
+        ]
+    },
+    {
+        "q": "What is 'Spike Testing'?",
+        "o": [
+            "Sudden extreme burst of load to test scaling speed and recovery",
+            "Slow ramp",
+            "Constant load",
+            "Endurance"
+        ]
+    },
+    {
+        "q": "What is 'Sharding' (Partitioning)?",
+        "o": [
+            "Splitting large dataset across multiple databases/instances (Horizontal Scaling for Data)",
+            "Replication",
+            "Backup",
+            "Clustering"
+        ]
+    },
+    {
+        "q": "Sharding Key importance?",
+        "o": [
+            "Determines distribution; Bad key causes Hot Spots (Uneven load)",
+            "No importance",
+            "Random",
+            "Color"
+        ]
+    },
+    {
+        "q": "What is 'Hot Spot' (Data)?",
+        "o": [
+            "One shard receiving disproportionate amount of traffic (e.g. Justin Bieber's tweets)",
+            "Sun",
+            "Fire",
+            "WiFi"
+        ]
+    },
+    {
+        "q": "What is 'Consistent Hashing'?",
+        "o": [
+            "Algo for distributing keys minimizes reshuffling when nodes leave/join (CDN/Sharding)",
+            "Random hashing",
+            "Modulo hashing",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "What is 'Serverless' Cold Start?",
+        "o": [
+            "Latency penalty when function is invoked after being idle (Container boot time)",
+            "Warm start",
+            "Fast start",
+            "Crash"
+        ]
+    },
+    {
+        "q": "How to mitigate Cold Starts?",
+        "o": [
+            "Provisioned Concurrency (Keep warm instances), Lighter runtime, Smaller code size",
+            "Sleep",
+            "Reboot",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Edge Computing'?",
+        "o": [
+            "Running code/logic closer to user (CDN Edge) to reduce Latency",
+            "Cloud computing",
+            "Fog computing",
+            "Localhost"
+        ]
+    },
+    {
+        "q": "What is 'Hydration' (Frontend)?",
+        "o": [
+            "Attaching event listeners to server-rendered HTML to make it interactive",
+            "Drinking water",
+            "Rendering",
+            "Loading"
+        ]
+    },
+    {
+        "q": "Hydration Latency affects?",
+        "o": [
+            "Time To Interactive (TTI) - User sees content (FCP) but can't click yet",
+            "TTFB",
+            "Network",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'Tree Shaking'?",
+        "o": [
+            "Removing unused code from final bundle during build (Dead code elimination)",
+            "Gardening",
+            "Optimization",
+            "Planting"
+        ]
+    },
+    {
+        "q": "What is 'Lazy Loading' (Code Splitting)?",
+        "o": [
+            "Loading resources (Images/JS) only when needed (on scroll/route change)",
+            "Eager loading",
+            "Preloading",
+            "Slow loading"
+        ]
+    },
+    {
+        "q": "What is 'Preloading'?",
+        "o": [
+            "Telling browser to fetch critical resources ASAP (Fonts/Hero Image)",
+            "Lazy loading",
+            "Post loading",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What is 'Prefetching'?",
+        "o": [
+            "Fetching resources for NEXT page navigation in background (Low priority)",
+            "Preloading",
+            "Lazy loading",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What are 'Core Web Vitals'?",
+        "o": [
+            "Set of 3 metrics (LCP, FID/INP, CLS) Google uses to measure User Experience (SEO ranking factor)",
+            "Colors",
+            "Network stats",
+            "Server stats"
+        ]
+    },
+    {
+        "q": "What is 'LCP'?",
+        "o": [
+            "Largest Contentful Paint: Time until the largest text/image block is visible (Loading Speed)",
+            "Last Content Paint",
+            "Least Content",
+            "Loading Content"
+        ]
+    },
+    {
+        "q": "Good LCP score is?",
+        "o": [
+            "< 2.5 seconds",
+            "< 5 seconds",
+            "< 100ms",
+            "< 1 minute"
+        ]
+    },
+    {
+        "q": "What is 'CLS'?",
+        "o": [
+            "Cumulative Layout Shift: Measure of visual stability (Did page elements jump around?)",
+            "Cascading Lock Sheet",
+            "Content Loading Speed",
+            "CPU Load System"
+        ]
+    },
+    {
+        "q": "Good CLS score is?",
+        "o": [
+            "< 0.1",
+            "< 1.0",
+            "< 50",
+            "0"
+        ]
+    },
+    {
+        "q": "What causes poor CLS?",
+        "o": [
+            "Images without dimensions (width/height), ads injecting dynamic content, late-loading fonts",
+            "Fast network",
+            "Small fonts",
+            "Colors"
+        ]
+    },
+    {
+        "q": "What is 'FID' (Deprecated)?",
+        "o": [
+            "First Input Delay: Time from first user interaction (click) to browser processing it",
+            "First Image Display",
+            "Fast Input Data",
+            "File I/O"
+        ]
+    },
+    {
+        "q": "What is 'INP' (New)?",
+        "o": [
+            "Interaction to Next Paint: Measures responsiveness of ALL interactions (replacing FID)",
+            "Input Network Protocol",
+            "Image Next Page",
+            "Internal Net Port"
+        ]
+    },
+    {
+        "q": "Good INP score is?",
+        "o": [
+            "< 200 milliseconds",
+            "< 1 second",
+            "< 500ms",
+            "0 ms"
+        ]
+    },
+    {
+        "q": "What is 'FCP'?",
+        "o": [
+            "First Contentful Paint: Time until the first bit of content (text/image) appears",
+            "First Call Protocol",
+            "Fast Caching Process",
+            "File Copy"
+        ]
+    },
+    {
+        "q": "What is 'TTI'?",
+        "o": [
+            "Time To Interactive: Time until page is fully rendered AND responsive to input",
+            "Time To Image",
+            "Total Time Interest",
+            "Text To Image"
+        ]
+    },
+    {
+        "q": "What is 'TBT'?",
+        "o": [
+            "Total Blocking Time: Total time main thread was blocked between FCP and TTI",
+            "Total Byte Transfer",
+            "Time Between Tasks",
+            "Text Byte Time"
+        ]
+    },
+    {
+        "q": "What is 'Critical Rendering Path'?",
+        "o": [
+            "Sequence of steps the browser takes to convert HTML/CSS/JS into pixels on screen",
+            "Network route",
+            "DB path",
+            "File path"
+        ]
+    },
+    {
+        "q": "CRP Steps?",
+        "o": [
+            "DOM -> CSSOM -> Render Tree -> Layout -> Paint -> Composite",
+            "Paint -> Layout -> DOM",
+            "HTML -> JSON -> Paint",
+            "Download -> View"
+        ]
+    },
+    {
+        "q": "What is 'Render Blocking' resource?",
+        "o": [
+            "CSS or JS that prevents the browser from showing any content until it is downloaded/parsed",
+            "Image",
+            "Video",
+            "Font"
+        ]
+    },
+    {
+        "q": "How to fix Render Blocking JS?",
+        "o": [
+            "Use 'async' or 'defer' attributes on script tags",
+            "Delete script",
+            "Move to top",
+            "Make it larger"
+        ]
+    },
+    {
+        "q": "'async' vs 'defer' scripts?",
+        "o": [
+            "Async: Runs as soon as downloaded (out of order); Defer: Runs after HTML parsing (in order)",
+            "Same",
+            "Async is slower",
+            "Defer is random"
+        ]
+    },
+    {
+        "q": "What is 'Reflow' (Layout)?",
+        "o": [
+            "Calculating position/size of elements (Expensive CPU)",
+            "Painting",
+            "Downloading",
+            "Compiling"
+        ]
+    },
+    {
+        "q": "What is 'Repaint'?",
+        "o": [
+            "Changing pixels (color/visibility) without changing layout (Cheaper than Reflow)",
+            "Reflow",
+            "Reboot",
+            "Refresh"
+        ]
+    },
+    {
+        "q": "What triggers Reflow?",
+        "o": [
+            "Changing window size, changing font, adding/removing DOM elements, changing margin/padding",
+            "Changing color",
+            "Scrolling",
+            "Clicking"
+        ]
+    },
+    {
+        "q": "What is 'Compositing'?",
+        "o": [
+            "GPU combining different layers (Z-index) into final image (Very fast)",
+            "Reflow",
+            "Parsing",
+            "Loading"
+        ]
+    },
+    {
+        "q": "CSS Animation Performance tip?",
+        "o": [
+            "Animate 'transform' and 'opacity' (handled by GPU/Compositor); Avoid 'width'/'left' (triggers Reflow)",
+            "Use JavaScript",
+            "Use Flash",
+            "Animate 'margin'"
+        ]
+    },
+    {
+        "q": "What is 'Vary' header?",
+        "o": [
+            "Tells caches that the response differs based on some header (e.g. Vary: Accept-Encoding)",
+            "Random header",
+            "Variable",
+            "Version"
+        ]
+    },
+    {
+        "q": "What is 'Cache-Control: private'?",
+        "o": [
+            "Response can be cached by Browser but NOT by intermediate CDN/Proxy (User specific)",
+            "No caching",
+            "Public caching",
+            "Server only"
+        ]
+    },
+    {
+        "q": "What is 'Cache-Control: no-store'?",
+        "o": [
+            "Do NOT store any version of the response (For sensitive banking data)",
+            "Cache forever",
+            "Revalidate",
+            "Private"
+        ]
+    },
+    {
+        "q": "What is 'Cache-Control: no-cache'?",
+        "o": [
+            "Must revalidate with server (ETag check) before using cached copy (Not 'no caching'!)",
+            "No storage",
+            "Delete cache",
+            "Cache forever"
+        ]
+    },
+    {
+        "q": "What is 'stale-while-revalidate'?",
+        "o": [
+            "Serve old (stale) content immediately while fetching new content in background",
+            "Error",
+            "Wait",
+            "Timeout"
+        ]
+    },
+    {
+        "q": "What is 'CDN Edge Caching'?",
+        "o": [
+            "Caching static assets (Images/CSS) at servers geographically close to user",
+            "Browser cache",
+            "DB cache",
+            "CPU cache"
+        ]
+    },
+    {
+        "q": "What is 'Origin Shield'?",
+        "o": [
+            "Extra caching layer between Edge and Origin to protect Origin from 'Cache Miss Storms'",
+            "Firewall",
+            "Anti-virus",
+            "Armor"
+        ]
+    },
+    {
+        "q": "What is 'Brotli' vs 'Gzip'?",
+        "o": [
+            "Brotli offers better compression ratio (smaller files) but is slower to compress than Gzip",
+            "Gzip is better",
+            "Same",
+            "Brotli is larger"
+        ]
+    },
+    {
+        "q": "What is 'HTTP/3'?",
+        "o": [
+            "Newest HTTP version running over QUIC (UDP) instead of TCP",
+            "TCP based",
+            "Slower",
+            "Depreciated"
+        ]
+    },
+    {
+        "q": "Why HTTP/3 over UDP?",
+        "o": [
+            "Eliminates TCP Head-of-Line blocking (Packet loss only affects one stream, not all)",
+            "It is simpler",
+            "UDP is reliable",
+            "No handshake"
+        ]
+    },
+    {
+        "q": "What is '0-RTT' (Zero Round Trip Time)?",
+        "o": [
+            "QUIC feature allowing Resume Session without a handshake (Immediate data send)",
+            "1-RTT",
+            "Slow start",
+            "Fast ping"
+        ]
+    },
+    {
+        "q": "What is a 'Service Worker'?",
+        "o": [
+            "Script running in background (proxy) enabling Offline mode, Push notifications, Background sync",
+            "Worker thread",
+            "UI thread",
+            "Server script"
+        ]
+    },
+    {
+        "q": "What is 'PWA' (Progressive Web App)?",
+        "o": [
+            "Web app that behaves like native app (Installable, Offline, Manifest)",
+            "Old website",
+            "Flash app",
+            "Java applet"
+        ]
+    },
+    {
+        "q": "What is 'Lighthouse'?",
+        "o": [
+            "Automated tool (Chrome DevTools) for auditing performance, accessibility, SEO",
+            "House light",
+            "Search engine",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Mobile-First Indexing'?",
+        "o": [
+            "Google ranks your site based on its Mobile version performance/content",
+            "Desktop first",
+            "Tablet only",
+            "Print"
+        ]
+    },
+    {
+        "q": "What is 'Responsive Image' (srcset)?",
+        "o": [
+            "Serving different image sizes based on screen width (Don't send 4K image to mobile)",
+            "One size",
+            "Crop",
+            "Filter"
+        ]
+    },
+    {
+        "q": "What is 'Lazy Loading' images?",
+        "o": [
+            "loading='lazy' attribute; Browser fetches image only when it nears viewport",
+            "Eager",
+            "Slow",
+            "Hidden"
+        ]
+    },
+    {
+        "q": "What is 'CLS' caused by no dimensions?",
+        "o": [
+            "Browser doesn't know image height -> text loads -> image loads -> text gets pushed down",
+            "Color shift",
+            "Font shift",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Font Flashing' (FOIT/FOUT)?",
+        "o": [
+            "Flash of Invisible/Unstyled Text while custom font is loading",
+            "Strobe light",
+            "Binking",
+            "Color change"
+        ]
+    },
+    {
+        "q": "How to fix Font Flashing?",
+        "o": [
+            "font-display: swap (Show fallback font immediately, swap when loaded)",
+            "Block styling",
+            "Hide text",
+            "Use images"
+        ]
+    },
+    {
+        "q": "What is 'Preconnect'?",
+        "o": [
+            "Establishing DNS+TCP+SSL to a third-party domain early (e.g. fonts.googleapis.com)",
+            "Preload",
+            "Prefetch",
+            "Ping"
+        ]
+    },
+    {
+        "q": "What is 'DNS Prefetch'?",
+        "o": [
+            "Resolving domain name to IP early (Low cost)",
+            "Connect",
+            "Download",
+            "Ping"
+        ]
+    },
+    {
+        "q": "What is 'Memory Leak' in JS?",
+        "o": [
+            "Forgot to remove Event Listener / Global variables / Consoles holding references",
+            "RAM damaged",
+            "Disk full",
+            "CPU hot"
+        ]
+    },
+    {
+        "q": "How to profile JS memory?",
+        "o": [
+            "Chrome DevTools -> Memory Tab -> Heap Snapshot (Compare snapshots)",
+            "Network tab",
+            "Elements tab",
+            "Console"
+        ]
+    },
+    {
+        "q": "What is 'Main Thread'?",
+        "o": [
+            "Single thread where Browser processes JS, Layout, Paint (Don't block it!)",
+            "Worker thread",
+            "Background thread",
+            "Server thread"
+        ]
+    },
+    {
+        "q": "How to offload work from Main Thread?",
+        "o": [
+            "Web Workers run scripts in background threads",
+            "Async/Await (still main thread usually)",
+            "Promises",
+            "Events"
+        ]
+    },
+    {
+        "q": "Promise vs Web Worker?",
+        "o": [
+            "Promise handles async I/O on Main Thread; Worker handles heavy CPU calc on separate thread",
+            "Same",
+            "Promise is Thread",
+            "Worker is Network"
+        ]
+    },
+    {
+        "q": "What is 'FPS' (Frame Per Second) goal?",
+        "o": [
+            "60 FPS (16.6ms per frame) for smooth animation",
+            "30 FPS",
+            "100 FPS",
+            "10 FPS"
+        ]
+    },
+    {
+        "q": "What causes 'Jank'?",
+        "o": [
+            "Frame drops (Processing took > 16ms); Animation stutters",
+            "Smoothness",
+            "Speed",
+            "Fast load"
+        ]
+    },
+    {
+        "q": "What is 'requestAnimationFrame'?",
+        "o": [
+            "Schedule function to run before next repaint (Synced with refresh rate)",
+            "setTimeout",
+            "setInterval",
+            "while loop"
+        ]
+    },
+    {
+        "q": "Why use requestAnimationFrame over setTimeout?",
+        "o": [
+            "Prevents layout thrashing and saves battery (pauses in background tab)",
+            "Faster",
+            "Simpler",
+            "Older"
+        ]
+    },
+    {
+        "q": "What is 'Virtual DOM' (React)?",
+        "o": [
+            "In-memory representation of DOM; minimizes direct DOM manipulation (Batches updates)",
+            "Real DOM",
+            "Shadow DOM",
+            "Browser DOM"
+        ]
+    },
+    {
+        "q": "Virtual DOM vs Real DOM performance?",
+        "o": [
+            "Virtual DOM is usually faster for complex updates due to diffing/batching",
+            "Real DOM is always faster",
+            "Same",
+            "Virtual DOM is slower"
+        ]
+    },
+    {
+        "q": "What is 'Rehydration' cost?",
+        "o": [
+            "Browser downloads HTML (fast) -> Downloads JS (slow) -> Executes JS to assume control (CPU heavy)",
+            "Free",
+            "Fast",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'SSR' (Server Side Rendering)?",
+        "o": [
+            "Server generates HTML; Client sees content immediately (Good for SEO/LCP)",
+            "Client Side Rendering",
+            "Static Site",
+            "Lazy loading"
+        ]
+    },
+    {
+        "q": "What is 'CSR' (Client Side Rendering)?",
+        "o": [
+            "Server sends empty HTML + JS; Browser renders everything (Slow initial load, fast subsequent nav)",
+            "SSR",
+            "Static",
+            "HTML only"
+        ]
+    },
+    {
+        "q": "What is 'SSG' (Static Site Generation)?",
+        "o": [
+            "HTML is built at build time (Fastest, cheapest, hard for dynamic data)",
+            "SSR",
+            "CSR",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "What is 'ISR' (Incremental Static Regeneration)?",
+        "o": [
+            "Hybrid: Static pages are rebuilt in background after traffic hits them (Freshness + Speed)",
+            "SSR",
+            "CSR",
+            "Magic"
+        ]
+    },
+    {
+        "q": "What is 'Debounce'?",
+        "o": [
+            "Delaying execution of function until user stops triggered event (e.g. Search input)",
+            "Throttle",
+            "Immediate",
+            "Rush"
+        ]
+    },
+    {
+        "q": "What is 'Throttle'?",
+        "o": [
+            "Limiting execution of function to once every X ms (e.g. Scroll event)",
+            "Debounce",
+            "Stop",
+            "Pause"
+        ]
+    },
+    {
+        "q": "Debounce vs Throttle use case?",
+        "o": [
+            "Debounce: Search bar (wait for typing to finish); Throttle: Infinite Scroll (check every 200ms)",
+            "Same",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Memoization'?",
+        "o": [
+            "Caching result of expensive function call based on inputs (Pure functions)",
+            "Memory leak",
+            "Deleting",
+            "Forgetting"
+        ]
+    },
+    {
+        "q": "What is 'Big O Notation'?",
+        "o": [
+            "Mathematical notation describing limiting behavior of algorithms (Time/Space complexity)",
+            "Small O",
+            "Code quality",
+            "Style"
+        ]
+    },
+    {
+        "q": "O(1) means?",
+        "o": [
+            "Constant Time (Hash Map lookup) - Fastest",
+            "Linear",
+            "Quadratic",
+            "Exponential"
+        ]
+    },
+    {
+        "q": "O(n) means?",
+        "o": [
+            "Linear Time (Looping through array) - Slower as input grows",
+            "Constant",
+            "Logarithmic",
+            "Fast"
+        ]
+    },
+    {
+        "q": "O(log n) means?",
+        "o": [
+            "Logarithmic Time (Binary Search) - Very efficient for large datasets",
+            "Linear",
+            "Slow",
+            "Bad"
+        ]
+    },
+    {
+        "q": "O(n^2) means?",
+        "o": [
+            "Quadratic Time (Nested loops) - Performance disaster for large inputs",
+            "Fast",
+            "Linear",
+            "Good"
+        ]
+    },
+    {
+        "q": "Which is faster: Array vs Linked List (Access)?",
+        "o": [
+            "Array (O(1) index access); Linked List is O(n) scan",
+            "Linked List",
+            "Same",
+            "Tree"
+        ]
+    },
+    {
+        "q": "Which is faster: Array vs Linked List (Insertion at Head)?",
+        "o": [
+            "Linked List (O(1)); Array is O(n) (Shift all elements)",
+            "Array",
+            "Same",
+            "Stack"
+        ]
+    },
+    {
+        "q": "What is 'Premature Optimization'?",
+        "o": [
+            "Optimizing code before you know where the bottleneck is (Root of all evil)",
+            "Good practice",
+            "Necessary",
+            "Fast coding"
+        ]
+    },
+    {
+        "q": "Optimization Rule #1?",
+        "o": [
+            "Measure first (Profile), then optimize",
+            "Guess",
+            "Copy paste",
+            "Refactor everything"
+        ]
+    },
+    {
+        "q": "What is 'Pareto Principle' (80/20)?",
+        "o": [
+            "80% of performance issues come from 20% of the code (Focus on the hot paths)",
+            "50/50",
+            "100/0",
+            "10/90"
+        ]
+    },
+    {
+        "q": "Performance: SQL JOIN vs App-side Filter?",
+        "o": [
+            "SQL JOIN is usually faster (Database optimized C code) vs transferring data to App",
+            "App side",
+            "Same",
+            "Depends on weather"
+        ]
+    },
+    {
+        "q": "Performance: 'SELECT *'?",
+        "o": [
+            "Avoid it! Fetches unnecessary columns, prevents Index Only Scans, wastes network",
+            "Good practice",
+            "Easy",
+            "Required"
+        ]
+    },
+    {
+        "q": "SQL: What is a 'Clustered Index'?",
+        "o": [
+            "Index where the physical order of rows on disk matches the index (e.g. Primary Key). Only 1 per table.",
+            "Any index",
+            "Backup",
+            "Unsorted"
+        ]
+    },
+    {
+        "q": "SQL: What is a 'Non-Clustered Index'?",
+        "o": [
+            "Index separate from data; contains pointer to the row (Can have many per table)",
+            "Primary key",
+            "Table itself",
+            "Backup"
+        ]
+    },
+    {
+        "q": "Clustered vs Non-Clustered Lookup Cost?",
+        "o": [
+            "Clustered is faster (found data immediately); Non-Clustered requires extra 'Key Lookup' step to fetch row",
+            "Non-Clustered is faster",
+            "Same",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Covering Index'?",
+        "o": [
+            "Non-clustered index that includes ALL columns requested by query (Avoids Key Lookup entirely)",
+            "Blanket",
+            "Hidden index",
+            "Full table"
+        ]
+    },
+    {
+        "q": "What is 'Index Scew'?",
+        "o": [
+            "When index values are not evenly distributed (e.g. status='ACTIVE' is 99% of rows)",
+            "Corrupt index",
+            "Wrong index",
+            "Fast index"
+        ]
+    },
+    {
+        "q": "Why is Indexing a Low Cardinality column bad?",
+        "o": [
+            "DB planner ignores it because scanning table is faster than reading 99% of index + lookups",
+            "It works great",
+            "Saves space",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'B-Tree' Index?",
+        "o": [
+            "Balanced Tree (Default for most DBs); Good for range queries (<, >, =) and sorting",
+            "Binary Tree",
+            "Hash Map",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'Hash Index'?",
+        "o": [
+            "O(1) lookups for exact matches (=); Cannot handle ranges (<, >) or sorting",
+            "B-Tree",
+            "Slow",
+            "Tree"
+        ]
+    },
+    {
+        "q": "When to use Hash Index?",
+        "o": [
+            "Key-value lookups (e.g. Session ID lookup) where range scans are never needed",
+            "Billing dates",
+            "Names",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Composite Index'?",
+        "o": [
+            "Index on multiple columns (e.g. Lastname, Firstname)",
+            "Single index",
+            "Complex index",
+            "Table"
+        ]
+    },
+    {
+        "q": "Composite Index: (A, B). Query: WHERE B=5?",
+        "o": [
+            "Index NOT used! (Leftmost prefix rule: must use A to use the index)",
+            "Used efficiently",
+            "Full scan",
+            "Magic"
+        ]
+    },
+    {
+        "q": "Composite Index: (A, B). Query: WHERE A=1 AND B=5?",
+        "o": [
+            "Index used perfectly",
+            "Not used",
+            "Partial use",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Vacuum' (Postgres)?",
+        "o": [
+            "Process to reclaim storage from 'Dead Tuples' (deleted/updated rows) and prevent bloat",
+            "Cleaning room",
+            "Deleting table",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What happens if Vacuum doesn't run?",
+        "o": [
+            "Transaction ID wraparound (Data loss risk) and Table Bloat (Slow queries)",
+            "Nothing",
+            "Faster",
+            "Clean DB"
+        ]
+    },
+    {
+        "q": "What is 'Write Amplification' (SSD/DB)?",
+        "o": [
+            "One logical write triggers multiple physical writes (e.g. updating index + table + WAL + RAID parity)",
+            "Loud noise",
+            "Echo",
+            "Speed boost"
+        ]
+    },
+    {
+        "q": "NoSQL: What is 'RCU' (DynamoDB)?",
+        "o": [
+            "Read Capacity Unit (1 RCU = 1 strong read of 4KB per second)",
+            "Remote Control Unit",
+            "Random CPU Usage",
+            "Read Count"
+        ]
+    },
+    {
+        "q": "NoSQL: What is 'WCU'?",
+        "o": [
+            "Write Capacity Unit (1 WCU = 1 write of 1KB per second)",
+            "Wireless Control",
+            "Write Count",
+            "Wait CPU"
+        ]
+    },
+    {
+        "q": "DynamoDB: Scan vs Query?",
+        "o": [
+            "Query uses Partition Key (Fast/Cheap); Scan reads EVERY item in table (Slow/Expensive)",
+            "Scan is faster",
+            "Same",
+            "Scan uses Index"
+        ]
+    },
+    {
+        "q": "Cassandra: What is 'Compaction'?",
+        "o": [
+            "Merging small SSTables into larger ones to reclaim space and improve Read performance",
+            "Deleting",
+            "Zipping",
+            "Crushing"
+        ]
+    },
+    {
+        "q": "Cassandra: What is 'Tombstone'?",
+        "o": [
+            "Marker indicating a row was deleted (Data isn't removed immediately)",
+            "Grave",
+            "Dead process",
+            "Error"
+        ]
+    },
+    {
+        "q": "Too many Tombstones causes?",
+        "o": [
+            "Slow reads (Read query must scan tombstones to ensure data is effectively dead)",
+            "Fast reads",
+            "Less disk usage",
+            "Crash"
+        ]
+    },
+    {
+        "q": "Redis: Why is it fast?",
+        "o": [
+            "In-memory storage (No disk seek) + Single-threaded (No lock contention)",
+            "Magic",
+            "Use GPU",
+            "Written in Java"
+        ]
+    },
+    {
+        "q": "Redis: Bottleneck is usually?",
+        "o": [
+            "Network Bandwidth (or CPU for O(N) commands like KEYS *)",
+            "Disk I/O",
+            "RAM speed",
+            "Locking"
+        ]
+    },
+    {
+        "q": "Redis: Danger of 'KEYS *' command?",
+        "o": [
+            "Blocks the single thread while scanning 100M keys -> Complete Outage for seconds/minutes",
+            "Nothing",
+            "Fast",
+            "Useful"
+        ]
+    },
+    {
+        "q": "Redis: Use what instead of 'KEYS *'?",
+        "o": [
+            "SCAN (Cursor based iterator, non-blocking)",
+            "LIST",
+            "GET ALL",
+            "SHOW"
+        ]
+    },
+    {
+        "q": "Image Opt: 'WebP' vs 'JPEG'?",
+        "o": [
+            "WebP supports transparency and better compression (typically 30% smaller) than JPEG",
+            "JPEG is smaller",
+            "Same",
+            "WebP is strictly lossy"
+        ]
+    },
+    {
+        "q": "Image Opt: 'AVIF'?",
+        "o": [
+            "Newer format (AV1 based) with even better compression than WebP (but slower encoding)",
+            "Old format",
+            "Audio",
+            "Video"
+        ]
+    },
+    {
+        "q": "Image Opt: 'SVG'?",
+        "o": [
+            "Vector format (XML); Infinite scaling without pixelation (Great for logos/icons)",
+            "Raster",
+            "Photo",
+            "Heavy"
+        ]
+    },
+    {
+        "q": "Optimize SVG?",
+        "o": [
+            "SVGO (Remove XML comments, metadata, unused definitions) drastically reduces size",
+            "Zip it",
+            "Resize",
+            "Blur"
+        ]
+    },
+    {
+        "q": "What is 'Sprite Sheet'?",
+        "o": [
+            "Combining many small icons into 1 image to reduce HTTP requests (Less valid with HTTP/2)",
+            "Animation",
+            "Soda",
+            "Ghost"
+        ]
+    },
+    {
+        "q": "What is 'Base64 Inlining'?",
+        "o": [
+            "Embedding image data directly in HTML/CSS (Saves request, blocks rendering if large)",
+            "Compression",
+            "Caching",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "Video: 'HLS' (HTTP Live Streaming)?",
+        "o": [
+            "Adaptive Bitrate Streaming (Splits video into chunks, client switches quality based on bandwidth)",
+            "MP4 download",
+            "AVI",
+            "Flash"
+        ]
+    },
+    {
+        "q": "Queueing Theory: 'Little's Law' application?",
+        "o": [
+            "If incoming rate > max throughput, Queue grows infinitely -> Latency -> Infinity",
+            "Queue shrinks",
+            "Queue stays constant",
+            "Latency drops"
+        ]
+    },
+    {
+        "q": "What is 'M/M/1' Queue?",
+        "o": [
+            "Kendall's notation: Markovian arrival, Markovian service, 1 server (Basic model)",
+            "Highway",
+            "Bank",
+            "Store"
+        ]
+    },
+    {
+        "q": "Utilization (rho) approaches 1.0 (100%)?",
+        "o": [
+            "Queue length and Wait time explode asymptotically (Hockey stick graph)",
+            "Linear growth",
+            "Flat",
+            "Negative"
+        ]
+    },
+    {
+        "q": "Why run servers at max 70-80% CPU?",
+        "o": [
+            "To stay on the flat part of the curve (Avoid exponential latency penalty of queuing)",
+            "Save electricity",
+            "Cooling",
+            "Politics"
+        ]
+    },
+    {
+        "q": "What is 'Spot Instance' (AWS)?",
+        "o": [
+            "Unused capacity sold cheap (90% off) but can be reclaimed with 2 min warning",
+            "Reserved",
+            "On-demand",
+            "Dedicated"
+        ]
+    },
+    {
+        "q": "Spot Instance use case?",
+        "o": [
+            "Stateless workloads, Batch processing, CI/CD runners (Can handle interruption)",
+            "Database Primary",
+            "Critical api",
+            "Login server"
+        ]
+    },
+    {
+        "q": "What is 'Reserved Instance'?",
+        "o": [
+            "Commit to 1-3 years for discount (Good for steady-state baseline load)",
+            "Spot",
+            "On-demand",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is 'Autoscaling Group' (ASG)?",
+        "o": [
+            "Collection of instances that automatically grows/shrinks based on metric (CPU)",
+            "Static group",
+            "Manual group",
+            "Backup"
+        ]
+    },
+    {
+        "q": "ASG 'Cooldown Period'?",
+        "o": [
+            "Time to wait after scaling action before allowing another (Prevents flapping/oscillation)",
+            "Freeze time",
+            "Sleep",
+            "Lunch break"
+        ]
+    },
+    {
+        "q": "What is 'Pre-warming' (ELB)?",
+        "o": [
+            "Asking AWS to scale Load Balancer capacity BEFORE a known massive spike (Flash sale)",
+            "Heating",
+            "Testing",
+            "Caching"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Engineering'?",
+        "o": [
+            "Experimenting on a system (injecting faults) to verify resilience (e.g. Chaos Monkey)",
+            "Breaking things",
+            "Hacking",
+            "Developing"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Monkey'?",
+        "o": [
+            "Tool that randomly terminates instances in production to ensure system self-heals",
+            "Virus",
+            "Game",
+            "Pet"
+        ]
+    },
+    {
+        "q": "Why test inside Production?",
+        "o": [
+            "Staging never perfectly matches Prod (Data scale, Traffic patterns, Network config)",
+            "For fun",
+            "Cheaper",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag'?",
+        "o": [
+            "Configuration to toggle functionality ON/OFF live without deploying code (Safe rollout)",
+            "Bug",
+            "Comment",
+            "Variable"
+        ]
+    },
+    {
+        "q": "Feature Flag Performance impact?",
+        "o": [
+            "Minimal logic check; Enables 'Canary Release' (Test perf on 1% users before 100%)",
+            "Slows down app",
+            "Requires DB",
+            "Requires reboot"
+        ]
+    },
+    {
+        "q": "What is 'Canary Deployment'?",
+        "o": [
+            "Deploying new version to small subset of users; Monitor metrics compare to Baseline",
+            "Bird",
+            "Mining",
+            "Color"
+        ]
+    },
+    {
+        "q": "What is 'Blue/Green Deployment'?",
+        "o": [
+            "Running two identical envs (Blue=Live, Green=New). Switch traffic instantly. Easy Rollback.",
+            "Colors",
+            "Slow rollout",
+            "Manual file copy"
+        ]
+    },
+    {
+        "q": "What is 'Rolling Deployment'?",
+        "o": [
+            "Replacing instances one by one (No downtime, but mix of Version A vs Version B running)",
+            "Fast",
+            "Slow",
+            "Wheel"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Lock'?",
+        "o": [
+            "Mechanisms (Redis/Redlock, Zookeeper) to ensure only 1 node does a task (e.g. cron job)",
+            "Local mutex",
+            "Padlock",
+            "Key"
+        ]
+    },
+    {
+        "q": "Risk of Distributed Lock?",
+        "o": [
+            "If holder crashes without releasing, system stalls (Need TTL/Leases)",
+            "Fast",
+            "Free",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Clock Skew' vs 'Drift'?",
+        "o": [
+            "Skew is difference between two clocks NOW; Drift is change in Skew over time",
+            "Same",
+            "Random",
+            "Music"
+        ]
+    },
+    {
+        "q": "Google Spanner uses?",
+        "o": [
+            "TrueTime API (Atomic clocks + GPS) to keep clock uncertainty small for global consistency",
+            "NTP",
+            "Manual",
+            "No clocks"
+        ]
+    },
+    {
+        "q": "What is 'CAP Theorem'?",
+        "o": [
+            "Consistency, Availability, Partition Tolerance - Pick 2 (In distributed system with partition, choose CP or AP)",
+            "Hat",
+            "Limit",
+            "Theory"
+        ]
+    },
+    {
+        "q": "CP System (CAP)?",
+        "o": [
+            "Favors Consistency; If partition occurs, rejects writes/reads to ensure data is correct (e.g. HBase, Mongo default)",
+            "AP",
+            "Availability",
+            "Fast"
+        ]
+    },
+    {
+        "q": "AP System (CAP)?",
+        "o": [
+            "Favors Availability; If partition occurs, serves potentially stale data (e.g. Cassandra, DNS)",
+            "CP",
+            "Consistency",
+            "Banking"
+        ]
+    },
+    {
+        "q": "PACELC Theorem?",
+        "o": [
+            "Extension of CAP: If Partition (P), choose A or C. Else (E), choose Latency (L) or Consistency (C).",
+            "Package",
+            "Place",
+            "Peace"
+        ]
+    },
+    {
+        "q": "What is 'Eventual Consistency'?",
+        "o": [
+            "System guarantees that if no new updates are made, eventually all accesses will return the last updated value",
+            "Strong consistency",
+            "Immediate",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Strong Consistency' (Linearizability)?",
+        "o": [
+            "Once a write is confirmed, all subsequent reads see that write (Behaves like 1 machine)",
+            "Eventual",
+            "Weak",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Causal Consistency'?",
+        "o": [
+            "Writes that are causally related must be seen in order (Chat replies appear after message)",
+            "Random",
+            "Strong",
+            "Weak"
+        ]
+    },
+    {
+        "q": "What is 'Throughput' measure in database?",
+        "o": [
+            "Transactions Per Second (TPS) / Queries Per Second (QPS)",
+            "Storage",
+            "Connections",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'Working Set'?",
+        "o": [
+            "Subset of data that is actively accessed/used (Should fit in RAM for best perf)",
+            "Full DB",
+            "Backup",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What happens if Working Set > RAM?",
+        "o": [
+            "Disk Thrashing (Constant swapping of pages from disk); Performance plummets",
+            "Fine",
+            "Better",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Filter'?",
+        "o": [
+            "Probabilistic data structure to test if element is in set. 'No' is definite. 'Yes' is 'Maybe'.",
+            "Flower",
+            "Hash Map",
+            "List"
+        ]
+    },
+    {
+        "q": "Bloom Filter use case?",
+        "o": [
+            "Reducing expensive disk lookups (If Bloom says 'No', don't check disk)",
+            "Sorting",
+            "Storing data",
+            "Compression"
+        ]
+    },
+    {
+        "q": "What is 'HyperLogLog'?",
+        "o": [
+            "Probabilistic algorithm for counting unique items (Cardinality) with tiny memory",
+            "Tree",
+            "Graph",
+            "Log"
+        ]
+    },
+    {
+        "q": "HyperLogLog use case?",
+        "o": [
+            "Counting distinct visitors (Daily Active Users) on huge scale (1B users = 12KB memory)",
+            "Counting money",
+            "Storing users",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'Count-Min Sketch'?",
+        "o": [
+            "Probabilistic frequency table (Counting occurrences of events in stream)",
+            "Drawing",
+            "Artist",
+            "Sketch"
+        ]
+    },
+    {
+        "q": "What is 'Leaky Bucket' algo?",
+        "o": [
+            "Rate limiting algorithm; Requests enter bucket, process at constant rate. Overflow dropped.",
+            "Water",
+            "Bucket list",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'Token Bucket' algo?",
+        "o": [
+            "Rate limit algo; Tokens added at rate R. Request needs token to pass. Allows bursts.",
+            "Coin",
+            "Game",
+            "Slot machine"
+        ]
+    },
+    {
+        "q": "Token Bucket vs Leaky Bucket?",
+        "o": [
+            "Token Bucket allows bursts (if tokens saved up); Leaky Bucket enforces constant outflow",
+            "Same",
+            "Token is slower",
+            "Leaky allows bursts"
+        ]
+    },
+    {
+        "q": "What is 'Fixed Window' rate limit?",
+        "o": [
+            "Reset counter every minute. Flaw: Can allow 2x limit at boundary (Limit 100/m: 100 at 0:59, 100 at 1:01)",
+            "Perfect",
+            "Sliding",
+            "Smooth"
+        ]
+    },
+    {
+        "q": "What is 'Sliding Window Log'?",
+        "o": [
+            "Precise rate limiting; Stores timestamp of each request. Expensive storage.",
+            "Cheap",
+            "Fast",
+            "Inaccurate"
+        ]
+    },
+    {
+        "q": "What is 'Sliding Window Counter'?",
+        "o": [
+            "Approximation combining Fixed Window + weighted calculation of previous window (Memory efficient + Smooth)",
+            "Complex",
+            "Slow",
+            "Heavy"
+        ]
+    },
+    {
+        "q": "What is 'Idempotency'?",
+        "o": [
+            "Property where performing an operation multiple times has same effect as once (Crucial for retries)",
+            "Repeat",
+            "Error",
+            "Unsafe"
+        ]
+    },
+    {
+        "q": "How to make Payment creation Idempotent?",
+        "o": [
+            "Client sends unique IdempotencyKey (UUID); Server checks if Key exists -> Return saved result",
+            "Trust client",
+            "Do it twice",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "Safe HTTP methods (Idempotent)?",
+        "o": [
+            "GET, HEAD, PUT, DELETE (Should be)",
+            "POST",
+            "PATCH",
+            "None"
+        ]
+    },
+    {
+        "q": "Is POST idempotent?",
+        "o": [
+            "No! POST /pay creates multiple payments if retried. (Need Idempotency Key)",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh' (Istio/Linkerd)?",
+        "o": [
+            "Infrastructure layer (Sidecar proxies) handling communication, observability, security between microservices",
+            "Mesh network",
+            "Wifi",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "Service Mesh benefits?",
+        "o": [
+            "Automatic mTLS, Tracing, Retries, Rate Limiting without changing app code",
+            "Faster CPU",
+            "More RAM",
+            "Less disk"
+        ]
+    },
+    {
+        "q": "Service Mesh downsides?",
+        "o": [
+            "Complexity (Operational overhead) and Latency (Sidecar hops)",
+            "Simplicity",
+            "Speed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar Pattern'?",
+        "o": [
+            "Running a helper process (container) alongside main app container in same Pod (shares network/disk)",
+            "Motorcycle",
+            "Car",
+            "Driver"
+        ]
+    },
+    {
+        "q": "What is 'Ambassador Pattern'?",
+        "o": [
+            "Sidecar that acts as a proxy for external world access (e.g. Auth proxy)",
+            "Diplomat",
+            "Politics",
+            "Leader"
+        ]
+    },
+    {
+        "q": "What is 'Adapter Pattern' (Container)?",
+        "o": [
+            "Sidecar that standardizes output/interface (e.g. converting logs to common format)",
+            "Plug",
+            "Power",
+            "Electric"
+        ]
+    },
+    {
+        "q": "What is 'Shed Load' strategy?",
+        "o": [
+            "Rejecting low priority traffic (Header: priority=low) when CPU > 90%",
+            "Accept all",
+            "Crash",
+            "Queue forever"
+        ]
+    },
+    {
+        "q": "What is 'Geofencing' or 'Geo-routing'?",
+        "o": [
+            "Routing users to nearest Data Center based on IP (DNS or Anycast)",
+            "Fencing",
+            "Mapping",
+            "Blocking"
+        ]
+    },
+    {
+        "q": "What is 'Anycast' IP?",
+        "o": [
+            "Single IP address advertised from multiple locations; BGP routes to nearest one",
+            "Unicast",
+            "Multicast",
+            "Broadcast"
+        ]
+    },
+    {
+        "q": "Performance: JSON vs Protobuf?",
+        "o": [
+            "Protobuf (Binary) is smaller, faster to serialize/parse, type-safe; JSON is text, human readable",
+            "JSON is faster",
+            "Same",
+            "XML is best"
+        ]
+    },
+    {
+        "q": "gRPC uses what protocol?",
+        "o": [
+            "HTTP/2 (Multiplexing, Streaming) + Protobuf",
+            "HTTP/1.1",
+            "FTP",
+            "SMTP"
+        ]
+    },
+    {
+        "q": "REST vs gRPC?",
+        "o": [
+            "gRPC implies strict contracts + efficient internal comms; REST/JSON better for public APIs",
+            "Same",
+            "REST is binary",
+            "gRPC is text"
+        ]
+    },
+    {
+        "q": "What is 'Webhook'?",
+        "o": [
+            "Server calling Client (Push) when event happens (No polling needed)",
+            "Hook",
+            "Fishing",
+            "Pull"
+        ]
+    },
+    {
+        "q": "Webhook performance risk?",
+        "o": [
+            "If Client is slow accepting webhook, Server queue fills up (Need timeout/retries)",
+            "None",
+            "Fast",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Server-Sent Events' (SSE)?",
+        "o": [
+            "One-way persistent HTTP connection (Server -> Client) for text streams",
+            "Two way",
+            "WebSocket",
+            "Polling"
+        ]
+    },
+    {
+        "q": "SSE vs WebSocket?",
+        "o": [
+            "SSE is simpler (HTTP based), one-way, sends text; WebSocket is two-way binary",
+            "Same",
+            "WebSocket is always better",
+            "SSE is binary"
+        ]
+    },
+    {
+        "q": "Load Testing: K6 vs JMeter?",
+        "o": [
+            "K6 is modern, scriptable in JS, developer-friendly; JMeter is GUI-based Java, older, harder to version control",
+            "K6 is GUI",
+            "JMeter is JS",
+            "Both are Go"
+        ]
+    },
+    {
+        "q": "What is 'Locust'?",
+        "o": [
+            "Load testing tool written in Python; defines user behavior as code",
+            "Bug",
+            "Animal",
+            "Tree"
+        ]
+    },
+    {
+        "q": "What is 'Gatling'?",
+        "o": [
+            "High performance load tool (Scala/Akka based); good for huge concurrency with single node",
+            "Gun",
+            "K6",
+            "JMeter"
+        ]
+    },
+    {
+        "q": "What is 'Wrk'?",
+        "o": [
+            "Extremely high performance HTTP benchmarking tool (C + Lua) for raw throughput testing",
+            "Work",
+            "Word",
+            "Writing"
+        ]
+    },
+    {
+        "q": "What is 'Apache Bench' (ab)?",
+        "o": [
+            "Simple command line tool for quick HTTP load testing (Single threaded limitation)",
+            "Database",
+            "Server",
+            "Chair"
+        ]
+    },
+    {
+        "q": "What is 'RPS' vs 'VU'?",
+        "o": [
+            "RPS = Requests Per Second (Throughput); VU = Virtual Users (Concurrency)",
+            "Same",
+            "Inverse",
+            "Random"
+        ]
+    },
+    {
+        "q": "Connection Pool: 'MaxLifetime'?",
+        "o": [
+            "Maximum time a connection stays in pool before being retired (prevents using stale/firewalled connections)",
+            "Forever",
+            "Timeout",
+            "Wait"
+        ]
+    },
+    {
+        "q": "Connection Pool: 'IdleTimeout'?",
+        "o": [
+            "Time allowed for connection to sit unused before closing (saves server resources)",
+            "Busy time",
+            "Active time",
+            "Max time"
+        ]
+    },
+    {
+        "q": "Connection Pool: 'MinimumIdle'?",
+        "o": [
+            "Minimum number of connections to keep open (Ready to serve immediate traffic)",
+            "Smallest",
+            "Zero",
+            "One"
+        ]
+    },
+    {
+        "q": "Why is 'MinimumIdle' important?",
+        "o": [
+            "Prevents latency penalty of opening new connection for every request during low traffic",
+            "Saves RAM",
+            "Saves CPU",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'HikariCP'?",
+        "o": [
+            "High-performance JDBC Connection Pool (Fast, Light, Reliable) for Java",
+            "Pokemon",
+            "Database",
+            "Language"
+        ]
+    },
+    {
+        "q": "Java Perf: 'JIT Compiler'?",
+        "o": [
+            "Just-In-Time: Compiles Bytecode to Native Machine Code at runtime (Optimizes hot paths)",
+            "Ahead of time",
+            "Interpreter",
+            "Slow"
+        ]
+    },
+    {
+        "q": "JIT 'Warmup'?",
+        "o": [
+            "Initial period where app is slower because JIT hasn't compiled hot paths yet",
+            "Cooling",
+            "Stopping",
+            "Crashing"
+        ]
+    },
+    {
+        "q": "Java Perf: 'VisualVM'?",
+        "o": [
+            "GUI tool to monitor JVM CPU, Heap, Threads, and take Dumps",
+            "IDE",
+            "Editor",
+            "Game"
+        ]
+    },
+    {
+        "q": "Node.js Perf: 'libuv'?",
+        "o": [
+            "Library providing Async I/O (Event Loop, Thread Pool for file/DNS) in Node",
+            "Library V",
+            "Java library",
+            "Python lib"
+        ]
+    },
+    {
+        "q": "Node.js: Default Thread Pool size?",
+        "o": [
+            "4 threads (Used for FS, Crypto, DNS lookup). Can be increased via UV_THREADPOOL_SIZE.",
+            "1",
+            "100",
+            "Unlimited"
+        ]
+    },
+    {
+        "q": "Blocking the Event Loop causes?",
+        "o": [
+            "Entire server stops responding to ALL users (Since it's single threaded JS)",
+            "One user waits",
+            "Slow DB",
+            "Network lag"
+        ]
+    },
+    {
+        "q": "Linux: 'Oom_score_adj'?",
+        "o": [
+            "Value (-1000 to 1000) adjusting likelihood of process being killed by OOM Killer",
+            "Score",
+            "Game",
+            "Memory"
+        ]
+    },
+    {
+        "q": "How to protect critical Daemon from OOM Kill?",
+        "o": [
+            "Set oom_score_adj to -1000 (Disable OOM kill for this process)",
+            "Set to 1000",
+            "Run as root",
+            "Rename it"
+        ]
+    },
+    {
+        "q": "What is 'HugePages'?",
+        "o": [
+            "Using larger memory page blocks (2MB/1GB vs 4KB) to reduce TLB Misses (Good for DBs)",
+            "Big book",
+            "Large file",
+            "Swap"
+        ]
+    },
+    {
+        "q": "What is 'TLB' (Translation Lookaside Buffer)?",
+        "o": [
+            "CPU Cache for storing recent Virtual-to-Physical memory address translations",
+            "Database",
+            "Buffer",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'NUMA' (Non-Uniform Memory Access)?",
+        "o": [
+            "Architecture where CPU has faster access to local RAM than remote RAM (Multi-socket)",
+            "UMA",
+            "Single core",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "NUMA Awareness?",
+        "o": [
+            "Pinning processes to specific CPU Cores and Local Memory to avoid slow remote access",
+            "Ignoring it",
+            "Random",
+            "Sharing"
+        ]
+    },
+    {
+        "q": "What is 'Context Switch' voluntary vs involuntary?",
+        "o": [
+            "Voluntary = Waiting for I/O; Involuntary = CPU time slice expired (CPU contention)",
+            "Same",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "High 'cs' (Context Switch) in vmstat implies?",
+        "o": [
+            "Too many threads fighting for CPU or heavy I/O rate",
+            "Idle",
+            "Good",
+            "Slow disk"
+        ]
+    },
+    {
+        "q": "What is 'False Sharing' optimization?",
+        "o": [
+            "Padding data structures to align with Cache Lines (64 bytes) to prevent ping-pong",
+            "Sharing",
+            "Merging",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Branch Prediction'?",
+        "o": [
+            "CPU guessing which way 'if' statement goes to pre-fetch code. Fail = Pipeline Flush (Expensive).",
+            "Tree",
+            "Leaves",
+            "Forest"
+        ]
+    },
+    {
+        "q": "What is 'Loop Unrolling'?",
+        "o": [
+            "Compiler optimization replacing loop with repeated code to reduce branch overhead",
+            "Rolling",
+            "Spinning",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "What is 'SIMD'?",
+        "o": [
+            "Single Instruction, Multiple Data (CPU instructions processing vector data in parallel)",
+            "SISD",
+            "MIMD",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Zero Copy' network?",
+        "o": [
+            "data transfer from disk to network card without copying to user-space RAM (sendfile syscall)",
+            "Copying",
+            "Slow",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Kafka uses Zero Copy for?",
+        "o": [
+            "Extremely high throughput log streaming (Disk -> NIC directly)",
+            "CPU calc",
+            "Ram usage",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Where is the 'Bottleneck' usually (Web App)?",
+        "o": [
+            "Database (I/O) > Network > Application Logic (CPU)",
+            "CPU",
+            "RAM",
+            "Mouse"
+        ]
+    },
+    {
+        "q": "Where is the 'Bottleneck' (Video Encoding)?",
+        "o": [
+            "CPU (Compute Bound)",
+            "Disk",
+            "Network",
+            "RAM"
+        ]
+    },
+    {
+        "q": "Where is the 'Bottleneck' (Redis)?",
+        "o": [
+            "Network Bandwidth (or CPU for single thread)",
+            "Disk",
+            "RAM size",
+            "Cooling"
+        ]
+    },
+    {
+        "q": "What is 'Little's law' formula?",
+        "o": [
+            "L = Lambda * W (Number in system = Arrival Rate * Time in system)",
+            "E=mc2",
+            "A=B+C",
+            "1+1=2"
+        ]
+    },
+    {
+        "q": "If throughput is 100/s and latency is 0.1s, concurrency is?",
+        "o": [
+            "10 (100 * 0.1)",
+            "100",
+            "1",
+            "0.1"
+        ]
+    },
+    {
+        "q": "If you double concurrency (20) but system maxes at 100/s?",
+        "o": [
+            "Latency doubles to 0.2s (Queuing)",
+            "Throughput doubles",
+            "Nothing happens",
+            "Magic"
+        ]
+    },
+    {
+        "q": "Why 'Fail Fast'?",
+        "o": [
+            "To prevent resource exhaustion (Queue buildup) when system is overloaded",
+            "To be mean",
+            "To crash",
+            "To lose data"
+        ]
+    },
+    {
+        "q": "What is 'SLA'?",
+        "o": [
+            "Service Level Agreement (Contract with penalty)",
+            "SLO",
+            "SLI",
+            "Service"
+        ]
+    },
+    {
+        "q": "What is 'SLO'?",
+        "o": [
+            "Service Level Objective (Internal goal, e.g. 99.9%)",
+            "SLA",
+            "SLI",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'SLI'?",
+        "o": [
+            "Service Level Indicator (The actual metric measurement, e.g. current latency)",
+            "SLA",
+            "SLO",
+            "Slide"
+        ]
+    },
+    {
+        "q": "SLI vs SLO?",
+        "o": [
+            "SLI is what you measure (Reality); SLO is what you aim for (Goal)",
+            "Same",
+            "Opposite",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "What is 'Error Budget'?",
+        "o": [
+            "100% - SLO (e.g. 0.1%); The amount of unreliability allowed before stopping releases",
+            "Money",
+            "Cost",
+            "Bill"
+        ]
+    },
+    {
+        "q": "If Error Budget is exhausted?",
+        "o": [
+            "Stop new feature deploys; Focus on Stability/Reliability tasks until budget recovers",
+            "Deploy more",
+            "Ignore",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What defines 'High Availability' (HA)?",
+        "o": [
+            "System remains operational for a high percentage of time (e.g. 99.99%) despite failures",
+            "Fast",
+            "Cheap",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'Redundancy'?",
+        "o": [
+            "Duplication of critical components (N+1) so failure of one doesn't shut down system",
+            "Waste",
+            "Copying",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'SPOF'?",
+        "o": [
+            "Single Point Of Failure (Component which, if it fails, stops the entire system)",
+            "Spoof",
+            "Point",
+            "Place"
+        ]
+    },
+    {
+        "q": "How to eliminate SPOF?",
+        "o": [
+            "Redundancy (Load Balancers, Clusters, Replicas) + Failover mechanisms",
+            "Buy better hardware",
+            "Pray",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Restart'?",
+        "o": [
+            "Server finishes processing active requests before shutting down (No user errors)",
+            "Hard kill",
+            "Crash",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "Signal for Graceful Shutdown?",
+        "o": [
+            "SIGTERM (App catches it, stops listening, drains queue, quits)",
+            "SIGKILL",
+            "SIGSTOP",
+            "SIGINT"
+        ]
+    }
+]

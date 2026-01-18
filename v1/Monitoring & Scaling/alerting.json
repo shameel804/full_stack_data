@@ -1,0 +1,4520 @@
+[
+    {
+        "q": "What is the primary purpose of Alerting?",
+        "o": [
+            "To notify humans (or systems) about significant events or failures requiring attention",
+            "To log data",
+            "To graph data",
+            "To delete data"
+        ]
+    },
+    {
+        "q": "What is a 'Symptom-based' alert?",
+        "o": [
+            "Alert triggered by user-visible issues (e.g. High Latency, 500 Errors) regardless of cause",
+            "Cpu usage",
+            "Disk usage",
+            "Cause based"
+        ]
+    },
+    {
+        "q": "What is a 'Cause-based' alert?",
+        "o": [
+            "Alert triggered by a specific root cause (e.g. DB CPU high, Disk Full)",
+            "Symptom based",
+            "User based",
+            "Latency based"
+        ]
+    },
+    {
+        "q": "Why favor Symptom-based alerts over Cause-based?",
+        "o": [
+            "They minimize noise; you care that the site is slow, not necessarily why (until you investigate)",
+            "They are faster",
+            "They are colorful",
+            "They are cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Alert Fatigue'?",
+        "o": [
+            "Desensitization to alerts caused by frequent non-actionable or false alarms",
+            "Tiredness",
+            "Sleepiness",
+            "Laziness"
+        ]
+    },
+    {
+        "q": "What is 'MTTA' (Mean Time To Acknowledge)?",
+        "o": [
+            "Average time between an alert triggering and an operator acknowledging the issue",
+            "Time to resolve",
+            "Time to fail",
+            "Time to sleep"
+        ]
+    },
+    {
+        "q": "What is 'MTTR' (Mean Time To Resolve/Repair)?",
+        "o": [
+            "Average time taken to fix the issue and restore service after discovery",
+            "Time to detect",
+            "Time to alert",
+            "Time to boot"
+        ]
+    },
+    {
+        "q": "What is 'Sev 1' (Severity 1) or 'P1' usually?",
+        "o": [
+            "Critical incidents affecting all/most users (Site Down); Immediate attention required",
+            "Minor bug",
+            "Cosmetic issue",
+            "Internal tool down"
+        ]
+    },
+    {
+        "q": "What is 'Sev 5' (Severity 5) usually?",
+        "o": [
+            "Trivial/Cosmetic issue or feature request; No urgent action needed",
+            "Site down",
+            "Data loss",
+            "Security breach"
+        ]
+    },
+    {
+        "q": "What acts as a 'Notification Channel'?",
+        "o": [
+            "Email, Slack, PagerDuty, SMS, Webhook",
+            "Database",
+            "Log file",
+            "Config file"
+        ]
+    },
+    {
+        "q": "What is 'On-Call'?",
+        "o": [
+            "Rotational duty where engineers are available to respond to urgent alerts outside business hours",
+            "Calling users",
+            "Sales calls",
+            "Meeting"
+        ]
+    },
+    {
+        "q": "What is an 'Escalation Policy'?",
+        "o": [
+            "Rules defining who to notify next if the primary on-call engineer doesn't acknowledge an alert",
+            "HR policy",
+            "Sales policy",
+            "Security policy"
+        ]
+    },
+    {
+        "q": "What is 'Flapping' (Oscillation)?",
+        "o": [
+            "Alert state rapidly switching between Firing and Resolved (e.g. CPU hovering around 80%)",
+            "Flying",
+            "Falling",
+            "Failing"
+        ]
+    },
+    {
+        "q": "How to prevent Flapping?",
+        "o": [
+            "Use Hysteresis (different thresholds for trigger vs resolve) or 'For' duration (e.g. high for 5m)",
+            "Delete alert",
+            "Ignore it",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is a 'False Positive'?",
+        "o": [
+            "Alert fires when there is NO actual problem (Noise)",
+            "Missed alert",
+            "Real alert",
+            "Silent failure"
+        ]
+    },
+    {
+        "q": "What is a 'False Negative'?",
+        "o": [
+            "System fails to alert when there IS a real problem (Silent Failure)",
+            "False alarm",
+            "Too many alerts",
+            "Noise"
+        ]
+    },
+    {
+        "q": "What is 'The 4 Golden Signals' of monitoring?",
+        "o": [
+            "Latency, Traffic, Errors, Saturation",
+            "CPU, RAM, Disk, Net",
+            "Read, Write, Execute, Delete",
+            "Get, Post, Put, Patch"
+        ]
+    },
+    {
+        "q": "What is the 'Latency' signal?",
+        "o": [
+            "Time it takes to service a request",
+            "Bandwidth",
+            "Error rate",
+            "Fullness"
+        ]
+    },
+    {
+        "q": "What is the 'Traffic' signal?",
+        "o": [
+            "Demand placed on the system (e.g. requests per second)",
+            "Car traffic",
+            "Packet loss",
+            "Latency"
+        ]
+    },
+    {
+        "q": "What is the 'Errors' signal?",
+        "o": [
+            "Rate of requests that fail (e.g. HTTP 500s)",
+            "Bugs",
+            "Typos",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is the 'Saturation' signal?",
+        "o": [
+            "How 'full' your service is (e.g. most constrained resource usage)",
+            "Color",
+            "Wetness",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Which signal is best for capacity planning?",
+        "o": [
+            "Saturation",
+            "Errors",
+            "Latency",
+            "Traffic"
+        ]
+    },
+    {
+        "q": "Which signal is best for user experience?",
+        "o": [
+            "Latency & Errors",
+            "Saturation",
+            "Traffic",
+            "Disk space"
+        ]
+    },
+    {
+        "q": "What is 'USE Method' (Brendan Gregg)?",
+        "o": [
+            "Utilization, Saturation, Errors (Methodology for resource analysis)",
+            "User, System, Entity",
+            "Up, Start, End",
+            "Usage, Speed, Efficiency"
+        ]
+    },
+    {
+        "q": "What is 'RED Method' (Tom Wilkie)?",
+        "o": [
+            "Rate, Errors, Duration (Methodology for microservices instrumentation)",
+            "Red color",
+            "Read, Edit, Delete",
+            "Router, Edge, Device"
+        ]
+    },
+    {
+        "q": "The RED Method is a subset of?",
+        "o": [
+            "The 4 Golden Signals (Traffic=Rate, Errors=Errors, Latency=Duration)",
+            "USE Method",
+            "Six Sigma",
+            "Agile"
+        ]
+    },
+    {
+        "q": "What is a 'Runbook' (Playbook)?",
+        "o": [
+            "Documentation describing how to handle a specific alert/incident",
+            "Running shoes",
+            "Script",
+            "Novel"
+        ]
+    },
+    {
+        "q": "Why link Runbooks to Alerts?",
+        "o": [
+            "Speeds up MTTR by giving operators immediate instructions",
+            "Looks nice",
+            "Required by law",
+            "Slows down"
+        ]
+    },
+    {
+        "q": "What is 'Incident Commander' (IC)?",
+        "o": [
+            "Person in charge of coordinating the response to a major incident",
+            "CEO",
+            "Developer",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'Scribe' in incident management?",
+        "o": [
+            "Person documenting the timeline and actions during an incident",
+            "Writer",
+            "Logger",
+            "Coder"
+        ]
+    },
+    {
+        "q": "What is 'Communications Lead' in incident management?",
+        "o": [
+            "Person responsible for updating distinct stakeholders (internal/external)",
+            "Phone op",
+            "Manager",
+            "HR"
+        ]
+    },
+    {
+        "q": "What constitutes a 'Silent Failure'?",
+        "o": [
+            "System breaks but sends no alert (high risk)",
+            "Loud failure",
+            "Alert spam",
+            "Warning"
+        ]
+    },
+    {
+        "q": "What is 'Heartbeat' alerting?",
+        "o": [
+            "Alerting if a regular signal ('I am alive') is MISSING (detects total failure/hang)",
+            "Pulse",
+            "Checkup",
+            "Ping"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Monitoring' (Synthetics)?",
+        "o": [
+            "Scripts simulating user behavior (e.g. login flow) to test system from outside",
+            "Real user monitoring",
+            "Log monitoring",
+            "Unit testing"
+        ]
+    },
+    {
+        "q": "Why use Synthetics for alerting?",
+        "o": [
+            "Proactively detecting issues (e.g. login broken) even when traffic is low",
+            "Cheaper",
+            "Faster",
+            "Easier"
+        ]
+    },
+    {
+        "q": "What is 'Threshold'?",
+        "o": [
+            "The numeric value that triggers an alert (e.g. CPU > 90%)",
+            "Doorway",
+            "Limit",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Threshold' (Anomaly Detection)?",
+        "o": [
+            "Threshold that adapts to historical baselines (e.g. traffic lower at night is normal)",
+            "Static threshold",
+            "Fixed threshold",
+            "Hard limit"
+        ]
+    },
+    {
+        "q": "Trend-Based Alerting checks for?",
+        "o": [
+            "Rate of change (e.g. Disk filling up fast) rather than just current value",
+            "Fashion",
+            "News",
+            "Static value"
+        ]
+    },
+    {
+        "q": "What is 'Resolution' state?",
+        "o": [
+            "The alert condition is no longer met; system returns to normal",
+            "Firing",
+            "Pending",
+            "Critical"
+        ]
+    },
+    {
+        "q": "What is 'Ack' (Acknowledgement)?",
+        "o": [
+            "Operator signals 'I saw this and am working on it' (Stops escalation)",
+            "Ignore",
+            "Delete",
+            "Fix"
+        ]
+    },
+    {
+        "q": "What is 'Snooze' (Silence)?",
+        "o": [
+            "Temporarily muting an alert for a set duration (e.g. during maintenance)",
+            "Sleep",
+            "Disable",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Window'?",
+        "o": [
+            "Scheduled time where alerts are suppressed because downtime is expected",
+            "Glass window",
+            "Broken window",
+            "Free time"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty'?",
+        "o": [
+            "Popular Incident Response / On-Call management platform",
+            "Database",
+            "Cloud provider",
+            "Language"
+        ]
+    },
+    {
+        "q": "What is 'OpsGenie'?",
+        "o": [
+            "Incident management platform (by Atlassian)",
+            "Genie",
+            "Game",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'VictorOps' (Splunk On-Call)?",
+        "o": [
+            "Incident response tool",
+            "Person",
+            "Robot",
+            "OS"
+        ]
+    },
+    {
+        "q": "Alerting on 'High CPU' vs 'High Latency'?",
+        "o": [
+            "Latency is better (User Impact); CPU is just a proxy/cause",
+            "CPU is better",
+            "Both equal",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Black Box' monitoring?",
+        "o": [
+            "Testing externally visible behavior (e.g. HTTP 200 OK) without knowing internals",
+            "White box",
+            "Internal",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'White Box' monitoring?",
+        "o": [
+            "Monitoring based on internal metrics (JVM heap, DB connections, logs)",
+            "Black box",
+            "External",
+            "User"
+        ]
+    },
+    {
+        "q": "Which monitoring type is better for Alerting?",
+        "o": [
+            "Mix: Black Box for 'Is it broken?', White Box for 'Why?'",
+            "Only Black",
+            "Only White",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Alert Aggregation'?",
+        "o": [
+            "Grouping related alerts (e.g. 100 servers down) into a single notification",
+            "Spamming",
+            "Splitting",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Deduplication'?",
+        "o": [
+            "Combining identical alerts occurring repeatedly into one incident",
+            "Copying",
+            "Repeating",
+            "Printing"
+        ]
+    },
+    {
+        "q": "What is 'Root Cause Analysis' (RCA)?",
+        "o": [
+            "Process of identifying the fundamental cause of a failure to prevent recurrence",
+            "Blaming",
+            "Fixing",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Post-Mortem' (Retrospective)?",
+        "o": [
+            "Document/Meeting after an incident to analyze what happened and create action items",
+            "Funeral",
+            "Party",
+            "Pre-planning"
+        ]
+    },
+    {
+        "q": "What is 'Blameless Post-Mortem'?",
+        "o": [
+            "Focusing on process/system failures rather than blaming individuals (Encourages honesty)",
+            "Blaming everyone",
+            "Ignoring cause",
+            "Punishing"
+        ]
+    },
+    {
+        "q": "What is 'Action Item'?",
+        "o": [
+            "Specific task assigned during post-mortem to prevent recurrence",
+            "Item",
+            "Tool",
+            "Link"
+        ]
+    },
+    {
+        "q": "What is 'Sev 2' usually?",
+        "o": [
+            "Major issue affecting many users or core functionality, but workarounds exist",
+            "Site down",
+            "Typo",
+            "Info"
+        ]
+    },
+    {
+        "q": "What is 'Sev 3' usually?",
+        "o": [
+            "Non-critical issue, partial outage, or minor user impact (Daytime fix)",
+            "Critical",
+            "Urgent",
+            "Night fix"
+        ]
+    },
+    {
+        "q": "What is 'Sev 4' usually?",
+        "o": [
+            "Low impact, minor bug, or internal issue (Backlog)",
+            "High impact",
+            "Crisis",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What is 'Game Day' in SRE?",
+        "o": [
+            "Simulated failure exercise to test response processes and alerts",
+            "Holiday",
+            "Sports",
+            "Lunch"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Monkey'?",
+        "o": [
+            "Tool that randomly terminates instances to test resilience/alerting",
+            "Pet",
+            "Virus",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'Sout' (Scale Out) alert?",
+        "o": [
+            "Alert indicating the system has reached max capacity",
+            "Scale in",
+            "Scale up",
+            "Scale down"
+        ]
+    },
+    {
+        "q": "What is 'Stale Metric' alert?",
+        "o": [
+            "Alert if data hasn't been updated for X minutes (Monitoring system failure)",
+            "Fresh data",
+            "New data",
+            "Null data"
+        ]
+    },
+    {
+        "q": "What is 'Dead Man's Switch'?",
+        "o": [
+            "Alert triggered if a periodic 'check-in' signal is NOT received (Heartbeat)",
+            "Kill switch",
+            "Bomb",
+            "Button"
+        ]
+    },
+    {
+        "q": "What is 'Webhook' integration?",
+        "o": [
+            "Sending JSON payload to a URL when alert fires (automating response/ticketing)",
+            "Email",
+            "Call",
+            "SMS"
+        ]
+    },
+    {
+        "q": "Why link alerts to Ticket System (Jira)?",
+        "o": [
+            "To track work, prioritize fixes, and maintain history",
+            "To spam",
+            "To slow down",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Rich Alert'?",
+        "o": [
+            "Alert notification including graphs, logs, and context links (not just text)",
+            "Text only",
+            "Poor alert",
+            "Short alert"
+        ]
+    },
+    {
+        "q": "What is 'Alert Routing'?",
+        "o": [
+            "Directing alerts to the correct team based on labels/tags (Database team vs Frontend team)",
+            "Network routing",
+            "Ignoring",
+            "Broadcasting"
+        ]
+    },
+    {
+        "q": "What is 'Noise Reduction'?",
+        "o": [
+            "Strategies to reduce non-actionable alerts (Grouping, Threshold tuning, Inhibiting)",
+            "Earplugs",
+            "Silence",
+            "Muting"
+        ]
+    },
+    {
+        "q": "What is 'Single Point of Failure' in Monitoring?",
+        "o": [
+            "If the monitoring system itself goes down, you are blind (Need meta-monitoring)",
+            "Agent",
+            "Server",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Meta-Monitoring' (Watch the Watcher)?",
+        "o": [
+            "A simplified external check ensuring the main monitoring system is up",
+            "Double monitoring",
+            "Self check",
+            "Mirror"
+        ]
+    },
+    {
+        "q": "What is 'Alert Severity' vs 'Priority'?",
+        "o": [
+            "Severity = Technical Impact; Priority = Order in which to fix (Business value)",
+            "Same thing",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Operational Excellence'?",
+        "o": [
+            "Continuous improvement of operations, including effective alerting and response",
+            "Perfect code",
+            "No bugs",
+            "Fast deploy"
+        ]
+    },
+    {
+        "q": "What is 'Toil' (SRE)?",
+        "o": [
+            "Manual, repetitive, automatable work (e.g. manually restarting servers)",
+            "Hard work",
+            "Fun work",
+            "New features"
+        ]
+    },
+    {
+        "q": "How does Alerting reduce Toil?",
+        "o": [
+            "By triggering automated remediation (Self-healing) instead of paging human",
+            "It adds toil",
+            "It makes noise",
+            "It wakes you up"
+        ]
+    },
+    {
+        "q": "What is 'Baseline'?",
+        "o": [
+            "The 'normal' behavior of a metric (used to set thresholds)",
+            "Bottom",
+            "Line",
+            "Target"
+        ]
+    },
+    {
+        "q": "What is 'Seasonality' in metrics?",
+        "o": [
+            "Predictable patterns (e.g. high traffic during day, low at night)",
+            "Weather",
+            "Summer",
+            "Winter"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Alert'?",
+        "o": [
+            "Alerting when resource usage > X% (Warning: 80%, Critical: 90%)",
+            "Full",
+            "Empty",
+            "New"
+        ]
+    },
+    {
+        "q": "What is 'Saturation Point'?",
+        "o": [
+            "The point where performance degrades significantly (The cliff)",
+            "Max",
+            "Min",
+            "Zero"
+        ]
+    },
+    {
+        "q": "Check: 'Can I do anything about this alert?'",
+        "o": [
+            "If No, it should probably be a log or report, not a page",
+            "Yes always",
+            "Maybe",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "Check: ' Is this urgent?'",
+        "o": [
+            "If No, send to ticket/email/chat, do not wake up on-call",
+            "Yes always",
+            "Maybe",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What is 'ChatOps'?",
+        "o": [
+            "Managing operations (and alerts) through chat tools (Slack bots)",
+            "Talking",
+            "Email",
+            "Voice"
+        ]
+    },
+    {
+        "q": "Example of ChatOps for alerting?",
+        "o": [
+            "Bot posts alert to channel; User clicks 'Ack', 'Graph', or 'Restart' buttons in chat",
+            "Texting",
+            "Calling",
+            "Meeting"
+        ]
+    },
+    {
+        "q": "What is 'SNMP Trap' (Legacy)?",
+        "o": [
+            "Protocol for network devices to send alerts (Still used in hardware/network monitoring)",
+            "Bear trap",
+            "Mouse trap",
+            "Email"
+        ]
+    },
+    {
+        "q": "What is 'Syslog' alerting?",
+        "o": [
+            "Triggering alerts based on specific log patterns (e.g. 'Out of Memory' string)",
+            "System log",
+            "File log",
+            "Binary log"
+        ]
+    },
+    {
+        "q": "What is 'Composite Alarm' (CloudWatch)?",
+        "o": [
+            "Alarm that triggers based on the state of multiple other alarms (AND/OR logic)",
+            "Single alarm",
+            "Simple alarm",
+            "Complex"
+        ]
+    },
+    {
+        "q": "Benefit of Composite Alarms?",
+        "o": [
+            "Reduces noise; only alert if DB AND App are failing (Correlation)",
+            "More noise",
+            "Harder",
+            "Slower"
+        ]
+    },
+    {
+        "q": "What is 'Percentile' alerting?",
+        "o": [
+            "Alerting on p99 or p95 latency (captures outliers) rather than Average",
+            "Average",
+            "Min",
+            "Max"
+        ]
+    },
+    {
+        "q": "Why not alert on Average Latency?",
+        "o": [
+            "Averages hide spikes; users could be suffering while average looks fine",
+            "Average is best",
+            "Average is fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Metric Math' in alerting?",
+        "o": [
+            "Creating alerts on calculated values (e.g. ErrorRate = Errors / TotalRequests * 100)",
+            "Calculus",
+            "Algebra",
+            "Geometry"
+        ]
+    },
+    {
+        "q": "What is 'Missing Data' treatment?",
+        "o": [
+            "Deciding if missing data means 'Good' (Not Breaching), 'Bad' (Breaching), or 'Ignore'",
+            "Panic",
+            "Crash",
+            "Null"
+        ]
+    },
+    {
+        "q": "Treat missing data as 'Breaching' when?",
+        "o": [
+            "You expect a steady stream (e.g. Heartbeat); silence means death",
+            "Always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "Treat missing data as 'Not Breaching' when?",
+        "o": [
+            "Metric is sparse (e.g. errors only occurring rarely); no data = no errors",
+            "Always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What shows 'Status Check Failed'?",
+        "o": [
+            "Basic health check for EC2/Cloud resources (System or Instance check)",
+            "Code error",
+            "User error",
+            "DB error"
+        ]
+    },
+    {
+        "q": "What is 'Instance Status Check'?",
+        "o": [
+            "Checks issues reachable by OS (e.g. config issue, exhausted memory)",
+            "Hardware issue",
+            "AWS issue",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'System Status Check'?",
+        "o": [
+            "Checks underlying infrastructure (Power, Network, Hardware Host)",
+            "OS issue",
+            "Config issue",
+            "User issue"
+        ]
+    },
+    {
+        "q": "Automated recovery for System Status Check?",
+        "o": [
+            "EC2 Auto Recovery (moves instance to new host)",
+            "Manual reboot",
+            "Reinstall",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Personal Health Dashboard' (AWS)?",
+        "o": [
+            "Alerts about AWS events affecting YOUR resources (Maintenance, Outages)",
+            "Global dashboard",
+            "Public status",
+            "News"
+        ]
+    },
+    {
+        "q": "What is 'Service Quotas' alerting?",
+        "o": [
+            "Alerting when you approach a robust limit (e.g. 80% of Max vCPUs used)",
+            "Billing",
+            "Errors",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Hysteresis' in alerting?",
+        "o": [
+            "Using two different thresholds (High/Low) to prevent flapping when value hovers near limit",
+            "History",
+            "Latency",
+            "Delay"
+        ]
+    },
+    {
+        "q": "Example of Hysteresis?",
+        "o": [
+            "Alert ON when CPU > 90%; Alert OFF when CPU < 80% (Gap prevents flicker)",
+            "Alert > 90, Off < 90",
+            "Alert > 90, Off < 95",
+            "Alert > 90, Off < 100"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Policy' - 'Wait Time'?",
+        "o": [
+            "Duration to wait for acknowledgement before notifying the next person/tier",
+            "Resolve time",
+            "Hold time",
+            "Ping time"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Policy' - 'Repeat'?",
+        "o": [
+            "Restarting the escalation loop if no one acknowledges after all steps",
+            "Duplicating",
+            "Ignoring",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "What is 'Primary On-Call'?",
+        "o": [
+            "The first person notified when an incident occurs",
+            "Secondary",
+            "Manager",
+            "CEO"
+        ]
+    },
+    {
+        "q": "What is 'Secondary On-Call' (Shadow)?",
+        "o": [
+            "Backup person notified if Primary does not ACK or needs help",
+            "Primary",
+            "Observer",
+            "Ghost"
+        ]
+    },
+    {
+        "q": "What is 'Follow-the-Sun' rotation?",
+        "o": [
+            "Handing off on-call duty across time zones so everyone works daytime hours",
+            "Night shift",
+            "24/7 same person",
+            "Random"
+        ]
+    },
+    {
+        "q": "Benefit of Follow-the-Sun?",
+        "o": [
+            "Prevents burnout by reducing night shifts/sleep interruption",
+            "Cheaper",
+            "Complexity",
+            "Slower"
+        ]
+    },
+    {
+        "q": "What is 'Override' in scheduling?",
+        "o": [
+            "Temporarily replacing the scheduled on-call person (e.g. for vacation/sick day)",
+            "Deletion",
+            "Permanent change",
+            "Swap"
+        ]
+    },
+    {
+        "q": "What is 'Handover'?",
+        "o": [
+            "Meeting/Process transferring context and active incidents between on-call shifts",
+            "High five",
+            "Ignoring",
+            "Leaving"
+        ]
+    },
+    {
+        "q": "Why document 'Handover' notes?",
+        "o": [
+            "To ensure continuity and awareness of ongoing low-severity issues",
+            "For audit",
+            "For fun",
+            "To blame"
+        ]
+    },
+    {
+        "q": "What is 'Alert Suppression'?",
+        "o": [
+            "Preventing notifications for recognized issues or during scheduled maintenance",
+            "Deleting",
+            "Hiding",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Alert Inhibition' (Dependency)?",
+        "o": [
+            "Suppressing 'Child' alerts if 'Parent' is already firing (e.g. DB Down -> suppress App Errors)",
+            "Amplification",
+            "Repeating",
+            "Broadcasting"
+        ]
+    },
+    {
+        "q": "What is 'Alert Grouping' by 'Cluster'?",
+        "o": [
+            "Sending one notification saying '50 nodes down' instead of 50 individual emails",
+            "Spamming",
+            "Listing",
+            "Printing"
+        ]
+    },
+    {
+        "q": "What is 'Jira Integration' for alerts?",
+        "o": [
+            "Automatically creating a ticket when alert fires; closing it when resolved",
+            "Emailing",
+            "Chatting",
+            "Calling"
+        ]
+    },
+    {
+        "q": "What is 'Bidirectional Sync' in Incident Management?",
+        "o": [
+            "Ack in PagerDuty -> Updates Jira; Close in Jira -> Resolves PagerDuty",
+            "One way",
+            "No sync",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Conference Bridge'?",
+        "o": [
+            "Phone/Video meeting link automatically attached to major incidents for coordination",
+            "Game",
+            "Bridge",
+            "Chat"
+        ]
+    },
+    {
+        "q": "What is 'Status Page'?",
+        "o": [
+            "Public (or internal) dashboard communicating current system health to users",
+            "Admin page",
+            "Login page",
+            "Wiki"
+        ]
+    },
+    {
+        "q": "Why update Status Page early?",
+        "o": [
+            "Trust & Transparency; reduces support tickets asking 'Is it down?'",
+            "To panic users",
+            "To hide info",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is 'Runbook Automation'?",
+        "o": [
+            "Scripts that execute automatically or via button press to fix known issues (e.g. restart service)",
+            "Manual work",
+            "Writing docs",
+            "Reading"
+        ]
+    },
+    {
+        "q": "What is 'Self-Healing' system?",
+        "o": [
+            "System that detects faults and corrects them without human intervention",
+            "Broken system",
+            "Manual system",
+            "Legacy system"
+        ]
+    },
+    {
+        "q": "Risk of automated remediation?",
+        "o": [
+            "Remediation loops (Restart -> Crash -> Restart) worsening the outage",
+            "It works too well",
+            "It is free",
+            "It is fast"
+        ]
+    },
+    {
+        "q": "How to mitigate remediation loops?",
+        "o": [
+            "Implement limits/backoffs (e.g. max 3 restarts per hour) then escalate to human",
+            "Restart faster",
+            "Ignore limits",
+            "Disable logs"
+        ]
+    },
+    {
+        "q": "What is 'Outlier Detection'?",
+        "o": [
+            "Alerting when a single node behaves differently from its peers (e.g. 1 CPU at 100%, others 10%)",
+            "Average check",
+            "Sum check",
+            "Min check"
+        ]
+    },
+    {
+        "q": "Why use Outlier Detection?",
+        "o": [
+            "Detects 'gray failures' where the cluster aggregate looks healthy but one node is broken",
+            "It is pretty",
+            "It is loud",
+            "It is slow"
+        ]
+    },
+    {
+        "q": "What is 'Burn Rate' (Error Budget)?",
+        "o": [
+            "The rate at which you are consuming your allowed error budget",
+            "Spending money",
+            "Fire rate",
+            "CPU temp"
+        ]
+    },
+    {
+        "q": "High Burn Rate means?",
+        "o": [
+            "You are failing too fast; Error Budget will be exhausted soon (Alert immediately)",
+            "Good performance",
+            "Stable",
+            "Below budget"
+        ]
+    },
+    {
+        "q": "What is 'Alert Sensitivity'?",
+        "o": [
+            "How quickly an alert triggers (Trade-off: High sensitivity = False Positives; Low = False Negatives)",
+            "Emotion",
+            "Volume",
+            "Brightness"
+        ]
+    },
+    {
+        "q": "What is 'Recall' in alerting?",
+        "o": [
+            "Percentage of real incidents that were successfully alerted on (Avoid missing bugs)",
+            "Memory",
+            "Undo",
+            "Return"
+        ]
+    },
+    {
+        "q": "What is 'Precision' in alerting?",
+        "o": [
+            "Percentage of alerts that were actual real incidents (Avoid noise)",
+            "Accuracy",
+            "Timing",
+            "Sharpness"
+        ]
+    },
+    {
+        "q": "The goal of 'Alert Tuning' is?",
+        "o": [
+            "Balancing Recall vs Precision to minimize fatigue while ensuring safety",
+            "Max alerts",
+            "Zero alerts",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Informational' Alert?",
+        "o": [
+            "Notification about non-critical event (e.g. 'Backup Completed'); send to log/email, not pager",
+            "Critical",
+            "Warning",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'War Room'?",
+        "o": [
+            "Dedicated chat channel or meeting room for real-time incident collaboration",
+            "Battlefield",
+            "Office",
+            "Kitchen"
+        ]
+    },
+    {
+        "q": "First step when paged?",
+        "o": [
+            "Acknowledge the alert (Stop the noise/escalation)",
+            "Fix it",
+            "Delete it",
+            "Panic"
+        ]
+    },
+    {
+        "q": "Second step when paged?",
+        "o": [
+            "Triage: Assess impact (Sev level) and decide if help is needed",
+            "Go back to sleep",
+            "Reboot",
+            "Deploy"
+        ]
+    },
+    {
+        "q": "What is 'Triage'?",
+        "o": [
+            "Process of determining priority and severity of an issue",
+            "Fixing",
+            "Coding",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What is 'Mitigation' vs 'Resolution'?",
+        "o": [
+            "Mitigation stops the bleeding (workaround); Resolution fixes the root cause permanently",
+            "Same thing",
+            "Opposite",
+            "Reversed"
+        ]
+    },
+    {
+        "q": "Example of Mitigation?",
+        "o": [
+            "Rollback bad deploy, Add capacity, Block IP",
+            "Fixing bug in code",
+            "Refactoring",
+            "Optimizing"
+        ]
+    },
+    {
+        "q": "Example of Resolution?",
+        "o": [
+            "Fixing the bug and re-deploying safely",
+            "Rebooting",
+            "Rolling back",
+            "Scaling"
+        ]
+    },
+    {
+        "q": "When to declare a 'Major Incident'?",
+        "o": [
+            "When business impact is high, multiple teams are needed, or resolution time is uncertain",
+            "Never",
+            "Always",
+            "For typos"
+        ]
+    },
+    {
+        "q": "What is 'Call Tree'?",
+        "o": [
+            "Hierarchical list of contacts to notify during a crisis",
+            "Phone book",
+            "Graph",
+            "Tree data structure"
+        ]
+    },
+    {
+        "q": "What is 'Stakeholder' notification?",
+        "o": [
+            "Updating business leaders/support teams (who don't fix the code) about status",
+            "User alert",
+            "Dev alert",
+            "System alert"
+        ]
+    },
+    {
+        "q": "Why separate Stakeholder comms from Engineering comms?",
+        "o": [
+            "Engineering needs technical details; Stakeholders need impact/ETA (and keeps War Room focused)",
+            "No reason",
+            "They are same",
+            "Confusion"
+        ]
+    },
+    {
+        "q": "What is 'TTD' (Time To Detect)?",
+        "o": [
+            "Time from actual failure start until system generates alert",
+            "Time to delete",
+            "Time to deploy",
+            "Time to debug"
+        ]
+    },
+    {
+        "q": "What is 'TTE' (Time To Engage)?",
+        "o": [
+            "Time from alert generation until human actually starts investigating",
+            "Time to end",
+            "Time to eat",
+            "Time to edit"
+        ]
+    },
+    {
+        "q": "Total Downtime = ?",
+        "o": [
+            "TTD + TTE + TTR (Detect + Engage + Repair)",
+            "TTD only",
+            "TTR only",
+            "Random"
+        ]
+    },
+    {
+        "q": "How to improve TTD?",
+        "o": [
+            "Better monitoring resolution (1s vs 1m), sharper thresholds, synthetics",
+            "Hire more",
+            "Sleep less",
+            "Type faster"
+        ]
+    },
+    {
+        "q": "How to improve TTE?",
+        "o": [
+            "Better notification channels (PagerDuty vs Email), loud alarms, escalation policies",
+            "Graphs",
+            "Logs",
+            "Docs"
+        ]
+    },
+    {
+        "q": "How to improve TTR?",
+        "o": [
+            "Runbooks, Automation, better debug tools, rollbacks, training",
+            "Yelling",
+            "Panicking",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Alert Storm'?",
+        "o": [
+            "Huge volume of alerts triggered simultaneously (often by single cause)",
+            "Rain",
+            "Cloud",
+            "Wind"
+        ]
+    },
+    {
+        "q": "How to handle Alert Storm?",
+        "o": [
+            "Deduping, Grouping, Root Cause Analysis features",
+            "Turn off phone",
+            "Delete email",
+            "Quit"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Mode' (Downtime)?",
+        "o": [
+            "Flagging a host/service as 'under maintenance' to suppress alerts during work",
+            "Broken mode",
+            "Offline mode",
+            "Sleep mode"
+        ]
+    },
+    {
+        "q": "What is 'Root Cause'?",
+        "o": [
+            "The fundamental reason the failure occurred (e.g. Config error, Code bug)",
+            "Symptom",
+            "Result",
+            "Effect"
+        ]
+    },
+    {
+        "q": "What is 'Proximate Cause'?",
+        "o": [
+            "The immediate trigger (e.g. Disk Full) which resulted from Root Cause (Log rotation failed)",
+            "Root cause",
+            "Solution",
+            "Plan"
+        ]
+    },
+    {
+        "q": "What is '5 Whys'?",
+        "o": [
+            "Technique to find Root Cause by asking 'Why?' five times",
+            "Asking 5 people",
+            "5 reasons",
+            "5 questions"
+        ]
+    },
+    {
+        "q": "What is 'Incident Severity Matrix'?",
+        "o": [
+            "Table defining Sev thresholds based on Impact (Users affected) and Urgency",
+            "Movie",
+            "Math",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Smoke Test' alert?",
+        "o": [
+            "Basic check after deployment to ensure critical paths work; alert if fails (Auto-rollback)",
+            "Fire alarm",
+            "Vape",
+            "Oven"
+        ]
+    },
+    {
+        "q": "What is 'Heartbeat' check endpoint?",
+        "o": [
+            "/health or /status returning 200 OK",
+            "/login",
+            "/admin",
+            "/home"
+        ]
+    },
+    {
+        "q": "What confirms an alert is fixed?",
+        "o": [
+            "Metric returns to normal range AND verification tests pass",
+            "Silence",
+            "Time passing",
+            "Closing ticket"
+        ]
+    },
+    {
+        "q": "What is 'Alert Annotation'?",
+        "o": [
+            "Adding metadata (Link to dashboard, Runbook URL, Summary) to the alert body",
+            "Drawing",
+            "Tagging",
+            "Signing"
+        ]
+    },
+    {
+        "q": "Why use 'Labels' in alerts?",
+        "o": [
+            "For routing (team=db), grouping (env=prod), and filtering",
+            "Decoration",
+            "Coloring",
+            "Naming"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Tier 1'?",
+        "o": [
+            "The first line of defense (often NOC or Primary On-Call)",
+            "Manager",
+            "CEO",
+            "Vendor"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Tier 2'?",
+        "o": [
+            "Subject Matter Experts (SME) or Senior Engineers called if Tier 1 cannot fix",
+            "Interns",
+            "HR",
+            "Sales"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Tier 3'?",
+        "o": [
+            "Developers/Architects deep in the code (or Vendor support)",
+            "Users",
+            "Admins",
+            "Support"
+        ]
+    },
+    {
+        "q": "What is 'Alert Payload'?",
+        "o": [
+            "The data sent with the notification (JSON containing metric value, host, time)",
+            "Virus",
+            "Money",
+            "Weight"
+        ]
+    },
+    {
+        "q": "What is 'Push Notification' alert?",
+        "o": [
+            "Notification sent directly to mobile app (PagerDuty app) - faster than SMS",
+            "Email",
+            "Letter",
+            "Fax"
+        ]
+    },
+    {
+        "q": "What is 'SMS' alert limitations?",
+        "o": [
+            "Can be delayed by carrier; strict character limits; no rich formatting",
+            "None",
+            "Too fast",
+            "Too rich"
+        ]
+    },
+    {
+        "q": "What is 'Email' alert limitations?",
+        "o": [
+            "Easily missed (Inbox clutter); slow delivery; not good for waking up",
+            "None",
+            "Cost",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Phone Call' alert?",
+        "o": [
+            "Automated voice call; most effective for waking up on-call engineers",
+            "Chat",
+            "Text",
+            "Video"
+        ]
+    },
+    {
+        "q": "What is 'Notification Rule'?",
+        "o": [
+            "User preference defining: Immediate -> Push; 5 min -> SMS; 10 min -> Call",
+            "Law",
+            "Code",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is an 'Incident Role'?",
+        "o": [
+            "Specific responsibility assigned during incident (Commander, Scribe, Ops, Comms)",
+            "Actor",
+            "Permission",
+            "Login"
+        ]
+    },
+    {
+        "q": "Why define Incident Roles?",
+        "o": [
+            "Avoids 'Too many cooks' and paralysis; clear chain of command",
+            "More meetings",
+            "Bureaucracy",
+            "Fun"
+        ]
+    },
+    {
+        "q": "What is 'Alert Audit Trail'?",
+        "o": [
+            "Log of all actions taken on an alert (Triggered, Acked by Bob, Resolved by Alice)",
+            "File path",
+            "Debug log",
+            "Network trace"
+        ]
+    },
+    {
+        "q": "What is 'Correlated Alerts'?",
+        "o": [
+            "Alerts that happen together because of shared dependency (e.g. Switch down -> 100 Servers down)",
+            "Random alerts",
+            "Unrelated",
+            "Opposite"
+        ]
+    },
+    {
+        "q": "What is 'Event Storming'?",
+        "o": [
+            "Workshop to explore domain events (can help identify what brings value to monitor)",
+            "Weather",
+            "Crisis",
+            "Meeting"
+        ]
+    },
+    {
+        "q": "What is 'NOC' (Network Operations Center)?",
+        "o": [
+            "Centralized location/team monitoring infrastructure 24/7 (Eyes on Glass)",
+            "Office",
+            "Server room",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "NOC vs On-Call Engineering?",
+        "o": [
+            "NOC watches screens covers L1; Engineering fixes L2/L3 code/infra issues on demand",
+            "Same",
+            "Opposite",
+            "Competitors"
+        ]
+    },
+    {
+        "q": "What is 'Alert Escalation Timeout'?",
+        "o": [
+            "Time before alert moves to next person if current person ignores it",
+            "Resolution time",
+            "Ack time",
+            "Fix time"
+        ]
+    },
+    {
+        "q": "What is 'Unacknowledged Alert'?",
+        "o": [
+            "Alert that is firing but no human has claimed it yet (Dangerous)",
+            "Fixed",
+            "Closed",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Self-Inflicted' Incident?",
+        "o": [
+            "Incident caused by internal change (deployment, config change) - Most common cause",
+            "Hacker",
+            "Hardware",
+            "Weather"
+        ]
+    },
+    {
+        "q": "First thing to check during Self-Inflicted Incident?",
+        "o": [
+            "Recent deployments or config changes (Rollback candidate)",
+            "Logs",
+            "CPU",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Mean Time Between Failures' (MTBF)?",
+        "o": [
+            "Average time system runs correctly between outages (Measure of Reliability)",
+            "MTTR",
+            "MTTA",
+            "Uptime"
+        ]
+    },
+    {
+        "q": "Reliability formula?",
+        "o": [
+            "MTBF / (MTBF + MTTR)",
+            "MTTR / MTBF",
+            "MTTA + MTTR",
+            "Random"
+        ]
+    },
+    {
+        "q": "High Availability target?",
+        "o": [
+            "Maximize MTBF, Minimize MTTR",
+            "Maximize MTTR",
+            "Minimize MTBF",
+            "Ignore both"
+        ]
+    },
+    {
+        "q": "What is 'Error Budget' used for?",
+        "o": [
+            "Balance innovation velocity vs reliability; if budget remains, ship faster. If exhausted, freeze.",
+            "Buying servers",
+            "Paying team",
+            "Bonuses"
+        ]
+    },
+    {
+        "q": "Who owns the Error Budget?",
+        "o": [
+            "Product Owner and SRE Team jointly",
+            "Dev only",
+            "Ops only",
+            "Sales"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Alertmanager'?",
+        "o": [
+            "Component that handles alerts sent by Prometheus server (Grouping, Inhibiting, Routing)",
+            "Metrics collector",
+            "Dashboard",
+            "Database"
+        ]
+    },
+    {
+        "q": "Does Prometheus Server send emails directly?",
+        "o": [
+            "No, it sends alerts to Alertmanager, which handles notifications",
+            "Yes always",
+            "Sometimes",
+            "Only SMS"
+        ]
+    },
+    {
+        "q": "What is 'Grouping' in Alertmanager?",
+        "o": [
+            "Combining multiple alerts of similar nature into a single notification (e.g. ClusterDown)",
+            "Splitting",
+            "Deleting",
+            "Sorting"
+        ]
+    },
+    {
+        "q": "What is 'Inhibition' in Alertmanager?",
+        "o": [
+            "Muting an alert if another specific alert is already firing (e.g. mute 'AppDown' if 'RegionDown')",
+            "Amplification",
+            "Repeating",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Silencing' in Alertmanager?",
+        "o": [
+            "Muting alerts for a given time based on matchers (e.g. during maintenance)",
+            "Deleting",
+            "Ignoring",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "What is 'Routing' in Alertmanager?",
+        "o": [
+            "Sending alerts to different receivers based on active labels",
+            "Networking",
+            "Directing",
+            "Sending"
+        ]
+    },
+    {
+        "q": "Alertmanager 'Receiver' defines?",
+        "o": [
+            "Where to send notifications (Slack, PagerDuty, Email, Webhook)",
+            "Protocol",
+            "Format",
+            "Time"
+        ]
+    },
+    {
+        "q": "Alertmanager 'Route' tree?",
+        "o": [
+            "Hierarchy of routing rules; alerts traverse until they match a receiver",
+            "File tree",
+            "Process tree",
+            "Log tree"
+        ]
+    },
+    {
+        "q": "What is 'group_wait' in Alertmanager?",
+        "o": [
+            "How long to wait to buffer initial alerts of a group before sending notification",
+            "Forever",
+            "Zero",
+            "Retry time"
+        ]
+    },
+    {
+        "q": "What is 'group_interval' in Alertmanager?",
+        "o": [
+            "How long to wait before sending NEW alerts that were added to an EXISTING group",
+            "Sleep time",
+            "Buffer time",
+            "Ping time"
+        ]
+    },
+    {
+        "q": "What is 'repeat_interval' in Alertmanager?",
+        "o": [
+            "How long to wait before re-sending a notification for an alert that is STILL firing",
+            "Daily",
+            "Hourly",
+            "Weekly"
+        ]
+    },
+    {
+        "q": "PromQL: 'up == 0' means?",
+        "o": [
+            "Instance is down (scrapes failing)",
+            "Instance is up",
+            "No data",
+            "Reset"
+        ]
+    },
+    {
+        "q": "PromQL: 'rate(http_requests_total[5m]) > 100'?",
+        "o": [
+            "Alert if request rate exceeds 100/sec over 5m window",
+            "Total requests > 100",
+            "Latency > 100",
+            "Errors > 100"
+        ]
+    },
+    {
+        "q": "What is 'for' clause in Prometheus Rule?",
+        "o": [
+            "Duration an alert must be active before firing (Pending state)",
+            "Loop",
+            "Name",
+            "Label"
+        ]
+    },
+    {
+        "q": "Alert State: 'Pending'?",
+        "o": [
+            "Condition met, but 'for' duration hasn't passed yet",
+            "Firing",
+            "Resolved",
+            "Inactive"
+        ]
+    },
+    {
+        "q": "Alert State: 'Firing'?",
+        "o": [
+            "Condition met AND 'for' duration passed (Notification sent)",
+            "Pending",
+            "Resolved",
+            "Inactive"
+        ]
+    },
+    {
+        "q": "What is 'Recording Rule'?",
+        "o": [
+            "Pre-calculating a query (e.g. heavy aggregation) and saving it as a new time series",
+            "Recording audio",
+            "Saving log",
+            "Writing disk"
+        ]
+    },
+    {
+        "q": "Benefit of Recording Rules for Alerts?",
+        "o": [
+            "Alerts query the pre-calculated rule (Fast) instead of raw data (Slow)",
+            "More storage",
+            "Less detailed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Absent' alert?",
+        "o": [
+            "Alerting when a metric is missing completely (absent(up{job='myjob'}))",
+            "Present",
+            "Null",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Alert Label'?",
+        "o": [
+            "Key-value pair attached to alert (severity=critical, team=frontend)",
+            "Sticker",
+            "Tag",
+            "Name"
+        ]
+    },
+    {
+        "q": "What is 'Alert Annotation' in Prometheus?",
+        "o": [
+            "Descriptive text (summary, description, runbook_url) using templates",
+            "Label",
+            "Tag",
+            "Key"
+        ]
+    },
+    {
+        "q": "Template syntax in Prometheus Annotations?",
+        "o": [
+            "Go Templates ({{ $value }}, {{ $labels.instance }})",
+            "Jinja2",
+            "Mustache",
+            "ERB"
+        ]
+    },
+    {
+        "q": "What is 'amtool'?",
+        "o": [
+            "CLI tool for interacting with Alertmanager (Check config, Silence alerts)",
+            "Admin tool",
+            "Api tool",
+            "App tool"
+        ]
+    },
+    {
+        "q": "How to debug 'Why is my alert not firing'?",
+        "o": [
+            "Check Prometheus /alerts page (State?), Check Query in Graph, Check Alertmanager logs",
+            "Reboot",
+            "Panic",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Evaluation Interval'?",
+        "o": [
+            "How often Prometheus evaluates alerting rules (e.g. every 1m)",
+            "Scrape interval",
+            "Timeout",
+            "Delay"
+        ]
+    },
+    {
+        "q": "Evaluation Interval vs Scrape Interval?",
+        "o": [
+            "Scrape gets data; Evaluation checks rules against that data",
+            "Same thing",
+            "Opposite",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "What is 'High Cardinality' risk in Alerts?",
+        "o": [
+            "Alerting on 'pod_name' or 'client_ip' can generate thousands of unique alerts",
+            "Low impact",
+            "Storage risk",
+            "Network risk"
+        ]
+    },
+    {
+        "q": "How to avoid High Cardinality alerts?",
+        "o": [
+            "Aggregate by service or deployment instead of individual pod",
+            "Use more RAM",
+            "Delete data",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Federated Prometheus' alerting?",
+        "o": [
+            "Global Prometheus scrapes aggregated metrics from local Prometheus instances to alert globally",
+            "Local alert",
+            "Single alert",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'Thanos Ruler'?",
+        "o": [
+            "Component in Thanos stack that evaluates rules/alerts on distributed data",
+            "King",
+            "Database",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "PromQL: 'histogram_quantile(0.99...)' alert?",
+        "o": [
+            "Alerting on 99th percentile latency derived from buckets",
+            "Average",
+            "Count",
+            "Sum"
+        ]
+    },
+    {
+        "q": "PromQL: 'increase()' vs 'rate()' in alerts?",
+        "o": [
+            "Increase returns total count (Int); Rate returns per-second (Float). Both handle counter resets.",
+            "Same",
+            "Opposite",
+            "Different"
+        ]
+    },
+    {
+        "q": "When to use 'increase()' in alert?",
+        "o": [
+            "When 'Errors > 5 in last hour' is easier to understand than 'Error Rate > 0.0013'",
+            "Always",
+            "Never",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Predictive Alerting' (Holt-Winters)?",
+        "o": [
+            "Using predict_linear() to forecast when disk will fill up (e.g. in 4 hours)",
+            "Magic",
+            "Guessing",
+            "Machine learning"
+        ]
+    },
+    {
+        "q": "PromQL: 'predict_linear(node_filesystem_free_bytes[1h], 4*3600) < 0'?",
+        "o": [
+            "Alert if disk is expected to be full in 4 hours based on last 1h trend",
+            "Disk empty",
+            "Disk full now",
+            "Disk error"
+        ]
+    },
+    {
+        "q": "What is 'Blackbox Exporter'?",
+        "o": [
+            "Prometheus exporter for probing endpoints (HTTP/DNS/TCP/ICMP) - external checks",
+            "Whitebox",
+            "App exporter",
+            "Node exporter"
+        ]
+    },
+    {
+        "q": "What is 'probe_success' metric?",
+        "o": [
+            "Metric from Blackbox Exporter: 1 = Success, 0 = Fail (Key for availability alerts)",
+            "Latency",
+            "Duration",
+            "Size"
+        ]
+    },
+    {
+        "q": "How to alert on SSL Expiry?",
+        "o": [
+            "Use Blackbox Exporter 'probe_ssl_earliest_cert_expiry' < time() + 30days",
+            "Manual check",
+            "Browser check",
+            "Cron job"
+        ]
+    },
+    {
+        "q": "What is 'Alert Logic' best practice?",
+        "o": [
+            "Keep text simple, labels rich, and thresholds reasonable",
+            "Complex logic",
+            "Hidden logic",
+            "Magic numbers"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Window' alert?",
+        "o": [
+            "Checking condition over Short (5m) AND Long (1h) windows to reduce noise",
+            "Single window",
+            "No window",
+            "Glass"
+        ]
+    },
+    {
+        "q": "Why use 'changes()' function?",
+        "o": [
+            "To detect if a value is changing (or stuck) - count value changes in window",
+            "Rate",
+            "Sum",
+            "Avg"
+        ]
+    },
+    {
+        "q": "Alerting on 'CrashLoopBackOff'?",
+        "o": [
+            "Detecting K8s pods that restart frequently (kube_pod_container_status_waiting_reason)",
+            "Running pods",
+            "Healthy pods",
+            "New pods"
+        ]
+    },
+    {
+        "q": "Alerting on 'OOMKilled'?",
+        "o": [
+            "Detecting containers killed by Out Of Memory (kube_pod_container_status_terminated_reason)",
+            "CPU kill",
+            "Network kill",
+            "User kill"
+        ]
+    },
+    {
+        "q": "What is 'Node Not Ready' alert?",
+        "o": [
+            "kube_node_status_condition{condition='Ready', status='true'} == 0",
+            "Node ready",
+            "Node up",
+            "Node new"
+        ]
+    },
+    {
+        "q": "What is 'Job Down' alert?",
+        "o": [
+            "up{job='myjob'} == 0",
+            "Job up",
+            "Job slow",
+            "Job fast"
+        ]
+    },
+    {
+        "q": "How to silence alert via UI?",
+        "o": [
+            "Create a Silence in Alertmanager UI matching labels/time",
+            "Edit config",
+            "Delete rule",
+            "Stop server"
+        ]
+    },
+    {
+        "q": "What is 'Expire' in Silence?",
+        "o": [
+            "When the silence rule automatically deletes itself",
+            "Death",
+            "End",
+            "Stop"
+        ]
+    },
+    {
+        "q": "Alertmanager 'Ha' (High Availability)?",
+        "o": [
+            "Running multiple Alertmanagers in a cluster (Gossip protocol used to sync silences/groups)",
+            "Single instance",
+            "Backup",
+            "Cold standby"
+        ]
+    },
+    {
+        "q": "What is 'Gossip Protocol' in Alertmanager?",
+        "o": [
+            "Mechanism for Alertmanager instances to share notification logs (prevents duplicate emails)",
+            "Chatting",
+            "Rumors",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Notification Template'?",
+        "o": [
+            "Defining the structure of the email/slack message (HTML/Markdown)",
+            "Rule",
+            "Limit",
+            "Config"
+        ]
+    },
+    {
+        "q": "What is 'Common Labels'?",
+        "o": [
+            "Labels shared by all alerts in a group (Only common ones are shown in group header)",
+            "Unique labels",
+            "All labels",
+            "No labels"
+        ]
+    },
+    {
+        "q": "What is 'Common Annotations'?",
+        "o": [
+            "Annotations shared by all alerts in a group",
+            "Unique",
+            "All",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Webhook' receiver format?",
+        "o": [
+            "POST request with JSON body containing list of alerts",
+            "GET",
+            "PUT",
+            "DELETE"
+        ]
+    },
+    {
+        "q": "How to test Alertmanager config?",
+        "o": [
+            "amtool check-config alertmanager.yml",
+            "Run it",
+            "Wait",
+            "Pray"
+        ]
+    },
+    {
+        "q": "How to test Prometheus Rules?",
+        "o": [
+            "promtool check rules rules.yml (and 'promtool test rules' for unit testing)",
+            "Run it",
+            "Wait",
+            "Hope"
+        ]
+    },
+    {
+        "q": "What is 'Unit Testing' for Alerts?",
+        "o": [
+            " simulating metrics series and checking if alerts fire as expected (promtool)",
+            "Manual test",
+            "End to end",
+            "Integration"
+        ]
+    },
+    {
+        "q": "What is 'Alert Sensitivity' trade-off?",
+        "o": [
+            "Highly sensitive = fast detection but false alarms; Low sensitivity = slow detection but reliable",
+            "No trade off",
+            "Only speed",
+            "Only reliability"
+        ]
+    },
+    {
+        "q": "What is 'Rule Evaluation Delay'?",
+        "o": [
+            "Time taken to execute rule queries",
+            "Network delay",
+            "User delay",
+            "Disk delay"
+        ]
+    },
+    {
+        "q": "When does 'Resolved' notification send?",
+        "o": [
+            "When the alert condition is no longer true (up == 1) for the 'resolve_timeout' period",
+            "Immediately",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'resolve_timeout'?",
+        "o": [
+            "Default time Alertmanager waits before declaring an alert resolved if Prometheus stops sending it",
+            "Infinite",
+            "Zero",
+            "1 day"
+        ]
+    },
+    {
+        "q": "Prometheus 'Rule Group' executes?",
+        "o": [
+            "Sequentially (rules in a group run in order)",
+            "Parallel",
+            "Random",
+            "Reverse"
+        ]
+    },
+    {
+        "q": "Why is sequential execution useful?",
+        "o": [
+            "Allows recording rules to feed into subsequent alerting rules in same group",
+            "Performance",
+            "Simplicity",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "What is 'Watchdog' alert?",
+        "o": [
+            "An alert that is ALWAYS firing (vector(1)); proves the entire alert pipeline is working",
+            "Guard dog",
+            "Security",
+            "Pet"
+        ]
+    },
+    {
+        "q": "How to use Watchdog?",
+        "o": [
+            "If you STOP receiving the Watchdog notification (via Dead Man's Switch), monitoring is down",
+            "Ignore it",
+            "Delete it",
+            "Feed it"
+        ]
+    },
+    {
+        "q": "What is 'Info' severity used for?",
+        "o": [
+            "Events for context, not paging (e.g. Deprecated API usage, Certificate expiring in 30d)",
+            "Critical",
+            "Page",
+            "Wake up"
+        ]
+    },
+    {
+        "q": "What is 'Critical' severity?",
+        "o": [
+            "Service affecting, immediate action required (Wake up)",
+            "Info",
+            "Warning",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Warning' severity?",
+        "o": [
+            "Approaching limit or degraded but functional (Next business day)",
+            "Wake up",
+            "Panic",
+            "Info"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty Integration Key'?",
+        "o": [
+            "Key used by Alertmanager to authorize sending events to a specific PagerDuty service",
+            "Password",
+            "Username",
+            "IP"
+        ]
+    },
+    {
+        "q": "What is 'Slack Incoming Webhook'?",
+        "o": [
+            "URL used to post alerts to a specific Slack channel",
+            "Login",
+            "Password",
+            "API"
+        ]
+    },
+    {
+        "q": "Can Alertmanager inhibit based on time?",
+        "o": [
+            "Yes, using 'time_intervals' (mute_time_intervals) in config",
+            "No",
+            "Maybe",
+            "Only manually"
+        ]
+    },
+    {
+        "q": "What is 'Mute Time Interval'?",
+        "o": [
+            "Defining business hours or maintenance windows where alerts are suppressed",
+            "Quiet time",
+            "Sleep time",
+            "Off time"
+        ]
+    },
+    {
+        "q": "What is 'Active' vs 'Suppressed'?",
+        "o": [
+            "Active = Will notify; Suppressed = Silenced/Inhibited (Won't notify)",
+            "Same",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'AWS CloudWatch Alarm'?",
+        "o": [
+            "Monitors a single metric over a time period and performs action (SNS, Auto Scaling) when breaching",
+            "Logging",
+            "Graphing",
+            "Tracing"
+        ]
+    },
+    {
+        "q": "CloudWatch Alarm State: 'OK'?",
+        "o": [
+            "Metric is within the defined threshold",
+            "Breached",
+            "Insufficient data",
+            "Firing"
+        ]
+    },
+    {
+        "q": "CloudWatch Alarm State: 'ALARM'?",
+        "o": [
+            "Metric is outside the defined threshold for the specified number of periods",
+            "OK",
+            "Pending",
+            "Good"
+        ]
+    },
+    {
+        "q": "CloudWatch Alarm State: 'INSUFFICIENT_DATA'?",
+        "o": [
+            "Not enough data points yet to determine state (Starting up or metric stopped)",
+            "Alarm",
+            "OK",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'Period' in CloudWatch Alarm?",
+        "o": [
+            "The length of time to evaluate the metric (e.g. 1 minute, 5 minutes)",
+            "Forever",
+            "Latency",
+            "Delay"
+        ]
+    },
+    {
+        "q": "What is 'Evaluation Periods'?",
+        "o": [
+            "Number of consecutive periods the threshold must be breached to trigger ALARM (e.g. 3 periods of 1 min)",
+            "1 always",
+            "Zero",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Datapoints to Alarm' (M out of N)?",
+        "o": [
+            "Alarm if M datapoints out of the last N periods are breaching (Allows for spikes/flapping)",
+            "Strict",
+            "All",
+            "None"
+        ]
+    },
+    {
+        "q": "How to notify PagerDuty from CloudWatch?",
+        "o": [
+            "Alarm -> SNS Topic -> HTTPS Subscription (PagerDuty Integration URL)",
+            "Direct email",
+            "Call user",
+            "Run script"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch Metric Math' Alarm?",
+        "o": [
+            "Alarm based on a mathematical expression combining multiple metrics (e.g. m1 + m2 > 100)",
+            "Simple alarm",
+            "Single metric",
+            "Log alarm"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch Anomaly Detection' Alarm?",
+        "o": [
+            "Alarm based on statistical deviation from expected baseline (Band) rather than static threshold",
+            "Static",
+            "Fixed",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'Grafana Unified Alerting'?",
+        "o": [
+            "Consolidated alerting system in Grafana (Managed and Data Source managed alerts)",
+            "Old alerting",
+            "Plugin",
+            "Dashboard"
+        ]
+    },
+    {
+        "q": "Where are Grafana Alerts evaluated?",
+        "o": [
+            "In the Grafana backend (Server-side)",
+            "In the browser",
+            "In the database",
+            "In the user mind"
+        ]
+    },
+    {
+        "q": "What is 'Grafana Alert Rule'?",
+        "o": [
+            "Defines the query, condition, and duration for an alert",
+            "Dashboard",
+            "Panel",
+            "Row"
+        ]
+    },
+    {
+        "q": "What is 'Grafana Contact Point'?",
+        "o": [
+            "Destination for alert notifications (Slack, Email, PagerDuty, Webhook)",
+            "User",
+            "Admin",
+            "Role"
+        ]
+    },
+    {
+        "q": "What is 'Grafana Notification Policy'?",
+        "o": [
+            "Routing rules to direct alerts to specific contact points based on labels (like Alertmanager)",
+            "Terms of service",
+            "Privacy policy",
+            "Login"
+        ]
+    },
+    {
+        "q": "Can Grafana alert on ANY data source?",
+        "o": [
+            "Yes, allowing cross-source alerting (e.g. SQL + Prometheus combined)",
+            "No, only Prometheus",
+            "No, only Graphite",
+            "No, only SQL"
+        ]
+    },
+    {
+        "q": "What is 'No Data' handling in Grafana?",
+        "o": [
+            "Configure state to Alerting, OK, or NoData if query returns nothing",
+            "Always Alert",
+            "Always OK",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'Error' handling in Grafana?",
+        "o": [
+            "Configure state to Alerting, OK, or Error if query execution fails",
+            "Retry",
+            "Ignore",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What is 'Elasticsearch Watcher' (or Kibana Alerts)?",
+        "o": [
+            "Alerting framework for the ELK Stack (Query index -> Check condition -> Action)",
+            "Prometheus",
+            "Grafana",
+            "CloudWatch"
+        ]
+    },
+    {
+        "q": "How does Log-Based Alerting work?",
+        "o": [
+            "Periodically query logs (e.g. 'count of ERROR in last 5m') > Threshold -> Alert",
+            "Real-time stream",
+            "Metric push",
+            "Manual check"
+        ]
+    },
+    {
+        "q": "Downside of Log-Based Alerting?",
+        "o": [
+            "Latency (logs must be indexed first); High cost if querying huge volumes",
+            "Instant",
+            "Cheap",
+            "No downsides"
+        ]
+    },
+    {
+        "q": "What is 'Splunk Alert'?",
+        "o": [
+            "Saved search that runs on a schedule or real-time to trigger actions",
+            "Log file",
+            "Index",
+            "Forwarder"
+        ]
+    },
+    {
+        "q": "What is 'Trigger Condition' in Splunk?",
+        "o": [
+            "Number of results > 0, Number of hosts > 5, etc.",
+            "Always",
+            "Never",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Throttle' in Splunk Alerts?",
+        "o": [
+            "Suppressing subsequent alerts for the same group of events for a set time (Deduplication)",
+            "Speed up",
+            "Slow down",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Nagios' (Legacy)?",
+        "o": [
+            "Classic infrastructure monitoring tool (Check scripts -> Status: OK/WARNING/CRITICAL)",
+            "New tool",
+            "Cloud tool",
+            "AI tool"
+        ]
+    },
+    {
+        "q": "Nagios 'NRPE'?",
+        "o": [
+            "Nagios Remote Plugin Executor (Agent running on remote host to execute local checks)",
+            "Server",
+            "Cloud",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Zabbix'?",
+        "o": [
+            "Open-source enterprise monitoring solution (Agent/SNMP/IPMI based)",
+            "Game",
+            "Word processor",
+            "Browser"
+        ]
+    },
+    {
+        "q": "What is 'Datadog Monitor'?",
+        "o": [
+            "Alert defined in Datadog (Metric, Integration, Process, Network, etc.)",
+            "Dog",
+            "Log",
+            "Metric"
+        ]
+    },
+    {
+        "q": "What is 'Datadog Downtime'?",
+        "o": [
+            "Scheduling silence for a monitor (Maintenance window)",
+            "Crash",
+            "Outage",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'New Relic Alert Condition'?",
+        "o": [
+            "Criteria for determining a violation (NRQL query + Threshold)",
+            "Policy",
+            "Channel",
+            "Workflow"
+        ]
+    },
+    {
+        "q": "What is 'Baseline Alerting' (New Relic)?",
+        "o": [
+            "Dynamic thresholds based on historical data (Standard Deviations)",
+            "Static",
+            "Fixed",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Sentry' alerting?",
+        "o": [
+            "Alerts focused on Application Errors/Exceptions (Stack traces)",
+            "Infrastructure",
+            "Network",
+            "Hardware"
+        ]
+    },
+    {
+        "q": "Common Sentry alert trigger?",
+        "o": [
+            "New Issue (First time error seen) or Regression (Resolved error reappeared)",
+            "CPU high",
+            "Disk full",
+            "Ping fail"
+        ]
+    },
+    {
+        "q": "What is 'Spike' alert?",
+        "o": [
+            "Sudden increase in a metric (e.g. 5x traffic increase in 1 minute)",
+            "Drop",
+            "Flatline",
+            "Slow rise"
+        ]
+    },
+    {
+        "q": "What is 'Drop' alert?",
+        "o": [
+            "Sudden decrease (e.g. Order rate drops to zero)",
+            "Spike",
+            "Rise",
+            "Increase"
+        ]
+    },
+    {
+        "q": "What is 'Flatline' alert?",
+        "o": [
+            "Metric stops changing or becomes zero (Process hung / Logging stopped)",
+            "Spike",
+            "Noise",
+            "Variable"
+        ]
+    },
+    {
+        "q": "What is 'Rate of Change' alert?",
+        "o": [
+            "Alerting on the derivative (Predicting disk full by how FAST it fills)",
+            "Absolute value",
+            "Count",
+            "Sum"
+        ]
+    },
+    {
+        "q": "CloudWatch 'Standard Resolution'?",
+        "o": [
+            "1 minute granularity (Basic Monitoring is 5 minutes)",
+            "1 second",
+            "1 hour",
+            "1 day"
+        ]
+    },
+    {
+        "q": "CloudWatch 'High Resolution'?",
+        "o": [
+            "1 second granularity (Cost extra)",
+            "1 minute",
+            "1 hour",
+            "10 seconds"
+        ]
+    },
+    {
+        "q": "What is 'Alarm Actions' in CloudWatch?",
+        "o": [
+            "SNS Notification, Auto Scaling Action, EC2 Action (Recover/Stop/Reboot), Systems Manager OpsItem",
+            "Email only",
+            "Log only",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'OpsCenter' (AWS)?",
+        "o": [
+            "Central place to view, investigate, and resolve OpsItems (Operational issues)",
+            "Help desk",
+            "Call center",
+            "Marketplace"
+        ]
+    },
+    {
+        "q": "What is 'OpsItem'?",
+        "o": [
+            "Operational Issue tracking object in Systems Manager (like a ticket)",
+            "Log",
+            "Metric",
+            "Alarm"
+        ]
+    },
+    {
+        "q": "What is 'EventBridge Rule' for alerting?",
+        "o": [
+            "Matching specific event patterns (e.g. EC2 State Change) and routing to target (SNS/Lambda)",
+            "Cron",
+            "Schedule",
+            "Loop"
+        ]
+    },
+    {
+        "q": "Difference: CloudWatch Alarm vs EventBridge Rule?",
+        "o": [
+            "Alarm = Metric Threshold (CPU > 90); EventBridge = Discrete Event (Instance Terminated)",
+            "Same",
+            "Opposite",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Azure Monitor Alert'?",
+        "o": [
+            "Alerts on Metric, Log, or Activity Log in Azure",
+            "AWS alert",
+            "GCP alert",
+            "On-prem alert"
+        ]
+    },
+    {
+        "q": "What is 'Action Group' in Azure Monitor?",
+        "o": [
+            "Collection of notification preferences (Email, SMS, Webhook, ITSM) reused across alerts",
+            "Resource Group",
+            "Security Group",
+            "User Group"
+        ]
+    },
+    {
+        "q": "What is 'Smart Detection' (Azure Application Insights)?",
+        "o": [
+            "Machine Learning based detection of performance anomalies or failure patterns",
+            "Manual rule",
+            "Static check",
+            "Simple check"
+        ]
+    },
+    {
+        "q": "What is 'Google Cloud Monitoring Alerting'?",
+        "o": [
+            "Alerting Policy defining conditions on metrics/logs and notification channels",
+            "AWS",
+            "Azure",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Uptime Check' (GCP)?",
+        "o": [
+            "Checks availabilty of public endpoints (Synthetics) from multiple global locations",
+            "Internal check",
+            "Local check",
+            "Disk check"
+        ]
+    },
+    {
+        "q": "What is 'Incidents' dashboard (GCP)?",
+        "o": [
+            "Shows currently open and recently closed incidents",
+            "Billing",
+            "IAM",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Webhook' Authentication?",
+        "o": [
+            "Standard webhooks often lack auth; use HMAC signature or token in URL/Header",
+            "Always secure",
+            "Impossible",
+            "None"
+        ]
+    },
+    {
+        "q": "How to handle 'Flappy' Alert via Rules?",
+        "o": [
+            "Increase 'Evaluation Periods' or 'Duration' (e.g. must be high for 10m, not 1m)",
+            "Decrease time",
+            "Lower threshold",
+            "Remove alert"
+        ]
+    },
+    {
+        "q": "What is 'State Change'?",
+        "o": [
+            "Transition from OK -> ALARM (Trigger) or ALARM -> OK (Resolve)",
+            "Stay same",
+            "Flicker",
+            "Loading"
+        ]
+    },
+    {
+        "q": "Alerting on 'Certificate Transparency' logs?",
+        "o": [
+            "Detecting unauthorized issuance of SSL certificates for your domain",
+            "Server down",
+            "Slow site",
+            "Expiration"
+        ]
+    },
+    {
+        "q": "What is 'Domain Expiry' alert?",
+        "o": [
+            "Alerting 30 days before domain registration expires (Prevent loss of domain)",
+            "Server expiry",
+            "Code expiry",
+            "User expiry"
+        ]
+    },
+    {
+        "q": "What is 'Quota Alert'?",
+        "o": [
+            "Alerting when usage approaches API rate limits or resource quotas",
+            "Space",
+            "Time",
+            "Money"
+        ]
+    },
+    {
+        "q": "What is 'Billing Alert'?",
+        "o": [
+            "Alerting when estimated cost exceeds budget threshold",
+            "Performance",
+            "Security",
+            "Ops"
+        ]
+    },
+    {
+        "q": "Best practice for Billing Alerts?",
+        "o": [
+            "Set multiple tiers (50%, 80%, 100%, 150% forecast) to catch spikes early",
+            "Set only at 100%",
+            "Set at $0",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Sensitive Data Exposure' alert?",
+        "o": [
+            "DLP (Data Loss Prevention) scanning logs/traffic for PII/Credit Cards and alerting",
+            "Performance",
+            "Uptime",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Login Failure' spike alert?",
+        "o": [
+            "Indicates potential Brute Force attack or Broken Auth service",
+            "Users forgot password",
+            "Normal",
+            "Good sign"
+        ]
+    },
+    {
+        "q": "What is 'Successful Login' from unusual location?",
+        "o": [
+            "Impossible Travel alert (User logged in from NY and London in 5 mins)",
+            "Normal",
+            "Good",
+            "Fast travel"
+        ]
+    },
+    {
+        "q": "What is 'Root User Login' alert?",
+        "o": [
+            "Critical Security Alert; Root account should rarely be used (AWS Best Practice)",
+            "Normal",
+            "Routine",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Security Group Change' alert?",
+        "o": [
+            "Alerting when a Security Group allows 0.0.0.0/0 (Open to World) on SSH/RDP",
+            "Config change",
+            "Routine",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'IAM Policy Change' alert?",
+        "o": [
+            "Detecting privilege escalation or administrative changes",
+            "User update",
+            "Password change",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'SIEM' alerting?",
+        "o": [
+            "Security Information and Event Management; correlating security events to find threats",
+            "Monitoring",
+            "Logging",
+            "Chat"
+        ]
+    },
+    {
+        "q": "Who receives Security Alerts?",
+        "o": [
+            "SecOps / Security Team (distinct from DevOps/SRE usually)",
+            "Everyone",
+            "No one",
+            "Users"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty Service'?",
+        "o": [
+            "Represents a technical component (DB, WebApp) associated with an Escalation Policy",
+            "Users",
+            "Teams",
+            "Schedules"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty Incident Priority'?",
+        "o": [
+            "P1, P2, P3 classification to communicate urgency to stakeholders",
+            "Sev 1",
+            "Tag",
+            "Label"
+        ]
+    },
+    {
+        "q": "What is 'Business Service' in PagerDuty?",
+        "o": [
+            "Maps technical services to business capabilities (e.g. 'Checkout') for executive visibility",
+            "Technical Svc",
+            "Microservice",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Window' in PagerDuty?",
+        "o": [
+            "Suppressing notifications for a service during planned work",
+            "Downtime",
+            "Uptime",
+            "Sleep"
+        ]
+    },
+    {
+        "q": "What is 'Intelligent Triage'?",
+        "o": [
+            "AI features suggesting Root Cause or related incidents based on history",
+            "Manual triage",
+            "Slower triage",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Change Event' in alerts?",
+        "o": [
+            "Marker on the graph showing a Deployment or Config Change (helps correlation)",
+            "Metric",
+            "Log",
+            "Alarm"
+        ]
+    },
+    {
+        "q": "Why overlay Change Events on Monitoring dashboards?",
+        "o": [
+            "80% of incidents are caused by changes; visual correlation speeds up RCA",
+            "Looks cool",
+            "Fills space",
+            "Distraction"
+        ]
+    },
+    {
+        "q": "What is 'Alert Context'?",
+        "o": [
+            "Information included in alert (Logs, Metric snapshot, Topology) to help diagnosis",
+            "Text only",
+            "Subject line",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Deep Linking' in alerts?",
+        "o": [
+            "Link that takes you directly to the relevant dashboard view/log search for that timeframe",
+            "Homepage link",
+            "Google link",
+            "Wiki link"
+        ]
+    },
+    {
+        "q": "What is 'On-Call Etiquette'?",
+        "o": [
+            "Unwritten rules (be responsive, acknowledge quickly, be kind to the previous shift) to maintain team health",
+            "Dress code",
+            "Speaking style",
+            "Formal meeting"
+        ]
+    },
+    {
+        "q": "Golden Rule of On-Call?",
+        "o": [
+            "Leave the system better than you found it (Update runbooks, fix flaky alerts)",
+            "Ignore everything",
+            "Sleep all day",
+            "Delete logs"
+        ]
+    },
+    {
+        "q": "How to reduce 'On-Call Fatigue'?",
+        "o": [
+            "Fix root causes, delete useless alerts, rotate often, and compensate (money or time off)",
+            "Drink coffee",
+            "Yell",
+            "Quit"
+        ]
+    },
+    {
+        "q": "What is 'Blameless Post-Mortem'?",
+        "o": [
+            "Analyzing an incident to find systemic causes without blaming individuals (Focus on Process not Person)",
+            "Firing people",
+            "Ignoring it",
+            "Blaming vendor"
+        ]
+    },
+    {
+        "q": "Why avoid blame in Post-Mortems?",
+        "o": [
+            "Blame encourages hiding mistakes; Blamelessness encourages honesty and learning",
+            "It is mean",
+            " HR rules",
+            "No reason"
+        ]
+    },
+    {
+        "q": "What is a 'Runbook' (Playbook)?",
+        "o": [
+            "Step-by-step guide for troubleshooting and resolving a specific alert",
+            "Novel",
+            "Code",
+            "Config"
+        ]
+    },
+    {
+        "q": "Best place for Runbook link?",
+        "o": [
+            "Directly in the alert notification (Clickable)",
+            "On a shared drive",
+            "In a binder",
+            "Nowhere"
+        ]
+    },
+    {
+        "q": "What is 'Game Day'?",
+        "o": [
+            "Scheduled time to practice incident response (Simulated outage) to test people and process",
+            "Sports",
+            "Fun day",
+            "Coding day"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Engineering'?",
+        "o": [
+            "Proactively injecting failure (kill pods, add latency) to test system resilience",
+            "Destruction",
+            "Hacking",
+            "Malware"
+        ]
+    },
+    {
+        "q": "Chaos Monkey does what?",
+        "o": [
+            "Randomly terminates instances in production to ensure auto-scaling handles it",
+            "Eats bananas",
+            "Writes code",
+            "Fixes bugs"
+        ]
+    },
+    {
+        "q": "Alerting for Chaos Engineering?",
+        "o": [
+            "You SHOULD receive alerts during chaos experiments (Verifies your monitoring works)",
+            "Silence alerts",
+            "Ignore alerts",
+            "Disable monitoring"
+        ]
+    },
+    {
+        "q": "What is 'Mean Time Between Failures' (MTBF)?",
+        "o": [
+            "Average time the system runs correctly between outages (Measure of Reliability)",
+            "Downtime",
+            "Repair time",
+            "Lag"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Planning' alert?",
+        "o": [
+            "Alerting when resource usage trend indicates exhaustion in X days (Proactive)",
+            "Reactive",
+            "Instant",
+            "Too late"
+        ]
+    },
+    {
+        "q": "What is 'Business Metric' monitoring?",
+        "o": [
+            "Monitoring Revenue, Orders/Sec, Signups (Ultimate measure of health)",
+            "CPU/RAM",
+            "Network",
+            "Disk"
+        ]
+    },
+    {
+        "q": "Why monitor Business Metrics?",
+        "o": [
+            "Technical metrics can be green (CPU OK) while users can't checkout (Business Down)",
+            "No reason",
+            "Too hard",
+            "Manager job"
+        ]
+    },
+    {
+        "q": "Example of Business Alert?",
+        "o": [
+            "Order Rate dropped by 50% compared to same time last week",
+            "CPU < 5%",
+            "Disk free",
+            "Ping OK"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Transaction'?",
+        "o": [
+            "Script simulating a user flow (Login -> Add to Cart -> Checkout) running periodically",
+            "Unit test",
+            "Integration test",
+            "Manual test"
+        ]
+    },
+    {
+        "q": "Benefit of Synthetics?",
+        "o": [
+            "Detects issues even when traffic is low (e.g. 3 AM) and tests full stack",
+            "Performance",
+            "Cost",
+            "Simplicity"
+        ]
+    },
+    {
+        "q": "What is 'Canary Deployment' alert?",
+        "o": [
+            "Alerting if the Canary version has higher error rate/latency than Baseline",
+            "Bird died",
+            "Deploy fail",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Blue/Green Deployment' alert?",
+        "o": [
+            "Monitoring the new (Green) environment before switching traffic",
+            "Color blind",
+            "Deployment",
+            "Rollback"
+        ]
+    },
+    {
+        "q": " What is 'Observability' vs 'Monitoring'?",
+        "o": [
+            "Monitoring tells you system is broken; Observability tells you WHY (High cardinality, context)",
+            "Same",
+            "Opposite",
+            "Marketing"
+        ]
+    },
+    {
+        "q": "The 'Three Pillars' of Observability?",
+        "o": [
+            "Metrics, Logs, Traces",
+            "CPU, RAM, Disk",
+            "Code, DB, Network",
+            "Dev, Ops, QA"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Tracing'?",
+        "o": [
+            "Tracking a request as it propagates across microservices (Latency per hop)",
+            "Logging",
+            "Graphing",
+            "Alerting"
+        ]
+    },
+    {
+        "q": "How to alert on Traces?",
+        "o": [
+            "Alert on 'Span Duration' > 2s or 'Error Tag' = true for critical services",
+            "Count traces",
+            "Delete traces",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Span' in tracing?",
+        "o": [
+            "A single operation within a trace (e.g. DB Query, HTTP Request)",
+            "Bridge",
+            "Time",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Trace ID'?",
+        "o": [
+            "Unique identifier propagated through all services to stitch logs and spans together",
+            "User ID",
+            "Session ID",
+            "Process ID"
+        ]
+    },
+    {
+        "q": "What is 'Sampling' in tracing?",
+        "o": [
+            "Recording only a percentage (e.g. 1%) of requests to save storage/cost",
+            "Testing",
+            "Eeating",
+            "Listening"
+        ]
+    },
+    {
+        "q": "Risk of low Sampling rate?",
+        "o": [
+            "Might miss the trace for a rare error condition",
+            "Too much data",
+            "High cost",
+            "Slow UI"
+        ]
+    },
+    {
+        "q": "What is 'Tail-Based Sampling'?",
+        "o": [
+            "Deciding to keep a trace AFTER seeing it finish (Keep if error/slow, discard if fast)",
+            "Head based",
+            "Random",
+            "Fixed"
+        ]
+    },
+    {
+        "q": "What is 'Head-Based Sampling'?",
+        "o": [
+            "Deciding to keep a trace at the start (Random %)",
+            "Tail based",
+            "Smart",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Context Propagation'?",
+        "o": [
+            "Passing TraceID/SpanID in HTTP Headers (e.g. W3C Traceparent) between services",
+            "Networking",
+            "Routing",
+            "Copying"
+        ]
+    },
+    {
+        "q": "What is 'OpenTelemetry' (OTel)?",
+        "o": [
+            "Standard framework for collecting Metrics, Logs, and Traces (Vendor neutral)",
+            "Tool",
+            "Vendor",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'OTel Collector'?",
+        "o": [
+            "Proxy that receives telemetry, processes it, and exports to backends (Prometheus, Jaeger)",
+            "Database",
+            "Agent",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Jaeger'?",
+        "o": [
+            "Open source distributed tracing system (UI + Backend)",
+            "Metrics",
+            "Logs",
+            "Alerts"
+        ]
+    },
+    {
+        "q": "What is 'Zipkin'?",
+        "o": [
+            "Another open source distributed tracing system",
+            "Lighter",
+            "Coat",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Tempo' (Grafana)?",
+        "o": [
+            "High-scale distributed tracing backend from Grafana Labs",
+            "Music",
+            "Time",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Service Map' (Topology)?",
+        "o": [
+            "Visual graph showing how services call each other (derived from Traces)",
+            "World map",
+            "Road map",
+            "Code map"
+        ]
+    },
+    {
+        "q": "How to use Service Map for alerts?",
+        "o": [
+            "Visualize impact radius (If Svc A is red, Svc B/C might be affected)",
+            "Ignore it",
+            "Draw it",
+            "Print it"
+        ]
+    },
+    {
+        "q": "What is 'RED Method'?",
+        "o": [
+            "Monitoring Rate, Errors, Duration (Standard for request-driven services)",
+            "Color",
+            "STOP",
+            "Blue"
+        ]
+    },
+    {
+        "q": "What is 'USE Method'?",
+        "o": [
+            "Monitoring Utilization, Saturation, Errors (Standard for Resources/Hardware)",
+            "Tools",
+            "Consume",
+            "Help"
+        ]
+    },
+    {
+        "q": "What is 'Saturation' in USE?",
+        "o": [
+            "Degree to which extra work is queued (e.g. Load Average > CPU Count)",
+            "Full",
+            "Wet",
+            "Color"
+        ]
+    },
+    {
+        "q": "What is 'Utilization' in USE?",
+        "o": [
+            "% of time resource is busy (e.g. CPU percent)",
+            "Usage",
+            "Idle",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is 'Four Golden Signals' (Google SRE)?",
+        "o": [
+            "Latency, Traffic, Errors, Saturation",
+            "RED + USE",
+            "Metrics, Logs, Traces",
+            "North, South, East, West"
+        ]
+    },
+    {
+        "q": "Why distinguish 'Traffic' in Golden Signals?",
+        "o": [
+            "High traffic is good (growth) or bad (DDoS); zero traffic is very bad",
+            "Roads",
+            "Cars",
+            "People"
+        ]
+    },
+    {
+        "q": "What is 'Alert Fatigue'?",
+        "o": [
+            "Desensitization to alerts due to high volume of noise",
+            "Sleepy",
+            "Tired",
+            "Bored"
+        ]
+    },
+    {
+        "q": "Sign of Alert Fatigue?",
+        "o": [
+            "Ignoring pages, auto-resolving without checking, creating email filters",
+            "Working hard",
+            "Fixing bugs",
+            "Smiling"
+        ]
+    },
+    {
+        "q": "How to measure On-Call Health?",
+        "o": [
+            "Alerts per shift, Pages per night (Should be < 2), Hours sleep interrupted",
+            "Revenue",
+            "Code written",
+            "Lines of code"
+        ]
+    },
+    {
+        "q": "What is 'Toil'?",
+        "o": [
+            "Manual, repetitive, automatable work (e.g. manually restarting servers)",
+            "Hard work",
+            "Fun work",
+            "Creative work"
+        ]
+    },
+    {
+        "q": "SRE goal regarding Toil?",
+        "o": [
+            "Reduce Toil to < 50% of time; spend rest on Engineering (Automation)",
+            "Increase Toil",
+            "Ignore Toil",
+            "Love Toil"
+        ]
+    },
+    {
+        "q": "How does Alerting relate to Toil?",
+        "o": [
+            "Bad alerts (non-actionable) create Toil; Automating responses reduces Toil",
+            "No relation",
+            "Increases fun",
+            "Prevents work"
+        ]
+    },
+    {
+        "q": "What is 'Availability'?",
+        "o": [
+            "Percentage of time system is operational (Uptime)",
+            "Free time",
+            "Meeting",
+            "Status"
+        ]
+    },
+    {
+        "q": "Formula for Availability?",
+        "o": [
+            "Uptime / (Uptime + Downtime)",
+            "Downtime / Uptime",
+            "Uptime * 100",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Reliability'?",
+        "o": [
+            "Probability that system will function correctly for a specific period",
+            "Trust",
+            "Friend",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Availability vs Reliability?",
+        "o": [
+            "Availability = Is it up?; Reliability = Does it work without error?",
+            "Same",
+            "Opposite",
+            "Different words"
+        ]
+    },
+    {
+        "q": "What are 'Nines' (e.g. 5 Nines)?",
+        "o": [
+            "99.999% Availability (~5 mins downtime per year)",
+            "Number 9",
+            "Baseball",
+            "Cats"
+        ]
+    },
+    {
+        "q": "How much downtime is 3 Nines (99.9%)?",
+        "o": [
+            "~43 minutes per month (~8.7 hours per year)",
+            "1 minute",
+            "1 day",
+            "1 week"
+        ]
+    },
+    {
+        "q": "How much downtime is 4 Nines (99.99%)?",
+        "o": [
+            "~4 minutes per month (~52 mins per year)",
+            "1 hour",
+            "1 day",
+            "1 second"
+        ]
+    },
+    {
+        "q": "What is 'Resilience'?",
+        "o": [
+            "Ability to recover from failures (Self-healing, Fallback)",
+            "Strength",
+            "Hardness",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation'?",
+        "o": [
+            "Continuing to offer limited functionality when a component fails (e.g. show cached content)",
+            "Crashing",
+            "Stopping",
+            "Burning"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' pattern?",
+        "o": [
+            "Stopping calls to a failing service to prevent cascading failure",
+            "Electricity",
+            "Switch",
+            "Light"
+        ]
+    },
+    {
+        "q": "Circuit Breaker Alert?",
+        "o": [
+            "Alert when Circuit 'Opens' (Dependency is down)",
+            "Power out",
+            "Light off",
+            "Fuse blown"
+        ]
+    },
+    {
+        "q": "What is 'Retry Storm'?",
+        "o": [
+            "Clients retrying failed requests simultaneously, crushing the recovering server",
+            "Weather",
+            "Thunder",
+            "Rain"
+        ]
+    },
+    {
+        "q": "How to prevent Retry Storm?",
+        "o": [
+            "Exponential Backoff and Jitter (Randomized delay)",
+            "Retry faster",
+            "Retry more",
+            "Retry harder"
+        ]
+    },
+    {
+        "q": "What is 'Load Shedding'?",
+        "o": [
+            "Intentionally dropping excess traffic to save the service from total collapse",
+            "Weight loss",
+            "Trash",
+            "Cleaning"
+        ]
+    },
+    {
+        "q": "Alert for Load Shedding?",
+        "o": [
+            "Critical Alert: We are rejecting users to survive (Capacity reached)",
+            "Info",
+            "Warning",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'Noisy Neighbor'?",
+        "o": [
+            "One tenant continually consuming excessive resources, impacting others",
+            "Loud music",
+            "Party",
+            "Dog barking"
+        ]
+    },
+    {
+        "q": "Alert for Noisy Neighbor?",
+        "o": [
+            "Alert on per-tenant usage spikes (Throttle them)",
+            "Call police",
+            "Move out",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Cold Start' (Serverless)?",
+        "o": [
+            "Latency incurred when a Lambda function starts up for the first time",
+            "Winter",
+            "Car",
+            "Engine"
+        ]
+    },
+    {
+        "q": "Alerting on Cold Starts?",
+        "o": [
+            "Monitor 'InitDuration'; Alert if affecting P99 latency significantly",
+            "Temperature",
+            "Heater",
+            "Cooler"
+        ]
+    },
+    {
+        "q": "What is 'Provisioned Concurrency'?",
+        "o": [
+            "Keeping Lambdas warm to avoid Cold Starts (Cost vs Latency trade-off)",
+            "Money",
+            "Speed",
+            "Heat"
+        ]
+    },
+    {
+        "q": "What is 'Resource Starvation'?",
+        "o": [
+            "Process unable to get CPU/RAM because others are hogging it",
+            "Hunger",
+            "Food",
+            "Diet"
+        ]
+    },
+    {
+        "q": "What is 'Deadlock'?",
+        "o": [
+            "Two processes waiting for each other to release a lock (Stuck forever)",
+            "Lock key",
+            "Door",
+            "Game"
+        ]
+    },
+    {
+        "q": "How to detect Deadlock?",
+        "o": [
+            "Process monitoring (Thread dump, Wait analysis) or Database Lock metrics",
+            "Key",
+            "Pick",
+            "Force"
+        ]
+    },
+    {
+        "q": "What is 'Zombie Process'?",
+        "o": [
+            "Process that has completed execution but still has an entry in the process table",
+            "Undead",
+            "Monster",
+            "Game"
+        ]
+    },
+    {
+        "q": "Alert on Zombie Processes?",
+        "o": [
+            "If count > threshold (indicates parent process bug reaping children)",
+            "Run",
+            "Hide",
+            "Shoot"
+        ]
+    },
+    {
+        "q": "What is 'Inode usage' alert?",
+        "o": [
+            "Filesystem full not by size, but by number of files (Many small files)",
+            "Node",
+            "Tree",
+            "Graph"
+        ]
+    },
+    {
+        "q": "Why monitor Inodes?",
+        "o": [
+            "Disk can be 50% free space but 100% Inodes used = No new files allowed",
+            "No reason",
+            "Space",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Clock Drift' alert?",
+        "o": [
+            "System time deviation from NTP server (Breaks Auth, Logs, Distributed Consensus)",
+            "Time travel",
+            "Watch",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Entropy' alert?",
+        "o": [
+            "Low entropy pool (randomness) can block crypto operations/SSL generation",
+            "Physics",
+            "Chaos",
+            "Heat"
+        ]
+    },
+    {
+        "q": "What is 'File Descriptor' alert?",
+        "o": [
+            "Process reaching limit of open files/sockets (ulimit)",
+            "File name",
+            "Folder",
+            "Icon"
+        ]
+    },
+    {
+        "q": "Symptom of File Descriptor exhaustion?",
+        "o": [
+            "'Too many open files' error; Connectivity fails",
+            "Disk full",
+            "CPU high",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Context Switching' alert?",
+        "o": [
+            "High rate indicates CPU thrashing between threads (Inefficient)",
+            "Change topic",
+            "Multitasking",
+            "Focus"
+        ]
+    },
+    {
+        "q": "What is 'Page Fault' alert?",
+        "o": [
+            "Major page faults indicate RAM exhaustion/Swapping (Performance killer)",
+            "Book",
+            "Paper",
+            "Read"
+        ]
+    },
+    {
+        "q": "What is 'TCP Retransmission' alert?",
+        "o": [
+            "Indicates network packet loss or congestion",
+            "Send again",
+            "Copy",
+            "Fax"
+        ]
+    },
+    {
+        "q": "What is 'DNS Latency' alert?",
+        "o": [
+            "Slow name resolution slows down every connection initiation",
+            "Name",
+            "Phone",
+            "Address"
+        ]
+    },
+    {
+        "q": "What is 'Database Connection Pool' alert?",
+        "o": [
+            "Pool exhausted (Wait time > 0); indicates need for scaling or fix leak",
+            "Swimming",
+            "Water",
+            "Summer"
+        ]
+    },
+    {
+        "q": "What is 'Thread Pool' alert?",
+        "o": [
+            "Active threads at max; tasks queueing/rejected",
+            "Sewing",
+            "Needle",
+            "Fabric"
+        ]
+    },
+    {
+        "q": "What is 'Garbage Collection' (GC) alert?",
+        "o": [
+            "Long 'Stop-the-world' pauses impacting latency (Java/Go/Node)",
+            "Trash",
+            "Recycle",
+            "Truck"
+        ]
+    },
+    {
+        "q": "What is 'Heap Memory' alert?",
+        "o": [
+            "Heap usage approaching max (Risk of OOM)",
+            "Pile",
+            "Stack",
+            "Queue"
+        ]
+    },
+    {
+        "q": "What is 'Leaked Goroutine/Thread' alert?",
+        "o": [
+            "Steady increase in routine count without drop (Memory leak)",
+            "Leak",
+            "Drip",
+            "Water"
+        ]
+    },
+    {
+        "q": "What is 'Event Loop Lag' (Node.js)?",
+        "o": [
+            "Blocked loop means application is unresponsive",
+            "Circle",
+            "Spin",
+            "Round"
+        ]
+    },
+    {
+        "q": "What is 'Dependency Health'?",
+        "o": [
+            "Monitoring the health of APIs/Databases you depend on",
+            "Doctor",
+            "Nurse",
+            "Hospital"
+        ]
+    },
+    {
+        "q": "What is 'Certificate Pinning' alert?",
+        "o": [
+            "Alert if the server certificate changes unexpectedly (MITM attack)",
+            "Pin",
+            "Needle",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'Version Drift'?",
+        "o": [
+            "Different versions of code running in production simultaneously (after partial deploy)",
+            "Car drift",
+            "Boat",
+            "Wind"
+        ]
+    },
+    {
+        "q": "What is 'Config Drift'?",
+        "o": [
+            "Server configuration deviating from the defined IaC state (Manual changes)",
+            "Snow drift",
+            "Sand",
+            "Desert"
+        ]
+    },
+    {
+        "q": "How to alert on Config Drift?",
+        "o": [
+            "Tools like Puppet/Chef/Terraform report changes; alert on 'Out of Sync'",
+            "Manual check",
+            "Visual check",
+            "Guess"
+        ]
+    },
+    {
+        "q": "What is 'Immutable Infrastructure'?",
+        "o": [
+            "Never modifying servers; always replacing them with new images (Solves drift)",
+            "Statue",
+            "Rock",
+            "Stone"
+        ]
+    },
+    {
+        "q": "What is 'Golden Image'?",
+        "o": [
+            "Pre-configured, secured OS image used for all deployments",
+            "Statue",
+            "Picture",
+            "Photo"
+        ]
+    },
+    {
+        "q": "What is 'Compliance Alert'?",
+        "o": [
+            "Resource violates policy (e.g. S3 Bucket Public, Encrypt=False)",
+            "Law",
+            "Rule",
+            "Police"
+        ]
+    },
+    {
+        "q": "What is 'Budget Burn' forecast?",
+        "o": [
+            "Predicting end-of-month bill based on current spend rate",
+            "Fire",
+            "Heat",
+            "Warmth"
+        ]
+    },
+    {
+        "q": "What is 'Unused Resource' alert?",
+        "o": [
+            "Finding Idle EC2s, unattached EBS volumes (Cost savings)",
+            "Trash",
+            "Waste",
+            "Lost"
+        ]
+    },
+    {
+        "q": "What is 'Right Sizing'?",
+        "o": [
+            "Matching instance type to actual workload (Moving from large to medium)",
+            "Clothing",
+            "Fit",
+            "Shoes"
+        ]
+    },
+    {
+        "q": "What is 'Spot Instance' Interruption alert?",
+        "o": [
+            "2-minute warning before AWS reclaims Spot instance (Need to drain/checkpoint)",
+            "Spot cleaning",
+            "Dog",
+            "Dot"
+        ]
+    },
+    {
+        "q": "What is 'Burst Balance' alert (EBS)?",
+        "o": [
+            "Credits for bursting IOPS running low (Risk of performance cliff)",
+            "Balloon",
+            "Pop",
+            "Explosion"
+        ]
+    },
+    {
+        "q": "What is 'CPU Steal' alert?",
+        "o": [
+            "Hypervisor taking cycles from VM (Noisy Neighbor on Host)",
+            "Thief",
+            "Robber",
+            "Cop"
+        ]
+    },
+    {
+        "q": "What is 'Keepalive'?",
+        "o": [
+            "Periodic signal to maintain connection or prove liveliness",
+            "Life",
+            "CPR",
+            "Health"
+        ]
+    },
+    {
+        "q": "What is 'Jitter'?",
+        "o": [
+            "Variance in latency (Inconsistent performance)",
+            "Coffee",
+            "Shake",
+            "Dance"
+        ]
+    },
+    {
+        "q": "What is 'Throughput'?",
+        "o": [
+            "Amount of data moved successfully in a given time period",
+            "Door",
+            "Gate",
+            "Open"
+        ]
+    },
+    {
+        "q": "What is 'Goodput'?",
+        "o": [
+            "Application-level throughput (excluding retransmissions/overhead)",
+            "Badput",
+            "Output",
+            "Input"
+        ]
+    },
+    {
+        "q": "What is 'Head-of-Line Blocking'?",
+        "o": [
+            "First item in queue processing slowly blocks all subsequent items",
+            "Line",
+            "Queue",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Backpressure'?",
+        "o": [
+            "Signaling upstream to slow down because downstream is overwhelmed",
+            "Massage",
+            "Push",
+            "Pull"
+        ]
+    },
+    {
+        "q": "Alerting on Backpressure?",
+        "o": [
+            "Queue size growing ?? consumer lagging producer",
+            "Pushing",
+            "Pulling",
+            "Lifting"
+        ]
+    },
+    {
+        "q": "What is 'Poison Message'?",
+        "o": [
+            "Message that crashes the consumer, returns to queue, and crashes it again (Loop)",
+            "Food",
+            "Drink",
+            "Snake"
+        ]
+    },
+    {
+        "q": "How to handle Poison Message?",
+        "o": [
+            "Dead Letter Queue (DLQ) after X retries; Alert on DLQ size > 0",
+            "Eat it",
+            "Drink it",
+            "Ignore it"
+        ]
+    },
+    {
+        "q": "What is 'Idempotency'?",
+        "o": [
+            "Operation can be applied multiple times without changing result beyond initial application",
+            "Math",
+            "Logic",
+            "Code"
+        ]
+    },
+    {
+        "q": "Why is Idempotency important for Retries?",
+        "o": [
+            "Prevents duplicate orders/charges when network fails during ack",
+            "Speed",
+            "Cost",
+            "Looks good"
+        ]
+    },
+    {
+        "q": "What is 'CAP Theorem' relevance?",
+        "o": [
+            "Trade-off between Consistency and Availability during Partition (Network Failure)",
+            "Hat",
+            "Cap",
+            "Head"
+        ]
+    },
+    {
+        "q": "Alerting in AP system (Eventual Consistency)?",
+        "o": [
+            "Alert if 'Replication Lag' fits acceptable bounds (Consistency check)",
+            "Immediate",
+            "Strict",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SLA' (Service Level Agreement)?",
+        "o": [
+            "Contractual commitment to customer (e.g. 99.9% uptime or refund)",
+            "Legal",
+            "Paper",
+            "Sign"
+        ]
+    },
+    {
+        "q": "What is 'SLO' (Service Level Objective)?",
+        "o": [
+            "Internal target for reliability (Stricter than SLA to provide buffer)",
+            "Goal",
+            "Aim",
+            "Target"
+        ]
+    },
+    {
+        "q": "What is 'SLI' (Service Level Indicator)?",
+        "o": [
+            "The actual metric used to measure performance against SLO (e.g. Success Rate)",
+            "Meter",
+            "Gauge",
+            "Ruler"
+        ]
+    },
+    {
+        "q": "Relationship: SLI, SLO, SLA?",
+        "o": [
+            "SLI is the metric; SLO is the target (99.9%); SLA is the contract (99%)",
+            "Same",
+            "Different",
+            "Random"
+        ]
+    },
+    {
+        "q": "What happens if SLO is violated?",
+        "o": [
+            "Internal review, freeze features, focus on stability (Error Budget policy)",
+            "Sued",
+            "Fired",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What happens if SLA is violated?",
+        "o": [
+            "Financial penalty / Credit to customer",
+            "Nothing",
+            "High five",
+            "Party"
+        ]
+    },
+    {
+        "q": "What is 'Error Budget'?",
+        "o": [
+            "Allowed amount of unreliability (100% - SLO); spend it on innovation/speed",
+            "Money",
+            "Cash",
+            "Bank"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Window' impact on SLO?",
+        "o": [
+            "Usually excluded from SLO calculation (if planned and communicated)",
+            " Included",
+            "Doubled",
+            "Ignored"
+        ]
+    },
+    {
+        "q": "What is 'Black Swan' event?",
+        "o": [
+            "Rare, unpredictable, high-impact event",
+            "Bird",
+            "Animal",
+            "Lake"
+        ]
+    },
+    {
+        "q": "What is 'Bus Factor'?",
+        "o": [
+            "Number of team members that can disappear before project stalls (Knowledge silo)",
+            "Vehicle",
+            "Transport",
+            "Drive"
+        ]
+    },
+    {
+        "q": "Alerting and Bus Factor?",
+        "o": [
+            "Runbooks reduce Bus Factor (Anyone can fix it, not just 'Dave')",
+            "Bus schedule",
+            "Ticket",
+            "Route"
+        ]
+    },
+    {
+        "q": "What is 'Change Management'?",
+        "o": [
+            "Process/Gatekeeping for making changes to production (Approval, CAB)",
+            "Coins",
+            "Money",
+            "Bank"
+        ]
+    },
+    {
+        "q": "Modern Change Management (DevOps)?",
+        "o": [
+            "Automated testing/pipelines replace manual CAB approvals for standard changes",
+            "Slow",
+            "Hard",
+            "Paper"
+        ]
+    },
+    {
+        "q": "What is 'Dark Launch'?",
+        "o": [
+            "Deploying features to prod but hiding them from users (Feature Flags)",
+            "Night",
+            "Space",
+            "Moon"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag'?",
+        "o": [
+            "Toggle in code to enable/disable feature at runtime (Instant rollback)",
+            "Banner",
+            "Flag",
+            "Pole"
+        ]
+    },
+    {
+        "q": "Alerting on Feature Flags?",
+        "o": [
+            "Monitor error rates segmented by 'Flag On' vs 'Flag Off'",
+            "Ignore",
+            "Delete",
+            "Hide"
+        ]
+    },
+    {
+        "q": "What is 'A/B Testing'?",
+        "o": [
+            "Comparing two versions (A and B) to see which performs better (Business metric)",
+            "Exam",
+            "School",
+            "Grade"
+        ]
+    },
+    {
+        "q": "What is 'Load Testing'?",
+        "o": [
+            "Simulating expected peak traffic to verify system handles it",
+            "Weight",
+            "Gym",
+            "Lift"
+        ]
+    },
+    {
+        "q": "What is 'Stress Testing'?",
+        "o": [
+            "Pushing system BEYOND limits to see how it fails (Graceful vs Crash)",
+            "Anxiety",
+            "Work",
+            "Job"
+        ]
+    },
+    {
+        "q": "What is 'Soak Testing'?",
+        "o": [
+            "Running load for LONG duration to find leaks/slow degradation",
+            "Water",
+            "Bath",
+            "Rain"
+        ]
+    },
+    {
+        "q": "What is 'Spike Testing'?",
+        "o": [
+            "Sudden extreme burst of load to test scaling speed",
+            "Nail",
+            "Sharp",
+            "Point"
+        ]
+    },
+    {
+        "q": "What is 'Scalability'?",
+        "o": [
+            "Ability to handle increased load by adding resources",
+            "Weight",
+            "Size",
+            "Height"
+        ]
+    },
+    {
+        "q": "What is 'Elasticity'?",
+        "o": [
+            "Ability to scale UP and DOWN automatically to match demand",
+            "Rubber",
+            "Band",
+            "Stretch"
+        ]
+    },
+    {
+        "q": "Vertical Scaling vs Horizontal Scaling?",
+        "o": [
+            "Vertical = Bigger Machine (Up); Horizontal = More Machines (Out)",
+            "Same",
+            "Reverse",
+            "Sideways"
+        ]
+    },
+    {
+        "q": "Which scaling is harder for stateful Databases?",
+        "o": [
+            "Horizontal (Sharding/Replication is complex)",
+            "Vertical",
+            "None",
+            "Both easy"
+        ]
+    },
+    {
+        "q": "What is 'Sharding'?",
+        "o": [
+            "Partitioning data across multiple servers (e.g. Users A-M on DB1, N-Z on DB2)",
+            "Glass",
+            "Breaking",
+            "Cutting"
+        ]
+    },
+    {
+        "q": "Alerting on Shards?",
+        "o": [
+            "Monitor 'Data Skew' (One shard full, others empty)",
+            "Ignore",
+            "Glue",
+            "Fix"
+        ]
+    },
+    {
+        "q": "What is 'Caching' alert?",
+        "o": [
+            "Monitor 'Cache Hit Rate' (Low hit rate = DB hammer)",
+            "Money",
+            "Bank",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Cache Stampede'?",
+        "o": [
+            "Many items expire at once; massive request spike to DB to regenerate cache",
+            "Run",
+            "Animal",
+            "Zoo"
+        ]
+    },
+    {
+        "q": "How to prevent Cache Stampede?",
+        "o": [
+            "Jitter expiration times (Randomize TTL)",
+            "Stop cache",
+            "Delete cache",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Thundering Herd'?",
+        "o": [
+            "Many processes waking up at once to handle one event (Resource contention)",
+            "Noise",
+            "Storm",
+            "Rain"
+        ]
+    },
+    {
+        "q": "What is 'Exponential Backoff'?",
+        "o": [
+            "Wait time doubles after each failure (1s, 2s, 4s, 8s)",
+            "Linear",
+            "Constant",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Grace Period'?",
+        "o": [
+            "Time allowed for startup before health checks begin",
+            "Dance",
+            "Style",
+            "Move"
+        ]
+    },
+    {
+        "q": "What is 'Draining' (Connection Draining)?",
+        "o": [
+            "Allowing in-flight requests to complete before terminating instance",
+            "Water",
+            "Pipe",
+            "Sink"
+        ]
+    },
+    {
+        "q": "What is 'Single Point of Failure' (SPOF)?",
+        "o": [
+            "Component whose failure causes entire system to fail (No redundancy)",
+            "Key",
+            "Lock",
+            "Door"
+        ]
+    },
+    {
+        "q": "How to identify SPOF?",
+        "o": [
+            "Architecture review, Chaos testing (What if I unplug this?)",
+            "Looking",
+            "Guessing",
+            "Hoping"
+        ]
+    },
+    {
+        "q": "Final Goal of Alerting?",
+        "o": [
+            "High Availability, Happy Users, Happy Engineers (Sleep well)",
+            "Graphs",
+            "Logs",
+            "Noise"
+        ]
+    },
+    {
+        "q": "What is 'pagerduty_config_url' in Alertmanager?",
+        "o": [
+            "Field allowing a link to the PagerDuty service configuration for easier access",
+            "API key",
+            "Password",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'send_resolved' in Alertmanager Receiver?",
+        "o": [
+            "Boolean flag to enable/disable sending notifications when an alert is resolved (Default: true)",
+            "Delete alert",
+            "Ignore",
+            "Archive"
+        ]
+    },
+    {
+        "q": "PromQL: 'delta()' vs 'idelta()'?",
+        "o": [
+            "delta() is difference over range; idelta() is difference between last 2 samples (Instant)",
+            "Same",
+            "Opposite",
+            "Random"
+        ]
+    },
+    {
+        "q": "When to use 'idelta()' in alerts?",
+        "o": [
+            "Rarely; it's noisy. Use rate() for alerts to smooth out spikes",
+            "Always",
+            "Never",
+            "For counters"
+        ]
+    },
+    {
+        "q": "What is 'deriv()' function?",
+        "o": [
+            "Calculates per-second derivative of time series (slope) using regression",
+            "Sum",
+            "Count",
+            "Avg"
+        ]
+    },
+    {
+        "q": "What is 'topk(5, metric)' alert?",
+        "o": [
+            "Alerting on the top 5 consumers of a resource (e.g. Top 5 CPU nodes)",
+            "Bottom 5",
+            "Average",
+            "Total"
+        ]
+    },
+    {
+        "q": "What is 'bottomk'?",
+        "o": [
+            "Returns smallest 5 elements",
+            "Largest",
+            "Average",
+            "Median"
+        ]
+    },
+    {
+        "q": "What is 'count_values'?",
+        "o": [
+            "Counts number of times each value occurs (building frequency histogram)",
+            "Sum",
+            "Total",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'Alert Persistence'?",
+        "o": [
+            "Storing alert history (Trigger/Resolve times) in DB for reporting/analysis",
+            "Retrying",
+            "Deleting",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "What is 'Flapping Suppression' window?",
+        "o": [
+            "Time period during which rapid state changes are ignored or delayed",
+            "Forever",
+            "Never",
+            "Instant"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty Maintenance Mode' vs 'Silence'?",
+        "o": [
+            "Maintenance Mode suppresses ALL alerts for a service; Silence acts on specific alerts",
+            "Same",
+            "Opposite",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is 'Impact-Based' Alerting?",
+        "o": [
+            "Alerting based on number of users affected (Impact) rather than raw metric value",
+            "CPU based",
+            "RAM based",
+            "Disk based"
+        ]
+    },
+    {
+        "q": "What is 'Symptom-Based' Alerting?",
+        "o": [
+            "Alerting on 'High Latency' (Symptom) instead of 'High CPU' (Cause) - Better for users",
+            "Cause based",
+            "Log based",
+            "Trace based"
+        ]
+    },
+    {
+        "q": "What is 'Cause-Based' Alerting?",
+        "o": [
+            "Alerting on 'High CPU' - Useful for investigation but can be noisy if user validly impacted",
+            "Symptom based",
+            "Result based",
+            "Effect based"
+        ]
+    },
+    {
+        "q": "Golden Rule: Symptom vs Cause alerts?",
+        "o": [
+            "Page on Symptoms (User Pain); Log/Ticket on Causes (Diagnostic info)",
+            "Page on everything",
+            "Page on nothing",
+            "Log everything"
+        ]
+    },
+    {
+        "q": "What is 'Alert Documentation'?",
+        "o": [
+            "Wiki/Readme explaining what an alert means and how to fix it (Critical context)",
+            "Code",
+            "Config",
+            "Log"
+        ]
+    }
+]

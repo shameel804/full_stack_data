@@ -1,0 +1,4948 @@
+[
+    {
+        "q": "What is Supertest primarily used for?",
+        "o": [
+            "Testing HTTP assertions for Node.js servers (like Express)",
+            "Testing unit logic",
+            "Front-end UI testing",
+            "Database load testing"
+        ]
+    },
+    {
+        "q": "Which library does Supertest build upon for its API?",
+        "o": [
+            "Superagent",
+            "Axios",
+            "Request",
+            "Fetch"
+        ]
+    },
+    {
+        "q": "How do you install Supertest via npm?",
+        "o": [
+            "npm install supertest --save-dev",
+            "npm install supertest",
+            "npm get supertest",
+            "npm i -g supertest"
+        ]
+    },
+    {
+        "q": "What is the typical way to require Supertest in a test file?",
+        "o": [
+            "const request = require('supertest');",
+            "const supertest = require('test');",
+            "import { test } from 'supertest';",
+            "require('supertest').init();"
+        ]
+    },
+    {
+        "q": "If you have an Express app instance 'app', how do you start a request?",
+        "o": [
+            "request(app)",
+            "supertest.start(app)",
+            "app.test()",
+            "new request(app)"
+        ]
+    },
+    {
+        "q": "How do you assert a status code of 200?",
+        "o": [
+            ".expect(200)",
+            ".assert(200)",
+            ".status(200)",
+            ".check(200)"
+        ]
+    },
+    {
+        "q": "How do you make a GET request to the '/users' endpoint?",
+        "o": [
+            "request(app).get('/users')",
+            "request(app).fetch('/users')",
+            "request(app).send('GET', '/users')",
+            "request(app).users()"
+        ]
+    },
+    {
+        "q": "How do you end a test and handle errors in a callback style?",
+        "o": [
+            ".end(function(err, res) { if (err) throw err; });",
+            ".finish()",
+            ".done()",
+            ".complete()"
+        ]
+    },
+    {
+        "q": "When using Mocha, how can you simply pass the 'done' callback to .expect?",
+        "o": [
+            ".expect(200, done)",
+            ".expect(200).done()",
+            ".expect(200, function() { done(); })",
+            ".expect(200).then(done)"
+        ]
+    },
+    {
+        "q": "How do you assert that a specific header exists?",
+        "o": [
+            ".expect('Content-Type', /json/)",
+            ".header('Content-Type')",
+            ".assertHeader('Content-Type')",
+            ".check('Content-Type')"
+        ]
+    },
+    {
+        "q": "How do you assert the response body deep equality?",
+        "o": [
+            ".expect({ id: 1, name: 'John' })",
+            ".body.equal({ id: 1, name: 'John' })",
+            ".expectBody({ id: 1, name: 'John' })",
+            ".data({ id: 1, name: 'John' })"
+        ]
+    },
+    {
+        "q": "How do you send JSON data in a POST request?",
+        "o": [
+            ".send({ name: 'john' })",
+            ".body({ name: 'john' })",
+            ".write({ name: 'john' })",
+            ".json({ name: 'john' })"
+        ]
+    },
+    {
+        "q": "What is the default content-type when using .send() with an object?",
+        "o": [
+            "application/json",
+            "text/plain",
+            "application/x-www-form-urlencoded",
+            "multipart/form-data"
+        ]
+    },
+    {
+        "q": "How do you set a custom header in the request?",
+        "o": [
+            ".set('Authorization', 'token')",
+            ".header('Authorization', 'token')",
+            ".addHeader('Authorization', 'token')",
+            ".auth('token')"
+        ]
+    },
+    {
+        "q": "How do you assert that the response body contains a specific property?",
+        "o": [
+            ".expect(res => { if (!('id' in res.body)) throw new Error('missing id'); })",
+            ".expectBodyContains('id')",
+            ".has('id')",
+            ".contains('id')"
+        ]
+    },
+    {
+        "q": "Can you use standard assertions (like Chai) inside the .end callback?",
+        "o": [
+            "Yes, accessing res.body and throwing errors if assertions fail",
+            "No, only Supertest assertions allowed",
+            "Yes, but you must wrapping them in try/catch",
+            "No, callbacks are deprecated"
+        ]
+    },
+    {
+        "q": "Does Supertest start the server automatically?",
+        "o": [
+            "Yes, if passed an app instance, it creates a temporary server on an ephemeral port",
+            "No, you must always listen() manually first",
+            "Yes, always on port 3000",
+            "No, it requires an external running URL only"
+        ]
+    },
+    {
+        "q": "Can Supertest test a remote API URL?",
+        "o": [
+            "Yes, by passing the URL string instead of an app instance",
+            "No, only local apps",
+            "Only if it's localhost",
+            "Only HTTP, not HTTPS"
+        ]
+    },
+    {
+        "q": "How do you chain multiple assertions?",
+        "o": [
+            ".expect(200).expect('Content-Type', /json/)",
+            ".expect(200, 'Content-Type', /json/)",
+            ".assert(200).assert('json')",
+            ".check(200).check('json')"
+        ]
+    },
+    {
+        "q": "How do you verify a response property using a regular expression?",
+        "o": [
+            ".expect('Content-Type', /json/)",
+            ".expect('Content-Type', 'json*')",
+            ".regex('Content-Type', 'json')",
+            ".match('Content-Type', /json/)"
+        ]
+    },
+    {
+        "q": "How do you send form data (application/x-www-form-urlencoded)?",
+        "o": [
+            ".type('form').send({ key: 'val' })",
+            ".sendForm({ key: 'val' })",
+            ".form({ key: 'val' })",
+            ".body('key=val')"
+        ]
+    },
+    {
+        "q": "What method supports file uploads?",
+        "o": [
+            ".attach('fileField', 'path/to/file')",
+            ".upload('path/to/file')",
+            ".file('path/to/file')",
+            ".send('file')"
+        ]
+    },
+    {
+        "q": "How do you attach multiple files?",
+        "o": [
+            "Call .attach() multiple times",
+            ".attach(['file1', 'file2'])",
+            ".uploadAll()",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "How do you set the 'Accept' header?",
+        "o": [
+            ".set('Accept', 'application/json')",
+            ".accept('application/json')",
+            ".header('Accept', 'application/json')",
+            ".type('json')"
+        ]
+    },
+    {
+        "q": "How do you handle authentication via Basic Auth?",
+        "o": [
+            ".auth('user', 'pass')",
+            ".set('Authorization', 'Basic <encoded>')",
+            "Both .auth() method or setting header manually work",
+            ".login('user', 'pass')"
+        ]
+    },
+    {
+        "q": "What happens if you don't call .end() or await the request?",
+        "o": [
+            "The request is not sent",
+            "It runs in background",
+            "It throws an error",
+            "It hangs forever"
+        ]
+    },
+    {
+        "q": "How do use promises with Supertest?",
+        "o": [
+            "request(app).get('/').expect(200).then(response => ...)",
+            "request(app).get('/').expect(200).promise()",
+            "It doesn't support promises",
+            "use .toPromise()"
+        ]
+    },
+    {
+        "q": "How do you use async/await with Supertest in a modern test runner?",
+        "o": [
+            "await request(app).get('/').expect(200);",
+            "async request(app).get('/');",
+            "await request(app).get('/').done();",
+            "request(app).get('/').await();"
+        ]
+    },
+    {
+        "q": "How do you set a query string?",
+        "o": [
+            ".query({ name: 'john' })",
+            ".params({ name: 'john' })",
+            ".search({ name: 'john' })",
+            ".send({ name: 'john' })"
+        ]
+    },
+    {
+        "q": "If asserting the body content fails, what does Supertest return?",
+        "o": [
+            "An error with a diff of expected vs actual",
+            "It crashes the process",
+            "A 500 status code",
+            "null"
+        ]
+    },
+    {
+        "q": "Can you test cookie persistence?",
+        "o": [
+            "Yes, by saving cookies from one response and setting them in the next request",
+            "No, Superagent doesn't store cookies automatically like a browser",
+            "Yes, it stores cookies automatically",
+            "Cookies are not supported"
+        ]
+    },
+    {
+        "q": "How do you assert that a redirect occurred (302)?",
+        "o": [
+            ".expect(302).expect('Location', '/new-path')",
+            ".expectRedirect('/new-path')",
+            ".followRedirects()",
+            ".assertRedirect()"
+        ]
+    },
+    {
+        "q": "How do you tell Supertest to follow redirects automatically?",
+        "o": [
+            ".redirects(number_of_redirects)",
+            ".follow()",
+            ".autoRedirect()",
+            "It always follows redirects"
+        ]
+    },
+    {
+        "q": "What is the 'agent' in 'supertest.agent(app)'?",
+        "o": [
+            "A test agent that persists cookies between requests",
+            "A spy",
+            "A background worker",
+            "A mock server"
+        ]
+    },
+    {
+        "q": "How do you create a persistent session agent?",
+        "o": [
+            "const agent = request.agent(app);",
+            "const agent = new request(app);",
+            "const agent = request.session(app);",
+            "const agent = app.agent();"
+        ]
+    },
+    {
+        "q": "Using an agent, if you login in one request, are cookies sent in the next?",
+        "o": [
+            "Yes, if using the same agent instance",
+            "No, never",
+            "Only if you manually copy them",
+            "Only for GET requests"
+        ]
+    },
+    {
+        "q": "How do you set a timeout for a specific request?",
+        "o": [
+            ".timeout(ms)",
+            ".wait(ms)",
+            ".expire(ms)",
+            ".limit(ms)"
+        ]
+    },
+    {
+        "q": "What is the output of .expect(200) if the status is 404?",
+        "o": [
+            "An error saying 'expected 200 \"OK\", got 404 \"Not Found\"'",
+            "It passes but warns",
+            "It retries",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "Can you pass a custom error message to .expect?",
+        "o": [
+            "Yes, as a second argument to expect(val, msg) (mostly for boolean checks)",
+            "No",
+            "Yes, via .message()",
+            "Yes, via .fail()"
+        ]
+    },
+    {
+        "q": "How do you enable verbose logging for debugging?",
+        "o": [
+            "It's not built-in, usually you rely on the app's logging or console.log in callbacks",
+            ".debug(true)",
+            ".log()",
+            ".verbose()"
+        ]
+    },
+    {
+        "q": "What property of the response object contains the headers?",
+        "o": [
+            "res.headers",
+            "res.header",
+            "res.meta",
+            "res.config"
+        ]
+    },
+    {
+        "q": "What property contains the status code?",
+        "o": [
+            "res.status",
+            "res.code",
+            "res.statusCode",
+            "res.stat"
+        ]
+    },
+    {
+        "q": "What property contains parsed text for text/plain responses?",
+        "o": [
+            "res.text",
+            "res.body",
+            "res.string",
+            "res.content"
+        ]
+    },
+    {
+        "q": "If expectation fails, does it stop the test suite execution?",
+        "o": [
+            "It depends on the runner (e.g., in Mocha it fails the current test)",
+            "Yes, always crashes Node",
+            "No, it ignores failures",
+            "It pauses execution"
+        ]
+    },
+    {
+        "q": "How do you send a DELETE request?",
+        "o": [
+            ".delete('/resource')",
+            ".del('/resource')",
+            "Both .delete() and .del() work",
+            ".remove('/resource')"
+        ]
+    },
+    {
+        "q": "How do check a value in nested body object?",
+        "o": [
+            ".expect(res => { if(res.body.nested.val !== 1) throw new Error('fail'); })",
+            ".expect('nested.val', 1)",
+            ".expectNested('val', 1)",
+            ".checkDeep('nested', 1)"
+        ]
+    },
+    {
+        "q": "Can you usage Supertest with TypeScript?",
+        "o": [
+            "Yes, by installing @types/supertest",
+            "No",
+            "Only with Babel",
+            "Only in loose mode"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '1';\nprint(Number(x) + 1);",
+        "o": [
+            "2",
+            "11",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr[0] = 5;\nprint(arr[0]);",
+        "o": [
+            "5",
+            "1",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = true;\nprint(a ? 1 : 0);",
+        "o": [
+            "1",
+            "0",
+            "true",
+            "false"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'TEST';\nprint(s.toLowerCase());",
+        "o": [
+            "test",
+            "TEST",
+            "TesT",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x * 2);",
+        "o": [
+            "20",
+            "10",
+            "12",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { val: 10 };\nprint(obj.val);",
+        "o": [
+            "10",
+            "val",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 0.5;\nprint(Math.ceil(n));",
+        "o": [
+            "1",
+            "0",
+            "0.5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar list = [];\nprint(list.length);",
+        "o": [
+            "0",
+            "undefined",
+            "null",
+            "1"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 5;\nprint(x == 5);",
+        "o": [
+            "true",
+            "false",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a';\nprint(s + 'b');",
+        "o": [
+            "ab",
+            "a",
+            "b",
+            "NaN"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr[1]);",
+        "o": [
+            "2",
+            "1",
+            "3",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = undefined;\nprint(x);",
+        "o": [
+            "undefined",
+            "null",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n > 0);",
+        "o": [
+            "true",
+            "false",
+            "10",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint('a' in obj);",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = NaN;\nprint(a === a);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '  a  ';\nprint(s.trim());",
+        "o": [
+            "a",
+            "  a  ",
+            "a  ",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 4;\nprint(Math.sqrt(x));",
+        "o": [
+            "2",
+            "4",
+            "16",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 1;\nif(x > 0) print('Pos');",
+        "o": [
+            "Pos",
+            "Neg",
+            "x",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.includes(1));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '';\nprint(s.length);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = null;\nprint(val === null);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 20;\nprint(x / 2);",
+        "o": [
+            "10",
+            "20",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { x: 1 };\nprint(Object.keys(obj).length);",
+        "o": [
+            "1",
+            "0",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr.push(3);\nprint(arr.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = '1';\nvar b = 1;\nprint(a == b);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n % 3);",
+        "o": [
+            "1",
+            "3",
+            "0",
+            "10"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.charAt(0));",
+        "o": [
+            "a",
+            "b",
+            "c",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = false;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [10];\nprint(arr.indexOf(10));",
+        "o": [
+            "0",
+            "10",
+            "-1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nprint(JSON.stringify(obj));",
+        "o": [
+            "{}",
+            "obj",
+            "Object",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 5;\nprint(x++);",
+        "o": [
+            "5",
+            "6",
+            "4",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar str = '5';\nprint(+str);",
+        "o": [
+            "5",
+            "5.0",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nvar arr2 = arr;\nprint(arr === arr2);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 100;\nprint(x.toString());",
+        "o": [
+            "100",
+            "x",
+            "Object",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar b = false;\nprint(b || true);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj.b);",
+        "o": [
+            "undefined",
+            "1",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\narr.pop();\nprint(arr.length);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 3;\nprint(Math.pow(x, 2));",
+        "o": [
+            "9",
+            "6",
+            "3",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a-b';\nprint(s.split('-').length);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x += 5);",
+        "o": [
+            "15",
+            "10",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = -10;\nprint(Math.abs(n));",
+        "o": [
+            "10",
+            "-10",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.slice(1).length);",
+        "o": [
+            "2",
+            "3",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(String(x));",
+        "o": [
+            "true",
+            "false",
+            "x",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nvar obj2 = { a: 1 };\nprint(obj == obj2);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x > 5 ? 'A' : 'B');",
+        "o": [
+            "A",
+            "B",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'hello';\nprint(s.indexOf('e'));",
+        "o": [
+            "1",
+            "0",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.join(''));",
+        "o": [
+            "12",
+            "1,2",
+            "1 2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 0;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = 5;\nprint(val >= 5);",
+        "o": [
+            "true",
+            "false",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 1.2;\nprint(Math.floor(n));",
+        "o": [
+            "1",
+            "2",
+            "1.2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the benefit of passing the `app` instance to `supertest` instead of a URL string?",
+        "o": [
+            "It allows testing without manually starting the server on a port",
+            "It is faster",
+            "It is required for HTTPS",
+            "It allows testing of static files only"
+        ]
+    },
+    {
+        "q": "How can you assert that a response header matches a specific value?",
+        "o": [
+            ".expect('Header-Name', 'ExpectedValue')",
+            ".expectHeader('Header-Name', 'ExpectedValue')",
+            ".assertHeader('Header-Name', 'ExpectedValue')",
+            ".header('Header-Name', 'ExpectedValue')"
+        ]
+    },
+    {
+        "q": "Which method is used to set the `Content-Type` of the request?",
+        "o": [
+            ".type() or .set('Content-Type', ...)",
+            ".contentType()",
+            ".headerType()",
+            ".mimeType()"
+        ]
+    },
+    {
+        "q": "How typically do you handle database connections in integration tests with Supertest?",
+        "o": [
+            "Connect before tests (beforeAll) and disconnect after tests (afterAll)",
+            "Connect inside every test",
+            "Supertest handles the database automatically",
+            "Do not use a database"
+        ]
+    },
+    {
+        "q": "What is the purpose of `request.agent()`?",
+        "o": [
+            "To persist cookies between requests (simulating a browser session)",
+            "To run tests in parallel",
+            "To mock the server",
+            "To spy on network requests"
+        ]
+    },
+    {
+        "q": "How do you assert that the response body is an empty object `{}`?",
+        "o": [
+            ".expect({})",
+            ".expectBody({})",
+            ".expectEmpty()",
+            ".expect(null)"
+        ]
+    },
+    {
+        "q": "If you want to debug a failing test response, what is a quick way to see the output?",
+        "o": [
+            "console.log(res.body) or console.log(res.text) inside the .end() callback or after await",
+            "Use .debug()",
+            "Use .trace()",
+            "Check the server logs only"
+        ]
+    },
+    {
+        "q": "How can you upload a file using `multipart/form-data`?",
+        "o": [
+            ".attach('field', 'filepath')",
+            ".upload('filepath')",
+            ".sendFile('filepath')",
+            ".multipart('filepath')"
+        ]
+    },
+    {
+        "q": "Can you use `.expect()` to check standard HTTP headers like `Location`?",
+        "o": [
+            "Yes, .expect('Location', '/path')",
+            "No, only status codes",
+            "Yes, but you need a plugin",
+            "No, you must parse res.headers manually"
+        ]
+    },
+    {
+        "q": "What happens if you assert `.expect(200)` but the server returns 500?",
+        "o": [
+            "The test fails with an error message indicating the status mismatch",
+            "It warns but passes",
+            "It retries the request",
+            "It ignores the status code"
+        ]
+    },
+    {
+        "q": "How do you assert binary content (like an image) in the response?",
+        "o": [
+            ".expect(res => { if (res.body.length === 0) throw new Error('Empty'); }) + checking content-type",
+            ".expectBinary()",
+            ".expectImage()",
+            ".expectFile()"
+        ]
+    },
+    {
+        "q": "Is it possible to test a server that is already running on a specific port?",
+        "o": [
+            "Yes, pass the full URL (e.g., 'http://localhost:3000') to `request()`",
+            "No, Supertest only works with Express apps",
+            "Yes, but only if it is Node.js",
+            "No, it must be started by Supertest"
+        ]
+    },
+    {
+        "q": "How do you add a Bearer token to the Authorization header?",
+        "o": [
+            ".set('Authorization', 'Bearer <token>')",
+            ".auth('<token>')",
+            ".bearer('<token>')",
+            ".token('<token>')"
+        ]
+    },
+    {
+        "q": "Which property of the response object contains the raw headers?",
+        "o": [
+            "res.headers",
+            "res.rawHeaders",
+            "res.header",
+            "res.meta"
+        ]
+    },
+    {
+        "q": "How do you assert that a response took less than a certain time?",
+        "o": [
+            "This is not built-in to .expect(), usually done via test runner timeout or manual timestamp check",
+            ".expectTimeout(ms)",
+            ".expectFast()",
+            ".time(ms)"
+        ]
+    },
+    {
+        "q": "What does `.retry(n)` do?",
+        "o": [
+            "Retries the request `n` times if it fails (available in newer SuperAgent/Supertest versions)",
+            "Retries the assertions",
+            "Restarts the server",
+            "Does nothing"
+        ]
+    },
+    {
+        "q": "How do you send XML data?",
+        "o": [
+            ".type('xml').send('<xml>...</xml>')",
+            ".xml('<xml>...</xml>')",
+            ".sendXML('<xml>...</xml>')",
+            ".body('<xml>...</xml>')"
+        ]
+    },
+    {
+        "q": "When testing an API that sets a cookie, where can you find it in the response?",
+        "o": [
+            "res.headers['set-cookie']",
+            "res.cookies",
+            "res.cookie",
+            "res.body.cookie"
+        ]
+    },
+    {
+        "q": "How do you ensure your tests don't hang if the server doesn't respond?",
+        "o": [
+            ".timeout(ms)",
+            ".stop(ms)",
+            ".end(ms)",
+            ".abort(ms)"
+        ]
+    },
+    {
+        "q": "Can you invoke `.expect()` multiple times in a chain?",
+        "o": [
+            "Yes, and order generally doesn't matter (status, header, body)",
+            "No, only once",
+            "Only for status code",
+            "Only for headers"
+        ]
+    },
+    {
+        "q": "How do you signify that you strictly want to send JSON?",
+        "o": [
+            ".type('json') (though .send({}) sets it auto)",
+            ".setMode('json')",
+            ".acceptJSON()",
+            ".forceJSON()"
+        ]
+    },
+    {
+        "q": "What is returned if you await `request(app).get(...)`?",
+        "o": [
+            "The response object",
+            "The request object",
+            "A promise that resolves to true",
+            "Undefined"
+        ]
+    },
+    {
+        "q": "How do you parse a custom response body type (e.g. binary)?",
+        "o": [
+            ".parse((res, cb) => { ... })",
+            ".buffer(true).parse(...) ",
+            ".customParse()",
+            ".type('custom')"
+        ]
+    },
+    {
+        "q": "How do you check if a specific key exists in a JSON response using `.expect` function?",
+        "o": [
+            ".expect(res => { if (!('key' in res.body)) throw new Error('missing key'); })",
+            ".expectKey('key')",
+            ".expectHas('key')",
+            ".assertKey('key')"
+        ]
+    },
+    {
+        "q": "What is the correct way to handle assertions on `res.body` using a library like Chai?",
+        "o": [
+            "Inside `.then(res => { expect(res.body).to... })` or after await",
+            "Inside .expect()",
+            "You cannot use Chai",
+            "Inside server code"
+        ]
+    },
+    {
+        "q": "Does Supertest support HTTP/2?",
+        "o": [
+            "Yes, via the underlying `superagent` plugin support (http2)",
+            "No, strictly HTTP/1.1",
+            "Yes, natively enabled by default",
+            "No, creates error"
+        ]
+    },
+    {
+        "q": "If you use `app.listen()` manually in your test, what must you ensure?",
+        "o": [
+            "You must call `.close()` on the server after tests to free the port",
+            "Nothing, it closes automatically",
+            "You must use port 80",
+            "You must restart computer"
+        ]
+    },
+    {
+        "q": "How do you test a 404 response for an unknown route?",
+        "o": [
+            "request(app).get('/random-route').expect(404)",
+            "request(app).get('/random-route').expect(200)",
+            "request(app).get('/random-route').fail()",
+            "request(app).post('/random-route').expect(200)"
+        ]
+    },
+    {
+        "q": "What is the effect of `.buffer(true)`?",
+        "o": [
+            "Forces buffering of the response body (useful for binary or large text)",
+            "Disables buffering",
+            "Buffers the request",
+            "Buffers the logs"
+        ]
+    },
+    {
+        "q": "How do you specify a query parameter 'sort=asc'?",
+        "o": [
+            ".query({ sort: 'asc' })",
+            ".send({ sort: 'asc' })",
+            ".param('sort', 'asc')",
+            ".add('sort', 'asc')"
+        ]
+    },
+    {
+        "q": "Is Supertest suitable for Unit Testing individual functions?",
+        "o": [
+            "No, it is designed for Integration/E2E testing of HTTP endpoints",
+            "Yes, it is the best tool for that",
+            "Yes, specifically for math functions",
+            "Yes, for database queries"
+        ]
+    },
+    {
+        "q": "How can you check if the `Content-Type` is strictly `application/json; charset=utf-8`?",
+        "o": [
+            ".expect('Content-Type', 'application/json; charset=utf-8')",
+            ".expect('json')",
+            ".expectType('json')",
+            ".assertType('json')"
+        ]
+    },
+    {
+        "q": "What does `res.ok` indicate?",
+        "o": [
+            "True if status code is 2xx",
+            "True if status code is 200 exactly",
+            "True if response body is valid",
+            "True if body is not empty"
+        ]
+    },
+    {
+        "q": "What does `res.clientError` indicate?",
+        "o": [
+            "True if status code is 4xx",
+            "True if client crashed",
+            "True if connection lost",
+            "True if status code is 5xx"
+        ]
+    },
+    {
+        "q": "What does `res.serverError` indicate?",
+        "o": [
+            "True if status code is 5xx",
+            "True if server crashed",
+            "True if status code is 4xx",
+            "True if database failed"
+        ]
+    },
+    {
+        "q": "How do create a clean instance of supertest agent for a specific user role?",
+        "o": [
+            "Create a new `request.agent(app)` and perform login for that user",
+            "Reuse the global agent",
+            "Clear cookies manually",
+            "Restart the server"
+        ]
+    },
+    {
+        "q": "If you want to mock an external service called by your API during a Supertest run, what library is commonly used?",
+        "o": [
+            "Nock (or Jest mocks)",
+            "Supertest mocks",
+            "Mocha",
+            "Chai"
+        ]
+    },
+    {
+        "q": "How do you assert that a redirect location matches a regex?",
+        "o": [
+            ".expect('Location', /\\/new-path\\/id/)",
+            ".expectLocation(/pattern/)",
+            ".location(/pattern/)",
+            ".assertRedirect(/pattern/)"
+        ]
+    },
+    {
+        "q": "What if your app uses signed cookies?",
+        "o": [
+            "Supertest handles them as standard cookies; you may need to sign them manually if spoofing request cookies",
+            "Supertest automatically signs them",
+            "Supertest cannot handle signed cookies",
+            "It decrypts them automatically"
+        ]
+    },
+    {
+        "q": "How to properly handle `ECONNREFUSED` in Supertest?",
+        "o": [
+            "Ensure the server is running or that the app instance is correct; assert error in callback if expected",
+            "It is a bug in Supertest",
+            "Ignore it",
+            "Restart Node"
+        ]
+    },
+    {
+        "q": "Does `.expect(status)` wait for the body to be fully received?",
+        "o": [
+            "Yes, it waits for the response end",
+            "No, it checks headers only",
+            "No, it checks status only and aborts",
+            "It depends on the phase"
+        ]
+    },
+    {
+        "q": "How do you send a PATCH request?",
+        "o": [
+            ".patch('/resource')",
+            ".update('/resource')",
+            ".send('PATCH', '/resource')",
+            ".modify('/resource')"
+        ]
+    },
+    {
+        "q": "What is the equivalent of `curl -H 'X-Custom: 1' ...` in Supertest?",
+        "o": [
+            ".set('X-Custom', '1')",
+            ".header('X-Custom', '1')",
+            ".add('X-Custom', '1')",
+            ".custom('1')"
+        ]
+    },
+    {
+        "q": "How do you verify the response body is an array?",
+        "o": [
+            ".expect(res => { if (!Array.isArray(res.body)) throw new Error('Not array'); })",
+            ".expectArray()",
+            ".isArray()",
+            ".expectType('array')"
+        ]
+    },
+    {
+        "q": "Can Supertest be used with any Node.js http server (not just Express)?",
+        "o": [
+            "Yes, any standard `http.Server`",
+            "No, only Express",
+            "No, only Koa",
+            "No, only Fastify"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '10';\nvar y = 20;\nprint(Number(x) + y);",
+        "o": [
+            "30",
+            "1020",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr[1] + arr[2]);",
+        "o": [
+            "5",
+            "3",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'Hello';\nprint(s.substring(0, 2));",
+        "o": [
+            "He",
+            "el",
+            "Hel",
+            "H"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 100;\nprint(x % 10);",
+        "o": [
+            "0",
+            "10",
+            "1",
+            "100"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [5, 10];\nvar sum = 0;\nfor(var n of arr) sum += n;\nprint(sum);",
+        "o": [
+            "15",
+            "5",
+            "10",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = false;\nvar y = true;\nprint(x || y);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj['a']);",
+        "o": [
+            "1",
+            "a",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 1.6;\nprint(Math.round(n));",
+        "o": [
+            "2",
+            "1",
+            "1.6",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = null;\nprint(a ? 'T' : 'F');",
+        "o": [
+            "F",
+            "T",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a/b/c';\nprint(s.split('/').join(''));",
+        "o": [
+            "abc",
+            "a/b/c",
+            "a b c",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nvar arr2 = arr.concat(3);\nprint(arr2.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(typeof x);",
+        "o": [
+            "number",
+            "string",
+            "object",
+            "int"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { x: 1 };\nobj.y = 2;\nprint(obj.y);",
+        "o": [
+            "2",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = [0];\nprint(a.length);",
+        "o": [
+            "1",
+            "0",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 2;\nprint(x ** 3);",
+        "o": [
+            "8",
+            "6",
+            "9",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar str = 'JS';\nprint(str[0]);",
+        "o": [
+            "J",
+            "S",
+            "0",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = true;\nval = false;\nprint(val);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr.length = 0;\nprint(arr.length);",
+        "o": [
+            "0",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = '12';\nprint(parseInt(n) + 1);",
+        "o": [
+            "13",
+            "121",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 100;\nvar y = '100';\nprint(x == y);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1, b: 2 };\nprint(Object.keys(obj).join(''));",
+        "o": [
+            "ab",
+            "a,b",
+            "12",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar list = [1, 2, 3];\nprint(list.indexOf(2));",
+        "o": [
+            "1",
+            "2",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 'hello';\nprint(x.toUpperCase());",
+        "o": [
+            "HELLO",
+            "Hello",
+            "hello",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = true;\nprint(!a);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [10, 20];\nprint(arr.shift());",
+        "o": [
+            "10",
+            "20",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 3;\nprint(n > 2 && n < 4);",
+        "o": [
+            "true",
+            "false",
+            "3",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nobj['a'] = 1;\nprint(obj.a);",
+        "o": [
+            "1",
+            "undefined",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x / 0);",
+        "o": [
+            "Infinity",
+            "0",
+            "Error",
+            "NaN"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '  ';\nprint(s.trim().length);",
+        "o": [
+            "0",
+            "2",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nvar arr2 = arr;\narr2[0] = 2;\nprint(arr[0]);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = 5;\nprint(val == '5');",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 5;\nprint(x * 3);",
+        "o": [
+            "15",
+            "8",
+            "53",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar str = 'abc';\nprint(str.includes('b'));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = [1, 2];\nprint(a[2]);",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 'word';\nx = 1;\nprint(x);",
+        "o": [
+            "1",
+            "word",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(--n);",
+        "o": [
+            "9",
+            "10",
+            "11",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint('b' in obj);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [10, 20];\nprint(arr.length);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a-b';\nprint(s.replace('-', '+'));",
+        "o": [
+            "a+b",
+            "a-b",
+            "ab",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 1.1;\nprint(Math.ceil(x));",
+        "o": [
+            "2",
+            "1",
+            "1.1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = 0;\nprint(a || 1);",
+        "o": [
+            "1",
+            "0",
+            "true",
+            "false"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\ndelete obj.a;\nprint(obj.a);",
+        "o": [
+            "undefined",
+            "1",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n > 20);",
+        "o": [
+            "false",
+            "true",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'ABC';\nprint(s.toLowerCase());",
+        "o": [
+            "abc",
+            "ABC",
+            "Abc",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\narr.pop();\nprint(arr.length);",
+        "o": [
+            "2",
+            "3",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "How can you access the `Test` object created by `supertest` to manually configure it?",
+        "o": [
+            "It is returned by `request(app).method(...)`",
+            "It is available as `supertest.Test`",
+            "It is `app.Test`",
+            "You cannot access it"
+        ]
+    },
+    {
+        "q": "Which method is used to specify the client certificate for mutual TLS authentication?",
+        "o": [
+            ".ca(cert) or .cert(cert) and .key(key)",
+            ".ssl(cert)",
+            ".tls(cert)",
+            ".secure(cert)"
+        ]
+    },
+    {
+        "q": "How do you disable automatic redirect following for a single request?",
+        "o": [
+            ".redirects(0)",
+            ".noRedirect()",
+            ".manualRedirect()",
+            ".follow(false)"
+        ]
+    },
+    {
+        "q": "What is the purpose of `.expect(200, done)` pattern?",
+        "o": [
+            "To use the classic callback style for asynchronous test completion (common in older Mocha setups)",
+            "To finish the test immediately",
+            "To ignore the result",
+            "To run in parallel"
+        ]
+    },
+    {
+        "q": "How do you verify that a response does NOT have a specific header?",
+        "o": [
+            ".expect(res => { if (res.headers['header-name']) throw new Error('Header exists'); })",
+            ".expectNoHeader('header-name')",
+            ".assertMissingHeader('header-name')",
+            ".missing('header-name')"
+        ]
+    },
+    {
+        "q": "How can you pipe a file stream directly as the request body?",
+        "o": [
+            "fs.createReadStream('file.txt').pipe(request(app).post('/url'))",
+            "request(app).post('/url').send(fs.createReadStream('file.txt')) (if handled by superagent)",
+            ".stream('file.txt')",
+            ".pipe('file.txt')"
+        ]
+    },
+    {
+        "q": "What happens if you use `.end()` AND await the request?",
+        "o": [
+            "It is generally redundant and can lead to errors or double execution checks",
+            "It is best practice",
+            "It makes the test faster",
+            "It cancels the request"
+        ]
+    },
+    {
+        "q": "How do you assert that the 'ETag' header is present?",
+        "o": [
+            ".expect('ETag', /.+/)",
+            ".expect('ETag')",
+            ".assertHeader('ETag')",
+            ".hasETag()"
+        ]
+    },
+    {
+        "q": "How can you share cookies across multiple test files?",
+        "o": [
+            "Create a setup file that logs in, saves the cookie to a global/shared Config or Context, and reuse it",
+            "Supertest shares cookies globally by default",
+            "You cannot",
+            "Using a shared database"
+        ]
+    },
+    {
+        "q": "Does Supertest modify the global `http.globalAgent`?",
+        "o": [
+            "No, it creates its own agents",
+            "Yes, strictly",
+            "Yes, for performance",
+            "Only on Windows"
+        ]
+    },
+    {
+        "q": "How do you test a response specific encoding (e.g., gzip)?",
+        "o": [
+            ".expect('Content-Encoding', 'gzip')",
+            ".expectCompression('gzip')",
+            ".expectGzip()",
+            ".encoded('gzip')"
+        ]
+    },
+    {
+        "q": "If getting `Error: socket hang up`, what is a likely cause?",
+        "o": [
+            "The server process crashed or closed the connection unexpectedly",
+            "The request was too fast",
+            "Supertest is not installed",
+            "Wrong port"
+        ]
+    },
+    {
+        "q": "How do you send a JSON payload with a custom content type header?",
+        "o": [
+            ".send(data).set('Content-Type', 'application/vnd.api+json')",
+            ".type('application/vnd.api+json').send(data)",
+            "Both work",
+            ".json(data, 'type')"
+        ]
+    },
+    {
+        "q": "How do you assert on the length of a JSON array in the body?",
+        "o": [
+            ".expect(res => { if(res.body.length !== 5) throw new Error('Length fail'); })",
+            ".expect('length', 5)",
+            ".expectBodyLength(5)",
+            ".assertLength(5)"
+        ]
+    },
+    {
+        "q": "How do you persist authentication using a token instead of cookies?",
+        "o": [
+            "Save the token in a variable after login, then `.set('Authorization', token)` in subsequent requests",
+            "Supertest saves tokens automatically",
+            "Use `.token(token)` method on the agent",
+            "It is not possible"
+        ]
+    },
+    {
+        "q": "What is the return type of `request.agent()`?",
+        "o": [
+            "A `TestAgent` instance that mimics the API of the `request` function but maintains state",
+            "A Promise",
+            "A Server",
+            "A Socket"
+        ]
+    },
+    {
+        "q": "Can you use `supertest` to test WebSocket connections?",
+        "o": [
+            "No, Supertest is strictly for HTTP requests",
+            "Yes, via `.ws()`",
+            "Yes, it upgrades automatically",
+            "Yes, but limited"
+        ]
+    },
+    {
+        "q": "How do you access the express app instance within a supertest test (if needed)?",
+        "o": [
+            "It is not exposed on the response; you must have reference to it from your test setup",
+            "res.app",
+            "req.app",
+            "supertest.app"
+        ]
+    },
+    {
+        "q": "What is the `host` header used for in testing?",
+        "o": [
+            "To simulate requests to a specific virtual host or domain",
+            "To specify the database host",
+            "To debug localhost",
+            "To check ping"
+        ]
+    },
+    {
+        "q": "How do you mock the current time in Supertest tests?",
+        "o": [
+            "Use a library like `sinon` or `jest.useFakeTimers()` in the test configuration, independent of Supertest",
+            "Supertest has `.time()` method",
+            "Supertest auto-mocks time",
+            ".mockTime()"
+        ]
+    },
+    {
+        "q": "What is the purpose of `res.text` in a JSON response?",
+        "o": [
+            "It holds the stringified JSON body",
+            "It is undefined for JSON",
+            "It holds the headers",
+            "It holds comments"
+        ]
+    },
+    {
+        "q": "How do you force the connection to close after the request?",
+        "o": [
+            ".set('Connection', 'close')",
+            ".close()",
+            ".endConnection()",
+            ".disconnect()"
+        ]
+    },
+    {
+        "q": "How do you specify a range header for partial content?",
+        "o": [
+            ".set('Range', 'bytes=0-100')",
+            ".range(0, 100)",
+            ".bytes(0, 100)",
+            ".partial(0, 100)"
+        ]
+    },
+    {
+        "q": "What status code do you expect for a successful creation of a resource?",
+        "o": [
+            "201 Created",
+            "200 OK",
+            "204 No Content",
+            "202 Accepted"
+        ]
+    },
+    {
+        "q": "What status code do you expect when deleting a resource returns no body?",
+        "o": [
+            "204 No Content",
+            "200 OK",
+            "202 Accepted",
+            "201 Created"
+        ]
+    },
+    {
+        "q": "If `res.body` is empty but you expect JSON, what might be wrong?",
+        "o": [
+            "Content-Type header from server is likely not application/json, preventing parsing",
+            "Supertest is broken",
+            "Node is out of memory",
+            "The network is down"
+        ]
+    },
+    {
+        "q": "How do you handle testing a route that downloads a file?",
+        "o": [
+            ".buffer().parse(binaryParser).expect(...)",
+            ".download()",
+            ".expectFile()",
+            ".saveFile()"
+        ]
+    },
+    {
+        "q": "Can you define custom checks in `.expect(fn)`?",
+        "o": [
+            "Yes, the function receives the response object",
+            "No, only string matching",
+            "No, only status codes",
+            "Yes, but it receives request object"
+        ]
+    },
+    {
+        "q": "How do you test CORS headers?",
+        "o": [
+            ".expect('Access-Control-Allow-Origin', '*')",
+            ".expectCors()",
+            ".assertCors()",
+            ".checkCors()"
+        ]
+    },
+    {
+        "q": "What is the result of `request(app).get('/').expect(500)` on a successful 200 response?",
+        "o": [
+            "Test failure",
+            "Test pass",
+            "Warning",
+            "Skip"
+        ]
+    },
+    {
+        "q": "How do you differentiate between test timeout and connection timeout?",
+        "o": [
+            "Test timeout is from the runner (Mocha/Jest), connection timeout is from `.timeout()` in Supertest",
+            "They are the same",
+            "Supertest has no connection timeout",
+            "Runner has no timeout"
+        ]
+    },
+    {
+        "q": "How do you assert that a specific cookie is marked `HttpOnly`?",
+        "o": [
+            "Inspect `res.headers['set-cookie']` manually in `.expect(res => ...)`",
+            ".expectCookie('HttpOnly')",
+            ".cookie('HttpOnly')",
+            ".assertHttpOnly()"
+        ]
+    },
+    {
+        "q": "How do you assert that a response is cached?",
+        "o": [
+            ".expect('Cache-Control', /max-age/)",
+            ".expectCached()",
+            ".isCached()",
+            ".checkCache()"
+        ]
+    },
+    {
+        "q": "What is the best way to organize Supertest tests?",
+        "o": [
+            "Group by route/resource (e.g., describe('GET /users'))",
+            "Group by status code",
+            "Group by time of day",
+            "Randomly"
+        ]
+    },
+    {
+        "q": "How do you test environments variables in Supertest?",
+        "o": [
+            "Set `process.env` before starting the app/test suite",
+            "Pass env to request()",
+            "Use .env()",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "How do you handle 'unauthorized' scenarios?",
+        "o": [
+            ".expect(401)",
+            ".expect(403)",
+            ".expect(500)",
+            ".expect(200)"
+        ]
+    },
+    {
+        "q": "Can you use Supertest with a localized app (i18n)?",
+        "o": [
+            "Yes, typically by sending `Accept-Language` header",
+            "No",
+            "Only for English",
+            "Only for Spanish"
+        ]
+    },
+    {
+        "q": "How do you verify the `X-Powered-By` header is hidden?",
+        "o": [
+            ".expect(res => { if (res.headers['x-powered-by']) throw new Error('Exposed'); })",
+            ".expectNoHeader('X-Powered-By')",
+            ".header('X-Powered-By', null)",
+            ".assertSecurity()"
+        ]
+    },
+    {
+        "q": "Does Supertest support following 301 redirects exactly like 302?",
+        "o": [
+            "Yes",
+            "No, only 302",
+            "No, only 307",
+            "No, only 308"
+        ]
+    },
+    {
+        "q": "How do you simulate a slow network?",
+        "o": [
+            "Not directly in Supertest; mock the server to delay response",
+            "Use .slow()",
+            "Use .delay()",
+            "Use .lag()"
+        ]
+    },
+    {
+        "q": "How do you check for duplicate headers?",
+        "o": [
+            "Inspect `res.rawHeaders` to see duplicates (since `res.headers` merges them)",
+            ".expectUniqueHeaders()",
+            ".checkDuplicates()",
+            "Cannot check"
+        ]
+    },
+    {
+        "q": "What library is Supertest wrapped around?",
+        "o": [
+            "SuperAgent",
+            "Request",
+            "Axios",
+            "Got"
+        ]
+    },
+    {
+        "q": "How do you assert that the content length matches the body size?",
+        "o": [
+            ".expect('Content-Length', String(bodySize))",
+            ".expectBodySize()",
+            ".checkSize()",
+            ".assertLength()"
+        ]
+    },
+    {
+        "q": "Which property gives the IP address of the requester inside Express (tested by Supertest)?",
+        "o": [
+            "req.ip",
+            "req.remoteAddress",
+            "req.host",
+            "req.address"
+        ]
+    },
+    {
+        "q": "How do you define a constant base URL for all requests without using `request.agent()`?",
+        "o": [
+            "const request = require('supertest')('http://api.example.com');",
+            "request.baseUrl = ...",
+            "config.url = ...",
+            "Cannot do it"
+        ]
+    },
+    {
+        "q": "How do you test a 500 error produced by an exception?",
+        "o": [
+            "Trigger the exception in the route handler and .expect(500)",
+            "Manually throw in the test",
+            ".fail()",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '5';\nvar y = +x;\nprint(typeof y);",
+        "o": [
+            "number",
+            "string",
+            "object",
+            "int"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr[2] = 3;\nprint(arr.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'TEST';\nprint(s.toLowerCase() == 'test');",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x % 4);",
+        "o": [
+            "2",
+            "4",
+            "1",
+            "10"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nvar b = arr;\nb.push(3);\nprint(arr.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = null;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj.b === undefined);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 1.1;\nprint(Math.floor(n));",
+        "o": [
+            "1",
+            "2",
+            "1.1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = true;\nvar b = false;\nprint(a && b);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a,b,c';\nprint(s.indexOf(','));",
+        "o": [
+            "1",
+            "0",
+            "2",
+            "3"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.indexOf(2));",
+        "o": [
+            "-1",
+            "0",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 100;\nprint(x > 50 && x < 150);",
+        "o": [
+            "true",
+            "false",
+            "100",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { x: 1 };\nprint('x' in obj);",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = [1, 2, 3];\nprint(a[3]);",
+        "o": [
+            "undefined",
+            "3",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 4;\nprint(x / 2);",
+        "o": [
+            "2",
+            "4",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar str = ' JS ';\nprint(str.trim());",
+        "o": [
+            "JS",
+            " JS ",
+            "JS ",
+            " JS"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = 10;\nval *= 2;\nprint(val);",
+        "o": [
+            "20",
+            "10",
+            "12",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\narr.push(2);\nprint(arr);",
+        "o": [
+            "[1, 2]",
+            "[1]",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 'abc';\nprint(x.length);",
+        "o": [
+            "3",
+            "0",
+            "abc",
+            "4"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar b = true;\nprint(String(b));",
+        "o": [
+            "true",
+            "false",
+            "b",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n === '10');",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nprint(Object.keys(obj).length);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a';\nprint(s + s);",
+        "o": [
+            "aa",
+            "a",
+            "2a",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 5;\nprint(x >= 5);",
+        "o": [
+            "true",
+            "false",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar list = [1, 2];\nvar [a, b] = list;\nprint(a);",
+        "o": [
+            "1",
+            "2",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = -5;\nprint(Math.abs(x));",
+        "o": [
+            "5",
+            "-5",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.includes(4));",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'Code';\nprint(s.charAt(0));",
+        "o": [
+            "C",
+            "c",
+            "o",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = 1;\nvar b = 2;\nprint(a != b);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { val: 1 };\nprint(obj.val++);",
+        "o": [
+            "1",
+            "2",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '1';\nprint(parseInt(x));",
+        "o": [
+            "1",
+            "1.0",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(Array.isArray(arr));",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 0;\nprint(n++);",
+        "o": [
+            "0",
+            "1",
+            "-1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'A';\nprint(s.toLowerCase());",
+        "o": [
+            "a",
+            "A",
+            "Error",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 100;\nx = null;\nprint(x);",
+        "o": [
+            "null",
+            "100",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.join('-'));",
+        "o": [
+            "1-2",
+            "1,2",
+            "12",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = undefined;\nprint(val === undefined);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x > 0 ? 'Pos' : 'Neg');",
+        "o": [
+            "Pos",
+            "Neg",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [];\narr.push(1);\nprint(arr.length);",
+        "o": [
+            "1",
+            "0",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.substring(1));",
+        "o": [
+            "bc",
+            "b",
+            "c",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = 1;\nprint(a === 1);",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj['b']);",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 3;\nprint(x * x);",
+        "o": [
+            "9",
+            "6",
+            "3",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '1';\nprint(+s + 1);",
+        "o": [
+            "2",
+            "11",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "How can you bypass self-signed certificate errors in Supertest requests?",
+        "o": [
+            ".trustLocalhost() or .disableTLSCerts()",
+            ".insecure()",
+            ".ignoreCerts()",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "What method would you use to set a custom User-Agent for the request?",
+        "o": [
+            ".set('User-Agent', 'MyAgent/1.0')",
+            ".agent('MyAgent/1.0')",
+            ".userAgent('MyAgent/1.0')",
+            ".identify('MyAgent/1.0')"
+        ]
+    },
+    {
+        "q": "How do you test that a response is a valid PDF file?",
+        "o": [
+            ".expect('Content-Type', 'application/pdf')",
+            ".expectPDF()",
+            ".isPDF()",
+            ".assertFileType('pdf')"
+        ]
+    },
+    {
+        "q": "Does Supertest support aborting a request programmatically?",
+        "o": [
+            "Yes, by calling .abort() on the returned request object",
+            "No",
+            "Yes, via .cancel()",
+            "Yes, via .stop()"
+        ]
+    },
+    {
+        "q": "How do you handle a scenario where you expect a connection timeout?",
+        "o": [
+            "Set a short .timeout(ms) and assert that the error code is 'ECONNABORTED' or 'ETIMEDOUT'",
+            ".expectTimeout()",
+            ".expectConnectionError()",
+            "Supertest cannot test timeouts"
+        ]
+    },
+    {
+        "q": "How do you send raw binary data as the body?",
+        "o": [
+            ".send(Buffer.from('data'))",
+            ".binary('data')",
+            ".raw('data')",
+            ".body('data')"
+        ]
+    },
+    {
+        "q": "What is the best way to clean up after tests that modify a database?",
+        "o": [
+            "Use an `afterEach` or `afterAll` hook to truncate tables or rollback transactions",
+            "Manually delete data in the test",
+            "Drop the database",
+            "Restoring a backup"
+        ]
+    },
+    {
+        "q": "How do you perform Basic Authorization without using the `.auth()` convenience method?",
+        "o": [
+            ".set('Authorization', 'Basic ' + Buffer.from('user:pass').toString('base64'))",
+            ".set('Authorization', 'user:pass')",
+            ".login('user', 'pass')",
+            ".signin('user', 'pass')"
+        ]
+    },
+    {
+        "q": "How can you test an endpoint that returns a stream?",
+        "o": [
+            "Use `.buffer(false)` or pipe the response to a writable stream and assert on completion",
+            ".expectStream()",
+            ".isStream()",
+            "Cannot test streams"
+        ]
+    },
+    {
+        "q": "How do you assert that a `set-cookie` header sets a specific `Path`?",
+        "o": [
+            "Parse the `res.headers['set-cookie']` array strings manually",
+            ".expectCookiePath('/')",
+            ".cookiePath('/')",
+            ".assertCookiePath('/')"
+        ]
+    },
+    {
+        "q": "What distinguishes `supertest` from `nock`?",
+        "o": [
+            "Supertest tests actual HTTP endpoints (integration), Nock mocks outgoing HTTP requests (unit/isolation)",
+            "Supertest is for unit testing, Nock is for integration",
+            "They are the same",
+            "Nock is deprecated"
+        ]
+    },
+    {
+        "q": "How do you assert that the response body is an array of length greater than 0?",
+        "o": [
+            ".expect(res => { if (!Array.isArray(res.body) || res.body.length === 0) throw new Error('empty array'); })",
+            ".expectArrayNotEmpty()",
+            ".expectNonEmpty()",
+            ".hasItems()"
+        ]
+    },
+    {
+        "q": "How do you pass a query string with array values `?ids=1&ids=2`?",
+        "o": [
+            ".query({ ids: [1, 2] })",
+            ".query('ids=1&ids=2')",
+            ".queryArray('ids', [1, 2])",
+            "Both object with array and raw string work"
+        ]
+    },
+    {
+        "q": "What does `.expect(200, { id: 1 })` do?",
+        "o": [
+            "Asserts status 200 AND body deep equality to `{ id: 1 }`",
+            "Asserts status 200 or body `{ id: 1 }`",
+            "Asserts 200 then sets body to `{ id: 1 }`",
+            "Sends `{ id: 1 }` and expects 200"
+        ]
+    },
+    {
+        "q": "How do you assert that a JSON response has a property `token` that is a string?",
+        "o": [
+            ".expect(res => { if (typeof res.body.token !== 'string') throw new Error('not string'); })",
+            ".expectType('token', 'string')",
+            ".expectString('token')",
+            ".assertProperty('token', 'string')"
+        ]
+    },
+    {
+        "q": "If you are testing a secure API (HTTPS), do you need to change anything in `request(app)`?",
+        "o": [
+            "No, if passing an Express app, Supertest wraps it in an ephemeral server (HTTP or HTTPS depending on config but usually HTTP for local test)",
+            "Yes, MUST use https protocol",
+            "Yes, must provide certificates",
+            "No, it assumes HTTPS"
+        ]
+    },
+    {
+        "q": "How do you assert that the response header `X-RateLimit-Remaining` is a number?",
+        "o": [
+            ".expect(res => { if (isNaN(parseInt(res.headers['x-ratelimit-remaining']))) throw new Error('NaN'); })",
+            ".expectHeaderType('X-RateLimit-Remaining', 'number')",
+            ".assertHeaderNumber('X-RateLimit-Remaining')",
+            ".isNumber('X-RateLimit-Remaining')"
+        ]
+    },
+    {
+        "q": "Can you attach a file and send fields in the same request (multipart)?",
+        "o": [
+            "Yes, using `.attach()` and `.field()`",
+            "No, only one or the other",
+            "Yes, using .form()",
+            "Yes, using .data()"
+        ]
+    },
+    {
+        "q": "How do you specify the filename when attaching a buffer?",
+        "o": [
+            ".attach('file', buffer, 'filename.txt')",
+            ".attach('file', buffer, { filename: 'filename.txt' })",
+            ".file('file', buffer, 'filename.txt')",
+            ".attachBuffer('file', buffer, 'filename.txt')"
+        ]
+    },
+    {
+        "q": "What happens if you provide a relative path to `.attach()`?",
+        "o": [
+            "It resolves relative to `process.cwd()` or the test file location depending on usage (best to use absolute paths)",
+            "It fails always",
+            "It searches globally",
+            "It searches in /tmp"
+        ]
+    },
+    {
+        "q": "How do you maximize the request timeout for a long-running test?",
+        "o": [
+            ".timeout({ response: 10000, deadline: 60000 }) or just .timeout(number)",
+            ".noTimeout()",
+            ".infinite()",
+            ".waitForever()"
+        ]
+    },
+    {
+        "q": "How do you verify the server handles large payloads correctly?",
+        "o": [
+            "Send a large string/buffer via .send() and assert response",
+            ".sendLarge()",
+            ".payload(1MB)",
+            ".stressTest()"
+        ]
+    },
+    {
+        "q": "What is the behavior of `.expect(regex)`?",
+        "o": [
+            "Asserts that the response body (if text) matches the regex",
+            "Asserts headers match regex",
+            "Asserts status matches regex",
+            "Asserts URL matches regex"
+        ]
+    },
+    {
+        "q": "How do you test a 304 Not Modified response?",
+        "o": [
+            "Send `If-None-Match` header with ETag from previous response, expect 304",
+            ".expect(304)",
+            "Just assert 304 without setup",
+            "Send `Cache-Control` header"
+        ]
+    },
+    {
+        "q": "How do you verify the `Link` header for pagination?",
+        "o": [
+            "Inspect `res.headers.link`",
+            ".expectLink()",
+            ".assertPagination()",
+            ".hasLink()"
+        ]
+    },
+    {
+        "q": "Does Supertest support validation of JSON Schema?",
+        "o": [
+            "Not natively, but you can integrate libraries like `ajv` inside `.expect(res => ...)`",
+            "Yes, .expectSchema(schema)",
+            "Yes, .validate(schema)",
+            "Yes, .schema(schema)"
+        ]
+    },
+    {
+        "q": "How do you assert that a cookie has expired?",
+        "o": [
+            "Check that `Expires` attribute in `Set-Cookie` is in the past",
+            ".expectCookieExpired()",
+            ".assertExpired()",
+            ".cookieGone()"
+        ]
+    },
+    {
+        "q": "How do you chain multiple requests that require state (like CSRF token)?",
+        "o": [
+            "Request 1 -> extract token -> Request 2 .set('CSRF-Token', token)",
+            "Use `request.agent()` which handles everything automatically",
+            "It is impossible",
+            "Use global variables"
+        ]
+    },
+    {
+        "q": "If you get `Error: generic error` from Supertest, what does it likely mean?",
+        "o": [
+            "It is often a catch-all from the underlying layer; check `err.response` if available",
+            "Supertest is broken",
+            "URL is wrong",
+            "Network is down"
+        ]
+    },
+    {
+        "q": "How do you assert that the response is NOT cached?",
+        "o": [
+            ".expect('Cache-Control', 'no-store, no-cache')",
+            ".expectNoCache()",
+            ".assertNoCache()",
+            ".fresh()"
+        ]
+    },
+    {
+        "q": "What is the purpose of `request.delete` vs `request.del`?",
+        "o": [
+            "`del` is an alias for `delete` (aliased because `delete` is a keyword in JS)",
+            "They are different methods",
+            "delete is deprecated",
+            "del is deprecated"
+        ]
+    },
+    {
+        "q": "How do you assert on `res.ok` explicitly?",
+        "o": [
+            ".expect(res => { if (!res.ok) throw new Error('Not OK'); })",
+            ".expectOk()",
+            ".isOk()",
+            ".assertOk()"
+        ]
+    },
+    {
+        "q": "Can you use Supertest with a callback AND a promise?",
+        "o": [
+            "No, if you pass a callback to `.end()`, it does not return a Promise (usually)",
+            "Yes, always",
+            "Yes, if you use .then()",
+            "Yes, if you use .catch()"
+        ]
+    },
+    {
+        "q": "How do you verify the response body matches a subset of properties?",
+        "o": [
+            "Use `jest`'s `expect(res.body).toMatchObject(...)` or similar inside `.then()`",
+            ".expectSubset({...})",
+            ".expectPartial({...})",
+            ".contains({...})"
+        ]
+    },
+    {
+        "q": "How do you handle a redirect loop in tests?",
+        "o": [
+            "Supertest/Superagent will eventually throw an error 'Too many redirects'",
+            "It hangs forever",
+            "It returns 500",
+            "It returns 200"
+        ]
+    },
+    {
+        "q": "How do you ensure a clean state for `request.agent()`?",
+        "o": [
+            "Instantiate a new agent for each test or test suite",
+            "Call `.clear()`",
+            "Call `.reset()`",
+            "Call `.clean()`"
+        ]
+    },
+    {
+        "q": "Can you verify query parameters were received by the server via Supertest?",
+        "o": [
+            "Only if the server echoes them back in the response",
+            "Yes, check `req.query` in the test",
+            "Yes, use .expectQuery()",
+            "No"
+        ]
+    },
+    {
+        "q": "How do you test HTTP verbs like `OPTIONS`?",
+        "o": [
+            ".options('/url')",
+            ".send('OPTIONS', '/url')",
+            ".opt('/url')",
+            ".meta('/url')"
+        ]
+    },
+    {
+        "q": "How do you test HTTP verbs like `HEAD`?",
+        "o": [
+            ".head('/url')",
+            ".send('HEAD', '/url')",
+            ".headerReq('/url')",
+            ".check('/url')"
+        ]
+    },
+    {
+        "q": "If testing a GraphQL API, how do you send the query?",
+        "o": [
+            ".post('/graphql').send({ query: '...' })",
+            ".graphql('...')",
+            ".queryGraph('...')",
+            ".gql('...')"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = '10';\nvar b = a - 5;\nprint(b);",
+        "o": [
+            "5",
+            "NaN",
+            "10-5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr[1]);",
+        "o": [
+            "undefined",
+            "null",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a';\nprint(s.repeat(3));",
+        "o": [
+            "aaa",
+            "3a",
+            "a3",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 0;\nprint(x || 5);",
+        "o": [
+            "5",
+            "0",
+            "true",
+            "false"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = 100;\nprint(val.toString(16));",
+        "o": [
+            "64",
+            "100",
+            "A0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.find(x => x > 1));",
+        "o": [
+            "2",
+            "1",
+            "3",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = ' '; \nprint(a.length);",
+        "o": [
+            "1",
+            "0",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(x && false);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 15;\nprint(n % 4);",
+        "o": [
+            "3",
+            "4",
+            "0",
+            "1"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr.push(3);\nprint(arr[2]);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(Object.values(obj)[0]);",
+        "o": [
+            "1",
+            "a",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x === 10);",
+        "o": [
+            "true",
+            "false",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.slice(1));",
+        "o": [
+            "bc",
+            "b",
+            "abc",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = 2;\nprint(a ** 3);",
+        "o": [
+            "8",
+            "6",
+            "9",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [10];\nprint(arr.pop());",
+        "o": [
+            "10",
+            "undefined",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = undefined;\nprint(x == null);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a-b-c';\nprint(s.split('-')[0]);",
+        "o": [
+            "a",
+            "b",
+            "c",
+            "-"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = 10;\nprint(val > 20);",
+        "o": [
+            "false",
+            "true",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 1.99;\nprint(Math.floor(n));",
+        "o": [
+            "1",
+            "2",
+            "1.99",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '1';\nvar y = '1';\nprint(x === y);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr[0]++;\nprint(arr[0]);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj['a']);",
+        "o": [
+            "1",
+            "a",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'Hello';\nprint(s.toUpperCase());",
+        "o": [
+            "HELLO",
+            "Hello",
+            "hello",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x++);",
+        "o": [
+            "10",
+            "11",
+            "9",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [];\nprint(arr.shift());",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = -5;\nprint(Math.abs(n));",
+        "o": [
+            "5",
+            "-5",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = true;\nvar b = !a;\nprint(b);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '10';\nprint(+s);",
+        "o": [
+            "10",
+            "10.0",
+            "s",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.includes(2));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nprint(JSON.stringify(obj));",
+        "o": [
+            "{}",
+            "obj",
+            "Object",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 1;\nif(x) print('ok');",
+        "o": [
+            "ok",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n / 2);",
+        "o": [
+            "5",
+            "2",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '   a   ';\nprint(s.trim());",
+        "o": [
+            "a",
+            " a ",
+            "   a   ",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr[arr.length-1]);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = null;\nprint(typeof val);",
+        "o": [
+            "object",
+            "null",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 20;\nprint(x > 10 && x < 30);",
+        "o": [
+            "true",
+            "false",
+            "20",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint('c' in obj);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar str = 'JS';\nprint(str.concat('ON'));",
+        "o": [
+            "JSON",
+            "JS",
+            "ON",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.reverse()[0]);",
+        "o": [
+            "2",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nn += 5;\nprint(n);",
+        "o": [
+            "15",
+            "10",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "How can you manually set the server address for a Test instance if not passing an app?",
+        "o": [
+            "Pass the URL string to the `request()` function instead of an app instance",
+            "Use `.setAddress(url)`",
+            "Use `.server(url)`",
+            "You cannot, you must always pass an app"
+        ]
+    },
+    {
+        "q": "What is the purpose of `.redirects(n)`?",
+        "o": [
+            "Sets the maximum number of redirects to follow",
+            "Enables redirects (boolean)",
+            "disables redirects if n=0",
+            "Both A and C"
+        ]
+    },
+    {
+        "q": "How do you handle custom response parsing (e.g., specific image format)?",
+        "o": [
+            ".parse((res, callback) => { ... })",
+            ".parser('type', fn)",
+            ".setParser(fn)",
+            ".customParse(fn)"
+        ]
+    },
+    {
+        "q": "What method allows you to pipe the response data to a stream?",
+        "o": [
+            ".pipe(stream)",
+            ".stream(stream)",
+            ".to(stream)",
+            ".write(stream)"
+        ]
+    },
+    {
+        "q": "How do you enable mutual TLS (mTLS) with client certificates in Supertest?",
+        "o": [
+            ".key(keyFile).cert(certFile) (inherited from SuperAgent)",
+            ".mtls(key, cert)",
+            ".auth(key, cert)",
+            ".secure(key, cert)"
+        ]
+    },
+    {
+        "q": "What is the effect of `.retry(2)` on a request?",
+        "o": [
+            "It retries the request 2 times if it fails (network error or 5xx depending on config)",
+            "It retries 2 times on 404",
+            "It retries indefinitely 2 times",
+            "It sends 2 requests in parallel"
+        ]
+    },
+    {
+        "q": "How do you explicitly set the Content-Type header using a shorthand method?",
+        "o": [
+            ".type('json') or .type('application/json')",
+            ".contentType('json')",
+            ".header('Content-Type', 'json')",
+            ".format('json')"
+        ]
+    },
+    {
+        "q": "How do you set the `Accept` header using a shorthand method?",
+        "o": [
+            ".accept('json')",
+            ".accepts('json')",
+            ".expectHeader('Accept', 'json')",
+            ".receive('json')"
+        ]
+    },
+    {
+        "q": "What does `.ok(res => res.status < 500)` do?",
+        "o": [
+            "It defines a callback to determine if the response should be considered an 'error' at the HTTP level",
+            "It asserts the status is less than 500",
+            "It filters responses",
+            "It sets the status code to 500"
+        ]
+    },
+    {
+        "q": "How do you serialize a custom object format before sending?",
+        "o": [
+            ".serialize(serializerFn)",
+            ".stringify(fn)",
+            ".format(fn)",
+            ".convert(fn)"
+        ]
+    },
+    {
+        "q": "How do you unset a header that might have been set globally?",
+        "o": [
+            ".unset('Header-Name')",
+            ".removeHeader('Header-Name')",
+            ".deleteHeader('Header-Name')",
+            ".set('Header-Name', null)"
+        ]
+    },
+    {
+        "q": "How do you listen to the 'progress' event for uploads?",
+        "o": [
+            ".on('progress', event => { ... })",
+            ".progress(event => { ... })",
+            ".watch('progress')",
+            ".trackProgress()"
+        ]
+    },
+    {
+        "q": "Can you use Supertest to test a server running on a remote host?",
+        "o": [
+            "Yes, by passing the full URL (e.g., 'http://remote.com') to `request()`",
+            "No, only localhost",
+            "No, only Express apps",
+            "Yes, but you need a proxy"
+        ]
+    },
+    {
+        "q": "What property of the response object contains the unparsed binary body?",
+        "o": [
+            "res.body (if Buffer) or res.text (if string) - verify with `.buffer(true)`",
+            "res.raw",
+            "res.data",
+            "res.content"
+        ]
+    },
+    {
+        "q": "How do you use a PFX certificate for SSL/TLS?",
+        "o": [
+            ".pfx(pfxData)",
+            ".cert(pfxData)",
+            ".ssl(pfxData)",
+            ".tls(pfxData)"
+        ]
+    },
+    {
+        "q": "How do you assert that a specific cookie is NOT present?",
+        "o": [
+            "Inspect `res.headers['set-cookie']` and ensure the cookie name is missing",
+            ".expectNoCookie('name')",
+            ".assertNoCookie('name')",
+            ".cookieMissing('name')"
+        ]
+    },
+    {
+        "q": "What happens if you mix `.send({a:1})` and `.field('b', 2)`?",
+        "o": [
+            "This generally throws or behaves unexpectedly; `.field()` is for multipart, `.send()` is for JSON/UrlEncoded. They shouldn't be mixed for the same request body type contextually.",
+            "It merges them into JSON",
+            "It merges them into Multipart",
+            "It sends two requests"
+        ]
+    },
+    {
+        "q": "How do you specify a timeout specifically for the response (waiting for headers)?",
+        "o": [
+            ".timeout({ response: 5000 })",
+            ".responseTimeout(5000)",
+            ".wait(5000)",
+            ".time(5000)"
+        ]
+    },
+    {
+        "q": "How do you specify a deadline timeout (total time for the request)?",
+        "o": [
+            ".timeout({ deadline: 5000 })",
+            ".deadline(5000)",
+            ".totalTimeout(5000)",
+            ".maxTime(5000)"
+        ]
+    },
+    {
+        "q": "What is the return type of `request(app).get('/')`?",
+        "o": [
+            "A `Test` object (which inherits from `Request` in SuperAgent)",
+            "A Promise",
+            "A Stream",
+            "An undefined object"
+        ]
+    },
+    {
+        "q": "Can you use `await` directly on the `Test` object?",
+        "o": [
+            "Yes, because it implements a `then` method (Thenable)",
+            "No, you must call .end()",
+            "No, you must call .toPromise()",
+            "No"
+        ]
+    },
+    {
+        "q": "How do you verify the response charset?",
+        "o": [
+            "Check `res.charset` or `res.type` (which may include charset)",
+            ".expectCharset('utf-8')",
+            ".assertCharset('utf-8')",
+            ".charset('utf-8')"
+        ]
+    },
+    {
+        "q": "How do you simulate a socket error?",
+        "o": [
+            "This is difficult with Supertest alone; usually requires mocking the underlying server or network layer",
+            ".simulateError('socket')",
+            ".error('socket')",
+            ".socketDown()"
+        ]
+    },
+    {
+        "q": "How do you Test a server that starts properly only after an async initialization?",
+        "o": [
+            "Wait for the initialization in `beforeAll`, then pass the server instance to `request()`",
+            "Supertest waits automatically",
+            "Pass a promise to `request()`",
+            "You cannot"
+        ]
+    },
+    {
+        "q": "What does `.expect(200, done)` do?",
+        "o": [
+            "Asserts status 200 and calls `done(err)` when finished (standard callback style)",
+            "Asserts 200 and returns a promise",
+            "Asserts 200 and waits",
+            "Asserts 200 and pauses"
+        ]
+    },
+    {
+        "q": "How do you assert deep equality on a response body using `.expect` without a function?",
+        "o": [
+            "Pass the object as the second argument: `.expect(200, { data: 'test' })`",
+            ".expectBody({ data: 'test' })",
+            ".expectDeep({ data: 'test' })",
+            ".assertBody({ data: 'test' })"
+        ]
+    },
+    {
+        "q": "What if you pass a string to `.expect(string)`?",
+        "o": [
+            "It asserts that the response body (text) equals the string",
+            "It asserts the status is the string parsed as int",
+            "It asserts a header exists",
+            "It throws an error"
+        ]
+    },
+    {
+        "q": "How do you handle 'EADDRINUSE' when running parallel tests with Supertest?",
+        "o": [
+            "Supertest usually spins up servers on random ephemeral ports if passed an app, avoiding conflicts. If binding manually, use port 0.",
+            "Use fixed ports 3000, 3001...",
+            "Run sequentially only",
+            "Delete the address"
+        ]
+    },
+    {
+        "q": "How do you configure CA certificates for trusted self-signed certs?",
+        "o": [
+            ".ca(caCert)",
+            ".trust(caCert)",
+            ".root(caCert)",
+            ".authority(caCert)"
+        ]
+    },
+    {
+        "q": "What does `res.redirect` boolean indicate?",
+        "o": [
+            "Whether the response is a redirect (status 3xx)",
+            "Whether redirects are enabled",
+            "Whether the request was redirected",
+            "Current redirect count"
+        ]
+    },
+    {
+        "q": "How do you access the redirect history?",
+        "o": [
+            "`res.redirects` (array of formatted strings)",
+            "`res.history`",
+            "`res.locations`",
+            "`res.trace`"
+        ]
+    },
+    {
+        "q": "How do you disable HTTP/2 if the server supports it but you want to test HTTP/1?",
+        "o": [
+            "Configure the server or agent options (Supertest/SuperAgent is primarily HTTP/1.x, support for HTTP/2 varies by version/plugin)",
+            ".http1()",
+            ".disableHttp2()",
+            ".protocol('http/1.1')"
+        ]
+    },
+    {
+        "q": "How do you verify `Content-Length` matches the body size?",
+        "o": [
+            "It's implicitly handled by the server, but you can assert `res.header['content-length']` equals `res.text.length` (byte length)",
+            ".expectContentLength()",
+            ".assertLength()",
+            ".verifyLength()"
+        ]
+    },
+    {
+        "q": "How do you send a request without a body but with Content-Type header?",
+        "o": [
+            ".set('Content-Type', 'application/json').send() (or .send(undefined))",
+            ".type('json')",
+            ".sendEmpty()",
+            ".emptyBody()"
+        ]
+    },
+    {
+        "q": "What happens if you pass a number to `.send()`?",
+        "o": [
+            "It sends it as a string representation or JSON depending on Content-Type defaults",
+            "It sends raw bytes",
+            "It throws an error",
+            "It sends status code"
+        ]
+    },
+    {
+        "q": "How do you verify the `ETag` header is present?",
+        "o": [
+            ".expect('ETag', /.+/)",
+            ".expectHeader('ETag')",
+            ".hasETag()",
+            ".checkETag()"
+        ]
+    },
+    {
+        "q": "How do you test a WebSocket upgrade endpoint with Supertest?",
+        "o": [
+            "Supertest is for HTTP requests; use a library like `ws` or `superwstest` for WebSockets",
+            ".ws('/socket')",
+            ".upgrade('/socket')",
+            ".websocket()"
+        ]
+    },
+    {
+        "q": "How do you capture cookies from a login response for subsequent requests?",
+        "o": [
+            "Extract `res.headers['set-cookie']`, save it, and use `.set('Cookie', savedCookie)` in next requests, or use `agent`",
+            "It listens automatically",
+            "Use .saveCookies()",
+            "Use .persist()"
+        ]
+    },
+    {
+        "q": "How does `agent` distinguish between different user sessions?",
+        "o": [
+            "You create a separate `request.agent(app)` instance for each user/session",
+            "It uses a global cookie jar",
+            "It keys by IP address",
+            "It cannot distinguish"
+        ]
+    },
+    {
+        "q": "How do you verify that a response is HTML?",
+        "o": [
+            ".expect('Content-Type', /html/)",
+            ".expectHTML()",
+            ".isHTML()",
+            ".assertMime('html')"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 5;\nvar y = '5';\nprint(x == y);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.indexOf(4));",
+        "o": [
+            "-1",
+            "0",
+            "undefined",
+            "null"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'hello';\nprint(s.charAt(0));",
+        "o": [
+            "h",
+            "e",
+            "H",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar b = false;\nprint(b.toString());",
+        "o": [
+            "false",
+            "true",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 100;\nprint(Math.sqrt(n));",
+        "o": [
+            "10",
+            "100",
+            "50",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\ndelete obj.a;\nprint(obj.a);",
+        "o": [
+            "undefined",
+            "1",
+            "null",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nvar arr2 = arr.concat([3]);\nprint(arr2.length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '10';\nprint(parseInt(x) + 5);",
+        "o": [
+            "15",
+            "105",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a,b,c';\nprint(s.replace(',', '-'));",
+        "o": [
+            "a-b,c",
+            "a-b-c",
+            "a,b,c",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n > 5 ? 'yes' : 'no');",
+        "o": [
+            "yes",
+            "no",
+            "true",
+            "false"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.some(x => x > 2));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1, b: 2 };\nprint(Object.keys(obj).length);",
+        "o": [
+            "2",
+            "1",
+            "0",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 0;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'ABC';\nprint(s.toLowerCase());",
+        "o": [
+            "abc",
+            "ABC",
+            "Abc",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 3.14;\nprint(Math.ceil(n));",
+        "o": [
+            "4",
+            "3",
+            "3.14",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(Array.isArray(arr));",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar val = undefined;\nprint(typeof val);",
+        "o": [
+            "undefined",
+            "object",
+            "null",
+            "string"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nx *= 2;\nprint(x);",
+        "o": [
+            "20",
+            "10",
+            "12",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = ' hello ';\nprint(s.length);",
+        "o": [
+            "7",
+            "5",
+            "6",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.every(x => x > 0));",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nobj.a = 1;\nprint(obj.b);",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '5';\nprint(-x);",
+        "o": [
+            "-5",
+            "5",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar date = new Date(2023, 0, 1);\nprint(date.getMonth());",
+        "o": [
+            "0",
+            "1",
+            "January",
+            "2023"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [10, 20];\nprint(arr.join('-'));",
+        "o": [
+            "10-20",
+            "10,20",
+            "[10, 20]",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'A';\nprint(s.charCodeAt(0));",
+        "o": [
+            "65",
+            "97",
+            "A",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(x || true);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n.toFixed(2));",
+        "o": [
+            "10.00",
+            "10",
+            "10.0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\narr.unshift(0);\nprint(arr[0]);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nvar obj2 = obj;\nobj2.a = 2;\nprint(obj.a);",
+        "o": [
+            "2",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = null;\nprint(x == undefined);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '123';\nprint(s.substring(0, 1));",
+        "o": [
+            "1",
+            "12",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 0;\nprint(n++);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.slice(1).length);",
+        "o": [
+            "2",
+            "3",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x !== '10');",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a';\nprint(s + 'b');",
+        "o": [
+            "ab",
+            "a",
+            "b",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(typeof n);",
+        "o": [
+            "number",
+            "string",
+            "object",
+            "int"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [];\nprint(arr.pop());",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(String(x));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 4.5;\nprint(parseInt(n));",
+        "o": [
+            "4",
+            "5",
+            "4.5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint('a' in obj);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\narr.length = 0;\nprint(arr[0]);",
+        "o": [
+            "undefined",
+            "1",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x % 3);",
+        "o": [
+            "1",
+            "3",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s[1]);",
+        "o": [
+            "b",
+            "a",
+            "c",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = '1';\nvar b = 1;\nprint(a == b);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\narr.splice(1, 1);\nprint(arr.length);",
+        "o": [
+            "2",
+            "3",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = false;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 100;\nprint(n.toString());",
+        "o": [
+            "100",
+            "100.0",
+            "n",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj.toString());",
+        "o": [
+            "[object Object]",
+            "{ a: 1 }",
+            "obj",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr[2]);",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\n{ var x = 20; }\nprint(x);",
+        "o": [
+            "20",
+            "10",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = ' ';\nprint(!!s);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 0;\nprint(n === 0);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.push(2));",
+        "o": [
+            "2",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x / 0);",
+        "o": [
+            "Infinity",
+            "0",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.startsWith('a'));",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = true;\nvar b = false;\nprint(a && b);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = '10';\nprint(Number(x));",
+        "o": [
+            "10",
+            "NaN",
+            "10.0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.map(x => x * 2)[0]);",
+        "o": [
+            "2",
+            "1",
+            "4",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nprint(obj.a === undefined);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.split('').length);",
+        "o": [
+            "3",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 'hello';\nprint(x.includes('ll'));",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What status code represents 'Unprocessable Entity'?",
+        "o": [
+            "422",
+            "400",
+            "500",
+            "418"
+        ]
+    },
+    {
+        "q": "What status code represents 'Too Many Requests'?",
+        "o": [
+            "429",
+            "420",
+            "503",
+            "408"
+        ]
+    },
+    {
+        "q": "What status code is 'I am a teapot'?",
+        "o": [
+            "418",
+            "420",
+            "400",
+            "404"
+        ]
+    },
+    {
+        "q": "How can you expect a response body to match a regular expression?",
+        "o": [
+            ".expect(/pattern/)",
+            ".expectBody(/pattern/)",
+            ".match(/pattern/)",
+            ".bodyMatch(/pattern/)"
+        ]
+    },
+    {
+        "q": "How do you assert that a response header exists regardless of value?",
+        "o": [
+            ".expect('Header-Name', /.+/)",
+            ".expect('Header-Name')",
+            ".hasHeader('Header-Name')",
+            ".exists('Header-Name')"
+        ]
+    },
+    {
+        "q": "What method sends a DELETE request?",
+        "o": [
+            ".delete('/path') or .del('/path')",
+            ".remove('/path')",
+            ".destroy('/path')",
+            ".erase('/path')"
+        ]
+    },
+    {
+        "q": "How do you send a PATCH request?",
+        "o": [
+            ".patch('/path')",
+            ".update('/path')",
+            ".change('/path')",
+            ".modify('/path')"
+        ]
+    },
+    {
+        "q": "What is the correct way to test an API that requires an API key in the header?",
+        "o": [
+            ".set('x-api-key', 'your-key')",
+            ".auth('your-key')",
+            ".key('your-key')",
+            ".apiKey('your-key')"
+        ]
+    },
+    {
+        "q": "How would you debug a failing Supertest request?",
+        "o": [
+            "Inspect `err.response.text`, `err.status`, or log the response body in the `.end()` callback",
+            "Use debugger;",
+            "Run with DEBUG=supertest",
+            "All of the above"
+        ]
+    },
+    {
+        "q": "Can Supertest handle 'multipart/form-data' without an attached file?",
+        "o": [
+            "Yes, using `.field()` for text fields",
+            "No, .attach() is required",
+            "No, stick to urlencoded",
+            "Yes, using .send()"
+        ]
+    },
+    {
+        "q": "How do you chain assertions on the response object property?",
+        "o": [
+            "Use `.expect(res => ...)` and write manual assertions",
+            ".expectProp('a', 1).expectProp('b', 2)",
+            ".check('a', 1).check('b', 2)",
+            "You cannot chain"
+        ]
+    },
+    {
+        "q": "What does a 502 status code mean?",
+        "o": [
+            "Bad Gateway",
+            "Service Unavailable",
+            "Gateway Timeout",
+            "Internal Server Error"
+        ]
+    },
+    {
+        "q": "What does a 504 status code mean?",
+        "o": [
+            "Gateway Timeout",
+            "Bad Gateway",
+            "Time limit exceeded",
+            "Request Timeout"
+        ]
+    },
+    {
+        "q": "How do you test if a route returns a 404 for an unknown ID?",
+        "o": [
+            ".get('/users/99999').expect(404)",
+            ".get('/users/unknown').expect(400)",
+            ".expectNotFound('/users/99999')",
+            ".test404('/users/99999')"
+        ]
+    },
+    {
+        "q": "How do you assert that a Content-Type includes 'charset=utf-8'?",
+        "o": [
+            ".expect('Content-Type', /charset=utf-8/)",
+            ".expect('charset=utf-8')",
+            ".charset('utf-8')",
+            ".type('utf-8')"
+        ]
+    },
+    {
+        "q": "What does `.buffer(true)` force?",
+        "o": [
+            "Forces buffering of the response allowing body access even if binary",
+            "Disables buffering",
+            "Streams the response",
+            "Buffers the request"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = [1, 2];\nprint(x[2]);",
+        "o": [
+            "undefined",
+            "2",
+            "error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'test';\nprint(s.indexOf('e'));",
+        "o": [
+            "1",
+            "2",
+            "0",
+            "-1"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n !== 5);",
+        "o": [
+            "true",
+            "false",
+            "5",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar a = [1];\nvar b = [1];\nprint(a == b);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x > 5 && x < 15);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a b';\nprint(s.trim().length);",
+        "o": [
+            "3",
+            "2",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = null;\nprint(!x);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 5;\nn *= 3;\nprint(n);",
+        "o": [
+            "15",
+            "5",
+            "3",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr[arr.length]);",
+        "o": [
+            "undefined",
+            "3",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '100';\nprint(+s + 1);",
+        "o": [
+            "101",
+            "1001",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(x ? 1 : 0);",
+        "o": [
+            "1",
+            "0",
+            "true",
+            "false"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { x: 1 };\nprint('x' in obj);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.pop());",
+        "o": [
+            "1",
+            "undefined",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = -10;\nprint(Math.abs(n));",
+        "o": [
+            "10",
+            "-10",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'abc';\nprint(s.toUpperCase());",
+        "o": [
+            "ABC",
+            "abc",
+            "Abc",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 0;\nprint(Boolean(x));",
+        "o": [
+            "false",
+            "true",
+            "0",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.join(''));",
+        "o": [
+            "12",
+            "1,2",
+            "[1,2]",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n % 2);",
+        "o": [
+            "0",
+            "1",
+            "10",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = ' ';\nprint(s.trim() === '');",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x; \nprint(x);",
+        "o": [
+            "undefined",
+            "null",
+            "Error",
+            "0"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.length);",
+        "o": [
+            "1",
+            "0",
+            "2",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = null;\nprint(obj);",
+        "o": [
+            "null",
+            "undefined",
+            "{}",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = '123';\nprint(typeof +n);",
+        "o": [
+            "number",
+            "string",
+            "object",
+            "int"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 10;\nprint(x + '');",
+        "o": [
+            "10",
+            "10.0",
+            "NaN",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar b = !true;\nprint(b);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.reverse());",
+        "o": [
+            "[2, 1]",
+            "[1, 2]",
+            "2,1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'a';\nprint(s.repeat(2));",
+        "o": [
+            "aa",
+            "a2",
+            "2a",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 5;\nprint(n > 3);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 'abc';\nprint(x.slice(0, 1));",
+        "o": [
+            "a",
+            "ab",
+            "b",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = { a: 1 };\nprint(obj['a']);",
+        "o": [
+            "1",
+            "a",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1];\nprint(arr.concat([2]));",
+        "o": [
+            "[1, 2]",
+            "1,2",
+            "[1]",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = '10';\nprint(parseInt(s));",
+        "o": [
+            "10",
+            "10.0",
+            "s",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 100;\nprint(n / 10);",
+        "o": [
+            "10",
+            "100",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = true;\nprint(!x);",
+        "o": [
+            "false",
+            "true",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2];\nprint(arr.indexOf(1));",
+        "o": [
+            "0",
+            "1",
+            "-1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'hi';\nprint(s + ' there');",
+        "o": [
+            "hi there",
+            "hi",
+            "there",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n == '10');",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar obj = {};\nprint(Object.keys(obj).length);",
+        "o": [
+            "0",
+            "1",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar arr = [1, 2, 3];\nprint(arr.includes(3));",
+        "o": [
+            "true",
+            "false",
+            "1",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar x = 1;\nprint(x++);",
+        "o": [
+            "1",
+            "2",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar s = 'ABC';\nprint(s.length);",
+        "o": [
+            "3",
+            "1",
+            "0",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar b = false;\nprint(b || true);",
+        "o": [
+            "true",
+            "false",
+            "undefined",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is the output of this code?",
+        "c": "/* Pseudocode */\nvar n = 10;\nprint(n * 0);",
+        "o": [
+            "0",
+            "10",
+            "1",
+            "Error"
+        ]
+    }
+]
