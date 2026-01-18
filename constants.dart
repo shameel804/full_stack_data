@@ -2061,6 +2061,7 @@ class Constants {
     AllLanguages(name: 'Vue', apiName: "vue", tier: LangTier.free),
     AllLanguages(name: 'Node.js', apiName: "node", tier: LangTier.free),
     AllLanguages(name: 'Python', apiName: "python", tier: LangTier.free),
+    AllLanguages(name: 'Django', apiName: "django", tier: LangTier.free),
     AllLanguages(name: 'Java', apiName: "java", tier: LangTier.vip),
     AllLanguages(name: 'C#', apiName: "csharp", tier: LangTier.vip),
     AllLanguages(name: 'C++', apiName: "cpp", tier: LangTier.vip),
