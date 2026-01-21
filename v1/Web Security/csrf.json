@@ -1,0 +1,4034 @@
+[
+    {
+        "q": "What does CSRF stand for?",
+        "o": [
+            "Cross-Site Request Forgery",
+            "Cross-Site Resource Format",
+            "Cascading Style Request Format",
+            "Client-Side Request Forgery"
+        ]
+    },
+    {
+        "q": "What is the primary goal of a CSRF attack?",
+        "o": [
+            "To trick a user's browser into executing an unwanted action on a site where they are authenticated",
+            "To steal the user's password directly",
+            "To inspect the server database",
+            "To decrypt SSL traffic"
+        ]
+    },
+    {
+        "q": "Which Http Method is theoretically safer against CSRF if used correctly (no side effects)?",
+        "o": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ]
+    },
+    {
+        "q": "Does CSRF require the victim to be logged in?",
+        "o": [
+            "Yes, typically relies on active session/cookies",
+            "No, can attack anyone",
+            "Only for admins",
+            "Only for guests"
+        ]
+    },
+    {
+        "q": "What is a 'CSRF Token'?",
+        "o": [
+            "A secret, unique, unpredictable value submitted with state-changing requests",
+            "A password",
+            "A username",
+            "A cookie name"
+        ]
+    },
+    {
+        "q": "Where should a CSRF token be validated?",
+        "o": [
+            "On the server side",
+            "On the client side",
+            "In the browser cache",
+            "In the database logs"
+        ]
+    },
+    {
+        "q": "Can a CSRF attack read the response from the forged request?",
+        "o": [
+            "Generally No (due to Same-Origin Policy)",
+            "Yes, always",
+            "Yes, if using POST",
+            "Yes, if using GET"
+        ]
+    },
+    {
+        "q": "What is 'SameSite' cookie attribute?",
+        "o": [
+            "A browser security mechanism to control when cookies are sent with cross-site requests",
+            "A website layout",
+            "A database field",
+            "A caching header"
+        ]
+    },
+    {
+        "q": "What does `SameSite=Strict` do?",
+        "o": [
+            "Prevents sending cookie on any cross-site request (even top-level navigation)",
+            "Allows all requests",
+            "Allows only GET requests",
+            "Allows only POST requests"
+        ]
+    },
+    {
+        "q": "What does `SameSite=Lax` do?",
+        "o": [
+            "Sends cookies on top-level navigations (safe HTTP methods) but blocks on subresources (like images/frames)",
+            "Blocks everything",
+            "Allows everything",
+            "Deletes cookies"
+        ]
+    },
+    {
+        "q": "What is the default SameSite value in modern browsers if not specified?",
+        "o": [
+            "Lax",
+            "Strict",
+            "None",
+            "Normal"
+        ]
+    },
+    {
+        "q": "If `SameSite=None` is used, what other attribute is required?",
+        "o": [
+            "Secure",
+            "HttpOnly",
+            "Domain",
+            "Path"
+        ]
+    },
+    {
+        "q": "What is 'Synchronizer Token Pattern'?",
+        "o": [
+            "Server generates token, client submits it, server verifies match",
+            "Syncing clocks",
+            "Syncing files",
+            "Syncing databases"
+        ]
+    },
+    {
+        "q": "Where should the CSRF token be stored on the client for AJAX requests?",
+        "o": [
+            "HTML meta tag or JS variable (readable by same-origin JS)",
+            "In a public cookie",
+            "In the URL bar",
+            "In the page title"
+        ]
+    },
+    {
+        "q": "How is the CSRF token usually sent in AJAX requests?",
+        "o": [
+            "Custom HTTP Header (e.g. X-CSRF-Token)",
+            "As a cookie only",
+            "As a file",
+            "As an image"
+        ]
+    },
+    {
+        "q": "Is 'Double Submit Cookie' a valid CSRF defense?",
+        "o": [
+            "Yes, stateless defense where token is in cookie and request body/header",
+            "No, never works",
+            "Only for PHP",
+            "Only for Java"
+        ]
+    },
+    {
+        "q": "What is the main advantage of Double Submit Cookie?",
+        "o": [
+            "No server-side state required (session independent)",
+            "It is faster",
+            "It is encrypted",
+            "It uses less bandwidth"
+        ]
+    },
+    {
+        "q": "Does checking the 'Referer' header prevent CSRF?",
+        "o": [
+            "It can help as defense-in-depth, but unreliable (can be spoofed/omitted)",
+            "Yes, completely",
+            "No, useless",
+            "Only in Firefox"
+        ]
+    },
+    {
+        "q": "Does checking the 'Origin' header prevent CSRF?",
+        "o": [
+            "Stronger than Referer, but still should be used with tokens",
+            "Yes, standalone solution",
+            "No, useless",
+            "Only in Chrome"
+        ]
+    },
+    {
+        "q": "What is 'Login CSRF'?",
+        "o": [
+            "Attacker forces victim to log in to attacker's account",
+            "Stealing login",
+            "Deleting login",
+            "Sharing login"
+        ]
+    },
+    {
+        "q": "Why is Login CSRF dangerous?",
+        "o": [
+            "Victim activity (search history, credit card) is saved to attacker's account",
+            "Victim sees funny images",
+            "Victim logs out",
+            "Victim sees ads"
+        ]
+    },
+    {
+        "q": "Does using JSON APIs automatically prevent CSRF?",
+        "o": [
+            "No, but often requires CORS + Preflight which helps (if content-type checked)",
+            "Yes, JSON is safe",
+            "Only if using XML",
+            "Only if GET"
+        ]
+    },
+    {
+        "q": "How can an attacker send JSON via CSRF without Preflight?",
+        "o": [
+            "Using `<form>` with text/plain, resulting in valid JSON body but wrong Content-Type",
+            "They can't",
+            "Using Flash",
+            "Using Java"
+        ]
+    },
+    {
+        "q": "Why is verifying `Content-Type: application/json` important?",
+        "o": [
+            "Prevents simple HTML form CSRF (which cannot send application/json)",
+            "It makes parsing faster",
+            "It saves memory",
+            "It is standard"
+        ]
+    },
+    {
+        "q": "What is a 'Per-Session' CSRF token?",
+        "o": [
+            "Token stays same for entire session",
+            "Token changes every request",
+            "Token changes every hour",
+            "Token changes every login"
+        ]
+    },
+    {
+        "q": "What is a 'Per-Request' CSRF token?",
+        "o": [
+            "Token changes with every single request (more secure, harder usability)",
+            "Token never changes",
+            "Token is static",
+            "Token is public"
+        ]
+    },
+    {
+        "q": "What happens if a user opens multiple tabs with Per-Request tokens?",
+        "o": [
+            "Ideally handled correctly, but can cause sync issues/errors if not managed well",
+            "Nothing",
+            "Browser crashes",
+            "User logs out"
+        ]
+    },
+    {
+        "q": "Can XSS be used to bypass CSRF protection?",
+        "o": [
+            "Yes, XSS runs in victim's browser and can read/send tokens",
+            "No",
+            "Only if token is in cookie",
+            "Only if token is in header"
+        ]
+    },
+    {
+        "q": "Is CAPTCHA a defense against CSRF?",
+        "o": [
+            "Yes, requires human interaction, stopping automated forgery",
+            "No",
+            "Only reCAPTCHA",
+            "Only logic puzzles"
+        ]
+    },
+    {
+        "q": "Is 'Re-Authentication' (password check) a defense against CSRF?",
+        "o": [
+            "Yes, attacker doesn't know password",
+            "No",
+            "Only for banks",
+            "Only for email"
+        ]
+    },
+    {
+        "q": "Which framework has built-in CSRF protection?",
+        "o": [
+            "Django, Rails, Laravel, Spring Security etc.",
+            "None",
+            "Only PHP",
+            "Only Node"
+        ]
+    },
+    {
+        "q": "Does JWT stored in `localStorage` need CSRF protection?",
+        "o": [
+            "No (explicitly attached by JS), but vulnerable to XSS",
+            "Yes",
+            "Maybe",
+            "Only if HttpOnly"
+        ]
+    },
+    {
+        "q": "Does JWT stored in `Cookie` (HttpOnly) need CSRF protection?",
+        "o": [
+            "Yes, browser sends cookie automatically",
+            "No",
+            "Only if Secure",
+            "Only if Signed"
+        ]
+    },
+    {
+        "q": "What is 'Flash' CSRF (historical)?",
+        "o": [
+            "Using Flash to send cross-domain requests with headers",
+            "Flash mob",
+            "Flash light",
+            "Flash drive"
+        ]
+    },
+    {
+        "q": "What is `crossdomain.xml`?",
+        "o": [
+            "Policy file allowing Flash/Silverlight cross-domain access",
+            "HTML file",
+            "CSS file",
+            "JS file"
+        ]
+    },
+    {
+        "q": "Why is `crossdomain.xml` dangerous if `*` is allowed?",
+        "o": [
+            "Allows any site to send authenticated requests (CSRF/Data theft)",
+            "It is slow",
+            "It is big",
+            "It is ugly"
+        ]
+    },
+    {
+        "q": "Can `GET` requests be dangerous in CSRF?",
+        "o": [
+            "Yes, if GET request changes state (bad practice)",
+            "No, GET is always safe",
+            "Only if URL is long",
+            "Only if URL is short"
+        ]
+    },
+    {
+        "q": "What is 'Clickjacking' vs CSRF?",
+        "o": [
+            "Clickjacking hijacks clicks (UI), CSRF hijacks the request (Network)",
+            "They are same",
+            "Clickjacking is server side",
+            "CSRF is client side"
+        ]
+    },
+    {
+        "q": "Can you have CSRF on a static HTML site?",
+        "o": [
+            "No, no state/session to forge actions on",
+            "Yes",
+            "Only if JS enabled",
+            "Only if CSS enabled"
+        ]
+    },
+    {
+        "q": "What is the 'Origin' header?",
+        "o": [
+            "Identifies the origin that initiated the request",
+            "Identifies the user",
+            "Identifies the browser",
+            "Identifies the OS"
+        ]
+    },
+    {
+        "q": "When is the 'Origin' header sent?",
+        "o": [
+            "Cross-origin requests and POST/PUT/DELETE",
+            "Only GET",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What if CSRF token is leaked in URL (GET)?",
+        "o": [
+            "Can be captured via Referer/History/Logs (Vulnerability)",
+            "It is fine",
+            "It is secure",
+            "It expires instantly"
+        ]
+    },
+    {
+        "q": "How to prevent token leakage in URL?",
+        "o": [
+            "Use POST/PUT/DELETE for actions, put token in Body/Header",
+            "Use encryption",
+            "Use compression",
+            "Use shortening"
+        ]
+    },
+    {
+        "q": "Does `Content-Security-Policy` prevent CSRF?",
+        "o": [
+            "No, primarily for XSS",
+            "Yes, completely",
+            "Yes, partially",
+            "Only strict-dynamic"
+        ]
+    },
+    {
+        "q": "Does `X-Frame-Options` prevent CSRF?",
+        "o": [
+            "No, prevents Clickjacking",
+            "Yes",
+            "Only in IE",
+            "Only in Safari"
+        ]
+    },
+    {
+        "q": "What is 'UI Redressing'?",
+        "o": [
+            "Another name for Clickjacking",
+            "CSRF",
+            "XSS",
+            "SQLi"
+        ]
+    },
+    {
+        "q": "Can a CSRF attack upload a file?",
+        "o": [
+            "Yes, using a forged form submission",
+            "No",
+            "Only text",
+            "Only numbers"
+        ]
+    },
+    {
+        "q": "How to prevent CSRF on file upload?",
+        "o": [
+            "Require CSRF token in the multipart form",
+            "Disallow uploads",
+            "Check file size",
+            "Check file type"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Site WebSocket Hijacking' (CSWSH)?",
+        "o": [
+            "CSRF equivalent for WebSockets (connecting from malicious origin)",
+            "Stealing sockets",
+            "Breaking sockets",
+            "Local socket"
+        ]
+    },
+    {
+        "q": "How to prevent CSWSH?",
+        "o": [
+            "Check Origin header during WebSocket handshake",
+            "Use SSL",
+            "Use VPN",
+            "Use Proxy"
+        ]
+    },
+    {
+        "q": "Can a CSRF attack work if the site uses HTTP Basic Auth?",
+        "o": [
+            "Yes, browser sends credentials automatically",
+            "No",
+            "Only if saved",
+            "Only if specific user"
+        ]
+    },
+    {
+        "q": "What is 'Pre-flight' request?",
+        "o": [
+            "OPTIONS request sent by browser before actual cross-origin request",
+            "Flight check",
+            "Pilot check",
+            "Airport check"
+        ]
+    },
+    {
+        "q": "Does Pre-flight prevent CSRF?",
+        "o": [
+            "Yes, if server validates checks and doesn't allow the action via OPTIONS",
+            "No",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Simple Request' in CORS terms?",
+        "o": [
+            "Request that doesn't trigger pre-flight (e.g. standard form POST)",
+            "Short request",
+            "Fast request",
+            "Small request"
+        ]
+    },
+    {
+        "q": "Is a standard HTML form POST a 'Simple Request'?",
+        "o": [
+            "Yes",
+            "No",
+            "Maybe",
+            "Only GET"
+        ]
+    },
+    {
+        "q": "Why are 'Simple Requests' dangerous for CSRF?",
+        "o": [
+            "They execute immediately without permission check (pre-flight)",
+            "They are slow",
+            "They are big",
+            "They are loud"
+        ]
+    },
+    {
+        "q": "What is the weakness of 'Secret Cookie' pattern?",
+        "o": [
+            "If attacker sets the cookie (Cookie Tossing), they can bypass check",
+            "Cookie expires",
+            "Cookie is small",
+            "Cookie is tasty"
+        ]
+    },
+    {
+        "q": "How to mitigate Cookie Tossing in CSRF defense?",
+        "o": [
+            "Use strict cookie paths/domains, or bind token to session side",
+            "Allow all cookies",
+            "Ignore cookies",
+            "Delete cookies"
+        ]
+    },
+    {
+        "q": "What is 'BREACH' attack?",
+        "o": [
+            "Compression side-channel attack (can steal CSRF tokens)",
+            "Wall breach",
+            "Door breach",
+            "Data breach"
+        ]
+    },
+    {
+        "q": "How to mitigate BREACH for CSRF tokens?",
+        "o": [
+            "Masking/XORing the token (so it changes every time)",
+            "Disable SSL",
+            "Disable HTTP",
+            "Disable Web"
+        ]
+    },
+    {
+        "q": "What is 'Token Masking'?",
+        "o": [
+            "XORing the real token with a random nonce",
+            "Hiding token",
+            "Painting token",
+            "Encrypting token"
+        ]
+    },
+    {
+        "q": "Does Rails use Token Masking?",
+        "o": [
+            "Yes",
+            "No",
+            "Sometimes",
+            "Only in debug"
+        ]
+    },
+    {
+        "q": "Can you use UUID for CSRF token?",
+        "o": [
+            "Yes, as long as it is cryptographically secure (unpredictable)",
+            "No",
+            "Only numbers",
+            "Only letters"
+        ]
+    },
+    {
+        "q": "Should CSRF token be in the URL?",
+        "o": [
+            "No, avoid it (risk of leakage)",
+            "Yes",
+            "Sometimes",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Strict-Dynamic' CSP?",
+        "o": [
+            "Trusts scripts spawned by trusted scripts (irrelevant to CSRF)",
+            "Strict mode",
+            "Dynamic mode",
+            "None"
+        ]
+    },
+    {
+        "q": "What is the primary method to prevent CSRF in ASP.NET?",
+        "o": [
+            "Anti-Forgery Tokens",
+            "ViewState",
+            "SessionID",
+            "Cookies"
+        ]
+    },
+    {
+        "q": "What is `__RequestVerificationToken`?",
+        "o": [
+            "Common name for ASP.NET CSRF token field",
+            "A cookie",
+            "A header",
+            "A variable"
+        ]
+    },
+    {
+        "q": "What is 'Idempotent'?",
+        "o": [
+            "Operation can be applied multiple times without changing result beyond initial application",
+            "Powerful",
+            "Fast",
+            "Slow"
+        ]
+    },
+    {
+        "q": "Why should safe methods (GET) be idempotent?",
+        "o": [
+            "To prevent accidental state change (and CSRF via img tags)",
+            "To be faster",
+            "To be cleaner",
+            "To be smaller"
+        ]
+    },
+    {
+        "q": "Can an attacker read a CSRF token from a frame?",
+        "o": [
+            "No, SOP prevents reading cross-origin frame content",
+            "Yes",
+            "Only from parent",
+            "Only from child"
+        ]
+    },
+    {
+        "q": "What if the site has an XSS vulnerability?",
+        "o": [
+            "CSRF protection is bypassed (attacker reads token)",
+            "Nothing changes",
+            "It is safer",
+            "It is faster"
+        ]
+    },
+    {
+        "q": "Does 'Private Browsing' prevent CSRF?",
+        "o": [
+            "No, if user is logged in within that private window",
+            "Yes, always",
+            "Only Chrome",
+            "Only Firefox"
+        ]
+    },
+    {
+        "q": "Does 'VPN' prevent CSRF?",
+        "o": [
+            "No",
+            "Yes",
+            "Sometimes",
+            "Only corporate"
+        ]
+    },
+    {
+        "q": "What is 'Client-Side CSRF'?",
+        "o": [
+            "When JS logic automatically performs action based on input without user interaction",
+            "Server CSRF",
+            "Database CSRF",
+            "Network CSRF"
+        ]
+    },
+    {
+        "q": "Example of Client-Side CSRF?",
+        "o": [
+            "Page reads URL param and sends POST request immediately",
+            "Page loads image",
+            "Page plays sound",
+            "Page closes"
+        ]
+    },
+    {
+        "q": "Does `Referrer-Policy: no-referrer` help attacker?",
+        "o": [
+            "It makes Referer-based defense impossible",
+            "No",
+            "Yes",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is the best defense against CSRF?",
+        "o": [
+            "Synchronizer Token Pattern + SameSite Cookies",
+            "Referer check only",
+            "HTTPS only",
+            "CORS only"
+        ]
+    },
+    {
+        "q": "Is CSRF a Top 10 OWASP vulnerability?",
+        "o": [
+            "It was, but dropped in 2017/2021 due to framework protections",
+            "Yes #1",
+            "Yes #2",
+            "Yes #3"
+        ]
+    },
+    {
+        "q": "Does that mean CSRF is gone?",
+        "o": [
+            "No, still prevalent in custom apps or misconfigured frameworks",
+            "Yes completely",
+            "Only on internet",
+            "Only on intranet"
+        ]
+    },
+    {
+        "q": "Can you CSRF an Intranet site?",
+        "o": [
+            "Yes, using external site to target internal IP",
+            "No",
+            "Only if firewall off",
+            "Only if VPN on"
+        ]
+    },
+    {
+        "q": "What is 'Drive-by CSRF'?",
+        "o": [
+            "User visits malicious site, request sent in background",
+            "Driving car",
+            "Driving bus",
+            "Driving train"
+        ]
+    },
+    {
+        "q": "Can CSRF target a router?",
+        "o": [
+            "Yes, strictly common (changing DNS settings)",
+            "No",
+            "Only switches",
+            "Only hubs"
+        ]
+    },
+    {
+        "q": "What is 'DOM-based CSRF'?",
+        "o": [
+            "Attacker controls DOM to trigger a request (often overlaps with XSS)",
+            "Server CSRF",
+            "DB CSRF",
+            "Cloud CSRF"
+        ]
+    },
+    {
+        "q": "Can you use a GET request for a CSRF token?",
+        "o": [
+            "Yes, but risky (URL leakage)",
+            "No",
+            "Only POST",
+            "Only HEAD"
+        ]
+    },
+    {
+        "q": "Does 'Authorization' header prevent CSRF?",
+        "o": [
+            "Yes, if browser doesn't send it automatically (like Bearer tokens)",
+            "No",
+            "Mostly",
+            "Rarely"
+        ]
+    },
+    {
+        "q": "If using Bearer token in JS, is CSRF possible?",
+        "o": [
+            "Generally No (attacker acts blindly, can't attach custom header)",
+            "Yes",
+            "Maybe",
+            "Only if stored in cookie"
+        ]
+    },
+    {
+        "q": "What if Bearer token is stored in Cookie?",
+        "o": [
+            "Vulnerable to CSRF (browser attaches cookie)",
+            "Secure",
+            "Fast",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Cookie-to-Header' token?",
+        "o": [
+            "JS reads cookie and copies value to header (defense)",
+            "Moving cookie",
+            "Copying cookie",
+            "Deleting cookie"
+        ]
+    },
+    {
+        "q": "Why does Cookie-to-Header work?",
+        "o": [
+            "CSRF can't read cookie to put in header (SOP)",
+            "It encrypts it",
+            "It hides it",
+            "It deletes it"
+        ]
+    },
+    {
+        "q": "Is 'Stateless CSRF' possible?",
+        "o": [
+            "Yes (Double Submit Cookie is stateless)",
+            "No",
+            "Only stateful",
+            "Only sessions"
+        ]
+    },
+    {
+        "q": "What is the downside of stateless CSRF tokens?",
+        "o": [
+            "Harder to invalidate (cant revoke)",
+            "Slower",
+            "Bigger",
+            "None"
+        ]
+    },
+    {
+        "q": "Does 'Encrypted Token Pattern' need server state?",
+        "o": [
+            "No, server decrypts to verify",
+            "Yes",
+            "Maybe",
+            "Only for banks"
+        ]
+    },
+    {
+        "q": "What is the key algorithm for CSRF tokens?",
+        "o": [
+            "HMAC (Hash-based Message Authentication Code)",
+            "MD5",
+            "CRC32",
+            "ROT13"
+        ]
+    },
+    {
+        "q": "What is 'HMAC'?",
+        "o": [
+            "Cryptographic hash using a secret key",
+            "A macbook",
+            "A burger",
+            "A phone"
+        ]
+    },
+    {
+        "q": "What is the difference between CSRF and XSS?",
+        "o": [
+            "CSRF exploits trust site has in browser; XSS exploits trust browser has in site",
+            "CSRF exploits trust browser has in site; XSS exploits trust site has in browser",
+            "They are the same",
+            "One is faster"
+        ]
+    },
+    {
+        "q": "Which is more dangerous: Reflected XSS or Stored CSRF?",
+        "o": [
+            "Context dependent, but generally XSS can do everything CSRF can + more",
+            "CSRF is always worse",
+            "Both are harmless",
+            "SQLi is safer"
+        ]
+    },
+    {
+        "q": "Can CSRF lead to XSS?",
+        "o": [
+            "Yes, e.g. using CSRF to post a Stored XSS payload on victim's behalf",
+            "No, impossible",
+            "Only Reflected XSS",
+            "Only DOM XSS"
+        ]
+    },
+    {
+        "q": "What is 'Referer' header validation strictness issue?",
+        "o": [
+            "Sometimes Referer is omitted (privacy settings, HTTPS->HTTP downgrade)",
+            "It is too strict",
+            "It is too long",
+            "It is binary"
+        ]
+    },
+    {
+        "q": "What should server do if Referer header is missing?",
+        "o": [
+            "Ideally block request or fallback to Token check (secure default)",
+            "Allow request always",
+            "Crash",
+            "Send email"
+        ]
+    },
+    {
+        "q": "What is 'Lenient Referer Validation'?",
+        "o": [
+            "Checking if referer contains domain (vulnerable to subdomain.attacker.com)",
+            "Checking exact match",
+            "Checking length",
+            "Checking protocol"
+        ]
+    },
+    {
+        "q": "What is 'Strict Referer Validation'?",
+        "o": [
+            "Checking exact match of origin/path against allowlist",
+            "Allowing all",
+            "Checking if not empty",
+            "Checking header name"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header characteristic?",
+        "o": [
+            "Sent only for POST/CORS requests (unlike Referer which is sent for all)",
+            "Always sent",
+            "Never sent",
+            "It contains path"
+        ]
+    },
+    {
+        "q": "Does 'Origin' header contain path?",
+        "o": [
+            "No, only scheme, host, port",
+            "Yes",
+            "Sometimes",
+            "Only query params"
+        ]
+    },
+    {
+        "q": "Why is 'Origin' usually preferred over 'Referer' for CSRF check?",
+        "o": [
+            "It respects privacy (no path leakage) and is harder to spoof via meta tags",
+            "It is easier to spell",
+            "It is smaller",
+            "It is faster"
+        ]
+    },
+    {
+        "q": "Can an attacker spoof 'Origin' header via browser fetch?",
+        "o": [
+            "No, it is a forbidden header name for programmatic setting",
+            "Yes",
+            "Only on mobile",
+            "Only on windows"
+        ]
+    },
+    {
+        "q": "What is 'SOP' barrier for CSRF?",
+        "o": [
+            "SOP prevents reading response, but does NOT prevent sending request",
+            "SOP prevents sending request",
+            "SOP allows everything",
+            "SOP blocks cookies"
+        ]
+    },
+    {
+        "q": "Is reading response required for successful CSRF?",
+        "o": [
+            "Usually No (blind write), but yes for data theft CSRF",
+            "Yes always",
+            "Only for logging out",
+            "Only for searching"
+        ]
+    },
+    {
+        "q": "What is 'HTML Form' limitation regarding headers?",
+        "o": [
+            "Standard HTML forms cannot send custom headers (e.g. X-CSRF-Token)",
+            "They can send anything",
+            "They cannot send body",
+            "They cannot send method"
+        ]
+    },
+    {
+        "q": "Why is this limitation important for CSRF defense?",
+        "o": [
+            "Attackers can't force browser to send custom headers via simple forms",
+            "It limits file size",
+            "It limits speed",
+            "It limits color"
+        ]
+    },
+    {
+        "q": "What is 'Content-Type' spoofing in CSRF?",
+        "o": [
+            "Sending text/plain that looks like JSON/XML to bypass WAF/parser",
+            "Sending images as text",
+            "Sending video as audio",
+            "Sending bin as hex"
+        ]
+    },
+    {
+        "q": "How does Flash (SWF) relate to CSRF headers?",
+        "o": [
+            "Historically allowed sending custom headers if crossdomain.xml permitted",
+            "It blocked headers",
+            "It deleted headers",
+            "It ignored headers"
+        ]
+    },
+    {
+        "q": "What is 'Java Applet' CSRF (historical)?",
+        "o": [
+            "Using signed applets to bypass SOP/send arbitrary requests",
+            "Using coffee",
+            "Using beans",
+            "Using sugar"
+        ]
+    },
+    {
+        "q": "What is 'Silverlight' CSRF (historical)?",
+        "o": [
+            "Similar to Flash/Java vectors",
+            "Lighting silver",
+            "Gold standard",
+            "Bronze medal"
+        ]
+    },
+    {
+        "q": "What if CSRF token is checked but not tied to user session?",
+        "o": [
+            "Attacker can feed their own valid token to victim (Token Fixation)",
+            "Secure if token is valid",
+            "Only affects admin",
+            "Only affects guests"
+        ]
+    },
+    {
+        "q": "Is 'Token Fixation' a valid attack?",
+        "o": [
+            "Yes, attacker gets their own token and tricks victim into using it",
+            "No",
+            "Only for cookies",
+            "Only for headers"
+        ]
+    },
+    {
+        "q": "How to prevent Token Fixation?",
+        "o": [
+            "Bind token to user's session ID server-side",
+            "Use long tokens",
+            "Use short tokens",
+            "Use letters only"
+        ]
+    },
+    {
+        "q": "What is 'CORS Preflight' Trigger?",
+        "o": [
+            "Custom headers, non-simple method (PUT/DELETE), or specific Content-Type",
+            "Request size",
+            "Request time",
+            "Request ip"
+        ]
+    },
+    {
+        "q": "Which Content-Types trigger Preflight?",
+        "o": [
+            "application/json, application/xml (sending via fetch/XHR)",
+            "text/plain",
+            "multipart/form-data",
+            "application/x-www-form-urlencoded"
+        ]
+    },
+    {
+        "q": "Which Content-Types are 'Simple' (No Preflight)?",
+        "o": [
+            "application/x-www-form-urlencoded, multipart/form-data, text/plain",
+            "application/json",
+            "application/pdf",
+            "application/zip"
+        ]
+    },
+    {
+        "q": "Can attacker send `application/json` via HTML form?",
+        "o": [
+            "No, form enctype limited to simple types (text/plain hack exists though)",
+            "Yes easily",
+            "Only in Firefox",
+            "Only in IE"
+        ]
+    },
+    {
+        "q": "What is the text/plain JSON hack?",
+        "o": [
+            "Make body valid JSON but Content-Type is text/plain (form enctype)",
+            "Encrypting JSON",
+            "Zipping JSON",
+            "Hiding JSON"
+        ]
+    },
+    {
+        "q": "How does server checking Content-Type prevent text/plain hack?",
+        "o": [
+            "Server rejects text/plain, ensuring request came from XHR (with Preflight if cross-origin)",
+            "It reads text only",
+            "It deletes text",
+            "It converts text"
+        ]
+    },
+    {
+        "q": "What is 'Spring Security' default CSRF protection?",
+        "o": [
+            "Synchronizer Token Pattern enabled by default",
+            "None",
+            "Referer check",
+            "Double Submit"
+        ]
+    },
+    {
+        "q": "Does 'Angular' have built-in CSRF?",
+        "o": [
+            "Yes, reads XSRF-TOKEN cookie and sends X-XSRF-TOKEN header automatically",
+            "No",
+            "Only AngularJS",
+            "Only Angular 2"
+        ]
+    },
+    {
+        "q": "Does 'Axios' library handle CSRF?",
+        "o": [
+            "Yes, has settings to read cookie and set header automatically",
+            "No",
+            "Only for GET",
+            "Only for POST"
+        ]
+    },
+    {
+        "q": "What is 'Anti-CSRF' middleware?",
+        "o": [
+            "Server component that intercepts requests and validates tokens",
+            "Client script",
+            "Database trigger",
+            "Network switch"
+        ]
+    },
+    {
+        "q": "What is 'stateless' authentication (JWT) impact on CSRF?",
+        "o": [
+            "If JWT in cookie: Vulnerable. If JWT in header: Safe from CSRF (but needs XSS protection)",
+            "Always safe",
+            "Always vulnerable",
+            "None"
+        ]
+    },
+    {
+        "q": "Can you combine JWT in Cookie with CSRF protection?",
+        "o": [
+            "Yes, use Double Submit Cookie or SameSite=Strict",
+            "No, impossible",
+            "Only with HttpOnly",
+            "Only with Secure"
+        ]
+    },
+    {
+        "q": "What is 'GET-based CSRF' example?",
+        "o": [
+            "`<img src='http://bank.com/transfer?amt=100&to=attacker'>`",
+            "Posting form",
+            "Clicking button",
+            "Typing password"
+        ]
+    },
+    {
+        "q": "What is 'POST-based CSRF' example?",
+        "o": [
+            "Auto-submitting hidden form to target URL",
+            "Loading image",
+            "Playing video",
+            "Opening tab"
+        ]
+    },
+    {
+        "q": "Why is POST-based CSRF slightly harder?",
+        "o": [
+            "Requires JS or user interaction (button), while GET can be invisible (image)",
+            "It requires password",
+            "It requires slow internet",
+            "It requires expensive PC"
+        ]
+    },
+    {
+        "q": "Can you do CSRF with `XMLHttpRequest`?",
+        "o": [
+            "Yes, but constrained by SOP/CORS (cannot send custom headers cross-origin without preflight)",
+            "No",
+            "Only Same Origin",
+            "Only if Flash"
+        ]
+    },
+    {
+        "q": "What is 'Method Override' vulnerability?",
+        "o": [
+            "Using special param/header to make GET/POST act like PUT/DELETE (bypassing filters)",
+            "Overriding java methods",
+            "Overriding JS methods",
+            "Overriding CSS"
+        ]
+    },
+    {
+        "q": "Does `_method=DELETE` in POST body allow CSRF?",
+        "o": [
+            "Yes, if framework respects it (attacker uses simple POST to trigger DELETE)",
+            "No",
+            "Only in PHP",
+            "Only in Ruby"
+        ]
+    },
+    {
+        "q": "How to prevent Method Override CSRF?",
+        "o": [
+            "Apply CSRF protection to all unsafe effective methods (POST/PUT/DELETE)",
+            "Disable DELETE",
+            "Disable POST",
+            "Disable Web"
+        ]
+    },
+    {
+        "q": "What is 'GraphQL' CSRF risk?",
+        "o": [
+            "If executed via GET or simple POST (no custom header), it is vulnerable",
+            "None",
+            "Only mutations",
+            "Only queries"
+        ]
+    },
+    {
+        "q": "How to secure GraphQL from CSRF?",
+        "o": [
+            "Enforce Content-Type: application/json or require custom header/token",
+            "Use XML",
+            "Use SOAP",
+            "Use REST"
+        ]
+    },
+    {
+        "q": "Does 'SameSite=Lax' protect against POST CSRF?",
+        "o": [
+            "Generally Yes, as cookies aren't sent on cross-site POSTs",
+            "No",
+            "Maybe",
+            "Only if Secure"
+        ]
+    },
+    {
+        "q": "Does 'SameSite=Lax' protect against GET CSRF?",
+        "o": [
+            "No, top-level navigations (links) still send cookies",
+            "Yes always",
+            "Only images",
+            "Only scripts"
+        ]
+    },
+    {
+        "q": "Why is 'SameSite=Lax' default?",
+        "o": [
+            "Balances security with usability (users stay logged in when clicking links from email)",
+            "It is strongest",
+            "It is weakest",
+            "It is random"
+        ]
+    },
+    {
+        "q": "When to use 'SameSite=Strict'?",
+        "o": [
+            "High security apps (banking) where re-login from external links is acceptable trade-off",
+            "Blogs",
+            "News sites",
+            "Public forums"
+        ]
+    },
+    {
+        "q": "What is 'Time-based' CSRF token?",
+        "o": [
+            "Token includes timestamp and expires after duration",
+            "Token tells time",
+            "Token is a clock",
+            "Token is a calendar"
+        ]
+    },
+    {
+        "q": "What is 'Replay Attack' in CSRF?",
+        "o": [
+            "Attacker capturing a valid token and using it again (if not one-time use)",
+            "Playing video again",
+            "Restarting level",
+            "Looping music"
+        ]
+    },
+    {
+        "q": "How to prevent Replay Attack?",
+        "o": [
+            "Invalidate token after use (One-Time Token)",
+            "Use SameSite",
+            "Use SSL",
+            "Use VPN"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' against Logout?",
+        "o": [
+            "Forcing user to logout (Annoyance / DoS)",
+            "Secure Logout",
+            "Fast Logout",
+            "Slow Logout"
+        ]
+    },
+    {
+        "q": "Should Logout be protected against CSRF?",
+        "o": [
+            "Yes, to prevent annoyance or pre-phishing setups",
+            "No, harmless",
+            "Only for admins",
+            "Only for guests"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Site Flashing'?",
+        "o": [
+            "Historical term for Flash-based CSRF/XSS",
+            "Flashing lights",
+            "Flashing firmware",
+            "Flashing BIOS"
+        ]
+    },
+    {
+        "q": "Can `<img>` tag execute JS?",
+        "o": [
+            "No (usually), but can trigger GET request for CSRF",
+            "Yes always",
+            "Only SVG",
+            "Only PNG"
+        ]
+    },
+    {
+        "q": "Can `<script>` tag trigger CSRF?",
+        "o": [
+            "Yes, via src attribute (GET request)",
+            "No",
+            "Only POST",
+            "Only if executed"
+        ]
+    },
+    {
+        "q": "Can `<link>` tag trigger CSRF?",
+        "o": [
+            "Yes, e.g. prefetch or stylesheet load",
+            "No",
+            "Only CSS",
+            "Only Favicon"
+        ]
+    },
+    {
+        "q": "What is 'PDF' CSRF?",
+        "o": [
+            "PDFs can submit forms/requests potentially triggering CSRF",
+            "PDF reading",
+            "PDF printing",
+            "PDF signing"
+        ]
+    },
+    {
+        "q": "Does browser 'Remember Password' Autofill cause CSRF?",
+        "o": [
+            "No directly, but can help attacker in Login CSRF or XSS extraction",
+            "Yes",
+            "Maybe",
+            "Only Chrome"
+        ]
+    },
+    {
+        "q": "What is 'Subdomain' CSRF risk?",
+        "o": [
+            "If attacker controls subdomain, they can write cookies for parent domain (Cookie Tossing)",
+            "No risk",
+            "Low risk",
+            "High reward"
+        ]
+    },
+    {
+        "q": "What is 'Cookie Prefix' (`__Host-`)?",
+        "o": [
+            "Ensures cookie is Secure, no Domain attribute (must be exact host), and Path=/",
+            "Prefix for host",
+            "Prefix for name",
+            "Prefix for value"
+        ]
+    },
+    {
+        "q": "What is 'Cookie Prefix' (`__Secure-`)?",
+        "o": [
+            "Ensures cookie is Secure",
+            "Ensures cookie is encrypted",
+            "Ensures cookie is hidden",
+            "Ensures cookie is deleted"
+        ]
+    },
+    {
+        "q": "How do Cookie Prefixes help CSRF defense?",
+        "o": [
+            "Prevent Cookie Tossing (subdomains cannot overwrite `__Host-` cookies)",
+            "Make cookies faster",
+            "Make cookies smaller",
+            "Make cookies tasty"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header value for `null` origin?",
+        "o": [
+            "Serialized as 'null' (e.g. sandboxed iframe, local file)",
+            "Empty string",
+            "Missing",
+            "Undefined"
+        ]
+    },
+    {
+        "q": "Should you accept `Origin: null`?",
+        "o": [
+            "Generally No, unless you expect requests from sandboxed frames/local files",
+            "Yes always",
+            "Maybe",
+            "Only if valid"
+        ]
+    },
+    {
+        "q": "What is 'Referer' header value if policy is 'no-referrer'?",
+        "o": [
+            "Omitted (Missing)",
+            "Empty string",
+            "null",
+            "undefined"
+        ]
+    },
+    {
+        "q": "What is 'Referer' header value if protocol downgrades (HTTPS -> HTTP)?",
+        "o": [
+            "Omitted (standard behavior)",
+            "Full URL",
+            "Domain only",
+            "Path only"
+        ]
+    },
+    {
+        "q": "Can you use 'Custom Request Headers' for CSRF protection?",
+        "o": [
+            "Yes, presence of custom header proves JS context (SOP), assuming no CORS bypass",
+            "No",
+            "Only tokens",
+            "Only cookies"
+        ]
+    },
+    {
+        "q": "What is 'Triple Submit Cookie'?",
+        "o": [
+            "Extension of Double Submit (uncommon term)",
+            "Using 3 cookies",
+            "Using 3 tokens",
+            "Using 3 forms"
+        ]
+    },
+    {
+        "q": "What is 'Encrypted Token Pattern'?",
+        "o": [
+            "Token is encryption of (UserID + Timestamp + Random)",
+            "Token is random",
+            "Token is hash",
+            "Token is plain"
+        ]
+    },
+    {
+        "q": "What is 'Stateful' vs 'Stateless' Token?",
+        "o": [
+            "Stateful requires server storage (session); Stateless contains self-validating data (HMAC/Encrypted)",
+            "Stateful is faster",
+            "Stateless is safer",
+            "They are same"
+        ]
+    },
+    {
+        "q": "Which is better: Stateful or Stateless token?",
+        "o": [
+            "Stateful is more secure (can revoke), Stateless is scalable",
+            "Stateful always",
+            "Stateless always",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'BREACH' vs 'CRIME'?",
+        "o": [
+            "Both compression attacks, BREACH targets HTTP response bodies (like CSRF tokens)",
+            "Both target SQL",
+            "Both target headers",
+            "Both target cookies"
+        ]
+    },
+    {
+        "q": "Does disabling compression prevent BREACH?",
+        "o": [
+            "Yes, but hurts performance",
+            "No",
+            "Only gzip",
+            "Only brotli"
+        ]
+    },
+    {
+        "q": "Is it possible to CSRF a JSON Endpoint without CORS?",
+        "o": [
+            "If endpoints accept text/plain or don't validate Content-Type: Yes",
+            "No, JSON requires Preflight",
+            "Always Yes",
+            "Always No"
+        ]
+    },
+    {
+        "q": "What is 'Cookie-SameSite' scanner?",
+        "o": [
+            "Tool to check usage of SameSite attribute",
+            "Scanner for cookies",
+            "Scanner for sites",
+            "Scanner for same"
+        ]
+    },
+    {
+        "q": "can you set SameSite via meta tag?",
+        "o": [
+            "No, it's a Set-Cookie attribute",
+            "Yes",
+            "Only in head",
+            "Only in body"
+        ]
+    },
+    {
+        "q": "Can you set SameSite via Javascript `document.cookie`?",
+        "o": [
+            "Yes",
+            "No",
+            "Only if HttpOnly",
+            "Only if Secure"
+        ]
+    },
+    {
+        "q": "What is `SameSite=Lax` status in new browsers?",
+        "o": [
+            "Default if not specified (Chrome 80+)",
+            "Optional",
+            "Deprecated",
+            "Removed"
+        ]
+    },
+    {
+        "q": "What is 'Lax-plus-POST'?",
+        "o": [
+            "Not a standard, but concept where Lax is default but POST requires explicit None or token",
+            "Lax for POST",
+            "Strict for POST",
+            "None for POST"
+        ]
+    },
+    {
+        "q": "Does `Lax` allow cookies on a `GET` form to top-level URL?",
+        "o": [
+            "Yes (Top-level navigation)",
+            "No",
+            "Only if same domain",
+            "Only if cross domain"
+        ]
+    },
+    {
+        "q": "Does `Lax` allow cookies on `<iframe>` loading?",
+        "o": [
+            "No (it is a subresource, not top-level navigation)",
+            "Yes",
+            "Only if sandbox",
+            "Only if visible"
+        ]
+    },
+    {
+        "q": "Does `Lax` allow cookies on `<img>` loading?",
+        "o": [
+            "No",
+            "Yes",
+            "Only PNG",
+            "Only JPG"
+        ]
+    },
+    {
+        "q": "Does `Strict` allow cookies on clicking a link from headers?",
+        "o": [
+            "No (Top-level navigation is cross-site)",
+            "Yes",
+            "Only if logged in",
+            "Only if trusted"
+        ]
+    },
+    {
+        "q": "What is user experience impact of `SameSite=Strict`?",
+        "o": [
+            "User appears logged out when arriving from external link (needs re-login)",
+            "Better experience",
+            "Faster load",
+            "No impact"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' vs 'SSRF'?",
+        "o": [
+            "CSRF exploits User's browser; SSRF exploits Server's ability to make requests",
+            "Same thing",
+            "CSRF is server side",
+            "SSRF is client side"
+        ]
+    },
+    {
+        "q": "Can CSRF and XSS exist on same page?",
+        "o": [
+            "Yes, they are independent vulnerabilities",
+            "No, mutually exclusive",
+            "Only if PHP",
+            "Only if Java"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' potential impact on Admin users?",
+        "o": [
+            "Critical: Attacker can create admin accounts, change configs, delete data",
+            "Minor annoyance",
+            "None",
+            "Logs them out"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' impact on regular users?",
+        "o": [
+            "Transfer funds, change email/password, post content",
+            "See ads",
+            "Load images",
+            "Play sound"
+        ]
+    },
+    {
+        "q": "What is 'Client-Side Path Traversal' via CSRF?",
+        "o": [
+            "Not standard overlap, but CSRF can force navigating to vulnerable path",
+            "Walking paths",
+            "Deleting paths",
+            "Hiding paths"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Origin: *` risk for CSRF?",
+        "o": [
+            "Allows any site to read response (Data Exfiltration via CSRF)",
+            "Prevents CSRF",
+            "Allows Only GET",
+            "Allows Only POST"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Credentials`?",
+        "o": [
+            "Header allowing cookies/auth headers in cross-origin requests",
+            "Allowing passwords",
+            "Allowing usernames",
+            "Allowing emails"
+        ]
+    },
+    {
+        "q": "Can you use `*` origin with `Allow-Credentials: true`?",
+        "o": [
+            "No, browser forbids this combination (spec violation)",
+            "Yes",
+            "Only in IE",
+            "Only in Safari"
+        ]
+    },
+    {
+        "q": "How do attackers bypass `*` + Credentials restriction?",
+        "o": [
+            "If server reflects Origin header in `Access-Control-Allow-Origin`",
+            "They can't",
+            "Magic",
+            "Using Flash"
+        ]
+    },
+    {
+        "q": "What is 'Reflected Origin' vulnerability?",
+        "o": [
+            "Server echoes back whatever Origin sends in ACAO header (Effectively `*` with credentials)",
+            "Reflecting light",
+            "Reflecting sound",
+            "Reflecting images"
+        ]
+    },
+    {
+        "q": "What is 'Null Origin' in CSRF?",
+        "o": [
+            "Origin header sent as 'null' (e.g. from sandboxed iframe)",
+            "Origin 0",
+            "Origin void",
+            "Origin empty"
+        ]
+    },
+    {
+        "q": "Should you trust 'null' origin?",
+        "o": [
+            "Risky, allows attacks from local files or sandboxed iframes",
+            "Yes always",
+            "No never",
+            "Only on localhost"
+        ]
+    },
+    {
+        "q": "What is 'Django' CSRF cookie name default?",
+        "o": [
+            "csrftoken",
+            "token",
+            "csrf",
+            "xsrf"
+        ]
+    },
+    {
+        "q": "What is 'Django' CSRF header name default?",
+        "o": [
+            "HTTP_X_CSRFTOKEN",
+            "X-CSRF-TOKEN",
+            "X-TOKEN",
+            "CSRF-HEADER"
+        ]
+    },
+    {
+        "q": "What is 'Laravel' CSRF token field name?",
+        "o": [
+            "_token",
+            "csrf-token",
+            "token",
+            "authenticity_token"
+        ]
+    },
+    {
+        "q": "What is 'Rails' CSRF meta tag name?",
+        "o": [
+            "csrf-token",
+            "authenticity_token",
+            "_token",
+            "xsrf-token"
+        ]
+    },
+    {
+        "q": "How does Rails verify CSRF?",
+        "o": [
+            "Checks `authenticity_token` param or `X-CSRF-Token` header against session",
+            "Magic",
+            "Referer only",
+            "Cookie only"
+        ]
+    },
+    {
+        "q": "What is 'CSRF Exclusion'?",
+        "o": [
+            "Paths/endpoints explicitly excluded from CSRF protection (e.g. webhooks)",
+            "Excluding users",
+            "Excluding IPs",
+            "Excluding browsers"
+        ]
+    },
+    {
+        "q": "Why are `webhooks` often excluded from CSRF?",
+        "o": [
+            "They are machine-to-machine POSTs (no user session cookie involved usually)",
+            "They are fast",
+            "They are secret",
+            "They are internal"
+        ]
+    },
+    {
+        "q": "How to secure webhooks if CSRF is disabled?",
+        "o": [
+            "Verify signature (HMAC) of payload using shared secret",
+            "Use Basic Auth",
+            "Use IP whitelist",
+            "Hope for best"
+        ]
+    },
+    {
+        "q": "What is 'API' vs 'Web' CSRF context?",
+        "o": [
+            "API often stateless (Bearer) -> No CSRF; Web uses Cookies -> Vulnerable",
+            "API is unsafe",
+            "Web is safe",
+            "Both same"
+        ]
+    },
+    {
+        "q": "If API uses Cookies for Auth, is it vulnerable?",
+        "o": [
+            "Yes, absolutely",
+            "No",
+            "Only GET",
+            "Only POST"
+        ]
+    },
+    {
+        "q": "What is 'Cookie-to-Token' pattern limitation?",
+        "o": [
+            "Requires JS to read cookie (cannot be HttpOnly)",
+            "Complex",
+            "Slow",
+            "Browsers block it"
+        ]
+    },
+    {
+        "q": "Is HttpOnly cookie essential for CSRF defense?",
+        "o": [
+            "No (CSRF doesn't read cookie), but helps against XSS stealing the session",
+            "Yes absolutely",
+            "Only for JS",
+            "Only for CSS"
+        ]
+    },
+    {
+        "q": "If XSS allows reading CSRF token, what happens?",
+        "o": [
+            "Game Over: Attacker can perform any action (bypass CSRF)",
+            "Token resets",
+            "User logout",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' in 'Login' forms?",
+        "o": [
+            "Pre-authenticating victim (Login CSRF)",
+            "Stealing password",
+            "Brute force",
+            "Account lockout"
+        ]
+    },
+    {
+        "q": "Why is Login CSRF harder to detect?",
+        "o": [
+            "User looks logged in, site behaves normally (but tracking/history is compromised)",
+            "It is invisible",
+            "It makes screen black",
+            "It redirects"
+        ]
+    },
+    {
+        "q": "What is 'Logout CSRF' mitigation?",
+        "o": [
+            "Require POST + CSRF token for logout, or confirm dialog",
+            "Disable logout",
+            "Use GET",
+            "Ignore it"
+        ]
+    },
+    {
+        "q": "What is 'Search CSRF' (historical)?",
+        "o": [
+            "Forcing user to search for specific term (annoyance/SEO spam)",
+            "Stealing search",
+            "Hiding search",
+            "Deleting search"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Voice Assistants'?",
+        "o": [
+            "Malicious audio forcing assistant to make requests (technically CSRF-like)",
+            "Speaking loud",
+            "Screaming",
+            "Singing"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' against Intranet IoT?",
+        "o": [
+            "Changing router DNS, hacking printers via default passwords from browser",
+            "Turning off lights",
+            "Opening doors",
+            "Playing music"
+        ]
+    },
+    {
+        "q": "Why is Intranet CSRF dangerous?",
+        "o": [
+            "Internal devices often lack authentication or CSRF protection",
+            "Internal network is slow",
+            "Internal network is fast",
+            "Internal network is huge"
+        ]
+    },
+    {
+        "q": "What is 'DNS Rebinding' with CSRF?",
+        "o": [
+            "Bypassing SOP to read response or hit internal IP via variable DNS",
+            "Binding DNS",
+            "Changing IP",
+            "Filtering DNS"
+        ]
+    },
+    {
+        "q": "Does DNS Rebinding enable reading response?",
+        "o": [
+            "Yes (unlike standard CSRF)",
+            "No",
+            "Maybe",
+            "Only external"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header support in IE11?",
+        "o": [
+            "Supported but buggy in some edge cases",
+            "Not supported",
+            "Full support",
+            "Only HTTP"
+        ]
+    },
+    {
+        "q": "What is 'Referer' header privacy concerns?",
+        "o": [
+            "Leaks browsing history/path to third parties",
+            "Leaks password",
+            "Leaks username",
+            "Leaks IP"
+        ]
+    },
+    {
+        "q": "What is 'Referrer-Policy: strict-origin-when-cross-origin'?",
+        "o": [
+            "Send full path for same-origin, only origin for cross-origin",
+            "Send nothing",
+            "Send always",
+            "Send never"
+        ]
+    },
+    {
+        "q": "Is 'strict-origin-when-cross-origin' the default now?",
+        "o": [
+            "Yes, in most modern browsers",
+            "No",
+            "Only Firefox",
+            "Only Safari"
+        ]
+    },
+    {
+        "q": "How does 'strict-origin-when-cross-origin' affect CSRF defense?",
+        "o": [
+            "Origin is preserved, Path is hidden (Good for privacy and CSRF check)",
+            "It breaks CSRF check",
+            "It exposes path",
+            "It removes header"
+        ]
+    },
+    {
+        "q": "What is 'Samesite=Lax' default impact on Login flows?",
+        "o": [
+            "OpenID/SSO flows using POST might break (needs cookie)",
+            "Flows work better",
+            "Flows are faster",
+            "Flows are slower"
+        ]
+    },
+    {
+        "q": "How to fix SSO breakage with SameSite=Lax?",
+        "o": [
+            "Use SameSite=None; Secure (if flow relies on cross-site POST)",
+            "Disable SSO",
+            "Use HTTP",
+            "Use GET"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via `navigator.sendBeacon`?",
+        "o": [
+            "SendBeacon sends POST requests (potential CSRF vector if content-type manipulated)",
+            "Sending lights",
+            "Sending signals",
+            "Sending sms"
+        ]
+    },
+    {
+        "q": "Does `sendBeacon` trigger CORS preflight?",
+        "o": [
+            "No, for simple content types (text/plain, FormData, etc.)",
+            "Yes always",
+            "Maybe",
+            "Only Chrome"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via `<form target='_blank'>`?",
+        "o": [
+            "Opens new tab/window executing the request (stealthier or phishing)",
+            "Targeting blanks",
+            "Opening popup",
+            "Closing window"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via `iframe`?",
+        "o": [
+            "Hidden iframe submits form invisibly",
+            "Visible phishing",
+            "Clickjacking",
+            "XSS"
+        ]
+    },
+    {
+        "q": "Can you prevent iframe loading your site?",
+        "o": [
+            "X-Frame-Options or CSP frame-ancestors",
+            "No",
+            "Only JS",
+            "Only CSS"
+        ]
+    },
+    {
+        "q": "Does frame-busting prevent CSRF?",
+        "o": [
+            "No, attacker doesn't need to frame site to CSRF it (img, form target, etc)",
+            "Yes",
+            "Maybe",
+            "Only Clickjacking"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' risk in 'JSONP' endpoints?",
+        "o": [
+            "High (attacker defines callback and gets data - XSS + Data Leak)",
+            "Low",
+            "None",
+            "Medium"
+        ]
+    },
+    {
+        "q": "Does CSRF token in JSONP url protect it?",
+        "o": [
+            "Yes, if validated",
+            "No",
+            "Maybe",
+            "Only for GET"
+        ]
+    },
+    {
+        "q": "Why is JSONP deprecated/discouraged?",
+        "o": [
+            "Security risks (XSS/CSRF) and CORS is the standard replacement",
+            "It is slow",
+            "It is old",
+            "It is XML"
+        ]
+    },
+    {
+        "q": "What is 'Blind CSRF'?",
+        "o": [
+            "Standard CSRF (attacker can't see response/success/failure)",
+            "Attacker is blind",
+            "User is blind",
+            "Server is blind"
+        ]
+    },
+    {
+        "q": "What is 'Non-Blind CSRF'?",
+        "o": [
+            "Attacker can read response (e.g. via XSS or misconfigured CORS/Flash/Java)",
+            "Standard CSRF",
+            "Safe CSRF",
+            "Viewable CSRF"
+        ]
+    },
+    {
+        "q": "Is 'CSRF' possible via `svg` image source?",
+        "o": [
+            "Yes, if SVG loads external resources (mostly GET)",
+            "No",
+            "Only scripts",
+            "Only fonts"
+        ]
+    },
+    {
+        "q": "Is 'CSRF' possible via `background-image` CSS?",
+        "o": [
+            "Yes (GET request)",
+            "No",
+            "Only if inline",
+            "Only if external"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via `video` or `audio` tags?",
+        "o": [
+            "Yes (GET requests for media)",
+            "No",
+            "Only POST",
+            "Only PUT"
+        ]
+    },
+    {
+        "q": "Can CSRF happen via `import` statement in JS?",
+        "o": [
+            "Yes (GET request for module)",
+            "No",
+            "Only Node.js",
+            "Only Deno"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via `fetch` API?",
+        "o": [
+            "Same rules as XHR (subject to CORS)",
+            "Always safe",
+            "Always dangerous",
+            "None"
+        ]
+    },
+    {
+        "q": "What is `credentials: 'include'` in fetch?",
+        "o": [
+            "Sends cookies with keys request (Critical for CSRF if no preflight/token)",
+            "Includes password",
+            "Includes username",
+            "Includes file"
+        ]
+    },
+    {
+        "q": "What is `credentials: 'same-origin'` in fetch?",
+        "o": [
+            "Default, sends cookies only for same-origin requests",
+            "Sends always",
+            "Sends never",
+            "Sends random"
+        ]
+    },
+    {
+        "q": "What is `credentials: 'omit'` in fetch?",
+        "o": [
+            "Never sends cookies",
+            "Always sends",
+            "Default",
+            "Include"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' token 'Entropy'?",
+        "o": [
+            "Randomness/Unpredictability of the token (Crucial)",
+            "Length",
+            "Color",
+            "Smell"
+        ]
+    },
+    {
+        "q": "What if CSRF token is predictable (e.g. sequential)?",
+        "o": [
+            "Attacker can guess it and bypass protection",
+            "It is fine",
+            "It is faster",
+            "It is easier"
+        ]
+    },
+    {
+        "q": "Can you use session ID as CSRF token?",
+        "o": [
+            "Yes (Double Submit), but distinct token is better practice involving independent secret",
+            "No",
+            "Must use UUID",
+            "Must use timestamp"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' in 'REST' API?",
+        "o": [
+            "Relevant if strictly using Cookies for auth; irrelevant if using Authorization header",
+            "Always relevant",
+            "Never relevant",
+            "Only XML"
+        ]
+    },
+    {
+        "q": "Why prefer 'Authorization' header over Cookies for API?",
+        "o": [
+            "Immune to CSRF naturally (browser doesn't auto-send)",
+            "Faster",
+            "Cleaner",
+            "Smaller"
+        ]
+    },
+    {
+        "q": "What is 'XSS' vs 'Clickjacking'?",
+        "o": [
+            "XSS runs script; Clickjacking hijacks UI interaction",
+            "Same thing",
+            "XSS is server",
+            "Clickjacking is network"
+        ]
+    },
+    {
+        "q": "What is 'Cookie' vs 'LocalStorage' for Auth?",
+        "o": [
+            "Cookie (HttpOnly) prevents XSS theft but needs CSRF protection; LocalStorage vulnerable to XSS theft but immune to CSRF",
+            "Cookie sucks",
+            "LocalStorage sucks",
+            "Both suck"
+        ]
+    },
+    {
+        "q": "What is best-of-both-worlds for Auth storage?",
+        "o": [
+            "HttpOnly Cookie (prevents XSS theft) + SameSite=Strict/Lax + CSRF Token (prevents CSRF)",
+            "LocalStorage",
+            "SessionStorage",
+            "IndexedDB"
+        ]
+    },
+    {
+        "q": "Does 'Content-Type' validation fully prevent CSRF?",
+        "o": [
+            "No, older browsers or Flash hacks might bypass, but good defense-in-depth",
+            "Yes",
+            "Maybe",
+            "Only for JSON"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header reliability?",
+        "o": [
+            "High reliability, browser controlled, but can be spoofed by non-browser clients (irrelevant for CSRF)",
+            "Low",
+            "Medium",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What does `Referrer-Policy: unsafe-url` do?",
+        "o": [
+            "Sends full URL as referer always (Privacy/Leakage risk)",
+            "Safe URL",
+            "HTTPS only",
+            "Origin only"
+        ]
+    },
+    {
+        "q": "What does `Referrer-Policy: origin` do?",
+        "o": [
+            "Sends only origin (scheme, host, port), stripping path",
+            "Sends full path",
+            "Sends nothing",
+            "Sends query"
+        ]
+    },
+    {
+        "q": "Can you CSRF a SOAP service?",
+        "o": [
+            "Yes, if it accepts POST and uses Cookie auth",
+            "No, SOAP is secure",
+            "Only REST",
+            "Only GraphQL"
+        ]
+    },
+    {
+        "q": "Can you CSRF a WebSocket connection?",
+        "o": [
+            "Yes (CSWSH), handshake is standard HTTP with Cookies",
+            "No",
+            "Only TCP",
+            "Only UDP"
+        ]
+    },
+    {
+        "q": "What does `Upgrade: websocket` header do?",
+        "o": [
+            "Initiates WS handshake",
+            "Upgrades software",
+            "Upgrades hardware",
+            "Upgrades plan"
+        ]
+    },
+    {
+        "q": "What is 'Same-Origin' regarding WebSockets?",
+        "o": [
+            "WebSockets satisfy SOP freely (can connect cross-origin), server must check Origin header",
+            "SOP blocks cross-origin WS",
+            "SOP is ignored",
+            "SOP is strict"
+        ]
+    },
+    {
+        "q": "Does `SameSite=Strict` block WebSocket handshake?",
+        "o": [
+            "Yes, handshake is a GET request; Strict blocks cookies if cross-site",
+            "No",
+            "Only for POST",
+            "Only for PUT"
+        ]
+    },
+    {
+        "q": "Does `SameSite=Lax` block WebSocket handshake?",
+        "o": [
+            "No, handshake is top-level navigation-like GET (usually sends cookies)",
+            "Yes",
+            "Only if Secure",
+            "Only if HttpOnly"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'File Download'?",
+        "o": [
+            "Forcing user to download file (annoyance/exploit)",
+            "Stealing file",
+            "Uploading file",
+            "Copying file"
+        ]
+    },
+    {
+        "q": "What is 'Content-Disposition: inline' risk?",
+        "o": [
+            "Browser renders content (XSS risk if HTML/SVG)",
+            "Browser downloads",
+            "Browser crashes",
+            "Browser saves"
+        ]
+    },
+    {
+        "q": "What is 'Content-Disposition: attachment' benefit?",
+        "o": [
+            "Forces download (mitigates XSS in file content)",
+            "Forces render",
+            "Forces execution",
+            "Forces printing"
+        ]
+    },
+    {
+        "q": "Can you CSRF using 'HEAD' method?",
+        "o": [
+            "Ideally No (HEAD should be safe/readonly), but if app changes state on HEAD...",
+            "Yes always",
+            "Only for checking",
+            "Only for logging"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'OPTIONS' method?",
+        "o": [
+            "Rare, but if app creates state on OPTIONS (bad design), it's vulnerable",
+            "It is standard",
+            "It is safe",
+            "It is fast"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'TRACE' method?",
+        "o": [
+            "Mostly for XST (Cross Site Tracing), not standard CSRF",
+            "Tracing route",
+            "Drawing trace",
+            "Finding errors"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'CONNECT' method?",
+        "o": [
+            "Proxy usage, not standard CSRF vector",
+            "Connecting wifi",
+            "Connecting bluetooth",
+            "Connecting dots"
+        ]
+    },
+    {
+        "q": "What is 'Port Swigger'?",
+        "o": [
+            "Company behind Burp Suite",
+            "A drink",
+            "A dance",
+            "A pirate"
+        ]
+    },
+    {
+        "q": "Who invented CSRF?",
+        "o": [
+            "Concept evolved; Peter Barren (2001) is often cited",
+            "Al Gore",
+            "Tim Berners Lee",
+            "Bill Gates"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Data URI'?",
+        "o": [
+            "Using data: scheme to render HTML that auto-submits forms (Bypassed in modern browsers)",
+            "Sending huge data",
+            "Sending files",
+            "Sending images"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'MIME Sniffing'?",
+        "o": [
+            "Browser misinterpreting non-HTML content as HTML (executing CSRF via XSS/form)",
+            "Smelling mime",
+            "Sniffing packets",
+            "Sniffing wifi"
+        ]
+    },
+    {
+        "q": "What header prevents MIME Sniffing?",
+        "o": [
+            "X-Content-Type-Options: nosniff",
+            "Content-Type: strict",
+            "X-No-Sniff: true",
+            "X-Frame-Options: deny"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'CSS' (CSS Injection)?",
+        "o": [
+            "Exfiltrating tokens via CSS selectors (Attribute selector matching character by character)",
+            "Styling buttons",
+            "Styling forms",
+            "Making site ugly"
+        ]
+    },
+    {
+        "q": "Can you prevent CSS Injection CSRF token stealing?",
+        "o": [
+            "Yes, don't put token in DOM attributes if possible, or use Random/Masked attributes",
+            "No",
+            "Only using images",
+            "Only using flash"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Error Messages'?",
+        "o": [
+            "Leaking token in error page URL or Response (if accessible cross-origin)",
+            "Showing big errors",
+            "Showing stacktrace",
+            "Showing debug"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Link Prefetch'?",
+        "o": [
+            "Browser voluntarily fetching link href (GET CSRF risk)",
+            "Fetching coffee",
+            "Fetching paper",
+            "Fetching mail"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Prerender'?",
+        "o": [
+            "Browser rendering next page in background (executes JS -> CSRF)",
+            "Rendering video",
+            "Rendering image",
+            "Rendering audio"
+        ]
+    },
+    {
+        "q": "Are there automated scanners for CSRF?",
+        "o": [
+            "Yes, e.g. OWASP ZAP, Burp Suite, but false positives/negatives common",
+            "No",
+            "Only manual",
+            "Only code review"
+        ]
+    },
+    {
+        "q": "What indicates a likely CSRF vulnerability scanning?",
+        "o": [
+            "State-changing request with no random token & lax/no Referer check",
+            "Presence of token",
+            "Presence of CSP",
+            "Presence of HTTPS"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Cache Poisoning'?",
+        "o": [
+            "Poisoning cache to serve malicious content that triggers CSRF later",
+            "Poisoning water",
+            "Poisoning food",
+            "Poisoning air"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'HSTS' abuse?",
+        "o": [
+            "Creating 'super cookies' to track or aid attacks (theoretical overlap)",
+            "Using SSL",
+            "Using TLS",
+            "Using HTTP"
+        ]
+    },
+    {
+        "q": "Does 'CSRF' affect 'Single Page Apps' (SPA)?",
+        "o": [
+            "Yes, if they use Cookies for API auth (Must use Tokens/SameSite)",
+            "No, SPAs are safe",
+            "Only React",
+            "Only Vue"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Push Notifications'?",
+        "o": [
+            "Abusing push service to trigger fetches (rare)",
+            "Sending spam",
+            "Sending alerts",
+            "Sending ads"
+        ]
+    },
+    {
+        "q": "Can a browser extension cause CSRF?",
+        "o": [
+            "Yes, if it has permissions to make requests on behalf of user",
+            "No",
+            "Only themes",
+            "Only adblockers"
+        ]
+    },
+    {
+        "q": "Are browser extensions subject to SOP/CORS?",
+        "o": [
+            "Often exempt or have broader permissions (dangerous)",
+            "Yes strictly",
+            "No never",
+            "Only Firefox"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Service Workers'?",
+        "o": [
+            "Malicious service worker intercepting/forging requests",
+            "Working hard",
+            "Working late",
+            "Working fast"
+        ]
+    },
+    {
+        "q": "Can you register a malicious Service Worker via CSRF?",
+        "o": [
+            "Generally No, requires JS execution on same origin (XSS)",
+            "Yes",
+            "Maybe",
+            "Only with magic"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Site Script Inclusion' (XSSI)?",
+        "o": [
+            "Including external script to leak data (often confused with CSRF, but targets Read)",
+            "Including CSS",
+            "Including HTML",
+            "Including Images"
+        ]
+    },
+    {
+        "q": "Is XSSI a type of CSRF?",
+        "o": [
+            "Related (Cross-Original Data Leak), but distinct mechanism",
+            "Yes exactly",
+            "No unrelated",
+            "Same as SQLi"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' against 'OAuth' flow?",
+        "o": [
+            "Login CSRF: Forcing victim to link attacker's OAuth account",
+            "Stealing token",
+            "Deleting account",
+            "Creating app"
+        ]
+    },
+    {
+        "q": "How to prevent OAuth Login CSRF?",
+        "o": [
+            "Use 'state' parameter in OAuth handshake (acts as CSRF token)",
+            "Use secret",
+            "Use password",
+            "Use email"
+        ]
+    },
+    {
+        "q": "What if 'state' parameter is missing in OAuth?",
+        "o": [
+            "Vulnerable to CSRF (Attacker can switch victim's account to attacker's)",
+            "Secure",
+            "Faster",
+            "Slower"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' against 'OpenID Connect'?",
+        "o": [
+            "Same as OAuth, requires 'nonce' or 'state' validation",
+            "Different",
+            "Safer",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' in 'SAML'?",
+        "o": [
+            "Attacker injects SAML response. Mitigation: RelayState or InResponseTo check",
+            "XML attack",
+            "JSON attack",
+            "HTML attack"
+        ]
+    },
+    {
+        "q": "What is 'SAML' RelayState?",
+        "o": [
+            "Used to store state, can act as CSRF token",
+            "Relay race",
+            "Relay switch",
+            "Relay server"
+        ]
+    },
+    {
+        "q": "What is 'HTML Injection' vs CSRF?",
+        "o": [
+            "Injection puts HTML in page (XSS risk); CSRF sends request",
+            "Same thing",
+            "Injection is network",
+            "CSRF is display"
+        ]
+    },
+    {
+        "q": "Can you fix CSRF by 'checking referer matches host'?",
+        "o": [
+            "Yes, loosely, but fails if referer is stripped. Strict Origin is better",
+            "No",
+            "Only for GET",
+            "Only for POST"
+        ]
+    },
+    {
+        "q": "What if Referer is 'about:blank'?",
+        "o": [
+            "Treat as suspicious or block if strict policy active",
+            "Allow it",
+            "Ignore it",
+            "Trust it"
+        ]
+    },
+    {
+        "q": "What if Referer is 'android-app://'?",
+        "o": [
+            "Legitimate traffic from Android apps, verify against known app IDs",
+            "Block it",
+            "Trust all",
+            "Allow if HTTPS"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Deep Links'?",
+        "o": [
+            "Opening app via deep link to trigger action (CSRF in mobile apps)",
+            "Deep diving",
+            "Deep sea",
+            "Deep web"
+        ]
+    },
+    {
+        "q": "How to prevent Mobile App CSRF (Deep Link)?",
+        "o": [
+            "Confirmation prompts, verify headers/tokens if possible, universal links matching",
+            "Disable links",
+            "Disable apps",
+            "Disable phone"
+        ]
+    },
+    {
+        "q": "Is 'CSRF' relevant to 'Desktop Apps'?",
+        "o": [
+            "Yes, if they open local web servers or handle custom protocols",
+            "No",
+            "Only Mac",
+            "Only Windows"
+        ]
+    },
+    {
+        "q": "What is 'Local Web Server' CSRF?",
+        "o": [
+            "Website attacking a server running on localhost (e.g. 127.0.0.1:8080)",
+            "Attacking cloud",
+            "Attacking proxy",
+            "Attacking DNS"
+        ]
+    },
+    {
+        "q": "Why is Localhost CSRF common?",
+        "o": [
+            "Developers assume localhost is private/safe and skip CSRF checks",
+            "It is fast",
+            "It is easy",
+            "It is default"
+        ]
+    },
+    {
+        "q": "Can a public site CSRF `http://localhost:3000`?",
+        "o": [
+            "Yes, SOP distinguishes port/protocol but doesn't block *sending* requests (fetch/form)",
+            "No",
+            "Only if HTTPS",
+            "Only if SameSite"
+        ]
+    },
+    {
+        "q": "What is 'Private Network Access' (PNA) check?",
+        "o": [
+            "Browser protection sending Preflight for public->private requests",
+            "Private browsing",
+            "VPN check",
+            "Firewall check"
+        ]
+    },
+    {
+        "q": "Does PNA prevent Localhost CSRF?",
+        "o": [
+            "Ideally yes (requires explicit opt-in from localhost server), still evolving spec",
+            "No",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'PDF features'?",
+        "o": [
+            "Submitting data to URL feature in PDF forms",
+            "PDF reading",
+            "PDF printing",
+            "PDF signing"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Word Macros'?",
+        "o": [
+            "Macros making web requests using user's cookies (IE stack usually)",
+            "Writing docs",
+            "Printing docs",
+            "Saving docs"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Excel Web Query'?",
+        "o": [
+            "Excel pulling data from URL (GET CSRF/Data Theft)",
+            "Excel math",
+            "Excel chart",
+            "Excel sort"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Java Web Start'?",
+        "o": [
+            "Historical vector launching Java apps via browser to make requests",
+            "Starting web",
+            "Stopping web",
+            "Restarting web"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Silverlight'?",
+        "o": [
+            "Historical vector making cross-domain requests",
+            "Silver screen",
+            "Silver surfer",
+            "Silver ware"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'ActionScript' (Flash)?",
+        "o": [
+            "Historical vector used extensively for Cross-Domain POSTs",
+            "Acting",
+            "Screenplay",
+            "Movies"
+        ]
+    },
+    {
+        "q": "What is 'Strict-Transport-Security' (HSTS) relation?",
+        "o": [
+            "Ensures HTTPS, preventing downgrade attacks that might expose tokens or referers",
+            "Enciphers tokens",
+            "Compresses tokens",
+            "Signs tokens"
+        ]
+    },
+    {
+        "q": "What is 'Upgrade-Insecure-Requests'?",
+        "o": [
+            "Browser directive to fetch http resources as https",
+            "Upgrade computer",
+            "Upgrade ram",
+            "Upgrade browser"
+        ]
+    },
+    {
+        "q": "Can CSRF happen on 'file://' URI?",
+        "o": [
+            "Yes, if file is loaded and makes requests (Local File Isolation aims to prevent)",
+            "No",
+            "Only on Linux",
+            "Only on Mac"
+        ]
+    },
+    {
+        "q": "What is 'Origin: file://'?",
+        "o": [
+            "Often mapped to 'null', treated as opaque origin",
+            "File origin",
+            "Host origin",
+            "Root origin"
+        ]
+    },
+    {
+        "q": "Can you set cookies on 'file://'?",
+        "o": [
+            "Generally No (modern browsers), Chrome flag --enable-file-cookies needed",
+            "Yes",
+            "Always",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'AppCache' (Deprecated)?",
+        "o": [
+            "Caching malicious pages to persist attack",
+            "Caching app",
+            "Caching file",
+            "Caching data"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Manifest'?",
+        "o": [
+            "Usually XSS/Phishing related, less direct CSRF",
+            "Manifest destiny",
+            "Manifest file",
+            "Manifest list"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'WebRTC'?",
+        "o": [
+            "Leaking internal IP (STUN/TURN), helpful for Intranet CSRF targeting",
+            "Real time chat",
+            "Video call",
+            "Voice call"
+        ]
+    },
+    {
+        "q": "Can WebRTC make HTTP requests?",
+        "o": [
+            "Not directly standard HTTP, but via data channels or signaling abuse",
+            "Yes",
+            "No",
+            "Only GET"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Beacon API'?",
+        "o": [
+            "Asynchronous non-blocking requests (POST), often no preflight if simple",
+            "Lighting beacon",
+            "Signal fire",
+            "Lighthouse"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Ping' attribute on links?",
+        "o": [
+            "Sends POST to ping URL when link clicked (User Interaction required)",
+            "Pinging server",
+            "Pinging pong",
+            "Pinging network"
+        ]
+    },
+    {
+        "q": "Can 'Ping' attribute be blocked?",
+        "o": [
+            "Yes, by browser settings or extensions (Privacy)",
+            "No",
+            "Only by ISP",
+            "Only by DNS"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'CSP Report URI'?",
+        "o": [
+            "Sending JSON reports to server (cannot be customized much, usually safe)",
+            "Reporting crime",
+            "Reporting bugs",
+            "Reporting news"
+        ]
+    },
+    {
+        "q": "Can you use 'CSP Report' to trigger actions?",
+        "o": [
+            "Unlikely unless server blindly parses report as command (very rare)",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Signed Exchange' (SXG)?",
+        "o": [
+            "Delivering content signed by origin (complex security model)",
+            "Signing checks",
+            "Signing contracts",
+            "Signing petition"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Portal' element?",
+        "o": [
+            "Experimental element like iframe, potential clickjacking/CSRF surface",
+            "Teleporting",
+            "Gaming",
+            "Science"
+        ]
+    },
+    {
+        "q": "What is 'SameParty' cookie attribute (Deprecated)?",
+        "o": [
+            "Was proposed for First-Party Sets, replaced by actual First-Party Sets",
+            "Party time",
+            "Party mode",
+            "Party hat"
+        ]
+    },
+    {
+        "q": "What is 'First-Party Sets' (FPS)?",
+        "o": [
+            "Group of domains owned by same entity, sharing some cookie privs (affects CSRF/SameSite boundary)",
+            "Math sets",
+            "Lego sets",
+            "Tool sets"
+        ]
+    },
+    {
+        "q": "Does FPS weaken SameSite?",
+        "o": [
+            "Intended to relax it strictly within trust boundary, controversial for privacy",
+            "Yes drastically",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CHIPS' (Cookies)?",
+        "o": [
+            "Cookies Having Independent Partitioned State (Privacy sandbox feature)",
+            "Potato chips",
+            "Silicon chips",
+            "Poker chips"
+        ]
+    },
+    {
+        "q": "How does CHIPS affect CSRF?",
+        "o": [
+            "Partitioned cookies are keyed by top-level site (Mitigates cross-site tracking/attacks)",
+            "Makes it worse",
+            "No effect",
+            "Deletes cookies"
+        ]
+    },
+    {
+        "q": "What is 'Partitioned' attribute?",
+        "o": [
+            "Opt-in for cookie partitioning (CHIPS)",
+            "Dividing drive",
+            "Splitting room",
+            "Cutting cake"
+        ]
+    },
+    {
+        "q": "What is 'Topics API' vs CSRF?",
+        "o": [
+            "Topics is for ad targeting (replacing 3rd party cookies), minimizes cross-site state",
+            "Topic sentence",
+            "Topic list",
+            "Topic off"
+        ]
+    },
+    {
+        "q": "What is 'Fenced Frame'?",
+        "o": [
+            "Iframe with network isolation (prevents communication with embedding page)",
+            "Fenced yard",
+            "Fenced wall",
+            "Fenced garden"
+        ]
+    },
+    {
+        "q": "Does Fenced Frame prevent CSRF?",
+        "o": [
+            "It limits data leakage/communication, reducing attack surface",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Attestation' (WebAuthn)?",
+        "o": [
+            "Proving authenticator legitimacy (Verification) - High security",
+            "Testing",
+            "Guessing",
+            "Hoping"
+        ]
+    },
+    {
+        "q": "Does WebAuthn prevent CSRF?",
+        "o": [
+            "WebAuthn relies on Origin check during ceremony (built-in phishing/CSRF protection)",
+            "No",
+            "Only passwords",
+            "Only pins"
+        ]
+    },
+    {
+        "q": "Why is WebAuthn immune to CSRF?",
+        "o": [
+            "Browser enforces Origin binding to the public key credential",
+            "It is magic",
+            "It is hardware",
+            "It is software"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Site' header?",
+        "o": [
+            "Browser header indicating relationship between request initiator and target (cross-site, same-origin, etc)",
+            "Fetching site",
+            "Securing site",
+            "Loading site"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Mode' header?",
+        "o": [
+            "navigate, cors, no-cors, etc. (Describes request type)",
+            "Fetching mode",
+            "Securing mode",
+            "Loading mode"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Dest' header?",
+        "o": [
+            "document, image, script, etc. (Describes destination)",
+            "Fetching dest",
+            "Securing dest",
+            "Loading dest"
+        ]
+    },
+    {
+        "q": "How to use 'Sec-Fetch-*' headers for CSRF defense?",
+        "o": [
+            "If `Sec-Fetch-Site` is 'cross-site', block request unless specialized endpoint",
+            "Ignore them",
+            "Log them",
+            "Delete them"
+        ]
+    },
+    {
+        "q": "Are 'Sec-Fetch' headers spoofable?",
+        "o": [
+            "No, they are forbidden headers (browser controlled)",
+            "Yes",
+            "Only in curl",
+            "Only in wget"
+        ]
+    },
+    {
+        "q": "What is 'CORB' (Cross-Origin Read Blocking)?",
+        "o": [
+            "Browser mechanism blocking cross-origin responses with mismatched content-types (Mitigates Spectre/CSRF-read)",
+            "Blocking read",
+            "Blocking write",
+            "Blocking exec"
+        ]
+    },
+    {
+        "q": "What is 'ORB' (Opaque Response Blocking)?",
+        "o": [
+            "Successor to CORB",
+            "Orbital",
+            "Orbit",
+            "Sphere"
+        ]
+    },
+    {
+        "q": "What is 'Spectre' vulnerability impact on CSRF?",
+        "o": [
+            "Allows reading memory (breaking process isolation), effectively bypassing SOP/CSRF read protections",
+            "Ghost",
+            "Spirit",
+            "James Bond"
+        ]
+    },
+    {
+        "q": "What is 'Site Isolation'?",
+        "o": [
+            "Browser architecture putting different sites in different processes (Defends Spectre/CSRF leaks)",
+            "Isolating site",
+            "Blocking site",
+            "Hiding site"
+        ]
+    },
+    {
+        "q": "What is 'COOP' (Cross-Origin Opener Policy)?",
+        "o": [
+            "Isolates browsing context group (prevents cross-window attacks/XS-Leaks)",
+            "Co-op game",
+            "Co-op mode",
+            "Co-op store"
+        ]
+    },
+    {
+        "q": "What is 'COEP' (Cross-Origin Embedder Policy)?",
+        "o": [
+            "Ensures embedded resources opt-in to being loaded (Prevents loading non-public resources)",
+            "Embedding policy",
+            "Loading policy",
+            "Saving policy"
+        ]
+    },
+    {
+        "q": "What is 'CORP' (Cross-Origin Resource Policy)?",
+        "o": [
+            "Header allowing resource to specify who can load it (same-site, same-origin, cross-origin)",
+            "Corporation",
+            "Cooperation",
+            "Coordination"
+        ]
+    },
+    {
+        "q": "How does CORP help security?",
+        "o": [
+            "Prevents your images/scripts from being loaded by malicious sites (Info Leak/XS-Search)",
+            "It doesn't",
+            "Only checks CORS",
+            "Only checks Cookie"
+        ]
+    },
+    {
+        "q": "What is 'XS-Leak' (Cross-Site Leak)?",
+        "o": [
+            "Inferring user state (login status, search results) via side-channels (timing, error events)",
+            "Leaking xs",
+            "Leaking clothes",
+            "Leaking water"
+        ]
+    },
+    {
+        "q": "Is XS-Leak a form of CSRF?",
+        "o": [
+            "Related (Cross-Site), but focuses on inference rather than action forgery",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Framing' attack?",
+        "o": [
+            "Loading site in iframe to perform Clickjacking or exploit side-channels",
+            "Framing picture",
+            "Framing wall",
+            "Framing house"
+        ]
+    },
+    {
+        "q": "What is 'Click-event' interception?",
+        "o": [
+            "Clickjacking basic mechanism",
+            "Clicking mouse",
+            "Clicking keyboard",
+            "Clicking screen"
+        ]
+    },
+    {
+        "q": "What is 'Cursorjacking'?",
+        "o": [
+            "Misleading user about cursor position (visual spoofing)",
+            "Stealing cursor",
+            "Hiding cursor",
+            "Freezing cursor"
+        ]
+    },
+    {
+        "q": "What is 'Filejacking'?",
+        "o": [
+            "Using file input and clickjacking to steal local files",
+            "Stealing file",
+            "Locking file",
+            "Encrypting file"
+        ]
+    },
+    {
+        "q": "What is 'Tabnabbing' relation to CSRF?",
+        "o": [
+            "Replacing inactive tab content (phishing); can lead to user submitting credentials/CSRF on fake site",
+            "Nabbing tabs",
+            "Closing tabs",
+            "Opening tabs"
+        ]
+    },
+    {
+        "q": "What is 'Reverse Tabnabbing'?",
+        "o": [
+            "Attacker page uses `window.opener.location` to redirect original tab (phishing/CSRF vector)",
+            "Reverse driving",
+            "Reverse engineering",
+            "Reverse proxy"
+        ]
+    },
+    {
+        "q": "How to prevent Reverse Tabnabbing?",
+        "o": [
+            "Use `rel='noopener noreferrer'` on links to untrusted sites",
+            "Use `target='_self'`",
+            "Use HTTPS",
+            "Use VPN"
+        ]
+    },
+    {
+        "q": "What is 'Window.opener' vulnerability?",
+        "o": [
+            "Allows opened page to control parent window (redirect it)",
+            "Opening windows",
+            "Cleaning windows",
+            "Closing windows"
+        ]
+    },
+    {
+        "q": "What is 'DOM Clobbering' impact on CSRF?",
+        "o": [
+            "If CSRF token variable/element is clobbered, attacker might bypass check or force default",
+            "Clobbering DOM",
+            "Breaking DOM",
+            "Fixing DOM"
+        ]
+    },
+    {
+        "q": "What is 'Prototype Pollution' impact on CSRF?",
+        "o": [
+            "Polluting Object.prototype to alter CSRF middleware config (e.g. disabling it)",
+            "Polluting water",
+            "Polluting air",
+            "Polluting code"
+        ]
+    },
+    {
+        "q": "What is 'Self-XSS' to 'CSRF' chain?",
+        "o": [
+            "Using CSRF (Login CSRF) to force victim into account with Self-XSS, then executing XSS",
+            "Not possible",
+            "Selfies",
+            "Mirrors"
+        ]
+    },
+    {
+        "q": "What is 'Cookie Bomb'?",
+        "o": [
+            "Setting many large cookies to crash server header limits (DoS); can disrupt CSRF token validation",
+            "Exploding cookie",
+            "Eating cookie",
+            "Baking cookie"
+        ]
+    },
+    {
+        "q": "What is 'Cookie Overflow'?",
+        "o": [
+            "Overwriting important cookies (like Session/CSRF) by setting too many cookies (eviction)",
+            "Spilling milk",
+            "Spilling water",
+            "Spilling data"
+        ]
+    },
+    {
+        "q": "What is 'HTTP Response Splitting' (CRLF Injection) vs CSRF?",
+        "o": [
+            "Injecting headers to set cookies (Session Fixation/CSRF bypass)",
+            "Splitting atoms",
+            "Splitting wood",
+            "Splitting bills"
+        ]
+    },
+    {
+        "q": "What is 'Host Header Injection' vs CSRF?",
+        "o": [
+            "Manipulating Host header to poison password reset links (account takeover), distinct from CSRF",
+            "Injecting host",
+            "Injecting guest",
+            "Injecting party"
+        ]
+    },
+    {
+        "q": "What is 'Dangling Markup' Injection?",
+        "o": [
+            "Injecting incomplete HTML (e.g. `<img src='...`) to slurp data up to next quote (CSRF token theft)",
+            "Hanging text",
+            "Floating div",
+            "Falling span"
+        ]
+    },
+    {
+        "q": "How to prevent Dangling Markup token theft?",
+        "o": [
+            "CSP (no-inline-styles/scripts), Quote blocking in WAF",
+            "Use bold text",
+            "Use italic text",
+            "Use red text"
+        ]
+    },
+    {
+        "q": "What is 'Referer-Policy: navigation'?",
+        "o": [
+            "Non-standard/Theoretical: send referer only on navigation",
+            "Driving car",
+            "Sailing ship",
+            "Flying plane"
+        ]
+    },
+    {
+        "q": "What is 'Referer-Policy: same-origin'?",
+        "o": [
+            "Send referer for same-origin requests, nothing for cross-origin",
+            "Send always",
+            "Send never",
+            "Send random"
+        ]
+    },
+    {
+        "q": "What is 'Double-Submit' with 'Encrypted Token'?",
+        "o": [
+            "Combining both patterns: Cookie has encrypted token, header has derived value",
+            "Double encryption",
+            "Double hashing",
+            "Double encoding"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Flash' (Historical details)?",
+        "o": [
+            "Flash sent headers if crossdomain.xml allowed, bypassed SOP before fixes",
+            "Flash animation",
+            "Flash game",
+            "Flash player"
+        ]
+    },
+    {
+        "q": "What is 'ActionScript' `URLRequest`?",
+        "o": [
+            "API in Flash to make HTTP requests (CSRF vector)",
+            "Requesting URL",
+            "Requesting help",
+            "Requesting money"
+        ]
+    },
+    {
+        "q": "What is 'Silverlight' `ClientAccessPolicy.xml`?",
+        "o": [
+            "Silverlight's version of crossdomain.xml (CSRF risk if misconfigured)",
+            "Client policy",
+            "Server policy",
+            "Network policy"
+        ]
+    },
+    {
+        "q": "What is 'CORS' `null` origin exploitation?",
+        "o": [
+            "If server reflects `null` into ACAO, sandboxed iframes can read response",
+            "Null pointer",
+            "Null value",
+            "Null set"
+        ]
+    },
+    {
+        "q": "What is 'Pre-flight' caching?",
+        "o": [
+            "Browser caches preflight result (Access-Control-Max-Age) to improve performance",
+            "Caching flight",
+            "Caching ticket",
+            "Caching bag"
+        ]
+    },
+    {
+        "q": "Does 'Access-Control-Max-Age' affect security?",
+        "o": [
+            "Long cache means permission persists even if server config changes",
+            "No",
+            "Only for GET",
+            "Only for PUT"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'DNS Rebinding' timeframe?",
+        "o": [
+            "Very fast (TTL=0), attacker switches IP before browser realizes",
+            "Very slow",
+            "Infinite",
+            "Zero"
+        ]
+    },
+    {
+        "q": "Does 'SameSite' fix DNS Rebinding?",
+        "o": [
+            "Partially (cookies might be blocked), but Rebinding targets Internal IP (no cookies needed sometimes)",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'SSRF' chain?",
+        "o": [
+            "SSRF makes internal request; CSRF triggers the SSRF remotely",
+            "Chain reaction",
+            "Chain link",
+            "Chain mail"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'XML External Entity' (XXE)?",
+        "o": [
+            "CSRF posts XML with XXE payload (if Content-Type ignored)",
+            "External entity",
+            "Internal entity",
+            "Unknown entity"
+        ]
+    },
+    {
+        "q": "What is 'Login' CSRF vs 'Session Fixation'?",
+        "o": [
+            "Login CSRF logs victim as attacker; Fixation forces victim to use known session ID",
+            "Same thing",
+            "Login is faster",
+            "Fixation is slower"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Parameter Pollution'?",
+        "o": [
+            "Injecting multiple parameters to confuse WAF/Validation (e.g. `?token=bad&token=good`)",
+            "Polluting ocean",
+            "Polluting river",
+            "Polluting lake"
+        ]
+    },
+    {
+        "q": "How does HPP (HTTP Parameter Pollution) bypass CSRF?",
+        "o": [
+            "Server might valid check second token but use first (or vice versa)",
+            "It doesn't",
+            "Only in PHP",
+            "Only in ASP"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'JSON' pollution?",
+        "o": [
+            "Overwriting keys in JSON if parser creates last-key-wins structure",
+            "Messy JSON",
+            "Clean JSON",
+            "Big JSON"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Bypass' via 'Header Spoofing'?",
+        "o": [
+            "Trying to spoof Referer/Origin (Usually impossible in browser, possible in open proxies)",
+            "Spoofing IP",
+            "Spoofing MAC",
+            "Spoofing DNS"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'X-Forwarded-Host'?",
+        "o": [
+            "Injecting headers to confuse application about its own host (can bypass Referer check)",
+            "Forwarding mail",
+            "Forwarding call",
+            "Forwarding port"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Clickjacking' + 'Drag and Drop'?",
+        "o": [
+            "Tricking user to drag a value (token) into an iframe or attacker window",
+            "Dragging feet",
+            "Dropping ball",
+            "Moving files"
+        ]
+    },
+    {
+        "q": "What is 'Drag and Drop' XSS/CSRF?",
+        "o": [
+            "User drags text/image that contains payload; browser executes it in target context",
+            "Dangerous",
+            "Safe",
+            "Fun"
+        ]
+    },
+    {
+        "q": "How to prevent Draw-and-Drop attacks?",
+        "o": [
+            "Frame-busting, COOP, checking drop events source",
+            "Disable mouse",
+            "Disable screen",
+            "Disable browser"
+        ]
+    },
+    {
+        "q": "What is 'Strict' vs 'Lax' SameSite enforcement in Chrome?",
+        "o": [
+            "Chrome treats missing SameSite as Lax (Lax-by-default)",
+            "Treats as Strict",
+            "Treats as None",
+            "Treats as Random"
+        ]
+    },
+    {
+        "q": "Does 'Lax-by-default' break iframes?",
+        "o": [
+            "Yes, iframes accessing cross-site resources need SameSite=None; Secure",
+            "No",
+            "Only videos",
+            "Only maps"
+        ]
+    },
+    {
+        "q": "What is '2-minute' rule for SameSite=Lax (POST)?",
+        "o": [
+            "Chrome temporarily allowed Lax+POST for 2 minutes after cookie set (Removed feature)",
+            "Cooking rule",
+            "Sports rule",
+            "Traffic rule"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header `moz-extension://`?",
+        "o": [
+            "Origin sent by Firefox extensions",
+            "Mozilla site",
+            "Mozilla store",
+            "Mozilla blog"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header `chrome-extension://`?",
+        "o": [
+            "Origin sent by Chrome extensions",
+            "Chrome bumper",
+            "Chrome wheel",
+            "Chrome paint"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Electron' apps?",
+        "o": [
+            "If Electron app has `nodeIntegration: true` & loads remote content -> RCE via CSRF/XSS",
+            "Electric shock",
+            "Battery power",
+            "Nuclear energy"
+        ]
+    },
+    {
+        "q": "How to secure Electron from CSRF?",
+        "o": [
+            "Disable nodeIntegration, enable contextIsolation, use preload scripts, validate Origin",
+            "Use tape",
+            "Use glue",
+            "Use lock"
+        ]
+    },
+    {
+        "q": "What is 'Attacker-controlled' subsystem?",
+        "o": [
+            "Any system component (DNS, Proxy, User Input) attacker can manipulate",
+            "Robot arm",
+            "Remote car",
+            "Drone"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Webhooks' without verification?",
+        "o": [
+            "Attacker triggers webhook endpoint with fake data (Server-Side CSRF against itself)",
+            "Fishing hook",
+            "Coat hook",
+            "Right hook"
+        ]
+    },
+    {
+        "q": "What is 'Re-Binding' attack?",
+        "o": [
+            "DNS Rebinding",
+            "Book binding",
+            "Key binding",
+            "Spell binding"
+        ]
+    },
+    {
+        "q": "What is 'Port Blocking' in browsers?",
+        "o": [
+            "Browsers block specific ports (e.g. SMTP 25, IRC 6667) to prevent Cross-Protocol Scripting",
+            "Blocking traffic",
+            "Blocking view",
+            "Blocking sun"
+        ]
+    },
+    {
+        "q": "What is 'Cross-Protocol Scripting'?",
+        "o": [
+            "Using HTTP POST to send commands to non-HTTP services (SMTP, FTP, Redis)",
+            "Writing scripts",
+            "Acting roles",
+            "Filming movies"
+        ]
+    },
+    {
+        "q": "Can you CSRF a Redis server?",
+        "o": [
+            "Yes, if exposed on localhost and browser allows port (rare now), command injection via POST body",
+            "No",
+            "Only if auth",
+            "Only if TLS"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Memcached'?",
+        "o": [
+            "Similar to Redis (UDP/TCP), injecting commands via forged requests",
+            "Memory loss",
+            "Memory card",
+            "Memory foam"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Elasticsearch'?",
+        "o": [
+            "If unprotected, browser can POST JSON queries/updates (Data modification/Leak)",
+            "Elastic band",
+            "Elastic girl",
+            "Elastic man"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' protection library for 'Express'?",
+        "o": [
+            "`csurf` (deprecated), now recommends tiny-csrf or manual implementation",
+            "Passport",
+            "Helmet",
+            "Cors"
+        ]
+    },
+    {
+        "q": "Why was `csurf` deprecated?",
+        "o": [
+            "Complexity and maintenance issues",
+            "Security flaw",
+            "Too fast",
+            "Too slow"
+        ]
+    },
+    {
+        "q": "What is 'Double-Submit' cookie weakness (Subdomains)?",
+        "o": [
+            "Attacker on subdomain can overwrite cookie (Cookie Tossing), setting it to match their token",
+            "None",
+            "Only secure",
+            "Only http"
+        ]
+    },
+    {
+        "q": "What is 'Strict-Dynamic' CSP usage?",
+        "o": [
+            "Allows trusted scripts to load other scripts (focus on XSS, but relevant to avoiding CSRF bypass via XSS)",
+            "Strict layout",
+            "Dynamic layout",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Navigate-to' CSP directive (Experimental)?",
+        "o": [
+            "Restricts where a page can navigate (Mitigates some CSRF/Open Redirect)",
+            "Driving map",
+            "GPS",
+            "Compass"
+        ]
+    },
+    {
+        "q": "What is 'Form-Action' CSP directive?",
+        "o": [
+            "Restricts URLs to which forms can be submitted (Defense against data exfil via forged forms)",
+            "Acting class",
+            "Action movie",
+            "Directing"
+        ]
+    },
+    {
+        "q": "Does 'Form-Action' prevent CSRF?",
+        "o": [
+            "Prevents forms on YOUR site submitting to attacker site (Reverse CSRF/Exfil), not attacker submitting to YOU",
+            "Yes completely",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Open Redirect'?",
+        "o": [
+            "Using open redirect to bypass strict Referer/Origin checks (redirect originates from trusted domain)",
+            "Opening doors",
+            "Opening windows",
+            "Opening jars"
+        ]
+    },
+    {
+        "q": "How does Open Redirect bypass header checks?",
+        "o": [
+            "Initial request is to trusted domain (passes check), which redirects to sensitive action (headers might persist or checks skipped)",
+            "It deletes headers",
+            "It adds headers",
+            "It encrypts headers"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Wildcard' subdomain content?",
+        "o": [
+            "Any user content on subdomain (e.g. user.site.com) can be used to attack parent (Cookie Tossing)",
+            "Wild party",
+            "Wild fire",
+            "Wild card"
+        ]
+    },
+    {
+        "q": "What is 'Public Suffix List'?",
+        "o": [
+            "List of domains where users can register subdomains (e.g. .co.uk,github.io). Affects cookie scope",
+            "Public library",
+            "Public park",
+            "Public school"
+        ]
+    },
+    {
+        "q": "Why is Public Suffix List important for CSRF?",
+        "o": [
+            "Prevents setting cookies for top-level domains (e.g. cookie for .com)",
+            "It is fun",
+            "It is free",
+            "It is open"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Referer spoofing' (Flash)?",
+        "o": [
+            "Old Flash vulnerability allowed setting Referer",
+            "Spoofing voice",
+            "Spoofing face",
+            "Spoofing text"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'XMLHttpRequest' (IE6)?",
+        "o": [
+            "IE6 had weak cross-domain checks",
+            "Old browser",
+            "Slow browser",
+            "Fast browser"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Favicon'?",
+        "o": [
+            "Browser fetching favicon (GET request) - potentially triggering logout or state change if path is mapped",
+            "Fetching icon",
+            "Fetching image",
+            "Fetching logo"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Social Media' preview?",
+        "o": [
+            "Link expalnders/bots making requests to generate preview cards (GET CSRF)",
+            "Social party",
+            "Social work",
+            "Social club"
+        ]
+    },
+    {
+        "q": "What is 'Headless Browser' CSRF?",
+        "o": [
+            "Attacker using headless browser script to automate CSRF (more capabilities than simple form)",
+            "No head",
+            "Ghost",
+            "Invisible"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'RSS Feed'?",
+        "o": [
+            "RSS reader making requests to feed items (GET CSRF)",
+            "Reading news",
+            "Reading books",
+            "Reading logs"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Calendar' invites?",
+        "o": [
+            "Fetching external images/links in calendar events",
+            "Scheduling meeting",
+            "Planning party",
+            "Timing event"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Email' images?",
+        "o": [
+            "Loading external images in webmail (GET CSRF + tracking)",
+            "Writing letter",
+            "Sending package",
+            "mailing list"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via '404' page?",
+        "o": [
+            "If 404 page reflects input or allows script, can become vector",
+            "Page not found",
+            "Missing link",
+            "Broken url"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via '307 Redirect'?",
+        "o": [
+            "Preserves method (POST stays POST) on redirect. Dangerous if Open Redirect exists",
+            "Moving house",
+            "Changing lane",
+            "Turning corner"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via '302 Redirect'?",
+        "o": [
+            "Usually changes POST to GET (protects against POST CSRF accidentally)",
+            "Found",
+            "Moved",
+            "Gone"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Client-Side Routing'?",
+        "o": [
+            "Manipulating URL fragment/state to trigger client actions",
+            "Routing map",
+            "Routing traffic",
+            "Routing cable"
+        ]
+    },
+    {
+        "q": "What is 'State' parameter in 'OIDC'?",
+        "o": [
+            "Prevents CSRF in OpenID Connect flow (binding request to browser session)",
+            "State of matter",
+            "State of mind",
+            "United States"
+        ]
+    },
+    {
+        "q": "What is 'Nonce' in 'OIDC'?",
+        "o": [
+            "Prevents Replay attacks and associates ID Token with client session",
+            "Number once",
+            "Nonsense",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PKCE' (Proof Key for Code Exchange)?",
+        "o": [
+            "OAuth extension for public clients, prevents authorization code interception (and CSRF)",
+            "Exchange rate",
+            "Key exchange",
+            "Stock exchange"
+        ]
+    },
+    {
+        "q": "Does PKCE prevent CSRF?",
+        "o": [
+            "Yes, `state` is still recommended but PKCE adds strong correlation",
+            "No",
+            "Maybe",
+            "Only for mobile"
+        ]
+    },
+    {
+        "q": "What is 'SAML' `InResponseTo`?",
+        "o": [
+            "Attribute in SAML Response matching the ID of the Request (Anti-CSRF/Replay)",
+            "Answering",
+            "Replying",
+            "Speaking"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Middleware Misorder'?",
+        "o": [
+            "Placing CSRF middleware AFTER body parser or route handler (Protection fails)",
+            "Wrong order",
+            "Mixed up",
+            "Confusion"
+        ]
+    },
+    {
+        "q": "What implies 'CSRF Middleware' must be before 'Routes'?",
+        "o": [
+            "Middleware must intercept/validate BEFORE action executes",
+            "After",
+            "During",
+            "Parallel"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Ignored Paths'?",
+        "o": [
+            "Devs excluding /api/* from CSRF thinking it is safe (it might not be)",
+            "Ignoring signs",
+            "Ignoring rules",
+            "Ignoring people"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Null Session'?",
+        "o": [
+            "If app allows action with no session (public), CSRF is technically 'Click fraud' or 'Spam'",
+            "Empty session",
+            "Void session",
+            "Blank session"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Guest Checkout'?",
+        "o": [
+            "Forcing user to checkout (buying items) if payment details saved/session active",
+            "Buying things",
+            "Shopping",
+            "Spending"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Print' feature?",
+        "o": [
+            "Triggering print dialog (Annoyance) or printer exploits",
+            "Printing paper",
+            "Printing ink",
+            "Printing money"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Bluetooth'?",
+        "o": [
+            "Web Bluetooth API abuse (if permissions granted) to control devices",
+            "Blue tooth",
+            "Red tooth",
+            "Green tooth"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'USB'?",
+        "o": [
+            "WebUSB API abuse to send commands to connected USB devices",
+            "Universal bus",
+            "Serial bus",
+            "Parallel bus"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'NFC'?",
+        "o": [
+            "WebNFC API abuse to write/read tags",
+            "Near field",
+            "Far field",
+            "Mid field"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'MIDI'?",
+        "o": [
+            "WebMIDI API abuse to control instruments/sysex",
+            "Music",
+            "Sound",
+            "Audio"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Gamepad'?",
+        "o": [
+            "Using Gamepad API to fingerprint or track (less direct CSRF)",
+            "Gaming",
+            "Playing",
+            "Winning"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'VR/AR'?",
+        "o": [
+            "WebXR abuse (theoretical future vectors)",
+            "Virtual reality",
+            "Augmented reality",
+            "Mixed reality"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' via 'Payment Request API'?",
+        "o": [
+            "Triggering payment UI (Phishing/Annoyance)",
+            "Asking money",
+            "Begging",
+            "Stealing"
+        ]
+    }
+]

@@ -1,0 +1,3656 @@
+[
+    {
+        "q": "What is 'CORS'?",
+        "o": [
+            "Cross-Origin Resource Sharing. Mechanism allowing browser to load resources from different origin",
+            "Cross Origin Request Security",
+            "Computer On Right Side",
+            "Common Origin Request System"
+        ]
+    },
+    {
+        "q": "What is 'Origin'?",
+        "o": [
+            "Combination of Scheme (Protocol), Host (Domain), and Port",
+            "Just Domain",
+            "Just IP",
+            "URL path"
+        ]
+    },
+    {
+        "q": "Are `http://example.com` and `https://example.com` same origin?",
+        "o": [
+            "No. Different scheme (http vs https)",
+            "Yes",
+            "Maybe",
+            "In some browsers"
+        ]
+    },
+    {
+        "q": "Are `example.com:80` and `example.com:8080` same origin?",
+        "o": [
+            "No. Different port",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Are `a.example.com` and `b.example.com` same origin?",
+        "o": [
+            "No. Different host",
+            "Yes",
+            "Maybe",
+            "Close enough"
+        ]
+    },
+    {
+        "q": "What is 'SOP'?",
+        "o": [
+            "Same-Origin Policy. Browser security model preventing scripts from one origin accessing data of another",
+            "Standard Operating Procedure",
+            "Service Oriented Protocol",
+            "Secure Origin Protocol"
+        ]
+    },
+    {
+        "q": "Does SOP block loading images from other origins?",
+        "o": [
+            "Generally No. You can embed images (embedding is allowed, reading pixel data is blocked unless CORS)",
+            "Yes always",
+            "No never",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Does SOP block `fetch()` or XHR to other origins?",
+        "o": [
+            "Yes. Unless the server sends correct CORS headers",
+            "No",
+            "Usually",
+            "Depends on user"
+        ]
+    },
+    {
+        "q": "What header allows access from specific origin?",
+        "o": [
+            "`Access-Control-Allow-Origin: https://example.com`",
+            "`Allow-Origin: *`",
+            "`Origin: Allow`",
+            "`CORS: true`"
+        ]
+    },
+    {
+        "q": "What allows access from ANY origin?",
+        "o": [
+            "`Access-Control-Allow-Origin: *`",
+            "`Access-Control-Allow-Origin: any`",
+            "`Access-Control-Allow-Origin: all`",
+            "`Access-Control-Allow-Origin: true`"
+        ]
+    },
+    {
+        "q": "What is 'Simple Request' in CORS?",
+        "o": [
+            "Request (GET/HEAD/POST) with limited headers/content-types that doesn't trigger Preflight",
+            "Fast request",
+            "Easy request",
+            "Small request"
+        ]
+    },
+    {
+        "q": "What Content-Types are allowed in Simple Request?",
+        "o": [
+            "`application/x-www-form-urlencoded`, `multipart/form-data`, `text/plain`",
+            "`application/json`",
+            "`application/xml`",
+            "Any"
+        ]
+    },
+    {
+        "q": "Does `application/json` trigger Preflight?",
+        "o": [
+            "Yes. It is not a simplified content-type",
+            "No",
+            "Only on PUT",
+            "Only on DELETE"
+        ]
+    },
+    {
+        "q": "What is a 'Preflight Request'?",
+        "o": [
+            "An OPTIONS request sent by browser automatically before the actual request to check permissions",
+            "Test request",
+            "Check request",
+            "Setup request"
+        ]
+    },
+    {
+        "q": "What HTTP method is used for Preflight?",
+        "o": [
+            "OPTIONS",
+            "GET",
+            "HEAD",
+            "POST"
+        ]
+    },
+    {
+        "q": "What status code should Preflight return?",
+        "o": [
+            "2xx (usually 200 OK or 204 No Content)",
+            "302 Found",
+            "403 Forbidden",
+            "500 Error"
+        ]
+    },
+    {
+        "q": "What header lists allowed methods in Preflight response?",
+        "o": [
+            "`Access-Control-Allow-Methods`",
+            "`Allow-Methods`",
+            "`Methods`",
+            "`Allowed`"
+        ]
+    },
+    {
+        "q": "What header lists allowed headers in Preflight response?",
+        "o": [
+            "`Access-Control-Allow-Headers`",
+            "`Allow-Headers`",
+            "`Headers`",
+            "`Allowed-Head`"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Max-Age`?",
+        "o": [
+            "Cache duration (in seconds) for the Preflight response",
+            "Request timeout",
+            "Connection timeout",
+            "Session time"
+        ]
+    },
+    {
+        "q": "Why cache Preflight?",
+        "o": [
+            "To avoid sending OPTIONS request for every single API call (Performance)",
+            "To save disk",
+            "To save ram",
+            "To allow auth"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Credentials`?",
+        "o": [
+            "Header (true) allowing browser to send cookies/auth headers with the request",
+            "Allow password",
+            "Allow user",
+            "Allow login"
+        ]
+    },
+    {
+        "q": "Can you use `Access-Control-Allow-Origin: *` with Credentials?",
+        "o": [
+            "No. If Credentials are true, Origin CANNOT be *. It must be specific",
+            "Yes",
+            "Sometimes",
+            "Browser specific"
+        ]
+    },
+    {
+        "q": "What happens if server sends `Access-Control-Allow-Origin: *` AND `Allow-Credentials: true`?",
+        "o": [
+            "Browser blocks the request (CORS Error)",
+            "It works",
+            "Cookies are sent but ignored",
+            "Cookies are not sent"
+        ]
+    },
+    {
+        "q": "How to support multiple origins with Credentials?",
+        "o": [
+            "Server checks `Origin` header dynamically and reflects it back in `Access-Control-Allow-Origin` if whitelisted",
+            "List all origins in header",
+            "Use *",
+            "Use Regex"
+        ]
+    },
+    {
+        "q": "What header does Browser send to indicate origin?",
+        "o": [
+            "`Origin`",
+            "`Referer`",
+            "`Host`",
+            "`Source`"
+        ]
+    },
+    {
+        "q": "Can Javascript modify `Origin` header?",
+        "o": [
+            "No. It is a forbidden header controlled by browser",
+            "Yes",
+            "Sometimes",
+            "With permissions"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Expose-Headers`?",
+        "o": [
+            "Lists headers that browser script is allowed to read from response (e.g. `X-Custom-Token`)",
+            "Headers to show",
+            "Headers to hide",
+            "Headers to send"
+        ]
+    },
+    {
+        "q": "Which headers are exposed by default in CORS response?",
+        "o": [
+            "Simple headers: Cache-Control, Content-Language, Content-Type, Expires, Last-Modified, Pragma",
+            "All headers",
+            "No headers",
+            "Set-Cookie"
+        ]
+    },
+    {
+        "q": "Is `Set-Cookie` exposed to JS via CORS?",
+        "o": [
+            "No. `Set-Cookie` is filtered out for security (HttpOnly logic applies)",
+            "Yes",
+            "If listed in Expose-Headers",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What does `fetch(url, { mode: 'no-cors' })` do?",
+        "o": [
+            "Sends request but gives opaque response (can't read body/status). Useful for logging/tracking pixels only",
+            "Disables CORS security",
+            "Bypasses server check",
+            "Allows everything"
+        ]
+    },
+    {
+        "q": "What is 'Opaque Response'?",
+        "o": [
+            "Response where JS can't see content, status code, or headers (status appears as 0)",
+            "Hidden response",
+            "Clear response",
+            "Error response"
+        ]
+    },
+    {
+        "q": "Can you load a Font from another origin?",
+        "o": [
+            "Only if server allows via CORS. Fonts often enforce CORS even for GET",
+            "Yes always",
+            "No never",
+            "Without checking"
+        ]
+    },
+    {
+        "q": "Can you load a Script (`<script src=...>`) from another origin?",
+        "o": [
+            "Yes. Scripts are embeddable resources (not subject to SOP for execution, but reading code might be)",
+            "No",
+            "Only with CORS",
+            "Only if same protocol"
+        ]
+    },
+    {
+        "q": "What is `crossorigin` attribute on `<script>`?",
+        "o": [
+            "Tells browser to use CORS. Allows receiving detailed error details in `window.onerror` instead of 'Script Error'",
+            "Runs faster",
+            "Loads async",
+            "Downloads file"
+        ]
+    },
+    {
+        "q": "What value for `crossorigin` attribute?",
+        "o": [
+            "`anonymous` (no creds) or `use-credentials`",
+            "`true`",
+            "`on`",
+            "`enabled`"
+        ]
+    },
+    {
+        "q": "What happens if Preflight fails (403)?",
+        "o": [
+            "Browser blocks the actual request. It is never sent",
+            "Actual request is sent anyway but ignored",
+            "Browser retries",
+            "User alerted"
+        ]
+    },
+    {
+        "q": "Can `curl` bypass CORS?",
+        "o": [
+            "Yes. CORS is a Browser restriction. `curl`/Postman don't enforce it",
+            "No",
+            "Maybe",
+            "Only with flag"
+        ]
+    },
+    {
+        "q": "Why doesn't server block `curl`?",
+        "o": [
+            "Server often replies with headers. It's the CLIENT (Browser) that sees headers and decides to block JS access",
+            "Server is dumb",
+            "Curl is smart",
+            "Standard broken"
+        ]
+    },
+    {
+        "q": "What is 'Vary: Origin' header?",
+        "o": [
+            "Tells caching proxies that response differs based on Origin. Crucial when dynamically reflecting Access-Control-Allow-Origin",
+            "Vary content",
+            "Vary user",
+            "Vary time"
+        ]
+    },
+    {
+        "q": "What happens if you miss `Vary: Origin` when reflecting origin?",
+        "o": [
+            "Cache poisoning. Example.com response might be cached and served to Evil.com (or vice versa blocking legit users)",
+            "Nothing",
+            "Slows down",
+            "Works better"
+        ]
+    },
+    {
+        "q": "What is 'CORS Misconfiguration'?",
+        "o": [
+            "Allowing arbitary origins (reflecting Origin header blindly) + Allow Credentials. Opens up data theft",
+            "Typo in header",
+            "Wrong port",
+            "Missing date"
+        ]
+    },
+    {
+        "q": "What is 'Null Origin'?",
+        "o": [
+            "Origin sent by local files (`file://`) or sandboxed iframes. Can be exploitable if `null` is whitelisted",
+            "No origin",
+            "Zero origin",
+            "Empty origin"
+        ]
+    },
+    {
+        "q": "Why allow `file://` origin?",
+        "o": [
+            "Often needed for local development (opening HTML file directly). Dangerous in prod",
+            "Production use",
+            "Required by spec",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Request-Method`?",
+        "o": [
+            "Header sent by Browser in Preflight asking 'Can I use this method?'",
+            "Header from server",
+            "Header from proxy",
+            "Header from user"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Request-Headers`?",
+        "o": [
+            "Header sent by Browser in Preflight asking 'Can I send these headers?'",
+            "Header from server",
+            "Header from proxy",
+            "Header from user"
+        ]
+    },
+    {
+        "q": "Does a simple GET request need CORS to read response?",
+        "o": [
+            "Yes. Browser sends request, but if response lacks `Access-Control-Allow-Origin`, Browser destroys response body so JS can't see it",
+            "No",
+            "Only POST",
+            "Only PUT"
+        ]
+    },
+    {
+        "q": "Does `<img src=...>` allow JS to read pixel data?",
+        "o": [
+            "No (SOP). Unless `crossorigin` attribute used + server sends CORS header. (Canvas tainting)",
+            "Yes",
+            "Always",
+            "Depends on format"
+        ]
+    },
+    {
+        "q": "What is 'Canvas Tainting'?",
+        "o": [
+            "If you draw non-CORS image to Canvas, canvas becomes 'tainted'. `toDataURL()`/`getImageData()` throws error",
+            "Canvas dirty",
+            "Canvas color",
+            "Canvas slow"
+        ]
+    },
+    {
+        "q": "Why is Canvas Tainting needed?",
+        "o": [
+            "Prevent reading private images (captchas, banking charts) loaded from other origins",
+            "Performance",
+            "Design",
+            "Storage"
+        ]
+    },
+    {
+        "q": "Is 'localhost' treated as secure context?",
+        "o": [
+            "Yes. Browsers treat localhost as secure (like https) for development",
+            "No",
+            "Sometimes",
+            "Never"
+        ]
+    },
+    {
+        "q": "Does CORS apply to WebSockets?",
+        "o": [
+            "No. WebSockets differ. Browser sends Origin, server must validate it. But SOP doesn't block handshake strictly like fetch",
+            "Yes",
+            "Always",
+            "Fully"
+        ]
+    },
+    {
+        "q": "How does WebSocket handle Cross-Origin?",
+        "o": [
+            "Server receives `Origin` header in handshake. Server chooses to accept/reject connection (CSWSH protection)",
+            "Preflight",
+            "CORS headers",
+            "It doesn't"
+        ]
+    },
+    {
+        "q": "What is CSWSH?",
+        "o": [
+            "Cross-Site WebSocket Hijacking. Like CSRF but for WebSockets",
+            "CORS Shell",
+            "Cross Site Windows",
+            "Cross System Web"
+        ]
+    },
+    {
+        "q": "Does CORS apply to Server-Sent Events (SSE)?",
+        "o": [
+            "Yes. `EventSource` follows CORS rules (requires Allow-Origin header)",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is the max value for `Access-Control-Max-Age` in Chrome?",
+        "o": [
+            "600 seconds (10 minutes) or 7200 (2 hours) depending on version cap. (Spec allows more, browsers cap it)",
+            "24 hours",
+            "1 year",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Private-Network`?",
+        "o": [
+            "Proposed header for CORS-RFC1918 (Private Network Access) checks",
+            "Allow VPN",
+            "Allow LAN",
+            "Allow Wifi"
+        ]
+    },
+    {
+        "q": "What is 'Private Network Access' (CORS-RFC1918)?",
+        "o": [
+            "Protecting internal devices (routers/printers) from being accessed by public internet websites via browser",
+            "Public access",
+            "Global access",
+            "Open access"
+        ]
+    },
+    {
+        "q": "Can you disable CORS in browser?",
+        "o": [
+            "Yes, via flags or extensions (e.g. `--disable-web-security`). Only for dev/testing!",
+            "No impossible",
+            "Yes safely",
+            "Default on"
+        ]
+    },
+    {
+        "q": "What is a 'Safe List' header?",
+        "o": [
+            "Headers allowed in Simple Requests (Accept, Accept-Language, Content-Language, Content-Type)",
+            "Secure list",
+            "White list",
+            "Black list"
+        ]
+    },
+    {
+        "q": "Are custom headers safe-listed?",
+        "o": [
+            "No. Adding `X-My-Header` triggers Preflight",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'CORS Proxy'?",
+        "o": [
+            "Server that fetches resource and adds `Access-Control-Allow-Origin: *` to response. (e.g. `cors-anywhere`)",
+            "Proxy server",
+            "VPN",
+            "Tunnel"
+        ]
+    },
+    {
+        "q": "Is using a public CORS proxy safe for production?",
+        "o": [
+            "No. Slow, unreliable, and privacy risk (proxy sees traffic)",
+            "Yes",
+            "Best practice",
+            "Recommended"
+        ]
+    },
+    {
+        "q": "How to fix CORS error locally?",
+        "o": [
+            "Configure your local dev server (Vite/Webpack) to proxy API requests or add headers",
+            "Disable browser security",
+            "Hack server",
+            "Change ISP"
+        ]
+    },
+    {
+        "q": "What is 'Proxying' in dev server?",
+        "o": [
+            "Dev server forwards `/api` requests to backend. Browser sees same-origin request to dev server. (Bypasses CORS during dev)",
+            "Hiding",
+            "Masking",
+            "Spoofing"
+        ]
+    },
+    {
+        "q": "Why do mobile apps (native) not have CORS issues?",
+        "o": [
+            "They are not browsers. They don't enforce SOP. They can request any URL",
+            "They are slow",
+            "They are secure",
+            "They use HTTP/3"
+        ]
+    },
+    {
+        "q": "Do Server-to-Server requests have CORS?",
+        "o": [
+            "No. CORS is a Browser concept",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is the 'SameSite' cookie attribute relation to CORS?",
+        "o": [
+            "Orthogonal. SameSite controls cookie sending on cross-site requests (CSRF). CORS controls response reading",
+            "Same thing",
+            "Replaces CORS",
+            "Requires CORS"
+        ]
+    },
+    {
+        "q": "Does JSONP use CORS?",
+        "o": [
+            "No. JSONP (JSON with Padding) is a workaround using `<script>` tags to bypass SOP before CORS existed",
+            "Yes",
+            "Sometimes",
+            "It is CORS"
+        ]
+    },
+    {
+        "q": "Is JSONP secure?",
+        "o": [
+            "Generally No. Vulnerable to XSS (evaluating arbitrary script code)",
+            "Yes very",
+            "Better than CORS",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'CSP' relation to CORS?",
+        "o": [
+            "CSP (Content Security Policy) restricts where browser can load resources FROM. CORS restricts who can read resources",
+            "Same",
+            "Conflicts",
+            "None"
+        ]
+    },
+    {
+        "q": "If CSP blocks a domain, does CORS matter?",
+        "o": [
+            "No. CSP blocks the request before CORS logic even happens",
+            "Yes",
+            "Maybe",
+            "Only POST"
+        ]
+    },
+    {
+        "q": "What is `connect-src` in CSP?",
+        "o": [
+            "Directive limiting domains allowed for `fetch`, `XHR`, `WebSocket`",
+            "Connect user",
+            "Connect net",
+            "Connect app"
+        ]
+    },
+    {
+        "q": "What is `Referrer-Policy` header?",
+        "o": [
+            "Controls what is sent in `Referer` header.",
+            "Controls CORS",
+            "Controls Origin",
+            "Controls Auth"
+        ]
+    },
+    {
+        "q": "Default `Referrer-Policy` in modern browsers?",
+        "o": [
+            "`strict-origin-when-cross-origin` (Sends origin only, no path, on cross-origin HTTPS)",
+            "`no-referrer`",
+            "`unsafe-url`",
+            "`origin`"
+        ]
+    },
+    {
+        "q": "Does `Referer` header affect CORS?",
+        "o": [
+            "Server might check it, but `Origin` is the primary header for CORS checks",
+            "Yes primary",
+            "No never",
+            "Only info"
+        ]
+    },
+    {
+        "q": "Can you wildcard subdomains in CORS config?",
+        "o": [
+            "Spec says No for `Allow-Origin`. Must be full origin or `*`. (Servers implement wildcard logic dynamically)",
+            "Yes natively",
+            "Browsers handle it",
+            "Always"
+        ]
+    },
+    {
+        "q": "How to allow `*.example.com`?",
+        "o": [
+            "Server logic: regex match Origin header, if matches, echo it back in Allow-Origin",
+            "Set header `*.example.com`",
+            "Set header `any.example.com`",
+            "Browser setting"
+        ]
+    },
+    {
+        "q": "What is 'Timing Allow Origin'?",
+        "o": [
+            "Resource Timing API header allowing JS to see detailed timing (DNS, TCP start) of external resource",
+            "Time Allow",
+            "Clock Allow",
+            "Speed Allow"
+        ]
+    },
+    {
+        "q": "Does sending OPTIONS manually with JS trigger Preflight logic?",
+        "o": [
+            "No. It's just a regular fetch request with method OPTIONS. Real Preflight is internal to browser",
+            "Yes",
+            "Maybe",
+            "Confuses browser"
+        ]
+    },
+    {
+        "q": "Can you cache CORS errors?",
+        "o": [
+            "Browsers don't cache 0/Error response content, but might remember Preflight failure for short time",
+            "Yes forever",
+            "No never",
+            "Depends on OS"
+        ]
+    },
+    {
+        "q": "What is 'Redirect' in CORS?",
+        "o": [
+            "If CORS request is redirected, the redirect response AND final response must both pass CORS checks",
+            "Ignored",
+            "Bypassed",
+            "Failed"
+        ]
+    },
+    {
+        "q": "Does `Location` header expose redirect URL to JS?",
+        "o": [
+            "No, opaque by default unless exposed? Actually `fetch` follows redirects automatically. `manual` mode returns opaque",
+            "Yes",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Request-Private-Network'?",
+        "o": [
+            "Header requesting permission to access local network device from public web",
+            "Private IP",
+            "Localhost",
+            "Router"
+        ]
+    },
+    {
+        "q": "Is CORS authentication?",
+        "o": [
+            "No. It allows public access or controlled access. It relies on Cookies/Tokens for actual user auth",
+            "Yes",
+            "Sort of",
+            "Replacement"
+        ]
+    },
+    {
+        "q": "Can you use CORS to prevent bot scraping?",
+        "o": [
+            "No. Bots (Python, curl) ignore CORS headers. CORS protects USERS (browsers)",
+            "Yes",
+            "Effective",
+            "Best way"
+        ]
+    },
+    {
+        "q": "What if `Access-Control-Allow-Origin` is missing?",
+        "o": [
+            "Browser throws CORS error: 'No 'Access-Control-Allow-Origin' header is present'",
+            "Works fine",
+            "Warning",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What if `Access-Control-Allow-Origin` has multiple values?",
+        "o": [
+            "Not allowed. Must be single value (or null/star). Spec forbids list",
+            "Works",
+            "Browser picks first",
+            "Browser picks matching"
+        ]
+    },
+    {
+        "q": "What is the 'credentialless' mode?",
+        "o": [
+            "`Cross-Origin-Embedder-Policy: credentialless` vs CORS credentialless request (Drafts)",
+            "No password",
+            "Guest mode",
+            "Public mode"
+        ]
+    },
+    {
+        "q": "Does CORS protect against CSRF?",
+        "o": [
+            "Partially. Preflights prevent some CSRF (PUT/DELETE/JSON). But Simple Requests (POST Form) still go through! (Need Anti-CSRF tokens)",
+            "Yes completely",
+            "No",
+            "Main defense"
+        ]
+    },
+    {
+        "q": "Does `POST` with `text/plain` bypass Preflight?",
+        "o": [
+            "Yes. It is a Simple Request",
+            "No",
+            "Only GET",
+            "Only HEAD"
+        ]
+    },
+    {
+        "q": "Can attacker send JSON via `text/plain` POST?",
+        "o": [
+            "Yes. Body is valid JSON, but Content-Type is text/plain. Server might parse it anyway (CSRF risk)",
+            "No",
+            "Browser blocks",
+            "JSON breaks"
+        ]
+    },
+    {
+        "q": "How to prevent `text/plain` JSON CSRF?",
+        "o": [
+            "Enforce Content-Type check on server. Require `application/json` (which prompts Preflight)",
+            "Use CORS",
+            "Use SOP",
+            "Use HTTPS"
+        ]
+    },
+    {
+        "q": "What is 'CORS-Safe-Listed Request Header'?",
+        "o": [
+            "Headers that don't trigger preflight: Accept, Accept-Language, Content-Language, Content-Type (parsed values)",
+            "Safe header",
+            "Good header",
+            "Secure header"
+        ]
+    },
+    {
+        "q": "Is `Authorization` header safe-listed?",
+        "o": [
+            "No. Sending `Authorization: Bearer ...` triggers Preflight",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is `Range` header safe-listed?",
+        "o": [
+            "No. Triggers Preflight",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is `DNT` (Do Not Track) header safe-listed?",
+        "o": [
+            "It was removed/deprecated? Usually considered safe or forbidden to set by JS",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can you use CORS with 'file://' scheme?",
+        "o": [
+            "Spec is vague. Chrome blocks 'file://' AJAX by default (security). Firefox has looser rules. Run a local server!",
+            "Yes always",
+            "No never",
+            "Easily"
+        ]
+    },
+    {
+        "q": "What is 'CORB'?",
+        "o": [
+            "Cross-Origin Read Blocking. Algorithm to identify/block sensitive data (HTML/JSON/XML) from entering process memory via `<img>`/`<script>` tags",
+            "CORS B",
+            "Read Block",
+            "Browser Block"
+        ]
+    },
+    {
+        "q": "What is 'CORP'?",
+        "o": [
+            "Cross-Origin Resource Policy. Header (`Cross-Origin-Resource-Policy`) allowing resource to opt-in/out of being loaded by others",
+            "Resource Policy",
+            "Origin Policy",
+            "Site Policy"
+        ]
+    },
+    {
+        "q": "Values for CORP?",
+        "o": [
+            "`same-site`, `same-origin`, `cross-origin`",
+            "`true`, `false`",
+            "`allow`, `deny`",
+            "`yes`, `no`"
+        ]
+    },
+    {
+        "q": "What is 'COEP'?",
+        "o": [
+            "Cross-Origin Embedder Policy. Header (`require-corp`) ensuring that all resources loaded by page explicitly opt-in via CORP or CORS",
+            "Embedder Policy",
+            "Embedder Plan",
+            "Embedder Rule"
+        ]
+    },
+    {
+        "q": "What is 'COOP'?",
+        "o": [
+            "Cross-Origin Opener Policy. Header isolating the browsing context (window) from other origins (prevents Spectre attacks via shared process)",
+            "Opener Policy",
+            "Opener Plan",
+            "Opener Rule"
+        ]
+    },
+    {
+        "q": "Why use COOP/COEP?",
+        "o": [
+            "To enable 'Cross-Origin Isolated' state, which unlocks powerful features like `SharedArrayBuffer` and `performance.now()` high-res",
+            "To enable CORS",
+            "To enable HTTPS",
+            "To enable Flash"
+        ]
+    },
+    {
+        "q": "What is 'Spectre' mitigation in CORS context?",
+        "o": [
+            "Browsers limit high-res timers and SharedArrayBuffer unless site is Cross-Origin Isolated (COOP+COEP)",
+            "CPU patch",
+            "Kernel patch",
+            "BIOS update"
+        ]
+    },
+    {
+        "q": "What is 'CORS-RFC1918' status?",
+        "o": [
+            "Private Network Access. Still evolving (Chrome warns, plans to block public->private without Preflight)",
+            "Finished",
+            "Stable",
+            "Deprecated"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Request-Private-Network: true`?",
+        "o": [
+            "Header requesting PNA permission during Preflight",
+            "Private Header",
+            "Network Header",
+            "Local Header"
+        ]
+    },
+    {
+        "q": "How to debug CORS in Chrome DevTools?",
+        "o": [
+            "Network Tab -> Click Request -> Headers. Look for 'CORS error' status or missing response headers",
+            "Console Tab",
+            "Elements Tab",
+            "Sources Tab"
+        ]
+    },
+    {
+        "q": "What does 'Response to preflight request doesn't pass access control check' mean?",
+        "o": [
+            "The OPTIONS request failed (403, 500) or returned wrong headers (e.g. Method not allowed)",
+            "Server down",
+            "Network down",
+            "Browser broken"
+        ]
+    },
+    {
+        "q": "What does 'No Access-Control-Allow-Origin header is present on the requested resource' mean?",
+        "o": [
+            "Server didn't send the allow header at all. (Standard CORS block)",
+            "Header is empty",
+            "Header is wrong",
+            "Header is null"
+        ]
+    },
+    {
+        "q": "What does 'The value of the Access-Control-Allow-Origin header ... is not equal to the supplied origin' mean?",
+        "o": [
+            "Server sent a header, but it didn't match your Origin (and wasn't *)",
+            "Header is null",
+            "Header is empty",
+            "Header is broken"
+        ]
+    },
+    {
+        "q": "What is 'Wildcard' limitation?",
+        "o": [
+            "Cannot be used if `Allow-Credentials` is true. Cannot be used for `Allow-Headers` or `Allow-Methods` in some older browsers (safest to list)",
+            "Always works",
+            "Never works",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Methods: *` support?",
+        "o": [
+            "Not supported by spec. Must list methods (GET, POST, etc.)",
+            "Supported",
+            "Maybe",
+            "Depending on OS"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Headers: *` support?",
+        "o": [
+            "Supported in modern browsers (wildcard allowed for headers), but not older ones",
+            "Never supported",
+            "Always supported",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'AMP' (Accelerated Mobile Pages) CORS?",
+        "o": [
+            "AMP imposes strict CORS rules (AMP-Access-Control-Allow-Source-Origin) for dynamic components",
+            "No CORS",
+            "Google CORS",
+            "Fast CORS"
+        ]
+    },
+    {
+        "q": "What is 'S3 Bucket' CORS?",
+        "o": [
+            "AWS S3 buckets are private/no-CORS by default. Must configure CORS XML/JSON policy to serve assets to web apps",
+            "Public by default",
+            "Open by default",
+            "No policy"
+        ]
+    },
+    {
+        "q": "What happens if S3 CORS is missing for fonts?",
+        "o": [
+            "Browser blocks font loading (usually requires simple GET CORS)",
+            "Standard font used",
+            "Font loads anyway",
+            "Page crash"
+        ]
+    },
+    {
+        "q": "What is 'Firebase Storage' CORS?",
+        "o": [
+            "Must configure `gsutil cors set` to allow web access to storage objects via XHR",
+            "Auto config",
+            "No config",
+            "Manual file"
+        ]
+    },
+    {
+        "q": "What is 'CloudFront' CORS behavior?",
+        "o": [
+            "Edge caches OPTIONS responses. Must whitelist `Origin`, `Access-Control-Request-Method`, etc. in 'Cache Based on Selected Request Headers'",
+            "Ignores CORS",
+            "Blocks CORS",
+            "Auto CORS"
+        ]
+    },
+    {
+        "q": "What is 'Vary: Origin' importance for CDNs?",
+        "o": [
+            "Ensures CDN caches separate responses for different origins (or for no origin). Prevents serving 'Access-Control-Allow-Origin: A' to Origin B",
+            "Cache key",
+            "Cache tag",
+            "Cache time"
+        ]
+    },
+    {
+        "q": "What is 'CSRF' vs 'CORS' failure?",
+        "o": [
+            "CSRF: Attack succeeds because browser sends credentials automatically. CORS: Browser blocks legitimate request/response reading. (Opposite goals)",
+            "Same",
+            "Linked",
+            "Unrelated"
+        ]
+    },
+    {
+        "q": "Can CORS stop a hacker running a script outside a browser?",
+        "o": [
+            "No. PyCurl/Postman has no concept of prohibited origin",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Does `<iframe>` follow CORS?",
+        "o": [
+            "Iframes follow SOP for DOM access (cannot read content of cross-origin iframe). Fetch inside iframe follows CORS relative to iframe origin",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is `document.domain` (Deprecated)?",
+        "o": [
+            "Old way to relax SOP between subdomains (both setting `example.com`). Now disabled usually",
+            "New way",
+            "Best way",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is `postMessage`?",
+        "o": [
+            "Secure way to communicate between Cross-Origin windows/iframes (bypassing SOP DOM restrictions)",
+            "Email",
+            "Chat",
+            "Signal"
+        ]
+    },
+    {
+        "q": "How to secure `postMessage`?",
+        "o": [
+            "Verify `event.origin` in receiver. Specify targetOrigin in sender (don't use `*`)",
+            "Encrypt it",
+            "Sign it",
+            "Hide it"
+        ]
+    },
+    {
+        "q": "Does CORS apply to `navigator.sendBeacon`?",
+        "o": [
+            "Yes. CORS applies if sending to cross-origin",
+            "No",
+            "Maybe",
+            "Only POST"
+        ]
+    },
+    {
+        "q": "What is 'Preflight Result Cache' scope?",
+        "o": [
+            "Cached by (Origin, URL) tuple. (Or just URL?) Usually specific to the resource URL",
+            "Global",
+            "Domain wide",
+            "Session wide"
+        ]
+    },
+    {
+        "q": "Does Query String affect Preflight Cache?",
+        "o": [
+            "Yes. `?foo=1` is a different URL than `?foo=2`. Preflight cached for one doesn't apply to other unless browser optimizes",
+            "No",
+            "Maybe",
+            "Depends on server"
+        ]
+    },
+    {
+        "q": "What is 'Service Worker' CORS handling?",
+        "o": [
+            "SW intercepts fetch. It can synthesize responses (bypass network) but synthesized response must have valid CORS headers if request was cors mode",
+            "Bypasses CORS",
+            "Ignores CORS",
+            "Disables CORS"
+        ]
+    },
+    {
+        "q": "What is 'no-cors' mode restriction?",
+        "o": [
+            "JS cannot access properties of the response (status is 0, type is opaque). Only useful for caching/media consumption",
+            "None",
+            "Full access",
+            "Read only"
+        ]
+    },
+    {
+        "q": "Can `<img>` use `no-cors`?",
+        "o": [
+            "Yes. Standard image load is practically `no-cors` GET. You see image, but JS can't read pixels (tainted)",
+            "No",
+            "Only cors",
+            "Only secure"
+        ]
+    },
+    {
+        "q": "What is 'Anonymous' mode in `crossorigin`?",
+        "o": [
+            "Send CORS request without credentials (cookies/auth)",
+            "Hidden mode",
+            "Secret mode",
+            "Private mode"
+        ]
+    },
+    {
+        "q": "What is 'Use-Credentials' mode in `crossorigin`?",
+        "o": [
+            "Send CORS request WITH credentials. Server must respond `Access-Control-Allow-Credentials: true`",
+            "Login mode",
+            "Auth mode",
+            "Admin mode"
+        ]
+    },
+    {
+        "q": "Can you Mix 'Access-Control-Allow-Origin: *' and 'Authorization' header?",
+        "o": [
+            "Yes! Authorization header is not a cookie. 'Credential' in CORS context specifically means Cookies/TLS Client Cert. Bearer tokens are just custom headers",
+            "No",
+            "Maybe",
+            "Spec ambiguous"
+        ]
+    },
+    {
+        "q": "But `Authorization` triggers Preflight?",
+        "o": [
+            "Yes. But server can reply `Allow-Origin: *` and `Allow-Headers: Authorization`. (Unless browser treats Auth as credential - some confusion here, usually Bearer is fine with *)",
+            "No",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "Wait, does `withCredentials` flag affect Bearer token?",
+        "o": [
+            "No. `withCredentials` controls Cookies. You manually add Bearer token. But wildcard might track `withCredentials = false`",
+            "Yes",
+            "Maybe",
+            "Linked"
+        ]
+    },
+    {
+        "q": "What is 'Preflight Status 302' issue?",
+        "o": [
+            "Browsers historically rejected redirects on OPTIONS preflight. Spec updated to allow it, but support varies. Ideally return 200/204",
+            "Good",
+            "Allowed",
+            "Recommended"
+        ]
+    },
+    {
+        "q": "What is 'CORS Middleware'?",
+        "o": [
+            "Library (e.g. `cors` package in Express) that handles OPTIONS requests and sets headers automatically",
+            "Proxy",
+            "Server",
+            "Bot"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Expose-Headers' shorthand?",
+        "o": [
+            "None. Must list each header (e.g. `Link, X-RateLimit-Limit`). `*` support added recently but risky",
+            "All",
+            "Any",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'X-Requested-With' header?",
+        "o": [
+            "Often added by AJAX libraries (jQuery). Triggers Preflight (not safelisted). Used to detect AJAX on server",
+            "Browser header",
+            "Standard header",
+            "Required header"
+        ]
+    },
+    {
+        "q": "Is 'X-Requested-With' required for CORS?",
+        "o": [
+            "No. But if present, must be allowed in `Access-Control-Allow-Headers`",
+            "Yes",
+            "Sometimes",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header value for `file://`?",
+        "o": [
+            "`null` (in many browsers) or specific file scheme. Be careful allowing `null`",
+            "file",
+            "path",
+            "local"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header for Privacy?",
+        "o": [
+            "Only contains Scheme, Host, Port. NO path or query params. Protects user privacy",
+            "Full URL",
+            "Path only",
+            "Query only"
+        ]
+    },
+    {
+        "q": "What is 'Referer' vs 'Origin'?",
+        "o": [
+            "Referer is full URL (unless policy strips it). Origin is just origin. Origin is preferred for security checks",
+            "Same",
+            "Referer is safer",
+            "Origin is longer"
+        ]
+    },
+    {
+        "q": "Why rely on Origin and not Referer?",
+        "o": [
+            "Referer can be spoofed (historically) or stripped (privacy). Origin is harder to spoof in browser context",
+            "Origin is faster",
+            "Origin is smaller",
+            "Referer is better"
+        ]
+    },
+    {
+        "q": "Does 'localhost' need CORS for remote API?",
+        "o": [
+            "Yes. `localhost` is a different origin than `api.example.com`. API must allow localhost",
+            "No",
+            "Localhost is trusted",
+            "Dev mode"
+        ]
+    },
+    {
+        "q": "How to proxy in React/Angular CLI?",
+        "o": [
+            "Set `proxy` in `package.json` or config. Forwards local `/api` calls to remote target backend, stripping/changing origin headers",
+            "Use VPN",
+            "Disable CORS",
+            "Change code"
+        ]
+    },
+    {
+        "q": "Does 'cURL' send Origin header?",
+        "o": [
+            "Not by default. You can add `-H 'Origin: ...'`. Server might check it",
+            "Yes",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "Does 'Postman' send Origin header?",
+        "o": [
+            "Not by default (unless configured or browser capture). It ignores CORS response headers anyway",
+            "Yes",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Browser Extension' CORS exemption?",
+        "o": [
+            "Extensions with host permissions can bypass CORS (background scripts). Content scripts still subject to page CORS",
+            "Always bypass",
+            "Never bypass",
+            "Same as page"
+        ]
+    },
+    {
+        "q": "What is 'Anywhere' protocol?",
+        "o": [
+            "Fake protocol. `cors-anywhere` is a node.js proxy",
+            "Real protocol",
+            "New protocol",
+            "Old protocol"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' latency impact?",
+        "o": [
+            "Adds 1 RTT before actual request. Significant for mobile/high-latency networks. Cache it!",
+            "Zero",
+            "Small",
+            "Huge"
+        ]
+    },
+    {
+        "q": "How to avoid Preflight?",
+        "o": [
+            "Use Simple Requests (GET/POST simple forms) if possible. Avoid custom headers and `application/json`",
+            "Use HTTP/2",
+            "Use WebSocket",
+            "Use FTP"
+        ]
+    },
+    {
+        "q": "Is `application/x-www-form-urlencoded` simple?",
+        "o": [
+            "Yes. Does not trigger preflight",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is `multipart/form-data` simple?",
+        "o": [
+            "Yes. Does not trigger preflight (used for uploads)",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is `application/xml` simple?",
+        "o": [
+            "No. Triggers preflight",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can you preflight a `GET` request?",
+        "o": [
+            "Yes, if you add custom headers to it (e.g. `Authorization` or `X-Api-Key`)",
+            "No, GET is always simple",
+            "Never",
+            "Only POST"
+        ]
+    },
+    {
+        "q": "What is 'CORS' RFC?",
+        "o": [
+            "Originally W3C Recommendation, now part of Fetch Standard (WHATWG)",
+            "RFC 1234",
+            "RFC 2616",
+            "RFC 1918"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Origin: null' use case?",
+        "o": [
+            "Sandboxed iframes `allow-scripts` but not `allow-same-origin`. They send `null` origin",
+            "Testing",
+            "Production",
+            "None"
+        ]
+    },
+    {
+        "q": "Is 'null' origin secure?",
+        "o": [
+            "Risky. Attackers can create sandboxed iframes to spoof `null` origin",
+            "Yes very",
+            "Standard",
+            "Best"
+        ]
+    },
+    {
+        "q": "What is 'Public API' CORS best practice?",
+        "o": [
+            "`Access-Control-Allow-Origin: *` and `Access-Control-Allow-Methods: GET` (Read only)",
+            "Block all",
+            "Allow credentials",
+            "Allow null"
+        ]
+    },
+    {
+        "q": "What is 'Private API' CORS best practice?",
+        "o": [
+            "Reflect Origin if whitelisted. `Allow-Credentials: true`. Do NOT use `*`",
+            "Use *",
+            "Block all",
+            "Open to all"
+        ]
+    },
+    {
+        "q": "What is 'Timing-Allow-Origin: *'?",
+        "o": [
+            "Allows any site to read resource timing (waterfall) details. Low security risk typically",
+            "Dangerous",
+            "Private",
+            "Hidden"
+        ]
+    },
+    {
+        "q": "Does CORS affect 'Link Preview' bots (Facebook/Twitter)?",
+        "o": [
+            "No. They are server-side bots, not browsers. They ignore CORS headers",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Does CORS affect 'Googlebot'?",
+        "o": [
+            "Googlebot generally renders JS now, so it might respect CORS if the rendering engine enforces it, but usually indexing works",
+            "Yes blocks it",
+            "No ignores it",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can 'Service Worker' bypass CORS for cached assets?",
+        "o": [
+            "No. Opaque responses cached remain opaque. Verify CORS before caching if you need to read it",
+            "Yes",
+            "Always",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'Workbox' CORS handling?",
+        "o": [
+            "Library for SW. Has strategies like `CacheFirst`. Can configure to handle opaque responses",
+            "Tool",
+            "App",
+            "Bot"
+        ]
+    },
+    {
+        "q": "What is 'CORS-Safe-Listed Response Header'?",
+        "o": [
+            "Seven headers JS can read without `Expose-Headers`: Cache-Control, Content-Language, Content-Length, Content-Type, Expires, Last-Modified, Pragma",
+            "Any header",
+            "No header",
+            "One header"
+        ]
+    },
+    {
+        "q": "Can JS read `Content-Length` by default?",
+        "o": [
+            "Yes. It is safelisted",
+            "No",
+            "Only with Expose",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can JS read `Date` header by default?",
+        "o": [
+            "No? Actually `Date` is NOT safelisted in Fetch spec. Requires Expose-Hedaers?",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can JS read `Etag` by default?",
+        "o": [
+            "No. Requires `Access-Control-Expose-Headers: Etag`",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can JS read `Set-Cookie` header via `Expose-Headers`?",
+        "o": [
+            "No. Browser forbids exposing `Set-Cookie` (and `Set-Cookie2`) regardless of policy",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Why forbid exposing `Set-Cookie`?",
+        "o": [
+            "To prevent JS from stealing Session IDs (HttpOnly concept)",
+            "Privacy",
+            "Speed",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Strict-Origin' referrer policy?",
+        "o": [
+            "Send origin for HTTPS->HTTPS. Don't send for HTTPS->HTTP. (Use `strict-origin-when-cross-origin` usually)",
+            "Send full path",
+            "Send nothing",
+            "Send all"
+        ]
+    },
+    {
+        "q": "What is 'Unsafe-Url' referrer policy?",
+        "o": [
+            "Send full URL (path+query) to any origin. Privacy leak. Avoid",
+            "Safe",
+            "Secure",
+            "Best"
+        ]
+    },
+    {
+        "q": "Does CORS use 'Options' method?",
+        "o": [
+            "Yes, for Preflight",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is 'Options' method safe (Idempotent)?",
+        "o": [
+            "Yes. Should be read-only metadata check",
+            "No",
+            "Maybe",
+            "Dangerous"
+        ]
+    },
+    {
+        "q": "Can you send a body with OPTIONS?",
+        "o": [
+            "Spec allows it, but Preflight OPTIONS body is empty (Browser sends 0 content length)",
+            "Yes always",
+            "No never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What does server return for OPTIONS body?",
+        "o": [
+            "Usually empty (0-length). Just headers. Status 200/204",
+            "JSON",
+            "HTML",
+            "XML"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Methods' default?",
+        "o": [
+            "None? Must be specified. Usually `GET, POST, OPTIONS, PUT, DELETE`",
+            "All",
+            "None",
+            "GET"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Headers' default?",
+        "o": [
+            "Only safelisted headers. Custom headers must be explicitly allowed",
+            "All",
+            "None",
+            "Some"
+        ]
+    },
+    {
+        "q": "What is 'Fetch' API default mode for CORS?",
+        "o": [
+            "`cors` (Requests cross-origin will fail if server doesn't support CORS)",
+            "`no-cors`",
+            "`same-origin`",
+            "`navigate`"
+        ]
+    },
+    {
+        "q": "What is `fetch(url, {mode: 'same-origin'})`?",
+        "o": [
+            "Ensures request is strictly same-origin. Throws error if URL is cross-origin (Prevents accidental leaks)",
+            "Default",
+            "Permissive",
+            "Blocks all"
+        ]
+    },
+    {
+        "q": "What is `fetch(url, {mode: 'navigate'})`?",
+        "o": [
+            "Mode used for HTML navigation (loading a page). Not typically used manually in fetch",
+            "Go back",
+            "Refresh",
+            "Redirect"
+        ]
+    },
+    {
+        "q": "Does `XHR` have `mode` option?",
+        "o": [
+            "No. XHR infers mode. It attempts CORS if cross-origin. Cannot force 'no-cors' easily like fetch",
+            "Yes",
+            "Maybe",
+            "In new XHR"
+        ]
+    },
+    {
+        "q": "What is the 'Subresource Integrity' (SRI) attribute?",
+        "o": [
+            "`integrity='sha256-...'`. Verifies that fetched resource matches hash. Requires CORS if cross-origin!",
+            "Hash tag",
+            "Security tag",
+            "Verify tag"
+        ]
+    },
+    {
+        "q": "Why does SRI require CORS?",
+        "o": [
+            "To verify the hash, browser must read the script content. SOP blocks reading unless CORS is present (even for scripts)",
+            "Just for fun",
+            "Performance",
+            "Standards"
+        ]
+    },
+    {
+        "q": "What happens if SRI fails?",
+        "o": [
+            "Browser refuses to execute the script/style",
+            "It runs anyway",
+            "Warning",
+            "Retry"
+        ]
+    },
+    {
+        "q": "What is 'Module Script' (`<script type=module>`) CORS default?",
+        "o": [
+            "Modules are 'defer' by default and REQUIRE CORS for cross-origin loading (unlike classic scripts)",
+            "No CORS",
+            "Same as classic",
+            "Optional"
+        ]
+    },
+    {
+        "q": "Can you load a Module Script without CORS headers from CDN?",
+        "o": [
+            "No. It fails. (Classic scripts work without headers, Modules do not)",
+            "Yes",
+            "Maybe",
+            "Only chrome"
+        ]
+    },
+    {
+        "q": "What is `import` statement CORS rule?",
+        "o": [
+            "ES Modules loaded via `import` must support CORS if cross-origin",
+            "No rule",
+            "Strict origin",
+            "Loose"
+        ]
+    },
+    {
+        "q": "What is 'JSONP' callback?",
+        "o": [
+            "Function name passed in URL (`?callback=foo`). Server wraps JSON in `foo({...})`",
+            "Auth token",
+            "ID",
+            "Key"
+        ]
+    },
+    {
+        "q": "Is JSONP read-only?",
+        "o": [
+            "Yes (GET only). Cannot send data via POST body",
+            "No",
+            "POST allowed",
+            "Full CRUD"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Max-Age' default if missing?",
+        "o": [
+            "5 seconds (Browser default). Hence Preflights happen often if not set",
+            "0 seconds",
+            "1 hour",
+            "1 day"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Max-Age: -1`?",
+        "o": [
+            "Disables caching of preflight completely",
+            "Infinite cache",
+            "1 second",
+            "Invalid"
+        ]
+    },
+    {
+        "q": "How to handle CORS in Node.js (Express)?",
+        "o": [
+            "Use `app.use(cors())` middleware. Or manually set `res.header('Access-Control-Allow-Origin', '*')`",
+            "Impossible",
+            "Use nginx",
+            "Use Apache"
+        ]
+    },
+    {
+        "q": "How to handle CORS in Python (Flask)?",
+        "o": [
+            "Use `flask-cors` extension (`CORS(app)`)",
+            "Manual headers",
+            "Django",
+            "FastAPI"
+        ]
+    },
+    {
+        "q": "How to handle CORS in Go?",
+        "o": [
+            "Use a middleware handler (e.g. `rs/cors`) to intercept OPTIONS and add headers",
+            "Built-in",
+            "Not needed",
+            "Config file"
+        ]
+    },
+    {
+        "q": "How to handle CORS in Nginx?",
+        "o": [
+            "Add `add_header` directives. Handle `if ($request_method = OPTIONS) { return 204; }` manually",
+            "Module",
+            "Plugin",
+            "Auto"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' vs 'Redirect'?",
+        "o": [
+            "Redirects during preflight were forbidden. Now allowed, but browser must check CORS on redirect target too",
+            "Same",
+            "Ignore",
+            "Block"
+        ]
+    },
+    {
+        "q": "Does `Location` header need CORS?",
+        "o": [
+            "Reading `Location` header in JS requires exposing it. But browser usually handles redirect transparency",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header format?",
+        "o": [
+            "`scheme://host:port` (No trailing slash)",
+            "`scheme://host`",
+            "`host:port`",
+            "`scheme://host/path`"
+        ]
+    },
+    {
+        "q": "Is `null` origin unique?",
+        "o": [
+            "Yes. `null` != `null`. But for string matching in CORS header, `null` is the literal string",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can you use Regex in `Access-Control-Allow-Origin`?",
+        "o": [
+            "No. The header must be a single string (literal origin or *). Logic to match regex must happen on Server script",
+            "Yes",
+            "Browser supports it",
+            "Wildcards only"
+        ]
+    },
+    {
+        "q": "What is 'CORS' implication for Microservices?",
+        "o": [
+            "Front-end calling multiple microservices on different subdomains requires CORS on each service",
+            "None",
+            "Optional",
+            "Avoid it"
+        ]
+    },
+    {
+        "q": "What is 'API Gateway' role in CORS?",
+        "o": [
+            "Gateway provides single origin (stops CORS issues) or handles CORS centrally for all backend services",
+            "Blocks CORS",
+            "Ignores CORS",
+            "Creates CORS"
+        ]
+    },
+    {
+        "q": "What is 'Reverse Proxy' role?",
+        "o": [
+            "Nginx/HAProxy serves frontend and api on same domain (`/` and `/api`), eliminating CORS need completely",
+            "Adds latency",
+            "Adds security",
+            "Adds headers"
+        ]
+    },
+    {
+        "q": "Can 'DNS Rebinding' bypass CORS?",
+        "o": [
+            "Maybe. If attacker switches DNS IP from evil to localhost mid-session, they might access localhost. Browsers pin DNS to prevent this",
+            "Yes always",
+            "No never",
+            "Old bug"
+        ]
+    },
+    {
+        "q": "What is 'Local Network Access' checks?",
+        "o": [
+            "New security feature. Websites on public internet cannot access private IPs (RFC 1918) without explicit Permission (Preflight)",
+            "Firewall",
+            "VPN",
+            "Route"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Request-Private-Network`?",
+        "o": [
+            "Client sends this in preflight to private IP. Server must reply `Access-Control-Allow-Private-Network: true`",
+            "Auth",
+            "ID",
+            "Key"
+        ]
+    },
+    {
+        "q": "Does `127.0.0.1` need Private Network Access check?",
+        "o": [
+            "Yes. It is considered private. Public `example.com` trying to hit `127.0.0.1:8080` triggers mixed-content/PNA checks",
+            "No",
+            "Trusted",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Mixed Content'?",
+        "o": [
+            "HTTPS page loading HTTP resource. Active content (scripts) blocked. Passive (images) warning",
+            "Bad content",
+            "Old content",
+            "New content"
+        ]
+    },
+    {
+        "q": "Does CORS relax Mixed Content?",
+        "o": [
+            "No. Mixed Content block happens before CORS. You cannot load HTTP API from HTTPS page even with CORS",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "How to fix Mixed Content locally?",
+        "o": [
+            "Run local dev server with HTTPS (mkcert) or use proxy",
+            "Disable security",
+            "Use HTTP prod",
+            "Ignore it"
+        ]
+    },
+    {
+        "q": "What is 'mkcert'?",
+        "o": [
+            "Tool to create locally trusted development certificates (Simplifies local HTTPS/CORS dev)",
+            "Cert maker",
+            "Key gen",
+            "SSL tool"
+        ]
+    },
+    {
+        "q": "What is `ngrok`?",
+        "o": [
+            "Tunneling tool. Exposes local port to public HTTPS URL. Helps test CORS/Webhooks",
+            "Proxy",
+            "VPN",
+            "DNS"
+        ]
+    },
+    {
+        "q": "Does `ngrok` handle CORS?",
+        "o": [
+            "Not automatically. Your local server must still handle headers, but ngrok provides HTTPS origin to avoid Mixed Content",
+            "Yes",
+            "Strips headers",
+            "Adds headers"
+        ]
+    },
+    {
+        "q": "What is 'SOP' for Cookies?",
+        "o": [
+            "Cookies have 'Domain' and 'Path' attributes, not strict Origin (Port ignored for cookies!). Different from DOM SOP",
+            "Strict origin",
+            "No blocking",
+            "Secure"
+        ]
+    },
+    {
+        "q": "Can port 80 and 8080 share cookies?",
+        "o": [
+            "Yes! Cookie scope is Domain. Ports do not isolate cookies (security quirk)",
+            "No",
+            "Never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Do you need CORS for Cookies?",
+        "o": [
+            "CORS with credentials allows Ssending/Reading cookies on Cross-Origin XHR. Without it, cookies aren't sent",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Third-Party Cookie' block?",
+        "o": [
+            "Browsers blocking cookies from different origins (tracking protection). Breaks 'CORS with Credentials' flows often",
+            "Good",
+            "Bad",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Storage Access API'?",
+        "o": [
+            "API to request permission to access third-party cookies (e.g. for embeds) when blocked by default",
+            "Storage tool",
+            "Disk access",
+            "File api"
+        ]
+    },
+    {
+        "q": "What is 'CORS' for WebFonts?",
+        "o": [
+            "Fonts loaded via `@font-face` MUST undergo CORS check if cross-origin. (Standard mandates it)",
+            "Optional",
+            "No check",
+            "Only IE"
+        ]
+    },
+    {
+        "q": "Does CSS load trigger CORS?",
+        "o": [
+            "Generally No (`<link rel=stylesheet>`). But accessing CSSOM (rules) might be blocked if cross-origin",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is `crossorigin='anonymous'` on `<link>`?",
+        "o": [
+            "Requests CSS with CORS. Allows reading CSSMain via JS without security error",
+            "Faster load",
+            "Preload",
+            "Async"
+        ]
+    },
+    {
+        "q": "What is 'Tainted Canvas' error?",
+        "o": [
+            "`SecurityError: The operation is insecure.`",
+            "Error 500",
+            "Error 403",
+            "Generic error"
+        ]
+    },
+    {
+        "q": "Can WebGL textures be tainted?",
+        "o": [
+            "Yes. Cross-origin images cannot be used as textures unless CORS approved",
+            "No",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is `img.crossOrigin = 'Anonymous'`?",
+        "o": [
+            "JS property to request image with CORS (must be set BEFORE src)",
+            "Attribute",
+            "Style",
+            "HTML"
+        ]
+    },
+    {
+        "q": "What if server doesn't support CORS for image?",
+        "o": [
+            "Image might fail to load entirely if `crossOrigin` is set",
+            "Loads tainted",
+            "Loads fine",
+            "Warning"
+        ]
+    },
+    {
+        "q": "What is 'Video' tag CORS?",
+        "o": [
+            "Same as Image. Need `crossorigin` to capture frame to canvas or access data",
+            "No CORS",
+            "Always CORS",
+            "Stream"
+        ]
+    },
+    {
+        "q": "What is 'Media Source Extensions' (MSE) CORS?",
+        "o": [
+            "Fetching segments for MSE (DASH/HLS) uses XHR/Fetch, so MUST follow CORS",
+            "No CORS",
+            "Stream",
+            "Buffer"
+        ]
+    },
+    {
+        "q": "What is 'HLS' CORS issue?",
+        "o": [
+            "m3u8 playlist and ts segments must have CORS headers if hosted on CDN",
+            "None",
+            "Built-in",
+            "Video player handles it"
+        ]
+    },
+    {
+        "q": "What is 'PDF' CORS?",
+        "o": [
+            "PDF viewer (pdf.js) fetching PDF via XHR needs CORS",
+            "No",
+            "Native",
+            "Adobe"
+        ]
+    },
+    {
+        "q": "What is 'X-Frame-Options' vs CORS?",
+        "o": [
+            "Unrelated. XFO controls iframing (Clickjacking). CORS controls data access",
+            "Same",
+            "Linked",
+            "Similar"
+        ]
+    },
+    {
+        "q": "What is 'CSP frame-ancestors'?",
+        "o": [
+            "Modern replacement for X-Frame-Options. Controls who can embed you",
+            "Ancestors",
+            "Parents",
+            "Family"
+        ]
+    },
+    {
+        "q": "Can you define CORS in `.htaccess` (Apache)?",
+        "o": [
+            "Yes. `Header set Access-Control-Allow-Origin *`",
+            "No",
+            "Only php",
+            "Only config"
+        ]
+    },
+    {
+        "q": "Can you define CORS in `web.config` (IIS)?",
+        "o": [
+            "Yes. `<customHeaders>` section",
+            "No",
+            "Only c#",
+            "Only gui"
+        ]
+    },
+    {
+        "q": "Is CORS header case-sensitive?",
+        "o": [
+            "Header Names are case-insensitive. Values (Origins) are case-sensitive!",
+            "No",
+            "Yes both",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Is `http://example.com` same as `http://example.com/`?",
+        "o": [
+            "Yes. Trailing slash in path doesn't change origin",
+            "No",
+            "Maybe",
+            "Strictly no"
+        ]
+    },
+    {
+        "q": "Is `http://example.com` same as `http://EXAMPLE.COM`?",
+        "o": [
+            "Yes. Hostnames are case-insensitive",
+            "No",
+            "Maybe",
+            "Linux only"
+        ]
+    },
+    {
+        "q": "What is 'Punycode' origin?",
+        "o": [
+            "International domains (`xn--...`). Browser converts to punycode for Origin check. Server needs to handle punycode string",
+            "Unicode",
+            "UTF8",
+            "Emoji"
+        ]
+    },
+    {
+        "q": "What is 'Public Suffix List'?",
+        "o": [
+            "List of domains where users can register subdomains (co.uk, github.io). Affects Cookie security and potentially Origin trust concepts",
+            "Domain list",
+            "Web list",
+            "Suffix list"
+        ]
+    },
+    {
+        "q": "Does CORS allow 'partial match'?",
+        "o": [
+            "No. `*.example.com` is not in spec (though some frameworks support config). Spec requires full match or `*`",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CORS Preflight' limit?",
+        "o": [
+            "Max redirects (0 allowed historically, now some). Max age (limited by browser)",
+            "None",
+            "High",
+            "Low"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Origin' reflection risk?",
+        "o": [
+            "Reflecting any origin allows any site to attack users (CSRF-like via CORS). Must validate against whitelist",
+            "None",
+            "Low",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Is 'Origin' header always present?",
+        "o": [
+            "Present on Cross-Origin requests. Present on Same-Origin POST/PUT (in modern browsers, to prevent CSRF). Missing on Same-Origin GET usually",
+            "Yes",
+            "No",
+            "Random"
+        ]
+    },
+    {
+        "q": "Can you fake Origin with `curl`?",
+        "o": [
+            "Yes. `curl -H 'Origin: http://evil.com'`. Server must not trust it blindly for auth, but used for CORS logic",
+            "No",
+            "Maybe",
+            "Hard"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Site'?",
+        "o": [
+            "Header indicating relationship (`same-origin`, `cross-site`, `none`). More reliable than Origin for server checks",
+            "Fetch site",
+            "Site check",
+            "Origin check"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Mode'?",
+        "o": [
+            "Header indicating mode (`cors`, `no-cors`, `navigate`)",
+            "Fetch mode",
+            "Request mode",
+            "Mode check"
+        ]
+    },
+    {
+        "q": "What is 'Sec-Fetch-Dest'?",
+        "o": [
+            "Header indicating destination (`document`, `image`, `script`). Helps server decide security policy",
+            "Fetch dest",
+            "Target",
+            "Goal"
+        ]
+    },
+    {
+        "q": "Are `Sec-Fetch-*` headers spoofable?",
+        "o": [
+            "No. Forbidden headers. Set by browser. Reliable for server-side security logic",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can you disable Preflight for `application/json`?",
+        "o": [
+            "No. Spec requires it. Use `text/plain` if you really must skip it (but you lose JSON parsing auto)",
+            "Yes",
+            "Config",
+            "Hack"
+        ]
+    },
+    {
+        "q": "What is `proxies` in `create-react-app`?",
+        "o": [
+            "Config used in dev to proxy requests to backend to avoid CORS",
+            "Proxy list",
+            "Agent",
+            "Bot"
+        ]
+    },
+    {
+        "q": "Does `proxies` work in production build?",
+        "o": [
+            "No! Setup is dev-server only. In prod, you must serve app from same origin or configure CORS on backend",
+            "Yes",
+            "Maybe",
+            "Magic"
+        ]
+    },
+    {
+        "q": "What is 'OPTIONS 405 Method Not Allowed'?",
+        "o": [
+            "Common error. Server not configured to handle OPTIONS method (API only handles GET/POST)",
+            "Good",
+            "Allowed",
+            "Pass"
+        ]
+    },
+    {
+        "q": "What is 'OPTIONS 401 Unauthorized'?",
+        "o": [
+            "Error. Preflight should not require Auth (Browser doesn't send creds in Preflight usually). Open OPTIONS to public",
+            "Good",
+            "Secure",
+            "Safe"
+        ]
+    },
+    {
+        "q": "Does Preflight send Cookies?",
+        "o": [
+            "No. OPTIONS request is stripped of Cookies/Auth headers by browser",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Origin: *` security check?",
+        "o": [
+            "Safe for public/read-only APIs. Dangerous for internal/private APIs",
+            "Always safe",
+            "Always bad",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'CORS' vs 'JSONP' performance?",
+        "o": [
+            "JSONP is faster (no preflight). CORS is safer and more capable",
+            "CORS faster",
+            "Same",
+            "JSONP slow"
+        ]
+    },
+    {
+        "q": "Can you wrap CORS in Promise?",
+        "o": [
+            "CORS is handled by fetch/xhr which return Promises (or callbacks). You don't wrap CORS itself",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Request-Headers: authorization`?",
+        "o": [
+            "Browser asking permission to send Authorization header",
+            "Server asking",
+            "User asking",
+            "App asking"
+        ]
+    },
+    {
+        "q": "Does `Access-Control-Allow-Methods` affect simple requests?",
+        "o": [
+            "No? Simple requests don't preflight, so they don't see this header until response. But server might block method anyway",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is `Link` header impact on CORS?",
+        "o": [
+            "Exposed headers must include `Link` if client needs to read pagination links from header",
+            "None",
+            "Big",
+            "Small"
+        ]
+    },
+    {
+        "q": "What is `Content-Security-Policy` (CSP) 'connect-src'?",
+        "o": [
+            "Controls which origins the script can connect to (XHR, Fetch, WebSocket). Separate from CORS check (both must pass)",
+            "Connect user",
+            "Connect file",
+            "Connect DB"
+        ]
+    },
+    {
+        "q": "If CSP blocks origin X, is CORS Preflight sent?",
+        "o": [
+            "No. CSP check usually happens before network request is dispatched. (Browser console shows CSP violation)",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is `COEP: require-corp`?",
+        "o": [
+            "Cross-Origin Embedder Policy. Forces document to only load resources that explicitly grant permission via CORP or CORS",
+            "Require core",
+            "Require corp",
+            "Require code"
+        ]
+    },
+    {
+        "q": "What is `CORP: same-origin`?",
+        "o": [
+            "Resource loads only from same origin. Blocks cross-origin loading even if they try. Good for sensitive JSON",
+            "Same site",
+            "Same user",
+            "Same net"
+        ]
+    },
+    {
+        "q": "What is `CORP: cross-origin`?",
+        "o": [
+            "Resource allows being embedded by any origin (like CORS * but for embedding, not reading data?)",
+            "Public",
+            "Open",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is `COOP: same-origin`?",
+        "o": [
+            " Isolates browsing context. `window.opener` becomes null for cross-origin popups. Prevents XS-Leaks/Spectre",
+            "Same site",
+            "Same user",
+            "Same tab"
+        ]
+    },
+    {
+        "q": "Does COOP break OAuth popups?",
+        "o": [
+            "Yes, if they need `window.opener` to communicate back. Unless `same-origin-allow-popups` is used or OAuth flow uses redirects",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is `Cross-Origin-Isolated` definition?",
+        "o": [
+            "Environment state when `COOP: same-origin` and `COEP: require-corp` are set. Unlocks `SharedArrayBuffer`",
+            "Isolated",
+            "Secure",
+            "Private"
+        ]
+    },
+    {
+        "q": "Why was `SharedArrayBuffer` disabled?",
+        "o": [
+            "Spectre vulnerability (timing attacks via precise shared memory clocks). Re-enabled only with COOP/COEP isolation",
+            "Buggy",
+            "Slow",
+            "Unused"
+        ]
+    },
+    {
+        "q": "What is 'XS-Leak'?",
+        "o": [
+            "Cross-Site Leak.Side-channel attack guessing state of user on another site (e.g. search results count) via timing/frames",
+            "XSS",
+            "CSRF",
+            "SQLi"
+        ]
+    },
+    {
+        "q": "How does CORS prevent XS-Leak?",
+        "o": [
+            "It generally prevents reading data directly. But timing attacks (search duration) might bypass CORS reading protections",
+            "Completely",
+            "Solves it",
+            "Blocks it"
+        ]
+    },
+    {
+        "q": "What is 'CORS-RFC1918' motivation?",
+        "o": [
+            "Prevent malicious public website from scanning internal network (port scanning localhost) via image loops or XHR timing",
+            "Public access",
+            "Global access",
+            "Free access"
+        ]
+    },
+    {
+        "q": "Can you port-scan localhost via Browser?",
+        "o": [
+            "Historically yes (timing attack on error responses). PNA (Private Network Access) aims to block this",
+            "No",
+            "Easily",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Vary: Origin, Access-Control-Request-Method'?",
+        "o": [
+            "Complex Vary header. Tells cache to vary on both Origin and the requested Method (for Preflight caching)",
+            "Vary user",
+            "Vary ip",
+            "Vary url"
+        ]
+    },
+    {
+        "q": "What is 'CORS' response on `304 Not Modified`?",
+        "o": [
+            "Must still include CORS headers! If cache revalidates and returns 304 without CORS headers, browser triggers CORS error",
+            "No headers",
+            "Ignore headers",
+            "Cache headers"
+        ]
+    },
+    {
+        "q": "Does server need to handle OPTIONS for every endpoint?",
+        "o": [
+            "If enabling CORS globally, yes. Middleware usually handles `*` route for OPTIONS",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Expose-Headers` comma separation?",
+        "o": [
+            "Rules are strict. `Header-A, Header-B` (no internal spaces is safer? or space after comma). Follow spec",
+            "Space only",
+            "Semi-colon",
+            "Pipe"
+        ]
+    },
+    {
+        "q": "What is 'Origin' header on `POST` to same origin?",
+        "o": [
+            "Browsers send it. Server can use it to verify request is not CSRF (Origin matches Host). 'Origin-based anti-CSRF'",
+            "Missing",
+            "Absent",
+            "Removed"
+        ]
+    },
+    {
+        "q": "Is 'Origin-based anti-CSRF' perfect?",
+        "o": [
+            "No. Origin might be missing (some privacy modes?). Tokens are more robust. But Origin check is a good defense-in-depth",
+            "Yes",
+            "Bad",
+            "Weak"
+        ]
+    },
+    {
+        "q": "What is 'Fetch Metadata Request Headers'?",
+        "o": [
+            "`Sec-Fetch-Dest`, `Sec-Fetch-Mode`, `Sec-Fetch-Site`, `Sec-Fetch-User`. More granular than Origin",
+            "CORS v2",
+            "HTML5",
+            "HTTP/3"
+        ]
+    },
+    {
+        "q": "What is `Sec-Fetch-Site: cross-site`?",
+        "o": [
+            "Request comes from a completely different site (e.g. evil.com to bank.com). Risky",
+            "Same site",
+            "Same origin",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is `Sec-Fetch-Site: same-origin`?",
+        "o": [
+            "Request comes from same origin. Usually trusted",
+            "Cross site",
+            "External",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is `Sec-Fetch-Site: same-site`?",
+        "o": [
+            "Request from same 'site' (eTlD+1) but maybe different subdomain/port/scheme. (e.g. auth.example.com to api.example.com)",
+            "Cross origin",
+            "Different",
+            "Far"
+        ]
+    },
+    {
+        "q": "What is `Sec-Fetch-Site: none`?",
+        "o": [
+            "User-initiated (e.g. typing URL in bar, bookmark). Start of navigation",
+            "Nothing",
+            "Empty",
+            "Null"
+        ]
+    },
+    {
+        "q": "How to use `Sec-Fetch-*` for security?",
+        "o": [
+            "Resource Isolation Policy. Block requests where `Sec-Fetch-Site` is `cross-site` unless it's a known safe endpoint (public API)",
+            "Log them",
+            "Ignore them",
+            "Delete them"
+        ]
+    },
+    {
+        "q": "Does CORS apply to `favicon.ico`?",
+        "o": [
+            "Generally No (browser fetches it). But if JS fetches it via Image/XHR, yes",
+            "Yes always",
+            "No never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Does CORS apply to `manifest.json`?",
+        "o": [
+            "Yes. Must be served with CORS headers if on CDN (Cross-Origin)",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Does CORS apply to `worker` scripts?",
+        "o": [
+            "Yes. `new Worker('http://other.com/worker.js')` is Cross-Origin. Needs CORS",
+            "No",
+            "Maybe",
+            "Internal"
+        ]
+    },
+    {
+        "q": "What is 'opaque' response body size?",
+        "o": [
+            "0 bytes (exposed to JS). Actual footprint in browser memory exists but hidden from JS logic",
+            "100 bytes",
+            "Full size",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "What is 'CORS' issue with 'Basic Auth'?",
+        "o": [
+            "Browser prompts for credentials? No, AJAX with Basic Auth needs `withCredentials` or explicit `Authorization` header",
+            "Login popup",
+            "Error",
+            "Crash"
+        ]
+    },
+    {
+        "q": "Does URL fragment (`#hash`) affect Origin?",
+        "o": [
+            "No. Origin is Scheme+Host+Port. URL path/query/hash are irrelevant for Origin definition",
+            "Yes",
+            "Maybe",
+            "Depends"
+        ]
+    },
+    {
+        "q": "Does `blob:` URL have an origin?",
+        "o": [
+            "Yes. `blob:` URLs inherit origin of the context that created them. (e.g. blob:https://example.com/...)",
+            "No",
+            "Maybe",
+            "Unique"
+        ]
+    },
+    {
+        "q": "Can you CORS fetch a `blob:` URL?",
+        "o": [
+            "Usually treat as Same-Origin if created by same page. Cross-origin access to blob URL is blocked (UUID is unique)",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is `data:` URL origin?",
+        "o": [
+            "Treated as unique opaque origin (process dependent). Often `null` or unique. Cross-origin by default relative to page",
+            "Same origin",
+            "Local",
+            "File"
+        ]
+    },
+    {
+        "q": "What is 'Origin' of `about:blank`?",
+        "o": [
+            "Inherits origin of the document that opened it (or into which it is embedded if iframe)",
+            "Null",
+            "Blank",
+            "Zero"
+        ]
+    },
+    {
+        "q": "What is 'Origin' of `javascript:` url?",
+        "o": [
+            "Inherits origin of the document where it executes",
+            "Null",
+            "Script",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Canonical' CORS header order?",
+        "o": [
+            "No strict order required. But usually `Access-Control-Allow-Origin` first",
+            "Alphabetical",
+            "Length",
+            "Random"
+        ]
+    },
+    {
+        "q": "Can you have multiple `Access-Control-Allow-Origin` headers?",
+        "o": [
+            "No! RFC says MUST be single header with single value. (Some servers send two lines, browsers might reject or pick first)",
+            "Yes",
+            "Maybe",
+            "Array"
+        ]
+    },
+    {
+        "q": "What is 'Content-Type' negotiation in CORS?",
+        "o": [
+            "If client sends `Content-Type: application/json`, it is a requested header. Server must allow it in `Access-Control-Allow-Headers`",
+            "Automatic",
+            "Ignore",
+            "Block"
+        ]
+    },
+    {
+        "q": "Are 'typos' common in CORS?",
+        "o": [
+            "Yes. `Access-Control-Allow-Origins` (plural) is a common mistake. It is Singular `Origin`",
+            "No",
+            "Never",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "Is `Access-Control-Allow-Method` singular or plural?",
+        "o": [
+            "Plural: `...-Methods`. (List of methods)",
+            "Singular",
+            "Either",
+            "Both"
+        ]
+    },
+    {
+        "q": "Is `Access-Control-Allow-Header` singular or plural?",
+        "o": [
+            "Plural: `...-Headers`. (List of headers)",
+            "Singular",
+            "Either",
+            "Both"
+        ]
+    },
+    {
+        "q": "Is `Access-Control-Max-Age` singular?",
+        "o": [
+            "Yes. It is a single value (seconds)",
+            "Plural",
+            "List",
+            "Double"
+        ]
+    },
+    {
+        "q": "What if Preflight succeeds but actual request fails CORS?",
+        "o": [
+            "Possible. Preflight checks Permission. Actual request might have dynamic logic that fails (e.g. DB error) or returns different headers",
+            "Impossible",
+            "Browser bug",
+            "Ghost"
+        ]
+    },
+    {
+        "q": "What if Actual Request omits CORS headers?",
+        "o": [
+            "Browser blocks response reading (even if Preflight passed). Every response in CORS chain must have headers",
+            "Allowed",
+            "Cached",
+            "Saved"
+        ]
+    },
+    {
+        "q": "Does `304 Not Modified` need Access-Control-Allow-Credentials?",
+        "o": [
+            "Yes! If the original request used credentials. Missing header on 304 causes CORS error",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Can `ETag` match cross-origin?",
+        "o": [
+            "Yes, if exposed. Useful for caching",
+            "No",
+            "Never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'CORS' debug header?",
+        "o": [
+            "None standard. Some frameworks add `X-CORS-Debug` info",
+            "X-Debug",
+            "CORS-Log",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Expose-Headers: *'?",
+        "o": [
+            "Exposes ALL headers (except Set-Cookie). Supported in newer specs/browsers",
+            "None",
+            "Some",
+            "Default"
+        ]
+    },
+    {
+        "q": "Who enforces CORS?",
+        "o": [
+            "The Browser (User Agent). The Server just provides permission slips (headers)",
+            "The Server",
+            "The Proxy",
+            "The User"
+        ]
+    },
+    {
+        "q": "Can Server enforce CORS?",
+        "o": [
+            "Server can check `Origin` and block request (403). But standard CORS flow is Browser blocking Response Reading",
+            "Yes always",
+            "No never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Does CORS use 'IP Address'?",
+        "o": [
+            "No. Origin uses Domain names. IP is network layer. Though `http://1.2.3.4` is a valid origin",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Is 'localhost' vs '127.0.0.1' same origin?",
+        "o": [
+            "NO. Different host strings. `http://localhost:3000` != `http://127.0.0.1:3000`",
+            "Yes",
+            "Basically",
+            "Close"
+        ]
+    },
+    {
+        "q": "Is 'localhost:80' vs 'localhost' same origin?",
+        "o": [
+            "Yes, if 80 is default for http. Normalization happens",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Is 'https://foo.com:443' vs 'https://foo.com' same origin?",
+        "o": [
+            "Yes. Default port usually normalized",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Origin' of a generic file drag-and-drop?",
+        "o": [
+            "Files read via FileReader (File API) from user disk don't really have an origin in the HTTP sense? `null` or context origin",
+            "File",
+            "Disk",
+            "User"
+        ]
+    },
+    {
+        "q": "What is 'Origin' blocking in Firewall?",
+        "o": [
+            "Firewall can inspect HTTP headers and block specific Origins. Defense in depth",
+            "Impossible",
+            "Hard",
+            "Easy"
+        ]
+    },
+    {
+        "q": "What is 'CORS Any'?",
+        "o": [
+            "Slang for `Access-Control-Allow-Origin: *`",
+            "Protocol",
+            "RFC",
+            "Spec"
+        ]
+    },
+    {
+        "q": "What is 'CORS Creds'?",
+        "o": [
+            "Slang for `Access-Control-Allow-Credentials: true`",
+            "Login",
+            "User",
+            "Pass"
+        ]
+    },
+    {
+        "q": "Does 'OPTIONS' appear in Server Logs?",
+        "o": [
+            "Yes! You will see OPTIONS requests in access logs. Can fill up logs if not cached",
+            "No",
+            "Hidden",
+            "Silent"
+        ]
+    },
+    {
+        "q": "Can you filter 'OPTIONS' from logs?",
+        "o": [
+            "Yes. Config server to log OPTIONS to /dev/null or separate file (common practice)",
+            "No",
+            "Illegal",
+            "Hard"
+        ]
+    },
+    {
+        "q": "Does 'OPTIONS' count towards quota?",
+        "o": [
+            "Depends on API Gateway. Some charge for every call (including OPTIONS). Some ignore it. Check pricing!",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "How to reduce OPTIONS cost?",
+        "o": [
+            "Cache Preflight with high `Access-Control-Max-Age`",
+            "Stop CORS",
+            "Use VPN",
+            "Pay more"
+        ]
+    },
+    {
+        "q": "What is 'CORS' in 'Serverless' (Lambda)?",
+        "o": [
+            "Must configure API Gateway to header CORS or return CORS headers from Lambda function code",
+            "Auto",
+            "None",
+            "Magic"
+        ]
+    },
+    {
+        "q": "What is 'Lambda Proxy Integration' CORS?",
+        "o": [
+            "Lambda responsbile for returning headers: `{ headers: { 'Access-Control-Allow-Origin': '*' } }`",
+            "Gateway",
+            "Console",
+            "Ops"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'Static Site' (S3)?",
+        "o": [
+            "XML/JSON config on bucket. Define allowed origins and methods",
+            "File header",
+            "Meta tag",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'GitHub Pages'?",
+        "o": [
+            "GitHub Pages sends `Access-Control-Allow-Origin: *` for all static assets by default (usually)",
+            "None",
+            "Block",
+            "Private"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'CDN'?",
+        "o": [
+            "CDN must forward OPTIONS to origin OR handle them at edge. Must respect Vary header",
+            "Fast",
+            "Slow",
+            "Broken"
+        ]
+    },
+    {
+        "q": "What is 'Edge CORS'?",
+        "o": [
+            "Handling CORS logic in Edge function (Cloudflare Workers, Lambda@Edge). Fast, dynamic, no hit to origin",
+            "Browser",
+            "Client",
+            "User"
+        ]
+    },
+    {
+        "q": "Can you double-CORS?",
+        "o": [
+            "Sending two `Access-Control-Allow-Origin` headers usually breaks the browser parser. Don't append, replace",
+            "Yes",
+            "Good",
+            "Safe"
+        ]
+    },
+    {
+        "q": "Does 'WebDAV' use CORS?",
+        "o": [
+            "Yes. WebDAV methods (PROPFIND, MKCOL) are HTTP methods. Need Preflight and `Allow-Methods`",
+            "No",
+            "Separate",
+            "Different"
+        ]
+    },
+    {
+        "q": "What is 'CORS' for 'GraphQL'?",
+        "o": [
+            "GraphQL usually uses POST `application/json`. Triggers Preflight. Server must handle OPTIONS",
+            "No CORS",
+            "Special",
+            "Built-in"
+        ]
+    },
+    {
+        "q": "Does 'WebRTC' checks CORS?",
+        "o": [
+            "Not for peer connection itself (UDP/TCP). But signaling server (WebSocket/HTTP) needs CORS. `getUserMedia` permissions are separate",
+            "Yes",
+            "Always",
+            "Strictly"
+        ]
+    },
+    {
+        "q": "What is 'ORB' (Opaque Response Blocking)?",
+        "o": [
+            "Successor to CORB. HEURISTICALLY blocks opaque cross-origin responses from entering renderer process if they look like HTML/XML/JSON",
+            "CORS v3",
+            "New header",
+            "Blocker"
+        ]
+    },
+    {
+        "q": "What is `Permissions-Policy` (formerly Feature-Policy)?",
+        "o": [
+            "Controls which browser features (camera, mic, geolocation) are allowed in document and IFRAMES. Can block features cross-origin",
+            "CORS policy",
+            "User policy",
+            "Admin policy"
+        ]
+    },
+    {
+        "q": "Does `Permissions-Policy` allow disabling `sync-xhr`?",
+        "o": [
+            "Yes! You can disable synchronous XHR to improve performance/UX",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'WebAssembly' CORS?",
+        "o": [
+            "`WebAssembly.instantiateStreaming` requires the WASM file to be served with correct MIME (`application/wasm`) AND CORS if cross-origin",
+            "No CORS",
+            "Any MIME",
+            "Text"
+        ]
+    },
+    {
+        "q": "What happens if WASM has wrong MIME?",
+        "o": [
+            "Browser rejects streaming instantiation (security/spec requirement)",
+            "Slows down",
+            "Warnings",
+            "Works"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Origin' caching issue?",
+        "o": [
+            "If server returns ACAO based on Origin header but forgets Vary: Origin, ISP proxies might cache response for User A (Origin X) and serve to User B (Origin Y), causing CORS error for B",
+            "None",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'CORS' debug via 'curl -I -X OPTIONS'?",
+        "o": [
+            "Good way to test server headers manually. `-I` (head) might be wrong if OPTIONS has body, but usually works for checking standard headers",
+            "Bad",
+            "Useless",
+            "Wrong"
+        ]
+    },
+    {
+        "q": "Does 'Import Maps' need CORS?",
+        "o": [
+            "Yes. If import map JSON is fetched cross-origin, it needs CORS",
+            "No",
+            "Maybe",
+            "Internal"
+        ]
+    },
+    {
+        "q": "What is `Access-Control-Allow-Origin: *` credential risk?",
+        "o": [
+            "If developer manually checks `withCredentials` on client but forgets server uses `*`, browser blocks it safely. But if server hardcodes `Allow-Credentials: true` with `*`, browser enforces block",
+            "None",
+            "Low",
+            "High"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' behavior on HTTP 4xx?",
+        "o": [
+            "If Preflight returns 404/400, browser treats it as Failure. Actual request is NOT sent",
+            "Retry",
+            "Ignore",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' behavior on HTTP 5xx?",
+        "o": [
+            "Failure. Request not sent",
+            "Retry",
+            "Ignore",
+            "Success"
+        ]
+    },
+    {
+        "q": "Can you define CORS headers in meta tag?",
+        "o": [
+            "No. CORS headers MUST be HTTP headers. `<meta http-equiv=...>` does not support CORS headers",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "Why no meta tag support?",
+        "o": [
+            "Security checks happen before HTML parsing (often). Headers are safer/earlier",
+            "Slow",
+            "Parsing",
+            "Legacy"
+        ]
+    },
+    {
+        "q": "What is 'Samesite=Strict' cookie interaction with CORS?",
+        "o": [
+            "Strict cookies are NOT sent on top-level navigation from other sites, nor cross-site subrequests. CORS credentials relies on cookie presence",
+            "None",
+            "Blocks",
+            "Allows"
+        ]
+    },
+    {
+        "q": "What is 'Samesite=Lax' default?",
+        "o": [
+            "Modern browsers default to Lax. Cookies not sent on cross-site subrequests (images/xhr) unless user navigates. Breaks 'default' CORS auth without `SameSite=None; Secure`",
+            "Strict",
+            "None",
+            "Open"
+        ]
+    },
+    {
+        "q": "How to fix CORS Auth with SameSite in modern browsers?",
+        "o": [
+            "Set cookie `SameSite=None; Secure`. Allows sending cookie on cross-site CORS request (with `withCredentials`)",
+            "Disable SameSite",
+            "Use HTTP",
+            "Use Lax"
+        ]
+    },
+    {
+        "q": "What is 'Secure' flag requirement?",
+        "o": [
+            "`SameSite=None` REQUIRED `Secure` (HTTPS). You cannot have cross-site cookies on HTTP anymore",
+            "Optional",
+            "Recommended",
+            "Unused"
+        ]
+    },
+    {
+        "q": "What is 'Public Wi-Fi' CORS attack?",
+        "o": [
+            "If site accepts HTTP (no HSTS), attacker injects script. Script makes CORS requests to internal/local services. (Local Network Access reduces this)",
+            "None",
+            "Sniffing",
+            "Spoofing"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Origin: null' exploit?",
+        "o": [
+            "Attacker uses `data:` or `sandbox` iframe to generate request from `null` origin. If server whitelists `null`, they bypass SOP",
+            "Safe",
+            "Hard",
+            "Rare"
+        ]
+    },
+    {
+        "q": "When should you allow `null` origin?",
+        "o": [
+            "Almost never. Maybe for local file development, but highly discouraged in production",
+            "Always",
+            "Often",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'Timing Attack' on CORS?",
+        "o": [
+            "Measuring how long a cross-origin request takes (even if blocked) to guess if user is logged in (redirect vs direct, database cache hit)",
+            "Clock skew",
+            "NTP",
+            "Time zone"
+        ]
+    },
+    {
+        "q": "How to mitigate Timing Attacks?",
+        "o": [
+            "Make responses constant time? Hard. Use COOP/COEP to reduce timer precision. Or SameSite cookies to prevent auth'd state usage",
+            "CORS *",
+            "Block IP",
+            "add jitter"
+        ]
+    },
+    {
+        "q": "What is 'Resource Timing API' risk?",
+        "o": [
+            "Exposes redirect start/end times. Blocked/Zeroed out for cross-origin unless `Timing-Allow-Origin` is present",
+            "None",
+            "High",
+            "Data leak"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'Fonts' specifically?",
+        "o": [
+            "Spec requires it to prevent font piracy (licensing). Browsers respect this DRM-like feature via CORS",
+            "Format",
+            "Type",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Font Obfuscation'?",
+        "o": [
+            "Some fonts are scrambled and unlocked by JS. CORS ensures only authorized domains fetch the font blob",
+            "Zip",
+            "Crypt",
+            "Hide"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'SVG images'?",
+        "o": [
+            "Fetching SVG via `<img>` is simple GET. Fetching via XHR (to inject into DOM) needs CORS",
+            "None",
+            "Vector",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'Canvas' `toDataURL()` security?",
+        "o": [
+            "If canvas is tainted (drew cors-less image), `toDataURL` returns exception/security error. Prevents pixel scraping",
+            "None",
+            "Open",
+            "Free"
+        ]
+    },
+    {
+        "q": "How to 'untaint' a canvas?",
+        "o": [
+            "You cannot untaint it. You must start fresh with CORS-enabled images (`crossOrigin='anonymous'`)",
+            "Reload",
+            "Clear",
+            "Reset"
+        ]
+    },
+    {
+        "q": "Does 'Cache-Control' header affect CORS?",
+        "o": [
+            "Indirectly. If cache holds a response without CORS headers and valid for days, subsequent CORS requests failing is a 'Cache Poisoning' issue (Solve with Vary: Origin)",
+            "Directly",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Private' cache?",
+        "o": [
+            "Browser cache. Less risk of cross-user poisoning than CDN (Shared) cache",
+            "CDN",
+            "Server",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "What is 'Shared' cache?",
+        "o": [
+            "Proxy/CDN. HIGH risk of serving wrong CORS headers to wrong origin if Vary is missing",
+            "Browser",
+            "Disk",
+            "RAM"
+        ]
+    },
+    {
+        "q": "What is 'Authorization' vs 'Authentication' in CORS?",
+        "o": [
+            "CORS is Access Control (Authorization-ish). Auth is Login. CORS does not identify WHO you are, only WHERE you are from",
+            "Same",
+            "Login",
+            "ID"
+        ]
+    },
+    {
+        "q": "What is 'Bearer Token' + CORS?",
+        "o": [
+            "Common modern pattern. Token in header. Requires Preflight. CORS * allowed (usually). No cookie issues",
+            "Hard",
+            "Slow",
+            "Old"
+        ]
+    },
+    {
+        "q": "What is 'Cookie Auth' + CORS?",
+        "o": [
+            "Legacy/Standard pattern. Cookie implicit. Requires `withCredentials`. `Access-Control-Allow-Origin` CANNOT be *. Vulnerable to CSRF if not careful",
+            "Easier",
+            "Zero config",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Origin' trust?",
+        "o": [
+            "You trust the code served from that Origin. CORS allows that trusted code to talk to your API",
+            "Trust IP",
+            "Trust User",
+            "Trust Browser"
+        ]
+    },
+    {
+        "q": "Can a malicious browser lie about Origin?",
+        "o": [
+            "Yes. You cannot trust Origin header for strictly authenticating a device. You trust it to differentiate honest users browsing site A vs site B",
+            "No",
+            "Secure",
+            "Hard"
+        ]
+    },
+    {
+        "q": "What is 'CORS-E'?",
+        "o": [
+            "Not a thing? Maybe typo for CORS-Everywhere extension?",
+            "Enhanced",
+            "Enterprise",
+            "Extended"
+        ]
+    },
+    {
+        "q": "What is 'CORS-Anywhere' risk?",
+        "o": [
+            "Public proxy. If you use it for production, your data passes through third-party server. Privacy nightmare. Rate limits",
+            "Safe",
+            "Good",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Can you host your own 'CORS Anywhere'?",
+        "o": [
+            "Yes. `npm install cors-anywhere`. Run on your own Heroku/VPS. Safer for dev proxies",
+            "No",
+            "Illegal",
+            "Hard"
+        ]
+    },
+    {
+        "q": "What is 'Reverse Proxy' vs CORS Proxy?",
+        "o": [
+            "Reverse proxy (Nginx) makes it Same-Origin (client sees one domain). CORS proxy adds headers to Cross-Origin response. Reverse proxy is architectural fix",
+            "Same",
+            "Similar",
+            "Linked"
+        ]
+    },
+    {
+        "q": "Does 'HTTP/2' change CORS?",
+        "o": [
+            "No. Headers logic is same. Though HPACK compresses verbose CORS headers efficiently",
+            "Yes",
+            "Removes it",
+            "Replaces it"
+        ]
+    },
+    {
+        "q": "Does 'HTTP/3' (QUIC) change CORS?",
+        "o": [
+            "No. Semantics are identical. Transport is UDP but Browser security model remains",
+            "Yes",
+            "Maybe",
+            "Changes it"
+        ]
+    },
+    {
+        "q": "What is 'WAF' role in CORS?",
+        "o": [
+            "Web Application Firewall. Can filter/block requests with bad Origins before they hit app. Can inject CORS headers too",
+            "Firewall",
+            "Blocker",
+            "Filter"
+        ]
+    },
+    {
+        "q": "What is 'API Key' vs Origin?",
+        "o": [
+            "API Key identifies Project/Client. Origin identifies serving domain. Use both for defense",
+            "Same",
+            "Duplicate",
+            "Conflict"
+        ]
+    },
+    {
+        "q": "Can you restrict API Key by Referer/Origin?",
+        "o": [
+            "Yes. Google Maps API keys do this. They check Referer header to prevent key theft usage",
+            "No",
+            "Impossible",
+            "Useless"
+        ]
+    },
+    {
+        "q": "What is 'Referer' spoofing?",
+        "o": [
+            "Using tools outside browser to send fake Referer. Browsers generally protect Referer. Extension can change it",
+            "Easy",
+            "Common",
+            "Default"
+        ]
+    },
+    {
+        "q": "What is 'User Agent' CORS?",
+        "o": [
+            "UA is irrelevant for CORS logic technically, but servers might vary logic based on UA (e.g. mobile app vs browser)",
+            "Browser",
+            "Client",
+            "Device"
+        ]
+    },
+    {
+        "q": "What is 'CORS' on 'File Upload'?",
+        "o": [
+            "Uploading file via XHR/Fetch (FormData) triggers Preflight if Cross-Origin. Simple POST (form submit) might not read response",
+            "Upload",
+            "TUS",
+            "FTP"
+        ]
+    },
+    {
+        "q": "What is 'TUS' protocol CORS?",
+        "o": [
+            "Resumable upload. Uses PATCH/HEAD methods. REQUIRES CORS Preflight configuration for custom methods",
+            "Upload",
+            "File",
+            "Data"
+        ]
+    },
+    {
+        "q": "What is 'Method: PATCH' CORS?",
+        "o": [
+            "PATCH is NOT a simple method. Always triggers Preflight",
+            "Simple",
+            "Safe",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Method: HEAD' CORS?",
+        "o": [
+            "HEAD is simple method (like GET). No Preflight (unless custom headers)",
+            "Complex",
+            "Unsafe",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What is 'Method: PUT' CORS?",
+        "o": [
+            "PUT is NOT simple. Triggers Preflight",
+            "Simple",
+            "Safe",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Method: DELETE' CORS?",
+        "o": [
+            "DELETE is NOT simple. Triggers Preflight",
+            "Simple",
+            "Safe",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' bypass via 'Flash'?",
+        "o": [
+            "Old exploit. Flash had `crossdomain.xml`. Dead now",
+            "New",
+            "Active",
+            "Risky"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' bypass via 'Java Applet'?",
+        "o": [
+            "Old exploit. Dead technology",
+            "New",
+            "Active",
+            "Risky"
+        ]
+    },
+    {
+        "q": "What is 'Preflight' bypass via 'PDF'?",
+        "o": [
+            "Some PDF readers had vulnerabilities making cross-origin requests. Browsers sandbox them heavily now",
+            "Active",
+            "Common",
+            "Easy"
+        ]
+    },
+    {
+        "q": "What is 'Certificate Transparency' vs CORS?",
+        "o": [
+            "Unrelated. CT is SSL trust. CORS is browser access control",
+            "Same",
+            "Linked",
+            "Similar"
+        ]
+    },
+    {
+        "q": "Why is CORS confusing?",
+        "o": [
+            "It is invisible (happens in browser network layer), errors are vague (security), and caching makes it flaky",
+            "Bad spec",
+            "Hard math",
+            "Poor docs"
+        ]
+    },
+    {
+        "q": "Best way to learn CORS?",
+        "o": [
+            "Setup two local servers (port 3000, 4000). Try fetching. Watch Network tab. Fix errors",
+            "Read spec",
+            "Read book",
+            "Guess"
+        ]
+    },
+    {
+        "q": "Is 'CORS' in 'Mobile App' (React Native)?",
+        "o": [
+            "No! React Native uses native networking, not browser engine. No SOP. CORS irrelevant (unless using WebView)",
+            "Yes",
+            "Always",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Is 'CORS' in 'Electron'?",
+        "o": [
+            "Yes, if using Renderer process normally. But can disable `webSecurity` in BrowserWindow preference (careful!)",
+            "No",
+            "Never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Is 'CORS' in 'Capacitor/Ionic'?",
+        "o": [
+            "If using native HTTP plugin, No. If using standard `fetch` in WebView, Yes (and origin is usually `capacitor://localhost` or similar)",
+            "No",
+            "Yes",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What origin does 'Capacitor' use?",
+        "o": [
+            "`capacitor://localhost` (iOS) or `http://localhost` (Android). API must whitelist this scheme/origin",
+            "file://",
+            "null",
+            "random"
+        ]
+    },
+    {
+        "q": "What is 'Access-Control-Allow-Origin: file://'?",
+        "o": [
+            "Not valid standard value. Must typically use `null` for file or `*`? Browser support for file scheme CORS is inconsistent",
+            "Valid",
+            "Good",
+            "Best"
+        ]
+    },
+    {
+        "q": "Does 'Post Message' replace CORS?",
+        "o": [
+            "For Iframe communication: Yes. For Server communication: No",
+            "Yes",
+            "No",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "Can you verify 'Origin' with DNSSEC?",
+        "o": [
+            "No. TLS verifies connection. Origin header is trusted because TLS prevents tampering",
+            "Yes",
+            "Maybe",
+            "Future"
+        ]
+    },
+    {
+        "q": "Is 'CORS' a firewall?",
+        "o": [
+            "No. It is a cooperating mechanism between Browser and Server. It does not stop non-browser traffic",
+            "Yes",
+            "Sort of",
+            "Basically"
+        ]
+    },
+    {
+        "q": "What is 'Same-Origin Policy' vs 'Same-Site Policy'?",
+        "o": [
+            "Same-Origin: Scheme+Host+Port (Strict). Same-Site: eTLD+1 (Looser, used for Cookies)",
+            "Same",
+            "Different names",
+            "Who cares"
+        ]
+    },
+    {
+        "q": "Which is safer: SOP or SameSite?",
+        "o": [
+            "SOP is the bedrock of web security boundaries. SameSite is a cookie attribute amendment",
+            "SOP",
+            "SameSite",
+            "Both"
+        ]
+    },
+    {
+        "q": "Can you use 'CORS' for 'Offline' apps (PWA)?",
+        "o": [
+            "Yes. Service Worker intercepts requests. If fetching from external API, CORS still applies",
+            "No",
+            "Maybe",
+            "Sometimes"
+        ]
+    }
+]

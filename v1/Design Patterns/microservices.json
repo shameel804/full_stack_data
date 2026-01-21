@@ -1,0 +1,4290 @@
+[
+    {
+        "q": "What is a Microservice Architecture?",
+        "o": [
+            "Architectural style that structures an application as a collection of loosely coupled services",
+            "Monolithic application",
+            "Single large database",
+            "Client-side rendering"
+        ]
+    },
+    {
+        "q": "Key characteristic of Microservices?",
+        "o": [
+            "Independently deployable",
+            "Shared database",
+            "Single codebase",
+            "Tight coupling"
+        ]
+    },
+    {
+        "q": "Microservices vs Monolith?",
+        "o": [
+            "Microservices: Distributed, many repos/services; Monolith: Single process, single repo usually",
+            "Same thing",
+            "Monolith is distributed",
+            "Microservices are slower"
+        ]
+    },
+    {
+        "q": "Conway's Law relevance?",
+        "o": [
+            "Teams organization impacts architecture; Split teams to enable split services",
+            "Code quality",
+            "Testing",
+            "Documentation"
+        ]
+    },
+    {
+        "q": "Database per Service pattern?",
+        "o": [
+            "Each service owns its own database (Private); no direct access by other services",
+            "Shared database",
+            "Global database",
+            "No database"
+        ]
+    },
+    {
+        "q": "Why Database per Service?",
+        "o": [
+            "Ensures loose coupling and independent scaling",
+            "Easier reporting",
+            "Less storage",
+            "Faster joins"
+        ]
+    },
+    {
+        "q": "Shared Database pattern?",
+        "o": [
+            "Anti-pattern in Microservices; creates tight coupling between services",
+            "Best practice",
+            "Recommended",
+            "Secure"
+        ]
+    },
+    {
+        "q": "API Gateway pattern?",
+        "o": [
+            "Single entry point for all clients; routes requests to appropriate microservices",
+            "Database",
+            "Auth server",
+            "Frontend"
+        ]
+    },
+    {
+        "q": "Benefits of API Gateway?",
+        "o": [
+            "Request routing, Composition, Protocol translation, Rate limiting, Auth",
+            "Database storage",
+            "UI rendering",
+            "Logic execution"
+        ]
+    },
+    {
+        "q": "Backend for Frontend (BFF) pattern?",
+        "o": [
+            "Separate API Gateway for each client type (Web, Mobile, External)",
+            "Single gateway",
+            "Direct calls",
+            "Database access"
+        ]
+    },
+    {
+        "q": "Service Discovery?",
+        "o": [
+            "Mechanism for services to find location (IP/Port) of other services dynamically",
+            "DNS",
+            "Hardcoding",
+            "Config file"
+        ]
+    },
+    {
+        "q": "Client-side Service Discovery?",
+        "o": [
+            "Client queries Service Registry to get instances and load balances internally (Netflix Ribbon)",
+            "Server-side",
+            "DNS",
+            "Hardcoded"
+        ]
+    },
+    {
+        "q": "Server-side Service Discovery?",
+        "o": [
+            "Client calls Load Balancer (AWS ELB, Nginx) which queries Registry and routes",
+            "Client-side",
+            "Peer-to-peer",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Service Registry (Eureka/Consul)?",
+        "o": [
+            "Database containing network locations of service instances",
+            "User database",
+            "Log file",
+            "Config map"
+        ]
+    },
+    {
+        "q": "Circuit Breaker pattern?",
+        "o": [
+            "Prevents cascading failures by stopping calls to a failing service (Open/Closed/Half-Open states)",
+            "Switch",
+            "Fuse",
+            "Wire"
+        ]
+    },
+    {
+        "q": "Why use Circuit Breaker?",
+        "o": [
+            "Fail fast and recover gracefully; prevent resource exhaustion waiting for timeouts",
+            "Speed up",
+            "Security",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Bulkhead pattern?",
+        "o": [
+            "Isolating elements collecting into pools so if one fails, the others continue to function (Ship metaphor)",
+            "Wall",
+            "Door",
+            "Window"
+        ]
+    },
+    {
+        "q": "Saga Pattern?",
+        "o": [
+            "Managing distributed transactions as a sequence of local transactions",
+            "Two-phase commit",
+            "Global transaction",
+            "Locking"
+        ]
+    },
+    {
+        "q": "Choreography-based Saga?",
+        "o": [
+            "Participants exchange events without a centralized point of control",
+            "Orchestration",
+            "Director",
+            "RPC"
+        ]
+    },
+    {
+        "q": "Orchestration-based Saga?",
+        "o": [
+            "Centralized controller (Orchestrator) tells participants what local transactions to execute",
+            "Choreography",
+            "Chaos",
+            "Random"
+        ]
+    },
+    {
+        "q": "Compensating Transaction?",
+        "o": [
+            "Undo operation executed when a step in Saga fails (e.g. Refund)",
+            "Commit",
+            "Rollback (ACID)",
+            "Delete"
+        ]
+    },
+    {
+        "q": "Two-Phase Commit (2PC)?",
+        "o": [
+            "Strong consistency protocol for distributed transactions (Prepare/Commit phases) - often too slow for Microservices",
+            "Saga",
+            "Eventual consistency",
+            "Best practice"
+        ]
+    },
+    {
+        "q": "CQRS (Command Query Responsibility Segregation)?",
+        "o": [
+            "Separating Read and Write models (often different databases/services)",
+            "CRUD",
+            "Monolith",
+            "Active Record"
+        ]
+    },
+    {
+        "q": "Event Sourcing?",
+        "o": [
+            "Persisting state as a sequence of events (Append-only log) rather than current state",
+            "CRUD",
+            "Snapshot",
+            "Cache"
+        ]
+    },
+    {
+        "q": "CQRS + Event Sourcing?",
+        "o": [
+            "Common combination: Write side logs events; Read side consumes events to build projections",
+            "Bad idea",
+            "Impossible",
+            "Standard CRUD"
+        ]
+    },
+    {
+        "q": "Strangler Fig Pattern?",
+        "o": [
+            "Migrating Monolith to Microservices by gradually replacing functionality with new services",
+            "Big Bang",
+            "Rewrite",
+            "Copy Paste"
+        ]
+    },
+    {
+        "q": "Sidecar Pattern?",
+        "o": [
+            "Helper process running alongside main service (logging, proxy, config) - Kubernetes Pod concept",
+            "Main process",
+            "Remote service",
+            "Database"
+        ]
+    },
+    {
+        "q": "Ambassador Pattern?",
+        "o": [
+            "Proxy service sending network requests on behalf of a consumer service (Smart client)",
+            "Sidecar",
+            "Gateway",
+            "Server"
+        ]
+    },
+    {
+        "q": "Anti-Corruption Layer (ACL)?",
+        "o": [
+            "Layer that translates between two different domains/systems to prevent pollution (DDD)",
+            "Facade",
+            "Adapter",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "Smart Endpoints and Dumb Pipes?",
+        "o": [
+            "Microservices Principle: Logic in services (endpoints), simplified communication (pipes like HTTP/Messaging)",
+            "ESB",
+            "SOA",
+            "Smart Pipes"
+        ]
+    },
+    {
+        "q": "Synchronous vs Asynchronous Communication?",
+        "o": [
+            "Sync: Request/Response (HTTP/gRPC); Async: Messaging/Events (RabbitMQ/Kafka)",
+            "Same",
+            "Opposite",
+            "Unsure"
+        ]
+    },
+    {
+        "q": "REST (Representational State Transfer)?",
+        "o": [
+            "Resource-based architectural style over HTTP (Stateless, Cacheable)",
+            "Protocol",
+            "RPC",
+            "SOAP"
+        ]
+    },
+    {
+        "q": "gRPC?",
+        "o": [
+            "High-performance RPC framework using Protobufs and HTTP/2",
+            "REST",
+            "SOAP",
+            "XML"
+        ]
+    },
+    {
+        "q": "GraphQL?",
+        "o": [
+            "Query language for APIs; allows client to request exactly what it needs",
+            "REST",
+            "gRPC",
+            "SOAP"
+        ]
+    },
+    {
+        "q": "Message Broker?",
+        "o": [
+            "Intermediary program translating messages (RabbitMQ, Kafka, ActiveMQ)",
+            "Database",
+            "Gateway",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "Idempotency in Messaging?",
+        "o": [
+            "Handling duplicate messages without side effects (Crucial for at-least-once delivery)",
+            "Transactions",
+            "Speed",
+            "Security"
+        ]
+    },
+    {
+        "q": "Scaling Microservices?",
+        "o": [
+            "Scale Cube: X-axis (Clones), Y-axis (Functional Decomposition), Z-axis (Data Partitioning)",
+            "Vertical only",
+            "Horizontal only",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Blue-Green Deployment?",
+        "o": [
+            "Zero-downtime deployment: Two environs, switch traffic from Blue (Old) to Green (New)",
+            "Canary",
+            "Rolling",
+            "Big Bang"
+        ]
+    },
+    {
+        "q": "Canary Deployment?",
+        "o": [
+            "Release to small subset of users first to test stability",
+            "Blue-Green",
+            "Rolling",
+            "Feature Toggle"
+        ]
+    },
+    {
+        "q": "Distributed Tracing?",
+        "o": [
+            "Tracking a request as it flows through multiple services (Zipkin, Jaeger, OpenTelemetry)",
+            "Logging",
+            "Monitoring",
+            "Debugging"
+        ]
+    },
+    {
+        "q": "Trace ID vs Span ID?",
+        "o": [
+            "Trace ID: Identifies entire request flow; Span ID: Identifies specific operation/hop",
+            "Same",
+            "Opposite",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "Centralized Logging?",
+        "o": [
+            "Aggregating logs from all services into one place (ELK Stack, Splunk)",
+            "Local files",
+            "Console",
+            "Discard"
+        ]
+    },
+    {
+        "q": "Health Checks?",
+        "o": [
+            "Endpoint (/health) returning service status (UP/DOWN) for Load Balancer/Orchestrator",
+            "Ping",
+            "Status",
+            "Info"
+        ]
+    },
+    {
+        "q": "Infrastructure as Code (IaC)?",
+        "o": [
+            "Managing infrastructure via config files (Terraform, Ansible) rather than manual setup",
+            "Manual",
+            "Scripting",
+            "GUI"
+        ]
+    },
+    {
+        "q": "Containerization (Docker)?",
+        "o": [
+            "Packaging app + dependencies into standardized unit (Container)",
+            "Virtualization",
+            "Compiling",
+            "Zipping"
+        ]
+    },
+    {
+        "q": "Orchestration (Kubernetes)?",
+        "o": [
+            "Automating deployment, scaling, and management of containerized applications",
+            "Docker",
+            "VirtualBox",
+            "Hypervisor"
+        ]
+    },
+    {
+        "q": "Service Mesh (Istio/Linkerd)?",
+        "o": [
+            "Infrastructure layer handling service-to-service communication (mTLS, Retries, Observability) transparently",
+            "Gateway",
+            "Broker",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "Sidecar Proxy in Service Mesh?",
+        "o": [
+            "Intercepts all traffic for a pod to enforce mesh policies (Envoy)",
+            "Main app",
+            "Kernel",
+            "Driver"
+        ]
+    },
+    {
+        "q": "Twelve-Factor App?",
+        "o": [
+            "Methodology for building valid Cloud-Native apps (Config, Backing Services, Statelessness, etc.)",
+            "Ten Steps",
+            "Agile",
+            "Scrum"
+        ]
+    },
+    {
+        "q": "Stateless Services?",
+        "o": [
+            "Services don't store client state (Session) between requests; enables easy scaling",
+            "Stateful",
+            "Sticky Session",
+            "Cache"
+        ]
+    },
+    {
+        "q": "Externalized Configuration?",
+        "o": [
+            "Store config in environment/central server (Spring Cloud Config), not code",
+            "Hardcoded",
+            "Properties file",
+            "Database"
+        ]
+    },
+    {
+        "q": "Consumer-Driven Contracts (Pact)?",
+        "o": [
+            "Testing strategy where consumers define expectations for providers",
+            "Provider driven",
+            "End-to-End",
+            "Unit"
+        ]
+    },
+    {
+        "q": "Benefits of CDC Testing?",
+        "o": [
+            "Prevents breaking changes; faster than E2E tests",
+            "Slower",
+            "Harder",
+            "Less coverage"
+        ]
+    },
+    {
+        "q": "CAP Theorem?",
+        "o": [
+            "Distributed system can guarantee only 2 of 3: Consistency, Availability, Partition Tolerance",
+            "ACID",
+            "BASE",
+            "SOLID"
+        ]
+    },
+    {
+        "q": "BASE properties?",
+        "o": [
+            "Basically Available, Soft state, Eventual consistency (NoSQL model)",
+            "ACID",
+            "Hard state",
+            "Immediate consistency"
+        ]
+    },
+    {
+        "q": "Domain-Driven Design (DDD) relation?",
+        "o": [
+            "DDD concepts (Bounded Contexts) help define Microservice boundaries",
+            "Unrelated",
+            "Opposite",
+            "Conflict"
+        ]
+    },
+    {
+        "q": "Bounded Context?",
+        "o": [
+            "Explicit boundary within which a domain model is valid (often maps to a Service)",
+            "Global scope",
+            "Module",
+            "Class"
+        ]
+    },
+    {
+        "q": "Deep vs Shallow Services?",
+        "o": [
+            "Deep: Simple interface, complex implementation (Good); Shallow: Exposes complexity (Bad)",
+            "Large vs Small",
+            "Fast vs Slow",
+            "Code size"
+        ]
+    },
+    {
+        "q": "Micro Frontends?",
+        "o": [
+            "Extending microservices concept to Frontend (Independent deployment of UI fragments)",
+            "Monolythic UI",
+            "SPA",
+            "MPA"
+        ]
+    },
+    {
+        "q": "Chaos Engineering (Netflix Simian Army)?",
+        "o": [
+            "Intentionally introducing failure to test resilience (Chaos Monkey)",
+            "Stable testing",
+            "Unit testing",
+            "Integration testing"
+        ]
+    },
+    {
+        "q": "Log Aggregation pattern?",
+        "o": [
+            "Collecting logs from all services to searchable center",
+            "Local logging",
+            "No logging",
+            "Console"
+        ]
+    },
+    {
+        "q": "Distributed Transaction?",
+        "o": [
+            "Transaction spanning multiple services/DBs (Hard, avoid if possible)",
+            "Local transaction",
+            "Simple",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Fallacies of Distributed Computing?",
+        "o": [
+            "Network is reliable, Latency is zero, Bandwidth is infinite, etc.",
+            "Network is fast",
+            "Network is secure",
+            "No latency"
+        ]
+    },
+    {
+        "q": "Semantic Versioning (SemVer)?",
+        "o": [
+            "Major.Minor.Patch (Breaking.Feature.Fix)",
+            "Date based",
+            "Random",
+            "Hash"
+        ]
+    },
+    {
+        "q": "Backward Compatibility?",
+        "o": [
+            "New version works with old clients",
+            "Forward",
+            "Breaking",
+            "None"
+        ]
+    },
+    {
+        "q": "Throttling?",
+        "o": [
+            "Limiting number of requests user can make (Protect service)",
+            "Speeding up",
+            "Caching",
+            "Logging"
+        ]
+    },
+    {
+        "q": "Retry Pattern?",
+        "o": [
+            "Automatically retrying failed operations (transient faults) with backoff",
+            "Fail fast",
+            "Ignore",
+            "Crash"
+        ]
+    },
+    {
+        "q": "Exponential Backoff?",
+        "o": [
+            "Increasing wait time between retries (1s, 2s, 4s...) to avoid thundering herd",
+            "Constant",
+            "Linear",
+            "Random"
+        ]
+    },
+    {
+        "q": "Jitter in Retries?",
+        "o": [
+            "Adding randomness to wait time to prevent synchronization of retries",
+            "Constant",
+            "Fixed",
+            "None"
+        ]
+    },
+    {
+        "q": "Leader Election?",
+        "o": [
+            "Selecting one node as coordinator (Raft/Paxos)",
+            "Voting",
+            "Random",
+            "Manual"
+        ]
+    },
+    {
+        "q": "Sidecar vs Gateway?",
+        "o": [
+            "Sidecar is 1:1 with service instance; Gateway is 1:N entry point",
+            "Same",
+            "Unknown",
+            "Opposite"
+        ]
+    },
+    {
+        "q": "Service Mesh vs API Gateway?",
+        "o": [
+            "Mesh: Internal service-to-service comms; Gateway: Edge traffic (Client-to-System)",
+            "Same",
+            "Competing",
+            "Redundant"
+        ]
+    },
+    {
+        "q": "Cold Start (Serverless)?",
+        "o": [
+            "Delay in first request execution while container spins up",
+            "Warm start",
+            "Hot start",
+            "Fast"
+        ]
+    },
+    {
+        "q": "Serverless (FaaS)?",
+        "o": [
+            "Run code without provisioning servers (AWS Lambda)",
+            "Servers",
+            "VMs",
+            "Bare metal"
+        ]
+    },
+    {
+        "q": "Event-Driven Architecture?",
+        "o": [
+            "Components communicate by producing/consuming events (Decoupled)",
+            "Request-Driven",
+            "Batch",
+            "Poll"
+        ]
+    },
+    {
+        "q": "Pub/Sub Model?",
+        "o": [
+            "Publishers emit messages to Topics; Subscribers listen (Many-to-Many)",
+            "Queue",
+            "P2P",
+            "Direct"
+        ]
+    },
+    {
+        "q": "Dead Letter Queue (DLQ)?",
+        "o": [
+            "Queue for messages that could not be processed successfully",
+            "Live queue",
+            "Trash",
+            "Archive"
+        ]
+    },
+    {
+        "q": "Sharding vs Replication?",
+        "o": [
+            "Sharding: Splits data (Partitions); Replication: Copies data (Redundancy/Read scaling)",
+            "Same",
+            "Opposite",
+            "Unsure"
+        ]
+    },
+    {
+        "q": "Vertical Scaling (Scale Up)?",
+        "o": [
+            "Adding more power (CPU/RAM) to existing machine",
+            "Horizontal",
+            "Cloning",
+            "Sharding"
+        ]
+    },
+    {
+        "q": "Horizontal Scaling (Scale Out)?",
+        "o": [
+            "Adding more machines/instances",
+            "Vertical",
+            "Upgrade",
+            "Replace"
+        ]
+    },
+    {
+        "q": "Why Containers for Microservices?",
+        "o": [
+            "Isolation, Portability, Fast startup, Consistency",
+            "Security only",
+            "Speed only",
+            "Size only"
+        ]
+    },
+    {
+        "q": "Cloud Native?",
+        "o": [
+            "Designed specifically for cloud environments (Microservices, Containers, CI/CD)",
+            "On-prem",
+            "Legacy",
+            "Monolith"
+        ]
+    },
+    {
+        "q": "GitOps?",
+        "o": [
+            "Using Git as source of truth for infrastructure/deployment state",
+            "ClickOps",
+            "Manual",
+            "Script"
+        ]
+    },
+    {
+        "q": "Observability pillars?",
+        "o": [
+            "Logs, Metrics, Traces",
+            "Code, Test, Deploy",
+            "CPU, RAM, Disk",
+            "Net, IO, OS"
+        ]
+    },
+    {
+        "q": "Role of Load Balancer?",
+        "o": [
+            "Distribute traffic across multiple instances to prevent overload",
+            "Security",
+            "Logging",
+            "Routing"
+        ]
+    },
+    {
+        "q": "Sticky Sessions?",
+        "o": [
+            "Routing requests from same user to same instance (Anti-pattern for stateless scaling)",
+            "Stateless",
+            "Random",
+            "Round robin"
+        ]
+    },
+    {
+        "q": "Round Robin?",
+        "o": [
+            "Load balancing strategy: Sequentially pick next instance",
+            "Random",
+            "Least connection",
+            "Hash"
+        ]
+    },
+    {
+        "q": "Shared Nothing Architecture?",
+        "o": [
+            "Nodes share no memory/disk; communicate via network (Ideal for scaling)",
+            "Shared disk",
+            "Shared memory",
+            "Cluster"
+        ]
+    },
+    {
+        "q": "Continuous Integration (CI)?",
+        "o": [
+            "Frequent merging of code changes + Automated builds/tests",
+            "CD",
+            "Deployment",
+            "Coding"
+        ]
+    },
+    {
+        "q": "Continuous Deployment (CD)?",
+        "o": [
+            "Automatically deploying every passing build to production",
+            "Delivery",
+            "Integration",
+            "Testing"
+        ]
+    },
+    {
+        "q": "Continuous Delivery?",
+        "o": [
+            "Always ready to deploy; manual trigger to prod (vs Deployment which is auto)",
+            "Deployment",
+            "Integration",
+            "Building"
+        ]
+    },
+    {
+        "q": "Immutable object pattern?",
+        "o": [
+            "State cannot change after creation (Thread safe, Cache friendly)",
+            "Mutable",
+            "Variable",
+            "Dynamic"
+        ]
+    },
+    {
+        "q": "Command Query Separation (CQS)?",
+        "o": [
+            "Methods should either be Commands (Action) or Queries (Data), not both",
+            "CQRS",
+            "CRUD",
+            "SOLID"
+        ]
+    },
+    {
+        "q": "Polyglot Programming?",
+        "o": [
+            "Using multiple languages in a system (allowed by Microservices)",
+            "Single language",
+            "Java only",
+            "JS only"
+        ]
+    },
+    {
+        "q": "Single Point of Failure (SPOF)?",
+        "o": [
+            "Component whose failure takes down entire system (Microservices aim to eliminate)",
+            "Redundancy",
+            "Cluster",
+            "Backup"
+        ]
+    }
+,
+{
+    "q": "What is 'Distributed Locking'?",
+    "o": [
+        "Mechanism to ensure mutually exclusive access to shared resource in distributed system (Redis Redlock, Zookeeper)",
+        "Local Mutex",
+        "Synchronized block",
+        "Database constraint"
+    ]
+},
+{
+    "q": "Quorum in distributed systems?",
+    "o": [
+        "Minimum number of votes (nodes) required to perform an operation (N/2 + 1)",
+        "All nodes",
+        "One node",
+        "Random nodes"
+    ]
+},
+{
+    "q": "Split-Brain Syndrome?",
+    "o": [
+        "Cluster partitions into two or more independent sub-clusters believing they are the only active ones",
+        "Headache",
+        "Data corruption",
+        "Fast consensus"
+    ]
+},
+{
+    "q": "Fencing Token?",
+    "o": [
+        "Token used to prevent 'zombie' primary from writing to storage (Optimistic Locking for leaders)",
+        "Auth token",
+        "Fence",
+        "Password"
+    ]
+},
+{
+    "q": "Gossip Protocol?",
+    "o": [
+        "Peer-to-peer communication where nodes share state information periodically (Cassandra uses this)",
+        "Rumors",
+        "Chat",
+        "Email"
+    ]
+},
+{
+    "q": "Vector Clock?",
+    "o": [
+        "Algorithm for generating a partial ordering of events in a distributed system and detecting causality",
+        "Wall clock",
+        "Stopwatch",
+        "Timer"
+    ]
+},
+{
+    "q": "Lamport Timestamp?",
+    "o": [
+        "Logical clock to determine order of events (Total ordering)",
+        "Physical clock",
+        "NTP",
+        "GPS"
+    ]
+},
+{
+    "q": "True Time (Google Spanner)?",
+    "o": [
+        "High precision time API using GPS/Atomic clocks to keep uncertainty small windows",
+        "NTP",
+        "System time",
+        "Local time"
+    ]
+},
+{
+    "q": "Write-Ahead Logging (WAL)?",
+    "o": [
+        "Modifications are written to a log before they are applied to data pages (Crash recovery)",
+        "Read-After log",
+        "No logging",
+        "Cache"
+    ]
+},
+{
+    "q": "Log compaction?",
+    "o": [
+        "Removing obsolete records from the log (keeping only latest state for a key) - Kafka/Raft",
+        "Deleting log",
+        "Zipping",
+        "Archiving"
+    ]
+},
+{
+    "q": "Bloom Filter false positives?",
+    "o": [
+        "Possible (Says 'Maybe in set'); False negatives impossible.",
+        "Impossible",
+        "Guaranteed",
+        "Depends"
+    ]
+},
+{
+    "q": "Uses of Bloom Filter?",
+    "o": [
+        "Cache filtering (don't check DB if not in filter), Crawler loops, Spell Checkers",
+        "Sorting",
+        "Encryption",
+        "Compression"
+    ]
+},
+{
+    "q": "Consistent Hashing benefit?",
+    "o": [
+        "Adding/Removing nodes only affects K/N keys (minimal data movement)",
+        "All keys move",
+        "No keys move",
+        "Random"
+    ]
+},
+{
+    "q": "Virtual Nodes (VNodes) in Consistent Hashing?",
+    "o": [
+        "One physical node holding multiple positions on the ring to balance load",
+        "Replicas",
+        "Masters",
+        "Slaves"
+    ]
+},
+{
+    "q": "Raft Consensus Algorithm?",
+    "o": [
+        "Understandable consensus algorithm (Leader Election, Log Replication, Safety)",
+        "Paxos",
+        "Zab",
+        "Gossip"
+    ]
+},
+{
+    "q": "Paxos?",
+    "o": [
+        "Family of protocols for solving consensus (difficult to implement correctly)",
+        "Raft",
+        "Simple",
+        "New"
+    ]
+},
+{
+    "q": "Byzantine Fault Tolerance?",
+    "o": [
+        "System tolerates components failing and sending conflicting information (Malicious actors)",
+        "Crash tolerance",
+        "Network tolerance",
+        "Disk tolerance"
+    ]
+},
+{
+    "q": "Blockchain and BFT?",
+    "o": [
+        "Blockchains typically require BFT (Proof of Work/Stake) to trust untrusted nodes",
+        "No BFT",
+        "Trust all",
+        "Centralized"
+    ]
+},
+{
+    "q": "Merkl Tree?",
+    "o": [
+        "Tree where leaf is hash of data, non-leaf is hash of children (Fast verification of data integrity)",
+        "B-Tree",
+        "Binary Tree",
+        "Red-Black Tree"
+    ]
+},
+{
+    "q": "SSTable (Sorted String Table)?",
+    "o": [
+        "Immutable on-disk map implementation (Key-Value) sorted by key (LSM Trees)",
+        "Hash Map",
+        "Heap",
+        "Queue"
+    ]
+},
+{
+    "q": "LSM Tree (Log-Structured Merge-Tree)?",
+    "o": [
+        "Data structure for write-heavy workloads (Writes to MemTable -> Flushed to SSTable -> Compacted)",
+        "B-Tree",
+        "R-Tree",
+        "Hash Index"
+    ]
+},
+{
+    "q": "B-Tree vs LSM Tree?",
+    "o": [
+        "B-Tree: Read optimized (In-place update); LSM: Write optimized (Append only)",
+        "Same",
+        "B-Tree Write optimized",
+        "LSM Read optimized"
+    ]
+},
+{
+    "q": "CDN (Content Delivery Network)?",
+    "o": [
+        "Distributed network of servers delivering web content based on user location (Caching at edge)",
+        "Database",
+        "App Server",
+        "DNS"
+    ]
+},
+{
+    "q": "Edge Computing?",
+    "o": [
+        "Computation done at or near the source of data (IoT devices, CDN edge) vs centralized cloud",
+        "Core computing",
+        "Cloud only",
+        "Mainframe"
+    ]
+},
+{
+    "q": "What is 'Snowball' (AWS)?",
+    "o": [
+        "Physical device to transfer petabytes of data to cloud (sneaker-net)",
+        "Cloud service",
+        "Database",
+        "Network"
+    ]
+},
+{
+    "q": "Hybrid Cloud?",
+    "o": [
+        "Environment mixing on-premises infrastructure with public cloud",
+        "Multi-Cloud",
+        "Private Cloud",
+        "Public Cloud"
+    ]
+},
+{
+    "q": "Multi-Cloud?",
+    "o": [
+        "Using services from multiple cloud providers (AWS + Azure + GCP)",
+        "Hybrid",
+        "Private",
+        "Single"
+    ]
+},
+{
+    "q": "Vendor Lock-in?",
+    "o": [
+        "Dependency on proprietary technologies making it hard to switch providers",
+        "Freedom",
+        "Open Source",
+        "Portability"
+    ]
+},
+{
+    "q": "Service Level Agreement (SLA)?",
+    "o": [
+        "Commitment between service provider and client (e.g. 99.9% uptime)",
+        "SLO",
+        "SLI",
+        "Contract"
+    ]
+},
+{
+    "q": "Service Level Objective (SLO)?",
+    "o": [
+        "Internal target for reliability (e.g. 99.95%) - usually stricter than SLA",
+        "SLA",
+        "Indicator",
+        "Law"
+    ]
+},
+{
+    "q": "Service Level Indicator (SLI)?",
+    "o": [
+        "Metric used to measure performance against SLO (e.g. Failure rate, Latency)",
+        "SLA",
+        "Goal",
+        "Target"
+    ]
+},
+{
+    "q": "Error Budget?",
+    "o": [
+        "Allowed amount of unreliability (100% - SLO). Burn it to release features faster.",
+        "Money",
+        "Cost",
+        "Time"
+    ]
+},
+{
+    "q": "MTBF (Mean Time Between Failures)?",
+    "o": [
+        "Average time between breakdowns (Reliability metric)",
+        "MTTR",
+        "Uptime",
+        "Latency"
+    ]
+},
+{
+    "q": "MTTR (Mean Time To Recovery)?",
+    "o": [
+        "Average time to fix a failure (Availability metric)",
+        "MTBF",
+        "Downtime",
+        "Speed"
+    ]
+},
+{
+    "q": "Five Nines?",
+    "o": [
+        "99.999% Availability (approx 5 mins downtime per year)",
+        "99.99%",
+        "99.9%",
+        "100%"
+    ]
+},
+{
+    "q": "High Availability (HA)?",
+    "o": [
+        "System design ensuring operation for long periods (Redundancy, Failover)",
+        "Low latency",
+        "High scalability",
+        "Performance"
+    ]
+},
+{
+    "q": "Active-Passive Failover?",
+    "o": [
+        "Primary node handles traffic; Secondary waits on standby to take over",
+        "Active-Active",
+        "Cluster",
+        "Sharding"
+    ]
+},
+{
+    "q": "Active-Active Failover?",
+    "o": [
+        "Multiple nodes handle traffic; if one fails, others take load (Load Balancing)",
+        "Active-Passive",
+        "Standby",
+        "Cold"
+    ]
+},
+{
+    "q": "Disaster Recovery (DR)?",
+    "o": [
+        "Plan for recovering data/infrastructure after major storage/site failure",
+        "Backup",
+        "HA",
+        "Security"
+    ]
+},
+{
+    "q": "RPO (Recovery Point Objective)?",
+    "o": [
+        "Max acceptable data loss (time-based) during disaster (e.g. last 15 mins)",
+        "RTO",
+        "Backup size",
+        "Cost"
+    ]
+},
+{
+    "q": "RTO (Recovery Time Objective)?",
+    "o": [
+        "Max acceptable time to restore system after disaster",
+        "RPO",
+        "Uptime",
+        "Latency"
+    ]
+},
+{
+    "q": "Geographical Redundancy?",
+    "o": [
+        "Distributing system across physical locations (Zones/Regions) to survive site failure",
+        "Local",
+        "Rack",
+        "Server"
+    ]
+},
+{
+    "q": "Database Replication Lag?",
+    "o": [
+        "Delay between write on Leader and write appearing on Follower",
+        "Zero",
+        "Infinite",
+        "Fast"
+    ]
+},
+{
+    "q": "Read-Your-Writes Consistency?",
+    "o": [
+        "Guarantee that a user will read their own updates immediately (Handling Replication Lag)",
+        "Strong",
+        "Eventual",
+        "Weak"
+    ]
+},
+{
+    "q": "Monotonic Reads?",
+    "o": [
+        "Guarantee that if user reads data, they won't read older data later",
+        "Read uncommitted",
+        "Dirty read",
+        "Random"
+    ]
+},
+{
+    "q": "Leader-Follower Replication?",
+    "o": [
+        "All writes go to Leader; Leaders replicates to Followers (Read-only)",
+        "Multi-Leader",
+        "Leaderless",
+        "Master-Master"
+    ]
+},
+{
+    "q": "Multi-Leader Replication?",
+    "o": [
+        "More than one node accepts writes (Good for multi-datacenter), resolves conflicts",
+        "Leader-Follower",
+        "Single-Leader",
+        "Read-only"
+    ]
+},
+{
+    "q": "Leaderless Replication (Dynamo-style)?",
+    "o": [
+        "Client writes to any node; uses Quorums (W+R > N) to ensure consistency",
+        "Leader-Follower",
+        "Master-Slave",
+        "Primary-Backup"
+    ]
+},
+{
+    "q": "Entropy in databases?",
+    "o": [
+        "Divergence of replicas over time (Fixed by Read Repair or Anti-Entropy process)",
+        "Chaos",
+        "Order",
+        "Consistency"
+    ]
+},
+{
+    "q": "Read Repair?",
+    "o": [
+        "Client detects stale data on read (version check) and writes newer version back",
+        "Write repair",
+        "Entropy",
+        "Gossip"
+    ]
+},
+{
+    "q": "Anti-Entropy process?",
+    "o": [
+        "Background process (Merkle Trees) comparing replicas and fixing inconsistencies",
+        "Read path",
+        "Write path",
+        "Log"
+    ]
+},
+{
+    "q": "Hinted Handoff?",
+    "o": [
+        "If node is down, neighbor stores write temporarily ('hint') and delivers when back up",
+        "Drop write",
+        "Fail write",
+        "Block"
+    ]
+},
+{
+    "q": "Thundering Herd Problem?",
+    "o": [
+        "Many clients retry/request simultaneously after outage/event, overwhelming system",
+        "Stampede",
+        "Block",
+        "Quiet"
+    ]
+},
+{
+    "q": "Cache Stampede (Dogpiling)?",
+    "o": [
+        "Cache expires -> Multiple threads see miss -> All hit DB simultaneously",
+        "Cache hit",
+        "Thundering herd",
+        "Cold start"
+    ]
+},
+{
+    "q": "How to fix Cache Stampede?",
+    "o": [
+        "Locking (Mutex), Probabilistic Early Expiration (Jitter), Keep old value while updating",
+        "Remove cache",
+        "Increase TTL",
+        "Ignore"
+    ]
+},
+{
+    "q": "Cache Penetration?",
+    "o": [
+        "Requests for non-existent keys hit DB every time (Bloom Filter helps)",
+        "Cache miss",
+        "Cache hit",
+        "Cache full"
+    ]
+},
+{
+    "q": "Cache Avalanche?",
+    "o": [
+        "Many keys expire at once (TTL sync) -> Massive DB load (Fix: Randomize TTL)",
+        "Snow",
+        "Cold",
+        "Ice"
+    ]
+},
+{
+    "q": "LRU Policy (Least Recently Used)?",
+    "o": [
+        "Evict item accessed longest ago",
+        "LFU",
+        "FIFO",
+        "Random"
+    ]
+},
+{
+    "q": "LFU Policy (Least Frequently Used)?",
+    "o": [
+        "Evict item with fewest hits",
+        "LRU",
+        "FIFO",
+        "Random"
+    ]
+},
+{
+    "q": "Write-Through Cache?",
+    "o": [
+        "Write to cache and DB synchronously (Consistency high, Write latency higher)",
+        "Write-Back",
+        "Write-Around",
+        "Read-Through"
+    ]
+},
+{
+    "q": "Write-Back (Write-Behind) Cache?",
+    "o": [
+        "Write to cache first, async write to DB (Fast writes, Risk of data loss)",
+        "Write-Through",
+        "Write-Around",
+        "Read-Through"
+    ]
+},
+{
+    "q": "Write-Around Cache?",
+    "o": [
+        "Write directly to DB, bypassing cache (Good for write-once-read-rarely)",
+        "Write-Through",
+        "Write-Back",
+        "Read-Through"
+    ]
+},
+{
+    "q": "Idempotent Key?",
+    "o": [
+        "Unique ID sent with request to ensure server processes it only once",
+        "Auth key",
+        "Session ID",
+        "API key"
+    ]
+},
+{
+    "q": "Stateless Auth (JWT)?",
+    "o": [
+        "Token contains all user info/claims; Server verifies signature (No DB lookup needed)",
+        "Session Auth",
+        "Sticky",
+        "Stateful"
+    ]
+},
+{
+    "q": "Stateful Auth (Session)?",
+    "o": [
+        "Server stores session ID in DB/Memory; Client sends ID cookie",
+        "JWT",
+        "Stateless",
+        "Token"
+    ]
+},
+{
+    "q": "OAuth 2.0?",
+    "o": [
+        "Authorization framework (Delegated access) - 'Log in with Google'",
+        "Authentication",
+        "Protocol",
+        "Algorithm"
+    ]
+},
+{
+    "q": "OpenID Connect (OIDC)?",
+    "o": [
+        "Authentication layer on top of OAuth 2.0 (Identity)",
+        "Authorization",
+        "Permission",
+        "Role"
+    ]
+},
+{
+    "q": "Refresh Token?",
+    "o": [
+        "Long-lived token used to get new Access Tokens (Short-lived)",
+        "Access Token",
+        "ID Token",
+        "Key"
+    ]
+},
+{
+    "q": "Access Token?",
+    "o": [
+        "Short-lived token used to access resources (Bearer token)",
+        "Refresh Token",
+        "Password",
+        "Key"
+    ]
+},
+{
+    "q": "Mutual TLS (mTLS)?",
+    "o": [
+        "Both Client and Server authenticate each other via Certificates (Zero Trust)",
+        "TLS",
+        "SSL",
+        "HTTP"
+    ]
+},
+{
+    "q": "Zero Trust Architecture?",
+    "o": [
+        "Never trust, always verify (Identity-based security, not perimeter-based)",
+        "VPN",
+        "Firewall",
+        "Castle"
+    ]
+},
+{
+    "q": "Rate Limiting Algorithms?",
+    "o": [
+        "Token Bucket, Leaky Bucket, Fixed Window, Sliding Window Log, Sliding Window Counter",
+        "Round Robin",
+        "Hash",
+        "Sort"
+    ]
+},
+{
+    "q": "Token Bucket?",
+    "o": [
+        "Tokens added at rate r; Request consumes token. Allows burstiness.",
+        "Leaky Bucket",
+        "Fixed Window",
+        "Queue"
+    ]
+},
+{
+    "q": "Leaky Bucket?",
+    "o": [
+        "Requests enter queue; processed at constant rate. Smooths out bursts.",
+        "Token Bucket",
+        "Stack",
+        "Heap"
+    ]
+},
+{
+    "q": "Horizontal Pod Autoscaler (HPA)?",
+    "o": [
+        "K8s: Adds more pods based on CPU/Memory metrics",
+        "VPA",
+        "Cluster Autoscaler",
+        "Manual"
+    ]
+},
+{
+    "q": "Vertical Pod Autoscaler (VPA)?",
+    "o": [
+        "K8s: Resizes pod (CPU/RAM limits) based on usage",
+        "HPA",
+        "Cluster",
+        "Manual"
+    ]
+},
+{
+    "q": "Cluster Autoscaler?",
+    "o": [
+        "Adds nodes to the cluster when pods can't be scheduled",
+        "HPA",
+        "VPA",
+        "Monitoring"
+    ]
+},
+{
+    "q": "Kanban?",
+    "o": [
+        "Visual workflow management (Boards, Columns, WIP Limits)",
+        "Scrum",
+        "Waterfall",
+        "XP"
+    ]
+},
+{
+    "q": "WIP Limit (Work In Progress)?",
+    "o": [
+        "Limiting active tasks to improve flow and reduce context switching",
+        "No limit",
+        "Multitasking",
+        "Speed"
+    ]
+},
+{
+    "q": "Scrum?",
+    "o": [
+        "Iterative framework (Sprints, Standups, Retrospectives)",
+        "Kanban",
+        "Waterfall",
+        "Lean"
+    ]
+},
+{
+    "q": "Velocity (Agile)?",
+    "o": [
+        "Measure of work completed in a Sprint (Points)",
+        "Speed",
+        "Time",
+        "Quality"
+    ]
+},
+{
+    "q": "Story Points?",
+    "o": [
+        "Relative estimation of effort/complexity (Fibonacci sequence)",
+        "Hours",
+        "Days",
+        "Lines of code"
+    ]
+},
+{
+    "q": "Definition of Done (DoD)?",
+    "o": [
+        "Checklist of criteria met before story is considered complete (Code, Test, Doc)",
+        "Done",
+        "Finished",
+        "Closed"
+    ]
+},
+{
+    "q": "Spike (Agile)?",
+    "o": [
+        "Time-boxed research task to learn/explore (Coding experiment)",
+        "Bug fix",
+        "Feature",
+        "Story"
+    ]
+},
+{
+    "q": "MVP (Minimum Viable Product)?",
+    "o": [
+        "Product with just enough features to satisfy early customers and provide feedback",
+        "Full product",
+        "Prototype",
+        "Beta"
+    ]
+},
+{
+    "q": "Greenfield Project?",
+    "o": [
+        "New project from scratch (No legacy)",
+        "Brownfield",
+        "Legacy",
+        "Refactor"
+    ]
+},
+{
+    "q": "Brownfield Project?",
+    "o": [
+        "Building on/modifying existing legacy systems",
+        "Greenfield",
+        "New",
+        "Clean"
+    ]
+},
+{
+    "q": "Feature Creep?",
+    "o": [
+        "Excessive ongoing expansion or addition of new features (Scope creep)",
+        "Growth",
+        "Expansion",
+        "Refactoring"
+    ]
+},
+{
+    "q": "YAGNI?",
+    "o": [
+        "You Aren't Gonna Need It (Don't build features until needed)",
+        "Future proof",
+        "Speculation",
+        "Planning"
+    ]
+},
+{
+    "q": "DRY?",
+    "o": [
+        "Don't Repeat Yourself (Single source of truth)",
+        "WET",
+        "Copy Paste",
+        "Redundant"
+    ]
+},
+{
+    "q": "KISS?",
+    "o": [
+        "Keep It Simple Stupid",
+        "Complex",
+        "Smart",
+        "Hard"
+    ]
+},
+{
+    "q": "Boy Scout Rule?",
+    "o": [
+        "Leave the code cleaner than you found it",
+        "Ignore mess",
+        "Make mess",
+        "Status quo"
+    ]
+},
+{
+    "q": "Broken Windows Theory?",
+    "o": [
+        "Bad code encourages more bad code (Fix technical debt early)",
+        "Glass",
+        "House",
+        "Crime"
+    ]
+},
+{
+    "q": "Rubber Duck Debugging?",
+    "o": [
+        "Explaining code line-by-line to an inanimate object often reveals bug",
+        "Help",
+        "Pair",
+        "Ask"
+    ]
+},
+{
+    "q": "Heisenbug?",
+    "o": [
+        "Software bug that disappears or alters behavior when you try to study/debug it",
+        "Bug",
+        "Feature",
+        "Glitch"
+    ]
+}
+,
+{
+    "q": "What is Inversion of Control (IoC)?",
+    "o": [
+        "Principle where control flow is inverted compared to traditional method; framework calls you (Hollywood Principle - Don't call us, we'll call you)",
+        "Dependency Injection",
+        "Factory Pattern",
+        "Recursion"
+    ]
+},
+{
+    "q": "Dependency Injection (DI) relation to IoC?",
+    "o": [
+        "DI is a specific pattern to implement IoC (inverting control of object creation)",
+        "Same thing",
+        "Unrelated",
+        "Opposite"
+    ]
+},
+{
+    "q": "Service Locator vs DI?",
+    "o": [
+        "Locator: Class asks for dependency (Active); DI: Class is given dependency (Passive/Cleaner)",
+        "Same",
+        "Locator is better",
+        "Locator is newer"
+    ]
+},
+{
+    "q": "Constructor Injection benefits?",
+    "o": [
+        "Ensures object is fully initialized (all deps present); Immutable; Easy testing",
+        "Fast",
+        "Optional deps",
+        "Circular deps"
+    ]
+},
+{
+    "q": "Setter Injection benefits?",
+    "o": [
+        "Allows optional dependencies; Resolves circular dependencies",
+        "Immutable",
+        "Required deps",
+        "Clean code"
+    ]
+},
+{
+    "q": "What is AOP (Aspect Oriented Programming)?",
+    "o": [
+        "Separating Cross-Cutting Concerns (Logging, Auth) from Business Logic",
+        "OOP",
+        "Functional",
+        "Procedural"
+    ]
+},
+{
+    "q": "Join Point (AOP)?",
+    "o": [
+        "Point in execution where Aspect can be applied (Method call, Exception thrown)",
+        "Pointcut",
+        "Advice",
+        "Weaving"
+    ]
+},
+{
+    "q": "Pointcut (AOP)?",
+    "o": [
+        "Expression matching Join Points (Where to apply advice)",
+        "Join Point",
+        "Advice",
+        "Aspect"
+    ]
+},
+{
+    "q": "Advice (AOP)?",
+    "o": [
+        "Action taken at a Join Point (Before, After, Around)",
+        "Suggestion",
+        "Code",
+        "Log"
+    ]
+},
+{
+    "q": "Weaving (AOP)?",
+    "o": [
+        "Process of linking aspects with other types/objects to create advised object (Compile/Load/Runtime)",
+        "Knitting",
+        "Linking",
+        "Binding"
+    ]
+},
+{
+    "q": "Spring Bean Scope: Singleton?",
+    "o": [
+        "One instance per container (Default)",
+        "One per request",
+        "One per thread",
+        "One per session"
+    ]
+},
+{
+    "q": "Spring Bean Scope: Prototype?",
+    "o": [
+        "New instance every time requested",
+        "Singleton",
+        "Request",
+        "Session"
+    ]
+},
+{
+    "q": "Spring Bean Scope: Request?",
+    "o": [
+        "One instance per HTTP Request (Web app only)",
+        "Singleton",
+        "Prototype",
+        "Global"
+    ]
+},
+{
+    "q": "What is 'Autowiring'?",
+    "o": [
+        "Automatic dependency resolution by container (Spring)",
+        "Manual wiring",
+        "Factory",
+        "Constructor"
+    ]
+},
+{
+    "q": "Bean Lifecycle (Spring)?",
+    "o": [
+        "Instantiate -> Populate Properties -> Aware Methods -> PostProcessBefore -> Init -> PostProcessAfter -> Ready -> Destroy",
+        "Init -> Destroy",
+        "Start -> Stop",
+        "Create -> Delete"
+    ]
+},
+{
+    "q": "@PostConstruct?",
+    "o": [
+        "Method executed after dependency injection is complete (Initialization logic)",
+        "Constructor",
+        "Static block",
+        "Finalizer"
+    ]
+},
+{
+    "q": "@PreDestroy?",
+    "o": [
+        "Method executed before bean is removed from container (Cleanup resources)",
+        "Destructor",
+        "Finalize",
+        "Close"
+    ]
+},
+{
+    "q": "Circular Dependency in Spring?",
+    "o": [
+        "A needs B, B needs A. Fails Construction. Fix: Setter Injection or @Lazy.",
+        "Good pattern",
+        "Infinite loop",
+        "Recursion"
+    ]
+},
+{
+    "q": "ApplicationContext vs BeanFactory?",
+    "o": [
+        "ApplicationContext: Superset (Enterprise features, Events, AOP); BeanFactory: Basic DI",
+        "Same",
+        "BeanFactory better",
+        "Opposite"
+    ]
+},
+{
+    "q": "Spring Boot Starter?",
+    "o": [
+        "Dependency descriptor that aggregates common dependencies for a specific tech (e.g. spring-boot-starter-web)",
+        "Plugin",
+        "Library",
+        "Framework"
+    ]
+},
+{
+    "q": "Spring Boot Auto-configuration?",
+    "o": [
+        "Automatically configuring beans based on classpath dependencies (Opinionated defaults)",
+        "Manual config",
+        "XML config",
+        "Annotation"
+    ]
+},
+{
+    "q": "@SpringBootApplication?",
+    "o": [
+        "Combines @Configuration, @EnableAutoConfiguration, @ComponentScan",
+        "Main method",
+        "Server",
+        "Deploy"
+    ]
+},
+{
+    "q": "Embedded Server (Spring Boot)?",
+    "o": [
+        "Tomcat/Jetty included in JAR; App runs itself (java -jar)",
+        "External server",
+        "WAR file",
+        "IIS"
+    ]
+},
+{
+    "q": "Actuator (Spring Boot)?",
+    "o": [
+        "Production-ready features (Health checks, Metrics, Env info endpoints)",
+        "Actor",
+        "Action",
+        "Controller"
+    ]
+},
+{
+    "q": "Spring Profiles?",
+    "o": [
+        "Segregate parts of app config to be active only in specific environments (dev, prod)",
+        "Users",
+        "Roles",
+        "Logins"
+    ]
+},
+{
+    "q": "Distributed System Fallacy: Reliable Network?",
+    "o": [
+        "Networks are unreliable; packet loss, timeouts, partitions happen",
+        "True",
+        "Always reliable",
+        "Mostly reliable"
+    ]
+},
+{
+    "q": "Fallacy: Infinite Bandwidth?",
+    "o": [
+        "Bandwidth is limited; avoid chatty interfaces or large payloads",
+        "True",
+        "Fiber is infinite",
+        "Cloud is infinite"
+    ]
+},
+{
+    "q": "Fallacy: Secure Network?",
+    "o": [
+        "Internal network is not automatically secure (Zero Trust needed)",
+        "True",
+        "VPN is secure",
+        "Firewall is enough"
+    ]
+},
+{
+    "q": "Fallacy: Zero Latency?",
+    "o": [
+        "Speed of light is limit; WAN calls are slow compared to RAM/LAN",
+        "True",
+        "5G is zero latency",
+        "Local is zero"
+    ]
+},
+{
+    "q": "Microkernel Architecture?",
+    "o": [
+        "Core system with minimal functionality; extended by plugins (Eclipse, VS Code)",
+        "Monolith",
+        "Microservices",
+        "Layered"
+    ]
+},
+{
+    "q": "Space-Based Architecture?",
+    "o": [
+        "Distributed architecture relying on in-memory grids (Tuple Space) for scalability/performance",
+        "Cloud",
+        "SpaceX",
+        "Satellite"
+    ]
+},
+{
+    "q": "Processing Unit (Space-Based)?",
+    "o": [
+        "Self-contained unit with logic and in-memory data grid partition",
+        "Server",
+        "Function",
+        "Thread"
+    ]
+},
+{
+    "q": "Lambda Architecture (Big Data)?",
+    "o": [
+        "Handling massive data with two layers: Batch (High latency, High accuracy) and Speed (Low latency, Approximate)",
+        "Kappa",
+        "Microservices",
+        "Serverless"
+    ]
+},
+{
+    "q": "Kappa Architecture?",
+    "o": [
+        "Simplification of Lambda: Everything is a stream processing job (No Batch layer)",
+        "Lambda",
+        "Sigma",
+        "Delta"
+    ]
+},
+{
+    "q": "Data Lake vs Data Warehouse?",
+    "o": [
+        "Lake: Raw/Unstructured data (Schema-on-Read); Warehouse: Structured/Processed data (Schema-on-Write)",
+        "Same",
+        "Opposite",
+        "Unknown"
+    ]
+},
+{
+    "q": "ETL (Extract, Transform, Load)?",
+    "o": [
+        "Process of moving data from sources to Warehouse",
+        "ELT",
+        "Copy",
+        "Sync"
+    ]
+},
+{
+    "q": "ELT (Extract, Load, Transform)?",
+    "o": [
+        "Modern approach: Load raw data to Warehouse first, then Transform (Uses warehouse power)",
+        "ETL",
+        "Fast",
+        "Slow"
+    ]
+},
+{
+    "q": "Change Data Capture (CDC)?",
+    "o": [
+        "Tracking changes in database (Insert/Update/Delete) and streaming them (Debezium)",
+        "Polling",
+        "Triggers",
+        "Diff"
+    ]
+},
+{
+    "q": "Outbox Pattern?",
+    "o": [
+        "Reliably publish events: Write event to DB 'Outbox' table in same transaction as data (Poll/CDC sends it)",
+        "Inbox",
+        "Direct publish",
+        "Dual write"
+    ]
+},
+{
+    "q": "Dual Write Problem?",
+    "o": [
+        "Failing to atomically update DB and publish message (Inconsistent state)",
+        "Slow write",
+        "Fast write",
+        "Double write"
+    ]
+},
+{
+    "q": "Eventual Consistency vs Strong Consistency?",
+    "o": [
+        "Eventual: Fast, Scalable, Stale reads ok; Strong: Accurate, Slower, Harder to scale",
+        "Same",
+        "Eventual is slow",
+        "Strong is fast"
+    ]
+},
+{
+    "q": "Distributed Transaction Coordinator?",
+    "o": [
+        "Component managing 2 Phase Commit (SPOF risk, Blocking)",
+        "Saga",
+        "Manager",
+        "Leader"
+    ]
+},
+{
+    "q": "REST Maturity Model (Richardson)?",
+    "o": [
+        "Level 0 (XML-RPC), Level 1 (Resources), Level 2 (Verbs), Level 3 (HATEOAS)",
+        "Level 5",
+        "Level 10",
+        "Binary"
+    ]
+},
+{
+    "q": "HATEOAS?",
+    "o": [
+        "Hypermedia As The Engine Of Application State (Responses include links to next actions)",
+        "Hate",
+        "REST",
+        "JSON"
+    ]
+},
+{
+    "q": "Headless Service (K8s)?",
+    "o": [
+        "Service without ClusterIP; DNS returns IPs of all backing pods (Client-side load balancing/StatefulSets)",
+        "NodePort",
+        "ClusterIP",
+        "LoadBalancer"
+    ]
+},
+{
+    "q": "StatefulSet (K8s)?",
+    "o": [
+        "Workload API for stateful apps (Stable ID, Ordered deployment, Persistent Volume)",
+        "Deployment",
+        "DaemonSet",
+        "Job"
+    ]
+},
+{
+    "q": "DaemonSet (K8s)?",
+    "o": [
+        "Ensures copy of Pod runs on all (or some) Nodes (e.g. Logs, Monitoring agents)",
+        "Deployment",
+        "StatefulSet",
+        "Job"
+    ]
+},
+{
+    "q": "Ingress (K8s)?",
+    "o": [
+        "Manages external access to services (HTTP/S routes) - Layer 7 Load Balancer",
+        "Service",
+        "NodePort",
+        "Proxy"
+    ]
+},
+{
+    "q": "ConfigMap (K8s)?",
+    "o": [
+        "Store non-confidential data in key-value pairs (Env vars, config files)",
+        "Secret",
+        "Volume",
+        "Pod"
+    ]
+},
+{
+    "q": "Secret (K8s)?",
+    "o": [
+        "Store sensitive data (Passwords, Keys) - Obfuscated (Base64) but strictly encrypted only if configured",
+        "ConfigMap",
+        "Env",
+        "File"
+    ]
+},
+{
+    "q": "Liveness Probe (K8s)?",
+    "o": [
+        "Checks if container is running. If fails, restarts container (Deadlock fix).",
+        "Readiness",
+        "Startup",
+        "Health"
+    ]
+},
+{
+    "q": "Readiness Probe (K8s)?",
+    "o": [
+        "Checks if container is ready to accept traffic. If fails, removes from endpoints (Load Balancer).",
+        "Liveness",
+        "Startup",
+        "Health"
+    ]
+},
+{
+    "q": "Startup Probe (K8s)?",
+    "o": [
+        "Checks if app has started. Delays Liveness/Readiness probes (Slow boot legacy apps).",
+        "Liveness",
+        "Readiness",
+        "Health"
+    ]
+},
+{
+    "q": "Pod (K8s)?",
+    "o": [
+        "Smallest deployable unit in K8s; one or more containers sharing network/storage",
+        "Container",
+        "Node",
+        "Cluster"
+    ]
+},
+{
+    "q": "Node (K8s)?",
+    "o": [
+        "Worker machine (VM or Physical) where pods run",
+        "Master",
+        "Cluster",
+        "Pod"
+    ]
+},
+{
+    "q": "Namespace (K8s)?",
+    "o": [
+        "Virtual cluster inside physical cluster (Isolation for teams/envs)",
+        "Group",
+        "Folder",
+        "Tag"
+    ]
+},
+{
+    "q": "Label vs Annotation (K8s)?",
+    "o": [
+        "Labels: Identifying metadata for selection/querying; Annotations: Non-identifying metadata for tools/libraries",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Operator Pattern (K8s)?",
+    "o": [
+        "Extends K8s to manage complex stateful applications (DBs) using custom controllers/CRDs",
+        "Admin",
+        "User",
+        "Manager"
+    ]
+},
+{
+    "q": "CRD (Custom Resource Definition)?",
+    "o": [
+        "Extending K8s API with custom types",
+        "Resource",
+        "Type",
+        "Class"
+    ]
+},
+{
+    "q": "Helm?",
+    "o": [
+        "Package manager for Kubernetes (Charts)",
+        "Docker",
+        "Yum",
+        "Apt"
+    ]
+},
+{
+    "q": "Service Mesh: Data Plane?",
+    "o": [
+        "Proxies (Envoy) handling traffic between services",
+        "Control Plane",
+        "Management Plane",
+        "User Plane"
+    ]
+},
+{
+    "q": "Service Mesh: Control Plane?",
+    "o": [
+        "Manages/Configures the Data Plane proxies (Istiod)",
+        "Data Plane",
+        "Proxy",
+        "Traffic"
+    ]
+},
+{
+    "q": "Observability: Metrics?",
+    "o": [
+        "Aggregatable numerical data (Counts, Gauges, Histograms) - 'What' is happening",
+        "Logs",
+        "Traces",
+        "Events"
+    ]
+},
+{
+    "q": "Observability: Logs?",
+    "o": [
+        "Discrete events (Text) - 'Why' it happened (Detailed context)",
+        "Metrics",
+        "Traces",
+        "Graphs"
+    ]
+},
+{
+    "q": "Observability: Traces?",
+    "o": [
+        "Request lifecycle across services - 'Where' it happened (Latency analysis)",
+        "Logs",
+        "Metrics",
+        "Counts"
+    ]
+},
+{
+    "q": "Prometheus?",
+    "o": [
+        "Time-series database and monitoring system (Pull model)",
+        "Grafana",
+        "Elk",
+        "Splunk"
+    ]
+},
+{
+    "q": "Grafana?",
+    "o": [
+        "Visualization tool for metrics (Dashboards)",
+        "Prometheus",
+        "Kibana",
+        "Splunk"
+    ]
+},
+{
+    "q": "ELK Stack?",
+    "o": [
+        "Elasticsearch (Search), Logstash (Ingest), Kibana (Visualize) - Log Aggregation",
+        "EFK",
+        "TIG",
+        "LAMP"
+    ]
+},
+{
+    "q": "OpenTelemetry?",
+    "o": [
+        "Standard for collecting traces, metrics, logs (Vendor neutral)",
+        "Zipkin",
+        "Jaeger",
+        "Proprietary"
+    ]
+},
+{
+    "q": "Alert Fatigue?",
+    "o": [
+        "Desensitization to alerts due to high volume of non-actionable alarms",
+        "Sleep",
+        "Tired",
+        "Bored"
+    ]
+},
+{
+    "q": "Golden Signals (SRE)?",
+    "o": [
+        "Latency, Traffic, Errors, Saturation",
+        "CPU, RAM, Disk, Net",
+        "Uptime, Downtime",
+        "Speed"
+    ]
+},
+{
+    "q": "Saturation (Golden Signal)?",
+    "o": [
+        "How 'full' the service is (CPU usage, Queue depth)",
+        "Traffic",
+        "Errors",
+        "Latency"
+    ]
+},
+{
+    "q": "Toil (SRE)?",
+    "o": [
+        "Manual, repetitive, automatable work (SREs aim to reduce this)",
+        "Engineering",
+        "Coding",
+        "Designing"
+    ]
+},
+{
+    "q": "Blameless Post-Mortem?",
+    "o": [
+        "Analyzing incident root cause without punishing individuals; focus on process improvement",
+        "Blame game",
+        "Firing",
+        "Warning"
+    ]
+},
+{
+    "q": "Root Cause Analysis (RCA)?",
+    "o": [
+        "Finding the underlying cause of a problem (5 Whys)",
+        "Quick fix",
+        "Patch",
+        "Restart"
+    ]
+},
+{
+    "q": "5 Whys?",
+    "o": [
+        "Iterative interrogative technique to find root cause",
+        "1 Why",
+        "Who",
+        "What"
+    ]
+},
+{
+    "q": "Bus Factor?",
+    "o": [
+        "Risk metric: How many people need to leave for knowledge to differ dangerously",
+        "Truck factor",
+        "Team size",
+        "Budget"
+    ]
+},
+{
+    "q": "Dark Launch?",
+    "o": [
+        "Deploying features to prod but hiding them from users (Feature Toggles)",
+        "Night launch",
+        "Canary",
+        "Blue-Green"
+    ]
+},
+{
+    "q": "Semantic Versioning rules?",
+    "o": [
+        "Major (Breaking), Minor (Feature), Patch (Bugfix)",
+        "Sequence",
+        "Date",
+        "Random"
+    ]
+},
+{
+    "q": "API Versioning methods?",
+    "o": [
+        "URL Path (/v1), Header (Accept-Version), Query Param (?v=1)",
+        "Body",
+        "Cookie",
+        "None"
+    ]
+},
+{
+    "q": "Which API Versioning is most RESTful?",
+    "o": [
+        "Content Negotiation (Header: Accept: application/vnd.myapi.v1+json)",
+        "URL",
+        "Query",
+        "None"
+    ]
+},
+{
+    "q": "Reverse Proxy?",
+    "o": [
+        "Server sitting in front of web servers; handles load balancing, ssl, caching (Nginx)",
+        "Forward Proxy",
+        "Client",
+        "Browser"
+    ]
+},
+{
+    "q": "Forward Proxy?",
+    "o": [
+        "Proxy acting on behalf of client (e.g. bypassing firewall, anonymity)",
+        "Reverse Proxy",
+        "Server",
+        "Backend"
+    ]
+},
+{
+    "q": "SSL Termination?",
+    "o": [
+        "Decrypting encrypted traffic at Load Balancer/Reverse Proxy so backend sees plain HTTP (Offloading)",
+        "End SSL",
+        "Break SSL",
+        "Encrypt"
+    ]
+},
+{
+    "q": "Sticky Session (Session Affinity)?",
+    "o": [
+        "LB routes requests from same client to same backend server (Bad for scaling)",
+        "Stateless",
+        "Round Robin",
+        "Random"
+    ]
+},
+{
+    "q": "Shared-Nothing Architecture?",
+    "o": [
+        "Nodes operate independently with no shared state (Best for horizontal scale)",
+        "Shared Disk",
+        "Shared Memory",
+        "Cluster"
+    ]
+},
+{
+    "q": "Server-Sent Events (SSE)?",
+    "o": [
+        "Server pushes updates to client over single HTTP connection (Unidirectional)",
+        "WebSockets",
+        "Long Polling",
+        "Short Polling"
+    ]
+},
+{
+    "q": "WebSockets?",
+    "o": [
+        "Full-duplex communication channel over single TCP connection (Bidirectional)",
+        "SSE",
+        "HTTP",
+        "UDP"
+    ]
+},
+{
+    "q": "Long Polling?",
+    "o": [
+        "Client requests, Server holds connection open until data available (Legacy Push)",
+        "Short Polling",
+        "SSE",
+        "Sockets"
+    ]
+},
+{
+    "q": "Short Polling?",
+    "o": [
+        "Client repeatedly requests data at intervals (Inefficient)",
+        "Long Polling",
+        "Push",
+        "Sockets"
+    ]
+},
+{
+    "q": "Zombie Process?",
+    "o": [
+        "Process that has completed execution but still has entry in process table (Parent hasn't waited)",
+        "Orphan",
+        "Daemon",
+        "Thread"
+    ]
+},
+{
+    "q": "Orphan Process?",
+    "o": [
+        "Process whose parent has finished/died; adopted by init (PID 1)",
+        "Zombie",
+        "Daemon",
+        "Child"
+    ]
+},
+{
+    "q": "Memory Leak detection?",
+    "o": [
+        "Increasing memory usage over time; Profilers (VisualVM), Heap Dumps",
+        "Logs",
+        "CPU",
+        "Network"
+    ]
+},
+{
+    "q": "Heap Dump?",
+    "o": [
+        "Snapshot of application memory at a point in time (Analysing objects)",
+        "Thread Dump",
+        "Core Dump",
+        "Log"
+    ]
+},
+{
+    "q": "Thread Dump?",
+    "o": [
+        "Snapshot of all threads' state (Running, Waiting, Blocked) - Deadlock analysis",
+        "Heap Dump",
+        "Core Dump",
+        "Trace"
+    ]
+},
+{
+    "q": "Garbage Collection (GC)?",
+    "o": [
+        "Automatic memory management; reclaiming memory occupied by unreachable objects",
+        "Manual free",
+        "Malloc",
+        "Delete"
+    ]
+}
+,
+{
+    "q": "JVM (Java Virtual Machine)?",
+    "o": [
+        "Virtual Machine that enables computer to run Java programs (Platform independence)",
+        "Compiler",
+        "Language",
+        "Library"
+    ]
+},
+{
+    "q": "JRE vs JDK?",
+    "o": [
+        "JRE: Runtime Environment (run apps); JDK: Development Kit (compile + run + tools)",
+        "Same",
+        "JRE contains JDK",
+        "JDK is smaller"
+    ]
+},
+{
+    "q": "JIT (Just-In-Time) Compiler?",
+    "o": [
+        "Compiles bytecode to native machine code at runtime (Optimization)",
+        "Interpreter",
+        "AOT",
+        "Parser"
+    ]
+},
+{
+    "q": "AOT (Ahead-Of-Time) Compiler?",
+    "o": [
+        "Compiles code to native binaries before execution (Faster startup, no JIT warm-up) - GraalVM",
+        "JIT",
+        "Interpreter",
+        "Slow"
+    ]
+},
+{
+    "q": "GraalVM?",
+    "o": [
+        "High-performance JDK capable of compiling Java to Native Image (Microservices startup optimized)",
+        "HotSpot",
+        "OpenJ9",
+        "Azul"
+    ]
+},
+{
+    "q": "Native Image benefits?",
+    "o": [
+        "Instant startup, Low memory footprint (Ideal for Serverless/K8s)",
+        "Dynamic loading",
+        "Reflection support",
+        "Debugging"
+    ]
+},
+{
+    "q": "Project Loom (Virtual Threads)?",
+    "o": [
+        "Lightweight threads managed by JVM (Millions per app) - blocking I/O becomes cheap",
+        "OS threads",
+        "Async/Await",
+        "Callbacks"
+    ]
+},
+{
+    "q": "Reactive Programming (Spring WebFlux)?",
+    "o": [
+        "Asynchronous, non-blocking, event-driven stream processing (Backpressure supported)",
+        "Blocking",
+        "Synchronous",
+        "Thread per request"
+    ]
+},
+{
+    "q": "Publisher-Subscriber (Reactive Streams)?",
+    "o": [
+        "Publisher emits items; Subscriber consumes them; Subscription manages link (One-to-many flow)",
+        "Iterators",
+        "Loops",
+        "Variables"
+    ]
+},
+{
+    "q": "Mono (Reactor)?",
+    "o": [
+        "Publisher that emits 0 or 1 element",
+        "Flux",
+        "List",
+        "Stream"
+    ]
+},
+{
+    "q": "Flux (Reactor)?",
+    "o": [
+        "Publisher that emits 0 to N elements",
+        "Mono",
+        "Single",
+        "Optional"
+    ]
+},
+{
+    "q": "Backpressure in Reactive Streams?",
+    "o": [
+        "Subscriber tells Publisher how much data it can handle (request(n))",
+        "Blocking",
+        "Overflow",
+        "Drop"
+    ]
+},
+{
+    "q": "Netty?",
+    "o": [
+        "Asynchronous event-driven network application framework (Underpins WebFlux)",
+        "Tomcat",
+        "Jetty",
+        "Apache"
+    ]
+},
+{
+    "q": "Blocking I/O vs Non-Blocking I/O?",
+    "o": [
+        "Blocking: Thread waits for I/O; Non-Blocking: Thread is freed to do other work (Callback/Future)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "RDBMS vs NoSQL?",
+    "o": [
+        "RDBMS: Structured (Schema), SQL, ACID; NoSQL: Unstructured/flexible, CAP focus (Scale-out)",
+        "Same",
+        "NoSQL is faster always",
+        "SQL is dead"
+    ]
+},
+{
+    "q": "Document Store (MongoDB)?",
+    "o": [
+        "Stores data as JSON-like documents (Flexible schema)",
+        "Key-Value",
+        "Column",
+        "Graph"
+    ]
+},
+{
+    "q": "Key-Value Store (Redis)?",
+    "o": [
+        "Simple hash table (Key -> Value); very fast (Caching)",
+        "Document",
+        "Table",
+        "Graph"
+    ]
+},
+{
+    "q": "Column Family Store (Cassandra)?",
+    "o": [
+        "Stores data by columns rather than rows (Optimized for write heavy/queries on columns)",
+        "RDBMS",
+        "Document",
+        "Graph"
+    ]
+},
+{
+    "q": "Graph Database (Neo4j)?",
+    "o": [
+        "Stores nodes and edges (relationships); best for connected data (Social networks)",
+        "RDBMS",
+        "Document",
+        "Key-Value"
+    ]
+},
+{
+    "q": "Time Series Database (InfluxDB)?",
+    "o": [
+        "Optimized for handling time-stamped data (Metrics, IoT)",
+        "Graph",
+        "Document",
+        "RDBMS"
+    ]
+},
+{
+    "q": "Polyglot Persistence?",
+    "o": [
+        "Using multiple database types in one system based on needs (Redis for cache, Mongo for Catalog, Postgres for Orders)",
+        "Monolythic DB",
+        "Single DB",
+        "No DB"
+    ]
+},
+{
+    "q": "Flyway / Liquibase?",
+    "o": [
+        "Database migration tools (Version control for DB Schema)",
+        "Backup tools",
+        "Monitoring",
+        "Drivers"
+    ]
+},
+{
+    "q": "Repository Pattern?",
+    "o": [
+        "Abstraction over data access (Collection-like interface)",
+        "Direct SQL",
+        "DAO",
+        "Active Record"
+    ]
+},
+{
+    "q": "DAO (Data Access Object)?",
+    "o": [
+        "Object providing abstract interface to DB (Lower level than Repo)",
+        "Repository",
+        "Service",
+        "Controller"
+    ]
+},
+{
+    "q": "Active Record Pattern?",
+    "o": [
+        "Object wraps a row in DB table; encapsulates data and access logic (User.save())",
+        "Data Mapper",
+        "Repository",
+        "DTO"
+    ]
+},
+{
+    "q": "Data Mapper Pattern?",
+    "o": [
+        "Layer moving data between Objects and DB; keeping them independent (Hibernate)",
+        "Active Record",
+        "Direct Access",
+        "Script"
+    ]
+},
+{
+    "q": "Soft Delete?",
+    "o": [
+        "Marking record as deleted (flag) rather than physically removing",
+        "Hard delete",
+        "Drop table",
+        "Truncate"
+    ]
+},
+{
+    "q": "N+1 Problem?",
+    "o": [
+        "Performance issue where app executes 1 query for parent + N queries for N children",
+        "Optimization",
+        "Feature",
+        "Bug"
+    ]
+},
+{
+    "q": "Fetch Type: Lazy vs Eager?",
+    "o": [
+        "Lazy: Load relation only when accessed; Eager: Load immediately (Join)",
+        "Same",
+        "Lazy is faster",
+        "Eager is smaller"
+    ]
+},
+{
+    "q": "JPA Cascade Types?",
+    "o": [
+        "PERSIST, MERGE, REMOVE, REFRESH, DETACH, ALL (Propagate operations to children)",
+        "None",
+        "One",
+        "Select"
+    ]
+},
+{
+    "q": "Optimistic Locking?",
+    "o": [
+        "Use version column; check version on update. If changed, fail (Concurrent modification)",
+        "Pessimistic",
+        "Table lock",
+        "Row lock"
+    ]
+},
+{
+    "q": "Pessimistic Locking?",
+    "o": [
+        "Lock data in DB (SELECT FOR UPDATE) preventing others from reading/writing",
+        "Optimistic",
+        "Version",
+        "Cache"
+    ]
+},
+{
+    "q": "ACID: Atomicity?",
+    "o": [
+        "All or nothing; transaction is indivisible",
+        "Consistent",
+        "Isolated",
+        "Durable"
+    ]
+},
+{
+    "q": "ACID: Consistency?",
+    "o": [
+        "Transaction brings DB from one valid state to another (Constraints satisfied)",
+        "Atomic",
+        "Isolated",
+        "Durable"
+    ]
+},
+{
+    "q": "ACID: Isolation?",
+    "o": [
+        "Concurrent transactions usually invisible to each other",
+        "Atomic",
+        "Consistent",
+        "Durable"
+    ]
+},
+{
+    "q": "ACID: Durability?",
+    "o": [
+        "Once committed, changes are permanent (survive power loss)",
+        "Atomic",
+        "Consistent",
+        "Isolated"
+    ]
+},
+{
+    "q": "Isolation Level: Read Uncommitted?",
+    "o": [
+        "Allow Dirty Reads (Reading uncommitted data)",
+        "Read Committed",
+        "Repeatable Read",
+        "Serializable"
+    ]
+},
+{
+    "q": "Isolation Level: Read Committed?",
+    "o": [
+        "No Dirty Reads; Non-Repeatable Reads possible",
+        "Read Uncommitted",
+        "Repeatable Read",
+        "Serializable"
+    ]
+},
+{
+    "q": "Isolation Level: Repeatable Read?",
+    "o": [
+        "Read consistency within transaction; Phantom Reads possible",
+        "Read Committed",
+        "Check Read",
+        "Serializable"
+    ]
+},
+{
+    "q": "Isolation Level: Serializable?",
+    "o": [
+        "Highest isolation; no anomalies; emulate serial execution (Slow)",
+        "Fastest",
+        "Weakest",
+        "Default"
+    ]
+},
+{
+    "q": "Phantom Read?",
+    "o": [
+        "Query returns different set of rows in same transaction (New rows added by other tx)",
+        "Dirty Read",
+        "Non-Repeatable Read",
+        "Lost Update"
+    ]
+},
+{
+    "q": "Rate Limiting: 429 Status?",
+    "o": [
+        "Too Many Requests",
+        "Forbidden",
+        "Unauthorized",
+        "Bad Gateway"
+    ]
+},
+{
+    "q": "HTTP 502?",
+    "o": [
+        "Bad Gateway (Upstream server returned invalid response)",
+        "Gateway Timeout",
+        "Service Unavailable",
+        "Internal Error"
+    ]
+},
+{
+    "q": "HTTP 504?",
+    "o": [
+        "Gateway Timeout (Upstream server took too long)",
+        "Bad Gateway",
+        "Service Unavailable",
+        "Timeout"
+    ]
+},
+{
+    "q": "HTTP 503?",
+    "o": [
+        "Service Unavailable (Overloaded or down)",
+        "Not Found",
+        "Forbidden",
+        "Error"
+    ]
+},
+{
+    "q": "HTTP 401 vs 403?",
+    "o": [
+        "401: Unauthenticated (Who are you?); 403: Unauthorized (You can't do this)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "HTTP 409?",
+    "o": [
+        "Conflict (State of resource conflicts with request, e.g. duplicate email)",
+        "Gone",
+        "Found",
+        "Method Not Allowed"
+    ]
+},
+{
+    "q": "HTTP 301 vs 302?",
+    "o": [
+        "301: Moved Permanently (Cacheable); 302: Found/Moved Temporarily",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "HTTP 418?",
+    "o": [
+        "I'm a teapot (April Fools RFC)",
+        "Error",
+        "Coffee",
+        "Tea"
+    ]
+},
+{
+    "q": "REST: Safe Methods?",
+    "o": [
+        "GET, HEAD, OPTIONS (Don't modify resource)",
+        "POST",
+        "PUT",
+        "DELETE"
+    ]
+},
+{
+    "q": "REST: Idempotent Methods?",
+    "o": [
+        "GET, HEAD, OPTIONS, PUT, DELETE (Multiple calls same as one)",
+        "POST (Not idempotent)",
+        "PATCH (Depends)",
+        "All"
+    ]
+},
+{
+    "q": "PATCH vs PUT?",
+    "o": [
+        "PUT: Replace entire resource; PATCH: Partial update",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Hateoas Links?",
+    "o": [
+        "_links object in JSON response (rel, href)",
+        "Headers",
+        "Body",
+        "Cookies"
+    ]
+},
+{
+    "q": "GraphQL Schema?",
+    "o": [
+        "Strongly typed definition of available data (Types, Queries, Mutations)",
+        "JSON",
+        "Table",
+        "Code"
+    ]
+},
+{
+    "q": "GraphQL Resolver?",
+    "o": [
+        "Function responsible for fetching data for a field",
+        "Query",
+        "Mutation",
+        "Type"
+    ]
+},
+{
+    "q": "GraphQL N+1 Problem?",
+    "o": [
+        "Resolvers executing per item in list (Fix: DataLoader/Batching)",
+        "Feature",
+        "Bug",
+        "Speed"
+    ]
+},
+{
+    "q": "gRPC vs REST?",
+    "o": [
+        "gRPC: Binary (Protobuf), HTTP/2, Contract-first, Faster; REST: Text (JSON), HTTP/1.1, Flexible",
+        "Same",
+        "REST is binary",
+        "gRPC is text"
+    ]
+},
+{
+    "q": "Protobuf .proto file?",
+    "o": [
+        "Interface Definition Language (message structure, service definition)",
+        "JSON file",
+        "XML file",
+        "Java file"
+    ]
+},
+{
+    "q": "WebSocket Handshake?",
+    "o": [
+        "HTTP Upgrade request to switch protocol to WebSocket",
+        "TCP handshake",
+        "SSL handshake",
+        "Login"
+    ]
+},
+{
+    "q": "Event Sourcing: Snapshot?",
+    "o": [
+        "Periodic saving of current state to avoid replaying entire event history",
+        "Photo",
+        "Backup",
+        "Log"
+    ]
+},
+{
+    "q": "Command Bus?",
+    "o": [
+        "Mechanism to route commands to appropriate handlers",
+        "Event Bus",
+        "Query Bus",
+        "Transport"
+    ]
+},
+{
+    "q": "Event Bus?",
+    "o": [
+        "Mechanism to broadcast events to subscribers",
+        "Command Bus",
+        "Queue",
+        "Topic"
+    ]
+},
+{
+    "q": "What is a 'Unit' in Unit Testing?",
+    "o": [
+        "Smallest testable part of application (Method/Class)",
+        "Module",
+        "Service",
+        "System"
+    ]
+},
+{
+    "q": "Integration Testing?",
+    "o": [
+        "Testing interaction between units/modules (detect interface defects)",
+        "Unit",
+        "System",
+        "E2E"
+    ]
+},
+{
+    "q": "End-to-End (E2E) Testing?",
+    "o": [
+        "Testing entire flow from user perspective (Browser/API) - Selenium/Cypress",
+        "Unit",
+        "Integration",
+        "System"
+    ]
+},
+{
+    "q": "Test Pyramid?",
+    "o": [
+        "Base: Many Unit Tests; Middle: Some Integration Tests; Top: Few E2E Tests",
+        "Inverted",
+        "Square",
+        "Circle"
+    ]
+},
+{
+    "q": "Testing Trophy?",
+    "o": [
+        "Emphasis on Integration Tests (The 'middle' layer)",
+        "Pyramid",
+        "Cone",
+        "Sphere"
+    ]
+},
+{
+    "q": "TDD (Test Driven Development)?",
+    "o": [
+        "Red (Write failing test) -> Green (Write code to pass) -> Refactor",
+        "Write code first",
+        "Test last",
+        "No tests"
+    ]
+},
+{
+    "q": "BDD (Behavior Driven Development)?",
+    "o": [
+        "Tests written in natural language (Given-When-Then) describing behavior (Cucumber/Gherkin)",
+        "TDD",
+        "Unit",
+        "Integration"
+    ]
+},
+{
+    "q": "Code Coverage?",
+    "o": [
+        "Metric showing % of code executed by tests",
+        "Quality",
+        "Bugs",
+        "Speed"
+    ]
+},
+{
+    "q": "Fuzz Testing?",
+    "o": [
+        "Inputting invalid/random data to find crashes/leaks",
+        "Unit",
+        "Integration",
+        "Manual"
+    ]
+},
+{
+    "q": "Mutation Testing?",
+    "o": [
+        "Modifying code (mutants) and running tests to see if tests fail (verify test quality)",
+        "Fuzz",
+        "Unit",
+        "Load"
+    ]
+},
+{
+    "q": "Load Testing?",
+    "o": [
+        "Testing system behavior under expected load",
+        "Stress",
+        "Soak",
+        "Spike"
+    ]
+},
+{
+    "q": "Stress Testing?",
+    "o": [
+        "Testing system beyond limits to find breaking point",
+        "Load",
+        "Soak",
+        "Spike"
+    ]
+},
+{
+    "q": "Soak Testing (Endurance)?",
+    "o": [
+        "Testing system under load for long duration (find leaks)",
+        "Stress",
+        "Load",
+        "Spike"
+    ]
+},
+{
+    "q": "Spike Testing?",
+    "o": [
+        "Testing system response to sudden bursts of load",
+        "Stress",
+        "Load",
+        "Soak"
+    ]
+},
+{
+    "q": "Contract Testing?",
+    "o": [
+        "Verifying interactions between services based on agreed contract (Pact)",
+        "Unit",
+        "Integration",
+        "E2E"
+    ]
+},
+{
+    "q": "Shift Left Security?",
+    "o": [
+        "Implementing security checks early in SDLC (DevSecOps)",
+        "Shift right",
+        "Audit",
+        "Patch"
+    ]
+},
+{
+    "q": "OWASP Top 10?",
+    "o": [
+        "Standard awareness document for developers on web security risks",
+        "Standards",
+        "Protocol",
+        "List"
+    ]
+},
+{
+    "q": "SQL Injection?",
+    "o": [
+        "Attacker interferes with DB queries via input (Fix: Prepared Statements)",
+        "XSS",
+        "CSRF",
+        "DOS"
+    ]
+},
+{
+    "q": "XSS (Cross Site Scripting)?",
+    "o": [
+        "Attacker injects scripts into web pages viewed by others (Fix: Output Encoding/Sanitization)",
+        "SQLi",
+        "CSRF",
+        "DOS"
+    ]
+},
+{
+    "q": "CSRF (Cross Site Request Forgery)?",
+    "o": [
+        "Attacker tricks user into performing action on trusted site (Fix: Anti-CSRF Token/SameSite Cookie)",
+        "XSS",
+        "SQLi",
+        "DOS"
+    ]
+},
+{
+    "q": "Man-in-the-Middle Attack (MitM)?",
+    "o": [
+        "Attacker intercepts communication (Fix: HTTPS/Encryption)",
+        "DOS",
+        "Phishing",
+        "Spoofing"
+    ]
+},
+{
+    "q": "Rainbow Table?",
+    "o": [
+        "Precomputed table for reversing cryptographic hash functions (Cracking passwords)",
+        "Salt",
+        "Pepper",
+        "Sugar"
+    ]
+},
+{
+    "q": "Salting Passwords?",
+    "o": [
+        "Adding random data to password before hashing to defend against Rainbow Tables",
+        "Pepper",
+        "Sugar",
+        "Spice"
+    ]
+},
+{
+    "q": "Peppering Passwords?",
+    "o": [
+        "Adding secret key to password before hashing (Not stored in DB)",
+        "Salt",
+        "Sugar",
+        "Spice"
+    ]
+},
+{
+    "q": "BCrypt/Argon2?",
+    "o": [
+        "Slow hashing algorithms designed for passwords (resistant to brute force)",
+        "MD5",
+        "SHA1",
+        "Fast"
+    ]
+},
+{
+    "q": "Public Key Infrastructure (PKI)?",
+    "o": [
+        "Hierarchy of CA, Certificates, Keys managing digital identities",
+        "Private Key",
+        "Symmetric",
+        "Hash"
+    ]
+},
+{
+    "q": "Symmetric Encryption?",
+    "o": [
+        "Same key for encryption and decryption (AES)",
+        "Asymmetric",
+        "Hash",
+        "Public"
+    ]
+},
+{
+    "q": "Asymmetric Encryption?",
+    "o": [
+        "Pair of keys (Public/Private); Public encrypts, Private decrypts (RSA, ECC)",
+        "Symmetric",
+        "Hash",
+        "Secret"
+    ]
+},
+{
+    "q": "Digital Signature?",
+    "o": [
+        "Hash encrypted with Private Key; verified with Public Key (Authenticity/Integrity)",
+        "Encryption",
+        "Hash",
+        "MAC"
+    ]
+}
+,
+{
+    "q": "Certificate Authority (CA)?",
+    "o": [
+        "Trusted entity that issues digital certificates (validates identity)",
+        "Server",
+        "Client",
+        "Browser"
+    ]
+},
+{
+    "q": "Self-Signed Certificate?",
+    "o": [
+        "Certificate signed by its creator (Not trusted by browsers by default; ok for internal dev)",
+        "CA signed",
+        "Valid",
+        "Trusted"
+    ]
+},
+{
+    "q": "Docker Image vs Container?",
+    "o": [
+        "Image: Read-only template (Class); Container: Running instance (Object)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Docker Layer?",
+    "o": [
+        "Stackable filesystems (Diffs) that make up an image (Cached efficiently)",
+        "Tier",
+        "Level",
+        "Slice"
+    ]
+},
+{
+    "q": "Dockerfile?",
+    "o": [
+        "Script containing commands to assemble an image",
+        "Makefile",
+        "Yaml",
+        "Json"
+    ]
+},
+{
+    "q": "Docker Compose?",
+    "o": [
+        "Tool for defining and running multi-container applications (YAML config)",
+        "Kubernetes",
+        "Swarm",
+        "Podman"
+    ]
+},
+{
+    "q": "Docker Volume?",
+    "o": [
+        "Mechanism for persisting data generated by containers (survives container removal)",
+        "Network",
+        "Image",
+        "Layer"
+    ]
+},
+{
+    "q": "Kubernetes Master Node Components?",
+    "o": [
+        "API Server, Scheduler, Controller Manager, etcd",
+        "Kubelet, Proxy",
+        "Docker, Pod",
+        "Container"
+    ]
+},
+{
+    "q": "Kubernetes Worker Node Components?",
+    "o": [
+        "Kubelet, Kube-Proxy, Container Runtime",
+        "API Server",
+        "Etcd",
+        "Scheduler"
+    ]
+},
+{
+    "q": "Etcd?",
+    "o": [
+        "Consistent and highly-available key value store used as K8s backing store for all cluster data",
+        "Redis",
+        "Mongo",
+        "MySQL"
+    ]
+},
+{
+    "q": "Kube-Scheduler?",
+    "o": [
+        "Watches for newly created Pods with no assigned node, and selects a node for them to run on",
+        "API Server",
+        "Controller",
+        "Kubelet"
+    ]
+},
+{
+    "q": "Kubelet?",
+    "o": [
+        "Agent that runs on each node; ensures containers are running in a Pod",
+        "Master",
+        "Scheduler",
+        "Proxy"
+    ]
+},
+{
+    "q": "Kube-Proxy?",
+    "o": [
+        "Network proxy running on each node; maintains network rules (IP tables)",
+        "Gateway",
+        "Sidecar",
+        "Ingress"
+    ]
+},
+{
+    "q": "ReplicaSet?",
+    "o": [
+        "Ensures a specified number of pod replicas are running at any given time",
+        "Deployment",
+        "Pod",
+        "Service"
+    ]
+},
+{
+    "q": "Deployment (K8s)?",
+    "o": [
+        "Manages ReplicaSets and provides declarative updates (Rolling updates, Rollbacks)",
+        "Pod",
+        "Service",
+        "Volume"
+    ]
+},
+{
+    "q": "Rolling Update?",
+    "o": [
+        "Updating instances one by one (or in batches) to ensure zero downtime",
+        "Recreate",
+        "Blue-Green",
+        "Canary"
+    ]
+},
+{
+    "q": "Taint and Toleration (K8s)?",
+    "o": [
+        "Taint: Node repels pods; Toleration: Pod allows being scheduled on tainted node",
+        "Label",
+        "Select",
+        "Affinity"
+    ]
+},
+{
+    "q": "Node Affinity?",
+    "o": [
+        "Rules constraining which nodes your pod is eligible to be scheduled on (Prefer/Require)",
+        "Taint",
+        "Toleration",
+        "Limit"
+    ]
+},
+{
+    "q": "PersistentVolume (PV)?",
+    "o": [
+        "Piece of storage in cluster provisioned by admin",
+        "PVC",
+        "StorageClass",
+        "Disk"
+    ]
+},
+{
+    "q": "PersistentVolumeClaim (PVC)?",
+    "o": [
+        "Request for storage by a user (Consumes PV resources)",
+        "PV",
+        "StorageClass",
+        "Volume"
+    ]
+},
+{
+    "q": "StorageClass?",
+    "o": [
+        "Describes classes of storage offered (e.g. SSD, HDD) for dynamic provisioning",
+        "PV",
+        "PVC",
+        "Volume"
+    ]
+},
+{
+    "q": "Big O Notation?",
+    "o": [
+        "Describes performance/complexity of algorithm as input size grows",
+        "Little O",
+        "Theta",
+        "Omega"
+    ]
+},
+{
+    "q": "O(1)?",
+    "o": [
+        "Constant Time (Hash Map lookup)",
+        "Linear",
+        "Log",
+        "Quadratic"
+    ]
+},
+{
+    "q": "O(log n)?",
+    "o": [
+        "Logarithmic Time (Binary Search)",
+        "Linear",
+        "Constant",
+        "Exponential"
+    ]
+},
+{
+    "q": "O(n)?",
+    "o": [
+        "Linear Time (Loop through array)",
+        "Constant",
+        "Log",
+        "Quadratic"
+    ]
+},
+{
+    "q": "O(n log n)?",
+    "o": [
+        "Linearithmic Time (Efficient Sorting: Merge Sort, Quick Sort)",
+        "Quadratic",
+        "Linear",
+        "Log"
+    ]
+},
+{
+    "q": "O(n^2)?",
+    "o": [
+        "Quadratic Time (Nested loops, Bubble Sort)",
+        "Linear",
+        "Log",
+        "Factorial"
+    ]
+},
+{
+    "q": "Array vs LinkedList?",
+    "o": [
+        "Array: Fast access O(1), Slow insert O(n); List: Slow access O(n), Fast insert O(1)",
+        "Opposite",
+        "Same",
+        "Unsure"
+    ]
+},
+{
+    "q": "HashMap Internals?",
+    "o": [
+        "Array of buckets (Lists/Trees); Hash function maps Key to Index",
+        "Tree",
+        "Graph",
+        "Stack"
+    ]
+},
+{
+    "q": "Hash Collision?",
+    "o": [
+        "Two keys map to same bucket (Handled by Chaining or Open Addressing)",
+        "Error",
+        "Crash",
+        "Lost data"
+    ]
+},
+{
+    "q": "Proactive Scaling?",
+    "o": [
+        "Scaling based on predicted demand (e.g. Schedule) rather than reaction to load",
+        "Reactive",
+        "Manual",
+        "None"
+    ]
+},
+{
+    "q": "Serverless Scaling?",
+    "o": [
+        "Auto-scaling from 0 to N based on events (Scale-to-zero implies cost saving)",
+        "Fixed",
+        "Manual",
+        "Slow"
+    ]
+},
+{
+    "q": "FinOps?",
+    "o": [
+        "Financial Operations (Managing cloud costs/value)",
+        "DevOps",
+        "SecOps",
+        "NoOps"
+    ]
+},
+{
+    "q": "Spot Instances (AWS)?",
+    "o": [
+        "Unused capacity offered at steep discount; can be interrupted (Stateless/Batch work)",
+        "On-Demand",
+        "Reserved",
+        "Dedicated"
+    ]
+},
+{
+    "q": "Reserved Instances?",
+    "o": [
+        "Commitment to use specific instances for 1-3 years for discount",
+        "Spot",
+        "On-Demand",
+        "Dedicated"
+    ]
+},
+{
+    "q": "Snowball Edge?",
+    "o": [
+        "Compute capability on Snowball device (Edge processing)",
+        "Cloud",
+        "Network",
+        "Disk"
+    ]
+},
+{
+    "q": "CloudFormation / Terraform State?",
+    "o": [
+        "File tracking the state of managed infrastructure resources",
+        "Log",
+        "Config",
+        "Script"
+    ]
+},
+{
+    "q": "Drift Detection?",
+    "o": [
+        "Identifying when actual infrastructure differs from IaC configuration (Manual changes)",
+        "Audit",
+        "Log",
+        "Fix"
+    ]
+},
+{
+    "q": "Blue-Green vs Canary?",
+    "o": [
+        "Blue-Green: Instant switch (All or nothing); Canary: Gradual rollout (Percentage)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Webhook?",
+    "o": [
+        "User-defined HTTP callback (Server calls Client when event happens)",
+        "Polling",
+        "Socket",
+        "RPC"
+    ]
+},
+{
+    "q": "Message Queue vs Pub/Sub?",
+    "o": [
+        "Queue: 1 producer -> 1 consumer (Load balancing); Pub/Sub: 1 publisher -> N subscribers (Broadcast)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Guaranteed Delivery?",
+    "o": [
+        "Ensuring message is not lost (Acknowledgements + Persistence)",
+        "Best effort",
+        "Fast",
+        "Loose"
+    ]
+},
+{
+    "q": "At-Least-Once Delivery?",
+    "o": [
+        "Message delivered 1 or more times (Requires Idempotency)",
+        "At-Most-Once",
+        "Exactly-Once",
+        "Never"
+    ]
+},
+{
+    "q": "At-Most-Once Delivery?",
+    "o": [
+        "Fire and Forget (Messages can be lost, never duplicated)",
+        "At-Least-Once",
+        "Exactly-Once",
+        "Guaranteed"
+    ]
+},
+{
+    "q": "Exactly-Once Delivery?",
+    "o": [
+        "Guaranteed execution only once (Hardest to achieve; usually transactional/deduped)",
+        "At-Least-Once",
+        "At-Most-Once",
+        "Simple"
+    ]
+},
+{
+    "q": "Kafka Partition?",
+    "o": [
+        "Unit of parallelism in Kafka (Ordered sequence of messages); Consumers scale to partitions",
+        "Topic",
+        "Broker",
+        "Cluster"
+    ]
+},
+{
+    "q": "Kafka Consumer Group?",
+    "o": [
+        "Group of consumers sharing work (Each partition consumed by only 1 member of group)",
+        "Cluster",
+        "Topic",
+        "Replica"
+    ]
+},
+{
+    "q": "Kafka Offset?",
+    "o": [
+        "Unique identifier of a record within a partition (Progress tracking)",
+        "Index",
+        "ID",
+        "Key"
+    ]
+},
+{
+    "q": "Single Partition Ordering?",
+    "o": [
+        "Kafka guarantees order only within a partition, not across topic",
+        "Global order",
+        "No order",
+        "Random"
+    ]
+},
+{
+    "q": "Hot Partition?",
+    "o": [
+        "Partition receiving disproportionate amount of traffic (Key skew)",
+        "Cold",
+        "Balanced",
+        "Even"
+    ]
+},
+{
+    "q": "Compacting Topic (Kafka)?",
+    "o": [
+        "Retains only the latest value for each key (Log compaction)",
+        "Delete",
+        "Archive",
+        "Ignore"
+    ]
+},
+{
+    "q": "Data Sovereignty?",
+    "o": [
+        "Concept that data is subject to laws of country where it is stored (GDPR)",
+        "Cloud",
+        "Freedom",
+        "Storage"
+    ]
+},
+{
+    "q": "GDPR (General Data Protection Regulation)?",
+    "o": [
+        "EU regulation on data protection and privacy",
+        "USA",
+        "Asia",
+        "Global"
+    ]
+},
+{
+    "q": "Right to be Forgotten?",
+    "o": [
+        "User right to have personal data erased (Hard in Event Sourcing/Backups)",
+        "Write only",
+        "Read only",
+        "Archive"
+    ]
+},
+{
+    "q": "PII (Personally Identifiable Information)?",
+    "o": [
+        "Data allowing ID of individual (Name, SSN, IP) - Requires protection",
+        "Public",
+        "Anonymized",
+        "Open"
+    ]
+},
+{
+    "q": "Data Discovery?",
+    "o": [
+        "Process of identifying where sensitive data resides in system",
+        "Searching",
+        "Indexing",
+        "Mining"
+    ]
+},
+{
+    "q": "Data Masking?",
+    "o": [
+        "Obfuscating data for non-production environments (Testing)",
+        "Encryption",
+        "Deletion",
+        "Hiding"
+    ]
+},
+{
+    "q": "Tokenization (Security)?",
+    "o": [
+        "Substituting sensitive data with non-sensitive equivalent (Token)",
+        "Hashing",
+        "Encryption",
+        "Masking"
+    ]
+},
+{
+    "q": "Principle of Least Privilege?",
+    "o": [
+        "Giving user/process only those privileges needed to do its job",
+        "Admin access",
+        "Root",
+        "Open"
+    ]
+},
+{
+    "q": "Defense in Depth?",
+    "o": [
+        "Layered security approach (Firewall + Auth + Encryption + Monitoring)",
+        "Single layer",
+        "Perimeter",
+        "Gateway"
+    ]
+},
+{
+    "q": "Security by Design?",
+    "o": [
+        "Integrating security protocols into development process from start",
+        "Afterthought",
+        "Patch",
+        "Audit"
+    ]
+},
+{
+    "q": "Penetration Testing (Pen Test)?",
+    "o": [
+        "Simulated cyberattack to identify vulnerabilities (Ethical Hacking)",
+        "Unit test",
+        "Black box",
+        "White box"
+    ]
+},
+{
+    "q": "Static Application Security Testing (SAST)?",
+    "o": [
+        "White-box testing: Analyzing source code for security flaws (SonarQube)",
+        "DAST",
+        "IAST",
+        "RASP"
+    ]
+},
+{
+    "q": "Dynamic Application Security Testing (DAST)?",
+    "o": [
+        "Black-box testing: Analyzing running application for flaws (OWASP ZAP)",
+        "SAST",
+        "IAST",
+        "RASP"
+    ]
+},
+{
+    "q": "Interactive Application Security Testing (IAST)?",
+    "o": [
+        "Hybrid: Instrumentation inside app analyzes execution flow/data (Contrast)",
+        "SAST",
+        "DAST",
+        "RASP"
+    ]
+},
+{
+    "q": "Runtime Application Self-Protection (RASP)?",
+    "o": [
+        "Security technology built into app runtime capable of controlling execution/blocking attacks",
+        "Firewall",
+        "WAF",
+        "IPS"
+    ]
+},
+{
+    "q": "Web Application Firewall (WAF)?",
+    "o": [
+        "Filter/Monitor HTTP traffic to/from web app (Blocks SQLi, XSS)",
+        "Network Firewall",
+        "Gateway",
+        "Proxy"
+    ]
+},
+{
+    "q": "Bot Management?",
+    "o": [
+        "Differentiating human vs bot traffic (Captcha, Behavioral analysis)",
+        "WAF",
+        "Rate Limit",
+        "Block"
+    ]
+},
+{
+    "q": "DDoS (Distributed Denial of Service)?",
+    "o": [
+        "Overwhelming target with flood of traffic from many sources",
+        "DOS",
+        "Hack",
+        "Crack"
+    ]
+},
+{
+    "q": "CDN DDoS Protection?",
+    "o": [
+        "Absorbing traffic at edge; hiding origin IP",
+        "Firewall",
+        "Local",
+        "None"
+    ]
+},
+{
+    "q": "Scrubbing Center?",
+    "o": [
+        "Centralized data cleansing station where traffic is analyzed/malicious filtered",
+        "Wash",
+        "Clean",
+        "Filter"
+    ]
+},
+{
+    "q": "Egress Filtering?",
+    "o": [
+        "Monitoring/restricting outbound traffic (Prevent data exfiltration/C2 comms)",
+        "Ingress",
+        "Firewall",
+        "Rules"
+    ]
+},
+{
+    "q": "Kill Switch?",
+    "o": [
+        "Mechanism to shut down system/feature quickly in emergency",
+        "Button",
+        "Off",
+        "Stop"
+    ]
+},
+{
+    "q": "Feature Flag vs Config?",
+    "o": [
+        "Flag: Toggle logic paths (Dynamic); Config: Environment settings (Static/Restart)",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+},
+{
+    "q": "Canary Release?",
+    "o": [
+        "Rollout to small % users (Canary in coal mine)",
+        "Beta",
+        "Alpha",
+        "Dev"
+    ]
+},
+{
+    "q": "Dark Launch?",
+    "o": [
+        "Deploy code but keep features disabled (Toggles)",
+        "Night",
+        "Hidden",
+        "Secret"
+    ]
+},
+{
+    "q": "Semantic Versioning (SemVer)?",
+    "o": [
+        "Major.Minor.Patch",
+        "Date",
+        "Hash",
+        "Name"
+    ]
+},
+{
+    "q": "Monorepo?",
+    "o": [
+        "Single repository containing code for many projects (Google/Facebook style)",
+        "Polyrepo",
+        "Multi-repo",
+        "Single"
+    ]
+},
+{
+    "q": "Polyrepo?",
+    "o": [
+        "One repository per project/service",
+        "Monorepo",
+        "Git",
+        "SVN"
+    ]
+},
+{
+    "q": "Git Flow?",
+    "o": [
+        "Branching model: Master, Develop, Feature, Release, Hotfix branches",
+        "Trunk Based",
+        "Simple",
+        "Flat"
+    ]
+},
+{
+    "q": "Trunk Based Development?",
+    "o": [
+        "Developers merge small, frequent updates to core 'trunk' (main)",
+        "Git Flow",
+        "Branchy",
+        "Slow"
+    ]
+},
+{
+    "q": "Merge Hell?",
+    "o": [
+        "Painful conflict resolution from long-lived branches",
+        "Heaven",
+        "Fast",
+        "Easy"
+    ]
+},
+{
+    "q": "Technical Debt?",
+    "o": [
+        "Implied cost of additional rework caused by choosing an easy solution now instead of a better one later",
+        "Financial debt",
+        "Money",
+        "Credit"
+    ]
+},
+{
+    "q": "Refactoring?",
+    "o": [
+        "Restructuring existing code without changing external behavior",
+        "Rewrite",
+        "Redesign",
+        "Rebuild"
+    ]
+},
+{
+    "q": "Legacy Code?",
+    "o": [
+        "Code without tests (Michael Feathers definition)",
+        "Old code",
+        "Bad code",
+        "COBOL"
+    ]
+},
+{
+    "q": "Code Rot?",
+    "o": [
+        "Slow deterioration of software performance/integrity over time (Updates, entropy)",
+        "Rust",
+        "Decay",
+        "Bug"
+    ]
+},
+{
+    "q": "Software Entropy?",
+    "o": [
+        "Tendency for software to become difficult to maintain as changes are made (Second Law of Thermodynamics)",
+        "Order",
+        "Clean",
+        "Energy"
+    ]
+},
+{
+    "q": "Bus Factor?",
+    "o": [
+        "Number of team members that can be hit by a bus before project fails (Knowledge distribution)",
+        "Truck",
+        "Car",
+        "Plane"
+    ]
+},
+{
+    "q": "Pair Programming?",
+    "o": [
+        "Two developers, one workstation (Driver/Navigator)",
+        "Mob",
+        "Solo",
+        "Review"
+    ]
+},
+{
+    "q": "Mob Programming?",
+    "o": [
+        "Whole team working on same thing (Driver + Navigators)",
+        "Pair",
+        "Solo",
+        "Meeting"
+    ]
+},
+{
+    "q": "Context Switching?",
+    "o": [
+        "Cost of jumping between tasks (Process/Mental overhead) - Productitivty killer",
+        "Focus",
+        "Flow",
+        "Zone"
+    ]
+},
+{
+    "q": "Flow State?",
+    "o": [
+        "Mental state of being completely immersed in activity (Zone)",
+        "Distraction",
+        "Interrupt",
+        "Switch"
+    ]
+},
+{
+    "q": "Pomodoro Technique?",
+    "o": [
+        "Time management (25 min work, 5 min break)",
+        "Tomato",
+        "Timer",
+        "Clock"
+    ]
+},
+{
+    "q": "Agile Manifesto val 1?",
+    "o": [
+        "Individuals and interactions over processes and tools",
+        "Tools",
+        "Process",
+        "Docs"
+    ]
+},
+{
+    "q": "Agile Manifesto val 2?",
+    "o": [
+        "Working software over comprehensive documentation",
+        "Docs",
+        "Plans",
+        "Contracts"
+    ]
+},
+{
+    "q": "Agile Manifesto val 3?",
+    "o": [
+        "Customer collaboration over contract negotiation",
+        "Contract",
+        "Sales",
+        "Lawyer"
+    ]
+},
+{
+    "q": "Agile Manifesto val 4?",
+    "o": [
+        "Responding to change over following a plan",
+        "Plan",
+        "Fixed",
+        "Rigid"
+    ]
+},
+{
+    "q": "Waterfall Model?",
+    "o": [
+        "Linear sequential approach (Requirements -> Design -> Implementation -> Verification -> Maintenance)",
+        "Agile",
+        "Scrum",
+        "Kanban"
+    ]
+},
+{
+    "q": "Microservices vs SOA?",
+    "o": [
+        "Microservices: Independently deployable, smart endpoints; SOA: Enterprise bus, shared components",
+        "Same",
+        "Opposite",
+        "Unsure"
+    ]
+}
+]
