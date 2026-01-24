@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Factory Method Intent 🏭",
+        "ques": "What is the main intent of the **Factory Method** pattern? Why not just call `new ClassName()` directly?",
+        "answer": {
+            "type": "text",
+            "content": "The intent is to define an interface for creating an object but let subclasses decide **which class** to instantiate. \nDirectly calling `new Dog()` couples your code to the `Dog` class. Using a factory allows your code to work with `Animal`, and the factory decides if it should return a `Dog`, `Cat`, or `Duck` based on logic."
+        },
+        "explanation": "It decouples the client code from the concrete classes it needs to instantiate."
+    },
+    {
+        "title": "Abstract Factory 🏗️",
+        "ques": "How does the **Abstract Factory** pattern differ from a simple Factory Method?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Factory Method:** Creates **one** product (e.g., `createButton()`).\n*   **Abstract Factory:** Creates **families** of related products without specifying their concrete classes. \n    *   Example: A `GUIFactory` that creates a `Button`, `Checkbox`, and `Scrollbar`. You can have a `WindowsFactory` or `MacFactory` that ensures all created widgets match the same theme."
+        },
+        "explanation": "Abstract Factory is a factory of factories. It ensures consistency among a suite of products."
+    },
+    {
+        "title": "Builder Pattern 👷",
+        "ques": "The **Builder** pattern is another creational pattern. When should you use Builder instead of a Factory?",
+        "answer": {
+            "type": "text",
+            "content": "Use **Builder** when constructing a complex object that requires many steps or configuration options (e.g., a Pizza with optional toppings, crust type, sauce). \nFactory is for \"one-shot\" creation; Builder is for step-by-step construction."
+        },
+        "explanation": "Builder avoids the \"Telescoping Constructor\" problem where you have constructors with 10 different arguments."
+    },
+    {
+        "title": "Simple Factory Implementation (Python) 🐍",
+        "ques": "Write a simple function `get_pet(pet_type)` that returns a `Dog` instance if input is \"dog\" and a `Cat` instance if input is \"cat\".",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "class Dog:\n    def speak(self): return \"Woof\"\nclass Cat:\n    def speak(self): return \"Meow\"\n\ndef get_pet(pet_type):\n    if pet_type == \"dog\":\n        return Dog()\n    elif pet_type == \"cat\":\n        return Cat()\n    else:\n        raise ValueError(\"Unknown pet\")\n\npet = get_pet(\"dog\")\nprint(pet.speak())"
+        },
+        "explanation": "This simple function acts as a factory, encapsulating the creation logic."
+    },
+    {
+        "title": "Open/Closed Principle 🚪",
+        "ques": "How does the Factory pattern support the **Open/Closed Principle**?",
+        "answer": {
+            "type": "text",
+            "content": "You can introduce new product types (e.g., add a `Bird` class) into the program without breaking existing client code. You only need to extend the factory, not modify every place where objects are created."
+        },
+        "explanation": "Existing code is **closed** for modification but **open** for extension via the factory."
+    }
+]

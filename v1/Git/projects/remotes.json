@@ -1,38 +1,52 @@
 [
     {
-        "title": "Origin",
-        "ques": "In `git push origin main`, what does **origin** refer to?",
+        "title": "Adding a Remote 🌐",
+        "ques": "You have a local repository and want to connect it to a GitHub repository at `https://github.com/user/repo.git`.\n\nAdd this remote with the name **`origin`**.",
         "answer": {
-            "type": "text",
-            "content": "**origin** is just the default **alias** (nickname) for the remote repository URL.\n\nInstead of typing `git push https://github.com/user/repo.git main`, you type `git push origin main`."
+            "type": "code",
+            "lang": "bash",
+            "content": "git remote add origin https://github.com/user/repo.git"
         },
-        "explanation": "You can have multiple remotes (e.g., `upstream` and `origin`)."
+        "explanation": "**`git remote add <name> <url>`** creates a connection to a remote repository."
     },
     {
-        "title": "Fetch vs Pull",
-        "ques": "What is the difference between `git fetch` and `git pull`?",
+        "title": "Pushing Changes ⬆️",
+        "ques": "You have committed your changes locally.\n\n**Push** your `main` branch to the `origin` remote.",
         "answer": {
-            "type": "text",
-            "content": "*   **`git fetch`:** Downloads new data from the remote repository but **does not** integrate it into your working files. It's safe.\n*   **`git pull`:** Does a `git fetch` followed immediately by a `git merge`. It updates your current branch."
+            "type": "code",
+            "lang": "bash",
+            "content": "git push origin main"
         },
-        "explanation": "Fetch allows you to inspect changes before merging."
+        "explanation": "**`git push`** uploads your local branch commits to the remote repository."
     },
     {
-        "title": "Tracking Branch",
-        "ques": "What is an **Upstream** or Tracking Branch?",
+        "title": "Pulling Changes ⬇️",
+        "ques": "Teammates have made changes to the `main` branch on the remote.\n\n**Pull** these changes into your local `main` branch.",
         "answer": {
-            "type": "text",
-            "content": "It is a link between a local branch and a remote branch.\n\nIf your local `main` tracks `origin/main`, you can just type `git push` or `git pull` without arguments, and Git knows where to push/pull."
+            "type": "code",
+            "lang": "bash",
+            "content": "git pull origin main"
         },
-        "explanation": "Set it with `git push -u origin main`."
+        "explanation": "**`git pull`** fetches changes from the remote and immediately tries to merge them into your current branch."
     },
     {
-        "title": "Clone",
-        "ques": "What does `git clone [url]` do?",
+        "title": "Fetching vs. Pulling 🕵️",
+        "ques": "You want to see what changes are on the remote **without** merging them into your local work yet.\n\nWhat command should you use?",
         "answer": {
-            "type": "text",
-            "content": "It copies an entire remote repository to your local machine, creates a directory, initializes a `.git` folder inside it, pulls down all data, and checks out a working copy of the latest version."
+            "type": "code",
+            "lang": "bash",
+            "content": "git fetch"
         },
-        "explanation": "It sets up the remote 'origin' automatically."
+        "explanation": "**`git fetch`** downloads commits, files, and refs from a remote repository into your local repository but does not merge them into your working files."
+    },
+    {
+        "title": "Checking Remotes 👀",
+        "ques": "You want to see a list of the remote repositories configured for your project, along with their URLs.\n\nRun the command to list remotes with verification **verbose** output.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git remote -v"
+        },
+        "explanation": "**`git remote -v`** shows the names and URLs of all configured remotes."
     }
 ]

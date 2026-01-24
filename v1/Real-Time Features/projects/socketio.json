@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Socket.IO vs. WebSockets 🥊",
+        "ques": "Socket.IO is often confused with WebSockets. Ideally, Socket.IO uses WebSockets, but what does it do if WebSockets are blocked by a corporate firewall?",
+        "answer": {
+            "type": "text",
+            "content": "It **falls back** to HTTP Long-Polling transparently. \nThis guarantees that the real-time functionality works on every device and network, even those that don't support WebSockets 100%."
+        },
+        "explanation": "Socket.IO is a \"library\", not a protocol. It adds reliability on top of the raw transport."
+    },
+    {
+        "title": "Rooms concept 🚪",
+        "ques": "Explain the concept of **Rooms** in Socket.IO. How is it useful for a chat application?",
+        "answer": {
+            "type": "text",
+            "content": "**Rooms** are arbitrary channels that sockets can join or leave. \nInstead of broadcasting to *everyone* (`io.emit`), you can broadcast only to sockets in a specific room (`io.to('room_1').emit`).\nUse case: `socket.join('chat_room_A')` ensures users only see messages from their active chat window."
+        },
+        "explanation": "Rooms are a server-side concept. The client knows nothing about rooms; it just sends messages."
+    },
+    {
+        "title": "Namespaces 🌌",
+        "ques": "How are **Namespaces** different from Rooms?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Namespaces (`io.of('/admin')`):** Allow you to split the logic of your application over a single shared connection. Clients connect specifically to a namespace.\n*   **Rooms:** Are lightweight groupings *within* a namespace."
+        },
+        "explanation": "Namespaces are good for separating \"Chat\" logic from \"Notification\" logic completely."
+    },
+    {
+        "title": "Acknowledgements 📨",
+        "ques": "Socket.IO allows sending a callback function from the client to the server (or vice-versa) to acknowledge receipt. \nWrite a client-side snippet emitting a 'create' event and waiting for a server acknowledgement.",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "socket.emit('create_todo', { text: \"Buy Milk\" }, (response) => {\n  // This function runs when the SERVER calls the callback\n  if (response.status === 'ok') {\n    console.log(\"Server saved the ID:\", response.id);\n  }\n});"
+        },
+        "explanation": "This implies Request-Response semantics over a persistent socket, which is very convenient."
+    },
+    {
+        "title": "Broadcasting 📡",
+        "ques": "If a user types a message, you want to send it to everyone *else* but not the sender (they already see what they typed). How do you do this in Socket.IO?",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "// Server-side\nsocket.on('message', (msg) => {\n  // 'broadcast' sends to everyone EXCEPT the socket that triggered it\n  socket.broadcast.emit('message', msg);\n});"
+        },
+        "explanation": "`io.emit` sends to everyone (including sender). `socket.broadcast.emit` sends to everyone else."
+    }
+]

@@ -1,0 +1,47 @@
+[
+    {
+        "title": "CSRF Explained 🎭",
+        "ques": "What does **CSRF** stand for? In a CSRF attack, does the attacker need to know the user's password?",
+        "answer": {
+            "type": "text",
+            "content": "*   **CSRF:** Cross-Site Request Forgery.\n*   **No Password Needed:** The attacker relies on the fact that the user is **already logged in**. The browser automatically sends the user's session cookies with requests to the target site, even if the request originated from a malicious site."
+        },
+        "explanation": "The browser's behavior of automatically attaching cookies to cross-origin requests is the root cause of CSRF."
+    },
+    {
+        "title": "Anti-CSRF Tokens 🎟️",
+        "ques": "The most common defense is an **Anti-CSRF Token** (Synchronizer Token Pattern). Explain how this works.",
+        "answer": {
+            "type": "text",
+            "content": "1.  The server generates a random, secret token and includes it in the User's HTML form (usually as a hidden field).\n2.  When the form is submitted, the server checks if the submitted token matches the one it issued.\n3.  An attacker on `malicious.com` cannot read this token from the legitimate site (due to Same-Origin Policy), so they cannot forge a valid request."
+        },
+        "explanation": "The token proves that the request originated from the **legitimate application's UI**, not from a hidden form on an attacker's site."
+    },
+    {
+        "title": "SameSite Cookie Attribute 🍪",
+        "ques": "What is the `SameSite` cookie attribute? How does setting `SameSite=Strict` or `SameSite=Lax` prevent CSRF?",
+        "answer": {
+            "type": "text",
+            "content": "**SameSite** tells the browser whether to send the cookie with cross-site requests.\n*   **Strict:** The cookie is NEVER sent on cross-site requests (even following a link).\n*   **Lax:** The cookie is sent only on \"safe\" top-level navigations (like clicking a link), but not on sub-requests (images, frames) or POST submissions."
+        },
+        "explanation": "**SameSite=Lax** is now the default in modern browsers and provides strong protection against CSRF without breaking normal navigation."
+    },
+    {
+        "title": "Idempotent Methods 🔄",
+        "ques": "Safe HTTP methods like GET should be **Idempotent** (read-only). Why is it a huge security risk to allow a state-changing action (like `delete_account`) via a GET request?",
+        "answer": {
+            "type": "text",
+            "content": "GET requests are trivial to forge (e.g., via an `<img>` tag `src`). If `GET /delete_account` works, an attacker can delete your account simply by making your browser load an image. CSRF protections (like tokens) are often not applied to GET requests because they are assumed to be safe/read-only."
+        },
+        "explanation": "Always use **POST**, **PUT**, or **DELETE** for actions that change data. GET should never have side effects."
+    },
+    {
+        "title": "Double Submit Cookie ✌️",
+        "ques": "In stateless APIs (like SPAs), using session storage is common. Explain the **Double Submit Cookie** pattern for CSRF defense.",
+        "answer": {
+            "type": "text",
+            "content": "1.  The server sends a random token as a **cookie**.\n2.  The client reads this cookie and sends the same value in a custom **HTTP Header** (e.g., `X-CSRF-Token`).\n3.  The server verifies that the cookie value matches the header value.\n\nSince an attacker cannot write to your domain's cookies or set custom headers on cross-origin requests, a match proves legitimacy."
+        },
+        "explanation": "This pattern is useful when the server doesn't want to store a session state for CSRF tokens."
+    }
+]

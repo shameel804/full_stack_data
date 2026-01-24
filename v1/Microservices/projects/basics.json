@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Monolith vs. Microservices 🏢",
+        "ques": "What is the key structural difference between a **Monolithic** application and a **Microservices** architecture?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Monolith:** Entire application (UI, Business Logic, Data Interface) is a single, unified codebase deployed as one unit.\n*   **Microservices:** The application is a collection of small, independent services, each running in its own process and communicating via protocols like HTTP. Each service can be deployed independently."
+        },
+        "explanation": "Microservices offer agility and independent scaling, while Monoliths are simpler to develop initially."
+    },
+    {
+        "title": "Bounded Context (DDD) 🗺️",
+        "ques": "Microservices rely heavily on the concept of **Bounded Context** from Domain-Driven Design (DDD). What does this efficiently define for a service?",
+        "answer": {
+            "type": "text",
+            "content": "A **Bounded Context** defines the clear, logical boundary within which a particular domain model (like \"Shipping\" or \"Billing\") is defined and applicable. Ideally, one Microservice maps to one Bounded Context."
+        },
+        "explanation": "This prevents the \"Distributed Monolith\" problem where services are tightly coupled. Each service owns its own domain logic and data."
+    },
+    {
+        "title": "Database per Service 🗄️",
+        "ques": "In a strict microservices architecture, can two services share the **same database tables**? Why or why not?",
+        "answer": {
+            "type": "text",
+            "content": "**No.** Sharing tables creates tight coupling (if one service changes the schema, the other breaks). \nEach service should own its private data store. Communication should happen only via publicly exposed APIs, not shared DB tables."
+        },
+        "explanation": "Start With simple shared data is tempting, but it destroys the independence that makes microservices valuable."
+    },
+    {
+        "title": "Decomposition Strategies 🔪",
+        "ques": "Where do you start when breaking a Monolith? Explain decomposition by **Business Capability**.",
+        "answer": {
+            "type": "text",
+            "content": "Decomposition by **Business Capability** involves identifying what the business *does* (e.g., Order Management, Inventory, Shipping) and creating services around those capabilities. The software architecture mirrors the business structure."
+        },
+        "explanation": "Conway's Law suggests that systems often end up mirroring the communication structure of the organization building them."
+    },
+    {
+        "title": "Scaling Benefits 📈",
+        "ques": "How does Microservices architecture enable **more efficient scaling** compared to a Monolith?",
+        "answer": {
+            "type": "text",
+            "content": "In a Monolith, if the \"Video Processing\" feature is heavy, you have to scale (duplicate) the *entire* application just to handle the load.\nIn Microservices, you can scale *only* the \"Video Processing Service\" (e.g., spin up 10 containers) while keeping the \"User Profile Service\" at just 1 instance."
+        },
+        "explanation": "Granular scaling saves infrastructure costs and improves resource utilization."
+    }
+]

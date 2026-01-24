@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Latency Reduction 📉",
+        "ques": "Edge Computing moves logic closer to the user. Why does this improve performance?",
+        "answer": {
+            "type": "text",
+            "content": "Speed of Light limitation. \nIf a user is in Tokyo and the server is in New York, the round trip takes 200ms+. \nIf the logic runs on an **Edge Node** in Tokyo, the round trip is 10ms. Less distance = Lower Latency."
+        },
+        "explanation": "The Edge brings the server to the user."
+    },
+    {
+        "title": "Edge Workers (Cloudflare/Vercel) 👷",
+        "ques": "What functionality do **Edge Workers** typically provide?",
+        "answer": {
+            "type": "text",
+            "content": "They allow you to run small snippets of JavaScript code at the CDN edge. \nCommon uses:\n1.  A/B Testing routing.\n2.  Custom authentication headers.\n3.  Personalized caching logic."
+        },
+        "explanation": "They run instantly on request, intercepting it before it reaches the origin server."
+    },
+    {
+        "title": "Data Consistency 🧂",
+        "ques": "What is the hard part about moving Data (Database) to the Edge?",
+        "answer": {
+            "type": "text",
+            "content": "**Replication and Consistency.** \nIt's easy to copy static files to 100 locations. It's hard to synchronize a writable database across 100 locations instantly. (CAP Theorem)."
+        },
+        "explanation": "Most apps settle for \"Compute at Edge, Data at Center\" or use eventual consistency."
+    },
+    {
+        "title": "Cold Starts 🥶",
+        "ques": "Do Edge functions suffer from **Cold Starts** like traditional Lambda functions?",
+        "answer": {
+            "type": "text",
+            "content": "**Generally No (or much less).** \nEdge runtimes (like V8 Isolate) are lighter than full Lambda containers. They spin up in milliseconds (0ms to 5ms), effectively eliminating the cold start penalty."
+        },
+        "explanation": "This makes them suitable for user-facing middleware."
+    },
+    {
+        "title": "IoT Use Case 🌡️",
+        "ques": "Why is Edge computing critical for IoT (Internet of Things)?",
+        "answer": {
+            "type": "text",
+            "content": "Bandwidth and Privacy. \nA security camera generates GBs of video. Sending all that to the cloud is expensive and slow. \nAn **Edge Gateway** processes the video locally, detects motion, and only sends the *alert* to the cloud."
+        },
+        "explanation": "Process locally, aggregate globally."
+    }
+]

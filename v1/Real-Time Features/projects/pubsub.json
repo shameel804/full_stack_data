@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Redis Pub/Sub 📮",
+        "ques": "Why is **Redis** commonly used as a backend for Node.js WebSocket servers?",
+        "answer": {
+            "type": "text",
+            "content": "Redis acts as the **Message BUS**. \nIf you have multiple server instances, they subscribe to a Redis channel. When one server receives a message from a user, it publishes it to Redis. Redis forwards it to ALL other servers, allowing them to notify their connected users."
+        },
+        "explanation": "It solves the \"Horizontal Scaling\" problem for stateful socket servers."
+    },
+    {
+        "title": "At-Most-Once Delivery 📦",
+        "ques": "Redis Pub/Sub has \"At-Most-Once\" delivery semantics. What does this mean if a subscriber is offline?",
+        "answer": {
+            "type": "text",
+            "content": "It means **Fire and Forget**. \nIf the subscriber is offline when the message is published, the message is **lost forever**. Redis does not store it in a queue for later."
+        },
+        "explanation": "If you need guaranteed delivery (persistence), use **Redis Streams** or a real Message Queue (RabbitMQ)."
+    },
+    {
+        "title": "Topics and Wildcards 🃏",
+        "ques": "In a Pub/Sub system (like MQTT), explain how wildcards work. Example: `sensors/+/temp`.",
+        "answer": {
+            "type": "text",
+            "content": "Subscribers can listen to patterns. \n*   `+` matches one level.\n*   `sensors/+/temp` would receive messages from `sensors/kitchen/temp` AND `sensors/garage/temp`.\n\nThis allows decoupled listeners to aggregate data easily."
+        },
+        "explanation": "Topic-based routing is powerful for IoT and complex event systems."
+    },
+    {
+        "title": "Decoupling ⛓️",
+        "ques": "How does Pub/Sub decouple the Sender from the Receiver?",
+        "answer": {
+            "type": "text",
+            "content": "The Sender (Publisher) does not know IP address, or even the existence, of the Receiver (Subscriber). It just broadcasts to a \"Topic\". \nYou can add 0, 1, or 100 subscribers later without changing the Sender's code."
+        },
+        "explanation": "This allows for highly flexible system evolution."
+    },
+    {
+        "title": "Message Broker vs. API 🗣️",
+        "ques": "Why insert a **Message Broker** (RabbitMQ/Kafka) between microservices instead of just calling each other's APIs?",
+        "answer": {
+            "type": "text",
+            "content": "It acts as a **buffer**. \nIf the Consumer service crashes or is slow, the Broker holds the messages in a queue. When the Consumer recovers, it processes the backlog. \nDirect API calls would just fail (HTTP 500), losing the data."
+        },
+        "explanation": "It converts \"synchronous pressure\" into \"asynchronous backlog\"."
+    }
+]

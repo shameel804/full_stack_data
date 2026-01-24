@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The Observer Pattern 🔭",
+        "ques": "Describe the **Observer** pattern. What are the two main actors involved?",
+        "answer": {
+            "type": "text",
+            "content": "The Observer pattern defines a one-to-many dependency so that when one object changes state, all its dependents are notified and updated automatically.\n*   **Subject (Publisher):** The object holding the state.\n*   **Observers (Subscribers):** The objects watching for changes."
+        },
+        "explanation": "This is fundamental in event-driven programming (e.g., a button click notifying event listeners)."
+    },
+    {
+        "title": "Implementation Steps 📝",
+        "ques": "What **three** methods does the Subject typically expose to manage Observers?",
+        "answer": {
+            "type": "text",
+            "content": "1.  `attach(observer)`: Adds a new subscriber.\n2.  `detach(observer)`: Removes a subscriber.\n3.  `notify()`: Loops through all attached observers and calls their update method."
+        },
+        "explanation": "This standard interface allows the Subject to talk to any Observer without knowing its concrete class (loose coupling)."
+    },
+    {
+        "title": "Push vs. Pull Model ↔️",
+        "ques": "When the Subject notifies observers, it can use a **Push** or **Pull** model. What is the difference?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Push:** The Subject sends all the data to the observer as arguments (e.g., `observer.update(data)`). Quick but inflexible if observers need different data.\n*   **Pull:** The Subject just says \"I changed!\" (`observer.update()`). The Observer then asks the Subject for the specific data it needs (`subject.get_state()`)."
+        },
+        "explanation": "**Pull** is often more flexible because the Observer only retrieves what it needs."
+    },
+    {
+        "title": "Memory Leaks 🧠",
+        "ques": "What happens if an Observer fails to `detach` (unsubscribe) from the Subject before being destroyed?",
+        "answer": {
+            "type": "text",
+            "content": "It creates a **Memory Leak** (specifically, the \"Lapsed Listener Problem\"). The Subject still holds a reference to the Observer, preventing the Garbage Collector from freeing the Observer's memory."
+        },
+        "explanation": "Always clean up listeners! This is a classic source of leaks in UI frameworks (e.g., React `useEffect` cleanup)."
+    },
+    {
+        "title": "Pub/Sub Variation 📬",
+        "ques": "How is the **Publish-Subscribe (Pub/Sub)** pattern different from the standard Observer pattern?",
+        "answer": {
+            "type": "text",
+            "content": "In **Observer**, the Subject and Observer know about each other securely. \nIn **Pub/Sub**, there is a third component: the **Event Channel** (or Message Broker). Publishers throw messages into the channel, and Subscribers pick them up. They don't know each other exists."
+        },
+        "explanation": "Pub/Sub is more loosely coupled and scalable, commonly used in distributed systems (like with RabbitMQ or Kafka)."
+    }
+]

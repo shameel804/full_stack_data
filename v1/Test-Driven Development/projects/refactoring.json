@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Code Smells 👃",
+        "ques": "Refactoring is often triggered by **Code Smells**. Define 'Code Smell' and give one example, such as 'Long Method'.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Code Smell:** A surface indication that usually corresponds to a deeper problem in the system. It's not a bug (the code works), but it indicates a design weakness that might slow down development or increase the risk of bugs.\n*   **Example (Long Method):** A function that contains hundreds of lines of code. It does too many things, making it hard to understand, test, and maintain."
+        },
+        "explanation": "Recognizing smells like **Long Method**, **Large Class (God Object)**, or **Duplicated Code** is the first step in knowing *what* to refactor."
+    },
+    {
+        "title": "Extract Method ✂️",
+        "ques": "You have a large function that prints a user's details and then calculates their bill. \n\nApply the **Extract Method** refactoring technique conceptually. How would you change this large function?",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "# BEFORE: One giant function\n# def process_order():\n#    print_details()\n#    calculate_bill()\n#    send_email()\n\n# AFTER: Composed of smaller, named methods\ndef process_order(user, items):\n    print_invoice_header(user)\n    total = calculate_total(items)\n    print_invoice_footer(total)\n\n# Code is moved into these new functions"
+        },
+        "explanation": "**Extract Method** is the most common refactoring. It breaks complexity into small, named chunks, making the main logic read like a table of contents."
+    },
+    {
+        "title": "DRY Principle 🌵",
+        "ques": "What does **DRY** stand for? If you see the same 5 lines of code copied in three different places, what refactoring should you apply?",
+        "answer": {
+            "type": "text",
+            "content": "*   **DRY:** Don't Repeat Yourself.\n*   **Action:** You should apply **Extract Method** (or promote the code to a shared utility class/module). You pull the duplicated code into a single function and call that function in all three places."
+        },
+        "explanation": "Duplication is the enemy of maintainability. If logic changes, you have to fix it in multiple places, increasing the risk of missing one."
+    },
+    {
+        "title": "Renaming Variables 🏷️",
+        "ques": "Why is **Renaming** considered a powerful refactoring? Compare `d = 86400` vs `seconds_in_day = 86400`.",
+        "answer": {
+            "type": "text",
+            "content": "Renaming improves **Readability**. \n*   `d` conveys no meaning and requires the reader to guess (context switching).\n*   `seconds_in_day` explains itself. \n\nGood naming eliminates the need for many comments and reduces cognitive load for anyone reading the code."
+        },
+        "explanation": "Code is read much more often than it is written. Investing time in **meaningful names** pays off dividends in long-term maintenance."
+    },
+    {
+        "title": "Refactoring Legacy Code 🏰",
+        "ques": "You inherit a class with no tests. You want to refactor it. What is the **absolute first step** you must take before changing any logic?",
+        "answer": {
+            "type": "text",
+            "content": "You must **write Characterization Tests** (tests that lock down the *current* behavior of the code, even if it's buggy). You cannot safely refactor code without a safety net of tests to ensure you haven't broken the existing functionality."
+        },
+        "explanation": "Refactoring without tests is just \"changing code\" and is extremely dangerous. Tests provide the **confidence** that your structural changes didn't break the behavior."
+    }
+]

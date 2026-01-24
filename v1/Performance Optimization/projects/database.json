@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Database Indexing 📇",
+        "ques": "Explain what a **Database Index** is using the analogy of a textbook. Why shouldn't you index **every** column in a table?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Analogy:** An index is like the **index at the back of a textbook**. Instead of reading every page (full table scan) to find \"Functions\", you look at the index, find the page number, and go directly there.\n*   **Trade-off:** You shouldn't index everything because indexes take up **space** and slow down **write operations** (INSERT/UPDATE/DELETE). Every time you change data, the index must also be updated."
+        },
+        "explanation": "Indexes drastically speed up **read** operations (SELECT) but come at the cost of storage and slower **write** performance. They should be used strategically on columns frequently used in WHERE clauses."
+    },
+    {
+        "title": "N+1 Query Problem 🔢",
+        "ques": "Describe the **N+1 Query Problem** in the context of ORMs (like Django or Hibernate). How does it affect performance?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Problem:** It happens when code fetches a list of N items (1 query) and then iterates over them, executing an additional query for each item to fetch related data (N queries). Total = N+1 queries.\n*   **Impact:** It floods the database with many small queries instead of one efficient join, causing significant latency. \n    *   *Bad:* Fetch 100 authors. Loop through each to fetch their books. (101 queries)\n    *   *Good:* Fetch 100 authors and their books in one go (eager loading). (1 or 2 queries)"
+        },
+        "explanation": "The N+1 problem is a classic performance killer in application code. Using **Eager Loading** (e.g., `select_related` or `prefetch_related`) typically solves this."
+    },
+    {
+        "title": "Query Execution Plans 🗺️",
+        "ques": "What is `EXPLAIN` (or `EXPLAIN ANALYZE`) in SQL? Write a theoretical SQL command to analyze a query selecting users by email.",
+        "answer": {
+            "type": "code",
+            "lang": "sql",
+            "content": "EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'test@example.com';"
+        },
+        "explanation": "The `EXPLAIN` command reveals the **Query Execution Plan**, showing how the database intends to execute the query (e.g., using an index search vs. a full sequential scan). This is vital for diagnosing slow queries."
+    },
+    {
+        "title": "Database Normalization vs. Denormalization ⚖️",
+        "ques": "Briefly define **Normalization**. Why might you choose to **Denormalize** a database schema for the sake of read performance?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Normalization:** Organizing data to minimize redundancy (duplicates) and improve integrity. It often involves splitting data into many related tables.\n*   **Denormalization:** Intentionally adding redundant data to a table. \n*   **Reason:** Joining 5 tables to get a user's full profile is slow. Storing the most accessed data (like `last_login_date` or `total_orders`) directly on the `User` table (redundantly) allows you to fetch everything in a **single, fast query**."
+        },
+        "explanation": "Normalization is the default for data integrity, but **Denormalization** is a valid optimization strategy for read-heavy systems to avoid expensive **JOINS**."
+    },
+    {
+        "title": "Connection Pooling 🏊",
+        "ques": "Opening a new database connection for every API request is expensive. Explain **Connection Pooling**. How does it improve performance?",
+        "answer": {
+            "type": "text",
+            "content": "A **Connection Pool** is a cache of database connections maintained so that the connections can be reused when future requests to the database are required. instead of performing the expensive TCP handshake and authentication for every request, the application borrows an already-open connection from the pool, uses it, and returns it. This significantly reduces **latency** and overhead."
+        },
+        "explanation": "**Connection establishment** is resource-intensive. Pooling reuses existing resources, allowing the application to handle higher concurrency with less overhead."
+    }
+]

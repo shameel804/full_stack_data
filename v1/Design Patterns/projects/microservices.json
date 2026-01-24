@@ -1,0 +1,47 @@
+[
+    {
+        "title": "CQRS Pattern 🔍",
+        "ques": "What does **CQRS** (Command Query Responsibility Segregation) separate? Why is this useful for performance?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Separation:** It splits the application into two parts: one for **Commands** (Writes/Updates) and one for **Queries** (Reads).\n*   **Performance:** You can scale them independently. You might have 1 server for writes (consistency focus) and 10 replicas for reads (speed focus). The Read model can be denormalized for speed."
+        },
+        "explanation": "CQRS adds complexity but allows massive scaling for read-heavy applications."
+    },
+    {
+        "title": "Saga Pattern 📜",
+        "ques": "In a microservices architecture, you can't use a distributed transaction (ACID) across services easily. How does the **Saga Pattern** handle a long-running transaction (e.g., Booking a trip: Flight -> Hotel -> Car)?",
+        "answer": {
+            "type": "text",
+            "content": "A Saga interacts with a sequence of local transactions. If one step fails (e.g., Hotel checks out full), the Saga executes **Compensating Transactions** to undo the previous steps (e.g., Cancel the Flight booking)."
+        },
+        "explanation": "Sagas manage **eventual consistency**. Instead of rolling back a DB transaction, you run specific \"undo\" logic."
+    },
+    {
+        "title": "Even Sourcing 🎞️",
+        "ques": "Instead of storing the *current state* of an object (e.g., \"Account Balance: $100\"), what does **Event Sourcing** store?",
+        "answer": {
+            "type": "text",
+            "content": "It stores the **sequence of events** that led to the current state (e.g., \"Deposited $50\", \"Withdrew $10\", \"Deposited $60\"). The current state is derived by replaying all events from the beginning."
+        },
+        "explanation": "This provides a perfect audit trail and allows you to travel back in time to see the state at any point."
+    },
+    {
+        "title": "Circuit Breaker 🔌",
+        "ques": "Why is the **Circuit Breaker** pattern essential when calling external services?",
+        "answer": {
+            "type": "text",
+            "content": "If a service is down or slow, keep trying requests can exhaust your own system's resources (threads). A Circuit Breaker detects the failures and \"trips\" (opens), immediately returning an error for subsequent calls without waiting for a timeout. This gives the failing service time to recover."
+        },
+        "explanation": "It strictly prevents **Cascading Failures** where one down service takes down the entire mesh."
+    },
+    {
+        "title": "BFF Pattern 👯",
+        "ques": "What is the **Backend For Frontend (BFF)** pattern?",
+        "answer": {
+            "type": "text",
+            "content": "It involves creating separate backend services for specific frontends. \n*   One BFF for the **Mobile App** (returns small, JSON payloads).\n*   One BFF for the **Web Dashboard** (returns rich data).\n\nThis optimizes the API for the specific needs of that client."
+        },
+        "explanation": "One general-purpose API often serves no one well. BFFs tailor the experience."
+    }
+]

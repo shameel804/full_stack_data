@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Over-fetching problem 🏋️‍♀️",
+        "ques": "Mobile networks are erratic. Why is **GraphQL** often preferred over REST for identifying the \"Over-fetching\" problem on mobile?",
+        "answer": {
+            "type": "text",
+            "content": "In REST, hitting `/users/1` might return 50 fields (including address, history, etc.). The mobile view might only need the `name`. \n**GraphQL** allows the client to request *exactly* what it needs (`{ user(id: 1) { name } }`), saving massive amounts of bandwidth."
+        },
+        "explanation": "Saving bandwidth also saves battery life and improves perceived speed."
+    },
+    {
+        "title": "Pagination Strategy 📄",
+        "ques": "A mobile \"Infinite Scroll\" list needs data. Which pagination strategy is safer for real-time feeds: **Offset-based** (`limit=10, offset=20`) or **Cursor-based** (`after=pointer_id`)?",
+        "answer": {
+            "type": "text",
+            "content": "**Cursor-based.** \nOffset-based allows duplicates or skipped items if new items are added to the top of the list while the user is scrolling. Cursor-based (using a unique ID) ensures the user fetches the \"next 10 items after X\" reliably."
+        },
+        "explanation": "Mobile feeds change constantly. Offset pagination is brittle for dynamic data."
+    },
+    {
+        "title": "Compression (GZIP/Brotli) 🗜️",
+        "ques": "Why is enabling **Brotli** or **GZIP** compression on your API responses critical for mobile clients?",
+        "answer": {
+            "type": "text",
+            "content": "JSON is text, and text compresses extremely well (often 80-90% reduction). \nSending 100KB of uncompressed JSON over a 3G network is slow. Compressing it to 10KB makes the app feel snappy."
+        },
+        "explanation": "It's a one-line config change on the server with massive impact."
+    },
+    {
+        "title": "Caching Headers 💾",
+        "ques": "How can the `Cache-Control` header reduce API calls from a mobile app?",
+        "answer": {
+            "type": "text",
+            "content": "By setting `Cache-Control: max-age=3600`, you tell the mobile OS's networking layer: \"Save this response for 1 hour.\"\nIf usage code requests the same URL 5 minutes later, the OS returns the cached data instantly without even opening a radio connection."
+        },
+        "explanation": "The fastest network request is the one you don't make."
+    },
+    {
+        "title": "Optimistic UI 🔮",
+        "ques": "What is **Optimistic UI**? How does it handle API latency?",
+        "answer": {
+            "type": "text",
+            "content": "When a user likes a post, the app updates the UI (turns the heart red) **immediately**, without waiting for the API to confirm success. \nIt assumes success. If the API eventually fails, the app rolls back the change and shows an error. This makes the app feel instant."
+        },
+        "explanation": "It masks network latency, providing a native-grade feel."
+    }
+]

@@ -1,0 +1,48 @@
+[
+    {
+        "title": "What is a CDN? 🌍",
+        "ques": "Define **CDN** (Content Delivery Network). How does it use **Edge Servers** to speed up content delivery to a user in Tokyo accessing a site hosted in New York?",
+        "answer": {
+            "type": "text",
+            "content": "*   **CDN:** A network of geographically distributed servers that work together to provide fast delivery of Internet content.\n*   **Mechanism:** When the Tokyo user requests the site, the DNS routes them to the nearest **Edge Server** (likely in or near Tokyo). This server delivers the cached content. The data travels a predictable short distance (intra-city) rather than crossing the ocean to the Origin Server in New York, drastically reducing **latency**."
+        },
+        "explanation": "CDNs minimize the physical distance between the client and the server, which is the primary factor in reducing network latency."
+    },
+    {
+        "title": "CDN for Static Assets 📦",
+        "ques": "Why are **static assets** (images, CSS, JS) the best candidates for CDN caching compared to dynamic API responses? Give **one reason**.",
+        "answer": {
+            "type": "text",
+            "content": "**Static assets** do not change frequently and are the same for every user. This makes them ideal for caching because once an Edge Server has a copy, it can serve millions of users without needing to check with the origin server. Dynamic content (like a user profile) changes often and is unique, making it harder to cache effectively."
+        },
+        "explanation": "Offloading static assets to a CDN frees up the **Origin Server** to focus its resources on processing dynamic logic and database queries."
+    },
+    {
+        "title": "Cache Hit Ratio 🎯",
+        "ques": "A key metric for CDNs is the **Cache Hit Ratio**. \n1.  What does it mean if you have a 95% Cache Hit Ratio?\n2.  What happens during the remaining 5% of requests?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **95% Hit Ratio:** It means 95 out of every 100 requests satisfy the user directly from the CDN Edge Server, providing the fastest response.\n2.  **The 5% (Misses):** These requests are **Cache Misses**. The Edge Server must forward the request to the Origin Server to fetch the content, cache it for future use, and then serve it to the user. This is slower."
+        },
+        "explanation": "A high **Cache Hit Ratio** is the goal. It indicates the CDN is effectively shielding the origin infrastructure and delivering maximum speed."
+    },
+    {
+        "title": "Geo-Distribution and Redundancy 🛡️",
+        "ques": "Apart from speed, how does a CDN improve website **availability** and **redundancy** during a Distributed Denial of Service (DDoS) attack?",
+        "answer": {
+            "type": "text",
+            "content": "Because CDNs have a massive distributed infrastructure, they can absorb huge amounts of traffic. In a **DDoS attack**, the malicious traffic is distributed across hundreds of edge servers globally, preventing the concentrated load from overwhelming the single **Origin Server**. If one edge server goes down, traffic is automatically rerouted to the next available one."
+        },
+        "explanation": "CDNs act as a massive **shield**, absorbing traffic spikes and malicious requests that would otherwise crash a standalone server."
+    },
+    {
+        "title": "CDN URL Rewrite (Concept) 🔗",
+        "ques": "To use a CDN, you often change your asset URLs. \nOriginal: `https://mysite.com/logo.png`\nCDN: `https://cdn.mysite.com/logo.png`\n\nWrite a pseudo-code function `get_asset_url(filename)` that returns the CDN URL if a global flag `USE_CDN` is True, otherwise returns the local URL.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "USE_CDN = True\nCDN_DOMAIN = \"https://my-cdn.com\"\nLOCAL_DOMAIN = \"/static\"\n\ndef get_asset_url(filename):\n    if USE_CDN:\n        # Point to the CDN copy\n        return f\"{CDN_DOMAIN}/{filename}\"\n    else:\n        # Point to local server\n        return f\"{LOCAL_DOMAIN}/{filename}\"\n\nprint(get_asset_url(\"header.jpg\"))"
+        },
+        "explanation": "Integrating a CDN often involves a simple config change that prefixes asset paths with the **CDN Hostname**. The browser then fetches those specific files from the edge network."
+    }
+]

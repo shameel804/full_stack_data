@@ -1,0 +1,48 @@
+[
+    {
+        "title": "The Handshake 🤝",
+        "ques": "A WebSocket connection starts with an HTTP request. What specific header must be present to switch from HTTP to WebSocket?",
+        "answer": {
+            "type": "text",
+            "content": "`Connection: Upgrade`\n`Upgrade: websocket`\n`Sec-WebSocket-Key: ...`"
+        },
+        "explanation": "The server responds with `101 Switching Protocols`, and from that moment on, the connection is a raw TCP socket, not HTTP."
+    },
+    {
+        "title": "Full-Duplex Communication 🗣️",
+        "ques": "WebSockets provide **Full-Duplex** communication. What does this mean?",
+        "answer": {
+            "type": "text",
+            "content": "It means both the Client and the Server can send data to each other **independently** and **simultaneously**. \nThe server doesn't have to wait for a request to send a message."
+        },
+        "explanation": "This simulates a real physical conversation, unlike walkie-talkies (Half-Duplex) or mail (Simplex/Request-Response)."
+    },
+    {
+        "title": "Framing 🖼️",
+        "ques": "Unlike HTTP (which sends headers + body), WebSockets send data in **Frames**. Why?",
+        "answer": {
+            "type": "text",
+            "content": "Frames allow splitting a large message into smaller chunks. This prevents a large file transfer from blocking the control messages (like Pings/Pongs). It also minimizes overhead (2-14 bytes per frame) compared to HTTP headers (hundreds of bytes)."
+        },
+        "explanation": "WebSockets are optimized for small, frequent messages."
+    },
+    {
+        "title": "Heartbeats (Ping/Pong) 💓",
+        "ques": "Why is it important to implement a **Ping/Pong** (Heartbeat) mechanism in a WebSocket application?",
+        "answer": {
+            "type": "text",
+            "content": "To detect **Ghost Connections**. \nSometimes a connection drops (e.g., Wi-Fi cut) without generating a proper TCP Close event. Without a heartbeat, the server assumes the client is online and keeps sending messages into the void."
+        },
+        "explanation": "Heartbeats also keep the connection alive through aggressive firewalls/proxies that close idle connections."
+    },
+    {
+        "title": "Unexpected Disconnection 🔌",
+        "ques": "Write a snippet of JavaScript logic to handle a WebSocket disconnect on the client side.",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "const socket = new WebSocket('ws://api.com');\n\nsocket.onclose = (event) => {\n  console.warn(\"Disconnected!\", event.reason);\n  // Reconnection Logic\n  setTimeout(() => {\n    console.log(\"Attempting reconnect...\");\n    connect(); // Function that re-initializes connection\n  }, 3000);\n};"
+        },
+        "explanation": "Production WebSocket code must *always* include automatic reconnection logic with exponential backoff."
+    }
+]

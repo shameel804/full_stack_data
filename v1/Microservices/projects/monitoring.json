@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Distributed Tracing 🕵️‍♀️",
+        "ques": "In a microservices world, one request might hop through 5 services. If it fails, how does **Distributed Tracing** (like Jaeger or Zipkin) help you debug?",
+        "answer": {
+            "type": "text",
+            "content": "It assigns a unique **Trace ID** to the incoming request. This ID is passed along to every service in the chain. \nThe tracing tool visualizes the full journey as a waterfall, specifically highlighting *which* service caused the latency or error."
+        },
+        "explanation": "Without tracing, finding a bug in a murder mystery of 50 interdependent services is nearly impossible."
+    },
+    {
+        "title": "Centralized Logging 🪵",
+        "ques": "Why is SSH-ing into a server to check `server.log` impractical in Microservices? What is the alternative (ELK Stack)?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Problem:** You have hundreds of containers, often ephemeral. You don't know where the log is.\n*   **Solution:** All services ship their logs to a central collector (like **Elasticsearch-Logstash-Kibana**). You search one dashboard to see logs from *any* service."
+        },
+        "explanation": "Logs must be aggregated to be searchable and correlatable."
+    },
+    {
+        "title": "Metrics vs. Logs 📊",
+        "ques": "Distinguish between **Metrics** and **Logs**. Which one would you use to trigger an alert if CPU usage > 90%?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Logs:** Textual events describing something that happened (e.g., \"User X logged in\"). Good for detailed debugging.\n*   **Metrics:** Numerical data measured over time (e.g., CPU %, Request Count). Good for trends and alerting.\n\nYou use **Metrics** for the CPU alert."
+        },
+        "explanation": "Metrics are cheap to store and fast to query (Prometheus). Logs are expensive."
+    },
+    {
+        "title": "The Three Pillars of Observability 🏛️",
+        "ques": "What are the three pillars of **Observability**?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Metrics:** What is happening? (Numbers)\n2.  **Logs:** Why is it happening? (Events/Text)\n3.  **Traces:** Where is it happening? (Context/Path)"
+        },
+        "explanation": "Together, they give you a complete picture of your distributed system's internal state."
+    },
+    {
+        "title": "Synthetic Monitoring 🤖",
+        "ques": "Passive monitoring watches real user traffic. What is **Synthetic Monitoring**?",
+        "answer": {
+            "type": "text",
+            "content": "It involves a script/bot that artificially simulates user actions (e.g., \"Login -> Add to Cart -> Checkout\") periodically (e.g., every 5 mins). \nIt alerts you if the core flow is broken, even if no real users are currently on the site (e.g., at 3 AM)."
+        },
+        "explanation": "It ensures uptime and functionality proactively."
+    }
+]

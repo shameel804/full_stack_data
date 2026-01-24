@@ -1,0 +1,47 @@
+[
+    {
+        "title": "FCM and APNs 🔔",
+        "ques": "To send a push notification to an iOS device and an Android device, do you talk to them directly?",
+        "answer": {
+            "type": "text",
+            "content": "No. You talk to the Gatekeepers.\n*   **Android:** Firebase Cloud Messaging (FCM).\n*   **iOS:** Apple Push Notification service (APNs).\n\nYour backend sends the message to FCM/APNs, and *they* maintain the persistent connection to the phone to deliver it."
+        },
+        "explanation": "This saves battery. The phone maintains only ONE open socket to Apple/Google, rather than one socket per app."
+    },
+    {
+        "title": "Push vs. Poll 🥊",
+        "ques": "Why are Push Notifications more battery-efficient than the app waking up every 10 minutes to check for updates?",
+        "answer": {
+            "type": "text",
+            "content": "Waking up the CPU and Radio every 10 minutes prevents the phone from entering \"Deep Sleep\" (Doze mode), draining battery. \nPush allows the OS to handle the waiting efficiently, waking the specific app only when a message actually arrives."
+        },
+        "explanation": "Always prefer Push for event-driven updates."
+    },
+    {
+        "title": "Silent Push 🤫",
+        "ques": "What is a **Silent Push** (Background Notification) used for?",
+        "answer": {
+            "type": "text",
+            "content": "It delivers data to the app **without** showing a visible banner to the user. \nUse case: Tell the app \"New content is available\". The app wakes up in the background, downloads the new content, and goes back to sleep. When the user opens the app later, the content is already there."
+        },
+        "explanation": "It improves perceived performance."
+    },
+    {
+        "title": "Permission Model ✋",
+        "ques": "On iOS (and newer Android), what must happen before you can send a push to a user?",
+        "answer": {
+            "type": "text",
+            "content": "You must explicitly ask for **Permission**. \nThe user sees a system dialog (\"App would like to send you notifications\"). If they say No, you are permanently blocked unless they go to Settings."
+        },
+        "explanation": "Timing is key. Don't ask on first launch. Ask when the user performs an action that benefits from notifications."
+    },
+    {
+        "title": "Tokens 🎟️",
+        "ques": "What is a **Device Token**? Why do you need to store it on your backend?",
+        "answer": {
+            "type": "text",
+            "content": "A Device Token is a unique address for that specific app installation on that specific phone. \nWhen you want to message User A, you look up their Device Token in your DB and tell FCM/APNs: \"Send this payload to token X\"."
+        },
+        "explanation": "Tokens can change (e.g., app reinstall). You must keep them updated."
+    }
+]

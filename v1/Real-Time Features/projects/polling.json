@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Short Polling ⏱️",
+        "ques": "Describe **Short Polling**. Why is it considered inefficient for a chat app?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Mechanism:** Client sends a request every X seconds (e.g., setTimout loop). Server responds immediately, usually with \"No new data\".\n*   **Inefficiency:** It creates a massive number of empty HTTP requests (overhead) and has a built-in delay (latency) equal to the polling interval."
+        },
+        "explanation": "Short polling is basically saying \"Are we there yet?\" every 2 seconds."
+    },
+    {
+        "title": "Long Polling 🎣",
+        "ques": "How does **Long Polling** improve upon Short Polling?",
+        "answer": {
+            "type": "text",
+            "content": "In Long Polling, the client sends a request, but the **server holds the connection open** (doesn't respond) until it actually has new data (or a timeout occurs). \nOnce the client gets the data (or timeout), it immediately sends a new request."
+        },
+        "explanation": "This reduces empty requests and lowers latency significantly because the data is sent the moment it arrives."
+    },
+    {
+        "title": "Connection Hold Time ⏳",
+        "ques": "What is the primary server-side challenge with Long Polling?",
+        "answer": {
+            "type": "text",
+            "content": "Resource consumption. The server must keep thousands of TCP connections / threads open, waiting for events. In traditional blocking web servers (like Apache PHP), this would consume all available threads quickly."
+        },
+        "explanation": "Long Polling requires an event-driven, non-blocking server (like Node.js or Nginx) to scale."
+    },
+    {
+        "title": "When to use Polling? 🤷",
+        "ques": "If WebSockets are better, why would you ever choose Polling (Short or Long) today?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Simplicity:** Short polling is trivial to implement (simple AJAX). If you only need updates every 5 minutes (e.g., Weather widget), efficiency doesn't matter.\n2.  **Reliability:** Works over strict corporate firewalls/proxies that might block WebSocket connections."
+        },
+        "explanation": "Always choose the simplest tool for the job. Not everything needs <50ms latency."
+    },
+    {
+        "title": "HTTP Overhead 📉",
+        "ques": "Calculate the overhead. If HTTP headers are 500 bytes and you poll every 1 second for 1 minute (60 requests), how much data is wasted just on headers?",
+        "answer": {
+            "type": "text",
+            "content": "500 bytes * 60 requests = **30,000 bytes (~30 KB)**.\n\nCompare to WebSockets, which would send ~2 bytes of frame overhead per message, costing almost nothing if idle."
+        },
+        "explanation": "For mobile users on data plans, polling drains battery and data."
+    }
+]

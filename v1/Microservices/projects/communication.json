@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Synchronous vs. Asynchronous 🚦",
+        "ques": "Microservices communicate in two main ways. Compare **Synchronous** (e.g., HTTP/REST) and **Asynchronous** (e.g., Messaging) communication in terms of **coupling**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Synchronous (HTTP):** Service A waits for Service B to respond. This creates **tight temporal coupling** (if B is down, A fails or hangs).\n*   **Asynchronous (Messaging):** Service A sends a message to a queue and moves on. It doesn't care if Service B processes it now or later. This is **loose coupling**."
+        },
+        "explanation": "Async communication improves resilience but adds complexity (managing queues, eventual consistency)."
+    },
+    {
+        "title": "REST API 🌐",
+        "ques": "REST over HTTP is the standard sync protocol. What is the fundamental resource identifier in REST?",
+        "answer": {
+            "type": "text",
+            "content": "The **URI** (Uniform Resource Identifier). \nREST treats everything as a resource (e.g., `/users/123/orders`), manipulated via standard HTTP verbs (GET, POST, PUT, DELETE)."
+        },
+        "explanation": "Its widespread adoption and simplicity make it the default choice for inter-service communication."
+    },
+    {
+        "title": "gRPC 🚀",
+        "ques": "What is **gRPC**, and why might you choose it over REST for internal service-to-service communication?",
+        "answer": {
+            "type": "text",
+            "content": "**gRPC** (Google Remote Procedure Call) uses **Protocol Buffers** (binary format) instead of JSON (text). \nIt is significantly **faster** and more compact, supports bi-directional streaming, and generates typed client code automatically. It is ideal for high-performance internal traffic."
+        },
+        "explanation": "REST is great for public APIs (human-readable), but gRPC excels at efficient machine-to-machine chatter."
+    },
+    {
+        "title": "Message Brokers ✉️",
+        "ques": "In an event-driven architecture, what role does a **Message Broker** (like RabbitMQ or Kafka) play?",
+        "answer": {
+            "type": "text",
+            "content": "The Message Broker acts as an intermediary. \nService A (Publisher) sends a message to the Broker. The Broker ensures delivery to Service B (Consumer). Service A and B never speak directly to each other, decoupling their availability."
+        },
+        "explanation": "If the Consumer crashes, the Broker holds the message until it comes back online, ensuring no data loss."
+    },
+    {
+        "title": "Eventual Consistency ⏳",
+        "ques": "When using asynchronous messaging, you lose immediate consistency. What is **Eventual Consistency**?",
+        "answer": {
+            "type": "text",
+            "content": "It means the system will become consistent *over time*, but not instantly. \nExample: You post a comment. It appears in your feed instantly (local UI update), but might take 5 seconds to propagate via queues to your friend's feed. Eventually, everyone sees the same data."
+        },
+        "explanation": "Accepting this lag is the trade-off for high availability and scalability in distributed systems."
+    }
+]

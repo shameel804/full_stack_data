@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Containerization (Docker) 🐳",
+        "ques": "How does **Docker** solve the \"It works on my machine\" problem for Microservices?",
+        "answer": {
+            "type": "text",
+            "content": "Docker packages the application along with *all* its dependencies (OS libraries, runtime, environment variables) into a single standard unit (Image). \nThis image runs exactly the same way on a developer's laptop as it does on the production server."
+        },
+        "explanation": "Containers provide immutable infrastructure. You ship the environment, not just the code."
+    },
+    {
+        "title": "Kubernetes (K8s) Orchestration ☸️",
+        "ques": "If you have 100 Docker containers, you need a way to manage them. What role does **Kubernetes** play?",
+        "answer": {
+            "type": "text",
+            "content": "Kubernetes is a container orchestrator. It automates:\n1.  **Placement:** Deciding which server runs which container.\n2.  **Scaling:** Adding more replicas when load is high.\n3.  **Healing:** Restarting crashed containers automatically."
+        },
+        "explanation": "K8s is the operating system of the cloud. It manages the lifecycle of your microservices fleet."
+    },
+    {
+        "title": "Blue-Green Deployment 🔵🟢",
+        "ques": "Explain the **Blue-Green Deployment** strategy. How does it eliminate downtime?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Blue:** The currently running Production version.\n2.  **Green:** You deploy the new version alongside Blue, but no traffic goes to it yet.\n3.  **Switch:** You test Green. If it works, you switch the Load Balancer to point traffic from Blue to Green instantly.\n\nIf anything goes wrong, you switch back to Blue instantly."
+        },
+        "explanation": "It reduces risk by having a fully working environment ready to take over."
+    },
+    {
+        "title": "Canary Deployment 🐤",
+        "ques": "Why is **Canary Deployment** considered safer than a big bang rollout?",
+        "answer": {
+            "type": "text",
+            "content": "In a Canary release, you route only a small percentage (e.g., 5%) of users to the new version. \nIf there is a bug, only 5% of users are affected. You monitoring metrics, and if stable, you gradually increase traffic to 100%."
+        },
+        "explanation": "It limits the \"Blast Radius\" of a bad deployment."
+    },
+    {
+        "title": "Service Mesh (Istio) 🕸️",
+        "ques": "A **Service Mesh** injects a proxy (sidecar) next to every service. What functionality does this move *out* of your application code?",
+        "answer": {
+            "type": "text",
+            "content": "It abstracts network logic. \nInstead of your Java code doing retry logic, TLS encryption, or metric collection, the **Sidecar Proxy** handles it transparently. Your code just says \"Call Service B,\" and the mesh handles the *how*."
+        },
+        "explanation": "Service Mesh decouples operations (security, traffic control) from development (business logic)."
+    }
+]

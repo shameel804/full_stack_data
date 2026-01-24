@@ -1,38 +1,49 @@
 [
     {
-        "title": "Git Hooks",
-        "ques": "What are **Git Hooks**?",
+        "title": "Understanding Hooks 🪝",
+        "ques": "Where are Git hooks scripts stored inside a repository?",
         "answer": {
             "type": "text",
-            "content": "Scripts that run automatically before or after specific Git events.\n\nThey live in the `.git/hooks` directory. They are local to the repository."
+            "content": "**.git/hooks**"
         },
-        "explanation": "Written in Shell, Python, Ruby, etc."
+        "explanation": "Git hooks are scripts found in the **`.git/hooks`** directory. They are triggered by certain actions like committing or pushing."
     },
     {
-        "title": "Pre-Commit Hook",
-        "ques": "What is a common use case for a **pre-commit** hook?",
+        "title": "Pre-commit Hook 🛑",
+        "ques": "You want to run a script to check for linting errors **before** a commit is created. If the script fails, the commit should be aborted.\n\nWhich hook should you use?",
         "answer": {
             "type": "text",
-            "content": "**Linting and Formatting.**\n\nYou can set up a hook that runs a linter (like ESLint) before allowing a commit. If the linter fails, the commit is aborted. This prevents bad code from entering the history."
+            "content": "**pre-commit**"
         },
-        "explanation": "Tools like Husky make this easy to configure."
+        "explanation": "The **pre-commit** hook runs before the commit message editor is opened. It's often used to inspect the snapshot that's about to be committed."
     },
     {
-        "title": "Pre-Push Hook",
-        "ques": "What is a **pre-push** hook often used for?",
+        "title": "Making Hooks Executable 🏃",
+        "ques": "You created a new file `.git/hooks/pre-commit`.\n\nWhat permission must you give this file for Git to run it?",
         "answer": {
-            "type": "text",
-            "content": "**Running Tests.**\n\nIt runs before `git push` completes. If your unit tests fail, the push is blocked. This ensures that you never break the build on the remote server."
+            "type": "code",
+            "lang": "bash",
+            "content": "chmod +x .git/hooks/pre-commit"
         },
-        "explanation": "It guards the shared repository."
+        "explanation": "Hook scripts must be **executable** to be run by Git."
     },
     {
-        "title": "Sharing Hooks",
-        "ques": "Since hooks live in `.git/hooks` (which is not committed), how do teams share them?",
+        "title": "Bypassing Hooks ⏩",
+        "ques": "You need to commit a work-in-progress immediately and want to skip the pre-commit checks.\n\nAdd the flag to **bypass** the verify hooks during commit.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git commit --no-verify"
+        },
+        "explanation": "**`--no-verify`** (or **`-n`**) bypasses the pre-commit and commit-msg hooks."
+    },
+    {
+        "title": "Post-Merge Hook 🏁",
+        "ques": "Which hook runs **after** a successful merge command is completed?",
         "answer": {
             "type": "text",
-            "content": "They use a tool like **Husky** or a setup script.\n\nHusky configures Git to look for hooks in a committed directory (like `.husky/`) instead of the local `.git/hooks` folder, ensuring all developers run the same checks."
+            "content": "**post-merge**"
         },
-        "explanation": "Hooks are local-only by default."
+        "explanation": "The **post-merge** hook runs after a successful merge, which can be useful for restoring data or permissions."
     }
 ]

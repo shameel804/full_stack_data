@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Why HTTPS? 🔒",
+        "ques": "HTTP is sent in plaintext. HTTPS uses TLS encryption. What specific risk does HTTPS prevent when a user is using public Wi-Fi?",
+        "answer": {
+            "type": "text",
+            "content": "It prevents **Man-in-the-Middle (MitM)** attacks (or eavesdropping). Without HTTPS, anyone on the same Wi-Fi network can sniff packets and read passwords, credit card numbers, or session cookies in clear text."
+        },
+        "explanation": "Encryption ensures that even if the data is intercepted, it looks like gibberish to the attacker."
+    },
+    {
+        "title": "The Handshake 🤝",
+        "ques": "Briefly describe the **TLS Handshake**. What is its purpose?",
+        "answer": {
+            "type": "text",
+            "content": "The handshake establishes a secure connection.\n1.  **Agreement:** Client and Server agree on encryption algorithms (cipher suite).\n2.  **Authentication:** Server sends its Certificate. Client verifies it is valid and trusted.\n3.  **Key Exchange:** They securely generate a shared session key (symmetric key) to encrypt the actual data transfer."
+        },
+        "explanation": "This complex process happens instantly before any HTTP data is exchanged."
+    },
+    {
+        "title": "HSTS (Strict Transport Security) 🚦",
+        "ques": "You have HTTPS set up, but a user types `http://example.com` (no 's'). They are redirected to HTTPS, but that first request was insecure. How does **HSTS** fix this?",
+        "answer": {
+            "type": "text",
+            "content": "**HSTS** is a header (`Strict-Transport-Security`) that tells the browser: \"For the next year (max-age), NEVER try to connect to me via HTTP. Automatically convert all requests to HTTPS locally before sending them.\"\nThis prevents protocol downgrade attacks."
+        },
+        "explanation": "HSTS closes the window of opportunity during that initial redirect, ensuring the browser enforces security."
+    },
+    {
+        "title": "Certificate Authorities (CA) 🏛️",
+        "ques": "Why does your browser trust `google.com`'s certificate? What role does a **Certificate Authority** play?",
+        "answer": {
+            "type": "text",
+            "content": "A **CA** (like Let's Encrypt or DigiCert) is a trusted third party. They verify the website owner's identity and digitally sign their certificate. Your browser/OS comes pre-installed with a list of trusted CAs. It trusts the website because a trusted CA vouched for it."
+        },
+        "explanation": "The **Chain of Trust** is fundamental. If you create a self-signed certificate, the browser warns the user because no trusted CA has signed it."
+    },
+    {
+        "title": "Mixed Content 🌗",
+        "ques": "What is **Mixed Content** and why does the browser block it?",
+        "answer": {
+            "type": "text",
+            "content": "Mixed content occurs when a secure HTTPS page loads insecure resources (like scripts or images over HTTP). \n*   **Passive Mixed Content (Images):** Might be allowed but degrades privacy.\n*   **Active Mixed Content (Scripts/Iframes):** Is BLOCKED because an attacker could modify the insecure script to take over the entire secure page."
+        },
+        "explanation": "A page is only as secure as its weakest link. One insecure script compromises the security of the whole HTTPS session."
+    }
+]

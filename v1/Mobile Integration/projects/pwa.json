@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The Service Worker 👷",
+        "ques": "What is a **Service Worker** in the context of a PWA? Where does it sit in the network stack?",
+        "answer": {
+            "type": "text",
+            "content": "A Service Worker is a JavaScript file that runs in the background, separate from the web page. \nIt acts as a **Client-Side Proxy** sitting between the Web App and the Network. It can intercept network requests and serve cached responses immediately, enabling offline support."
+        },
+        "explanation": "It empowers the developer to programmatically control the cache, unlike the standard browser cache."
+    },
+    {
+        "title": "Web App Manifest 📜",
+        "ques": "To make a PWA installable (Add to Home Screen), you need a `manifest.json`. name three key properties usually defined in this file.",
+        "answer": {
+            "type": "text",
+            "content": "1.  `name` / `short_name`: The name of the app on the home screen.\n2.  `icons`: Array of images for the app icon.\n3.  `start_url`: Which page to open when launched.\n4.  `display`: Mode (e.g., `standalone` to remove the browser URL bar)."
+        },
+        "explanation": "The manifest allows the browser to treat the website like a native Operating System application."
+    },
+    {
+        "title": "App Shell Architecture 🐚",
+        "ques": "Explain the **App Shell** model. What part of the app is cached immediately?",
+        "answer": {
+            "type": "text",
+            "content": "The **App Shell** is the minimal HTML/CSS/JS required to power the user interface (header, sidebar, loader). \nThis shell is cached by the Service Worker so it loads **instantly** on repeat visits. Dynamic content (data) is then fetched or loaded from a local database."
+        },
+        "explanation": "This mimics native apps: the UI is installed locally, only data is fetched over the network."
+    },
+    {
+        "title": "Offline-First Strategy 🚫",
+        "ques": "What does **Offline-First** mean functionality-wise? If a user submits a form while offline, what should the PWA do?",
+        "answer": {
+            "type": "text",
+            "content": "It means the app assumes zero connectivity. \nIf a user submits a form, the app should save the data to **IndexedDB/LocalStorage** and register a **Background Sync** task. When the internet returns, the Service Worker automatically sends the data to the server."
+        },
+        "explanation": "The user should never see a \"No Internet\" dinosaur. The app should works, just with stale data."
+    },
+    {
+        "title": "PWA vs. Native 🥊",
+        "ques": "What is one major hardware limitation of PWAs compared to Native Apps (iOS/Android)?",
+        "answer": {
+            "type": "text",
+            "content": "Limited access to low-level hardware. \nWhile improvements are happening (Project Fugu), PWAs generally cannot access features like Geofencing, Advanced Bluetooth, Contacts, or SMS reading as freely as native apps due to browser security models."
+        },
+        "explanation": "If you need deep hardware integration (e.g., an AR game), Native is still better."
+    }
+]

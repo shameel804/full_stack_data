@@ -1,39 +1,52 @@
 [
     {
-        "title": "Git Stash",
-        "ques": "What is the purpose of `git stash`?",
-        "answer": {
-            "type": "text",
-            "content": "To temporarily save changes that are not ready to be committed, so you can switch branches.\n\n**Scenario:** You are working on Branch A. Boss says 'Fix urgent bug on Branch B'. You can't switch because you have messy files. `git stash` saves them on a stack and cleans your directory."
-        },
-        "explanation": "You can 'pop' them back later."
-    },
-    {
-        "title": "Stash Pop vs Apply",
-        "ques": "What is the difference between `git stash pop` and `git stash apply`?",
-        "answer": {
-            "type": "text",
-            "content": "*   **`pop`:** Applies the changes and **removes** them from the stash list.\n*   **`apply`:** Applies the changes but **keeps** them in the stash list (useful if you want to apply the same stash to multiple branches)."
-        },
-        "explanation": "Pop is generally used more often."
-    },
-    {
-        "title": "Stashing Untracked Files",
-        "ques": "Does `git stash` save new files that haven't been staged?",
-        "answer": {
-            "type": "text",
-            "content": "**No, not by default.**\n\nIt only stashes modified tracked files. To stash untracked (new) files, you must use `git stash -u` (include untracked)."
-        },
-        "explanation": "A common 'Gotcha' is losing a new file when cleaning."
-    },
-    {
-        "title": "Listing Stashes",
-        "ques": "How do you see what you have stashed?",
+        "title": "Stashing Changes 📦",
+        "ques": "You have uncommitted changes but need to switch branches urgently.\n\nSave your current changes to a temporary storage area (stash) so your working directory is clean.",
         "answer": {
             "type": "code",
             "lang": "bash",
-            "content": "git stash list"
+            "content": "git stash"
         },
-        "explanation": "Stashes look like `stash@{0}: WIP on master...`"
+        "explanation": "**`git stash`** records the current state of the working directory and the index, then reverts to a clean working directory."
+    },
+    {
+        "title": "Applying Stashed Changes 📤",
+        "ques": "You want to bring back the changes you stashed but **keep** them in the stash list for later use as well.\n\nApply the latest stash.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git stash apply"
+        },
+        "explanation": "**`git stash apply`** restores the most recently stashed changes but leaves them in the stash stack."
+    },
+    {
+        "title": "Popping Stashed Changes 🍾",
+        "ques": "You want to restore the latest stash and **remove** it from the stash list immediately.\n\nPop the stash.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git stash pop"
+        },
+        "explanation": "**`git stash pop`** restores the changes and drops them from the stack in one go."
+    },
+    {
+        "title": "Cherry-Picking 🍒",
+        "ques": "You need a specific commit `abc1234` from the `dev` branch to be applied to your current `main` branch, without merging the whole branch.\n\n**Cherry-pick** this commit.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git cherry-pick abc1234"
+        },
+        "explanation": "**`git cherry-pick <commit>`** applies the changes introduced by some existing commit to your current branch as a new commit."
+    },
+    {
+        "title": "Selective Staging 🤏",
+        "ques": "You have many changes in a file but only want to stage **some** of them (hunks).\n\nStart the interactive staging mode.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git add -p"
+        },
+        "explanation": "**`git add -p`** (patch) allows you to interactively choose which hunks of code to stage."
     }
 ]

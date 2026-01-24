@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Understanding Performance Bottlenecks 🐢",
+        "ques": "Explain what a **performance bottleneck** is in the context of web development. Give **one example** of a client-side bottleneck and **one example** of a server-side bottleneck.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Definition:** A performance bottleneck is a specific point in a system or application that limits overall performance, often because it cannot handle the workload as fast as other parts of the system.\n*   **Client-Side Example:** Large, unoptimized images or excessive JavaScript execution blocking the main thread, causing slow page rendering.\n*   **Server-Side Example:** Slow database queries or an overloaded CPU that delays processing requests and sending responses."
+        },
+        "explanation": "Identifying **bottlenecks** is the first step in optimization. Examples like **rendering delays** (client) or **database latency** (server) illustrate common areas where performance degrades."
+    },
+    {
+        "title": "Profiling: The First Step 🕵️‍♂️",
+        "ques": "Why is **profiling** crucial before attempting any optimization? Write a Python script (conceptually representing a backend check) that measures the execution time of a function using the `time` module.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "import time\n\ndef heavy_computation():\n    # Simulating a task\n    total = 0\n    for i in range(1000000):\n        total += i\n    return total\n\nstart_time = time.time()\nresult = heavy_computation()\nend_time = time.time()\n\nprint(f\"Result: {result}\")\nprint(f\"Execution Time: {end_time - start_time} seconds\")"
+        },
+        "explanation": "Profiling helps locate the exact source of slowness rather than guessing. Often, optimization without profiling leads to **premature optimization**, which can waste effort and complicate code without significant gains."
+    },
+    {
+        "title": "Benchmarking vs. Monitoring 📊",
+        "ques": "Distinguish between **benchmarking** and **monitoring**. \n\n1.  Which one is typically done **before** deployment to compare performance against a standard?\n2.  Which one is continuous and happens **in production**?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Benchmarking:** This is done **before** deployment (or in a controlled environment). It involves running specific tests to compare the application's performance metrics (like Requests Per Second) against a baseline or a standard.\n2.  **Monitoring:** This is continuous and happens **in production**. It involves tracking the system's health, error rates, and response times in real-time to detect issues as they arise with real users."
+        },
+        "explanation": "**Benchmarking** measures potential performance under controlled conditions, while **monitoring** observes actual performance and health in the live environment."
+    },
+    {
+        "title": "Identifying Slow Database Queries 🐌",
+        "ques": "You suspect a database query is the bottleneck. In a Python function, simulate measuring the time taken for a specific operation. If it takes longer than **0.5 seconds**, print a warning \"**Slow Query Detected!**\".",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "import time\nimport random\n\ndef mock_db_query():\n    # Simulate variable query duration\n    duration = random.uniform(0.1, 0.8)\n    time.sleep(duration)\n    return duration\n\nelapsed = mock_db_query()\nprint(f\"Query time: {elapsed:.4f}s\")\n\nif elapsed > 0.5:\n    print(\"**Slow Query Detected!**\")\nelse:\n    print(\"Query performance is acceptable.\")"
+        },
+        "explanation": "Setting **thresholds** for performance metrics allows developers to flag specific operations that exceed acceptable latency, prompting further investigation or optimization like **indexing** or **caching**."
+    },
+    {
+        "title": "Chrome DevTools: The Network Tab 🌐",
+        "ques": "In the context of client-side profiling, what specific information does the **Network tab** in Chrome DevTools provide that helps identify bottlenecks? List **three** key metrics you can observe there.",
+        "answer": {
+            "type": "text",
+            "content": "The **Network tab** records network activity, showing resources that are being downloaded, by whom, and for how long. Key metrics include:\n1.  **Waterfall:** Visualizes the timeline of resource loading, identifying blocking resources.\n2.  **Size (Transfer/Resource):** Shows the size of files (compressed vs. uncompressed) to identify heavy assets.\n3.  **Time (TTFB/Download):** Breaks down the total request time into phases like waiting for the server (Time To First Byte) and content download time."
+        },
+        "explanation": "The **Network tab** is essential for diagnosing load-time issues. High **TTFB** suggests server issues, while large **file sizes** point to needing compression or minification."
+    }
+]

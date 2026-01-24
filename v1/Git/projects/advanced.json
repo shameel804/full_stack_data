@@ -1,38 +1,52 @@
 [
     {
-        "title": "Cherry-Picking",
-        "ques": "What does `git cherry-pick [commit-hash]` do?",
+        "title": "Reverting Commits ↩️",
+        "ques": "You made a mistake in the last commit `abc1234` and pushed it. You need to undo the changes by creating a **new commit** that reverses the effect of the bad commit.\n\nRevert the commit `abc1234`.",
         "answer": {
-            "type": "text",
-            "content": "It takes a specific commit from one branch and applies it **onto** your current branch.\n\n**Use Case:** You fixed a bug on `feature-branch` but you want *only that fix* on `main` right now, without merging the rest of the unfinished feature."
+            "type": "code",
+            "lang": "bash",
+            "content": "git revert abc1234"
         },
-        "explanation": "It creates a new commit ID."
+        "explanation": "**`git revert`** creates a *new* commit that is the exact opposite of the specified commit, making it safe for shared history."
     },
     {
-        "title": "Git Bisect",
-        "ques": "What is `git bisect` used for?",
+        "title": "Soft Reset 🍦",
+        "ques": "You want to undo your last commit but **keep** your changes in the staging area to fix them.\n\nPerform a **soft reset** to the previous commit (`HEAD~1`).",
         "answer": {
-            "type": "text",
-            "content": "It uses a **Binary Search** algorithm to find the commit that introduced a bug.\n\nYou tell Git: \"This commit is bad, that commit (weeks ago) was good.\" Git checks out the middle commit. You test it. If good, it searches the newer half. If bad, it searches the older half."
+            "type": "code",
+            "lang": "bash",
+            "content": "git reset --soft HEAD~1"
         },
-        "explanation": "Finds the culprit in minutes instead of hours."
+        "explanation": "**`git reset --soft`** moves the HEAD pointer back but leaves your index (staging area) and working directory unchanged."
     },
     {
-        "title": "Reset Hard vs Soft",
-        "ques": "What is the difference between `git reset --hard` and `git reset --soft`?",
+        "title": "Hard Reset 🔨",
+        "ques": "You want to completely discard all local changes and commits, resetting your branch to match `origin/main` exactly.\n\nPerform a **hard reset**.",
         "answer": {
-            "type": "text",
-            "content": "*   **`--hard`:** Moves HEAD back **and** destroys all changes in your Staging Area and Working Directory. (Dangerous).\n*   **`--soft`:** Moves HEAD back but keeps your changes in the Staging Area, so you can re-commit them."
+            "type": "code",
+            "lang": "bash",
+            "content": "git reset --hard origin/main"
         },
-        "explanation": "Use Soft to squash the last 3 commits into 1."
+        "explanation": "**`git reset --hard`** resets the index and working tree. Any changes to tracked files in the working tree since `<commit>` are discarded."
     },
     {
-        "title": "Reflog",
-        "ques": "You accidentally deleted a branch or hard-reset a commit. Is it lost forever?",
+        "title": "Adding Submodules 🧩",
+        "ques": "You want to include another Git repository as a subdirectory in your project.\n\nAdd the repository `https://github.com/lib/lib.git` as a submodule in the folder `libs/my-lib`.",
         "answer": {
-            "type": "text",
-            "content": "**Usually No.**\n\n`git reflog` tracks every movement of HEAD. Even if a commit is not reachable by any branch, it is still in the Reflog for a few days (gc period). You can find the SHA hash and check it out again."
+            "type": "code",
+            "lang": "bash",
+            "content": "git submodule add https://github.com/lib/lib.git libs/my-lib"
         },
-        "explanation": "The safety net of Git."
+        "explanation": "**`git submodule add`** clones an external repository into a specific path and adds it to the `.gitmodules` file."
+    },
+    {
+        "title": "Git Flow Initialization 🌊",
+        "ques": "Which command initializes a repository to use the **Gitflow** branching model with default branch names?",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git flow init"
+        },
+        "explanation": "**`git flow init`** sets up the configuration for the git-flow branching model, asking for branch naming conventions."
     }
 ]

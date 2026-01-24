@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Same-Origin Policy (SOP) 🏠",
+        "ques": "CORS exists to relax the **Same-Origin Policy**. What is the default rule of SOP regarding JavaScript making fetch requests?",
+        "answer": {
+            "type": "text",
+            "content": "By default, SOP **blocks** JavaScript on one origin (e.g., `siteA.com`) from reading data returned by a request to a different origin (e.g., `siteB.com/api`). This prevents malicious sites from reading your private emails or banking data."
+        },
+        "explanation": "SOP is the cornerstone of web security. CORS is a mechanism to **safely** bypass it when you *want* to share data (e.g., your public API)."
+    },
+    {
+        "title": "The CORS Header 🔓",
+        "ques": "If `client.com` tries to fetch data from `api.server.com`, what header must `api.server.com` include in the response to allow the browser to release the data?",
+        "answer": {
+            "type": "text",
+            "content": "`Access-Control-Allow-Origin: https://client.com`\n\n(Or `*` for public APIs, though typically restricted for security)."
+        },
+        "explanation": "The browser makes the request, but it hides the response from JavaScript unless this specific header confirms that the server consents to sharing."
+    },
+    {
+        "title": "Preflight Requests 🛫",
+        "ques": "What is a **Preflight Request** (`OPTIONS` method) and when does the browser send it?",
+        "answer": {
+            "type": "text",
+            "content": "A Preflight is a safety check. The browser sends an `OPTIONS` request **before** the actual request if the request is \"complex\" (e.g., uses custom headers like `Authorization` or methods like `PUT/DELETE`). \nThe server must respond approving the methods and headers before the browser sends the actual data."
+        },
+        "explanation": "Preflight ensures that servers unaware of CORS aren't subjected to complex requests (like DELETE) they didn't expect from cross-origin sources."
+    },
+    {
+        "title": "Credentials and Wildcards 💳",
+        "ques": "Can you set `Access-Control-Allow-Origin: *` if your request includes credentials (cookies/auth headers)?",
+        "answer": {
+            "type": "text",
+            "content": "**No.** If `withCredentials` is true, the wildcard `*` is forbidden. The server must explicitly echo back the specific origin: `Access-Control-Allow-Origin: https://client.com`."
+        },
+        "explanation": "This is a safety mechanism. Allowing \"everyone\" (`*`) to access an API that accepts user credentials would be a massive security hole."
+    },
+    {
+        "title": "Server-Side vs. Client-Side 🖥️",
+        "ques": "You see a CORS error in your browser console. Can you fix this by changing your frontend JavaScript code (e.g., adding headers)?",
+        "answer": {
+            "type": "text",
+            "content": "**No.** CORS is enforced by the **browser** based on the **server's** headers. You must configure the backend server to send the correct `Access-Control-Allow-Origin` headers. You cannot bypass it from the client side (unless you use a proxy)."
+        },
+        "explanation": "CORS errors are server configuration issues, not client code bugs."
+    }
+]

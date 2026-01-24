@@ -1,40 +1,52 @@
 [
     {
-        "title": "DVCS",
-        "ques": "Git is a **DVCS**. What does that stand for?",
-        "answer": {
-            "type": "text",
-            "content": "**Distributed Version Control System.**\n\nUnlike centralized systems (SVN), every developer has a **full copy** of the entire project history on their local machine. You can commit, diff, and log without an internet connection."
-        },
-        "explanation": "No single point of failure."
-    },
-    {
-        "title": "Stage vs Commit",
-        "ques": "What is the difference between `git add` and `git commit`?",
-        "answer": {
-            "type": "text",
-            "content": "*   **`git add`:** Moves changes from the Working Directory to the **Staging Area** (Index). You pick what you want to save.\n*   **`git commit`:** Takes a snapshot of the **Staging Area** and saves it permanently to the **Local Repository** history."
-        },
-        "explanation": "It's a two-step process to allow partial commits."
-    },
-    {
-        "title": "git status",
-        "ques": "Which command shows you which files are staged, unstaged, or untracked?",
+        "title": "Initializing a Repository 🚀",
+        "ques": "You are starting a new project and want to track your changes using Git.\n\n1.  Create a new directory named **`my_project`**.\n2.  Navigate into it.\n3.  **Initialize** a new Git repository inside this directory.\n\nWrite the sequence of commands to achieve this.",
         "answer": {
             "type": "code",
             "lang": "bash",
-            "content": "git status"
+            "content": "mkdir my_project\ncd my_project\ngit init"
         },
-        "explanation": "This is the most frequently run command."
+        "explanation": "**`git init`** is the command used to start a new Git repository. It creates a hidden **`.git`** folder where Git stores all version control information."
     },
     {
-        "title": "git log",
-        "ques": "How do you view the history of commits?",
+        "title": "Checking Status and Staging Files 📝",
+        "ques": "You have created a file named **`index.html`** in your repository.\n\n1.  Check the current **status** of your repository to see untracked files.\n2.  **Add** the file `index.html` to the staging area so it can be committed.\n\nProvide the commands for these two steps.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git status\ngit add index.html"
+        },
+        "explanation": "**`git status`** shows the state of the working directory and staging area. **`git add`** moves changes from the working directory to the staging area, preparing them to be committed."
+    },
+    {
+        "title": "Committing Changes 💾",
+        "ques": "You have staged `index.html` and are ready to save a snapshot of your project.\n\nCreate a **commit** with the message **\"Initial commit\"**.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git commit -m \"Initial commit\""
+        },
+        "explanation": "**`git commit`** captures a snapshot of the currently staged changes. The **`-m`** flag allows you to pass a commit message directly in the command line."
+    },
+    {
+        "title": "Viewing Commit History 📜",
+        "ques": "You want to see a history of the commits you have made in the repository.\n\nWhat command should you run to display the **commit log**, showing commit hashes, authors, dates, and messages?",
         "answer": {
             "type": "code",
             "lang": "bash",
             "content": "git log"
         },
-        "explanation": "Use `git log --oneline` for a cleaner summary."
+        "explanation": "**`git log`** displays the commit history. It helps you track changes, see who made them, and when they were made."
+    },
+    {
+        "title": "The Workflow: Edit, Add, Commit 🔄",
+        "ques": "You have modified `index.html` and also created a new file `style.css`.\n\n1.  Add **all** changes (both modified and new files) to the staging area.\n2.  Commit these changes with the message **\"Add styles and update content\"**.\n\nWrite the commands.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git add .\ngit commit -m \"Add styles and update content\""
+        },
+        "explanation": "Using **`git add .`** stages all changes in the current directory and subdirectories. Then, **`git commit`** saves these staged changes to the history."
     }
 ]

@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Continuous Integration (CI) 🔄",
+        "ques": "How does TDD fit into a **Continuous Integration** (CI) pipeline? What happens to the build pipeline if a developer commits code with a failing test?",
+        "answer": {
+            "type": "text",
+            "content": "In a CI pipeline, the test suite runs automatically on every commit/push. If a developer commits code that causes a test to fail:\n1.  The build is marked as **Failed** (Red).\n2.  The team is notified.\n3.  Deployment is typically blocked until the tests pass again."
+        },
+        "explanation": "CI automates the \"run tests\" part of TDD at the team level, ensuring that the main codebase (\"main\" branch) always remains in a **Green** state."
+    },
+    {
+        "title": "Code Coverage ☂️",
+        "ques": "What does **Code Coverage** measure? Is 100% code coverage a guarantee that your software is bug-free? Why or why not?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Code Coverage:** Measures the percentage of code lines (or branches) that were executed while the test suite ran.\n*   **100% != Bug-free:** No. You can have 100% coverage but still have bugs if:\n    1.  The tests don't check for edge cases.\n    2.  The assertions are weak (e.g., just checking `result != null` instead of the correct value).\n    3.  Integration issues exist that unit tests miss."
+        },
+        "explanation": "Coverage is a useful metric to find **untested code**, but it is a poor metric for **quality**. High coverage is necessary but not sufficient."
+    },
+    {
+        "title": "Test Anatomy: AAA Pattern 🅰️",
+        "ques": "Good tests follow the **AAA** pattern. Expand the acronym and briefly explain each step.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Arrange:** Set up the test environment, initialize objects, and create inputs (mocks/data).\n2.  **Act:** Invoke the method or function you are testing.\n3.  **Assert:** Verify that the output matches the expected result."
+        },
+        "explanation": "The **AAA** structure keeps tests clean and readable. Visual separation between these three phases helps other developers understand what is being tested quickly."
+    },
+    {
+        "title": "One Assert Per Test? 1️⃣",
+        "ques": "A distinct best practice is \"One Assert Per Test\". Why is this generally recommended over having 10 assertions in a single test function?",
+        "answer": {
+            "type": "text",
+            "content": "If you have 10 assertions and the **first one fails**, the test stops there. You never get feedback on the other 9. \n\nBy splitting them into separate tests (or using \"Soft Assertions\"), you identify exactly **which** behavior is broken immediately, and multiple failures can be reported simultaneously."
+        },
+        "explanation": "Tests should be **focused**. When a test fails, the reason should be obvious from the test name alone, without needing to debug which line of the test failed."
+    },
+    {
+        "title": "Test Pollution ☣️",
+        "ques": "What is **Test Pollution**? Why is it crucial that Test A does not rely on the state left behind by Test B?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Test Pollution:** When side effects from one test (like a database entry or a global variable change) leak into and affect other tests.\n*   **Importance:** Tests must be **Independent** and **Isolated**. If order matters (A must run before B), the suite becomes brittle. You should be able to run tests in random order and get the same results."
+        },
+        "explanation": "Proper **Teardown** (cleanup) or using fresh mocks for every test prevents pollution and flaky tests."
+    }
+]

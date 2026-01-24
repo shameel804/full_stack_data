@@ -1,39 +1,51 @@
 [
     {
-        "title": "Fast-Forward Merge",
-        "ques": "What is a **Fast-Forward** merge?",
+        "title": "Merging a Branch 🔗",
+        "ques": "You are on the **`main`** branch and want to incorporate changes from **`feature-login`**.\n\nRun the command to **merge** `feature-login` into your current branch.",
         "answer": {
-            "type": "text",
-            "content": "It happens when the target branch has **not diverged** from the source branch.\n\nGit simply moves the pointer of the target branch forward to the latest commit of the source branch. No new 'Merge Commit' is created."
+            "type": "code",
+            "lang": "bash",
+            "content": "git merge feature-login"
         },
-        "explanation": "It produces a linear history."
+        "explanation": "**`git merge <branch>`** combines the history of the specified branch into the current branch."
     },
     {
-        "title": "Merge Conflicts",
-        "ques": "When does a **Merge Conflict** occur?",
+        "title": "Rebasing a Branch 🏗️",
+        "ques": "You are working on **`feature-login`** and want to update it with the latest changes from **`main`** by moving your commits to the tip of `main`.\n\nRun the command to **rebase** your current branch onto `main`.",
         "answer": {
-            "type": "text",
-            "content": "It occurs when two branches have changed the **same part of the same file** in different ways, and Git cannot automatically decide which one is correct.\n\nThe developer must manually edit the file to resolve the conflict."
+            "type": "code",
+            "lang": "bash",
+            "content": "git rebase main"
         },
-        "explanation": "Git inserts conflict markers `<<<<<<<`, `=======`, `>>>>>>>`."
+        "explanation": "**`git rebase main`** rewrites your project history by creating new commits for each commit in your original branch, placing them after the last commit of `main`."
     },
     {
-        "title": "Abort Merge",
-        "ques": "If you are in the middle of a conflict and want to bail out, what command do you run?",
+        "title": "Aborting a Conflict 🛑",
+        "ques": "You started a merge, but ran into too many conflicts and want to back out.\n\nWhat command stops the merge and returns the repository to its state before the merge started?",
         "answer": {
             "type": "code",
             "lang": "bash",
             "content": "git merge --abort"
         },
-        "explanation": "This returns the repository to the state it was in before the merge started."
+        "explanation": "**`git merge --abort`** stops the merge process and resets the state of the repository to how it was before the merge command was run."
     },
     {
-        "title": "Rebase vs Merge",
-        "ques": "What is the main difference between **Rebase** and Merge?",
+        "title": "Interactive Rebase (Squashing) 🥞",
+        "ques": "You have 5 small commits on your branch and want to combine them into a cleaner history before merging.\n\nStart an **interactive rebase** for the last 5 commits.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "git rebase -i HEAD~5"
+        },
+        "explanation": "**`git rebase -i`** opens an interactive editor where you can squash, fixup, reword, or drop commits to clean up your history."
+    },
+    {
+        "title": "Rebase vs. Merge 🤔",
+        "ques": "You want to integrate changes from `main` into your feature branch **without** creating an extra merge commit, keeping a **linear history**.\n\nWhich command should you use: `git merge main` or `git rebase main`?",
         "answer": {
             "type": "text",
-            "content": "*   **Merge:** Preserves history exactly as it happened. Creates a 'Merge Commit' if branches diverged.\n*   **Rebase:** Rewrites history. It takes your commits and 're-plays' them on top of the target branch, creating a perfectly linear history without merge commits."
+            "content": "**`git rebase main`**"
         },
-        "explanation": "Golden Rule: Never rebase a public branch."
+        "explanation": "**Rebasing** creates a linear history by moving your commits on top of the base branch, whereas **merging** preserves the history structure but creates a merge commit."
     }
 ]

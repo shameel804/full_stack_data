@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The Gateway Role 🚪",
+        "ques": "What is an **API Gateway**? Why is it better than letting a client (mobile app) talk to 50 microservices directly?",
+        "answer": {
+            "type": "text",
+            "content": "An **API Gateway** is a single entry point for all client requests. It effectively acts as a \"Front Door.\"\nInstead of the client needing to know 50 endpoints and handle 50 auth tokens, it calls `api.example.com`, and the Gateway routes the request to the correct internal service."
+        },
+        "explanation": "It simplifies the client code and hides the messy internal architecture from the outside world."
+    },
+    {
+        "title": "Cross-Cutting Concerns ✂️",
+        "ques": "An API Gateway is the perfect place to handle **cross-cutting concerns**. List three responsibilities typically offloaded to the Gateway.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Authentication:** verifying the JWT token once at the door.\n2.  **Rate Limiting:** Stopping one user from spamming requests.\n3.  **SSL Termination:** Handling HTTPS decryption so internal services can speak HTTP."
+        },
+        "explanation": "Implement these once at the edge rather than re-implementing them in every single Java, Node, and Go service you own."
+    },
+    {
+        "title": "Gateway vs. Load Balancer ⚖️",
+        "ques": "How is an API Gateway different from a simple Layer 4 **Load Balancer**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Load Balancer:** Distributes traffic based on IP/Port (lower level). It doesn't understand the content.\n*   **Gateway:** Operates at Layer 7 (Application). It understands paths (`/users`), headers, and can even transform the message body (e.g., XML to JSON)."
+        },
+        "explanation": "Gateways are \"smart\" routers; Load Balancers are \"dumb\" pipes (generally speaking)."
+    },
+    {
+        "title": "Back-End for Front-End (BFF) 👯",
+        "ques": "The **BFF** pattern suggests having multiple Gateways. Why would you want a separate Gateway for Mobile vs. Web?",
+        "answer": {
+            "type": "text",
+            "content": "Mobile devices have smaller screens and limited bandwidth. \nThe Mobile BFF can aggregate data and return a minimal JSON response, while the Web BFF returns a full, rich dataset. This optimizes the experience for each specific client type."
+        },
+        "explanation": "One size fits all APIs often lead to over-fetching on mobile."
+    },
+    {
+        "title": "Rate Limiting 🛑",
+        "ques": "Why is **Rate Limiting** crucial at the Gateway level? How does it protect the internal services?",
+        "answer": {
+            "type": "text",
+            "content": "It protects services from being overwhelmed (DoS). \nIf the Gateway sees User A hitting the API 1000 times a second, it returns `429 Too Many Requests` immediately. The internal services never even see that traffic, staying healthy for other users."
+        },
+        "explanation": "The Gateway acts as a bouncer, keeping the club inside from getting too crowded."
+    }
+]

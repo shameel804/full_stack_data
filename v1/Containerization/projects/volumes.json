@@ -1,0 +1,51 @@
+[
+    {
+        "title": "Creating a Volume 💾",
+        "ques": "You want to create a persistent storage area managed by Docker that is not tied to a specific container.\n\nCreate a named volume called **`db_data`**.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "docker volume create db_data"
+        },
+        "explanation": "**`docker volume create`** creates a managed volume that can be mounted into containers to persist data."
+    },
+    {
+        "title": "Bind Mounts 🔗",
+        "ques": "You want to mount the current directory `$(pwd)` on your host to `/app` inside the container for live reloading during development.\n\nWrite the flag to add to `docker run`.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "-v $(pwd):/app"
+        },
+        "explanation": "**` -v (or --mount)`** maps a host file or directory to a location inside the container. This is called a **bind mount**."
+    },
+    {
+        "title": "Data Persistence 🏠",
+        "ques": "If you delete a container that was using a **named volume**, does the data in the volume get deleted automatically?",
+        "answer": {
+            "type": "text",
+            "content": "**No**"
+        },
+        "explanation": "Volumes are independent of container lifecycles. They persist until explicitly removed using `docker volume rm`."
+    },
+    {
+        "title": "Listing Volumes 📋",
+        "ques": "You want to see all the volumes currently present on your Docker host.\n\nWrite the command.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "docker volume ls"
+        },
+        "explanation": "**`docker volume ls`** lists all named volumes on the system."
+    },
+    {
+        "title": "Cleaning Up 🧹",
+        "ques": "You want to remove all volumes that are **not** currently used by any container.\n\nWrite the command.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "docker volume prune"
+        },
+        "explanation": "**`docker volume prune`** deletes all unused volumes, freeing up disk space."
+    }
+]

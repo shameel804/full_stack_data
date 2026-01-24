@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Confirming the Red Phase 🔴",
+        "ques": "You are starting the 'Red' phase. You write a test for a `User` class to have a property `is_active`. What exact error should you expect when you run this test for the first time?",
+        "answer": {
+            "type": "text",
+            "content": "You should expect an **AttributeError** (or compilation error in typed languages) stating that the `User` object has no attribute or property named `is_active`."
+        },
+        "explanation": "This confirms the **Red** state. The interface you designed in the test does not exist yet. If it failed with an assertion error (e.g., `False != True`), it would imply the property exists but has the wrong value."
+    },
+    {
+        "title": "The Green Phase Goal 🟢",
+        "ques": "In the 'Green' phase, your only goal is to make the test pass. Is it acceptable to copy-paste code or use hardcoded values (magic numbers) during this phase? Why?",
+        "answer": {
+            "type": "text",
+            "content": "**Yes**, it is acceptable (and often encouraged). The priority is to get the bar to **Green** as quickly as possible to confirm the test matches the implementation logic. Validating correctness comes before improving quality."
+        },
+        "explanation": "clean code is imperative, but that belongs in the **Refactor** phase. In the **Green** phase, \"sin\" is allowed to get immediate feedback."
+    },
+    {
+        "title": "Refactoring: What Changes? 🔵",
+        "ques": "During the 'Refactor' phase, you change the code's structure (e.g., extracting a method). What must **NOT** change during this process?",
+        "answer": {
+            "type": "text",
+            "content": "The **external behavior** of the code must not change. The tests must remain **Green** throughout the entire refactoring process."
+        },
+        "explanation": "Refactoring improves internal design without altering external behavior. If a test turns **Red** during refactoring, you have introduced a regression or changed behavior."
+    },
+    {
+        "title": "Cycle Application Example 🚲",
+        "ques": "You need to write a function `capitalize_words(sentence)`. \n1.  **Red:** Write a test case for the input `\"hello world\"` expecting `\"Hello World\"`.\n2.  **Green:** Write a Python implementation (doesn't have to be perfect) to pass it.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "# Test (Conceptual)\n# assert capitalize_words(\"hello world\") == \"Hello World\"\n\n# Green Implementation\ndef capitalize_words(sentence):\n    # Using title() is a quick way to get Green\n    return sentence.title()"
+        },
+        "explanation": "This simple implementation passes the test. Later, if you add a test case like `\"marketing's job\"` (which `title()` might mishandle as `\"Marketing'S Job\"`), you would need to loop back to Red and write a more robust implementation."
+    },
+    {
+        "title": "When to Stop Refactoring? 🛑",
+        "ques": "When do you know you are finished with the 'Refactor' phase and should move back to the 'Red' phase for the next feature?",
+        "answer": {
+            "type": "text",
+            "content": "You are finished refactoring when:\n1.  Code is clean (no duplication, readable naming).\n2.  All tests are passing.\n3.  You cannot see any obvious design improvements (\"code smells\") relevant to the current complexity."
+        },
+        "explanation": "Refactoring is not an endless pursuit of perfection. Once the code is **clean enough** and expressive, it's time to add new value (next test)."
+    }
+]

@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Singleton Definition 1️⃣",
+        "ques": "What is the primary purpose of the **Singleton** pattern? Name one common use case.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Purpose:** To ensure a class has only **one instance** and provide a global point of access to it.\n*   **Use Case:** A **Database Connection Pool** or a **Logger**. You typically want only one pool managing connections or one logger writing to a file to avoid conflicts."
+        },
+        "explanation": "Singleton restricts instantiation. It's useful when exactly one object is needed to coordinate actions across the system."
+    },
+    {
+        "title": "Implementing Singleton (Python) 🐍",
+        "ques": "In Python, a common way to implement Singleton is by overriding the `__new__` method. Write a basic `Singleton` class that returns the same instance every time it is instantiated.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "class Singleton:\n    _instance = None\n\n    def __new__(cls, *args, **kwargs):\n        if not cls._instance:\n            # Create the instance if it doesn't exist\n            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)\n        return cls._instance\n\na = Singleton()\nb = Singleton()\nprint(a is b)  # True"
+        },
+        "explanation": "`__new__` controls instance creation. By checking a class-level variable `_instance`, we ensure we never create a second object."
+    },
+    {
+        "title": "Thread Safety Issues 🧵",
+        "ques": "In a multi-threaded application, what can go wrong with the standard \"lazy initialization\" of a Singleton (checking `if instance is null`)?",
+        "answer": {
+            "type": "text",
+            "content": "If two threads check `if instance is null` at the exact same moment, both might see it as true. Both threads will then proceed to create an instance, resulting in **two** different instances. This violates the Singleton pattern."
+        },
+        "explanation": "To fix this, you need **locking** (mutex) or eager initialization to ensure the instance is created atomically."
+    },
+    {
+        "title": "Singleton vs. Static Class 🗿",
+        "ques": "How is a **Singleton** different from a class full of **static methods**?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Singleton:** It is a real **Object**. It can implement interfaces, inherit from other classes, and be passed around as a parameter. Its initialization can be lazy.\n*   **Static Class:** It is just a namespace for functions. It cannot be passed as an object or implement interfaces (in most languages)."
+        },
+        "explanation": "Singletons offer more flexibility (polymorphism) than static classes."
+    },
+    {
+        "title": "Why is it considered an Anti-Pattern? 👿",
+        "ques": "Many developers consider Singleton an **Anti-Pattern**. Why? What problem does it introduce for **Unit Testing**?",
+        "answer": {
+            "type": "text",
+            "content": "Singletons introduce **Global State**. \nIn testing, global state is dangerous because it persists between tests. If Test A modifies the Singleton, Test B might fail unexpectedly because it received the altered state (Test Pollution). It also makes mocking difficult because the code is tightly coupled to the global instance."
+        },
+        "explanation": "Dependency Injection is often preferred over Singletons to maintain testability and avoid hidden dependencies."
+    }
+]

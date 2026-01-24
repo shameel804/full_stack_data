@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Gherkin Syntax Basics 🥒",
+        "ques": "BDD often uses **Gherkin syntax** to define behavior. Write a simple scenario for \"Login\" using the keywords **Given**, **When**, and **Then**.",
+        "answer": {
+            "type": "code",
+            "lang": "gherkin",
+            "content": "Feature: User Login\n\n  Scenario: Successful Login with Valid Credentials\n    Given the user is on the login page\n    When the user enters valid username \"user1\" and password \"pass123\"\n    And clicks the login button\n    Then the user should be redirected to the dashboard\n    And should see a welcome message \"Welcome, user1\""
+        },
+        "explanation": "**Gherkin** uses plain English to describe application behavior in a structured way that both non-technical stakeholders and automated tools (like Cucumber) can understand."
+    },
+    {
+        "title": "Features and Scenarios 🎬",
+        "ques": "In the context of BDD/Cucumber files (typically `.feature` files): \n1.  What is a **Feature**?\n2.  What is a **Scenario**?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Feature:** A high-level description of a software capability (e.g., \"Shopping Cart Checkout\"). It groups related scenarios.\n2.  **Scenario:** A specific example or path through that feature (e.g., \"Checkout with an empty cart\" or \"Checkout with a discount code\"). It acts as a single test case."
+        },
+        "explanation": "Features provide the **context**, while scenarios provide the **executable specifications**."
+    },
+    {
+        "title": "Step Definitions 👣",
+        "ques": "The Gherkin file is just text. How does a tool like **Cucumber** run it? Explain what a **Step Definition** is.",
+        "answer": {
+            "type": "text",
+            "content": "A **Step Definition** is a block of code (in Python, Java, JS, etc.) that maps a Gherkin sentence (like \"Given the user is on the login page\") to actual automation code (e.g., `driver.get(\"/login\")`). Regular expressions are often used to match the text."
+        },
+        "explanation": "Step definitions bridge the gap between human-readable requirements and machine-executable code."
+    },
+    {
+        "title": "BDD vs. TDD 🤝",
+        "ques": "How does **BDD** complement **TDD**? Does it replace it?",
+        "answer": {
+            "type": "text",
+            "content": "BDD does **not** replace TDD. \n*   **BDD:** Focuses on the **system behavior** and acceptance criteria from the user's perspective (high-level).\n*   **TDD:** Focuses on the **unit implementation** and code design (low-level).\n\nTypically, a BDD scenario (failing acceptance test) drives the outer loop, while TDD loops are used to implement the components needed to satisfy that scenario."
+        },
+        "explanation": "BDD helps ensure you are building the **right thing** (validation), while TDD ensures you are building the **thing right** (verification)."
+    },
+    {
+        "title": "Scenario Outline 📝",
+        "ques": "Gherkin allows validation of multiple data sets using a **Scenario Outline**. Write a conceptual outline to test a login with different user roles.",
+        "answer": {
+            "type": "code",
+            "lang": "gherkin",
+            "content": "Scenario Outline: Login with different roles\n  Given the user enters username <username>\n  When they login\n  Then they should see the <portal> link\n\n  Examples:\n    | username | portal |\n    | admin    | /admin |\n    | client   | /shop  |"
+        },
+        "explanation": "**Scenario Outlines** combined with **Examples** tables allow you to run the same test logic against multiple inputs, reducing duplication."
+    }
+]

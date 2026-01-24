@@ -1,0 +1,47 @@
+[
+    {
+        "title": "SSE Directionality ➡️",
+        "ques": "Server-Sent Events (SSE) allows real-time communication. Is it **Full-Duplex** or **Unidirectional**?",
+        "answer": {
+            "type": "text",
+            "content": "**Unidirectional.** \nThe Server can push data to the Client, but the Client *cannot* send data back over the same SSE connection (it must use standard `fetch`/POST)."
+        },
+        "explanation": "SSE is perfect for \"Feed\" scenarios: Stock Tickers, News Feeds, Sports Scores."
+    },
+    {
+        "title": "Underlying Protocol 📜",
+        "ques": "Does SSE use a custom protocol like WebSockets?",
+        "answer": {
+            "type": "text",
+            "content": "**No.** SSE is just standard **HTTP**. \nIt uses a standardized Content-Type: `text/event-stream`. The server keeps the HTTP response open sending chunks of text starting with `data:`."
+        },
+        "explanation": "Because it's just HTTP, it works easily through most firewalls and load balancers without special config."
+    },
+    {
+        "title": "Automatic Reconnection 🔁",
+        "ques": "What feature does the browser's native `EventSource` API handle automatically that WebSockets do not?",
+        "answer": {
+            "type": "text",
+            "content": "**Automatic Reconnection.** \nIf the connection drops, the browser automatically tries to reconnect after a few seconds without you writing any code."
+        },
+        "explanation": "This makes SSE much simpler to implement on the client side for basic use cases."
+    },
+    {
+        "title": "Event IDs 🆔",
+        "ques": "In an SSE stream, the server can send an `id: 123` field. How does this help reliability during a reconnection?",
+        "answer": {
+            "type": "text",
+            "content": "If the connection drops after event `123` and reconnects, the browser will automatically send a header `Last-Event-ID: 123`. The server can seeing this and send any *missed* messages (124, 125) that happened while the client was offline."
+        },
+        "explanation": "This provides \"Resumable\" streams out of the box."
+    },
+    {
+        "title": "Binary Data 0️⃣1️⃣",
+        "ques": "What is the major limitation of SSE regarding data format?",
+        "answer": {
+            "type": "text",
+            "content": "SSE is strictly **Text-based** (UTF-8). \nYou cannot send raw binary data (like an image blob) easily. You would have to Base64 encode it, which bloats the size by ~33%. WebSockets support binary directly."
+        },
+        "explanation": "If you are streaming video or heavy binary data, SSE is the wrong choice."
+    }
+]

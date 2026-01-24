@@ -1,0 +1,48 @@
+[
+    {
+        "title": "What is a Mock? 🎭",
+        "ques": "In TDD, why do we use **mock objects**? Explain their role in the context of **dependencies** like a Database or an API.",
+        "answer": {
+            "type": "text",
+            "content": "**Mocks** are simulated objects that mimic the behavior of real objects in controlled ways. We use them to **isolate** the unit being tested. For example, when testing a `UserService`, you mock the `Database` so that:\n1.  The test runs instantly (no network/disk I/O).\n2.  You don't accidentally modify real data.\n3.  You can force specific error states (e.g., database timeout) to test error handling."
+        },
+        "explanation": "Isolation is key in unit testing. If a test fails, it should be because the **unit logic** is broken, not because the database server is down."
+    },
+    {
+        "title": "Python `unittest.mock` Example 🐍",
+        "ques": "Use Python's `unittest.mock` to mock a function `get_weather_data()` so that it returns `{'temp': 20}` instead of making a real API call. Write a test function that verifies this behavior.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "from unittest.mock import MagicMock\n\n# The function to ignore (simulated)\ndef get_weather_data():\n    raise Exception(\"Real API call attempted!\")\n\n# Design the test\ndef test_weather_display():\n    # 1. Create the mock\n    mock_weather = MagicMock(return_value={'temp': 20})\n    \n    # 2. Use the mock (conceptually injecting it)\n    result = mock_weather()\n    \n    # 3. Assertions\n    assert result['temp'] == 20\n    print(\"Test Passed: Weather data mocked successfully.\")\n\ntest_weather_display()"
+        },
+        "explanation": "`MagicMock` allows you to define return values (`return_value`) or side effects arbitrarily, giving you full control over the dependency's behavior during the test."
+    },
+    {
+        "title": "Stubs vs. Mocks 🃏",
+        "ques": "While often used interchangeably, there is a subtle difference. \n1.  What is a **Stub**?\n2.  What is a **Mock** (behavior verification)?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Stub:** Provides \"canned\" answers to calls made during the test. It focuses on **state**. (e.g., \"When `get_user(1)` is called, always return `Alice`\").\n2.  **Mock:** Focuses on **behavior verification**. It checks *how* it was used. (e.g., \"Verify `send_email` was called exactly **once** with arguments `hello@example.com`\")."
+        },
+        "explanation": "Stubs support the test setup (arrange), while Mocks support the verification (assert) that interactions happened correctly."
+    },
+    {
+        "title": "Dependency Injection 💉",
+        "ques": "How does the design pattern **Dependency Injection (DI)** make Mocking easier? \n\n*   **Scenario A:** Function creates its own database connection internally.\n*   **Scenario B:** Function accepts a database connection as an argument.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Scenario B** makes Mocking easier.\n*   **Reason:** In Scenario A, you have to use complex patching to intercept the internal creation. In **Scenario B**, you simply pass your **Mock Object** into the function instead of the real connection object. The function doesn't know the difference."
+        },
+        "explanation": "**Testability** is a major benefit of Dependency Injection. It allows you to swap real dependencies for test doubles (mocks) effortlessly."
+    },
+    {
+        "title": "Over-Mocking Anti-Pattern ⚠️",
+        "ques": "What is the danger of **Over-Mocking**? If you mock every single dependency, what risk do you run regarding the system as a whole?",
+        "answer": {
+            "type": "text",
+            "content": "If you mock everything, you are testing your **mocks**, not the real integration. A test might pass because your mock returns perfect data, but in production, the real API might return data in a different format, causing a crash. You lose confidence that the parts actually work **together**."
+        },
+        "explanation": "Mocks are for **Unit Tests**. You still need **Integration Tests** (with real components) to verify the system works as a whole."
+    }
+]

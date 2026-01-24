@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The Circuit Breaker 🔌",
+        "ques": "The **Circuit Breaker** is the most famous resilience pattern. Describe its three states: **Closed**, **Open**, and **Half-Open**.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Closed:** Everything is normal. Requests flow through.\n2.  **Open:** Errors exceeded a threshold (e.g., 50% failure rate). Use \"trips\" the circuit. Requests are blocked immediately (Fast Fail) to let the service recover.\n3.  **Half-Open:** After a timeout, let one request through to test if the service is back. If success -> Close. If fail -> Open again."
+        },
+        "explanation": "It stops you from beating a dead horse. If a service is down, stop calling it so it has a chance to reboot."
+    },
+    {
+        "title": "Retry Pattern 🔄",
+        "ques": "What is the **Retry** pattern? Why should you always use **Exponential Backoff** with it?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Retry:** Automatically resending a failed request hoping it was a temporary blip.\n*   **Exponential Backoff:** Waiting longer between each retry (1s, 2s, 4s, 8s). \nWithout backoff, instant retries act like a mini-DDoS attack, slamming the recovering service and ensuring it stays down."
+        },
+        "explanation": "Retry is great for transient errors (network glitch), but bad for persistent errors."
+    },
+    {
+        "title": "Bulkhead Pattern 🛳️",
+        "ques": "The **Bulkhead** pattern is inspired by ship design. How does it prevent a failure in one part of the system from crashing the whole application?",
+        "answer": {
+            "type": "text",
+            "content": "It isolates resources (like thread pools) for different services. \nIf the \"Image Upload\" service hangs and uses all its allocated threads, the \"User Login\" service stays unaffected because it has its *own* separate pool of threads. The ship sinks only in one compartment."
+        },
+        "explanation": "Resource isolation is key to preventing cascading failures."
+    },
+    {
+        "title": "Timeout Pattern ⏱️",
+        "ques": "Why is setting a **Timeout** on every external call mandatory in Microservices? What happens if you default to 'infinite' timeout?",
+        "answer": {
+            "type": "text",
+            "content": "If you don't set a timeout, a hanging service can cause the caller to wait forever. These waiting threads consume memory and connections. Eventually, the caller runs out of resources and crashes too. \n**Timeouts** allow the caller to give up and free resources."
+        },
+        "explanation": "Never assume a network call will return. Always set a deadline."
+    },
+    {
+        "title": "Fallback Strategy 🤸",
+        "ques": "When a Circuit Breaker opens or a request fails, you can provide a **Fallback**. Give an example of a graceful fallback for a \"Recommendation Engine\".",
+        "answer": {
+            "type": "text",
+            "content": "If the personalized \"Recommendation Service\" fails, the fallback could be:\n1.  Return a static list of \"Top 10 Popular Items\" (cached).\n2.  Return an empty list (better than an error page).\n\nThe user still sees the homepage, just slightly less personalized."
+        },
+        "explanation": "Graceful degradation is better than a hard crash. Ideally, the user shouldn't even know something broke."
+    }
+]

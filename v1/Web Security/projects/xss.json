@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Reflected vs. Stored XSS 🪞",
+        "ques": "Explain the difference between **Reflected XSS** and **Stored XSS**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Reflected XSS:** The malicious script is part of the request (e.g., URL parameter) and is immediately returned (reflected) by the server in the response. It usually targets a single user via a phishing link.\n*   **Stored (Persistent) XSS:** The malicious script is saved in the database (e.g., in a comment). The server then serves this script to *every* user who views that page."
+        },
+        "explanation": "**Stored XSS** is generally considered more dangerous because it can automatically infect all users of the application without requiring them to click a specific link."
+    },
+    {
+        "title": "The Mechanism of XSS ⚙️",
+        "ques": "How does an XSS attack actually work? What is the browser doing wrong?",
+        "answer": {
+            "type": "text",
+            "content": "The browser is executing malicious JavaScript because it cannot distinguish between **script** provided by the developer and **text** provided by a user. It blindly trusts the HTML it receives. If user input contains `<script>alert(1)</script>` and the server renders it raw, the browser executes it as code."
+        },
+        "explanation": "XSS is essentially an **Injection** attack where data is misinterpreted as code."
+    },
+    {
+        "title": "Sanitization vs. Escaping 🧹",
+        "ques": "To prevent XSS, you can use Sanitization or Escaping. \n1.  Which one converts `<` to `&lt;`?\n2.  Which one removes dangerous tags while keeping safe HTML (like `<b>`)?",
+        "answer": {
+            "type": "text",
+            "content": "1.  **Escaping (Encoding):** Converts special characters into safe HTML entities (`<` -> `&lt;`). This renders the code as harmless text.\n2.  **Sanitization:** Uses a library to parse the HTML and strip out dangerous parts (like `<script>` or `onclick` attributes) while preserving safe formatting."
+        },
+        "explanation": "**Escaping** is the safest default (render everything as text). **Sanitization** is needed only when you *allow* rich text input (e.g., a blog editor)."
+    },
+    {
+        "title": "Content Security Policy (CSP) 👮",
+        "ques": "What is a **Content Security Policy (CSP)**? How does the header `Content-Security-Policy: default-src 'self'` protect against XSS?",
+        "answer": {
+            "type": "text",
+            "content": "**CSP** is an HTTP header that allows site administrators to declare approved sources of content. \n\n`default-src 'self'` tells the browser: \"Only execute scripts or load images if they come from **my own domain** ('self').\" If an attacker injects a script pointing to `attacker.com/malware.js`, the browser will refuse to load it."
+        },
+        "explanation": "CSP is a powerful second layer of defense. Even if your input validation fails, CSP can stop the injected script from executing or phoning home."
+    },
+    {
+        "title": "HttpOnly Cookies 🍪",
+        "ques": "A common goal of XSS is to steal session cookies (`document.cookie`). How does the **HttpOnly** flag on a cookie prevent this?",
+        "answer": {
+            "type": "text",
+            "content": "When a cookie is flagged as **HttpOnly**, the browser strictly prevents client-side scripts (JavaScript) from accessing it. `document.cookie` will not show that cookie. Even if an attacker successfully runs XSS, they cannot read the session token."
+        },
+        "explanation": "Always set **HttpOnly** for sensitive session tokens. It neutralizes the most common impact of XSS attacks."
+    }
+]

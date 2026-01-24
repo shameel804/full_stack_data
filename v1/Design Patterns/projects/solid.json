@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The S in SOLID ☝️",
+        "ques": "Explain the **Single Responsibility Principle (SRP)**. If a `User` class handles authentication AND saving to the database AND sending emails, how would you refactor it?",
+        "answer": {
+            "type": "text",
+            "content": "*   **SRP:** A class should have one, and only one, reason to change.\n*   **Refactor:** Split it into three classes:\n    1.  `User` (holds data)\n    2.  `UserRepository` (handles database saving)\n    3.  `EmailService` (handles sending emails)"
+        },
+        "explanation": "Mixing responsibilities leads to fragile code where a change in email logic might accidentally break database logic."
+    },
+    {
+        "title": "Open/Closed Principle (OCP) 👐",
+        "ques": "Software entities should be **Open for extension, but Closed for modification**. Give an example of how Interface/Polymorphism achieves this.",
+        "answer": {
+            "type": "text",
+            "content": "Instead of a big `if-else` block checking types:\n`if type == 'Dog': bark()`\n\nYou define an interface `Animal` with a `speak()` method. `Dog` and `Cat` implement it. To add a `Cow`, you just create a new class `Cow`. You don't **modify** the existing logic that calls `animal.speak()`; you just **extend** the system with a new class."
+        },
+        "explanation": "This prevents \"Shotgun Surgery\" where adding a feature requires editing existing, working code."
+    },
+    {
+        "title": "Liskov Substitution Principle (LSP) 🦆",
+        "ques": "If class `B` is a subclass of `A`, what does **LSP** say about replacing `A` with `B`?",
+        "answer": {
+            "type": "text",
+            "content": "**LSP:** You should be able to replace an instance of the parent class `A` with an instance of the subclass `B` **without breaking the application**.\n\n*   *Violation Example:* A `Square` inherits from `Rectangle` but changing the width also changes the height. Code expecting a normal `Rectangle` will break."
+        },
+        "explanation": "Subtypes must honor the contract of the base type. If a subtype throws an allowance exception for a method the parent allowed, it violates LSP."
+    },
+    {
+        "title": "Interface Segregation Principle (ISP) 🔪",
+        "ques": "Why is it better to have many specific interfaces (like `Printing`, `Scanning`) rather than one general purpose interface (`Machine`)?",
+        "answer": {
+            "type": "text",
+            "content": "Clients should not be forced to implement methods they don't use. \nIf I implement `Machine` for a simple printer, I shouldn't be forced to write a dummy `scan()` method just to satisfy the interface. Segregating them allows a Printer to only implement `Printing`."
+        },
+        "explanation": "Fat interfaces lead to empty method implementations and tight coupling."
+    },
+    {
+        "title": "Dependency Inversion (DIP) 🔌",
+        "ques": "**High-level modules should not depend on low-level modules. Both should depend on abstractions.** Explain this.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Bad:** `Store` class directly imports `MySQLDatabase` class. If you switch to PostgreSQL, you have to rewrite `Store`.\n*   **Good:** `Store` depends on an interface `Database`. `MySQLDatabase` implements `Database`. You inject the implementation. `Store` doesn't care what the DB is."
+        },
+        "explanation": "Decoupling high-level logic (business rules) from low-level details (frameworks, databases) makes the system flexible."
+    }
+]

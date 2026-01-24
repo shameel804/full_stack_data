@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Browser Caching Mechanisms 💾",
+        "ques": "Explain the concept of **Browser Caching**. How does the `Cache-Control` HTTP header help in reducing server load?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Browser Caching:** The browser stores copies of static assets (like HTML, CSS, Images) locally on the user's device. On subsequent visits, the browser serves these resources from the local disk instead of downloading them again from the server.\n*   **Cache-Control Header:** This header dictates **how long** and **in what manner** a resource should be cached. For example, `Cache-Control: max-age=3600` tells the browser to reuse the cached file for 3600 seconds (1 hour) before checking for a new version."
+        },
+        "explanation": "Properly configured **HTTP headers** like `Cache-Control` significantly improve load times for returning visitors by checking local storage first, thus saving bandwidth and latency."
+    },
+    {
+        "title": "Server-Side Caching with Dictionary ⚡",
+        "ques": "Implement a simple **server-side cache** using a Python dictionary. Create a function `get_data(key)` that checks if the key exists in a global `cache` dictionary. \n\n*   If it exists, return the value and print \"**Cache Hit!**\".\n*   If not, simulate a data fetch (just return the string \"fetched_data\"), store it in the cache, and print \"**Cache Miss!**\".",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "cache = {}\n\ndef get_data(key):\n    if key in cache:\n        print(\"**Cache Hit!**\")\n        return cache[key]\n    else:\n        print(\"**Cache Miss!**\")\n        # Simulate fetching data\n        data = f\"data_for_{key}\"\n        cache[key] = data\n        return data\n\n# Test the function\nprint(get_data(\"user_1\")) # First time\nprint(get_data(\"user_1\")) # Second time"
+        },
+        "explanation": "This demonstrates the basic principle of **caching**: storing expensive operation results in memory for quick retrieval. A **Cache Hit** avoids repeating the work, while a **Cache Miss** performs the work and updates the cache."
+    },
+    {
+        "title": "Redis vs. Memcached 🥊",
+        "ques": "Compare **Redis** and **Memcached** as distributed caching solutions. List **one complexity** where Redis is superior and **one scenario** where either would suffice.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Redis:** Supports advanced data structures (lists, sets, sorted sets, hashes) and persistence (saving data to disk). It acts as a data structure server.\n*   **Memcached:** Designed strictly for simple key-value storage of strings or objects. It is multithreaded and very fast for simple caching.\n*   **Superiority:** Redis is superior when you need **complex data operations** or **persistence**.\n*   **Basic Scenario:** Both suffice for simple **session caching** or caching database query results where losing data on restart is acceptable."
+        },
+        "explanation": "While both are in-memory stores, **Redis** offers richer features like persistence and data structures, whereas **Memcached** is a straightforward, high-performance key-value cache."
+    },
+    {
+        "title": "Cache Invalidation Strategy 🗑️",
+        "ques": "One of the hardest things in computer science is **cache invalidation**. Write a Python function `update_user(user_id, new_name)` that:\n1.  Updates the user's name in a mock database (a strictly separate dictionary `db`).\n2.  **Invalidates** (deletes) the corresponding entry in the `cache` dictionary so the next read fetches fresh data.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "db = {\"u1\": \"Alice\", \"u2\": \"Bob\"}\ncache = {\"u1\": \"Alice\"}\n\ndef update_user(user_id, new_name):\n    # 1. Update Source of Truth (Database)\n    if user_id in db:\n        db[user_id] = new_name\n        print(f\"DB updated for {user_id}\")\n    \n    # 2. Invalidate Cache\n    if user_id in cache:\n        del cache[user_id]\n        print(f\"Cache invalidated for {user_id}\")\n\nupdate_user(\"u1\", \"Alice Cooper\")\nprint(f\"DB: {db}\")\nprint(f\"Cache: {cache}\")"
+        },
+        "explanation": "**Cache invalidation** ensures consistency. When the underlying data changes, the cached copy must be removed or updated to prevent serving **stale data** to the user."
+    },
+    {
+        "title": "ETags and Conditional Requests 🏷️",
+        "ques": "What is an **ETag**? Describe the flow of a **conditional GET request** using ETags when a browser requests a resource it has visited before.",
+        "answer": {
+            "type": "text",
+            "content": "1.  **ETag (Entity Tag):** A unique identifier (hash) assigned by the web server to a specific version of a resource.\n2.  **Flow:**\n    *   The browser requests a resource and receives it with an `ETag` header (e.g., \"v1\").\n    *   On the next request, the browser sends `If-None-Match: \"v1\"`.\n    *   The server checks the current ETag. If it matches \"v1\", the resource hasn't changed.\n    *   The server responds with **304 Not Modified** (empty body), telling the browser to use its cached version."
+        },
+        "explanation": "ETags allow efficient **revalidation**. If the content hasn't changed, the server saves bandwidth by sending a small **304 status** instead of the full file."
+    }
+]

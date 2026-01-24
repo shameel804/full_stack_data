@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The Dynamic IP Problem 📍",
+        "ques": "In a cloud environment, services spin up and down dynamically, changing IP addresses. Why can't Service A just have Service B's IP address hardcoded in a configuration file?",
+        "answer": {
+            "type": "text",
+            "content": "Because in modern containerized environments (like Kubernetes), containers imply ephemeral IPs. Service B might restart on a different node with a new IP every hour. Hardcoding IPs would break communication instantly."
+        },
+        "explanation": "Service Discovery solves this by providing a dynamic phonebook of services."
+    },
+    {
+        "title": "Service Registry 📒",
+        "ques": "What is a **Service Registry** (like Eucalyptus or Consul)?",
+        "answer": {
+            "type": "text",
+            "content": "It is a database containing the network locations (IP and Port) of currently available service instances. \n*   When a service starts, it **Registers** itself (\"I am Service B at 10.0.0.5\").\n*   When it dies, it Deregisters."
+        },
+        "explanation": "The registry is the single source of truth for where everyone lives."
+    },
+    {
+        "title": "Client-Side vs. Server-Side Discovery 🔎",
+        "ques": "Explain the difference between **Client-Side** and **Server-Side** discovery.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Client-Side:** The Client (Service A) asks the Registry for Service B's address, then calls it directly.\n*   **Server-Side:** The Client calls a Load Balancer (or Router). The Router asks the Registry and forwards the request. The client doesn't know about the registry."
+        },
+        "explanation": "Server-side discovery (like AWS ALB or Kubernetes Services) abstracts the complexity away from the client code."
+    },
+    {
+        "title": "Health Checks 💓",
+        "ques": "Why must the Service Registry perform **Health Checks** on the registered services?",
+        "answer": {
+            "type": "text",
+            "content": "Just because a service registered itself 5 hours ago doesn't mean it's still alive. \nThe Registry periodically pings each instance. If one fails to respond, the Registry removes it from the list so no one tries to call a dead service."
+        },
+        "explanation": "Routing traffic to a dead instance causes errors. Active health checking ensures reliability."
+    },
+    {
+        "title": "Self-Registration Pattern 🙋",
+        "ques": "The **Self-Registration** pattern means the service instance itself is responsible for talking to the Registry. What is a potential downside compared to the **Third-Party Registration** pattern (sidecar)?",
+        "answer": {
+            "type": "text",
+            "content": "It couples the service code to the Service Registry implementation. If you use self-registration, you must include the Eureka/Consul client library in every microservice. If you change Registries, you have to update every service."
+        },
+        "explanation": "Sidecars (Third-Party) handle this transparently, keeping the application code clean."
+    }
+]

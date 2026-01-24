@@ -1,0 +1,47 @@
+[
+    {
+        "title": "FaaS Definition ☁️",
+        "ques": "What does **FaaS** stand for? How is it different from PaaS?",
+        "answer": {
+            "type": "text",
+            "content": "**Function as a Service.**\n*   **PaaS (Heroku):** You deploy an *application* (server) that runs 24/7.\n*   **FaaS (Lambda):** You deploy a *single function*. It sleeps until an event triggers it, runs once, and dies."
+        },
+        "explanation": "FaaS is the epitome of \"Pay for what you use\". Zero traffic = Zero cost."
+    },
+    {
+        "title": "The Cold Start Problem 🥶",
+        "ques": "What is a **Cold Start** in Serverless?",
+        "answer": {
+            "type": "text",
+            "content": "When a function hasn't been used in a while, the cloud provider spins down the container to save resources. \nThe next request must wait for the provider to provision a new container and boot the runtime (taking 100ms - 2s). This latency spike is a Cold Start."
+        },
+        "explanation": "Mitigations include \"Provisioned Concurrency\" or keeping functions warm with ping."
+    },
+    {
+        "title": "Statelessness 😶",
+        "ques": "Serverless functions are **Stateless**. What does this imply for handling user sessions?",
+        "answer": {
+            "type": "text",
+            "content": "You cannot store session data in the function's memory variables (global variables reset). \nYou must store all state externally (e.g., in Redis, DynamoDB, or JWT tokens passed with every request)."
+        },
+        "explanation": "Treat every invocation as a blank slate."
+    },
+    {
+        "title": "Scaling Limits 📈",
+        "ques": "Serverless scales infinitely, right? What is the **Concurrency Limit**?",
+        "answer": {
+            "type": "text",
+            "content": "Not exactly. Every account has a limit (e.g., 1000 concurrent executions). \nIf you get 5000 requests, 1000 will run and 4000 will be throttled (fail). You also risk overwhelming your database (running out of connection pool slots)."
+        },
+        "explanation": "Serverless requires careful architecture to protect downstream resources."
+    },
+    {
+        "title": "Vendor Lock-in 🔒",
+        "ques": "Why is **Vendor Lock-in** a major concern with Serverless?",
+        "answer": {
+            "type": "text",
+            "content": "FaaS is heavily glued to the provider's ecosystem (AWS triggers, IAM roles, DynamoDB streams). \nPorting an AWS Lambda app to Google Cloud Functions often typically requires a total rewrite of the configuration and infrastructure code."
+        },
+        "explanation": "Using a framework like **Serverless Framework** or **Terraform** can help mitigate this."
+    }
+]

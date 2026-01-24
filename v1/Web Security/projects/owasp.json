@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Broken Access Control 🚪",
+        "ques": "What is **Broken Access Control** (IDOR)? Give an example where a user accesses data they shouldn't.",
+        "answer": {
+            "type": "text",
+            "content": "It happens when permissions are not properly enforced. \n*   **Example:** User A is viewing their profile at `/user/123`. They change the URL to `/user/124` and successfully view User B's profile because the server didn't check if User A *owns* account 124."
+        },
+        "explanation": "This is consistently a top vulnerability. Servers must verify authorization for **every** object reference."
+    },
+    {
+        "title": "Cryptographic Failures 🔓",
+        "ques": "Previously known as \"Sensitive Data Exposure\". Why is storing passwords in **Plaintext** or using **MD5** hashing considered a Cryptographic Failure?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Plaintext:** Anyone with DB access can read everyone's password.\n*   **MD5:** It is a fast hashing algorithm, making it trivial to reverse via brute-force or rainbow tables.\n*   **Fix:** Use slow, salted hashing algorithms designed for passwords, like **bcrypt** or **Argon2**."
+        },
+        "explanation": "Weak crypto is as bad as no crypto. Always use industry-standard algorithms."
+    },
+    {
+        "title": "Security Misconfiguration 🛠️",
+        "ques": "Leaving **default accounts** (admin/admin) or enabling **detailed error messages** (stack traces) in production are examples of what?",
+        "answer": {
+            "type": "text",
+            "content": "**Security Misconfiguration.** \n*   stack traces leak internal info (file paths, library versions) that helps attackers.\n*   Default credentials are the easiest way for bots to take over systems."
+        },
+        "explanation": "Hardening the environment (disabling defaults, turning off debug mode) is just as important as writing secure code."
+    },
+    {
+        "title": "Vulnerable and Outdated Components 📦",
+        "ques": "Your code is secure, but you use an old version of a library (e.g., `lodash` or `Django`) that has a known CVE. Why is this dangerous?",
+        "answer": {
+            "type": "text",
+            "content": "Hackers scan the internet specifically for known versions of libraries with published exploits. Integrating a vulnerable library imports its security holes into your application. \n**Solution:** Regularly run `npm audit` or similar tools and update dependencies."
+        },
+        "explanation": "Supply chain security is critical. You are responsible for the security of your entire stack, including third-party code."
+    },
+    {
+        "title": "Server-Side Request Forgery (SSRF) 🤖",
+        "ques": "Explain **SSRF**. How can an attacker use your server to attack internal systems?",
+        "answer": {
+            "type": "text",
+            "content": "In SSRF, an attacker tricks the server into making a request to an unintended destination.\n*   **Attack:** User inputs a URL (e.g., for an avatar upload) like `http://localhost/admin` or `http://169.254.169.254` (cloud metadata).\n*   **Result:** The server, trusting \"localhost\", fetches internal admin pages or cloud secrets and returns them to the attacker."
+        },
+        "explanation": "The server becomes a proxy for the attacker, bypassing firewalls that protect internal resources from the outside internet."
+    }
+]

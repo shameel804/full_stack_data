@@ -1,0 +1,49 @@
+[
+    {
+        "title": "Lazy Loading Images 🖼️",
+        "ques": "What is **Lazy Loading** compared to eager loading? Write a standard HTML `<img>` tag that utilizes the native browser attribute to enable lazy loading.",
+        "answer": {
+            "type": "code",
+            "lang": "html",
+            "content": "<!-- Standard Image with Lazy Loading -->\n<img \n  src=\"large-photo.jpg\" \n  alt=\"Beautiful Scenery\" \n  loading=\"lazy\" \n  width=\"600\" \n  height=\"400\"\n/>"
+        },
+        "explanation": "**Lazy Loading** defers the loading of non-critical resources (like images below the fold) until they are needed (when they scroll into view). The `loading=\"lazy\"` attribute is a simple, native way to implement this."
+    },
+    {
+        "title": "Code Splitting for Components 🧩",
+        "ques": "In a Single Page Application (SPA), loading one massive JS bundle is inefficient. Explain **Code Splitting**. How does it improve the 'Time to Interactive' for the user?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Code Splitting:** The process of splitting the application code into smaller chunks that can be loaded on demand. For example, the code for the 'Admin Dashboard' is kept in a separate chunk from the 'Home Page'.\n*   **Benefit:** Users only download the JavaScript necessary for the **current page**. This reduces the initial payload size, allowing the browser to parse and execute the script faster, thus improving **Time to Interactive (TTI)**."
+        },
+        "explanation": "Code splitting ensures users don't pay the performance penalty of downloading code for features they might never visit (like a settings page or admin panel)."
+    },
+    {
+        "title": "Intersection Observer API 👁️",
+        "ques": "Before native lazy loading, developers used the **Intersection Observer API**. Briefly explain what this API monitors and how it triggers a load event.",
+        "answer": {
+            "type": "text",
+            "content": "The **Intersection Observer API** provides a way to asynchronously observe changes in the intersection of a target element with an ancestor (usually the browser viewport). When the target element (e.g., a placeholder div) enters the viewport (intersects), the callback function is triggered, which can then swap the placeholder for the actual content or fetch the data."
+        },
+        "explanation": "This API is highly performant because it offloads the scroll monitoring logic to the browser, avoiding expensive event listeners on the main thread."
+    },
+    {
+        "title": "Dynamic Imports in JavaScript ⚡",
+        "ques": "Write a JavaScript snippet that uses the `import()` syntax (Dynamic Import) to load a module named `math_utils.js` only when a button with id `calcBtn` is clicked.",
+        "answer": {
+            "type": "code",
+            "lang": "javascript",
+            "content": "document.getElementById('calcBtn').addEventListener('click', () => {\n  // Dynamically import the module when needed\n  import('./math_utils.js')\n    .then((module) => {\n      // Use the imported module\n      module.heavyCalculation();\n    })\n    .catch((err) => {\n      console.error(\"Failed to load module\", err);\n    });\n});"
+        },
+        "explanation": "Dynamic imports (`import()`) allow you to load modules logically at runtime rather than statically at load time. This is the foundation of **route-based code splitting**."
+    },
+    {
+        "title": "Skeleton Screens vs. Spinners 💀",
+        "ques": "When lazy loading content, the UI state is crucial. Compare **Skeleton Screens** (shimmer effects) with traditional **Loading Spinners**. Why are Skeleton Screens generally perceived as faster?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Spinners:** Indicate simply that \"something is happening,\" focusing on the process/wait.\n*   **Skeleton Screens:** mimick the layout of the content that is about to appear.\n*   **Perception:** Skeletons are perceived as faster (perceived performance) because they provide immediate structure, reducing cognitive load and making the transition to the final content smoother and less jarring than a poppingspinner."
+        },
+        "explanation": "Perceived performance is just as important as actual metrics. **Skeleton screens** manage user expectations and keep them engaged by layout out the page structure instantly."
+    }
+]

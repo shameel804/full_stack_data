@@ -1,0 +1,50 @@
+[
+    {
+        "title": "Tagging Images 🏷️",
+        "ques": "You have an image `my-app:latest`. You want to tag it as `v1.0` before pushing.\n\nWrite the command.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "docker tag my-app:latest my-app:v1.0"
+        },
+        "explanation": "**`docker tag`** creates a new alias for an existing image ID, allowing you to refer to it by a different name or version."
+    },
+    {
+        "title": "Image Layers 🍰",
+        "ques": "Are Docker image layers read-only or read-write?",
+        "answer": {
+            "type": "text",
+            "content": "**Read-only**"
+        },
+        "explanation": "Docker images are built from a series of **read-only** layers. When you run a container, a thin read-write layer is added on top."
+    },
+    {
+        "title": "Pushing to Registry ☁️",
+        "ques": "You have tagged your image as `username/my-app:v1`. Now you want to upload it to Docker Hub.\n\nWrite the command.",
+        "answer": {
+            "type": "code",
+            "lang": "bash",
+            "content": "docker push username/my-app:v1"
+        },
+        "explanation": "**`docker push`** uploads your local image to the specified registry (like Docker Hub)."
+    },
+    {
+        "title": "Multi-Stage Builds 🚀",
+        "ques": "You want to keep your final image small by copying only the compiled binary from a build stage.\n\nWhich Dockerfile instruction allows you to copy files from another stage?",
+        "answer": {
+            "type": "code",
+            "lang": "dockerfile",
+            "content": "COPY --from=builder /app/bin /app/bin"
+        },
+        "explanation": "**`COPY --from=<stage>`** allows you to copy artifacts from a previous build stage, discarding the build tools and intermediate files."
+    },
+    {
+        "title": "Dangling Images 👻",
+        "ques": "What is the term for images that have no tag and are not referenced by any container (often shown as `<none>:<none>`)?",
+        "answer": {
+            "type": "text",
+            "content": "**Dangling images**"
+        },
+        "explanation": "**Dangling images** are layers that have no relationship to any tagged images and are usually safe to remove to free up space."
+    }
+]

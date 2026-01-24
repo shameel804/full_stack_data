@@ -1,0 +1,47 @@
+[
+    {
+        "title": "The First Rule of ARIA 🥇",
+        "ques": "What is the **\"First Rule of ARIA\"** as stated by the W3C?",
+        "answer": {
+            "type": "text",
+            "content": "**\"If you can use a native HTML element or attribute with the semantics and behavior you require already built in, then do so instead of re-purposing an element and adding an ARIA role, state or property to it.\"**\n\nExample: Use `<button>` instead of `<div role=\"button\">`."
+        },
+        "explanation": "Native elements come with free accessibility (keyboard support, roles). ARIA is a bridge for when native elements fall short."
+    },
+    {
+        "title": "ARIA Roles 🎭",
+        "ques": "You are building a custom alert box using a `<div>`. What ARIA `role` should you give it so screen readers announce it immediately?",
+        "answer": {
+            "type": "text",
+            "content": "`role=\"alert\"`\n\nThis gives the element an implicit `aria-live=\"assertive\"`, meaning screen readers will interrupt the current speech to read the alert message."
+        },
+        "explanation": "Roles define **what** an element is. Examples: `dialog`, `tablist`, `progressbar`."
+    },
+    {
+        "title": "ARIA Labels: Label vs. LabelledBy 🏷️",
+        "ques": "Compare `aria-label` and `aria-labelledby`. Which one is generally preferred if visible text is available?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`aria-label`:** Takes a string string directly (e.g., `aria-label=\"Close\"`). Use this if there is no visible text on screen.\n*   **`aria-labelledby`:** Takes the **ID** of another element (e.g., `aria-labelledby=\"modal-title\"`). Use this to point to existing visible text.\n\n**Preferred:** `aria-labelledby` is better because it ensures the visible label matches the accessible name."
+        },
+        "explanation": "Duplicating text in `aria-label` creates maintenance issues. Linking to existing text is robust."
+    },
+    {
+        "title": "State Management with ARIA 🚦",
+        "ques": "You have a custom accordion widget. Which ARIA attribute handles the **open/closed** state?",
+        "answer": {
+            "type": "text",
+            "content": "`aria-expanded=\"true\"` or `aria-expanded=\"false\"`.\n\nYou must update this attribute via JavaScript whenever the user toggles the accordion."
+        },
+        "explanation": "ARIA states inform the user of the current interaction status. Just hiding the content (`display: none`) isn't enough; you must tell the screen reader *that* it is effectively hidden."
+    },
+    {
+        "title": "Hidden Content 🙈",
+        "ques": "What is the difference between `aria-hidden=\"true\"` and HTML's `hidden` attribute?",
+        "answer": {
+            "type": "text",
+            "content": "*   **`hidden` (HTML):** Removes the element from the layout visually AND from the accessibility tree. It is gone for everyone.\n*   **`aria-hidden=\"true\"`:** Removes the element from the accessibility tree (screen readers ignore it) but **keeps it visible** on screen. Use this for purely decorative icons."
+        },
+        "explanation": "Be careful with `aria-hidden`. You don't want to hide interactive content from screen reader users."
+    }
+]

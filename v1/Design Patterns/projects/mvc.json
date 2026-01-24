@@ -1,0 +1,48 @@
+[
+    {
+        "title": "M-V-C Roles 🎭",
+        "ques": "Define the roles of **Model**, **View**, and **Controller**.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Model:** Manages the data and business logic (e.g., Database records, calculation rules). It has no knowledge of the View.\n*   **View:** Displays the data to the user (UI). It should contain minimal logic.\n*   **Controller:** Handles user input (clicks, keypresses), updates the Model, and refreshes the View."
+        },
+        "explanation": "Separation of Concerns is the goal. You should be able to swap out the console View for a Web View without changing the Model."
+    },
+    {
+        "title": "Separation of Concerns 💔",
+        "ques": "Why is it bad practice to write SQL queries directly inside your View (HTML/Template) files?",
+        "answer": {
+            "type": "text",
+            "content": "It violates **Separation of Concerns**. \n1.  **Security:** Harder to protect against injection.\n2.  **Maintainability:** If the database schema changes, you have to hunt through HTML files to fix queries.\n3.  **Reusability:** You can't reuse that query logic in a mobile app view."
+        },
+        "explanation": "The View should be dumb. It just renders what it is given."
+    },
+    {
+        "title": "MVVM Variation 🧬",
+        "ques": "Modern frameworks like Vue and React often use **MVVM** (Model-View-ViewModel) or Component notions. What does the **ViewModel** replace?",
+        "answer": {
+            "type": "text",
+            "content": "The **ViewModel** acts as a binder between the View and the Model. It replaces the **Controller** in data-binding scenarios. Changes in the View automatically update the ViewModel (and vice versa) via **two-way data binding**, reducing the boilerplate code needed to manually synchronize them."
+        },
+        "explanation": "MVVM is great for rich UIs where the display state is complex."
+    },
+    {
+        "title": "Fat Model, Skinny Controller 🐋",
+        "ques": "A common best practice in frameworks like Rails or Django is \"**Fat Model, Skinny Controller**\". What does this mean?",
+        "answer": {
+            "type": "text",
+            "content": "It means you should put most of your business logic (validation, data manipulation) into the **Model**.\nThe **Controller** should be simple: receive request -> ask Model for data -> return View. It shouldn't contain complex decision logic."
+        },
+        "explanation": "Models are easier to unit test than Controllers. Keeping logic in the Model improves testability."
+    },
+    {
+        "title": "Controller Code Example 🎮",
+        "ques": "Write a conceptual Python function for a Controller handling a login request. It should check credentials and return either a success or failure view.",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "def login_controller(request):\n    username = request.form['user']\n    password = request.form['pass']\n    \n    # Delegation to Model\n    user = User.authenticate(username, password)\n    \n    if user:\n        # Update View\n        return render_view(\"dashboard.html\", user=user)\n    else:\n        return render_view(\"login.html\", error=\"Invalid credentials\")"
+        },
+        "explanation": "Notice the Controller itself doesn't check the password hash. It asks the `User` model to do validatation (`User.authenticate`)."
+    }
+]

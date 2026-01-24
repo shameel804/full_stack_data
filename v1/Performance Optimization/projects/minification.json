@@ -1,0 +1,48 @@
+[
+    {
+        "title": "The Purpose of Minification 🤏",
+        "ques": "What is **minification**? Write a conceptual function `minify_code(code_string)` that takes a string of code and performs a very basic minification:\n1.  Removes all spaces.\n2.  Removes all newline characters (`\\n`).\n\n(Note: Real minifiers are much more complex!)",
+        "answer": {
+            "type": "code",
+            "lang": "python",
+            "content": "def minify_code(code_string):\n    # Simple removal of whitespace and newlines\n    minified = code_string.replace(\" \", \"\").replace(\"\\n\", \"\")\n    return minified\n\noriginal = \"x = 5\\n y = 10\"\nprint(f\"Original: {original}\")\nprint(f\"Minified: {minify_code(original)}\")"
+        },
+        "explanation": "**Minification** is the process of removing unnecessary characters (whitespace, comments, newlines) from source code without changing its functionality. This reduces file size, leading to **faster downloads** and parsing."
+    },
+    {
+        "title": "Bundling with Webpack 📦",
+        "ques": "Explain the concept of **Bundling** in modern web development using tools like **Webpack**. Why do we bundle strictly distinct JavaScript files into one or a few files?",
+        "answer": {
+            "type": "text",
+            "content": "*   **Concept:** Bundling involves traversing the dependency graph of an application (starting from an entry point) and merging all required modules (JS, CSS, images) into one or more output files (bundles).\n*   **Reason:** Browsers traditionally had limits on simultaneous connections per domain. Fetching one large `bundle.js` is often more efficient than making 50 separate HTTP requests for 50 small files. It also manages **dependency resolution** automatically."
+        },
+        "explanation": "Bundlers like **Webpack**, **Rollup**, or **Parcel** solve dependency management issues and reduce the number of **HTTP requests**, which is crucial for page load speed."
+    },
+    {
+        "title": "Tree Shaking 🌳",
+        "ques": "What is **Tree Shaking**? Describe how using ES6 modules (import/export) enables tools like Webpack to perform tree shaking effectively.",
+        "answer": {
+            "type": "text",
+            "content": "*   **Tree Shaking:** It is a form of dead code elimination. It removes code that has been exported but is **never actually imported or used** by the application.\n*   **Mechanism:** It relies on the **static structure** of ES6 modules. Because `import` and `export` statements are static (cannot be dynamic at runtime), the bundler can determine exactly which parts of a module are needed and exclude the rest from the final bundle."
+        },
+        "explanation": "Tree shaking ensures that production bundles are as light as possible. If you import a massive utility library but only use **one function**, tree shaking strips away the unused functions."
+    },
+    {
+        "title": "Source Maps for Debugging 🗺️",
+        "ques": "After minification and bundling, the code running in the browser is unreadable. usage of **Source Maps** is the solution. Explain what a Source Map does when you open the browser's debugger.",
+        "answer": {
+            "type": "text",
+            "content": "A **Source Map** is a file that maps the transformed, minified code back to the original source code. When you open the debugger (DevTools), it uses the source map to reconstruct the original directory structure and file contents, allowing you to set breakpoints and debug the **original code** (authored by you) rather than the **minified blob** (served to the browser)."
+        },
+        "explanation": "Without **source maps**, debugging errors in a production build would be impossible. They bridge the gap between **production performance** (minified) and **development experience** (readable)."
+    },
+    {
+        "title": "Uglify vs. Minify 👹",
+        "ques": "While often used interchangeably, \"uglification\" can imply more than just minification. What additional step does a tool like **UglifyJS** perform besides removing whitespace to further reduce size?",
+        "answer": {
+            "type": "text",
+            "content": "In addition to removing whitespace and comments (minification), **UglifyJS** performs **mangling**. This involves renaming local variables and function names to shorter versions (e.g., changing `userAuthenticationStatus` to `a`). This significantly reduces the character count while preserving logic."
+        },
+        "explanation": "**Mangling** makes the code harder to reverse-engineer (obfuscation side effect) but its primary goal in this context is purely **file size reduction**."
+    }
+]

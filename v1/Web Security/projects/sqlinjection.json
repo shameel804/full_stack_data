@@ -1,0 +1,48 @@
+[
+    {
+        "title": "Anatomy of an Attack 💉",
+        "ques": "You have a query: `SELECT * FROM users WHERE name = '\" + user_input + \"';`. \n\nIf a user enters `' OR '1'='1`, what does the final query look like and what is the result?",
+        "answer": {
+            "type": "code",
+            "lang": "sql",
+            "content": "SELECT * FROM users WHERE name = '' OR '1'='1';"
+        },
+        "explanation": "Since `'1'='1'` is always True, the database returns **every user** in the table, bypassing the name check. This is the classic SQL Injection authentication bypass."
+    },
+    {
+        "title": "Prepared Statements (Parameterized Queries) 🛡️",
+        "ques": "The primary defense against SQL Injection is using **Prepared Statements** (Parameterized Queries). Explain *why* this prevents the attack.",
+        "answer": {
+            "type": "text",
+            "content": "Prepared statements separate the **code** (SQL structure) from the **data** (user input).\n1.  The SQL statement is pre-compiled by the database (`WHERE name = ?`).\n2.  The user input is treated strictly as a **literal value**, not executable code. Even if the input contains SQL syntax, the database treats it as a weird string."
+        },
+        "explanation": "It solves the root cause: mixing code and data in the same channel."
+    },
+    {
+        "title": "Sanitization is Insufficient 🚫",
+        "ques": "Why is trying to \"sanitize\" input (e.g., manually removing quotes) considered a bad practice compared to Prepared Statements?",
+        "answer": {
+            "type": "text",
+            "content": "Sanitization is known as \"denylist\" filtering. It is incomplete because attackers are creative. There are endless ways to format SQL injection (e.g., using hex encoding, comments, different charsets). Prepared statements fix the structural problem entirely."
+        },
+        "explanation": "Always prefer structural fixes (Parameterization) over filtering fixes (Sanitization) for SQLi."
+    },
+    {
+        "title": "ORM Protection 🧱",
+        "ques": "Do modern ORMs (like Hibernate, Entity Framework, Django ORM) automatically protect against SQL Injection?",
+        "answer": {
+            "type": "text",
+            "content": "**Yes**, generally. Standard ORM methods (e.g., `User.objects.filter(name=input)`) use parameterized queries under the hood. \n\n**Warning:** You can still be vulnerable if you use the ORM's \"raw SQL\" features (e.g., `User.objects.raw(\"...\")`) and treat it like string concatenation."
+        },
+        "explanation": "Using an ORM is one of the easiest ways to ensure database security, provided you use the query builder correctly."
+    },
+    {
+        "title": "Blind SQL Injection 🙈",
+        "ques": "What is **Blind SQL Injection**? How can an attacker steal data if the application doesn't return database errors or data?",
+        "answer": {
+            "type": "text",
+            "content": "In Blind SQLi, the attacker gets no visible output. However, they can ask True/False questions by injecting conditions.\n*   *\"If the first letter of the password is 'A', sleep for 10 seconds.\"*\n\nIf the server delays, the attacker knows the first letter is 'A'. They repeat this bit-by-bit to extract data."
+        },
+        "explanation": "Just because an app doesn't show errors doesn't mean it's safe. Timing attacks are a powerful form of blind extraction."
+    }
+]
