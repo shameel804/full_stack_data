@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_logs",
+    "topicId": "logs",
+    "topicTitle": "Log Management",
+    "description": "Master logging with Elasticsearch, Logstash, Kibana (ELK), and Beats for centralized log management",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "logs_1",
+            "type": "content",
+            "title": "ELK Stack Overview",
+            "content": "# ELK Stack 📝\n\nCentralized logging platform.\n\n## Components\n| Tool | Purpose |\n|------|--------|\n| Elasticsearch | Storage & search |\n| Logstash | Processing |\n| Kibana | Visualization |\n| Beats | Collection |\n\n## Data Flow\n```\nApps → Beats → Logstash → Elasticsearch → Kibana\n```"
+        },
+        {
+            "id": "logs_2",
+            "type": "content",
+            "title": "Elasticsearch Basics",
+            "content": "# Elasticsearch 🔍\n\nDistributed search engine.\n\n## Concepts\n| Term | Meaning |\n|------|--------|\n| Index | Collection of docs |\n| Document | JSON record |\n| Shard | Data partition |\n| Replica | Copy for HA |\n\n## Index Example\n```\nlogs-2024.01.15\n├── shard 0 (primary)\n├── shard 1 (primary)\n└── replicas\n```"
+        },
+        {
+            "id": "logs_3",
+            "type": "content",
+            "title": "Logstash Pipeline",
+            "content": "# Logstash 🔧\n\nProcess and transform logs.\n\n## Pipeline\n```\nInput → Filter → Output\n```\n\n## Config Example\n```ruby\ninput {\n  beats { port => 5044 }\n}\nfilter {\n  grok {\n    match => { \"message\" => \"%{COMBINEDAPACHELOG}\" }\n  }\n  date {\n    match => [ \"timestamp\", \"dd/MMM/yyyy:HH:mm:ss Z\" ]\n  }\n}\noutput {\n  elasticsearch { hosts => [\"es:9200\"] }\n}\n```"
+        },
+        {
+            "id": "logs_quiz_1",
+            "type": "quiz",
+            "title": "ELK Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What is the role of Logstash in the ELK stack?",
+            "quizOptions": [
+                "Storage",
+                "Processing and transformation",
+                "Visualization",
+                "Collection from sources"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "logs_4",
+            "type": "content",
+            "title": "Beats",
+            "content": "# Beats 🎵\n\nLightweight data shippers.\n\n## Types\n| Beat | Purpose |\n|------|--------|\n| Filebeat | Log files |\n| Metricbeat | System metrics |\n| Packetbeat | Network |\n| Heartbeat | Uptime |\n| Auditbeat | Audit data |\n\n## Filebeat Config\n```yaml\nfilebeat.inputs:\n  - type: log\n    paths:\n      - /var/log/*.log\noutput.elasticsearch:\n  hosts: [\"es:9200\"]\n```"
+        },
+        {
+            "id": "logs_5",
+            "type": "content",
+            "title": "Kibana Basics",
+            "content": "# Kibana 📊\n\nVisualize and explore logs.\n\n## Features\n- Discover (search)\n- Dashboards\n- Visualizations\n- Dev Tools\n\n## Index Patterns\n```\nlogs-*\napp-logs-2024.*\n```\n\n## KQL (Kibana Query Language)\n```\nstatus: 500 AND host: \"web-1\"\nmessage: \"error\" OR level: \"ERROR\"\n```"
+        },
+        {
+            "id": "logs_6",
+            "type": "content",
+            "title": "Grok Patterns",
+            "content": "# Grok Parsing 🧩\n\nExtract structured data from logs.\n\n## Built-in Patterns\n```\n%{IP:client_ip}\n%{NUMBER:response_time}\n%{WORD:method}\n%{URIPATHPARAM:path}\n```\n\n## Example\n```ruby\n# Input: 192.168.1.1 GET /api 200\ngrok {\n  match => { \n    \"message\" => \"%{IP:ip} %{WORD:method} %{URIPATH:path} %{NUMBER:status}\" \n  }\n}\n```"
+        },
+        {
+            "id": "logs_quiz_2",
+            "type": "quiz",
+            "title": "Beats Quiz",
+            "content": "Test your Beats knowledge!",
+            "quizQuestion": "Which Beat is used for collecting log files?",
+            "quizOptions": [
+                "Metricbeat",
+                "Heartbeat",
+                "Filebeat",
+                "Packetbeat"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "logs_7",
+            "type": "content",
+            "title": "Index Lifecycle",
+            "content": "# Index Lifecycle Management 📅\n\nAutomate index management.\n\n## Phases\n| Phase | Actions |\n|-------|--------|\n| Hot | Active writes |\n| Warm | Read-only |\n| Cold | Infrequent access |\n| Delete | Remove |\n\n## Policy Example\n```json\n{\n  \"phases\": {\n    \"hot\": {\"actions\": {\"rollover\": {\"max_size\": \"50gb\"}}},\n    \"warm\": {\"min_age\": \"7d\"},\n    \"delete\": {\"min_age\": \"30d\"}\n  }\n}\n```"
+        },
+        {
+            "id": "logs_8",
+            "type": "content",
+            "title": "Log Aggregation",
+            "content": "# Kibana Aggregations 📈\n\n## Common Aggregations\n| Type | Use |\n|------|-----|\n| Count | Total events |\n| Avg | Average value |\n| Sum | Total value |\n| Terms | Group by field |\n| Date Histogram | Over time |\n\n## Dashboard Panels\n- Line charts (errors over time)\n- Pie charts (by status code)\n- Data tables (top errors)\n- Metrics (total requests)"
+        },
+        {
+            "id": "logs_9",
+            "type": "content",
+            "title": "Structured Logging",
+            "content": "# Structured Logs 📋\n\nJSON format for easy parsing.\n\n## Benefits\n- Machine readable\n- Searchable fields\n- No parsing needed\n\n## Example\n```json\n{\n  \"@timestamp\": \"2024-01-15T10:30:00Z\",\n  \"level\": \"ERROR\",\n  \"service\": \"api\",\n  \"message\": \"Request failed\",\n  \"trace_id\": \"abc123\",\n  \"user_id\": \"u456\"\n}\n```"
+        },
+        {
+            "id": "logs_quiz_3",
+            "type": "quiz",
+            "title": "ILM Quiz",
+            "content": "Test your ILM knowledge!",
+            "quizQuestion": "What is the purpose of the 'Hot' phase in ILM?",
+            "quizOptions": [
+                "Delete old data",
+                "Infrequent reads",
+                "Active writes",
+                "Archive storage"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "logs_10",
+            "type": "content",
+            "title": "Log Correlation",
+            "content": "# Log Correlation 🔗\n\nConnect related events.\n\n## Trace IDs\n```json\n{\"trace_id\": \"abc123\", \"service\": \"frontend\"}\n{\"trace_id\": \"abc123\", \"service\": \"api\"}\n{\"trace_id\": \"abc123\", \"service\": \"database\"}\n```\n\n## Kibana Search\n```\ntrace_id: \"abc123\"\n```\n\nFollow a request across all services."
+        },
+        {
+            "id": "logs_11",
+            "type": "content",
+            "title": "Alerting",
+            "content": "# Elasticsearch Alerting 🚨\n\n## Watcher (X-Pack)\n```json\n{\n  \"trigger\": {\n    \"schedule\": {\"interval\": \"5m\"}\n  },\n  \"input\": {\n    \"search\": {\n      \"query\": {\"match\": {\"level\": \"ERROR\"}}\n    }\n  },\n  \"condition\": {\n    \"compare\": {\"ctx.payload.hits.total\": {\"gt\": 10}}\n  },\n  \"actions\": {\n    \"email\": {\"to\": \"ops@company.com\"}\n  }\n}\n```"
+        },
+        {
+            "id": "logs_12",
+            "type": "content",
+            "title": "Loki Alternative",
+            "content": "# Grafana Loki 📝\n\nLightweight alternative to ELK.\n\n## Differences\n| ELK | Loki |\n|-----|------|\n| Full-text index | Label-based |\n| Resource heavy | Lightweight |\n| Rich features | Simple |\n\n## LogQL\n```logql\n{app=\"frontend\"} |= \"error\" | json\n```\n\n## When to Use\n- Simpler setup\n- Grafana already used\n- Cost-conscious"
+        },
+        {
+            "id": "logs_13",
+            "type": "content",
+            "title": "Security",
+            "content": "# Log Security 🔐\n\n## Sensitive Data\n- ❌ Passwords\n- ❌ Credit cards\n- ❌ SSNs\n- ⚠️ Emails (maybe)\n\n## Masking\n```ruby\nmutate {\n  gsub => [\n    \"message\", \"\\\\d{16}\", \"XXXX-XXXX-XXXX-XXXX\"\n  ]\n}\n```\n\n## Access Control\n- Role-based access\n- Index-level security\n- Audit logging"
+        },
+        {
+            "id": "logs_quiz_4",
+            "type": "quiz",
+            "title": "Security Quiz",
+            "content": "Test your security knowledge!",
+            "quizQuestion": "What should you never log?",
+            "quizOptions": [
+                "Error messages",
+                "Timestamps",
+                "Passwords and credit cards",
+                "Request IDs"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "logs_14",
+            "type": "content",
+            "title": "Scaling",
+            "content": "# Scaling Elasticsearch 📈\n\n## Cluster Architecture\n```\nMaster nodes (3)\nData nodes (variable)\nCoordinating nodes\n```\n\n## Best Practices\n- Separate master/data\n- Multiple shards\n- Cross-zone replicas\n- Hot-warm architecture\n\n## Sizing\n- 50GB max per shard\n- 20 shards max per GB heap"
+        },
+        {
+            "id": "logs_15",
+            "type": "content",
+            "title": "Performance",
+            "content": "# Performance Tips ⚡\n\n## Ingestion\n- Bulk API for writes\n- Disable refresh during bulk\n- Increase memory\n\n## Queries\n- Use filters (cached)\n- Limit result size\n- Avoid wildcards at start\n\n## Storage\n- ILM for old data\n- Force merge old indices"
+        },
+        {
+            "id": "logs_16",
+            "type": "content",
+            "title": "Cloud Options",
+            "content": "# Cloud Logging ☁️\n\n## Managed Options\n| Service | Provider |\n|---------|----------|\n| CloudWatch Logs | AWS |\n| Log Analytics | Azure |\n| Cloud Logging | GCP |\n| Elastic Cloud | Elastic |\n| Datadog | Multi |\n\n## Benefits\n- No infrastructure\n- Auto-scaling\n- Integrated"
+        },
+        {
+            "id": "logs_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is the recommended max size for an Elasticsearch shard?",
+            "quizOptions": [
+                "10GB",
+                "50GB",
+                "100GB",
+                "500GB"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "logs_17",
+            "type": "content",
+            "title": "Troubleshooting",
+            "content": "# Troubleshooting 🔧\n\n## Common Issues\n| Issue | Solution |\n|-------|----------|\n| Cluster red | Check shards |\n| Slow queries | Add memory |\n| Disk full | ILM/delete |\n| High CPU | Reduce queries |\n\n## Health Check\n```bash\nGET _cluster/health\nGET _cat/indices\nGET _cat/shards\n```"
+        },
+        {
+            "id": "logs_18",
+            "type": "content",
+            "title": "Docker Setup",
+            "content": "# Docker Compose 🐳\n\n```yaml\nversion: '3'\nservices:\n  elasticsearch:\n    image: elasticsearch:8.11.0\n    environment:\n      - discovery.type=single-node\n  kibana:\n    image: kibana:8.11.0\n    ports:\n      - 5601:5601\n  filebeat:\n    image: elastic/filebeat:8.11.0\n    volumes:\n      - /var/log:/var/log:ro\n```"
+        },
+        {
+            "id": "logs_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Logging\n- ✅ Structured JSON format\n- ✅ Include trace IDs\n- ✅ Use log levels properly\n- ❌ Log sensitive data\n\n## Infrastructure\n- ✅ ILM policies\n- ✅ Separate clusters\n- ✅ Regular backups\n- ✅ Monitor cluster health"
+        },
+        {
+            "id": "logs_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### ELK Stack\n- ✅ Elasticsearch for storage\n- ✅ Logstash for processing\n- ✅ Kibana for visualization\n- ✅ Beats for collection\n\n### Best Practices\n- ✅ Structured logging\n- ✅ ILM for management\n- ✅ Grok for parsing\n\nHappy logging! 📝"
+        }
+    ]
+}

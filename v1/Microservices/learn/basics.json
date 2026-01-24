@@ -1,0 +1,103 @@
+{
+    "id": "learn_basics_micro",
+    "topicId": "basics",
+    "topicTitle": "Microservices Basics",
+    "description": "Master microservices fundamentals including decomposition, bounded contexts, and architecture principles",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "Welcome to Microservices",
+            "content": "# Microservices Basics 🏗️\n\nBuild scalable, distributed systems.\n\n## What You'll Learn:\n- **Microservices vs Monolith** - Architecture comparison\n- **Decomposition** - Breaking down applications\n- **Bounded Contexts** - Domain-driven design\n- **Communication** - Service interaction\n- **Best Practices** - Real-world patterns\n\n> 💡 Microservices enable independent deployment and scaling!"
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "Monolith vs Microservices",
+            "content": "# Monolith vs Microservices 🆚\n\n## Monolith:\n```\n┌─────────────────────────┐\n│   Single Application    │\n│  ┌─────┬─────┬─────┐   │\n│  │Users│Orders│Notify│  │\n│  └─────┴─────┴─────┘   │\n│      Single Database    │\n└─────────────────────────┘\n```\n\n## Microservices:\n```\n┌──────┐ ┌──────┐ ┌──────┐\n│Users │ │Orders│ │Notify│\n│ DB   │ │ DB   │ │ DB   │\n└──────┘ └──────┘ └──────┘\n```\n\n## Comparison:\n| Aspect | Monolith | Microservices |\n|--------|----------|---------------|\n| Deploy | All at once | Independent |\n| Scale | Entire app | Per service |\n| Tech | One stack | Flexible |\n| Complexity | Lower | Higher |"
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Benefits",
+            "content": "# Microservices Benefits ✅\n\n## Independent Deployment:\n- Deploy services separately\n- Reduce deployment risk\n- Faster release cycles\n\n## Scalability:\n- Scale only what's needed\n- Cost-effective resources\n- Handle varying loads\n\n## Technology Freedom:\n- Choose best tool for job\n- Use different languages\n- Different databases\n\n## Team Autonomy:\n- Small, focused teams\n- Own their services\n- Faster decision making\n\n## Fault Isolation:\n- One failure doesn't crash all\n- Easier to debug\n- Better resilience"
+        },
+        {
+            "id": "basics_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your microservices knowledge!",
+            "quizQuestion": "What is a key benefit of microservices?",
+            "quizOptions": [
+                "Simpler architecture",
+                "Independent deployment and scaling",
+                "Lower cost always",
+                "No need for coordination"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "Challenges",
+            "content": "# Microservices Challenges ⚠️\n\n## Distributed Complexity:\n- Network failures\n- Latency\n- Data consistency\n\n## Operational Overhead:\n- More services to manage\n- Monitoring complexity\n- Deployment pipelines\n\n## Data Management:\n- Distributed transactions\n- Data consistency\n- No ACID across services\n\n## Testing:\n- Integration testing harder\n- End-to-end testing complex\n- Contract testing needed\n\n## When NOT to Use:\n- Small teams\n- Simple applications\n- Early-stage startups\n- Limited DevOps maturity"
+        },
+        {
+            "id": "basics_5",
+            "type": "content",
+            "title": "Decomposition Strategies",
+            "content": "# Decomposition Strategies 🔪\n\n## By Business Capability:\n```\nE-commerce Company:\n├── User Management\n├── Product Catalog\n├── Order Processing\n├── Payment Processing\n├── Shipping\n└── Notifications\n```\n\n## By Subdomain (DDD):\n- Core Domain (competitive advantage)\n- Supporting Domain (necessary)\n- Generic Domain (common problems)\n\n## Guidelines:\n- High cohesion within service\n- Low coupling between services\n- Single responsibility\n- Own data storage\n\n## Signs of Wrong Boundaries:\n- Frequent cross-service changes\n- High network chatter\n- Distributed transactions"
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Bounded Contexts",
+            "content": "# Bounded Contexts 🔲\n\nFrom Domain-Driven Design.\n\n## Concept:\n```\n┌─────────────────┐  ┌─────────────────┐\n│   Sales Context │  │ Shipping Context│\n│                 │  │                 │\n│  Customer:      │  │  Customer:      │\n│  - name         │  │  - address      │\n│  - email        │  │  - preferences  │\n│  - credit info  │  │  - history      │\n└─────────────────┘  └─────────────────┘\n\nSame concept, different meanings!\n```\n\n## Benefits:\n- Clear boundaries\n- Independent models\n- Team ownership\n- Reduced coupling\n\n## Implementation:\n- One service per bounded context\n- Own database\n- Defined API contracts\n- Translation at boundaries"
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "Service Size",
+            "content": "# Service Size 📏\n\nHow big should a microservice be?\n\n## Guidelines:\n- Small enough for one team\n- Large enough to be meaningful\n- \"Can be rewritten in 2 weeks\"\n- Single business capability\n\n## Too Small (Nano-services):\n- Too many services\n- Network overhead\n- Operational nightmare\n\n## Too Large:\n- Hard to deploy\n- Coupled components\n- Scaling issues\n\n## Right Size:\n- 2-pizza team can own it\n- Clear, focused purpose\n- Independent deployment\n- Own data store"
+        },
+        {
+            "id": "basics_quiz_2",
+            "type": "quiz",
+            "title": "Context Check",
+            "content": "Test your bounded context knowledge!",
+            "quizQuestion": "What is a bounded context?",
+            "quizOptions": [
+                "Physical server boundary",
+                "A boundary defining clear ownership and meaning of domain concepts",
+                "Network firewall",
+                "Database schema"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Data Management",
+            "content": "# Data Management 🗄️\n\n## Database per Service:\n```\n┌─────────┐    ┌─────────┐\n│ User    │    │ Order   │\n│ Service │    │ Service │\n└────┬────┘    └────┬────┘\n     │              │\n ┌───▼───┐      ┌───▼───┐\n │User DB│      │Order  │\n │(Mongo)│      │(MySQL)│\n └───────┘      └───────┘\n```\n\n## Principles:\n- No direct DB access\n- API for data access\n- Data ownership clear\n- Eventually consistent\n\n## Patterns:\n- Event sourcing\n- Saga for transactions\n- CQRS for complex queries\n- Change data capture"
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "API Design",
+            "content": "# API Design 📡\n\n## REST APIs:\n```\nGET    /users\nGET    /users/{id}\nPOST   /users\nPUT    /users/{id}\nDELETE /users/{id}\n```\n\n## Versioning:\n```\n/api/v1/users\n/api/v2/users\n```\n\n## Best Practices:\n- Consistent naming\n- Version your APIs\n- Use HTTP properly\n- Document with OpenAPI\n- Return meaningful errors\n\n## Error Responses:\n```json\n{\n    \"error\": {\n        \"code\": \"USER_NOT_FOUND\",\n        \"message\": \"User 123 not found\"\n    }\n}\n```"
+        },
+        {
+            "id": "basics_10",
+            "type": "content",
+            "title": "When to Use",
+            "content": "# When to Use Microservices 🤔\n\n## Good Fit ✅:\n- Large, complex domains\n- Need independent scaling\n- Multiple teams\n- Different tech needs\n- High availability required\n\n## Bad Fit ❌:\n- Small team (<10 people)\n- Simple domain\n- Rapid prototyping\n- Limited DevOps skills\n- Tight budgets\n\n## Start Monolith?\n- Many experts recommend\n- Extract services later\n- Learn domain first\n- Easier to refactor\n\n> \"Don't even consider microservices unless you have a system that's too complex to manage as a monolith.\" - Martin Fowler"
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Microservices Basics!\n\n## Key Takeaways:\n\n### Architecture\n- Independent, deployable services\n- Own their data\n- Communicate via APIs\n\n### Decomposition\n- By business capability\n- Bounded contexts\n- High cohesion, low coupling\n\n### Trade-offs\n| Benefit | Challenge |\n|---------|----------|\n| Scalability | Complexity |\n| Flexibility | Operations |\n| Independence | Consistency |\n\n## Next Steps:\n- Learn service communication\n- Master service discovery\n- Study resilience patterns\n\nBuild distributed systems! 🏗️"
+        }
+    ]
+}

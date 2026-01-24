@@ -1,0 +1,167 @@
+{
+    "id": "learn_lazy_perf",
+    "topicId": "lazy",
+    "topicTitle": "Lazy Loading",
+    "description": "Master lazy loading techniques for images, components, and code splitting to dramatically improve initial page load performance",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "lazy_1",
+            "type": "content",
+            "title": "Welcome to Lazy Loading",
+            "content": "# Lazy Loading 🦥\n\nWelcome to the art of loading content just-in-time! In this lesson, you'll master techniques that make your applications feel lightning-fast.\n\n## What You'll Learn:\n- **Lazy Loading Fundamentals** - The concept and benefits\n- **Image Lazy Loading** - Native and JavaScript approaches\n- **Component Lazy Loading** - React, Vue, and Angular patterns\n- **Code Splitting** - Divide bundles for faster initial loads\n- **Route-Based Splitting** - Load code per route\n- **Preloading Strategies** - Smart prefetching techniques\n\n> 💡 **Fun Fact:** Implementing lazy loading can reduce initial page weight by 50-80%!\n\n## Why Lazy Loading Matters:\n- 🚀 **Faster Initial Load** - Load only what's visible\n- 💾 **Reduced Bandwidth** - Save data for users\n- 📱 **Better Mobile UX** - Critical for slow connections\n- ⚡ **Improved Core Web Vitals** - Better LCP and FID\n- 💰 **Lower Infrastructure Costs** - Less data served\n\n## The Core Principle:\n```\nLoad Later = Load Faster Now\n```\n\nLet's learn to be strategically lazy! 🚀"
+        },
+        {
+            "id": "lazy_2",
+            "type": "content",
+            "title": "What is Lazy Loading?",
+            "content": "# What is Lazy Loading? 🎯\n\nLazy loading is a design pattern that defers the loading of resources until they are actually needed.\n\n## Traditional Loading (Eager):\n```\nPage Request → Load ALL Resources → Render Page\n     ↓               ↓                  ↓\n    1s            5s                  6s\n```\n\n## Lazy Loading:\n```\nPage Request → Load Critical Content → Render Page → Load Rest On-Demand\n     ↓                ↓                    ↓              ↓\n    1s              1.5s                 2.5s         Progressive\n```\n\n## What Can Be Lazy Loaded?\n\n| Resource | Technique | Impact |\n|----------|-----------|--------|\n| **Images** | Native/Intersection Observer | High |\n| **Videos** | Poster images, lazy src | High |\n| **Components** | Dynamic imports | Medium-High |\n| **Routes** | Code splitting | High |\n| **Data** | Pagination, infinite scroll | Medium |\n| **Third-party scripts** | Defer/async | Medium |\n\n## The Trade-off:\n- ✅ **Faster initial load**\n- ✅ **Lower initial bandwidth**\n- ⚠️ **Slight delay when loading deferred content**\n- ⚠️ **Additional complexity**\n\n> 🎯 **Golden Rule:** Lazy load content that's not visible in the initial viewport!"
+        },
+        {
+            "id": "lazy_3",
+            "type": "content",
+            "title": "Native Image Lazy Loading",
+            "content": "# Native Image Lazy Loading 🖼️\n\nModern browsers support lazy loading images natively with a single attribute!\n\n## The `loading` Attribute:\n```html\n<!-- Lazy load image -->\n<img src=\"hero.jpg\" loading=\"lazy\" alt=\"Hero image\">\n\n<!-- Eager load (default behavior) -->\n<img src=\"logo.jpg\" loading=\"eager\" alt=\"Logo\">\n\n<!-- Auto (browser decides) -->\n<img src=\"content.jpg\" loading=\"auto\" alt=\"Content\">\n```\n\n## Browser Support:\n- ✅ Chrome 77+\n- ✅ Firefox 75+\n- ✅ Edge 79+\n- ✅ Safari 15.4+\n- ✅ ~95% global support\n\n## Best Practices:\n```html\n<!-- Always include dimensions to prevent layout shift -->\n<img \n    src=\"photo.jpg\" \n    loading=\"lazy\"\n    width=\"800\" \n    height=\"600\"\n    alt=\"Description\"\n>\n\n<!-- With aspect ratio CSS -->\n<style>\n.lazy-img {\n    aspect-ratio: 16/9;\n    width: 100%;\n    height: auto;\n}\n</style>\n<img src=\"photo.jpg\" loading=\"lazy\" class=\"lazy-img\" alt=\"Wide photo\">\n```\n\n## When NOT to Use:\n- ❌ Above-the-fold images (hero, logo)\n- ❌ LCP (Largest Contentful Paint) images\n- ❌ Images visible on initial load\n\n> 💡 **Pro Tip:** Add `decoding=\"async\"` for additional performance gains!"
+        },
+        {
+            "id": "lazy_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your understanding of lazy loading basics!",
+            "quizQuestion": "Which images should NOT be lazy loaded?",
+            "quizOptions": [
+                "Images in the footer",
+                "Images in a gallery below the fold",
+                "The hero image visible on initial page load",
+                "Images in a carousel"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "lazy_4",
+            "type": "content",
+            "title": "Intersection Observer API",
+            "content": "# Intersection Observer API 👁️\n\nThe Intersection Observer API provides a powerful way to detect when elements enter or exit the viewport.\n\n## Basic Setup:\n```javascript\nconst observer = new IntersectionObserver((entries) => {\n    entries.forEach(entry => {\n        if (entry.isIntersecting) {\n            // Element is visible\n            loadContent(entry.target);\n            observer.unobserve(entry.target);\n        }\n    });\n}, {\n    root: null, // viewport\n    rootMargin: '100px', // load 100px before visible\n    threshold: 0.1 // 10% visible triggers callback\n});\n\n// Observe elements\ndocument.querySelectorAll('.lazy').forEach(el => {\n    observer.observe(el);\n});\n```\n\n## Image Lazy Loading Example:\n```javascript\nfunction lazyLoadImages() {\n    const images = document.querySelectorAll('img[data-src]');\n    \n    const observer = new IntersectionObserver((entries) => {\n        entries.forEach(entry => {\n            if (entry.isIntersecting) {\n                const img = entry.target;\n                img.src = img.dataset.src;\n                img.removeAttribute('data-src');\n                observer.unobserve(img);\n            }\n        });\n    });\n    \n    images.forEach(img => observer.observe(img));\n}\n```\n\n## Configuration Options:\n| Option | Description | Default |\n|--------|-------------|---------|\n| `root` | Scrollable ancestor | viewport |\n| `rootMargin` | Margin around root | \"0px\" |\n| `threshold` | Visibility ratio to trigger | 0 |"
+        },
+        {
+            "id": "lazy_5",
+            "type": "content",
+            "title": "Advanced Image Techniques",
+            "content": "# Advanced Image Lazy Loading 🎨\n\nGo beyond basic lazy loading with progressive enhancement.\n\n## Progressive Image Loading:\n```html\n<div class=\"progressive-image\">\n    <img \n        src=\"tiny-placeholder.jpg\" \n        data-src=\"full-image.jpg\"\n        class=\"lazy blur\"\n        alt=\"Description\"\n    >\n</div>\n```\n\n```css\n.progressive-image img {\n    transition: filter 0.3s ease-out;\n}\n\n.progressive-image img.blur {\n    filter: blur(20px);\n    transform: scale(1.1);\n}\n\n.progressive-image img.loaded {\n    filter: blur(0);\n    transform: scale(1);\n}\n```\n\n## LQIP (Low Quality Image Placeholder):\n```html\n<!-- Tiny base64 placeholder -->\n<img \n    src=\"data:image/jpeg;base64,/9j/4AAQ...\" \n    data-src=\"full-quality.jpg\"\n    loading=\"lazy\"\n    alt=\"Photo\"\n>\n```\n\n## Responsive Lazy Loading:\n```html\n<picture>\n    <source \n        media=\"(min-width: 1200px)\" \n        data-srcset=\"large.jpg\"\n    >\n    <source \n        media=\"(min-width: 768px)\" \n        data-srcset=\"medium.jpg\"\n    >\n    <img \n        data-src=\"small.jpg\" \n        loading=\"lazy\"\n        alt=\"Responsive image\"\n    >\n</picture>\n```\n\n## Performance Comparison:\n| Technique | Initial Load | UX |\n|-----------|--------------|----|\n| No lazy loading | Slow | Instant view |\n| Basic lazy | Fast | Flash/pop |\n| LQIP | Fast | Smooth blur unblur |\n| Progressive | Fast | Best UX |"
+        },
+        {
+            "id": "lazy_6",
+            "type": "content",
+            "title": "React Component Lazy Loading",
+            "content": "# React Component Lazy Loading ⚛️\n\nReact provides built-in support for lazy loading components with `React.lazy()` and `Suspense`.\n\n## Basic Usage:\n```javascript\nimport React, { Suspense, lazy } from 'react';\n\n// Lazy load the component\nconst HeavyComponent = lazy(() => import('./HeavyComponent'));\n\nfunction App() {\n    return (\n        <div>\n            <h1>My App</h1>\n            <Suspense fallback={<div>Loading...</div>}>\n                <HeavyComponent />\n            </Suspense>\n        </div>\n    );\n}\n```\n\n## With Loading Spinner:\n```javascript\nconst LoadingSpinner = () => (\n    <div className=\"spinner-container\">\n        <div className=\"spinner\"></div>\n        <p>Loading component...</p>\n    </div>\n);\n\nfunction App() {\n    return (\n        <Suspense fallback={<LoadingSpinner />}>\n            <HeavyComponent />\n        </Suspense>\n    );\n}\n```\n\n## Named Exports:\n```javascript\n// For named exports, create an intermediate module\n// HeavyComponent.js\nexport const HeavyComponent = () => { ... };\n\n// lazyHeavy.js\nexport { HeavyComponent as default } from './HeavyComponent';\n\n// App.js\nconst HeavyComponent = lazy(() => import('./lazyHeavy'));\n```\n\n## Error Handling:\n```javascript\nimport { ErrorBoundary } from 'react-error-boundary';\n\n<ErrorBoundary fallback={<div>Error loading component</div>}>\n    <Suspense fallback={<Loading />}>\n        <HeavyComponent />\n    </Suspense>\n</ErrorBoundary>\n```"
+        },
+        {
+            "id": "lazy_7",
+            "type": "content",
+            "title": "Route-Based Code Splitting in React",
+            "content": "# Route-Based Code Splitting ⚛️🛣️\n\nSplit your bundle by routes for optimal loading performance.\n\n## React Router with Lazy Loading:\n```javascript\nimport React, { Suspense, lazy } from 'react';\nimport { BrowserRouter, Routes, Route } from 'react-router-dom';\n\n// Lazy load route components\nconst Home = lazy(() => import('./pages/Home'));\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Profile = lazy(() => import('./pages/Profile'));\nconst Settings = lazy(() => import('./pages/Settings'));\n\nfunction App() {\n    return (\n        <BrowserRouter>\n            <Suspense fallback={<PageLoader />}>\n                <Routes>\n                    <Route path=\"/\" element={<Home />} />\n                    <Route path=\"/dashboard\" element={<Dashboard />} />\n                    <Route path=\"/profile\" element={<Profile />} />\n                    <Route path=\"/settings\" element={<Settings />} />\n                </Routes>\n            </Suspense>\n        </BrowserRouter>\n    );\n}\n```\n\n## Named Chunks for Better Caching:\n```javascript\nconst Dashboard = lazy(() => \n    import(/* webpackChunkName: \"dashboard\" */ './pages/Dashboard')\n);\n\nconst Admin = lazy(() => \n    import(/* webpackChunkName: \"admin\" */ './pages/Admin')\n);\n```\n\n## Result Bundle Structure:\n```\ndist/\n├── main.js          (50KB) - Core app\n├── dashboard.js     (30KB) - Dashboard route\n├── admin.js         (40KB) - Admin route\n└── profile.js       (15KB) - Profile route\n```\n\n> 💡 **Benefit:** Users only download code for routes they visit!"
+        },
+        {
+            "id": "lazy_quiz_2",
+            "type": "quiz",
+            "title": "React Check",
+            "content": "Test your React lazy loading knowledge!",
+            "quizQuestion": "What component wraps lazy-loaded components in React to show a fallback?",
+            "quizOptions": [
+                "ErrorBoundary",
+                "Suspense",
+                "Fragment",
+                "Portal"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "lazy_8",
+            "type": "content",
+            "title": "Vue Component Lazy Loading",
+            "content": "# Vue Component Lazy Loading 💚\n\nVue provides elegant async component support for lazy loading.\n\n## Vue 3 - defineAsyncComponent:\n```javascript\nimport { defineAsyncComponent } from 'vue';\n\n// Basic usage\nconst AsyncComponent = defineAsyncComponent(() =>\n    import('./components/HeavyComponent.vue')\n);\n\n// With loading and error states\nconst AsyncWithOptions = defineAsyncComponent({\n    loader: () => import('./components/Heavy.vue'),\n    loadingComponent: LoadingSpinner,\n    errorComponent: ErrorDisplay,\n    delay: 200, // Show loading after 200ms\n    timeout: 3000 // Timeout after 3s\n});\n```\n\n## Vue Router Lazy Loading:\n```javascript\nimport { createRouter, createWebHistory } from 'vue-router';\n\nconst routes = [\n    {\n        path: '/',\n        component: () => import('./views/Home.vue')\n    },\n    {\n        path: '/dashboard',\n        component: () => import(\n            /* webpackChunkName: \"dashboard\" */\n            './views/Dashboard.vue'\n        )\n    },\n    {\n        path: '/admin',\n        component: () => import('./views/Admin.vue'),\n        children: [\n            {\n                path: 'users',\n                component: () => import('./views/admin/Users.vue')\n            }\n        ]\n    }\n];\n\nconst router = createRouter({\n    history: createWebHistory(),\n    routes\n});\n```\n\n## Grouping Chunks:\n```javascript\n// Group related routes into single chunk\nconst AdminDashboard = () => import(/* webpackChunkName: \"admin\" */ './Admin.vue');\nconst AdminUsers = () => import(/* webpackChunkName: \"admin\" */ './AdminUsers.vue');\nconst AdminSettings = () => import(/* webpackChunkName: \"admin\" */ './AdminSettings.vue');\n```"
+        },
+        {
+            "id": "lazy_9",
+            "type": "content",
+            "title": "Angular Lazy Loading",
+            "content": "# Angular Lazy Loading 🅰️\n\nAngular uses lazy loading for feature modules via the router.\n\n## Lazy Loading Modules:\n```typescript\n// app-routing.module.ts\nconst routes: Routes = [\n    { path: '', component: HomeComponent },\n    { \n        path: 'dashboard',\n        loadChildren: () => import('./dashboard/dashboard.module')\n            .then(m => m.DashboardModule)\n    },\n    {\n        path: 'admin',\n        loadChildren: () => import('./admin/admin.module')\n            .then(m => m.AdminModule)\n    }\n];\n```\n\n## Feature Module Setup:\n```typescript\n// dashboard/dashboard.module.ts\n@NgModule({\n    declarations: [\n        DashboardComponent,\n        WidgetComponent\n    ],\n    imports: [\n        CommonModule,\n        DashboardRoutingModule\n    ]\n})\nexport class DashboardModule { }\n\n// dashboard/dashboard-routing.module.ts\nconst routes: Routes = [\n    { path: '', component: DashboardComponent },\n    { path: 'analytics', component: AnalyticsComponent }\n];\n```\n\n## Preloading Strategies:\n```typescript\nimport { PreloadAllModules, PreloadingStrategy } from '@angular/router';\n\n@NgModule({\n    imports: [\n        RouterModule.forRoot(routes, {\n            preloadingStrategy: PreloadAllModules\n        })\n    ]\n})\nexport class AppRoutingModule { }\n```\n\n## Custom Preloading:\n```typescript\n@Injectable({ providedIn: 'root' })\nexport class SelectivePreload implements PreloadingStrategy {\n    preload(route: Route, load: () => Observable<any>) {\n        return route.data?.['preload'] ? load() : of(null);\n    }\n}\n```"
+        },
+        {
+            "id": "lazy_10",
+            "type": "content",
+            "title": "Webpack Code Splitting",
+            "content": "# Webpack Code Splitting ✂️\n\nWebpack provides multiple ways to split your code into separate bundles.\n\n## 1. Entry Points:\n```javascript\n// webpack.config.js\nmodule.exports = {\n    entry: {\n        app: './src/app.js',\n        vendor: './src/vendor.js'\n    },\n    output: {\n        filename: '[name].[contenthash].js'\n    }\n};\n```\n\n## 2. Dynamic Imports:\n```javascript\n// Dynamically import module when needed\nasync function loadEditor() {\n    const { Editor } = await import(\n        /* webpackChunkName: \"editor\" */\n        './editor'\n    );\n    return new Editor();\n}\n\n// Conditional loading\nif (userIsAdmin) {\n    import('./admin-panel').then(module => {\n        module.init();\n    });\n}\n```\n\n## 3. SplitChunks Plugin:\n```javascript\noptimization: {\n    splitChunks: {\n        chunks: 'all',\n        cacheGroups: {\n            vendors: {\n                test: /[\\\\/]node_modules[\\\\/]/,\n                name: 'vendors',\n                chunks: 'all',\n                priority: 20\n            },\n            common: {\n                minChunks: 2,\n                priority: 10,\n                reuseExistingChunk: true\n            }\n        }\n    }\n}\n```\n\n## Magic Comments:\n| Comment | Purpose |\n|---------|--------|\n| `webpackChunkName` | Name the chunk |\n| `webpackPrefetch` | Prefetch during idle |\n| `webpackPreload` | Preload with parent |"
+        },
+        {
+            "id": "lazy_11",
+            "type": "content",
+            "title": "Prefetching and Preloading",
+            "content": "# Prefetching and Preloading 🔮\n\nLoad resources in advance for instant navigation.\n\n## Prefetch vs Preload:\n| Feature | Prefetch | Preload |\n|---------|----------|---------|\n| Priority | Low (idle time) | High (with current page) |\n| Timing | Future navigation | Current page needs |\n| Use Case | Next page assets | Current critical assets |\n\n## Webpack Magic Comments:\n```javascript\n// Prefetch - load during browser idle time\nconst AdminPanel = () => import(\n    /* webpackPrefetch: true */\n    './AdminPanel'\n);\n\n// Preload - load in parallel with parent chunk\nconst CriticalFeature = () => import(\n    /* webpackPreload: true */\n    './CriticalFeature'\n);\n```\n\n## HTML Prefetch/Preload:\n```html\n<!-- Prefetch for future navigation -->\n<link rel=\"prefetch\" href=\"/dashboard.js\">\n\n<!-- Preload for current page -->\n<link rel=\"preload\" href=\"/critical.js\" as=\"script\">\n<link rel=\"preload\" href=\"/fonts/main.woff2\" as=\"font\" crossorigin>\n```\n\n## Smart Prefetching Strategy:\n```javascript\n// Prefetch on hover (user intent signal)\nlink.addEventListener('mouseenter', () => {\n    import(/* webpackPrefetch: true */ './next-page');\n});\n\n// Prefetch on visible (Intersection Observer)\nconst prefetchObserver = new IntersectionObserver((entries) => {\n    entries.forEach(entry => {\n        if (entry.isIntersecting) {\n            const href = entry.target.getAttribute('href');\n            prefetchRoute(href);\n        }\n    });\n});\n```"
+        },
+        {
+            "id": "lazy_quiz_3",
+            "type": "quiz",
+            "title": "Prefetch Quiz",
+            "content": "Test your prefetching knowledge!",
+            "quizQuestion": "When does a prefetched resource get loaded?",
+            "quizOptions": [
+                "Immediately with high priority",
+                "During browser idle time",
+                "Only when explicitly requested",
+                "Before the HTML is parsed"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "lazy_12",
+            "type": "content",
+            "title": "Lazy Loading Third-Party Scripts",
+            "content": "# Lazy Loading Third-Party Scripts 📜\n\nDefer non-critical third-party scripts for better performance.\n\n## Script Loading Attributes:\n```html\n<!-- Blocks parsing -->\n<script src=\"blocking.js\"></script>\n\n<!-- Executes after HTML parsed, in order -->\n<script src=\"deferred.js\" defer></script>\n\n<!-- Executes when ready, any order -->\n<script src=\"async-script.js\" async></script>\n```\n\n## Dynamic Script Loading:\n```javascript\nfunction loadScript(src) {\n    return new Promise((resolve, reject) => {\n        const script = document.createElement('script');\n        script.src = src;\n        script.async = true;\n        script.onload = resolve;\n        script.onerror = reject;\n        document.body.appendChild(script);\n    });\n}\n\n// Load on user interaction\ndocument.getElementById('chat-btn').addEventListener('click', async () => {\n    await loadScript('https://third-party.com/chat-widget.js');\n    initChatWidget();\n});\n```\n\n## Conditional Loading:\n```javascript\n// Load analytics after interaction\nlet analyticsLoaded = false;\n\nfunction loadAnalyticsOnce() {\n    if (analyticsLoaded) return;\n    analyticsLoaded = true;\n    loadScript('https://analytics.com/script.js');\n}\n\n['scroll', 'click', 'keypress'].forEach(event => {\n    window.addEventListener(event, loadAnalyticsOnce, { once: true });\n});\n```\n\n## Facade Pattern:\n```html\n<!-- Show static placeholder, load real widget on interaction -->\n<div class=\"youtube-facade\" data-video-id=\"abc123\">\n    <img src=\"thumbnail.jpg\" alt=\"Video thumbnail\">\n    <button class=\"play-btn\">Play</button>\n</div>\n```"
+        },
+        {
+            "id": "lazy_13",
+            "type": "content",
+            "title": "Infinite Scroll and Pagination",
+            "content": "# Infinite Scroll and Pagination 📜\n\nLazy load data as users scroll through content.\n\n## Intersection Observer Infinite Scroll:\n```javascript\nclass InfiniteScroll {\n    constructor(container, loadMore) {\n        this.container = container;\n        this.loadMore = loadMore;\n        this.page = 1;\n        this.loading = false;\n        \n        this.setupObserver();\n    }\n    \n    setupObserver() {\n        const sentinel = document.createElement('div');\n        sentinel.className = 'scroll-sentinel';\n        this.container.appendChild(sentinel);\n        \n        const observer = new IntersectionObserver(async (entries) => {\n            if (entries[0].isIntersecting && !this.loading) {\n                this.loading = true;\n                await this.loadMore(this.page++);\n                this.loading = false;\n            }\n        }, { rootMargin: '200px' });\n        \n        observer.observe(sentinel);\n    }\n}\n\n// Usage\nnew InfiniteScroll(\n    document.getElementById('feed'),\n    async (page) => {\n        const data = await fetch(`/api/posts?page=${page}`);\n        renderPosts(await data.json());\n    }\n);\n```\n\n## Virtual Scrolling:\n```javascript\n// Only render visible items\nclass VirtualList {\n    constructor(container, items, itemHeight) {\n        this.items = items;\n        this.itemHeight = itemHeight;\n        this.visibleCount = Math.ceil(container.clientHeight / itemHeight) + 2;\n        \n        container.addEventListener('scroll', () => this.render());\n    }\n    \n    render() {\n        const startIndex = Math.floor(scrollTop / this.itemHeight);\n        const visibleItems = this.items.slice(startIndex, startIndex + this.visibleCount);\n        // Render only visible items\n    }\n}\n```\n\n> 💡 **Tip:** Use virtual scrolling for lists with 1000+ items!"
+        },
+        {
+            "id": "lazy_14",
+            "type": "content",
+            "title": "Skeleton Screens and Placeholders",
+            "content": "# Skeleton Screens and Placeholders 💀\n\nProvide visual feedback while content loads.\n\n## CSS Skeleton Screen:\n```css\n.skeleton {\n    background: linear-gradient(\n        90deg,\n        #f0f0f0 25%,\n        #e0e0e0 50%,\n        #f0f0f0 75%\n    );\n    background-size: 200% 100%;\n    animation: shimmer 1.5s infinite;\n}\n\n@keyframes shimmer {\n    0% { background-position: 200% 0; }\n    100% { background-position: -200% 0; }\n}\n\n.skeleton-text {\n    height: 1em;\n    margin: 0.5em 0;\n    border-radius: 4px;\n}\n\n.skeleton-avatar {\n    width: 48px;\n    height: 48px;\n    border-radius: 50%;\n}\n```\n\n## Skeleton Component:\n```javascript\nfunction SkeletonCard() {\n    return (\n        <div className=\"card skeleton-card\">\n            <div className=\"skeleton skeleton-avatar\"></div>\n            <div className=\"skeleton-content\">\n                <div className=\"skeleton skeleton-text\" style={{width: '60%'}}></div>\n                <div className=\"skeleton skeleton-text\" style={{width: '80%'}}></div>\n                <div className=\"skeleton skeleton-text\" style={{width: '40%'}}></div>\n            </div>\n        </div>\n    );\n}\n\nfunction Feed({ isLoading, posts }) {\n    if (isLoading) {\n        return Array(5).fill().map((_, i) => <SkeletonCard key={i} />);\n    }\n    return posts.map(post => <PostCard key={post.id} {...post} />);\n}\n```\n\n## Benefits:\n- ✅ Perceived performance improvement\n- ✅ Reduces layout shift (CLS)\n- ✅ Better user experience than spinners"
+        },
+        {
+            "id": "lazy_15",
+            "type": "content",
+            "title": "Performance Metrics",
+            "content": "# Performance Metrics 📊\n\nMeasure the impact of lazy loading on Core Web Vitals.\n\n## Key Metrics Affected:\n\n| Metric | Full Name | Impact of Lazy Loading |\n|--------|-----------|----------------------|\n| **LCP** | Largest Contentful Paint | ⬇️ Faster initial paint |\n| **FID** | First Input Delay | ⬇️ Less JS to parse |\n| **CLS** | Cumulative Layout Shift | ⚠️ Can increase if not handled |\n| **TTI** | Time to Interactive | ⬇️ Faster interaction |\n| **TBT** | Total Blocking Time | ⬇️ Less main thread work |\n\n## Measuring Performance:\n```javascript\n// Performance Observer\nconst observer = new PerformanceObserver((list) => {\n    list.getEntries().forEach(entry => {\n        console.log(`${entry.name}: ${entry.startTime}ms`);\n    });\n});\n\nobserver.observe({ entryTypes: ['largest-contentful-paint', 'layout-shift'] });\n\n// Web Vitals library\nimport { getLCP, getFID, getCLS } from 'web-vitals';\n\ngetLCP(console.log);\ngetFID(console.log);\ngetCLS(console.log);\n```\n\n## Avoiding CLS with Lazy Loading:\n```css\n/* Reserve space for images */\nimg {\n    aspect-ratio: 16/9;\n    width: 100%;\n    height: auto;\n}\n\n/* Container with min-height */\n.lazy-container {\n    min-height: 300px;\n}\n```\n\n> 🎯 **Goal:** LCP < 2.5s, FID < 100ms, CLS < 0.1"
+        },
+        {
+            "id": "lazy_16",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Lazy Loading Best Practices ✅\n\nFollow these guidelines for optimal lazy loading implementation.\n\n## Do's ✅\n\n### 1. Prioritize Above-the-Fold Content\n```javascript\n// Critical content loads immediately\nimport Header from './Header';\nimport Hero from './Hero';\n\n// Below-fold content is lazy loaded\nconst Features = lazy(() => import('./Features'));\nconst Testimonials = lazy(() => import('./Testimonials'));\n```\n\n### 2. Always Reserve Space\n```html\n<img \n    src=\"placeholder.jpg\"\n    data-src=\"real-image.jpg\"\n    width=\"800\"\n    height=\"600\"\n    loading=\"lazy\"\n    alt=\"Description\"\n>\n```\n\n### 3. Use Meaningful Loading States\n```javascript\n<Suspense fallback={<SkeletonLoader />}>\n    <LazyComponent />\n</Suspense>\n```\n\n### 4. Implement Error Boundaries\n```javascript\n<ErrorBoundary fallback={<ErrorMessage />}>\n    <Suspense fallback={<Loading />}>\n        <LazyComponent />\n    </Suspense>\n</ErrorBoundary>\n```\n\n## Don'ts ❌\n- ❌ Don't lazy load LCP images\n- ❌ Don't lazy load critical CSS\n- ❌ Don't over-split (too many small chunks)\n- ❌ Don't forget accessibility (screen readers)\n- ❌ Don't ignore loading states\n\n## Testing Checklist:\n- [ ] Test on slow 3G connections\n- [ ] Verify no layout shifts\n- [ ] Check accessibility with screen readers\n- [ ] Measure Core Web Vitals before/after"
+        },
+        {
+            "id": "lazy_quiz_4",
+            "type": "quiz",
+            "title": "Best Practices Quiz",
+            "content": "Test your knowledge of lazy loading best practices!",
+            "quizQuestion": "What should you always do when lazy loading images to prevent layout shift?",
+            "quizOptions": [
+                "Use JavaScript instead of HTML",
+                "Remove alt attributes",
+                "Reserve space with width, height, or aspect-ratio",
+                "Load images synchronously first"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "lazy_17",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Lazy Loading techniques!\n\n## Key Takeaways:\n\n### Image Lazy Loading\n- ✅ Use native `loading=\"lazy\"` for broad support\n- ✅ Intersection Observer for custom implementations\n- ✅ Progressive loading with LQIP for better UX\n- ✅ Never lazy load LCP/above-fold images\n\n### Component Lazy Loading\n- ✅ React: `React.lazy()` + `Suspense`\n- ✅ Vue: `defineAsyncComponent()`\n- ✅ Angular: `loadChildren` in routes\n\n### Code Splitting\n- ✅ Route-based splitting for page-level chunks\n- ✅ Dynamic imports for on-demand loading\n- ✅ Webpack magic comments for naming and prefetching\n\n### Advanced Techniques\n- ✅ Prefetch for future navigation\n- ✅ Preload for current page critical assets\n- ✅ Skeleton screens for perceived performance\n- ✅ Virtual scrolling for large lists\n\n## Performance Impact:\n| Optimization | Typical Improvement |\n|-------------|--------------------|\n| Image lazy loading | 40-60% faster LCP |\n| Route splitting | 30-50% smaller initial bundle |\n| Third-party deferral | 20-40% faster TTI |\n| Virtual scrolling | 10x better with large lists |\n\n## Next Steps:\n- 📊 Learn **Profiling Tools** to measure impact\n- 🗄️ Master **Caching Strategies** for repeat visits\n- 🚀 Explore **CDN** for global performance\n\nHappy lazy loading! 🦥"
+        }
+    ]
+}

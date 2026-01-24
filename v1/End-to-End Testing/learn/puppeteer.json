@@ -1,0 +1,173 @@
+{
+    "id": "learn_e2etest_puppeteer",
+    "topicId": "puppeteer",
+    "topicTitle": "Puppeteer",
+    "description": "Master Puppeteer for headless Chrome automation, web scraping, and high-performance browser control",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "puppeteer_1",
+            "type": "content",
+            "title": "Introduction to Puppeteer",
+            "content": "# Puppeteer 🎭\n\nA Node.js library which provides a high-level API to control Chrome or Chromium over the **DevTools Protocol**.\n\n- **Headless by default**: Runs in the background.\n- **Direct Control**: Native access to Chrome's internals.\n- **Fast**: Lean and optimized for performance."
+        },
+        {
+            "id": "puppeteer_2",
+            "type": "content",
+            "title": "Core Use Cases",
+            "content": "# Beyond Testing 🛠️\n\n- **Generating PDFs**: Save pages as print-ready files.\n- **Web Scraping**: Extract data from dynamic React/Vue sites.\n- **Performance Audits**: Track cold starts and paint times.\n- **Screenshots**: Automated visual captures."
+        },
+        {
+            "id": "puppeteer_3",
+            "type": "content",
+            "title": "A Simple script",
+            "content": "# Hello Puppeteer 👋\n\n```javascript\nconst puppeteer = require('puppeteer');\n\n(async () => {\n  const browser = await puppeteer.launch();\n  const page = await browser.newPage();\n  await page.goto('https://example.com');\n  await page.screenshot({ path: 'example.png' });\n  await browser.close();\n})();\n```"
+        },
+        {
+            "id": "puppeteer_4",
+            "type": "content",
+            "title": "Interacting with Pages",
+            "content": "# Actions 🖱️\n\n```javascript\nawait page.type('#email', 'user@example.com');\nawait page.click('#submit-btn');\nawait page.waitForSelector('.success-msg');\n```"
+        },
+        {
+            "id": "puppeteer_5",
+            "quizQuestion": "Puppeteer controls browsers using which protocol?",
+            "quizOptions": [
+                "WebDriver",
+                "JSON Wire Protocol",
+                "Chrome DevTools Protocol (CDP)",
+                "HTTP/2"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Protocol Quiz",
+            "content": "Under the hood."
+        },
+        {
+            "id": "puppeteer_6",
+            "type": "content",
+            "title": "Page Evaluation",
+            "content": "# Running JS in Browser 🧠\n\n`page.evaluate()` runs code in the context of the page, giving you access to `window`, `document`, and library objects (like `jQuery`).\n\n```javascript\nconst dimensions = await page.evaluate(() => {\n  return { width: document.body.clientWidth };\n});\n```"
+        },
+        {
+            "id": "puppeteer_7",
+            "type": "content",
+            "title": "Waiting Strategies",
+            "content": "# Don't Rush ⏳\n\n- `page.waitForNavigation()`: Wait for URL change.\n- `page.waitForSelector('.item')`: Wait for element.\n- `page.waitForResponse(url)`: Wait for an API call to finish."
+        },
+        {
+            "id": "puppeteer_8",
+            "type": "content",
+            "title": "Emulating Devices",
+            "content": "# Mobile View 📱\n\n```javascript\nconst iPhone = puppeteer.KnownDevices['iPhone 11'];\nawait page.emulate(iPhone);\n```\n\nInstantly switch to mobile viewports, touch support, and user-agent strings."
+        },
+        {
+            "id": "puppeteer_9",
+            "type": "content",
+            "title": "Network Interception",
+            "content": "# Traffic Control 📡\n\nBlock images or CSS to speed up scraping, or mock API responses.\n\n```javascript\nawait page.setRequestInterception(true);\npage.on('request', req => {\n  if (req.resourceType() === 'image') req.abort();\n  else req.continue();\n});\n```"
+        },
+        {
+            "id": "puppeteer_10",
+            "quizQuestion": "Which method allows you to run custom JavaScript inside the browser's context?",
+            "puppeteerOptions": [
+                "page.run()",
+                "page.evaluate()",
+                "page.script()",
+                "page.exec()"
+            ],
+            "quizOptions": [
+                "page.run()",
+                "page.evaluate()",
+                "page.script()",
+                "page.exec()"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Actions Quiz",
+            "content": "Custom logic."
+        },
+        {
+            "id": "puppeteer_11",
+            "type": "content",
+            "title": "Generating PDFs",
+            "content": "# Print to File 📄\n\n```javascript\nawait page.pdf({\n  path: 'report.pdf',\n  format: 'A4',\n  printBackground: true\n});\n```"
+        },
+        {
+            "id": "puppeteer_12",
+            "type": "content",
+            "title": "Request & Response Monitoring",
+            "content": "# Insight 👁️\n\nWatch all network traffic in real-time. Useful for verifying that analytics tags or tracking pixels are actually fired."
+        },
+        {
+            "id": "puppeteer_13",
+            "type": "content",
+            "title": "Headless vs Headful",
+            "content": "# Visual Debugging 🛠️\n\nSet `headless: false` during development to see the browser window and optionally add a `slowMo` delay to watch the test execute."
+        },
+        {
+            "id": "puppeteer_14",
+            "type": "content",
+            "title": "Handling Alerts",
+            "content": "# Dialogs 📢\n\n```javascript\npage.on('dialog', async dialog => {\n  console.log(dialog.message());\n  await dialog.dismiss();\n});\n```"
+        },
+        {
+            "id": "puppeteer_15",
+            "quizQuestion": "What is 'Headless' mode?",
+            "quizOptions": [
+                "Running without JS",
+                "Running without a monitor",
+                "Running the browser without a visible window/GUI",
+                "Running without cookies"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Modes Quiz",
+            "content": "Invisible browsers."
+        },
+        {
+            "id": "puppeteer_16",
+            "type": "content",
+            "title": "Wait for Network Idle",
+            "content": "# Stability ⚓\n\n```javascript\nawait page.goto(url, { waitUntil: 'networkidle0' });\n```\n\n`networkidle0`: Wait until there are no network connections for at least 500ms. Perfect for Single Page Apps (SPAs)."
+        },
+        {
+            "id": "puppeteer_17",
+            "type": "content",
+            "title": "Shadow DOM",
+            "content": "# Deep Querying 🧤\n\nUse `>>>` or specialized queries to reach inside Shadow Roots, which are often used in modern Web Components."
+        },
+        {
+            "id": "puppeteer_18",
+            "type": "content",
+            "title": "Cookie Management",
+            "content": "# Auth 🔐\n\n```javascript\nawait page.setCookie({ name: 'token', value: 'secret' });\nconst cookies = await page.cookies();\n```"
+        },
+        {
+            "id": "puppeteer_19",
+            "type": "content",
+            "title": "Performance Tracing",
+            "content": "# Metrics 📈\n\nStart a trace to capture a timeline of everything happening in the browser, which can be loaded into Chrome DevTools for analysis."
+        },
+        {
+            "id": "puppeteer_20",
+            "quizQuestion": "Which option allows you to slow down Puppeteer's operations so you can watch what happens?",
+            "quizOptions": [
+                "delay",
+                "slowMo",
+                "wait",
+                "pause"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Debugging."
+        },
+        {
+            "id": "puppeteer_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ High-performance browser control.\n- ✅ Great for Scraping, PDFs, and Audits.\n- ✅ Native **CDP** protocol access.\n- ✅ Lean Node.js integration.\n\nTake control of the web with Puppeteer! 🎭"
+        }
+    ]
+}

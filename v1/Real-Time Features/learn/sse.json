@@ -1,0 +1,53 @@
+{
+    "id": "learn_sse_realtime",
+    "topicId": "sse",
+    "topicTitle": "Server-Sent Events",
+    "description": "Master SSE for one-way server push and event streams",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "sse_1",
+            "type": "content",
+            "title": "Server-Sent Events",
+            "content": "# Server-Sent Events 📨\n\nOne-way server push over HTTP.\n\n## What You'll Learn:\n- **EventSource API** - Client-side\n- **Event Streams** - Server format\n- **Auto Reconnect** - Built-in recovery\n\n> 💡 SSE = Simple server-to-client push!"
+        },
+        {
+            "id": "sse_2",
+            "type": "content",
+            "title": "Client",
+            "content": "# Client Implementation 💻\n\n```javascript\nconst eventSource = new EventSource('/events');\n\neventSource.onmessage = (event) => {\n    console.log('Message:', event.data);\n};\n\neventSource.addEventListener('notification', (event) => {\n    console.log('Notification:', event.data);\n});\n\neventSource.onerror = (error) => {\n    console.error('Error:', error);\n};\n\n// Close connection\neventSource.close();\n```\n\n## Features:\n- Auto reconnection\n- Event types\n- Last-event-id tracking"
+        },
+        {
+            "id": "sse_3",
+            "type": "content",
+            "title": "Server",
+            "content": "# Server Implementation 🖥️\n\n```javascript\napp.get('/events', (req, res) => {\n    res.setHeader('Content-Type', 'text/event-stream');\n    res.setHeader('Cache-Control', 'no-cache');\n    res.setHeader('Connection', 'keep-alive');\n    \n    // Send event\n    res.write('data: Hello!\\n\\n');\n    \n    // Named event\n    res.write('event: notification\\n');\n    res.write('data: {\"message\": \"New item\"}\\n\\n');\n    \n    // Keep connection alive\n    const interval = setInterval(() => {\n        res.write('data: ping\\n\\n');\n    }, 30000);\n    \n    req.on('close', () => clearInterval(interval));\n});\n```"
+        },
+        {
+            "id": "sse_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your SSE knowledge!",
+            "quizQuestion": "What is a key limitation of SSE compared to WebSocket?",
+            "quizOptions": [
+                "Slower",
+                "One-way only (server to client)",
+                "No auto-reconnect",
+                "Browser support"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sse_4",
+            "type": "content",
+            "title": "SSE vs WebSocket",
+            "content": "# SSE vs WebSocket ⚖️\n\n| Aspect | SSE | WebSocket |\n|--------|-----|----------|\n| Direction | Server → Client | Bi-directional |\n| Protocol | HTTP | ws:// |\n| Reconnect | Auto | Manual |\n| Complexity | Simple | Medium |\n| Binary | No | Yes |\n\n## Choose SSE When:\n- Only need server push\n- Want simplicity\n- Need auto-reconnect\n- HTTP/2 multiplexing"
+        },
+        {
+            "id": "sse_5",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Server-Sent Events!\n\n## Key Points:\n- One-way server push\n- Built on HTTP\n- Auto reconnection\n- Named events\n\n## Use Cases:\n- Notifications\n- Live feeds\n- Stock tickers\n- Progress updates\n\nPush updates! 📨"
+        }
+    ]
+}

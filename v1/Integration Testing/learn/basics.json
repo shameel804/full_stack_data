@@ -1,0 +1,167 @@
+{
+    "id": "learn_integtest_basics",
+    "topicId": "basics",
+    "topicTitle": "Integration Testing Basics",
+    "description": "Master the fundamentals of integration testing, focusing on component interactions and interface reliability",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "What is Integration Testing?",
+            "content": "# Integration Testing 🔗\n\nThe phase in software testing where individual units are combined and tested as a group.\n\n- **Purpose**: Expose faults in the interaction between integrated units.\n- **Scope**: Covers the \"seams\" between modules, services, and databases."
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "Unit vs Integration",
+            "content": "# The Difference ⚖️\n\n- **Unit Testing**: Tests a method or class in isolation (using mocks).\n- **Integration Testing**: Tests how two or more units work together (using real or semi-real dependencies).\n\n> 💡 \"Unit tests tell you if your code is right. Integration tests tell you if your app works.\""
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Common Targets",
+            "content": "# What to Integrate? 🎯\n\n- **App + Database**: Do queries return correct data?\n- **App + External API**: Does our client handle the JSON correctly?\n- **Service A + Service B**: Do they communicate over HTTP/gRPC without errors?"
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "Big Bang Approach",
+            "content": "# Integration Strategies 🏗️\n\n## 1. Big Bang\n- Mix all components together at once and test.\n- **Pros**: Good for small systems.\n- **Cons**: Extremely hard to debug when things go wrong."
+        },
+        {
+            "id": "basics_5",
+            "quizQuestion": "What is the primary goal of integration testing?",
+            "quizOptions": [
+                "To test logic in isolation",
+                "To find bugs in the interaction between modules",
+                "To verify UI layout",
+                "To measure performance under load"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Goal Quiz",
+            "content": "Why integrate?"
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Incremental Approach",
+            "content": "# Incremental Testing 🪜\n\n## 2. Top-Down\n- Test top-level modules first using **Stubs** for lower ones.\n\n## 3. Bottom-Up\n- Test low-level modules first using **Drivers** to call them."
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "Sandwich Approach",
+            "content": "# Hybrid (Sandwich) 🥪\n\nTesting both top-down and bottom-up simultaneously. It combines the advantages of both but can be complex to manage."
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Stubs vs Drivers",
+            "content": "# Support Tools 🛠️\n\n- **Stub**: A dummy module that simulated the *output* of a sub-module.\n- **Driver**: A dummy module that simulates the *input* to a module from above."
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "Data Fixtures",
+            "content": "# Testing with Data 💾\n\nIntegration tests often need a known state (Data Fixtures).\n\n- **Best Practice**: Load seed data into a clean test database before running suite.\n- **Cleanup**: Truncate tables / delete test data after tests finish."
+        },
+        {
+            "id": "basics_10",
+            "quizQuestion": "In Bottom-Up testing, what is used to simulate the calling of lower-level modules?",
+            "quizOptions": [
+                "Stubs",
+                "Mocks",
+                "Drivers",
+                "Spies"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Tools Quiz",
+            "content": "Stubs vs Drivers."
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "Persistence Testing",
+            "content": "# DB Integration 🗄️\n\nTesting that your ORM (Object-Relational Mapping) or SQL queries actually work with the schema.\n\n- Check unique constraints.\n- Verify cascading deletes.\n- Test transaction rollbacks."
+        },
+        {
+            "id": "basics_12",
+            "type": "content",
+            "title": "External Service Testing",
+            "content": "# External Seams 🌐\n\nIntegration tests often touch external services (Stripe, Twilio).\n\n- **Don't** hit real production APIs.\n- **Do** hit \"Sandbox/Test\" environments.\n- **Or** use a specialized tool like **WireMock** to simulate the external API locally."
+        },
+        {
+            "id": "basics_13",
+            "type": "content",
+            "title": "API Integration",
+            "content": "# The HTTP Layer 📡\n\nTesting that your REST/GraphQL API correctly routes requests and parses JSON.\n\n- Verify headers (Content-Type, Auth).\n- Check Status Codes (200 OK, 404 Not Found).\n- Validate Response JSON structure."
+        },
+        {
+            "id": "basics_14",
+            "type": "content",
+            "title": "Contract Testing",
+            "content": "# Contracts 📜\n\nA specialized form of integration testing where the consumer and provider agree on a data schema. If one changes, the tests fail before deployment."
+        },
+        {
+            "id": "basics_15",
+            "quizQuestion": "Why should you avoid hitting production APIs in integration tests?",
+            "quizOptions": [
+                "It might cost money",
+                "It might mess up real data",
+                "It is slow",
+                "All of the above"
+            ],
+            "correctOptionIndex": 3,
+            "type": "quiz",
+            "title": "Risk Quiz",
+            "content": "Safety first."
+        },
+        {
+            "id": "basics_16",
+            "type": "content",
+            "title": "Environment Management",
+            "content": "# Clean Environments 🧼\n\nRunning integration tests locally should be as easy as:\n\n```bash\ndocker-compose up -d database\nnpm test\n```\n\n> [!TIP]\n> Use environment variables (`.env.test`) to point to your test resources."
+        },
+        {
+            "id": "basics_17",
+            "type": "content",
+            "title": "Transactional Tests",
+            "content": "# Fast Cleanup 🔄\n\nInstead of deleting data after every test, wrap each test in a **Database Transaction** and roll it back at the end. Your DB stays clean and it's much faster!"
+        },
+        {
+            "id": "basics_18",
+            "type": "content",
+            "title": "CI/CD Integration",
+            "content": "# CI Pipeline 🚜\n\nIntegration tests run *after* unit tests in the pipeline. They often require \"Service Containers\" (Spinning up MySQL/Redis) to run successfully during the build."
+        },
+        {
+            "id": "basics_19",
+            "type": "content",
+            "title": "Complexity & Cost",
+            "content": "# The Trade-off 💸\n\nIntegration tests are more expensive to write and maintain than unit tests. \n\n- **Unit**: Fast, specific, cheap.\n- **Integration**: Slower, broader, more realistic."
+        },
+        {
+            "id": "basics_20",
+            "quizQuestion": "What is the benefit of wrapping integration tests in a database transaction?",
+            "quizOptions": [
+                "Higher security",
+                "Automatic data cleanup and speed",
+                "Encryption of data",
+                "Better UI performance"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Optimization."
+        },
+        {
+            "id": "basics_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Integration tests verify the \"glue\" between modules.\n- ✅ Prefer incremental strategies (Top-Down/Bottom-Up).\n- ✅ Use real databases (test instances) for persistence tests.\n- ✅ Contract tests help prevent breaking changes in APIs.\n\nBuild confidence by testing your system as a whole! 🚀"
+        }
+    ]
+}

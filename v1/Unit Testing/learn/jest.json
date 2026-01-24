@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_jest",
+    "topicId": "jest",
+    "topicTitle": "Jest",
+    "description": "Master the Jest testing framework including matchers, mocking, and advanced configurations",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "jest_1",
+            "type": "content",
+            "title": "Introduction to Jest",
+            "content": "# Jest 🃏\n\nA delightful JavaScript Testing Framework with a focus on simplicity.\n\n- **Zero config** for most JS projects.\n- **Snapshots** for UI state.\n- **Isolate** tests for speed.\n- **Built-in** mocks and coverage."
+        },
+        {
+            "id": "jest_2",
+            "type": "content",
+            "title": "Common Matchers",
+            "content": "# Jest Matchers 🎯\n\n- `toBe(v)`: Exact equality (===)\n- `toEqual(v)`: Deep equality (objects/arrays)\n- `toBeTruthy()` / `toBeFalsy()`\n- `toContain(item)`: Array containing\n- `toMatch(regex)`: String matching\n\n```javascript\nexpect(data).toEqual({ one: 1, two: 2 });\n```"
+        },
+        {
+            "id": "jest_3",
+            "type": "content",
+            "title": "Numerical Matchers",
+            "content": "# Numbers in Jest 🔢\n\n```javascript\nexpect(value).toBeGreaterThan(3);\nexpect(value).toBeGreaterThanOrEqual(3.5);\nexpect(value).toBeLessThan(5);\n\n// For decimals:\nexpect(0.1 + 0.2).toBeCloseTo(0.3);\n```"
+        },
+        {
+            "id": "jest_4",
+            "type": "content",
+            "title": "Async Testing",
+            "content": "# Promises & Async ⏳\n\nJest makes async testing seamless.\n\n```javascript\ntest('the data is peanut butter', async () => {\n  const data = await fetchData();\n  expect(data).toBe('peanut butter');\n});\n\n// Using resolves/rejects matchers\nawait expect(fetchData()).resolves.toBe('peanut butter');\n```"
+        },
+        {
+            "id": "jest_5",
+            "type": "quiz",
+            "title": "Matchers Quiz",
+            "content": "Which matcher should you use to check if an object has the same key-value pairs as another?",
+            "quizQuestion": "Which Jest matcher performs a deep equality check on objects?",
+            "quizOptions": [
+                "toBe",
+                "toEqual",
+                "toHold",
+                "toMatch"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jest_6",
+            "type": "content",
+            "title": "Setup & Teardown",
+            "content": "# Lifecycle Hooks 🔄\n\n- `beforeEach(() => { ... })`\n- `afterEach(() => { ... })`\n- `beforeAll(() => { ... })`\n- `afterAll(() => { ... })`\n\nUseful for resetting global state or database connections."
+        },
+        {
+            "id": "jest_7",
+            "type": "content",
+            "title": "Mock Functions",
+            "content": "# spying & Mocking 🕵️\n\nUse `jest.fn()` to create a mock function.\n\n```javascript\nconst mockCallback = jest.fn(x => 42 + x);\nforEach([0, 1], mockCallback);\n\n// Assertions on mocks\nexpect(mockCallback.mock.calls.length).toBe(2);\nexpect(mockCallback.mock.results[0].value).toBe(42);\n```"
+        },
+        {
+            "id": "jest_8",
+            "type": "content",
+            "title": "Manual Mocks",
+            "content": "# Mocking Modules 📦\n\nReplace entire modules with `jest.mock()`.\n\n```javascript\nimport axios from 'axios';\njest.mock('axios');\n\naxios.get.mockResolvedValue({ data: 'mocked!' });\n```"
+        },
+        {
+            "id": "jest_9",
+            "type": "content",
+            "title": "Snapshots",
+            "content": "# Snapshot Testing 📸\n\nSave the state of a large object/UI and verify it doesn't change unexpectedly.\n\n```javascript\ntest('renders correctly', () => {\n  const tree = renderer.create(<MyComponent />).toJSON();\n  expect(tree).toMatchSnapshot();\n});\n```"
+        },
+        {
+            "id": "jest_10",
+            "type": "quiz",
+            "title": "Mocking Quiz",
+            "content": "How do you mock a module in Jest?",
+            "quizQuestion": "Which function is used to automatically mock an entire dependency in Jest?",
+            "quizOptions": [
+                "jest.fake()",
+                "jest.stub()",
+                "jest.mock()",
+                "jest.spyOn()"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "jest_11",
+            "type": "content",
+            "title": "Timer Mocks",
+            "content": "# Fake Timers ⏰\n\nInstantly fast-forward time in tests.\n\n```javascript\njest.useFakeTimers();\n\ntest('calls callback after 1s', () => {\n  const cb = jest.fn();\n  timer(cb);\n  jest.advanceTimersByTime(1000);\n  expect(cb).toHaveBeenCalled();\n});\n```"
+        },
+        {
+            "id": "jest_12",
+            "type": "content",
+            "title": "SpyOn",
+            "content": "# Spying on Methods 👁️\n\nWatch calls to an existing method without replacing it.\n\n```javascript\nconst spy = jest.spyOn(video, 'play');\nvideo.play();\nexpect(spy).toHaveBeenCalled();\n```"
+        },
+        {
+            "id": "jest_13",
+            "type": "content",
+            "title": "Code Coverage",
+            "content": "# Coverage Reports 📊\n\nRun with `--coverage` to see which lines are hit.\n\n```bash\njest --coverage\n```\n\nOutput table shows: `Statements`, `Branches`, `Functions`, `Lines`."
+        },
+        {
+            "id": "jest_14",
+            "type": "content",
+            "title": "Custom Matchers",
+            "content": "# Extending Jest 🛠️\n\n```javascript\nexpect.extend({\n  toBeEven(received) {\n    const pass = received % 2 === 0;\n    if (pass) return { message: () => 'Even', pass: true };\n    return { message: () => 'Odd', pass: false };\n  },\n});\n```"
+        },
+        {
+            "id": "jest_15",
+            "type": "quiz",
+            "title": "Timer Quiz",
+            "content": "What does jest.useFakeTimers() do?",
+            "quizQuestion": "What allows Jest to skip the real 'waiting' time in tests involving setTimeout?",
+            "quizOptions": [
+                "Fast Network Mode",
+                "Mocking Timers",
+                "Async/Await",
+                "Event Loop Skiping"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jest_16",
+            "type": "content",
+            "title": "Jest CLI",
+            "content": "# CLI Power 💻\n\n- `--watch`: Run on file change.\n- `-t 'pattern'`: Run specific tests.\n- `--onlyChanged`: Only run tests for changed files."
+        },
+        {
+            "id": "jest_17",
+            "type": "content",
+            "title": "Configuration",
+            "content": "# jest.config.js ⚙️\n\n```javascript\nmodule.exports = {\n  verbose: true,\n  testEnvironment: 'node',\n  setupFilesAfterEnv: ['./setupTests.js'],\n};\n```"
+        },
+        {
+            "id": "jest_18",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Clean Jest Tests ✅\n\n- Use `describe` blocks logically.\n- Keep tests deterministic.\n- Reset mocks after each test (`mockClear` or `restoreMocks`).\n- Don't over-mock; test behavior, not implementation."
+        },
+        {
+            "id": "jest_19",
+            "type": "content",
+            "title": "Debugging",
+            "content": "# Debugging 🔍\n\n- Use `debugger;` inside a test.\n- Run with node inspector: `node --inspect-brk node_modules/.bin/jest`."
+        },
+        {
+            "id": "jest_20",
+            "type": "quiz",
+            "title": "Snapshot Quiz",
+            "content": "What happens if a snapshot fails?",
+            "quizQuestion": "If a snapshot test fails because you intentionally changed the UI, how do you fix it?",
+            "quizOptions": [
+                "Delete the test",
+                "Rewrite the code",
+                "Update the snapshot with -u",
+                "Reinstall Jest"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "jest_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Jest Summary 🎉\n\n- ✅ Matchers for values.\n- ✅ Mocks for dependencies.\n- ✅ Async support built-in.\n- ✅ Snapshots for large outputs.\n\nMaster Jest to build rock-solid JS apps! 🚀"
+        }
+    ]
+}

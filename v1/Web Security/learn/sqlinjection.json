@@ -1,0 +1,167 @@
+{
+    "id": "learn_security_sqlinjection",
+    "topicId": "sqlinjection",
+    "topicTitle": "SQL Injection (SQLi)",
+    "description": "Master the art of defending against SQL Injection attacks, including error-based, blind, and second-order types",
+    "baseKP": 95,
+    "slides": [
+        {
+            "id": "sqlinjection_1",
+            "type": "content",
+            "title": "What is SQL Injection?",
+            "content": "# SQL Injection (SQLi) 💉🗄️\n\nA vulnerability that allows an attacker to interfere with the queries that an application makes to its database.\n\n- **Impact**: Viewing sensitive data, deleting tables, or gaining administrative access to the server."
+        },
+        {
+            "id": "sqlinjection_2",
+            "type": "content",
+            "title": "The Core Problem",
+            "content": "# Concatenation is Evil 🛑\n\nSQLi happens when user-provided data is directly concatenated into a SQL string. \n\n```javascript\n// VULNERABLE CODE\nconst query = \"SELECT * FROM users WHERE id = \" + req.body.id;\n```"
+        },
+        {
+            "id": "sqlinjection_3",
+            "type": "content",
+            "title": "The Famous '1=1' Attack",
+            "content": "# Bypassing Login 🚪\n\nIf the code is `SELECT * FROM users WHERE user='\" + name + \"' AND pass='\" + pass + \"'`.\n\nAttacker inputs: `admin' --` (The `--` comments out the rest of the query).\nResult: `SELECT * FROM users WHERE user='admin' -- AND pass=...` -> **LOGGED IN!**"
+        },
+        {
+            "id": "sqlinjection_4",
+            "type": "content",
+            "title": "Type 1: In-band (Classic) SQLi",
+            "content": "# Direct Feedback 📢\n\nThe attacker uses the same communication channel to launch the attack and gather results.\n\n- **Error-based**: Forcing the DB to output error messages containing the table names.\n- **Union-based**: Using `UNION` to combine results with private tables."
+        },
+        {
+            "id": "sqlinjection_5",
+            "quizQuestion": "What is the root cause of SQL Injection vulnerabilities?",
+            "quizOptions": [
+                "Using a slow database",
+                "Directly concatenating user input into SQL strings",
+                "Not using HTTPS",
+                "Using too many indexes"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Source Quiz",
+            "content": "Understanding the flaw."
+        },
+        {
+            "id": "sqlinjection_6",
+            "type": "content",
+            "title": "Type 2: Blind SQLi",
+            "content": "# Silent But Deadly 🤫\n\nThe application doesn't return data or errors directly. The attacker asks the DB True/False questions.\n\n- **Boolean-based**: Does the page load normally if the first letter of the password is 'A'?\n- **Time-based**: Make the DB sleep for 10 seconds if a condition is true."
+        },
+        {
+            "id": "sqlinjection_7",
+            "type": "content",
+            "title": "Defense: Prepared Statements",
+            "content": "# The Gold Standard 🥇\n\nUse **Parameterized Queries**. The SQL logic and the data are sent to the DB separately. The DB engine treats the data as literal values, never as executable code.\n\n```javascript\n// SECURE CODE\ndb.query(\"SELECT * FROM users WHERE id = ?\", [req.body.id]);\n```"
+        },
+        {
+            "id": "sqlinjection_8",
+            "type": "content",
+            "title": "Defense: Using an ORM",
+            "content": "# Indirect Security 🛡️\n\nORMs like **Sequelize**, **Eloquent**, or **Hibernate** use prepared statements under the hood by default, making them naturally resistant to SQLi (as long as you avoid raw queries!)."
+        },
+        {
+            "id": "sqlinjection_9",
+            "type": "content",
+            "title": "Defense: Input Validation",
+            "content": "# Type Safety 🧤\n\nIf you expect an Integer ID, ensure it is actually an Integer before sending it anywhere near the database layer."
+        },
+        {
+            "id": "sqlinjection_10",
+            "quizQuestion": "Which defense mechanism is considered most effective against SQL Injection?",
+            "quizOptions": [
+                "Base64 Encoding",
+                "Input Sanitization",
+                "Prepared Statements (Parameterized Queries)",
+                "Complex Passwords"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Defense Quiz",
+            "content": "Identifying the cure."
+        },
+        {
+            "id": "sqlinjection_11",
+            "type": "content",
+            "title": "Second-Order SQLi",
+            "content": "# Delayed Attack ⏰\n\nMalicious input is stored in the DB correctly, but later used insecurely in a second query. \n\n- **Example**: Changing your username to `admin' --`. Later, the 'Update Password' feature uses it in a query that targets the real admin!"
+        },
+        {
+            "id": "sqlinjection_12",
+            "type": "content",
+            "title": "Principle of Least Privilege (DB)",
+            "content": "# Damage Control 🚧\n\nYour web app's database user should **not** be the `root` or `sa` user. It should only have permissions to the specific tables and actions (SELECT, INSERT) it needs."
+        },
+        {
+            "id": "sqlinjection_13",
+            "type": "content",
+            "title": "Escaping User Input",
+            "content": "# Manual Labor 🛠️\n\nManually escaping characters like `'` with `\\'`. \n\n> [!CAUTION]\n> This is error-prone and much less secure than Prepared Statements. Use as a last resort only."
+        },
+        {
+            "id": "sqlinjection_14",
+            "type": "content",
+            "title": "NoSQL Injection",
+            "content": "# Not Just SQL! 🍃\n\nMongoDB and others are also vulnerable! Attackers can use operators like `$gt` (greater than) to bypass logic.\n\n```javascript\n// Malicious body: { \"user\": \"admin\", \"pass\": { \"$gt\": \"\" } }\n// Result: Logs in as admin because any password is > \"\"\n```"
+        },
+        {
+            "id": "sqlinjection_15",
+            "quizQuestion": "What is 'Time-based Blind SQLi'?",
+            "quizOptions": [
+                "An attack that only works at midnight",
+                "Using database sleep functions to infer information based on response time",
+                "Predicting the database's internal clock",
+                "Deleting the database history"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Blind SQLi Quiz",
+            "content": "Inference attacks."
+        },
+        {
+            "id": "sqlinjection_16",
+            "type": "content",
+            "title": "Stored Procedures",
+            "content": "# Pre-compiled Logic 🏛️\n\nWell-written stored procedures use parameters and can be more secure, but they are not a silver bullet if they internally use string concatenation."
+        },
+        {
+            "id": "sqlinjection_17",
+            "type": "content",
+            "title": "Information Schema",
+            "content": "# Mapping the Treasure 🗺️\n\nAttackers use `union select table_name from information_schema.tables` to discover the structure of your database before extracting data."
+        },
+        {
+            "id": "sqlinjection_18",
+            "type": "content",
+            "title": "WAF Protection",
+            "content": "# Network Shield 🛡️\n\nA **Web Application Firewall** (WAF) can detect and block common SQLi patterns (like `UNION SELECT`) before they even reach your server."
+        },
+        {
+            "id": "sqlinjection_19",
+            "type": "content",
+            "title": "SQLi in Order By",
+            "content": "# Sneaky Injection 🥷\n\nParameters in `ORDER BY` or `GROUP BY` often don't support standard placeholders, making them frequent targets for manually crafted SQLi."
+        },
+        {
+            "id": "sqlinjection_20",
+            "quizQuestion": "Is NoSQL (like MongoDB) immune to injection attacks?",
+            "quizOptions": [
+                "Yes, it doesn't use SQL",
+                "No, it is vulnerable to NoSQL-specific operator injection",
+                "Only if running on Linux",
+                "Only if using a cloud provider"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Dispelling myths."
+        },
+        {
+            "id": "sqlinjection_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Always use **Prepared Statements**.\n- ✅ Prefer **ORMs** for data access.\n- ✅ Use **Least Privilege** for DB users.\n- ✅ Validate all inputs for **Type** and **Range**.\n- ✅ Beware of **Blind** and **Second-Order** attacks.\n\nKeep your database rows safe from prying eyes! 🗄️🛡️"
+        }
+    ]
+}

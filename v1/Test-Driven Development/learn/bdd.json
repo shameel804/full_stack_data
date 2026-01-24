@@ -1,0 +1,165 @@
+{
+    "id": "learn_tdd_bdd",
+    "topicId": "bdd",
+    "topicTitle": "Behavior Driven Development",
+    "description": "Master BDD to bridge the gap between technical teams and business stakeholders using human-readable specifications",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "bdd_1",
+            "type": "content",
+            "title": "What is BDD?",
+            "content": "# Behavior Driven Development 🤝\n\nAn extension of TDD that focuses on the **behavior** of the system from the perspective of the business and the user.\n\n- **Collaboration**: Designers, Developers, and QA work together.\n- **Language**: Uses natural language (Ubiquitous Language)."
+        },
+        {
+            "id": "bdd_2",
+            "type": "content",
+            "title": "BDD Purpose",
+            "content": "# Why BDD? 💡\n\n- **Alignment**: Ensures everyone agrees on *what* we are building before we build it.\n- **Living Documentation**: The tests are readable by non-technical people.\n- **Reduced Waste**: Prevents building features that don't match business requirements."
+        },
+        {
+            "id": "bdd_3",
+            "type": "content",
+            "title": "Gherkin Syntax",
+            "content": "# Given-When-Then 🥒\n\nScenarios are written in **Gherkin**, a structured natural language.\n\n- **Given**: The initial context (Setup).\n- **When**: An action occurs (Event).\n- **Then**: The expected outcome (Assertion)."
+        },
+        {
+            "id": "bdd_4",
+            "type": "content",
+            "title": "A Gherkin Example",
+            "content": "# Formal Specs 📄\n\n```gherkin\nFeature: User Login\n\n  Scenario: Successful login with valid credentials\n    Given I am on the login page\n    When I enter \"shameel\" and \"pass123\"\n    And I click the login button\n    Then I should see my dashboard\n```"
+        },
+        {
+            "id": "bdd_5",
+            "quizQuestion": "Which part of Gherkin syntax defines the expected outcome of a scenario?",
+            "quizOptions": [
+                "Given",
+                "When",
+                "Then",
+                "But"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Syntax Quiz",
+            "content": "Understanding Gherkin."
+        },
+        {
+            "id": "bdd_6",
+            "type": "content",
+            "title": "The Three Amigos",
+            "content": "# Collaboration 👥\n\nBDD thrives on the \"Three Amigos\" meeting:\n1. **Product Owner**: Defines the 'What'.\n2. **Developer**: Explains the 'How'.\n3. **Tester**: Finds the edge cases and 'What if?' scenarios."
+        },
+        {
+            "id": "bdd_7",
+            "type": "content",
+            "title": "Step Definitions",
+            "content": "# Connecting to Code 🔗\n\nStep definitions are the glue code that translates Gherkin into executable test logic.\n\n```javascript\nGiven('I am on the login page', () => {\n  cy.visit('/login');\n});\n```"
+        },
+        {
+            "id": "bdd_8",
+            "type": "content",
+            "title": "BDD Tooling",
+            "content": "# Popular Tools 🛠️\n\n- **Cucumber**: The most famous BDD tool (Java, JS, Ruby).\n- **SpecFlow**: BDD for .NET.\n- **Behat**: BDD for PHP.\n- **Cypress-Cucumber-Preprocessor**: Integrates Gherkin into Cypress."
+        },
+        {
+            "id": "bdd_9",
+            "type": "content",
+            "title": "User Stories",
+            "content": "# Requirements 📝\n\nBDD scenarios often stem from **User Stories**:\n\n> \"As a [User Role], I want [Feature], so that [Value].\""
+        },
+        {
+            "id": "bdd_10",
+            "quizQuestion": "Who are the 'Three Amigos' in BDD?",
+            "quizOptions": [
+                "Frontend, Backend, DevOps",
+                "Product, Developer, Tester",
+                "Manager, Designer, User",
+                "CEO, CTO, COO"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Collaboration Quiz",
+            "content": "The dream team."
+        },
+        {
+            "id": "bdd_11",
+            "type": "content",
+            "title": "Scenario Outlines",
+            "content": "# Dynamic Data 📊\n\n```gherkin\nScenario Outline: Different login attempts\n  When I enter \"<user>\" and \"<pass>\"\n  Then I should see \"<message>\"\n\n  Examples:\n    | user   | pass    | message |\n    | bob    | 123     | Error   |\n    | alice  | secret  | Welcome |\n```"
+        },
+        {
+            "id": "bdd_12",
+            "type": "content",
+            "title": "Ubiquitous Language",
+            "content": "# Common Tongue 🗣️\n\nBDD encourages using the same terms in the UI, the code, and the database as the business stakeholders use (e.g., \"Policy\", \"Claim\", \"Premium\")."
+        },
+        {
+            "id": "bdd_13",
+            "type": "content",
+            "title": "BDD vs TDD",
+            "content": "# Differences ⚖️\n\n- **TDD**: Developer-focused, tests implementation/modules.\n- **BDD**: Business-focused, tests system behavior/scenarios.\n\n> [!TIP]\n> Use BDD for high-level features and TDD for low-level logic!"
+        },
+        {
+            "id": "bdd_14",
+            "type": "content",
+            "title": "Backgrounds",
+            "content": "# Setting the Stage 🎬\n\nUse `Background` in Gherkin to define steps that run before **every** scenario in a feature file (like a `beforeEach` hook)."
+        },
+        {
+            "id": "bdd_15",
+            "quizQuestion": "What is the primary benefit of Scenario Outlines?",
+            "quizOptions": [
+                "They are faster to run",
+                "They allow running the same scenario with multiple sets of data",
+                "They are written in Python",
+                "They replace the need for step definitions"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Features Quiz",
+            "content": "Reusability."
+        },
+        {
+            "id": "bdd_16",
+            "type": "content",
+            "title": "Tags & Organization",
+            "content": "# Filtering 🏷️\n\nUse tags like `@smoke`, `@regression`, or `@slow` to group scenarios and decide which ones to run in different CI/CD stages."
+        },
+        {
+            "id": "bdd_17",
+            "type": "content",
+            "title": "Living Documentation",
+            "content": "# Always Up-to-Date 📚\n\nSince the documentation (Gherkin) **IS** the test, it can never become obsolete. If the behavior changes, the tests break, forcing a documentation update."
+        },
+        {
+            "id": "bdd_18",
+            "type": "content",
+            "title": "Handling Failure",
+            "content": "# Clear Why ❌\n\nWhen a BDD test fails, the error is descriptive: \"Expected to see 'Welcome' but saw 'Error'\". This is much easier for a PO to understand than a generic stack trace."
+        },
+        {
+            "id": "bdd_19",
+            "type": "content",
+            "title": "Challenges with BDD",
+            "content": "# Pitfalls 🧗\n\n- **Verbose**: Gherkin can become hard to manage if scenarios are too long.\n- **Overhead**: Writing step definitions takes extra time.\n- **Brittle**: If the UI changes frequently, Gherkin specs might need constant updates."
+        },
+        {
+            "id": "bdd_20",
+            "quizQuestion": "True or False: BDD intended to completely replace Unit Testing.",
+            "quizOptions": [
+                "True",
+                "False"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Scope check."
+        },
+        {
+            "id": "bdd_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Focus on **Behavior** and **User Value**.\n- ✅ Use **Gherkin** (Given-When-Then).\n- ✅ Collaborate via the **Three Amigos**.\n- ✅ Create **Living Documentation**.\n- ✅ Use **Cucumber** or similar tools.\n\nAlign your code with your users using BDD! 🤝"
+        }
+    ]
+}

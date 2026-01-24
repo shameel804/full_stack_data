@@ -1,0 +1,179 @@
+{
+    "id": "learn_minification_perf",
+    "topicId": "minification",
+    "topicTitle": "Minification & Bundling",
+    "description": "Master code minification and bundling techniques including Uglify, Webpack configuration, and tree shaking for optimal production builds",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "minification_1",
+            "type": "content",
+            "title": "Welcome to Minification & Bundling",
+            "content": "# Minification & Bundling 📦\n\nWelcome to the essential world of code optimization! In this lesson, you'll master the techniques that separate amateur builds from production-ready applications.\n\n## What You'll Learn:\n- **Minification Fundamentals** - Reducing file sizes without losing functionality\n- **Uglify & Terser** - Industry-standard JavaScript minification tools\n- **Webpack Deep Dive** - The most powerful bundler in the ecosystem\n- **Tree Shaking** - Eliminating dead code automatically\n- **Build Optimization** - Creating lightning-fast production bundles\n\n> 💡 **Did You Know?** Minification can reduce JavaScript file sizes by 30-70%, dramatically improving page load times!\n\n## Why This Matters:\n- 🚀 **Faster Load Times** - Smaller files = quicker downloads\n- 💰 **Reduced Bandwidth Costs** - Less data transferred\n- 📱 **Better Mobile Experience** - Critical for slower connections\n- 🔒 **Code Obfuscation** - Makes reverse engineering harder\n- ⚡ **Improved Performance Scores** - Better Lighthouse ratings\n\nLet's dive into the art of making your code smaller and faster!"
+        },
+        {
+            "id": "minification_2",
+            "type": "content",
+            "title": "What is Minification?",
+            "content": "# What is Minification? 🗜️\n\nMinification is the process of removing all unnecessary characters from source code without changing its functionality.\n\n## What Gets Removed:\n\n| Element | Before | After |\n|---------|--------|-------|\n| **Whitespace** | `var x = 1;` | `var x=1;` |\n| **Comments** | `// Calculate sum` | *(removed)* |\n| **Line Breaks** | Multiple lines | Single line |\n| **Long Names** | `calculateTotal` | `a` |\n| **Dead Code** | Unused functions | *(removed)* |\n\n## Before Minification:\n```javascript\n// Calculate the sum of two numbers\nfunction calculateSum(firstNumber, secondNumber) {\n    // Add the numbers together\n    const result = firstNumber + secondNumber;\n    \n    // Return the calculated result\n    return result;\n}\n```\n\n## After Minification:\n```javascript\nfunction calculateSum(a,b){return a+b}\n```\n\n## File Size Comparison:\n- **Original**: 245 bytes\n- **Minified**: 35 bytes\n- **Reduction**: 86%! 🎉\n\n> 🎯 **Key Insight:** Minification is lossless - the code behaves exactly the same, just in a more compact form."
+        },
+        {
+            "id": "minification_3",
+            "type": "content",
+            "title": "Types of Code Optimization",
+            "content": "# Types of Code Optimization 🔧\n\nUnderstand the different levels of code optimization available.\n\n## 1. Minification\nBasic compression - removes whitespace and comments.\n```javascript\n// Before\nconst   greeting   =   \"Hello World\";\n// After\nconst greeting=\"Hello World\";\n```\n\n## 2. Uglification\nAdvanced compression - shortens variable names.\n```javascript\n// Before\nfunction getUserFullName(user) {\n    return user.firstName + ' ' + user.lastName;\n}\n// After\nfunction a(b){return b.firstName+\" \"+b.lastName}\n```\n\n## 3. Bundling\nCombines multiple files into one or few files.\n```\nsrc/\n├── utils.js      ─┐\n├── api.js        ─┼─→ bundle.js\n├── components.js ─┘\n└── app.js        ─┘\n```\n\n## 4. Tree Shaking\nRemoves unused exports from modules.\n```javascript\n// utils.js exports 10 functions\n// Your app uses only 2\n// Tree shaking removes the other 8!\n```\n\n## Optimization Pipeline:\n```\nSource → Bundle → Minify → Uglify → Tree Shake → Production\n```\n\n> ⚡ **Pro Tip:** Modern bundlers like Webpack combine all these steps into a single build process!"
+        },
+        {
+            "id": "minification_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your understanding of minification basics!",
+            "quizQuestion": "What is the PRIMARY purpose of minification?",
+            "quizOptions": [
+                "To make code more readable",
+                "To reduce file size without changing functionality",
+                "To add new features to code",
+                "To convert code to a different language"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "minification_4",
+            "type": "content",
+            "title": "Introduction to Uglify",
+            "content": "# Uglify & Terser 🔨\n\nUglifyJS was the gold standard for JavaScript minification. Terser is its modern successor with ES6+ support.\n\n## UglifyJS Features:\n- ✅ Minification and compression\n- ✅ Mangle (rename) variables\n- ✅ Dead code elimination\n- ✅ Source map generation\n- ❌ Limited ES6+ support\n\n## Terser Features:\n- ✅ All UglifyJS features\n- ✅ Full ES6+ support\n- ✅ Better optimization algorithms\n- ✅ Active development\n- ✅ Webpack 5 default\n\n## Installation:\n```bash\n# UglifyJS (ES5 only)\nnpm install uglify-js -g\n\n# Terser (ES6+ support)\nnpm install terser -g\n```\n\n## Basic Usage:\n```bash\n# UglifyJS\nuglifyjs input.js -o output.min.js\n\n# Terser\nterser input.js -o output.min.js\n```\n\n## Comparison:\n| Feature | UglifyJS | Terser |\n|---------|----------|--------|\n| ES5 Support | ✅ | ✅ |\n| ES6+ Support | ❌ | ✅ |\n| Async/Await | ❌ | ✅ |\n| Maintenance | Legacy | Active |\n\n> 💡 **Recommendation:** Always use Terser for modern JavaScript projects!"
+        },
+        {
+            "id": "minification_5",
+            "type": "content",
+            "title": "Terser Configuration",
+            "content": "# Terser Configuration Options ⚙️\n\nMaster Terser's powerful configuration options for optimal minification.\n\n## Basic CLI Options:\n```bash\nterser input.js \\\n  --compress \\\n  --mangle \\\n  --output output.min.js \\\n  --source-map\n```\n\n## Programmatic Usage:\n```javascript\nconst Terser = require('terser');\n\nconst code = `\nfunction longFunctionName(parameter) {\n    const result = parameter * 2;\n    return result;\n}\n`;\n\nconst options = {\n    compress: {\n        dead_code: true,\n        drop_console: true,\n        drop_debugger: true,\n        passes: 2\n    },\n    mangle: {\n        toplevel: true,\n        properties: false\n    },\n    format: {\n        comments: false\n    }\n};\n\nconst result = await Terser.minify(code, options);\nconsole.log(result.code);\n// Output: function a(b){return 2*b}\n```\n\n## Key Options Explained:\n\n| Option | Purpose |\n|--------|--------|\n| `compress` | Enable compression transformations |\n| `mangle` | Shorten variable/function names |\n| `dead_code` | Remove unreachable code |\n| `drop_console` | Remove console.* calls |\n| `passes` | Number of compression passes |\n\n> ⚠️ **Warning:** Be careful with `mangle.properties` - it can break code that accesses properties by string name!"
+        },
+        {
+            "id": "minification_6",
+            "type": "content",
+            "title": "Introduction to Webpack",
+            "content": "# Introduction to Webpack 📦\n\nWebpack is the most powerful and widely-used JavaScript bundler in the ecosystem.\n\n## What is Webpack?\nA static module bundler that builds a dependency graph and bundles all modules into optimized files.\n\n## Core Concepts:\n\n### 1. Entry\nThe starting point of the dependency graph.\n```javascript\nmodule.exports = {\n    entry: './src/index.js'\n};\n```\n\n### 2. Output\nWhere to emit the bundled files.\n```javascript\nmodule.exports = {\n    output: {\n        filename: 'bundle.js',\n        path: path.resolve(__dirname, 'dist')\n    }\n};\n```\n\n### 3. Loaders\nTransform non-JavaScript files.\n```javascript\nmodule: {\n    rules: [\n        { test: /\\.css$/, use: ['style-loader', 'css-loader'] },\n        { test: /\\.ts$/, use: 'ts-loader' }\n    ]\n}\n```\n\n### 4. Plugins\nExtend Webpack's capabilities.\n```javascript\nplugins: [\n    new HtmlWebpackPlugin(),\n    new MiniCssExtractPlugin()\n]\n```\n\n### 5. Mode\nOptimization presets.\n```javascript\nmodule.exports = {\n    mode: 'production' // or 'development'\n};\n```\n\n> 🎯 **Key Point:** Production mode automatically enables minification and optimization!"
+        },
+        {
+            "id": "minification_7",
+            "type": "content",
+            "title": "Webpack Configuration Deep Dive",
+            "content": "# Webpack Configuration Deep Dive 🔍\n\nLet's explore a complete production-ready Webpack configuration.\n\n## Full Configuration Example:\n```javascript\nconst path = require('path');\nconst HtmlWebpackPlugin = require('html-webpack-plugin');\nconst MiniCssExtractPlugin = require('mini-css-extract-plugin');\nconst TerserPlugin = require('terser-webpack-plugin');\nconst CssMinimizerPlugin = require('css-minimizer-webpack-plugin');\n\nmodule.exports = {\n    mode: 'production',\n    entry: {\n        main: './src/index.js',\n        vendor: './src/vendor.js'\n    },\n    output: {\n        filename: '[name].[contenthash].js',\n        path: path.resolve(__dirname, 'dist'),\n        clean: true\n    },\n    module: {\n        rules: [\n            {\n                test: /\\.js$/,\n                exclude: /node_modules/,\n                use: 'babel-loader'\n            },\n            {\n                test: /\\.css$/,\n                use: [MiniCssExtractPlugin.loader, 'css-loader']\n            }\n        ]\n    },\n    optimization: {\n        minimizer: [\n            new TerserPlugin(),\n            new CssMinimizerPlugin()\n        ],\n        splitChunks: {\n            chunks: 'all'\n        }\n    },\n    plugins: [\n        new HtmlWebpackPlugin({ template: './src/index.html' }),\n        new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })\n    ]\n};\n```\n\n## Key Optimization Features:\n- **Content Hashing** - Cache busting with `[contenthash]`\n- **Code Splitting** - Separate vendor and app bundles\n- **CSS Extraction** - Separate CSS files for parallel loading\n- **Minimization** - Terser for JS, CssMinimizer for CSS"
+        },
+        {
+            "id": "minification_quiz_2",
+            "type": "quiz",
+            "title": "Webpack Check",
+            "content": "Test your Webpack knowledge!",
+            "quizQuestion": "Which Webpack mode automatically enables minification and tree shaking?",
+            "quizOptions": [
+                "development",
+                "production",
+                "none",
+                "optimize"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "minification_8",
+            "type": "content",
+            "title": "Understanding Tree Shaking",
+            "content": "# Tree Shaking 🌳\n\nTree shaking is the process of eliminating dead code - code that is never used in your application.\n\n## How It Works:\n\n```\nModule Exports          Your Usage           Final Bundle\n┌─────────────┐        ┌──────────┐        ┌──────────┐\n│ export add  │   +    │ import   │   =    │ add()    │\n│ export sub  │        │ { add }  │        │          │\n│ export mul  │        │          │        │ (sub and │\n│ export div  │        │          │        │ mul, div │\n└─────────────┘        └──────────┘        │ removed) │\n                                           └──────────┘\n```\n\n## Requirements for Tree Shaking:\n\n### 1. Use ES6 Modules (ESM)\n```javascript\n// ✅ Treeshakable\nexport const add = (a, b) => a + b;\nexport const sub = (a, b) => a - b;\n\n// ❌ Not treeshakable (CommonJS)\nmodule.exports = { add, sub };\n```\n\n### 2. Named Exports\n```javascript\n// ✅ Treeshakable\nimport { add } from './math';\n\n// ❌ Imports everything\nimport * as math from './math';\n```\n\n### 3. Pure Functions\n```javascript\n// ✅ Can be safely removed\nexport const pure = (x) => x * 2;\n\n// ❌ Has side effects, kept in bundle\nexport const impure = (x) => {\n    console.log('called!');\n    return x * 2;\n};\n```\n\n> 💡 **Key Insight:** Tree shaking only works with static analysis - dynamic imports can't be tree-shaken!"
+        },
+        {
+            "id": "minification_9",
+            "type": "content",
+            "title": "Enabling Tree Shaking in Webpack",
+            "content": "# Enabling Tree Shaking in Webpack 🔧\n\nConfigure Webpack for optimal tree shaking results.\n\n## Package.json Configuration:\n```json\n{\n    \"name\": \"my-package\",\n    \"sideEffects\": false\n}\n```\n\n## With Side Effects:\n```json\n{\n    \"sideEffects\": [\n        \"*.css\",\n        \"*.scss\",\n        \"./src/polyfills.js\"\n    ]\n}\n```\n\n## Webpack Configuration:\n```javascript\nmodule.exports = {\n    mode: 'production',\n    optimization: {\n        usedExports: true,\n        minimize: true,\n        sideEffects: true\n    }\n};\n```\n\n## Babel Configuration:\n```json\n{\n    \"presets\": [\n        [\"@babel/preset-env\", {\n            \"modules\": false\n        }]\n    ]\n}\n```\n\n> ⚠️ **Critical:** Set `modules: false` in Babel to preserve ES6 imports!\n\n## Verify Tree Shaking:\n```bash\n# Check bundle contents\nnpx webpack --stats-modules-sort-by size\n\n# Use webpack-bundle-analyzer\nnpm install webpack-bundle-analyzer\n```\n\n## Common Pitfalls:\n- ❌ Using `import *` syntax\n- ❌ Re-exporting with `export *`\n- ❌ Importing for side effects\n- ❌ Dynamic imports with variables"
+        },
+        {
+            "id": "minification_10",
+            "type": "content",
+            "title": "Code Splitting Strategies",
+            "content": "# Code Splitting Strategies ✂️\n\nDivide your bundle into smaller chunks for better performance.\n\n## 1. Entry Points\n```javascript\nmodule.exports = {\n    entry: {\n        app: './src/app.js',\n        admin: './src/admin.js'\n    }\n};\n```\n\n## 2. Dynamic Imports\n```javascript\n// Lazy load modules on demand\nconst loadModule = async () => {\n    const { default: heavyModule } = await import(\n        /* webpackChunkName: \"heavy\" */\n        './heavyModule'\n    );\n    heavyModule.init();\n};\n\n// React lazy loading\nconst LazyComponent = React.lazy(() => import('./Component'));\n```\n\n## 3. SplitChunks Plugin\n```javascript\noptimization: {\n    splitChunks: {\n        chunks: 'all',\n        minSize: 20000,\n        maxSize: 244000,\n        cacheGroups: {\n            vendors: {\n                test: /[\\\\/]node_modules[\\\\/]/,\n                name: 'vendors',\n                priority: -10\n            },\n            common: {\n                minChunks: 2,\n                priority: -20,\n                reuseExistingChunk: true\n            }\n        }\n    }\n}\n```\n\n## Benefits of Code Splitting:\n| Benefit | Description |\n|---------|-------------|\n| Faster Initial Load | Only load what's needed |\n| Better Caching | Unchanged chunks stay cached |\n| Parallel Downloads | Multiple smaller files |\n| Route-based Loading | Load code per route |"
+        },
+        {
+            "id": "minification_11",
+            "type": "content",
+            "title": "Source Maps",
+            "content": "# Source Maps 🗺️\n\nDebug minified code by mapping it back to original source.\n\n## What are Source Maps?\nFiles that map minified/bundled code back to the original source code for debugging.\n\n## Webpack Devtool Options:\n\n| Option | Build | Rebuild | Quality | Production |\n|--------|-------|---------|---------|------------|\n| `source-map` | Slow | Slow | Best | ✅ |\n| `cheap-source-map` | Medium | Fast | Lines only | ❌ |\n| `eval-source-map` | Slow | Fast | Best | ❌ |\n| `hidden-source-map` | Slow | Slow | Best | ✅ |\n\n## Configuration:\n```javascript\nmodule.exports = {\n    // Development\n    devtool: 'eval-source-map',\n    \n    // Production (hidden from browser)\n    devtool: 'hidden-source-map'\n};\n```\n\n## Terser Source Map Options:\n```javascript\nnew TerserPlugin({\n    sourceMap: true,\n    terserOptions: {\n        sourceMap: {\n            filename: 'bundle.js',\n            url: 'bundle.js.map'\n        }\n    }\n})\n```\n\n## Security Considerations:\n- ✅ `hidden-source-map` - Maps exist but not referenced\n- ✅ `nosources-source-map` - Stack traces without source content\n- ❌ `source-map` in production exposes source code\n\n> 🔒 **Security Tip:** Never expose source maps publicly in production - they reveal your original code!"
+        },
+        {
+            "id": "minification_quiz_3",
+            "type": "quiz",
+            "title": "Tree Shaking Quiz",
+            "content": "Test your tree shaking knowledge!",
+            "quizQuestion": "What is required for tree shaking to work effectively?",
+            "quizOptions": [
+                "CommonJS modules",
+                "ES6 modules with static imports",
+                "Dynamic require statements",
+                "Global variables"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "minification_12",
+            "type": "content",
+            "title": "CSS Minification",
+            "content": "# CSS Minification 🎨\n\nOptimize your CSS bundles for production.\n\n## CSS Optimization Techniques:\n\n### 1. Minification\n```css\n/* Before */\n.container {\n    margin: 0px;\n    padding: 10px 20px 10px 20px;\n    background-color: #ffffff;\n}\n\n/* After */\n.container{margin:0;padding:10px 20px;background:#fff}\n```\n\n### 2. Webpack CSS Minimizer:\n```javascript\nconst CssMinimizerPlugin = require('css-minimizer-webpack-plugin');\n\nmodule.exports = {\n    optimization: {\n        minimizer: [\n            '...', // Keep JS minimizer\n            new CssMinimizerPlugin({\n                minimizerOptions: {\n                    preset: [\n                        'default',\n                        { discardComments: { removeAll: true } }\n                    ]\n                }\n            })\n        ]\n    }\n};\n```\n\n### 3. PurgeCSS - Remove Unused CSS:\n```javascript\nconst PurgeCSSPlugin = require('purgecss-webpack-plugin');\nconst glob = require('glob-all');\n\nplugins: [\n    new PurgeCSSPlugin({\n        paths: glob.sync([\n            path.join(__dirname, 'src/**/*.html'),\n            path.join(__dirname, 'src/**/*.js')\n        ]),\n        safelist: ['dynamic-class', /^modal-/]\n    })\n]\n```\n\n## CSS Optimization Results:\n| Technique | Size Reduction |\n|-----------|---------------|\n| Minification | 15-25% |\n| PurgeCSS | 50-95% |\n| Combined | 60-95% |"
+        },
+        {
+            "id": "minification_13",
+            "type": "content",
+            "title": "Image and Asset Optimization",
+            "content": "# Image and Asset Optimization 🖼️\n\nOptimize all assets in your bundle, not just JavaScript.\n\n## Webpack Asset Modules:\n```javascript\nmodule.exports = {\n    module: {\n        rules: [\n            {\n                test: /\\.(png|jpg|gif)$/i,\n                type: 'asset',\n                parser: {\n                    dataUrlCondition: {\n                        maxSize: 8 * 1024 // 8KB inline limit\n                    }\n                }\n            },\n            {\n                test: /\\.svg$/,\n                type: 'asset/inline' // Always inline\n            },\n            {\n                test: /\\.(woff|woff2)$/,\n                type: 'asset/resource' // Always file\n            }\n        ]\n    }\n};\n```\n\n## Image Optimization with ImageMinimizerPlugin:\n```javascript\nconst ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');\n\nplugins: [\n    new ImageMinimizerPlugin({\n        minimizer: {\n            implementation: ImageMinimizerPlugin.imageminMinify,\n            options: {\n                plugins: [\n                    ['mozjpeg', { quality: 80 }],\n                    ['pngquant', { quality: [0.6, 0.8] }],\n                    ['svgo', { plugins: [{ removeViewBox: false }] }]\n                ]\n            }\n        }\n    })\n]\n```\n\n## Asset Type Comparison:\n| Type | Use Case |\n|------|----------|\n| `asset/resource` | Large files, always separate |\n| `asset/inline` | Small files, base64 in JS |\n| `asset` | Auto-choose based on size |"
+        },
+        {
+            "id": "minification_14",
+            "type": "content",
+            "title": "Compression Techniques",
+            "content": "# Compression Techniques 🗜️\n\nGo beyond minification with file compression.\n\n## Gzip Compression:\n```javascript\nconst CompressionPlugin = require('compression-webpack-plugin');\n\nplugins: [\n    new CompressionPlugin({\n        algorithm: 'gzip',\n        test: /\\.(js|css|html|svg)$/,\n        threshold: 8192, // Only files > 8KB\n        minRatio: 0.8\n    })\n]\n```\n\n## Brotli Compression:\n```javascript\nconst zlib = require('zlib');\n\nplugins: [\n    new CompressionPlugin({\n        filename: '[path][base].br',\n        algorithm: 'brotliCompress',\n        test: /\\.(js|css|html|svg)$/,\n        compressionOptions: {\n            params: {\n                [zlib.constants.BROTLI_PARAM_QUALITY]: 11\n            }\n        },\n        threshold: 10240,\n        minRatio: 0.8\n    })\n]\n```\n\n## Compression Comparison:\n\n| Algorithm | Speed | Size | Browser Support |\n|-----------|-------|------|----------------|\n| None | N/A | 100% | 100% |\n| Gzip | Fast | 30-40% | 99%+ |\n| Brotli | Medium | 20-30% | 95%+ |\n\n## Server Configuration:\n```nginx\n# Nginx\ngzip on;\ngzip_types text/plain application/javascript text/css;\n\n# Enable Brotli\nbrotli on;\nbrotli_types text/plain application/javascript text/css;\n```\n\n> 💡 **Best Practice:** Generate both .gz and .br files and let the server choose based on `Accept-Encoding` header!"
+        },
+        {
+            "id": "minification_15",
+            "type": "content",
+            "title": "Build Performance Optimization",
+            "content": "# Build Performance Optimization ⚡\n\nSpeed up your Webpack builds for better developer experience.\n\n## 1. Cache Configuration:\n```javascript\nmodule.exports = {\n    cache: {\n        type: 'filesystem',\n        cacheDirectory: path.resolve(__dirname, '.cache')\n    }\n};\n```\n\n## 2. Parallel Processing:\n```javascript\nconst TerserPlugin = require('terser-webpack-plugin');\n\noptimization: {\n    minimizer: [\n        new TerserPlugin({\n            parallel: true, // Use multi-core\n            terserOptions: {\n                compress: { passes: 2 }\n            }\n        })\n    ]\n}\n```\n\n## 3. Module Resolution:\n```javascript\nresolve: {\n    extensions: ['.js', '.jsx'],\n    modules: [path.resolve(__dirname, 'src'), 'node_modules'],\n    alias: {\n        '@': path.resolve(__dirname, 'src')\n    }\n}\n```\n\n## 4. Exclude node_modules:\n```javascript\nmodule: {\n    rules: [\n        {\n            test: /\\.js$/,\n            exclude: /node_modules/,\n            use: {\n                loader: 'babel-loader',\n                options: { cacheDirectory: true }\n            }\n        }\n    ]\n}\n```\n\n## Build Time Improvements:\n| Optimization | Impact |\n|-------------|--------|\n| Filesystem Cache | 60-80% faster rebuilds |\n| Parallel Processing | 30-50% faster |\n| Proper Exclusions | 20-40% faster |\n| Module Resolution | 5-10% faster |"
+        },
+        {
+            "id": "minification_16",
+            "type": "content",
+            "title": "Bundle Analysis",
+            "content": "# Bundle Analysis 🔬\n\nAnalyze your bundles to identify optimization opportunities.\n\n## Webpack Bundle Analyzer:\n```bash\nnpm install webpack-bundle-analyzer --save-dev\n```\n\n```javascript\nconst BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;\n\nplugins: [\n    new BundleAnalyzerPlugin({\n        analyzerMode: 'static',\n        reportFilename: 'bundle-report.html',\n        openAnalyzer: false\n    })\n]\n```\n\n## Webpack Stats:\n```javascript\n// webpack.config.js\nmodule.exports = {\n    stats: {\n        assets: true,\n        chunks: true,\n        modules: true,\n        reasons: true\n    }\n};\n```\n\n## CLI Analysis:\n```bash\n# Generate stats file\nwebpack --profile --json > stats.json\n\n# Analyze with online tool\n# Upload to webpack.github.io/analyse/\n```\n\n## Common Issues Found:\n| Issue | Solution |\n|-------|----------|\n| Large vendor bundle | Split chunks |\n| Duplicate dependencies | Use `dedupe` |\n| Unused exports | Enable tree shaking |\n| Heavy moment.js locales | Use moment-locales-webpack-plugin |\n| Multiple lodash copies | Use lodash-webpack-plugin |\n\n## Size Targets:\n- 📦 **Vendor**: < 100KB gzipped\n- 📱 **Initial JS**: < 150KB gzipped\n- 🏃 **Critical CSS**: < 15KB"
+        },
+        {
+            "id": "minification_quiz_4",
+            "type": "quiz",
+            "title": "Advanced Quiz",
+            "content": "Test your advanced bundling knowledge!",
+            "quizQuestion": "Which compression algorithm typically provides the best compression ratio for web assets?",
+            "quizOptions": [
+                "Gzip",
+                "Brotli",
+                "Deflate",
+                "LZ4"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "minification_17",
+            "type": "content",
+            "title": "Alternative Bundlers",
+            "content": "# Alternative Bundlers 🔄\n\nExplore modern alternatives to Webpack.\n\n## 1. Vite\n```bash\nnpm create vite@latest my-app\n```\n**Pros:**\n- Lightning-fast HMR\n- Native ES modules in dev\n- Rollup-based production builds\n\n## 2. Rollup\n```javascript\n// rollup.config.js\nimport { terser } from 'rollup-plugin-terser';\n\nexport default {\n    input: 'src/index.js',\n    output: {\n        file: 'dist/bundle.js',\n        format: 'esm'\n    },\n    plugins: [terser()]\n};\n```\n**Best for:** Libraries, tree shaking\n\n## 3. esbuild\n```bash\nnpx esbuild src/index.js --bundle --minify --outfile=dist/bundle.js\n```\n**Pros:** 10-100x faster than Webpack\n\n## 4. Parcel\n```bash\nnpx parcel build src/index.html\n```\n**Pros:** Zero configuration\n\n## Comparison:\n| Bundler | Speed | Config | Tree Shake | Ecosystem |\n|---------|-------|--------|------------|----------|\n| Webpack | Slow | Complex | ✅ | Huge |\n| Vite | Fast | Simple | ✅ | Growing |\n| Rollup | Medium | Medium | ✅✅ | Good |\n| esbuild | Very Fast | Minimal | ✅ | Limited |\n| Parcel | Fast | Zero | ✅ | Medium |"
+        },
+        {
+            "id": "minification_18",
+            "type": "content",
+            "title": "Production Checklist",
+            "content": "# Production Checklist ✅\n\nEnsure your build is fully optimized before deployment.\n\n## Pre-Deployment Checklist:\n\n### JavaScript\n- [ ] Production mode enabled\n- [ ] Terser minification active\n- [ ] Tree shaking configured\n- [ ] Code splitting implemented\n- [ ] Console logs removed\n- [ ] Source maps secured\n\n### CSS\n- [ ] CSS minified\n- [ ] Unused CSS purged\n- [ ] Critical CSS extracted\n- [ ] CSS-in-JS optimized\n\n### Assets\n- [ ] Images optimized\n- [ ] Fonts subsetted\n- [ ] SVGs optimized\n- [ ] Asset hashing enabled\n\n### Compression\n- [ ] Gzip enabled\n- [ ] Brotli enabled\n- [ ] Pre-compressed files generated\n\n### Performance\n- [ ] Bundle size < 250KB (gzipped)\n- [ ] Lighthouse score > 90\n- [ ] No duplicate dependencies\n- [ ] Lazy loading for routes\n\n## Quick Commands:\n```bash\n# Build for production\nnpm run build\n\n# Analyze bundle\nnpx webpack-bundle-analyzer dist/stats.json\n\n# Check bundle size\nnpx bundlesize\n```\n\n> 🏆 **Goal:** Achieve sub-second Time to Interactive on 3G connections!"
+        },
+        {
+            "id": "minification_19",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Minification & Bundling!\n\n## Key Takeaways:\n\n### Minification\n- ✅ Removes whitespace, comments, and unnecessary characters\n- ✅ Terser is the modern standard for JavaScript\n- ✅ Reduces file sizes by 30-70%\n\n### Bundling with Webpack\n- ✅ Entry, output, loaders, plugins, and mode\n- ✅ Production mode enables automatic optimization\n- ✅ Code splitting for better caching and loading\n\n### Tree Shaking\n- ✅ Requires ES6 modules with static imports\n- ✅ Set `sideEffects: false` in package.json\n- ✅ Eliminates unused code automatically\n\n### Advanced Optimization\n- ✅ Gzip and Brotli compression\n- ✅ CSS minification and purging\n- ✅ Image and asset optimization\n- ✅ Bundle analysis for optimization insights\n\n## Performance Gains:\n| Optimization | Typical Improvement |\n|-------------|--------------------|\n| Minification | 30-70% smaller |\n| Tree Shaking | 20-50% smaller |\n| Code Splitting | 40-60% faster initial load |\n| Compression | 60-80% smaller transfer |\n\n## Next Steps:\n- 📊 Learn **Profiling Tools** for performance analysis\n- 🚀 Explore **Lazy Loading** techniques\n- 🗄️ Master **Caching Strategies**\n\nHappy optimizing! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "id": "learn_push_mobile",
+    "topicId": "push",
+    "topicTitle": "Push Notifications",
+    "description": "Master push notifications with FCM, APNs, and device tokens",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "push_1",
+            "type": "content",
+            "title": "Push Notifications",
+            "content": "# Push Notifications 🔔\n\nRe-engage users with messages.\n\n## What You'll Learn:\n- **FCM** - Firebase Cloud Messaging\n- **APNs** - Apple Push Notification\n- **Tokens** - Device registration\n- **Topics** - Group notifications\n\n> 💡 Reach users even when app is closed!"
+        },
+        {
+            "id": "push_2",
+            "type": "content",
+            "title": "Architecture",
+            "content": "# Push Architecture 🏗️\n\n```\n┌─────────┐    ┌───────────┐    ┌──────────┐\n│ Backend │───►│ FCM/APNs │───►│ Device   │\n└─────────┘    └───────────┘    └──────────┘\n\n1. Device registers, gets token\n2. Device sends token to backend\n3. Backend sends notification via FCM\n4. FCM delivers to device\n```\n\n## Flow:\n1. Get device token\n2. Store on server\n3. Send from server\n4. Handle on device"
+        },
+        {
+            "id": "push_3",
+            "type": "content",
+            "title": "FCM",
+            "content": "# Firebase Cloud Messaging 🔥\n\n## Server (Node.js):\n```javascript\nconst admin = require('firebase-admin');\nadmin.initializeApp();\n\nasync function sendNotification(token, title, body) {\n    await admin.messaging().send({\n        token: token,\n        notification: {\n            title: title,\n            body: body\n        },\n        data: {\n            orderId: '123'\n        }\n    });\n}\n```\n\n## Client:\n```javascript\nconst token = await messaging().getToken();\n// Send token to server\n\nmessaging().onMessage(message => {\n    console.log('Received:', message);\n});\n```"
+        },
+        {
+            "id": "push_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your push knowledge!",
+            "quizQuestion": "What uniquely identifies a device for push notifications?",
+            "quizOptions": [
+                "User ID",
+                "Device token",
+                "IP address",
+                "Phone number"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "push_4",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've learned Push Notifications!\n\n## Key Concepts:\n| Concept | Description |\n|---------|-------------|\n| FCM | Google's service |\n| APNs | Apple's service |\n| Token | Device identifier |\n| Topic | Group messaging |\n\n## Best Practices:\n- Request permission\n- Handle background\n- Deep linking\n- Don't spam!\n\nEngage your users! 🔔"
+        }
+    ]
+}

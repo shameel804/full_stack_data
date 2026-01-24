@@ -1,0 +1,199 @@
+{
+    "id": "learn_patterns_factory",
+    "topicId": "factory",
+    "topicTitle": "Factory Pattern",
+    "description": "Master factory patterns including Simple Factory, Abstract Factory, Builder, and Prototype patterns",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "factory_1",
+            "type": "content",
+            "title": "Factory Pattern Overview",
+            "content": "# Factory Pattern 🏭\n\nObject creation without specifying class.\n\n## Patterns Covered\n- Simple Factory\n- Factory Method\n- Abstract Factory\n- Builder\n- Prototype\n\n## Why Factory?\n- Decouple creation\n- Hide complexity\n- Easy to extend"
+        },
+        {
+            "id": "factory_2",
+            "type": "content",
+            "title": "Simple Factory",
+            "content": "# Simple Factory 🔧\n\n```python\nclass Animal:\n    pass\n\nclass Dog(Animal):\n    def speak(self): return 'Woof!'\n\nclass Cat(Animal):\n    def speak(self): return 'Meow!'\n\nclass AnimalFactory:\n    @staticmethod\n    def create(animal_type):\n        if animal_type == 'dog':\n            return Dog()\n        elif animal_type == 'cat':\n            return Cat()\n        raise ValueError('Unknown animal')\n\n# Usage\ndog = AnimalFactory.create('dog')\nprint(dog.speak())  # Woof!\n```"
+        },
+        {
+            "id": "factory_3",
+            "type": "content",
+            "title": "Factory Method",
+            "content": "# Factory Method 📐\n\nDefine interface for creating objects.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass Creator(ABC):\n    @abstractmethod\n    def create_product(self):\n        pass\n    \n    def operation(self):\n        product = self.create_product()\n        return product.use()\n\nclass ConcreteCreatorA(Creator):\n    def create_product(self):\n        return ProductA()\n\nclass ConcreteCreatorB(Creator):\n    def create_product(self):\n        return ProductB()\n```"
+        },
+        {
+            "id": "factory_quiz_1",
+            "type": "quiz",
+            "title": "Factory Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What is the main benefit of the Factory pattern?",
+            "quizOptions": [
+                "Faster code",
+                "Decoupling object creation from usage",
+                "Less memory",
+                "Simpler code"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "factory_4",
+            "type": "content",
+            "title": "Abstract Factory",
+            "content": "# Abstract Factory 🎨\n\nCreate families of related objects.\n\n```python\nclass GUIFactory(ABC):\n    @abstractmethod\n    def create_button(self): pass\n    @abstractmethod\n    def create_checkbox(self): pass\n\nclass WindowsFactory(GUIFactory):\n    def create_button(self):\n        return WindowsButton()\n    def create_checkbox(self):\n        return WindowsCheckbox()\n\nclass MacFactory(GUIFactory):\n    def create_button(self):\n        return MacButton()\n    def create_checkbox(self):\n        return MacCheckbox()\n```"
+        },
+        {
+            "id": "factory_5",
+            "type": "content",
+            "title": "Builder Pattern",
+            "content": "# Builder Pattern 🧱\n\nStep-by-step construction.\n\n```python\nclass QueryBuilder:\n    def __init__(self):\n        self._select = '*'\n        self._table = ''\n        self._where = []\n    \n    def select(self, fields):\n        self._select = fields\n        return self\n    \n    def from_table(self, table):\n        self._table = table\n        return self\n    \n    def where(self, condition):\n        self._where.append(condition)\n        return self\n    \n    def build(self):\n        query = f'SELECT {self._select} FROM {self._table}'\n        if self._where:\n            query += ' WHERE ' + ' AND '.join(self._where)\n        return query\n```"
+        },
+        {
+            "id": "factory_6",
+            "type": "content",
+            "title": "Builder Usage",
+            "content": "# Using Builder 🔨\n\n```python\nquery = (\n    QueryBuilder()\n    .select('name, email')\n    .from_table('users')\n    .where('active = true')\n    .where('age > 18')\n    .build()\n)\n# SELECT name, email FROM users WHERE active = true AND age > 18\n```\n\n## Benefits\n- Fluent interface\n- Optional parameters\n- Immutable products"
+        },
+        {
+            "id": "factory_quiz_2",
+            "type": "quiz",
+            "title": "Builder Quiz",
+            "content": "Test your builder knowledge!",
+            "quizQuestion": "When is the Builder pattern most useful?",
+            "quizOptions": [
+                "Simple objects",
+                "Complex objects with many optional parts",
+                "Singleton objects",
+                "Static methods"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "factory_7",
+            "type": "content",
+            "title": "Prototype Pattern",
+            "content": "# Prototype Pattern 📋\n\nClone existing objects.\n\n```python\nimport copy\n\nclass Prototype:\n    def clone(self):\n        return copy.deepcopy(self)\n\nclass Document(Prototype):\n    def __init__(self):\n        self.title = ''\n        self.content = ''\n        self.author = ''\n\n# Usage\noriginal = Document()\noriginal.title = 'Report'\n\nclone = original.clone()\nclone.title = 'Report Copy'\n```"
+        },
+        {
+            "id": "factory_8",
+            "type": "content",
+            "title": "JavaScript Factory",
+            "content": "# JavaScript Factory 📜\n\n```javascript\nclass UserFactory {\n  static create(type) {\n    switch (type) {\n      case 'admin':\n        return new Admin();\n      case 'guest':\n        return new Guest();\n      default:\n        return new User();\n    }\n  }\n}\n\n// Usage\nconst admin = UserFactory.create('admin');\n```\n\n## Modern JS\n```javascript\nconst factories = {\n  admin: () => new Admin(),\n  guest: () => new Guest()\n};\n```"
+        },
+        {
+            "id": "factory_9",
+            "type": "content",
+            "title": "Real World Examples",
+            "content": "# Real Examples 🌍\n\n## Python\n```python\n# Django forms\nPostForm = modelform_factory(Post, fields=['title'])\n\n# SQLAlchemy\nsession = sessionmaker(bind=engine)()\n```\n\n## JavaScript\n```javascript\n// React createElement\nReact.createElement('div', {}, 'Hello')\n\n// Document\ndocument.createElement('div')\n```"
+        },
+        {
+            "id": "factory_quiz_3",
+            "type": "quiz",
+            "title": "Prototype Quiz",
+            "content": "Test your prototype knowledge!",
+            "quizQuestion": "What does the Prototype pattern do?",
+            "quizOptions": [
+                "Creates new classes",
+                "Clones existing objects",
+                "Deletes objects",
+                "Validates objects"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "factory_10",
+            "type": "content",
+            "title": "Choosing Patterns",
+            "content": "# Which Pattern? 🤔\n\n| Scenario | Pattern |\n|----------|--------|\n| One product type | Simple Factory |\n| Product families | Abstract Factory |\n| Step-by-step build | Builder |\n| Copy existing | Prototype |\n| Subclass decides | Factory Method |\n\n## Questions\n- How complex is creation?\n- Are there families?\n- Is copying cheaper?"
+        },
+        {
+            "id": "factory_11",
+            "type": "content",
+            "title": "Factory + Registry",
+            "content": "# Factory Registry 📝\n\n```python\nclass ShapeFactory:\n    _creators = {}\n    \n    @classmethod\n    def register(cls, shape_type, creator):\n        cls._creators[shape_type] = creator\n    \n    @classmethod\n    def create(cls, shape_type, **kwargs):\n        creator = cls._creators.get(shape_type)\n        if not creator:\n            raise ValueError(f'Unknown: {shape_type}')\n        return creator(**kwargs)\n\n# Register\nShapeFactory.register('circle', Circle)\nShapeFactory.register('square', Square)\n\n# Use\ncircle = ShapeFactory.create('circle', radius=5)\n```"
+        },
+        {
+            "id": "factory_12",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# Factory + DI 💉\n\n```python\nclass Container:\n    def __init__(self):\n        self._services = {}\n    \n    def register(self, name, factory):\n        self._services[name] = factory\n    \n    def resolve(self, name):\n        return self._services[name]()\n\n# Setup\ncontainer = Container()\ncontainer.register('db', lambda: Database('url'))\ncontainer.register('cache', lambda: RedisCache())\n\n# Resolve\ndb = container.resolve('db')\n```"
+        },
+        {
+            "id": "factory_13",
+            "type": "content",
+            "title": "Testing Factories",
+            "content": "# Testing 🧪\n\n## Mock Factory\n```python\nclass MockFactory:\n    @staticmethod\n    def create(type):\n        return MockObject()\n\n# In tests\ndef test_service():\n    service = Service(factory=MockFactory)\n    result = service.process()\n    assert result == expected\n```\n\n## Benefits\n- Easy to mock\n- Isolated tests\n- Swap implementations"
+        },
+        {
+            "id": "factory_quiz_4",
+            "type": "quiz",
+            "title": "Pattern Choice Quiz",
+            "content": "Test your decision skills!",
+            "quizQuestion": "When creating cross-platform UI components, which pattern is best?",
+            "quizOptions": [
+                "Simple Factory",
+                "Abstract Factory",
+                "Builder",
+                "Singleton"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "factory_14",
+            "type": "content",
+            "title": "Anti-Patterns",
+            "content": "# Avoid These ⚠️\n\n## Too Complex\n- Factory for simple objects\n- Too many factory levels\n\n## Wrong Pattern\n- Builder when not needed\n- Factory when DI sufficient\n\n## Best Practice\n- Start simple\n- Refactor to pattern\n- Don't over-engineer"
+        },
+        {
+            "id": "factory_15",
+            "type": "content",
+            "title": "Builder Director",
+            "content": "# Director Pattern 🎬\n\n```python\nclass Director:\n    def __init__(self, builder):\n        self._builder = builder\n    \n    def build_minimal(self):\n        self._builder.set_engine('1.0L')\n        return self._builder.build()\n    \n    def build_full(self):\n        self._builder.set_engine('2.0L')\n        self._builder.set_gps(True)\n        self._builder.set_sunroof(True)\n        return self._builder.build()\n\n# Usage\ndirector = Director(CarBuilder())\nbasic_car = director.build_minimal()\nluxury_car = director.build_full()\n```"
+        },
+        {
+            "id": "factory_16",
+            "type": "content",
+            "title": "Immutable Builder",
+            "content": "# Immutable Pattern 🔒\n\n```python\nclass User:\n    def __init__(self, name, email, age=None):\n        self._name = name\n        self._email = email\n        self._age = age\n    \n    class Builder:\n        def __init__(self, name, email):\n            self._name = name\n            self._email = email\n            self._age = None\n        \n        def age(self, age):\n            self._age = age\n            return self\n        \n        def build(self):\n            return User(self._name, self._email, self._age)\n\n# Usage\nuser = User.Builder('John', 'john@email.com').age(30).build()\n```"
+        },
+        {
+            "id": "factory_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is a Director in the Builder pattern?",
+            "quizOptions": [
+                "A database manager",
+                "Controls the steps of building",
+                "A singleton",
+                "A factory registry"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "factory_17",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Do's\n- ✅ Use for complex creation\n- ✅ Return interfaces\n- ✅ Single responsibility\n- ✅ Easy to test\n\n## Don'ts\n- ❌ Over-engineer\n- ❌ Factory for everything\n- ❌ Ignore DI alternatives"
+        },
+        {
+            "id": "factory_18",
+            "type": "content",
+            "title": "Comparison",
+            "content": "# Pattern Comparison 📊\n\n| Pattern | Creates | Complexity |\n|---------|---------|------------|\n| Simple Factory | One type | Low |\n| Factory Method | Subclass decides | Medium |\n| Abstract Factory | Families | High |\n| Builder | Step-by-step | Medium |\n| Prototype | Clones | Low |"
+        },
+        {
+            "id": "factory_19",
+            "type": "content",
+            "title": "Exercise",
+            "content": "# Practice 📝\n\n## Create Pizza Factory\n1. PizzaFactory class\n2. Create Margherita, Pepperoni\n3. Builder for custom pizza\n4. Abstract factory for restaurant styles\n\n## Expected\n```python\npizza = PizzaFactory.create('pepperoni')\n\ncustom = (\n    PizzaBuilder()\n    .add_topping('mushrooms')\n    .add_topping('olives')\n    .build()\n)\n```"
+        },
+        {
+            "id": "factory_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Patterns\n- ✅ Simple Factory - basic\n- ✅ Abstract Factory - families\n- ✅ Builder - complex objects\n- ✅ Prototype - cloning\n\n### When to Use\n- Complex creation logic\n- Decouple client from products\n- Multiple product variants\n\nHappy building! 🏭"
+        }
+    ]
+}

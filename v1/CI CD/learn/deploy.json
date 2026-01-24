@@ -1,0 +1,167 @@
+{
+    "id": "learn_cicd_deploy",
+    "topicId": "deploy",
+    "topicTitle": "Deployment Strategies",
+    "description": "Master deployment strategies including blue-green, canary, rolling deployments, feature flags, and rollback techniques",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "deploy_1",
+            "type": "content",
+            "title": "Deployment Strategies Overview",
+            "content": "# Deployment Strategies 🚀\n\nSafe ways to release software to production.\n\n## What you'll learn:\n- **Blue-Green** - Zero downtime switches\n- **Canary** - Gradual rollout\n- **Rolling** - Instance by instance\n- **Feature Flags** - Controlled releases\n\n## Strategy Comparison\n\n| Strategy | Risk | Downtime | Rollback |\n|----------|------|----------|----------|\n| Big Bang | High | Yes | Hard |\n| Blue-Green | Low | Zero | Instant |\n| Canary | Very Low | Zero | Fast |\n| Rolling | Low | Zero | Medium |"
+        },
+        {
+            "id": "deploy_2",
+            "type": "content",
+            "title": "Blue-Green Deployment",
+            "content": "# Blue-Green Deployment 💙💚\n\nTwo identical environments, switch traffic instantly.\n\n```\n┌─────────────────────────────────────┐\n│  Load Balancer                     │\n│       │                             │\n│       ▼ (switch)                    │\n│  ┌─────────┐    ┌─────────┐        │\n│  │  BLUE   │    │  GREEN  │        │\n│  │  v1.0   │    │  v1.1   │        │\n│  │ (live)  │    │ (idle)  │        │\n│  └─────────┘    └─────────┘        │\n└─────────────────────────────────────┘\n```\n\n## Benefits\n\n- ✅ Zero downtime\n- ✅ Instant rollback\n- ✅ Easy validation"
+        },
+        {
+            "id": "deploy_3",
+            "type": "content",
+            "title": "Canary Deployment",
+            "content": "# Canary Deployment 🐤\n\nGradually shift traffic to new version.\n\n```\n       Traffic Distribution\n       ┌──────────────────────┐\n       │ Step 1: 5% canary    │\n       │ Step 2: 25% canary   │\n       │ Step 3: 50% canary   │\n       │ Step 4: 100% canary  │\n       └──────────────────────┘\n```\n\n## Benefits\n\n- ✅ Minimize blast radius\n- ✅ Real traffic testing\n- ✅ Automatic rollback"
+        },
+        {
+            "id": "deploy_4",
+            "type": "content",
+            "title": "Rolling Deployment",
+            "content": "# Rolling Deployment 🔄\n\nUpdate instances one at a time.\n\n```\nStart:   [v1] [v1] [v1] [v1]\nStep 1:  [v2] [v1] [v1] [v1]\nStep 2:  [v2] [v2] [v1] [v1]\nStep 3:  [v2] [v2] [v2] [v1]\nDone:    [v2] [v2] [v2] [v2]\n```\n\n## Benefits\n\n- ✅ No extra infrastructure\n- ✅ Gradual rollout\n- ✅ Easy to implement"
+        },
+        {
+            "id": "deploy_5",
+            "type": "quiz",
+            "title": "Strategies Quiz",
+            "content": "Test your deployment knowledge!",
+            "quizQuestion": "Which deployment strategy uses two identical environments?",
+            "quizOptions": [
+                "Canary",
+                "Rolling",
+                "Blue-Green",
+                "A/B Testing"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "deploy_6",
+            "type": "content",
+            "title": "Feature Flags",
+            "content": "# Feature Flags 🚩\n\nToggle features without deploying.\n\n```javascript\nif (featureFlags.isEnabled('new-checkout')) {\n    return <NewCheckout />;\n} else {\n    return <OldCheckout />;\n}\n```\n\n## Benefits\n\n- ✅ Decouple deploy from release\n- ✅ Easy rollback\n- ✅ A/B testing"
+        },
+        {
+            "id": "deploy_7",
+            "type": "content",
+            "title": "Kubernetes Deployments",
+            "content": "# Kubernetes Strategies 🎭\n\n## Rolling Update (Default)\n\n```yaml\nspec:\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxSurge: 1\n      maxUnavailable: 0\n```\n\n## Recreate\n\n```yaml\nspec:\n  strategy:\n    type: Recreate\n```"
+        },
+        {
+            "id": "deploy_8",
+            "type": "content",
+            "title": "Rollback Strategies",
+            "content": "# Rollback Strategies ⏪\n\n## Methods\n\n| Method | Speed | Complexity |\n|--------|-------|------------|\n| Blue-Green switch | Instant | Low |\n| Redeploy previous | Minutes | Low |\n| Database rollback | Slow | High |\n\n## Kubernetes Rollback\n\n```bash\nkubectl rollout undo deployment/my-app\n```"
+        },
+        {
+            "id": "deploy_9",
+            "type": "content",
+            "title": "Database Migrations",
+            "content": "# Database Migrations 🗄️\n\n## Backward Compatible\n\n```\n1. Add new column (nullable)\n2. Deploy new code (writes to both)\n3. Migrate old data\n4. Remove old column usage\n5. Drop old column\n```\n\n## Key Principle\n\n- ✅ Make changes backward compatible\n- ✅ Deploy code before removing columns"
+        },
+        {
+            "id": "deploy_10",
+            "type": "quiz",
+            "title": "Rollback Quiz",
+            "content": "Test your rollback knowledge!",
+            "quizQuestion": "What is the fastest rollback method?",
+            "quizOptions": [
+                "Database restore",
+                "Blue-Green switch",
+                "Rebuild from source",
+                "Manual fix"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "deploy_11",
+            "type": "content",
+            "title": "Health Checks",
+            "content": "# Health Checks ❤️\n\n## Types\n\n| Check | Purpose |\n|-------|--------|\n| Liveness | Is app alive? |\n| Readiness | Can receive traffic? |\n| Startup | Has app started? |\n\n```yaml\nlivenessProbe:\n  httpGet:\n    path: /health\n    port: 8080\n  initialDelaySeconds: 10\n```"
+        },
+        {
+            "id": "deploy_12",
+            "type": "content",
+            "title": "Smoke Tests",
+            "content": "# Smoke Tests 🔥\n\nQuick post-deployment verification.\n\n```bash\n# After deploy\ncurl https://api.example.com/health\ncurl https://api.example.com/api/v1/status\n\n# Check critical flows\nnpm run test:smoke\n```\n\n## Best Practices\n\n- ✅ Run immediately after deploy\n- ✅ Test critical paths only\n- ✅ Fail fast"
+        },
+        {
+            "id": "deploy_13",
+            "type": "content",
+            "title": "Progressive Delivery",
+            "content": "# Progressive Delivery 📈\n\nCombine strategies for safer releases.\n\n```\nDeploy → Smoke Test → 5% Canary → Monitor\n                            │\n                      25% Canary → Monitor\n                            │\n                      100% Rollout\n```\n\n## Tools\n\n- Argo Rollouts\n- Flagger\n- Spinnaker"
+        },
+        {
+            "id": "deploy_14",
+            "type": "content",
+            "title": "Monitoring Deployments",
+            "content": "# Deployment Monitoring 📊\n\n## Key Metrics\n\n| Metric | Description |\n|--------|-------------|\n| Error rate | 5xx responses |\n| Latency | p95, p99 |\n| Traffic | Requests/sec |\n| Saturation | CPU, memory |\n\n## Automatic Rollback\n\n```\nif (errorRate > 5%) {\n  rollback();\n}\n```"
+        },
+        {
+            "id": "deploy_15",
+            "type": "quiz",
+            "title": "Health Quiz",
+            "content": "Test your health check knowledge!",
+            "quizQuestion": "What does a Kubernetes readiness probe check?",
+            "quizOptions": [
+                "Is container running?",
+                "Can app receive traffic?",
+                "Is database connected?",
+                "Is CPU available?"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "deploy_16",
+            "type": "content",
+            "title": "GitOps Deployment",
+            "content": "# GitOps 📚\n\nGit as source of truth for deployments.\n\n```\n┌─────────────────────────────────┐\n│ Git Repo (desired state)       │\n│       │                         │\n│       ▼                         │\n│ GitOps Operator (Argo, Flux)   │\n│       │                         │\n│       ▼                         │\n│ Kubernetes (actual state)       │\n└─────────────────────────────────┘\n```"
+        },
+        {
+            "id": "deploy_17",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Deployment\n\n- ✅ Use infrastructure as code\n- ✅ Automate everything\n- ✅ Test in staging first\n- ✅ Monitor after deploy\n\n## Rollback\n\n- ✅ Keep previous version ready\n- ✅ Test rollback procedures\n- ✅ Use feature flags"
+        },
+        {
+            "id": "deploy_18",
+            "type": "content",
+            "title": "Strategy Selection",
+            "content": "# Choosing a Strategy 🎯\n\n| Scenario | Strategy |\n|----------|----------|\n| Zero downtime critical | Blue-Green |\n| Minimize risk | Canary |\n| Resource constrained | Rolling |\n| Rapid iteration | Feature Flags |\n| Kubernetes native | Argo Rollouts |"
+        },
+        {
+            "id": "deploy_19",
+            "type": "content",
+            "title": "AWS Deployment",
+            "content": "# AWS Deployment 🌩️\n\n## Services\n\n| Service | Use |\n|---------|-----|\n| CodeDeploy | EC2, Lambda |\n| ECS | Containers |\n| EKS | Kubernetes |\n| Elastic Beanstalk | PaaS |\n\n## Blue-Green in ECS\n\n```yaml\ndeploymentController:\n  type: CODE_DEPLOY\n```"
+        },
+        {
+            "id": "deploy_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your deployment knowledge!",
+            "quizQuestion": "What is GitOps?",
+            "quizOptions": [
+                "Git branching strategy",
+                "Git as source of truth for infrastructure",
+                "Git hosting service",
+                "Git workflow tool"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "deploy_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Deployment Strategies!\n\n## Key Takeaways\n\n- ✅ Blue-Green for instant rollback\n- ✅ Canary for gradual rollout\n- ✅ Rolling for resource efficiency\n- ✅ Feature flags for control\n- ✅ Always have a rollback plan\n\n> 🚀 **Remember:** Deploy early, deploy often, deploy safely!\n\nHappy deploying! 🎯"
+        }
+    ]
+}

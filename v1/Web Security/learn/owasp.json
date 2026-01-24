@@ -1,0 +1,167 @@
+{
+    "id": "learn_security_owasp",
+    "topicId": "owasp",
+    "topicTitle": "OWASP Top 10",
+    "description": "Master the world's most critical web application security risks with an in-depth look at the OWASP Top 10",
+    "baseKP": 95,
+    "slides": [
+        {
+            "id": "owasp_1",
+            "type": "content",
+            "title": "What is OWASP?",
+            "content": "# OWASP 🛡️\n\nThe **Open Web Application Security Project** is a non-profit foundation that works to improve software security. \n\n- The **Top 10** is their most famous document, representing the broad consensus on the most critical security risks."
+        },
+        {
+            "id": "owasp_2",
+            "type": "content",
+            "title": "A01: Broken Access Control",
+            "content": "# Permission Leaks 🔓\n\nUsers can access resources outside of their intended permissions.\n\n- **Example**: Changing `id=5` to `id=6` in a URL to view someone else's profile.\n- **Defense**: Server-side checks for every single request."
+        },
+        {
+            "id": "owasp_3",
+            "type": "content",
+            "title": "A02: Cryptographic Failures",
+            "content": "# Data Exposure 💎\n\nSensitive data (passwords, health records) is stored in plaintext or with weak encryption.\n\n- **Defense**: Use strong protocols (TLS 1.3), hash passwords (Argon2/BCrypt), and never roll your own crypto."
+        },
+        {
+            "id": "owasp_4",
+            "type": "content",
+            "title": "A03: Injection",
+            "content": "# Code Mixup 💉\n\nUser input is processed as code by the interpreter (SQL, NoSQL, LDAP, OS Commands).\n\n- **Defense**: Prepared Statements, Parameterized Queries, and Input Validation."
+        },
+        {
+            "id": "owasp_5",
+            "quizQuestion": "Which OWASP risk category covers issues like SQL Injection and XSS?",
+            "quizOptions": [
+                "Broken Access Control",
+                "Injection",
+                "Cryptographic Failures",
+                "Vulnerable Components"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Top 10 Quiz",
+            "content": "Identifying risks."
+        },
+        {
+            "id": "owasp_6",
+            "type": "content",
+            "title": "A04: Insecure Design",
+            "content": "# Flawed Logic 🏗️\n\nFocuses on risks related to design and architectural flaws. \n\n- **Defense**: Use 'Threat Modeling', 'Secure Design Patterns', and 'Reference Architectures' from the start."
+        },
+        {
+            "id": "owasp_7",
+            "type": "content",
+            "title": "A05: Security Misconfiguration",
+            "content": "# Basic Holes 🕳️\n\nDefault passwords, unnecessary features enabled, or overly descriptive error messages.\n\n- **Defense**: Hardening guides, removing unused plugins, and proper error handling (don't show stack traces!)."
+        },
+        {
+            "id": "owasp_8",
+            "type": "content",
+            "title": "A06: Vulnerable Components",
+            "content": "# Supply Chain Risk ⛓️\n\nUsing libraries (NPM, NuGet, Maven) that have known security holes.\n\n- **Defense**: Regularly run `npm audit` or `Snyk` to find and patch outdated dependencies."
+        },
+        {
+            "id": "owasp_9",
+            "type": "content",
+            "title": "A07: Auth Failures",
+            "content": "# Identity Thefts 🆔\n\nWeak passwords, lack of MFA, or insecure 'Forgot Password' flows.\n\n- **Defense**: Implement multi-factor authentication and rotate session IDs after login."
+        },
+        {
+            "id": "owasp_10",
+            "quizQuestion": "How should you defend against 'Vulnerable and Outdated Components'?",
+            "quizOptions": [
+                "Write all code from scratch",
+                "Stop using open-source libraries",
+                "Regularly scan and update dependencies using tools like 'Snyk' or 'npm audit'",
+                "Encrypt the source code"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Supply Chain Quiz",
+            "content": "Third-party risk."
+        },
+        {
+            "id": "owasp_11",
+            "type": "content",
+            "title": "A08: Software Integrity Failures",
+            "content": "# Untrusted Updates 🔄\n\nUpdating software from untrusted sources or without verifying its digital signature (CI/CD pipeline attacks).\n\n- **Defense**: Use signed commits and secure build pipelines."
+        },
+        {
+            "id": "owasp_12",
+            "type": "content",
+            "title": "A09: Logging Failures",
+            "content": "# Flying Blind ✈️\n\nInsufficient logging and monitoring prevents organizations from detecting attacks until it's too late.\n\n- **Defense**: Log failed logins, high-value transactions, and audit all security-related events."
+        },
+        {
+            "id": "owasp_13",
+            "type": "content",
+            "title": "A10: SSRF",
+            "content": "# Server-Side Request Forgery 🌐\n\nWhen a web application fetches a remote resource without validating the user-supplied URL. An attacker can force the server to hit internal services behind the firewall."
+        },
+        {
+            "id": "owasp_14",
+            "type": "content",
+            "title": "Changing Rankings",
+            "content": "# Dynamic Threats 📈\n\nThe Top 10 isn't static. For example, **Broken Access Control** moved to the #1 spot in 2021, reflecting its massive impact and frequency."
+        },
+        {
+            "id": "owasp_15",
+            "quizQuestion": "What does SSRF (Server-Side Request Forgery) allow an attacker to do?",
+            "quizOptions": [
+                "Change the client's CSS",
+                "Force the server to make unauthorized requests to internal or external resources",
+                "Steal the user's monitor",
+                "Hack the browser's history"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "SSRF Quiz",
+            "content": "The #10 risk."
+        },
+        {
+            "id": "owasp_16",
+            "type": "content",
+            "title": "Defense in Depth with OWASP",
+            "content": "# Layering up 🧅\n\nSuccessful security involves addressing all 10 areas simultaneously. Fixing only one (like Injection) while leaving another (like Misconfiguration) still leaves you vulnerable."
+        },
+        {
+            "id": "owasp_17",
+            "type": "content",
+            "title": "The OWASP ASVS",
+            "content": "# Advanced Standard 📐\n\nFor high-security apps, look beyond the Top 10 and use the **Application Security Verification Standard (ASVS)**, which provides hundreds of detailed security requirements."
+        },
+        {
+            "id": "owasp_18",
+            "type": "content",
+            "title": "Zap & Tools",
+            "content": "# Automated Audits 🤖\n\n**OWASP ZAP** (Zed Attack Proxy) is a free tool that scans your running application for Top 10 vulnerabilities automatically."
+        },
+        {
+            "id": "owasp_19",
+            "type": "content",
+            "title": "Culture of Security",
+            "content": "# People Power 👥\n\nSecurity is a team sport. Training every developer on the OWASP Top 10 is the most effective way to eliminate these bugs at the source."
+        },
+        {
+            "id": "owasp_20",
+            "quizQuestion": "Why is 'Software and Data Integrity Failures' important in a CI/CD environment?",
+            "quizOptions": [
+                "It improves code speed",
+                "It ensures the code being deployed hasn't been tampered with in the pipeline",
+                "It helps with marketing",
+                "It reduces server costs"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Integrity check."
+        },
+        {
+            "id": "owasp_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Use **OWASP Top 10** as your base security checklist.\n- ✅ **Access Control** and **Injection** are the biggest risks.\n- ✅ Patch **Vulnerable Components** regularly.\n- ✅ **Log and Monitor** to detect ongoing attacks.\n- ✅ Build a **Culture** of security awareness.\n\nMaster the Top 10 to build professional-grade secure apps! 🛡️🚀"
+        }
+    ]
+}

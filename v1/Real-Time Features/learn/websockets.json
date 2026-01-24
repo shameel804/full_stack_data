@@ -1,0 +1,59 @@
+{
+    "id": "learn_websockets_realtime",
+    "topicId": "websockets",
+    "topicTitle": "WebSockets",
+    "description": "Master WebSocket protocol including handshakes, messages, and real-time communication",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "ws_1",
+            "type": "content",
+            "title": "WebSockets",
+            "content": "# WebSockets 🔌\n\nPersistent bi-directional connections.\n\n## What You'll Learn:\n- **Protocol** - How WebSocket works\n- **Handshake** - Connection upgrade\n- **Messages** - Sending/receiving\n- **Events** - Connection lifecycle\n\n> 💡 Full-duplex communication over single TCP!"
+        },
+        {
+            "id": "ws_2",
+            "type": "content",
+            "title": "How It Works",
+            "content": "# How WebSocket Works 🔄\n\n## Connection Lifecycle:\n```\n1. HTTP Request (Upgrade)\n        │\n2. 101 Switching Protocols\n        │\n3. WebSocket Connection Open\n        │\n4. Messages (both ways)\n        │\n5. Close\n```\n\n## Handshake:\n```\nGET /chat HTTP/1.1\nUpgrade: websocket\nConnection: Upgrade\nSec-WebSocket-Key: dGhlIHNhbXBsZQ==\nSec-WebSocket-Version: 13\n\nHTTP/1.1 101 Switching Protocols\nUpgrade: websocket\nConnection: Upgrade\n```"
+        },
+        {
+            "id": "ws_3",
+            "type": "content",
+            "title": "Client Implementation",
+            "content": "# Client Implementation 💻\n\n## Browser API:\n```javascript\nconst ws = new WebSocket('ws://localhost:8080');\n\nws.onopen = () => {\n    console.log('Connected!');\n    ws.send('Hello Server!');\n};\n\nws.onmessage = (event) => {\n    console.log('Received:', event.data);\n};\n\nws.onclose = () => {\n    console.log('Disconnected');\n};\n\nws.onerror = (error) => {\n    console.error('Error:', error);\n};\n```\n\n## Send Data:\n```javascript\nws.send('Text message');\nws.send(JSON.stringify({ type: 'chat', msg: 'Hi!' }));\n```"
+        },
+        {
+            "id": "ws_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your WebSocket knowledge!",
+            "quizQuestion": "What HTTP status indicates successful WebSocket upgrade?",
+            "quizOptions": [
+                "200 OK",
+                "101 Switching Protocols",
+                "301 Redirect",
+                "204 No Content"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ws_4",
+            "type": "content",
+            "title": "Server Implementation",
+            "content": "# Server Implementation 🖥️\n\n## Node.js with ws:\n```javascript\nconst WebSocket = require('ws');\nconst wss = new WebSocket.Server({ port: 8080 });\n\nwss.on('connection', (ws) => {\n    console.log('Client connected');\n    \n    ws.on('message', (message) => {\n        console.log('Received:', message);\n        \n        // Broadcast to all\n        wss.clients.forEach((client) => {\n            if (client.readyState === WebSocket.OPEN) {\n                client.send(message);\n            }\n        });\n    });\n    \n    ws.on('close', () => {\n        console.log('Client disconnected');\n    });\n});\n```"
+        },
+        {
+            "id": "ws_5",
+            "type": "content",
+            "title": "Reconnection",
+            "content": "# Reconnection 🔄\n\nHandle disconnects gracefully.\n\n```javascript\nclass ReconnectingWebSocket {\n    constructor(url) {\n        this.url = url;\n        this.connect();\n    }\n    \n    connect() {\n        this.ws = new WebSocket(this.url);\n        \n        this.ws.onclose = () => {\n            console.log('Reconnecting...');\n            setTimeout(() => this.connect(), 1000);\n        };\n        \n        this.ws.onopen = () => {\n            console.log('Connected!');\n        };\n    }\n    \n    send(data) {\n        if (this.ws.readyState === WebSocket.OPEN) {\n            this.ws.send(data);\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "ws_6",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered WebSockets!\n\n## Key Concepts:\n| Concept | Description |\n|---------|-------------|\n| Handshake | HTTP upgrade |\n| Messages | Text/binary |\n| Events | open, message, close, error |\n\n## Best Practices:\n- Handle reconnection\n- Implement heartbeats\n- Use JSON for messages\n- Handle errors gracefully\n\nGo real-time! 🔌"
+        }
+    ]
+}

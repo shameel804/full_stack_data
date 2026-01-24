@@ -1,0 +1,167 @@
+{
+    "id": "learn_e2etest_cypress",
+    "topicId": "cypress",
+    "topicTitle": "Cypress",
+    "description": "Master Cypress for modern web automation, including the Test Runner, commands, stubs, and debugging",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "cypress_1",
+            "type": "content",
+            "title": "Introduction to Cypress",
+            "content": "# Cypress 🌲\n\nA next-generation front-end testing tool built for the modern web.\n\n- **Fast**: Runs in the same loop as your app.\n- **Reliable**: No more async sync issues.\n- **Visual**: See exactly what happened at every step."
+        },
+        {
+            "id": "cypress_2",
+            "type": "content",
+            "title": "The Cypress Architecture",
+            "content": "# No WebDriver 🚫\n\nUnlike Selenium, Cypress runs **inside** the browser. This gives it native access to every object (DOM, window, storage, etc.)."
+        },
+        {
+            "id": "cypress_3",
+            "type": "content",
+            "title": "Your First Test",
+            "content": "# Writing Tests ✍️\n\n```javascript\ndescribe('My First Test', () => {\n  it('Visits the Kitchen Sink', () => {\n    cy.visit('https://example.cypress.io');\n    cy.contains('type').click();\n    cy.url().should('include', '/commands/actions');\n  });\n});\n```"
+        },
+        {
+            "id": "cypress_4",
+            "type": "content",
+            "title": "Queries & Actions",
+            "content": "# Command Chain ⛓️\n\n- **Queries**: `cy.get('.btn')`, `cy.contains('Login')`.\n- **Actions**: `.click()`, `.type('hello')`, `.check()`.\n- **Assertions**: `.should('be.visible')`, `.should('have.value', '7')`."
+        },
+        {
+            "id": "cypress_5",
+            "quizQuestion": "Where does Cypress run its test code?",
+            "quizOptions": [
+                "On a separate Node.js server",
+                "Inside the browser alongside your app",
+                "In the terminal only",
+                "On the operating system's shell"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Architecture Quiz",
+            "content": "Execution context."
+        },
+        {
+            "id": "cypress_6",
+            "type": "content",
+            "title": "Automatic Waiting",
+            "content": "# Stability ⚖️\n\nCypress automatically waits for commands and assertions before moving on. \n\n- No more `cy.wait(5000)`!\n- It retries assertions until they pass or timeout."
+        },
+        {
+            "id": "cypress_7",
+            "type": "content",
+            "title": "Time Travel Debugging",
+            "content": "# Rewind 🕒\n\nIn the Cypress Test Runner, hover over commands in the metadata log to see a **snapshot** of exactly how the app looked at that moment."
+        },
+        {
+            "id": "cypress_8",
+            "type": "content",
+            "title": "Network Interception",
+            "content": "# cy.intercept() 📡\n\nControl network traffic to test edge cases without a backend.\n\n```javascript\ncy.intercept('GET', '/users', { fixture: 'users.json' });\ncy.visit('/users');\n// The app now sees the mock data!\n```"
+        },
+        {
+            "id": "cypress_9",
+            "type": "content",
+            "title": "Custom Commands",
+            "content": "# DRY Code 🌵\n\nDefine reusable logic in `cypress/support/commands.js`.\n\n```javascript\nCypress.Commands.add('login', (email, password) => {\n  cy.get('#email').type(email);\n  cy.get('#pass').type(password);\n  cy.get('#login-btn').click();\n});\n```"
+        },
+        {
+            "id": "cypress_10",
+            "quizQuestion": "Which Cypress command is used to stub or spy on network requests?",
+            "quizOptions": [
+                "cy.request()",
+                "cy.network()",
+                "cy.intercept()",
+                "cy.mock()"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "API Quiz",
+            "content": "Traffic control."
+        },
+        {
+            "id": "cypress_11",
+            "type": "content",
+            "title": "Folders & Files",
+            "content": "# Folder Structure 📂\n\n- `fixtures/`: Static data (JSON).\n- `e2e/`: Your test files (Specs).\n- `support/`: Custom commands & global setup."
+        },
+        {
+            "id": "cypress_12",
+            "type": "content",
+            "title": "Configuration",
+            "content": "# cypress.config.js ⚙️\n\n```javascript\nconst { defineConfig } = require(\"cypress\");\n\nmodule.exports = defineConfig({\n  e2e: {\n    baseUrl: 'http://localhost:3000',\n    viewportWidth: 1280,\n    viewportHeight: 720,\n  },\n});\n```"
+        },
+        {
+            "id": "cypress_13",
+            "type": "content",
+            "title": "Cypress Studio",
+            "content": "# Recorder 🎥\n\nA visual tool that lets you interact with your app and automatically generates test code for you."
+        },
+        {
+            "id": "cypress_14",
+            "type": "content",
+            "title": "Asynchronous Nature",
+            "content": "# Commands are Promises? 🎭\n\nCypress commands are asynchronous and queued. They return a `Chainable` object, NOT the value itself.\n\n> [!CAUTION]\n> Don't use `const val = cy.get(...)`! Use `.then((val) => { ... })` instead."
+        },
+        {
+            "id": "cypress_15",
+            "quizQuestion": "Can you use the return value of a Cypress command directly in a variable (e.g., const x = cy.get('...'))?",
+            "quizOptions": [
+                "Yes, anytime",
+                "No, they are queued and must be accessed via .then()",
+                "Only for button clicks",
+                "Only in headful mode"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Coding Quiz",
+            "content": "Variable access."
+        },
+        {
+            "id": "cypress_16",
+            "type": "content",
+            "title": "Component Testing",
+            "content": "# Beyond E2E 🧩\n\nCypress can also test individual React, Vue, or Angular components in isolation with the same API."
+        },
+        {
+            "id": "cypress_17",
+            "type": "content",
+            "title": "Screenshots & Videos",
+            "content": "# Proof 📸\n\nWhen running in `cypress run` (Headless), Cypress automatically saves screenshots of failures and videos of every test run."
+        },
+        {
+            "id": "cypress_18",
+            "type": "content",
+            "title": "Cypress Cloud",
+            "content": "# Dashboard 🌩️\n\nA web service that records your test runs in CI, provides analytics, and allows for parallel execution across multiple machines."
+        },
+        {
+            "id": "cypress_19",
+            "type": "content",
+            "title": "Aliases",
+            "content": "# .as() 🏷️\n\nUse aliases to store references and reuse them later in the test.\n\n```javascript\ncy.get('.user-row').first().as('firstUser');\n// later...\ncy.get('@firstUser').click();\n```"
+        },
+        {
+            "id": "cypress_20",
+            "quizQuestion": "What is the benefit of 'Time Travel' in the Cypress Test Runner?",
+            "quizOptions": [
+                "It changes the local time",
+                "It allows seeing the state of the app at any specific command step",
+                "It speeds up the tests",
+                "It predicts future bugs"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Debugging features."
+        },
+        {
+            "id": "cypress_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Native browser execution.\n- ✅ Automatic waiting and retries.\n- ✅ Powerful network interception with `cy.intercept`.\n- ✅ Visual debugging with Time Travel.\n\nModernize your web testing with the power of Cypress! 🌲"
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "id": "learn_solid_dp",
+    "topicId": "solid",
+    "topicTitle": "SOLID Principles",
+    "description": "Master SOLID principles: Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "solid_1",
+            "type": "content",
+            "title": "Welcome to SOLID",
+            "content": "# SOLID Principles 🏛️\n\nMaster the five principles of object-oriented design!\n\n## What You'll Learn:\n- **S** - Single Responsibility Principle\n- **O** - Open/Closed Principle\n- **L** - Liskov Substitution Principle\n- **I** - Interface Segregation Principle\n- **D** - Dependency Inversion Principle\n\n> 💡 SOLID makes code maintainable and extensible!\n\n## Why SOLID Matters:\n- 🔧 **Maintainability** - Easier to change\n- 🧪 **Testability** - Easier to test\n- 🔄 **Flexibility** - Easier to extend\n- 🐛 **Fewer Bugs** - Better design"
+        },
+        {
+            "id": "solid_2",
+            "type": "content",
+            "title": "Single Responsibility",
+            "content": "# Single Responsibility (S) 🎯\n\n**A class should have only one reason to change.**\n\n## Bad Example:\n```javascript\nclass User {\n    constructor(name) { this.name = name; }\n    \n    save() {\n        // Database logic\n    }\n    \n    sendEmail() {\n        // Email logic\n    }\n    \n    generateReport() {\n        // Report logic\n    }\n}\n```\n\n## Good Example:\n```javascript\nclass User {\n    constructor(name) { this.name = name; }\n}\n\nclass UserRepository {\n    save(user) { /* DB logic */ }\n}\n\nclass EmailService {\n    sendEmail(user, message) { /* Email */ }\n}\n\nclass ReportGenerator {\n    generate(user) { /* Report */ }\n}\n```\n\n## Benefits:\n- Each class has one job\n- Changes isolate to one class\n- Easy to test individually"
+        },
+        {
+            "id": "solid_3",
+            "type": "content",
+            "title": "Open-Closed Principle",
+            "content": "# Open-Closed Principle (O) 🚪\n\n**Open for extension, closed for modification.**\n\n## Bad Example:\n```javascript\nclass PaymentProcessor {\n    process(payment) {\n        if (payment.type === 'credit') {\n            // Credit card logic\n        } else if (payment.type === 'paypal') {\n            // PayPal logic\n        } else if (payment.type === 'crypto') {\n            // New payment = modify class!\n        }\n    }\n}\n```\n\n## Good Example:\n```javascript\nclass PaymentProcessor {\n    process(paymentMethod, amount) {\n        return paymentMethod.pay(amount);\n    }\n}\n\nclass CreditCardPayment {\n    pay(amount) { /* Credit logic */ }\n}\n\nclass PayPalPayment {\n    pay(amount) { /* PayPal logic */ }\n}\n\nclass CryptoPayment {\n    pay(amount) { /* Add new = no modification! */ }\n}\n```\n\n## Key:\n- Use abstraction/interfaces\n- Add features by adding classes\n- Don't modify existing code"
+        },
+        {
+            "id": "solid_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your SOLID knowledge!",
+            "quizQuestion": "What does 'Open-Closed' mean?",
+            "quizOptions": [
+                "Open source, closed development",
+                "Open for extension, closed for modification",
+                "Open database, closed API",
+                "Open testing, closed production"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "solid_4",
+            "type": "content",
+            "title": "Liskov Substitution",
+            "content": "# Liskov Substitution (L) 🔄\n\n**Subtypes must be substitutable for base types.**\n\n## Bad Example:\n```javascript\nclass Bird {\n    fly() { return 'Flying'; }\n}\n\nclass Penguin extends Bird {\n    fly() {\n        throw new Error(\"Can't fly!\"); // Breaks LSP!\n    }\n}\n\nfunction makeBirdFly(bird) {\n    return bird.fly(); // Fails for Penguin!\n}\n```\n\n## Good Example:\n```javascript\nclass Bird {\n    move() { return 'Moving'; }\n}\n\nclass FlyingBird extends Bird {\n    fly() { return 'Flying'; }\n    move() { return this.fly(); }\n}\n\nclass Penguin extends Bird {\n    swim() { return 'Swimming'; }\n    move() { return this.swim(); }\n}\n\nfunction makeBirdMove(bird) {\n    return bird.move(); // Works for all!\n}\n```\n\n## Rule:\n- Derived classes must honor base class contracts\n- No surprising behavior changes\n- If it looks like a duck, it should quack like one"
+        },
+        {
+            "id": "solid_5",
+            "type": "content",
+            "title": "Interface Segregation",
+            "content": "# Interface Segregation (I) 📋\n\n**Clients shouldn't depend on interfaces they don't use.**\n\n## Bad Example:\n```typescript\ninterface Worker {\n    work(): void;\n    eat(): void;\n    sleep(): void;\n}\n\nclass Robot implements Worker {\n    work() { /* Works */ }\n    eat() { throw new Error('Robots don\\'t eat!'); }\n    sleep() { throw new Error('Robots don\\'t sleep!'); }\n}\n```\n\n## Good Example:\n```typescript\ninterface Workable {\n    work(): void;\n}\n\ninterface Eatable {\n    eat(): void;\n}\n\ninterface Sleepable {\n    sleep(): void;\n}\n\nclass Human implements Workable, Eatable, Sleepable {\n    work() { }\n    eat() { }\n    sleep() { }\n}\n\nclass Robot implements Workable {\n    work() { /* Only what it needs */ }\n}\n```\n\n## Principle:\n- Many small interfaces > one fat interface\n- Clients implement only what they need\n- Reduces coupling"
+        },
+        {
+            "id": "solid_6",
+            "type": "content",
+            "title": "Dependency Inversion",
+            "content": "# Dependency Inversion (D) ⬆️\n\n**Depend on abstractions, not concrete implementations.**\n\n## Bad Example:\n```javascript\nclass UserService {\n    constructor() {\n        this.database = new MySQLDatabase(); // Concrete!\n    }\n    \n    getUser(id) {\n        return this.database.query(`SELECT * FROM users WHERE id = ${id}`);\n    }\n}\n```\n\n## Good Example:\n```javascript\nclass UserService {\n    constructor(database) { // Abstract!\n        this.database = database;\n    }\n    \n    getUser(id) {\n        return this.database.findById('users', id);\n    }\n}\n\n// Usage - inject dependency\nconst mysqlDb = new MySQLDatabase();\nconst userService = new UserService(mysqlDb);\n\n// Easy to swap!\nconst mongoDb = new MongoDatabase();\nconst userService2 = new UserService(mongoDb);\n```\n\n## Benefits:\n- Easy to swap implementations\n- Easy to test with mocks\n- Decoupled code"
+        },
+        {
+            "id": "solid_quiz_2",
+            "type": "quiz",
+            "title": "DI Check",
+            "content": "Test your Dependency Inversion knowledge!",
+            "quizQuestion": "What is Dependency Injection?",
+            "quizOptions": [
+                "Importing modules",
+                "Passing dependencies as parameters",
+                "Using global variables",
+                "Hardcoding values"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "solid_7",
+            "type": "content",
+            "title": "SRP in Practice",
+            "content": "# SRP in Practice 💼\n\n## Refactoring Example:\n\n### Before:\n```javascript\nclass Order {\n    calculateTotal() { ... }\n    saveToDatabase() { ... }\n    sendConfirmationEmail() { ... }\n    generatePDF() { ... }\n    logActivity() { ... }\n}\n```\n\n### After:\n```javascript\nclass Order {\n    calculateTotal() { ... }\n}\n\nclass OrderRepository {\n    save(order) { ... }\n}\n\nclass OrderNotifier {\n    sendConfirmation(order) { ... }\n}\n\nclass OrderDocumentGenerator {\n    generatePDF(order) { ... }\n}\n\nclass ActivityLogger {\n    log(action, data) { ... }\n}\n```\n\n## Signs of SRP Violation:\n- Class has too many methods\n- Methods do unrelated things\n- Frequent changes for different reasons"
+        },
+        {
+            "id": "solid_8",
+            "type": "content",
+            "title": "OCP with Strategy Pattern",
+            "content": "# OCP with Strategy Pattern 🎮\n\n## Implementing OCP:\n```javascript\n// Strategy interface\nclass ShippingStrategy {\n    calculate(order) {\n        throw new Error('Must implement');\n    }\n}\n\n// Strategies\nclass StandardShipping extends ShippingStrategy {\n    calculate(order) {\n        return order.weight * 1.5;\n    }\n}\n\nclass ExpressShipping extends ShippingStrategy {\n    calculate(order) {\n        return order.weight * 3.0;\n    }\n}\n\nclass FreeShipping extends ShippingStrategy {\n    calculate(order) {\n        return 0;\n    }\n}\n\n// Context (closed for modification)\nclass ShippingCalculator {\n    constructor(strategy) {\n        this.strategy = strategy;\n    }\n    \n    calculate(order) {\n        return this.strategy.calculate(order);\n    }\n}\n\n// Usage\nconst express = new ShippingCalculator(new ExpressShipping());\nexpress.calculate(order);\n```"
+        },
+        {
+            "id": "solid_9",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# Dependency Injection 💉\n\n## Types of DI:\n\n### Constructor Injection:\n```javascript\nclass UserService {\n    constructor(repository, logger) {\n        this.repository = repository;\n        this.logger = logger;\n    }\n}\n\nconst service = new UserService(\n    new UserRepository(),\n    new Logger()\n);\n```\n\n### Setter Injection:\n```javascript\nclass UserService {\n    setRepository(repository) {\n        this.repository = repository;\n    }\n}\n\nconst service = new UserService();\nservice.setRepository(new UserRepository());\n```\n\n### DI Container:\n```javascript\nclass Container {\n    constructor() {\n        this.services = new Map();\n    }\n    \n    register(name, factory) {\n        this.services.set(name, factory);\n    }\n    \n    resolve(name) {\n        return this.services.get(name)(this);\n    }\n}\n\nconst container = new Container();\ncontainer.register('logger', () => new Logger());\ncontainer.register('userService', (c) => \n    new UserService(c.resolve('logger'))\n);\n```"
+        },
+        {
+            "id": "solid_10",
+            "type": "content",
+            "title": "Testing with SOLID",
+            "content": "# Testing with SOLID 🧪\n\n## Why SOLID Enables Testing:\n\n### Without DI:\n```javascript\nclass UserService {\n    constructor() {\n        this.db = new Database(); // Hard to mock!\n    }\n}\n\n// Test - impossible to isolate\ntest('getUser', async () => {\n    const service = new UserService();\n    // Actually hits real database!\n});\n```\n\n### With DI:\n```javascript\nclass UserService {\n    constructor(db) {\n        this.db = db;\n    }\n}\n\n// Test - easily mocked\ntest('getUser', async () => {\n    const mockDb = {\n        findById: jest.fn().mockResolvedValue({ id: 1, name: 'John' })\n    };\n    \n    const service = new UserService(mockDb);\n    const user = await service.getUser(1);\n    \n    expect(mockDb.findById).toHaveBeenCalledWith(1);\n    expect(user.name).toBe('John');\n});\n```\n\n## SOLID Testing Benefits:\n- SRP: Test one thing\n- OCP: No modification to test\n- DIP: Easy mocking"
+        },
+        {
+            "id": "solid_quiz_3",
+            "type": "quiz",
+            "title": "Testing Check",
+            "content": "Test your understanding!",
+            "quizQuestion": "How does Dependency Inversion help testing?",
+            "quizOptions": [
+                "Makes tests slower",
+                "Enables easy mocking",
+                "Removes need for tests",
+                "Requires more code"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "solid_11",
+            "type": "content",
+            "title": "SOLID in React",
+            "content": "# SOLID in React ⚛️\n\n## SRP - Components:\n```javascript\n// ❌ Does too much\nfunction UserDashboard() {\n    // Fetches, validates, renders, handles events\n}\n\n// ✅ Single responsibility\nfunction UserProfile({ user }) { /* Display only */ }\nfunction UserStats({ stats }) { /* Stats display */ }\nfunction useUserData(id) { /* Data fetching */ }\n```\n\n## OCP - Composition:\n```javascript\nfunction Button({ variant, children, ...props }) {\n    return <button className={variant} {...props}>{children}</button>;\n}\n\n// Extend without modifying\nfunction PrimaryButton(props) {\n    return <Button variant=\"primary\" {...props} />;\n}\n```\n\n## DIP - Context:\n```javascript\nconst ApiContext = createContext();\n\nfunction App() {\n    return (\n        <ApiContext.Provider value={new RealApiClient()}>\n            <UserList />\n        </ApiContext.Provider>\n    );\n}\n\n// Test with mock\n<ApiContext.Provider value={mockApi}>\n    <UserList />\n</ApiContext.Provider>\n```"
+        },
+        {
+            "id": "solid_12",
+            "type": "content",
+            "title": "SOLID in Node.js",
+            "content": "# SOLID in Node.js 🟢\n\n## Repository Pattern (SRP + DIP):\n```javascript\n// Interface\nclass UserRepository {\n    findById(id) { throw new Error('Implement'); }\n    save(user) { throw new Error('Implement'); }\n}\n\n// Implementations\nclass MongoUserRepository extends UserRepository {\n    findById(id) {\n        return User.findById(id);\n    }\n}\n\nclass PostgresUserRepository extends UserRepository {\n    findById(id) {\n        return db.query('SELECT * FROM users WHERE id = $1', [id]);\n    }\n}\n\n// Service depends on abstraction\nclass UserService {\n    constructor(repository) {\n        this.repository = repository;\n    }\n}\n\n// Dependency injection\nconst userService = new UserService(\n    process.env.DB === 'mongo'\n        ? new MongoUserRepository()\n        : new PostgresUserRepository()\n);\n```"
+        },
+        {
+            "id": "solid_13",
+            "type": "content",
+            "title": "Common Violations",
+            "content": "# Common SOLID Violations ❌\n\n## SRP Violations:\n- God classes doing everything\n- Mixing UI and business logic\n\n## OCP Violations:\n- Giant if/else or switch statements\n- Modifying existing code for new features\n\n## LSP Violations:\n- Throwing exceptions in overrides\n- Empty method implementations\n\n## ISP Violations:\n- Fat interfaces with many methods\n- Implementing unused methods\n\n## DIP Violations:\n- `new` keyword inside classes\n- Hard-coded dependencies\n- Importing concrete classes\n\n## Quick Fixes:\n| Violation | Solution |\n|-----------|---------|\n| God class | Extract classes |\n| if/else | Strategy pattern |\n| Fat interface | Split interfaces |\n| Hard dependencies | Constructor injection |"
+        },
+        {
+            "id": "solid_14",
+            "type": "content",
+            "title": "Real-World Example",
+            "content": "# Real-World Example 🌍\n\n## E-commerce Order System:\n```javascript\n// SRP - Separate concerns\nclass Order { /* Order data only */ }\nclass OrderValidator { /* Validation only */ }\nclass OrderRepository { /* Persistence only */ }\nclass OrderNotifier { /* Notifications only */ }\n\n// OCP - Extensible payments\nclass PaymentProcessor {\n    constructor(gateway) { this.gateway = gateway; }\n    process(order) { return this.gateway.charge(order); }\n}\n\n// DIP - Inject dependencies  \nclass OrderService {\n    constructor(repo, validator, notifier, payment) {\n        this.repo = repo;\n        this.validator = validator;\n        this.notifier = notifier;\n        this.payment = payment;\n    }\n    \n    async placeOrder(orderData) {\n        const order = new Order(orderData);\n        this.validator.validate(order);\n        await this.payment.process(order);\n        await this.repo.save(order);\n        await this.notifier.sendConfirmation(order);\n        return order;\n    }\n}\n```"
+        },
+        {
+            "id": "solid_quiz_4",
+            "type": "quiz",
+            "title": "Application Check",
+            "content": "Test your SOLID application knowledge!",
+            "quizQuestion": "Which principle suggests using Strategy pattern over if/else?",
+            "quizOptions": [
+                "SRP",
+                "OCP",
+                "LSP",
+                "DIP"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "solid_15",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered SOLID Principles!\n\n## Key Takeaways:\n\n### S - Single Responsibility\n- One class, one reason to change\n- Extract classes with one job\n\n### O - Open/Closed\n- Add features by adding code\n- Don't modify existing code\n\n### L - Liskov Substitution\n- Subtypes must work as base types\n- No surprising behavior\n\n### I - Interface Segregation\n- Many small interfaces\n- Implement only what you need\n\n### D - Dependency Inversion\n- Depend on abstractions\n- Inject dependencies\n\n## Benefits:\n| Benefit | Result |\n|---------|--------|\n| Maintainability | Easy changes |\n| Testability | Easy mocking |\n| Flexibility | Swap implementations |\n\n## Next Steps:\n- Learn Microservices patterns\n- Practice refactoring\n- Apply to real projects\n\nHappy coding! 🏛️"
+        }
+    ]
+}

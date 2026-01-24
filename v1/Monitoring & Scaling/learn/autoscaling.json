@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_autoscaling",
+    "topicId": "autoscaling",
+    "topicTitle": "Auto-Scaling",
+    "description": "Master auto-scaling strategies including horizontal pod autoscaling, cluster autoscaling, and AWS auto-scaling groups",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "autoscaling_1",
+            "type": "content",
+            "title": "Auto-Scaling Overview",
+            "content": "# Auto-Scaling 📈\n\nDynamically adjust capacity.\n\n## What You'll Learn\n- **HPA** - Horizontal Pod Autoscaler\n- **Cluster Autoscaler** - Node scaling\n- **AWS ASG** - EC2 instances\n\n## Why Auto-Scale?\n| Benefit | Impact |\n|---------|--------|\n| Cost | Pay for usage |\n| Performance | Handle load |\n| Availability | Prevent overload |"
+        },
+        {
+            "id": "autoscaling_2",
+            "type": "content",
+            "title": "Scaling Types",
+            "content": "# Scaling Strategies 📐\n\n## Horizontal vs Vertical\n```\nHorizontal: Add more instances\n[VM] → [VM] [VM] [VM]\n\nVertical: Make instance bigger\n[Small] → [Large]\n```\n\n## Comparison\n| Type | Pros | Cons |\n|------|------|------|\n| Horizontal | No downtime | Stateless apps |\n| Vertical | Simple | Downtime, limits |"
+        },
+        {
+            "id": "autoscaling_3",
+            "type": "content",
+            "title": "Kubernetes HPA",
+            "content": "# Horizontal Pod Autoscaler 🎯\n\n## Basic HPA\n```yaml\napiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: web-hpa\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: web\n  minReplicas: 2\n  maxReplicas: 10\n  metrics:\n  - type: Resource\n    resource:\n      name: cpu\n      target:\n        type: Utilization\n        averageUtilization: 70\n```"
+        },
+        {
+            "id": "autoscaling_quiz_1",
+            "type": "quiz",
+            "title": "HPA Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What does HPA scale based on by default?",
+            "quizOptions": [
+                "Memory only",
+                "CPU utilization",
+                "Network traffic",
+                "Disk usage"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "autoscaling_4",
+            "type": "content",
+            "title": "Custom Metrics HPA",
+            "content": "# Custom Metrics 📊\n\n## Scaling on Custom Metrics\n```yaml\nmetrics:\n- type: Pods\n  pods:\n    metric:\n      name: requests_per_second\n    target:\n      type: AverageValue\n      averageValue: 1000\n```\n\n## External Metrics\n```yaml\n- type: External\n  external:\n    metric:\n      name: queue_length\n    target:\n      type: Value\n      value: 100\n```"
+        },
+        {
+            "id": "autoscaling_5",
+            "type": "content",
+            "title": "VPA",
+            "content": "# Vertical Pod Autoscaler 📏\n\nAdjust pod resources.\n\n## VPA Config\n```yaml\napiVersion: autoscaling.k8s.io/v1\nkind: VerticalPodAutoscaler\nmetadata:\n  name: web-vpa\nspec:\n  targetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: web\n  updatePolicy:\n    updateMode: Auto\n```\n\n## Modes\n| Mode | Behavior |\n|------|----------|\n| Off | Recommendations only |\n| Initial | Set at creation |\n| Auto | Restart to resize |"
+        },
+        {
+            "id": "autoscaling_6",
+            "type": "content",
+            "title": "Cluster Autoscaler",
+            "content": "# Cluster Autoscaler 🎛️\n\nScale cluster nodes.\n\n## How It Works\n```\n1. Pod pending (no resources)\n2. CA adds node\n3. Pod scheduled\n\n1. Node underutilized\n2. Pods moved\n3. CA removes node\n```\n\n## Configuration\n```yaml\ncluster-autoscaler:\n  cloudProvider: aws\n  autoDiscovery:\n    clusterName: my-cluster\n  nodeGroups:\n    - minSize: 2\n      maxSize: 20\n```"
+        },
+        {
+            "id": "autoscaling_quiz_2",
+            "type": "quiz",
+            "title": "Cluster Quiz",
+            "content": "Test your cluster knowledge!",
+            "quizQuestion": "When does Cluster Autoscaler add nodes?",
+            "quizOptions": [
+                "On schedule",
+                "When pods are pending",
+                "Every hour",
+                "When CPU is high"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "autoscaling_7",
+            "type": "content",
+            "title": "AWS ASG Basics",
+            "content": "# AWS Auto Scaling Groups 🚀\n\n## Components\n| Part | Purpose |\n|------|--------|\n| Launch Template | Instance config |\n| ASG | Group management |\n| Scaling Policy | When to scale |\n\n## Create ASG\n```bash\naws autoscaling create-auto-scaling-group \\\n  --auto-scaling-group-name my-asg \\\n  --launch-template LaunchTemplateName=my-template \\\n  --min-size 2 \\\n  --max-size 10 \\\n  --desired-capacity 3\n```"
+        },
+        {
+            "id": "autoscaling_8",
+            "type": "content",
+            "title": "AWS Scaling Policies",
+            "content": "# Scaling Policies 📋\n\n## Policy Types\n| Type | Use |\n|------|-----|\n| Target Tracking | Maintain metric |\n| Step | Variable scale |\n| Simple | Basic scale |\n| Scheduled | Time-based |\n\n## Target Tracking\n```bash\naws autoscaling put-scaling-policy \\\n  --policy-name cpu-tracking \\\n  --auto-scaling-group-name my-asg \\\n  --policy-type TargetTrackingScaling \\\n  --target-tracking-configuration \\\n    '{\"TargetValue\": 50.0, \n      \"PredefinedMetricSpecification\": {\n        \"PredefinedMetricType\": \"ASGAverageCPUUtilization\"\n      }}'\n```"
+        },
+        {
+            "id": "autoscaling_9",
+            "type": "content",
+            "title": "Predictive Scaling",
+            "content": "# Predictive Scaling 🔮\n\nScale before demand.\n\n## How It Works\n1. Analyze history\n2. Predict demand\n3. Pre-provision capacity\n\n## Benefits\n- No cold start delays\n- Smooth user experience\n- Works with patterns\n\n## Best For\n- Regular patterns\n- Business hours traffic\n- Scheduled events"
+        },
+        {
+            "id": "autoscaling_quiz_3",
+            "type": "quiz",
+            "title": "Policies Quiz",
+            "content": "Test your policy knowledge!",
+            "quizQuestion": "Which policy type automatically maintains a target metric value?",
+            "quizOptions": [
+                "Simple",
+                "Step",
+                "Target Tracking",
+                "Scheduled"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "autoscaling_10",
+            "type": "content",
+            "title": "KEDA",
+            "content": "# KEDA 🎢\n\nKubernetes Event-driven Autoscaler.\n\n## ScaledObject\n```yaml\napiVersion: keda.sh/v1alpha1\nkind: ScaledObject\nmetadata:\n  name: web-scaler\nspec:\n  scaleTargetRef:\n    name: web\n  minReplicaCount: 0\n  maxReplicaCount: 30\n  triggers:\n  - type: prometheus\n    metadata:\n      query: sum(rate(http_requests_total[2m]))\n      threshold: '100'\n```\n\n## Scalers\n- Prometheus, CloudWatch\n- RabbitMQ, Kafka, SQS\n- Cron, AWS Kinesis"
+        },
+        {
+            "id": "autoscaling_11",
+            "type": "content",
+            "title": "Scale to Zero",
+            "content": "# Scale to Zero 🔄\n\nSave costs with zero replicas.\n\n## When to Use\n- Dev/test environments\n- Queue processors\n- Event-driven apps\n\n## KEDA Zero\n```yaml\nminReplicaCount: 0\nidleReplicaCount: 0\n```\n\n## Knative\n```yaml\napiVersion: serving.knative.dev/v1\nkind: Service\nmetadata:\n  name: hello\nspec:\n  template:\n    metadata:\n      annotations:\n        autoscaling.knative.dev/minScale: \"0\"\n```"
+        },
+        {
+            "id": "autoscaling_12",
+            "type": "content",
+            "title": "Cooldown Periods",
+            "content": "# Cooldown & Stabilization ⏱️\n\n## Why Cooldown?\n- Prevent thrashing\n- Let metrics stabilize\n- Reduce costs\n\n## HPA Stabilization\n```yaml\nbehavior:\n  scaleDown:\n    stabilizationWindowSeconds: 300\n    policies:\n    - type: Percent\n      value: 10\n      periodSeconds: 60\n```\n\n## AWS Cooldown\n```\nDefault: 300 seconds\nScale Out: Shorter (e.g., 60s)\nScale In: Longer (e.g., 300s)\n```"
+        },
+        {
+            "id": "autoscaling_quiz_4",
+            "type": "quiz",
+            "title": "Cooldown Quiz",
+            "content": "Test your cooldown knowledge!",
+            "quizQuestion": "What is the purpose of a cooldown period?",
+            "quizOptions": [
+                "Increase performance",
+                "Prevent rapid scaling thrashing",
+                "Save memory",
+                "Improve security"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "autoscaling_13",
+            "type": "content",
+            "title": "Mixed Instances",
+            "content": "# Mixed Instance Policies 💰\n\nOptimize costs with variety.\n\n## AWS Mixed Instances\n```yaml\nMixedInstancesPolicy:\n  InstancesDistribution:\n    OnDemandBaseCapacity: 2\n    OnDemandPercentageAboveBaseCapacity: 20\n    SpotAllocationStrategy: capacity-optimized\n  LaunchTemplate:\n    Overrides:\n      - InstanceType: t3.large\n      - InstanceType: t3a.large\n      - InstanceType: m5.large\n```\n\n## Savings: Up to 90% with Spot"
+        },
+        {
+            "id": "autoscaling_14",
+            "type": "content",
+            "title": "Health Checks",
+            "content": "# Scaling Health Checks 🏥\n\n## AWS Health Checks\n| Type | Checks |\n|------|--------|\n| EC2 | Instance status |\n| ELB | Load balancer health |\n\n## Kubernetes Probes\n```yaml\nlivenessProbe:\n  httpGet:\n    path: /health\n    port: 8080\n  initialDelaySeconds: 10\nreadinessProbe:\n  httpGet:\n    path: /ready\n    port: 8080\n```\n\n## Grace Period\nTime for instances to start."
+        },
+        {
+            "id": "autoscaling_15",
+            "type": "content",
+            "title": "Metrics Selection",
+            "content": "# Choosing Metrics 📊\n\n## Good Metrics\n| Metric | Good For |\n|--------|----------|\n| CPU | Compute bound |\n| Memory | Memory bound |\n| Requests/sec | Web apps |\n| Queue depth | Workers |\n\n## Avoid\n- Latency alone (spikes)\n- Disk usage (slow)\n\n## Composite\nCombine multiple signals."
+        },
+        {
+            "id": "autoscaling_16",
+            "type": "content",
+            "title": "Database Scaling",
+            "content": "# Database Scaling 🗄️\n\n## Read Replicas\n```\nPrimary → Replica 1\n        → Replica 2\n        → Replica 3\n```\n\n## Aurora Auto Scaling\n```yaml\nAutoScaling:\n  MinCapacity: 2\n  MaxCapacity: 15\n  TargetMetric: RDSReaderAverageCPUUtilization\n  TargetValue: 70\n```\n\n## DynamoDB\n```yaml\nAutoScaling:\n  MinCapacity: 5\n  MaxCapacity: 1000\n  TargetUtilization: 70\n```"
+        },
+        {
+            "id": "autoscaling_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What does KEDA enable that standard HPA doesn't?",
+            "quizOptions": [
+                "CPU scaling",
+                "Memory scaling",
+                "Scale to zero and external metrics",
+                "Faster scaling"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "autoscaling_17",
+            "type": "content",
+            "title": "Testing Scaling",
+            "content": "# Load Testing 🧪\n\n## Tools\n- Locust\n- k6\n- JMeter\n- Gatling\n\n## Test Approach\n1. Baseline load\n2. Ramp up gradually\n3. Observe scaling\n4. Verify scale-down\n\n## Metrics to Watch\n- Replica count\n- Response time\n- Error rate"
+        },
+        {
+            "id": "autoscaling_18",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Configuration\n- ✅ Set appropriate min/max\n- ✅ Use multiple metrics\n- ✅ Test scaling behavior\n- ✅ Monitor closely\n\n## Performance\n- ✅ Keep containers small\n- ✅ Fast startup time\n- ✅ Proper health checks\n\n## Cost\n- ✅ Use Spot/preemptible\n- ✅ Right-size instances\n- ✅ Scale down aggressively"
+        },
+        {
+            "id": "autoscaling_19",
+            "type": "content",
+            "title": "Troubleshooting",
+            "content": "# Troubleshooting 🔧\n\n## Common Issues\n| Issue | Solution |\n|-------|----------|\n| Not scaling | Check metrics |\n| Too slow | Reduce cooldown |\n| Thrashing | Increase stability |\n| Pending pods | Check cluster limits |\n\n## Debug HPA\n```bash\nkubectl describe hpa web-hpa\nkubectl get hpa -w\n```"
+        },
+        {
+            "id": "autoscaling_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Kubernetes\n- ✅ HPA for pods\n- ✅ VPA for resources\n- ✅ Cluster Autoscaler for nodes\n- ✅ KEDA for events\n\n### AWS\n- ✅ ASG with policies\n- ✅ Target tracking\n- ✅ Mixed instances\n\n### Best Practices\n- ✅ Test scaling behavior\n- ✅ Use appropriate cooldowns\n\nHappy scaling! 📈"
+        }
+    ]
+}

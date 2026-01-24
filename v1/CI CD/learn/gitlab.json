@@ -1,0 +1,167 @@
+{
+    "id": "learn_cicd_gitlab",
+    "topicId": "gitlab",
+    "topicTitle": "GitLab CI",
+    "description": "Master GitLab CI/CD including pipelines, runners, environments, Auto DevOps, and advanced CI/CD features",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "gitlab_1",
+            "type": "content",
+            "title": "Welcome to GitLab CI",
+            "content": "# GitLab CI/CD 🦊\n\nBuilt-in DevOps platform with powerful CI/CD.\n\n## What you'll learn:\n- **Pipelines** - YAML configuration\n- **Runners** - Execution environments\n- **Environments** - Deployment tracking\n- **Advanced Features** - DAG, rules, includes\n\n> 💡 **Fun Fact:** GitLab CI was one of the first CI/CD systems to use YAML configuration!\n\n## Why GitLab CI?\n\n| Benefit | Description |\n|---------|-------------|\n| **Integrated** | Part of GitLab platform |\n| **Complete** | Full DevOps lifecycle |\n| **Flexible** | Self-hosted runners |\n| **Auto DevOps** | Zero-config CI/CD |\n| **Security** | Built-in scanning |\n\n## Quick Example\n\n```yaml\n# .gitlab-ci.yml\nstages:\n  - test\n  - deploy\n\ntest:\n  stage: test\n  script:\n    - npm test\n\ndeploy:\n  stage: deploy\n  script:\n    - ./deploy.sh\n  only:\n    - main\n```\n\nLet's master GitLab CI!"
+        },
+        {
+            "id": "gitlab_2",
+            "type": "content",
+            "title": "Pipeline Structure",
+            "content": "# Pipeline Anatomy 📐\n\n```yaml\n# .gitlab-ci.yml\n\n# Global settings\ndefault:\n  image: node:20-alpine\n  before_script:\n    - npm ci\n\n# Define stages\nstages:\n  - build\n  - test\n  - deploy\n\n# Global variables\nvariables:\n  NODE_ENV: production\n\n# Jobs\nbuild:\n  stage: build\n  script:\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 hour\n\ntest:\n  stage: test\n  script:\n    - npm test\n  coverage: '/Coverage: (\\d+\\.\\d+)%/'\n\ndeploy:\n  stage: deploy\n  script:\n    - ./deploy.sh\n  environment:\n    name: production\n    url: https://example.com\n```\n\n## Key Components\n\n| Component | Description |\n|-----------|-------------|\n| `stages` | Pipeline phases |\n| `default` | Global defaults |\n| `variables` | Environment vars |\n| `jobs` | Work units |"
+        },
+        {
+            "id": "gitlab_3",
+            "type": "content",
+            "title": "Jobs Configuration",
+            "content": "# Job Configuration 🔧\n\n```yaml\njob_name:\n  # Stage assignment\n  stage: test\n  \n  # Docker image\n  image: python:3.11\n  \n  # Service containers\n  services:\n    - postgres:15\n    - redis:7\n  \n  # Variables\n  variables:\n    POSTGRES_DB: test\n  \n  # Setup script\n  before_script:\n    - pip install -r requirements.txt\n  \n  # Main script\n  script:\n    - pytest tests/\n  \n  # Cleanup script\n  after_script:\n    - echo \"Cleanup...\"\n  \n  # Build artifacts\n  artifacts:\n    paths:\n      - reports/\n    reports:\n      junit: reports/junit.xml\n    expire_in: 1 week\n  \n  # Cache dependencies\n  cache:\n    key: ${CI_COMMIT_REF_SLUG}\n    paths:\n      - .pip-cache/\n  \n  # Job rules\n  rules:\n    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n  \n  # Allowed failures\n  allow_failure: true\n```"
+        },
+        {
+            "id": "gitlab_4",
+            "type": "content",
+            "title": "Rules and Conditions",
+            "content": "# Rules & Conditions 🎯\n\n## Modern Rules Syntax\n\n```yaml\njob:\n  script: echo \"Hello\"\n  rules:\n    # Run on merge requests\n    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n    \n    # Run on main branch\n    - if: $CI_COMMIT_BRANCH == \"main\"\n    \n    # Run when files change\n    - changes:\n        - src/**\n        - package.json\n    \n    # Never run on schedules\n    - if: $CI_PIPELINE_SOURCE == \"schedule\"\n      when: never\n    \n    # Manual trigger\n    - if: $CI_COMMIT_TAG\n      when: manual\n```\n\n## Legacy Only/Except\n\n```yaml\njob:\n  only:\n    - main\n    - /^release-.*$/  # Regex\n  except:\n    - schedules\n```\n\n## Common Variables\n\n| Variable | Description |\n|----------|-------------|\n| `CI_COMMIT_BRANCH` | Branch name |\n| `CI_COMMIT_TAG` | Tag name |\n| `CI_MERGE_REQUEST_IID` | MR ID |\n| `CI_PIPELINE_SOURCE` | How triggered |\n| `CI_COMMIT_REF_SLUG` | URL-safe ref |"
+        },
+        {
+            "id": "gitlab_5",
+            "type": "quiz",
+            "title": "GitLab CI Quiz",
+            "content": "Test your GitLab CI knowledge!",
+            "quizQuestion": "What file defines a GitLab CI/CD pipeline?",
+            "quizOptions": [
+                ".github/workflows/ci.yml",
+                ".gitlab-ci.yml",
+                "Jenkinsfile",
+                "pipeline.yml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_6",
+            "type": "content",
+            "title": "GitLab Runners",
+            "content": "# GitLab Runners 🏃\n\nExecute CI/CD jobs.\n\n## Runner Types\n\n| Type | Description |\n|------|-------------|\n| **Shared** | GitLab.com managed |\n| **Group** | Shared in group |\n| **Project** | Single project |\n\n## Runner Tags\n\n```yaml\njob:\n  tags:\n    - docker\n    - linux\n    - gpu\n```\n\n## Runner Executors\n\n| Executor | Use Case |\n|----------|----------|\n| `docker` | Containers |\n| `shell` | Direct execution |\n| `kubernetes` | K8s pods |\n| `docker+machine` | Auto-scaling |\n\n## Self-Hosted Runner Setup\n\n```bash\n# Download runner\ncurl -L --output /usr/local/bin/gitlab-runner \\\n  https://gitlab-runner-downloads.s3.amazonaws.com/.../gitlab-runner-linux-amd64\n\n# Register runner\ngitlab-runner register \\\n  --url https://gitlab.com/ \\\n  --registration-token TOKEN \\\n  --executor docker \\\n  --docker-image alpine:latest\n\n# Start runner\ngitlab-runner run\n```"
+        },
+        {
+            "id": "gitlab_7",
+            "type": "content",
+            "title": "Artifacts & Caching",
+            "content": "# Artifacts & Caching 📦\n\n## Artifacts\n\n```yaml\nbuild:\n  script:\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n      - coverage/\n    exclude:\n      - \"**/*.map\"\n    expire_in: 1 week\n    when: on_success  # or always, on_failure\n\ntest:\n  dependencies:\n    - build  # Download build artifacts\n  script:\n    - npm test\n```\n\n## Reports\n\n```yaml\ntest:\n  script:\n    - npm test\n  artifacts:\n    reports:\n      junit: reports/junit.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: coverage/cobertura.xml\n      sast: gl-sast-report.json\n```\n\n## Caching\n\n```yaml\nvariables:\n  PIP_CACHE_DIR: \"$CI_PROJECT_DIR/.pip-cache\"\n\njob:\n  cache:\n    key:\n      files:\n        - requirements.txt\n    paths:\n      - .pip-cache/\n    policy: pull-push  # or pull, push\n```"
+        },
+        {
+            "id": "gitlab_8",
+            "type": "content",
+            "title": "Environments",
+            "content": "# Environments 🌍\n\nTrack deployments and manage releases.\n\n```yaml\ndeploy_staging:\n  stage: deploy\n  script:\n    - ./deploy.sh staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n    on_stop: stop_staging\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"develop\"\n\nstop_staging:\n  stage: deploy\n  script:\n    - ./teardown.sh staging\n  environment:\n    name: staging\n    action: stop\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"develop\"\n      when: manual\n\ndeploy_production:\n  stage: deploy\n  script:\n    - ./deploy.sh production\n  environment:\n    name: production\n    url: https://example.com\n    deployment_tier: production\n  rules:\n    - if: $CI_COMMIT_TAG\n      when: manual\n```\n\n## Environment Features\n\n| Feature | Description |\n|---------|-------------|\n| **Dashboards** | View deployments |\n| **Rollback** | Redeploy previous |\n| **Protected** | Require approval |\n| **Auto-stop** | Time-limited envs |"
+        },
+        {
+            "id": "gitlab_9",
+            "type": "content",
+            "title": "DAG & Needs",
+            "content": "# DAG & Needs 🔗\n\nDefine job dependencies beyond stages.\n\n## Traditional Stages\n\n```\nStage 1: [job-a] [job-b]\n            │\n            ▼\nStage 2: [job-c] [job-d]\n```\n\n## With Needs (DAG)\n\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nbuild-backend:\n  stage: build\n  script: ./build-backend.sh\n\nbuild-frontend:\n  stage: build\n  script: ./build-frontend.sh\n\ntest-backend:\n  stage: test\n  needs: [build-backend]  # Starts as soon as build-backend finishes\n  script: ./test-backend.sh\n\ntest-frontend:\n  stage: test\n  needs: [build-frontend]\n  script: ./test-frontend.sh\n\ndeploy:\n  stage: deploy\n  needs: [test-backend, test-frontend]\n  script: ./deploy.sh\n```\n\n## DAG Visualization\n\n```\nbuild-backend ──► test-backend ──┐\n                                 ├──► deploy\nbuild-frontend ──► test-frontend ┘\n```\n\n## Needs with Artifacts\n\n```yaml\ntest:\n  needs:\n    - job: build\n      artifacts: true  # Download artifacts\n```"
+        },
+        {
+            "id": "gitlab_10",
+            "type": "quiz",
+            "title": "DAG Quiz",
+            "content": "Test your DAG knowledge!",
+            "quizQuestion": "What does the 'needs' keyword allow in GitLab CI?",
+            "quizOptions": [
+                "Define required variables",
+                "Start jobs before their stage, based on specific dependencies",
+                "Require manual approval",
+                "Set resource requirements"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_11",
+            "type": "content",
+            "title": "Includes & Extends",
+            "content": "# Includes & Extends 🔄\n\nReuse configuration across projects.\n\n## Include Files\n\n```yaml\ninclude:\n  # Local file\n  - local: '/templates/test.yml'\n  \n  # File from another project\n  - project: 'group/project'\n    file: '/templates/deploy.yml'\n    ref: main\n  \n  # Remote URL\n  - remote: 'https://example.com/ci-template.yml'\n  \n  # GitLab templates\n  - template: Security/SAST.gitlab-ci.yml\n```\n\n## Extends\n\n```yaml\n.base_test:\n  image: python:3.11\n  before_script:\n    - pip install -r requirements.txt\n  script:\n    - pytest\n\ntest:unit:\n  extends: .base_test\n  variables:\n    TEST_TYPE: unit\n\ntest:integration:\n  extends: .base_test\n  variables:\n    TEST_TYPE: integration\n  services:\n    - postgres:15\n```\n\n## Reference (Anchor)\n\n```yaml\n.common_rules: &common_rules\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n\njob1:\n  <<: *common_rules\n  script: echo \"Job 1\"\n\njob2:\n  <<: *common_rules\n  script: echo \"Job 2\"\n```"
+        },
+        {
+            "id": "gitlab_12",
+            "type": "content",
+            "title": "Variables & Secrets",
+            "content": "# Variables & Secrets 🔐\n\n## Define Variables\n\n```yaml\n# Global variables\nvariables:\n  NODE_ENV: production\n  DATABASE_URL: postgres://localhost/app\n\njob:\n  variables:\n    JOB_VAR: \"job specific\"\n  script:\n    - echo $NODE_ENV\n    - echo $JOB_VAR\n```\n\n## Predefined Variables\n\n| Variable | Description |\n|----------|-------------|\n| `CI_PROJECT_NAME` | Project name |\n| `CI_COMMIT_SHA` | Full commit SHA |\n| `CI_COMMIT_REF_NAME` | Branch/tag name |\n| `CI_PIPELINE_ID` | Pipeline ID |\n| `CI_JOB_TOKEN` | Job auth token |\n\n## Protected Variables\n\nConfigure in Settings > CI/CD > Variables:\n- **Protected**: Only on protected branches\n- **Masked**: Hidden in logs\n- **Expanded**: Variable expansion\n\n## File Variables\n\n```yaml\njob:\n  script:\n    # File variable creates actual file\n    - cat $MY_FILE_VAR\n```\n\n## Dynamic Variables\n\n```yaml\njob:\n  script:\n    - echo \"VERSION=1.0.0\" >> build.env\n  artifacts:\n    reports:\n      dotenv: build.env\n\nnext_job:\n  needs: [job]\n  script:\n    - echo $VERSION  # From previous job\n```"
+        },
+        {
+            "id": "gitlab_13",
+            "type": "content",
+            "title": "Parent-Child Pipelines",
+            "content": "# Parent-Child Pipelines 👨‍👧\n\nDynamic and modular pipeline generation.\n\n## Trigger Child Pipeline\n\n```yaml\n# Parent .gitlab-ci.yml\ntrigger-backend:\n  stage: test\n  trigger:\n    include: backend/.gitlab-ci.yml\n    strategy: depend  # Wait for child\n\ntrigger-frontend:\n  stage: test\n  trigger:\n    include: frontend/.gitlab-ci.yml\n```\n\n## Dynamic Child Pipeline\n\n```yaml\ngenerate-pipeline:\n  stage: build\n  script:\n    - ./generate-ci-config.sh > generated-ci.yml\n  artifacts:\n    paths:\n      - generated-ci.yml\n\nrun-dynamic:\n  stage: test\n  trigger:\n    include:\n      - artifact: generated-ci.yml\n        job: generate-pipeline\n```\n\n## Multi-Project Pipelines\n\n```yaml\ntrigger-deploy:\n  stage: deploy\n  trigger:\n    project: group/deploy-project\n    branch: main\n    strategy: depend\n```\n\n## Benefits\n\n- ✅ Modular configuration\n- ✅ Parallel sub-pipelines\n- ✅ Dynamic pipeline generation\n- ✅ Cross-project triggers"
+        },
+        {
+            "id": "gitlab_14",
+            "type": "content",
+            "title": "Auto DevOps",
+            "content": "# Auto DevOps 🤖\n\nAutomatic CI/CD with zero configuration.\n\n## Enable Auto DevOps\n\n1. Settings > CI/CD > Auto DevOps\n2. Enable Auto DevOps\n3. Configure Kubernetes cluster\n\n## Auto DevOps Stages\n\n```\n┌─────────────────────────────────────────────────┐\n│              AUTO DEVOPS PIPELINE                │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  Build  → Test → Code Quality → Security        │\n│            │                        │            │\n│            ▼                        ▼            │\n│         Container              SAST, DAST       │\n│         Scanning               Dependency       │\n│            │                    Scanning        │\n│            ▼                                     │\n│   Review → Staging → Production                 │\n│   (MR)     (Auto)    (Manual)                   │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Customize Auto DevOps\n\n```yaml\ninclude:\n  - template: Auto-DevOps.gitlab-ci.yml\n\nvariables:\n  AUTO_DEVOPS_BUILD_IMAGE_EXTRA_ARGS: \"--build-arg NODE_ENV=production\"\n  POSTGRES_ENABLED: \"true\"\n  TEST_DISABLED: \"false\"\n```\n\n## Auto DevOps Features\n\n| Feature | Description |\n|---------|-------------|\n| **Auto Build** | Buildpacks/Dockerfile |\n| **Auto Test** | Language detection |\n| **Auto Review** | Per-MR environments |\n| **Auto Deploy** | Kubernetes |"
+        },
+        {
+            "id": "gitlab_15",
+            "type": "quiz",
+            "title": "Parent-Child Quiz",
+            "content": "Test your pipeline knowledge!",
+            "quizQuestion": "What is a parent-child pipeline in GitLab CI?",
+            "quizOptions": [
+                "A pipeline that runs before another",
+                "A pipeline that triggers and depends on sub-pipelines",
+                "A pipeline for parent directories",
+                "A pipeline that inherits from another"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_16",
+            "type": "content",
+            "title": "Security Scanning",
+            "content": "# Security Scanning 🔒\n\nBuilt-in security testing.\n\n## Enable Security Scans\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n  - template: Security/Dependency-Scanning.gitlab-ci.yml\n  - template: Security/Secret-Detection.gitlab-ci.yml\n  - template: Security/Container-Scanning.gitlab-ci.yml\n  - template: Security/DAST.gitlab-ci.yml\n```\n\n## Security Scan Types\n\n| Scan | Detects |\n|------|--------|\n| **SAST** | Code vulnerabilities |\n| **Dependency** | Package vulnerabilities |\n| **Secret** | Hardcoded secrets |\n| **Container** | Image vulnerabilities |\n| **DAST** | Runtime vulnerabilities |\n\n## Custom SAST Config\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n\nvariables:\n  SAST_EXCLUDED_PATHS: \"spec, test, tests\"\n  SEARCH_MAX_DEPTH: 10\n\nsast:\n  variables:\n    SAST_BANDIT_EXCLUDED_PATHS: \"*/test/**\"\n```\n\n## Security Dashboard\n\n- View vulnerabilities per project\n- Track remediation status\n- Set severity thresholds\n- Block MRs with critical issues"
+        },
+        {
+            "id": "gitlab_17",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# GitLab CI Best Practices ✅\n\n## Performance\n\n- ✅ **Use cache wisely** - Key by lockfiles\n- ✅ **Parallel jobs** - Use DAG and needs\n- ✅ **Small images** - Alpine-based\n- ✅ **Artifacts expire** - Don't store forever\n\n## Organization\n\n- ✅ **Use includes** - Shared templates\n- ✅ **Extend jobs** - DRY principle\n- ✅ **Hidden jobs** - Prefix with `.`\n- ✅ **Consistent naming** - Clear job names\n\n## Security\n\n- ✅ **Protected variables** - For secrets\n- ✅ **Masked variables** - Hide in logs\n- ✅ **Security scans** - Enable all\n- ✅ **Protected branches** - Require reviews\n\n## Pipeline Design\n\n```yaml\n# Good structure\nstages:\n  - lint       # Fast checks first\n  - test       # Unit tests\n  - build      # Create artifacts\n  - scan       # Security\n  - deploy     # Environments\n```\n\n## Fail Fast\n\n```yaml\nlint:\n  stage: lint\n  script:\n    - npm run lint\n  # Run first, fail early\n```"
+        },
+        {
+            "id": "gitlab_18",
+            "type": "content",
+            "title": "Complete Pipeline Example",
+            "content": "# Complete Pipeline 🚀\n\n```yaml\nstages:\n  - lint\n  - test\n  - build\n  - deploy\n\ndefault:\n  image: node:20-alpine\n\nvariables:\n  npm_config_cache: \"$CI_PROJECT_DIR/.npm\"\n\n.setup: &setup\n  before_script:\n    - npm ci --cache .npm\n  cache:\n    key: ${CI_COMMIT_REF_SLUG}\n    paths:\n      - .npm/\n\nlint:\n  <<: *setup\n  stage: lint\n  script:\n    - npm run lint\n\ntest:\n  <<: *setup\n  stage: test\n  script:\n    - npm test\n  coverage: '/Coverage: (\\d+)%/'\n  artifacts:\n    reports:\n      junit: junit.xml\n\nbuild:\n  <<: *setup\n  stage: build\n  script:\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n\ndeploy:staging:\n  stage: deploy\n  script:\n    - ./deploy.sh staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n```"
+        },
+        {
+            "id": "gitlab_19",
+            "type": "content",
+            "title": "Troubleshooting",
+            "content": "# Troubleshooting 🔧\n\n## Common Issues\n\n### Pipeline Stuck\n```yaml\n# Check runner availability\n# Verify tags match\njob:\n  tags:\n    - docker  # Runner must have this tag\n```\n\n### Artifacts Not Found\n```yaml\n# Ensure dependencies are correct\ntest:\n  needs:\n    - job: build\n      artifacts: true\n```\n\n### Cache Not Working\n```yaml\n# Check cache key\ncache:\n  key:\n    files:\n      - package-lock.json  # Must exist\n```\n\n## Debug Mode\n\n```yaml\nvariables:\n  CI_DEBUG_TRACE: \"true\"  # Verbose logging\n```\n\n## Lint Pipeline\n\n```bash\n# Validate .gitlab-ci.yml\ngitlab-ci-lint .gitlab-ci.yml\n\n# Or use CI/CD > Editor in GitLab UI\n```\n\n## Useful CI Variables\n\n```yaml\nscript:\n  - echo $CI_JOB_NAME\n  - echo $CI_PIPELINE_URL\n  - echo $CI_JOB_STATUS\n```"
+        },
+        {
+            "id": "gitlab_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall GitLab CI knowledge!",
+            "quizQuestion": "What template enables automatic security scanning in GitLab CI?",
+            "quizOptions": [
+                "Auto-DevOps.gitlab-ci.yml",
+                "Security/SAST.gitlab-ci.yml",
+                "Scan.gitlab-ci.yml",
+                "Security/All.gitlab-ci.yml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered GitLab CI!\n\n## Key Takeaways\n\n### Basics 📐\n- ✅ `.gitlab-ci.yml` configuration\n- ✅ Stages, jobs, scripts\n- ✅ Runners and executors\n\n### Advanced ⚡\n- ✅ DAG with needs\n- ✅ Includes and extends\n- ✅ Parent-child pipelines\n- ✅ Environments\n\n### Security 🔒\n- ✅ SAST, DAST, Dependency\n- ✅ Container scanning\n- ✅ Secret detection\n\n### Best Practices ✅\n- ✅ Cache dependencies\n- ✅ Use includes\n- ✅ Fail fast\n- ✅ Protect secrets\n\n## Quick Reference\n\n```yaml\nstages: [test, build, deploy]\n\njob:\n  stage: test\n  script: npm test\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n```\n\n> 🦊 **Remember:** GitLab CI = Complete DevOps platform with powerful CI/CD!\n\nHappy shipping! 🚀"
+        }
+    ]
+}

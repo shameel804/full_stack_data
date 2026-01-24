@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_kubernetes",
+    "topicId": "kubernetes",
+    "topicTitle": "Kubernetes Basics",
+    "description": "Master Kubernetes fundamentals including pods, deployments, services, and the core concepts of container orchestration",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "kubernetes_1",
+            "type": "content",
+            "title": "Welcome to Kubernetes",
+            "content": "# Kubernetes (K8s) ☸️\n\nThe industry-standard **container orchestration** platform.\n\n## What you'll learn:\n- **Pods** - The smallest deployable unit\n- **Deployments** - Managing application replicas\n- **Services** - Networking and load balancing\n- **Core Concepts** - Architecture and components\n\n> 💡 **Fun Fact:** Kubernetes means \"helmsman\" in Greek, and was developed by Google based on their internal system called Borg!\n\n## Why Kubernetes?\n\n| Problem | K8s Solution |\n|---------|--------------|\n| Manual container management | Automated orchestration |\n| Service discovery | Built-in DNS and load balancing |\n| Scaling | Auto-scaling based on metrics |\n| Updates | Rolling updates, rollbacks |\n| Self-healing | Automatic restarts and rescheduling |\n\n## Docker vs Kubernetes\n\n```\nDocker:     Run containers on one machine\nKubernetes: Run containers across clusters\n```\n\nLet's explore container orchestration!"
+        },
+        {
+            "id": "kubernetes_2",
+            "type": "content",
+            "title": "Kubernetes Architecture",
+            "content": "# K8s Architecture 🏗️\n\n## Cluster Components\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    CONTROL PLANE                             │\n├─────────────────────────────────────────────────────────────┤\n│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │\n│  │ API Server  │  │  Scheduler  │  │ Controller Manager  │  │\n│  └─────────────┘  └─────────────┘  └─────────────────────┘  │\n│                    ┌─────────────┐                          │\n│                    │    etcd     │                          │\n│                    └─────────────┘                          │\n└─────────────────────────────────────────────────────────────┘\n                              │\n     ┌────────────────────────┼────────────────────────┐\n     │                        │                        │\n     ▼                        ▼                        ▼\n┌─────────────┐        ┌─────────────┐        ┌─────────────┐\n│   Node 1    │        │   Node 2    │        │   Node 3    │\n├─────────────┤        ├─────────────┤        ├─────────────┤\n│  kubelet    │        │  kubelet    │        │  kubelet    │\n│  kube-proxy │        │  kube-proxy │        │  kube-proxy │\n│  Container  │        │  Container  │        │  Container  │\n│  Runtime    │        │  Runtime    │        │  Runtime    │\n├─────────────┤        ├─────────────┤        ├─────────────┤\n│ Pod Pod Pod │        │  Pod  Pod   │        │ Pod Pod Pod │\n└─────────────┘        └─────────────┘        └─────────────┘\n```\n\n## Control Plane Components\n\n| Component | Function |\n|-----------|----------|\n| **API Server** | Frontend for K8s |\n| **etcd** | Key-value store |\n| **Scheduler** | Assigns pods to nodes |\n| **Controller** | Maintains desired state |"
+        },
+        {
+            "id": "kubernetes_3",
+            "type": "content",
+            "title": "Getting Started",
+            "content": "# Getting Started 🚀\n\n## Local Development Options\n\n| Tool | Description |\n|------|-------------|\n| **minikube** | Local K8s cluster |\n| **kind** | K8s in Docker |\n| **Docker Desktop** | Built-in K8s |\n| **k3s** | Lightweight K8s |\n\n## Installing kubectl\n\n```bash\n# macOS\nbrew install kubectl\n\n# Linux\ncurl -LO \"https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl\"\nchmod +x kubectl\nsudo mv kubectl /usr/local/bin/\n\n# Verify\nkubectl version --client\n```\n\n## Starting minikube\n\n```bash\n# Install minikube\nbrew install minikube\n\n# Start cluster\nminikube start\n\n# Check status\nminikube status\n\n# Access dashboard\nminikube dashboard\n```\n\n## Basic kubectl Commands\n\n```bash\n# View cluster info\nkubectl cluster-info\n\n# List nodes\nkubectl get nodes\n\n# View all resources\nkubectl get all\n```"
+        },
+        {
+            "id": "kubernetes_4",
+            "type": "content",
+            "title": "Understanding Pods",
+            "content": "# Pods 🫛\n\nThe **smallest deployable unit** in Kubernetes.\n\n## What is a Pod?\n\n```\n┌─────────────────────────────────────────────────┐\n│                     POD                          │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌─────────────┐    ┌─────────────┐             │\n│  │ Container 1 │    │ Container 2 │             │\n│  │   (nginx)   │    │  (sidecar)  │             │\n│  └─────────────┘    └─────────────┘             │\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │    Shared Network (localhost)            │    │\n│  │    Shared Storage (volumes)              │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n│  IP: 10.244.0.5                                 │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Pod Characteristics\n\n| Feature | Description |\n|---------|-------------|\n| **Shared Network** | Containers share IP |\n| **Shared Storage** | Via volumes |\n| **Co-scheduled** | Run on same node |\n| **Ephemeral** | Not durable, replaceable |\n\n## Single Container Pod (Common)\n\n```yaml\napiVersion: v1\nkind: Pod\nmetadata:\n  name: nginx-pod\nspec:\n  containers:\n    - name: nginx\n      image: nginx:latest\n```"
+        },
+        {
+            "id": "kubernetes_5",
+            "type": "quiz",
+            "title": "Pods Quiz",
+            "content": "Test your Pod knowledge!",
+            "quizQuestion": "What is the smallest deployable unit in Kubernetes?",
+            "quizOptions": [
+                "Container",
+                "Node",
+                "Pod",
+                "Deployment"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "kubernetes_6",
+            "type": "content",
+            "title": "Creating Pods",
+            "content": "# Creating Pods 📝\n\n## Imperative (Quick Testing)\n\n```bash\n# Run a pod\nkubectl run nginx --image=nginx\n\n# Run with port\nkubectl run nginx --image=nginx --port=80\n\n# Run and expose\nkubectl run nginx --image=nginx --port=80 --expose\n```\n\n## Declarative (Recommended)\n\n```yaml\n# pod.yaml\napiVersion: v1\nkind: Pod\nmetadata:\n  name: nginx-pod\n  labels:\n    app: nginx\n    env: production\nspec:\n  containers:\n    - name: nginx\n      image: nginx:1.25\n      ports:\n        - containerPort: 80\n      resources:\n        requests:\n          memory: \"64Mi\"\n          cpu: \"250m\"\n        limits:\n          memory: \"128Mi\"\n          cpu: \"500m\"\n```\n\n```bash\n# Apply the manifest\nkubectl apply -f pod.yaml\n\n# View pod\nkubectl get pods\n\n# Describe pod\nkubectl describe pod nginx-pod\n\n# Delete pod\nkubectl delete -f pod.yaml\n```"
+        },
+        {
+            "id": "kubernetes_7",
+            "type": "content",
+            "title": "Pod Operations",
+            "content": "# Working with Pods 🔧\n\n## Viewing Pods\n\n```bash\n# List pods\nkubectl get pods\nkubectl get pods -o wide  # More details\n\n# All namespaces\nkubectl get pods -A\n\n# Watch for changes\nkubectl get pods -w\n\n# Custom output\nkubectl get pods -o json\nkubectl get pods -o yaml\n```\n\n## Accessing Pods\n\n```bash\n# Execute command\nkubectl exec nginx-pod -- ls /\n\n# Interactive shell\nkubectl exec -it nginx-pod -- bash\n\n# Port forward\nkubectl port-forward nginx-pod 8080:80\n```\n\n## Logs\n\n```bash\n# View logs\nkubectl logs nginx-pod\n\n# Follow logs\nkubectl logs -f nginx-pod\n\n# Previous container logs\nkubectl logs nginx-pod --previous\n\n# Multi-container pod\nkubectl logs nginx-pod -c sidecar\n```\n\n## Debugging\n\n```bash\n# Describe pod\nkubectl describe pod nginx-pod\n\n# Get events\nkubectl get events --sort-by=.metadata.creationTimestamp\n\n# Debug with ephemeral container\nkubectl debug nginx-pod -it --image=busybox\n```"
+        },
+        {
+            "id": "kubernetes_8",
+            "type": "content",
+            "title": "Deployments",
+            "content": "# Deployments 🚀\n\nManage **replica sets** of pods with declarative updates.\n\n## Why Deployments?\n\nPods alone are:\n- ❌ Not self-healing\n- ❌ Not scalable\n- ❌ No rolling updates\n\nDeployments provide:\n- ✅ Desired replica count\n- ✅ Rolling updates\n- ✅ Rollback capability\n- ✅ Self-healing\n\n## Deployment Architecture\n\n```\n┌─────────────────────────────────────────────────┐\n│                  DEPLOYMENT                      │\n│           replicas: 3                            │\n│           strategy: RollingUpdate                │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │            REPLICASET                    │    │\n│  ├─────────────────────────────────────────┤    │\n│  │                                          │    │\n│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐    │    │\n│  │  │  Pod 1  │ │  Pod 2  │ │  Pod 3  │    │    │\n│  │  └─────────┘ └─────────┘ └─────────┘    │    │\n│  │                                          │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n> 💡 **Best Practice:** Never create pods directly - use Deployments!"
+        },
+        {
+            "id": "kubernetes_9",
+            "type": "content",
+            "title": "Creating Deployments",
+            "content": "# Deployment Manifest 📄\n\n```yaml\n# deployment.yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\n  labels:\n    app: nginx\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n        - name: nginx\n          image: nginx:1.25\n          ports:\n            - containerPort: 80\n          resources:\n            requests:\n              cpu: \"100m\"\n              memory: \"128Mi\"\n            limits:\n              cpu: \"200m\"\n              memory: \"256Mi\"\n          readinessProbe:\n            httpGet:\n              path: /\n              port: 80\n            initialDelaySeconds: 5\n            periodSeconds: 10\n          livenessProbe:\n            httpGet:\n              path: /\n              port: 80\n            initialDelaySeconds: 15\n            periodSeconds: 20\n```\n\n```bash\n# Apply deployment\nkubectl apply -f deployment.yaml\n\n# View deployments\nkubectl get deployments\n```"
+        },
+        {
+            "id": "kubernetes_10",
+            "type": "content",
+            "title": "Scaling and Updates",
+            "content": "# Scaling & Updates 📈\n\n## Scaling\n\n```bash\n# Scale manually\nkubectl scale deployment nginx --replicas=5\n\n# Or edit the deployment\nkubectl edit deployment nginx\n\n# View scaling\nkubectl get pods -w\n```\n\n## Rolling Updates\n\n```bash\n# Update image\nkubectl set image deployment/nginx nginx=nginx:1.26\n\n# View rollout status\nkubectl rollout status deployment/nginx\n\n# View rollout history\nkubectl rollout history deployment/nginx\n```\n\n## Rollback\n\n```bash\n# Undo last rollout\nkubectl rollout undo deployment/nginx\n\n# Rollback to specific revision\nkubectl rollout undo deployment/nginx --to-revision=2\n```\n\n## Update Strategy\n\n```yaml\nspec:\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxUnavailable: 1  # Max pods unavailable\n      maxSurge: 1        # Max extra pods\n```\n\n```\nRolling Update Flow:\nPod1(v1) Pod2(v1) Pod3(v1)\nPod1(v2) Pod2(v1) Pod3(v1)  # Start new\nPod1(v2) Pod2(v2) Pod3(v1)  # Continue\nPod1(v2) Pod2(v2) Pod3(v2)  # Complete\n```"
+        },
+        {
+            "id": "kubernetes_11",
+            "type": "quiz",
+            "title": "Deployments Quiz",
+            "content": "Test your Deployment knowledge!",
+            "quizQuestion": "What does 'kubectl rollout undo deployment/nginx' do?",
+            "quizOptions": [
+                "Deletes the deployment",
+                "Scales the deployment to zero",
+                "Reverts to the previous deployment version",
+                "Pauses the deployment"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "kubernetes_12",
+            "type": "content",
+            "title": "Services",
+            "content": "# Services 🔗\n\nExpose applications running in pods.\n\n## Why Services?\n\n- Pods get new IPs when recreated\n- Need stable endpoint for clients\n- Load balancing across pods\n\n## Service Types\n\n| Type | Description |\n|------|-------------|\n| **ClusterIP** | Internal only (default) |\n| **NodePort** | Expose on node port |\n| **LoadBalancer** | Cloud load balancer |\n| **ExternalName** | DNS CNAME redirect |\n\n## Service Architecture\n\n```\n┌─────────────────────────────────────────────────┐\n│                   SERVICE                        │\n│              nginx-service                       │\n│           ClusterIP: 10.96.0.1                  │\n│              Port: 80                            │\n├─────────────────────────────────────────────────┤\n│           selector: app=nginx                    │\n└─────────────────────────────────────────────────┘\n                      │\n         ┌────────────┼────────────┐\n         ▼            ▼            ▼\n    ┌─────────┐  ┌─────────┐  ┌─────────┐\n    │ Pod 1   │  │ Pod 2   │  │ Pod 3   │\n    │app=nginx│  │app=nginx│  │app=nginx│\n    │10.244.1.5│ │10.244.2.3│ │10.244.3.7│\n    └─────────┘  └─────────┘  └─────────┘\n```"
+        },
+        {
+            "id": "kubernetes_13",
+            "type": "content",
+            "title": "Creating Services",
+            "content": "# Service Manifests 📄\n\n## ClusterIP (Default)\n\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: nginx-service\nspec:\n  type: ClusterIP\n  selector:\n    app: nginx\n  ports:\n    - port: 80        # Service port\n      targetPort: 80  # Container port\n```\n\n## NodePort\n\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: nginx-nodeport\nspec:\n  type: NodePort\n  selector:\n    app: nginx\n  ports:\n    - port: 80\n      targetPort: 80\n      nodePort: 30080  # 30000-32767\n```\n\n## LoadBalancer\n\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: nginx-lb\nspec:\n  type: LoadBalancer\n  selector:\n    app: nginx\n  ports:\n    - port: 80\n      targetPort: 80\n```\n\n## Quick Commands\n\n```bash\n# Expose deployment\nkubectl expose deployment nginx --port=80 --type=LoadBalancer\n\n# Get services\nkubectl get services\n\n# Describe service\nkubectl describe service nginx-service\n```"
+        },
+        {
+            "id": "kubernetes_14",
+            "type": "content",
+            "title": "ConfigMaps and Secrets",
+            "content": "# Configuration 🔧\n\n## ConfigMaps\n\n```yaml\napiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  DATABASE_URL: \"postgres://db:5432/app\"\n  LOG_LEVEL: \"info\"\n  config.json: |\n    {\n      \"feature\": true,\n      \"maxItems\": 100\n    }\n```\n\n## Using ConfigMaps\n\n```yaml\nspec:\n  containers:\n    - name: app\n      image: myapp\n      # As environment variables\n      envFrom:\n        - configMapRef:\n            name: app-config\n      # Or individual values\n      env:\n        - name: DB_URL\n          valueFrom:\n            configMapKeyRef:\n              name: app-config\n              key: DATABASE_URL\n      # As volume\n      volumeMounts:\n        - name: config\n          mountPath: /app/config\n  volumes:\n    - name: config\n      configMap:\n        name: app-config\n```\n\n## Secrets\n\n```yaml\napiVersion: v1\nkind: Secret\nmetadata:\n  name: db-secret\ntype: Opaque\ndata:\n  password: cGFzc3dvcmQxMjM=  # base64 encoded\n```\n\n```bash\n# Create secret imperatively\nkubectl create secret generic db-secret --from-literal=password=secret123\n```"
+        },
+        {
+            "id": "kubernetes_15",
+            "type": "quiz",
+            "title": "Services Quiz",
+            "content": "Test your Services knowledge!",
+            "quizQuestion": "Which Service type creates an external cloud load balancer?",
+            "quizOptions": [
+                "ClusterIP",
+                "NodePort",
+                "LoadBalancer",
+                "ExternalName"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "kubernetes_16",
+            "type": "content",
+            "title": "Namespaces",
+            "content": "# Namespaces 📂\n\nVirtual clusters within a physical cluster.\n\n## Default Namespaces\n\n| Namespace | Purpose |\n|-----------|--------|\n| `default` | Default for user resources |\n| `kube-system` | System components |\n| `kube-public` | Publicly accessible |\n| `kube-node-lease` | Node heartbeats |\n\n## Working with Namespaces\n\n```bash\n# List namespaces\nkubectl get namespaces\n\n# Create namespace\nkubectl create namespace development\n\n# Get resources in namespace\nkubectl get pods -n development\n\n# Set default namespace\nkubectl config set-context --current --namespace=development\n```\n\n## Namespace in Manifests\n\n```yaml\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: production\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx\n  namespace: production  # Deploy to specific namespace\nspec:\n  # ...\n```\n\n## Cross-Namespace Communication\n\n```\nService DNS: <service>.<namespace>.svc.cluster.local\n\nExamples:\nnginx.default.svc.cluster.local\ndb.production.svc.cluster.local\n```"
+        },
+        {
+            "id": "kubernetes_17",
+            "type": "content",
+            "title": "Labels and Selectors",
+            "content": "# Labels & Selectors 🏷️\n\n## Labels\n\nKey-value pairs attached to objects.\n\n```yaml\nmetadata:\n  name: nginx-pod\n  labels:\n    app: nginx\n    env: production\n    tier: frontend\n    version: v1.0.0\n```\n\n## Selectors\n\n### Equality-Based\n\n```yaml\nselector:\n  matchLabels:\n    app: nginx\n    env: production\n```\n\n### Set-Based\n\n```yaml\nselector:\n  matchExpressions:\n    - key: env\n      operator: In\n      values: [production, staging]\n    - key: tier\n      operator: NotIn\n      values: [backend]\n```\n\n## Using Labels\n\n```bash\n# Filter by label\nkubectl get pods -l app=nginx\nkubectl get pods -l 'env in (prod,staging)'\nkubectl get pods -l app=nginx,env=production\n\n# Add label\nkubectl label pods nginx-pod team=frontend\n\n# Remove label\nkubectl label pods nginx-pod team-\n\n# Update label\nkubectl label pods nginx-pod env=staging --overwrite\n```\n\n## Service Selection\n\n```yaml\n# Service selects pods with matching labels\nspec:\n  selector:\n    app: nginx\n    tier: frontend\n```"
+        },
+        {
+            "id": "kubernetes_18",
+            "type": "content",
+            "title": "Full Application Example",
+            "content": "# Complete Application 🌐\n\n```yaml\n# namespace.yaml\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: myapp\n---\n# configmap.yaml\napiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\n  namespace: myapp\ndata:\n  NODE_ENV: production\n---\n# deployment.yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web\n  namespace: myapp\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: web\n  template:\n    metadata:\n      labels:\n        app: web\n    spec:\n      containers:\n        - name: web\n          image: myapp:1.0\n          ports:\n            - containerPort: 3000\n          envFrom:\n            - configMapRef:\n                name: app-config\n---\n# service.yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: web\n  namespace: myapp\nspec:\n  type: LoadBalancer\n  selector:\n    app: web\n  ports:\n    - port: 80\n      targetPort: 3000\n```\n\n```bash\nkubectl apply -f .\n```"
+        },
+        {
+            "id": "kubernetes_19",
+            "type": "content",
+            "title": "kubectl Cheat Sheet",
+            "content": "# kubectl Quick Reference 📋\n\n## Cluster Info\n\n```bash\nkubectl cluster-info\nkubectl get nodes\nkubectl get all\n```\n\n## Pods\n\n```bash\nkubectl get pods\nkubectl describe pod <name>\nkubectl logs <pod>\nkubectl exec -it <pod> -- bash\nkubectl delete pod <name>\n```\n\n## Deployments\n\n```bash\nkubectl get deployments\nkubectl create deployment <name> --image=<img>\nkubectl scale deployment <name> --replicas=5\nkubectl set image deployment/<name> <container>=<img>\nkubectl rollout status deployment/<name>\nkubectl rollout undo deployment/<name>\n```\n\n## Services\n\n```bash\nkubectl get services\nkubectl expose deployment <name> --port=80\nkubectl delete service <name>\n```\n\n## General\n\n```bash\nkubectl apply -f <file.yaml>\nkubectl delete -f <file.yaml>\nkubectl get all -n <namespace>\nkubectl config get-contexts\nkubectl config use-context <name>\n```\n\n## Debugging\n\n```bash\nkubectl describe <resource> <name>\nkubectl logs <pod> -f\nkubectl get events\nkubectl top pods\n```"
+        },
+        {
+            "id": "kubernetes_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall Kubernetes knowledge!",
+            "quizQuestion": "What is the purpose of a ReplicaSet in Kubernetes?",
+            "quizOptions": [
+                "To provide persistent storage",
+                "To expose pods to external traffic",
+                "To maintain a stable set of replica pods running at any given time",
+                "To manage configuration data"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "kubernetes_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Kubernetes Basics!\n\n## Key Takeaways\n\n### Pods 🫛\n- ✅ Smallest deployable unit\n- ✅ One or more containers\n- ✅ Shared network and storage\n\n### Deployments 🚀\n- ✅ Manages replica sets\n- ✅ Rolling updates and rollbacks\n- ✅ Self-healing capabilities\n\n### Services 🔗\n- ✅ Stable endpoint for pods\n- ✅ Load balancing\n- ✅ ClusterIP, NodePort, LoadBalancer\n\n### Core Concepts ☸️\n- ✅ Labels and selectors\n- ✅ Namespaces for isolation\n- ✅ ConfigMaps and Secrets\n\n## Quick Commands\n\n```bash\nkubectl get <resource>           # List\nkubectl describe <resource>      # Details\nkubectl apply -f <file>          # Apply\nkubectl delete -f <file>         # Delete\nkubectl logs <pod>               # Logs\nkubectl exec -it <pod> -- bash   # Shell\n```\n\n> ☸️ **Remember:** K8s makes containers production-ready!\n\nHappy orchestrating! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "id": "learn_deployment_micro",
+    "topicId": "deployment",
+    "topicTitle": "Deployment",
+    "description": "Master microservices deployment with Docker, Kubernetes, and service mesh patterns",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "dep_1",
+            "type": "content",
+            "title": "Microservices Deployment",
+            "content": "# Microservices Deployment 🚀\n\nDeploy and orchestrate services.\n\n## What You'll Learn:\n- **Containers** - Docker packaging\n- **Orchestration** - Kubernetes\n- **Service Mesh** - Istio\n- **CI/CD** - Automated pipelines\n- **Strategies** - Blue-green, canary\n\n> 💡 Deploy independently, many times a day!"
+        },
+        {
+            "id": "dep_2",
+            "type": "content",
+            "title": "Docker Containers",
+            "content": "# Docker Containers 🐳\n\nPackage services consistently.\n\n## Dockerfile:\n```dockerfile\nFROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --only=production\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]\n```\n\n## Build & Run:\n```bash\ndocker build -t user-service:1.0 .\ndocker run -p 3000:3000 user-service:1.0\n```\n\n## Benefits:\n- Consistent environments\n- Isolation\n- Portability\n- Versioned images"
+        },
+        {
+            "id": "dep_3",
+            "type": "content",
+            "title": "Kubernetes Basics",
+            "content": "# Kubernetes ☸️\n\nContainer orchestration platform.\n\n## Key Concepts:\n```\nCluster\n├── Node (machine)\n│   └── Pod (container group)\n│       └── Container (service)\n│\n├── Deployment (manage pods)\n├── Service (networking)\n└── ConfigMap/Secret (config)\n```\n\n## Deployment:\n```yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: user-service\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: user\n  template:\n    spec:\n      containers:\n        - name: user\n          image: user-service:1.0\n          ports:\n            - containerPort: 3000\n```"
+        },
+        {
+            "id": "dep_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your deployment knowledge!",
+            "quizQuestion": "What is a Kubernetes Pod?",
+            "quizOptions": [
+                "Virtual machine",
+                "Database",
+                "Smallest deployable unit (container group)",
+                "Load balancer"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "dep_4",
+            "type": "content",
+            "title": "Kubernetes Services",
+            "content": "# Kubernetes Services 🔗\n\nNetworking for pods.\n\n## Service Types:\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: user-service\nspec:\n  type: ClusterIP  # Internal\n  selector:\n    app: user\n  ports:\n    - port: 80\n      targetPort: 3000\n```\n\n## Types:\n| Type | Scope |\n|------|-------|\n| ClusterIP | Internal only |\n| NodePort | External on node port |\n| LoadBalancer | External with LB |\n| Ingress | HTTP routing |"
+        },
+        {
+            "id": "dep_5",
+            "type": "content",
+            "title": "Service Mesh",
+            "content": "# Service Mesh 🕸️\n\nDedicated infrastructure layer.\n\n## Architecture:\n```\n┌──────────────────────┐\n│ Service A │ Sidecar  │\n└─────┬─────┴────┬─────┘\n      │          │\n      └────┬─────┘\n      Control Plane\n      └────┬─────┘\n      │          │\n┌─────┴─────┬────┴─────┐\n│ Service B │ Sidecar  │\n└──────────────────────┘\n```\n\n## Features:\n- mTLS encryption\n- Traffic management\n- Observability\n- Retry/timeout\n\n## Options:\n- Istio\n- Linkerd\n- Consul Connect"
+        },
+        {
+            "id": "dep_6",
+            "type": "content",
+            "title": "Deployment Strategies",
+            "content": "# Deployment Strategies 📋\n\n## Blue-Green:\n```\nBlue (current) ──► Switch ──► Green (new)\nAll traffic moves at once\n```\n\n## Canary:\n```\nv1: 90% traffic\nv2: 10% traffic (canary)\n     ↓ gradually increase\nv2: 100% traffic\n```\n\n## Rolling:\n```\nReplace pods one at a time\nZero downtime\n```\n\n## Comparison:\n| Strategy | Risk | Rollback |\n|----------|------|----------|\n| Blue-Green | Low | Instant |\n| Canary | Lowest | Fast |\n| Rolling | Medium | Slower |"
+        },
+        {
+            "id": "dep_7",
+            "type": "content",
+            "title": "CI/CD Pipeline",
+            "content": "# CI/CD Pipeline 🔄\n\n## Stages:\n```\nCode Push\n    │\n    ▼\n┌─────────┐\n│  Build  │ → Tests → Lint\n└────┬────┘\n     ▼\n┌─────────┐\n│  Docker │ → Build Image → Push\n└────┬────┘\n     ▼\n┌─────────┐\n│ Deploy  │ → Stage → Prod\n└─────────┘\n```\n\n## Example:\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nbuild:\n  script:\n    - docker build -t app:$CI_COMMIT_SHA .\n    - docker push app:$CI_COMMIT_SHA\n\ndeploy:\n  script:\n    - kubectl set image deployment/app app=app:$CI_COMMIT_SHA\n```"
+        },
+        {
+            "id": "dep_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Microservices Deployment!\n\n## Key Takeaways:\n\n### Containers\n- Docker for packaging\n- Consistent environments\n- Versioned images\n\n### Orchestration\n- Kubernetes for management\n- Auto-scaling\n- Self-healing\n\n### Strategies\n| Strategy | Use Case |\n|----------|----------|\n| Blue-Green | Safety first |\n| Canary | Gradual rollout |\n| Rolling | Continuous |\n\nDeploy confidently! 🚀"
+        }
+    ]
+}

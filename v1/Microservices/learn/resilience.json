@@ -1,0 +1,71 @@
+{
+    "id": "learn_resilience_micro",
+    "topicId": "resilience",
+    "topicTitle": "Resilience Patterns",
+    "description": "Master resilience patterns including circuit breaker, retry, and bulkhead for fault-tolerant systems",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "res_1",
+            "type": "content",
+            "title": "Resilience Patterns",
+            "content": "# Resilience Patterns 🛡️\n\nBuild fault-tolerant distributed systems.\n\n## What You'll Learn:\n- **Circuit Breaker** - Fail fast\n- **Retry** - Automatic retries\n- **Bulkhead** - Isolate failures\n- **Timeout** - Don't wait forever\n- **Fallback** - Graceful degradation\n\n> 💡 In distributed systems, failures are normal!"
+        },
+        {
+            "id": "res_2",
+            "type": "content",
+            "title": "Circuit Breaker",
+            "content": "# Circuit Breaker 🔌\n\nStop cascading failures.\n\n## States:\n```\n       CLOSED ──failures──► OPEN\n          ▲                   │\n          │                timeout\n          │                   │\n       success◄── HALF-OPEN ◄─┘\n```\n\n## Logic:\n- CLOSED: Normal operation\n- OPEN: Reject immediately\n- HALF-OPEN: Test with limited requests\n\n## Configuration:\n```javascript\nconst breaker = new CircuitBreaker({\n    failureThreshold: 5,\n    resetTimeout: 30000,\n    halfOpenRequests: 3\n});\n```"
+        },
+        {
+            "id": "res_3",
+            "type": "content",
+            "title": "Retry Pattern",
+            "content": "# Retry Pattern 🔄\n\nAutomatically retry failed requests.\n\n## Strategies:\n\n### Fixed Delay:\n```\nTry → Wait 1s → Try → Wait 1s → Try\n```\n\n### Exponential Backoff:\n```\nTry → Wait 1s → Try → Wait 2s → Try → Wait 4s\n```\n\n## Implementation:\n```javascript\nasync function retry(fn, maxAttempts = 3) {\n    for (let i = 0; i < maxAttempts; i++) {\n        try {\n            return await fn();\n        } catch (err) {\n            if (i === maxAttempts - 1) throw err;\n            await sleep(Math.pow(2, i) * 1000);\n        }\n    }\n}\n```\n\n## When to Retry:\n- Network timeouts\n- 5xx errors\n- NOT for 4xx (client errors)"
+        },
+        {
+            "id": "res_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your resilience knowledge!",
+            "quizQuestion": "What does the circuit breaker do when open?",
+            "quizOptions": [
+                "Retries forever",
+                "Rejects requests immediately",
+                "Increases timeout",
+                "Switches servers"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "res_4",
+            "type": "content",
+            "title": "Bulkhead Pattern",
+            "content": "# Bulkhead Pattern 🚢\n\nIsolate failures to prevent spreading.\n\n## Concept:\n```\n┌─────────────────────────┐\n│ ┌─────┐┌─────┐┌─────┐   │\n│ │Pool ││Pool ││Pool │   │\n│ │ A   ││ B   ││ C   │   │\n│ └─────┘└─────┘└─────┘   │\n│                         │\n│ If A fails, B&C continue│\n└─────────────────────────┘\n```\n\n## Implementation:\n- Separate thread pools\n- Connection limits per service\n- Resource isolation\n\n## Example:\n```javascript\nconst pools = {\n    users: new Pool({ max: 10 }),\n    orders: new Pool({ max: 20 }),\n    payments: new Pool({ max: 5 })\n};\n```"
+        },
+        {
+            "id": "res_5",
+            "type": "content",
+            "title": "Timeout Pattern",
+            "content": "# Timeout Pattern ⏰\n\nDon't wait forever.\n\n## Importance:\n- Resources tied up waiting\n- Cascading delays\n- Poor user experience\n\n## Implementation:\n```javascript\nconst controller = new AbortController();\nconst timeout = setTimeout(() => controller.abort(), 5000);\n\ntry {\n    const response = await fetch(url, {\n        signal: controller.signal\n    });\n} catch (err) {\n    if (err.name === 'AbortError') {\n        // Handle timeout\n    }\n} finally {\n    clearTimeout(timeout);\n}\n```\n\n## Guidelines:\n- Set based on SLAs\n- Include in circuit breaker\n- Log timeouts\n- Have fallback"
+        },
+        {
+            "id": "res_6",
+            "type": "content",
+            "title": "Fallback Pattern",
+            "content": "# Fallback Pattern 🔄\n\nGraceful degradation.\n\n## Strategies:\n\n### Cached Response:\n```javascript\nasync function getData() {\n    try {\n        return await fetchFresh();\n    } catch (err) {\n        return await cache.get('data');\n    }\n}\n```\n\n### Default Value:\n```javascript\nasync function getRecommendations() {\n    try {\n        return await aiService.recommend();\n    } catch (err) {\n        return defaultRecommendations;\n    }\n}\n```\n\n### Alternative Service:\n```javascript\nasync function processPayment() {\n    try {\n        return await stripe.charge();\n    } catch (err) {\n        return await paypal.charge();\n    }\n}\n```"
+        },
+        {
+            "id": "res_7",
+            "type": "content",
+            "title": "Combining Patterns",
+            "content": "# Combining Patterns 🧩\n\n## Full Stack:\n```javascript\nasync function callService() {\n    return await circuitBreaker.call(async () => {\n        return await retry(async () => {\n            try {\n                return await fetchWithTimeout(url, 5000);\n            } catch (err) {\n                return fallbackValue;\n            }\n        });\n    });\n}\n```\n\n## Order:\n1. Timeout (innermost)\n2. Retry\n3. Circuit Breaker\n4. Fallback (outermost)\n\n## Libraries:\n- Polly (.NET)\n- Resilience4j (Java)\n- Hystrix (legacy)\n- Custom implementations"
+        },
+        {
+            "id": "res_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Resilience Patterns!\n\n## Key Patterns:\n\n| Pattern | Purpose |\n|---------|--------|\n| Circuit Breaker | Fail fast |\n| Retry | Handle transient failures |\n| Bulkhead | Isolate failures |\n| Timeout | Don't wait forever |\n| Fallback | Graceful degradation |\n\n## Best Practices:\n- Combine patterns\n- Monitor failures\n- Set appropriate thresholds\n- Test failure scenarios\n\nBuild resilient systems! 🛡️"
+        }
+    ]
+}

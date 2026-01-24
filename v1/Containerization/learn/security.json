@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_security",
+    "topicId": "security",
+    "topicTitle": "Container Security",
+    "description": "Master container security fundamentals including image scanning, runtime protection, secrets management, and security best practices",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "security_1",
+            "type": "content",
+            "title": "Welcome to Container Security",
+            "content": "# Container Security 🔒\n\nSecure your containerized applications from build to runtime.\n\n## What you'll learn:\n- **Image Security** - Scanning and trusted sources\n- **Runtime Security** - Isolation and protection\n- **Secrets** - Managing sensitive data\n- **Best Practices** - Security hardening\n\n> 💡 **Fun Fact:** 75% of container images have high or critical vulnerabilities according to security reports!\n\n## Security Layers\n\n```\n┌─────────────────────────────────────────────────┐\n│              SECURITY LAYERS                     │\n├─────────────────────────────────────────────────┤\n│  ┌──────────────────────────────────────────┐   │\n│  │ INFRASTRUCTURE: Host, Network, Cluster  │   │\n│  └──────────────────────────────────────────┘   │\n│  ┌──────────────────────────────────────────┐   │\n│  │ ORCHESTRATION: K8s, Swarm policies      │   │\n│  └──────────────────────────────────────────┘   │\n│  ┌──────────────────────────────────────────┐   │\n│  │ CONTAINER: Runtime, isolation           │   │\n│  └──────────────────────────────────────────┘   │\n│  ┌──────────────────────────────────────────┐   │\n│  │ IMAGE: Base images, vulnerabilities     │   │\n│  └──────────────────────────────────────────┘   │\n│  ┌──────────────────────────────────────────┐   │\n│  │ APPLICATION: Code, dependencies         │   │\n│  └──────────────────────────────────────────┘   │\n└─────────────────────────────────────────────────┘\n```\n\nLet's secure containers!"
+        },
+        {
+            "id": "security_2",
+            "type": "content",
+            "title": "Image Security Basics",
+            "content": "# Image Security Fundamentals 🖼️\n\n## 1. Use Official Images\n\n```dockerfile\n# ✅ Official verified images\nFROM node:20-alpine\nFROM python:3.11-slim\nFROM nginx:1.25-alpine\n\n# ❌ Avoid unknown sources\nFROM randomuser/node-custom\n```\n\n## 2. Use Specific Tags\n\n```dockerfile\n# ❌ Bad - mutable\nFROM node:latest\n\n# ✅ Better - version pinned\nFROM node:20.10.0\n\n# ✅ Best - digest pinned (immutable)\nFROM node:20.10.0@sha256:abc123...\n```\n\n## 3. Use Minimal Base Images\n\n| Image | Size | Attack Surface |\n|-------|------|----------------|\n| ubuntu:22.04 | 77MB | High |\n| debian:slim | 80MB | Medium |\n| alpine:3.18 | 7MB | Low |\n| distroless | ~2MB | Minimal |\n| scratch | 0MB | None (Go/Rust) |\n\n```dockerfile\n# Distroless for production\nFROM gcr.io/distroless/nodejs20-debian12\nCOPY --from=builder /app/dist /app\nCMD [\"/app/server.js\"]\n```\n\n> 🎯 **Rule:** Minimal image = Smaller attack surface"
+        },
+        {
+            "id": "security_3",
+            "type": "content",
+            "title": "Image Scanning",
+            "content": "# Vulnerability Scanning 🔍\n\nScan images for known vulnerabilities.\n\n## Scanning Tools\n\n| Tool | Type | Features |\n|------|------|----------|\n| **Trivy** | Open source | Fast, comprehensive |\n| **Snyk** | Commercial | Developer-focused |\n| **Grype** | Open source | SBOM support |\n| **Docker Scout** | Docker native | Built into Docker |\n| **Clair** | Open source | Registry integration |\n\n## Using Trivy\n\n```bash\n# Scan image\ntrivy image nginx:latest\n\n# Scan with severity filter\ntrivy image --severity HIGH,CRITICAL nginx:latest\n\n# Output as JSON\ntrivy image -f json -o results.json nginx:latest\n\n# Scan in CI (fail on vulnerabilities)\ntrivy image --exit-code 1 --severity CRITICAL myapp:latest\n```\n\n## Docker Scout\n\n```bash\n# Quick overview\ndocker scout quickview nginx:latest\n\n# Detailed CVE report\ndocker scout cves nginx:latest\n\n# Recommendations\ndocker scout recommendations nginx:latest\n```\n\n## CI/CD Integration\n\n```yaml\n# GitHub Actions\n- name: Scan image\n  uses: aquasecurity/trivy-action@master\n  with:\n    image-ref: myapp:${{ github.sha }}\n    exit-code: '1'\n    severity: 'CRITICAL,HIGH'\n```"
+        },
+        {
+            "id": "security_4",
+            "type": "quiz",
+            "title": "Image Security Quiz",
+            "content": "Test your image security knowledge!",
+            "quizQuestion": "Why should you use minimal base images like Alpine?",
+            "quizOptions": [
+                "They are faster to build",
+                "They have a smaller attack surface with fewer vulnerabilities",
+                "They are free to use",
+                "They work better with Kubernetes"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "security_5",
+            "type": "content",
+            "title": "Non-Root Containers",
+            "content": "# Running as Non-Root 👤\n\nNever run containers as root.\n\n## The Problem\n\n```dockerfile\n# ❌ Runs as root by default\nFROM node:20\nWORKDIR /app\nCOPY . .\nCMD [\"node\", \"server.js\"]\n# Container process runs as root!\n```\n\n## The Solution\n\n```dockerfile\nFROM node:20-alpine\n\n# Create non-root user\nRUN addgroup -g 1001 appgroup && \\\n    adduser -u 1001 -G appgroup -D appuser\n\nWORKDIR /app\n\n# Change ownership\nCOPY --chown=appuser:appgroup . .\n\n# Switch to non-root user\nUSER appuser\n\nCMD [\"node\", \"server.js\"]\n```\n\n## Kubernetes Enforcement\n\n```yaml\nspec:\n  securityContext:\n    runAsNonRoot: true\n    runAsUser: 1001\n    runAsGroup: 1001\n    fsGroup: 1001\n  containers:\n    - name: app\n      securityContext:\n        allowPrivilegeEscalation: false\n        readOnlyRootFilesystem: true\n```\n\n## Why Non-Root?\n\n- ✅ Limits damage from container escape\n- ✅ Prevents host filesystem modifications\n- ✅ Required by many security standards\n- ✅ Defense in depth"
+        },
+        {
+            "id": "security_6",
+            "type": "content",
+            "title": "Read-Only Filesystems",
+            "content": "# Read-Only Root Filesystem 📁\n\nPrevent runtime modifications.\n\n## Docker Run\n\n```bash\ndocker run --read-only \\\n  --tmpfs /tmp \\\n  --tmpfs /var/cache \\\n  nginx:alpine\n```\n\n## Docker Compose\n\n```yaml\nservices:\n  app:\n    image: myapp\n    read_only: true\n    tmpfs:\n      - /tmp\n      - /var/cache\n    volumes:\n      - app_data:/app/data  # Only writable mount\n```\n\n## Kubernetes\n\n```yaml\nspec:\n  containers:\n    - name: app\n      securityContext:\n        readOnlyRootFilesystem: true\n      volumeMounts:\n        - name: tmp\n          mountPath: /tmp\n        - name: cache\n          mountPath: /var/cache\n  volumes:\n    - name: tmp\n      emptyDir: {}\n    - name: cache\n      emptyDir: {}\n```\n\n## Benefits\n\n| Benefit | Description |\n|---------|-------------|\n| **Prevent tampering** | Can't modify binaries |\n| **Block malware** | Can't write malicious files |\n| **Compliance** | Many standards require it |\n| **Immutability** | Container matches image |"
+        },
+        {
+            "id": "security_7",
+            "type": "content",
+            "title": "Capabilities and Privileges",
+            "content": "# Linux Capabilities 🔐\n\nFine-grained privilege control.\n\n## Default Docker Capabilities\n\n```\nCAP_CHOWN, CAP_DAC_OVERRIDE, CAP_FSETID,\nCAP_FOWNER, CAP_MKNOD, CAP_NET_RAW,\nCAP_SETGID, CAP_SETUID, CAP_SETFCAP,\nCAP_SETPCAP, CAP_NET_BIND_SERVICE,\nCAP_SYS_CHROOT, CAP_KILL, CAP_AUDIT_WRITE\n```\n\n## Drop All, Add Only Needed\n\n```bash\n# Docker\ndocker run --cap-drop=ALL --cap-add=NET_BIND_SERVICE nginx\n```\n\n```yaml\n# Kubernetes\nspec:\n  containers:\n    - name: app\n      securityContext:\n        capabilities:\n          drop:\n            - ALL\n          add:\n            - NET_BIND_SERVICE\n```\n\n## Common Capabilities\n\n| Capability | Purpose |\n|------------|--------|\n| `NET_BIND_SERVICE` | Bind to ports < 1024 |\n| `SYS_PTRACE` | Debug processes |\n| `SYS_ADMIN` | Many admin tasks (dangerous) |\n| `NET_ADMIN` | Network configuration |\n\n## Never Use\n\n```bash\n# ❌ DANGEROUS - Full host access\ndocker run --privileged myapp\n\n# ❌ DANGEROUS - Almost everything\n--cap-add=SYS_ADMIN\n```"
+        },
+        {
+            "id": "security_8",
+            "type": "content",
+            "title": "Secrets Management",
+            "content": "# Secrets Management 🔑\n\nSecurely handle sensitive data.\n\n## ❌ Don't Do This\n\n```dockerfile\n# Never embed secrets in images\nENV API_KEY=sk_live_abc123\nRUN echo \"password123\" > /app/secrets\n```\n\n## Docker Secrets\n\n```bash\n# Create secret\necho \"supersecret\" | docker secret create db_password -\n\n# Use in service\ndocker service create \\\n  --secret db_password \\\n  --env DB_PASSWORD_FILE=/run/secrets/db_password \\\n  myapp\n```\n\n## Kubernetes Secrets\n\n```yaml\napiVersion: v1\nkind: Secret\nmetadata:\n  name: db-credentials\ntype: Opaque\ndata:\n  password: cGFzc3dvcmQxMjM=  # base64\n---\nspec:\n  containers:\n    - name: app\n      envFrom:\n        - secretRef:\n            name: db-credentials\n      # Or as file\n      volumeMounts:\n        - name: secrets\n          mountPath: /run/secrets\n          readOnly: true\n  volumes:\n    - name: secrets\n      secret:\n        secretName: db-credentials\n```\n\n## External Secret Managers\n\n- **HashiCorp Vault**\n- **AWS Secrets Manager**\n- **Azure Key Vault**\n- **GCP Secret Manager**"
+        },
+        {
+            "id": "security_9",
+            "type": "quiz",
+            "title": "Secrets Quiz",
+            "content": "Test your secrets management knowledge!",
+            "quizQuestion": "Where should you NEVER store secrets?",
+            "quizOptions": [
+                "Environment variables at runtime",
+                "Kubernetes Secrets",
+                "Docker image layers or Dockerfile",
+                "External secret managers"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "security_10",
+            "type": "content",
+            "title": "Network Security",
+            "content": "# Network Security 🌐\n\n## Network Policies (Kubernetes)\n\n```yaml\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: api-policy\nspec:\n  podSelector:\n    matchLabels:\n      app: api\n  policyTypes:\n    - Ingress\n    - Egress\n  ingress:\n    - from:\n        - podSelector:\n            matchLabels:\n              app: frontend\n      ports:\n        - protocol: TCP\n          port: 8080\n  egress:\n    - to:\n        - podSelector:\n            matchLabels:\n              app: database\n      ports:\n        - protocol: TCP\n          port: 5432\n```\n\n## Default Deny\n\n```yaml\n# Deny all ingress\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: deny-all-ingress\nspec:\n  podSelector: {}\n  policyTypes:\n    - Ingress\n```\n\n## Docker Network Isolation\n\n```bash\n# Create isolated network\ndocker network create --internal backend\n\n# Containers on 'backend' can't reach internet\ndocker run --network backend mydb\n```\n\n## TLS/mTLS\n\n- Use service mesh (Istio, Linkerd)\n- Encrypt all service-to-service traffic\n- Certificate rotation"
+        },
+        {
+            "id": "security_11",
+            "type": "content",
+            "title": "Runtime Security",
+            "content": "# Runtime Protection 🛡️\n\n## Seccomp Profiles\n\nRestrict system calls.\n\n```yaml\n# Kubernetes\nspec:\n  securityContext:\n    seccompProfile:\n      type: RuntimeDefault  # or Localhost\n```\n\n## AppArmor\n\nMandatory access control.\n\n```yaml\nmetadata:\n  annotations:\n    container.apparmor.security.beta.kubernetes.io/app: runtime/default\n```\n\n## Runtime Monitoring\n\n| Tool | Features |\n|------|----------|\n| **Falco** | Runtime threat detection |\n| **Sysdig** | Container visibility |\n| **Aqua** | Full lifecycle security |\n| **Prisma Cloud** | CWPP solution |\n\n## Falco Rules Example\n\n```yaml\n- rule: Container Shell Spawned\n  desc: Detect shell spawned in container\n  condition: container and proc.name in (bash, sh, zsh)\n  output: \"Shell spawned in container (user=%user.name container=%container.name)\"\n  priority: WARNING\n```\n\n## Pod Security Standards\n\n```yaml\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: production\n  labels:\n    pod-security.kubernetes.io/enforce: restricted\n    pod-security.kubernetes.io/warn: restricted\n```"
+        },
+        {
+            "id": "security_12",
+            "type": "content",
+            "title": "Kubernetes Pod Security",
+            "content": "# Pod Security 🔐\n\n## Complete Secure Pod\n\n```yaml\napiVersion: v1\nkind: Pod\nmetadata:\n  name: secure-pod\nspec:\n  securityContext:\n    runAsNonRoot: true\n    runAsUser: 1001\n    runAsGroup: 1001\n    fsGroup: 1001\n    seccompProfile:\n      type: RuntimeDefault\n  containers:\n    - name: app\n      image: myapp:1.0.0@sha256:abc123...\n      securityContext:\n        allowPrivilegeEscalation: false\n        readOnlyRootFilesystem: true\n        capabilities:\n          drop:\n            - ALL\n      resources:\n        limits:\n          cpu: \"500m\"\n          memory: \"256Mi\"\n        requests:\n          cpu: \"100m\"\n          memory: \"128Mi\"\n      volumeMounts:\n        - name: tmp\n          mountPath: /tmp\n  volumes:\n    - name: tmp\n      emptyDir: {}\n  automountServiceAccountToken: false\n```\n\n## Security Checklist\n\n- ✅ runAsNonRoot: true\n- ✅ allowPrivilegeEscalation: false\n- ✅ readOnlyRootFilesystem: true\n- ✅ Drop ALL capabilities\n- ✅ Resource limits set\n- ✅ Image digest pinned"
+        },
+        {
+            "id": "security_13",
+            "type": "content",
+            "title": "Image Signing and Trust",
+            "content": "# Image Trust & Signing ✍️\n\nVerify image authenticity.\n\n## Docker Content Trust\n\n```bash\n# Enable content trust\nexport DOCKER_CONTENT_TRUST=1\n\n# Pull only signed images\ndocker pull myregistry/myapp:1.0\n# Error if not signed!\n\n# Sign when pushing\ndocker push myregistry/myapp:1.0\n# Automatically signs with your key\n```\n\n## Cosign (Sigstore)\n\n```bash\n# Install cosign\nbrew install cosign\n\n# Generate key pair\ncosign generate-key-pair\n\n# Sign image\ncosign sign --key cosign.key myregistry/myapp:1.0\n\n# Verify signature\ncosign verify --key cosign.pub myregistry/myapp:1.0\n```\n\n## Kubernetes Admission Control\n\n```yaml\n# Kyverno Policy\napiVersion: kyverno.io/v1\nkind: ClusterPolicy\nmetadata:\n  name: verify-image-signature\nspec:\n  validationFailureAction: enforce\n  rules:\n    - name: verify-signature\n      match:\n        resources:\n          kinds:\n            - Pod\n      verifyImages:\n        - imageReferences:\n            - \"myregistry/*\"\n          attestors:\n            - entries:\n                - keys:\n                    publicKeys: |\n                      -----BEGIN PUBLIC KEY-----\n                      ...\n                      -----END PUBLIC KEY-----\n```"
+        },
+        {
+            "id": "security_14",
+            "type": "quiz",
+            "title": "Security Controls Quiz",
+            "content": "Test your security controls knowledge!",
+            "quizQuestion": "What does 'allowPrivilegeEscalation: false' prevent?",
+            "quizOptions": [
+                "Container from using network",
+                "Process from gaining more privileges than its parent",
+                "Container from reading files",
+                "Container from using CPU"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "security_15",
+            "type": "content",
+            "title": "CI/CD Security",
+            "content": "# Secure CI/CD Pipeline 🔄\n\n## Pipeline Security Stages\n\n```\n┌─────────────────────────────────────────────────┐\n│              SECURE PIPELINE                     │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  1. CODE SCAN                                    │\n│     └── SAST, dependency check                  │\n│                                                  │\n│  2. BUILD                                        │\n│     └── Multi-stage, minimal base               │\n│                                                  │\n│  3. IMAGE SCAN                                   │\n│     └── Trivy, Snyk, block on critical          │\n│                                                  │\n│  4. SIGN                                         │\n│     └── Cosign, notary                          │\n│                                                  │\n│  5. DEPLOY                                       │\n│     └── Admission control, policy check         │\n│                                                  │\n│  6. RUNTIME                                      │\n│     └── Monitoring, alerting                    │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## GitHub Actions Example\n\n```yaml\njobs:\n  security:\n    steps:\n      - name: Scan code\n        uses: github/codeql-action/analyze@v2\n\n      - name: Build image\n        run: docker build -t myapp:${{ github.sha }} .\n\n      - name: Scan image\n        uses: aquasecurity/trivy-action@master\n        with:\n          image-ref: myapp:${{ github.sha }}\n          exit-code: '1'\n          severity: 'CRITICAL'\n\n      - name: Sign image\n        run: cosign sign --key $KEY myapp:${{ github.sha }}\n```"
+        },
+        {
+            "id": "security_16",
+            "type": "content",
+            "title": "RBAC in Kubernetes",
+            "content": "# RBAC (Role-Based Access Control) 👥\n\n## RBAC Components\n\n```\n┌────────────────┐     ┌────────────────┐\n│     User/      │     │     Role/      │\n│ ServiceAccount │────►│  ClusterRole   │\n└────────────────┘     └────────┬───────┘\n         │                      │\n         │                      │ defines\n         │                      ▼\n         │             ┌────────────────┐\n         └────────────►│   Permissions  │\n     RoleBinding/      │  (verbs on     │\n   ClusterRoleBinding  │   resources)   │\n                       └────────────────┘\n```\n\n## Role Definition\n\n```yaml\napiVersion: rbac.authorization.k8s.io/v1\nkind: Role\nmetadata:\n  namespace: production\n  name: pod-reader\nrules:\n  - apiGroups: [\"\"]\n    resources: [\"pods\"]\n    verbs: [\"get\", \"watch\", \"list\"]\n  - apiGroups: [\"\"]\n    resources: [\"pods/log\"]\n    verbs: [\"get\"]\n```\n\n## RoleBinding\n\n```yaml\napiVersion: rbac.authorization.k8s.io/v1\nkind: RoleBinding\nmetadata:\n  name: read-pods\n  namespace: production\nsubjects:\n  - kind: User\n    name: developer\n    apiGroup: rbac.authorization.k8s.io\n  - kind: ServiceAccount\n    name: app-sa\n    namespace: production\nroleRef:\n  kind: Role\n  name: pod-reader\n  apiGroup: rbac.authorization.k8s.io\n```\n\n## Principle of Least Privilege\n\n- Grant minimum required permissions\n- Use namespace-scoped roles when possible\n- Audit RBAC regularly"
+        },
+        {
+            "id": "security_17",
+            "type": "content",
+            "title": "Audit and Compliance",
+            "content": "# Audit & Compliance 📋\n\n## Kubernetes Audit Logs\n\n```yaml\n# audit-policy.yaml\napiVersion: audit.k8s.io/v1\nkind: Policy\nrules:\n  # Log all requests at Metadata level\n  - level: Metadata\n    resources:\n      - group: \"\"\n        resources: [\"secrets\", \"configmaps\"]\n  \n  # Log pod exec\n  - level: RequestResponse\n    resources:\n      - group: \"\"\n        resources: [\"pods/exec\", \"pods/attach\"]\n```\n\n## Compliance Standards\n\n| Standard | Focus |\n|----------|------|\n| **CIS Benchmarks** | Security configuration |\n| **PCI DSS** | Payment card data |\n| **HIPAA** | Healthcare data |\n| **SOC 2** | Security controls |\n| **NIST** | Federal standards |\n\n## Security Scanning Tools\n\n```bash\n# CIS Benchmark scan\nkube-bench run --targets node\n\n# Configuration audit\nkubeaudit all\n\n# Policy compliance\nkubectl get podsecuritypolicies\n```\n\n## Continuous Compliance\n\n- Automated policy enforcement\n- Regular vulnerability scans\n- Audit log analysis\n- Compliance reporting dashboards"
+        },
+        {
+            "id": "security_18",
+            "type": "content",
+            "title": "Security Checklist",
+            "content": "# Security Checklist ✅\n\n## Image Security\n\n```\n☐ Use official/verified base images\n☐ Pin image versions/digests\n☐ Use minimal base images (alpine/distroless)\n☐ Scan images in CI/CD\n☐ Sign and verify images\n☐ Use multi-stage builds\n```\n\n## Container Runtime\n\n```\n☐ Run as non-root user\n☐ Use read-only root filesystem\n☐ Drop all capabilities\n☐ Set resource limits\n☐ Enable seccomp profile\n☐ No privileged mode\n```\n\n## Secrets & Config\n\n```\n☐ Never hardcode secrets\n☐ Use secret management tools\n☐ Rotate secrets regularly\n☐ Encrypt secrets at rest\n```\n\n## Network\n\n```\n☐ Implement network policies\n☐ Default deny ingress/egress\n☐ Use TLS for all traffic\n☐ Isolate sensitive workloads\n```\n\n## Access Control\n\n```\n☐ Implement RBAC\n☐ Least privilege principle\n☐ Audit access logs\n☐ Disable automountServiceAccountToken\n```"
+        },
+        {
+            "id": "security_19",
+            "type": "content",
+            "title": "Common Vulnerabilities",
+            "content": "# Common Container Vulnerabilities 🚨\n\n## Top Security Risks\n\n### 1. Vulnerable Base Images\n```dockerfile\n# Fix: Use minimal, updated images\nFROM node:20-alpine3.18\n```\n\n### 2. Secrets in Images\n```dockerfile\n# ❌ BAD\nENV DB_PASSWORD=secret123\n\n# ✅ Use runtime secrets\n```\n\n### 3. Running as Root\n```dockerfile\n# ✅ Add non-root user\nUSER 1001\n```\n\n### 4. Unrestricted Network\n```yaml\n# ✅ Use NetworkPolicy\nkind: NetworkPolicy\n```\n\n### 5. No Resource Limits\n```yaml\n# ✅ Set limits\nresources:\n  limits:\n    memory: \"256Mi\"\n```\n\n### 6. Outdated Dependencies\n```bash\n# Regular updates\nnpm audit fix\npip-audit\n```\n\n## CVE Examples\n\n| CVE | Impact | Prevention |\n|-----|--------|------------|\n| Log4Shell | RCE | Update dependencies |\n| Container escape | Host access | No privileged |\n| API exposure | Data leak | Network policies |"
+        },
+        {
+            "id": "security_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall container security knowledge!",
+            "quizQuestion": "What is the most effective way to reduce the attack surface of a container?",
+            "quizOptions": [
+                "Use the latest tag",
+                "Run as root for full access",
+                "Use minimal base images and drop unnecessary capabilities",
+                "Disable all logging"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "security_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Container Security!\n\n## Key Takeaways\n\n### Image Security 🖼️\n- ✅ Use official, minimal base images\n- ✅ Pin versions with digests\n- ✅ Scan for vulnerabilities\n- ✅ Sign images\n\n### Runtime Security 🛡️\n- ✅ Run as non-root\n- ✅ Read-only filesystem\n- ✅ Drop capabilities\n- ✅ Resource limits\n\n### Secrets 🔑\n- ✅ Never in images\n- ✅ Use secret managers\n- ✅ Rotate regularly\n\n### Access Control 👥\n- ✅ RBAC with least privilege\n- ✅ Network policies\n- ✅ Audit logging\n\n## Security Mantra\n\n```\nMinimal + Non-root + Read-only + Scanned = Secure\n```\n\n> 🔒 **Remember:** Security is not a feature, it's a requirement!\n\nStay secure! 🚀"
+        }
+    ]
+}

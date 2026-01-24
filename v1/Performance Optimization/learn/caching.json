@@ -1,0 +1,165 @@
+{
+    "id": "learn_performance_caching",
+    "topicId": "caching",
+    "topicTitle": "Caching Strategies",
+    "description": "Master web caching at every layer, from browser headers to CDN edge servers and Redis backends",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "caching_1",
+            "type": "content",
+            "title": "The Power of Caching",
+            "content": "# Caching Strategies 🧠⚡\n\nCaching is the process of storing data in a temporary storage area so that future requests for it can be served faster.\n\n- **Principle**: Read once, use many times. The fastest code is the code that doesn't run."
+        },
+        {
+            "id": "caching_2",
+            "type": "content",
+            "title": "Browser Caching (HTTP)",
+            "content": "# Direct Control 🍪\n\nControlled by the server via HTTP headers. These tell the browser how long it can keep a file before asking the server for a fresh copy."
+        },
+        {
+            "id": "caching_3",
+            "type": "content",
+            "title": "Cache-Control: max-age",
+            "content": "# Expiration ⏳\n\n`Cache-Control: max-age=31536000` (1 year).\n\n- Best for **Immutable** assets like hashed CSS/JS files (`app.a7f2.js`). If the content changes, the filename changes, so a 1-year cache is safe."
+        },
+        {
+            "id": "caching_4",
+            "type": "content",
+            "title": "Etag: Validation",
+            "content": "# Fingerprinting 🖐️\n\nA server sends an `Etag` (a hash of the content). On the next request, the browser sends `If-None-Match`. \n\n- If content hasn't changed, server returns **304 Not Modified**. \n- Result: Zero download time!"
+        },
+        {
+            "id": "caching_5",
+            "quizQuestion": "Which HTTP status code indicates that the cached resource is still valid and doesn't need to be re-downloaded?",
+            "quizOptions": [
+                "200 OK",
+                "301 Moved Permanently",
+                "304 Not Modified",
+                "404 Not Found"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Status Quiz",
+            "content": "Protocol knowledge."
+        },
+        {
+            "id": "caching_6",
+            "type": "content",
+            "title": "Private vs Public Cache",
+            "content": "# Shared or Solo 👥🧍\n\n- `private`: For one user only (e.g., their profile page). Browsers can cache it, but CDNs won't.\n- `public`: For everyone (e.g., homepage). CDNs can store and share it."
+        },
+        {
+            "id": "caching_7",
+            "type": "content",
+            "title": "CDN Caching",
+            "content": "# Edge Computing 🌐\n\nCaching resources at \"edge nodes\" physically closer to users. This drastically reduces **TTFB** for global audiences."
+        },
+        {
+            "id": "caching_8",
+            "type": "content",
+            "title": "Stale-While-Revalidate",
+            "content": "# Background Refresh 🔄\n\n`stale-while-revalidate=30`.\n\nAllows the browser to use a stale (old) version from cache while it fetches the new version in the background. The user gets speed immediately, and the app updates silently."
+        },
+        {
+            "id": "caching_9",
+            "type": "content",
+            "title": "The No-Cache Paradox",
+            "content": "# Always Verify 🧐\n\n`Cache-Control: no-cache` does NOT mean \"don't cache\". It means \"you must check with the server before using the cached version\". \n\n- `no-store` is what you want for truly sensitive data you never want saved."
+        },
+        {
+            "id": "caching_10",
+            "quizQuestion": "What does 'Cache-Control: no-store' tell the browser?",
+            "quizOptions": [
+                "Check with the server every time",
+                "Store it for 1 hour",
+                "Do not store any version of this response under any circumstances",
+                "Only cache on mobile devices"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Header Quiz",
+            "content": "Strict control."
+        },
+        {
+            "id": "caching_11",
+            "type": "content",
+            "title": "Server-Side Caching",
+            "content": "# Redis & Memcached 🗄️\n\nInstead of re-calculating a heavy SQL query or API response, store the JSON result in an in-memory database like **Redis**."
+        },
+        {
+            "id": "caching_12",
+            "type": "content",
+            "title": "Cache Invalidation",
+            "content": "# The Hardest Problem 🧩\n\n> \"There are only two hard things in Computer Science: cache invalidation and naming things.\"\n\nIf the data changes, you **must** purgue the old cache immediately, or users will see stale data."
+        },
+        {
+            "id": "caching_13",
+            "type": "content",
+            "title": "Cache Key Selection",
+            "content": "# Precise Mapping 🔑\n\nIn Redis, your key might be `user:123:profile`. If you forget the `user:123` part, everyone sees the same profile!"
+        },
+        {
+            "id": "caching_14",
+            "type": "content",
+            "title": "Client-Side Store (SWR/React Query)",
+            "content": "# Memory Caching 🏗️\n\nModern libraries like **React Query** cache data in the JS application memory. If you click \"Back\" to a page you just saw, it loads instantly from memory while refreshing in the background."
+        },
+        {
+            "id": "caching_15",
+            "quizQuestion": "What is the primary benefit of a CDN in caching?",
+            "quizOptions": [
+                "Encrypting the data",
+                "Reducing physical distance between user and server",
+                "Replacing the database",
+                "Making CSS easier to write"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "CDN Quiz",
+            "content": "Network benefits."
+        },
+        {
+            "id": "caching_16",
+            "type": "content",
+            "title": "Full Page Caching (Varnish)",
+            "content": "# Zero Logic ⚡\n\nA Reverse Proxy like **Varnish** can cache the entire HTML of a page. If a request hits Varnish, your Node/Python/PHP code never even wakes up!"
+        },
+        {
+            "id": "caching_17",
+            "type": "content",
+            "title": "Service Workers",
+            "content": "# Offline Support 📲\n\nService Workers allow you to cache files in the **Cache Storage API**. This enables the app to load even when the user is completely offline."
+        },
+        {
+            "id": "caching_18",
+            "type": "content",
+            "title": "Cache Penetration",
+            "content": "# Empty Hits 🚫\n\nAn attack where an attacker requests non-existent keys (e.g., ID 99999). If the cache doesn't store \"Negative results\", it hits the DB every time. \n\n- **Fix**: Cache the fact that ID 99999 does not exist."
+        },
+        {
+            "id": "caching_19",
+            "type": "content",
+            "title": "Thundering Herd Problem",
+            "content": "# The Crash 📉💥\n\nWhen a popular cache key expires, thousands of users hit the database at the same second to rebuild it. \n\n- **Fix**: Use Mutex locks or staggered expiration times."
+        },
+        {
+            "id": "caching_20",
+            "quizQuestion": "True or False: Cache Invalidation is considered one of the easiest tasks in software engineering.",
+            "quizOptions": [
+                "True",
+                "False"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Hard Problem Quiz",
+            "content": "Engineering reality."
+        },
+        {
+            "id": "caching_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Use **Cache-Control** for browser assets.\n- ✅ Use **Etags** for efficient validation (304).\n- ✅ Leverage **CDNs** for global speed.\n- ✅ **Redis** is perfect for server-side response caching.\n- ✅ Be careful with **Wildcards** and **Sensitive Data**.\n\nCache smart to make your apps feel like magic! ⚡🧠"
+        }
+    ]
+}

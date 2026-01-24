@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_performance",
+    "topicId": "performance",
+    "topicTitle": "Performance Profiling",
+    "description": "Master application performance profiling including APM tools, bottleneck detection, and optimization techniques",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "performance_1",
+            "type": "content",
+            "title": "Performance Overview",
+            "content": "# Performance Profiling 🚀\n\nFind and fix slow code.\n\n## What You'll Learn\n- **APM Tools** - Application monitoring\n- **Bottlenecks** - Finding slow spots\n- **Optimization** - Making it faster\n\n## Why Profile?\n| Reason | Benefit |\n|--------|--------|\n| User experience | Happy users |\n| Cost | Less resources |\n| Scale | Handle more load |"
+        },
+        {
+            "id": "performance_2",
+            "type": "content",
+            "title": "APM Introduction",
+            "content": "# Application Performance Monitoring 📊\n\n## What APM Tracks\n- Response times\n- Error rates\n- Database queries\n- External calls\n- Resource usage\n\n## Popular APM Tools\n| Tool | Type |\n|------|------|\n| New Relic | Commercial |\n| Datadog | Commercial |\n| Dynatrace | Commercial |\n| Jaeger | Open source |\n| OpenTelemetry | Standard |"
+        },
+        {
+            "id": "performance_3",
+            "type": "content",
+            "title": "OpenTelemetry",
+            "content": "# OpenTelemetry 🔭\n\nVendor-neutral observability.\n\n## Setup (Python)\n```python\nfrom opentelemetry import trace\nfrom opentelemetry.sdk.trace import TracerProvider\nfrom opentelemetry.sdk.trace.export import BatchSpanProcessor\n\nprovider = TracerProvider()\nprocessor = BatchSpanProcessor(exporter)\nprovider.add_span_processor(processor)\ntrace.set_tracer_provider(provider)\n\ntracer = trace.get_tracer(__name__)\n```\n\n## Auto-Instrumentation\n```bash\npip install opentelemetry-instrumentation-flask\nopentelemetry-instrument python app.py\n```"
+        },
+        {
+            "id": "performance_quiz_1",
+            "type": "quiz",
+            "title": "APM Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What does APM primarily help with?",
+            "quizOptions": [
+                "Security",
+                "Application performance visibility",
+                "User authentication",
+                "File storage"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "performance_4",
+            "type": "content",
+            "title": "Tracing Deep Dive",
+            "content": "# Distributed Tracing 🔍\n\n## Trace Structure\n```\nTrace: Request lifecycle\n├── Span: API endpoint (100ms)\n│   ├── Span: Auth check (10ms)\n│   ├── Span: DB query (40ms)\n│   └── Span: Cache lookup (5ms)\n└── Span: Response (5ms)\n```\n\n## Key Metrics\n- Span duration\n- Child span count\n- Error annotations"
+        },
+        {
+            "id": "performance_5",
+            "type": "content",
+            "title": "Finding Bottlenecks",
+            "content": "# Bottleneck Detection 🔎\n\n## Common Bottlenecks\n| Type | Signs |\n|------|-------|\n| CPU | High CPU % |\n| Memory | OOM, GC pauses |\n| I/O | Slow disk/network |\n| Database | Slow queries |\n| External APIs | High latency |\n\n## Investigation\n```\n1. Check high-level metrics\n2. Drill into traces\n3. Profile specific code\n4. Fix and verify\n```"
+        },
+        {
+            "id": "performance_6",
+            "type": "content",
+            "title": "Database Profiling",
+            "content": "# Database Performance 🗄️\n\n## Slow Query Log\n```sql\nSET slow_query_log = 1;\nSET long_query_time = 1;\n```\n\n## EXPLAIN\n```sql\nEXPLAIN ANALYZE\nSELECT * FROM users\nWHERE email = 'test@example.com';\n```\n\n## Common Issues\n- Missing indexes\n- N+1 queries\n- Full table scans\n- Lock contention"
+        },
+        {
+            "id": "performance_quiz_2",
+            "type": "quiz",
+            "title": "Database Quiz",
+            "content": "Test your database knowledge!",
+            "quizQuestion": "What is an N+1 query problem?",
+            "quizOptions": [
+                "Fast queries",
+                "One query plus N additional queries in a loop",
+                "Missing data",
+                "Syntax errors"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "performance_7",
+            "type": "content",
+            "title": "CPU Profiling",
+            "content": "# CPU Profiling 💻\n\n## Python cProfile\n```python\nimport cProfile\nimport pstats\n\nprofiler = cProfile.Profile()\nprofiler.enable()\n# Your code\nprofiler.disable()\nstats = pstats.Stats(profiler)\nstats.sort_stats('cumulative')\nstats.print_stats(10)\n```\n\n## Flame Graphs\nVisualize where time is spent.\n```\n─────────────────────────\n   main() 100%\n  ────────────────────\n     process() 80%\n    ───────────────\n      query() 60%\n```"
+        },
+        {
+            "id": "performance_8",
+            "type": "content",
+            "title": "Memory Profiling",
+            "content": "# Memory Profiling 🧠\n\n## Python memory_profiler\n```python\nfrom memory_profiler import profile\n\n@profile\ndef my_function():\n    big_list = [i for i in range(1000000)]\n    return sum(big_list)\n```\n\n## Common Issues\n- Memory leaks\n- Large objects\n- Unnecessary copies\n- Cache growth\n\n## Tools\n- memory_profiler (Python)\n- heapdump (Node.js)\n- JVisualVM (Java)"
+        },
+        {
+            "id": "performance_9",
+            "type": "content",
+            "title": "Load Testing",
+            "content": "# Load Testing 🧪\n\n## Tools\n| Tool | Language |\n|------|----------|\n| k6 | JavaScript |\n| Locust | Python |\n| Gatling | Scala |\n| JMeter | Java |\n\n## k6 Example\n```javascript\nimport http from 'k6/http';\n\nexport let options = {\n  vus: 100,\n  duration: '5m',\n};\n\nexport default function() {\n  http.get('https://api.example.com/users');\n}\n```"
+        },
+        {
+            "id": "performance_quiz_3",
+            "type": "quiz",
+            "title": "Profiling Quiz",
+            "content": "Test your profiling knowledge!",
+            "quizQuestion": "What do flame graphs help visualize?",
+            "quizOptions": [
+                "Network traffic",
+                "CPU time spent in functions",
+                "Disk usage",
+                "Memory allocation"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "performance_10",
+            "type": "content",
+            "title": "Frontend Performance",
+            "content": "# Frontend Profiling 🖥️\n\n## Core Web Vitals\n| Metric | Target |\n|--------|--------|\n| LCP | < 2.5s |\n| FID | < 100ms |\n| CLS | < 0.1 |\n\n## Chrome DevTools\n- Performance tab\n- Network waterfall\n- Lighthouse audit\n\n## Bundle Analysis\n```bash\nnpx webpack-bundle-analyzer\n```"
+        },
+        {
+            "id": "performance_11",
+            "type": "content",
+            "title": "Caching Strategies",
+            "content": "# Caching for Performance 💾\n\n## Cache Layers\n```\nBrowser → CDN → App Cache → Database\n```\n\n## Types\n| Type | Use |\n|------|-----|\n| Browser | Static assets |\n| CDN | Global content |\n| Redis | App data |\n| Query cache | DB results |\n\n## Cache-Control\n```\nCache-Control: max-age=3600, public\n```"
+        },
+        {
+            "id": "performance_12",
+            "type": "content",
+            "title": "Optimization Techniques",
+            "content": "# Quick Wins ⚡\n\n## Backend\n- Add database indexes\n- Use connection pooling\n- Enable compression\n- Cache expensive operations\n\n## Frontend\n- Compress images\n- Lazy load content\n- Minimize JavaScript\n- Use CDN\n\n## General\n- Remove unused code\n- Batch operations\n- Async where possible"
+        },
+        {
+            "id": "performance_quiz_4",
+            "type": "quiz",
+            "title": "Optimization Quiz",
+            "content": "Test your optimization knowledge!",
+            "quizQuestion": "What is the target for Largest Contentful Paint (LCP)?",
+            "quizOptions": [
+                "< 0.1s",
+                "< 1s",
+                "< 2.5s",
+                "< 10s"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "performance_13",
+            "type": "content",
+            "title": "Continuous Profiling",
+            "content": "# Continuous Profiling 📈\n\nProfile in production.\n\n## Benefits\n- Real workload data\n- Catch regressions\n- Find rare issues\n\n## Tools\n- Pyroscope\n- Datadog Continuous Profiler\n- Google Cloud Profiler\n\n## Low Overhead\n- Sampling-based\n- < 5% CPU overhead"
+        },
+        {
+            "id": "performance_14",
+            "type": "content",
+            "title": "SLOs and Performance",
+            "content": "# Performance SLOs 🎯\n\n## Example SLOs\n| Metric | Target |\n|--------|--------|\n| P95 latency | < 200ms |\n| P99 latency | < 500ms |\n| Error rate | < 0.1% |\n| Availability | 99.9% |\n\n## Alerting\n```promql\nhistogram_quantile(0.95, \n  rate(http_request_duration_seconds_bucket[5m])) > 0.2\n```"
+        },
+        {
+            "id": "performance_15",
+            "type": "content",
+            "title": "Performance Testing CI",
+            "content": "# CI/CD Performance 🔄\n\n## Integration\n```yaml\n- name: Performance Test\n  run: |\n    k6 run --summary-export=results.json test.js\n    \n- name: Check Thresholds\n  run: |\n    if [ $(jq '.p95 > 200' results.json) ]; then\n      exit 1\n    fi\n```\n\n## Regression Detection\n- Compare with baseline\n- Fail on degradation\n- Track over time"
+        },
+        {
+            "id": "performance_16",
+            "type": "content",
+            "title": "Real User Monitoring",
+            "content": "# RUM 👤\n\nMeasure real user experience.\n\n## What to Track\n- Page load times\n- API latencies\n- Errors\n- User actions\n\n## Tools\n- Datadog RUM\n- New Relic Browser\n- Google Analytics\n- Sentry Performance\n\n## Benefits\n- Real network conditions\n- Device variety\n- Geographic insights"
+        },
+        {
+            "id": "performance_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is continuous profiling?",
+            "quizOptions": [
+                "One-time analysis",
+                "Profiling in production continuously",
+                "Manual testing",
+                "Static code analysis"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "performance_17",
+            "type": "content",
+            "title": "Case Study",
+            "content": "# Case Study 📖\n\n## Problem\n- API response: 2 seconds\n- Target: < 200ms\n\n## Investigation\n1. Traced request\n2. Found N+1 queries (100 queries)\n3. Fixed with eager loading\n4. Result: 150ms\n\n## Lesson\nAlways check database queries first!"
+        },
+        {
+            "id": "performance_18",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Do's\n- ✅ Measure before optimizing\n- ✅ Set SLO targets\n- ✅ Profile in production\n- ✅ Test regularly\n\n## Don'ts\n- ❌ Premature optimization\n- ❌ Ignore slow dev tests\n- ❌ Skip load testing\n- ❌ Optimize without data"
+        },
+        {
+            "id": "performance_19",
+            "type": "content",
+            "title": "Tooling Setup",
+            "content": "# Quick Setup 🛠️\n\n## Python\n```bash\npip install opentelemetry-api\npip install opentelemetry-sdk\npip install py-spy  # CPU profiler\n```\n\n## Node.js\n```bash\nnpm install @opentelemetry/api\nnpm install clinic  # Profiler\n```\n\n## Visualization\n- Jaeger UI\n- Grafana\n- Pyroscope"
+        },
+        {
+            "id": "performance_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### APM\n- ✅ OpenTelemetry standard\n- ✅ Distributed tracing\n- ✅ Real-time visibility\n\n### Profiling\n- ✅ CPU flame graphs\n- ✅ Memory analysis\n- ✅ Database queries\n\n### Best Practices\n- ✅ Measure first\n- ✅ Set SLOs\n- ✅ Continuous profiling\n\nHappy optimizing! 🚀"
+        }
+    ]
+}

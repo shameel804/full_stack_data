@@ -1,0 +1,167 @@
+{
+    "id": "learn_integtest_api",
+    "topicId": "api",
+    "topicTitle": "API Integration",
+    "description": "Master the integration of multiple APIs, including mock servers, authentication flows, and error resilience",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "api_1",
+            "type": "content",
+            "title": "API Integration Strategy",
+            "content": "# API Integration 📡\n\nTesting the communication between your app and other microservices or external APIs (Stripe, GitHub, etc.).\n\n## Key Challenges\n- Flaky network.\n- Rate limiting.\n- Dirty data from third-parties.\n- Breaking schema changes."
+        },
+        {
+            "id": "api_2",
+            "type": "content",
+            "title": "Mock Servers",
+            "content": "# Mocking the World 🏗️\n\nDon't hit real APIs during local integration tests!\n\n- **WireMock**: A simulator for HTTP-based APIs.\n- **Prism**: Mock server for OpenAPI/Swagger files.\n- **Nock**: Node.js library to intercept and mock HTTP requests."
+        },
+        {
+            "id": "api_3",
+            "type": "content",
+            "title": "Using Nock",
+            "content": "# Intercepting Traffic 🛡️\n\n```javascript\nconst nock = require('nock');\n\nnock('https://api.github.com')\n  .get('/user')\n  .reply(200, { login: 'octocat' });\n\n// Any request to github.com/user is now intercepted!\n```"
+        },
+        {
+            "id": "api_4",
+            "type": "content",
+            "title": "Testing OAuth Flows",
+            "content": "# Auth Integration 🔐\n\nHow do you test \"Login with Google\"?\n\n1. **Integration**: Redirect to a mock auth provider.\n2. **Verify**: Check if your app correctly parses the callback token and creates a session."
+        },
+        {
+            "id": "api_5",
+            "quizQuestion": "Which tool would you use to intercept and mock outbound HTTP requests in a Node.js test environment?",
+            "quizOptions": [
+                "Postman",
+                "Nock",
+                "Cypress",
+                "Jenkins"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Tooling Quiz",
+            "content": "Intercepting requests."
+        },
+        {
+            "id": "api_6",
+            "type": "content",
+            "title": "Retry Strategies",
+            "content": "# Resilience 🛡️\n\nIntegration tests should verify that your app handles network blips.\n\n- **Retry**: Does it try again on a 503?\n- **Circuit Breaker**: Does it stop hitting a failing service?\n- **Timeout**: Does it give up after X seconds?"
+        },
+        {
+            "id": "api_7",
+            "type": "content",
+            "title": "Testing Webhooks",
+            "content": "# Reverse Traffic ↩️\n\nWebhooks are calls FROM an external service TO your app.\n\n- **Test Strategy**: Manually trigger a POST request to your webhook endpoint with a raw payload and verify the internal state change (e.g., \"Order Marked Paid\")."
+        },
+        {
+            "id": "api_8",
+            "type": "content",
+            "title": "OpenAPI Validation",
+            "content": "# Schema Guards 📜\n\nUse your `swagger.yaml` or `openapi.json` to automatically validate API responses in tests.\n\n```javascript\n// In test\nexpect(response).toSatisfyApiSpec();\n```"
+        },
+        {
+            "id": "api_9",
+            "type": "content",
+            "title": "GraphQL Integration",
+            "content": "# Complex Queries 🕸️\n\nTesting GraphQL requires verifying the exact fields returned vs requested.\n\n- Test that nested fragments resolve correctly.\n- Verify error handling for partially failed resolvers."
+        },
+        {
+            "id": "api_10",
+            "quizQuestion": "What is the benefit of using an OpenAPI spec for integration tests?",
+            "quizOptions": [
+                "It writes the tests for you",
+                "It ensures the API implementation matches the documentation",
+                "It makes the API run faster",
+                "It bypasses firewalls"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Validation Quiz",
+            "content": "Spec-driven testing."
+        },
+        {
+            "id": "api_11",
+            "type": "content",
+            "title": "Pagination & Limits",
+            "content": "# Large Data 📊\n\nIntegration tests must cover:\n\n- `?limit=10&offset=20` logic.\n- Ensuring the `Total-Count` header is present.\n- Handling empty pages gracefully."
+        },
+        {
+            "id": "api_12",
+            "type": "content",
+            "title": "Idempotency",
+            "content": "# Safe Retries 🔁\n\nVerify that sending the same POST request twice doesn't create duplicate orders.\n\n- Check for `Idempotency-Key` implementation.\n- Ensure the second call returns the same result as the first."
+        },
+        {
+            "id": "api_13",
+            "type": "content",
+            "title": "CORS Integration",
+            "content": "# Cross-Origin 🌐\n\nTests should check that `OPTIONS` preflight requests return the correct `Access-Control-Allow-Origin` headers, especially when moving between staging and local."
+        },
+        {
+            "id": "api_14",
+            "type": "content",
+            "title": "Payload Size Limits",
+            "content": "# Stressing Boundaries 🧱\n\nWhat happens if someone sends a 50MB JSON payload?\n\n- Test that your middleware (e.g., `body-parser`) correctly rejects oversized requests with a **413 Payload Too Large**."
+        },
+        {
+            "id": "api_15",
+            "quizQuestion": "What status code should an API return if a request is over the allowed size limit?",
+            "quizOptions": [
+                "400 Bad Request",
+                "404 Not Found",
+                "413 Payload Too Large",
+                "500 Internal Error"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "HTTP Quiz",
+            "content": "Status codes."
+        },
+        {
+            "id": "api_16",
+            "type": "content",
+            "title": "Testing gRPC",
+            "content": "# Binary Protocols 🦾\n\ngRPC uses ProtoBufs. Integration tests focus on types and streaming reliability rather than JSON structure."
+        },
+        {
+            "id": "api_17",
+            "type": "content",
+            "title": "API Gateway Patterns",
+            "content": "# The Middle Man 🚪\n\nIf using a gateway (Kong, AWS API Gateway), integration tests should verify rate limiting and request transformation logic at the edge."
+        },
+        {
+            "id": "api_18",
+            "type": "content",
+            "title": "Security Integration",
+            "content": "# Permission Leaks 🔓\n\nCrucial Integration tests:\n\n- User A should NOT be able to access `GET /user/B/profile`.\n- Verify JWT expiration logic results in a **401 Unauthorized**."
+        },
+        {
+            "id": "api_19",
+            "type": "content",
+            "title": "Logging & Observability",
+            "content": "# The Trail 👣\n\nIntegration tests should ensure that a **Correlation ID** is passed through all service calls to enable distributed tracing in production."
+        },
+        {
+            "id": "api_20",
+            "quizQuestion": "What helps track a single request as it propagates through multiple integrated microservices?",
+            "quizOptions": [
+                "Password",
+                "Correlation ID",
+                "User ID",
+                "Database ID"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Observability."
+        },
+        {
+            "id": "api_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Use **Mock Servers** (Nock, WireMock) locally.\n- ✅ Validate against your **OpenAPI** spec.\n- ✅ Test **Resilience** (retries, timeouts).\n- ✅ Verify **Security** and scoping.\n\nMaster the connections between your services! 🚀"
+        }
+    ]
+}

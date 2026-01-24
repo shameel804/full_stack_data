@@ -1,0 +1,161 @@
+{
+    "id": "learn_microservices_dp",
+    "topicId": "microservices",
+    "topicTitle": "Microservices Patterns",
+    "description": "Master microservices patterns including Saga, CQRS, and Event Sourcing for distributed systems",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "microservices_1",
+            "type": "content",
+            "title": "Welcome to Microservices Patterns",
+            "content": "# Microservices Patterns 🏗️\n\nMaster patterns for distributed systems!\n\n## What You'll Learn:\n- **Saga Pattern** - Distributed transactions\n- **CQRS** - Command Query Responsibility Segregation\n- **Event Sourcing** - Event-based state\n- **Outbox Pattern** - Reliable messaging\n- **Circuit Breaker** - Fault tolerance\n\n> 💡 These patterns solve distributed system challenges!\n\n## Why These Matter:\n- 🔄 **Data Consistency** - Across services\n- 📈 **Scalability** - Independent scaling\n- 🛡️ **Resilience** - Handle failures\n- 📊 **Audit Trail** - Complete history"
+        },
+        {
+            "id": "microservices_2",
+            "type": "content",
+            "title": "The Problem with Microservices",
+            "content": "# The Distributed Challenge 🤔\n\n## Monolith Transactions:\n```\n┌─────────────────────────┐\n│   Single Database       │\n│   ACID Transactions     │\n│   Simple rollback       │\n└─────────────────────────┘\n```\n\n## Microservices Reality:\n```\n┌─────────┐  ┌─────────┐  ┌─────────┐\n│Order DB │  │Payment  │  │Inventory│\n│         │  │   DB    │  │   DB    │\n└────┬────┘  └────┬────┘  └────┬────┘\n     │            │            │\n     └────────────┼────────────┘\n           No ACID!\n```\n\n## Challenges:\n| Problem | Solution Pattern |\n|---------|------------------|\n| Distributed transactions | Saga |\n| Query across services | CQRS |\n| State reconstruction | Event Sourcing |\n| Reliable messaging | Outbox |\n| Service failures | Circuit Breaker |"
+        },
+        {
+            "id": "microservices_3",
+            "type": "content",
+            "title": "Saga Pattern",
+            "content": "# Saga Pattern 📖\n\nManage distributed transactions as a sequence of local transactions.\n\n## Concept:\n```\nOrder Created → Payment Charged → Inventory Reserved → Order Confirmed\n      │              │                   │\n      └──────────────┴───────────────────┘\n         If failure: Compensating transactions\n```\n\n## Types:\n\n### Choreography (Event-Based):\n```\nOrder   →  Payment   →  Inventory\n emit       listen       listen\n event      & emit       & emit\n```\n\n### Orchestration (Central Control):\n```\n       ┌─────────────┐\n       │ Saga        │\n       │ Orchestrator│\n       └──────┬──────┘\n        ╱     │     ╲\n    Order  Payment  Inventory\n```\n\n## Compensation:\n- Each step has a compensating action\n- If step 3 fails, undo steps 2 and 1\n- Eventually consistent"
+        },
+        {
+            "id": "microservices_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your Saga knowledge!",
+            "quizQuestion": "What is a compensating transaction in Saga?",
+            "quizOptions": [
+                "Extra payment",
+                "Undo action for failed step",
+                "Database backup",
+                "Service restart"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "microservices_4",
+            "type": "content",
+            "title": "Saga Implementation",
+            "content": "# Saga Implementation 💻\n\n## Choreography Example:\n```javascript\n// Order Service\nclass OrderService {\n    async createOrder(data) {\n        const order = await Order.create(data);\n        await eventBus.publish('order.created', {\n            orderId: order.id,\n            amount: order.total\n        });\n        return order;\n    }\n    \n    async handlePaymentFailed(event) {\n        await Order.updateStatus(event.orderId, 'cancelled');\n    }\n}\n\n// Payment Service\nclass PaymentService {\n    async handleOrderCreated(event) {\n        try {\n            await this.chargePayment(event);\n            await eventBus.publish('payment.completed', event);\n        } catch (error) {\n            await eventBus.publish('payment.failed', event);\n        }\n    }\n}\n\n// Inventory Service\nclass InventoryService {\n    async handlePaymentCompleted(event) {\n        try {\n            await this.reserveStock(event);\n            await eventBus.publish('inventory.reserved', event);\n        } catch (error) {\n            await eventBus.publish('inventory.failed', event);\n            // Triggers payment refund\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "microservices_5",
+            "type": "content",
+            "title": "CQRS Pattern",
+            "content": "# CQRS Pattern 📊\n\nCommand Query Responsibility Segregation.\n\n## Traditional:\n```\n┌─────────────┐\n│   Service   │\n│─────────────│\n│ Read/Write  │──── Single Model ──── Single DB\n└─────────────┘\n```\n\n## CQRS:\n```\n        Commands                    Queries\n           │                           │\n           ▼                           ▼\n    ┌─────────────┐            ┌─────────────┐\n    │   Write     │            │    Read     │\n    │   Model     │            │    Model    │\n    └──────┬──────┘            └──────┬──────┘\n           │                           │\n           ▼                           ▼\n    ┌─────────────┐            ┌─────────────┐\n    │  Write DB   │──Events──►│   Read DB   │\n    │ (Normalized)│            │ (Optimized) │\n    └─────────────┘            └─────────────┘\n```\n\n## When to Use:\n- ✅ Read/write have different needs\n- ✅ Complex queries needed\n- ✅ High read scalability needed\n- ❌ Simple CRUD applications"
+        },
+        {
+            "id": "microservices_6",
+            "type": "content",
+            "title": "CQRS Implementation",
+            "content": "# CQRS Implementation 💻\n\n## Command Side:\n```javascript\nclass OrderCommandService {\n    async createOrder(command) {\n        const order = new Order(command);\n        await this.writeRepo.save(order);\n        \n        // Publish event for read side\n        await eventBus.publish('order.created', {\n            id: order.id,\n            customer: order.customer,\n            items: order.items,\n            total: order.total\n        });\n        \n        return order.id;\n    }\n}\n```\n\n## Query Side:\n```javascript\nclass OrderQueryService {\n    async getOrderSummary(orderId) {\n        // Read from denormalized view\n        return this.readDb.orderSummaries.findOne({ orderId });\n    }\n    \n    async getCustomerOrders(customerId) {\n        return this.readDb.customerOrders.find({ customerId });\n    }\n}\n\n// Event handler updates read model\nclass OrderProjection {\n    async handleOrderCreated(event) {\n        await this.readDb.orderSummaries.insert({\n            orderId: event.id,\n            customerName: event.customer.name,\n            itemCount: event.items.length,\n            total: event.total\n        });\n    }\n}\n```"
+        },
+        {
+            "id": "microservices_7",
+            "type": "content",
+            "title": "Event Sourcing",
+            "content": "# Event Sourcing 📝\n\nStore state as a sequence of events.\n\n## Traditional:\n```\nCurrent State: { balance: 100 }\n(History lost!)\n```\n\n## Event Sourcing:\n```\nEvents:\n1. AccountOpened { }                    balance: 0\n2. MoneyDeposited { amount: 200 }      balance: 200\n3. MoneyWithdrawn { amount: 50 }       balance: 150\n4. MoneyWithdrawn { amount: 50 }       balance: 100\n        ↓\n    Replay events = Current state\n```\n\n## Benefits:\n| Benefit | Description |\n|---------|-------------|\n| Audit Trail | Complete history |\n| Time Travel | Reconstruct any point |\n| Debug | Replay to find bugs |\n| Analytics | Event stream analysis |\n\n## Challenges:\n- Event schema evolution\n- Storage growth\n- Complexity"
+        },
+        {
+            "id": "microservices_quiz_2",
+            "type": "quiz",
+            "title": "Event Sourcing Check",
+            "content": "Test your Event Sourcing knowledge!",
+            "quizQuestion": "How do you get current state in Event Sourcing?",
+            "quizOptions": [
+                "Query database",
+                "Replay all events",
+                "Check cache",
+                "Ask user"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "microservices_8",
+            "type": "content",
+            "title": "Event Sourcing Implementation",
+            "content": "# Event Sourcing Implementation 💻\n\n## Event Store:\n```javascript\nclass EventStore {\n    async append(aggregateId, events) {\n        for (const event of events) {\n            await db.events.insert({\n                aggregateId,\n                type: event.type,\n                data: event.data,\n                timestamp: Date.now(),\n                version: event.version\n            });\n        }\n    }\n    \n    async getEvents(aggregateId) {\n        return db.events.find({ aggregateId })\n            .sort({ version: 1 });\n    }\n}\n```\n\n## Aggregate:\n```javascript\nclass BankAccount {\n    constructor() {\n        this.balance = 0;\n        this.events = [];\n    }\n    \n    apply(event) {\n        switch (event.type) {\n            case 'MoneyDeposited':\n                this.balance += event.data.amount;\n                break;\n            case 'MoneyWithdrawn':\n                this.balance -= event.data.amount;\n                break;\n        }\n    }\n    \n    static fromEvents(events) {\n        const account = new BankAccount();\n        events.forEach(e => account.apply(e));\n        return account;\n    }\n}\n```"
+        },
+        {
+            "id": "microservices_9",
+            "type": "content",
+            "title": "Outbox Pattern",
+            "content": "# Outbox Pattern 📤\n\nReliable event publishing with database transactions.\n\n## The Problem:\n```javascript\nasync createOrder(data) {\n    await db.orders.insert(order);  // Step 1\n    await eventBus.publish('order.created');  // Step 2\n    // What if step 2 fails? Inconsistency!\n}\n```\n\n## Outbox Solution:\n```\n┌─────────────────────────┐\n│ Database Transaction    │\n│  1. Insert Order        │\n│  2. Insert to Outbox    │\n└───────────┬─────────────┘\n            │\n┌───────────▼─────────────┐\n│ Background Process      │\n│  Read Outbox → Publish  │\n│  Mark as sent           │\n└─────────────────────────┘\n```\n\n## Implementation:\n```javascript\nasync createOrder(data) {\n    await db.transaction(async (tx) => {\n        const order = await tx.orders.insert(data);\n        await tx.outbox.insert({\n            type: 'order.created',\n            payload: order,\n            sent: false\n        });\n    });\n}\n\n// Background worker\nasync processOutbox() {\n    const pending = await db.outbox.find({ sent: false });\n    for (const msg of pending) {\n        await eventBus.publish(msg.type, msg.payload);\n        await db.outbox.update(msg.id, { sent: true });\n    }\n}\n```"
+        },
+        {
+            "id": "microservices_10",
+            "type": "content",
+            "title": "Circuit Breaker",
+            "content": "# Circuit Breaker 🔌\n\nPrevent cascading failures in distributed systems.\n\n## States:\n```\n        ┌─────────────┐\n   ┌────│   CLOSED    │◄───┐\n   │    └──────┬──────┘    │\n   │           │ failures   │ success\n   │           ▼           │\n   │    ┌─────────────┐    │\nfail────│    OPEN     │────┘\n   │    └──────┬──────┘\n   │           │ timeout\n   │           ▼\n   │    ┌─────────────┐\n   └────│  HALF-OPEN  │\n        └─────────────┘\n```\n\n## Implementation:\n```javascript\nclass CircuitBreaker {\n    constructor(options) {\n        this.failureThreshold = options.failureThreshold || 5;\n        this.resetTimeout = options.resetTimeout || 30000;\n        this.state = 'CLOSED';\n        this.failures = 0;\n    }\n    \n    async call(fn) {\n        if (this.state === 'OPEN') {\n            throw new Error('Circuit open');\n        }\n        \n        try {\n            const result = await fn();\n            this.onSuccess();\n            return result;\n        } catch (error) {\n            this.onFailure();\n            throw error;\n        }\n    }\n    \n    onFailure() {\n        this.failures++;\n        if (this.failures >= this.failureThreshold) {\n            this.state = 'OPEN';\n            setTimeout(() => this.state = 'HALF-OPEN', this.resetTimeout);\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "microservices_11",
+            "type": "content",
+            "title": "API Gateway Pattern",
+            "content": "# API Gateway Pattern 🚪\n\nSingle entry point for all clients.\n\n## Architecture:\n```\n   Mobile    Web    Partner\n      │       │        │\n      └───────┼────────┘\n              ▼\n     ┌─────────────────┐\n     │   API Gateway   │\n     │  ─────────────  │\n     │  Auth, Rate     │\n     │  Limit, Route   │\n     └────────┬────────┘\n        ╱     │     ╲\n    Users  Orders  Products\n```\n\n## Responsibilities:\n- Authentication & Authorization\n- Rate limiting\n- Request routing\n- Load balancing\n- Response caching\n- Protocol translation\n\n## Implementation:\n```javascript\n// Express Gateway\napp.use('/api/users/*', authenticate, rateLimit, \n    proxy({ target: 'http://user-service:3001' }));\n\napp.use('/api/orders/*', authenticate, rateLimit,\n    proxy({ target: 'http://order-service:3002' }));\n```"
+        },
+        {
+            "id": "microservices_quiz_3",
+            "type": "quiz",
+            "title": "Patterns Check",
+            "content": "Test your pattern knowledge!",
+            "quizQuestion": "What problem does the Outbox pattern solve?",
+            "quizOptions": [
+                "Rate limiting",
+                "Authentication",
+                "Reliable event publishing",
+                "Caching"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "microservices_12",
+            "type": "content",
+            "title": "Strangler Fig Pattern",
+            "content": "# Strangler Fig Pattern 🌿\n\nGradually migrate from monolith to microservices.\n\n## Concept:\n```\nPhase 1: Monolith with Facade\n┌─────────────────────────────┐\n│         Facade              │\n│    ┌───────────────────┐    │\n│    │    Monolith       │    │\n│    └───────────────────┘    │\n└─────────────────────────────┘\n\nPhase 2: Extract Services\n┌─────────────────────────────┐\n│         Facade              │\n│  ┌─────────┐ ┌──────────┐   │\n│  │New Svc  │ │ Monolith │   │\n│  └─────────┘ └──────────┘   │\n└─────────────────────────────┘\n\nPhase 3: Complete Migration\n┌─────────────────────────────┐\n│         Facade              │\n│  ┌─────┐┌─────┐┌─────┐      │\n│  │Svc A││Svc B││Svc C│      │\n│  └─────┘└─────┘└─────┘      │\n└─────────────────────────────┘\n```\n\n## Steps:\n1. Add facade/proxy in front\n2. Extract one feature to new service\n3. Route traffic to new service\n4. Repeat until monolith empty"
+        },
+        {
+            "id": "microservices_13",
+            "type": "content",
+            "title": "Service Mesh",
+            "content": "# Service Mesh 🕸️\n\nInfrastructure layer for service-to-service communication.\n\n## Architecture:\n```\n┌──────────────────────────────┐\n│ Service A  │  Sidecar Proxy  │\n└──────┬─────┴────────┬────────┘\n       │              │\n       │  ┌───────────┴───────────┐\n       │  │    Control Plane      │\n       │  └───────────┬───────────┘\n       │              │\n┌──────┴─────┬────────┴────────┐\n│ Service B  │  Sidecar Proxy  │\n└────────────┴─────────────────┘\n```\n\n## Features:\n| Feature | Description |\n|---------|-------------|\n| mTLS | Automatic encryption |\n| Load Balancing | Intelligent routing |\n| Observability | Metrics, tracing |\n| Retries | Automatic retry logic |\n| Circuit Breaking | Fault tolerance |\n\n## Popular Options:\n- Istio\n- Linkerd\n- Consul Connect"
+        },
+        {
+            "id": "microservices_14",
+            "type": "content",
+            "title": "Choosing Patterns",
+            "content": "# Choosing Patterns 🎯\n\n## Decision Guide:\n\n### Need distributed transactions?\n→ **Saga Pattern**\n\n### Different read/write loads?\n→ **CQRS**\n\n### Need complete audit trail?\n→ **Event Sourcing**\n\n### Reliable async messaging?\n→ **Outbox Pattern**\n\n### Handle service failures?\n→ **Circuit Breaker**\n\n### Migrating from monolith?\n→ **Strangler Fig**\n\n## Combinations:\n```\nCQRS + Event Sourcing\n  = Powerful audit + scalable reads\n\nSaga + Outbox\n  = Reliable distributed transactions\n\nCircuit Breaker + Retry\n  = Resilient communication\n```"
+        },
+        {
+            "id": "microservices_15",
+            "type": "content",
+            "title": "Common Pitfalls",
+            "content": "# Common Pitfalls ⚠️\n\n## 1. Distributed Monolith\n```\n❌ Services tightly coupled\n❌ Synchronous calls everywhere\n❌ Shared database\n\n✅ Async communication\n✅ Database per service\n✅ Loose coupling\n```\n\n## 2. Over-Engineering\n```\n❌ CQRS for simple CRUD\n❌ Event Sourcing for simple state\n❌ Saga for single-service ops\n\n✅ Start simple\n✅ Add patterns when needed\n```\n\n## 3. Ignoring Consistency\n```\n❌ Assuming immediate consistency\n❌ No compensation handling\n\n✅ Design for eventual consistency\n✅ Handle partial failures\n```\n\n## 4. Missing Observability\n```\n❌ No distributed tracing\n❌ No centralized logging\n\n✅ Correlation IDs\n✅ Distributed tracing (Jaeger)\n✅ Centralized logs (ELK)\n```"
+        },
+        {
+            "id": "microservices_quiz_4",
+            "type": "quiz",
+            "title": "Final Check",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "When should you use Event Sourcing?",
+            "quizOptions": [
+                "Simple CRUD apps",
+                "Need complete audit trail",
+                "Single database only",
+                "No events needed"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "microservices_16",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Microservices Patterns!\n\n## Key Patterns:\n\n### Saga\n- Distributed transactions\n- Choreography or Orchestration\n- Compensating transactions\n\n### CQRS\n- Separate read/write models\n- Optimized for different loads\n- Eventually consistent\n\n### Event Sourcing\n- Store state as events\n- Complete audit trail\n- Time travel debugging\n\n### Supporting Patterns\n- Outbox: Reliable publishing\n- Circuit Breaker: Fault tolerance\n- API Gateway: Single entry point\n\n## When to Use:\n| Pattern | Use Case |\n|---------|----------|\n| Saga | Multi-service transactions |\n| CQRS | High read scale |\n| Event Sourcing | Audit requirements |\n\n## Next Steps:\n- Implement in a real project\n- Learn Kubernetes orchestration\n- Study distributed systems\n\nHappy architecting! 🏗️"
+        }
+    ]
+}

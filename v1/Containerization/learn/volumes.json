@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_volumes",
+    "topicId": "volumes",
+    "topicTitle": "Docker Volumes",
+    "description": "Master data persistence in Docker including named volumes, bind mounts, tmpfs, and volume management strategies",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "volumes_1",
+            "type": "content",
+            "title": "Welcome to Docker Volumes",
+            "content": "# Docker Volumes 💾\n\nPersist and share data in containerized applications.\n\n## What you'll learn:\n- **Persistence** - Keeping data beyond container lifecycle\n- **Bind mounts** - Mapping host directories\n- **Named volumes** - Docker-managed storage\n- **Volume management** - Best practices\n\n> 💡 **Fun Fact:** Container filesystems are ephemeral - data is lost when containers are removed!\n\n## Why Volumes?\n\n| Problem | Solution |\n|---------|----------|\n| Data lost on container removal | Volumes persist data |\n| Need to share files with host | Bind mounts |\n| Sharing data between containers | Named volumes |\n| Performance issues with overlay | Volume drivers |\n\n## Storage Types\n\n```\n┌─────────────────────────────────────────────────┐\n│              CONTAINER                           │\n├─────────────────────────────────────────────────┤\n│  /var     /tmp     /app/data    /app/config    │\n│    │        │          │             │          │\n│    ▼        ▼          ▼             ▼          │\n│ Container  tmpfs   Named Vol    Bind Mount     │\n│  Layer    (RAM)   (Docker)      (Host Path)    │\n└─────────────────────────────────────────────────┘\n```\n\nLet's explore data persistence!"
+        },
+        {
+            "id": "volumes_2",
+            "type": "content",
+            "title": "Container Storage Layers",
+            "content": "# Container Storage 📦\n\n## How Container Storage Works\n\n```\n┌───────────────────────────────────────────────┐\n│           CONTAINER (Read-Write)               │\n│  ┌─────────────────────────────────────────┐  │\n│  │      Thin Read-Write Layer              │  │\n│  │  (Runtime changes: logs, temp files)    │  │\n│  └─────────────────────────────────────────┘  │\n├───────────────────────────────────────────────┤\n│              IMAGE (Read-Only)                 │\n│  ┌─────────────────────────────────────────┐  │\n│  │  Layer 4: Application code              │  │\n│  ├─────────────────────────────────────────┤  │\n│  │  Layer 3: Dependencies                  │  │\n│  ├─────────────────────────────────────────┤  │\n│  │  Layer 2: Runtime                       │  │\n│  ├─────────────────────────────────────────┤  │\n│  │  Layer 1: Base OS                       │  │\n│  └─────────────────────────────────────────┘  │\n└───────────────────────────────────────────────┘\n```\n\n## The Problem\n\n```bash\n# Data in container layer is lost!\ndocker run -d --name db postgres\ndocker exec db psql -c \"CREATE TABLE test...\"\ndocker rm db  # All data gone!\n```\n\n## The Solution: Volumes\n\n```bash\n# Data persisted in volume\ndocker run -d --name db \\\n  -v postgres_data:/var/lib/postgresql/data \\\n  postgres\ndocker rm db\n# Volume still exists, data preserved!\n```"
+        },
+        {
+            "id": "volumes_3",
+            "type": "content",
+            "title": "Named Volumes",
+            "content": "# Named Volumes 📁\n\nDocker-managed storage for persistent data.\n\n## Creating Named Volumes\n\n```bash\n# Create a volume\ndocker volume create my_data\n\n# Use volume with container\ndocker run -d \\\n  --name app \\\n  -v my_data:/app/data \\\n  myapp:latest\n\n# Volume is created automatically if it doesn't exist\ndocker run -d \\\n  -v auto_created_vol:/data \\\n  nginx\n```\n\n## Volume Commands\n\n```bash\n# List volumes\ndocker volume ls\n\n# Inspect volume\ndocker volume inspect my_data\n\n# Remove volume\ndocker volume rm my_data\n\n# Remove unused volumes\ndocker volume prune\n```\n\n## Volume Location\n\n```bash\n# Docker stores volumes at:\n# Linux: /var/lib/docker/volumes/\n# Docker Desktop: within VM\n\ndocker volume inspect my_data --format '{{.Mountpoint}}'\n# /var/lib/docker/volumes/my_data/_data\n```\n\n## Advantages\n\n- ✅ Managed by Docker\n- ✅ Easy backup and restore  \n- ✅ Works across platforms\n- ✅ Can use volume drivers"
+        },
+        {
+            "id": "volumes_4",
+            "type": "content",
+            "title": "Bind Mounts",
+            "content": "# Bind Mounts 🔗\n\nMount host directories directly into containers.\n\n## Basic Syntax\n\n```bash\n# Using -v flag\ndocker run -d \\\n  -v /host/path:/container/path \\\n  nginx\n\n# Using --mount flag (more explicit)\ndocker run -d \\\n  --mount type=bind,source=/host/path,target=/container/path \\\n  nginx\n\n# Relative path (current directory)\ndocker run -d \\\n  -v $(pwd)/html:/usr/share/nginx/html \\\n  nginx\n```\n\n## Common Use Cases\n\n### Development Hot Reload\n```bash\ndocker run -d \\\n  -v $(pwd)/src:/app/src \\\n  -p 3000:3000 \\\n  node-dev-server\n```\n\n### Configuration Files\n```bash\ndocker run -d \\\n  -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf:ro \\\n  nginx\n```\n\n## Read-Only Mounts\n\n```bash\n# Append :ro for read-only\ndocker run -d \\\n  -v $(pwd)/config:/app/config:ro \\\n  myapp\n```\n\n## Bind Mount vs Named Volume\n\n| Bind Mount | Named Volume |\n|------------|-------------|\n| Host path specified | Docker manages location |\n| Development workflow | Production data |\n| Config files | Databases |\n| Full access to host | Isolated from host |"
+        },
+        {
+            "id": "volumes_5",
+            "type": "quiz",
+            "title": "Volumes Quiz",
+            "content": "Test your volume knowledge!",
+            "quizQuestion": "What is the difference between a bind mount and a named volume?",
+            "quizOptions": [
+                "Bind mounts are faster than named volumes",
+                "Bind mounts use a specific host path; named volumes are managed by Docker",
+                "Named volumes can only be used with Docker Compose",
+                "There is no difference"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "volumes_6",
+            "type": "content",
+            "title": "tmpfs Mounts",
+            "content": "# tmpfs Mounts 💨\n\nStore data in **memory** (RAM), not on disk.\n\n## Creating tmpfs Mounts\n\n```bash\n# Using --tmpfs flag\ndocker run -d \\\n  --tmpfs /app/cache \\\n  myapp\n\n# Using --mount flag (more options)\ndocker run -d \\\n  --mount type=tmpfs,target=/app/cache,tmpfs-size=100m \\\n  myapp\n```\n\n## tmpfs Options\n\n```bash\ndocker run -d \\\n  --mount type=tmpfs,\\\ntarget=/app/cache,\\\ntmpfs-size=100m,\\\ntmpfs-mode=1770 \\\n  myapp\n```\n\n| Option | Description |\n|--------|-------------|\n| `tmpfs-size` | Size limit in bytes |\n| `tmpfs-mode` | File mode (octal) |\n\n## Use Cases\n\n```\n┌─────────────────────────────────────────────────┐\n│  tmpfs USE CASES                                 │\n├─────────────────────────────────────────────────┤\n│  ✅ Temporary cache data                        │\n│  ✅ Session data                                │\n│  ✅ Secrets that shouldn't persist              │\n│  ✅ High-performance scratch space              │\n│  ❌ Data that needs to persist                  │\n└─────────────────────────────────────────────────┘\n```\n\n> 💡 **Note:** Data in tmpfs is lost when container stops!"
+        },
+        {
+            "id": "volumes_7",
+            "type": "content",
+            "title": "Volume Syntax Comparison",
+            "content": "# Mount Syntax Options 📝\n\n## -v vs --mount\n\n### -v (Short Syntax)\n```bash\n# Named volume\ndocker run -v volume_name:/path nginx\n\n# Bind mount\ndocker run -v /host/path:/container/path nginx\n\n# Read-only\ndocker run -v /host/path:/container/path:ro nginx\n```\n\n### --mount (Long Syntax)\n```bash\n# Named volume\ndocker run --mount type=volume,source=vol,target=/path nginx\n\n# Bind mount\ndocker run --mount type=bind,source=/host,target=/path nginx\n\n# Read-only bind\ndocker run --mount type=bind,source=/host,target=/path,readonly nginx\n\n# tmpfs\ndocker run --mount type=tmpfs,target=/cache nginx\n```\n\n## Comparison\n\n| Feature | -v | --mount |\n|---------|----|---------|\n| Syntax | Concise | Verbose |\n| Error handling | Creates missing dirs | Errors on missing |\n| New options | Limited | Full support |\n| Recommended | Familiar users | Explicit config |\n\n## When to Use Which\n\n- **-v**: Quick commands, familiar syntax\n- **--mount**: Scripts, production, explicit config"
+        },
+        {
+            "id": "volumes_8",
+            "type": "content",
+            "title": "Sharing Data Between Containers",
+            "content": "# Sharing Data 🔄\n\nMultiple containers can access the same volume.\n\n## Shared Named Volume\n\n```bash\n# Create shared volume\ndocker volume create shared_data\n\n# Container 1: Writer\ndocker run -d --name writer \\\n  -v shared_data:/data \\\n  alpine sh -c \"while true; do date >> /data/log.txt; sleep 1; done\"\n\n# Container 2: Reader\ndocker run -it --name reader \\\n  -v shared_data:/data:ro \\\n  alpine tail -f /data/log.txt\n```\n\n## volumes-from Flag\n\n```bash\n# Container with volumes\ndocker run -d --name data_container \\\n  -v /data \\\n  alpine sleep infinity\n\n# Share volumes from another container\ndocker run -it --volumes-from data_container alpine sh\n```\n\n## Docker Compose Sharing\n\n```yaml\nservices:\n  writer:\n    image: alpine\n    volumes:\n      - shared:/data\n    command: sh -c \"while true; do date >> /data/log; sleep 1; done\"\n\n  reader:\n    image: alpine\n    volumes:\n      - shared:/data:ro\n    command: tail -f /data/log\n\nvolumes:\n  shared:\n```"
+        },
+        {
+            "id": "volumes_9",
+            "type": "quiz",
+            "title": "Sharing Quiz",
+            "content": "Test your data sharing knowledge!",
+            "quizQuestion": "How can you mount a volume as read-only?",
+            "quizOptions": [
+                "-v myvolume:/data --readonly",
+                "-v myvolume:/data:ro",
+                "-v myvolume:/data:read-only",
+                "--volume myvolume:/data --ro"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "volumes_10",
+            "type": "content",
+            "title": "Volume Drivers",
+            "content": "# Volume Drivers 🔌\n\nExtend volume functionality with drivers.\n\n## Default Local Driver\n\n```bash\n# Uses local filesystem\ndocker volume create --driver local my_volume\n```\n\n## Third-Party Drivers\n\n| Driver | Use Case |\n|--------|----------|\n| `local` | Local filesystem (default) |\n| `nfs` | Network File System |\n| `aws-efs` | AWS Elastic File System |\n| `azure-file` | Azure File Storage |\n| `ceph` | Distributed storage |\n| `glusterfs` | Distributed storage |\n\n## NFS Volume Example\n\n```bash\ndocker volume create \\\n  --driver local \\\n  --opt type=nfs \\\n  --opt o=addr=192.168.1.100,rw \\\n  --opt device=:/path/to/share \\\n  nfs_volume\n```\n\n## SSH Volume (sshfs)\n\n```bash\n# Install plugin\ndocker plugin install vieux/sshfs\n\n# Create volume\ndocker volume create \\\n  --driver vieux/sshfs \\\n  -o sshcmd=user@host:/path \\\n  -o password=secret \\\n  ssh_volume\n```\n\n## Docker Compose with Driver\n\n```yaml\nvolumes:\n  nfs_data:\n    driver: local\n    driver_opts:\n      type: nfs\n      o: addr=192.168.1.100,rw\n      device: \":/exports/data\"\n```"
+        },
+        {
+            "id": "volumes_11",
+            "type": "content",
+            "title": "Backup and Restore",
+            "content": "# Backup & Restore 💾\n\nProtect your persistent data.\n\n## Backup Volume to Archive\n\n```bash\n# Create backup of volume\ndocker run --rm \\\n  -v myvolume:/source:ro \\\n  -v $(pwd):/backup \\\n  alpine tar czf /backup/volume_backup.tar.gz -C /source .\n```\n\n## Restore Volume from Archive\n\n```bash\n# Create new volume\ndocker volume create restored_volume\n\n# Restore from backup\ndocker run --rm \\\n  -v restored_volume:/target \\\n  -v $(pwd):/backup:ro \\\n  alpine tar xzf /backup/volume_backup.tar.gz -C /target\n```\n\n## Database Backup Pattern\n\n```bash\n# PostgreSQL backup\ndocker exec -t postgres pg_dump -U user dbname > backup.sql\n\n# PostgreSQL restore\ndocker exec -i postgres psql -U user dbname < backup.sql\n\n# MySQL backup\ndocker exec mysql mysqldump -u root -ppassword dbname > backup.sql\n\n# MySQL restore\ndocker exec -i mysql mysql -u root -ppassword dbname < backup.sql\n```\n\n## Backup Script\n\n```bash\n#!/bin/bash\nVOLUME=$1\nBACKUP_DIR=./backups\nDATE=$(date +%Y%m%d_%H%M%S)\n\ndocker run --rm \\\n  -v ${VOLUME}:/source:ro \\\n  -v ${BACKUP_DIR}:/backup \\\n  alpine tar czf /backup/${VOLUME}_${DATE}.tar.gz -C /source .\n\necho \"Backup: ${BACKUP_DIR}/${VOLUME}_${DATE}.tar.gz\"\n```"
+        },
+        {
+            "id": "volumes_12",
+            "type": "content",
+            "title": "Volume Management",
+            "content": "# Volume Management 🗂️\n\n## Listing Volumes\n\n```bash\n# List all volumes\ndocker volume ls\n\n# Filter volumes\ndocker volume ls --filter \"dangling=true\"\ndocker volume ls --filter \"driver=local\"\n\n# Custom format\ndocker volume ls --format \"{{.Name}}: {{.Driver}}\"\n```\n\n## Inspecting Volumes\n\n```bash\n# Full inspection\ndocker volume inspect my_volume\n\n# Specific field\ndocker volume inspect my_volume --format '{{.Mountpoint}}'\n```\n\n## Removing Volumes\n\n```bash\n# Remove specific volume\ndocker volume rm my_volume\n\n# Remove unused volumes (dangerous!)\ndocker volume prune\n\n# Force remove all unused\ndocker volume prune -f\n```\n\n## Finding Orphaned Volumes\n\n```bash\n# Volumes not attached to containers\ndocker volume ls -f dangling=true\n\n# Check volume usage\nfor vol in $(docker volume ls -q); do\n  containers=$(docker ps -a --filter volume=$vol -q | wc -l)\n  echo \"$vol: $containers containers\"\ndone\n```\n\n> ⚠️ **Warning:** `docker volume prune` removes ALL unused volumes!"
+        },
+        {
+            "id": "volumes_13",
+            "type": "content",
+            "title": "Volumes in Dockerfile",
+            "content": "# VOLUME Instruction 📝\n\nDeclare volumes in Dockerfile.\n\n## Syntax\n\n```dockerfile\n# Single volume\nVOLUME /var/log\n\n# Multiple volumes\nVOLUME [\"/var/log\", \"/var/data\"]\n\n# Complete example\nFROM postgres:15\n\n# Declare data directory as volume\nVOLUME /var/lib/postgresql/data\n\n# This directory will be auto-mounted\n# even without -v flag\n```\n\n## What VOLUME Does\n\n```\n┌─────────────────────────────────────────────────┐\n│  VOLUME /data in Dockerfile                      │\n├─────────────────────────────────────────────────┤\n│  1. Creates mount point at /data                │\n│  2. Auto-creates anonymous volume on run        │\n│  3. Prevents data from being in image layer     │\n│  4. Signals intent to users                     │\n└─────────────────────────────────────────────────┘\n```\n\n## Anonymous Volumes\n\n```bash\n# VOLUME creates anonymous volume\ndocker run postgres\ndocker volume ls\n# abc123xyz... (random name)\n\n# Override with named volume\ndocker run -v pgdata:/var/lib/postgresql/data postgres\n```\n\n## Best Practice\n\n```dockerfile\n# Document but don't force anonymous volumes\n# Let users choose volume type at runtime\nFROM node:20\nWORKDIR /app\n# VOLUME /app/data  # Optional, documents mount point\nCMD [\"node\", \"app.js\"]\n```"
+        },
+        {
+            "id": "volumes_14",
+            "type": "quiz",
+            "title": "Management Quiz",
+            "content": "Test your volume management knowledge!",
+            "quizQuestion": "What does 'docker volume prune' do?",
+            "quizOptions": [
+                "Lists all volumes",
+                "Removes ALL volumes including those in use",
+                "Removes only unused (dangling) volumes",
+                "Creates a backup of all volumes"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "volumes_15",
+            "type": "content",
+            "title": "Permission Issues",
+            "content": "# Handling Permissions 🔐\n\nCommon volume permission challenges.\n\n## The Problem\n\n```bash\n# Container user can't write to mounted volume\ndocker run -v $(pwd)/data:/app/data myapp\n# Error: Permission denied\n```\n\n## Solution 1: Match User IDs\n\n```dockerfile\nFROM node:20\n\n# Create user with specific UID/GID\nRUN groupadd -g 1000 appgroup && \\\n    useradd -u 1000 -g appgroup appuser\n\nUSER appuser\n```\n\n```bash\n# Run with host user's UID\ndocker run -u $(id -u):$(id -g) -v ./data:/app/data myapp\n```\n\n## Solution 2: Fix Ownership\n\n```bash\n# Change host directory ownership\nsudo chown -R 1000:1000 ./data\n\n# Or in entrypoint script\n#!/bin/sh\nchown -R appuser:appgroup /app/data\nexec \"$@\"\n```\n\n## Solution 3: Named Volumes\n\n```bash\n# Named volumes handle permissions automatically\ndocker volume create app_data\ndocker run -v app_data:/app/data myapp\n```\n\n## Permission Debugging\n\n```bash\n# Check container user\ndocker exec myapp id\n\n# Check mount permissions\ndocker exec myapp ls -la /app/data\n\n# Check host permissions\nls -la ./data\n```"
+        },
+        {
+            "id": "volumes_16",
+            "type": "content",
+            "title": "Performance Considerations",
+            "content": "# Volume Performance ⚡\n\n## Performance Comparison\n\n| Type | Performance | Use Case |\n|------|-------------|----------|\n| Named Volume | Fastest | Databases, production |\n| Bind Mount | Fast (Linux) | Development, configs |\n| Bind Mount | Slower (Mac/Win) | Development only |\n| tmpfs | Very Fast | Caches, temp data |\n\n## macOS/Windows Performance Issues\n\n```\nBind Mount Performance:\n┌───────────────────────────────────────────────┐\n│  Linux:   Native speed (direct access)        │\n│  macOS:   Slower (osxfs layer)               │\n│  Windows: Slower (translation layer)          │\n└───────────────────────────────────────────────┘\n```\n\n## Optimization Strategies\n\n### Use Named Volumes for Dependencies\n```yaml\nservices:\n  app:\n    volumes:\n      - ./src:/app/src           # Source (bind)\n      - node_modules:/app/node_modules  # Deps (named)\n\nvolumes:\n  node_modules:\n```\n\n### Cached/Delegated Mounts (Docker Desktop)\n```bash\n# Cached: Host is source of truth\ndocker run -v ./src:/app/src:cached myapp\n\n# Delegated: Container is source of truth\ndocker run -v ./logs:/app/logs:delegated myapp\n```\n\n### Use .dockerignore\n```\nnode_modules\n.git\n*.log\n```"
+        },
+        {
+            "id": "volumes_17",
+            "type": "content",
+            "title": "Database Volume Patterns",
+            "content": "# Database Volume Patterns 🗄️\n\n## PostgreSQL\n\n```yaml\nservices:\n  postgres:\n    image: postgres:15-alpine\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro\n    environment:\n      POSTGRES_PASSWORD: secret\n\nvolumes:\n  postgres_data:\n```\n\n## MySQL/MariaDB\n\n```yaml\nservices:\n  mysql:\n    image: mysql:8\n    volumes:\n      - mysql_data:/var/lib/mysql\n      - ./my.cnf:/etc/mysql/conf.d/my.cnf:ro\n    environment:\n      MYSQL_ROOT_PASSWORD: secret\n\nvolumes:\n  mysql_data:\n```\n\n## MongoDB\n\n```yaml\nservices:\n  mongo:\n    image: mongo:7\n    volumes:\n      - mongo_data:/data/db\n      - mongo_config:/data/configdb\n\nvolumes:\n  mongo_data:\n  mongo_config:\n```\n\n## Redis\n\n```yaml\nservices:\n  redis:\n    image: redis:7-alpine\n    command: redis-server --appendonly yes\n    volumes:\n      - redis_data:/data\n\nvolumes:\n  redis_data:\n```"
+        },
+        {
+            "id": "volumes_18",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Volume Best Practices ✅\n\n## Development\n\n- ✅ Use **bind mounts** for source code\n- ✅ Use **named volumes** for dependencies\n- ✅ Use **:cached** flag on macOS/Windows\n- ✅ Use **.dockerignore** to exclude files\n\n## Production\n\n- ✅ Always use **named volumes** for data\n- ✅ **Never** use bind mounts for data\n- ✅ Implement **backup strategies**\n- ✅ Use **volume drivers** for cloud storage\n\n## Security\n\n- ✅ Use **:ro** for config files\n- ✅ Limit volume **paths** (don't mount /)\n- ✅ Handle **permissions** properly\n- ✅ Use **tmpfs** for sensitive temp data\n\n## Naming Conventions\n\n```bash\n# Good naming\nproject_postgres_data\nproject_redis_cache\nproject_uploads\n\n# Descriptive and searchable\n```\n\n## Cleanup Strategy\n\n```bash\n# Regular cleanup of unused volumes\ndocker volume prune\n\n# But NEVER in production without verification!\ndocker volume ls -f dangling=true\n```\n\n> 🎯 **Golden Rule:** Data in containers = ephemeral. Data in volumes = persistent."
+        },
+        {
+            "id": "volumes_19",
+            "type": "content",
+            "title": "Volume Cheat Sheet",
+            "content": "# Quick Reference 📋\n\n## Create and Use Volumes\n\n```bash\n# Named volume\ndocker run -v myvolume:/data nginx\n\n# Bind mount\ndocker run -v $(pwd)/data:/data nginx\n\n# Read-only\ndocker run -v myvolume:/data:ro nginx\n\n# tmpfs\ndocker run --tmpfs /cache nginx\n```\n\n## Manage Volumes\n\n```bash\n# Create\ndocker volume create myvolume\n\n# List\ndocker volume ls\n\n# Inspect\ndocker volume inspect myvolume\n\n# Remove\ndocker volume rm myvolume\n\n# Prune unused\ndocker volume prune\n```\n\n## Docker Compose\n\n```yaml\nservices:\n  app:\n    volumes:\n      - ./src:/app/src          # Bind mount\n      - data:/app/data          # Named volume\n      - /app/cache              # Anonymous\n\nvolumes:\n  data:                         # Declare named volume\n```\n\n## Backup\n\n```bash\n# Backup\ndocker run --rm -v vol:/src -v $(pwd):/bak alpine tar czf /bak/backup.tar.gz -C /src .\n\n# Restore\ndocker run --rm -v newvol:/dst -v $(pwd):/bak alpine tar xzf /bak/backup.tar.gz -C /dst\n```"
+        },
+        {
+            "id": "volumes_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall volume knowledge!",
+            "quizQuestion": "Which storage type provides the best performance for database workloads?",
+            "quizOptions": [
+                "Bind mounts",
+                "Named volumes",
+                "Anonymous volumes",
+                "Container layer"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "volumes_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Docker Volumes!\n\n## Key Takeaways\n\n### Persistence 💾\n- ✅ Container data is ephemeral\n- ✅ Volumes persist data beyond container lifecycle\n- ✅ Always use volumes for databases\n\n### Bind Mounts 🔗\n- ✅ Map host directories to containers\n- ✅ Great for development workflows\n- ✅ Use :ro for read-only configs\n\n### Named Volumes 📁\n- ✅ Docker-managed storage\n- ✅ Best for production data\n- ✅ Works across platforms\n\n### Management 🗂️\n- ✅ Backup volumes regularly\n- ✅ Clean up unused volumes\n- ✅ Use proper naming conventions\n\n## Quick Commands\n\n```bash\ndocker volume create mydata    # Create\ndocker volume ls               # List\ndocker volume inspect mydata   # Inspect\ndocker volume rm mydata        # Remove\ndocker volume prune            # Cleanup\n```\n\n> 💾 **Remember:** Volumes are your data's lifeline!\n\nHappy persisting! 🚀"
+        }
+    ]
+}

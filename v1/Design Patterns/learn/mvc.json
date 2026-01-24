@@ -1,0 +1,167 @@
+{
+    "id": "learn_mvc_dp",
+    "topicId": "mvc",
+    "topicTitle": "MVC Pattern",
+    "description": "Master the Model-View-Controller pattern and separation of concerns for scalable applications",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "mvc_1",
+            "type": "content",
+            "title": "Welcome to MVC",
+            "content": "# MVC Pattern 🏗️\n\nMaster the architecture that powers web frameworks!\n\n## What You'll Learn:\n- **MVC Fundamentals** - Model, View, Controller\n- **Separation of Concerns** - Clean architecture\n- **Data Flow** - How components interact\n- **Framework Examples** - Rails, Django, Express\n- **Modern Variations** - MVP, MVVM\n\n> 💡 MVC is the foundation of most web frameworks!\n\n## Why MVC Matters:\n- 🧩 **Modularity** - Separate business logic from UI\n- 🔄 **Reusability** - Components work independently\n- 🧪 **Testability** - Easy to test each layer\n- 👥 **Team Collaboration** - Parallel development"
+        },
+        {
+            "id": "mvc_2",
+            "type": "content",
+            "title": "Understanding MVC",
+            "content": "# Understanding MVC 📖\n\n## The Three Components:\n\n```\n┌─────────────┐     ┌─────────────┐\n│    View     │◄────│ Controller  │\n│   (UI)      │     │  (Logic)    │\n└──────┬──────┘     └──────┬──────┘\n       │                   │\n       │    ┌─────────────┐│\n       └───►│    Model    │◄\n            │   (Data)    │\n            └─────────────┘\n```\n\n## Component Responsibilities:\n\n| Component | Responsibility |\n|-----------|---------------|\n| **Model** | Data, business logic, database |\n| **View** | User interface, display |\n| **Controller** | User input, coordinates M & V |\n\n## Real-World Analogy:\n- **Model** = Kitchen (prepares food/data)\n- **View** = Dining room (presents food)\n- **Controller** = Waiter (takes orders, delivers)"
+        },
+        {
+            "id": "mvc_3",
+            "type": "content",
+            "title": "The Model",
+            "content": "# The Model 📊\n\nManages data, logic, and rules.\n\n## Responsibilities:\n- Store and manage data\n- Business logic and validation\n- Database operations\n- Notify views of changes\n\n## Example:\n```javascript\nclass UserModel {\n    constructor() {\n        this.users = [];\n    }\n    \n    async getAll() {\n        return await database.query('SELECT * FROM users');\n    }\n    \n    async create(data) {\n        if (!this.validate(data)) {\n            throw new Error('Invalid data');\n        }\n        return await database.insert('users', data);\n    }\n    \n    validate(data) {\n        return data.email && data.email.includes('@');\n    }\n}\n```\n\n## Best Practices:\n- ✅ Keep business logic in Model\n- ✅ Models should be framework-agnostic\n- ✅ One model per entity\n- ❌ No UI code in Model\n- ❌ No HTTP handling in Model"
+        },
+        {
+            "id": "mvc_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your MVC knowledge!",
+            "quizQuestion": "What is the primary responsibility of the Model in MVC?",
+            "quizOptions": [
+                "Handle user input",
+                "Display data",
+                "Manage data and business logic",
+                "Route requests"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "mvc_4",
+            "type": "content",
+            "title": "The View",
+            "content": "# The View 🎨\n\nPresents data to the user.\n\n## Responsibilities:\n- Render UI elements\n- Display data from Model\n- Capture user interactions\n- Send events to Controller\n\n## Template Example:\n```html\n<!-- users/index.ejs -->\n<h1>Users</h1>\n<ul>\n<% users.forEach(user => { %>\n    <li><%= user.name %> - <%= user.email %></li>\n<% }) %>\n</ul>\n\n<form action=\"/users\" method=\"POST\">\n    <input name=\"name\" placeholder=\"Name\">\n    <input name=\"email\" placeholder=\"Email\">\n    <button type=\"submit\">Add User</button>\n</form>\n```\n\n## React Component as View:\n```javascript\nfunction UserList({ users, onDelete }) {\n    return (\n        <ul>\n            {users.map(user => (\n                <li key={user.id}>\n                    {user.name}\n                    <button onClick={() => onDelete(user.id)}>\n                        Delete\n                    </button>\n                </li>\n            ))}\n        </ul>\n    );\n}\n```\n\n## Best Practices:\n- ✅ Views should be \"dumb\"\n- ✅ No business logic in Views\n- ✅ Reusable components"
+        },
+        {
+            "id": "mvc_5",
+            "type": "content",
+            "title": "The Controller",
+            "content": "# The Controller 🎮\n\nCoordinates Model and View.\n\n## Responsibilities:\n- Handle user input/requests\n- Call appropriate Model methods\n- Select View to render\n- Pass data to View\n\n## Express Controller:\n```javascript\nclass UserController {\n    constructor(userModel) {\n        this.model = userModel;\n    }\n    \n    async index(req, res) {\n        const users = await this.model.getAll();\n        res.render('users/index', { users });\n    }\n    \n    async create(req, res) {\n        try {\n            await this.model.create(req.body);\n            res.redirect('/users');\n        } catch (error) {\n            res.render('users/new', { error: error.message });\n        }\n    }\n    \n    async delete(req, res) {\n        await this.model.delete(req.params.id);\n        res.redirect('/users');\n    }\n}\n```\n\n## Best Practices:\n- ✅ Keep controllers thin\n- ✅ Delegate to Model\n- ✅ One responsibility per action\n- ❌ No SQL in Controller\n- ❌ No complex business logic"
+        },
+        {
+            "id": "mvc_6",
+            "type": "content",
+            "title": "Data Flow",
+            "content": "# MVC Data Flow 🔄\n\n## Request Lifecycle:\n\n```\n1. User clicks button\n        ↓\n2. Controller receives request\n        ↓\n3. Controller calls Model\n        ↓\n4. Model fetches/updates data\n        ↓\n5. Model returns data\n        ↓\n6. Controller selects View\n        ↓\n7. View renders with data\n        ↓\n8. User sees response\n```\n\n## Code Flow Example:\n```javascript\n// 1. Route -> Controller\napp.get('/users', userController.index);\n\n// 2. Controller -> Model\nasync index(req, res) {\n    const users = await this.model.getAll();\n    // 3. Controller -> View\n    res.render('users/index', { users });\n}\n\n// 4. View renders\n<% users.forEach(user => { %>\n    <li><%= user.name %></li>\n<% }) %>\n```\n\n## Key Principles:\n- Unidirectional data flow\n- Controller orchestrates\n- Model is source of truth\n- View is passive"
+        },
+        {
+            "id": "mvc_7",
+            "type": "content",
+            "title": "Express.js MVC",
+            "content": "# Express.js MVC 🟢\n\n## Project Structure:\n```\napp/\n├── models/\n│   ├── User.js\n│   └── Post.js\n├── views/\n│   ├── users/\n│   │   ├── index.ejs\n│   │   └── show.ejs\n│   └── layouts/\n├── controllers/\n│   ├── UserController.js\n│   └── PostController.js\n├── routes/\n│   └── index.js\n└── app.js\n```\n\n## Routes:\n```javascript\n// routes/index.js\nconst userController = require('../controllers/UserController');\n\nrouter.get('/users', userController.index);\nrouter.get('/users/:id', userController.show);\nrouter.post('/users', userController.create);\nrouter.put('/users/:id', userController.update);\nrouter.delete('/users/:id', userController.destroy);\n\nmodule.exports = router;\n```\n\n## App Setup:\n```javascript\n// app.js\nconst express = require('express');\nconst routes = require('./routes');\n\nconst app = express();\napp.set('view engine', 'ejs');\napp.use(express.urlencoded({ extended: true }));\napp.use('/', routes);\n```"
+        },
+        {
+            "id": "mvc_quiz_2",
+            "type": "quiz",
+            "title": "Flow Check",
+            "content": "Test your MVC flow understanding!",
+            "quizQuestion": "What does the Controller do after receiving a request?",
+            "quizOptions": [
+                "Renders directly",
+                "Queries database",
+                "Calls Model methods",
+                "Updates CSS"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "mvc_8",
+            "type": "content",
+            "title": "Django MVC (MTV)",
+            "content": "# Django MTV 🐍\n\nDjango uses Model-Template-View (MTV).\n\n## Terminology:\n| MVC | Django MTV |\n|-----|------------|\n| Model | Model |\n| View | Template |\n| Controller | View |\n\n## Model:\n```python\n# models.py\nfrom django.db import models\n\nclass User(models.Model):\n    name = models.CharField(max_length=100)\n    email = models.EmailField(unique=True)\n    created_at = models.DateTimeField(auto_now_add=True)\n    \n    def __str__(self):\n        return self.name\n```\n\n## View (Controller):\n```python\n# views.py\nfrom django.shortcuts import render, redirect\nfrom .models import User\n\ndef user_list(request):\n    users = User.objects.all()\n    return render(request, 'users/list.html', {'users': users})\n\ndef user_create(request):\n    if request.method == 'POST':\n        User.objects.create(**request.POST)\n        return redirect('user_list')\n    return render(request, 'users/create.html')\n```\n\n## Template:\n```html\n<!-- templates/users/list.html -->\n{% for user in users %}\n    <p>{{ user.name }} - {{ user.email }}</p>\n{% endfor %}\n```"
+        },
+        {
+            "id": "mvc_9",
+            "type": "content",
+            "title": "Ruby on Rails MVC",
+            "content": "# Ruby on Rails MVC 💎\n\nRails is the classic MVC framework.\n\n## Convention over Configuration:\n```\napp/\n├── models/\n│   └── user.rb           → User model\n├── views/\n│   └── users/\n│       ├── index.html.erb\n│       └── show.html.erb\n├── controllers/\n│   └── users_controller.rb\n└── routes.rb\n```\n\n## Model:\n```ruby\n# app/models/user.rb\nclass User < ApplicationRecord\n  validates :email, presence: true, uniqueness: true\n  has_many :posts\nend\n```\n\n## Controller:\n```ruby\n# app/controllers/users_controller.rb\nclass UsersController < ApplicationController\n  def index\n    @users = User.all\n  end\n  \n  def create\n    @user = User.new(user_params)\n    if @user.save\n      redirect_to users_path\n    else\n      render :new\n    end\n  end\n  \n  private\n  def user_params\n    params.require(:user).permit(:name, :email)\n  end\nend\n```\n\n## Routes:\n```ruby\nresources :users\n```"
+        },
+        {
+            "id": "mvc_10",
+            "type": "content",
+            "title": "Separation of Concerns",
+            "content": "# Separation of Concerns 🧩\n\nEach component has one job.\n\n## Benefits:\n\n### 1. Maintainability\n```\n❌ Spaghetti Code\nfunction handleClick() {\n    fetch('/api/users')\n    .then(r => r.json())\n    .then(data => {\n        document.getElementById('users').innerHTML = \n            data.map(u => `<li>${u.name}</li>`).join('');\n    });\n}\n\n✅ Separated Concerns\n// Model\nasync function getUsers() { ... }\n\n// View  \nfunction renderUsers(users) { ... }\n\n// Controller\nasync function handleClick() {\n    const users = await getUsers();\n    renderUsers(users);\n}\n```\n\n### 2. Testability\n```javascript\n// Easy to test Model alone\ndescribe('UserModel', () => {\n    it('validates email', () => {\n        expect(model.validate({ email: 'bad' })).toBe(false);\n    });\n});\n```\n\n### 3. Flexibility\n- Change View without touching Model\n- Swap database without changing Controller\n- Multiple views for same data"
+        },
+        {
+            "id": "mvc_11",
+            "type": "content",
+            "title": "MVP Pattern",
+            "content": "# MVP Pattern 📱\n\nModel-View-Presenter - MVC variant.\n\n## Key Difference:\n```\nMVC: View can read Model directly\nMVP: All communication through Presenter\n```\n\n## Structure:\n```\n┌─────────────┐\n│    View     │◄────┐\n│ (Passive)   │     │\n└──────┬──────┘     │\n       │            │\n       ▼            │\n┌─────────────┐     │\n│  Presenter  │─────┘\n│             │\n└──────┬──────┘\n       │\n       ▼\n┌─────────────┐\n│    Model    │\n└─────────────┘\n```\n\n## Implementation:\n```javascript\nclass UserPresenter {\n    constructor(view, model) {\n        this.view = view;\n        this.model = model;\n    }\n    \n    async loadUsers() {\n        const users = await this.model.getAll();\n        this.view.displayUsers(users);\n    }\n    \n    async deleteUser(id) {\n        await this.model.delete(id);\n        this.view.removeUser(id);\n    }\n}\n\nclass UserView {\n    displayUsers(users) { ... }\n    removeUser(id) { ... }\n}\n```\n\n## Use When:\n- View needs to be completely passive\n- Heavy testing requirements\n- Android development"
+        },
+        {
+            "id": "mvc_12",
+            "type": "content",
+            "title": "MVVM Pattern",
+            "content": "# MVVM Pattern 🔄\n\nModel-View-ViewModel - for reactive UIs.\n\n## Structure:\n```\n┌─────────────┐\n│    View     │◄───── Data Binding\n│             │           │\n└─────────────┘           │\n                          ▼\n              ┌─────────────┐\n              │  ViewModel  │\n              │             │\n              └──────┬──────┘\n                     │\n                     ▼\n              ┌─────────────┐\n              │    Model    │\n              └─────────────┘\n```\n\n## Vue.js Example:\n```javascript\n// ViewModel\nconst app = new Vue({\n    data: {\n        users: [],  // Model-like\n        newUser: ''\n    },\n    methods: {\n        async loadUsers() {\n            this.users = await api.getUsers();\n        },\n        addUser() {\n            this.users.push({ name: this.newUser });\n        }\n    }\n});\n```\n\n```html\n<!-- View with data binding -->\n<ul>\n    <li v-for=\"user in users\">{{ user.name }}</li>\n</ul>\n<input v-model=\"newUser\">\n<button @click=\"addUser\">Add</button>\n```\n\n## Frameworks Using MVVM:\n- Vue.js\n- Angular\n- WPF/.NET\n- SwiftUI"
+        },
+        {
+            "id": "mvc_quiz_3",
+            "type": "quiz",
+            "title": "Architecture Check",
+            "content": "Test your architecture knowledge!",
+            "quizQuestion": "What distinguishes MVVM from MVC?",
+            "quizOptions": [
+                "No Model",
+                "Data binding between View and ViewModel",
+                "No Controller",
+                "Server-side only"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "mvc_13",
+            "type": "content",
+            "title": "Testing MVC",
+            "content": "# Testing MVC 🧪\n\nTest each layer independently.\n\n## Model Testing:\n```javascript\ndescribe('UserModel', () => {\n    it('creates user', async () => {\n        const user = await model.create({ \n            name: 'John', \n            email: 'john@test.com' \n        });\n        expect(user.id).toBeDefined();\n    });\n    \n    it('validates email', () => {\n        expect(model.validate({ email: 'bad' })).toBe(false);\n    });\n});\n```\n\n## Controller Testing:\n```javascript\ndescribe('UserController', () => {\n    it('GET /users returns list', async () => {\n        const res = await request(app).get('/users');\n        expect(res.status).toBe(200);\n        expect(res.body.users).toBeArray();\n    });\n    \n    it('POST /users creates user', async () => {\n        const res = await request(app)\n            .post('/users')\n            .send({ name: 'Test', email: 'test@test.com' });\n        expect(res.status).toBe(201);\n    });\n});\n```\n\n## View Testing:\n```javascript\ndescribe('UserList', () => {\n    it('renders users', () => {\n        render(<UserList users={mockUsers} />);\n        expect(screen.getByText('John')).toBeInTheDocument();\n    });\n});\n```"
+        },
+        {
+            "id": "mvc_14",
+            "type": "content",
+            "title": "Common Mistakes",
+            "content": "# Common Mistakes ❌\n\n## 1. Fat Controllers\n```javascript\n// ❌ Too much logic in Controller\nasync create(req, res) {\n    if (!req.body.email.includes('@')) { ... }\n    const exists = await db.query(...);\n    if (exists) { ... }\n    await sendEmail(...);\n}\n\n// ✅ Delegate to Model\nasync create(req, res) {\n    const user = await this.model.create(req.body);\n    res.json(user);\n}\n```\n\n## 2. Logic in Views\n```html\n<!-- ❌ Business logic in template -->\n<% if (user.age >= 18 && user.verified && !user.banned) { %>\n\n<!-- ✅ Use Model method -->\n<% if (user.canAccess()) { %>\n```\n\n## 3. Model in View\n```javascript\n// ❌ Direct Model access\nfunction View() {\n    const users = await database.query('SELECT * FROM users');\n}\n\n// ✅ Data passed from Controller\nfunction View({ users }) { ... }\n```\n\n## 4. Circular Dependencies\n- Model should NOT know Controller\n- View should NOT import Model directly"
+        },
+        {
+            "id": "mvc_15",
+            "type": "content",
+            "title": "API with MVC",
+            "content": "# REST API with MVC 🌐\n\n## Structure:\n```\nsrc/\n├── models/\n│   └── User.js\n├── controllers/\n│   └── userController.js\n├── routes/\n│   └── userRoutes.js\n└── app.js\n```\n\n## Controller:\n```javascript\n// controllers/userController.js\nexports.getAll = async (req, res) => {\n    const users = await User.find();\n    res.json({ success: true, data: users });\n};\n\nexports.create = async (req, res) => {\n    const user = await User.create(req.body);\n    res.status(201).json({ success: true, data: user });\n};\n```\n\n## Routes:\n```javascript\n// routes/userRoutes.js\nrouter.route('/')\n    .get(userController.getAll)\n    .post(userController.create);\n\nrouter.route('/:id')\n    .get(userController.getOne)\n    .put(userController.update)\n    .delete(userController.delete);\n```\n\n## No Views Needed:\n- JSON responses replace Views\n- Frontend becomes the View layer\n- Same Model and Controller patterns"
+        },
+        {
+            "id": "mvc_16",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Model:\n- ✅ Single responsibility\n- ✅ All business logic here\n- ✅ Database abstraction\n- ✅ Validation methods\n\n## View:\n- ✅ Keep views simple/dumb\n- ✅ No database calls\n- ✅ Reusable components\n- ✅ Handle display logic only\n\n## Controller:\n- ✅ Thin controllers\n- ✅ Handle HTTP only\n- ✅ Delegate to services\n- ✅ Error handling\n\n## Project Structure:\n- ✅ Clear folder organization\n- ✅ Consistent naming\n- ✅ One class per file\n- ✅ Group by feature for large apps"
+        },
+        {
+            "id": "mvc_quiz_4",
+            "type": "quiz",
+            "title": "Best Practices",
+            "content": "Test your MVC best practices!",
+            "quizQuestion": "Where should input validation logic be placed?",
+            "quizOptions": [
+                "View",
+                "Controller",
+                "Model",
+                "Routes"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "mvc_17",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered the MVC Pattern!\n\n## Key Takeaways:\n\n### Components\n- ✅ Model: Data and business logic\n- ✅ View: User interface\n- ✅ Controller: Coordinates M & V\n\n### Principles\n- ✅ Separation of Concerns\n- ✅ Single Responsibility\n- ✅ Thin Controllers, Fat Models\n\n### Variations\n| Pattern | Key Feature |\n|---------|-------------|\n| MVC | Classic separation |\n| MVP | Passive View |\n| MVVM | Data binding |\n\n### Frameworks\n- Express.js\n- Django (MTV)\n- Ruby on Rails\n- Spring MVC\n\n## Next Steps:\n- Learn SOLID principles\n- Explore Microservices patterns\n- Master dependency injection\n\nHappy architecting! 🏗️"
+        }
+    ]
+}

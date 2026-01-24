@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_gcp",
+    "topicId": "gcp",
+    "topicTitle": "Google Cloud Platform",
+    "description": "Master GCP core services including Compute Engine, Cloud Storage, Cloud Functions, and BigQuery",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "gcp_1",
+            "type": "content",
+            "title": "Welcome to GCP",
+            "content": "# Google Cloud Platform ☁️\n\nGCP is Google's suite of cloud computing services, built on the same infrastructure that powers Google Search, YouTube, and Gmail.\n\n## What You'll Learn\n- **Compute Engine** - Virtual machines\n- **Cloud Storage** - Object storage\n- **Cloud Functions** - Serverless compute\n- **BigQuery** - Data warehouse\n\n## Why GCP?\n| Feature | Benefit |\n|---------|--------|\n| **Data & AI** | Leading ML/AI capabilities |\n| **Network** | Google's global fiber network |\n| **Kubernetes** | Creator of K8s, best GKE |\n| **Pricing** | Per-second billing, sustained discounts |\n\n> 💡 **Fun Fact:** GCP runs on the same infrastructure that handles 100+ billion Google searches per month!"
+        },
+        {
+            "id": "gcp_2",
+            "type": "content",
+            "title": "GCP Global Infrastructure",
+            "content": "# GCP Infrastructure 🌍\n\nGoogle's global network spans the entire planet.\n\n## Key Concepts\n\n### Regions\n- Geographic locations with data centers\n- Examples: `us-central1`, `europe-west1`, `asia-east1`\n- 35+ regions worldwide\n\n### Zones\n- Isolated locations within a region\n- Independent power and networking\n- Typically 3+ zones per region\n\n### Points of Presence (PoPs)\n- 146+ edge locations\n- Content delivery and acceleration\n\n```\nRegion (us-central1)\n├── Zone us-central1-a\n├── Zone us-central1-b\n├── Zone us-central1-c\n└── Zone us-central1-f\n```\n\n## Resource Hierarchy\n```\nOrganization\n└── Folders\n    └── Projects\n        └── Resources (VMs, Storage, etc.)\n```\n\n> 🌐 **Google's Network:** Private fiber network connecting all data centers globally!"
+        },
+        {
+            "id": "gcp_3",
+            "type": "content",
+            "title": "Compute Engine Introduction",
+            "content": "# Compute Engine 🖥️\n\nVirtual machines running on Google's infrastructure.\n\n## What is Compute Engine?\n- Scalable, high-performance VMs\n- Custom machine types\n- Per-second billing\n- Live migration (no downtime maintenance)\n\n## Machine Families\n\n| Family | Optimized For | Use Case |\n|--------|--------------|----------|\n| **E2** | Cost-optimized | Dev/test, small apps |\n| **N2/N2D** | Balanced | General workloads |\n| **C2/C2D** | Compute | HPC, gaming |\n| **M2/M3** | Memory | SAP, databases |\n| **A2** | Accelerator | ML training |\n\n## Predefined vs Custom\n```\nPredefined: n2-standard-4 (4 vCPU, 16GB RAM)\n\nCustom: n2-custom-6-32768 (6 vCPU, 32GB RAM)\n         └── Any combination you need!\n```\n\n## Free Tier\n- **e2-micro:** 1 instance/month (Oregon, Iowa, South Carolina)\n- **30 GB standard persistent disk**\n- **1 GB outbound networking**"
+        },
+        {
+            "id": "gcp_4",
+            "type": "content",
+            "title": "Creating Compute Engine VMs",
+            "content": "# Creating VMs 🚀\n\nLaunch virtual machines using Console, CLI, or API.\n\n## gcloud CLI\n```bash\n# Create a VM\ngcloud compute instances create my-vm \\\n  --zone=us-central1-a \\\n  --machine-type=e2-medium \\\n  --image-family=debian-11 \\\n  --image-project=debian-cloud \\\n  --boot-disk-size=20GB\n\n# Create with custom machine type\ngcloud compute instances create custom-vm \\\n  --custom-cpu=4 \\\n  --custom-memory=16GB \\\n  --zone=us-central1-a\n\n# List instances\ngcloud compute instances list\n\n# SSH into VM\ngcloud compute ssh my-vm --zone=us-central1-a\n```\n\n## Startup Script\n```bash\ngcloud compute instances create web-server \\\n  --metadata=startup-script='#!/bin/bash\n    apt-get update\n    apt-get install -y nginx\n    systemctl start nginx'\n```\n\n## Firewall Rules\n```bash\n# Allow HTTP traffic\ngcloud compute firewall-rules create allow-http \\\n  --allow=tcp:80 \\\n  --target-tags=http-server\n```"
+        },
+        {
+            "id": "gcp_quiz_1",
+            "type": "quiz",
+            "title": "Compute Engine Quiz",
+            "content": "Test your GCP compute knowledge!",
+            "quizQuestion": "What is unique about Google Compute Engine's billing?",
+            "quizOptions": [
+                "Billed per hour only",
+                "Billed per second with sustained use discounts",
+                "Flat monthly rate",
+                "Billed per minute"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gcp_5",
+            "type": "content",
+            "title": "Compute Engine Pricing",
+            "content": "# Compute Engine Pricing 💰\n\nFlexible pricing options for all workloads.\n\n## Pricing Models\n\n### On-Demand\n- Pay per second (minimum 1 minute)\n- No commitments\n- Full flexibility\n\n### Sustained Use Discounts\n- Automatic discounts for long-running VMs\n- Up to 30% off for full month usage\n- No action required!\n\n### Committed Use Discounts\n- 1 or 3 year commitments\n- Up to 57% discount\n- Commit to vCPU and memory\n\n### Preemptible/Spot VMs\n- Up to 91% discount\n- Can be terminated with 30s notice\n- Perfect for batch jobs\n\n## Cost Comparison (n2-standard-4)\n\n| Model | Hourly | Monthly | Savings |\n|-------|--------|---------|--------|\n| On-Demand | $0.1942 | $141.77 | - |\n| Sustained | Auto | ~$99.24 | 30% |\n| 1-Year CUD | $0.1214 | $88.62 | 37% |\n| 3-Year CUD | $0.0874 | $63.80 | 55% |\n| Spot | $0.0389 | $28.40 | 80% |\n\n> 💡 **Tip:** Use Spot VMs for fault-tolerant batch processing!"
+        },
+        {
+            "id": "gcp_6",
+            "type": "content",
+            "title": "Cloud Storage Introduction",
+            "content": "# Cloud Storage 📦\n\nUnified object storage for developers and enterprises.\n\n## What is Cloud Storage?\n- Store and retrieve any amount of data\n- Objects up to 5TB each\n- 11 9's durability\n- Global edge network\n\n## Storage Classes\n\n| Class | Use Case | Min Duration |\n|-------|----------|-------------|\n| **Standard** | Frequently accessed | None |\n| **Nearline** | Once per month | 30 days |\n| **Coldline** | Once per quarter | 90 days |\n| **Archive** | Once per year | 365 days |\n\n## Object Hierarchy\n```\ngs://my-bucket/folder/subfolder/file.txt\n      │         │\n   Bucket     Object Key (includes path)\n```\n\n## Key Features\n- **Versioning** - Keep object history\n- **Lifecycle** - Auto-delete or change class\n- **Encryption** - Always encrypted at rest\n- **IAM** - Fine-grained access control\n\n> 🆓 **Free Tier:** 5GB Standard Storage in Oregon!"
+        },
+        {
+            "id": "gcp_7",
+            "type": "content",
+            "title": "Working with Cloud Storage",
+            "content": "# Cloud Storage Operations 🔧\n\nManaging buckets and objects with gsutil and gcloud.\n\n## gsutil Commands\n\n```bash\n# Create bucket\ngsutil mb gs://my-unique-bucket\n\n# Upload file\ngsutil cp local-file.txt gs://my-bucket/\n\n# Upload directory\ngsutil -m cp -r ./local-dir gs://my-bucket/\n\n# Download file\ngsutil cp gs://my-bucket/file.txt ./\n\n# List objects\ngsutil ls gs://my-bucket/\n\n# Delete object\ngsutil rm gs://my-bucket/file.txt\n\n# Sync directories\ngsutil -m rsync -r ./local gs://my-bucket/backup\n```\n\n## Making Objects Public\n```bash\n# Single object\ngsutil acl ch -u AllUsers:R gs://my-bucket/public-file.jpg\n\n# Entire bucket\ngsutil iam ch allUsers:objectViewer gs://my-bucket\n```\n\n## Signed URLs (Temporary Access)\n```bash\ngsutil signurl -d 1h key.json gs://my-bucket/private-file.pdf\n```\n\n## Public URL Format\n```\nhttps://storage.googleapis.com/BUCKET_NAME/OBJECT_NAME\nhttps://storage.googleapis.com/my-bucket/images/photo.jpg\n```"
+        },
+        {
+            "id": "gcp_quiz_2",
+            "type": "quiz",
+            "title": "Cloud Storage Quiz",
+            "content": "Test your storage knowledge!",
+            "quizQuestion": "Which Cloud Storage class has a minimum storage duration of 365 days?",
+            "quizOptions": [
+                "Standard",
+                "Nearline",
+                "Coldline",
+                "Archive"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "gcp_8",
+            "type": "content",
+            "title": "Cloud Storage Advanced",
+            "content": "# Advanced Cloud Storage 🚀\n\nLifecycle management and advanced features.\n\n## Lifecycle Policies\n```json\n{\n  \"lifecycle\": {\n    \"rule\": [\n      {\n        \"action\": {\"type\": \"Delete\"},\n        \"condition\": {\"age\": 365}\n      },\n      {\n        \"action\": {\n          \"type\": \"SetStorageClass\",\n          \"storageClass\": \"COLDLINE\"\n        },\n        \"condition\": {\"age\": 90}\n      }\n    ]\n  }\n}\n```\n\n## Versioning\n```bash\n# Enable versioning\ngsutil versioning set on gs://my-bucket\n\n# List versions\ngsutil ls -a gs://my-bucket/\n\n# Restore version\ngsutil cp gs://my-bucket/file.txt#1234567890 gs://my-bucket/file.txt\n```\n\n## Object Composition\n- Combine up to 32 objects\n- Create large files from parts\n- No data transfer charges\n\n## Transfer Service\n- Move large datasets from AWS S3\n- Transfer from on-premises\n- Scheduled recurring transfers\n\n> ⚡ **Performance:** Use parallel uploads with `-m` flag for faster transfers!"
+        },
+        {
+            "id": "gcp_9",
+            "type": "content",
+            "title": "Cloud Functions Introduction",
+            "content": "# Cloud Functions ⚡\n\nEvent-driven serverless compute platform.\n\n## What are Cloud Functions?\n- Single-purpose functions\n- Automatic scaling\n- Pay only for execution time\n- No server management\n\n## Generations\n\n| Feature | 1st Gen | 2nd Gen |\n|---------|---------|--------|\n| Runtime | 9 minutes max | 60 minutes max |\n| Memory | 8 GB max | 32 GB max |\n| Concurrency | 1 per instance | 1000 per instance |\n| Platform | Own | Cloud Run |\n\n## Supported Languages\n- Node.js (10, 12, 14, 16, 18, 20)\n- Python (3.7, 3.8, 3.9, 3.10, 3.11)\n- Go (1.11, 1.13, 1.16, 1.18, 1.19, 1.20)\n- Java (11, 17)\n- Ruby (2.6, 2.7, 3.0)\n- PHP (7.4, 8.1)\n- .NET (3.1, 6.0)\n\n## Triggers\n```\nHTTP → Cloud Function → Response\nCloud Storage → Cloud Function → Process\nPub/Sub → Cloud Function → Transform\nFirestore → Cloud Function → React\n```\n\n> 💰 **Free Tier:** 2M invocations/month!"
+        },
+        {
+            "id": "gcp_10",
+            "type": "content",
+            "title": "Building Cloud Functions",
+            "content": "# Creating Functions 🛠️\n\nWrite and deploy Cloud Functions.\n\n## HTTP Function (Python)\n```python\nimport functions_framework\n\n@functions_framework.http\ndef hello_http(request):\n    name = request.args.get('name', 'World')\n    return f'Hello, {name}!'\n```\n\n## HTTP Function (Node.js)\n```javascript\nconst functions = require('@google-cloud/functions-framework');\n\nfunctions.http('helloHttp', (req, res) => {\n  const name = req.query.name || 'World';\n  res.send(`Hello, ${name}!`);\n});\n```\n\n## Deploy Function\n```bash\n# Python\ngcloud functions deploy hello-http \\\n  --gen2 \\\n  --runtime=python311 \\\n  --trigger-http \\\n  --allow-unauthenticated \\\n  --entry-point=hello_http \\\n  --region=us-central1\n\n# Node.js\ngcloud functions deploy hello-http \\\n  --gen2 \\\n  --runtime=nodejs18 \\\n  --trigger-http \\\n  --entry-point=helloHttp\n```\n\n## Test Locally\n```bash\n# Install framework\npip install functions-framework\n\n# Run locally\nfunctions-framework --target=hello_http --port=8080\n\n# Test\ncurl localhost:8080?name=Developer\n```"
+        },
+        {
+            "id": "gcp_11",
+            "type": "content",
+            "title": "Cloud Functions Triggers",
+            "content": "# Function Triggers 🔗\n\nRespond to events from various sources.\n\n## Cloud Storage Trigger\n```python\n@functions_framework.cloud_event\ndef process_file(cloud_event):\n    data = cloud_event.data\n    bucket = data['bucket']\n    name = data['name']\n    print(f'New file: gs://{bucket}/{name}')\n```\n\n```bash\ngcloud functions deploy process-file \\\n  --gen2 \\\n  --runtime=python311 \\\n  --trigger-bucket=my-bucket\n```\n\n## Pub/Sub Trigger\n```python\nimport base64\n\n@functions_framework.cloud_event\ndef process_message(cloud_event):\n    message = base64.b64decode(cloud_event.data['message']['data'])\n    print(f'Received: {message.decode()}')\n```\n\n## Scheduled Trigger (Cloud Scheduler)\n```bash\n# Deploy function\ngcloud functions deploy scheduled-task \\\n  --trigger-topic=scheduled-topic\n\n# Create scheduler job\ngcloud scheduler jobs create pubsub daily-job \\\n  --schedule=\"0 9 * * *\" \\\n  --topic=scheduled-topic \\\n  --message-body=\"run\"\n```\n\n## Firestore Trigger\n```python\n@functions_framework.cloud_event\ndef on_document_created(cloud_event):\n    document = cloud_event.data['value']\n    print(f'New document: {document}')\n```"
+        },
+        {
+            "id": "gcp_quiz_3",
+            "type": "quiz",
+            "title": "Cloud Functions Quiz",
+            "content": "Test your serverless GCP knowledge!",
+            "quizQuestion": "What is the maximum execution time for a 2nd generation Cloud Function?",
+            "quizOptions": [
+                "9 minutes",
+                "15 minutes",
+                "30 minutes",
+                "60 minutes"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "gcp_12",
+            "type": "content",
+            "title": "BigQuery Introduction",
+            "content": "# BigQuery 📊\n\nServerless, highly scalable data warehouse.\n\n## What is BigQuery?\n- Petabyte-scale analytics\n- SQL-based queries\n- Real-time analysis\n- Machine learning built-in\n\n## Key Features\n\n| Feature | Description |\n|---------|-------------|\n| **Serverless** | No infrastructure to manage |\n| **Speed** | Query TB in seconds |\n| **Separation** | Compute and storage separated |\n| **ML** | Built-in BigQuery ML |\n\n## Architecture\n```\n┌─────────────────────────────────┐\n│         BigQuery                │\n│  ┌─────────┐   ┌─────────────┐ │\n│  │ Dremel  │   │  Colossus   │ │\n│  │(Compute)│   │ (Storage)   │ │\n│  └─────────┘   └─────────────┘ │\n│        ↕              ↕        │\n│     Borg (Cluster Management)  │\n└─────────────────────────────────┘\n```\n\n## Pricing\n- **Storage:** $0.02/GB/month (active)\n- **Queries:** $5/TB processed (on-demand)\n- **Free:** 1TB queries/month, 10GB storage\n\n> 🚀 **Speed:** BigQuery can scan 100 billion rows in under a minute!"
+        },
+        {
+            "id": "gcp_13",
+            "type": "content",
+            "title": "BigQuery Basics",
+            "content": "# Working with BigQuery 🔧\n\nCreate datasets, load data, and run queries.\n\n## Create Dataset & Table\n```bash\n# Create dataset\nbq mk --dataset my_project:my_dataset\n\n# Create table from file\nbq load --autodetect \\\n  my_dataset.my_table \\\n  gs://my-bucket/data.csv\n```\n\n## SQL Queries\n```sql\n-- Simple query\nSELECT name, COUNT(*) as count\nFROM `my_project.my_dataset.my_table`\nGROUP BY name\nORDER BY count DESC\nLIMIT 10;\n\n-- Query public dataset\nSELECT\n  EXTRACT(YEAR FROM created_date) as year,\n  COUNT(*) as complaints\nFROM `bigquery-public-data.new_york.311_service_requests`\nGROUP BY year\nORDER BY year;\n```\n\n## bq Command Line\n```bash\n# Run query\nbq query --use_legacy_sql=false \\\n  'SELECT * FROM `project.dataset.table` LIMIT 10'\n\n# List datasets\nbq ls\n\n# Show table schema\nbq show project:dataset.table\n```\n\n## Python Client\n```python\nfrom google.cloud import bigquery\n\nclient = bigquery.Client()\nquery = 'SELECT * FROM `project.dataset.table`'\ndf = client.query(query).to_dataframe()\n```"
+        },
+        {
+            "id": "gcp_14",
+            "type": "content",
+            "title": "BigQuery Advanced Features",
+            "content": "# Advanced BigQuery 🚀\n\nPowerful features for analytics at scale.\n\n## Partitioning\n```sql\nCREATE TABLE my_dataset.sales\nPARTITION BY DATE(sale_date)\nAS SELECT * FROM source_table;\n```\n- Reduce costs by scanning less data\n- Time-based or integer partitions\n\n## Clustering\n```sql\nCREATE TABLE my_dataset.events\nPARTITION BY DATE(event_date)\nCLUSTER BY user_id, event_type\nAS SELECT * FROM source_table;\n```\n- Colocate related data\n- Faster queries on cluster columns\n\n## BigQuery ML\n```sql\n-- Create model\nCREATE MODEL my_dataset.my_model\nOPTIONS(model_type='linear_reg') AS\nSELECT feature1, feature2, label\nFROM my_dataset.training_data;\n\n-- Make predictions\nSELECT * FROM ML.PREDICT(\n  MODEL my_dataset.my_model,\n  (SELECT feature1, feature2 FROM new_data)\n);\n```\n\n## Scheduled Queries\n- Run queries on schedule\n- Save results to tables\n- Email notifications\n\n## Streaming Inserts\n```python\nerrors = client.insert_rows_json(\n    'project.dataset.table',\n    [{'name': 'Alice', 'value': 100}]\n)\n```"
+        },
+        {
+            "id": "gcp_quiz_4",
+            "type": "quiz",
+            "title": "BigQuery Quiz",
+            "content": "Test your data warehouse knowledge!",
+            "quizQuestion": "What is the purpose of partitioning in BigQuery?",
+            "quizOptions": [
+                "To encrypt data",
+                "To reduce query costs by scanning less data",
+                "To backup data automatically",
+                "To share data between projects"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gcp_15",
+            "type": "content",
+            "title": "GCP IAM",
+            "content": "# Identity & Access Management 🔐\n\nControl who can do what on GCP resources.\n\n## IAM Concepts\n\n### Members (Who)\n- Google Account (user@gmail.com)\n- Service Account (app@project.iam.gserviceaccount.com)\n- Google Group (team@googlegroups.com)\n- Domain (example.com)\n\n### Roles (What)\n- **Primitive:** Owner, Editor, Viewer\n- **Predefined:** roles/storage.admin\n- **Custom:** Fine-grained permissions\n\n### Resources (Where)\n- Organization, Folder, Project, Resource\n\n## Policy Structure\n```\nMember + Role + Resource = Binding\n```\n\n## Grant Roles\n```bash\n# Grant role to user\ngcloud projects add-iam-policy-binding my-project \\\n  --member=\"user:alice@example.com\" \\\n  --role=\"roles/storage.objectViewer\"\n\n# Grant role to service account\ngcloud projects add-iam-policy-binding my-project \\\n  --member=\"serviceAccount:my-sa@my-project.iam.gserviceaccount.com\" \\\n  --role=\"roles/bigquery.dataEditor\"\n```\n\n## Best Practices\n- ✅ Use service accounts for applications\n- ✅ Grant minimum required permissions\n- ✅ Use groups for team access\n- ❌ Avoid primitive roles in production"
+        },
+        {
+            "id": "gcp_16",
+            "type": "content",
+            "title": "Service Accounts",
+            "content": "# Service Accounts 🤖\n\nNon-human identities for applications.\n\n## What are Service Accounts?\n- Identity for applications/VMs\n- No password, uses keys\n- Can be impersonated\n\n## Create Service Account\n```bash\n# Create\ngcloud iam service-accounts create my-sa \\\n  --display-name=\"My Service Account\"\n\n# Grant role\ngcloud projects add-iam-policy-binding my-project \\\n  --member=\"serviceAccount:my-sa@my-project.iam.gserviceaccount.com\" \\\n  --role=\"roles/storage.objectAdmin\"\n\n# Create key (for local development)\ngcloud iam service-accounts keys create key.json \\\n  --iam-account=my-sa@my-project.iam.gserviceaccount.com\n```\n\n## Use in Applications\n```python\nfrom google.cloud import storage\nfrom google.oauth2 import service_account\n\ncredentials = service_account.Credentials.from_service_account_file(\n    'key.json'\n)\nclient = storage.Client(credentials=credentials)\n```\n\n## Attach to Compute Engine\n```bash\ngcloud compute instances create my-vm \\\n  --service-account=my-sa@my-project.iam.gserviceaccount.com \\\n  --scopes=cloud-platform\n```\n\n> ⚠️ **Security:** Never commit service account keys to version control!"
+        },
+        {
+            "id": "gcp_17",
+            "type": "content",
+            "title": "VPC Networking",
+            "content": "# Virtual Private Cloud 🌐\n\nPrivate network for your GCP resources.\n\n## VPC Features\n- Global resource (spans regions)\n- Subnets are regional\n- Automatic or custom mode\n\n## Create VPC\n```bash\n# Create custom VPC\ngcloud compute networks create my-vpc \\\n  --subnet-mode=custom\n\n# Create subnet\ngcloud compute networks subnets create my-subnet \\\n  --network=my-vpc \\\n  --region=us-central1 \\\n  --range=10.0.0.0/24\n```\n\n## Firewall Rules\n```bash\n# Allow SSH\ngcloud compute firewall-rules create allow-ssh \\\n  --network=my-vpc \\\n  --allow=tcp:22 \\\n  --source-ranges=0.0.0.0/0\n\n# Allow internal traffic\ngcloud compute firewall-rules create allow-internal \\\n  --network=my-vpc \\\n  --allow=tcp,udp,icmp \\\n  --source-ranges=10.0.0.0/8\n```\n\n## Architecture\n```\n┌─────────── VPC (Global) ───────────────┐\n│                                        │\n│  ┌─ us-central1 ─┐  ┌─ europe-west1 ─┐ │\n│  │ 10.0.1.0/24   │  │  10.0.2.0/24   │ │\n│  │   ┌────┐      │  │    ┌────┐      │ │\n│  │   │ VM │      │  │    │ VM │      │ │\n│  │   └────┘      │  │    └────┘      │ │\n│  └───────────────┘  └────────────────┘ │\n└────────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "gcp_18",
+            "type": "content",
+            "title": "gcloud CLI",
+            "content": "# gcloud Command Line 🛠️\n\nPrimary CLI tool for GCP.\n\n## Setup\n```bash\n# Install (Linux/Mac)\ncurl https://sdk.cloud.google.com | bash\n\n# Initialize\ngcloud init\n\n# Authenticate\ngcloud auth login\n\n# Set project\ngcloud config set project my-project\n```\n\n## Common Commands\n```bash\n# List all projects\ngcloud projects list\n\n# List compute instances\ngcloud compute instances list\n\n# List all services\ngcloud services list --enabled\n\n# Get current config\ngcloud config list\n\n# Switch projects\ngcloud config set project new-project\n```\n\n## Configuration\n```bash\n# Create named configuration\ngcloud config configurations create dev\n\n# Switch configurations\ngcloud config configurations activate prod\n\n# List configurations\ngcloud config configurations list\n```\n\n## Help\n```bash\n# Command help\ngcloud compute instances create --help\n\n# Interactive help\ngcloud help\n```\n\n> 💡 **Tip:** Use `--format=json` or `--format=yaml` for scripting!"
+        },
+        {
+            "id": "gcp_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall GCP knowledge!",
+            "quizQuestion": "Which GCP service would you use for running containerized applications without managing servers?",
+            "quizOptions": [
+                "Compute Engine",
+                "Cloud Run",
+                "App Engine",
+                "BigQuery"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gcp_19",
+            "type": "content",
+            "title": "GCP Cost Management",
+            "content": "# Cost Management 💰\n\nMonitor and optimize GCP spending.\n\n## Billing Tools\n\n### Billing Dashboard\n- View spending by project/service\n- Cost trends and forecasts\n- Export billing data to BigQuery\n\n### Budgets & Alerts\n```\nBudget: $1,000/month\nAlert 1: 50% → Email\nAlert 2: 90% → Email + Pub/Sub\nAlert 3: 100% → Disable billing (optional)\n```\n\n### Cost Reports\n- Breakdown by SKU\n- Filter by labels\n- Compare periods\n\n## Cost Optimization\n\n| Strategy | Savings |\n|----------|--------|\n| Sustained Use Discounts | Up to 30% |\n| Committed Use Discounts | Up to 57% |\n| Preemptible/Spot VMs | Up to 91% |\n| Rightsizing | 20-40% |\n| Storage Lifecycle | Variable |\n\n## Quick Wins\n```bash\n# Find idle VMs\ngcloud compute instances list --filter=\"status=RUNNING\"\n\n# Delete unused disks\ngcloud compute disks list --filter=\"NOT users:*\"\n\n# Check recommendations\ngcloud recommender recommendations list \\\n  --project=my-project \\\n  --location=global \\\n  --recommender=google.compute.instance.MachineTypeRecommender\n```"
+        },
+        {
+            "id": "gcp_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# GCP Summary 🎉\n\nCongratulations on completing Google Cloud Platform!\n\n## Key Takeaways\n\n### Compute Engine\n- ✅ Flexible VMs with custom machine types\n- ✅ Per-second billing\n- ✅ Sustained and committed use discounts\n\n### Cloud Storage\n- ✅ Unified object storage with classes\n- ✅ Lifecycle policies for cost optimization\n- ✅ Global access with gsutil/gcloud\n\n### Cloud Functions\n- ✅ Event-driven serverless compute\n- ✅ 2nd gen with 60-min timeout\n- ✅ Multiple language support\n\n### BigQuery\n- ✅ Petabyte-scale data warehouse\n- ✅ Serverless, pay-per-query\n- ✅ Built-in ML capabilities\n\n## Next Steps\n- 📚 Get certified (Cloud Digital Leader, Associate Cloud Engineer)\n- 🔧 Explore more services (Cloud Run, GKE, Vertex AI)\n- 🆓 Use free tier for hands-on practice\n\n> 🚀 **Pro Tip:** GCP excels at data and ML workloads - leverage BigQuery and Vertex AI!\n\nHappy cloud computing! ☁️"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_e2etest_basics",
+    "topicId": "basics",
+    "topicTitle": "End-to-End Testing Basics",
+    "description": "Master the fundamentals of E2E testing, including user flows, headless browsers, and testing from the user's perspective",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "What is E2E Testing?",
+            "content": "# End-to-End (E2E) Testing 🌐\n\nTesting the entire software product from start to finish to ensure the application flow behaves as expected.\n\n- **Perspective**: The User.\n- **Scope**: Frontend, API, Database, Network, and Third-party integrations.\n- **Goal**: Simulate a real user scenario."
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "The Testing Pyramid",
+            "content": "# The Pyramid 🔼\n\n- **Unit**: Base (Many, Fast, Cheap).\n- **Integration**: Middle (Fewer, Slower).\n- **E2E**: Peak (Fewest, Slowest, Most Expensive).\n\n> 💡 \"E2E tests catch the bugs that unit tests miss, but they are expensive to maintain!\""
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Key Components",
+            "content": "# The Tech Stack 🛠️\n\n1. **The Test Runner**: Executes the test scripts (Cypress, Playwright).\n2. **The Browser Driver**: Controls the browser (WebDriver, CDP).\n3. **The Application**: The fully running website and backend."
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "User Flows",
+            "content": "# Scenario Driven 🚶\n\nDon't test individual buttons; test **User Flows**:\n\n- \"User logs in, searches for a product, and completes checkout.\"\n- \"New user registers, confirms email, and sets profile picture.\""
+        },
+        {
+            "id": "basics_5",
+            "quizQuestion": "What is the primary perspective of an E2E test?",
+            "quizOptions": [
+                "The Database",
+                "The Developer",
+                "The End User",
+                "The Compiler"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Perspective Quiz",
+            "content": "Whose view matters?"
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Headless Mode",
+            "content": "# Headless Browsers 👻\n\nRunning tests without a visible UI (Headless) improves speed and is perfect for **CI/CD** servers.\n\n- **Example**: Puppeteer or Playwright running in a Linux server without a display."
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "Locators & Selectors",
+            "content": "# Finding Elements 🔍\n\nHow the test finds the button to click:\n\n- **CSS Selectors**: `.btn-primary`\n- **XPath**: `//button[text()='Login']`\n- **Best Practice**: Use dedicated test attributes like `data-testid=\"login-btn\"`."
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Waiting Strategies",
+            "content": "# Syncing with the UI ⏳\n\n- **Hard Wait**: `sleep(5000)` (**BAD!**).\n- **Implicit Wait**: Poll periodically for an element.\n- **Explicit Wait**: Wait for a specific condition (e.g., \"Button is clickable\")."
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "Flakiness",
+            "content": "# The Flaky Test 🧊\n\nA test that fails and passes intermittently without changes.\n\n- **Causes**: Network lag, timing issues, shared state.\n- **Fix**: Better waiting, isolated test data, stable environment."
+        },
+        {
+            "id": "basics_10",
+            "quizQuestion": "Why is 'sleep(5000)' considered a bad practice in E2E testing?",
+            "quizOptions": [
+                "It is too fast",
+                "It makes tests slow and unreliable",
+                "It is only for Java",
+                "It crashes the browser"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Waiting Quiz",
+            "content": "Avoiding sleep."
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "Data Driven E2E",
+            "content": "# Many Scenarios 📊\n\nRun the same user flow with different data sets (e.g., test login with valid user, locked user, and non-existent user)."
+        },
+        {
+            "id": "basics_12",
+            "type": "content",
+            "title": "Visual Testing",
+            "content": "# Pixel Perfect 📸\n\nComparing screenshots of the UI to ensure no visual regressions (e.g., the logo moved 2 pixels to the left)."
+        },
+        {
+            "id": "basics_13",
+            "type": "content",
+            "title": "Shadow DOM & Iframes",
+            "content": "# Visibility 🧤\n\nE2E tools must be able to pierce through Shadow DOMs and reach inside Iframes (common in payment gateways) to verify the full user experience."
+        },
+        {
+            "id": "basics_14",
+            "type": "content",
+            "title": "Capture & Replay",
+            "content": "# No-Code E2E 🎥\n\nTools that record your actions in the browser and automatically generate test scripts."
+        },
+        {
+            "id": "basics_15",
+            "quizQuestion": "What is 'Visual Regression Testing'?",
+            "quizOptions": [
+                "Testing if the code looks clean",
+                "Comparing screenshots of the UI to detect unintended layout changes",
+                "Checking if the text is spelled correctly",
+                "Testing the speed of page rendering"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Visual Quiz",
+            "content": "Beyond logic."
+        },
+        {
+            "id": "basics_16",
+            "type": "content",
+            "title": "Cross-Browser Testing",
+            "content": "# Variety 🖥️\n\nEnsuring the app works on **Chrome**, **Firefox**, **Safari**, and **Edge** using a unified testing framework."
+        },
+        {
+            "id": "basics_17",
+            "type": "content",
+            "title": "Mobile E2E",
+            "content": "# Small Screens 📱\n\nTesting touch events, orientations (Portrait/Landscape), and various screen sizes using emulators or real devices (Appium)."
+        },
+        {
+            "id": "basics_18",
+            "type": "content",
+            "title": "CI/CD & Reports",
+            "content": "# Evidence 📊\n\nE2E tests in CI should produce:\n- **Screenshots**: Of the failure state.\n- **Videos**: Of the whole test run.\n- **Logs**: Browser console and network traffic."
+        },
+        {
+            "id": "basics_19",
+            "type": "content",
+            "title": "Test Isolation",
+            "content": "# Clean Slate 🧼\n\nEvery E2E test should ideally start with a fresh user or a clean database state to avoid \"state leak\" where one test's data breaks the next one."
+        },
+        {
+            "id": "basics_20",
+            "quizQuestion": "Which of these is a valid reason for a test being 'flaky'?",
+            "quizOptions": [
+                "The compiler is too smart",
+                "Timing issues with asynchronous UI elements",
+                "The screen is too bright",
+                "Using too many comments"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Stability."
+        },
+        {
+            "id": "basics_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ E2E tests verify the **Full User Flow**.\n- ✅ Prefer `data-testid` over brittle CSS selectors.\n- ✅ Avoid hard `sleep`; use **Explicit Waits**.\n- ✅ Headless mode is best for **CI Servers**.\n- ✅ Visual testing catches layout bugs.\n\nProtect your user experience with robust E2E testing! 🚀"
+        }
+    ]
+}

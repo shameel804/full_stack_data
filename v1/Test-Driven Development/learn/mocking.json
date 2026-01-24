@@ -1,0 +1,167 @@
+{
+    "id": "learn_tdd_mocking",
+    "topicId": "mocking",
+    "topicTitle": "Mocking & Isolation",
+    "description": "Master mocking, stubbing, and spying to isolate your unit tests and achieve blazing fast TDD cycles",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "mocking_1",
+            "type": "content",
+            "title": "What is Mocking?",
+            "content": "# Mocking & Isolation 🎭\n\nMocking is the act of replacing a real dependency (Database, API, File System) with a fake object that mimics its behavior.\n\n- **Purpose**: Isolate the code under test so failures are only caused by that code, not its neighbors."
+        },
+        {
+            "id": "mocking_2",
+            "type": "content",
+            "title": "The Jest Mock",
+            "content": "# Test Doubles 👥\n\n\"Test Double\" is the generic term for any fake object used for testing purposes. \n\n1. **Dummies**: Objects passed around but never used.\n2. **Stubs**: Provide canned answers to calls.\n3. **Spies**: Record details about how they were called.\n4. **Mocks**: Verify behavior (e.g., \"Was this function called once?\")."
+        },
+        {
+            "id": "mocking_3",
+            "type": "content",
+            "title": "Stubbing",
+            "content": "# Canned Answers 🥫\n\nStubs are used to force the code down a specific path.\n\n```javascript\nconst mockGetData = jest.fn().mockReturnValue({ id: 1 });\n// Now whenever getData() is called, it returns our fake object.\n```"
+        },
+        {
+            "id": "mocking_4",
+            "type": "content",
+            "title": "Spying",
+            "content": "# Observation 🕵️\n\nSpies record interactions without necessarily overriding the real logic.\n\n```javascript\nconst spy = jest.spyOn(console, 'log');\nrunMyCode();\nexpect(spy).toHaveBeenCalledWith('Success!');\n```"
+        },
+        {
+            "id": "mocking_5",
+            "quizQuestion": "Which type of 'Test Double' is primarily used to provide pre-programmed answers to method calls?",
+            "quizOptions": [
+                "Spy",
+                "Dummy",
+                "Stub",
+                "Fake"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Types Quiz",
+            "content": "Definitions."
+        },
+        {
+            "id": "mocking_6",
+            "type": "content",
+            "title": "Why Mock?",
+            "content": "# The Need for Speed 🏎️\n\n- **Speed**: Real DBs/APIs are slow. Mocks are in-memory (nanoseconds).\n- **Determinism**: Real APIs might fail due to network. Mocks always behave exactly as you say.\n- **Separation**: Test your login logic without needing a real SMTP server to send emails."
+        },
+        {
+            "id": "mocking_7",
+            "type": "content",
+            "title": "Mocking Modules",
+            "content": "# Overriding Imports 📦\n\n```javascript\njest.mock('axios');\nimport axios from 'axios';\n\ntest('calls axios', async () => {\n  axios.get.mockResolvedValue({ data: {} });\n  await myApiCall();\n  expect(axios.get).toHaveBeenCalled();\n});\n```"
+        },
+        {
+            "id": "mocking_8",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# Design for Testing 🏗️\n\nTDD encourages **Dependency Injection** (DI), which makes mocking trivial.\n\n```javascript\n// Instead of hardcoding axios inside:\nclass Service {\n  constructor(apiClient) { \n    this.apiClient = apiClient; \n  }\n}\n// In test: new Service(mockClient);\n```"
+        },
+        {
+            "id": "mocking_9",
+            "type": "content",
+            "title": "Verifying Calls",
+            "content": "# Behavioral Assertion ✅\n\n```javascript\nexpect(mockFn).toHaveBeenCalledTimes(1);\nexpect(mockFn).toHaveBeenCalledWith(expect.stringContaining('admin'));\n```"
+        },
+        {
+            "id": "mocking_10",
+            "quizQuestion": "What does 'Dependency Injection' primarily facilitate in testing?",
+            "quizOptions": [
+                "Faster build times",
+                "Easier replacement of real objects with mocks",
+                "Better CSS styling",
+                "Automatic documentation"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Design Quiz",
+            "content": "Architecting for tests."
+        },
+        {
+            "id": "mocking_11",
+            "type": "content",
+            "title": "Mocking Time",
+            "content": "# Controlled Clocks 🕒\n\n```javascript\njest.useFakeTimers();\n// Run code with setTimeout\njest.advanceTimersByTime(5000);\n// Check results!\n```"
+        },
+        {
+            "id": "mocking_12",
+            "type": "content",
+            "title": "Async Mocks",
+            "content": "# Pending Promises ⏳\n\nUse `.mockResolvedValue()` for success and `.mockRejectedValue()` to test how your code handles API errors."
+        },
+        {
+            "id": "mocking_13",
+            "type": "content",
+            "title": "Over-Mocking",
+            "content": "# Brittle Tests ⚠️\n\nMocking too many internals makes tests fragile. If you rename a private helper and the test fails (even if the behavior is correct), you are over-mocking.\n\n> 💡 \"Mock the boundaries, not the internals.\""
+        },
+        {
+            "id": "mocking_14",
+            "type": "content",
+            "title": "Fakes",
+            "content": "# Smart Fakes 🧠\n\nA **Fake** is a working but simplified implementation. \n\n- **Example**: Using an in-memory `Map` instead of a real Redis database."
+        },
+        {
+            "id": "mocking_15",
+            "quizQuestion": "What is a 'Fake' in testing terms?",
+            "quizOptions": [
+                "A function that records calls",
+                "A simplified but working implementation (like in-memory DB)",
+                "A broken piece of code",
+                "A random data generator"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Implementation Quiz",
+            "content": "Working doubles."
+        },
+        {
+            "id": "mocking_16",
+            "type": "content",
+            "title": "Mock Resetting",
+            "content": "# Hygiene 🚿\n\n```javascript\nbeforeEach(() => {\n  jest.clearAllMocks();\n});\n```\n\nAlways clear mocks between tests to avoid carry-over state (e.g., \"called 2 times\" instead of 1)."
+        },
+        {
+            "id": "mocking_17",
+            "type": "content",
+            "title": "Manual Mocks",
+            "content": "# __mocks__ 📂\n\nIn Jest, you can place files in a `__mocks__` folder to automatically mock global libraries or complex modules across your whole suite."
+        },
+        {
+            "id": "mocking_18",
+            "type": "content",
+            "title": "Spying on Prototypes",
+            "content": "# Class Methods 🏛️\n\n```javascript\nconst spy = jest.spyOn(UserService.prototype, 'save');\n```"
+        },
+        {
+            "id": "mocking_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Pro Tips ✅\n\n- Don't mock what you don't own (mostly).\n- Use specific matches (expect `Object` vs `anything`).\n- Mocks should be simple; if your mock has complex logic, it's a smell."
+        },
+        {
+            "id": "mocking_20",
+            "quizQuestion": "Why should you clear mocks between tests?",
+            "quizOptions": [
+                "To save memory",
+                "To prevent test results from one test leaking into another",
+                "To update the library version",
+                "To delete the database"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test isolation."
+        },
+        {
+            "id": "mocking_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Isolate code with **Test Doubles**.\n- ✅ Use **Stubs** for inputs, **Mocks** for output verification.\n- ✅ **Spies** help track behavior without overriding.\n- ✅ Dependency Injection makes mocking easy.\n- ✅ Keep mocks simple to avoid brittle tests.\n\nMaster the art of isolation to supercharge your TDD! 🎭"
+        }
+    ]
+}

@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_security",
+    "topicId": "security",
+    "topicTitle": "Security & Compliance",
+    "description": "Master cloud security including roles, policies, and compliance standards across major cloud platforms",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "security_1",
+            "type": "content",
+            "title": "Cloud Security Overview",
+            "content": "# Security & Compliance 🔐\n\nProtect your cloud infrastructure.\n\n## What You'll Learn\n- **Roles** - Access control\n- **Policies** - Permissions\n- **Compliance** - Standards\n\n## Shared Responsibility Model\n```\nCustomer: Data, Applications, IAM\n──────────────────────────────────\nCloud Provider: Physical, Network, Hypervisor\n```\n\n## Security Pillars\n| Pillar | Focus |\n|--------|-------|\n| Identity | Who can access |\n| Network | Traffic control |\n| Data | Encryption |\n| Compute | VM security |\n| Logging | Audit trail |"
+        },
+        {
+            "id": "security_2",
+            "type": "content",
+            "title": "IAM Roles",
+            "content": "# IAM Roles 👤\n\nTemporary credentials for secure access.\n\n## Why Roles?\n- No long-term credentials\n- Automatic rotation\n- Cross-account access\n- Service-to-service auth\n\n## Role Components\n```json\n{\n  \"Trust Policy\": \"Who can assume\",\n  \"Permission Policy\": \"What they can do\"\n}\n```\n\n## Common Role Patterns\n- EC2 instance roles\n- Lambda execution roles\n- Cross-account roles\n- Federation roles\n\n> 💡 Always use roles instead of access keys!"
+        },
+        {
+            "id": "security_3",
+            "type": "content",
+            "title": "Creating Roles",
+            "content": "# Role Configuration 🔧\n\n## Trust Policy\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Principal\": {\n      \"Service\": \"ec2.amazonaws.com\"\n    },\n    \"Action\": \"sts:AssumeRole\"\n  }]\n}\n```\n\n## Permission Policy\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Action\": [\"s3:GetObject\", \"s3:PutObject\"],\n  \"Resource\": \"arn:aws:s3:::bucket/*\"\n}\n```\n\n## CLI\n```bash\naws iam create-role \\\n  --role-name MyRole \\\n  --assume-role-policy-document file://trust.json\n```"
+        },
+        {
+            "id": "security_quiz_1",
+            "type": "quiz",
+            "title": "Roles Quiz",
+            "content": "Test your IAM knowledge!",
+            "quizQuestion": "What is the benefit of IAM roles over access keys?",
+            "quizOptions": [
+                "Faster performance",
+                "Temporary credentials with auto-rotation",
+                "Cheaper cost",
+                "Simpler setup"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "security_4",
+            "type": "content",
+            "title": "Policy Types",
+            "content": "# IAM Policies 📜\n\n## Policy Types\n| Type | Scope |\n|------|-------|\n| Identity-based | Users, Groups, Roles |\n| Resource-based | S3, Lambda, etc |\n| Permission Boundary | Max permissions |\n| SCP | Organization-wide |\n\n## Policy Structure\n```json\n{\n  \"Effect\": \"Allow/Deny\",\n  \"Action\": \"service:action\",\n  \"Resource\": \"arn:...\",\n  \"Condition\": {}\n}\n```\n\n## Evaluation Logic\n```\nExplicit Deny > Explicit Allow > Implicit Deny\n```"
+        },
+        {
+            "id": "security_5",
+            "type": "content",
+            "title": "Least Privilege",
+            "content": "# Principle of Least Privilege 🎯\n\nGrant minimum required permissions.\n\n## Bad vs Good\n```json\n// BAD\n{\"Action\": \"*\", \"Resource\": \"*\"}\n\n// GOOD  \n{\"Action\": \"s3:GetObject\", \"Resource\": \"arn:aws:s3:::bucket/*\"}\n```\n\n## Implementation\n- Start with no permissions\n- Add based on needs\n- Use Access Analyzer\n- Review regularly\n\n## Tools\n- IAM Access Analyzer\n- Policy Simulator\n- CloudTrail logs"
+        },
+        {
+            "id": "security_6",
+            "type": "content",
+            "title": "Policy Conditions",
+            "content": "# Policy Conditions 🔒\n\nFine-grained access control.\n\n## Common Conditions\n```json\n{\n  \"Condition\": {\n    \"IpAddress\": {\n      \"aws:SourceIp\": \"10.0.0.0/8\"\n    },\n    \"Bool\": {\n      \"aws:MultiFactorAuthPresent\": \"true\"\n    },\n    \"DateGreaterThan\": {\n      \"aws:CurrentTime\": \"2024-01-01\"\n    }\n  }\n}\n```\n\n## Use Cases\n- Restrict by IP range\n- Require MFA\n- Time-based access\n- Tag-based access"
+        },
+        {
+            "id": "security_quiz_2",
+            "type": "quiz",
+            "title": "Policies Quiz",
+            "content": "Test your policy knowledge!",
+            "quizQuestion": "In IAM policy evaluation, what takes precedence?",
+            "quizOptions": [
+                "Implicit Allow",
+                "Explicit Allow",
+                "Explicit Deny",
+                "Condition statements"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "security_7",
+            "type": "content",
+            "title": "Network Security",
+            "content": "# Network Security 🌐\n\n## VPC Security\n- Security Groups (stateful)\n- NACLs (stateless)\n- VPC Flow Logs\n\n## Security Group Rules\n```bash\n# Allow HTTPS only\naws ec2 authorize-security-group-ingress \\\n  --group-id sg-123 \\\n  --protocol tcp \\\n  --port 443 \\\n  --cidr 0.0.0.0/0\n```\n\n## Zero Trust\n- Verify every request\n- Assume breach\n- Least privilege access\n- Microsegmentation"
+        },
+        {
+            "id": "security_8",
+            "type": "content",
+            "title": "Data Encryption",
+            "content": "# Data Encryption 🔑\n\n## Encryption Types\n| Type | When | Examples |\n|------|------|----------|\n| At Rest | Stored | S3, EBS, RDS |\n| In Transit | Moving | TLS/SSL |\n| In Use | Processing | Nitro Enclaves |\n\n## KMS Keys\n- AWS managed keys\n- Customer managed keys\n- Customer owned keys\n\n## Key Policy\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Principal\": {\"AWS\": \"arn:aws:iam::123:role/App\"},\n  \"Action\": [\"kms:Decrypt\", \"kms:GenerateDataKey\"]\n}\n```"
+        },
+        {
+            "id": "security_9",
+            "type": "content",
+            "title": "Secrets Management",
+            "content": "# Secrets Management 🤫\n\n## Store Secrets Securely\n```python\nimport boto3\n\nclient = boto3.client('secretsmanager')\nresponse = client.get_secret_value(SecretId='db-creds')\nsecret = json.loads(response['SecretString'])\n```\n\n## Options\n| Service | Use Case |\n|---------|----------|\n| Secrets Manager | DB creds, API keys |\n| Parameter Store | Config, less sensitive |\n| HashiCorp Vault | Multi-cloud |\n\n## Best Practices\n- Never hardcode secrets\n- Enable rotation\n- Audit access"
+        },
+        {
+            "id": "security_quiz_3",
+            "type": "quiz",
+            "title": "Encryption Quiz",
+            "content": "Test your encryption knowledge!",
+            "quizQuestion": "Where should you store database credentials?",
+            "quizOptions": [
+                "In code",
+                "Environment variables only",
+                "Secrets Manager with rotation",
+                "README file"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "security_10",
+            "type": "content",
+            "title": "Compliance Standards",
+            "content": "# Compliance Standards 📋\n\n## Major Standards\n| Standard | Focus |\n|----------|-------|\n| SOC 2 | Service org controls |\n| HIPAA | Healthcare data |\n| PCI DSS | Payment cards |\n| GDPR | EU data privacy |\n| ISO 27001 | Security mgmt |\n\n## AWS Compliance\n- Artifact for reports\n- Audit Manager\n- Config Rules\n- Security Hub"
+        },
+        {
+            "id": "security_11",
+            "type": "content",
+            "title": "HIPAA Compliance",
+            "content": "# HIPAA in Cloud 🏥\n\n## Requirements\n- Business Associate Agreement\n- Encryption everywhere\n- Access controls\n- Audit logging\n- Breach notification\n\n## HIPAA-Eligible Services\n- EC2, S3, RDS\n- Lambda, DynamoDB\n- CloudWatch, CloudTrail\n\n## Best Practices\n- Encrypt PHI at rest/transit\n- Enable VPC flow logs\n- Use dedicated hosts (optional)\n- Regular audits"
+        },
+        {
+            "id": "security_12",
+            "type": "content",
+            "title": "PCI DSS",
+            "content": "# PCI DSS Compliance 💳\n\n## Requirements\n1. Secure network (firewall)\n2. Protect cardholder data\n3. Vulnerability management\n4. Access control\n5. Monitor and test\n6. Security policy\n\n## AWS for PCI\n- Use AWS-defined boundaries\n- Encrypt card data\n- Segment cardholder env\n- Enable logging\n\n## Tokenization\n```\nCard: 4111-1111-1111-1111 → Token: tok_abc123\n```"
+        },
+        {
+            "id": "security_13",
+            "type": "content",
+            "title": "Auditing & Logging",
+            "content": "# Security Logging 📊\n\n## CloudTrail\n- Who did what, when\n- API call history\n- 90 days free\n\n## Key Logs\n| Service | Logs |\n|---------|------|\n| CloudTrail | API calls |\n| VPC Flow | Network traffic |\n| CloudWatch | App logs |\n| S3 Access | Object access |\n\n## Setup\n```bash\naws cloudtrail create-trail \\\n  --name my-trail \\\n  --s3-bucket-name logs-bucket \\\n  --is-multi-region-trail\n```"
+        },
+        {
+            "id": "security_quiz_4",
+            "type": "quiz",
+            "title": "Compliance Quiz",
+            "content": "Test your compliance knowledge!",
+            "quizQuestion": "Which compliance standard focuses on payment card data?",
+            "quizOptions": [
+                "HIPAA",
+                "GDPR",
+                "PCI DSS",
+                "SOC 2"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "security_14",
+            "type": "content",
+            "title": "Security Hub",
+            "content": "# AWS Security Hub 🛡️\n\nCentralized security view.\n\n## Features\n- Aggregates findings\n- CIS benchmarks\n- Automated checks\n- Multi-account\n\n## Standards\n- AWS Foundational Best Practices\n- CIS AWS Foundations\n- PCI DSS\n\n## Findings\n```\nCRITICAL: S3 bucket public\nHIGH: Root account no MFA\nMEDIUM: Security group open\n```"
+        },
+        {
+            "id": "security_15",
+            "type": "content",
+            "title": "GuardDuty",
+            "content": "# Amazon GuardDuty 🔍\n\nThreat detection service.\n\n## Detects\n- Compromised instances\n- Unauthorized access\n- Malicious IPs\n- Cryptocurrency mining\n\n## Data Sources\n- CloudTrail\n- VPC Flow Logs\n- DNS Logs\n\n## Finding Types\n```\nUnauthorizedAccess:IAMUser/TorIPCaller\nRecon:EC2/PortProbeUnprotectedPort\nCryptoCurrency:EC2/BitcoinTool.B\n```"
+        },
+        {
+            "id": "security_16",
+            "type": "content",
+            "title": "Incident Response",
+            "content": "# Incident Response 🚨\n\n## Response Steps\n1. **Detect** - Alerts trigger\n2. **Contain** - Isolate threat\n3. **Eradicate** - Remove cause\n4. **Recover** - Restore service\n5. **Learn** - Post-mortem\n\n## Containment\n```bash\n# Isolate compromised instance\naws ec2 modify-instance-attribute \\\n  --instance-id i-1234 \\\n  --groups sg-isolated\n```\n\n## Runbooks\n- Automated response\n- Consistent actions\n- Lambda + Step Functions"
+        },
+        {
+            "id": "security_17",
+            "type": "content",
+            "title": "WAF & Shield",
+            "content": "# Application Protection 🛡️\n\n## AWS WAF\n- Filter HTTP requests\n- Block SQL injection\n- Block XSS\n- Rate limiting\n\n## WAF Rules\n```json\n{\n  \"Name\": \"BlockSQLi\",\n  \"Statement\": {\n    \"SqliMatchStatement\": {\n      \"FieldToMatch\": {\"Body\": {}}\n    }\n  },\n  \"Action\": {\"Block\": {}}\n}\n```\n\n## AWS Shield\n- DDoS protection\n- Standard: Free\n- Advanced: 24/7 + cost protection"
+        },
+        {
+            "id": "security_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your security knowledge!",
+            "quizQuestion": "Which service provides automated threat detection?",
+            "quizOptions": [
+                "CloudTrail",
+                "GuardDuty",
+                "CloudWatch",
+                "Config"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "security_18",
+            "type": "content",
+            "title": "Security Best Practices",
+            "content": "# Security Checklist ✅\n\n## Identity\n- ✅ Enable MFA everywhere\n- ✅ Use roles not keys\n- ✅ Least privilege\n- ✅ Regular access review\n\n## Network\n- ✅ Private subnets for DBs\n- ✅ VPC endpoints\n- ✅ Security groups restrictive\n\n## Data\n- ✅ Encrypt at rest\n- ✅ Encrypt in transit\n- ✅ Key rotation"
+        },
+        {
+            "id": "security_19",
+            "type": "content",
+            "title": "Multi-Account Strategy",
+            "content": "# AWS Organizations 🏢\n\n## Account Strategy\n```\nManagement Account\n├── Security OU\n│   └── Log Archive, Security\n├── Production OU\n│   └── Prod accounts\n└── Development OU\n    └── Dev accounts\n```\n\n## SCPs\n```json\n{\n  \"Effect\": \"Deny\",\n  \"Action\": \"ec2:RunInstances\",\n  \"Resource\": \"*\",\n  \"Condition\": {\n    \"StringNotEquals\": {\n      \"ec2:Region\": \"us-east-1\"\n    }\n  }\n}\n```"
+        },
+        {
+            "id": "security_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Roles & Policies\n- ✅ Roles over access keys\n- ✅ Least privilege always\n- ✅ Use conditions\n\n### Compliance\n- ✅ Know your standards\n- ✅ Enable logging\n- ✅ Regular audits\n\n### Threat Protection\n- ✅ Enable GuardDuty\n- ✅ Use Security Hub\n- ✅ WAF for web apps\n\n## Best Practices\n- 🔐 Defense in depth\n- 📊 Monitor everything\n- 🚨 Have incident runbooks\n\nStay secure! 🛡️"
+        }
+    ]
+}

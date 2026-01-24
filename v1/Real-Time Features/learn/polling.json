@@ -1,0 +1,53 @@
+{
+    "id": "learn_polling_realtime",
+    "topicId": "polling",
+    "topicTitle": "Polling",
+    "description": "Master short and long polling techniques for real-time updates",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "poll_1",
+            "type": "content",
+            "title": "Polling",
+            "content": "# Polling Techniques 🔄\n\nSimulate real-time with HTTP.\n\n## What You'll Learn:\n- **Short Polling** - Regular intervals\n- **Long Polling** - Wait for updates\n- **Trade-offs** - When to use\n\n> 💡 Polling = fallback when WebSocket not available!"
+        },
+        {
+            "id": "poll_2",
+            "type": "content",
+            "title": "Short Polling",
+            "content": "# Short Polling ⏱️\n\nRequest at fixed intervals.\n\n```javascript\nsetInterval(async () => {\n    const data = await fetch('/api/messages');\n    const messages = await data.json();\n    updateUI(messages);\n}, 5000); // Every 5 seconds\n```\n\n## Pros/Cons:\n| Pro | Con |\n|-----|-----|\n| Simple | Wastes resources |\n| Works everywhere | High latency |\n| Stateless | Server load |"
+        },
+        {
+            "id": "poll_3",
+            "type": "content",
+            "title": "Long Polling",
+            "content": "# Long Polling ⏳\n\nServer holds request until data available.\n\n## Client:\n```javascript\nasync function poll() {\n    try {\n        const response = await fetch('/api/updates');\n        const data = await response.json();\n        handleData(data);\n    } finally {\n        poll(); // Immediately poll again\n    }\n}\npoll();\n```\n\n## Server:\n```javascript\napp.get('/api/updates', async (req, res) => {\n    const data = await waitForNewData(30000); // 30s timeout\n    res.json(data);\n});\n```"
+        },
+        {
+            "id": "poll_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your polling knowledge!",
+            "quizQuestion": "What is the main difference between short and long polling?",
+            "quizOptions": [
+                "Request size",
+                "Long polling waits for data before responding",
+                "Security",
+                "Speed"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "poll_4",
+            "type": "content",
+            "title": "Comparison",
+            "content": "# Technique Comparison 📊\n\n| Aspect | Short | Long | WebSocket |\n|--------|-------|------|----------|\n| Latency | High | Medium | Low |\n| Resources | High | Medium | Low |\n| Complexity | Low | Medium | High |\n| Compatibility | Best | Good | Good |\n\n## When to Use:\n- **Short**: Legacy systems, low update frequency\n- **Long**: No WebSocket, need near-real-time\n- **WebSocket**: Full real-time needed"
+        },
+        {
+            "id": "poll_5",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Polling!\n\n## Key Concepts:\n| Type | How It Works |\n|------|-------------|\n| Short | Fixed interval requests |\n| Long | Server holds until data |\n\n## Use Cases:\n- Fallback for WebSocket\n- Simple implementations\n- Legacy browser support\n\nKnow your options! 🔄"
+        }
+    ]
+}

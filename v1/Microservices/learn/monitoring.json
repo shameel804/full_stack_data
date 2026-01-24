@@ -1,0 +1,71 @@
+{
+    "id": "learn_monitoring_micro",
+    "topicId": "monitoring",
+    "topicTitle": "Monitoring & Observability",
+    "description": "Master microservices monitoring with distributed tracing, logging, and metrics",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "mon_1",
+            "type": "content",
+            "title": "Monitoring & Observability",
+            "content": "# Monitoring & Observability 📊\n\nUnderstand what's happening in your system.\n\n## What You'll Learn:\n- **Three Pillars** - Logs, Metrics, Traces\n- **Distributed Tracing** - Follow requests\n- **Centralized Logging** - Aggregate logs\n- **Metrics** - System health\n- **Alerting** - Proactive notification\n\n> 💡 You can't fix what you can't see!"
+        },
+        {
+            "id": "mon_2",
+            "type": "content",
+            "title": "Three Pillars",
+            "content": "# Three Pillars 🏛️\n\n## Logs:\n```\nWhat happened?\n[INFO] User 123 logged in\n[ERROR] Payment failed: timeout\n```\n\n## Metrics:\n```\nHow is it performing?\nRequests/sec: 1000\nLatency p99: 200ms\nError rate: 0.1%\n```\n\n## Traces:\n```\nWhere did the request go?\nGateway → User → Order → Payment\n  10ms    25ms   50ms    100ms\n```\n\n## Together:\n- Logs tell WHAT\n- Metrics tell HOW MUCH\n- Traces tell WHERE"
+        },
+        {
+            "id": "mon_3",
+            "type": "content",
+            "title": "Distributed Tracing",
+            "content": "# Distributed Tracing 🔍\n\nFollow requests across services.\n\n## Concept:\n```\n        Trace ID: abc123\n            │\n    ┌───────┴───────┐\n    │               │\n Span 1          Span 2\n Gateway        User Service\n  10ms            25ms\n                    │\n                 Span 3\n                Order Service\n                  50ms\n```\n\n## Tools:\n| Tool | Type |\n|------|------|\n| Jaeger | Open source |\n| Zipkin | Open source |\n| Datadog | Commercial |\n| AWS X-Ray | Managed |\n\n## Implementation:\n- Inject trace context\n- Pass between services\n- Collect and visualize"
+        },
+        {
+            "id": "mon_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your monitoring knowledge!",
+            "quizQuestion": "What problem does distributed tracing solve?",
+            "quizOptions": [
+                "Database queries",
+                "Following requests across services",
+                "User authentication",
+                "File storage"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "mon_4",
+            "type": "content",
+            "title": "Centralized Logging",
+            "content": "# Centralized Logging 📝\n\nAggregate logs from all services.\n\n## Architecture:\n```\n┌─────────┐┌─────────┐┌─────────┐\n│Service A││Service B││Service C│\n└────┬────┘└────┬────┘└────┬────┘\n     │          │          │\n     └──────────┼──────────┘\n                ▼\n        ┌─────────────┐\n        │  Log Store  │\n        │ (ELK Stack) │\n        └──────────────┘\n```\n\n## ELK Stack:\n- **Elasticsearch** - Storage\n- **Logstash** - Processing\n- **Kibana** - Visualization\n\n## Structured Logging:\n```json\n{\n    \"timestamp\": \"2024-01-15T10:00:00Z\",\n    \"service\": \"order-service\",\n    \"traceId\": \"abc123\",\n    \"level\": \"INFO\",\n    \"message\": \"Order created\"\n}\n```"
+        },
+        {
+            "id": "mon_5",
+            "type": "content",
+            "title": "Metrics",
+            "content": "# Metrics 📈\n\nQuantitative system health.\n\n## Key Metrics:\n| Metric | Description |\n|--------|-------------|\n| Request rate | Requests/sec |\n| Error rate | Errors/total |\n| Latency | Response time |\n| Saturation | Resource usage |\n\n## RED Method:\n- **R**ate - Requests/sec\n- **E**rrors - Error count\n- **D**uration - Latency\n\n## Prometheus:\n```yaml\n# Scrape config\nscrape_configs:\n  - job_name: 'services'\n    static_configs:\n      - targets:\n        - 'user-service:9090'\n        - 'order-service:9090'\n```"
+        },
+        {
+            "id": "mon_6",
+            "type": "content",
+            "title": "Alerting",
+            "content": "# Alerting 🚨\n\nProactive notification of issues.\n\n## Alert Rules:\n```yaml\ngroups:\n  - name: service-alerts\n    rules:\n      - alert: HighErrorRate\n        expr: error_rate > 0.05\n        for: 5m\n        labels:\n          severity: critical\n        annotations:\n          summary: \"Error rate above 5%\"\n```\n\n## Channels:\n- Slack\n- PagerDuty\n- Email\n- SMS\n\n## Best Practices:\n- Alert on symptoms, not causes\n- Avoid alert fatigue\n- Include runbooks\n- Set appropriate thresholds"
+        },
+        {
+            "id": "mon_7",
+            "type": "content",
+            "title": "Dashboards",
+            "content": "# Dashboards 📊\n\nVisualize system health.\n\n## Grafana Dashboard:\n```\n┌──────────────────────────────────┐\n│ Request Rate    Error Rate       │\n│    ████          ▓▓              │\n│    ████          ▓▓              │\n├──────────────────────────────────┤\n│ Latency p50/p95/p99              │\n│    ━━━━━━━━━━━━━━━━━━            │\n├──────────────────────────────────┤\n│ Top Errors                       │\n│ 1. Timeout (45%)                 │\n│ 2. 500 Error (30%)               │\n└──────────────────────────────────┘\n```\n\n## Key Dashboards:\n- Service overview\n- Per-service detail\n- Infrastructure\n- Business metrics"
+        },
+        {
+            "id": "mon_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Monitoring & Observability!\n\n## Three Pillars:\n| Pillar | Answers |\n|--------|---------|\n| Logs | What happened |\n| Metrics | How much |\n| Traces | Where/path |\n\n## Tools:\n- Tracing: Jaeger, Zipkin\n- Logging: ELK Stack\n- Metrics: Prometheus + Grafana\n\n## Best Practices:\n- Structured logging\n- Correlation IDs\n- RED metrics\n- Actionable alerts\n\nObserve your systems! 📊"
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "id": "learn_accessibility_a11y",
+    "topicId": "accessibility",
+    "topicTitle": "Accessibility Basics",
+    "description": "Master web accessibility with WCAG guidelines, screen readers, and keyboard navigation",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "accessibility_1",
+            "type": "content",
+            "title": "Welcome to Accessibility",
+            "content": "# Web Accessibility ♿\n\nMake the web usable for everyone!\n\n## What You'll Learn:\n- **WCAG Guidelines** - Standards for accessibility\n- **Screen Readers** - How they work\n- **Keyboard Navigation** - No mouse required\n- **Visual Accessibility** - Color, contrast, sizing\n- **Testing Tools** - Validate accessibility\n\n> 💡 Over 1 billion people have disabilities!\n\n## Why Accessibility Matters:\n- 👥 **Inclusion** - Everyone deserves access\n- ⚖️ **Legal** - Required by law in many places\n- 💰 **Business** - Larger audience\n- 🔍 **SEO** - Better for search engines"
+        },
+        {
+            "id": "accessibility_2",
+            "type": "content",
+            "title": "WCAG Guidelines",
+            "content": "# WCAG Guidelines 📋\n\nWeb Content Accessibility Guidelines.\n\n## Four Principles (POUR):\n\n| Principle | Meaning |\n|-----------|--------|\n| **Perceivable** | Can users perceive content? |\n| **Operable** | Can users operate interface? |\n| **Understandable** | Can users understand content? |\n| **Robust** | Works with assistive tech? |\n\n## Conformance Levels:\n```\nLevel A   → Minimum accessibility\nLevel AA  → Standard (most laws require)\nLevel AAA → Highest accessibility\n```\n\n## Key Guidelines:\n- Text alternatives for images\n- Captions for videos\n- Keyboard accessible\n- Sufficient color contrast\n- Consistent navigation\n- Error identification"
+        },
+        {
+            "id": "accessibility_3",
+            "type": "content",
+            "title": "Screen Readers",
+            "content": "# Screen Readers 🔊\n\nSoftware that reads screen content aloud.\n\n## How They Work:\n```\nHTML → Accessibility Tree → Screen Reader → Speech\n```\n\n## Popular Screen Readers:\n| Name | Platform |\n|------|----------|\n| NVDA | Windows (free) |\n| JAWS | Windows |\n| VoiceOver | Mac/iOS |\n| TalkBack | Android |\n\n## What Screen Readers Announce:\n```html\n<button>Submit</button>\n→ \"Submit, button\"\n\n<img alt=\"Company logo\">\n→ \"Company logo, image\"\n\n<h1>Welcome</h1>\n→ \"Welcome, heading level 1\"\n\n<a href=\"/about\">About Us</a>\n→ \"About Us, link\"\n```\n\n## Best Practices:\n- Semantic HTML\n- Meaningful alt text\n- Proper heading hierarchy\n- Descriptive link text"
+        },
+        {
+            "id": "accessibility_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your accessibility knowledge!",
+            "quizQuestion": "What does WCAG Level AA typically require?",
+            "quizOptions": [
+                "Minimum accessibility",
+                "Standard accessibility (most laws)",
+                "Maximum accessibility",
+                "No requirements"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "accessibility_4",
+            "type": "content",
+            "title": "Semantic HTML",
+            "content": "# Semantic HTML 📝\n\nUse elements that convey meaning.\n\n## Bad vs Good:\n```html\n<!-- ❌ Non-semantic -->\n<div onclick=\"submit()\">Click Me</div>\n<div class=\"header\">Title</div>\n<span class=\"link\">About</span>\n\n<!-- ✅ Semantic -->\n<button onclick=\"submit()\">Click Me</button>\n<h1>Title</h1>\n<a href=\"/about\">About</a>\n```\n\n## Landmark Elements:\n```html\n<header>Site header</header>\n<nav>Navigation</nav>\n<main>Main content</main>\n<aside>Sidebar</aside>\n<footer>Footer</footer>\n```\n\n## Benefits:\n- Screen readers understand structure\n- Keyboard navigation works\n- Better SEO\n- Easier styling\n\n## Common Semantic Elements:\n| Element | Purpose |\n|---------|--------|\n| `<button>` | Interactive actions |\n| `<a>` | Navigation |\n| `<h1>-<h6>` | Headings |\n| `<ul>/<ol>` | Lists |\n| `<article>` | Self-contained content |"
+        },
+        {
+            "id": "accessibility_5",
+            "type": "content",
+            "title": "Keyboard Navigation",
+            "content": "# Keyboard Navigation ⌨️\n\nAll functionality must work without a mouse.\n\n## Key Navigation Keys:\n| Key | Action |\n|-----|--------|\n| Tab | Move to next element |\n| Shift+Tab | Move to previous |\n| Enter | Activate button/link |\n| Space | Toggle checkbox, activate button |\n| Arrow keys | Navigate within component |\n| Escape | Close modal/menu |\n\n## Focus Management:\n```css\n/* Never do this */\n*:focus { outline: none; } /* ❌ */\n\n/* Custom focus styles */\nbutton:focus {\n    outline: 2px solid #0066ff;\n    outline-offset: 2px;\n}\n```\n\n## Tab Order:\n```html\n<!-- Natural order follows DOM -->\n<input tabindex=\"0\">  <!-- Normal -->\n<input tabindex=\"-1\"> <!-- Skip -->\n<input tabindex=\"1\">  <!-- Avoid! -->\n```\n\n## Focus Trapping for Modals:\n- Keep focus inside modal\n- Return focus when closed"
+        },
+        {
+            "id": "accessibility_6",
+            "type": "content",
+            "title": "Images and Alt Text",
+            "content": "# Images & Alt Text 🖼️\n\nText alternatives for non-text content.\n\n## Alt Text Examples:\n```html\n<!-- Informative image -->\n<img src=\"chart.png\" alt=\"Sales increased 50% from Q1 to Q2\">\n\n<!-- Decorative image -->\n<img src=\"decoration.png\" alt=\"\">\n\n<!-- Linked image -->\n<a href=\"/home\">\n    <img src=\"logo.png\" alt=\"Home - Company Name\">\n</a>\n\n<!-- Complex image -->\n<figure>\n    <img src=\"chart.png\" alt=\"Quarterly sales chart\">\n    <figcaption>Sales data: Q1: $1M, Q2: $1.5M...</figcaption>\n</figure>\n```\n\n## Good Alt Text:\n- ✅ Describes content and function\n- ✅ Concise (under 125 chars)\n- ✅ Doesn't start with \"image of\"\n- ✅ Empty for decorative images\n\n## Bad Alt Text:\n- ❌ \"image.jpg\"\n- ❌ \"Click here\"\n- ❌ \"Image of a photo of...\"\n- ❌ Missing alt attribute"
+        },
+        {
+            "id": "accessibility_7",
+            "type": "content",
+            "title": "Color and Contrast",
+            "content": "# Color & Contrast 🎨\n\nEnsure content is readable by everyone.\n\n## Contrast Ratios:\n| Level | Normal Text | Large Text |\n|-------|-------------|------------|\n| AA | 4.5:1 | 3:1 |\n| AAA | 7:1 | 4.5:1 |\n\n## Examples:\n```css\n/* ❌ Low contrast */\n.bad {\n    color: #666;\n    background: #888;\n}\n\n/* ✅ Good contrast */\n.good {\n    color: #000;\n    background: #fff;\n}\n```\n\n## Don't Rely on Color Alone:\n```html\n<!-- ❌ Color only -->\n<span style=\"color: red;\">Error</span>\n\n<!-- ✅ Color + icon + text -->\n<span style=\"color: red;\">⚠️ Error: Invalid email</span>\n```\n\n## Tools:\n- WebAIM Contrast Checker\n- Chrome DevTools contrast\n- Lighthouse audit"
+        },
+        {
+            "id": "accessibility_quiz_2",
+            "type": "quiz",
+            "title": "Color Check",
+            "content": "Test your color accessibility knowledge!",
+            "quizQuestion": "What is the minimum contrast ratio for normal text at WCAG AA?",
+            "quizOptions": [
+                "3:1",
+                "4.5:1",
+                "7:1",
+                "2:1"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "accessibility_8",
+            "type": "content",
+            "title": "Forms Accessibility",
+            "content": "# Accessible Forms 📝\n\nMake forms usable for everyone.\n\n## Labels:\n```html\n<!-- ✅ Associated label -->\n<label for=\"email\">Email:</label>\n<input type=\"email\" id=\"email\">\n\n<!-- ✅ Wrapped label -->\n<label>\n    Email:\n    <input type=\"email\">\n</label>\n\n<!-- ❌ No label -->\n<input type=\"email\" placeholder=\"Email\">\n```\n\n## Error Messages:\n```html\n<label for=\"email\">Email:</label>\n<input \n    type=\"email\" \n    id=\"email\"\n    aria-describedby=\"email-error\"\n    aria-invalid=\"true\"\n>\n<span id=\"email-error\" role=\"alert\">\n    Please enter a valid email\n</span>\n```\n\n## Required Fields:\n```html\n<label for=\"name\">\n    Name <span aria-hidden=\"true\">*</span>\n    <span class=\"sr-only\">(required)</span>\n</label>\n<input id=\"name\" required aria-required=\"true\">\n```\n\n## Fieldsets:\n```html\n<fieldset>\n    <legend>Contact Preference</legend>\n    <input type=\"radio\" id=\"email\" name=\"contact\">\n    <label for=\"email\">Email</label>\n</fieldset>\n```"
+        },
+        {
+            "id": "accessibility_9",
+            "type": "content",
+            "title": "Skip Links",
+            "content": "# Skip Links ⏭️\n\nAllow keyboard users to skip repetitive content.\n\n## Implementation:\n```html\n<body>\n    <a href=\"#main-content\" class=\"skip-link\">\n        Skip to main content\n    </a>\n    <header>...</header>\n    <nav>...</nav>\n    <main id=\"main-content\" tabindex=\"-1\">\n        <!-- Main content -->\n    </main>\n</body>\n```\n\n## CSS:\n```css\n.skip-link {\n    position: absolute;\n    top: -40px;\n    left: 0;\n    padding: 8px;\n    background: #000;\n    color: #fff;\n    z-index: 100;\n}\n\n.skip-link:focus {\n    top: 0;\n}\n```\n\n## Benefits:\n- Skip navigation on every page\n- Jump to content quickly\n- Essential for keyboard users\n- Visible only when focused"
+        },
+        {
+            "id": "accessibility_10",
+            "type": "content",
+            "title": "Tables Accessibility",
+            "content": "# Accessible Tables 📊\n\nStructure tables for screen readers.\n\n## Basic Table:\n```html\n<table>\n    <caption>Monthly Sales Data</caption>\n    <thead>\n        <tr>\n            <th scope=\"col\">Month</th>\n            <th scope=\"col\">Sales</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th scope=\"row\">January</th>\n            <td>$10,000</td>\n        </tr>\n    </tbody>\n</table>\n```\n\n## Key Elements:\n| Element | Purpose |\n|---------|--------|\n| `<caption>` | Table title |\n| `<th>` | Header cells |\n| `scope` | Header direction |\n| `<thead>` | Header rows |\n\n## Complex Tables:\n```html\n<th id=\"date\">Date</th>\n<td headers=\"date\">Jan 1</td>\n```\n\n## Don't Use Tables For:\n- ❌ Layout\n- ❌ Spacing\n- ❌ Design elements"
+        },
+        {
+            "id": "accessibility_11",
+            "type": "content",
+            "title": "Video and Audio",
+            "content": "# Video & Audio Accessibility 🎬\n\nMake multimedia accessible to all.\n\n## Captions:\n```html\n<video controls>\n    <source src=\"video.mp4\" type=\"video/mp4\">\n    <track \n        kind=\"captions\" \n        src=\"captions.vtt\" \n        srclang=\"en\" \n        label=\"English\"\n        default\n    >\n</video>\n```\n\n## WebVTT Format:\n```\nWEBVTT\n\n00:00:01.000 --> 00:00:04.000\nWelcome to our tutorial!\n\n00:00:05.000 --> 00:00:08.000\nToday we'll learn about accessibility.\n```\n\n## Requirements:\n| Content | Requirement |\n|---------|-------------|\n| Video with audio | Captions |\n| Audio only | Transcript |\n| Video (no audio) | Audio description (if needed) |\n\n## Best Practices:\n- ✅ Provide captions (not auto-generated)\n- ✅ Include transcripts\n- ✅ Avoid autoplay\n- ✅ Controls accessible via keyboard"
+        },
+        {
+            "id": "accessibility_quiz_3",
+            "type": "quiz",
+            "title": "Media Check",
+            "content": "Test your multimedia accessibility!",
+            "quizQuestion": "What is required for video content with audio?",
+            "quizOptions": [
+                "Background music",
+                "Captions/subtitles",
+                "Higher resolution",
+                "Autoplay"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "accessibility_12",
+            "type": "content",
+            "title": "Testing Accessibility",
+            "content": "# Testing Accessibility 🧪\n\nValidate your accessibility implementation.\n\n## Automated Tools:\n- **Lighthouse** - Chrome DevTools\n- **axe DevTools** - Browser extension\n- **WAVE** - Web accessibility evaluator\n- **Pa11y** - Command line tool\n\n## Manual Testing:\n1. **Keyboard only** - Navigate without mouse\n2. **Screen reader** - Test with NVDA/VoiceOver\n3. **Zoom** - Test at 200% zoom\n4. **Color contrast** - Check ratios\n\n## Keyboard Checklist:\n- [ ] Can Tab through all interactive elements\n- [ ] Focus visible on all elements\n- [ ] Can activate buttons with Enter\n- [ ] Can close modals with Escape\n\n## Screen Reader Checklist:\n- [ ] All images have alt text\n- [ ] Form fields have labels\n- [ ] Headings are logical\n- [ ] Links are descriptive"
+        },
+        {
+            "id": "accessibility_13",
+            "type": "content",
+            "title": "Common Mistakes",
+            "content": "# Common A11y Mistakes ❌\n\n## 1. Removing Focus Outlines:\n```css\n/* ❌ Never */\n:focus { outline: none; }\n\n/* ✅ Replace with custom */\n:focus {\n    outline: 2px solid blue;\n}\n```\n\n## 2. Using `<div>` as Buttons:\n```html\n<!-- ❌ Not keyboard accessible -->\n<div onclick=\"submit()\">Submit</div>\n\n<!-- ✅ Proper button -->\n<button onclick=\"submit()\">Submit</button>\n```\n\n## 3. Missing Form Labels:\n```html\n<!-- ❌ Placeholder is not a label -->\n<input placeholder=\"Email\">\n\n<!-- ✅ Proper label -->\n<label for=\"email\">Email</label>\n<input id=\"email\">\n```\n\n## 4. Low Contrast:\n```css\n/* ❌ Hard to read */\n.text { color: #999; background: #ddd; }\n\n/* ✅ Sufficient contrast */\n.text { color: #333; background: #fff; }\n```"
+        },
+        {
+            "id": "accessibility_14",
+            "type": "content",
+            "title": "Accessibility Checklist",
+            "content": "# A11y Checklist ✅\n\n## Structure:\n- [ ] Semantic HTML elements\n- [ ] Proper heading hierarchy (h1→h2→h3)\n- [ ] Skip link to main content\n- [ ] Page has `<title>`\n- [ ] Language attribute on `<html>`\n\n## Images:\n- [ ] All images have alt text\n- [ ] Decorative images have `alt=\"\"`\n- [ ] Complex images have descriptions\n\n## Forms:\n- [ ] All inputs have labels\n- [ ] Required fields indicated\n- [ ] Errors are clearly identified\n- [ ] Fieldsets group related inputs\n\n## Keyboard:\n- [ ] All interactive elements focusable\n- [ ] Focus visible\n- [ ] Tab order logical\n- [ ] No keyboard traps\n\n## Color:\n- [ ] Contrast ratio meets AA (4.5:1)\n- [ ] Color not sole indicator\n\n## Media:\n- [ ] Videos have captions\n- [ ] Audio has transcripts"
+        },
+        {
+            "id": "accessibility_quiz_4",
+            "type": "quiz",
+            "title": "Final Check",
+            "content": "Test your accessibility knowledge!",
+            "quizQuestion": "Why is placeholder text NOT sufficient for form accessibility?",
+            "quizOptions": [
+                "It's too short",
+                "It disappears when typing",
+                "It's too colorful",
+                "It's not semantic"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "accessibility_15",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Accessibility Basics!\n\n## Key Takeaways:\n\n### WCAG Principles (POUR)\n- Perceivable\n- Operable\n- Understandable\n- Robust\n\n### Core Techniques\n- ✅ Semantic HTML\n- ✅ Keyboard navigation\n- ✅ Alt text for images\n- ✅ Form labels\n- ✅ Color contrast 4.5:1\n- ✅ Skip links\n\n### Testing\n- Automated: Lighthouse, axe\n- Manual: Keyboard, screen reader\n\n## Remember:\n| Do | Don't |\n|----|-------|\n| Use `<button>` | Use `<div>` as button |\n| Add labels | Rely on placeholder |\n| Keep focus visible | Remove outlines |\n| Provide alt text | Leave images blank |\n\n## Next Steps:\n- Learn ARIA attributes\n- Master SEO basics\n- Explore semantic HTML\n\nMake the web for everyone! ♿"
+        }
+    ]
+}

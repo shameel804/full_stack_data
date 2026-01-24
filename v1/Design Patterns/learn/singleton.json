@@ -1,0 +1,199 @@
+{
+    "id": "learn_patterns_singleton",
+    "topicId": "singleton",
+    "topicTitle": "Singleton Pattern",
+    "description": "Master the Singleton pattern including single instance creation, eager/lazy initialization, and thread safety",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "singleton_1",
+            "type": "content",
+            "title": "Singleton Overview",
+            "content": "# Singleton Pattern 🎯\n\nEnsure single instance.\n\n## Purpose\n- Only one instance of class\n- Global access point\n- Control instantiation\n\n## Use Cases\n| Use Case | Example |\n|----------|--------|\n| Config | App settings |\n| Logging | Log manager |\n| Connection | Pool manager |\n| Cache | Cache singleton |"
+        },
+        {
+            "id": "singleton_2",
+            "type": "content",
+            "title": "Basic Implementation",
+            "content": "# Basic Singleton 🔧\n\n## Python\n```python\nclass Singleton:\n    _instance = None\n    \n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n        return cls._instance\n\n# Test\na = Singleton()\nb = Singleton()\nprint(a is b)  # True\n```\n\n## Key Points\n- Override `__new__`\n- Store single instance\n- Return same instance"
+        },
+        {
+            "id": "singleton_3",
+            "type": "content",
+            "title": "Lazy Initialization",
+            "content": "# Lazy Singleton 😴\n\nCreate on first use.\n\n```python\nclass LazyLogger:\n    _instance = None\n    \n    @classmethod\n    def get_instance(cls):\n        if cls._instance is None:\n            cls._instance = cls()\n        return cls._instance\n    \n    def __init__(self):\n        self.logs = []\n\n# Usage\nlogger = LazyLogger.get_instance()\n```\n\n## Benefits\n- Delayed creation\n- Save resources\n- Faster startup"
+        },
+        {
+            "id": "singleton_quiz_1",
+            "type": "quiz",
+            "title": "Basics Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What is lazy initialization?",
+            "quizOptions": [
+                "Create at startup",
+                "Create on first use",
+                "Create multiple instances",
+                "Never create"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "singleton_4",
+            "type": "content",
+            "title": "Eager Initialization",
+            "content": "# Eager Singleton 🚀\n\nCreate at module load.\n\n```python\nclass EagerConfig:\n    _instance = EagerConfig.__new__(EagerConfig)\n    \n    def __new__(cls):\n        return cls._instance\n\n# OR using module-level\nclass _Config:\n    def __init__(self):\n        self.settings = {}\n\nconfig = _Config()  # Created on import\n```\n\n## When to Use\n- Always needed\n- Fast initialization\n- Simple implementation"
+        },
+        {
+            "id": "singleton_5",
+            "type": "content",
+            "title": "Thread Safety",
+            "content": "# Thread-Safe Singleton 🔒\n\n## Problem\nMultiple threads = multiple instances.\n\n## Solution\n```python\nimport threading\n\nclass ThreadSafeSingleton:\n    _instance = None\n    _lock = threading.Lock()\n    \n    def __new__(cls):\n        if cls._instance is None:\n            with cls._lock:\n                if cls._instance is None:\n                    cls._instance = super().__new__(cls)\n        return cls._instance\n```\n\n## Double-Checked Locking\n- First check without lock (fast)\n- Second check with lock (safe)"
+        },
+        {
+            "id": "singleton_quiz_2",
+            "type": "quiz",
+            "title": "Thread Safety Quiz",
+            "content": "Test your thread knowledge!",
+            "quizQuestion": "Why is locking needed for thread-safe singletons?",
+            "quizOptions": [
+                "Better performance",
+                "Prevent multiple instances in race conditions",
+                "Easier code",
+                "Memory savings"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "singleton_6",
+            "type": "content",
+            "title": "Decorator Approach",
+            "content": "# Singleton Decorator 🎨\n\n```python\ndef singleton(cls):\n    instances = {}\n    \n    def get_instance(*args, **kwargs):\n        if cls not in instances:\n            instances[cls] = cls(*args, **kwargs)\n        return instances[cls]\n    \n    return get_instance\n\n@singleton\nclass Database:\n    def __init__(self, url):\n        self.url = url\n\n# Usage\ndb1 = Database('localhost')\ndb2 = Database('other')  # Still returns first\nprint(db1 is db2)  # True\n```"
+        },
+        {
+            "id": "singleton_7",
+            "type": "content",
+            "title": "Metaclass Approach",
+            "content": "# Singleton Metaclass 🔮\n\n```python\nclass SingletonMeta(type):\n    _instances = {}\n    \n    def __call__(cls, *args, **kwargs):\n        if cls not in cls._instances:\n            cls._instances[cls] = super().__call__(*args, **kwargs)\n        return cls._instances[cls]\n\nclass Database(metaclass=SingletonMeta):\n    def __init__(self):\n        self.connection = None\n```\n\n## Benefits\n- Clean class definition\n- Works with inheritance\n- Pythonic approach"
+        },
+        {
+            "id": "singleton_8",
+            "type": "content",
+            "title": "JavaScript Singleton",
+            "content": "# JavaScript Singleton 📜\n\n## Module Pattern\n```javascript\nconst Config = (function() {\n  let instance;\n  \n  function create() {\n    return {\n      apiUrl: 'https://api.example.com',\n      debug: false\n    };\n  }\n  \n  return {\n    getInstance: function() {\n      if (!instance) {\n        instance = create();\n      }\n      return instance;\n    }\n  };\n})();\n\nconst config = Config.getInstance();\n```"
+        },
+        {
+            "id": "singleton_quiz_3",
+            "type": "quiz",
+            "title": "Implementation Quiz",
+            "content": "Test your implementation knowledge!",
+            "quizQuestion": "Which Python feature can create singletons cleanly?",
+            "quizOptions": [
+                "List comprehension",
+                "Lambda functions",
+                "Metaclass",
+                "Generators"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "singleton_9",
+            "type": "content",
+            "title": "Real Examples",
+            "content": "# Real-World Singletons 🌍\n\n## Python Logging\n```python\nimport logging\nlogger = logging.getLogger('app')  # Returns same logger\n```\n\n## Django Settings\n```python\nfrom django.conf import settings\n# Global settings object\n```\n\n## Node.js Modules\n```javascript\n// Cached on first require\nconst db = require('./db');\n```\n\n## When Used\n- Configuration\n- Logging\n- Database connections"
+        },
+        {
+            "id": "singleton_10",
+            "type": "content",
+            "title": "Testing Singletons",
+            "content": "# Testing Challenges 🧪\n\n## Problems\n- Hard to reset state\n- Affects other tests\n- Mocking difficult\n\n## Solutions\n```python\nclass Singleton:\n    _instance = None\n    \n    @classmethod\n    def reset(cls):\n        cls._instance = None\n\n# In tests\ndef teardown():\n    Singleton.reset()\n```\n\n## Better: Dependency Injection\nPass instance as parameter."
+        },
+        {
+            "id": "singleton_11",
+            "type": "content",
+            "title": "Disadvantages",
+            "content": "# Singleton Drawbacks ⚠️\n\n## Issues\n| Problem | Impact |\n|---------|--------|\n| Global state | Hidden dependencies |\n| Testing hard | Mocking issues |\n| Coupling | Tight coupling |\n| Threading | Complex in multithreaded |\n\n## Considered Anti-Pattern?\n- Overused\n- Often better alternatives\n- Use sparingly"
+        },
+        {
+            "id": "singleton_quiz_4",
+            "type": "quiz",
+            "title": "Drawbacks Quiz",
+            "content": "Test your critical knowledge!",
+            "quizQuestion": "Why are singletons sometimes considered an anti-pattern?",
+            "quizOptions": [
+                "Too fast",
+                "Create global state and testing issues",
+                "Use too much memory",
+                "Too simple"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "singleton_12",
+            "type": "content",
+            "title": "Alternatives",
+            "content": "# Singleton Alternatives 🔄\n\n## Dependency Injection\n```python\nclass Service:\n    def __init__(self, config):\n        self.config = config\n\n# Inject config instead of singleton\nservice = Service(config)\n```\n\n## Module-Level\n```python\n# config.py\nAPI_URL = 'https://api.example.com'\n\n# usage.py\nfrom config import API_URL\n```"
+        },
+        {
+            "id": "singleton_13",
+            "type": "content",
+            "title": "Registry Pattern",
+            "content": "# Singleton Registry 📋\n\nManage multiple singletons.\n\n```python\nclass Registry:\n    _instances = {}\n    \n    @classmethod\n    def get(cls, key, factory):\n        if key not in cls._instances:\n            cls._instances[key] = factory()\n        return cls._instances[key]\n\n# Usage\ndef create_db():\n    return Database()\n\ndb = Registry.get('database', create_db)\n```"
+        },
+        {
+            "id": "singleton_14",
+            "type": "content",
+            "title": "Singleton vs Static",
+            "content": "# Singleton vs Static Class 📊\n\n## Comparison\n| Aspect | Singleton | Static |\n|--------|-----------|--------|\n| Instance | Yes | No |\n| Inheritance | Yes | No |\n| Lazy init | Yes | No |\n| Interfaces | Yes | No |\n\n## When to Use\n- Singleton: Need instance\n- Static: Just methods"
+        },
+        {
+            "id": "singleton_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is a better alternative to singleton for most cases?",
+            "quizOptions": [
+                "More singletons",
+                "Dependency injection",
+                "Global variables",
+                "Hardcoding"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "singleton_15",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Do's\n- ✅ Use sparingly\n- ✅ Consider alternatives\n- ✅ Make thread-safe\n- ✅ Allow reset for testing\n\n## Don'ts\n- ❌ Overuse\n- ❌ Use for everything\n- ❌ Ignore threading\n- ❌ Hide dependencies"
+        },
+        {
+            "id": "singleton_16",
+            "type": "content",
+            "title": "When to Use",
+            "content": "# When to Use 🤔\n\n## Good Use Cases\n- Logging (one logger)\n- Configuration (app settings)\n- Connection pools\n- Thread pools\n\n## Bad Use Cases\n- User sessions\n- Request-scoped data\n- When testing matters\n- When mocking needed"
+        },
+        {
+            "id": "singleton_17",
+            "type": "content",
+            "title": "Modern Approaches",
+            "content": "# Modern Singleton 🆕\n\n## Python 3.11+\n```python\nfrom functools import lru_cache\n\nclass Config:\n    @classmethod\n    @lru_cache(maxsize=1)\n    def instance(cls):\n        return cls()\n```\n\n## Frameworks\n- DI containers\n- IoC frameworks\n- Service locators"
+        },
+        {
+            "id": "singleton_18",
+            "type": "content",
+            "title": "Exercise",
+            "content": "# Practice Exercise 📝\n\n## Create Logger Singleton\n1. Single instance\n2. Thread-safe\n3. Reset method for tests\n4. Log methods\n\n## Expected Usage\n```python\nlogger = Logger.get_instance()\nlogger.log('Hello')\n\n# Same instance\nlogger2 = Logger.get_instance()\nprint(logger is logger2)  # True\n```"
+        },
+        {
+            "id": "singleton_19",
+            "type": "content",
+            "title": "Common Mistakes",
+            "content": "# Common Mistakes ❌\n\n## Errors\n1. Not handling threads\n2. Forgetting test reset\n3. Overusing pattern\n4. Ignoring alternatives\n\n## Fixes\n- Add locking\n- Add reset method\n- Use DI when possible\n- Consider scope"
+        },
+        {
+            "id": "singleton_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Implementation\n- ✅ Control `__new__`\n- ✅ Thread safety\n- ✅ Lazy vs Eager\n\n### Best Practices\n- ✅ Use sparingly\n- ✅ Prefer DI\n- ✅ Allow testing\n\n### Use Cases\n- Config, Logging, Pools\n\nHappy coding! 🎯"
+        }
+    ]
+}

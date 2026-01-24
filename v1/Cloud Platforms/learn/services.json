@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_services",
+    "topicId": "services",
+    "topicTitle": "Core Cloud Services",
+    "description": "Master essential cloud services including IAM, VPCs, load balancers, and auto-scaling groups across major cloud providers",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "services_1",
+            "type": "content",
+            "title": "Core Cloud Services Overview",
+            "content": "# Core Cloud Services 🏗️\n\nEssential building blocks for any cloud architecture.\n\n## What You'll Learn\n- **IAM** - Identity and Access Management\n- **VPCs** - Virtual Private Clouds\n- **Load Balancers** - Traffic distribution\n- **Auto-Scaling** - Dynamic resource management\n\n## Why These Services Matter\n\n| Service | Purpose |\n|---------|--------|\n| **IAM** | Security & access control |\n| **VPC** | Network isolation & security |\n| **Load Balancer** | High availability & performance |\n| **Auto-Scaling** | Cost optimization & reliability |\n\n## The Foundation Stack\n```\n┌─────────────────────────────────────┐\n│           Your Application          │\n├─────────────────────────────────────┤\n│         Load Balancers              │\n├─────────────────────────────────────┤\n│    Auto-Scaling Groups (Compute)    │\n├─────────────────────────────────────┤\n│         VPC (Networking)            │\n├─────────────────────────────────────┤\n│         IAM (Security)              │\n└─────────────────────────────────────┘\n```\n\n> 💡 **Key Insight:** These services are cloud-agnostic concepts - master them once, apply everywhere!"
+        },
+        {
+            "id": "services_2",
+            "type": "content",
+            "title": "IAM Fundamentals",
+            "content": "# Identity & Access Management 🔐\n\nControl who can access what in your cloud.\n\n## Core Concepts\n\n### Authentication (AuthN)\n- **Who are you?**\n- Verify identity\n- Usernames, passwords, MFA, keys\n\n### Authorization (AuthZ)\n- **What can you do?**\n- Permissions and access levels\n- Roles and policies\n\n## IAM Components\n\n| Component | Description |\n|-----------|-------------|\n| **Users** | Individual identities |\n| **Groups** | Collections of users |\n| **Roles** | Temporary credentials |\n| **Policies** | Permission definitions |\n| **Service Accounts** | Non-human identities |\n\n## Principle of Least Privilege\n```\n✅ Grant minimum required permissions\n✅ Start with no access, add as needed\n✅ Regularly review and revoke unused access\n❌ Never use wildcard (*) in production\n❌ Never share credentials\n```\n\n> ⚠️ **Security First:** 80% of cloud breaches involve IAM misconfigurations!"
+        },
+        {
+            "id": "services_3",
+            "type": "content",
+            "title": "IAM Policies Deep Dive",
+            "content": "# IAM Policies 📜\n\nJSON documents that define permissions.\n\n## Policy Structure (AWS Example)\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"AllowS3Read\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"s3:GetObject\",\n        \"s3:ListBucket\"\n      ],\n      \"Resource\": [\n        \"arn:aws:s3:::my-bucket\",\n        \"arn:aws:s3:::my-bucket/*\"\n      ],\n      \"Condition\": {\n        \"IpAddress\": {\n          \"aws:SourceIp\": \"10.0.0.0/8\"\n        }\n      }\n    }\n  ]\n}\n```\n\n## Policy Elements\n\n| Element | Purpose | Example |\n|---------|---------|--------|\n| **Effect** | Allow or Deny | `\"Allow\"` |\n| **Action** | API operations | `\"s3:GetObject\"` |\n| **Resource** | Target resources | `\"arn:aws:s3:::*\"` |\n| **Condition** | When to apply | IP, time, MFA |\n\n## Policy Types\n- **Identity-based:** Attached to users/roles\n- **Resource-based:** Attached to resources\n- **Permission boundaries:** Maximum permissions\n- **SCPs:** Organization-level controls"
+        },
+        {
+            "id": "services_4",
+            "type": "content",
+            "title": "IAM Best Practices",
+            "content": "# IAM Security Best Practices ✅\n\nSecure your cloud from day one.\n\n## Must-Do Practices\n\n### 1. Enable MFA Everywhere\n```bash\n# Enforce MFA in policy\n{\n  \"Condition\": {\n    \"Bool\": {\n      \"aws:MultiFactorAuthPresent\": \"true\"\n    }\n  }\n}\n```\n\n### 2. Use Roles, Not Keys\n```bash\n# Bad: Hardcoded credentials\nAWS_ACCESS_KEY_ID=AKIA...\nAWS_SECRET_ACCESS_KEY=...\n\n# Good: Assume role\naws sts assume-role --role-arn arn:aws:iam::...\n```\n\n### 3. Rotate Credentials\n- Rotate access keys every 90 days\n- Use temporary credentials when possible\n- Automate rotation with secrets managers\n\n### 4. Monitor & Audit\n```\nCloudTrail → Log all API calls\nCloudWatch → Alert on suspicious activity\nAccess Analyzer → Find public resources\n```\n\n## IAM Checklist\n- ✅ Root account has MFA\n- ✅ Root account not used daily\n- ✅ Password policy enforced\n- ✅ No inline policies\n- ✅ Regular access reviews\n- ✅ Unused credentials removed"
+        },
+        {
+            "id": "services_quiz_1",
+            "type": "quiz",
+            "title": "IAM Quiz",
+            "content": "Test your IAM knowledge!",
+            "quizQuestion": "What does the 'Principle of Least Privilege' mean in IAM?",
+            "quizOptions": [
+                "Give all users administrator access",
+                "Grant only the minimum permissions required for a task",
+                "Use the same password for all accounts",
+                "Allow all actions by default"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "services_5",
+            "type": "content",
+            "title": "VPC Introduction",
+            "content": "# Virtual Private Cloud 🌐\n\nYour own isolated network in the cloud.\n\n## What is a VPC?\n- Logically isolated network\n- You control IP ranges, subnets, routing\n- Secure boundary for resources\n- Foundation for cloud networking\n\n## VPC Components\n\n| Component | Purpose |\n|-----------|--------|\n| **CIDR Block** | IP address range |\n| **Subnets** | Network segments |\n| **Route Tables** | Traffic routing rules |\n| **Internet Gateway** | Internet access |\n| **NAT Gateway** | Outbound-only internet |\n| **Security Groups** | Instance firewalls |\n| **NACLs** | Subnet firewalls |\n\n## CIDR Notation\n```\n10.0.0.0/16  → 65,536 IP addresses\n10.0.1.0/24  → 256 IP addresses\n10.0.1.0/28  → 16 IP addresses\n\n/16 = Large VPC\n/24 = Typical subnet\n/28 = Small subnet\n```\n\n## Default vs Custom VPC\n- **Default:** Created automatically, public by default\n- **Custom:** You design everything, recommended for production"
+        },
+        {
+            "id": "services_6",
+            "type": "content",
+            "title": "Subnets and Routing",
+            "content": "# Subnets & Route Tables 🛣️\n\nOrganize and route traffic within your VPC.\n\n## Subnet Types\n\n### Public Subnet\n- Has route to Internet Gateway\n- Resources get public IPs\n- Web servers, load balancers\n\n### Private Subnet\n- No direct internet access\n- Uses NAT for outbound\n- Databases, app servers\n\n## Route Table Example\n```\n┌──────────────────┬─────────────────┐\n│   Destination    │     Target      │\n├──────────────────┼─────────────────┤\n│   10.0.0.0/16    │     local       │\n│   0.0.0.0/0      │     igw-xxx     │  ← Public\n│   0.0.0.0/0      │     nat-xxx     │  ← Private\n└──────────────────┴─────────────────┘\n```\n\n## Typical Architecture\n```\n┌─────────────── VPC (10.0.0.0/16) ────────────────┐\n│                                                   │\n│  ┌── Public Subnet ──┐  ┌── Private Subnet ──┐   │\n│  │   10.0.1.0/24     │  │   10.0.2.0/24      │   │\n│  │  ┌───────────┐    │  │  ┌───────────┐     │   │\n│  │  │ Web Server│    │  │  │ Database  │     │   │\n│  │  └───────────┘    │  │  └───────────┘     │   │\n│  │       │           │  │       │            │   │\n│  └───────┼───────────┘  └───────┼────────────┘   │\n│          │                      │                │\n│    Internet GW              NAT Gateway          │\n└──────────┼──────────────────────┼────────────────┘\n           │                      │\n        Internet               Internet\n        (in/out)              (out only)\n```"
+        },
+        {
+            "id": "services_7",
+            "type": "content",
+            "title": "Security Groups vs NACLs",
+            "content": "# VPC Security Layers 🔒\n\nMultiple layers of network security.\n\n## Security Groups (Instance Level)\n\n| Feature | Description |\n|---------|-------------|\n| **Scope** | Instance/ENI level |\n| **State** | Stateful (return traffic auto-allowed) |\n| **Rules** | Allow rules only |\n| **Evaluation** | All rules evaluated |\n\n```\nInbound Rules:\n- TCP 22 from 10.0.0.0/8 (SSH)\n- TCP 443 from 0.0.0.0/0 (HTTPS)\n\nOutbound Rules:\n- All traffic to 0.0.0.0/0 (default)\n```\n\n## Network ACLs (Subnet Level)\n\n| Feature | Description |\n|---------|-------------|\n| **Scope** | Subnet level |\n| **State** | Stateless (must allow return traffic) |\n| **Rules** | Allow and Deny rules |\n| **Evaluation** | Rules processed in order |\n\n```\nInbound:\n100 ALLOW TCP 443 from 0.0.0.0/0\n200 DENY  TCP 22  from 0.0.0.0/0\n*   DENY  ALL     from 0.0.0.0/0\n```\n\n## Comparison\n```\nInternet → NACL (Subnet) → Security Group (Instance) → EC2\n              │                    │\n           Stateless            Stateful\n         Allow + Deny          Allow only\n```"
+        },
+        {
+            "id": "services_quiz_2",
+            "type": "quiz",
+            "title": "VPC Quiz",
+            "content": "Test your networking knowledge!",
+            "quizQuestion": "What is the key difference between Security Groups and NACLs?",
+            "quizOptions": [
+                "Security Groups are faster",
+                "Security Groups are stateful, NACLs are stateless",
+                "NACLs only work with EC2",
+                "Security Groups are free, NACLs cost money"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "services_8",
+            "type": "content",
+            "title": "VPC Connectivity Options",
+            "content": "# VPC Connectivity 🔗\n\nConnect VPCs to each other and to on-premises.\n\n## VPC Peering\n```\n┌─────────┐         ┌─────────┐\n│  VPC A  │◄───────►│  VPC B  │\n│10.0.0.0 │ Peering │10.1.0.0 │\n└─────────┘         └─────────┘\n```\n- Direct, private connection\n- No transitive routing\n- Cross-account, cross-region\n\n## Transit Gateway\n```\n┌────────┐     ┌─────────────┐     ┌────────┐\n│ VPC A  │─────│             │─────│ VPC B  │\n└────────┘     │   Transit   │     └────────┘\n┌────────┐─────│   Gateway   │─────┌────────┐\n│ VPC C  │     │             │     │On-Prem │\n└────────┘     └─────────────┘     └────────┘\n```\n- Hub-and-spoke model\n- Transitive routing\n- Scale to thousands of VPCs\n\n## VPN Connection\n- Encrypted tunnel over internet\n- Site-to-site or client VPN\n- Quick to set up\n\n## Direct Connect\n- Dedicated physical connection\n- Consistent performance\n- Lower latency than VPN\n\n## Choose Based On\n| Need | Solution |\n|------|----------|\n| 2 VPCs | VPC Peering |\n| Many VPCs | Transit Gateway |\n| Quick hybrid | VPN |\n| Production hybrid | Direct Connect |"
+        },
+        {
+            "id": "services_9",
+            "type": "content",
+            "title": "Load Balancers Introduction",
+            "content": "# Load Balancers ⚖️\n\nDistribute traffic across multiple targets.\n\n## Why Load Balancing?\n- **High Availability** - No single point of failure\n- **Scalability** - Handle more traffic\n- **Flexibility** - Add/remove servers\n- **Health Checks** - Route away from unhealthy\n\n## Load Balancer Types\n\n| Type | Layer | Use Case |\n|------|-------|----------|\n| **Application (ALB)** | Layer 7 | HTTP/HTTPS |\n| **Network (NLB)** | Layer 4 | TCP/UDP |\n| **Gateway (GWLB)** | Layer 3 | Security appliances |\n| **Classic (CLB)** | Layer 4/7 | Legacy |\n\n## How It Works\n```\n        Client Requests\n              │\n              ▼\n      ┌──────────────┐\n      │ Load Balancer│\n      └──────────────┘\n         │    │    │\n         ▼    ▼    ▼\n      ┌───┐┌───┐┌───┐\n      │EC2││EC2││EC2│\n      └───┘└───┘└───┘\n```\n\n## Health Checks\n```\nProtocol: HTTP\nPath: /health\nInterval: 30 seconds\nTimeout: 5 seconds\nHealthy threshold: 2\nUnhealthy threshold: 3\n```"
+        },
+        {
+            "id": "services_10",
+            "type": "content",
+            "title": "Application Load Balancer",
+            "content": "# Application Load Balancer (ALB) 🌐\n\nIntelligent Layer 7 load balancing.\n\n## Key Features\n- Content-based routing\n- WebSocket support\n- HTTP/2 support\n- SSL/TLS termination\n- WAF integration\n\n## Routing Types\n\n### Path-Based Routing\n```\n/api/*     → API Target Group\n/images/*  → Static Target Group\n/*         → Web Target Group\n```\n\n### Host-Based Routing\n```\napi.example.com    → API Servers\nwww.example.com    → Web Servers\nadmin.example.com  → Admin Servers\n```\n\n### Query String Routing\n```\n?platform=mobile  → Mobile Backend\n?platform=desktop → Desktop Backend\n```\n\n## Architecture\n```\n┌─────────────────────────────────────────┐\n│            Application LB               │\n├─────────────────────────────────────────┤\n│  Listener (HTTPS:443)                   │\n│    ├── Rule: /api/* → API TG           │\n│    ├── Rule: /admin/* → Admin TG       │\n│    └── Default → Web TG                 │\n├─────────────────────────────────────────┤\n│  Target Groups                          │\n│    ├── API TG (port 8080)              │\n│    ├── Admin TG (port 8081)            │\n│    └── Web TG (port 80)                │\n└─────────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "services_11",
+            "type": "content",
+            "title": "Network Load Balancer",
+            "content": "# Network Load Balancer (NLB) 🚀\n\nUltra-high performance Layer 4 load balancing.\n\n## Key Features\n- Millions of requests/second\n- Ultra-low latency (~100μs)\n- Static IP per AZ\n- TCP/UDP/TLS support\n- Preserves source IP\n\n## When to Use NLB\n\n| Use Case | Why NLB |\n|----------|--------|\n| Gaming | Low latency |\n| IoT | TCP connections |\n| VoIP | UDP traffic |\n| Financial | Performance |\n| Static IPs | Required endpoint |\n\n## NLB vs ALB\n\n| Feature | ALB | NLB |\n|---------|-----|-----|\n| Layer | 7 (HTTP) | 4 (TCP/UDP) |\n| Latency | ~400μs | ~100μs |\n| Static IP | No | Yes |\n| WebSockets | Yes | Yes |\n| SSL Offload | Yes | Yes |\n| Path Routing | Yes | No |\n\n## Configuration\n```bash\n# Create NLB\naws elbv2 create-load-balancer \\\n  --name my-nlb \\\n  --type network \\\n  --subnets subnet-abc subnet-def\n\n# Create TCP listener\naws elbv2 create-listener \\\n  --load-balancer-arn $NLB_ARN \\\n  --protocol TCP \\\n  --port 80 \\\n  --default-actions Type=forward,TargetGroupArn=$TG_ARN\n```"
+        },
+        {
+            "id": "services_quiz_3",
+            "type": "quiz",
+            "title": "Load Balancer Quiz",
+            "content": "Test your load balancer knowledge!",
+            "quizQuestion": "Which load balancer type would you use for intelligent HTTP routing based on URL paths?",
+            "quizOptions": [
+                "Network Load Balancer",
+                "Application Load Balancer",
+                "Gateway Load Balancer",
+                "Classic Load Balancer"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "services_12",
+            "type": "content",
+            "title": "Auto-Scaling Introduction",
+            "content": "# Auto-Scaling Groups 📈\n\nAutomatically adjust capacity to maintain performance.\n\n## What is Auto-Scaling?\n- Add instances when demand increases\n- Remove instances when demand decreases\n- Maintain desired number of healthy instances\n- Optimize costs automatically\n\n## Key Components\n\n| Component | Purpose |\n|-----------|--------|\n| **Launch Template** | Instance configuration |\n| **ASG** | Group management |\n| **Scaling Policies** | When to scale |\n| **Cooldown** | Prevent rapid scaling |\n\n## How It Works\n```\n                Scaling Policy\n                     │\n        ┌────────────┼────────────┐\n        │            │            │\n        ▼            ▼            ▼\n   Scale OUT    Maintain    Scale IN\n   (add more)   (replace)   (remove)\n        │            │            │\n        └────────────┼────────────┘\n                     │\n              Auto-Scaling Group\n              ┌───┐ ┌───┐ ┌───┐\n              │EC2│ │EC2│ │EC2│\n              └───┘ └───┘ └───┘\n              min:2  desired:3  max:10\n```\n\n## Capacity Settings\n- **Minimum:** Never go below\n- **Desired:** Target count\n- **Maximum:** Never exceed"
+        },
+        {
+            "id": "services_13",
+            "type": "content",
+            "title": "Scaling Policies",
+            "content": "# Scaling Policies 📊\n\nDefine when and how to scale.\n\n## Policy Types\n\n### 1. Target Tracking\n```\nMetric: Average CPU Utilization\nTarget: 50%\n\nCPU > 50% → Add instances\nCPU < 50% → Remove instances\n```\n- Simple and automatic\n- AWS manages the math\n- Best for most cases\n\n### 2. Step Scaling\n```\nCPU 50-70% → +1 instance\nCPU 70-90% → +2 instances\nCPU > 90%  → +3 instances\n```\n- More control\n- Different actions for different thresholds\n\n### 3. Simple Scaling\n```\nAlarm triggers → Add/Remove X instances\nWait for cooldown\n```\n- Legacy approach\n- Single adjustment\n\n### 4. Scheduled Scaling\n```\n# Scale up every weekday at 9 AM\naws autoscaling put-scheduled-update-group-action \\\n  --scheduled-action-name morning-scale-up \\\n  --auto-scaling-group-name my-asg \\\n  --recurrence \"0 9 * * MON-FRI\" \\\n  --desired-capacity 10\n```\n\n## Cooldown Period\n- Wait time after scaling activity\n- Prevents thrashing\n- Default: 300 seconds"
+        },
+        {
+            "id": "services_14",
+            "type": "content",
+            "title": "Launch Templates",
+            "content": "# Launch Templates 📋\n\nBlueprint for Auto-Scaling instances.\n\n## Template Components\n\n| Setting | Description |\n|---------|-------------|\n| **AMI** | Base image |\n| **Instance Type** | Size/specs |\n| **Key Pair** | SSH access |\n| **Security Groups** | Firewall rules |\n| **IAM Role** | Permissions |\n| **User Data** | Startup script |\n| **EBS Volumes** | Storage config |\n\n## Create Launch Template\n```bash\naws ec2 create-launch-template \\\n  --launch-template-name my-template \\\n  --version-description \"Version 1\" \\\n  --launch-template-data '{\n    \"ImageId\": \"ami-0abcd1234\",\n    \"InstanceType\": \"t3.medium\",\n    \"KeyName\": \"my-key\",\n    \"SecurityGroupIds\": [\"sg-123456\"],\n    \"IamInstanceProfile\": {\n      \"Name\": \"my-instance-profile\"\n    },\n    \"UserData\": \"IyEvYmluL2Jhc2gK...\"\n  }'\n```\n\n## Versioning\n```bash\n# Create new version\naws ec2 create-launch-template-version \\\n  --launch-template-id lt-0abc123 \\\n  --source-version 1 \\\n  --launch-template-data '{\"InstanceType\":\"t3.large\"}'\n\n# Set default version\naws ec2 modify-launch-template \\\n  --launch-template-id lt-0abc123 \\\n  --default-version 2\n```"
+        },
+        {
+            "id": "services_15",
+            "type": "content",
+            "title": "Creating Auto-Scaling Groups",
+            "content": "# Auto-Scaling Group Setup 🚀\n\nCreate and configure an ASG.\n\n## AWS CLI\n```bash\n# Create ASG\naws autoscaling create-auto-scaling-group \\\n  --auto-scaling-group-name my-asg \\\n  --launch-template LaunchTemplateName=my-template,Version='$Latest' \\\n  --min-size 2 \\\n  --max-size 10 \\\n  --desired-capacity 3 \\\n  --vpc-zone-identifier \"subnet-abc,subnet-def\" \\\n  --target-group-arns $ALB_TG_ARN \\\n  --health-check-type ELB \\\n  --health-check-grace-period 300\n\n# Add target tracking policy\naws autoscaling put-scaling-policy \\\n  --auto-scaling-group-name my-asg \\\n  --policy-name cpu-target-tracking \\\n  --policy-type TargetTrackingScaling \\\n  --target-tracking-configuration '{\n    \"TargetValue\": 50.0,\n    \"PredefinedMetricSpecification\": {\n      \"PredefinedMetricType\": \"ASGAverageCPUUtilization\"\n    }\n  }'\n```\n\n## Health Check Types\n| Type | Description |\n|------|-------------|\n| **EC2** | Instance status checks |\n| **ELB** | Load balancer health checks |\n\n## Instance Refresh\n```bash\n# Rolling update to new version\naws autoscaling start-instance-refresh \\\n  --auto-scaling-group-name my-asg \\\n  --preferences '{\"MinHealthyPercentage\": 90}'\n```"
+        },
+        {
+            "id": "services_quiz_4",
+            "type": "quiz",
+            "title": "Auto-Scaling Quiz",
+            "content": "Test your scaling knowledge!",
+            "quizQuestion": "What is the purpose of a cooldown period in Auto-Scaling?",
+            "quizOptions": [
+                "To save money on compute costs",
+                "To prevent rapid scaling actions in quick succession",
+                "To cool down server temperatures",
+                "To delay the initial launch"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "services_16",
+            "type": "content",
+            "title": "Horizontal vs Vertical Scaling",
+            "content": "# Scaling Strategies 📐\n\nTwo approaches to meeting demand.\n\n## Horizontal Scaling (Scale Out/In)\n```\nBefore:  [Server A]\n\nAfter:   [Server A] [Server B] [Server C]\n```\n- Add more instances\n- Distributed load\n- Better for stateless apps\n- Auto-Scaling friendly\n\n## Vertical Scaling (Scale Up/Down)\n```\nBefore:  [t3.small - 2 vCPU, 2GB]\n\nAfter:   [t3.xlarge - 4 vCPU, 16GB]\n```\n- Increase instance size\n- Simple but limited\n- Requires downtime\n- Upper limit exists\n\n## Comparison\n\n| Aspect | Horizontal | Vertical |\n|--------|-----------|----------|\n| Availability | High | Lower |\n| Downtime | None | Required |\n| Complexity | Higher | Lower |\n| Cost | Pay-as-grow | Jumps |\n| Limit | Virtually none | Hardware limit |\n\n## Best Practice\n```\n┌─────────────────────────────────────────┐\n│ Design for horizontal scaling           │\n│ Use vertical only for quick fixes       │\n│ Stateless > Stateful for scalability   │\n└─────────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "services_17",
+            "type": "content",
+            "title": "Predictive Scaling",
+            "content": "# Predictive Scaling 🔮\n\nScale proactively based on patterns.\n\n## How It Works\n- Analyzes historical traffic\n- Uses machine learning\n- Predicts future demand\n- Scales BEFORE needed\n\n## Comparison\n```\nReactive Scaling:\n  Demand ↑ → Detect → Scale → Catch up\n  (Users experience slowdown)\n\nPredictive Scaling:\n  Predict → Scale → Demand ↑ → Ready!\n  (Users see no difference)\n```\n\n## Enable Predictive Scaling\n```bash\naws autoscaling put-scaling-policy \\\n  --auto-scaling-group-name my-asg \\\n  --policy-name predictive-scaling \\\n  --policy-type PredictiveScaling \\\n  --predictive-scaling-configuration '{\n    \"MetricSpecifications\": [{\n      \"TargetValue\": 50,\n      \"PredefinedMetricPairSpecification\": {\n        \"PredefinedMetricType\": \"ASGCPUUtilization\"\n      }\n    }],\n    \"Mode\": \"ForecastAndScale\",\n    \"SchedulingBufferTime\": 300\n  }'\n```\n\n## Modes\n| Mode | Behavior |\n|------|----------|\n| **ForecastOnly** | Generates forecast, no action |\n| **ForecastAndScale** | Scales based on forecast |\n\n> 💡 **Best for:** Regular patterns like business hours traffic!"
+        },
+        {
+            "id": "services_18",
+            "type": "content",
+            "title": "Multi-AZ Architecture",
+            "content": "# Multi-AZ Design 🏗️\n\nBuild for high availability.\n\n## Multi-AZ Architecture\n```\n┌────────────────── Region ──────────────────┐\n│                                             │\n│   ┌─── AZ-A ───┐     ┌─── AZ-B ───┐        │\n│   │            │     │            │        │\n│   │ ┌────────┐ │     │ ┌────────┐ │        │\n│   │ │  EC2   │ │     │ │  EC2   │ │        │\n│   │ └────────┘ │     │ └────────┘ │        │\n│   │     │      │     │     │      │        │\n│   │ ┌────────┐ │     │ ┌────────┐ │        │\n│   │ │  RDS   │─│─────│─│RDS Rep │ │        │\n│   │ │Primary │ │sync │ │Standby │ │        │\n│   │ └────────┘ │     │ └────────┘ │        │\n│   │            │     │            │        │\n│   └────────────┘     └────────────┘        │\n│          │                  │              │\n│          └───── ALB ────────┘              │\n│                  │                         │\n└──────────────────┼─────────────────────────┘\n                   │\n               Internet\n```\n\n## Multi-AZ Components\n- **Load Balancer:** Spans AZs\n- **Auto-Scaling:** Distributes across AZs\n- **Database:** Multi-AZ RDS\n- **Storage:** S3 (automatically replicated)\n\n## SLA Impact\n| Configuration | Availability |\n|---------------|-------------|\n| Single AZ | 99.5% |\n| Multi-AZ | 99.99% |"
+        },
+        {
+            "id": "services_19",
+            "type": "content",
+            "title": "Cost Optimization",
+            "content": "# Cost Optimization Strategies 💰\n\nOptimize spending across core services.\n\n## IAM Costs\n- IAM itself is free!\n- Reduce human access → Use roles\n- Centralize with AWS Organizations\n\n## VPC Costs\n| Service | Cost |\n|---------|------|\n| VPC | Free |\n| NAT Gateway | $0.045/hr + data |\n| VPN | $0.05/hr |\n| Transit Gateway | $0.05/hr/attachment |\n\n**Savings:** Use NAT instances for dev/test\n\n## Load Balancer Costs\n- ALB: $0.0225/hr + LCU charges\n- NLB: $0.0225/hr + LCU charges\n\n**Savings:** Right-size, use fewer LBs\n\n## Auto-Scaling Savings\n- Scale in during low demand\n- Use Spot instances (up to 90% off)\n- Mix On-Demand + Spot\n\n```bash\n# Mixed instances policy\n\"MixedInstancesPolicy\": {\n  \"InstancesDistribution\": {\n    \"OnDemandBaseCapacity\": 2,\n    \"OnDemandPercentageAboveBaseCapacity\": 20,\n    \"SpotAllocationStrategy\": \"capacity-optimized\"\n  }\n}\n```\n\n> 💡 **Best Practice:** Review monthly, optimize quarterly!"
+        },
+        {
+            "id": "services_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall core services knowledge!",
+            "quizQuestion": "For a highly available web application, which combination is most appropriate?",
+            "quizOptions": [
+                "Single EC2 instance with large size",
+                "Multi-AZ Auto-Scaling Group behind an ALB",
+                "Single VPC with one subnet",
+                "Multiple NAT Gateways without load balancer"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "services_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Core Services Summary 🎉\n\nYou've mastered the foundational cloud services!\n\n## Key Takeaways\n\n### IAM\n- ✅ Authentication & Authorization\n- ✅ Principle of least privilege\n- ✅ Use roles over keys\n- ✅ Enable MFA everywhere\n\n### VPCs\n- ✅ Network isolation\n- ✅ Public & private subnets\n- ✅ Security Groups (stateful)\n- ✅ NACLs (stateless)\n\n### Load Balancers\n- ✅ ALB for HTTP/Layer 7\n- ✅ NLB for TCP/Layer 4\n- ✅ Health checks essential\n- ✅ Multi-AZ deployment\n\n### Auto-Scaling\n- ✅ Horizontal > Vertical\n- ✅ Target tracking policies\n- ✅ Launch templates for config\n- ✅ Predictive scaling for patterns\n\n## Next Steps\n- 🔧 Build a multi-AZ web architecture\n- 📚 Practice IAM policies\n- 🎯 Set up Auto-Scaling with target tracking\n- 💰 Implement cost optimization strategies\n\n> 🚀 **Remember:** These services work together - design holistically!\n\nKeep building! ☁️"
+        }
+    ]
+}

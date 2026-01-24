@@ -1,0 +1,167 @@
+{
+    "id": "learn_integtest_postman",
+    "topicId": "postman",
+    "topicTitle": "Postman",
+    "description": "Master Postman for API integration testing, collections, pre-request scripts, and test scripts",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "postman_1",
+            "type": "content",
+            "title": "Introduction to Postman",
+            "content": "# Postman 🚀\n\nThe world's leading API platform for developers to design, build, test, and iterate their APIs.\n\n- **UI Based**: Explore APIs visually.\n- **Automation**: Write tests in JavaScript.\n- **Collections**: Group related requests.\n- **Collaboration**: Share APIs with your team."
+        },
+        {
+            "id": "postman_2",
+            "type": "content",
+            "title": "Collections & Folders",
+            "content": "# Organization 📂\n\nGroup requests into **Collections**. Use **Folders** for logical grouping (e.g., Auth, Users, Orders).\n\n- **Benefits**: Share the whole collection at once, run all tests in bulk."
+        },
+        {
+            "id": "postman_3",
+            "type": "content",
+            "title": "Environments & Variables",
+            "content": "# Dynamic APIs ⚙️\n\nDon't hardcode URLs or tokens! Use **Variables**.\n\n- **Global**: Available everywhere.\n- **Environment**: Switch between Local, Staging, Production.\n- **Collection**: Variables specific to one set of requests.\n\n```\n{{base_url}}/api/users/{{userId}}\n```"
+        },
+        {
+            "id": "postman_4",
+            "type": "content",
+            "title": "Writing Tests",
+            "content": "# Test Scripts 🧪\n\nPostman tests are written in JavaScript in the **Tests** tab.\n\n```javascript\npm.test(\"Status code is 200\", () => {\n  pm.response.to.have.status(200);\n});\n\npm.test(\"Response time is less than 200ms\", () => {\n  pm.expect(pm.response.responseTime).to.be.below(200);\n});\n```"
+        },
+        {
+            "id": "postman_5",
+            "quizQuestion": "Where do you define JavaScript code that runs after a request in Postman?",
+            "quizOptions": [
+                "Headers tab",
+                "Pre-request Script tab",
+                "Tests tab",
+                "Body tab"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "UI Quiz",
+            "content": "Where to test?"
+        },
+        {
+            "id": "postman_6",
+            "type": "content",
+            "title": "Asserting Response Body",
+            "content": "# Validating JSON 📦\n\n```javascript\npm.test(\"Verify user name\", () => {\n  const jsonData = pm.response.json();\n  pm.expect(jsonData.name).to.eql(\"John Doe\");\n  pm.expect(jsonData.id).to.be.a('number');\n});\n```"
+        },
+        {
+            "id": "postman_7",
+            "type": "content",
+            "title": "Pre-request Scripts",
+            "content": "# Setup Logic 🛠️\n\nCode in the **Pre-request Script** tab runs *before* the request is sent.\n\n- **Use case**: Generating dynamic timestamps, hashing signatures, or clearing variables."
+        },
+        {
+            "id": "postman_8",
+            "type": "content",
+            "title": "Variable Chaining",
+            "content": "# Passing Data 🔗\n\nCapture data from one request to use in the next.\n\n```javascript\n// In login request 'Tests' tab:\nconst token = pm.response.json().token;\npm.environment.set(\"auth_token\", token);\n\n// In next request 'Headers' tab:\nAuthorization: Bearer {{auth_token}}\n```"
+        },
+        {
+            "id": "postman_9",
+            "type": "content",
+            "title": "Collection Runner",
+            "content": "# Bulk Testing 🏃\n\nThe **Collection Runner** executes all requests in a collection in order.\n\n- Verify entire workflows (e.g., Create -> Get -> Update -> Delete).\n- View a summary of passes and fails."
+        },
+        {
+            "id": "postman_10",
+            "quizQuestion": "Which tab allows you to run code BEFORE the API request is made?",
+            "quizOptions": [
+                "Tests",
+                "Pre-request Script",
+                "Settings",
+                "Authorization"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Workflow Quiz",
+            "content": "Setup vs Teardown."
+        },
+        {
+            "id": "postman_11",
+            "type": "content",
+            "title": "Newman CLI",
+            "content": "# CLI for CI/CD 💻\n\n**Newman** is the command-line companion for Postman.\n\n```bash\nnewman run my_collection.json -e my_env.json\n```\n\nRun your Postman collections in GitHub Actions or Jenkins!"
+        },
+        {
+            "id": "postman_12",
+            "type": "content",
+            "title": "Postman Echo",
+            "content": "# Learning APIs 📡\n\nPostman provides `postman-echo.com`, a set of endpoints that echo back whatever you send them. Perfect for practicing scripts and variable manipulation."
+        },
+        {
+            "id": "postman_13",
+            "type": "content",
+            "title": "Mock Servers",
+            "content": "# Simulation 🏗️\n\nPostman can host **Mock Servers**. If your real backend isn't ready, the frontend team can hit Postman mocks that return pre-defined data."
+        },
+        {
+            "id": "postman_14",
+            "type": "content",
+            "title": "API Documentation",
+            "content": "# Auto-Docs 📚\n\nPostman automatically generates beautiful HTML documentation for your collections, including code snippets in C#, Python, JavaScript, and more."
+        },
+        {
+            "id": "postman_15",
+            "quizQuestion": "What is 'Newman' in the Postman ecosystem?",
+            "quizOptions": [
+                "A browser extension",
+                "The command-line tool to run collections",
+                "A library for React",
+                "The designer of the Postman logo"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Ecosystem Quiz",
+            "content": "Power of CLI."
+        },
+        {
+            "id": "postman_16",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Auth Management 🔐\n\nPostman supports various auth types out of the box:\n\n- API Key\n- Bearer Token\n- OAuth 2.0\n- Basic Auth\n- AWS Signature"
+        },
+        {
+            "id": "postman_17",
+            "type": "content",
+            "title": "Workspaces",
+            "content": "# Team Collaboration 👥\n\nUse **Workspaces** to share collections and environments with teammates. Everyone sees the latest version real-time."
+        },
+        {
+            "id": "postman_18",
+            "type": "content",
+            "title": "Visualizer",
+            "content": "# Data Visualization 📊\n\n`pm.visualizer.set(template, data)` allows you to render JSON response data as HTML tables, charts, or maps right inside Postman."
+        },
+        {
+            "id": "postman_19",
+            "type": "content",
+            "title": "Postman API",
+            "content": "# Programmatic Access 🔑\n\nYou can use the Postman API to fetch your own collections or environments programmatically, useful for advanced automation."
+        },
+        {
+            "id": "postman_20",
+            "quizQuestion": "How do you use a variable named 'apiKey' inside a Postman URL?",
+            "quizOptions": [
+                "$apiKey",
+                "{apiKey}",
+                "{{apiKey}}",
+                "[apiKey]"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Syntax check."
+        },
+        {
+            "id": "postman_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Use Collections for organization.\n- ✅ Leverage Environments for flexibility.\n- ✅ Write Tests in JS to automate validation.\n- ✅ Run everywhere with Newman.\n\nPostman turns manual API testing into a professional automation suite! 🚀"
+        }
+    ]
+}

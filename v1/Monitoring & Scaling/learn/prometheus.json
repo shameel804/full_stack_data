@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_prometheus",
+    "topicId": "prometheus",
+    "topicTitle": "Prometheus",
+    "description": "Master Prometheus for metrics collection including scraping, exporters, and PromQL queries",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "prometheus_1",
+            "type": "content",
+            "title": "Prometheus Overview",
+            "content": "# Prometheus 🔥\n\nOpen-source monitoring and alerting.\n\n## What You'll Learn\n- **Scraping** - Collecting metrics\n- **Exporters** - Data sources\n- **PromQL** - Query language\n\n## Key Features\n| Feature | Benefit |\n|---------|--------|\n| Pull model | Discover targets |\n| Time series | Historical data |\n| PromQL | Powerful queries |\n| Alertmanager | Notifications |"
+        },
+        {
+            "id": "prometheus_2",
+            "type": "content",
+            "title": "Architecture",
+            "content": "# Prometheus Architecture 🏗️\n\n```\nTargets → Prometheus → Grafana\n   ↓          ↓           ↓\nExporters  Storage    Dashboards\n              ↓\n         Alertmanager\n              ↓\n        Notifications\n```\n\n## Components\n- **Prometheus Server** - Core\n- **Exporters** - Data sources\n- **Alertmanager** - Alert routing\n- **Pushgateway** - Short jobs"
+        },
+        {
+            "id": "prometheus_3",
+            "type": "content",
+            "title": "Metric Types",
+            "content": "# Metric Types 📊\n\n## Four Types\n| Type | Use |\n|------|-----|\n| Counter | Cumulative count |\n| Gauge | Current value |\n| Histogram | Distribution |\n| Summary | Quantiles |\n\n## Examples\n```\n# Counter\nhttp_requests_total{method=\"GET\"} 1234\n\n# Gauge\nnode_memory_free_bytes 1073741824\n\n# Histogram\nhttp_request_duration_seconds_bucket{le=\"0.5\"} 2000\n```"
+        },
+        {
+            "id": "prometheus_quiz_1",
+            "type": "quiz",
+            "title": "Metrics Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "Which metric type tracks cumulative values that only increase?",
+            "quizOptions": [
+                "Gauge",
+                "Counter",
+                "Histogram",
+                "Summary"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "prometheus_4",
+            "type": "content",
+            "title": "Scraping",
+            "content": "# Metric Scraping 🎯\n\nPrometheus pulls metrics from targets.\n\n## Configuration\n```yaml\nscrape_configs:\n  - job_name: 'app'\n    static_configs:\n      - targets: ['localhost:8080']\n    scrape_interval: 15s\n```\n\n## Service Discovery\n```yaml\n  - job_name: 'kubernetes'\n    kubernetes_sd_configs:\n      - role: pod\n```\n\n## Endpoint Format\n```\n/metrics\n```"
+        },
+        {
+            "id": "prometheus_5",
+            "type": "content",
+            "title": "Exporters",
+            "content": "# Exporters 📤\n\nExpose metrics from external systems.\n\n## Common Exporters\n| Exporter | Purpose |\n|----------|--------|\n| Node Exporter | Linux metrics |\n| MySQL Exporter | Database |\n| Redis Exporter | Cache |\n| Blackbox | Probing |\n\n## Node Exporter Metrics\n```\nnode_cpu_seconds_total\nnode_memory_MemTotal_bytes\nnode_disk_io_now\nnode_network_receive_bytes_total\n```"
+        },
+        {
+            "id": "prometheus_6",
+            "type": "content",
+            "title": "Instrumenting Apps",
+            "content": "# Application Instrumentation 📝\n\n## Python\n```python\nfrom prometheus_client import Counter, start_http_server\n\nREQUESTS = Counter('http_requests_total', \n                   'Total HTTP requests',\n                   ['method', 'path'])\n\n@app.route('/api')\ndef api():\n    REQUESTS.labels(method='GET', path='/api').inc()\n    return 'OK'\n\nstart_http_server(8000)\n```\n\n## Node.js\n```javascript\nconst prom = require('prom-client');\nconst counter = new prom.Counter({\n  name: 'http_requests_total',\n  help: 'Total HTTP requests'\n});\n```"
+        },
+        {
+            "id": "prometheus_quiz_2",
+            "type": "quiz",
+            "title": "Scraping Quiz",
+            "content": "Test your scraping knowledge!",
+            "quizQuestion": "What endpoint does Prometheus scrape by default?",
+            "quizOptions": [
+                "/health",
+                "/status",
+                "/metrics",
+                "/prometheus"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "prometheus_7",
+            "type": "content",
+            "title": "PromQL Basics",
+            "content": "# PromQL Basics 🔍\n\nQuery language for Prometheus.\n\n## Basic Queries\n```promql\n# Single metric\nhttp_requests_total\n\n# Filter by label\nhttp_requests_total{method=\"GET\"}\n\n# Multiple labels\nhttp_requests_total{method=\"GET\", status=\"200\"}\n\n# Regex match\nhttp_requests_total{method=~\"GET|POST\"}\n```\n\n## Time Selection\n```promql\n# Last 5 minutes\nhttp_requests_total[5m]\n\n# 1 hour ago\nhttp_requests_total offset 1h\n```"
+        },
+        {
+            "id": "prometheus_8",
+            "type": "content",
+            "title": "PromQL Functions",
+            "content": "# PromQL Functions 📐\n\n## Common Functions\n```promql\n# Rate per second\nrate(http_requests_total[5m])\n\n# Increase over time\nincrease(http_requests_total[1h])\n\n# Sum by label\nsum by (method) (rate(http_requests_total[5m]))\n\n# Average\navg(node_cpu_seconds_total)\n\n# Max/Min\nmax(http_request_duration_seconds)\n```\n\n## Aggregators\n- sum, avg, max, min\n- count, stddev\n- topk, bottomk"
+        },
+        {
+            "id": "prometheus_9",
+            "type": "content",
+            "title": "PromQL Advanced",
+            "content": "# Advanced PromQL 🚀\n\n## Histogram Quantiles\n```promql\n# 95th percentile latency\nhistogram_quantile(0.95, \n  rate(http_request_duration_seconds_bucket[5m]))\n```\n\n## Error Rate\n```promql\nsum(rate(http_requests_total{status=~\"5..\"}[5m]))\n/\nsum(rate(http_requests_total[5m]))\n```\n\n## Saturation\n```promql\n1 - avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m]))\n```"
+        },
+        {
+            "id": "prometheus_quiz_3",
+            "type": "quiz",
+            "title": "PromQL Quiz",
+            "content": "Test your PromQL knowledge!",
+            "quizQuestion": "Which function calculates the per-second rate of a counter?",
+            "quizOptions": [
+                "increase()",
+                "rate()",
+                "sum()",
+                "avg()"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "prometheus_10",
+            "type": "content",
+            "title": "Alerting Rules",
+            "content": "# Alerting Rules ⚠️\n\n## Rule Definition\n```yaml\ngroups:\n- name: app\n  rules:\n  - alert: HighErrorRate\n    expr: |\n      sum(rate(http_requests_total{status=~\"5..\"}[5m]))\n      /\n      sum(rate(http_requests_total[5m])) > 0.05\n    for: 5m\n    labels:\n      severity: critical\n    annotations:\n      summary: \"High error rate detected\"\n```\n\n## States\n- Inactive\n- Pending (for duration)\n- Firing"
+        },
+        {
+            "id": "prometheus_11",
+            "type": "content",
+            "title": "Alertmanager",
+            "content": "# Alertmanager 🔔\n\nRoute alerts to destinations.\n\n## Configuration\n```yaml\nroute:\n  receiver: 'team-slack'\n  routes:\n    - match:\n        severity: critical\n      receiver: 'pagerduty'\n\nreceivers:\n  - name: 'team-slack'\n    slack_configs:\n      - channel: '#alerts'\n\n  - name: 'pagerduty'\n    pagerduty_configs:\n      - service_key: 'xxx'\n```"
+        },
+        {
+            "id": "prometheus_12",
+            "type": "content",
+            "title": "Service Discovery",
+            "content": "# Service Discovery 🔍\n\nAutomatically find targets.\n\n## Types\n| Type | Use |\n|------|-----|\n| static | Fixed list |\n| kubernetes | K8s pods |\n| consul | Consul services |\n| ec2 | AWS instances |\n| file | Dynamic file |\n\n## Kubernetes\n```yaml\n- job_name: 'kubernetes-pods'\n  kubernetes_sd_configs:\n    - role: pod\n  relabel_configs:\n    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]\n      action: keep\n      regex: true\n```"
+        },
+        {
+            "id": "prometheus_quiz_4",
+            "type": "quiz",
+            "title": "Alerting Quiz",
+            "content": "Test your alerting knowledge!",
+            "quizQuestion": "What does the 'for' field in an alert rule specify?",
+            "quizOptions": [
+                "Alert destination",
+                "Duration before firing",
+                "Metric name",
+                "Label value"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "prometheus_13",
+            "type": "content",
+            "title": "Recording Rules",
+            "content": "# Recording Rules 📼\n\nPre-compute expensive queries.\n\n## Definition\n```yaml\ngroups:\n- name: precomputed\n  rules:\n  - record: job:http_inprogress_requests:sum\n    expr: sum by (job) (http_inprogress_requests)\n\n  - record: instance:node_cpu:rate5m\n    expr: rate(node_cpu_seconds_total[5m])\n```\n\n## Naming Convention\n```\nlevel:metric:operations\n```\n\n## Benefits\n- Faster dashboards\n- Reusable metrics\n- Lower query load"
+        },
+        {
+            "id": "prometheus_14",
+            "type": "content",
+            "title": "Storage & Retention",
+            "content": "# Storage 💾\n\n## Local Storage\n```\n--storage.tsdb.path=/prometheus\n--storage.tsdb.retention.time=15d\n--storage.tsdb.retention.size=50GB\n```\n\n## Remote Storage\n| Solution | Type |\n|----------|------|\n| Thanos | Long-term |\n| Cortex | Multi-tenant |\n| M3DB | Distributed |\n| VictoriaMetrics | Performance |\n\n## Thanos Stack\n```\nPrometheus → Sidecar → Object Storage → Query\n```"
+        },
+        {
+            "id": "prometheus_15",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Naming\n```\n<namespace>_<name>_<unit>\nexample: http_request_duration_seconds\n```\n\n## Labels\n- ✅ Low cardinality\n- ✅ Meaningful names\n- ❌ User IDs as labels\n- ❌ Timestamps as labels\n\n## Instrumentation\n- Use rate() for counters\n- histograms > summaries\n- Standardize units"
+        },
+        {
+            "id": "prometheus_16",
+            "type": "content",
+            "title": "High Availability",
+            "content": "# Prometheus HA 🔄\n\n## Simple HA\n```\n┌───────────┐  ┌───────────┐\n│Prometheus1│  │Prometheus2│\n└─────┬─────┘  └─────┬─────┘\n      │              │\n      └──────┬───────┘\n             │\n      ┌──────▼──────┐\n      │ Alertmanager│\n      │  (cluster)  │\n      └─────────────┘\n```\n\n## Deduplication\n- Alertmanager clusters\n- Thanos Query layer"
+        },
+        {
+            "id": "prometheus_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is the purpose of recording rules?",
+            "quizOptions": [
+                "Store raw data",
+                "Pre-compute expensive queries",
+                "Send alerts",
+                "Discover services"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "prometheus_17",
+            "type": "content",
+            "title": "Security",
+            "content": "# Prometheus Security 🔐\n\n## Authentication\n```yaml\nbasic_auth_users:\n  admin: $2y$...\n```\n\n## TLS\n```yaml\ntls_server_config:\n  cert_file: /certs/cert.pem\n  key_file: /certs/key.pem\n```\n\n## RBAC\n- Use reverse proxy\n- OAuth2 proxy\n- Network policies"
+        },
+        {
+            "id": "prometheus_18",
+            "type": "content",
+            "title": "Kubernetes Deployment",
+            "content": "# Prometheus on K8s 🚢\n\n## Prometheus Operator\n```yaml\napiVersion: monitoring.coreos.com/v1\nkind: Prometheus\nmetadata:\n  name: main\nspec:\n  replicas: 2\n  serviceMonitorSelector:\n    matchLabels:\n      team: frontend\n```\n\n## Helm\n```bash\nhelm install prometheus prometheus-community/kube-prometheus-stack\n```"
+        },
+        {
+            "id": "prometheus_19",
+            "type": "content",
+            "title": "Troubleshooting",
+            "content": "# Troubleshooting 🔧\n\n## Common Issues\n| Issue | Solution |\n|-------|----------|\n| Target down | Check /targets |\n| No data | Verify scrape config |\n| High cardinality | Reduce labels |\n| OOM | Increase memory |\n\n## Debug Endpoints\n```\n/targets    - Scrape targets\n/config     - Active config\n/flags      - Runtime flags\n/metrics    - Self metrics\n```"
+        },
+        {
+            "id": "prometheus_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Scraping\n- ✅ Pull-based model\n- ✅ Service discovery\n- ✅ /metrics endpoint\n\n### PromQL\n- ✅ rate() for counters\n- ✅ histogram_quantile()\n- ✅ Aggregation operators\n\n### Alerting\n- ✅ Recording rules\n- ✅ Alertmanager routing\n- ✅ 'for' duration\n\nHappy monitoring! 🔥"
+        }
+    ]
+}

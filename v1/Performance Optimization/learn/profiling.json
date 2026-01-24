@@ -1,0 +1,173 @@
+{
+    "id": "learn_profiling_perf",
+    "topicId": "profiling",
+    "topicTitle": "Profiling Tools",
+    "description": "Master performance profiling with Chrome DevTools, Lighthouse, and WebPageTest",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "profiling_1",
+            "type": "content",
+            "title": "Welcome to Profiling Tools",
+            "content": "# Profiling Tools 🔬\n\nMaster the tools that reveal performance bottlenecks!\n\n## What You'll Learn:\n- **Chrome DevTools** - Built-in browser debugging\n- **Performance Panel** - Timeline analysis\n- **Lighthouse** - Automated auditing\n- **WebPageTest** - Real-world testing\n- **Core Web Vitals** - Google's essential metrics\n\n> 💡 You can't optimize what you can't measure!\n\n## Why Profiling Matters:\n- 🎯 **Find Real Issues** - Stop guessing\n- 📊 **Data-Driven** - Prioritize high-impact fixes\n- 🚀 **Prove Improvements** - Before/after comparison\n- 💰 **Business Impact** - Performance affects revenue\n\n## The Profiling Workflow:\n```\nMeasure → Analyze → Identify → Fix → Repeat\n```"
+        },
+        {
+            "id": "profiling_2",
+            "type": "content",
+            "title": "Chrome DevTools Overview",
+            "content": "# Chrome DevTools Overview 🛠️\n\n## Opening DevTools:\n- **Keyboard:** F12 or Cmd/Ctrl + Shift + I\n- **Right-click:** Inspect\n\n## Key Panels:\n\n| Panel | Purpose |\n|-------|---------|\n| **Performance** | Timeline profiling |\n| **Network** | Request timing |\n| **Memory** | Heap snapshots |\n| **Lighthouse** | Automated audits |\n| **Coverage** | Unused code |\n\n## Essential Shortcuts:\n```\nCmd/Ctrl + Shift + P  → Command Palette\nCmd/Ctrl + Shift + C  → Inspect Element\nCmd/Ctrl + Shift + M  → Device Mode\n```\n\n## Device Emulation:\n- 📱 Simulate mobile devices\n- 🐌 Throttle CPU (4x, 6x)\n- 📶 Throttle network (3G, 4G)\n\n> 🎯 Always test with CPU throttling!"
+        },
+        {
+            "id": "profiling_3",
+            "type": "content",
+            "title": "Performance Panel",
+            "content": "# Performance Panel ⏱️\n\n## Recording a Profile:\n1. Open Performance panel\n2. Click **Record** or Cmd/Ctrl + E\n3. Interact with page\n4. Click **Stop**\n\n## Understanding the Timeline:\n```\nFPS/CPU/NET  [Frame indicators]\nNetwork      ▓▓▓░░░░░░\nMain Thread  ▓▓▓▓▓░░░░░░░░\n             [script][style][layout]\n```\n\n## Color Coding:\n| Color | Activity |\n|-------|----------|\n| 🟡 Yellow | JavaScript |\n| 🟣 Purple | Layout |\n| 🟢 Green | Paint |\n| 🔵 Blue | Parse HTML |\n\n## Key Metrics:\n- **FPS:** Target 60\n- **Long Tasks:** > 50ms warning\n- **Forced Layout:** Purple after yellow\n\n> Click on blocks to see call stacks!"
+        },
+        {
+            "id": "profiling_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your DevTools knowledge!",
+            "quizQuestion": "What color represents JavaScript execution in the Performance panel?",
+            "quizOptions": [
+                "Green",
+                "Purple",
+                "Yellow",
+                "Blue"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "profiling_4",
+            "type": "content",
+            "title": "JavaScript Performance Analysis",
+            "content": "# JavaScript Performance 🟡\n\n## Finding Expensive Functions:\n1. Record a profile\n2. Click yellow blocks in Main thread\n3. View **Bottom-Up** tab\n4. Look for high Self Time\n\n## Reading Flame Charts:\n```\n(anonymous) 150ms\n └─ processData() 120ms\n     └─ transformItem() 80ms ← Bottleneck!\n```\n\n## Bottom-Up Analysis:\n| Self Time | Total | Activity |\n|-----------|-------|----------|\n| 80ms | 80ms | transformItem |\n| 60ms | 60ms | JSON.parse |\n\n## Warning Signs:\n- ⚠️ Long Tasks > 50ms\n- ⚠️ Forced synchronous layout\n- ⚠️ Repeated expensive operations\n\n## Optimization Targets:\n- Functions with high Self Time\n- Repeated function calls\n- Red corner warnings"
+        },
+        {
+            "id": "profiling_5",
+            "type": "content",
+            "title": "Layout Thrashing",
+            "content": "# Layout Thrashing 🟣\n\n## The Render Pipeline:\n```\nJS → Style → Layout → Paint → Composite\n```\n\n## Bad Pattern (Layout Thrashing):\n```javascript\n// ❌ Causes forced layout\nelements.forEach(el => {\n    const h = el.offsetHeight; // Read\n    el.style.height = h + 10 + 'px'; // Write\n});\n```\n\n## Good Pattern:\n```javascript\n// ✅ Batch reads, then writes\nconst heights = elements.map(el => el.offsetHeight);\nelements.forEach((el, i) => {\n    el.style.height = heights[i] + 10 + 'px';\n});\n```\n\n## Enable Paint Flashing:\n1. Cmd + Shift + P\n2. \"Show Rendering\"\n3. Enable Paint Flashing\n\n## Layout Triggers:\n| Triggers Layout | Paint Only |\n|-----------------|------------|\n| width, height | color |\n| margin, padding | background |\n| position | visibility |"
+        },
+        {
+            "id": "profiling_6",
+            "type": "content",
+            "title": "Network Panel",
+            "content": "# Network Panel 🌐\n\n## Request Timing:\n```\nQueuing     |▓|\nDNS Lookup      |▓|\nConnection       |▓▓▓|\nSSL                  |▓▓|\nWaiting (TTFB)          |▓▓▓▓▓▓▓|\nDownload                         |▓▓▓|\n```\n\n## Key Metrics:\n| Metric | Target |\n|--------|--------|\n| TTFB | < 600ms |\n| DOMContentLoaded | < 2s |\n| Load | < 3s |\n\n## Waterfall Analysis:\n- Horizontal = download time\n- Gaps = blocking resources\n- Color = resource type\n\n## Network Throttling:\n- **Fast 3G:** 1.5 Mbps\n- **Slow 3G:** 400 Kbps\n- **Offline:** No network\n\n> Use throttling to simulate real users!"
+        },
+        {
+            "id": "profiling_7",
+            "type": "content",
+            "title": "Memory Panel",
+            "content": "# Memory Profiling 🧠\n\n## Tools:\n1. **Heap Snapshot** - Current allocations\n2. **Allocation Timeline** - Track over time\n3. **Allocation Sampling** - Lightweight\n\n## Finding Memory Leaks:\n```\nSnapshot 1 → Interact → Snapshot 2 → Compare\n```\n\n## What to Look For:\n| Constructor | Delta |\n|-------------|-------|\n| HTMLDivElement | +90 ⚠️ |\n| EventListener | +50 ⚠️ |\n\n## Common Leaks:\n- ❌ Unremoved event listeners\n- ❌ Detached DOM nodes\n- ❌ Forgotten timers\n- ❌ Closures holding refs\n\n> Take 3 snapshots: initial, action, action again. Growing = leak!"
+        },
+        {
+            "id": "profiling_quiz_2",
+            "type": "quiz",
+            "title": "Memory Check",
+            "content": "Test your memory profiling knowledge!",
+            "quizQuestion": "How do you detect memory leaks?",
+            "quizOptions": [
+                "Heap Snapshot only",
+                "Network Panel",
+                "Comparing multiple Heap Snapshots",
+                "Performance Panel"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "profiling_8",
+            "type": "content",
+            "title": "Lighthouse",
+            "content": "# Lighthouse 🏠\n\n## Running Lighthouse:\n1. DevTools → Lighthouse panel\n2. Select categories\n3. Click Analyze\n\n## CLI:\n```bash\nnpm install -g lighthouse\nlighthouse https://example.com --output html\n```\n\n## Categories:\n| Category | Measures |\n|----------|----------|\n| Performance | Speed, interactivity |\n| Accessibility | A11y compliance |\n| Best Practices | Security, standards |\n| SEO | Search optimization |\n\n## Scoring Weights:\n- LCP (25%)\n- TBT (30%)\n- CLS (25%)\n- FCP (10%)\n- SI (10%)\n\n> 🎯 Goal: Score 90+ in all categories!"
+        },
+        {
+            "id": "profiling_9",
+            "type": "content",
+            "title": "Core Web Vitals",
+            "content": "# Core Web Vitals 📊\n\n## The Three Pillars:\n\n### 1. LCP (Loading)\n```\nGood: < 2.5s | Poor: > 4s\n```\nMain content visibility\n\n### 2. FID/INP (Interactivity)\n```\nGood: < 100ms | Poor: > 300ms\n```\nResponse to user input\n\n### 3. CLS (Stability)\n```\nGood: < 0.1 | Poor: > 0.25\n```\nVisual layout shifts\n\n## Measuring:\n```javascript\nimport { getLCP, getFID, getCLS } from 'web-vitals';\n\ngetLCP(console.log);\ngetFID(console.log);\ngetCLS(console.log);\n```\n\n## SEO Impact:\n- Ranking factor\n- Mobile-first indexing\n- Better UX = higher rankings"
+        },
+        {
+            "id": "profiling_10",
+            "type": "content",
+            "title": "Optimizing LCP",
+            "content": "# Optimizing LCP 🖼️\n\n## LCP Elements:\n- Hero images\n- Large text blocks\n- Video posters\n\n## Strategies:\n\n### 1. Preload Critical Resources\n```html\n<link rel=\"preload\" as=\"image\" href=\"hero.jpg\">\n```\n\n### 2. Remove Render-Blocking\n```html\n<script src=\"app.js\" defer></script>\n<link rel=\"preload\" href=\"style.css\" as=\"style\">\n```\n\n### 3. Server Optimization\n- TTFB < 600ms\n- Use CDN\n- Enable compression\n\n### 4. Image Optimization\n```html\n<img src=\"hero.jpg\" fetchpriority=\"high\">\n```\n\n> 🎯 Target: LCP < 2.5 seconds"
+        },
+        {
+            "id": "profiling_11",
+            "type": "content",
+            "title": "Optimizing CLS",
+            "content": "# Optimizing CLS 📐\n\n## Common Causes:\n\n### 1. Images Without Dimensions\n```html\n<!-- ❌ Bad -->\n<img src=\"photo.jpg\">\n\n<!-- ✅ Good -->\n<img src=\"photo.jpg\" width=\"800\" height=\"600\">\n```\n\n### 2. Ads/Embeds\n```html\n<div style=\"min-height: 250px;\">\n    <!-- Ad loads here -->\n</div>\n```\n\n### 3. Web Fonts\n```css\n@font-face {\n    font-display: swap;\n}\n```\n\n### 4. Dynamic Content\n```javascript\n// ✅ Insert below viewport\ncontainer.append(content);\n```\n\n> 🎯 Target: CLS < 0.1"
+        },
+        {
+            "id": "profiling_12",
+            "type": "content",
+            "title": "WebPageTest",
+            "content": "# WebPageTest 🌍\n\n## Features:\n- 🌍 40+ global locations\n- 📱 Device simulation\n- 🔄 Repeat view testing\n- 📹 Video capture\n\n## Running a Test:\n1. Visit webpagetest.org\n2. Enter URL\n3. Select location/browser\n4. Start Test\n\n## Key Metrics:\n| Metric | Description |\n|--------|-------------|\n| First Byte | Server response |\n| Start Render | First visual |\n| Speed Index | Visual completion |\n| LCP | Largest paint |\n\n## Waterfall:\n```\n[HTML]▓▓▓░░░░░░░░░░\n[CSS]   ▓▓▓░░░░░░░░\n[JS]       ▓▓▓▓▓░░░\n[IMG]           ▓▓▓▓\n```"
+        },
+        {
+            "id": "profiling_quiz_3",
+            "type": "quiz",
+            "title": "WebPageTest Quiz",
+            "content": "Test your WebPageTest knowledge!",
+            "quizQuestion": "What advantage does WebPageTest offer over local DevTools testing?",
+            "quizOptions": [
+                "Faster tests",
+                "Better JS profiling",
+                "Real-world global testing",
+                "Automatic fixes"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "profiling_13",
+            "type": "content",
+            "title": "Coverage Analysis",
+            "content": "# Coverage Analysis 📉\n\n## Finding Unused Code:\n1. Cmd + Shift + P\n2. \"Show Coverage\"\n3. Record and interact\n4. Analyze results\n\n## Results:\n```\nFile          | Type | Unused\nvendor.js     | JS   | 80% ⚠️\nstyles.css    | CSS  | 60% ⚠️\napp.js        | JS   | 25%\n```\n\n## Interpreting:\n- 🔴 Red = Unused\n- 🟢 Cyan = Used\n\n## Solutions:\n```javascript\n// Dynamic imports\nconst module = await import('./feature.js');\n\n// Tree shaking\nimport { usedFn } from './utils';\n```\n\n## Common Findings:\n- Large vendor bundles\n- CSS frameworks\n- Unused polyfills"
+        },
+        {
+            "id": "profiling_14",
+            "type": "content",
+            "title": "Real User Monitoring",
+            "content": "# Real User Monitoring 📡\n\n## Lab vs Field:\n| Type | Source |\n|------|--------|\n| Lab | Lighthouse, WPT |\n| Field | Real users |\n\n## Implementation:\n```javascript\nimport { onLCP, onFID, onCLS } from 'web-vitals';\n\nfunction send({ name, value }) {\n    gtag('event', name, { value });\n}\n\nonLCP(send);\nonFID(send);\nonCLS(send);\n```\n\n## RUM Tools:\n- Google Analytics\n- Chrome UX Report\n- SpeedCurve\n- New Relic\n\n## CrUX Data:\n```\nLCP Distribution:\n  Good:  ████████░░ 75%\n  Needs: ██░░░░░░░░ 18%\n  Poor:  █░░░░░░░░░ 7%\n```"
+        },
+        {
+            "id": "profiling_15",
+            "type": "content",
+            "title": "Performance Budgets",
+            "content": "# Performance Budgets 💰\n\n## Types:\n\n### Size Budgets\n```json\n{\n    \"resourceSizes\": [\n        { \"resourceType\": \"script\", \"budget\": 170 },\n        { \"resourceType\": \"image\", \"budget\": 300 }\n    ]\n}\n```\n\n### Timing Budgets\n```json\n{\n    \"timings\": [\n        { \"metric\": \"lcp\", \"budget\": 2500 },\n        { \"metric\": \"cls\", \"budget\": 0.1 }\n    ]\n}\n```\n\n## Bundlesize:\n```json\n\"bundlesize\": [\n    { \"path\": \"dist/*.js\", \"maxSize\": \"150 kB\" }\n]\n```\n\n> 🎯 Block PRs that exceed budgets!"
+        },
+        {
+            "id": "profiling_16",
+            "type": "content",
+            "title": "CI/CD Integration",
+            "content": "# CI/CD Integration 🔄\n\n## Lighthouse CI:\n```bash\nnpm install -g @lhci/cli\nlhci autorun\n```\n\n## GitHub Actions:\n```yaml\nname: Lighthouse CI\non: [push]\njobs:\n  lighthouse:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Run Lighthouse\n        uses: treosh/lighthouse-ci-action@v9\n        with:\n          urls: https://staging.example.com\n          budgetPath: ./budget.json\n```\n\n## Performance Gates:\n```\nPR Checks:\n ✅ Build successful\n ✅ Tests passing\n ⚠️ Lighthouse: 87 (threshold: 90)\n ❌ Bundle: 185KB (limit: 150KB)\n```"
+        },
+        {
+            "id": "profiling_17",
+            "type": "content",
+            "title": "Profiling Workflow",
+            "content": "# Profiling Workflow 🔄\n\n## Step 1: Measure Baseline\n- Run Lighthouse\n- Capture WebPageTest\n- Record Performance profile\n\n## Step 2: Identify Bottlenecks\n- Analyze waterfall\n- Check long tasks\n- Review Coverage\n\n## Step 3: Prioritize\n| Issue | Impact | Priority |\n|-------|--------|----------|\n| Large LCP | High | P0 |\n| Unused CSS | Medium | P1 |\n\n## Step 4: Fix & Verify\n- Make minimal change\n- Test locally\n- Compare metrics\n\n## Step 5: Monitor\n- Set budgets\n- Enable RUM\n- Configure CI\n\n> 🔁 Always: Measure → Optimize → Repeat"
+        },
+        {
+            "id": "profiling_quiz_4",
+            "type": "quiz",
+            "title": "CI Check",
+            "content": "Test your CI integration knowledge!",
+            "quizQuestion": "What is the primary purpose of performance budgets?",
+            "quizOptions": [
+                "Reduce server costs",
+                "Prevent regressions before deploy",
+                "Generate docs",
+                "Replace testing"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "profiling_18",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Profiling Tools!\n\n## Key Takeaways:\n\n### Chrome DevTools\n- ✅ Performance panel for timeline\n- ✅ Network panel for requests\n- ✅ Memory panel for leaks\n- ✅ Coverage for unused code\n\n### Lighthouse\n- ✅ Automated audits\n- ✅ Core Web Vitals\n- ✅ CI/CD integration\n\n### WebPageTest\n- ✅ Real-world testing\n- ✅ Global locations\n- ✅ Video comparison\n\n### Targets:\n- LCP < 2.5s\n- FID < 100ms\n- CLS < 0.1\n\n## Next Steps:\n- Learn Minification & Bundling\n- Master Caching\n- Explore CDN\n\nHappy profiling! 🔬"
+        }
+    ]
+}

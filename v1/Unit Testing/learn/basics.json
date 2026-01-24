@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_basics",
+    "topicId": "basics",
+    "topicTitle": "Unit Testing Basics",
+    "description": "Master the fundamentals of unit testing including assertions, test cases, and the AAA pattern",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "What is Unit Testing?",
+            "content": "# Unit Testing Fundamentals 🧪\n\nTesting the smallest parts of your code in isolation.\n\n## Core Principles\n\n- **Isolation**: Test one thing at a time.\n- **Speed**: Should run in milliseconds.\n- **Repeatability**: Always returns the same result.\n- **Independence**: Tests shouldn't depend on each other."
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "The AAA Pattern",
+            "content": "# The AAA Pattern 📐\n\nOrganize your tests for maximum clarity.\n\n1. **Arrange**: Set up the conditions (data, mocks).\n2. **Act**: Execute the function/method being tested.\n3. **Assert**: Verify the result is as expected.\n\n```javascript\ntest('should add numbers', () => {\n  // 1. Arrange\n  const a = 5;\n  const b = 10;\n\n  // 2. Act\n  const result = add(a, b);\n\n  // 3. Assert\n  expect(result).toBe(15);\n});\n```"
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Assertions",
+            "content": "# Assertions 📢\n\nThe \"Check\" step of your test.\n\n## Common Types\n\n- **Equality**: `expect(a).toBe(b)`\n- **Truthiness**: `expect(a).toBeTruthy()`\n- **Nullness**: `expect(a).toBeNull()`\n- **Exception**: `expect(fn).toThrow()`\n\n> 💡 \"Keep your assertions simple. One concept per test!\""
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "Test Suits & Cases",
+            "content": "# Structure 🏢\n\n- **Test Case**: A single scenario being tested.\n- **Test Suite**: A collection of related test cases (usually for one class or module).\n\n```javascript\ndescribe('Math Service', () => {\n  test('addition', () => { ... });\n  test('subtraction', () => { ... });\n});\n```"
+        },
+        {
+            "id": "basics_5",
+            "type": "quiz",
+            "title": "AAA Quiz",
+            "content": "Test your knowledge of the AAA pattern!",
+            "quizQuestion": "In the AAA pattern, which step involves calling the function being tested?",
+            "quizOptions": [
+                "Arrange",
+                "Act",
+                "Assert",
+                "Audit"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Setup & Teardown",
+            "content": "# Setup & Teardown 🔄\n\nPrepare and clean up your environment.\n\n- **beforeEach**: Runs before every test.\n- **afterEach**: Runs after every test.\n- **beforeAll**: Runs once before the whole suite.\n- **afterAll**: Runs once after everything is done.\n\n```javascript\nbeforeEach(() => {\n  database.clear();\n});\n```"
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "What to Test?",
+            "content": "# Selection 🎯\n\n## Focus on:\n\n- **Business Logic**: Calculations, rules.\n- **Edge Cases**: Empty inputs, zero, null.\n- **Error Handling**: Does it throw when it should?\n\n## Avoid:\n\n- Trivial code (getters/setters).\n- Third-party libraries.\n- UI layout (use snapshot testing instead)."
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Isolation vs Integration",
+            "content": "# Isolation 🚧\n\nUnit tests should **never** touch:\n\n- 🌐 Databases\n- 🌎 External APIs\n- 📁 File System\n- 🖥️ Network\n\n> [!IMPORTANT]\n> Use **Mocks** and **Stubs** to replace these dependencies!"
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "Red-Green-Refactor",
+            "content": "# The TDD Cycle ♻️\n\n1. 🔴 **Red**: Write a test that fails (since the code doesn't exist).\n2. 🟢 **Green**: Write the minimum code to make it pass.\n3. 🔵 **Refactor**: Clean up the code without changing behavior."
+        },
+        {
+            "id": "basics_10",
+            "type": "quiz",
+            "title": "Isolation Quiz",
+            "content": "Which of these should a pure unit test avoid?",
+            "quizQuestion": "Which of the following should a true unit test NOT interact with?",
+            "quizOptions": [
+                "Local Variables",
+                "Mathematical Functions",
+                "A Real Database",
+                "String Manipulators"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "Pure Functions",
+            "content": "# Testability 🧪\n\nPure functions are easiest to test.\n\n- **Same input → Same output**.\n- **No side effects** (no global state changes).\n\n```javascript\n// GOOD (Pure)\nconst add = (a, b) => a + b;\n\n// BAD (Impure)\nlet total = 0;\nconst addToTotal = (v) => total += v;\n```"
+        },
+        {
+            "id": "basics_12",
+            "type": "content",
+            "title": "Mocking Intro",
+            "content": "# Test Doubles 🎭\n\nWhen code depends on something complex, replace it.\n\n- **Stub**: Provides hardcoded answers.\n- **Mock**: Records how it was called.\n- **Fake**: Simplified working version (e.g., in-memory DB)."
+        },
+        {
+            "id": "basics_13",
+            "type": "content",
+            "title": "Asserting Exceptions",
+            "content": "# Testing Errors ⚠️\n\nTests should verify that code fails correctly.\n\n```javascript\ntest('should throw on zero division', () => {\n  expect(() => divide(10, 0)).toThrow('Division by zero');\n});\n```"
+        },
+        {
+            "id": "basics_14",
+            "type": "content",
+            "title": "Parameterize Tests",
+            "content": "# Data-Driven Tests 📊\n\nRun the same test with different values.\n\n```javascript\ntest.each([\n  [1, 1, 2],\n  [5, 5, 10],\n  [10, -2, 8]\n])('adds %i + %i to equal %i', (a, b, expected) => {\n  expect(a + b).toBe(expected);\n});\n```"
+        },
+        {
+            "id": "basics_15",
+            "type": "quiz",
+            "title": "TDD Quiz",
+            "content": "What is the correct order of the TDD cycle?",
+            "quizQuestion": "What is the first step in the TDD cycle?",
+            "quizOptions": [
+                "Write passing code",
+                "Refactor existing code",
+                "Write a failing test",
+                "Deploy to production"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "basics_16",
+            "type": "content",
+            "title": "Testing Asynchronous Code",
+            "content": "# Async Testing ⏳\n\nUse `async/await` in your tests too!\n\n```javascript\ntest('data fetched', async () => {\n  const data = await fetchData();\n  expect(data).toBeDefined();\n});\n```"
+        },
+        {
+            "id": "basics_17",
+            "type": "content",
+            "title": "Heuristic: FIRST",
+            "content": "# FIRST Principles 🌟\n\n- **F**ast\n- **I**ndependent\n- **R**epeatable\n- **S**elf-Validating (Pass/Fail)\n- **T**imely (Written before/during coding)"
+        },
+        {
+            "id": "basics_18",
+            "type": "content",
+            "title": "Code Coverage Intro",
+            "content": "# Coverage 📏\n\nA metric showing which lines of code were executed by tests.\n\n- **Line Coverage**\n- **Branch Coverage** (If/Else paths)\n- **Function Coverage**\n\n> ⚠️ Do not aim for 100% blindly. Aim for quality!"
+        },
+        {
+            "id": "basics_19",
+            "type": "content",
+            "title": "Naming Conventions",
+            "content": "# Test Naming 🏷️\n\nFollow the pattern: `UnitOfWork_StateUnderTest_ExpectedBehavior`.\n\n- `Withdraw_SufficientFunds_UpdatesBalance`\n- `Withdraw_InsufficientFunds_ThrowsError`"
+        },
+        {
+            "id": "basics_20",
+            "type": "quiz",
+            "title": "Final Summary Quiz",
+            "content": "Which 'F' in FIRST stands for tests having a clear Pass/Fail result?",
+            "quizQuestion": "Which principle ensures that a test report shows a definitive pass or fail without human interpretation?",
+            "quizOptions": [
+                "Fast",
+                "Independent",
+                "Repeatable",
+                "Self-Validating"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "basics_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Unit tests are fast and isolated.\n- ✅ Use the **AAA** pattern.\n- ✅ Prefer pure functions for testability.\n- ✅ Follow **FIRST** principles.\n\nKeep your codebase healthy and bug-free! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_coverage",
+    "topicId": "coverage",
+    "topicTitle": "Code Coverage",
+    "description": "Master code coverage metrics, tools like Istanbul and JaCoCo, and learn how to use coverage reports to drive quality",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "coverage_1",
+            "type": "content",
+            "title": "What is Code Coverage?",
+            "content": "# Code Coverage 📊\n\nA measurement used to describe the degree to which the source code of a program is executed when a particular test suite runs.\n\n- **Goal**: Identify untested parts of the application.\n- **Warning**: High coverage ≠ High quality code."
+        },
+        {
+            "id": "coverage_2",
+            "type": "content",
+            "title": "The Four Metrics",
+            "content": "# Essential Metrics 📏\n\n1. **Function**: Have all functions been called?\n2. **Statement**: Has each executable statement been run?\n3. **Branch**: Have both paths of an `if/else` or `switch` been taken?\n4. **Line**: Has each line of code been hit?"
+        },
+        {
+            "id": "coverage_3",
+            "type": "content",
+            "title": "Line vs Branch",
+            "content": "# Why Branch Matters 🌿\n\nLine coverage can be misleading!\n\n```javascript\nfunction check(a) {\n  if (a > 0) doSomething();\n  return a;\n}\n```\n\nPassing `a = 1` gets **100% Line Coverage**, but only **50% Branch Coverage** because the case where `a <= 0` was never tested!"
+        },
+        {
+            "id": "coverage_4",
+            "type": "content",
+            "title": "Coverage Tools",
+            "content": "# Top Tools 🛠️\n\n- **Istanbul (nyc)**: The standard for JavaScript.\n- **JaCoCo**: Industry standard for Java.\n- **SimpleCov**: Popular for Ruby.\n- **pytest-cov**: For the Python world.\n- **Built-in**: frameworks like Jest have it enabled by default!"
+        },
+        {
+            "id": "coverage_5",
+            "quizQuestion": "Which coverage metric is usually the hardest to reach 100% in complex logic?",
+            "quizOptions": [
+                "Line Coverage",
+                "Function Coverage",
+                "Branch Coverage",
+                "File Coverage"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Metrics Quiz",
+            "content": "Which metric is the most rigorous?"
+        },
+        {
+            "id": "coverage_6",
+            "type": "content",
+            "title": "The 80% Rule",
+            "content": "# How much is enough? 🎯\n\nMost teams aim for **80% coverage**.\n\n- **Diminishing Returns**: Getting from 90% to 100% often takes more effort than it's worth.\n- **Quality over Quantity**: You can have 100% coverage with tests that assert nothing (useless!)."
+        },
+        {
+            "id": "coverage_7",
+            "type": "content",
+            "title": "Istanbul/nyc",
+            "content": "# JS Example 🧪\n\n```bash\nnpx nyc mocha tests.js\n```\n\nThis generates a table in the console and creates a detailed HTML report in the `/coverage` folder."
+        },
+        {
+            "id": "coverage_8",
+            "type": "content",
+            "title": "HTML Reports",
+            "content": "# Visualizing Tested Code 📂\n\nInside the HTML report, you can see your source code highlighted:\n\n- 🟢 **Green**: Covered.\n- 🔴 **Red**: Not covered.\n- 🟡 **Yellow**: Branch not fully taken."
+        },
+        {
+            "id": "coverage_9",
+            "type": "content",
+            "title": "Coverage in CI",
+            "content": "# Guarding Quality 🚜\n\nEnable **Coverage Thresholds** in your CI/CD pipeline.\n\n```json\n// jest.config.js\n\"coverageThreshold\": {\n  \"global\": {\n    \"branches\": 80,\n    \"functions\": 80,\n    \"lines\": 80\n  }\n}\n```\n\nIf coverage drops, the build fails!"
+        },
+        {
+            "id": "coverage_10",
+            "quizQuestion": "What is the danger of chasing 100% code coverage?",
+            "quizOptions": [
+                "It makes the app slower",
+                "It leads to writing brittle tests for trivial code",
+                "It is impossible in Java",
+                "It removes the need for manual testing"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Quality Quiz",
+            "content": "The pitfall of metrics."
+        },
+        {
+            "id": "coverage_11",
+            "type": "content",
+            "title": "Ignoring Code",
+            "content": "# Excluding Files 🙈\n\nNot everything needs testing (e.g., config, boilerplate).\n\n```javascript\n/* istanbul ignore next */\nif (process.env.NODE_ENV === 'dev') {\n  // ignore me\n}\n```"
+        },
+        {
+            "id": "coverage_12",
+            "type": "content",
+            "title": "Instrumentation",
+            "content": "# How it Works 🧠\n\nCoverage tools perform **Instrumentation**: they inject counters into your code before running tests.\n\n`x = 1` becomes `c[1]++; x = 1`."
+        },
+        {
+            "id": "coverage_13",
+            "type": "content",
+            "title": "MC/DC",
+            "content": "# Advanced metrics 🎓\n\n**Modified Condition/Decision Coverage (MC/DC)**:\n\nA rigorous metric used in safety-critical systems (like aerospace) to ensure every condition in a decision independently affects the outcome."
+        },
+        {
+            "id": "coverage_14",
+            "type": "content",
+            "title": "Tracking Over Time",
+            "content": "# Coverage Trends 📈\n\nUse services like **Codecov** or **Coveralls** to track coverage history on GitHub and see coverage diffs in Pull Requests."
+        },
+        {
+            "id": "coverage_15",
+            "quizQuestion": "What tech do coverage tools use to track which lines were run?",
+            "quizOptions": [
+                "Reflection",
+                "Instrumentation",
+                "Debugging",
+                "Interpretation"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Internal Quiz",
+            "content": "Behind the scenes."
+        },
+        {
+            "id": "coverage_16",
+            "type": "content",
+            "title": "TDD & Coverage",
+            "content": "# Driving Design 🏎️\n\nTDD naturally leads to high coverage because you only write code to satisfy a test.\n\n> 💡 If you have complex logic with low coverage, it's often a sign that the code is too coupled and needs a refactor."
+        },
+        {
+            "id": "coverage_17",
+            "type": "content",
+            "title": "Dead Code",
+            "content": "# Spotting Zombies 🧟\n\nPersistent 0% coverage on certain functions often reveals **Dead Code** (code that is never actually reachable or used in the app)."
+        },
+        {
+            "id": "coverage_18",
+            "type": "content",
+            "title": "Manual Spot Checks",
+            "content": "# Spot Checks 👀\n\nEven with 100% coverage, ensure you are testing **values**.\n\n`expect(result).toBeDefined()` is weak coverage. `expect(result).toBe(42)` is strong coverage."
+        },
+        {
+            "id": "coverage_19",
+            "type": "content",
+            "title": "Test Strategy",
+            "content": "# The Sweet Spot 🍭\n\nFocus highest coverage on the **Core Domain** (business logic). Secondary focus on controllers/APIs. Lower focus on UI components."
+        },
+        {
+            "id": "coverage_20",
+            "quizQuestion": "What is the best way to use coverage reports?",
+            "quizOptions": [
+                "To fire developers",
+                "To find logic gaps and untested paths",
+                "To replace all other metrics",
+                "To guarantee bug-free software"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Goal Quiz",
+            "content": "Proper usage."
+        },
+        {
+            "id": "coverage_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Metrics: Function, Line, Statement, **Branch**.\n- ✅ Use tools like **nyc** or **JaCoCo**.\n- ✅ Set thresholds to prevent quality regressions.\n- ✅ Use HTML reports to visually find gaps.\n- ✅ Coverage is a tool for finding gaps, not a goal for perfection.\n\nBoost your confidence with visible code coverage! 🚀"
+        }
+    ]
+}

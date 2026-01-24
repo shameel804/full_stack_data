@@ -1,0 +1,109 @@
+{
+    "id": "learn_crawling_seo",
+    "topicId": "crawling",
+    "topicTitle": "Crawling & Indexing",
+    "description": "Master search engine crawling with robots.txt, sitemaps, and canonical tags",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "crawling_1",
+            "type": "content",
+            "title": "Welcome to Crawling & Indexing",
+            "content": "# Crawling & Indexing 🕷️\n\nControl how search engines discover and store your content.\n\n## What You'll Learn:\n- **Crawling** - How bots discover pages\n- **robots.txt** - Control crawler access\n- **Sitemaps** - Guide crawlers to pages\n- **Canonical Tags** - Prevent duplicates\n- **Indexing** - Get pages into search results\n\n> 💡 If it's not indexed, it won't rank!"
+        },
+        {
+            "id": "crawling_2",
+            "type": "content",
+            "title": "How Crawling Works",
+            "content": "# How Crawling Works 🤖\n\n## The Process:\n```\nCrawler discovers URL\n        │\n        ▼\nCheck robots.txt\n        │\n        ▼\nFetch page content\n        │\n        ▼\nExtract links\n        │\n        ▼\nAdd to crawl queue\n```\n\n## Crawl Budget:\n- Number of pages crawled per visit\n- Larger sites need optimization\n- Fresh content crawled more often\n\n## Factors:\n| Factor | Impact |\n|--------|--------|\n| Site speed | More crawling |\n| Fresh content | Priority crawling |\n| Internal links | Helps discovery |\n| Server errors | Less crawling |"
+        },
+        {
+            "id": "crawling_3",
+            "type": "content",
+            "title": "robots.txt Basics",
+            "content": "# robots.txt 🤖\n\nControl what crawlers can access.\n\n## Location:\n```\nhttps://example.com/robots.txt\n```\n\n## Basic Syntax:\n```\n# Allow all\nUser-agent: *\nAllow: /\n\n# Block all\nUser-agent: *\nDisallow: /\n\n# Block specific paths\nUser-agent: *\nDisallow: /admin/\nDisallow: /private/\nDisallow: /*.pdf$\n\n# Sitemap reference\nSitemap: https://example.com/sitemap.xml\n```\n\n## Target Specific Bots:\n```\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: Bingbot\nDisallow: /temp/\n```"
+        },
+        {
+            "id": "crawling_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your crawling knowledge!",
+            "quizQuestion": "Where must robots.txt be located?",
+            "quizOptions": [
+                "Any folder",
+                "Root of domain",
+                "In sitemap",
+                "In HTML head"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "crawling_4",
+            "type": "content",
+            "title": "robots.txt Best Practices",
+            "content": "# robots.txt Best Practices ✅\n\n## Do Block:\n- Admin areas\n- User accounts\n- Search results pages\n- Cart/checkout\n- Private content\n- Duplicate content\n\n## Don't Block:\n- CSS/JS files (needed for rendering)\n- Important images\n- Public content you want indexed\n\n## Common Patterns:\n```\n# Block URL parameters\nDisallow: /*?*\n\n# Block specific file types  \nDisallow: /*.pdf$\n\n# Allow specific path in blocked folder\nDisallow: /private/\nAllow: /private/public-page\n```\n\n## Testing:\n- Google Search Console robots.txt Tester\n- Validate before deploying"
+        },
+        {
+            "id": "crawling_5",
+            "type": "content",
+            "title": "XML Sitemaps",
+            "content": "# XML Sitemaps 🗺️\n\nTell search engines about your pages.\n\n## Basic Structure:\n```xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n    <url>\n        <loc>https://example.com/</loc>\n        <lastmod>2024-01-15</lastmod>\n        <changefreq>weekly</changefreq>\n        <priority>1.0</priority>\n    </url>\n    <url>\n        <loc>https://example.com/about</loc>\n        <lastmod>2024-01-10</lastmod>\n        <priority>0.8</priority>\n    </url>\n</urlset>\n```\n\n## Tags:\n| Tag | Required | Description |\n|-----|----------|-------------|\n| loc | Yes | Page URL |\n| lastmod | No | Last modified date |\n| changefreq | No | Update frequency |\n| priority | No | Relative importance |"
+        },
+        {
+            "id": "crawling_6",
+            "type": "content",
+            "title": "Sitemap Index",
+            "content": "# Sitemap Index 📚\n\nFor sites with many URLs.\n\n## Limits:\n- 50,000 URLs per sitemap\n- 50MB uncompressed size\n- Use sitemap index for more\n\n## Sitemap Index:\n```xml\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n    <sitemap>\n        <loc>https://example.com/sitemap-pages.xml</loc>\n        <lastmod>2024-01-15</lastmod>\n    </sitemap>\n    <sitemap>\n        <loc>https://example.com/sitemap-posts.xml</loc>\n        <lastmod>2024-01-15</lastmod>\n    </sitemap>\n</sitemapindex>\n```\n\n## Best Practices:\n- Gzip compress large sitemaps\n- Split by content type\n- Update lastmod dates\n- Submit to Search Console"
+        },
+        {
+            "id": "crawling_7",
+            "type": "content",
+            "title": "Canonical Tags",
+            "content": "# Canonical Tags 🔗\n\nPrevent duplicate content issues.\n\n## The Problem:\n```\n/products\n/products/\n/products?color=blue\n/products?ref=facebook\n```\nAll show same content = duplicate!\n\n## The Solution:\n```html\n<link rel=\"canonical\" href=\"https://example.com/products\">\n```\n\n## Use Cases:\n- URL parameters\n- www vs non-www\n- HTTP vs HTTPS\n- Trailing slashes\n- Syndicated content\n\n## Best Practices:\n- ✅ Absolute URLs\n- ✅ Self-referencing\n- ✅ One per page\n- ❌ Canonical to redirects\n- ❌ Canonical to 404s"
+        },
+        {
+            "id": "crawling_quiz_2",
+            "type": "quiz",
+            "title": "Canonical Check",
+            "content": "Test your canonical knowledge!",
+            "quizQuestion": "What problem do canonical tags solve?",
+            "quizOptions": [
+                "Slow pages",
+                "Duplicate content",
+                "Broken images",
+                "Missing alt text"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "crawling_8",
+            "type": "content",
+            "title": "Meta Robots",
+            "content": "# Meta Robots Tag 🤖\n\nPage-level indexing control.\n\n## Syntax:\n```html\n<meta name=\"robots\" content=\"index, follow\">\n```\n\n## Directives:\n| Directive | Meaning |\n|-----------|--------|\n| index | Include in search |\n| noindex | Exclude from search |\n| follow | Follow links on page |\n| nofollow | Don't follow links |\n| noarchive | No cached version |\n| nosnippet | No description shown |\n\n## Examples:\n```html\n<!-- Private page -->\n<meta name=\"robots\" content=\"noindex, nofollow\">\n\n<!-- Index but no cache -->\n<meta name=\"robots\" content=\"index, noarchive\">\n```\n\n## X-Robots-Tag Header:\n```\nX-Robots-Tag: noindex, nofollow\n```\nFor PDFs and non-HTML files."
+        },
+        {
+            "id": "crawling_9",
+            "type": "content",
+            "title": "Pagination",
+            "content": "# Handling Pagination 📄\n\n## Best Practices:\n\n### 1. Unique Content Per Page:\n```\n/products?page=1 → Products 1-20\n/products?page=2 → Products 21-40\n```\n\n### 2. View-All Page:\n```html\n<link rel=\"canonical\" href=\"/products/all\">\n```\n\n### 3. Self-Referencing Canonical:\n```html\n<!-- On page 2 -->\n<link rel=\"canonical\" href=\"/products?page=2\">\n```\n\n### 4. Prev/Next (deprecated but useful):\n```html\n<link rel=\"prev\" href=\"/products?page=1\">\n<link rel=\"next\" href=\"/products?page=3\">\n```\n\n## Tips:\n- Don't noindex paginated pages\n- Ensure crawlable links\n- Keep page count reasonable"
+        },
+        {
+            "id": "crawling_10",
+            "type": "content",
+            "title": "Hreflang for Languages",
+            "content": "# Hreflang Tags 🌍\n\nFor multilingual/regional sites.\n\n## Syntax:\n```html\n<link rel=\"alternate\" hreflang=\"en\" href=\"https://example.com/page\">\n<link rel=\"alternate\" hreflang=\"es\" href=\"https://example.com/es/page\">\n<link rel=\"alternate\" hreflang=\"fr\" href=\"https://example.com/fr/page\">\n<link rel=\"alternate\" hreflang=\"x-default\" href=\"https://example.com/page\">\n```\n\n## Language-Region:\n```html\n<link rel=\"alternate\" hreflang=\"en-US\" href=\"/en-us/page\">\n<link rel=\"alternate\" hreflang=\"en-GB\" href=\"/en-gb/page\">\n```\n\n## Rules:\n- Include on ALL versions\n- Use x-default for fallback\n- Can be in sitemap too\n- Must be reciprocal"
+        },
+        {
+            "id": "crawling_11",
+            "type": "content",
+            "title": "Indexing Issues",
+            "content": "# Common Indexing Issues ❌\n\n## Page Not Indexed:\n1. Check robots.txt\n2. Check meta robots\n3. Check canonical tag\n4. Verify in Search Console\n\n## Duplicate Content:\n- Set canonical tags\n- 301 redirect duplicates\n- Use consistent URLs\n\n## Crawl Errors:\n- Fix 404 errors\n- Reduce redirects chains\n- Improve server response\n\n## Search Console Tools:\n- URL Inspection\n- Coverage report\n- Sitemap status\n- robots.txt tester"
+        },
+        {
+            "id": "crawling_12",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Crawling & Indexing!\n\n## Key Takeaways:\n\n### robots.txt\n- ✅ Control crawler access\n- ✅ Block private content\n- ✅ Reference sitemap\n\n### Sitemaps\n- ✅ List all important URLs\n- ✅ Update lastmod dates\n- ✅ Submit to Search Console\n\n### Canonical Tags\n- ✅ Prevent duplicates\n- ✅ Use absolute URLs\n- ✅ Self-reference\n\n### Best Practices\n- ✅ Monitor in Search Console\n- ✅ Fix crawl errors\n- ✅ Optimize crawl budget\n\n## Next Steps:\n- Learn SEO tools & auditing\n- Master structured data\n- Study link building\n\nGet indexed! 🕷️"
+        }
+    ]
+}

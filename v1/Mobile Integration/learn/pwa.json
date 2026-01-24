@@ -1,0 +1,53 @@
+{
+    "id": "learn_pwa_mobile",
+    "topicId": "pwa",
+    "topicTitle": "PWA",
+    "description": "Master Progressive Web Apps with service workers, manifest, and offline support",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "pwa_1",
+            "type": "content",
+            "title": "PWA",
+            "content": "# Progressive Web Apps 📲\n\nWeb apps that feel native.\n\n## What You'll Learn:\n- **Manifest** - App metadata\n- **Service Workers** - Offline support\n- **Installation** - Add to home screen\n- **Push** - Notifications\n\n> 💡 PWAs work offline and install like apps!"
+        },
+        {
+            "id": "pwa_2",
+            "type": "content",
+            "title": "Web Manifest",
+            "content": "# Web Manifest 📋\n\n```json\n{\n    \"name\": \"My PWA\",\n    \"short_name\": \"MyPWA\",\n    \"start_url\": \"/\",\n    \"display\": \"standalone\",\n    \"background_color\": \"#ffffff\",\n    \"theme_color\": \"#2196f3\",\n    \"icons\": [\n        {\n            \"src\": \"/icon-192.png\",\n            \"sizes\": \"192x192\",\n            \"type\": \"image/png\"\n        },\n        {\n            \"src\": \"/icon-512.png\",\n            \"sizes\": \"512x512\",\n            \"type\": \"image/png\"\n        }\n    ]\n}\n```\n\n## Link:\n```html\n<link rel=\"manifest\" href=\"/manifest.json\">\n```"
+        },
+        {
+            "id": "pwa_3",
+            "type": "content",
+            "title": "Service Workers",
+            "content": "# Service Workers ⚙️\n\n## Registration:\n```javascript\nif ('serviceWorker' in navigator) {\n    navigator.serviceWorker.register('/sw.js');\n}\n```\n\n## sw.js:\n```javascript\nconst CACHE_NAME = 'v1';\nconst urlsToCache = ['/', '/styles.css', '/app.js'];\n\nself.addEventListener('install', (event) => {\n    event.waitUntil(\n        caches.open(CACHE_NAME)\n            .then(cache => cache.addAll(urlsToCache))\n    );\n});\n\nself.addEventListener('fetch', (event) => {\n    event.respondWith(\n        caches.match(event.request)\n            .then(response => response || fetch(event.request))\n    );\n});\n```"
+        },
+        {
+            "id": "pwa_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your PWA knowledge!",
+            "quizQuestion": "What enables offline functionality in PWAs?",
+            "quizOptions": [
+                "manifest.json",
+                "Service Workers",
+                "IndexedDB",
+                "LocalStorage"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "pwa_4",
+            "type": "content",
+            "title": "Installation",
+            "content": "# Installation Prompt 📲\n\n```javascript\nlet deferredPrompt;\n\nwindow.addEventListener('beforeinstallprompt', (e) => {\n    e.preventDefault();\n    deferredPrompt = e;\n    showInstallButton();\n});\n\ninstallBtn.addEventListener('click', () => {\n    deferredPrompt.prompt();\n    deferredPrompt.userChoice.then((result) => {\n        if (result.outcome === 'accepted') {\n            console.log('Installed!');\n        }\n    });\n});\n```\n\n## Requirements:\n- HTTPS\n- Valid manifest\n- Service worker\n- Install prompt criteria met"
+        },
+        {
+            "id": "pwa_5",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered PWAs!\n\n## Key Components:\n| Component | Purpose |\n|-----------|---------|\n| Manifest | App metadata |\n| Service Worker | Offline/caching |\n| HTTPS | Security |\n\n## Benefits:\n- Works offline\n- Installable\n- App-like experience\n- No app store needed\n\nBuild PWAs! 📲"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_security_https",
+    "topicId": "https",
+    "topicTitle": "HTTPS & SSL/TLS",
+    "description": "Master the fundamentals of HTTPS, certificates, and the TLS handshake to secure data in transit",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "https_1",
+            "type": "content",
+            "title": "What is HTTPS?",
+            "content": "# HTTPS 🔒\n\n**Hypertext Transfer Protocol Secure** is the secure version of HTTP. It uses SSL/TLS to encrypt communication between the browser and the server.\n\n- **Goals**: Privacy, Data Integrity, and Authentication."
+        },
+        {
+            "id": "https_2",
+            "type": "content",
+            "title": "SSL vs TLS",
+            "content": "# The Evolution 🧬\n\n- **SSL (Secure Sockets Layer)**: The original protocol. Now deprecated and insecure.\n- **TLS (Transport Layer Security)**: The modern successor. We say \"SSL\" out of habit, but we use **TLS 1.2** or **TLS 1.3**."
+        },
+        {
+            "id": "https_3",
+            "type": "content",
+            "title": "How it works: Handshake",
+            "content": "# The TLS Handshake 🤝\n\n1. **Hello**: Client and server agree on a version and cipher suite.\n2. **Certificate**: Server sends its SSL certificate.\n3. **Key Exchange**: They securely generate a shared session key.\n4. **Finished**: All subsequent data is encrypted with that key."
+        },
+        {
+            "id": "https_4",
+            "type": "content",
+            "title": "Asymmetric vs Symmetric",
+            "content": "# Best of Both Worlds 🌎\n\n- **Asymmetric**: Uses a Public/Private key pair to *securely share* a secret (Slow).\n- **Symmetric**: Uses that *shared secret* to encrypt the actual data (Fast)."
+        },
+        {
+            "id": "https_5",
+            "quizQuestion": "Which protocol is the modern, secure successor to SSL?",
+            "quizOptions": [
+                "HTTP/2",
+                "TLS",
+                "FTP",
+                "UDP"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Protocol Quiz",
+            "content": "Naming the standard."
+        },
+        {
+            "id": "https_6",
+            "type": "content",
+            "title": "CA: Certificate Authorities",
+            "content": "# Trusted Third Parties 🏛️\n\nA **CA** (like Let's Encrypt or DigiCert) verifies that you own the domain and issues the certificate. Browsers come pre-installed with a list of trusted CAs."
+        },
+        {
+            "id": "https_7",
+            "type": "content",
+            "title": "Let's Encrypt",
+            "content": "# Free & Automated 🆓\n\nA non-profit CA that provides free certificates. Combined with the **ACME** protocol, it allows for automatic certificate renewal."
+        },
+        {
+            "id": "https_8",
+            "type": "content",
+            "title": "Browser Warnings",
+            "content": "# Mixed Content 🛑\n\nIf an HTTPS page attempts to load images or scripts via `http://`, the browser will show a \"Not Fully Secure\" warning. \n\n> 💡 Always use relative protocol URLs or specify `https://`."
+        },
+        {
+            "id": "https_9",
+            "type": "content",
+            "title": "HSTS header",
+            "content": "# Force HTTPS 🛡️\n\n**HTTP Strict Transport Security** tells the browser: \"Only ever talk to me over HTTPS for the next year.\"\n\n- This prevents **SSL Stripping** attacks where an attacker tries to downgrade you to plain HTTP."
+        },
+        {
+            "id": "https_10",
+            "quizQuestion": "What does a Certificate Authority (CA) do?",
+            "quizOptions": [
+                "Encrypts your server's hardware",
+                "Verifies domain ownership and issues identity certificates",
+                "Sells domain names",
+                "Hosts your website"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Identity Quiz",
+            "content": "Trust roles."
+        },
+        {
+            "id": "https_11",
+            "type": "content",
+            "title": "Forward Secrecy",
+            "content": "# Future Proof 🛡️⏳\n\nEnsures that even if the server's long-term private key is stolen in the future, it can't be used to decrypt past recorded traffic. Enabled by modern ciphers like ECDHE."
+        },
+        {
+            "id": "https_12",
+            "type": "content",
+            "title": "Cipher Suites",
+            "content": "# The Toolset 🧰\n\nA set of algorithms used for the connection (e.g., `TLS_AES_256_GCM_SHA384`). Over time, weaker algorithms are removed from modern browsers for safety."
+        },
+        {
+            "id": "https_13",
+            "type": "content",
+            "title": "Server Name Indication (SNI)",
+            "content": "# Multi-Domain 🏠🏠\n\nSNI allows a single IP address to host multiple HTTPS sites, each with its own certificate, by telling the server which domain it wants *before* the handshake finishes."
+        },
+        {
+            "id": "https_14",
+            "type": "content",
+            "title": "Certificate Pinning",
+            "content": "# Extra Paranoid 📌\n\nA technique where an app only trusts a specific, hardcoded certificate, rather than any certificate issued by a CA. \n\n> [!CAUTION]\n> Hard to maintain. If you lose the certificate, your app breaks!"
+        },
+        {
+            "id": "https_15",
+            "quizQuestion": "What is 'SSL Stripping'?",
+            "quizOptions": [
+                "Removing the server's case",
+                "An attack that forces a connection down from HTTPS to insecure HTTP",
+                "A way to speed up connections",
+                "Deleting old certificates"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Attack Quiz",
+            "content": "Downgrade attacks."
+        },
+        {
+            "id": "https_16",
+            "type": "content",
+            "title": "CRL and OCSP",
+            "content": "# Revocation 🚫\n\nHow does a browser know if a certificate has been stolen? It checks the **Certificate Revocation List (CRL)** or uses **OCSP Stapling** for a real-time status check."
+        },
+        {
+            "id": "https_17",
+            "type": "content",
+            "title": "HTTP/2 and HTTPS",
+            "content": "# Performance 🏎️\n\nWhile the HTTP/2 spec doesn't technically require encryption, all major browsers (Chrome, Firefox, Safari) **ONLY** support HTTP/2 over HTTPS."
+        },
+        {
+            "id": "https_18",
+            "type": "content",
+            "title": "End-to-End Encryption",
+            "content": "# Complete Privacy 🤐\n\nEnsures the data is encrypted from the very start (client) to the very end (server), with no one in the middle (like an ISP or proxy) being able to see it."
+        },
+        {
+            "id": "https_19",
+            "type": "content",
+            "title": "Internal HTTPS",
+            "content": "# Local Trust 🏠\n\nFor internal services, you might use **Self-Signed Certificates**. Browser will show a warning unless you manually import that certificate into your trusted store."
+        },
+        {
+            "id": "https_20",
+            "quizQuestion": "Which HTTP header prevents SSL/TLS downgrade attacks by forcing HTTPS use?",
+            "quizOptions": [
+                "CSP",
+                "HSTS",
+                "X-Frame-Options",
+                "CORS"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "HSTS check."
+        },
+        {
+            "id": "https_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ **HTTPS** provides Privacy, Integrity, and Auth.\n- ✅ Use **TLS 1.2+**; avoid SSL.\n- ✅ Certificates are issued by **CAs**.\n- ✅ Enable **HSTS** to force security.\n- ✅ Fix **Mixed Content** errors.\n\nSecure your data in transit with HTTPS! 🔒"
+        }
+    ]
+}

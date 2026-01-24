@@ -1,0 +1,167 @@
+{
+    "id": "learn_tdd_redgreen",
+    "topicId": "redgreen",
+    "topicTitle": "Red-Green-Refactor",
+    "description": "Master the rhythmic three-step cycle of Test-Driven Development to build robust and maintainable software",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "redgreen_1",
+            "type": "content",
+            "title": "The TDD Rhythm",
+            "content": "# Red-Green-Refactor 🥁\n\nThis cycle is the heartbeat of professional software craftsmanship. It ensures that every line of code is necessary, tested, and clean."
+        },
+        {
+            "id": "redgreen_2",
+            "type": "content",
+            "title": "Step 1: RED 🔴",
+            "content": "# Thinking First 🔴\n\nWrite a test for the next bit of functionality you want to add.\n\n- **Must Fail**: If it passes, your test isn't checking anything new!\n- **Assertion**: Start with the `Assert` (What is the outcome?)."
+        },
+        {
+            "id": "redgreen_3",
+            "type": "content",
+            "title": "The Meaning of Failure",
+            "content": "# Good Failures ❌\n\nA test can fail because:\n- The function doesn't exist (Reference Error).\n- The function returns the wrong value.\n- It throws an exception erroneously.\n\n> 💡 \"Failure is information. It tells you exactly what to implement next.\""
+        },
+        {
+            "id": "redgreen_4",
+            "type": "content",
+            "title": "Step 2: GREEN 🟢",
+            "content": "# Minimum Effort 🟢\n\nMake the test pass. Just that. Nothing more.\n\n- **Sin of Anticipation**: Do not implement extra features \"just in case\".\n- **Quick and Dirty**: It's okay if the code is a bit messy here; we have a plan for it."
+        },
+        {
+            "id": "redgreen_5",
+            "quizQuestion": "In the RED phase, if your new test immediately passes, what should you do?",
+            "quizOptions": [
+                "Move to the next feature",
+                "Celebrate and go home",
+                "Determine why it passed and ensure the test is actually valid",
+                "Delete the test"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Phase Quiz",
+            "content": "Unexpected success."
+        },
+        {
+            "id": "redgreen_6",
+            "type": "content",
+            "title": "Hardcoding to Green",
+            "content": "# The Simplest Pass 🛠️\n\n```javascript\n// Requirement: multiply(2, 3) should be 6\ntest('multiplies', () => {\n  expect(multiply(2, 3)).toBe(6);\n});\n\n// Implementation to get Green FAST:\nconst multiply = (a, b) => 6;\n```"
+        },
+        {
+            "id": "redgreen_7",
+            "type": "content",
+            "title": "Forcing Logic",
+            "content": "# Triangularization 📐\n\nTo move from hardcoding to real logic, write a **second** test with different data.\n\n```javascript\n// Now add test for multiply(3, 3) -> 9\n// The hardcoded '6' above fails. Now you MUST write 'a * b'.\n```"
+        },
+        {
+            "id": "redgreen_8",
+            "type": "content",
+            "title": "Step 3: REFACTOR 🔵",
+            "content": "# Cleaning Up 🔵\n\nNow that you have a green safety net, improve the design.\n\n- **Check for**: Duplication (DRY), clarity, performance.\n- **Rules**: Internal structure changes only. **External behavior must NOT change**."
+        },
+        {
+            "id": "redgreen_9",
+            "type": "content",
+            "title": "Refactoring Examples",
+            "content": "# Better Code ✨\n\n- Rename `cnt` to `userCount`.\n- Extract a complex `if` block into a named helper function.\n- Move repeating logic into a shared class."
+        },
+        {
+            "id": "redgreen_10",
+            "quizQuestion": "What allows you to refactor code confidently in the third phase?",
+            "quizOptions": [
+                "The IDE's auto-format",
+                "The passing tests (Green safety net)",
+                "Experience",
+                "GIT commits"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Safety Quiz",
+            "content": "The safety net."
+        },
+        {
+            "id": "redgreen_11",
+            "type": "content",
+            "title": "The Golden Rule of Refactoring",
+            "content": "# One at a time ☝️\n\nNever refactor and add features at the same time. \n\n- **Refactor**: Stay in Green.\n- **New Feature**: Go to Red."
+        },
+        {
+            "id": "redgreen_12",
+            "type": "content",
+            "title": "The Refactoring Mindset",
+            "content": "# Scout Rule ⛺\n\n> \"Always leave the code cleaner than you found it.\"\n\nEach TDD cycle is an opportunity to pay back small amounts of technical debt."
+        },
+        {
+            "id": "redgreen_13",
+            "type": "content",
+            "title": "Skipping Refactor?",
+            "content": "# Technical Debt 🛑\n\nIf you skip the Refactor step repeatedly, your code will rot. You'll end up with \"tested spaghetti code\", which is hard to read and hard to change."
+        },
+        {
+            "id": "redgreen_14",
+            "type": "content",
+            "title": "Verification vs Design",
+            "content": "# Design Tool 🎨\n\nRemember: Red-Green is for **verification**. Refactor is for **design**. Both are equally critical for a healthy project."
+        },
+        {
+            "id": "redgreen_15",
+            "quizQuestion": "Which phase is specifically dedicated to improving the internal structure of code without changing its external behavior?",
+            "quizOptions": [
+                "Red",
+                "Green",
+                "Refactor",
+                "Deploy"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Objective Quiz",
+            "content": "Identifying goals."
+        },
+        {
+            "id": "redgreen_16",
+            "type": "content",
+            "title": "Handling Breaking Tests",
+            "content": "# Regression 🔙\n\nIf a refactor causes a test to turn Red, you made a mistake! Undo the change and try a smaller, safer refactor step."
+        },
+        {
+            "id": "redgreen_17",
+            "type": "content",
+            "title": "Small Refactors",
+            "content": "# Atomicity ⚛️\n\nLarge refactors should be broken into tiny steps. Move a method. Run tests. Rename a variable. Run tests. Move a class. Run tests."
+        },
+        {
+            "id": "redgreen_18",
+            "type": "content",
+            "title": "Performance Tuning",
+            "content": "# Speeding Up 🏎️\n\nRefactoring is also when you optimize slow logic. Since you already have the tests, you can swap an $O(N^2)$ algorithm for an $O(log N)$ one safely."
+        },
+        {
+            "id": "redgreen_19",
+            "type": "content",
+            "title": "Naming Things",
+            "content": "# Clarity 🏷️\n\nSpend your refactoring time on better names. Code is read thousands of times more than it is written. Make it clear!"
+        },
+        {
+            "id": "redgreen_20",
+            "quizQuestion": "When should you write a new test?",
+            "quizOptions": [
+                "During Refactor",
+                "When you want to add new behavior",
+                "Only after a bug is reported",
+                "Every Friday"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Continuing the cycle."
+        },
+        {
+            "id": "redgreen_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ **Red**: Define the requirements with a failing test.\n- ✅ **Green**: Satisfy the requirements with minimum code.\n- ✅ **Refactor**: Clean up and improve the design.\n- ✅ Stay in the rhythm to build high-quality software.\n\nMaster the cycle to master your code! 🚀"
+        }
+    ]
+}

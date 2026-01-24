@@ -1,0 +1,199 @@
+{
+    "id": "learn_patterns_basics",
+    "topicId": "basics",
+    "topicTitle": "Design Patterns Basics",
+    "description": "Introduction to design patterns including creational, structural, and behavioral patterns",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "Design Patterns Overview",
+            "content": "# Design Patterns 🏗️\n\nReusable solutions to common problems.\n\n## What You'll Learn\n- **Creational** - Object creation\n- **Structural** - Object composition\n- **Behavioral** - Object interaction\n\n## What are Design Patterns?\n- Proven solutions\n- Best practices\n- Common vocabulary\n- Language agnostic"
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "Pattern Categories",
+            "content": "# Pattern Categories 📦\n\n## Three Types\n| Category | Purpose | Examples |\n|----------|---------|----------|\n| Creational | Object creation | Singleton, Factory |\n| Structural | Object structure | Adapter, Decorator |\n| Behavioral | Object behavior | Observer, Strategy |\n\n## Gang of Four (GoF)\n23 classic patterns from the book."
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Creational Patterns",
+            "content": "# Creational Patterns 🔨\n\nControl object creation.\n\n## Patterns\n| Pattern | Purpose |\n|---------|--------|\n| Singleton | Single instance |\n| Factory | Create without exposing logic |\n| Builder | Step-by-step construction |\n| Prototype | Clone existing |\n| Abstract Factory | Families of objects |\n\n## When to Use\n- Complex creation logic\n- Control instantiation\n- Decouple client from concrete classes"
+        },
+        {
+            "id": "basics_quiz_1",
+            "type": "quiz",
+            "title": "Creational Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "Which pattern ensures only one instance of a class exists?",
+            "quizOptions": [
+                "Factory",
+                "Singleton",
+                "Builder",
+                "Prototype"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "Structural Patterns",
+            "content": "# Structural Patterns 🧱\n\nCompose objects into larger structures.\n\n## Patterns\n| Pattern | Purpose |\n|---------|--------|\n| Adapter | Interface compatibility |\n| Decorator | Add behavior dynamically |\n| Facade | Simplified interface |\n| Proxy | Placeholder for another |\n| Composite | Tree structures |\n\n## Key Idea\nUse composition over inheritance."
+        },
+        {
+            "id": "basics_5",
+            "type": "content",
+            "title": "Behavioral Patterns",
+            "content": "# Behavioral Patterns 🔄\n\nDefine object communication.\n\n## Patterns\n| Pattern | Purpose |\n|---------|--------|\n| Observer | Notify dependents |\n| Strategy | Interchangeable algorithms |\n| Command | Encapsulate requests |\n| State | Change behavior with state |\n| Template | Define algorithm skeleton |\n\n## Focus\nHow objects interact and distribute responsibilities."
+        },
+        {
+            "id": "basics_quiz_2",
+            "type": "quiz",
+            "title": "Structural Quiz",
+            "content": "Test your structural knowledge!",
+            "quizQuestion": "Which pattern makes incompatible interfaces work together?",
+            "quizOptions": [
+                "Decorator",
+                "Adapter",
+                "Proxy",
+                "Facade"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Singleton Pattern",
+            "content": "# Singleton Preview 🎯\n\n## Implementation\n```python\nclass Singleton:\n    _instance = None\n    \n    def __new__(cls):\n        if cls._instance is None:\n            cls._instance = super().__new__(cls)\n        return cls._instance\n\n# Usage\na = Singleton()\nb = Singleton()\nprint(a is b)  # True\n```\n\n## Use Cases\n- Configuration\n- Logging\n- Connection pools"
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "Factory Pattern",
+            "content": "# Factory Preview 🏭\n\n## Implementation\n```python\nclass UserFactory:\n    @staticmethod\n    def create(user_type):\n        if user_type == 'admin':\n            return Admin()\n        elif user_type == 'guest':\n            return Guest()\n        else:\n            return User()\n\n# Usage\nuser = UserFactory.create('admin')\n```\n\n## Benefit\nClient doesn't need to know concrete classes."
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Observer Pattern",
+            "content": "# Observer Preview 👁️\n\n## Implementation\n```python\nclass Subject:\n    def __init__(self):\n        self._observers = []\n    \n    def attach(self, observer):\n        self._observers.append(observer)\n    \n    def notify(self, data):\n        for observer in self._observers:\n            observer.update(data)\n\nclass Observer:\n    def update(self, data):\n        print(f'Received: {data}')\n```\n\n## Use Cases\n- Event systems\n- UI updates\n- Pub/sub"
+        },
+        {
+            "id": "basics_quiz_3",
+            "type": "quiz",
+            "title": "Behavioral Quiz",
+            "content": "Test your behavioral knowledge!",
+            "quizQuestion": "Which pattern notifies multiple objects about state changes?",
+            "quizOptions": [
+                "Strategy",
+                "Command",
+                "Observer",
+                "State"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "Strategy Pattern",
+            "content": "# Strategy Preview 🎭\n\n## Implementation\n```python\nclass PaymentContext:\n    def __init__(self, strategy):\n        self._strategy = strategy\n    \n    def pay(self, amount):\n        return self._strategy.pay(amount)\n\nclass CreditCard:\n    def pay(self, amount):\n        return f'Paid ${amount} via credit card'\n\nclass PayPal:\n    def pay(self, amount):\n        return f'Paid ${amount} via PayPal'\n```\n\n## Benefit\nSwap algorithms at runtime."
+        },
+        {
+            "id": "basics_10",
+            "type": "content",
+            "title": "Decorator Pattern",
+            "content": "# Decorator Preview 🎨\n\n## Implementation\n```python\nclass Coffee:\n    def cost(self):\n        return 5\n\nclass MilkDecorator:\n    def __init__(self, coffee):\n        self._coffee = coffee\n    \n    def cost(self):\n        return self._coffee.cost() + 1\n\n# Usage\ncoffee = MilkDecorator(Coffee())\nprint(coffee.cost())  # 6\n```\n\n## Benefit\nAdd behavior without modifying class."
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "When to Use Patterns",
+            "content": "# When to Use 🤔\n\n## Good Reasons\n- ✅ Solving recurring problem\n- ✅ Improve maintainability\n- ✅ Enable flexibility\n- ✅ Communicate intent\n\n## Bad Reasons\n- ❌ Just to use patterns\n- ❌ Simple problem\n- ❌ Add unnecessary complexity\n\n> 💡 Don't force patterns where not needed!"
+        },
+        {
+            "id": "basics_quiz_4",
+            "type": "quiz",
+            "title": "Usage Quiz",
+            "content": "Test your pattern knowledge!",
+            "quizQuestion": "When should you NOT use design patterns?",
+            "quizOptions": [
+                "Recurring problems",
+                "Complex systems",
+                "Simple problems with no recurring issues",
+                "Team communication"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "basics_12",
+            "type": "content",
+            "title": "Anti-Patterns",
+            "content": "# Anti-Patterns ⚠️\n\nPatterns to avoid.\n\n## Common Anti-Patterns\n| Pattern | Problem |\n|---------|--------|\n| God Object | Does everything |\n| Spaghetti | No structure |\n| Copy-Paste | Duplication |\n| Golden Hammer | One solution for all |\n\n## Prevention\n- Code reviews\n- Refactoring\n- SOLID principles"
+        },
+        {
+            "id": "basics_13",
+            "type": "content",
+            "title": "SOLID Preview",
+            "content": "# SOLID Principles 📐\n\n## Five Principles\n| Letter | Principle |\n|--------|----------|\n| S | Single Responsibility |\n| O | Open/Closed |\n| L | Liskov Substitution |\n| I | Interface Segregation |\n| D | Dependency Inversion |\n\n> Foundation for good design."
+        },
+        {
+            "id": "basics_14",
+            "type": "content",
+            "title": "Composition vs Inheritance",
+            "content": "# Composition Over Inheritance 🔗\n\n## Inheritance\n```python\nclass Animal:\n    def move(self): pass\n\nclass Dog(Animal):\n    def move(self): print('Walk')\n```\n\n## Composition\n```python\nclass Dog:\n    def __init__(self):\n        self.movement = WalkBehavior()\n    \n    def move(self):\n        self.movement.execute()\n```\n\n## Why Composition?\n- More flexible\n- Avoids fragile base class\n- Easy to change"
+        },
+        {
+            "id": "basics_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your design knowledge!",
+            "quizQuestion": "What is generally preferred over inheritance?",
+            "quizOptions": [
+                "More inheritance",
+                "Composition",
+                "Global variables",
+                "Copy-paste"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_15",
+            "type": "content",
+            "title": "Pattern Selection",
+            "content": "# Choosing Patterns 🎯\n\n## Ask Yourself\n1. What problem am I solving?\n2. Is this a recurring issue?\n3. Will this simplify or complicate?\n4. Does the team understand it?\n\n## Common Scenarios\n| Problem | Pattern |\n|---------|--------|\n| One instance needed | Singleton |\n| Create without specifying class | Factory |\n| Notify on changes | Observer |\n| Add behavior dynamically | Decorator |"
+        },
+        {
+            "id": "basics_16",
+            "type": "content",
+            "title": "Real-World Examples",
+            "content": "# Patterns in Practice 🌍\n\n## JavaScript\n- Module Pattern\n- Observer (Event Listeners)\n- Singleton (Module exports)\n\n## React\n- Component composition\n- HOCs (Decorator)\n- Render props\n\n## Python\n- Django middleware (Chain)\n- Decorators (@decorator)"
+        },
+        {
+            "id": "basics_17",
+            "type": "content",
+            "title": "Learning Path",
+            "content": "# Next Steps 📚\n\n## Learn Order\n1. Singleton - Easy entry\n2. Factory - Common need\n3. Observer - Event-driven\n4. Strategy - Algorithms\n5. Decorator - Composition\n\n## Practice\n- Identify patterns in code\n- Refactor to use patterns\n- Don't overengineeer"
+        },
+        {
+            "id": "basics_18",
+            "type": "content",
+            "title": "Resources",
+            "content": "# Resources 📖\n\n## Books\n- Design Patterns (GoF)\n- Head First Design Patterns\n- Refactoring (Fowler)\n\n## Online\n- Refactoring Guru\n- SourceMaking\n- GitHub examples\n\n## Practice\n- Code katas\n- Refactoring exercises"
+        },
+        {
+            "id": "basics_19",
+            "type": "content",
+            "title": "Common Mistakes",
+            "content": "# Common Mistakes ❌\n\n## Avoid\n- Overusing Singleton\n- Pattern for pattern's sake\n- Ignoring SOLID\n- Not refactoring\n\n## Fix\n- Start simple\n- Refactor to patterns\n- Review with team\n- Keep learning"
+        },
+        {
+            "id": "basics_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Categories\n- ✅ Creational - Object creation\n- ✅ Structural - Composition\n- ✅ Behavioral - Interaction\n\n### Best Practices\n- ✅ Composition over inheritance\n- ✅ Don't over-engineer\n- ✅ Let patterns emerge\n\n### Core Patterns\n- Singleton, Factory, Observer\n- Strategy, Decorator\n\nHappy designing! 🏗️"
+        }
+    ]
+}

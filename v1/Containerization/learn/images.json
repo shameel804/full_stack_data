@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_images",
+    "topicId": "images",
+    "topicTitle": "Images & Containers",
+    "description": "Master Docker image concepts including layers, tags, registries, and multi-stage builds for efficient container creation",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "images_1",
+            "type": "content",
+            "title": "Welcome to Docker Images",
+            "content": "# Docker Images & Containers 🖼️\n\nUnderstand the **building blocks** of containerization.\n\n## What you'll learn:\n- **Layers** - How images are structured\n- **Tags** - Versioning and naming\n- **Registries** - Storing and sharing images\n- **Multi-stage builds** - Optimizing image size\n\n> 💡 **Fun Fact:** Docker Hub hosts over 8 million container images!\n\n## Images vs Containers\n\n| Image | Container |\n|-------|----------|\n| Blueprint/Template | Running instance |\n| Read-only | Read-write layer |\n| Stored on disk | Running in memory |\n| Can create many containers | Created from one image |\n\n## Analogy\n\n```\nImage      = Class (definition)\nContainer  = Object (instance)\n\n// You can create multiple containers from one image\nContainer 1 = new Image()\nContainer 2 = new Image()\nContainer 3 = new Image()\n```\n\nLet's dive deep into images!"
+        },
+        {
+            "id": "images_2",
+            "type": "content",
+            "title": "Understanding Layers",
+            "content": "# Image Layers 📚\n\nDocker images are built from **stacked layers**.\n\n## Layer Architecture\n\n```\n┌─────────────────────────────────────┐\n│         Container Layer             │  (Read-Write)\n│         (Runtime changes)           │\n├─────────────────────────────────────┤\n│   Layer 4: CMD [\"npm\", \"start\"]    │\n├─────────────────────────────────────┤  \n│   Layer 3: COPY . /app              │  (Read-Only)\n├─────────────────────────────────────┤\n│   Layer 2: RUN npm install          │\n├─────────────────────────────────────┤\n│   Layer 1: FROM node:20-alpine      │\n└─────────────────────────────────────┘\n         Base Image Layers\n```\n\n## How Layers Work\n\nEach Dockerfile instruction creates a **new layer**:\n\n```dockerfile\nFROM node:20-alpine     # Layer 1: Base image\nWORKDIR /app            # Layer 2: Metadata only\nCOPY package.json ./    # Layer 3: Add file\nRUN npm install         # Layer 4: Install deps\nCOPY . .                # Layer 5: Add source\nCMD [\"npm\", \"start\"]    # Layer 6: Metadata\n```\n\n## Benefits of Layers\n\n- 📦 **Caching** - Unchanged layers reused\n- 📤 **Sharing** - Common layers shared between images\n- ⚡ **Speed** - Only changed layers rebuilt\n- 💾 **Storage** - Efficient disk usage"
+        },
+        {
+            "id": "images_3",
+            "type": "content",
+            "title": "Layer Caching",
+            "content": "# Layer Caching ⚡\n\nDocker caches layers to **speed up builds**.\n\n## How Caching Works\n\n```\nFirst Build:           Second Build (code change only):\n───────────────        ─────────────────────────────────\nFROM node:20    ──►    FROM node:20     ✓ CACHED\nCOPY package*   ──►    COPY package*    ✓ CACHED\nRUN npm install ──►    RUN npm install  ✓ CACHED\nCOPY . .        ──►    COPY . .         ✗ REBUILD\nCMD             ──►    CMD              ✗ REBUILD\n\nTime: 2 min            Time: 10 seconds\n```\n\n## Cache Invalidation\n\nCache is invalidated when:\n- Instruction changes\n- Files being copied change\n- Any previous layer is invalidated\n\n## Optimizing for Cache\n\n```dockerfile\n# ❌ Bad - cache invalidated on any code change\nCOPY . .\nRUN npm install\n\n# ✅ Good - deps cached unless package.json changes\nCOPY package*.json ./\nRUN npm install\nCOPY . .\n```\n\n## Viewing Layer Cache\n\n```bash\n# Build with cache info\ndocker build -t myapp . 2>&1 | grep -E \"CACHED|Step\"\n\n# Build without cache\ndocker build --no-cache -t myapp .\n```"
+        },
+        {
+            "id": "images_4",
+            "type": "quiz",
+            "title": "Layers Quiz",
+            "content": "Test your understanding of Docker layers!",
+            "quizQuestion": "What happens when a Dockerfile instruction changes?",
+            "quizOptions": [
+                "Only that layer is rebuilt",
+                "That layer and ALL subsequent layers are rebuilt",
+                "The entire image is rebuilt from scratch",
+                "Nothing happens, Docker uses old cache"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "images_5",
+            "type": "content",
+            "title": "Image Tags",
+            "content": "# Image Tags 🏷️\n\nTags identify specific **versions** of images.\n\n## Tag Format\n\n```\n[registry/][repository/]image[:tag]\n\nExamples:\nnginx                           # Default: nginx:latest\nnginx:1.25                      # Specific version\nnginx:1.25-alpine               # Version + variant\nmyregistry.com/myapp:v1.0       # Custom registry\ngh cr.io/user/app:sha-abc123     # GitHub Container Registry\n```\n\n## Common Tag Patterns\n\n| Pattern | Example | Use Case |\n|---------|---------|----------|\n| `latest` | `nginx:latest` | Most recent (avoid in prod) |\n| Semantic | `nginx:1.25.0` | Specific version |\n| Major | `node:20` | Latest in major version |\n| Variant | `python:3.11-slim` | Smaller image |\n| SHA | `app:sha-abc123` | Immutable reference |\n| Date | `backup:2024-01-15` | Time-based |\n\n## Creating Tags\n\n```bash\n# Tag during build\ndocker build -t myapp:1.0 .\ndocker build -t myapp:1.0 -t myapp:latest .\n\n# Tag existing image\ndocker tag myapp:1.0 myapp:stable\ndocker tag myapp:1.0 registry.com/myapp:1.0\n```\n\n> ⚠️ **Warning:** Avoid `latest` in production - it's mutable!"
+        },
+        {
+            "id": "images_6",
+            "type": "content",
+            "title": "Tag Best Practices",
+            "content": "# Tagging Best Practices ✅\n\n## 1. Use Semantic Versioning\n\n```bash\n# Major.Minor.Patch\nmyapp:1.0.0    # Initial release\nmyapp:1.0.1    # Bug fix\nmyapp:1.1.0    # New feature\nmyapp:2.0.0    # Breaking change\n```\n\n## 2. Include Git SHA\n\n```bash\n# Immutable reference\nmyapp:v1.0.0-abc1234\nmyapp:sha-abc1234567\n```\n\n## 3. Multi-Tag Strategy\n\n```bash\n# Tag with multiple identifiers\ndocker build \\\n  -t myapp:1.2.3 \\\n  -t myapp:1.2 \\\n  -t myapp:1 \\\n  -t myapp:latest \\\n  .\n```\n\n## 4. Use Descriptive Variants\n\n```bash\nmyapp:1.0-alpine    # Alpine-based\nmyapp:1.0-slim      # Minimal\nmyapp:1.0-debug     # With debug tools\nmyapp:1.0-gpu       # GPU support\n```\n\n## CI/CD Tagging Example\n\n```yaml\n# GitHub Actions\n- name: Build and tag\n  run: |\n    docker build \\\n      -t myapp:${{ github.sha }} \\\n      -t myapp:${{ github.ref_name }} \\\n      .\n```"
+        },
+        {
+            "id": "images_7",
+            "type": "content",
+            "title": "Container Registries",
+            "content": "# Container Registries 📦\n\nRegistries **store and distribute** container images.\n\n## Popular Registries\n\n| Registry | URL | Features |\n|----------|-----|----------|\n| Docker Hub | hub.docker.com | Public/private, free tier |\n| GitHub | ghcr.io | GitHub integration |\n| AWS ECR | *.ecr.aws | AWS integration |\n| Google GCR | gcr.io | GCP integration |\n| Azure ACR | *.azurecr.io | Azure integration |\n| Harbor | Self-hosted | Enterprise features |\n\n## Registry Architecture\n\n```\n┌─────────────────────────────────────────────────┐\n│              CONTAINER REGISTRY                  │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌───────────────┐  ┌───────────────┐           │\n│  │  Repository   │  │  Repository   │           │\n│  │    myapp      │  │   database    │           │\n│  ├───────────────┤  ├───────────────┤           │\n│  │ myapp:1.0     │  │ database:12   │           │\n│  │ myapp:1.1     │  │ database:13   │           │\n│  │ myapp:latest  │  │ database:14   │           │\n│  └───────────────┘  └───────────────┘           │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Authentication\n\n```bash\n# Docker Hub\ndocker login\n\n# Private registry\ndocker login myregistry.com\n\n# AWS ECR\naws ecr get-login-password | docker login --username AWS --password-stdin 123456.dkr.ecr.us-east-1.amazonaws.com\n```"
+        },
+        {
+            "id": "images_8",
+            "type": "content",
+            "title": "Push and Pull Images",
+            "content": "# Working with Registries 🔄\n\n## Pulling Images\n\n```bash\n# From Docker Hub\ndocker pull nginx\ndocker pull nginx:1.25-alpine\n\n# From other registries\ndocker pull ghcr.io/owner/image:tag\ndocker pull 123456.dkr.ecr.us-east-1.amazonaws.com/myapp:1.0\n\n# Pull all tags\ndocker pull -a nginx\n```\n\n## Pushing Images\n\n```bash\n# 1. Build with registry prefix\ndocker build -t myregistry.com/myapp:1.0 .\n\n# 2. Or tag existing image\ndocker tag myapp:1.0 myregistry.com/myapp:1.0\n\n# 3. Login to registry\ndocker login myregistry.com\n\n# 4. Push\ndocker push myregistry.com/myapp:1.0\n```\n\n## Image Pull Policies\n\nIn Kubernetes:\n\n```yaml\ncontainers:\n  - name: app\n    image: myapp:1.0\n    imagePullPolicy: Always    # Always pull\n    # imagePullPolicy: IfNotPresent  # Pull if missing\n    # imagePullPolicy: Never   # Never pull\n```\n\n## Private Registry Secrets\n\n```bash\n# Kubernetes secret for private registry\nkubectl create secret docker-registry regcred \\\n  --docker-server=myregistry.com \\\n  --docker-username=user \\\n  --docker-password=pass\n```"
+        },
+        {
+            "id": "images_9",
+            "type": "quiz",
+            "title": "Registries Quiz",
+            "content": "Test your registry knowledge!",
+            "quizQuestion": "What command is used to upload an image to a container registry?",
+            "quizOptions": [
+                "docker upload",
+                "docker push",
+                "docker publish",
+                "docker send"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "images_10",
+            "type": "content",
+            "title": "Multi-Stage Builds",
+            "content": "# Multi-Stage Builds 🎭\n\nCreate **production-optimized** images.\n\n## The Problem\n\n```dockerfile\n# Single stage - everything included\nFROM node:20\nWORKDIR /app\nCOPY . .\nRUN npm ci\nRUN npm run build\n# Image size: 1.2 GB (includes dev deps!)\n```\n\n## The Solution\n\n```dockerfile\n# Stage 1: Build\nFROM node:20 AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# Stage 2: Production\nFROM node:20-alpine AS production\nWORKDIR /app\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/node_modules ./node_modules\nCMD [\"node\", \"dist/index.js\"]\n# Image size: 150 MB\n```\n\n## Key Concepts\n\n| Concept | Description |\n|---------|-------------|\n| `AS name` | Name the stage |\n| `--from=stage` | Copy from named stage |\n| Only final stage | Ends up in image |\n| Build artifacts | Discarded from earlier stages |\n\n## Size Comparison\n\n```\nSingle Stage:     1.2 GB\nMulti-Stage:      150 MB\nReduction:        87.5%\n```"
+        },
+        {
+            "id": "images_11",
+            "type": "content",
+            "title": "Advanced Multi-Stage",
+            "content": "# Advanced Multi-Stage Patterns 🔧\n\n## Multiple Build Targets\n\n```dockerfile\n# Base stage\nFROM node:20-alpine AS base\nWORKDIR /app\nCOPY package*.json ./\n\n# Development stage\nFROM base AS development\nRUN npm install\nCOPY . .\nCMD [\"npm\", \"run\", \"dev\"]\n\n# Build stage\nFROM base AS builder\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# Production stage\nFROM node:20-alpine AS production\nWORKDIR /app\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/package*.json ./\nRUN npm ci --only=production\nCMD [\"node\", \"dist/index.js\"]\n```\n\n## Building Specific Stages\n\n```bash\n# Build development image\ndocker build --target development -t app:dev .\n\n# Build production image\ndocker build --target production -t app:prod .\n```\n\n## Copy from External Image\n\n```dockerfile\n# Copy from public image\nCOPY --from=nginx:alpine /etc/nginx/nginx.conf /etc/nginx/\n\n# Copy binary from builder image\nCOPY --from=golang:1.21 /usr/local/go/bin/go /usr/local/bin/\n```"
+        },
+        {
+            "id": "images_12",
+            "type": "content",
+            "title": "Image Size Optimization",
+            "content": "# Optimizing Image Size 📐\n\n## 1. Use Alpine Base Images\n\n```dockerfile\n# Standard: ~1 GB\nFROM node:20\n\n# Alpine: ~150 MB\nFROM node:20-alpine\n\n# Slim: ~200 MB\nFROM python:3.11-slim\n```\n\n## 2. Minimize Layers\n\n```dockerfile\n# ❌ Multiple layers\nRUN apt-get update\nRUN apt-get install -y curl\nRUN apt-get install -y wget\n\n# ✅ Single layer\nRUN apt-get update && \\\n    apt-get install -y curl wget && \\\n    rm -rf /var/lib/apt/lists/*\n```\n\n## 3. Clean Up in Same Layer\n\n```dockerfile\nRUN npm install && \\\n    npm cache clean --force\n\nRUN apt-get update && \\\n    apt-get install -y build-essential && \\\n    make && \\\n    apt-get purge -y build-essential && \\\n    rm -rf /var/lib/apt/lists/*\n```\n\n## 4. Use .dockerignore\n\n```\nnode_modules\n.git\n*.md\nDockerfile\n.dockerignore\ntests/\n*.log\n```\n\n## Size Comparison\n\n| Base Image | Size |\n|------------|------|\n| `ubuntu:22.04` | 77 MB |\n| `debian:slim` | 80 MB |\n| `alpine:3.18` | 7 MB |\n| `scratch` | 0 MB |"
+        },
+        {
+            "id": "images_13",
+            "type": "content",
+            "title": "Inspecting Images",
+            "content": "# Image Inspection 🔍\n\n## View Image Details\n\n```bash\n# Full inspection\ndocker inspect nginx:latest\n\n# Specific field\ndocker inspect --format='{{.Config.Cmd}}' nginx\ndocker inspect --format='{{.Config.ExposedPorts}}' nginx\n\n# Image size\ndocker images nginx --format \"{{.Size}}\"\n```\n\n## View Image History\n\n```bash\ndocker history nginx:latest\n\nIMAGE          CREATED       CREATED BY                  SIZE\nabc123         2 weeks ago   CMD [\"nginx\" \"-g\" \"daem...   0B\ndef456         2 weeks ago   EXPOSE 80                    0B\nghi789         2 weeks ago   COPY file:abc... in /etc     4.6kB\n...\n```\n\n## Analyze with dive\n\n```bash\n# Install dive\nbrew install dive\n\n# Analyze image layers\ndive nginx:latest\n```\n\n```\n┌─────────────────────────────────────────────────┐\n│ Layer Contents                                   │\n├─────────────────────────────────────────────────┤\n│ /usr/share/nginx/html/index.html   634 B        │\n│ /etc/nginx/nginx.conf              1.2 KB       │\n│ ...                                              │\n├─────────────────────────────────────────────────┤\n│ Image efficiency: 98%                           │\n│ Wasted space: 4.5 MB                            │\n└─────────────────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "images_14",
+            "type": "quiz",
+            "title": "Optimization Quiz",
+            "content": "Test your optimization knowledge!",
+            "quizQuestion": "What is the size of the Alpine Linux base image?",
+            "quizOptions": [
+                "77 MB",
+                "50 MB",
+                "7 MB",
+                "150 MB"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "images_15",
+            "type": "content",
+            "title": "Building for Multiple Platforms",
+            "content": "# Multi-Platform Builds 🌍\n\nBuild images for different CPU architectures.\n\n## Why Multi-Platform?\n\n- Intel/AMD (x86_64/amd64)\n- Apple Silicon (arm64)\n- Raspberry Pi (arm/v7)\n- AWS Graviton (arm64)\n\n## Using Docker Buildx\n\n```bash\n# Create builder\ndocker buildx create --name multiplatform --use\n\n# Build for multiple platforms\ndocker buildx build \\\n  --platform linux/amd64,linux/arm64 \\\n  -t myapp:latest \\\n  --push \\\n  .\n```\n\n## In Dockerfile\n\n```dockerfile\n# Build arg for platform\nARG TARGETPLATFORM\nARG BUILDPLATFORM\n\nRUN echo \"Building on $BUILDPLATFORM for $TARGETPLATFORM\"\n```\n\n## Checking Image Platform\n\n```bash\n# View supported platforms\ndocker manifest inspect nginx:latest\n\n# View local image platform\ndocker inspect --format='{{.Os}}/{{.Architecture}}' nginx\n```\n\n## Platform-Specific Base Images\n\n```dockerfile\nFROM --platform=linux/amd64 golang:1.21 AS builder\n# Forces amd64 even on arm machine\n```"
+        },
+        {
+            "id": "images_16",
+            "type": "content",
+            "title": "Image Security",
+            "content": "# Image Security 🔒\n\n## 1. Use Official Images\n\n```dockerfile\n# ✅ Official\nFROM node:20-alpine\nFROM python:3.11-slim\n\n# ❌ Unknown source\nFROM randomuser/node\n```\n\n## 2. Scan for Vulnerabilities\n\n```bash\n# Docker Scout\ndocker scout quickview nginx:latest\ndocker scout cves nginx:latest\n\n# Trivy\ntrivy image nginx:latest\n\n# Snyk\nsnyk container test nginx:latest\n```\n\n## 3. Use Non-Root User\n\n```dockerfile\nFROM node:20-alpine\n\n# Create user\nRUN addgroup -g 1001 appgroup && \\\n    adduser -u 1001 -G appgroup -D appuser\n\nWORKDIR /app\nCOPY --chown=appuser:appgroup . .\n\nUSER appuser\nCMD [\"node\", \"server.js\"]\n```\n\n## 4. Use Specific Tags\n\n```dockerfile\n# ❌ Mutable - can change anytime\nFROM node:latest\n\n# ✅ Immutable - never changes\nFROM node:20.10.0-alpine3.18@sha256:abc123...\n```\n\n## 5. Minimize Attack Surface\n\n- Use minimal base images (alpine, scratch)\n- Remove unnecessary packages\n- Don't install development tools in production"
+        },
+        {
+            "id": "images_17",
+            "type": "content",
+            "title": "Container Lifecycle",
+            "content": "# Container Lifecycle 🔄\n\n## States and Transitions\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    CONTAINER LIFECYCLE                       │\n│                                                              │\n│  docker create         docker start         docker stop     │\n│       │                     │                    │           │\n│       ▼                     ▼                    ▼           │\n│  ┌─────────┐          ┌─────────┐          ┌─────────┐      │\n│  │ CREATED │─────────►│ RUNNING │─────────►│ STOPPED │      │\n│  └─────────┘          └─────────┘          └─────────┘      │\n│       │                    │                    │           │\n│       │                    │ docker pause       │           │\n│       │                    ▼                    │           │\n│       │               ┌─────────┐               │           │\n│       │               │ PAUSED  │               │           │\n│       │               └─────────┘               │           │\n│       │                                         │           │\n│       └──────────────────┬──────────────────────┘           │\n│                          │ docker rm                         │\n│                          ▼                                   │\n│                     ┌─────────┐                              │\n│                     │ REMOVED │                              │\n│                     └─────────┘                              │\n│                                                              │\n└─────────────────────────────────────────────────────────────┘\n```\n\n## Lifecycle Commands\n\n```bash\n# Create without starting\ndocker create --name myapp nginx\n\n# Start created container\ndocker start myapp\n\n# Run = create + start\ndocker run -d --name myapp nginx\n\n# Stop running container\ndocker stop myapp\n\n# Remove stopped container\ndocker rm myapp\n\n# Remove running container (force)\ndocker rm -f myapp\n\n# Auto-remove when stopped\ndocker run --rm nginx echo \"hello\"\n```"
+        },
+        {
+            "id": "images_18",
+            "type": "content",
+            "title": "Container vs Image Commands",
+            "content": "# Commands Reference 📋\n\n## Image Commands\n\n```bash\n# Build\ndocker build -t app:1.0 .\n\n# List images\ndocker images\ndocker image ls\n\n# Pull from registry\ndocker pull nginx:latest\n\n# Push to registry\ndocker push myrepo/app:1.0\n\n# Remove image\ndocker rmi nginx:latest\ndocker image rm nginx:latest\n\n# Remove unused images\ndocker image prune -a\n\n# Tag image\ndocker tag app:1.0 app:latest\n\n# Inspect image\ndocker inspect nginx:latest\ndocker history nginx:latest\n```\n\n## Container Commands\n\n```bash\n# Run container\ndocker run -d --name web nginx\n\n# List containers\ndocker ps         # running\ndocker ps -a      # all\n\n# Start/stop\ndocker start web\ndocker stop web\ndocker restart web\n\n# Remove container\ndocker rm web\n\n# Execute command\ndocker exec -it web bash\n\n# View logs\ndocker logs -f web\n\n# Copy files\ndocker cp web:/path/file ./local\n```"
+        },
+        {
+            "id": "images_19",
+            "type": "content",
+            "title": "Best Practices Summary",
+            "content": "# Images Best Practices ✅\n\n## Building Images\n\n- ✅ Use **specific base image tags**\n- ✅ Order instructions by **change frequency**\n- ✅ Use **multi-stage builds**\n- ✅ Use **Alpine/slim** base images\n- ✅ **Clean up** in the same layer\n- ✅ Use **.dockerignore**\n\n## Tagging\n\n- ✅ Use **semantic versioning**\n- ✅ Include **git SHA** for traceability\n- ✅ Avoid **:latest** in production\n- ✅ Tag with **multiple identifiers**\n\n## Security\n\n- ✅ Use **official images**\n- ✅ **Scan** for vulnerabilities\n- ✅ Run as **non-root user**\n- ✅ Use **digest** for immutability\n- ✅ **Minimize** installed packages\n\n## Registries\n\n- ✅ Use **private registry** for proprietary code\n- ✅ **Automate** pushes in CI/CD\n- ✅ Set **retention policies**\n- ✅ Enable **vulnerability scanning**\n\n> 🎯 **Golden Rule:** Production images should be small, secure, and immutable!"
+        },
+        {
+            "id": "images_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall image knowledge!",
+            "quizQuestion": "Why should you avoid using the :latest tag in production?",
+            "quizOptions": [
+                "It makes images larger",
+                "It's slower to pull",
+                "It's mutable and can change unexpectedly, causing inconsistent deployments",
+                "It requires more storage"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "images_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Docker Images & Containers!\n\n## Key Takeaways\n\n### Layers 📚\n- ✅ Images are stacked read-only layers\n- ✅ Caching speeds up builds\n- ✅ Order instructions by change frequency\n\n### Tags 🏷️\n- ✅ Use semantic versioning\n- ✅ Include git SHA for traceability\n- ✅ Avoid :latest in production\n\n### Registries 📦\n- ✅ Docker Hub, ECR, GCR, ACR\n- ✅ Push with proper authentication\n- ✅ Use private registries for proprietary code\n\n### Multi-Stage Builds 🎭\n- ✅ Separate build and runtime\n- ✅ Dramatically reduce image size\n- ✅ Build specific targets\n\n## Quick Reference\n\n```bash\n# Build optimized image\ndocker build -t app:1.0 .\n\n# Push to registry\ndocker push registry.com/app:1.0\n\n# Scan for vulnerabilities\ndocker scout cves app:1.0\n```\n\n> 🖼️ **Remember:** Good images are small, secure, and immutable!\n\nHappy containerizing! 🚀"
+        }
+    ]
+}

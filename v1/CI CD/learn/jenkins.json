@@ -1,0 +1,167 @@
+{
+    "id": "learn_cicd_jenkins",
+    "topicId": "jenkins",
+    "topicTitle": "Jenkins",
+    "description": "Master Jenkins CI/CD including pipelines, Jenkinsfiles, plugins, agents, and enterprise automation",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "jenkins_1",
+            "type": "content",
+            "title": "Welcome to Jenkins",
+            "content": "# Jenkins 🔨\n\nThe most widely-used open-source automation server.\n\n## What you'll learn:\n- **Pipelines** - Jenkinsfile syntax\n- **Agents** - Distributed builds\n- **Plugins** - Extend functionality\n\n> 💡 **Fun Fact:** Jenkins has over 1,800 plugins!\n\n## Why Jenkins?\n\n| Benefit | Description |\n|---------|-------------|\n| **Open Source** | Free and community-driven |\n| **Extensible** | 1,800+ plugins |\n| **Self-Hosted** | Full control |\n| **Flexible** | Any language/platform |"
+        },
+        {
+            "id": "jenkins_2",
+            "type": "content",
+            "title": "Declarative Pipeline",
+            "content": "# Declarative Pipeline 📐\n\n```groovy\npipeline {\n    agent any\n    \n    stages {\n        stage('Build') {\n            steps {\n                sh 'npm ci'\n                sh 'npm run build'\n            }\n        }\n        \n        stage('Test') {\n            steps {\n                sh 'npm test'\n            }\n        }\n        \n        stage('Deploy') {\n            steps {\n                sh './deploy.sh'\n            }\n        }\n    }\n    \n    post {\n        success {\n            echo 'Pipeline succeeded!'\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "jenkins_3",
+            "type": "content",
+            "title": "Pipeline Syntax",
+            "content": "# Pipeline Syntax 📝\n\n## Stages & Steps\n\n```groovy\nstages {\n    stage('Build') {\n        steps {\n            sh 'echo Hello'\n            echo 'Building...'\n        }\n    }\n}\n```\n\n## Common Steps\n\n| Step | Description |\n|------|-------------|\n| `sh` | Run shell command |\n| `bat` | Run Windows batch |\n| `echo` | Print message |\n| `dir` | Change directory |\n| `checkout` | Clone repository |"
+        },
+        {
+            "id": "jenkins_4",
+            "type": "content",
+            "title": "Agents",
+            "content": "# Jenkins Agents 🤖\n\n```groovy\npipeline {\n    agent any\n    \n    // Or specific label\n    agent { label 'linux' }\n    \n    // Or Docker\n    agent {\n        docker {\n            image 'node:20-alpine'\n        }\n    }\n}\n```\n\n## Agent Types\n\n| Setting | Description |\n|---------|-------------|\n| `any` | Any available |\n| `none` | No global agent |\n| `label` | Specific label |\n| `docker` | Container |"
+        },
+        {
+            "id": "jenkins_5",
+            "type": "quiz",
+            "title": "Pipeline Quiz",
+            "content": "Test your Jenkins knowledge!",
+            "quizQuestion": "What file defines a Jenkins Pipeline as Code?",
+            "quizOptions": [
+                "jenkins.yml",
+                "Jenkinsfile",
+                "pipeline.groovy",
+                "config.xml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jenkins_6",
+            "type": "content",
+            "title": "Credentials",
+            "content": "# Credentials 🔐\n\n```groovy\nsteps {\n    withCredentials([usernamePassword(\n        credentialsId: 'docker-hub',\n        usernameVariable: 'USER',\n        passwordVariable: 'PASS'\n    )]) {\n        sh 'docker login -u $USER -p $PASS'\n    }\n}\n```\n\n## Types\n\n| Type | Use |\n|------|-----|\n| Username/Password | APIs |\n| Secret text | Tokens |\n| SSH key | Git |"
+        },
+        {
+            "id": "jenkins_7",
+            "type": "content",
+            "title": "Parallel Execution",
+            "content": "# Parallel Builds ⚡\n\n```groovy\nstage('Test') {\n    parallel {\n        stage('Unit') {\n            steps { sh 'npm test:unit' }\n        }\n        stage('E2E') {\n            steps { sh 'npm test:e2e' }\n        }\n    }\n}\n```\n\n## Visualization\n\n```\n        ┌── Unit ──┐\nBuild ──│          ├── Deploy\n        └── E2E ───┘\n```"
+        },
+        {
+            "id": "jenkins_8",
+            "type": "content",
+            "title": "Conditions",
+            "content": "# Conditional Execution 🎯\n\n```groovy\nstage('Deploy') {\n    when {\n        branch 'main'\n    }\n    steps {\n        sh './deploy.sh'\n    }\n}\n```\n\n## Conditions\n\n| Condition | Example |\n|-----------|--------|\n| `branch` | `branch 'main'` |\n| `tag` | `tag 'v*'` |\n| `expression` | `expression { return true }` |"
+        },
+        {
+            "id": "jenkins_9",
+            "type": "content",
+            "title": "Parameters",
+            "content": "# Build Parameters 📋\n\n```groovy\nparameters {\n    string(name: 'VERSION', defaultValue: '1.0.0')\n    choice(name: 'ENV', choices: ['dev', 'prod'])\n    booleanParam(name: 'DEPLOY', defaultValue: true)\n}\n\nstages {\n    stage('Deploy') {\n        when { expression { params.DEPLOY } }\n        steps {\n            echo \"Deploying ${params.VERSION}\"\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "jenkins_10",
+            "type": "quiz",
+            "title": "Credentials Quiz",
+            "content": "Test your credentials knowledge!",
+            "quizQuestion": "What wrapper injects credentials in Jenkins Pipeline?",
+            "quizOptions": [
+                "useCredentials",
+                "withCredentials",
+                "injectCredentials",
+                "credentials"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jenkins_11",
+            "type": "content",
+            "title": "Shared Libraries",
+            "content": "# Shared Libraries 📚\n\n## vars/deployApp.groovy\n\n```groovy\ndef call(String env) {\n    sh \"./deploy.sh ${env}\"\n}\n```\n\n## Using Library\n\n```groovy\n@Library('my-lib') _\n\npipeline {\n    agent any\n    stages {\n        stage('Deploy') {\n            steps { deployApp('prod') }\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "jenkins_12",
+            "type": "content",
+            "title": "Docker Integration",
+            "content": "# Docker Pipeline 🐳\n\n```groovy\npipeline {\n    agent {\n        docker {\n            image 'node:20'\n            args '-v $HOME/.npm:/root/.npm'\n        }\n    }\n    stages {\n        stage('Build') {\n            steps {\n                sh 'npm ci'\n                sh 'npm run build'\n            }\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "jenkins_13",
+            "type": "content",
+            "title": "Artifacts",
+            "content": "# Artifacts 📦\n\n```groovy\npost {\n    success {\n        archiveArtifacts artifacts: 'dist/**/*'\n        junit 'reports/*.xml'\n    }\n}\n```\n\n## Commands\n\n| Command | Purpose |\n|---------|--------|\n| `archiveArtifacts` | Save files |\n| `junit` | Test reports |\n| `stash/unstash` | Pass between stages |"
+        },
+        {
+            "id": "jenkins_14",
+            "type": "content",
+            "title": "Notifications",
+            "content": "# Notifications 📫\n\n```groovy\npost {\n    success {\n        slackSend(color: 'good', message: 'Build passed!')\n    }\n    failure {\n        slackSend(color: 'danger', message: 'Build failed!')\n    }\n}\n```\n\n## Post Conditions\n\n| Condition | When |\n|-----------|------|\n| `always` | Always |\n| `success` | Passed |\n| `failure` | Failed |"
+        },
+        {
+            "id": "jenkins_15",
+            "type": "quiz",
+            "title": "Plugins Quiz",
+            "content": "Test your plugins knowledge!",
+            "quizQuestion": "What plugin provides the modern UI for Jenkins?",
+            "quizOptions": [
+                "Jenkins UI",
+                "Blue Ocean",
+                "Modern Dashboard",
+                "Pipeline UI"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jenkins_16",
+            "type": "content",
+            "title": "Essential Plugins",
+            "content": "# Essential Plugins 🔌\n\n| Plugin | Purpose |\n|--------|--------|\n| **Pipeline** | Pipeline as code |\n| **Git** | Git integration |\n| **Docker Pipeline** | Docker support |\n| **Blue Ocean** | Modern UI |\n| **Credentials** | Secret management |\n| **Slack** | Notifications |"
+        },
+        {
+            "id": "jenkins_17",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Best Practices ✅\n\n## Pipeline Design\n- ✅ Use Declarative syntax\n- ✅ Use Shared Libraries\n- ✅ Keep Jenkinsfile in repo\n- ✅ Fail fast\n\n## Security\n- ✅ Use Credentials plugin\n- ✅ Limit access with RBAC\n- ✅ Update plugins regularly"
+        },
+        {
+            "id": "jenkins_18",
+            "type": "content",
+            "title": "Administration",
+            "content": "# Administration 🔧\n\n## Docker Install\n\n```bash\ndocker run -d -p 8080:8080 \\\n  -v jenkins_home:/var/jenkins_home \\\n  jenkins/jenkins:lts\n```\n\n## Backup\n\n- `/var/jenkins_home/` - All data\n- `jobs/*/config.xml` - Job configs\n- `credentials.xml` - Credentials"
+        },
+        {
+            "id": "jenkins_19",
+            "type": "content",
+            "title": "Pipeline Example",
+            "content": "# Complete Pipeline 🚀\n\n```groovy\npipeline {\n    agent { docker 'node:20' }\n    \n    stages {\n        stage('Build') {\n            steps { sh 'npm run build' }\n        }\n        stage('Test') {\n            parallel {\n                stage('Unit') { steps { sh 'npm test' } }\n                stage('Lint') { steps { sh 'npm run lint' } }\n            }\n        }\n        stage('Deploy') {\n            when { branch 'main' }\n            steps { sh './deploy.sh' }\n        }\n    }\n}\n```"
+        },
+        {
+            "id": "jenkins_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your Jenkins knowledge!",
+            "quizQuestion": "What is the recommended pipeline syntax for new Jenkins projects?",
+            "quizOptions": [
+                "Scripted Pipeline",
+                "Declarative Pipeline",
+                "Freestyle Job",
+                "Matrix Job"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "jenkins_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Jenkins!\n\n## Key Takeaways\n\n- ✅ Declarative pipelines\n- ✅ Jenkinsfile in repo\n- ✅ Parallel execution\n- ✅ Shared libraries\n- ✅ Docker integration\n- ✅ 1,800+ plugins\n\n> 🔨 **Remember:** Jenkins = The original CI/CD powerhouse!\n\nHappy building! 🚀"
+        }
+    ]
+}

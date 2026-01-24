@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_mocks",
+    "topicId": "mocks",
+    "topicTitle": "Mocks & Stubs",
+    "description": "Master test doubles including mocks, stubs, spies, and fakes to isolate your unit tests",
+    "baseKP": 95,
+    "slides": [
+        {
+            "id": "mocks_1",
+            "type": "content",
+            "title": "Introduction to Test Doubles",
+            "content": "# Test Doubles 🎭\n\nLike stunt doubles in movies, test doubles replace complex dependencies in your tests.\n\n## Why Use Them?\n\n- **Isolation**: Test only your code, not the database.\n- **Speed**: Avoid slow network calls.\n- **Reliability**: No more flaky tests due to external factors.\n- **Simplification**: Test complex error states easily."
+        },
+        {
+            "id": "mocks_2",
+            "type": "content",
+            "title": "Types of Doubles",
+            "content": "# The Five Types 🖐️\n\n1. **Dummy**: Passed around but never used.\n2. **Stub**: Provides hardcoded data to the test.\n3. **Spy**: Records information about how it was called.\n4. **Mock**: Pre-programmed with expectations (the VIP).\n5. **Fake**: Simplified working implementation (e.g., In-memory DB)."
+        },
+        {
+            "id": "mocks_3",
+            "type": "content",
+            "title": "Stubs",
+            "content": "# Stubs 📝\n\nProvide the minimum data needed for the test to run.\n\n```javascript\n// A stub for an API client\nconst apiStub = {\n  getUser: () => ({ id: 1, name: 'Alice' })\n};\n\n// Usage\nconst result = processUser(apiStub);\nexpect(result.valid).toBe(true);\n```"
+        },
+        {
+            "id": "mocks_4",
+            "type": "content",
+            "title": "Spies",
+            "content": "# Spies 👁️\n\nWatch and record calls. Did the function run? With what arguments?\n\n```javascript\nconst loggerSpy = sinon.spy(console, 'log');\n\nsomeFunction();\n\nexpect(loggerSpy.calledOnce).to.be.true;\nexpect(loggerSpy.calledWith('Starting...')).to.be.true;\n\nloggerSpy.restore();\n```"
+        },
+        {
+            "id": "mocks_5",
+            "quizQuestion": "Which test double is used primarily to verify that a specific method was called with specific arguments?",
+            "quizOptions": [
+                "Stub",
+                "Fake",
+                "Mock",
+                "Dummy"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Doubles Quiz",
+            "content": "Identify the correct test double type."
+        },
+        {
+            "id": "mocks_6",
+            "type": "content",
+            "title": "Mocks",
+            "content": "# Mocks 🛠️\n\nMocks are \"Assertive Spies\". You define the expectation **before** you run the code.\n\n```javascript\nconst mock = sinon.mock(database);\nmock.expects('save').once().withArgs({ id: 1 });\n\nuserService.save(1);\n\nmock.verify(); // Check if expectations were met\n```"
+        },
+        {
+            "id": "mocks_7",
+            "type": "content",
+            "title": "Fakes",
+            "content": "# Fakes 💾\n\nA fake is a real, simplified implementation.\n\n- Example: A `UserRepository` that uses a simple JavaScript `Map` instead of a real SQL database.\n- **Benefit**: Faster and doesn't require setup, but behaves logically."
+        },
+        {
+            "id": "mocks_8",
+            "type": "content",
+            "title": "Using Sinon.js",
+            "content": "# Sinon.js 🔧\n\nThe industry standard for JS test doubles (often used with Mocha/Chai).\n\n```javascript\nconst sinon = require('sinon');\n\n// Create a stub\nconst stub = sinon.stub();\nstub.returns(42);\n\n// Create a spy on an existing object\nsinon.spy(myObj, 'method');\n```"
+        },
+        {
+            "id": "mocks_9",
+            "type": "content",
+            "title": "Mocking in Jest",
+            "content": "# Jest Built-ins 🎭\n\nJest has its own powerful sub-system for doubles.\n\n- `jest.fn()`: Creates a new mock function.\n- `jest.spyOn()`: Spies on a method.\n- `jest.mock('module')`: Mocks a whole file/dependency."
+        },
+        {
+            "id": "mocks_10",
+            "quizQuestion": "What differentiates a Mock from a Spy?",
+            "quizOptions": [
+                "Mocks are faster",
+                "Mocks verify state, Spies verify behavior",
+                "Mocks have expectations set BEFORE execution",
+                "Spies are only for async code"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Mock vs Spy Quiz",
+            "content": "Understanding the subtle differences."
+        },
+        {
+            "id": "mocks_11",
+            "type": "content",
+            "title": "Mocking API Calls",
+            "content": "# Mocking Axios 🌐\n\n```javascript\nimport axios from 'axios';\njest.mock('axios');\n\ntest('fetch user', async () => {\n  axios.get.mockResolvedValue({\n    data: { name: 'Bob' }\n  });\n  \n  const user = await getUser(1);\n  expect(user.name).toBe('Bob');\n});\n```"
+        },
+        {
+            "id": "mocks_12",
+            "type": "content",
+            "title": "Verification vs State",
+            "content": "# Two Approaches ⚖️\n\n- **State-based**: check the *result* (Return value, side effects).\n- **Interaction-based**: check *how* components interacted (Mocking).\n\n> 💡 \"Over-mocking makes tests brittle. If you change internal code and the test fails even though the result is correct, you are over-mocking!\""
+        },
+        {
+            "id": "mocks_13",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# DI: The Secret Sauce 💉\n\nTo mock effectively, your code must allow dependencies to be injected.\n\n```javascript\n// BAD (Hardcoded dependency)\nconst save = () => DB.save(...);\n\n// GOOD (Injectable dependency)\nconst save = (database) => database.save(...);\n```"
+        },
+        {
+            "id": "mocks_14",
+            "type": "content",
+            "title": "Restoring Stubs",
+            "content": "# Cleanup 🧹\n\nAlways restore your spies and stubs to avoid \"pollution\" between tests!\n\n```javascript\nafterEach(() => {\n  sinon.restore(); // Or jest.restoreAllMocks();\n});\n```"
+        },
+        {
+            "id": "mocks_15",
+            "quizQuestion": "Why is Dependency Injection important for unit testing?",
+            "quizOptions": [
+                "It makes the code run faster",
+                "It allows replacing real objects with test doubles",
+                "It is required for every Java class",
+                "It automatically writes the tests"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "DI Quiz",
+            "content": "Why inject?"
+        },
+        {
+            "id": "mocks_16",
+            "type": "content",
+            "title": "Best Practice: Sandbox",
+            "content": "# Sinon Sandboxes 🏝️\n\nA sandbox makes cleanup automatic.\n\n```javascript\nlet sandbox;\nbeforeEach(() => sandbox = sinon.createSandbox());\nafterEach(() => sandbox.restore());\n\ntest(() => {\n  sandbox.stub(API, 'call').returns(5);\n});\n```"
+        },
+        {
+            "id": "mocks_17",
+            "type": "content",
+            "title": "Testing Error Propagation",
+            "content": "# Faking Failure 🛑\n\nUse stubs to force your code down the error path.\n\n```javascript\n// Force an API error\nstub.rejects(new Error('Network Fail'));\n\n// Test that your app handles it gracefully\nawait expect(myApp.run()).resolves.toBe('Please try again');\n```"
+        },
+        {
+            "id": "mocks_18",
+            "type": "content",
+            "title": "The Danger Zone",
+            "content": "# When NOT to Mock 🙅\n\n- Don't mock standard libraries (e.g., `Math`, `Array`).\n- Don't mock simple data objects (use real ones or builders).\n- Don't mock the **Unit Under Test** (unless spying on self-calls)."
+        },
+        {
+            "id": "mocks_19",
+            "type": "content",
+            "title": "Mocking Timers (Recap)",
+            "content": "# Time Control ⏲️\n\nRecall: `jest.useFakeTimers()` is a form of mocking the global `setTimeout` and `setInterval` functions."
+        },
+        {
+            "id": "mocks_20",
+            "quizQuestion": "What happens if you forget to restore a stub that replaces a global function like console.log?",
+            "quizOptions": [
+                "The computer crashes",
+                "Next tests will have a modified console.log",
+                "Nothing, it resets automatically",
+                "The test fails immediately"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Post-test state."
+        },
+        {
+            "id": "mocks_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Use **Stubs** for inputs/data.\n- ✅ Use **Spies** for monitoring behavior.\n- ✅ Use **Mocks** for strict contract verification.\n- ✅ Always **Restore** after each test.\n- ✅ Prefer **Dependency Injection**.\n\nMock with purpose and keep your tests meaningful! 🚀"
+        }
+    ]
+}

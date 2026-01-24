@@ -1,0 +1,53 @@
+{
+    "id": "learn_pubsub_realtime",
+    "topicId": "pubsub",
+    "topicTitle": "Pub/Sub",
+    "description": "Master publish-subscribe patterns with Redis, RabbitMQ, and Kafka",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "ps_1",
+            "type": "content",
+            "title": "Pub/Sub",
+            "content": "# Pub/Sub Pattern 📢\n\nPublish-subscribe messaging.\n\n## What You'll Learn:\n- **Pattern** - Publishers and subscribers\n- **Redis Pub/Sub** - Simple messaging\n- **Message Queues** - RabbitMQ, Kafka\n- **Scaling** - Real-time at scale\n\n> 💡 Pub/Sub decouples publishers from subscribers!"
+        },
+        {
+            "id": "ps_2",
+            "type": "content",
+            "title": "Pattern",
+            "content": "# Pub/Sub Pattern 🔄\n\n```\nPublisher ──► Topic/Channel ──► Subscriber 1\n                           └──► Subscriber 2\n                           └──► Subscriber 3\n```\n\n## Concepts:\n| Term | Description |\n|------|-------------|\n| Publisher | Sends messages |\n| Subscriber | Receives messages |\n| Topic/Channel | Message category |\n\n## Benefits:\n- Loose coupling\n- Scalable\n- Async communication"
+        },
+        {
+            "id": "ps_3",
+            "type": "content",
+            "title": "Redis Pub/Sub",
+            "content": "# Redis Pub/Sub 🔴\n\n## Publisher:\n```javascript\nconst redis = require('redis');\nconst publisher = redis.createClient();\n\npublisher.publish('chat', JSON.stringify({\n    user: 'John',\n    message: 'Hello!'\n}));\n```\n\n## Subscriber:\n```javascript\nconst subscriber = redis.createClient();\n\nsubscriber.subscribe('chat');\n\nsubscriber.on('message', (channel, message) => {\n    console.log(`${channel}: ${message}`);\n});\n```\n\n## Use Case:\n- Scale WebSocket servers\n- Cross-server messaging"
+        },
+        {
+            "id": "ps_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your pub/sub knowledge!",
+            "quizQuestion": "What is the main benefit of pub/sub pattern?",
+            "quizOptions": [
+                "Faster database",
+                "Decouples publishers from subscribers",
+                "Better security",
+                "Less code"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ps_4",
+            "type": "content",
+            "title": "Message Brokers",
+            "content": "# Message Brokers 📬\n\n| Broker | Best For |\n|--------|----------|\n| Redis | Simple, fast |\n| RabbitMQ | Reliability |\n| Kafka | High throughput |\n| AWS SNS | Managed service |\n\n## Kafka Example:\n```javascript\nconst { Kafka } = require('kafkajs');\nconst kafka = new Kafka({ brokers: ['localhost:9092'] });\n\n// Producer\nconst producer = kafka.producer();\nawait producer.send({\n    topic: 'events',\n    messages: [{ value: JSON.stringify(data) }]\n});\n\n// Consumer\nconst consumer = kafka.consumer({ groupId: 'my-app' });\nawait consumer.subscribe({ topic: 'events' });\nawait consumer.run({ eachMessage: async ({ message }) => {\n    console.log(message.value.toString());\n}});\n```"
+        },
+        {
+            "id": "ps_5",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Pub/Sub!\n\n## Key Points:\n- Publishers don't know subscribers\n- Topics organize messages\n- Enables scaling\n\n## Tools:\n| Tool | Use Case |\n|------|----------|\n| Redis | Quick setup |\n| RabbitMQ | Reliable delivery |\n| Kafka | Event streaming |\n\nScale your real-time! 📢"
+        }
+    ]
+}

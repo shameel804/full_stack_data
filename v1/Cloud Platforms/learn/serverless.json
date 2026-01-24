@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_serverless",
+    "topicId": "serverless",
+    "topicTitle": "Serverless Computing",
+    "description": "Master serverless architecture including FaaS, event-driven patterns, and API management across cloud platforms",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "serverless_1",
+            "type": "content",
+            "title": "Welcome to Serverless",
+            "content": "# Serverless Computing ⚡\n\nBuild and run applications without managing servers.\n\n## What You'll Learn\n- **FaaS** - Functions as a Service\n- **Event-Driven** - React to events\n- **API Management** - Gateway patterns\n\n## What is Serverless?\n\n| Traditional | Serverless |\n|-------------|------------|\n| Provision servers | No servers to manage |\n| Pay for idle time | Pay only for execution |\n| Manual scaling | Auto-scaling built-in |\n| Patch & maintain | Fully managed |\n\n## The Serverless Promise\n```\n📝 Write code → ☁️ Deploy → 🚀 Scale automatically\n         No infrastructure to manage!\n```\n\n> 💡 **Myth Buster:** \"Serverless\" doesn't mean no servers - it means YOU don't manage them!"
+        },
+        {
+            "id": "serverless_2",
+            "type": "content",
+            "title": "Functions as a Service",
+            "content": "# FaaS - Functions as a Service 🎯\n\nThe core of serverless computing.\n\n## What is FaaS?\n- Single-purpose functions\n- Triggered by events\n- Stateless execution\n- Millisecond billing\n\n## Major FaaS Platforms\n\n| Provider | Service | Max Duration |\n|----------|---------|-------------|\n| AWS | Lambda | 15 min |\n| Azure | Functions | 60 min |\n| GCP | Cloud Functions | 60 min |\n| Cloudflare | Workers | 30 sec |\n| Vercel | Functions | 60 sec |\n\n## Anatomy of a Function\n```\n┌─────────────────────────────────────┐\n│          Event (Trigger)            │\n│   HTTP request, file upload, timer  │\n└─────────────┬───────────────────────┘\n              │\n              ▼\n┌─────────────────────────────────────┐\n│         Function Handler            │\n│   Your business logic               │\n└─────────────┬───────────────────────┘\n              │\n              ▼\n┌─────────────────────────────────────┐\n│          Response/Output            │\n│   Return value, write to DB         │\n└─────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "serverless_3",
+            "type": "content",
+            "title": "Writing Serverless Functions",
+            "content": "# Building Functions 🛠️\n\nWrite functions in your favorite language.\n\n## AWS Lambda (Python)\n```python\nimport json\n\ndef lambda_handler(event, context):\n    name = event.get('name', 'World')\n    \n    return {\n        'statusCode': 200,\n        'body': json.dumps({\n            'message': f'Hello, {name}!'\n        })\n    }\n```\n\n## Azure Functions (JavaScript)\n```javascript\nmodule.exports = async function (context, req) {\n    const name = req.query.name || 'World';\n    \n    context.res = {\n        body: { message: `Hello, ${name}!` }\n    };\n};\n```\n\n## GCP Cloud Functions (Python)\n```python\nimport functions_framework\n\n@functions_framework.http\ndef hello_http(request):\n    name = request.args.get('name', 'World')\n    return f'Hello, {name}!'\n```\n\n## Function Best Practices\n- ✅ Keep functions small and focused\n- ✅ Minimize dependencies\n- ✅ Use environment variables\n- ✅ Handle errors gracefully"
+        },
+        {
+            "id": "serverless_quiz_1",
+            "type": "quiz",
+            "title": "FaaS Quiz",
+            "content": "Test your FaaS knowledge!",
+            "quizQuestion": "What does FaaS stand for?",
+            "quizOptions": [
+                "Fast as a Service",
+                "Functions as a Service",
+                "Framework as a Service",
+                "Files as a Service"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "serverless_4",
+            "type": "content",
+            "title": "Cold Starts Explained",
+            "content": "# Cold Starts ❄️\n\nThe serverless performance challenge.\n\n## What is a Cold Start?\n```\nFirst Request    Subsequent Requests\n     │                   │\n     ▼                   ▼\n┌─────────┐         ┌─────────┐\n│ Download│         │         │\n│ Runtime │  500ms  │ Execute │ 50ms\n├─────────┤         │         │\n│ Init    │         │         │\n│ Code    │  200ms  │         │\n├─────────┤         │         │\n│ Execute │  50ms   │         │\n└─────────┘         └─────────┘\n   ~750ms              ~50ms\n   Cold Start         Warm Start\n```\n\n## Factors Affecting Cold Starts\n\n| Factor | Impact |\n|--------|--------|\n| Runtime | Java/C# slower than Python/Node |\n| Package size | Larger = slower |\n| VPC config | Adds 1-10 seconds |\n| Memory | More memory = faster CPU |\n\n## Mitigation Strategies\n- **Provisioned concurrency** - Keep instances warm\n- **Smaller packages** - Reduce dependencies\n- **Optimize imports** - Lazy loading\n- **Choose faster runtimes** - Node.js, Python"
+        },
+        {
+            "id": "serverless_5",
+            "type": "content",
+            "title": "Event-Driven Architecture",
+            "content": "# Event-Driven Patterns 🎪\n\nBuilding reactive, loosely-coupled systems.\n\n## What is Event-Driven?\n- Systems communicate via events\n- Producers don't know consumers\n- Asynchronous by nature\n- Highly scalable\n\n## Event Flow\n```\n┌──────────┐     ┌─────────────┐     ┌──────────┐\n│ Producer │────▶│ Event Bus   │────▶│ Consumer │\n│ (Source) │     │ (SNS/EventB)│     │ (Lambda) │\n└──────────┘     └─────────────┘     └──────────┘\n                        │\n                        ├────▶ Consumer 2\n                        │\n                        └────▶ Consumer 3\n```\n\n## Common Event Sources\n\n| Source | Event | Action |\n|--------|-------|--------|\n| S3 | Object created | Process image |\n| API Gateway | HTTP request | Handle API |\n| DynamoDB | Record change | Sync data |\n| SQS | Message received | Process job |\n| Schedule | Cron timer | Run cleanup |\n\n## Benefits\n- 🔄 Loose coupling\n- 📈 Independent scaling\n- 🔧 Easy to extend\n- 🛡️ Fault isolation"
+        },
+        {
+            "id": "serverless_6",
+            "type": "content",
+            "title": "Event Sources Deep Dive",
+            "content": "# Event Triggers 🎯\n\nCommon triggers for serverless functions.\n\n## HTTP Triggers\n```python\n# API Gateway → Lambda\ndef handler(event, context):\n    method = event['httpMethod']\n    path = event['path']\n    body = json.loads(event['body'])\n    \n    return {'statusCode': 200, 'body': 'OK'}\n```\n\n## Storage Triggers\n```python\n# S3 → Lambda\ndef handler(event, context):\n    for record in event['Records']:\n        bucket = record['s3']['bucket']['name']\n        key = record['s3']['object']['key']\n        # Process the uploaded file\n```\n\n## Queue Triggers\n```python\n# SQS → Lambda\ndef handler(event, context):\n    for record in event['Records']:\n        message = json.loads(record['body'])\n        # Process the message\n```\n\n## Scheduled Triggers\n```yaml\n# Run every hour\nschedule: rate(1 hour)\n\n# Run at 9 AM UTC daily\nschedule: cron(0 9 * * ? *)\n```\n\n## Database Triggers\n```python\n# DynamoDB Streams → Lambda\ndef handler(event, context):\n    for record in event['Records']:\n        if record['eventName'] == 'INSERT':\n            new_item = record['dynamodb']['NewImage']\n```"
+        },
+        {
+            "id": "serverless_quiz_2",
+            "type": "quiz",
+            "title": "Event-Driven Quiz",
+            "content": "Test your event knowledge!",
+            "quizQuestion": "What is the main benefit of event-driven architecture?",
+            "quizOptions": [
+                "Tighter coupling between services",
+                "Loose coupling and independent scaling",
+                "Faster database queries",
+                "Reduced code complexity"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "serverless_7",
+            "type": "content",
+            "title": "API Gateway Introduction",
+            "content": "# API Management 🚪\n\nThe front door to your serverless applications.\n\n## What is API Gateway?\n- Entry point for APIs\n- Routes requests to backends\n- Handles auth, rate limiting\n- Transforms requests/responses\n\n## Major API Gateways\n\n| Provider | Service |\n|----------|--------|\n| AWS | API Gateway |\n| Azure | API Management |\n| GCP | API Gateway / Apigee |\n| Kong | Kong Gateway |\n| Cloudflare | Workers |\n\n## API Gateway + Lambda\n```\n┌──────────┐     ┌─────────────┐     ┌──────────┐\n│  Client  │────▶│ API Gateway │────▶│  Lambda  │\n│          │◀────│             │◀────│          │\n└──────────┘     └─────────────┘     └──────────┘\n                       │\n                 ┌─────┴─────┐\n                 │           │\n             Auth/Rate    Transform\n             Limiting    Req/Res\n```\n\n## Key Features\n- 🔐 Authentication (JWT, API Keys)\n- 🚦 Rate limiting & throttling\n- 📊 Request/Response transformation\n- 📝 Logging & monitoring\n- 🔄 Caching"
+        },
+        {
+            "id": "serverless_8",
+            "type": "content",
+            "title": "Building REST APIs",
+            "content": "# Serverless REST APIs 🌐\n\nBuild scalable APIs with serverless.\n\n## API Design\n```\nGET    /users          → List users\nPOST   /users          → Create user\nGET    /users/{id}     → Get user\nPUT    /users/{id}     → Update user\nDELETE /users/{id}     → Delete user\n```\n\n## Lambda Handler\n```python\nimport json\nimport boto3\n\ndynamodb = boto3.resource('dynamodb')\ntable = dynamodb.Table('Users')\n\ndef handler(event, context):\n    method = event['httpMethod']\n    path = event['path']\n    \n    if method == 'GET' and path == '/users':\n        response = table.scan()\n        return {\n            'statusCode': 200,\n            'body': json.dumps(response['Items'])\n        }\n    \n    if method == 'POST' and path == '/users':\n        body = json.loads(event['body'])\n        table.put_item(Item=body)\n        return {\n            'statusCode': 201,\n            'body': json.dumps({'message': 'Created'})\n        }\n```\n\n## Serverless Framework\n```yaml\nfunctions:\n  getUsers:\n    handler: handler.getUsers\n    events:\n      - http:\n          path: users\n          method: get\n```"
+        },
+        {
+            "id": "serverless_9",
+            "type": "content",
+            "title": "API Security",
+            "content": "# Securing APIs 🔒\n\nProtect your serverless APIs.\n\n## Authentication Methods\n\n### API Keys\n```\nHeader: x-api-key: abc123xyz\n```\n- Simple to implement\n- Good for server-to-server\n- Not for user auth\n\n### JWT (JSON Web Tokens)\n```\nHeader: Authorization: Bearer eyJhbG...\n```\n- Stateless authentication\n- Contains user claims\n- Standard for SPAs\n\n### OAuth 2.0 / Cognito\n```\nClient → Auth Server → Token → API\n```\n- Industry standard\n- Social logins\n- Full user management\n\n## Authorization\n```python\ndef handler(event, context):\n    # Check JWT claims\n    claims = event['requestContext']['authorizer']['claims']\n    user_role = claims['custom:role']\n    \n    if user_role != 'admin':\n        return {'statusCode': 403, 'body': 'Forbidden'}\n```\n\n## Rate Limiting\n```yaml\nusagePlan:\n  quota:\n    limit: 10000\n    period: MONTH\n  throttle:\n    burstLimit: 100\n    rateLimit: 50\n```"
+        },
+        {
+            "id": "serverless_10",
+            "type": "content",
+            "title": "Serverless Databases",
+            "content": "# Serverless Data Storage 💾\n\nDatabases that scale with your functions.\n\n## Serverless Database Options\n\n| Service | Type | Provider |\n|---------|----- |----------|\n| DynamoDB | NoSQL | AWS |\n| Aurora Serverless | SQL | AWS |\n| Cosmos DB | NoSQL | Azure |\n| Fauna | NoSQL | Multi-cloud |\n| PlanetScale | SQL | Multi-cloud |\n| Supabase | SQL | Open source |\n\n## DynamoDB Example\n```python\nimport boto3\n\ndynamodb = boto3.resource('dynamodb')\ntable = dynamodb.Table('Products')\n\n# Create\ntable.put_item(Item={'id': '1', 'name': 'Widget'})\n\n# Read\nresponse = table.get_item(Key={'id': '1'})\nitem = response['Item']\n\n# Update\ntable.update_item(\n    Key={'id': '1'},\n    UpdateExpression='SET price = :val',\n    ExpressionAttributeValues={':val': 29.99}\n)\n\n# Delete\ntable.delete_item(Key={'id': '1'})\n```\n\n## Connection Pooling Challenge\n```\nProblem: Each Lambda = new connection\nSolution: RDS Proxy, connection pooling\n```"
+        },
+        {
+            "id": "serverless_quiz_3",
+            "type": "quiz",
+            "title": "API Quiz",
+            "content": "Test your API management knowledge!",
+            "quizQuestion": "What is the main purpose of an API Gateway?",
+            "quizOptions": [
+                "Store data in databases",
+                "Route and manage API requests",
+                "Compile serverless functions",
+                "Monitor server health"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "serverless_11",
+            "type": "content",
+            "title": "Step Functions & Workflows",
+            "content": "# Serverless Workflows 🔄\n\nOrchestrate complex multi-step processes.\n\n## What are Step Functions?\n- Visual workflow builder\n- Coordinate multiple Lambdas\n- Handle errors and retries\n- Long-running processes\n\n## State Machine Definition\n```json\n{\n  \"StartAt\": \"ProcessOrder\",\n  \"States\": {\n    \"ProcessOrder\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:lambda:...:ProcessOrder\",\n      \"Next\": \"CheckInventory\"\n    },\n    \"CheckInventory\": {\n      \"Type\": \"Choice\",\n      \"Choices\": [\n        {\n          \"Variable\": \"$.inStock\",\n          \"BooleanEquals\": true,\n          \"Next\": \"ShipOrder\"\n        }\n      ],\n      \"Default\": \"NotifyBackorder\"\n    },\n    \"ShipOrder\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:lambda:...:ShipOrder\",\n      \"End\": true\n    }\n  }\n}\n```\n\n## Workflow Pattern\n```\n┌─────────────┐     ┌─────────────┐\n│ Process     │────▶│ Check       │\n│ Order       │     │ Inventory   │\n└─────────────┘     └──────┬──────┘\n                          │\n              ┌───────────┴───────────┐\n              │                       │\n         ┌────▼────┐             ┌────▼────┐\n         │  Ship   │             │ Backord │\n         │  Order  │             │ Notify  │\n         └─────────┘             └─────────┘\n```"
+        },
+        {
+            "id": "serverless_12",
+            "type": "content",
+            "title": "Serverless Framework",
+            "content": "# Serverless Framework 📦\n\nDeploy serverless apps with ease.\n\n## Why Use a Framework?\n- Infrastructure as Code\n- Multi-cloud support\n- Plugin ecosystem\n- Easy deployment\n\n## serverless.yml\n```yaml\nservice: my-api\n\nprovider:\n  name: aws\n  runtime: python3.9\n  region: us-east-1\n  environment:\n    TABLE_NAME: ${self:service}-table\n\nfunctions:\n  hello:\n    handler: handler.hello\n    events:\n      - http:\n          path: hello\n          method: get\n  \n  processUpload:\n    handler: handler.process\n    events:\n      - s3:\n          bucket: uploads\n          event: s3:ObjectCreated:*\n\nresources:\n  Resources:\n    UsersTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: ${self:service}-table\n        BillingMode: PAY_PER_REQUEST\n```\n\n## Commands\n```bash\n# Deploy\nserverless deploy\n\n# Deploy function only\nserverless deploy function -f hello\n\n# Invoke locally\nserverless invoke local -f hello\n\n# View logs\nserverless logs -f hello -t\n```"
+        },
+        {
+            "id": "serverless_13",
+            "type": "content",
+            "title": "SAM and CDK",
+            "content": "# AWS SAM & CDK 🏗️\n\nAWS-native serverless deployment tools.\n\n## AWS SAM (Serverless Application Model)\n```yaml\n# template.yaml\nAWSTemplateFormatVersion: '2010-09-09'\nTransform: AWS::Serverless-2016-10-31\n\nResources:\n  HelloFunction:\n    Type: AWS::Serverless::Function\n    Properties:\n      Handler: app.handler\n      Runtime: python3.9\n      Events:\n        HelloApi:\n          Type: Api\n          Properties:\n            Path: /hello\n            Method: get\n```\n\n```bash\n# Build and deploy\nsam build\nsam deploy --guided\n\n# Local testing\nsam local invoke HelloFunction\nsam local start-api\n```\n\n## AWS CDK (TypeScript)\n```typescript\nimport * as lambda from 'aws-cdk-lib/aws-lambda';\nimport * as apigateway from 'aws-cdk-lib/aws-apigateway';\n\nconst fn = new lambda.Function(this, 'Hello', {\n  runtime: lambda.Runtime.PYTHON_3_9,\n  handler: 'app.handler',\n  code: lambda.Code.fromAsset('lambda')\n});\n\nnew apigateway.LambdaRestApi(this, 'Api', {\n  handler: fn\n});\n```\n\n## Choose Your Tool\n| Use Case | Tool |\n|----------|------|\n| Quick start | SAM |\n| Complex infra | CDK |\n| Multi-cloud | Serverless Framework |"
+        },
+        {
+            "id": "serverless_14",
+            "type": "content",
+            "title": "Serverless Patterns",
+            "content": "# Common Patterns 🎨\n\nProven serverless architecture patterns.\n\n## 1. API Pattern\n```\nClient → API GW → Lambda → DynamoDB\n```\n\n## 2. Event Processing\n```\nS3 Upload → Lambda → Transform → S3 Output\n```\n\n## 3. Fan-Out / Fan-In\n```\n        ┌→ Lambda 1 ─┐\nSNS → Split → Lambda 2 → Aggregate → Result\n        └→ Lambda 3 ─┘\n```\n\n## 4. Saga Pattern\n```\nOrder → Pay → Ship → Notify\n  ↓ fail   ↓ fail\nRollback Rollback\n```\n\n## 5. CQRS\n```\nWrite Path: API → Lambda → DynamoDB\nRead Path:  API → Lambda → ElastiCache\n```\n\n## 6. Strangler Fig\n```\nL7 Proxy\n  ├── /new-api → Serverless\n  └── /old-api → Monolith\n```\n\n## Anti-Patterns to Avoid\n- ❌ Lambda calling Lambda synchronously\n- ❌ Long-running functions\n- ❌ Monolithic functions\n- ❌ Ignoring cold starts"
+        },
+        {
+            "id": "serverless_quiz_4",
+            "type": "quiz",
+            "title": "Patterns Quiz",
+            "content": "Test your serverless patterns knowledge!",
+            "quizQuestion": "Why should you avoid Lambda calling Lambda synchronously?",
+            "quizOptions": [
+                "It's not supported by AWS",
+                "It creates tight coupling and double billing",
+                "Lambda functions cannot make HTTP calls",
+                "It improves performance"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "serverless_15",
+            "type": "content",
+            "title": "Testing Serverless",
+            "content": "# Testing Strategies 🧪\n\nTest your serverless applications effectively.\n\n## Unit Testing\n```python\nimport pytest\nfrom handler import lambda_handler\n\ndef test_handler_success():\n    event = {'name': 'Test'}\n    context = {}\n    \n    result = lambda_handler(event, context)\n    \n    assert result['statusCode'] == 200\n    assert 'Test' in result['body']\n```\n\n## Mocking AWS Services\n```python\nimport boto3\nfrom moto import mock_dynamodb\n\n@mock_dynamodb\ndef test_dynamodb_operation():\n    # Create mock table\n    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')\n    table = dynamodb.create_table(\n        TableName='TestTable',\n        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],\n        AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],\n        BillingMode='PAY_PER_REQUEST'\n    )\n    \n    # Test your function\n    result = my_function()\n    assert result == expected\n```\n\n## Local Testing\n```bash\n# SAM Local\nsam local invoke -e event.json\n\n# Serverless Offline\nserverless offline start\n```\n\n## Integration Testing\n- Use separate test stack\n- Real AWS services\n- Automated cleanup"
+        },
+        {
+            "id": "serverless_16",
+            "type": "content",
+            "title": "Monitoring & Debugging",
+            "content": "# Observability 📊\n\nMonitor and debug serverless applications.\n\n## CloudWatch Logs\n```python\nimport logging\n\nlogger = logging.getLogger()\nlogger.setLevel(logging.INFO)\n\ndef handler(event, context):\n    logger.info(f\"Processing event: {event}\")\n    # Your code\n    logger.info(\"Processing complete\")\n```\n\n## X-Ray Tracing\n```python\nfrom aws_xray_sdk.core import xray_recorder\nfrom aws_xray_sdk.core import patch_all\n\npatch_all()  # Auto-trace AWS SDK calls\n\n@xray_recorder.capture('my_function')\ndef handler(event, context):\n    # Traced automatically\n    pass\n```\n\n## Key Metrics\n\n| Metric | What to Watch |\n|--------|---------------|\n| Invocations | Total calls |\n| Duration | Execution time |\n| Errors | Failed invocations |\n| Throttles | Concurrency limits |\n| Cold Starts | Init latency |\n\n## Debug Flow\n```\n1. Check CloudWatch Logs\n2. Review X-Ray traces\n3. Check Lambda metrics\n4. Reproduce locally with SAM\n```"
+        },
+        {
+            "id": "serverless_17",
+            "type": "content",
+            "title": "Cost Optimization",
+            "content": "# Serverless Cost Optimization 💰\n\nPayonly for what you use, optimize that usage.\n\n## Lambda Pricing\n- **Requests:** $0.20 per 1M requests\n- **Duration:** $0.0000166667 per GB-second\n- **Free tier:** 1M requests, 400,000 GB-sec/month\n\n## Cost Optimization Strategies\n\n### 1. Right-Size Memory\n```\nMemory ↑ = CPU ↑ = Faster execution\nSweet spot: Often 512MB-1024MB\nTest with AWS Lambda Power Tuning\n```\n\n### 2. Reduce Package Size\n```bash\n# Before: 50MB package = slow cold start\n# After: Layer + slim package = fast cold start\n```\n\n### 3. Use Arm64 Architecture\n```yaml\nRuntime: python3.9\nArchitectures:\n  - arm64  # 20% cheaper, often faster\n```\n\n### 4. Optimize Timeout\n```yaml\n# Don't: timeout: 300\n# Do: timeout: 30 (based on actual need)\n```\n\n## Cost Comparison\n| Scenario | Monthly Cost |\n|----------|-------------|\n| 1M requests, 100ms, 128MB | ~$0.20 |\n| 10M requests, 500ms, 512MB | ~$43 |\n| 100M requests, 1s, 1024MB | ~$2,083 |"
+        },
+        {
+            "id": "serverless_18",
+            "type": "content",
+            "title": "Serverless Security",
+            "content": "# Security Best Practices 🔐\n\nSecure your serverless applications.\n\n## IAM Least Privilege\n```yaml\n# Bad\nEffect: Allow\nAction: \"*\"\nResource: \"*\"\n\n# Good\nEffect: Allow\nAction:\n  - dynamodb:GetItem\n  - dynamodb:PutItem\nResource: arn:aws:dynamodb:*:*:table/MyTable\n```\n\n## Secrets Management\n```python\nimport boto3\n\ndef get_secret():\n    client = boto3.client('secretsmanager')\n    response = client.get_secret_value(\n        SecretId='my-secret'\n    )\n    return response['SecretString']\n\n# Cache secrets to reduce API calls\nSECRET = None\ndef handler(event, context):\n    global SECRET\n    if SECRET is None:\n        SECRET = get_secret()\n```\n\n## Security Checklist\n- ✅ Minimum IAM permissions\n- ✅ Encrypt environment variables\n- ✅ Use Secrets Manager for sensitive data\n- ✅ Enable VPC for internal resources\n- ✅ Input validation on all events\n- ✅ Dependencies scanning (Snyk, etc.)\n\n## API Gateway Security\n- Enable WAF\n- Use HTTPS only\n- Implement rate limiting\n- Validate request bodies"
+        },
+        {
+            "id": "serverless_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall serverless knowledge!",
+            "quizQuestion": "Which architecture is NOT recommended for serverless?",
+            "quizOptions": [
+                "Event-driven microservices",
+                "Lambda functions calling Lambda synchronously",
+                "API Gateway with Lambda backend",
+                "Step Functions for orchestration"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "serverless_19",
+            "type": "content",
+            "title": "When NOT to Use Serverless",
+            "content": "# Serverless Limitations ⚠️\n\nKnow when traditional infrastructure is better.\n\n## Not Ideal For\n\n### Long-Running Processes\n```\n❌ Video encoding (hours)\n❌ Large batch processing\n❌ ML training\n✅ Use: EC2, ECS, Batch\n```\n\n### Consistent High Traffic\n```\n❌ 1000+ requests/second constantly\n   (May be cheaper with containers)\n✅ Analyze: Compare costs at scale\n```\n\n### Low Latency Requirements\n```\n❌ Sub-10ms response needed\n❌ Cold starts unacceptable\n✅ Use: Containers, EC2\n```\n\n### Stateful Applications\n```\n❌ WebSocket servers\n❌ In-memory caching\n✅ Use: EC2, ECS with Redis\n```\n\n## Decision Matrix\n\n| Workload | Serverless? |\n|----------|------------|\n| API, variable traffic | ✅ Yes |\n| Event processing | ✅ Yes |\n| Scheduled jobs | ✅ Yes |\n| 24/7 high traffic | ⚠️ Maybe |\n| Long-running jobs | ❌ No |\n| Stateful services | ❌ No |"
+        },
+        {
+            "id": "serverless_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Serverless Summary 🎉\n\nYou've mastered serverless computing!\n\n## Key Takeaways\n\n### FaaS\n- ✅ Single-purpose functions\n- ✅ Auto-scaling and pay-per-use\n- ✅ Mitigate cold starts\n- ✅ Keep functions small\n\n### Event-Driven\n- ✅ Loose coupling\n- ✅ Multiple event sources\n- ✅ Asynchronous patterns\n- ✅ Use queues for resilience\n\n### API Management\n- ✅ API Gateway as front door\n- ✅ Authentication & authorization\n- ✅ Rate limiting & throttling\n- ✅ Request transformation\n\n## Best Practices\n- 📝 Keep functions focused\n- 🔐 Least privilege IAM\n- 📊 Monitor with X-Ray\n- 💰 Optimize memory and timeout\n- 🧪 Test locally with SAM\n\n## Next Steps\n- 🔧 Build a serverless API\n- 📖 Learn Step Functions\n- ☁️ Explore multi-cloud (Cloudflare Workers)\n\n> 🚀 **Remember:** Serverless isn't always the answer, but when it fits, it's magical!\n\nHappy building! ⚡"
+        }
+    ]
+}

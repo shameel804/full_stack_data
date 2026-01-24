@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_storage",
+    "topicId": "storage",
+    "topicTitle": "Storage & Databases",
+    "description": "Master cloud storage solutions including object storage, managed databases, and CDNs",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "storage_1",
+            "type": "content",
+            "title": "Cloud Storage Overview",
+            "content": "# Cloud Storage & Databases 💾\n\nStore, manage, and deliver data at scale.\n\n## What You'll Learn\n- **Object Storage** - S3, Blob, GCS\n- **Managed Databases** - RDS, Cloud SQL\n- **CDNs** - Content delivery networks\n\n## Storage Types\n\n| Type | Use Case | Examples |\n|------|----------|----------|\n| **Object** | Unstructured | S3, Blob |\n| **Block** | VM disks | EBS |\n| **File** | Shared FS | EFS |\n| **Database** | Structured | RDS |\n\n> 💡 Modern architectures use multiple storage types together!"
+        },
+        {
+            "id": "storage_2",
+            "type": "content",
+            "title": "Object Storage",
+            "content": "# Object Storage 📦\n\nStore any amount of data.\n\n## Major Services\n| Provider | Service | Durability |\n|----------|---------|------------|\n| AWS | S3 | 11 9's |\n| Azure | Blob | 11 9's |\n| GCP | GCS | 11 9's |\n\n## Object Structure\n```\nKey: images/photo.jpg\nData: [binary content]\nMetadata: Content-Type, Size\nVersion: abc123xyz\n```\n\n## Use Cases\n- 📸 Media storage\n- 📊 Data analytics\n- 💾 Backup and archive\n- 🌐 Static website hosting"
+        },
+        {
+            "id": "storage_3",
+            "type": "content",
+            "title": "Storage Classes",
+            "content": "# Storage Tiers 📊\n\nOptimize costs based on access.\n\n## S3 Storage Classes\n| Class | Access | Cost/GB |\n|-------|--------|--------|\n| Standard | Frequent | $0.023 |\n| Standard-IA | Monthly | $0.0125 |\n| Glacier Instant | Quarterly | $0.004 |\n| Glacier Deep | Yearly | $0.001 |\n\n## Lifecycle Policy\n```json\n{\n  \"Transitions\": [\n    {\"Days\": 30, \"StorageClass\": \"STANDARD_IA\"},\n    {\"Days\": 90, \"StorageClass\": \"GLACIER\"}\n  ]\n}\n```\n\n> 💰 Typical savings: 40-80% with lifecycle policies!"
+        },
+        {
+            "id": "storage_quiz_1",
+            "type": "quiz",
+            "title": "Storage Quiz",
+            "content": "Test your storage knowledge!",
+            "quizQuestion": "Which S3 class is best for data accessed quarterly?",
+            "quizOptions": [
+                "S3 Standard",
+                "S3 Glacier Instant",
+                "S3 Standard-IA",
+                "S3 One Zone-IA"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "storage_4",
+            "type": "content",
+            "title": "Object Storage Security",
+            "content": "# Securing Object Storage 🔒\n\n## Encryption Options\n- **SSE-S3:** AWS managed keys\n- **SSE-KMS:** Customer managed keys\n- **SSE-C:** Customer provided keys\n\n## Bucket Policy\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Principal\": {\"AWS\": \"arn:aws:iam::123:role/MyRole\"},\n  \"Action\": \"s3:GetObject\",\n  \"Resource\": \"arn:aws:s3:::bucket/*\"\n}\n```\n\n## Security Checklist\n- ✅ Block public access\n- ✅ Enable encryption\n- ✅ Use versioning\n- ✅ Enable access logging"
+        },
+        {
+            "id": "storage_5",
+            "type": "content",
+            "title": "Managed Databases",
+            "content": "# Managed Databases 🗄️\n\n## Why Managed?\n- No server management\n- Automated backups\n- Automatic patching\n- Built-in HA\n\n## Database Types\n### Relational\n- AWS RDS, Aurora\n- Azure SQL Database\n- GCP Cloud SQL\n\n### NoSQL\n- AWS DynamoDB\n- Azure Cosmos DB\n- GCP Firestore\n\n## Choose Based On\n```\nStructured + ACID → Relational\nFlexible schema  → Document\nKey-value speed  → Key-Value\n```"
+        },
+        {
+            "id": "storage_6",
+            "type": "content",
+            "title": "RDS and Aurora",
+            "content": "# AWS RDS & Aurora 🐘\n\n## Supported Engines\nMySQL, PostgreSQL, MariaDB, Oracle, SQL Server, Aurora\n\n## Aurora Advantages\n| Feature | RDS | Aurora |\n|---------|-----|--------|\n| Performance | 1x | 5x MySQL |\n| Storage | Manual | Auto |\n| Replicas | 5 | 15 |\n| Failover | 60-120s | <30s |\n\n## Aurora Serverless\n```yaml\nMinCapacity: 0.5 ACU\nMaxCapacity: 32 ACU\nAutoPause: true\n```\n\n> 💡 Aurora scales storage automatically to 128TB!"
+        },
+        {
+            "id": "storage_7",
+            "type": "content",
+            "title": "NoSQL Databases",
+            "content": "# NoSQL Databases 🚀\n\n## DynamoDB\n```python\nimport boto3\ntable = boto3.resource('dynamodb').Table('Users')\n\n# Create\ntable.put_item(Item={'id': 'u123', 'name': 'Alice'})\n\n# Read\nresponse = table.get_item(Key={'id': 'u123'})\n```\n\n## When to Use NoSQL\n- ✅ High write throughput\n- ✅ Flexible schemas\n- ✅ Horizontal scaling\n- ✅ Simple access patterns\n\n## DynamoDB Features\n- Single-digit ms latency\n- Serverless\n- Global tables\n- TTL for auto-expiry"
+        },
+        {
+            "id": "storage_quiz_2",
+            "type": "quiz",
+            "title": "Database Quiz",
+            "content": "Test your database knowledge!",
+            "quizQuestion": "What is Aurora's main advantage over standard RDS?",
+            "quizOptions": [
+                "It's free",
+                "5x better performance",
+                "Only supports PostgreSQL",
+                "No VPC required"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "storage_8",
+            "type": "content",
+            "title": "Database HA",
+            "content": "# Database High Availability 🔄\n\n## Multi-AZ\n```\nPrimary (AZ-A) ──sync──▶ Standby (AZ-B)\n```\n- Automatic failover\n- Same endpoint\n- 60-120s switchover\n\n## Read Replicas\n- Async replication\n- Offload read traffic\n- Cross-region DR\n\n## Backups\n| Type | Frequency | Retention |\n|------|-----------|----------|\n| Automated | Daily | 1-35 days |\n| Snapshot | On-demand | Forever |\n| Point-in-Time | Continuous | 35 days |"
+        },
+        {
+            "id": "storage_9",
+            "type": "content",
+            "title": "CDN Introduction",
+            "content": "# Content Delivery Networks 🌐\n\nDeliver content faster globally.\n\n## What is CDN?\n- Edge servers worldwide\n- Cache content near users\n- Reduce latency\n- Improve availability\n\n## Major CDNs\n| Provider | Service |\n|----------|--------|\n| AWS | CloudFront |\n| Azure | CDN |\n| GCP | Cloud CDN |\n| Cloudflare | CDN |\n\n## Benefits\n- ⚡ 50-90% latency reduction\n- 📈 Handle traffic spikes\n- 🔒 DDoS protection\n- 💰 Reduce bandwidth costs"
+        },
+        {
+            "id": "storage_10",
+            "type": "content",
+            "title": "CloudFront Setup",
+            "content": "# AWS CloudFront 🚀\n\n## Basic Setup\n```bash\naws cloudfront create-distribution \\\n  --origin-domain-name bucket.s3.amazonaws.com\n```\n\n## Cache Behaviors\n| Pattern | TTL | Origin |\n|---------|-----|--------|\n| /api/* | 0 | ALB |\n| /static/* | 86400 | S3 |\n| *.jpg | 604800 | S3 |\n\n## Origin Types\n- S3 bucket\n- ALB/ELB\n- EC2 instance\n- Any HTTP server"
+        },
+        {
+            "id": "storage_11",
+            "type": "content",
+            "title": "CDN Caching",
+            "content": "# CDN Caching Strategies 📋\n\n## Cache-Control Headers\n```\nmax-age=31536000, immutable\nno-cache\nno-store\npublic, max-age=3600\n```\n\n## By Content Type\n| Type | TTL |\n|------|-----|\n| Static assets | 1 year |\n| Images | 1 week |\n| API | 0-60s |\n| HTML | 5 min |\n\n## Best Practices\n- ✅ Versioned asset URLs\n- ✅ Appropriate Cache-Control\n- ✅ Minimize invalidations\n- ❌ Don't cache user data"
+        },
+        {
+            "id": "storage_quiz_3",
+            "type": "quiz",
+            "title": "CDN Quiz",
+            "content": "Test your CDN knowledge!",
+            "quizQuestion": "What is the primary benefit of a CDN?",
+            "quizOptions": [
+                "Reduce DB queries",
+                "Cache at edge to reduce latency",
+                "Increase CPU usage",
+                "Store passwords"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "storage_12",
+            "type": "content",
+            "title": "CDN Security",
+            "content": "# CDN Security 🔐\n\n## HTTPS/TLS\n```yaml\nViewerProtocolPolicy: redirect-to-https\nMinimumProtocolVersion: TLSv1.2_2021\n```\n\n## Origin Access\n- OAC for S3 access control\n- Signed URLs for private content\n\n## WAF Integration\n- Block malicious requests\n- Rate limiting\n- Geo blocking\n- Bot detection"
+        },
+        {
+            "id": "storage_13",
+            "type": "content",
+            "title": "Data Transfer",
+            "content": "# Data Transfer Solutions 🚚\n\n## Online Transfer\n- **DataSync:** On-prem to S3\n- **Transfer Acceleration:** Fast uploads\n\n## Offline Transfer\n| Service | Capacity |\n|---------|----------|\n| Snowcone | 8-14 TB |\n| Snowball | 80 TB |\n| Snowmobile | 100 PB |\n\n## Database Migration\n```\nSource DB → DMS → Target DB\n(On-prem)         (RDS)\n```\n\nMinimal downtime, continuous replication"
+        },
+        {
+            "id": "storage_14",
+            "type": "content",
+            "title": "File Storage",
+            "content": "# Cloud File Storage 📁\n\n## AWS EFS\n- Shared file system\n- Multiple EC2/Lambda attach\n- Auto-scaling\n\n## EFS vs EBS\n| Feature | EFS | EBS |\n|---------|-----|-----|\n| Type | File | Block |\n| Attach | Multiple | Single |\n| Scaling | Auto | Manual |\n\n## Use Cases\n- Content management\n- Web serving\n- Container storage"
+        },
+        {
+            "id": "storage_15",
+            "type": "content",
+            "title": "Data Lakes",
+            "content": "# Data Lakes 🏞️\n\n## What is a Data Lake?\n- All data types\n- Schema-on-read\n- Petabyte scale\n- Cost-effective\n\n## Architecture\n```\nRaw Zone → Curated Zone → Analytics Zone\n(Bronze)    (Silver)       (Gold)\n```\n\n## Query with Athena\n```sql\nSELECT customer_id, SUM(amount)\nFROM sales_data\nGROUP BY customer_id;\n```"
+        },
+        {
+            "id": "storage_quiz_4",
+            "type": "quiz",
+            "title": "Data Lake Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What makes Data Lakes different from Data Warehouses?",
+            "quizOptions": [
+                "More expensive",
+                "Schema-on-read with raw data",
+                "Only SQL data",
+                "Cannot scale"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "storage_16",
+            "type": "content",
+            "title": "Caching",
+            "content": "# In-Memory Caching 🚀\n\n## ElastiCache Redis\n```python\nimport redis\nclient = redis.Redis(host='cluster.cache.amazonaws.com')\nclient.setex('user:123', 3600, json.dumps(data))\n```\n\n## Patterns\n- **Cache-Aside:** Check cache → Miss → Query DB → Cache\n- **Write-Through:** Write to cache → Cache writes to DB\n\n## Redis vs Memcached\n| Feature | Redis | Memcached |\n|---------|-------|----------|\n| Data types | Rich | Simple |\n| Persistence | Yes | No |"
+        },
+        {
+            "id": "storage_17",
+            "type": "content",
+            "title": "Cost Optimization",
+            "content": "# Cost Optimization 💰\n\n## S3 Savings\n- Lifecycle policies: 40-80% savings\n- Intelligent-Tiering\n- Delete old versions\n\n## Database Savings\n| Strategy | Savings |\n|----------|--------|\n| Reserved | 30-60% |\n| Aurora Serverless | Variable |\n| Right-sizing | 20-40% |\n\n## CDN Tips\n- Appropriate price class\n- Maximize cache hit ratio\n- Compress content"
+        },
+        {
+            "id": "storage_18",
+            "type": "content",
+            "title": "Disaster Recovery",
+            "content": "# DR Strategies 🛡️\n\n## DR Patterns\n| Pattern | RTO | RPO | Cost |\n|---------|-----|-----|------|\n| Backup/Restore | Hours | Hours | 💰 |\n| Pilot Light | Mins | Mins | 💰💰 |\n| Warm Standby | Mins | Secs | 💰💰💰 |\n| Active/Active | Zero | Zero | 💰💰💰💰 |\n\n## Cross-Region Replication\n- S3 CRR\n- RDS Read Replicas\n- DynamoDB Global Tables"
+        },
+        {
+            "id": "storage_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your DR knowledge!",
+            "quizQuestion": "Which DR strategy provides zero RPO/RTO?",
+            "quizOptions": [
+                "Backup/Restore",
+                "Pilot Light",
+                "Warm Standby",
+                "Multi-Site Active/Active"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "storage_19",
+            "type": "content",
+            "title": "Hybrid Storage",
+            "content": "# Hybrid Cloud Storage ☁️\n\n## Storage Gateway Types\n| Type | Use Case |\n|------|----------|\n| S3 File | NFS/SMB to S3 |\n| Volume | iSCSI to S3 |\n| Tape | VTL to Glacier |\n\n## Edge Solutions\n- AWS Outposts\n- Azure Stack\n- GCP Anthos"
+        },
+        {
+            "id": "storage_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Object Storage\n- ✅ Lifecycle policies for cost\n- ✅ Block public access\n\n### Databases\n- ✅ RDS for relational\n- ✅ Multi-AZ for HA\n\n### CDNs\n- ✅ Edge caching\n- ✅ Versioned assets\n\n## Best Practices\n- 💾 Use appropriate storage class\n- 🔐 Encrypt everything\n- 💰 Review costs monthly\n\nHappy storing! 💾"
+        }
+    ]
+}

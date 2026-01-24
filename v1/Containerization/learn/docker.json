@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_docker",
+    "topicId": "docker",
+    "topicTitle": "Docker Basics",
+    "description": "Master Docker fundamentals including installation, essential commands (run, build, exec), and Dockerfile creation for containerized applications",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "docker_1",
+            "type": "content",
+            "title": "Welcome to Docker",
+            "content": "# Introduction to Docker 🐳\n\nDocker revolutionized how we **build**, **ship**, and **run** applications.\n\n## What you'll learn:\n- **Installation** - Getting Docker running\n- **Commands** - run, build, exec, and more\n- **Dockerfile** - Creating container images\n\n> 💡 **Fun Fact:** Docker was released in 2013 and has over 13 million developers using it worldwide!\n\n## What is Docker?\n\nDocker is a **containerization platform** that packages applications with their dependencies.\n\n## Containers vs Virtual Machines\n\n```\n┌─────────────────┐  ┌─────────────────┐\n│   Container     │  │  Virtual Machine│\n├─────────────────┤  ├─────────────────┤\n│ App A │ App B   │  │ App A │ App B   │\n├───────┴─────────┤  ├───────┴─────────┤\n│   Container     │  │   Guest OS      │\n│   Runtime       │  │   Guest OS      │\n├─────────────────┤  ├─────────────────┤\n│   Host OS       │  │   Hypervisor    │\n├─────────────────┤  ├─────────────────┤\n│   Hardware      │  │   Host OS       │\n└─────────────────┘  ├─────────────────┤\n                     │   Hardware      │\n                     └─────────────────┘\n```\n\n| Aspect | Containers | VMs |\n|--------|------------|-----|\n| Size | MBs | GBs |\n| Startup | Seconds | Minutes |\n| Isolation | Process level | Full |\n| Overhead | Minimal | Significant |"
+        },
+        {
+            "id": "docker_2",
+            "type": "content",
+            "title": "Docker Architecture",
+            "content": "# Docker Architecture 🏗️\n\n## Core Components\n\n```\n┌─────────────────────────────────────────────────┐\n│                  DOCKER CLIENT                   │\n│           (docker build, run, pull)              │\n└─────────────────────┬───────────────────────────┘\n                      │ REST API\n                      ▼\n┌─────────────────────────────────────────────────┐\n│                  DOCKER DAEMON                   │\n│                   (dockerd)                      │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌─────────┐  ┌─────────┐  ┌─────────┐         │\n│  │ Images  │  │Container│  │ Volumes │         │\n│  └─────────┘  └─────────┘  └─────────┘         │\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │              Networks                    │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n└─────────────────────────────────────────────────┘\n                      │\n                      ▼\n┌─────────────────────────────────────────────────┐\n│              CONTAINER REGISTRY                  │\n│         (Docker Hub, private registries)         │\n└─────────────────────────────────────────────────┘\n```\n\n## Key Terms\n\n| Term | Description |\n|------|-------------|\n| **Image** | Read-only template for containers |\n| **Container** | Running instance of an image |\n| **Dockerfile** | Instructions to build an image |\n| **Registry** | Storage for Docker images |\n| **Volume** | Persistent data storage |"
+        },
+        {
+            "id": "docker_3",
+            "type": "content",
+            "title": "Installing Docker",
+            "content": "# Installing Docker 📥\n\n## Docker Desktop (Windows/macOS)\n\n1. Download from [docker.com](https://docker.com)\n2. Run installer\n3. Start Docker Desktop\n4. Verify installation\n\n## Linux Installation\n\n```bash\n# Ubuntu/Debian\nsudo apt-get update\nsudo apt-get install ca-certificates curl gnupg\n\n# Add Docker's official GPG key\nsudo install -m 0755 -d /etc/apt/keyrings\ncurl -fsSL https://download.docker.com/linux/ubuntu/gpg | \\\n  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg\n\n# Set up repository\necho \\\n  \"deb [arch=$(dpkg --print-architecture) \\\n  signed-by=/etc/apt/keyrings/docker.gpg] \\\n  https://download.docker.com/linux/ubuntu \\\n  $(. /etc/os-release && echo $VERSION_CODENAME) stable\" | \\\n  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null\n\n# Install Docker\nsudo apt-get update\nsudo apt-get install docker-ce docker-ce-cli containerd.io\n\n# Add user to docker group (avoid sudo)\nsudo usermod -aG docker $USER\n```\n\n## Verify Installation\n\n```bash\ndocker --version\n# Docker version 24.0.7, build afdd53b\n\ndocker run hello-world\n# Hello from Docker!\n```"
+        },
+        {
+            "id": "docker_4",
+            "type": "content",
+            "title": "Docker Run Command",
+            "content": "# docker run 🏃\n\nThe `run` command creates and starts a container.\n\n## Basic Usage\n\n```bash\n# Run a simple container\ndocker run hello-world\n\n# Run and interact with container\ndocker run -it ubuntu bash\n\n# Run in background (detached)\ndocker run -d nginx\n\n# Run with port mapping\ndocker run -d -p 8080:80 nginx\n\n# Run with name\ndocker run -d --name my-nginx -p 8080:80 nginx\n```\n\n## Common Options\n\n| Option | Description | Example |\n|--------|-------------|--------|\n| `-d` | Detached mode | `docker run -d nginx` |\n| `-it` | Interactive TTY | `docker run -it ubuntu` |\n| `-p` | Port mapping | `-p 8080:80` |\n| `--name` | Container name | `--name my-app` |\n| `-e` | Environment var | `-e NODE_ENV=prod` |\n| `-v` | Volume mount | `-v /data:/app/data` |\n| `--rm` | Remove on exit | `docker run --rm ubuntu` |\n\n## Full Example\n\n```bash\ndocker run -d \\\n  --name web-server \\\n  -p 8080:80 \\\n  -e NGINX_HOST=localhost \\\n  -v ./html:/usr/share/nginx/html \\\n  nginx:latest\n```"
+        },
+        {
+            "id": "docker_5",
+            "type": "quiz",
+            "title": "Run Command Quiz",
+            "content": "Test your docker run knowledge!",
+            "quizQuestion": "What does the -d flag do in docker run?",
+            "quizOptions": [
+                "Deletes the container after exit",
+                "Runs the container in detached (background) mode",
+                "Downloads a new image",
+                "Debugs the container"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "docker_6",
+            "type": "content",
+            "title": "Container Management",
+            "content": "# Managing Containers 📦\n\n## Listing Containers\n\n```bash\n# List running containers\ndocker ps\n\n# List all containers (including stopped)\ndocker ps -a\n\n# List with formatted output\ndocker ps --format \"{{.ID}}\\t{{.Names}}\\t{{.Status}}\"\n```\n\n## Container Lifecycle\n\n```bash\n# Start a stopped container\ndocker start container_name\n\n# Stop a running container\ndocker stop container_name\n\n# Restart a container\ndocker restart container_name\n\n# Pause/unpause\ndocker pause container_name\ndocker unpause container_name\n\n# Remove a container\ndocker rm container_name\n\n# Force remove running container\ndocker rm -f container_name\n\n# Remove all stopped containers\ndocker container prune\n```\n\n## Container States\n\n```\n        ┌──────────────────────────────────────┐\n        │                                      │\n        ▼                                      │\n   ┌─────────┐    ┌─────────┐    ┌─────────┐  │\n   │ Created │───►│ Running │───►│ Stopped │──┘\n   └─────────┘    └─────────┘    └─────────┘\n        │              │              │\n        │              ▼              │\n        │         ┌─────────┐        │\n        └────────►│ Removed │◄───────┘\n                  └─────────┘\n```"
+        },
+        {
+            "id": "docker_7",
+            "type": "content",
+            "title": "Docker Exec Command",
+            "content": "# docker exec 🔧\n\nExecute commands inside **running** containers.\n\n## Basic Usage\n\n```bash\n# Run a command\ndocker exec container_name ls -la\n\n# Interactive shell\ndocker exec -it container_name bash\n\n# Run as specific user\ndocker exec -u root container_name whoami\n\n# Set environment variable\ndocker exec -e MY_VAR=value container_name printenv\n\n# Set working directory\ndocker exec -w /app container_name pwd\n```\n\n## Common Use Cases\n\n### Debug a Running Container\n```bash\n# Access shell\ndocker exec -it my-app bash\n\n# Check processes\ndocker exec my-app ps aux\n\n# View files\ndocker exec my-app cat /var/log/app.log\n\n# Check network\ndocker exec my-app netstat -tulpn\n```\n\n### Database Operations\n```bash\n# MySQL shell\ndocker exec -it mysql-container mysql -u root -p\n\n# PostgreSQL shell\ndocker exec -it postgres-container psql -U postgres\n\n# MongoDB shell\ndocker exec -it mongo-container mongosh\n```\n\n## Exec Options\n\n| Option | Description |\n|--------|-------------|\n| `-i` | Keep STDIN open |\n| `-t` | Allocate pseudo-TTY |\n| `-d` | Detached mode |\n| `-e` | Set environment variable |\n| `-u` | Username or UID |\n| `-w` | Working directory |"
+        },
+        {
+            "id": "docker_8",
+            "type": "content",
+            "title": "Docker Build Command",
+            "content": "# docker build 🏗️\n\nCreate images from a **Dockerfile**.\n\n## Basic Build\n\n```bash\n# Build in current directory\ndocker build .\n\n# Build with tag\ndocker build -t my-app:1.0 .\n\n# Build with specific Dockerfile\ndocker build -f Dockerfile.prod -t my-app:prod .\n\n# Build with build arguments\ndocker build --build-arg VERSION=1.0 -t my-app .\n\n# Build without cache\ndocker build --no-cache -t my-app .\n```\n\n## Build Options\n\n| Option | Description |\n|--------|-------------|\n| `-t, --tag` | Name and tag |\n| `-f, --file` | Dockerfile path |\n| `--build-arg` | Build-time variables |\n| `--no-cache` | Don't use cache |\n| `--target` | Build specific stage |\n| `--platform` | Target platform |\n\n## Build Context\n\n```bash\n# Current directory as context\ndocker build .\n\n# Specific directory\ndocker build /path/to/context\n\n# Git URL as context\ndocker build https://github.com/user/repo.git\n```\n\n## .dockerignore\n\nExclude files from build context:\n\n```\nnode_modules\n.git\n*.log\n.env\nDockerfile\n.dockerignore\n```"
+        },
+        {
+            "id": "docker_9",
+            "type": "content",
+            "title": "Dockerfile Basics",
+            "content": "# Dockerfile Fundamentals 📝\n\nA Dockerfile contains **instructions** to build an image.\n\n## Basic Structure\n\n```dockerfile\n# Base image\nFROM node:20-alpine\n\n# Maintainer info (optional)\nLABEL maintainer=\"you@example.com\"\n\n# Set working directory\nWORKDIR /app\n\n# Copy dependency files\nCOPY package*.json ./\n\n# Install dependencies\nRUN npm ci --only=production\n\n# Copy application code\nCOPY . .\n\n# Expose port\nEXPOSE 3000\n\n# Set environment variable\nENV NODE_ENV=production\n\n# Define startup command\nCMD [\"node\", \"server.js\"]\n```\n\n## Common Instructions\n\n| Instruction | Purpose |\n|-------------|--------|\n| `FROM` | Base image |\n| `WORKDIR` | Set working directory |\n| `COPY` | Copy files to image |\n| `ADD` | Copy files (with extraction) |\n| `RUN` | Execute command during build |\n| `CMD` | Default command to run |\n| `ENTRYPOINT` | Configure as executable |\n| `ENV` | Set environment variable |\n| `EXPOSE` | Document port |\n| `VOLUME` | Create mount point |"
+        },
+        {
+            "id": "docker_10",
+            "type": "content",
+            "title": "Dockerfile Best Practices",
+            "content": "# Dockerfile Best Practices ✅\n\n## 1. Order Instructions by Change Frequency\n\n```dockerfile\n# ✅ Good - rarely changing first\nFROM node:20-alpine\nWORKDIR /app\n\n# Dependencies (changes less often)\nCOPY package*.json ./\nRUN npm ci\n\n# Code (changes frequently)\nCOPY . .\n\nCMD [\"npm\", \"start\"]\n```\n\n## 2. Minimize Layers\n\n```dockerfile\n# ❌ Bad - multiple RUN commands\nRUN apt-get update\nRUN apt-get install -y curl\nRUN apt-get install -y wget\n\n# ✅ Good - combined\nRUN apt-get update && \\\n    apt-get install -y curl wget && \\\n    rm -rf /var/lib/apt/lists/*\n```\n\n## 3. Use Specific Tags\n\n```dockerfile\n# ❌ Bad\nFROM node:latest\n\n# ✅ Good\nFROM node:20.10-alpine3.18\n```\n\n## 4. Use Non-Root User\n\n```dockerfile\nFROM node:20-alpine\n\n# Create non-root user\nRUN addgroup -g 1001 appgroup && \\\n    adduser -u 1001 -G appgroup -D appuser\n\nWORKDIR /app\nCOPY --chown=appuser:appgroup . .\n\nUSER appuser\nCMD [\"npm\", \"start\"]\n```\n\n## 5. Use .dockerignore\n\n```\nnode_modules\n.git\n*.md\nDockerfile\n.dockerignore\n```"
+        },
+        {
+            "id": "docker_11",
+            "type": "quiz",
+            "title": "Dockerfile Quiz",
+            "content": "Test your Dockerfile knowledge!",
+            "quizQuestion": "What is the purpose of the WORKDIR instruction in a Dockerfile?",
+            "quizOptions": [
+                "To delete the working directory",
+                "To set the working directory for subsequent instructions",
+                "To copy files to the working directory",
+                "To create a new user"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "docker_12",
+            "type": "content",
+            "title": "Image Management",
+            "content": "# Managing Images 🖼️\n\n## Listing Images\n\n```bash\n# List all images\ndocker images\n\n# List with specific format\ndocker images --format \"{{.Repository}}:{{.Tag}} {{.Size}}\"\n\n# Filter images\ndocker images --filter \"dangling=true\"\n```\n\n## Pulling and Pushing\n\n```bash\n# Pull from registry\ndocker pull nginx:latest\ndocker pull ubuntu:22.04\n\n# Tag an image\ndocker tag my-app:latest myregistry.com/my-app:1.0\n\n# Push to registry\ndocker push myregistry.com/my-app:1.0\n\n# Login to registry\ndocker login myregistry.com\n```\n\n## Cleaning Up\n\n```bash\n# Remove specific image\ndocker rmi nginx:latest\n\n# Remove unused images\ndocker image prune\n\n# Remove all unused images\ndocker image prune -a\n\n# System-wide cleanup\ndocker system prune -a\n```\n\n## Inspecting Images\n\n```bash\n# View image details\ndocker inspect nginx:latest\n\n# View image history (layers)\ndocker history nginx:latest\n\n# View image size\ndocker images nginx --format \"{{.Size}}\"\n```"
+        },
+        {
+            "id": "docker_13",
+            "type": "content",
+            "title": "Logs and Debugging",
+            "content": "# Container Logs 📋\n\n## Viewing Logs\n\n```bash\n# View logs\ndocker logs container_name\n\n# Follow logs in real-time\ndocker logs -f container_name\n\n# Show last N lines\ndocker logs --tail 100 container_name\n\n# Show logs since timestamp\ndocker logs --since 2024-01-01T00:00:00 container_name\n\n# Show timestamps\ndocker logs -t container_name\n```\n\n## Debugging Commands\n\n```bash\n# Inspect container details\ndocker inspect container_name\n\n# View resource usage\ndocker stats container_name\n\n# View running processes\ndocker top container_name\n\n# View port mappings\ndocker port container_name\n\n# View file changes\ndocker diff container_name\n```\n\n## Resource Monitoring\n\n```\n┌──────────────────────────────────────────────────────────────┐\n│ CONTAINER ID   NAME         CPU %   MEM USAGE / LIMIT        │\n├──────────────────────────────────────────────────────────────┤\n│ abc123         web-server   0.50%   125.5MiB / 2GiB          │\n│ def456         database     2.10%   512MiB / 1GiB             │\n│ ghi789         cache        0.05%   50MiB / 256MiB            │\n└──────────────────────────────────────────────────────────────┘\n```\n\n> 💡 **Tip:** Use `-f` to follow logs in real-time!"
+        },
+        {
+            "id": "docker_14",
+            "type": "content",
+            "title": "Environment Variables",
+            "content": "# Environment Variables 🔧\n\n## Passing Variables\n\n```bash\n# Single variable\ndocker run -e MY_VAR=value nginx\n\n# Multiple variables\ndocker run -e VAR1=value1 -e VAR2=value2 nginx\n\n# From shell environment\nexport MY_SECRET=secret123\ndocker run -e MY_SECRET nginx\n\n# From env file\ndocker run --env-file ./env.list nginx\n```\n\n## Environment File\n\n```env\n# env.list\nDATABASE_HOST=localhost\nDATABASE_PORT=5432\nDATABASE_USER=admin\nDATABASE_PASSWORD=secret\nNODE_ENV=production\n```\n\n## In Dockerfile\n\n```dockerfile\n# Set default value\nENV NODE_ENV=production\nENV PORT=3000\n\n# Multiple in one line\nENV APP_NAME=myapp \\\n    APP_VERSION=1.0\n\n# Use in commands\nRUN echo \"Building for $NODE_ENV\"\n```\n\n## Build Arguments\n\n```dockerfile\n# Define argument\nARG VERSION=latest\n\n# Use in image tag\nFROM node:${VERSION}\n\n# Convert to env var\nARG NODE_ENV\nENV NODE_ENV=${NODE_ENV:-production}\n```\n\n```bash\ndocker build --build-arg VERSION=20 --build-arg NODE_ENV=development .\n```"
+        },
+        {
+            "id": "docker_15",
+            "type": "content",
+            "title": "Port Mapping",
+            "content": "# Port Mapping 🔌\n\n## Exposing Ports\n\n```bash\n# Map host:container port\ndocker run -p 8080:80 nginx\n\n# Map multiple ports\ndocker run -p 8080:80 -p 443:443 nginx\n\n# Map to specific host interface\ndocker run -p 127.0.0.1:8080:80 nginx\n\n# Random host port\ndocker run -p 80 nginx\ndocker port container_name  # See assigned port\n\n# Map all exposed ports\ndocker run -P nginx\n```\n\n## Port Syntax\n\n```\n-p HOST_PORT:CONTAINER_PORT\n-p HOST_IP:HOST_PORT:CONTAINER_PORT\n-p HOST_PORT:CONTAINER_PORT/udp\n```\n\n## In Dockerfile\n\n```dockerfile\n# Document exposed ports\nEXPOSE 80\nEXPOSE 443\nEXPOSE 3000/udp\n```\n\n> ⚠️ **Note:** `EXPOSE` is documentation only - ports are not published automatically!\n\n## Viewing Port Mappings\n\n```bash\n# Show all port mappings\ndocker port container_name\n# 80/tcp -> 0.0.0.0:8080\n\n# In docker ps output\ndocker ps\n# PORTS: 0.0.0.0:8080->80/tcp\n```"
+        },
+        {
+            "id": "docker_16",
+            "type": "quiz",
+            "title": "Ports Quiz",
+            "content": "Test your port mapping knowledge!",
+            "quizQuestion": "In the command docker run -p 8080:80 nginx, which port is the container port?",
+            "quizOptions": [
+                "8080",
+                "80",
+                "Both 8080 and 80",
+                "Neither"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "docker_17",
+            "type": "content",
+            "title": "Multi-Stage Builds",
+            "content": "# Multi-Stage Builds 🎭\n\nCreate **smaller** production images by using multiple build stages.\n\n## Without Multi-Stage (Large Image)\n\n```dockerfile\nFROM node:20\nWORKDIR /app\nCOPY . .\nRUN npm ci\nRUN npm run build\n# Image includes ALL dev dependencies!\nCMD [\"npm\", \"start\"]\n```\n\n## With Multi-Stage (Small Image)\n\n```dockerfile\n# Stage 1: Build\nFROM node:20 AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# Stage 2: Production\nFROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --only=production\nCOPY --from=builder /app/dist ./dist\nEXPOSE 3000\nCMD [\"node\", \"dist/server.js\"]\n```\n\n## Size Comparison\n\n```\nWithout multi-stage:  1.2 GB\nWith multi-stage:     150 MB\nReduction:            87%\n```\n\n## Build Specific Stage\n\n```bash\n# Build only the builder stage\ndocker build --target builder -t my-app:dev .\n```\n\n> 🎯 **Best Practice:** Always use multi-stage builds for production!"
+        },
+        {
+            "id": "docker_18",
+            "type": "content",
+            "title": "Docker Cheat Sheet",
+            "content": "# Docker Commands Cheat Sheet 📋\n\n## Container Commands\n\n```bash\n# Run\ndocker run -d -p 80:80 --name web nginx\ndocker run -it ubuntu bash\n\n# Lifecycle\ndocker start/stop/restart container\ndocker rm container\ndocker rm -f container  # Force\n\n# Information\ndocker ps / docker ps -a\ndocker logs container\ndocker exec -it container bash\ndocker inspect container\n```\n\n## Image Commands\n\n```bash\n# Build\ndocker build -t app:1.0 .\n\n# Registry\ndocker pull image:tag\ndocker push image:tag\ndocker tag old:tag new:tag\n\n# Management\ndocker images\ndocker rmi image\ndocker image prune\n```\n\n## Cleanup Commands\n\n```bash\n# Remove stopped containers\ndocker container prune\n\n# Remove unused images\ndocker image prune -a\n\n# Remove unused volumes\ndocker volume prune\n\n# Remove everything unused\ndocker system prune -a --volumes\n```\n\n## Useful Flags\n\n| Flag | Purpose |\n|------|--------|\n| `-d` | Detached mode |\n| `-it` | Interactive TTY |\n| `-p` | Port mapping |\n| `-v` | Volume mount |\n| `-e` | Environment variable |\n| `--name` | Container name |\n| `--rm` | Remove on exit |"
+        },
+        {
+            "id": "docker_19",
+            "type": "content",
+            "title": "Real-World Example",
+            "content": "# Complete Example: Node.js App 🚀\n\n## Dockerfile\n\n```dockerfile\n# Build stage\nFROM node:20-alpine AS builder\nWORKDIR /app\n\n# Install dependencies\nCOPY package*.json ./\nRUN npm ci\n\n# Build application\nCOPY . .\nRUN npm run build\n\n# Production stage\nFROM node:20-alpine\nWORKDIR /app\n\n# Create non-root user\nRUN addgroup -g 1001 nodejs && \\\n    adduser -u 1001 -G nodejs -D nodejs\n\n# Install production dependencies only\nCOPY package*.json ./\nRUN npm ci --only=production && npm cache clean --force\n\n# Copy built assets\nCOPY --from=builder --chown=nodejs:nodejs /app/dist ./dist\n\n# Switch to non-root user\nUSER nodejs\n\n# Expose port and set command\nEXPOSE 3000\nCMD [\"node\", \"dist/server.js\"]\n```\n\n## Build and Run\n\n```bash\n# Build\ndocker build -t my-node-app:1.0 .\n\n# Run\ndocker run -d \\\n  --name my-app \\\n  -p 3000:3000 \\\n  -e NODE_ENV=production \\\n  my-node-app:1.0\n\n# Verify\ncurl http://localhost:3000\n```"
+        },
+        {
+            "id": "docker_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall Docker knowledge!",
+            "quizQuestion": "What is the main benefit of multi-stage Docker builds?",
+            "quizOptions": [
+                "They make builds faster",
+                "They create smaller production images by excluding build dependencies",
+                "They allow running multiple containers",
+                "They automatically scale applications"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "docker_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Docker Basics!\n\n## Key Takeaways\n\n### Installation 📥\n- ✅ Docker Desktop for Windows/macOS\n- ✅ Docker Engine for Linux\n- ✅ Verify with `docker run hello-world`\n\n### Essential Commands 🔧\n- ✅ `docker run` - Create and start containers\n- ✅ `docker build` - Create images from Dockerfile\n- ✅ `docker exec` - Execute commands in containers\n- ✅ `docker ps/logs/inspect` - Monitor containers\n\n### Dockerfile 📝\n- ✅ FROM, WORKDIR, COPY, RUN, CMD\n- ✅ Order by change frequency\n- ✅ Minimize layers\n- ✅ Use multi-stage builds\n- ✅ Run as non-root user\n\n## Common Patterns\n\n```bash\n# Development workflow\ndocker build -t app:dev .\ndocker run -it --rm -v $(pwd):/app app:dev\n\n# Production workflow\ndocker build -t app:prod -f Dockerfile.prod .\ndocker run -d -p 80:80 app:prod\n```\n\n> 🐳 **Remember:** Containers are lightweight, portable, and consistent!\n\nHappy containerizing! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_performance_cdn",
+    "topicId": "cdn",
+    "topicTitle": "Content Delivery Networks (CDN)",
+    "description": "Master CDNs to deliver content at the edge, reducing latency and offloading your origin servers",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "cdn_1",
+            "type": "content",
+            "title": "What is a CDN?",
+            "content": "# Content Delivery Networks (CDN) 🌐🚀\n\nA network of servers distributed globally that cache and deliver content (images, JS, CSS, Video) to users from a location closest to them."
+        },
+        {
+            "id": "cdn_2",
+            "type": "content",
+            "title": "Reducing Latency",
+            "content": "# Speed of Light 🚀✨\n\nWithout a CDN, a user in Tokyo has to wait for data to travel from your server in New York (~200ms round trip). With a CDN, they get it from a Tokyo data center (~10ms)."
+        },
+        {
+            "id": "cdn_3",
+            "type": "content",
+            "title": "Origin vs Edge",
+            "content": "# Layered Delivery 🪜\n\n- **Origin Server**: Where your actual backend and files live.\n- **Edge Server**: The CDN's caching nodes located in hundreds of cities worldwide."
+        },
+        {
+            "id": "cdn_4",
+            "type": "content",
+            "title": "The First Request",
+            "content": "# Cache Miss 🔍\n\n1. User requests `script.js` from the edge.\n2. Edge doesn't have it (Miss).\n3. Edge fetches it from the **Origin** and caches it.\n4. Second user requests it? (Hit) -> Fast!"
+        },
+        {
+            "id": "cdn_5",
+            "quizQuestion": "What is the primary technical benefit of using a CDN?",
+            "quizOptions": [
+                "Encrypting the database",
+                "Reducing geographical latency for users",
+                "Replacing the need for a frontend framework",
+                "Automatic code minification"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "CDN Quiz",
+            "content": "Core purpose."
+        },
+        {
+            "id": "cdn_6",
+            "type": "content",
+            "title": "Offloading Origin",
+            "content": "# Scaling Power 📈\n\nCDNs handle 90%+ of your traffic. This means your origin server doesn't need to be giant and expensive, as it only serves the CDN, not the millions of users directly."
+        },
+        {
+            "id": "cdn_7",
+            "type": "content",
+            "title": "Anycast Routing",
+            "content": "# Magic IPs 🪄\n\nCDNs often use **Anycast**, where many servers around the world share the same IP address. The internet's routing protocol (BGP) automatically sends the user to the closest server."
+        },
+        {
+            "id": "cdn_8",
+            "type": "content",
+            "title": "Dynamic Content Caching",
+            "content": "# Not Just Static 🔄\n\nModern CDNs can cache API responses (JSON) if you set the right `Cache-Control` headers. This makes even dynamic sites feel instantaneous."
+        },
+        {
+            "id": "cdn_9",
+            "type": "content",
+            "title": "DDoS Protection",
+            "content": "# The Shield 🛡️💥\n\nCDNs act as a massive buffer against Distributed Denial of Service (DDoS) attacks. They can absorb millions of malicious requests per second without your origin even noticing."
+        },
+        {
+            "id": "cdn_10",
+            "quizQuestion": "In a CDN context, what is an 'Edge Server'?",
+            "quizOptions": [
+                "A server with a very sharp design",
+                "A server strategically placed near end-users to deliver cached content",
+                "The server where you edit your code",
+                "A database server"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Terminology Quiz",
+            "content": "Architecture roles."
+        },
+        {
+            "id": "cdn_11",
+            "type": "content",
+            "title": "WAF at the Edge",
+            "content": "# Intelligent Filtering 🧠🚧\n\nMost CDNs (Cloudflare, Akamai, AWS CloudFront) include a **Web Application Firewall** (WAF) that blocks SQLi, XSS, and bot traffic before it reaches your server."
+        },
+        {
+            "id": "cdn_12",
+            "type": "content",
+            "title": "Image Optimization at the Edge",
+            "content": "# Transformation 🖼️✨\n\nModern CDNs can automatically convert your JPEGs to WebP and resize them based on the `User-Agent` string of the browser making the request."
+        },
+        {
+            "id": "cdn_13",
+            "type": "content",
+            "title": "Push vs Pull CDN",
+            "content": "# Ingestion Strategies 🔄\n\n- **Pull**: CDN fetches content from origin automatically when requested (Most common).\n- **Push**: You upload files directly to the CDN storage (Best for giant video files)."
+        },
+        {
+            "id": "cdn_14",
+            "type": "content",
+            "title": "Purging the Cache",
+            "content": "# Immediate Updates 🗑️✨\n\nWhen you deploy a new version, you must use the CDN's **Purge API** or a unique versioned URL (Cache Busting) to ensure users don't keep seeing old versions."
+        },
+        {
+            "id": "cdn_15",
+            "quizQuestion": "What is 'Cache Purging'?",
+            "quizOptions": [
+                "A way to speed up the database",
+                "Forcing the CDN to delete its cached version of a file and fetch a new one from the origin",
+                "Deleting old user accounts",
+                "Removing CSS comments"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Invalidation Quiz",
+            "content": "Keeping data fresh."
+        },
+        {
+            "id": "cdn_16",
+            "type": "content",
+            "title": "Shared CDNs (Google Fonts)",
+            "content": "# Community Cache 🤝\n\nUsing a common CDN URL (like `fonts.gstatic.com`) used to be popular because if a user visited another site with the same font, it was already in their cache. \n\n> [!WARNING]\n> Most modern browsers have \"Cache Partitioning\", making this trick less effective for privacy reasons."
+        },
+        {
+            "id": "cdn_17",
+            "type": "content",
+            "title": "Compression at the Edge",
+            "content": "# Brotli for All 🗜️\n\nEven if your origin only supports Gzip, a CDN can decompress it and re-compress it using **Brotli** for the end user."
+        },
+        {
+            "id": "cdn_18",
+            "type": "content",
+            "title": "Lambda@Edge / Workers",
+            "content": "# Logic at the Edge 🧪\n\nYou can run small snippets of code (Edge Functions) directly on the CDN nodes. Great for A/B testing, authentication, or small header modifications."
+        },
+        {
+            "id": "cdn_19",
+            "type": "content",
+            "title": "Multi-CDN Strategies",
+            "content": "# High Availability 🛡️🏆\n\nGiant companies use multiple CDNs simultaneously. If one provider (e.g., Fastly) goes down, traffic is automatically routed to another (e.g., CloudFront)."
+        },
+        {
+            "id": "cdn_20",
+            "quizQuestion": "Does a CDN replace your actual web server (Origin)?",
+            "quizOptions": [
+                "Yes, completely",
+                "No, it acts as a caching layer between your server and the user",
+                "Only if you use Linux",
+                "Only if you use AWS"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Architecture summary."
+        },
+        {
+            "id": "cdn_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ **Reduces Latency** by serving content closer to users.\n- ✅ **Offloads Origin** server traffic.\n- ✅ Provides **DDoS** and **WAF** protection.\n- ✅ Enables **Automatic Optimization** (Images, Compression).\n- ✅ Use **Edge Functions** for global logic.\n\nPut your app on a CDN to serve the world instantly! 🌐🚀"
+        }
+    ]
+}

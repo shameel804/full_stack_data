@@ -1,0 +1,103 @@
+{
+    "id": "learn_tools_seo",
+    "topicId": "tools",
+    "topicTitle": "Tools & Auditing",
+    "description": "Master accessibility and SEO tools including WAVE, Google Search Console, and a11y audits",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "tools_1",
+            "type": "content",
+            "title": "Welcome to Tools & Auditing",
+            "content": "# Tools & Auditing 🛠️\n\nMeasure and improve accessibility and SEO.\n\n## What You'll Learn:\n- **Accessibility Tools** - WAVE, axe, Lighthouse\n- **SEO Tools** - Search Console, Analytics\n- **Auditing Process** - Systematic testing\n- **Automation** - CI/CD integration\n- **Reporting** - Document findings\n\n> 💡 Regular auditing prevents issues!"
+        },
+        {
+            "id": "tools_2",
+            "type": "content",
+            "title": "WAVE Tool",
+            "content": "# WAVE Accessibility Tool 🌊\n\nWeb Accessibility Evaluation Tool.\n\n## Features:\n- Visual feedback on page\n- Error and warning icons\n- Contrast analysis\n- Structure outline\n\n## How to Use:\n1. Install browser extension\n2. Navigate to page\n3. Click WAVE icon\n4. Review findings\n\n## Icons:\n| Icon | Meaning |\n|------|--------|\n| 🔴 Red | Error - must fix |\n| 🟡 Yellow | Alert - review |\n| 🟢 Green | Feature present |\n| 🔵 Blue | Structural element |\n\n## Common Findings:\n- Missing alt text\n- Empty links\n- Low contrast\n- Missing form labels"
+        },
+        {
+            "id": "tools_3",
+            "type": "content",
+            "title": "Lighthouse Audits",
+            "content": "# Lighthouse Audits 🏠\n\nBuilt into Chrome DevTools.\n\n## Categories:\n- Performance (0-100)\n- Accessibility (0-100)\n- Best Practices (0-100)\n- SEO (0-100)\n- PWA\n\n## Running Lighthouse:\n1. Open DevTools (F12)\n2. Go to Lighthouse tab\n3. Select categories\n4. Click Analyze\n\n## CLI Usage:\n```bash\nnpm install -g lighthouse\nlighthouse https://example.com --output html\n```\n\n## Score Targets:\n| Score | Rating |\n|-------|--------|\n| 90-100 | Good |\n| 50-89 | Needs Improvement |\n| 0-49 | Poor |"
+        },
+        {
+            "id": "tools_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your tools knowledge!",
+            "quizQuestion": "What score is considered 'Good' in Lighthouse?",
+            "quizOptions": [
+                "50+",
+                "70+",
+                "90+",
+                "100 only"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "tools_4",
+            "type": "content",
+            "title": "axe DevTools",
+            "content": "# axe DevTools 🪓\n\nProfessional accessibility testing.\n\n## Features:\n- Browser extension\n- Detailed issue reports\n- Code snippets\n- WCAG references\n- Intelligent analysis\n\n## Usage:\n1. Install axe DevTools extension\n2. Open DevTools\n3. Go to axe tab\n4. Click Analyze\n\n## Report Details:\n- Issue description\n- Impact level\n- Element location\n- How to fix\n- WCAG criteria\n\n## Integration:\n```javascript\n// axe-core for testing\nconst axe = require('axe-core');\n\naxe.run(document, (err, results) => {\n    console.log(results.violations);\n});\n```"
+        },
+        {
+            "id": "tools_5",
+            "type": "content",
+            "title": "Google Search Console",
+            "content": "# Google Search Console 🔍\n\nFree SEO monitoring from Google.\n\n## Key Features:\n- Performance reports\n- Index coverage\n- URL inspection\n- Sitemap submission\n- Core Web Vitals\n\n## Performance Report:\n- Clicks and impressions\n- Average position\n- Click-through rate\n- Top queries and pages\n\n## Setup:\n1. Add property\n2. Verify ownership\n3. Submit sitemap\n4. Monitor data\n\n## Weekly Checks:\n- [ ] Review coverage errors\n- [ ] Check Core Web Vitals\n- [ ] Monitor keyword rankings\n- [ ] Review manual actions"
+        },
+        {
+            "id": "tools_6",
+            "type": "content",
+            "title": "Screen Reader Testing",
+            "content": "# Screen Reader Testing 🔊\n\nManual testing with assistive tech.\n\n## Popular Screen Readers:\n| Name | Platform | Cost |\n|------|----------|------|\n| NVDA | Windows | Free |\n| JAWS | Windows | Paid |\n| VoiceOver | Mac/iOS | Built-in |\n| TalkBack | Android | Built-in |\n\n## Testing Checklist:\n- [ ] All images have alt text\n- [ ] Forms have labels\n- [ ] Headings are logical\n- [ ] Links are descriptive\n- [ ] Focus order is correct\n\n## VoiceOver Basics (Mac):\n- Cmd+F5 to toggle\n- Ctrl+Option+arrows to navigate\n- Ctrl+Option+Space to activate"
+        },
+        {
+            "id": "tools_7",
+            "type": "content",
+            "title": "Color Contrast Tools",
+            "content": "# Color Contrast Tools 🎨\n\n## WebAIM Contrast Checker:\n- Input foreground/background colors\n- Shows AA and AAA compliance\n- Suggests nearby passing colors\n\n## Chrome DevTools:\n1. Inspect element\n2. Click color swatch\n3. View contrast ratio\n4. See lines for AA/AAA\n\n## Contrast Requirements:\n| Level | Normal Text | Large Text |\n|-------|-------------|------------|\n| AA | 4.5:1 | 3:1 |\n| AAA | 7:1 | 4.5:1 |\n\n## Tools:\n- WebAIM Contrast Checker\n- Colour Contrast Analyser\n- Stark (Figma/Sketch)\n- Chrome DevTools"
+        },
+        {
+            "id": "tools_8",
+            "type": "content",
+            "title": "Automated Testing",
+            "content": "# Automated A11y Testing 🤖\n\n## Jest + axe-core:\n```javascript\nconst { axe, toHaveNoViolations } = require('jest-axe');\n\nexpect.extend(toHaveNoViolations);\n\ntest('should have no violations', async () => {\n    const { container } = render(<MyComponent />);\n    const results = await axe(container);\n    expect(results).toHaveNoViolations();\n});\n```\n\n## Cypress:\n```javascript\nimport 'cypress-axe';\n\ncy.visit('/');\ncy.injectAxe();\ncy.checkA11y();\n```\n\n## CI/CD:\n```yaml\n- name: Lighthouse CI\n  uses: treosh/lighthouse-ci-action@v9\n  with:\n    urls: |\n      https://example.com\n    budgetPath: ./budget.json\n```"
+        },
+        {
+            "id": "tools_quiz_2",
+            "type": "quiz",
+            "title": "Automation Check",
+            "content": "Test your automation knowledge!",
+            "quizQuestion": "Which library is commonly used for automated accessibility testing?",
+            "quizOptions": [
+                "jQuery",
+                "axe-core",
+                "lodash",
+                "moment"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "tools_9",
+            "type": "content",
+            "title": "Audit Checklist",
+            "content": "# Complete Audit Checklist ✅\n\n## Accessibility:\n- [ ] Run Lighthouse accessibility\n- [ ] Run axe DevTools\n- [ ] Run WAVE\n- [ ] Test with keyboard\n- [ ] Test with screen reader\n- [ ] Check color contrast\n- [ ] Validate HTML\n\n## SEO:\n- [ ] Run Lighthouse SEO\n- [ ] Check Search Console\n- [ ] Validate structured data\n- [ ] Test mobile-friendly\n- [ ] Check Core Web Vitals\n- [ ] Review robots.txt\n- [ ] Verify sitemap\n\n## Performance:\n- [ ] Run PageSpeed Insights\n- [ ] Check LCP < 2.5s\n- [ ] Check CLS < 0.1\n- [ ] Check FID < 100ms"
+        },
+        {
+            "id": "tools_10",
+            "type": "content",
+            "title": "Reporting",
+            "content": "# Audit Reporting 📊\n\n## Report Structure:\n1. **Executive Summary**\n   - Overall scores\n   - Critical issues\n   - Priority fixes\n\n2. **Detailed Findings**\n   - Issue description\n   - Impact/Severity\n   - Location\n   - How to fix\n\n3. **Recommendations**\n   - Quick wins\n   - Long-term improvements\n   - Resources\n\n## Severity Levels:\n| Level | Priority |\n|-------|----------|\n| Critical | Fix immediately |\n| Major | Fix this sprint |\n| Minor | Schedule fix |\n| Enhancement | Future improvement |"
+        },
+        {
+            "id": "tools_11",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Tools & Auditing!\n\n## Key Tools:\n\n### Accessibility\n- ✅ WAVE - Visual feedback\n- ✅ axe DevTools - Detailed reports\n- ✅ Lighthouse - Scoring\n- ✅ Screen readers - Manual testing\n\n### SEO\n- ✅ Google Search Console\n- ✅ PageSpeed Insights\n- ✅ Mobile-Friendly Test\n\n### Automation\n- ✅ axe-core for testing\n- ✅ Lighthouse CI\n- ✅ Cypress accessibility\n\n## Workflow:\n1. Run automated tools\n2. Manual testing\n3. Document findings\n4. Prioritize fixes\n5. Verify fixes\n6. Monitor ongoing\n\nAudit regularly! 🛠️"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_cicd_github",
+    "topicId": "github",
+    "topicTitle": "GitHub Actions",
+    "description": "Master GitHub Actions for CI/CD including workflows, actions, runners, secrets, and automation best practices",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "github_1",
+            "type": "content",
+            "title": "Welcome to GitHub Actions",
+            "content": "# GitHub Actions 🐙\n\nPowerful CI/CD built into GitHub.\n\n## What you'll learn:\n- **Workflows** - YAML configurations\n- **Actions** - Reusable components\n- **Runners** - Execution environments\n- **Advanced Features** - Matrix, secrets, environments\n\n> 💡 **Fun Fact:** GitHub Actions runs over 1 billion workflow runs per month!\n\n## Why GitHub Actions?\n\n| Benefit | Description |\n|---------|-------------|\n| **Integrated** | Native to GitHub |\n| **Free tier** | 2000 min/month |\n| **Marketplace** | 15,000+ actions |\n| **Flexible** | Any language/platform |\n| **Matrix builds** | Test multiple versions |\n\n## Quick Example\n\n```yaml\n# .github/workflows/ci.yml\nname: CI\n\non: [push, pull_request]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm test\n```\n\nLet's dive into Actions!"
+        },
+        {
+            "id": "github_2",
+            "type": "content",
+            "title": "Workflow Structure",
+            "content": "# Workflow Anatomy 📐\n\n```yaml\n# .github/workflows/main.yml\n\n# Workflow name\nname: Build and Test\n\n# Triggers\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\n# Environment variables\nenv:\n  NODE_VERSION: 20\n\n# Job definitions\njobs:\n  build:\n    name: Build Application\n    runs-on: ubuntu-latest\n    \n    # Job-level environment\n    env:\n      CI: true\n    \n    # Steps to execute\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v4\n      \n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: ${{ env.NODE_VERSION }}\n      \n      - name: Install and build\n        run: |\n          npm ci\n          npm run build\n```\n\n## Key Components\n\n| Component | Description |\n|-----------|-------------|\n| `name` | Workflow display name |\n| `on` | Event triggers |\n| `env` | Environment variables |\n| `jobs` | Work to perform |\n| `steps` | Individual tasks |"
+        },
+        {
+            "id": "github_3",
+            "type": "content",
+            "title": "Triggers",
+            "content": "# Workflow Triggers 🎯\n\n## Common Triggers\n\n```yaml\non:\n  # Push events\n  push:\n    branches: [main, develop]\n    paths:\n      - 'src/**'\n      - '!src/**/*.md'\n  \n  # Pull requests\n  pull_request:\n    types: [opened, synchronize, reopened]\n  \n  # Schedule (cron)\n  schedule:\n    - cron: '0 2 * * *'  # 2 AM daily\n  \n  # Manual trigger\n  workflow_dispatch:\n    inputs:\n      environment:\n        description: 'Target environment'\n        required: true\n        default: 'staging'\n        type: choice\n        options:\n          - staging\n          - production\n  \n  # Other workflows\n  workflow_run:\n    workflows: [\"CI\"]\n    types: [completed]\n```\n\n## Trigger Types\n\n| Trigger | When |\n|---------|------|\n| `push` | Code pushed |\n| `pull_request` | PR events |\n| `schedule` | Cron schedule |\n| `workflow_dispatch` | Manual trigger |\n| `release` | Release published |\n| `workflow_call` | Called by another workflow |"
+        },
+        {
+            "id": "github_4",
+            "type": "content",
+            "title": "Using Actions",
+            "content": "# Using Actions 🧩\n\n## Action Types\n\n```yaml\nsteps:\n  # Official GitHub action\n  - uses: actions/checkout@v4\n  \n  # Community action\n  - uses: docker/build-push-action@v5\n  \n  # Action from another repo\n  - uses: owner/repo@v1\n  \n  # Action from local path\n  - uses: ./.github/actions/my-action\n  \n  # Docker container action\n  - uses: docker://alpine:3.18\n```\n\n## Action with Inputs\n\n```yaml\n- name: Setup Node.js\n  uses: actions/setup-node@v4\n  with:\n    node-version: '20'\n    cache: 'npm'\n    registry-url: 'https://npm.pkg.github.com'\n```\n\n## Action with Outputs\n\n```yaml\n- name: Get version\n  id: version\n  uses: actions/github-script@v7\n  with:\n    script: |\n      return '1.0.0';\n\n- name: Use version\n  run: echo \"Version is ${{ steps.version.outputs.result }}\"\n```\n\n## Popular Actions\n\n| Action | Purpose |\n|--------|--------|\n| `actions/checkout` | Clone repo |\n| `actions/setup-node` | Install Node.js |\n| `actions/cache` | Cache dependencies |\n| `actions/upload-artifact` | Save artifacts |"
+        },
+        {
+            "id": "github_5",
+            "type": "quiz",
+            "title": "Actions Quiz",
+            "content": "Test your GitHub Actions knowledge!",
+            "quizQuestion": "What does `uses: actions/checkout@v4` do?",
+            "quizOptions": [
+                "Deploys the application",
+                "Clones the repository code into the runner",
+                "Runs tests",
+                "Publishes a package"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "github_6",
+            "type": "content",
+            "title": "Runners",
+            "content": "# Runners 🏃\n\nThe machines that execute workflows.\n\n## GitHub-Hosted Runners\n\n```yaml\njobs:\n  build-ubuntu:\n    runs-on: ubuntu-latest  # Ubuntu 22.04\n  \n  build-windows:\n    runs-on: windows-latest  # Windows Server 2022\n  \n  build-macos:\n    runs-on: macos-latest  # macOS Monterey\n  \n  build-specific:\n    runs-on: ubuntu-22.04  # Specific version\n```\n\n## Runner Specs\n\n| Runner | vCPU | RAM | SSD |\n|--------|------|-----|-----|\n| `ubuntu-latest` | 4 | 16 GB | 14 GB |\n| `windows-latest` | 4 | 16 GB | 14 GB |\n| `macos-latest` | 3 | 14 GB | 14 GB |\n| `macos-latest-xlarge` | 12 | 30 GB | 14 GB |\n\n## Self-Hosted Runners\n\n```yaml\njobs:\n  build:\n    runs-on: self-hosted\n    # Or with labels\n    runs-on: [self-hosted, linux, x64, gpu]\n```\n\n## Container Jobs\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    container:\n      image: node:20-alpine\n      credentials:\n        username: ${{ secrets.DOCKER_USER }}\n        password: ${{ secrets.DOCKER_PASSWORD }}\n```"
+        },
+        {
+            "id": "github_7",
+            "type": "content",
+            "title": "Secrets & Variables",
+            "content": "# Secrets & Variables 🔐\n\n## Repository Secrets\n\n```yaml\nsteps:\n  - name: Deploy\n    env:\n      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}\n      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}\n    run: ./deploy.sh\n```\n\n## Environment Secrets\n\n```yaml\njobs:\n  deploy:\n    environment: production\n    steps:\n      - run: echo ${{ secrets.PROD_API_KEY }}\n```\n\n## Variables (Non-secret)\n\n```yaml\n# Access repository/organization variables\nrun: echo ${{ vars.APP_NAME }}\n```\n\n## Default Environment Variables\n\n```yaml\nsteps:\n  - run: |\n      echo \"Repository: $GITHUB_REPOSITORY\"\n      echo \"SHA: $GITHUB_SHA\"\n      echo \"Ref: $GITHUB_REF\"\n      echo \"Actor: $GITHUB_ACTOR\"\n      echo \"Workflow: $GITHUB_WORKFLOW\"\n      echo \"Run ID: $GITHUB_RUN_ID\"\n```\n\n## Secret Masking\n\n```yaml\n# Automatically mask any secret value in logs\nrun: |\n  echo \"::add-mask::${{ secrets.MY_SECRET }}\"\n```"
+        },
+        {
+            "id": "github_8",
+            "type": "content",
+            "title": "Matrix Builds",
+            "content": "# Matrix Builds ⚡\n\nTest multiple configurations in parallel.\n\n```yaml\njobs:\n  test:\n    runs-on: ${{ matrix.os }}\n    strategy:\n      fail-fast: false\n      max-parallel: 4\n      matrix:\n        os: [ubuntu-latest, windows-latest, macos-latest]\n        node: [18, 20, 22]\n        include:\n          - os: ubuntu-latest\n            node: 22\n            experimental: true\n        exclude:\n          - os: windows-latest\n            node: 18\n    \n    name: Node ${{ matrix.node }} on ${{ matrix.os }}\n    \n    steps:\n      - uses: actions/checkout@v4\n      \n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ matrix.node }}\n      \n      - run: npm test\n      \n      - if: matrix.experimental\n        run: npm run test:experimental\n```\n\n## Matrix Options\n\n| Option | Description |\n|--------|-------------|\n| `fail-fast` | Stop all jobs if one fails |\n| `max-parallel` | Limit concurrent jobs |\n| `include` | Add specific combinations |\n| `exclude` | Remove combinations |"
+        },
+        {
+            "id": "github_9",
+            "type": "content",
+            "title": "Job Dependencies",
+            "content": "# Job Dependencies & Conditions 🔗\n\n## Sequential Jobs\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run build\n      \n  test:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm test\n      \n  deploy:\n    needs: [build, test]  # Both must pass\n    runs-on: ubuntu-latest\n    steps:\n      - run: ./deploy.sh\n```\n\n## Conditional Execution\n\n```yaml\njobs:\n  deploy-prod:\n    if: github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest\n    steps:\n      - run: ./deploy.sh\n  \n  notify:\n    needs: [build, test]\n    if: always()  # Run even if dependencies fail\n    steps:\n      - if: ${{ needs.test.result == 'failure' }}\n        run: echo \"Tests failed!\"\n```\n\n## Common Conditions\n\n| Condition | Meaning |\n|-----------|--------|\n| `success()` | All previous jobs passed |\n| `failure()` | Any previous job failed |\n| `always()` | Always run |\n| `cancelled()` | Workflow cancelled |\n\n## Branch Conditions\n\n```yaml\nif: github.event_name == 'push' && github.ref == 'refs/heads/main'\nif: contains(github.event.head_commit.message, '[skip ci]') == false\n```"
+        },
+        {
+            "id": "github_10",
+            "type": "quiz",
+            "title": "Matrix Quiz",
+            "content": "Test your matrix build knowledge!",
+            "quizQuestion": "What does `fail-fast: false` do in a matrix strategy?",
+            "quizOptions": [
+                "Makes all jobs run faster",
+                "Continues other matrix jobs even if one fails",
+                "Stops all jobs immediately on failure",
+                "Removes failed jobs from the matrix"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "github_11",
+            "type": "content",
+            "title": "Artifacts",
+            "content": "# Artifacts 📦\n\nShare files between jobs and store build outputs.\n\n## Upload Artifact\n\n```yaml\nbuild:\n  runs-on: ubuntu-latest\n  steps:\n    - run: npm run build\n    \n    - name: Upload build artifacts\n      uses: actions/upload-artifact@v4\n      with:\n        name: dist\n        path: |\n          dist/\n          coverage/\n        retention-days: 7\n        if-no-files-found: error\n```\n\n## Download Artifact\n\n```yaml\ndeploy:\n  needs: build\n  runs-on: ubuntu-latest\n  steps:\n    - name: Download build artifacts\n      uses: actions/download-artifact@v4\n      with:\n        name: dist\n        path: ./dist\n    \n    - run: ls -la ./dist\n```\n\n## Download All Artifacts\n\n```yaml\n- uses: actions/download-artifact@v4\n  # No name = download all\n```\n\n## Artifact Limits\n\n| Limit | Value |\n|-------|-------|\n| **Max size** | 10 GB per artifact |\n| **Retention** | 90 days (configurable) |\n| **Storage** | Counted against quota |"
+        },
+        {
+            "id": "github_12",
+            "type": "content",
+            "title": "Caching",
+            "content": "# Caching Dependencies 🗄️\n\nSpeed up workflows by caching.\n\n## Basic Cache\n\n```yaml\n- name: Cache node modules\n  uses: actions/cache@v4\n  with:\n    path: ~/.npm\n    key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}\n    restore-keys: |\n      ${{ runner.os }}-npm-\n```\n\n## Setup Actions with Cache\n\n```yaml\n# Node.js - built-in caching\n- uses: actions/setup-node@v4\n  with:\n    node-version: 20\n    cache: 'npm'  # or 'yarn', 'pnpm'\n\n# Python\n- uses: actions/setup-python@v5\n  with:\n    python-version: '3.11'\n    cache: 'pip'\n```\n\n## Multi-Path Cache\n\n```yaml\n- uses: actions/cache@v4\n  with:\n    path: |\n      ~/.npm\n      node_modules\n      ~/.cache/playwright\n    key: deps-${{ hashFiles('package-lock.json') }}\n```\n\n## Cache Limits\n\n| Limit | Value |\n|-------|-------|\n| **Max size** | 10 GB per repo |\n| **Entry limit** | 10 GB per cache |\n| **Retention** | 7 days unused |"
+        },
+        {
+            "id": "github_13",
+            "type": "content",
+            "title": "Environments",
+            "content": "# Environments 🌍\n\nManage deployments with protection rules.\n\n## Environment Configuration\n\n```yaml\njobs:\n  deploy-staging:\n    runs-on: ubuntu-latest\n    environment:\n      name: staging\n      url: https://staging.example.com\n    steps:\n      - run: ./deploy.sh staging\n  \n  deploy-production:\n    needs: deploy-staging\n    runs-on: ubuntu-latest\n    environment:\n      name: production\n      url: https://example.com\n    steps:\n      - run: ./deploy.sh production\n```\n\n## Environment Protection Rules\n\nConfigure in GitHub Settings:\n\n| Rule | Description |\n|------|-------------|\n| **Required reviewers** | Manual approval |\n| **Wait timer** | Delay before deploy |\n| **Branch rules** | Limit source branches |\n| **Custom rules** | External checks |\n\n## Environment Secrets\n\n```yaml\n# Secrets scoped to environment\n- run: echo ${{ secrets.PROD_API_KEY }}\n  # Only available when job runs in 'production' environment\n```\n\n## Deployment Status\n\n```yaml\n# Creates deployment record in GitHub\nenvironment:\n  name: production\n  url: ${{ steps.deploy.outputs.url }}\n```"
+        },
+        {
+            "id": "github_14",
+            "type": "content",
+            "title": "Reusable Workflows",
+            "content": "# Reusable Workflows 🔄\n\nShare workflows across repositories.\n\n## Define Reusable Workflow\n\n```yaml\n# .github/workflows/deploy.yml\nname: Reusable Deploy\n\non:\n  workflow_call:\n    inputs:\n      environment:\n        required: true\n        type: string\n      version:\n        required: false\n        type: string\n        default: 'latest'\n    secrets:\n      deploy_key:\n        required: true\n    outputs:\n      url:\n        description: 'Deployment URL'\n        value: ${{ jobs.deploy.outputs.url }}\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment: ${{ inputs.environment }}\n    outputs:\n      url: ${{ steps.deploy.outputs.url }}\n    steps:\n      - name: Deploy\n        id: deploy\n        run: |\n          echo \"Deploying ${{ inputs.version }}\"\n          echo \"url=https://${{ inputs.environment }}.example.com\" >> $GITHUB_OUTPUT\n```\n\n## Call Reusable Workflow\n\n```yaml\njobs:\n  deploy:\n    uses: ./.github/workflows/deploy.yml\n    # Or from another repo\n    # uses: owner/repo/.github/workflows/deploy.yml@main\n    with:\n      environment: production\n      version: '1.0.0'\n    secrets:\n      deploy_key: ${{ secrets.DEPLOY_KEY }}\n```"
+        },
+        {
+            "id": "github_15",
+            "type": "quiz",
+            "title": "Environments Quiz",
+            "content": "Test your environments knowledge!",
+            "quizQuestion": "What is the purpose of 'required reviewers' in GitHub Environments?",
+            "quizOptions": [
+                "To review code changes",
+                "To require manual approval before deployment",
+                "To assign tickets",
+                "To send notifications"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "github_16",
+            "type": "content",
+            "title": "Composite Actions",
+            "content": "# Composite Actions 🧱\n\nCreate reusable step sequences.\n\n## Define Composite Action\n\n```yaml\n# .github/actions/setup-project/action.yml\nname: 'Setup Project'\ndescription: 'Setup Node.js and install dependencies'\n\ninputs:\n  node-version:\n    description: 'Node.js version'\n    required: false\n    default: '20'\n\noutputs:\n  cache-hit:\n    description: 'Whether cache was hit'\n    value: ${{ steps.cache.outputs.cache-hit }}\n\nruns:\n  using: 'composite'\n  steps:\n    - name: Setup Node.js\n      uses: actions/setup-node@v4\n      with:\n        node-version: ${{ inputs.node-version }}\n    \n    - name: Cache dependencies\n      id: cache\n      uses: actions/cache@v4\n      with:\n        path: node_modules\n        key: npm-${{ hashFiles('package-lock.json') }}\n    \n    - name: Install dependencies\n      if: steps.cache.outputs.cache-hit != 'true'\n      shell: bash\n      run: npm ci\n```\n\n## Use Composite Action\n\n```yaml\nsteps:\n  - uses: actions/checkout@v4\n  \n  - name: Setup project\n    uses: ./.github/actions/setup-project\n    with:\n      node-version: '22'\n  \n  - run: npm test\n```"
+        },
+        {
+            "id": "github_17",
+            "type": "content",
+            "title": "Docker Actions",
+            "content": "# Docker Actions 🐳\n\nRun actions in containers.\n\n## Container Jobs\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    container:\n      image: node:20-alpine\n      options: --cpus 2 --memory 4g\n      volumes:\n        - /data:/data\n    \n    steps:\n      - uses: actions/checkout@v4\n      - run: npm test\n```\n\n## Service Containers\n\n```yaml\njobs:\n  test:\n    runs-on: ubuntu-latest\n    \n    services:\n      postgres:\n        image: postgres:15\n        env:\n          POSTGRES_PASSWORD: postgres\n        ports:\n          - 5432:5432\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n          --health-timeout 5s\n          --health-retries 5\n      \n      redis:\n        image: redis:7\n        ports:\n          - 6379:6379\n    \n    steps:\n      - run: |\n          psql -h localhost -U postgres -c 'SELECT 1'\n        env:\n          PGPASSWORD: postgres\n```\n\n## Docker Build & Push\n\n```yaml\n- uses: docker/login-action@v3\n  with:\n    registry: ghcr.io\n    username: ${{ github.actor }}\n    password: ${{ secrets.GITHUB_TOKEN }}\n\n- uses: docker/build-push-action@v5\n  with:\n    push: true\n    tags: ghcr.io/${{ github.repository }}:latest\n```"
+        },
+        {
+            "id": "github_18",
+            "type": "content",
+            "title": "Security Best Practices",
+            "content": "# Security Best Practices 🔒\n\n## Secret Handling\n\n```yaml\n# ✅ Use secrets from secure storage\nenv:\n  API_KEY: ${{ secrets.API_KEY }}\n\n# ❌ Never hardcode secrets\n# ❌ Never log secrets\n- run: echo ${{ secrets.API_KEY }}  # MASKED\n```\n\n## Permissions\n\n```yaml\n# Limit token permissions\npermissions:\n  contents: read\n  packages: write\n  pull-requests: write\n\njobs:\n  build:\n    permissions:\n      contents: read  # Job-level override\n```\n\n## Dependency Security\n\n```yaml\n# Pin action versions\nuses: actions/checkout@v4  # ✓ Major version\nuses: actions/checkout@a1...  # ✓ SHA (most secure)\nuses: actions/checkout@main  # ✗ Avoid branch refs\n```\n\n## Fork Security\n\n```yaml\n# Prevent secrets in fork PRs\njobs:\n  build:\n    if: github.event.pull_request.head.repo.full_name == github.repository\n```\n\n## Security Checklist\n\n- ✅ Use `GITHUB_TOKEN` with least privilege\n- ✅ Pin action versions\n- ✅ Review third-party actions\n- ✅ Don't expose secrets in logs\n- ✅ Use environments for production"
+        },
+        {
+            "id": "github_19",
+            "type": "content",
+            "title": "Complete Workflow Example",
+            "content": "# Complete CI/CD Workflow 🚀\n\n```yaml\nname: CI/CD\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\npermissions:\n  contents: read\n  packages: write\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n          cache: npm\n      - run: npm ci\n      - run: npm test\n      - uses: codecov/codecov-action@v4\n  \n  build:\n    needs: test\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: docker/build-push-action@v5\n        with:\n          push: ${{ github.ref == 'refs/heads/main' }}\n          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}\n  \n  deploy:\n    needs: build\n    if: github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest\n    environment:\n      name: production\n      url: https://example.com\n    steps:\n      - run: kubectl set image deployment/app app=ghcr.io/${{ github.repository }}:${{ github.sha }}\n```"
+        },
+        {
+            "id": "github_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall GitHub Actions knowledge!",
+            "quizQuestion": "What is the most secure way to reference a GitHub Action?",
+            "quizOptions": [
+                "uses: actions/checkout@main",
+                "uses: actions/checkout@latest",
+                "uses: actions/checkout@v4",
+                "uses: actions/checkout@a12a3943..."
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "github_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered GitHub Actions!\n\n## Key Takeaways\n\n### Workflow Basics 📐\n- ✅ YAML in `.github/workflows/`\n- ✅ Triggers with `on:`\n- ✅ Jobs and steps\n\n### Actions 🧩\n- ✅ Reusable components\n- ✅ Marketplace actions\n- ✅ Custom composite actions\n\n### Features ⚡\n- ✅ Matrix builds\n- ✅ Caching\n- ✅ Artifacts\n- ✅ Environments\n\n### Security 🔒\n- ✅ Secrets management\n- ✅ Permissions\n- ✅ Pin action versions\n\n## Quick Reference\n\n```yaml\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm test\n```\n\n> 🐙 **Remember:** GitHub Actions = Powerful, integrated, and free CI/CD!\n\nHappy automating! 🚀"
+        }
+    ]
+}

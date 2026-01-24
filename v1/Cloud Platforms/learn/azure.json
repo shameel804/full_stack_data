@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_azure",
+    "topicId": "azure",
+    "topicTitle": "Microsoft Azure",
+    "description": "Master Azure core services including Virtual Machines, Blob Storage, Azure Functions, and SQL Database",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "azure_1",
+            "type": "content",
+            "title": "Welcome to Azure",
+            "content": "# Microsoft Azure ☁️\n\nAzure is Microsoft's cloud computing platform, offering 200+ services for building, deploying, and managing applications.\n\n## What You'll Learn\n- **Virtual Machines** - Scalable compute resources\n- **Blob Storage** - Object storage for unstructured data\n- **Azure Functions** - Serverless compute\n- **SQL Database** - Managed SQL Server in the cloud\n\n## Why Azure?\n| Feature | Benefit |\n|---------|--------|\n| **Hybrid Ready** | Seamless on-prem integration |\n| **Enterprise Focus** | Microsoft ecosystem integration |\n| **Global Scale** | 60+ regions worldwide |\n| **Compliance** | 90+ compliance certifications |\n\n> 💡 **Fun Fact:** Azure was launched in 2010 as \"Windows Azure\" and rebranded to \"Microsoft Azure\" in 2014!"
+        },
+        {
+            "id": "azure_2",
+            "type": "content",
+            "title": "Azure Global Infrastructure",
+            "content": "# Azure Regions & Availability 🌍\n\nAzure operates the largest global cloud infrastructure.\n\n## Key Concepts\n\n### Regions\n- Geographic areas with data centers\n- Examples: `East US`, `West Europe`, `Southeast Asia`\n- Over 60 regions worldwide\n\n### Availability Zones\n- Physically separate locations within a region\n- Independent power, cooling, networking\n- 99.99% SLA for VMs\n\n### Region Pairs\n- Each region paired with another 300+ miles away\n- Automatic replication for some services\n- Priority recovery during outages\n\n```\nAzure Region (East US)\n├── Availability Zone 1\n├── Availability Zone 2\n└── Availability Zone 3\n        │\n        └── Paired with: West US\n```\n\n## Resource Organization\n```\nManagement Groups\n└── Subscriptions\n    └── Resource Groups\n        └── Resources (VMs, Storage, etc.)\n```"
+        },
+        {
+            "id": "azure_3",
+            "type": "content",
+            "title": "Azure Virtual Machines",
+            "content": "# Azure Virtual Machines 🖥️\n\nOn-demand, scalable computing resources in the cloud.\n\n## What are Azure VMs?\n- Windows or Linux virtual servers\n- Full control over OS and software\n- Pay-per-minute billing\n- Flexible sizing options\n\n## VM Series\n\n| Series | Optimized For | Use Case |\n|--------|--------------|----------|\n| **B** | Burstable | Dev/test, low traffic |\n| **D** | General purpose | Most workloads |\n| **E** | Memory | Databases, caching |\n| **F** | Compute | Batch, gaming |\n| **N** | GPU | ML, rendering |\n\n## Common Sizes\n```\nStandard_B1s  - 1 vCPU, 1 GB RAM (Budget)\nStandard_D2s_v3 - 2 vCPU, 8 GB RAM (General)\nStandard_E4s_v3 - 4 vCPU, 32 GB RAM (Memory)\nStandard_F4s_v2 - 4 vCPU, 8 GB RAM (Compute)\n```\n\n> 💰 **Free Tier:** 750 hours/month of B1s Windows or Linux VM for 12 months!"
+        },
+        {
+            "id": "azure_4",
+            "type": "content",
+            "title": "Creating Azure VMs",
+            "content": "# Creating Virtual Machines 🚀\n\nMultiple ways to create and manage VMs.\n\n## Azure Portal Steps\n1. Navigate to Virtual Machines\n2. Click \"Create\" → \"Azure virtual machine\"\n3. Configure basics (name, region, image)\n4. Select size\n5. Configure networking\n6. Review and create\n\n## Azure CLI\n```bash\n# Create resource group\naz group create --name myRG --location eastus\n\n# Create VM\naz vm create \\\n  --resource-group myRG \\\n  --name myVM \\\n  --image Ubuntu2204 \\\n  --size Standard_B1s \\\n  --admin-username azureuser \\\n  --generate-ssh-keys\n\n# Open port 80\naz vm open-port --port 80 --resource-group myRG --name myVM\n```\n\n## Connect to VM\n```bash\n# Linux (SSH)\nssh azureuser@<public-ip>\n\n# Windows (RDP)\nmstsc /v:<public-ip>\n```\n\n## PowerShell\n```powershell\nNew-AzVM -ResourceGroupName \"myRG\" `\n  -Name \"myVM\" `\n  -Location \"EastUS\" `\n  -Image \"Win2019Datacenter\" `\n  -Size \"Standard_D2s_v3\"\n```"
+        },
+        {
+            "id": "azure_quiz_1",
+            "type": "quiz",
+            "title": "VM Knowledge Check",
+            "content": "Test your Azure VM knowledge!",
+            "quizQuestion": "Which Azure VM series is optimized for memory-intensive workloads like databases?",
+            "quizOptions": [
+                "B-series (Burstable)",
+                "D-series (General Purpose)",
+                "E-series (Memory Optimized)",
+                "F-series (Compute Optimized)"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "azure_5",
+            "type": "content",
+            "title": "VM Availability Options",
+            "content": "# High Availability for VMs 🔄\n\nEnsure your VMs are always running.\n\n## Availability Sets\n- Distribute VMs across fault domains\n- Protect from hardware failures\n- 99.95% SLA\n\n```\nAvailability Set\n├── Fault Domain 0\n│   └── VM1, VM3\n├── Fault Domain 1\n│   └── VM2, VM4\n└── Update Domain (rolling updates)\n```\n\n## Availability Zones\n- Physically separate data centers\n- Each zone has independent infrastructure\n- 99.99% SLA\n\n## Scale Sets (VMSS)\n- Auto-scaling groups of identical VMs\n- Load balanced automatically\n- Scale from 0 to 1000+ VMs\n\n```bash\n# Create scale set\naz vmss create \\\n  --resource-group myRG \\\n  --name myScaleSet \\\n  --image Ubuntu2204 \\\n  --instance-count 3 \\\n  --upgrade-policy-mode automatic\n```\n\n## Comparison\n| Feature | Availability Set | Availability Zone | Scale Set |\n|---------|-----------------|--------------------|----------|\n| Isolation | Rack-level | Data center | Either |\n| Auto-scale | No | No | Yes |\n| SLA | 99.95% | 99.99% | Depends |"
+        },
+        {
+            "id": "azure_6",
+            "type": "content",
+            "title": "Azure Blob Storage Introduction",
+            "content": "# Azure Blob Storage 📦\n\nMassively scalable object storage for unstructured data.\n\n## What is Blob Storage?\n- Store any type of data (images, videos, logs)\n- Accessed via HTTP/HTTPS\n- Unlimited capacity\n- 11 9's durability (99.999999999%)\n\n## Storage Hierarchy\n```\nStorage Account\n└── Container\n    ├── Blob (file.jpg)\n    ├── Blob (document.pdf)\n    └── Virtual Directory/\n        └── Blob (data.csv)\n```\n\n## Blob Types\n\n| Type | Description | Use Case |\n|------|-------------|----------|\n| **Block Blob** | Text and binary data | Images, documents |\n| **Append Blob** | Optimized for append | Log files |\n| **Page Blob** | Random read/write | VHD disks |\n\n## Access Tiers\n- **Hot** - Frequently accessed (highest storage cost)\n- **Cool** - Infrequently accessed (30-day minimum)\n- **Cold** - Rarely accessed (90-day minimum)\n- **Archive** - Offline storage (180-day minimum)\n\n> 💡 **Cost Tip:** Use lifecycle management to auto-tier blobs!"
+        },
+        {
+            "id": "azure_7",
+            "type": "content",
+            "title": "Working with Blob Storage",
+            "content": "# Blob Storage Operations 🔧\n\nManaging containers and blobs.\n\n## Azure CLI Commands\n\n```bash\n# Create storage account\naz storage account create \\\n  --name mystorageacct \\\n  --resource-group myRG \\\n  --sku Standard_LRS\n\n# Create container\naz storage container create \\\n  --name mycontainer \\\n  --account-name mystorageacct\n\n# Upload blob\naz storage blob upload \\\n  --container-name mycontainer \\\n  --file ./local-file.txt \\\n  --name remote-file.txt \\\n  --account-name mystorageacct\n\n# Download blob\naz storage blob download \\\n  --container-name mycontainer \\\n  --name remote-file.txt \\\n  --file ./downloaded.txt \\\n  --account-name mystorageacct\n\n# List blobs\naz storage blob list \\\n  --container-name mycontainer \\\n  --account-name mystorageacct\n```\n\n## Blob URLs\n```\nhttps://<account>.blob.core.windows.net/<container>/<blob>\nhttps://mystorageacct.blob.core.windows.net/images/photo.jpg\n```\n\n## Shared Access Signatures (SAS)\n```\n?sv=2021-06-08&ss=b&srt=co&sp=r&se=2024-01-01&sig=...\n```\nTime-limited, permission-scoped access tokens."
+        },
+        {
+            "id": "azure_quiz_2",
+            "type": "quiz",
+            "title": "Blob Storage Quiz",
+            "content": "Test your Blob Storage knowledge!",
+            "quizQuestion": "Which Blob access tier has the lowest storage cost but highest access cost?",
+            "quizOptions": [
+                "Hot",
+                "Cool",
+                "Cold",
+                "Archive"
+            ],
+            "correctOptionIndex": 3
+        },
+        {
+            "id": "azure_8",
+            "type": "content",
+            "title": "Blob Security & Access",
+            "content": "# Blob Storage Security 🔒\n\nSecuring your storage account and data.\n\n## Authentication Methods\n\n### 1. Access Keys\n- Full access to storage account\n- Two keys for rotation\n- Use for admin operations\n\n### 2. Shared Access Signatures (SAS)\n```\nTypes:\n- Account SAS: Access to multiple services\n- Service SAS: Access to single service\n- User Delegation SAS: Azure AD backed\n```\n\n### 3. Azure AD Authentication\n- RBAC roles for fine-grained access\n- No keys to manage\n- Recommended approach\n\n## RBAC Roles\n| Role | Permissions |\n|------|-------------|\n| Storage Blob Data Owner | Full access |\n| Storage Blob Data Contributor | Read/write/delete |\n| Storage Blob Data Reader | Read only |\n\n## Network Security\n```\nFirewall Rules:\n- Allow specific IP addresses\n- Allow virtual network subnets\n- Private endpoints for private access\n```\n\n## Encryption\n- **At rest:** Always encrypted (SSE)\n- **In transit:** HTTPS enforced\n- **Customer-managed keys:** Optional\n\n> ⚠️ **Best Practice:** Disable public access and use private endpoints for production!"
+        },
+        {
+            "id": "azure_9",
+            "type": "content",
+            "title": "Azure Functions Introduction",
+            "content": "# Azure Functions ⚡\n\nServerless compute that runs code on-demand.\n\n## What are Azure Functions?\n- Event-driven, serverless compute\n- Pay only when code runs\n- Auto-scaling built-in\n- Supports multiple languages\n\n## Supported Languages\n- C#\n- JavaScript/TypeScript\n- Python\n- Java\n- PowerShell\n- Custom handlers\n\n## Hosting Plans\n\n| Plan | Scaling | Max Timeout | Use Case |\n|------|---------|-------------|----------|\n| **Consumption** | Auto | 10 min | Variable load |\n| **Premium** | Auto | Unlimited | Always warm |\n| **Dedicated** | Manual | Unlimited | Existing App Service |\n\n## Triggers & Bindings\n```\n┌─────────────┐     ┌───────────────┐     ┌─────────────┐\n│   Trigger   │────▶│ Azure Function│────▶│   Binding   │\n│ (HTTP, Timer)│     │  (Your Code)  │     │ (Blob, Queue)│\n└─────────────┘     └───────────────┘     └─────────────┘\n```\n\n## Pricing (Consumption Plan)\n- **Free:** 1M executions/month\n- **Execution:** $0.20 per million\n- **Duration:** $0.000016/GB-second"
+        },
+        {
+            "id": "azure_10",
+            "type": "content",
+            "title": "Creating Azure Functions",
+            "content": "# Building Functions 🛠️\n\nCreating and deploying Azure Functions.\n\n## HTTP Trigger (Python)\n\n```python\nimport azure.functions as func\nimport json\n\ndef main(req: func.HttpRequest) -> func.HttpResponse:\n    name = req.params.get('name')\n    if not name:\n        try:\n            req_body = req.get_json()\n            name = req_body.get('name')\n        except ValueError:\n            pass\n    \n    if name:\n        return func.HttpResponse(\n            json.dumps({\"message\": f\"Hello, {name}!\"}),\n            mimetype=\"application/json\"\n        )\n    else:\n        return func.HttpResponse(\n            \"Please pass a name\",\n            status_code=400\n        )\n```\n\n## HTTP Trigger (JavaScript)\n\n```javascript\nmodule.exports = async function (context, req) {\n    const name = req.query.name || req.body?.name;\n    \n    context.res = {\n        status: 200,\n        body: `Hello, ${name || 'World'}!`\n    };\n};\n```\n\n## function.json\n```json\n{\n  \"bindings\": [\n    {\n      \"type\": \"httpTrigger\",\n      \"direction\": \"in\",\n      \"methods\": [\"get\", \"post\"]\n    },\n    {\n      \"type\": \"http\",\n      \"direction\": \"out\"\n    }\n  ]\n}\n```"
+        },
+        {
+            "id": "azure_11",
+            "type": "content",
+            "title": "Functions Triggers & Bindings",
+            "content": "# Triggers & Bindings 🔗\n\nConnect functions to events and services.\n\n## Common Triggers\n\n### Timer Trigger\n```json\n{\n  \"schedule\": \"0 */5 * * * *\"\n}\n```\n```python\ndef main(timer: func.TimerRequest) -> None:\n    logging.info('Timer function ran!')\n```\n\n### Blob Trigger\n```python\ndef main(blob: func.InputStream):\n    logging.info(f\"Blob name: {blob.name}\")\n    logging.info(f\"Blob size: {blob.length} bytes\")\n    content = blob.read()\n```\n\n### Queue Trigger\n```python\ndef main(msg: func.QueueMessage) -> None:\n    message = msg.get_body().decode('utf-8')\n    logging.info(f\"Queue message: {message}\")\n```\n\n## Output Bindings\n\n### Write to Blob\n```python\ndef main(req: func.HttpRequest, \n         outputBlob: func.Out[str]) -> func.HttpResponse:\n    outputBlob.set(\"Hello, World!\")\n    return func.HttpResponse(\"Blob created!\")\n```\n\n### Write to Queue\n```json\n{\n  \"type\": \"queue\",\n  \"direction\": \"out\",\n  \"queueName\": \"myqueue\"\n}\n```\n\n> 💡 **Bindings = Less boilerplate code!**"
+        },
+        {
+            "id": "azure_quiz_3",
+            "type": "quiz",
+            "title": "Functions Quiz",
+            "content": "Test your Azure Functions knowledge!",
+            "quizQuestion": "In Azure Functions, what is a 'binding'?",
+            "quizOptions": [
+                "A way to connect functions to data sources without code",
+                "A security feature for authentication",
+                "A method to bind functions together",
+                "A deployment configuration"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "azure_12",
+            "type": "content",
+            "title": "Azure SQL Database Introduction",
+            "content": "# Azure SQL Database 🗄️\n\nFully managed SQL Server database in the cloud.\n\n## What is Azure SQL?\n- Platform-as-a-Service (PaaS)\n- Built on SQL Server engine\n- Automatic updates and patching\n- Built-in high availability\n\n## Deployment Options\n\n| Option | Description |\n|--------|-------------|\n| **Single Database** | Isolated database |\n| **Elastic Pool** | Shared resources |\n| **Managed Instance** | Full SQL Server |\n\n## Service Tiers\n\n### DTU-based\n- **Basic:** 5 DTUs, dev/test\n- **Standard:** 10-3000 DTUs\n- **Premium:** High performance\n\n### vCore-based\n- **General Purpose:** Balanced\n- **Business Critical:** High IOPS\n- **Hyperscale:** Up to 100TB\n\n## Key Features\n- ✅ 99.99% availability SLA\n- ✅ Geo-replication\n- ✅ Automatic backups (35 days)\n- ✅ Advanced threat protection\n- ✅ Automatic tuning\n\n> 💡 **When to use:** Modernizing SQL Server apps without managing infrastructure!"
+        },
+        {
+            "id": "azure_13",
+            "type": "content",
+            "title": "Creating Azure SQL Database",
+            "content": "# Setting Up Azure SQL 🚀\n\nCreate and connect to Azure SQL Database.\n\n## Azure CLI\n```bash\n# Create SQL server\naz sql server create \\\n  --name myserver \\\n  --resource-group myRG \\\n  --location eastus \\\n  --admin-user sqladmin \\\n  --admin-password MyP@ssw0rd!\n\n# Create database\naz sql db create \\\n  --server myserver \\\n  --resource-group myRG \\\n  --name mydb \\\n  --service-objective S0\n\n# Configure firewall\naz sql server firewall-rule create \\\n  --server myserver \\\n  --resource-group myRG \\\n  --name AllowMyIP \\\n  --start-ip-address 123.123.123.123 \\\n  --end-ip-address 123.123.123.123\n```\n\n## Connection String\n```\nServer=tcp:myserver.database.windows.net,1433;\nDatabase=mydb;\nUser ID=sqladmin;\nPassword=MyP@ssw0rd!;\nEncrypt=true;\n```\n\n## Python Connection\n```python\nimport pyodbc\n\nconn = pyodbc.connect(\n    'DRIVER={ODBC Driver 18 for SQL Server};'\n    'SERVER=myserver.database.windows.net;'\n    'DATABASE=mydb;'\n    'UID=sqladmin;'\n    'PWD=MyP@ssw0rd!'\n)\n```"
+        },
+        {
+            "id": "azure_14",
+            "type": "content",
+            "title": "SQL Database Security",
+            "content": "# SQL Security Features 🔐\n\nProtecting your database.\n\n## Authentication\n\n### SQL Authentication\n- Username/password\n- Stored in database\n\n### Azure AD Authentication\n- Centralized identity\n- MFA support\n- Recommended approach\n\n## Network Security\n\n### Firewall Rules\n```bash\n# Allow Azure services\naz sql server firewall-rule create \\\n  --name AllowAzure \\\n  --server myserver \\\n  --start-ip-address 0.0.0.0 \\\n  --end-ip-address 0.0.0.0\n```\n\n### Private Endpoints\n- Access from VNet only\n- No public internet exposure\n\n## Data Protection\n\n| Feature | Description |\n|---------|-------------|\n| **TDE** | Transparent Data Encryption (at rest) |\n| **Always Encrypted** | Client-side encryption |\n| **Dynamic Data Masking** | Hide sensitive data |\n| **Row-Level Security** | Filter rows per user |\n\n## Auditing\n```json\n{\n  \"auditActionsAndGroups\": [\n    \"SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\",\n    \"FAILED_DATABASE_AUTHENTICATION_GROUP\"\n  ]\n}\n```"
+        },
+        {
+            "id": "azure_15",
+            "type": "content",
+            "title": "SQL High Availability",
+            "content": "# High Availability & DR 🔄\n\nEnsure database uptime and data protection.\n\n## Built-in HA\n\n### Locally Redundant\n```\nPrimary Replica ──▶ Secondary Replica 1\n        │\n        └──▶ Secondary Replica 2\n```\n- 3 replicas within data center\n- Automatic failover\n- Included in all tiers\n\n## Geo-Replication\n\n### Active Geo-Replication\n- Up to 4 readable secondaries\n- Any region\n- Read offload and DR\n\n```bash\naz sql db replica create \\\n  --name mydb \\\n  --server myserver \\\n  --resource-group myRG \\\n  --partner-server myserver-dr \\\n  --partner-resource-group myRG-dr\n```\n\n### Auto-Failover Groups\n- Automatic failover\n- Single connection string\n- RPO < 5 seconds\n\n## Backup & Restore\n\n| Backup Type | Frequency | Retention |\n|-------------|-----------|----------|\n| Full | Weekly | 7-35 days |\n| Differential | Every 12h | Same |\n| Transaction Log | Every 5-10 min | Same |\n\n```bash\n# Point-in-time restore\naz sql db restore \\\n  --dest-name mydb-restored \\\n  --name mydb \\\n  --server myserver \\\n  --time \"2024-01-15T10:00:00Z\"\n```"
+        },
+        {
+            "id": "azure_quiz_4",
+            "type": "quiz",
+            "title": "SQL Database Quiz",
+            "content": "Test your Azure SQL knowledge!",
+            "quizQuestion": "What does TDE stand for in Azure SQL Database?",
+            "quizOptions": [
+                "Total Data Encryption",
+                "Transparent Data Encryption",
+                "Transfer Data Encryption",
+                "Temporary Data Encryption"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "azure_16",
+            "type": "content",
+            "title": "Azure Resource Management",
+            "content": "# Azure Resource Manager 📋\n\nManage and organize Azure resources.\n\n## Resource Groups\n- Logical containers for resources\n- Same lifecycle management\n- Apply policies and RBAC\n\n```bash\n# Create resource group\naz group create --name myRG --location eastus\n\n# List resources in group\naz resource list --resource-group myRG\n\n# Delete entire group\naz group delete --name myRG\n```\n\n## Tags\n```bash\n# Add tags\naz resource tag \\\n  --tags Environment=Production Department=IT \\\n  --id /subscriptions/.../resourceGroups/myRG\n```\n\n## ARM Templates\n```json\n{\n  \"$schema\": \"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\n  \"contentVersion\": \"1.0.0.0\",\n  \"resources\": [\n    {\n      \"type\": \"Microsoft.Storage/storageAccounts\",\n      \"apiVersion\": \"2021-09-01\",\n      \"name\": \"mystorageacct\",\n      \"location\": \"[resourceGroup().location]\",\n      \"sku\": {\n        \"name\": \"Standard_LRS\"\n      },\n      \"kind\": \"StorageV2\"\n    }\n  ]\n}\n```\n\n## Bicep (Modern IaC)\n```bicep\nresource storage 'Microsoft.Storage/storageAccounts@2021-09-01' = {\n  name: 'mystorageacct'\n  location: resourceGroup().location\n  sku: { name: 'Standard_LRS' }\n  kind: 'StorageV2'\n}\n```"
+        },
+        {
+            "id": "azure_17",
+            "type": "content",
+            "title": "Azure Identity & Access",
+            "content": "# Azure Active Directory 🔐\n\nIdentity and access management for Azure.\n\n## Key Concepts\n\n### Users & Groups\n- Individual identities\n- Security groups for access\n- Dynamic membership rules\n\n### App Registrations\n- Register apps for Azure AD\n- OAuth 2.0 / OpenID Connect\n- Managed identities\n\n### RBAC (Role-Based Access Control)\n```\n┌─────────────────────────────────────┐\n│ Who (Security Principal)            │\n│  - User, Group, Service Principal   │\n├─────────────────────────────────────┤\n│ What (Role Definition)              │\n│  - Owner, Contributor, Reader       │\n├─────────────────────────────────────┤\n│ Where (Scope)                       │\n│  - Management Group/Sub/RG/Resource │\n└─────────────────────────────────────┘\n```\n\n## Built-in Roles\n\n| Role | Permissions |\n|------|-------------|\n| **Owner** | Full access + assign roles |\n| **Contributor** | Full access, no role assignment |\n| **Reader** | View only |\n| **User Access Admin** | Manage user access |\n\n## Managed Identities\n```bash\n# System-assigned (tied to resource)\naz vm identity assign --name myVM --resource-group myRG\n\n# Use in code - no credentials needed!\nfrom azure.identity import DefaultAzureCredential\ncredential = DefaultAzureCredential()\n```"
+        },
+        {
+            "id": "azure_18",
+            "type": "content",
+            "title": "Azure Networking",
+            "content": "# Azure Virtual Network 🌐\n\nIsolated network infrastructure in Azure.\n\n## VNet Components\n\n### Virtual Network\n```bash\naz network vnet create \\\n  --name myVNet \\\n  --resource-group myRG \\\n  --address-prefixes 10.0.0.0/16\n```\n\n### Subnets\n```bash\naz network vnet subnet create \\\n  --name webSubnet \\\n  --vnet-name myVNet \\\n  --resource-group myRG \\\n  --address-prefixes 10.0.1.0/24\n```\n\n## Network Security Groups (NSG)\n```bash\n# Create NSG\naz network nsg create --name myNSG --resource-group myRG\n\n# Add rule\naz network nsg rule create \\\n  --nsg-name myNSG \\\n  --name AllowHTTP \\\n  --priority 100 \\\n  --destination-port-ranges 80 \\\n  --access Allow\n```\n\n## Architecture\n```\n┌─────────── Virtual Network ───────────┐\n│                                       │\n│  ┌─── Web Subnet ───┐ ┌─── DB Subnet ─┐\n│  │   10.0.1.0/24    │ │  10.0.2.0/24  │\n│  │  ┌──────────┐    │ │ ┌──────────┐  │\n│  │  │   VM     │    │ │ │   SQL    │  │\n│  │  └──────────┘    │ │ └──────────┘  │\n│  │      NSG         │ │     NSG       │\n│  └──────────────────┘ └───────────────┘\n│                                       │\n└───────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "azure_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall Azure knowledge!",
+            "quizQuestion": "What is Azure Managed Identity used for?",
+            "quizOptions": [
+                "Managing user passwords",
+                "Authenticating services without storing credentials in code",
+                "Creating virtual networks",
+                "Scaling virtual machines"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "azure_19",
+            "type": "content",
+            "title": "Azure Cost Management",
+            "content": "# Cost Management 💰\n\nMonitor and optimize Azure spending.\n\n## Cost Management Tools\n\n### Cost Analysis\n- View spending by service, resource group, tag\n- Filter and group costs\n- Export to CSV\n\n### Budgets\n```\nBudget: $500/month\nAlert 1: 80% → Email notification\nAlert 2: 100% → Email + Action Group\n```\n\n### Advisor Recommendations\n- Right-size VMs\n- Delete unused resources\n- Reserved Instance suggestions\n\n## Pricing Calculator\n- Estimate costs before deployment\n- Compare regions and tiers\n- Create and save estimates\n\n## Cost Saving Strategies\n\n| Strategy | Potential Savings |\n|----------|------------------|\n| Reserved Instances | Up to 72% |\n| Azure Hybrid Benefit | Up to 85% |\n| Spot VMs | Up to 90% |\n| Right-sizing | 20-30% |\n| Auto-shutdown | Variable |\n\n## Auto-shutdown\n```bash\n# Schedule VM shutdown\naz vm auto-shutdown \\\n  --resource-group myRG \\\n  --name myVM \\\n  --time 1900 \\\n  --timezone \"Pacific Standard Time\"\n```"
+        },
+        {
+            "id": "azure_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Azure Summary 🎉\n\nCongratulations! You've learned the core Azure services.\n\n## Key Takeaways\n\n### Virtual Machines\n- ✅ Flexible compute with multiple series\n- ✅ Availability Sets and Zones for HA\n- ✅ Scale Sets for auto-scaling\n\n### Blob Storage\n- ✅ Unlimited object storage\n- ✅ Multiple access tiers for cost optimization\n- ✅ SAS tokens for secure sharing\n\n### Azure Functions\n- ✅ Serverless, event-driven compute\n- ✅ Pay only for execution time\n- ✅ Triggers and bindings reduce code\n\n### SQL Database\n- ✅ Fully managed SQL Server\n- ✅ Built-in HA and geo-replication\n- ✅ Automatic backups and tuning\n\n## Next Steps\n- 📚 Get Azure Certified (AZ-900 Fundamentals)\n- 🔧 Build with Azure Free Account ($200 credit)\n- 🌐 Explore more services (Cosmos DB, App Service, AKS)\n\n> 🚀 **Pro Tip:** Use Infrastructure as Code (ARM/Bicep) for repeatable deployments!\n\nHappy cloud building! ☁️"
+        }
+    ]
+}

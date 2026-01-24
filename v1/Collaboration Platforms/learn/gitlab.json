@@ -1,0 +1,167 @@
+{
+    "id": "learn_collab_gitlab",
+    "topicId": "gitlab",
+    "topicTitle": "GitLab",
+    "description": "Master GitLab's integrated DevOps platform including CI/CD pipelines, merge requests, wikis, and project management features",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "gitlab_1",
+            "type": "content",
+            "title": "Welcome to GitLab",
+            "content": "# Introduction to GitLab 🦊\n\nGitLab is a complete **DevOps platform** delivered as a single application.\n\n## What you'll learn:\n- **Pipelines** - Automated CI/CD workflows\n- **Merge Requests** - Code review and collaboration\n- **Wikis** - Project documentation\n\n> 💡 **Fun Fact:** GitLab was started in 2011 by a Ukrainian developer and now powers millions of projects worldwide!\n\n## GitLab vs GitHub\n\n| Feature | GitLab | GitHub |\n|---------|--------|--------|\n| CI/CD | Built-in | Actions (separate) |\n| Self-hosting | Free CE edition | Enterprise only |\n| Issue boards | Included | Limited |\n| DevOps stages | All integrated | Third-party tools |\n\n## Why Choose GitLab?\n\n- 🔄 **All-in-One Platform** - From planning to monitoring\n- 🏠 **Self-Hosted Option** - Full control over your data\n- 🆓 **Generous Free Tier** - 400 CI/CD minutes/month\n- 🔐 **Security First** - Built-in security scanning\n\nLet's explore GitLab!"
+        },
+        {
+            "id": "gitlab_2",
+            "type": "content",
+            "title": "GitLab CI/CD Overview",
+            "content": "# GitLab CI/CD Pipelines 🔄\n\nGitLab CI/CD is a powerful tool for **automating** your software delivery process.\n\n## The Pipeline Concept\n\n```\n┌─────────────────────────────────────────────────────────┐\n│                      PIPELINE                           │\n├─────────┬─────────┬─────────┬─────────┬────────────────┤\n│  BUILD  │  TEST   │ ANALYZE │ DEPLOY  │   MONITOR      │\n│  Stage  │  Stage  │  Stage  │  Stage  │    Stage       │\n├─────────┼─────────┼─────────┼─────────┼────────────────┤\n│ compile │ unit    │ sast    │ staging │ performance    │\n│ package │ integr. │ dast    │ prod    │ error track    │\n└─────────┴─────────┴─────────┴─────────┴────────────────┘\n```\n\n## Key Components\n\n| Component | Description |\n|-----------|-------------|\n| **Pipeline** | Collection of jobs organized in stages |\n| **Stage** | Group of jobs that run in parallel |\n| **Job** | Basic unit of work with scripts |\n| **Runner** | Agent that executes jobs |\n| **Artifact** | Files passed between stages |\n\n## Pipeline File\n\nAll configuration lives in `.gitlab-ci.yml` at your repo root.\n\n> 🎯 **Key Point:** GitLab CI/CD is configured entirely through code!"
+        },
+        {
+            "id": "gitlab_3",
+            "type": "content",
+            "title": "Your First Pipeline",
+            "content": "# Creating Your First Pipeline 📝\n\nCreate `.gitlab-ci.yml` in your repository root:\n\n```yaml\n# Define stages (order matters)\nstages:\n  - build\n  - test\n  - deploy\n\n# Variables available to all jobs\nvariables:\n  NODE_ENV: production\n\n# Build job\nbuild-job:\n  stage: build\n  image: node:20\n  script:\n    - npm ci\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 week\n\n# Test job\ntest-job:\n  stage: test\n  image: node:20\n  script:\n    - npm ci\n    - npm test\n  coverage: '/Coverage: (\\d+\\.\\d+)%/'\n\n# Deploy job\ndeploy-job:\n  stage: deploy\n  script:\n    - echo \"Deploying to server...\"\n  only:\n    - main\n```\n\n> 💡 **Tip:** Commit this file and watch your pipeline run automatically!"
+        },
+        {
+            "id": "gitlab_4",
+            "type": "content",
+            "title": "Pipeline Configuration Deep Dive",
+            "content": "# Advanced Pipeline Configuration ⚙️\n\n## Job Keywords\n\n```yaml\nmy-job:\n  # Docker image for this job\n  image: python:3.11\n  \n  # Stage assignment\n  stage: test\n  \n  # Commands to run\n  script:\n    - pip install -r requirements.txt\n    - pytest\n  \n  # Commands before main script\n  before_script:\n    - echo \"Setting up...\"\n  \n  # Commands after main script\n  after_script:\n    - echo \"Cleaning up...\"\n  \n  # When to run the job\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n  \n  # Tags for runner selection\n  tags:\n    - docker\n    - linux\n  \n  # Allow this job to fail\n  allow_failure: true\n  \n  # Retry on failure\n  retry:\n    max: 2\n    when:\n      - runner_system_failure\n      - stuck_or_timeout_failure\n```\n\n## Parallel Jobs with Matrix\n\n```yaml\ntest:\n  stage: test\n  parallel:\n    matrix:\n      - PYTHON_VERSION: [\"3.9\", \"3.10\", \"3.11\"]\n        DATABASE: [\"postgres\", \"mysql\"]\n  image: python:$PYTHON_VERSION\n  script:\n    - pytest --db $DATABASE\n```"
+        },
+        {
+            "id": "gitlab_5",
+            "type": "quiz",
+            "title": "Pipeline Quiz",
+            "content": "Test your GitLab CI/CD knowledge!",
+            "quizQuestion": "What is the name of the configuration file for GitLab CI/CD?",
+            "quizOptions": [
+                "pipeline.yml",
+                ".gitlab-ci.yml",
+                "ci-config.yaml",
+                ".gitlab/workflows/ci.yml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_6",
+            "type": "content",
+            "title": "GitLab Runners",
+            "content": "# GitLab Runners 🏃\n\nRunners are agents that **execute** your CI/CD jobs.\n\n## Runner Types\n\n| Type | Description | Use Case |\n|------|-------------|----------|\n| **Shared** | GitLab.com provided | General purpose |\n| **Group** | Available to group projects | Team-wide |\n| **Project** | Specific to one project | Custom requirements |\n\n## Runner Executors\n\n```\n┌──────────────────────────────────────────────┐\n│                  EXECUTORS                    │\n├──────────────┬──────────────┬────────────────┤\n│    Docker    │    Shell     │  Kubernetes    │\n│              │              │                │\n│  Containers  │  Host system │   K8s pods     │\n│  Isolation   │  Direct exec │   Scalable     │\n└──────────────┴──────────────┴────────────────┘\n```\n\n## Installing a Runner\n\n```bash\n# Download runner\ncurl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash\nsudo apt-get install gitlab-runner\n\n# Register runner\nsudo gitlab-runner register\n```\n\n## Runner Tags\n\n```yaml\ndeploy-production:\n  tags:\n    - production\n    - aws\n  script:\n    - ./deploy.sh\n```\n\n> 🎯 **Tip:** Use tags to route jobs to specific runners!"
+        },
+        {
+            "id": "gitlab_7",
+            "type": "content",
+            "title": "Merge Requests Overview",
+            "content": "# Merge Requests (MRs) 🔀\n\nMerge Requests are GitLab's mechanism for **code review** and **collaboration**.\n\n## MR Workflow\n\n```\n┌──────────────┐     ┌──────────────┐     ┌──────────────┐\n│   Create     │     │    Review    │     │    Merge     │\n│   Branch     │ ──► │      &       │ ──► │     to       │\n│              │     │   Discuss    │     │    Main      │\n└──────────────┘     └──────────────┘     └──────────────┘\n       │                    │                    │\n       ▼                    ▼                    ▼\n    feature/         CI runs, reviewers      Squash/merge\n    new-login        comment on code         commits\n```\n\n## MR Features\n\n| Feature | Description |\n|---------|-------------|\n| **Diff View** | Side-by-side code comparison |\n| **Discussions** | Comment on specific lines |\n| **Approvals** | Required reviewers |\n| **CI Status** | Pipeline must pass |\n| **Conflicts** | Automatic detection |\n| **Draft MRs** | Work in progress |\n\n> 💡 **Best Practice:** Create a merge request early and mark it as Draft to get continuous feedback!"
+        },
+        {
+            "id": "gitlab_8",
+            "type": "content",
+            "title": "Creating Merge Requests",
+            "content": "# Creating a Merge Request 📝\n\n## From the Web UI\n\n1. Navigate to your project\n2. Click **Merge Requests** → **New merge request**\n3. Select source and target branches\n4. Fill in the details:\n   - Title\n   - Description (use templates!)\n   - Assignee\n   - Reviewer(s)\n   - Labels\n   - Milestone\n\n## From Command Line\n\n```bash\n# Create feature branch\ngit checkout -b feature/add-authentication\n\n# Make changes and commit\ngit add .\ngit commit -m \"Add user authentication\"\n\n# Push with MR creation\ngit push -u origin feature/add-authentication \\\n  -o merge_request.create \\\n  -o merge_request.target=main \\\n  -o merge_request.title=\"Add user authentication\" \\\n  -o merge_request.description=\"Implements OAuth2 login\"\n```\n\n## MR Description Template\n\n```markdown\n## Summary\nBrief description of changes\n\n## Changes Made\n- Change 1\n- Change 2\n\n## Testing\n- [ ] Unit tests added\n- [ ] Manual testing completed\n\n## Screenshots (if applicable)\n\nCloses #123\n```"
+        },
+        {
+            "id": "gitlab_9",
+            "type": "content",
+            "title": "Code Review in MRs",
+            "content": "# Code Review Best Practices 👀\n\n## Reviewing Code\n\n### In the Changes Tab\n- View all file changes\n- Click on a line to add comments\n- Use suggestion mode for direct fixes\n\n### Suggestion Mode\n\n```markdown\n```suggestion\nconst result = calculateTotal(items);\n```\n```\n\nAuthors can apply suggestions with one click!\n\n## Review Types\n\n| Action | Meaning |\n|--------|--------|\n| **Comment** | General feedback |\n| **Approve** | Changes are good |\n| **Request Changes** | Must fix before merge |\n\n## Approval Rules\n\n```yaml\n# In .gitlab/CODEOWNERS\n* @default-reviewers\n/src/auth/ @security-team\n/docs/ @documentation-team\n*.js @frontend-team\n```\n\n## Review Checklist\n\n- ✅ Code follows style guidelines\n- ✅ Tests are included and passing\n- ✅ No security vulnerabilities\n- ✅ Documentation updated\n- ✅ Performance considered\n\n> 🎯 **Tip:** Be constructive and specific in your feedback!"
+        },
+        {
+            "id": "gitlab_10",
+            "type": "quiz",
+            "title": "Merge Request Quiz",
+            "content": "Test your merge request knowledge!",
+            "quizQuestion": "What is the purpose of marking a Merge Request as 'Draft'?",
+            "quizOptions": [
+                "To delete the merge request",
+                "To indicate work in progress and prevent accidental merging",
+                "To assign multiple reviewers",
+                "To run the CI pipeline faster"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_11",
+            "type": "content",
+            "title": "GitLab Wiki",
+            "content": "# GitLab Wiki 📚\n\nEvery GitLab project comes with a built-in **wiki** for documentation.\n\n## Wiki Features\n\n- 📝 **Markdown Support** - Write in familiar syntax\n- 📁 **Page Hierarchy** - Organize with folders\n- 🔍 **Search** - Find content quickly\n- 📜 **Version History** - Track all changes\n- 🔗 **Git Backend** - Clone and edit locally\n\n## Creating Wiki Pages\n\n### Via Web UI\n1. Go to **Wiki** in sidebar\n2. Click **Create your first page** or **New page**\n3. Enter title and content\n4. Choose format (Markdown, RDoc, AsciiDoc)\n5. Add commit message and save\n\n### Via Git\n\n```bash\n# Clone wiki repository\ngit clone git@gitlab.com:group/project.wiki.git\ncd project.wiki\n\n# Create pages\necho \"# Home Page\" > home.md\necho \"# Installation Guide\" > installation.md\n\n# Commit and push\ngit add .\ngit commit -m \"Add wiki pages\"\ngit push origin main\n```\n\n> 💡 **Tip:** The wiki has its own git repository, separate from your project!"
+        },
+        {
+            "id": "gitlab_12",
+            "type": "content",
+            "title": "Wiki Organization",
+            "content": "# Organizing Your Wiki 🗂️\n\n## Page Structure\n\n```\nwiki/\n├── home.md                 # Landing page\n├── getting-started/\n│   ├── installation.md\n│   ├── configuration.md\n│   └── quick-start.md\n├── api/\n│   ├── overview.md\n│   ├── authentication.md\n│   └── endpoints.md\n├── development/\n│   ├── contributing.md\n│   ├── code-style.md\n│   └── testing.md\n└── _sidebar.md             # Custom sidebar\n```\n\n## Creating Subpages\n\nUse folder-like naming:\n- `getting-started/installation` creates a subpage\n- Link with `[[getting-started/installation|Installation Guide]]`\n\n## Wiki Syntax\n\n```markdown\n# Page Title\n\n## Section\n\nRegular **markdown** formatting.\n\n### Links\n- [[Other Page]]              # Link to wiki page\n- [[Page|Display Text]]       # Custom link text\n- [[folder/page]]             # Link to subpage\n\n### Table of Contents\n[[_TOC_]]\n\n### Images\n![Alt text](uploads/image.png)\n```\n\n## Custom Sidebar\n\nCreate `_sidebar.md` for navigation:\n\n```markdown\n**Navigation**\n- [[Home]]\n- [[Getting Started|getting-started/installation]]\n- [[API Reference|api/overview]]\n```"
+        },
+        {
+            "id": "gitlab_13",
+            "type": "content",
+            "title": "Pipeline Artifacts",
+            "content": "# Pipeline Artifacts 📦\n\nArtifacts are files created by jobs that can be **passed between stages** or **downloaded**.\n\n## Defining Artifacts\n\n```yaml\nbuild:\n  stage: build\n  script:\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n      - build/\n    exclude:\n      - dist/**/*.map\n    expire_in: 1 week\n    name: \"build-$CI_COMMIT_SHORT_SHA\"\n\ntest:\n  stage: test\n  script:\n    - npm test\n  artifacts:\n    reports:\n      junit: test-results.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: coverage/cobertura.xml\n    when: always  # Upload even on failure\n```\n\n## Artifact Types\n\n| Type | Purpose |\n|------|--------|\n| `paths` | General files |\n| `reports:junit` | Test results |\n| `reports:coverage_report` | Code coverage |\n| `reports:sast` | Security scan |\n| `reports:codequality` | Code quality |\n\n## Downloading Artifacts\n\n- From pipeline page: Click **Download artifacts**\n- From job: Click **Browse** or **Download**\n- Via API: `GET /projects/:id/jobs/:job_id/artifacts`\n\n> 🎯 **Tip:** Use `dependencies` to control which artifacts are downloaded!"
+        },
+        {
+            "id": "gitlab_14",
+            "type": "content",
+            "title": "Pipeline Variables",
+            "content": "# Variables in GitLab CI 🔧\n\n## Variable Types\n\n### Predefined Variables\n```yaml\njob:\n  script:\n    - echo $CI_COMMIT_SHA\n    - echo $CI_COMMIT_BRANCH\n    - echo $CI_PROJECT_NAME\n    - echo $CI_PIPELINE_ID\n    - echo $CI_JOB_NAME\n```\n\n### Custom Variables\n\n```yaml\n# Global variables\nvariables:\n  DEPLOYMENT_ENV: production\n  API_URL: https://api.example.com\n\n# Job-level variables\njob:\n  variables:\n    LOCAL_VAR: \"only in this job\"\n  script:\n    - echo $DEPLOYMENT_ENV\n    - echo $LOCAL_VAR\n```\n\n### Protected & Masked Variables\n\nSet in **Settings → CI/CD → Variables**:\n\n| Option | Effect |\n|--------|--------|\n| **Protected** | Only available on protected branches |\n| **Masked** | Hidden in job logs |\n| **Expand** | Expand variable references |\n\n## Variable Priority (lowest to highest)\n\n1. Predefined variables\n2. Project variables\n3. Group variables\n4. Instance variables\n5. Pipeline variables\n6. Job variables\n\n> ⚠️ **Security:** Never commit secrets to `.gitlab-ci.yml`!"
+        },
+        {
+            "id": "gitlab_15",
+            "type": "quiz",
+            "title": "CI/CD Features Quiz",
+            "content": "Test your knowledge of GitLab CI/CD features!",
+            "quizQuestion": "What are 'artifacts' in GitLab CI/CD?",
+            "quizOptions": [
+                "Git commit messages",
+                "Files created by jobs that can be passed between stages or downloaded",
+                "Pipeline configuration files",
+                "Docker images"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "gitlab_16",
+            "type": "content",
+            "title": "Pipeline Caching",
+            "content": "# Caching in Pipelines ⚡\n\nCaching speeds up jobs by **reusing files** from previous runs.\n\n## Basic Cache Configuration\n\n```yaml\nvariables:\n  npm_config_cache: \"$CI_PROJECT_DIR/.npm\"\n\ncache:\n  key: ${CI_COMMIT_REF_SLUG}\n  paths:\n    - .npm/\n    - node_modules/\n\nbuild:\n  script:\n    - npm ci --cache .npm\n    - npm run build\n```\n\n## Cache Strategies\n\n```yaml\njob:\n  cache:\n    key:\n      files:\n        - package-lock.json  # Key changes when file changes\n    paths:\n      - node_modules/\n    policy: pull-push  # pull, push, or pull-push\n```\n\n## Cache vs Artifacts\n\n| Feature | Cache | Artifacts |\n|---------|-------|----------|\n| Purpose | Speed up jobs | Pass files between jobs |\n| Persistence | Between pipelines | Within pipeline |\n| Location | Runner-specific | Central storage |\n| Reliability | Best-effort | Guaranteed |\n\n## Multiple Caches\n\n```yaml\njob:\n  cache:\n    - key: npm-cache\n      paths:\n        - node_modules/\n    - key: pip-cache\n      paths:\n        - .pip/\n```"
+        },
+        {
+            "id": "gitlab_17",
+            "type": "content",
+            "title": "Environments and Deployments",
+            "content": "# Environments & Deployments 🚀\n\nGitLab tracks deployments to **environments** like staging and production.\n\n## Defining Environments\n\n```yaml\ndeploy-staging:\n  stage: deploy\n  script:\n    - ./deploy.sh staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n  only:\n    - develop\n\ndeploy-production:\n  stage: deploy\n  script:\n    - ./deploy.sh production\n  environment:\n    name: production\n    url: https://example.com\n  when: manual  # Requires manual trigger\n  only:\n    - main\n```\n\n## Environment Features\n\n- 📊 **Deployment History** - Track all deployments\n- 🔙 **Rollback** - Redeploy previous versions\n- 🛑 **Stop Environment** - Clean up dynamic environments\n- 🔗 **Environment URL** - Quick access links\n\n## Dynamic Environments\n\n```yaml\nreview:\n  stage: deploy\n  script:\n    - deploy-review-app.sh\n  environment:\n    name: review/$CI_COMMIT_REF_SLUG\n    url: https://$CI_COMMIT_REF_SLUG.review.example.com\n    on_stop: stop-review\n  only:\n    - merge_requests\n\nstop-review:\n  stage: deploy\n  script:\n    - delete-review-app.sh\n  environment:\n    name: review/$CI_COMMIT_REF_SLUG\n    action: stop\n  when: manual\n```"
+        },
+        {
+            "id": "gitlab_18",
+            "type": "content",
+            "title": "GitLab Security Features",
+            "content": "# Security Scanning 🔒\n\nGitLab includes built-in **security scanning** tools.\n\n## Available Scanners\n\n| Scanner | Purpose |\n|---------|--------|\n| **SAST** | Static code analysis |\n| **DAST** | Dynamic app testing |\n| **Container Scanning** | Docker vulnerabilities |\n| **Dependency Scanning** | Library vulnerabilities |\n| **Secret Detection** | Exposed credentials |\n| **License Compliance** | License violations |\n\n## Enabling Security Scans\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n  - template: Security/Secret-Detection.gitlab-ci.yml\n  - template: Security/Dependency-Scanning.gitlab-ci.yml\n\nstages:\n  - build\n  - test\n  - security\n  - deploy\n```\n\n## Security Dashboard\n\n- View vulnerabilities across projects\n- Track remediation status\n- Set severity thresholds\n- Create issues from findings\n\n## Merge Request Blocking\n\n```yaml\nsast:\n  stage: security\n  allow_failure: false  # Block MR on failure\n```\n\n> 🔐 **Best Practice:** Run security scans on every merge request!"
+        },
+        {
+            "id": "gitlab_19",
+            "type": "content",
+            "title": "GitLab Container Registry",
+            "content": "# Container Registry 🐳\n\nGitLab provides a built-in **Docker registry** for every project.\n\n## Using the Registry\n\n```yaml\nvariables:\n  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA\n\nbuild-image:\n  stage: build\n  image: docker:latest\n  services:\n    - docker:dind\n  before_script:\n    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY\n  script:\n    - docker build -t $IMAGE_TAG .\n    - docker push $IMAGE_TAG\n\ndeploy:\n  stage: deploy\n  script:\n    - docker pull $IMAGE_TAG\n    - docker run -d $IMAGE_TAG\n```\n\n## Registry URLs\n\n```\nregistry.gitlab.com/group/project\nregistry.gitlab.com/group/project/image-name\nregistry.gitlab.com/group/project/image-name:tag\n```\n\n## Image Tagging Strategy\n\n```yaml\nvariables:\n  IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest\n  IMAGE_SHA: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA\n  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG\n\nscript:\n  - docker build -t $IMAGE_SHA -t $IMAGE_LATEST .\n  - docker push $IMAGE_SHA\n  - docker push $IMAGE_LATEST\n```\n\n> 💡 **Tip:** Use commit SHA tags for immutable references!"
+        },
+        {
+            "id": "gitlab_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall GitLab knowledge!",
+            "quizQuestion": "Which GitLab feature allows you to track and manage technical documentation alongside your project?",
+            "quizOptions": [
+                "Issues",
+                "Merge Requests",
+                "Wiki",
+                "Snippets"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "gitlab_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered GitLab fundamentals!\n\n## Key Takeaways\n\n### CI/CD Pipelines 🔄\n- ✅ Configured via `.gitlab-ci.yml`\n- ✅ Stages, jobs, and runners\n- ✅ Artifacts and caching\n- ✅ Variables for configuration\n\n### Merge Requests 🔀\n- ✅ Code review and collaboration\n- ✅ Approvals and discussions\n- ✅ Draft MRs for work in progress\n- ✅ CI integration\n\n### Wikis 📚\n- ✅ Built-in documentation\n- ✅ Markdown support\n- ✅ Git-backed for offline editing\n- ✅ Page hierarchy and organization\n\n### Additional Features\n- 🔒 Security scanning built-in\n- 🐳 Container registry included\n- 🚀 Environment management\n- 📊 Project analytics\n\n## Next Steps\n\n- 📝 Create your first `.gitlab-ci.yml`\n- 🔀 Practice merge request workflows\n- 📚 Document your project in the wiki\n- 🔒 Enable security scanning\n\n> 🦊 **Remember:** GitLab is a complete DevOps platform - explore all its features!\n\nHappy DevOps! 🚀"
+        }
+    ]
+}

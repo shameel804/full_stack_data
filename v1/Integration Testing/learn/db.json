@@ -1,0 +1,167 @@
+{
+    "id": "learn_integtest_db",
+    "topicId": "db",
+    "topicTitle": "Database Integration",
+    "description": "Master database integration testing including fixtures, migrations, transactions, and seed data management",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "db_1",
+            "type": "content",
+            "title": "Database Integration Testing",
+            "content": "# DB Integration 🗄️\n\nTesting the \"seam\" between your application logic and the permanent storage layer.\n\n- **Focus**: SQL queries, NoSQL operations, ORM mapping, and constraints.\n- **Requirement**: A real running database (not a mock!)."
+        },
+        {
+            "id": "db_2",
+            "type": "content",
+            "title": "Persistence testing",
+            "content": "# Why a real DB? 🤔\n\n- Mocks don't know about **Foreign Keys**.\n- Mocks don't know about **Triggers/Stored Procs**.\n- Mocks don't verify if your query syntax is valid for that specific ENGINE (Postgres vs MySQL)."
+        },
+        {
+            "id": "db_3",
+            "type": "content",
+            "title": "Test Databases",
+            "content": "# Isolation 🚧\n\nNever run tests against production or development databases!\n\n- **Dedicated Instance**: Spin up a fresh DB using Docker for every test run.\n- **Separate Schema**: Prefix tables or use a distinct `test_db` name."
+        },
+        {
+            "id": "db_4",
+            "type": "content",
+            "title": "Schema Migrations",
+            "content": "# Evolution 🧬\n\nYour test suite should automatically apply **Migrations** before running to ensure the test DB matches the code's expectations.\n\n```bash\nnpm run migrate:test\n```"
+        },
+        {
+            "id": "db_5",
+            "quizQuestion": "Why should database integration tests use a real database instead of a mock?",
+            "quizOptions": [
+                "It is faster",
+                "To verify constraints and engine-specific syntax",
+                "It is easier to set up",
+                "Real databases are always available"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Real vs Mock Quiz",
+            "content": "The need for reality."
+        },
+        {
+            "id": "db_6",
+            "type": "content",
+            "title": "Fixtures & Seed Data",
+            "content": "# Preparing State 🚜\n\n- **Fixtures**: JSON / YAML files containing \"Golden Records\" (e.g., standard categories).\n- **Seed Data**: Programmatically inserting data before a test (e.g., creating a User with 5 Orders)."
+        },
+        {
+            "id": "db_7",
+            "type": "content",
+            "title": "Factories",
+            "content": "# Code-based Seeds 🏗️\n\nUse factories like **FactoryBot** or **Fisherman** to easily create objects with random but valid data.\n\n```javascript\nconst user = await UserFactory.create({ title: 'Admin' });\n```"
+        },
+        {
+            "id": "db_8",
+            "type": "content",
+            "title": "Transactional Tests",
+            "content": "# Instant Cleanup 🧼\n\nRunning `TRUNCATE TABLE` after every test is slow.\n\n- **The Trick**: Start a transaction `BEFORE` the test, and `ROLLBACK` after the test. The database stays exactly as it was!"
+        },
+        {
+            "id": "db_9",
+            "type": "content",
+            "title": "Testing Constraints",
+            "content": "# Guardrails 🛡️\n\nIntegration tests should purposefully try to break constraints:\n\n- Insert a duplicate email -> Expect `UniqueConstraintError`.\n- Insert a null where forbidden -> Expect `NotNullViolation`."
+        },
+        {
+            "id": "db_10",
+            "quizQuestion": "What is the fastest way to revert a database to its original state after an integration test?",
+            "quizOptions": [
+                "Reinstall the database",
+                "Delete all rows manually",
+                "Rolling back a transaction",
+                "Restoring from a backup file"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Cleanup Quiz",
+            "content": "Effeciency."
+        },
+        {
+            "id": "db_11",
+            "type": "content",
+            "title": "NoSQL Integration",
+            "content": "# Flexible Schemas 🍃\n\nTesting MongoDB/DynamoDB focus:\n- Correct indexing for performance.\n- TTL (Time-To-Live) logic.\n- Schema validation rules if using Mongoose."
+        },
+        {
+            "id": "db_12",
+            "type": "content",
+            "title": "In-Memory Databases",
+            "content": "# Speed 🏎️\n\nFor ultra-fast tests, use an in-memory database like **SQLite** (memory mode) or **H2**. \n\n> ⚠️ Be careful! These might not support advanced features of your production DB (like JSONB or specialized triggers)."
+        },
+        {
+            "id": "db_13",
+            "type": "content",
+            "title": "Testing Connections",
+            "content": "# Networking 🌐\n\nVerify that your app handles connection pooling and retries correctly when the DB is temporarily unavailable (simulate by killing the DB process in a test)."
+        },
+        {
+            "id": "db_14",
+            "type": "content",
+            "title": "Performance: N+1",
+            "content": "# Efficiency 🐌\n\nIntegration tests can count the number of queries executed. If a simple page fetch triggers 100 queries, you've found an **N+1 problem**."
+        },
+        {
+            "id": "db_15",
+            "quizQuestion": "What is an 'N+1 problem' in database testing?",
+            "quizOptions": [
+                "One query returning N rows",
+                "An infinite loop in SQL",
+                "A performance issue where too many small queries are sent",
+                "Adding one to an ID column"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Perf Quiz",
+            "content": "Common pitfalls."
+        },
+        {
+            "id": "db_16",
+            "type": "content",
+            "title": "Encryption at Rest",
+            "content": "# Security 🔐\n\nVerify that sensitive fields (Social Security numbers, keys) are actually encrypted in the storage layer by inspecting the raw DB state in your test."
+        },
+        {
+            "id": "db_17",
+            "type": "content",
+            "title": "Testing Batch Ops",
+            "content": "# Bulk Actions 📦\n\nIntegration tests should verify that importing a CSV with 1,000 rows works within memory and time limits without crashing the process."
+        },
+        {
+            "id": "db_18",
+            "type": "content",
+            "title": "Audit Logs",
+            "content": "# Accountability 📝\n\nTest that every `UPDATE` to a sensitive record correctly creates a corresponding row in the `audit_logs` table with the correct `timestamp` and `user_id`."
+        },
+        {
+            "id": "db_19",
+            "type": "content",
+            "title": "Slow Query Detection",
+            "content": "# SLAs ⏱️\n\nIntegration tests can fail if a specific query takes longer than 200ms, ensuring you don't ship un-indexed slow code to production."
+        },
+        {
+            "id": "db_20",
+            "quizQuestion": "Which tool is commonly used to manage and apply schema changes in a repeatable way?",
+            "quizOptions": [
+                "Excel",
+                "Migrations",
+                "Word",
+                "Manual Input"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Consistency."
+        },
+        {
+            "id": "db_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Test against a **Real DB** instance.\n- ✅ Use **Docker/Containers** for local isolation.\n- ✅ Use **Transactions** for fast cleanup.\n- ✅ Automate **Schema Migrations**.\n- ✅ Verify **Constraints** and **Performance**.\n\nKeep your data layer bulletproof! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,199 @@
+{
+    "id": "learn_cloud_aws",
+    "topicId": "aws",
+    "topicTitle": "Amazon Web Services (AWS)",
+    "description": "Master AWS core services including EC2 for compute, S3 for storage, Lambda for serverless, and RDS for managed databases",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "aws_1",
+            "type": "content",
+            "title": "Welcome to AWS",
+            "content": "# Amazon Web Services ☁️\n\nAWS is the world's most comprehensive and widely adopted cloud platform, offering over 200 fully featured services.\n\n## What You'll Learn\n- **EC2** - Elastic Compute Cloud for virtual servers\n- **S3** - Simple Storage Service for object storage\n- **Lambda** - Serverless compute service\n- **RDS** - Relational Database Service\n\n## Why AWS?\n| Feature | Benefit |\n|---------|--------|\n| **Global Reach** | 30+ regions worldwide |\n| **Scalability** | Scale from 1 to millions of users |\n| **Reliability** | 99.99% uptime SLAs |\n| **Security** | Enterprise-grade security |\n\n> 💡 **Fun Fact:** AWS started in 2006 with just S3 and EC2. Today it powers Netflix, Airbnb, and NASA!"
+        },
+        {
+            "id": "aws_2",
+            "type": "content",
+            "title": "AWS Global Infrastructure",
+            "content": "# Global Infrastructure 🌍\n\nAWS operates in multiple geographic locations worldwide.\n\n## Key Concepts\n\n### Regions\n- Geographical areas containing multiple data centers\n- Examples: `us-east-1` (N. Virginia), `eu-west-1` (Ireland)\n- Choose based on latency, compliance, and cost\n\n### Availability Zones (AZs)\n- Isolated data centers within a region\n- Connected via low-latency links\n- Typically 3+ AZs per region\n\n### Edge Locations\n- CDN endpoints for CloudFront\n- 400+ locations globally\n- Reduce latency for end users\n\n```\nRegion (us-east-1)\n├── AZ-1a (Data Center)\n├── AZ-1b (Data Center)\n└── AZ-1c (Data Center)\n```\n\n> 🎯 **Best Practice:** Deploy across multiple AZs for high availability!"
+        },
+        {
+            "id": "aws_3",
+            "type": "content",
+            "title": "EC2 Introduction",
+            "content": "# Amazon EC2 🖥️\n\n**Elastic Compute Cloud** provides resizable compute capacity in the cloud.\n\n## What is EC2?\n- Virtual servers in the cloud\n- Complete control over computing resources\n- Scale capacity within minutes\n\n## Key Components\n\n| Component | Description |\n|-----------|-------------|\n| **Instance** | Virtual server |\n| **AMI** | Amazon Machine Image (template) |\n| **Instance Type** | CPU, memory, storage config |\n| **EBS** | Elastic Block Store (persistent storage) |\n| **Security Group** | Virtual firewall |\n\n## Common Instance Families\n- **t3** - General purpose, burstable\n- **m5** - General purpose, balanced\n- **c5** - Compute optimized\n- **r5** - Memory optimized\n- **p3** - GPU instances\n\n> 💰 **Cost Tip:** Use t3.micro for free tier eligibility!"
+        },
+        {
+            "id": "aws_4",
+            "type": "content",
+            "title": "Launching an EC2 Instance",
+            "content": "# Launching EC2 🚀\n\nStep-by-step process to launch your first instance.\n\n## Launch Steps\n\n### 1. Choose AMI\n```\nAmazon Linux 2023\nUbuntu Server 22.04 LTS\nWindows Server 2022\nRed Hat Enterprise Linux 9\n```\n\n### 2. Choose Instance Type\n```\nt3.micro  - 2 vCPU, 1 GB RAM (Free Tier)\nt3.small  - 2 vCPU, 2 GB RAM\nt3.medium - 2 vCPU, 4 GB RAM\n```\n\n### 3. Configure Security Group\n```\nInbound Rules:\n- SSH (22) from My IP\n- HTTP (80) from Anywhere\n- HTTPS (443) from Anywhere\n```\n\n### 4. Create Key Pair\n```bash\n# Connect to your instance\nssh -i \"my-key.pem\" ec2-user@<public-ip>\n```\n\n## AWS CLI Example\n```bash\naws ec2 run-instances \\\n  --image-id ami-0abcdef1234567890 \\\n  --instance-type t3.micro \\\n  --key-name my-key \\\n  --security-groups my-sg\n```"
+        },
+        {
+            "id": "aws_quiz_1",
+            "type": "quiz",
+            "title": "EC2 Basics Quiz",
+            "content": "Test your EC2 knowledge!",
+            "quizQuestion": "What does AMI stand for in AWS EC2?",
+            "quizOptions": [
+                "Amazon Machine Image",
+                "Amazon Managed Instance",
+                "Application Machine Interface",
+                "Automated Machine Installation"
+            ],
+            "correctOptionIndex": 0
+        },
+        {
+            "id": "aws_5",
+            "type": "content",
+            "title": "EC2 Pricing Models",
+            "content": "# EC2 Pricing 💰\n\nAWS offers multiple pricing options to optimize costs.\n\n## Pricing Models\n\n### On-Demand\n- Pay by the hour/second\n- No commitments\n- Best for: Short-term, unpredictable workloads\n\n### Reserved Instances\n- 1 or 3 year commitment\n- Up to 72% discount\n- Best for: Steady-state applications\n\n### Spot Instances\n- Bid on unused capacity\n- Up to 90% discount\n- Can be interrupted with 2-min notice\n- Best for: Fault-tolerant, flexible workloads\n\n### Savings Plans\n- Flexible pricing model\n- Commit to usage ($/hour)\n- Applies across instance families\n\n## Cost Comparison Example\n\n| Model | Hourly Cost | Monthly (730h) |\n|-------|-------------|----------------|\n| On-Demand | $0.0416 | $30.37 |\n| Reserved (1yr) | $0.025 | $18.25 |\n| Spot | $0.0125 | $9.13 |\n\n> 🎯 **Pro Tip:** Use Spot for dev/test, Reserved for production!"
+        },
+        {
+            "id": "aws_6",
+            "type": "content",
+            "title": "Amazon S3 Introduction",
+            "content": "# Amazon S3 📦\n\n**Simple Storage Service** - Object storage built to retrieve any amount of data from anywhere.\n\n## What is S3?\n- Unlimited storage capacity\n- Objects up to 5TB each\n- 99.999999999% (11 9's) durability\n- Global accessibility via URLs\n\n## Key Concepts\n\n### Buckets\n- Containers for objects\n- Globally unique names\n- Region-specific\n\n### Objects\n- Files stored in buckets\n- Key-value pairs\n- Metadata and versioning\n\n### Storage Classes\n| Class | Use Case |\n|-------|----------|\n| **Standard** | Frequently accessed |\n| **Standard-IA** | Infrequent access |\n| **Glacier** | Archive (minutes to hours) |\n| **Glacier Deep Archive** | Long-term (12+ hours) |\n\n```\ns3://my-bucket/photos/vacation/beach.jpg\n         │         │           │\n      Bucket    Prefix       Key\n```"
+        },
+        {
+            "id": "aws_7",
+            "type": "content",
+            "title": "Working with S3",
+            "content": "# S3 Operations 🔧\n\nCommon operations for managing S3 buckets and objects.\n\n## AWS CLI Commands\n\n### Create Bucket\n```bash\naws s3 mb s3://my-unique-bucket-name\n```\n\n### Upload Files\n```bash\n# Single file\naws s3 cp myfile.txt s3://my-bucket/\n\n# Entire directory\naws s3 sync ./local-folder s3://my-bucket/folder/\n```\n\n### Download Files\n```bash\naws s3 cp s3://my-bucket/myfile.txt ./\n```\n\n### List Objects\n```bash\naws s3 ls s3://my-bucket/\n```\n\n## S3 URLs\n\n### Path-Style (Legacy)\n```\nhttps://s3.amazonaws.com/bucket-name/key\n```\n\n### Virtual-Hosted Style\n```\nhttps://bucket-name.s3.amazonaws.com/key\n```\n\n## Pre-Signed URLs\n```bash\n# Generate temporary access URL (1 hour)\naws s3 presign s3://my-bucket/private-file.pdf \\\n  --expires-in 3600\n```\n\n> 🔐 **Security:** Never make buckets public unless absolutely necessary!"
+        },
+        {
+            "id": "aws_quiz_2",
+            "type": "quiz",
+            "title": "S3 Storage Quiz",
+            "content": "Test your S3 knowledge!",
+            "quizQuestion": "Which S3 storage class is best for data that is rarely accessed but requires rapid retrieval?",
+            "quizOptions": [
+                "S3 Standard",
+                "S3 Standard-IA",
+                "S3 Glacier",
+                "S3 Glacier Deep Archive"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aws_8",
+            "type": "content",
+            "title": "S3 Security & Policies",
+            "content": "# S3 Security 🔒\n\nProtecting your data in S3 with proper access controls.\n\n## Access Control Methods\n\n### 1. Bucket Policies (JSON)\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Principal\": \"*\",\n    \"Action\": \"s3:GetObject\",\n    \"Resource\": \"arn:aws:s3:::my-bucket/*\",\n    \"Condition\": {\n      \"IpAddress\": {\n        \"aws:SourceIp\": \"192.168.1.0/24\"\n      }\n    }\n  }]\n}\n```\n\n### 2. IAM Policies\n- Attached to users, groups, roles\n- Define who can access what\n\n### 3. Access Control Lists (ACLs)\n- Legacy method\n- Object-level permissions\n\n## Encryption Options\n\n| Type | Description |\n|------|-------------|\n| **SSE-S3** | AWS managed keys |\n| **SSE-KMS** | Customer managed keys |\n| **SSE-C** | Customer provided keys |\n| **Client-Side** | Encrypt before upload |\n\n> ⚠️ **Important:** Enable \"Block Public Access\" by default!"
+        },
+        {
+            "id": "aws_9",
+            "type": "content",
+            "title": "AWS Lambda Introduction",
+            "content": "# AWS Lambda ⚡\n\nRun code without provisioning or managing servers.\n\n## What is Lambda?\n- **Serverless** compute service\n- Pay only for compute time used\n- Automatic scaling\n- Zero administration\n\n## How It Works\n\n```\nEvent Source → Lambda Function → Output\n    │              │              │\n  S3 Upload    Your Code      DynamoDB\n  API Gateway  (Python/Node)  S3 Bucket\n  CloudWatch   Java/Go/Ruby   SNS Topic\n```\n\n## Key Features\n\n| Feature | Details |\n|---------|---------|\n| **Runtime** | Python, Node.js, Java, Go, Ruby, .NET |\n| **Memory** | 128 MB to 10,240 MB |\n| **Timeout** | Up to 15 minutes |\n| **Concurrency** | 1000+ simultaneous executions |\n| **Deployment** | ZIP or Container Image |\n\n## Pricing\n- **Free Tier:** 1M requests/month, 400,000 GB-seconds\n- Per request: $0.20 per 1M requests\n- Duration: $0.0000166667 per GB-second\n\n> 💡 **Use Case:** Perfect for event-driven architectures!"
+        },
+        {
+            "id": "aws_10",
+            "type": "content",
+            "title": "Creating Lambda Functions",
+            "content": "# Lambda in Action 🎬\n\nCreating and deploying Lambda functions.\n\n## Basic Lambda Function (Python)\n\n```python\nimport json\n\ndef lambda_handler(event, context):\n    # Extract data from event\n    name = event.get('name', 'World')\n    \n    # Business logic\n    message = f\"Hello, {name}!\"\n    \n    # Return response\n    return {\n        'statusCode': 200,\n        'headers': {\n            'Content-Type': 'application/json'\n        },\n        'body': json.dumps({\n            'message': message\n        })\n    }\n```\n\n## Lambda Function (Node.js)\n\n```javascript\nexports.handler = async (event) => {\n    const name = event.name || 'World';\n    \n    return {\n        statusCode: 200,\n        body: JSON.stringify({\n            message: `Hello, ${name}!`\n        })\n    };\n};\n```\n\n## Event Object Example\n```json\n{\n  \"name\": \"Alice\",\n  \"action\": \"greet\",\n  \"timestamp\": \"2024-01-15T10:30:00Z\"\n}\n```\n\n## Deploy with AWS CLI\n```bash\naws lambda create-function \\\n  --function-name my-function \\\n  --runtime python3.11 \\\n  --handler lambda_function.lambda_handler \\\n  --zip-file fileb://function.zip \\\n  --role arn:aws:iam::123456789:role/lambda-role\n```"
+        },
+        {
+            "id": "aws_11",
+            "type": "content",
+            "title": "Lambda Triggers & Integrations",
+            "content": "# Lambda Triggers 🔗\n\nLambda functions can be invoked by various AWS services.\n\n## Common Event Sources\n\n### API Gateway (REST APIs)\n```\nPOST /users → Lambda → DynamoDB\nGET /products → Lambda → Response\n```\n\n### S3 Events\n```python\ndef lambda_handler(event, context):\n    # Triggered when file uploaded to S3\n    bucket = event['Records'][0]['s3']['bucket']['name']\n    key = event['Records'][0]['s3']['object']['key']\n    print(f\"New file: s3://{bucket}/{key}\")\n```\n\n### CloudWatch Events (Scheduled)\n```yaml\n# Run every 5 minutes\nSchedule: rate(5 minutes)\n\n# Run at 9 AM UTC daily\nSchedule: cron(0 9 * * ? *)\n```\n\n### DynamoDB Streams\n- Process table changes in real-time\n- Event-driven data processing\n\n### SQS/SNS Messages\n- Decouple microservices\n- Async processing\n\n## Integration Pattern\n```\n┌─────────┐     ┌─────────┐     ┌─────────┐\n│   S3    │────▶│ Lambda  │────▶│   SNS   │\n│ Upload  │     │ Process │     │ Notify  │\n└─────────┘     └─────────┘     └─────────┘\n```"
+        },
+        {
+            "id": "aws_quiz_3",
+            "type": "quiz",
+            "title": "Lambda Quiz",
+            "content": "Test your serverless knowledge!",
+            "quizQuestion": "What is the maximum execution timeout for an AWS Lambda function?",
+            "quizOptions": [
+                "5 minutes",
+                "10 minutes",
+                "15 minutes",
+                "30 minutes"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "aws_12",
+            "type": "content",
+            "title": "Amazon RDS Introduction",
+            "content": "# Amazon RDS 🗄️\n\n**Relational Database Service** - Managed relational databases in the cloud.\n\n## What is RDS?\n- Fully managed database service\n- Automated backups, patching, scaling\n- High availability with Multi-AZ\n- Read replicas for performance\n\n## Supported Engines\n\n| Engine | Description |\n|--------|-------------|\n| **MySQL** | Popular open-source |\n| **PostgreSQL** | Advanced open-source |\n| **MariaDB** | MySQL fork |\n| **Oracle** | Enterprise database |\n| **SQL Server** | Microsoft database |\n| **Aurora** | AWS cloud-native |\n\n## Key Features\n\n### Automated Backups\n- Daily snapshots\n- Transaction logs every 5 minutes\n- Retention up to 35 days\n\n### Multi-AZ Deployment\n```\n┌──────────────┐     ┌──────────────┐\n│   Primary    │────▶│   Standby    │\n│   (AZ-1a)    │sync │   (AZ-1b)    │\n└──────────────┘     └──────────────┘\n      │                    │\n      └── Automatic Failover ─┘\n```\n\n> 🎯 **When to use RDS:** When you need a managed relational database without operational overhead."
+        },
+        {
+            "id": "aws_13",
+            "type": "content",
+            "title": "RDS Configuration",
+            "content": "# Configuring RDS 🔧\n\nSetting up and connecting to RDS databases.\n\n## Instance Classes\n\n| Class | vCPU | Memory | Use Case |\n|-------|------|--------|----------|\n| db.t3.micro | 2 | 1 GB | Dev/Test |\n| db.t3.medium | 2 | 4 GB | Small apps |\n| db.r5.large | 2 | 16 GB | Production |\n| db.r5.xlarge | 4 | 32 GB | High memory |\n\n## Storage Options\n- **General Purpose (gp2/gp3):** Balanced\n- **Provisioned IOPS (io1):** High performance\n- **Magnetic:** Legacy, cost-effective\n\n## Creating RDS Instance\n```bash\naws rds create-db-instance \\\n  --db-instance-identifier mydb \\\n  --db-instance-class db.t3.micro \\\n  --engine mysql \\\n  --master-username admin \\\n  --master-user-password MyPassword123 \\\n  --allocated-storage 20\n```\n\n## Connection String\n```python\nimport mysql.connector\n\nconn = mysql.connector.connect(\n    host=\"mydb.abc123.us-east-1.rds.amazonaws.com\",\n    port=3306,\n    user=\"admin\",\n    password=\"MyPassword123\",\n    database=\"myapp\"\n)\n```\n\n> 🔐 **Security:** Never expose RDS to the public internet. Use VPC and security groups!"
+        },
+        {
+            "id": "aws_14",
+            "type": "content",
+            "title": "RDS High Availability",
+            "content": "# RDS High Availability 🔄\n\nEnsuring your database is always available.\n\n## Multi-AZ Deployments\n\n### How It Works\n- Primary instance in one AZ\n- Synchronous standby in another AZ\n- Automatic failover (60-120 seconds)\n- Same endpoint, no app changes needed\n\n### Failover Triggers\n- AZ outage\n- Primary instance failure\n- Instance type change\n- Manual failover\n\n## Read Replicas\n\n### Purpose\n- Scale read workloads\n- Offload reporting queries\n- Cross-region disaster recovery\n\n### Configuration\n```\n┌──────────┐     ┌──────────┐     ┌──────────┐\n│  Primary │────▶│ Replica 1│     │ Replica 2│\n│  (Write) │async│  (Read)  │     │  (Read)  │\n└──────────┘     └──────────┘     └──────────┘\n                       │               │\n                       └── Read Traffic ─┘\n```\n\n## Comparison\n\n| Feature | Multi-AZ | Read Replica |\n|---------|----------|-------------|\n| Purpose | HA & DR | Performance |\n| Replication | Sync | Async |\n| Failover | Automatic | Manual |\n| Readable | No | Yes |\n| Cross-Region | No | Yes |"
+        },
+        {
+            "id": "aws_quiz_4",
+            "type": "quiz",
+            "title": "RDS Quiz",
+            "content": "Test your RDS knowledge!",
+            "quizQuestion": "What is the primary purpose of RDS Multi-AZ deployment?",
+            "quizOptions": [
+                "Improve read performance",
+                "High availability and automatic failover",
+                "Reduce storage costs",
+                "Enable cross-region replication"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aws_15",
+            "type": "content",
+            "title": "Amazon Aurora",
+            "content": "# Amazon Aurora ✨\n\nAWS cloud-native relational database with MySQL and PostgreSQL compatibility.\n\n## Why Aurora?\n\n| Feature | Aurora | Standard RDS |\n|---------|--------|-------------|\n| Performance | 5x MySQL, 3x PostgreSQL | Baseline |\n| Storage | Auto-scales to 128TB | Manual scaling |\n| Replicas | Up to 15 | Up to 5 |\n| Failover | < 30 seconds | 60-120 seconds |\n| Cost | Higher | Lower |\n\n## Aurora Architecture\n\n```\n┌─────────────────────────────────────┐\n│        Aurora Cluster               │\n│  ┌─────────┐    ┌─────────────────┐ │\n│  │ Primary │───▶│ Shared Storage  │ │\n│  └─────────┘    │   (6 copies)    │ │\n│  ┌─────────┐    │  across 3 AZs   │ │\n│  │ Replica │───▶│                 │ │\n│  └─────────┘    └─────────────────┘ │\n└─────────────────────────────────────┘\n```\n\n## Aurora Serverless\n- Auto-scaling compute\n- Pay per second\n- Perfect for variable workloads\n\n```\nCapacity: 0 ACUs (paused) ←→ 256 ACUs (max)\n```\n\n> 💡 **Use Aurora when:** You need high performance and can justify the higher cost."
+        },
+        {
+            "id": "aws_16",
+            "type": "content",
+            "title": "AWS IAM Basics",
+            "content": "# AWS IAM 🔐\n\n**Identity and Access Management** - Control who can do what in AWS.\n\n## Key Components\n\n### Users\n- Individual AWS accounts\n- Long-term credentials\n- Assigned to people\n\n### Groups\n- Collection of users\n- Shared permissions\n- Example: Developers, Admins\n\n### Roles\n- Temporary credentials\n- Assumed by services/users\n- Best for EC2, Lambda\n\n### Policies\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [{\n    \"Effect\": \"Allow\",\n    \"Action\": \"s3:GetObject\",\n    \"Resource\": \"arn:aws:s3:::my-bucket/*\"\n  }]\n}\n```\n\n## Best Practices\n- ✅ Enable MFA for all users\n- ✅ Use roles instead of access keys\n- ✅ Follow principle of least privilege\n- ✅ Rotate credentials regularly\n- ❌ Never use root account for daily tasks\n\n> ⚠️ **Critical:** Root account should only be used for billing and initial setup!"
+        },
+        {
+            "id": "aws_17",
+            "type": "content",
+            "title": "AWS VPC Basics",
+            "content": "# Amazon VPC 🌐\n\n**Virtual Private Cloud** - Your isolated network in AWS.\n\n## VPC Components\n\n### Subnets\n- **Public Subnet:** Has route to Internet Gateway\n- **Private Subnet:** No direct internet access\n\n### Internet Gateway\n- Enables internet connectivity\n- Attached to VPC\n\n### NAT Gateway\n- Allows private subnets to access internet\n- Outbound only\n\n### Route Tables\n```\nDestination     Target\n10.0.0.0/16     local\n0.0.0.0/0       igw-12345 (Internet Gateway)\n```\n\n## Typical Architecture\n```\n┌─────────────── VPC (10.0.0.0/16) ───────────────┐\n│                                                  │\n│  ┌──── Public Subnet ────┐ ┌── Private Subnet ──┐│\n│  │   10.0.1.0/24         │ │   10.0.2.0/24      ││\n│  │  ┌────────────┐       │ │  ┌────────────┐    ││\n│  │  │ Web Server │       │ │  │  Database  │    ││\n│  │  └────────────┘       │ │  └────────────┘    ││\n│  └───────────────────────┘ └────────────────────┘│\n│            │                        │            │\n│     Internet Gateway           NAT Gateway       │\n└─────────────────────────────────────────────────┘\n```"
+        },
+        {
+            "id": "aws_18",
+            "type": "content",
+            "title": "AWS CLI & SDK",
+            "content": "# AWS CLI & SDKs 🛠️\n\nProgrammatic access to AWS services.\n\n## AWS CLI Setup\n\n```bash\n# Install\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\n\n# Configure\naws configure\n# AWS Access Key ID: AKIA...\n# AWS Secret Access Key: wJalr...\n# Default region: us-east-1\n# Output format: json\n```\n\n## Common CLI Commands\n```bash\n# List S3 buckets\naws s3 ls\n\n# Describe EC2 instances\naws ec2 describe-instances\n\n# Invoke Lambda function\naws lambda invoke --function-name myFunc out.json\n\n# Get caller identity\naws sts get-caller-identity\n```\n\n## AWS SDK (Python - Boto3)\n```python\nimport boto3\n\n# S3 client\ns3 = boto3.client('s3')\nbuckets = s3.list_buckets()\n\n# EC2 resource\nec2 = boto3.resource('ec2')\nfor instance in ec2.instances.all():\n    print(instance.id, instance.state['Name'])\n```\n\n> 💡 **Tip:** Use IAM roles on EC2/Lambda instead of hardcoding credentials!"
+        },
+        {
+            "id": "aws_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall AWS knowledge!",
+            "quizQuestion": "Which AWS service would you use for a globally distributed NoSQL database?",
+            "quizOptions": [
+                "Amazon RDS",
+                "Amazon DynamoDB",
+                "Amazon Aurora",
+                "Amazon Redshift"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aws_19",
+            "type": "content",
+            "title": "AWS Cost Optimization",
+            "content": "# Cost Optimization 💰\n\nMaximize value while minimizing AWS spending.\n\n## Cost Management Tools\n\n### AWS Cost Explorer\n- Visualize spending patterns\n- Forecast future costs\n- Identify cost drivers\n\n### AWS Budgets\n- Set custom budgets\n- Alerts when exceeding thresholds\n- Cost and usage tracking\n\n### Trusted Advisor\n- Cost optimization recommendations\n- Security and performance checks\n\n## Cost Saving Strategies\n\n| Strategy | Savings | Effort |\n|----------|---------|--------|\n| Right-sizing | 20-30% | Low |\n| Reserved Instances | 30-72% | Medium |\n| Spot Instances | Up to 90% | High |\n| S3 Lifecycle Policies | 20-50% | Low |\n| Lambda over EC2 | Variable | Medium |\n\n## Quick Wins\n- ✅ Delete unused EBS volumes\n- ✅ Release unattached Elastic IPs\n- ✅ Use S3 Intelligent-Tiering\n- ✅ Enable auto-scaling\n- ✅ Schedule non-prod instances\n\n> 🎯 **Rule of thumb:** Review costs weekly and optimize monthly!"
+        },
+        {
+            "id": "aws_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# AWS Summary 🎉\n\nCongratulations! You've learned the core AWS services.\n\n## Key Takeaways\n\n### EC2 (Compute)\n- ✅ Virtual servers with flexible pricing\n- ✅ Use t3.micro for free tier\n- ✅ Spot instances for cost savings\n\n### S3 (Storage)\n- ✅ Unlimited, durable object storage\n- ✅ Multiple storage classes for cost optimization\n- ✅ Bucket policies for access control\n\n### Lambda (Serverless)\n- ✅ Run code without managing servers\n- ✅ Pay only for execution time\n- ✅ Perfect for event-driven architecture\n\n### RDS (Database)\n- ✅ Managed relational databases\n- ✅ Multi-AZ for high availability\n- ✅ Aurora for high performance\n\n## Next Steps\n- 📚 Get AWS Certified (Cloud Practitioner)\n- 🔧 Build projects using AWS Free Tier\n- 🌐 Explore additional services (DynamoDB, SNS, SQS)\n\n> 🚀 **Remember:** The best way to learn AWS is by building real projects. Start small and scale up!\n\nHappy cloud computing! ☁️"
+        }
+    ]
+}

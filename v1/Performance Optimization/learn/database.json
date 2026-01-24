@@ -1,0 +1,167 @@
+{
+    "id": "learn_database_perf",
+    "topicId": "database",
+    "topicTitle": "Database Optimization",
+    "description": "Master database optimization with indexes, query optimization, and caching strategies",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "database_1",
+            "type": "content",
+            "title": "Welcome to Database Optimization",
+            "content": "# Database Optimization 🗄️\n\nMaster techniques to make databases lightning-fast!\n\n## What You'll Learn:\n- **Indexes** - Speed up data retrieval\n- **Query Optimization** - Write efficient SQL\n- **Caching** - Reduce database load\n- **Connection Pooling** - Manage connections\n- **Monitoring** - Find bottlenecks\n\n> 💡 Database is often the biggest bottleneck!\n\n## Why This Matters:\n- 🚀 **Faster Responses** - Sub-millisecond queries\n- 💰 **Lower Costs** - Less infrastructure needed\n- 📈 **Better Scalability** - Handle more users\n- ⚡ **Improved UX** - Snappy applications"
+        },
+        {
+            "id": "database_2",
+            "type": "content",
+            "title": "Understanding Indexes",
+            "content": "# Understanding Indexes 📑\n\nIndexes are data structures that speed up data retrieval.\n\n## How Indexes Work:\n```\nWithout Index: Full Table Scan O(n)\n┌─────────────────────────────┐\n│ Scan all rows → Find match │\n└─────────────────────────────┘\n\nWith Index: B-Tree Lookup O(log n)\n┌─────────────────────────────┐\n│ Jump to index → Find fast  │\n└─────────────────────────────┘\n```\n\n## Creating Indexes:\n```sql\n-- Single column index\nCREATE INDEX idx_users_email \nON users(email);\n\n-- Composite index\nCREATE INDEX idx_orders_user_date \nON orders(user_id, created_at);\n\n-- Unique index\nCREATE UNIQUE INDEX idx_users_username \nON users(username);\n```\n\n## Performance Impact:\n| Operation | Without Index | With Index |\n|-----------|--------------|------------|\n| SELECT | 1000ms | 5ms |\n| INSERT | 1ms | 2ms |\n| UPDATE | 500ms | 10ms |"
+        },
+        {
+            "id": "database_3",
+            "type": "content",
+            "title": "Types of Indexes",
+            "content": "# Types of Indexes 🏷️\n\n## 1. B-Tree Index (Default)\n```sql\nCREATE INDEX idx_name ON table(column);\n```\nBest for: Equality, ranges, sorting\n\n## 2. Hash Index\n```sql\nCREATE INDEX idx_hash ON table \nUSING HASH(column);\n```\nBest for: Exact matches only\n\n## 3. Full-Text Index\n```sql\nCREATE FULLTEXT INDEX idx_content \nON articles(content);\n\nSELECT * FROM articles \nWHERE MATCH(content) AGAINST('search term');\n```\n\n## 4. Partial Index\n```sql\nCREATE INDEX idx_active_users \nON users(email) \nWHERE active = true;\n```\n\n## 5. Covering Index\n```sql\n-- Include all SELECT columns\nCREATE INDEX idx_cover ON orders(user_id, total, status);\n```\n\n## Choosing the Right Index:\n| Use Case | Index Type |\n|----------|------------|\n| Exact match | Hash |\n| Range queries | B-Tree |\n| Text search | Full-Text |\n| Conditional | Partial |"
+        },
+        {
+            "id": "database_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your index knowledge!",
+            "quizQuestion": "Which index type is best for range queries like WHERE age > 18?",
+            "quizOptions": [
+                "Hash Index",
+                "B-Tree Index",
+                "Full-Text Index",
+                "Bitmap Index"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "database_4",
+            "type": "content",
+            "title": "Query Optimization Basics",
+            "content": "# Query Optimization Basics 🔧\n\n## Using EXPLAIN:\n```sql\nEXPLAIN ANALYZE\nSELECT * FROM users \nWHERE email = 'test@example.com';\n```\n\n## Reading EXPLAIN Output:\n```\nSeq Scan on users (cost=0.00..1234.00 rows=1)\n  Filter: (email = 'test@example.com')\n  Rows Removed: 50000\n```\n\n## What to Look For:\n| Warning | Problem |\n|---------|--------|\n| Seq Scan | Missing index |\n| High rows | Too much data scanned |\n| Nested Loop | Possible N+1 |\n| Sort | Missing index for ORDER BY |\n\n## Good vs Bad:\n```sql\n-- ❌ Bad: Full table scan\nSELECT * FROM orders WHERE YEAR(created_at) = 2024;\n\n-- ✅ Good: Uses index\nSELECT * FROM orders \nWHERE created_at >= '2024-01-01' \nAND created_at < '2025-01-01';\n```"
+        },
+        {
+            "id": "database_5",
+            "type": "content",
+            "title": "Common Query Anti-Patterns",
+            "content": "# Query Anti-Patterns ❌\n\n## 1. SELECT *\n```sql\n-- ❌ Fetches unnecessary columns\nSELECT * FROM users;\n\n-- ✅ Select only needed columns\nSELECT id, name, email FROM users;\n```\n\n## 2. Functions on Indexed Columns\n```sql\n-- ❌ Can't use index\nWHERE LOWER(email) = 'test@example.com'\n\n-- ✅ Store normalized, use expression index\nWHERE email_lower = 'test@example.com'\n```\n\n## 3. LIKE with Leading Wildcard\n```sql\n-- ❌ No index usage\nWHERE name LIKE '%smith'\n\n-- ✅ Uses index\nWHERE name LIKE 'smith%'\n```\n\n## 4. OR Conditions\n```sql\n-- ❌ Often causes full scan\nWHERE status = 'active' OR role = 'admin'\n\n-- ✅ Use UNION\nSELECT * FROM users WHERE status = 'active'\nUNION\nSELECT * FROM users WHERE role = 'admin'\n```\n\n## 5. Implicit Type Conversion\n```sql\n-- ❌ String compared to int\nWHERE user_id = '123'\n\n-- ✅ Match types\nWHERE user_id = 123\n```"
+        },
+        {
+            "id": "database_6",
+            "type": "content",
+            "title": "JOIN Optimization",
+            "content": "# JOIN Optimization 🔗\n\n## Index Your JOIN Columns:\n```sql\n-- Create indexes on foreign keys\nCREATE INDEX idx_orders_user_id ON orders(user_id);\nCREATE INDEX idx_items_order_id ON order_items(order_id);\n```\n\n## Choose JOIN Order Wisely:\n```sql\n-- Start with smallest result set\nSELECT * FROM small_table s\nJOIN large_table l ON s.id = l.small_id\nWHERE s.active = true;\n```\n\n## JOIN Types Impact:\n| Type | Returns | Performance |\n|------|---------|-------------|\n| INNER | Matched only | Fastest |\n| LEFT | All left + matched | Medium |\n| CROSS | Cartesian product | Slowest |\n\n## Avoid N+1 Queries:\n```sql\n-- ❌ N+1: Query per user\nFOR user IN users:\n    SELECT * FROM orders WHERE user_id = user.id;\n\n-- ✅ Single JOIN query\nSELECT u.*, o.* FROM users u\nLEFT JOIN orders o ON u.id = o.user_id;\n```"
+        },
+        {
+            "id": "database_7",
+            "type": "content",
+            "title": "Pagination",
+            "content": "# Pagination Strategies 📄\n\n## Offset Pagination (Simple but Slow):\n```sql\n-- ❌ Slow for large offsets\nSELECT * FROM posts \nORDER BY created_at DESC \nLIMIT 20 OFFSET 10000;\n-- Scans 10,020 rows!\n```\n\n## Cursor/Keyset Pagination (Fast):\n```sql\n-- ✅ Always fast\nSELECT * FROM posts \nWHERE created_at < '2024-01-15 10:00:00'\nORDER BY created_at DESC \nLIMIT 20;\n```\n\n## Comparison:\n| Method | Page 1 | Page 500 |\n|--------|--------|----------|\n| Offset | 5ms | 500ms |\n| Cursor | 5ms | 5ms |\n\n## Implementation:\n```javascript\n// Return cursor with response\n{\n    data: [...],\n    nextCursor: \"2024-01-15T10:00:00Z\",\n    hasMore: true\n}\n```\n\n> Always use cursor pagination for infinite scroll!"
+        },
+        {
+            "id": "database_quiz_2",
+            "type": "quiz",
+            "title": "Query Check",
+            "content": "Test your query optimization knowledge!",
+            "quizQuestion": "Why is OFFSET pagination slow for large offsets?",
+            "quizOptions": [
+                "Network latency",
+                "It scans all previous rows",
+                "Index corruption",
+                "Lock contention"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "database_8",
+            "type": "content",
+            "title": "Caching Strategies",
+            "content": "# Database Caching 💾\n\n## Cache Layers:\n```\nApp → Cache → Database\n         ↑\n    Hit = Fast!\n```\n\n## Cache Types:\n\n### 1. Query Cache (Built-in)\n```sql\n-- MySQL query cache (deprecated in 8.0)\nSHOW VARIABLES LIKE 'query_cache%';\n```\n\n### 2. Application Cache (Redis)\n```python\ndef get_user(user_id):\n    # Try cache first\n    cached = redis.get(f\"user:{user_id}\")\n    if cached:\n        return json.loads(cached)\n    \n    # Query database\n    user = db.query(\"SELECT * FROM users WHERE id = ?\", user_id)\n    \n    # Cache result\n    redis.setex(f\"user:{user_id}\", 3600, json.dumps(user))\n    return user\n```\n\n### 3. Materialized Views\n```sql\nCREATE MATERIALIZED VIEW sales_summary AS\nSELECT date, SUM(amount) as total\nFROM sales GROUP BY date;\n\n-- Refresh periodically\nREFRESH MATERIALIZED VIEW sales_summary;\n```\n\n## Cache Invalidation:\n- **TTL** - Expire after time\n- **Write-through** - Update cache on write\n- **Event-based** - Invalidate on change"
+        },
+        {
+            "id": "database_9",
+            "type": "content",
+            "title": "Redis Caching",
+            "content": "# Redis Caching 🔴\n\n## Common Patterns:\n\n### Cache-Aside:\n```python\ndef get_data(key):\n    data = redis.get(key)\n    if data is None:\n        data = database.query(key)\n        redis.setex(key, TTL, data)\n    return data\n```\n\n### Write-Through:\n```python\ndef update_user(user_id, data):\n    database.update(user_id, data)\n    redis.set(f\"user:{user_id}\", data)\n```\n\n### Cache Stampede Prevention:\n```python\ndef get_with_lock(key):\n    data = redis.get(key)\n    if data is None:\n        lock = redis.setnx(f\"lock:{key}\", 1)\n        if lock:\n            data = database.query(key)\n            redis.setex(key, TTL, data)\n            redis.delete(f\"lock:{key}\")\n        else:\n            time.sleep(0.1)\n            return get_with_lock(key)\n    return data\n```\n\n## Data Structures:\n| Type | Use Case |\n|------|----------|\n| String | Simple K/V |\n| Hash | Object fields |\n| List | Queues |\n| Set | Unique items |\n| Sorted Set | Leaderboards |"
+        },
+        {
+            "id": "database_10",
+            "type": "content",
+            "title": "Connection Pooling",
+            "content": "# Connection Pooling 🔌\n\nReuse database connections for better performance.\n\n## Without Pooling:\n```\nRequest → Create Connection → Query → Close\nRequest → Create Connection → Query → Close\n(Slow! Connection setup is expensive)\n```\n\n## With Pooling:\n```\nRequest → Get from Pool → Query → Return to Pool\nRequest → Get from Pool → Query → Return to Pool\n(Fast! Connections are reused)\n```\n\n## Pool Configuration:\n```python\npool = create_pool(\n    min_connections=5,\n    max_connections=20,\n    connection_timeout=30,\n    idle_timeout=600\n)\n```\n\n## Sizing Formula:\n```\nPool Size = CPU Cores * 2 + Disk Spindles\n```\n\n## Common Settings:\n| App Size | Min | Max |\n|----------|-----|-----|\n| Small | 5 | 10 |\n| Medium | 10 | 30 |\n| Large | 20 | 100 |\n\n> Too many connections = memory issues!"
+        },
+        {
+            "id": "database_11",
+            "type": "content",
+            "title": "Database Monitoring",
+            "content": "# Database Monitoring 📊\n\n## Key Metrics:\n\n| Metric | Good | Bad |\n|--------|------|-----|\n| Query Time | < 100ms | > 1s |\n| Connections | < 80% pool | 100% |\n| Cache Hit | > 90% | < 50% |\n| Slow Queries | 0 | Many |\n\n## Slow Query Log:\n```sql\n-- MySQL\nSET GLOBAL slow_query_log = 'ON';\nSET GLOBAL long_query_time = 1;\n\n-- PostgreSQL\nlog_min_duration_statement = 1000\n```\n\n## Query Analysis:\n```sql\n-- Find slow queries\nSELECT query, calls, mean_time\nFROM pg_stat_statements\nORDER BY mean_time DESC\nLIMIT 10;\n```\n\n## Monitoring Tools:\n- pgAdmin / MySQL Workbench\n- Datadog / New Relic\n- Prometheus + Grafana\n- AWS RDS Insights"
+        },
+        {
+            "id": "database_quiz_3",
+            "type": "quiz",
+            "title": "Caching Check",
+            "content": "Test your caching knowledge!",
+            "quizQuestion": "What is the cache-aside pattern?",
+            "quizOptions": [
+                "Always write to cache first",
+                "Check cache, if miss query DB and cache result",
+                "Never cache writes",
+                "Replicate all data to cache"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "database_12",
+            "type": "content",
+            "title": "Denormalization",
+            "content": "# Denormalization 📋\n\nTrade storage for read performance.\n\n## Normalized (Slow Reads):\n```sql\nSELECT o.*, u.name, u.email\nFROM orders o\nJOIN users u ON o.user_id = u.id;\n```\n\n## Denormalized (Fast Reads):\n```sql\n-- Store user_name in orders table\nSELECT * FROM orders;\n-- No JOIN needed!\n```\n\n## When to Denormalize:\n- ✅ Read-heavy workloads\n- ✅ Data rarely changes\n- ✅ Query performance critical\n- ❌ Write-heavy systems\n- ❌ Frequently changing data\n\n## Strategies:\n\n### 1. Duplicate Columns\n```sql\nALTER TABLE orders \nADD COLUMN user_name VARCHAR(100);\n```\n\n### 2. Computed Columns\n```sql\nALTER TABLE users \nADD COLUMN order_count INT DEFAULT 0;\n```\n\n### 3. Summary Tables\n```sql\nCREATE TABLE daily_sales (\n    date DATE,\n    total DECIMAL\n);\n```"
+        },
+        {
+            "id": "database_13",
+            "type": "content",
+            "title": "Partitioning",
+            "content": "# Table Partitioning 📦\n\nSplit large tables for better performance.\n\n## Types:\n\n### Range Partitioning:\n```sql\nCREATE TABLE orders (\n    id INT,\n    created_at DATE,\n    amount DECIMAL\n) PARTITION BY RANGE (YEAR(created_at)) (\n    PARTITION p2022 VALUES LESS THAN (2023),\n    PARTITION p2023 VALUES LESS THAN (2024),\n    PARTITION p2024 VALUES LESS THAN (2025)\n);\n```\n\n### Hash Partitioning:\n```sql\nPARTITION BY HASH(user_id)\nPARTITIONS 8;\n```\n\n### List Partitioning:\n```sql\nPARTITION BY LIST(region) (\n    PARTITION us VALUES IN ('US-EAST', 'US-WEST'),\n    PARTITION eu VALUES IN ('EU-WEST', 'EU-NORTH')\n);\n```\n\n## Benefits:\n| Benefit | Impact |\n|---------|--------|\n| Query pruning | Scan fewer rows |\n| Maintenance | Archive old data |\n| Parallelism | Query partitions separately |\n\n> Partition by most common query filter!"
+        },
+        {
+            "id": "database_14",
+            "type": "content",
+            "title": "Read Replicas",
+            "content": "# Read Replicas 📖\n\nScale reads by distributing to replicas.\n\n## Architecture:\n```\n       ┌─────────────┐\n       │   Primary   │\n       │   (Writes)  │\n       └─────┬───────┘\n             │ Replication\n     ┌───────┼───────┐\n     ▼       ▼       ▼\n┌─────────┐┌─────────┐┌─────────┐\n│ Replica ││ Replica ││ Replica │\n│ (Read)  ││ (Read)  ││ (Read)  │\n└─────────┘└─────────┘└─────────┘\n```\n\n## Implementation:\n```python\ndef get_connection(write=False):\n    if write:\n        return primary_connection\n    return random.choice(replica_connections)\n\n# Read from replica\nuser = get_connection(write=False).query(\"SELECT...\")\n\n# Write to primary\nget_connection(write=True).execute(\"INSERT...\")\n```\n\n## Considerations:\n| Factor | Impact |\n|--------|--------|\n| Replication lag | Stale reads |\n| Consistency | Read-after-write issues |\n| Failover | Promote replica to primary |"
+        },
+        {
+            "id": "database_15",
+            "type": "content",
+            "title": "Query Caching Strategies",
+            "content": "# Query Caching 💡\n\n## Cache Key Design:\n```python\ndef cache_key(query, params):\n    return hashlib.md5(\n        f\"{query}:{json.dumps(params)}\".encode()\n    ).hexdigest()\n\nkey = cache_key(\n    \"SELECT * FROM users WHERE id = ?\",\n    [123]\n)\n```\n\n## Cache Invalidation:\n\n### 1. Time-Based (TTL):\n```python\nredis.setex(key, 300, data)  # 5 min TTL\n```\n\n### 2. Event-Based:\n```python\ndef update_user(user_id, data):\n    db.update(user_id, data)\n    redis.delete(f\"user:{user_id}\")\n    redis.delete(f\"users:list\")\n```\n\n### 3. Version-Based:\n```python\ndef get_users():\n    version = redis.get(\"users:version\")\n    key = f\"users:list:{version}\"\n    return redis.get(key) or refresh_and_cache()\n\ndef invalidate_users():\n    redis.incr(\"users:version\")\n```\n\n## What to Cache:\n- ✅ Expensive queries\n- ✅ Frequently accessed data\n- ✅ Stable/slow-changing data\n- ❌ User-specific volatile data"
+        },
+        {
+            "id": "database_quiz_4",
+            "type": "quiz",
+            "title": "Architecture Check",
+            "content": "Test your database architecture knowledge!",
+            "quizQuestion": "What is the main purpose of read replicas?",
+            "quizOptions": [
+                "Backup data",
+                "Scale read operations",
+                "Improve write speed",
+                "Encrypt data"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "database_16",
+            "type": "content",
+            "title": "Optimization Checklist",
+            "content": "# Optimization Checklist ✅\n\n## Index Optimization:\n- [ ] Index frequently queried columns\n- [ ] Index foreign keys\n- [ ] Remove unused indexes\n- [ ] Use composite indexes\n\n## Query Optimization:\n- [ ] Use EXPLAIN on slow queries\n- [ ] Avoid SELECT *\n- [ ] Avoid functions on indexed columns\n- [ ] Use cursor pagination\n\n## Caching:\n- [ ] Cache frequently accessed data\n- [ ] Implement proper invalidation\n- [ ] Monitor cache hit rate\n\n## Architecture:\n- [ ] Configure connection pooling\n- [ ] Consider read replicas\n- [ ] Partition large tables\n- [ ] Enable slow query logging\n\n## Monitoring:\n- [ ] Set up query monitoring\n- [ ] Alert on slow queries\n- [ ] Track connection usage"
+        },
+        {
+            "id": "database_17",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Database Optimization!\n\n## Key Takeaways:\n\n### Indexes\n- ✅ Use B-Tree for most queries\n- ✅ Index foreign keys and WHERE columns\n- ✅ Consider composite indexes\n\n### Query Optimization\n- ✅ Always EXPLAIN slow queries\n- ✅ Avoid anti-patterns\n- ✅ Use cursor pagination\n\n### Caching\n- ✅ Cache-aside pattern\n- ✅ Redis for application cache\n- ✅ Proper invalidation strategies\n\n### Architecture\n- ✅ Connection pooling\n- ✅ Read replicas for scaling\n- ✅ Partitioning large tables\n\n## Performance Impact:\n| Optimization | Improvement |\n|-------------|-------------|\n| Proper indexes | 10-100x faster |\n| Query optimization | 2-10x faster |\n| Caching | 100-1000x faster |\n\n## Next Steps:\n- Learn Minification & Bundling\n- Master Caching patterns\n- Explore CDN strategies\n\nHappy optimizing! 🚀"
+        }
+    ]
+}

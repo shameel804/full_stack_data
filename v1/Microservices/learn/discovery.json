@@ -1,0 +1,71 @@
+{
+    "id": "learn_discovery_micro",
+    "topicId": "discovery",
+    "topicTitle": "Service Discovery",
+    "description": "Master service discovery with Eureka, Consul, and dynamic registration patterns",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "disc_1",
+            "type": "content",
+            "title": "Service Discovery",
+            "content": "# Service Discovery 🔍\n\nHow services find each other dynamically.\n\n## What You'll Learn:\n- **Why Discovery?** - Dynamic environments\n- **Client-Side** - Services resolve\n- **Server-Side** - Load balancer resolves\n- **Tools** - Eureka, Consul, K8s\n\n> 💡 Hard-coded IPs don't work in dynamic environments!"
+        },
+        {
+            "id": "disc_2",
+            "type": "content",
+            "title": "The Problem",
+            "content": "# The Problem 🤔\n\n## Static Configuration:\n```\nUSER_SERVICE=http://192.168.1.10:3000\nORDER_SERVICE=http://192.168.1.11:3001\n```\n\n## Problems:\n- Services scale up/down\n- Containers get new IPs\n- Failures need rerouting\n- Manual updates don't scale\n\n## Solution:\n```\nService A ──► Registry ──► Service B\n             (dynamic)\n```\n\nRegistry knows current locations!"
+        },
+        {
+            "id": "disc_3",
+            "type": "content",
+            "title": "Client-Side Discovery",
+            "content": "# Client-Side Discovery 🖥️\n\n```\n┌────────┐    ┌──────────┐\n│ Client │───►│ Registry │\n└───┬────┘    └──────────┘\n    │              │\n    │ gets list    │\n    │◄─────────────┘\n    │\n    └────► Pick & Call Service\n```\n\n## Benefits:\n- Client controls load balancing\n- No single point of failure\n- Language-specific logic\n\n## Drawbacks:\n- Client complexity\n- Library per language"
+        },
+        {
+            "id": "disc_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your discovery knowledge!",
+            "quizQuestion": "What problem does service discovery solve?",
+            "quizOptions": [
+                "Database queries",
+                "Finding services with dynamic IPs",
+                "User authentication",
+                "Logging"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "disc_4",
+            "type": "content",
+            "title": "Server-Side Discovery",
+            "content": "# Server-Side Discovery 🖧\n\n```\n┌────────┐    ┌──────────────┐    ┌─────────┐\n│ Client │───►│ Load Balancer│───►│ Service │\n└────────┘    └──────┬───────┘    └─────────┘\n                     │\n              ┌──────▼──────┐\n              │  Registry   │\n              └─────────────┘\n```\n\n## Benefits:\n- Simple clients\n- Centralized logic\n- Consistent\n\n## Examples:\n- AWS ELB\n- Kubernetes Services\n- Nginx"
+        },
+        {
+            "id": "disc_5",
+            "type": "content",
+            "title": "Eureka",
+            "content": "# Netflix Eureka 📺\n\nPopular Java-based registry.\n\n## Registration:\n```java\n@EnableEurekaClient\n@SpringBootApplication\npublic class UserService {\n    public static void main(String[] args) {\n        SpringApplication.run(UserService.class, args);\n    }\n}\n```\n\n## Config:\n```yaml\neureka:\n  client:\n    serviceUrl:\n      defaultZone: http://eureka:8761/eureka/\n  instance:\n    preferIpAddress: true\n```\n\n## Features:\n- Self-registration\n- Health checks\n- Web dashboard\n- REST API"
+        },
+        {
+            "id": "disc_6",
+            "type": "content",
+            "title": "Consul",
+            "content": "# HashiCorp Consul 🏛️\n\nMulti-purpose service mesh.\n\n## Features:\n- Service discovery\n- Health checking\n- Key-value store\n- Multi-datacenter\n\n## Registration:\n```json\n{\n    \"service\": {\n        \"name\": \"user-service\",\n        \"port\": 3000,\n        \"check\": {\n            \"http\": \"http://localhost:3000/health\",\n            \"interval\": \"10s\"\n        }\n    }\n}\n```\n\n## DNS Query:\n```bash\ndig user-service.service.consul\n```"
+        },
+        {
+            "id": "disc_7",
+            "type": "content",
+            "title": "Kubernetes Discovery",
+            "content": "# Kubernetes Service Discovery ☸️\n\nBuilt-in discovery with Services.\n\n## Service:\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: user-service\nspec:\n  selector:\n    app: user\n  ports:\n    - port: 80\n      targetPort: 3000\n```\n\n## Usage:\n```javascript\n// DNS-based discovery\nfetch('http://user-service/users')\n```\n\n## Benefits:\n- Built-in\n- DNS-based\n- Automatic load balancing\n- No extra registry"
+        },
+        {
+            "id": "disc_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Service Discovery!\n\n## Key Takeaways:\n\n### Patterns\n- Client-side: Clients resolve\n- Server-side: Load balancer resolves\n\n### Tools\n| Tool | Best For |\n|------|----------|\n| Eureka | Java/Spring |\n| Consul | Multi-purpose |\n| K8s | Container orchestration |\n\n### Best Practices:\n- Health checks\n- Graceful shutdown\n- Circuit breakers\n\nFind services dynamically! 🔍"
+        }
+    ]
+}

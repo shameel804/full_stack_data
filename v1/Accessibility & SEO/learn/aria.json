@@ -1,0 +1,135 @@
+{
+    "id": "learn_aria_a11y",
+    "topicId": "aria",
+    "topicTitle": "ARIA",
+    "description": "Master ARIA roles, labels, states, and properties for enhanced accessibility",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "aria_1",
+            "type": "content",
+            "title": "Welcome to ARIA",
+            "content": "# ARIA Attributes ♿\n\nAccessible Rich Internet Applications.\n\n## What You'll Learn:\n- **ARIA Roles** - Define element purpose\n- **ARIA Labels** - Provide accessible names\n- **ARIA States** - Dynamic element states\n- **ARIA Properties** - Describe relationships\n- **Live Regions** - Dynamic content updates\n\n> 💡 ARIA bridges gaps when HTML isn't enough!\n\n## The First Rule of ARIA:\n**Don't use ARIA if native HTML works!**\n\n```html\n<!-- ❌ Don't do this -->\n<div role=\"button\" tabindex=\"0\">Click</div>\n\n<!-- ✅ Use native HTML -->\n<button>Click</button>\n```"
+        },
+        {
+            "id": "aria_2",
+            "type": "content",
+            "title": "ARIA Roles",
+            "content": "# ARIA Roles 🏷️\n\nDefine what an element IS.\n\n## Landmark Roles:\n```html\n<div role=\"banner\">Header</div>\n<div role=\"navigation\">Nav</div>\n<div role=\"main\">Content</div>\n<div role=\"complementary\">Sidebar</div>\n<div role=\"contentinfo\">Footer</div>\n```\n\n## Widget Roles:\n```html\n<div role=\"button\">Click Me</div>\n<div role=\"checkbox\" aria-checked=\"true\">Option</div>\n<div role=\"dialog\">Modal</div>\n<div role=\"tablist\">Tabs</div>\n<div role=\"tab\">Tab 1</div>\n<div role=\"tabpanel\">Content</div>\n```\n\n## Document Roles:\n```html\n<div role=\"article\">Blog post</div>\n<div role=\"figure\">Image + caption</div>\n<div role=\"list\">List container</div>\n<div role=\"listitem\">List item</div>\n```\n\n## Note:\nPrefer native HTML over roles when possible!"
+        },
+        {
+            "id": "aria_3",
+            "type": "content",
+            "title": "ARIA Labels",
+            "content": "# ARIA Labels 📝\n\nProvide accessible names for elements.\n\n## aria-label:\n```html\n<!-- Direct label -->\n<button aria-label=\"Close dialog\">X</button>\n\n<!-- Icon button -->\n<button aria-label=\"Search\">\n    <svg>...</svg>\n</button>\n```\n\n## aria-labelledby:\n```html\n<!-- Reference another element -->\n<h2 id=\"section-title\">Products</h2>\n<ul aria-labelledby=\"section-title\">\n    <li>Item 1</li>\n</ul>\n\n<!-- Multiple references -->\n<span id=\"name\">John</span>\n<span id=\"role\">Admin</span>\n<div aria-labelledby=\"name role\">...</div>\n```\n\n## aria-describedby:\n```html\n<!-- Additional description -->\n<input id=\"email\" aria-describedby=\"email-hint\">\n<p id=\"email-hint\">We'll never share your email</p>\n```\n\n## Priority:\n1. `aria-labelledby`\n2. `aria-label`\n3. Native `<label>`\n4. Content"
+        },
+        {
+            "id": "aria_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your ARIA knowledge!",
+            "quizQuestion": "When should you use ARIA roles?",
+            "quizOptions": [
+                "Always for all elements",
+                "Only when native HTML isn't sufficient",
+                "Never",
+                "Only for forms"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aria_4",
+            "type": "content",
+            "title": "ARIA States",
+            "content": "# ARIA States 🔄\n\nDescribe dynamic element states.\n\n## Common States:\n```html\n<!-- Expanded/Collapsed -->\n<button aria-expanded=\"false\">Menu</button>\n<div hidden>...</div>\n\n<!-- Selected -->\n<li role=\"option\" aria-selected=\"true\">Option 1</li>\n\n<!-- Checked -->\n<div role=\"checkbox\" aria-checked=\"true\">Agree</div>\n<div role=\"checkbox\" aria-checked=\"mixed\">Partial</div>\n\n<!-- Disabled -->\n<button aria-disabled=\"true\">Submit</button>\n\n<!-- Hidden -->\n<div aria-hidden=\"true\">Decorative content</div>\n\n<!-- Pressed (toggle) -->\n<button aria-pressed=\"true\">Bold</button>\n```\n\n## Update States with JavaScript:\n```javascript\nbutton.addEventListener('click', () => {\n    const expanded = button.getAttribute('aria-expanded') === 'true';\n    button.setAttribute('aria-expanded', !expanded);\n});\n```"
+        },
+        {
+            "id": "aria_5",
+            "type": "content",
+            "title": "ARIA Properties",
+            "content": "# ARIA Properties 🔗\n\nDescribe element relationships and characteristics.\n\n## Relationships:\n```html\n<!-- Controls another element -->\n<button aria-controls=\"menu\">Toggle Menu</button>\n<ul id=\"menu\">...</ul>\n\n<!-- Owns elements -->\n<div role=\"listbox\" aria-owns=\"option1 option2\">...</div>\n\n<!-- Current item -->\n<nav>\n    <a href=\"/\" aria-current=\"page\">Home</a>\n    <a href=\"/about\">About</a>\n</nav>\n```\n\n## Form Properties:\n```html\n<!-- Required field -->\n<input aria-required=\"true\">\n\n<!-- Invalid input -->\n<input aria-invalid=\"true\" aria-errormessage=\"err1\">\n<span id=\"err1\">Invalid email format</span>\n\n<!-- Value range -->\n<input \n    type=\"range\" \n    aria-valuemin=\"0\" \n    aria-valuemax=\"100\" \n    aria-valuenow=\"50\"\n    aria-valuetext=\"50 percent\"\n>\n```"
+        },
+        {
+            "id": "aria_6",
+            "type": "content",
+            "title": "Live Regions",
+            "content": "# Live Regions 📢\n\nAnnounce dynamic content changes.\n\n## aria-live:\n```html\n<!-- Polite - waits for user to finish -->\n<div aria-live=\"polite\">\n    Status: Loading...\n</div>\n\n<!-- Assertive - interrupts immediately -->\n<div aria-live=\"assertive\">\n    Error: Connection lost!\n</div>\n```\n\n## Role Shortcuts:\n```html\n<!-- Same as aria-live=\"polite\" -->\n<div role=\"status\">Saved successfully</div>\n\n<!-- Same as aria-live=\"assertive\" -->\n<div role=\"alert\">Error occurred!</div>\n```\n\n## aria-atomic:\n```html\n<!-- Announce entire region on change -->\n<div aria-live=\"polite\" aria-atomic=\"true\">\n    Time: <span id=\"minutes\">05</span>:<span id=\"seconds\">30</span>\n</div>\n```\n\n## Use Cases:\n- Toast notifications\n- Form validation messages\n- Loading states\n- Chat messages\n- Live scores"
+        },
+        {
+            "id": "aria_7",
+            "type": "content",
+            "title": "Custom Widgets",
+            "content": "# Custom Widgets 🎛️\n\nBuild accessible custom components.\n\n## Accessible Dropdown:\n```html\n<div class=\"dropdown\">\n    <button \n        aria-haspopup=\"listbox\"\n        aria-expanded=\"false\"\n        aria-controls=\"options\"\n    >\n        Select Option\n    </button>\n    <ul \n        id=\"options\"\n        role=\"listbox\"\n        hidden\n    >\n        <li role=\"option\" aria-selected=\"false\">Option 1</li>\n        <li role=\"option\" aria-selected=\"true\">Option 2</li>\n    </ul>\n</div>\n```\n\n## Accessible Tabs:\n```html\n<div role=\"tablist\">\n    <button \n        role=\"tab\" \n        aria-selected=\"true\"\n        aria-controls=\"panel1\"\n        id=\"tab1\"\n    >Tab 1</button>\n</div>\n<div \n    role=\"tabpanel\" \n    id=\"panel1\" \n    aria-labelledby=\"tab1\"\n>\n    Tab 1 content\n</div>\n```\n\n## Key Requirements:\n- Keyboard navigation\n- Focus management\n- State announcements"
+        },
+        {
+            "id": "aria_quiz_2",
+            "type": "quiz",
+            "title": "States Check",
+            "content": "Test your ARIA states knowledge!",
+            "quizQuestion": "What does aria-live=\"polite\" do?",
+            "quizOptions": [
+                "Hides content",
+                "Announces changes when user is idle",
+                "Makes text larger",
+                "Disables element"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aria_8",
+            "type": "content",
+            "title": "Modal Dialogs",
+            "content": "# Accessible Modals 🪟\n\nCreate fully accessible modal dialogs.\n\n## Structure:\n```html\n<div \n    role=\"dialog\" \n    aria-modal=\"true\"\n    aria-labelledby=\"dialog-title\"\n>\n    <h2 id=\"dialog-title\">Confirm Delete</h2>\n    <p>Are you sure?</p>\n    <button>Cancel</button>\n    <button>Delete</button>\n</div>\n```\n\n## Requirements:\n1. **Focus trap** - Keep focus inside\n2. **Escape to close** - Close on Escape key\n3. **Return focus** - Focus trigger on close\n4. **Background inert** - Disable background\n\n## JavaScript:\n```javascript\nfunction openModal(modal, trigger) {\n    modal.hidden = false;\n    modal.querySelector('button').focus();\n    \n    // Trap focus\n    modal.addEventListener('keydown', (e) => {\n        if (e.key === 'Escape') {\n            closeModal(modal, trigger);\n        }\n    });\n}\n\nfunction closeModal(modal, trigger) {\n    modal.hidden = true;\n    trigger.focus(); // Return focus\n}\n```"
+        },
+        {
+            "id": "aria_9",
+            "type": "content",
+            "title": "Navigation Menus",
+            "content": "# Accessible Navigation 🧭\n\nBuild screen reader friendly menus.\n\n## Basic Navigation:\n```html\n<nav aria-label=\"Main navigation\">\n    <ul>\n        <li><a href=\"/\" aria-current=\"page\">Home</a></li>\n        <li><a href=\"/about\">About</a></li>\n        <li><a href=\"/contact\">Contact</a></li>\n    </ul>\n</nav>\n```\n\n## Dropdown Menu:\n```html\n<nav aria-label=\"Main\">\n    <ul>\n        <li>\n            <button \n                aria-expanded=\"false\" \n                aria-controls=\"products-menu\"\n            >Products</button>\n            <ul id=\"products-menu\" hidden>\n                <li><a href=\"/product-a\">Product A</a></li>\n            </ul>\n        </li>\n    </ul>\n</nav>\n```\n\n## Multiple Navs:\n```html\n<nav aria-label=\"Main\">...</nav>\n<nav aria-label=\"Footer\">...</nav>\n```\n\nAlways distinguish with aria-label!"
+        },
+        {
+            "id": "aria_10",
+            "type": "content",
+            "title": "Forms with ARIA",
+            "content": "# Enhanced Forms 📋\n\nAugment form accessibility with ARIA.\n\n## Error Handling:\n```html\n<form aria-describedby=\"form-errors\">\n    <div id=\"form-errors\" role=\"alert\">\n        Please correct the errors below\n    </div>\n    \n    <label for=\"email\">Email</label>\n    <input \n        id=\"email\" \n        aria-invalid=\"true\"\n        aria-describedby=\"email-error\"\n    >\n    <span id=\"email-error\" role=\"alert\">\n        Please enter a valid email\n    </span>\n</form>\n```\n\n## Autocomplete:\n```html\n<label for=\"search\">Search</label>\n<input \n    id=\"search\"\n    role=\"combobox\"\n    aria-autocomplete=\"list\"\n    aria-controls=\"suggestions\"\n    aria-expanded=\"true\"\n>\n<ul id=\"suggestions\" role=\"listbox\">\n    <li role=\"option\">Suggestion 1</li>\n    <li role=\"option\" aria-selected=\"true\">Suggestion 2</li>\n</ul>\n```"
+        },
+        {
+            "id": "aria_11",
+            "type": "content",
+            "title": "ARIA Best Practices",
+            "content": "# ARIA Best Practices ✅\n\n## Do:\n- ✅ Use native HTML first\n- ✅ Add keyboard support\n- ✅ Update states dynamically\n- ✅ Test with screen readers\n- ✅ Use landmark roles\n\n## Don't:\n- ❌ Use ARIA as a fix for bad HTML\n- ❌ Change semantics unnecessarily\n- ❌ Forget keyboard navigation\n- ❌ Use redundant roles\n- ❌ Hide content incorrectly\n\n## Redundant (Don't Do):\n```html\n<!-- Unnecessary - native semantics sufficient -->\n<button role=\"button\">Click</button>\n<nav role=\"navigation\">Menu</nav>\n<h1 role=\"heading\">Title</h1>\n```\n\n## Correct Usage:\n```html\n<!-- ARIA needed - custom widget -->\n<div role=\"tablist\">...</div>\n\n<!-- ARIA needed - dynamic state -->\n<button aria-expanded=\"true\">...</button>\n```"
+        },
+        {
+            "id": "aria_quiz_3",
+            "type": "quiz",
+            "title": "Best Practices",
+            "content": "Test your ARIA best practices!",
+            "quizQuestion": "Which is the FIRST rule of ARIA?",
+            "quizOptions": [
+                "Always use aria-label",
+                "Don't use ARIA if native HTML works",
+                "Use roles on everything",
+                "Avoid landmarks"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "aria_12",
+            "type": "content",
+            "title": "Testing ARIA",
+            "content": "# Testing ARIA 🧪\n\nVerify your ARIA implementation.\n\n## Browser DevTools:\n- Chrome: Accessibility pane\n- Firefox: Accessibility Inspector\n- View accessibility tree\n\n## Screen Reader Testing:\n1. Turn on screen reader\n2. Navigate with keyboard\n3. Verify announcements\n4. Check focus order\n\n## Common Tests:\n```\n[ ] Roles announced correctly\n[ ] Labels read properly\n[ ] States update announced\n[ ] Live regions working\n[ ] Focus management correct\n```\n\n## Tools:\n- axe DevTools extension\n- NVDA Screen Reader\n- VoiceOver (Mac)\n- Chrome Accessibility Inspector\n\n## Checklist:\n- All custom widgets have roles\n- Interactive elements labeled\n- States reflect UI state\n- Live regions for dynamic content"
+        },
+        {
+            "id": "aria_13",
+            "type": "content",
+            "title": "Common Mistakes",
+            "content": "# Common ARIA Mistakes ❌\n\n## 1. Hiding Important Content:\n```html\n<!-- ❌ Hides from screen readers -->\n<button aria-hidden=\"true\">Submit</button>\n\n<!-- ✅ Only hide decorative content -->\n<span aria-hidden=\"true\">🎨</span>\n```\n\n## 2. Wrong Role:\n```html\n<!-- ❌ Link styled as button but wrong role -->\n<a href=\"/submit\" role=\"button\">Submit</a>\n\n<!-- ✅ Use appropriate element -->\n<button type=\"submit\">Submit</button>\n```\n\n## 3. Missing State Updates:\n```html\n<!-- ❌ Never updates -->\n<button aria-expanded=\"false\">Menu</button>\n\n<!-- ✅ Updates on interaction -->\n<button aria-expanded=\"true/false\">Menu</button>\n```\n\n## 4. Conflicting Labels:\n```html\n<!-- ❌ Confusing -->\n<button aria-label=\"Close\" aria-labelledby=\"title\">X</button>\n\n<!-- ✅ Use one method -->\n<button aria-label=\"Close dialog\">X</button>\n```"
+        },
+        {
+            "id": "aria_14",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered ARIA Attributes!\n\n## Key Takeaways:\n\n### Roles - What it IS\n- Landmark roles for structure\n- Widget roles for custom components\n\n### Labels - What it's CALLED\n- aria-label for direct naming\n- aria-labelledby for references\n- aria-describedby for hints\n\n### States - What it DOES\n- aria-expanded, aria-selected\n- aria-checked, aria-pressed\n- aria-hidden, aria-disabled\n\n### Properties - How it RELATES\n- aria-controls, aria-owns\n- aria-live for dynamic content\n\n## Remember:\n| Rule | Guidance |\n|------|----------|\n| First | Use native HTML |\n| Second | Add keyboard support |\n| Third | Test with screen readers |\n\n## Next Steps:\n- Learn SEO basics\n- Master semantic HTML\n- Build accessible components\n\nMake the web accessible! ♿"
+        }
+    ]
+}

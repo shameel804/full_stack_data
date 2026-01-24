@@ -1,0 +1,59 @@
+{
+    "id": "learn_socketio_realtime",
+    "topicId": "socketio",
+    "topicTitle": "Socket.io",
+    "description": "Master Socket.io with rooms, namespaces, events, and broadcasting",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "sio_1",
+            "type": "content",
+            "title": "Socket.io",
+            "content": "# Socket.io 🔌\n\nReal-time library with fallbacks.\n\n## What You'll Learn:\n- **Events** - Custom event system\n- **Rooms** - Group connections\n- **Namespaces** - Separate channels\n- **Broadcasting** - Send to many\n\n> 💡 Socket.io = WebSocket + fallbacks + features!"
+        },
+        {
+            "id": "sio_2",
+            "type": "content",
+            "title": "Setup",
+            "content": "# Socket.io Setup ⚙️\n\n## Server:\n```javascript\nconst io = require('socket.io')(server);\n\nio.on('connection', (socket) => {\n    console.log('User connected:', socket.id);\n    \n    socket.on('chat', (msg) => {\n        io.emit('chat', msg);\n    });\n    \n    socket.on('disconnect', () => {\n        console.log('User disconnected');\n    });\n});\n```\n\n## Client:\n```javascript\nimport { io } from 'socket.io-client';\n\nconst socket = io('http://localhost:3000');\n\nsocket.on('connect', () => {\n    console.log('Connected!');\n});\n\nsocket.emit('chat', 'Hello!');\nsocket.on('chat', (msg) => console.log(msg));\n```"
+        },
+        {
+            "id": "sio_3",
+            "type": "content",
+            "title": "Events",
+            "content": "# Events 📡\n\nCustom event-based communication.\n\n## Emit & Listen:\n```javascript\n// Emit event\nsocket.emit('eventName', data);\n\n// Listen for event\nsocket.on('eventName', (data) => {\n    console.log(data);\n});\n```\n\n## With Acknowledgment:\n```javascript\n// Client\nsocket.emit('save', data, (response) => {\n    console.log('Server confirmed:', response);\n});\n\n// Server\nsocket.on('save', (data, callback) => {\n    saveData(data);\n    callback({ success: true });\n});\n```"
+        },
+        {
+            "id": "sio_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your Socket.io knowledge!",
+            "quizQuestion": "How do you send to all clients in Socket.io?",
+            "quizOptions": [
+                "socket.emit()",
+                "io.emit()",
+                "socket.broadcast()",
+                "io.send()"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "sio_4",
+            "type": "content",
+            "title": "Rooms",
+            "content": "# Rooms 🏠\n\nGroup sockets together.\n\n```javascript\n// Join room\nsocket.join('room1');\n\n// Leave room\nsocket.leave('room1');\n\n// Emit to room\nio.to('room1').emit('message', 'Hello room!');\n\n// Emit to multiple rooms\nio.to('room1').to('room2').emit('event', data);\n```\n\n## Use Cases:\n- Chat rooms\n- Game lobbies\n- User groups\n- Live events"
+        },
+        {
+            "id": "sio_5",
+            "type": "content",
+            "title": "Broadcasting",
+            "content": "# Broadcasting 📢\n\n## Options:\n```javascript\n// To all connected clients\nio.emit('event', data);\n\n// To all except sender\nsocket.broadcast.emit('event', data);\n\n// To specific room\nio.to('room').emit('event', data);\n\n// To room except sender\nsocket.to('room').emit('event', data);\n\n// To specific socket\nio.to(socketId).emit('event', data);\n```"
+        },
+        {
+            "id": "sio_6",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Socket.io!\n\n## Key Features:\n| Feature | Use Case |\n|---------|----------|\n| Events | Custom messages |\n| Rooms | Group users |\n| Broadcast | Send to many |\n| Namespaces | Separate channels |\n\n## Benefits over WebSocket:\n- Auto reconnection\n- Fallback transports\n- Room management\n- Event system\n\nBuild chat apps! 🔌"
+        }
+    ]
+}

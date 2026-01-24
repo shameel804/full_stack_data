@@ -1,0 +1,167 @@
+{
+    "id": "learn_integtest_supertest",
+    "topicId": "supertest",
+    "topicTitle": "Supertest",
+    "description": "Master Supertest for testing Node.js HTTP servers and Express applications with high-level assertions",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "supertest_1",
+            "type": "content",
+            "title": "What is Supertest?",
+            "content": "# Supertest 🚀\n\nA high-level abstraction for testing HTTP, while still allowing you to drop down to the lower-level API provided by `superagent`.\n\n- **Fast**: No need to spin up a real server on a port (usually).\n- **Express-Ready**: Works seamlessly with Express apps.\n- **Assertive**: Flexible assertion syntax for bodies, headers, and status codes."
+        },
+        {
+            "id": "supertest_2",
+            "type": "content",
+            "title": "Installation",
+            "content": "# Getting Started 🛠️\n\n```bash\nnpm install supertest --save-dev\n```\n\nUsually paired with a test runner like **Jest** or **Mocha**.\n\n```javascript\nconst request = require('supertest');\nconst app = require('./app'); // Your Express app\n```"
+        },
+        {
+            "id": "supertest_3",
+            "type": "content",
+            "title": "Basic Request",
+            "content": "# Hello Supertest 👋\n\n```javascript\ndescribe('GET /user', function() {\n  it('responds with json', function(done) {\n    request(app)\n      .get('/user')\n      .set('Accept', 'application/json')\n      .expect('Content-Type', /json/)\n      .expect(200, done);\n  });\n});\n```"
+        },
+        {
+            "id": "supertest_4",
+            "type": "content",
+            "title": "Async/Await API",
+            "content": "# Modern Syntax 🚀\n\nUsing `async/await` is much cleaner than using callbacks (`done`).\n\n```javascript\ntest('GET /users', async () => {\n  const response = await request(app).get('/users');\n  \n  expect(response.status).toBe(200);\n  expect(response.body).toBeInstanceOf(Array);\n});\n```"
+        },
+        {
+            "id": "supertest_5",
+            "quizQuestion": "What is primarily passed to the request() function in Supertest for an Express app?",
+            "quizOptions": [
+                "The URL string",
+                "The Express 'app' object",
+                "A port number",
+                "The 'server.listen' function"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Architecture Quiz",
+            "content": "Linking Supertest and Express."
+        },
+        {
+            "id": "supertest_6",
+            "type": "content",
+            "title": "POSTing Data",
+            "content": "# Sending Bodies 📝\n\n```javascript\nconst res = await request(app)\n  .post('/user')\n  .send({ name: 'john' })\n  .set('Content-Type', 'application/json');\n\nexpect(res.body.id).toBeDefined();\n```\n\nSupertest automatically handles JSON stringification if you pass an object to `.send()`."
+        },
+        {
+            "id": "supertest_7",
+            "type": "content",
+            "title": "Asserting Headers",
+            "content": "# Headers 📋\n\n```javascript\nawait request(app)\n  .get('/')\n  .expect('Cache-Control', 'no-cache')\n  .expect('X-Powered-By', /Express/);\n```\n\nYou can use exact strings or **Regular Expressions** for header values."
+        },
+        {
+            "id": "supertest_8",
+            "type": "content",
+            "title": "Cookies & Sessions",
+            "content": "# Cookies 🍪\n\n```javascript\nconst res = await request(app).get('/login');\nconst cookies = res.headers['set-cookie'];\n\n// Use the cookie in the next request\nawait request(app)\n  .get('/profile')\n  .set('Cookie', cookies);\n```"
+        },
+        {
+            "id": "supertest_9",
+            "type": "content",
+            "title": "File Uploads",
+            "content": "# Testing Multer 📁\n\n```javascript\nawait request(app)\n  .post('/avatar')\n  .attach('image', 'test/fixtures/avatar.jpg')\n  .expect(200);\n```\n\nUse `.attach(field, path)` to simulate multipart/form-data file uploads."
+        },
+        {
+            "id": "supertest_10",
+            "quizQuestion": "Which method is used to send a JSON body in a Supertest POST request?",
+            "quizOptions": [
+                ".body()",
+                ".send()",
+                ".json()",
+                ".payload()"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "API Quiz",
+            "content": "Sending data."
+        },
+        {
+            "id": "supertest_11",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Bearer Tokens 🔐\n\n```javascript\nconst token = 'eyJhbG...';\n\nawait request(app)\n  .get('/admin')\n  .set('Authorization', `Bearer ${token}`)\n  .expect(200);\n```"
+        },
+        {
+            "id": "supertest_12",
+            "type": "content",
+            "title": "Error Handling Tests",
+            "content": "# Negative Testing ❌\n\nEnsure your API fails gracefully.\n\n```javascript\ntest('should return 400 for bad input', async () => {\n  const res = await request(app)\n    .post('/register')\n    .send({ email: 'bad-email' });\n  \n  expect(res.status).toBe(400);\n  expect(res.body.error).toBe('Invalid Email');\n});\n```"
+        },
+        {
+            "id": "supertest_13",
+            "type": "content",
+            "title": "Testing External URLs",
+            "content": "# Real Server Testing 🌍\n\nSupertest can also test real, running servers elsewhere.\n\n```javascript\nrequest('https://api.example.com')\n  .get('/status')\n  .expect(200);\n```"
+        },
+        {
+            "id": "supertest_14",
+            "type": "content",
+            "title": "Expectation Chaining",
+            "content": "# Fluency 🌊\n\nYou can chain multiple `.expect()` calls for a succinct test.\n\n```javascript\nrequest(app)\n  .get('/')\n  .expect(200)\n  .expect('Content-Type', /html/)\n  .expect(/Welcome/);\n```"
+        },
+        {
+            "id": "supertest_15",
+            "quizQuestion": "How do you test a file upload in Supertest?",
+            "quizOptions": [
+                ".send(file)",
+                ".attach(fieldName, path)",
+                ".upload(file)",
+                ".file(path)"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Features Quiz",
+            "content": "Multipart requests."
+        },
+        {
+            "id": "supertest_16",
+            "type": "content",
+            "title": "Custom Assertions",
+            "content": "# Custom Logic 🛠️\n\nIf `.expect()` isn't enough, inspect the `response` object manually.\n\n```javascript\nconst res = await request(app).get('/items');\n\nexpect(res.body.length).toBeGreaterThan(0);\nexpect(res.header['x-total-count']).toBe('50');\n```"
+        },
+        {
+            "id": "supertest_17",
+            "type": "content",
+            "title": "Port Aliasing",
+            "content": "# Port Management ⚓\n\nIf you pass an app to `request(app)`, Supertest starts the server on an ephemeral port. This prevents port collisions during parallel test runs!"
+        },
+        {
+            "id": "supertest_18",
+            "type": "content",
+            "title": "Redirect Testing",
+            "content": "# Following 🔀\n\n```javascript\nawait request(app)\n  .get('/old-page')\n  .expect(302)\n  .expect('Location', '/new-page');\n```"
+        },
+        {
+            "id": "supertest_19",
+            "type": "content",
+            "title": "Timeout Control",
+            "content": "# Slow APIs 🐌\n\n```javascript\n// Extend Superagent timeout\nawait request(app)\n  .get('/slow')\n  .timeout(5000)\n  .expect(200);\n```"
+        },
+        {
+            "id": "supertest_20",
+            "quizQuestion": "What is a major advantage of passing 'app' directly to Supertest instead of a URL?",
+            "quizOptions": [
+                "It's more secure",
+                "It doesn't require the app to be 'listening' on a port",
+                "It automatically writes the frontend",
+                "It bypasses all middleware"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Testing speed."
+        },
+        {
+            "id": "supertest_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Ideal for Express/Node.js integration testing.\n- ✅ High-level fluent API (`expect`, `send`, `set`).\n- ✅ No need to manage server ports manually.\n- ✅ Handles files, cookies, and auth easily.\n\nSupercharge your API tests with Supertest! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_basics",
+    "topicId": "basics",
+    "topicTitle": "Monitoring Basics",
+    "description": "Master the fundamentals of monitoring including metrics, logs, traces, and alerts for modern applications",
+    "baseKP": 80,
+    "slides": [
+        {
+            "id": "basics_1",
+            "type": "content",
+            "title": "Monitoring Overview",
+            "content": "# Monitoring Basics 📊\n\nUnderstand your systems through observability.\n\n## What You'll Learn\n- **Metrics** - Numerical measurements\n- **Logs** - Event records\n- **Traces** - Request flows\n- **Alerts** - Notifications\n\n## Why Monitor?\n| Reason | Benefit |\n|--------|--------|\n| Uptime | Know before users |\n| Performance | Optimize response |\n| Debugging | Find root cause |\n| Capacity | Plan resources |"
+        },
+        {
+            "id": "basics_2",
+            "type": "content",
+            "title": "The Three Pillars",
+            "content": "# Three Pillars of Observability 🏛️\n\n## Metrics\n- Numbers over time\n- CPU, memory, latency\n- Aggregated data\n\n## Logs\n- Event records\n- Timestamped text\n- Detailed context\n\n## Traces\n- Request journey\n- Distributed systems\n- Latency breakdown\n\n```\nMetrics: How many? How fast?\nLogs: What happened?\nTraces: Where did it go?\n```"
+        },
+        {
+            "id": "basics_3",
+            "type": "content",
+            "title": "Metrics Deep Dive",
+            "content": "# Metrics 📈\n\nNumerical data over time.\n\n## Metric Types\n| Type | Use | Example |\n|------|-----|--------|\n| Counter | Increasing | Requests |\n| Gauge | Current value | CPU % |\n| Histogram | Distribution | Latency |\n\n## Key Metrics\n- **CPU/Memory** - Resource usage\n- **Latency** - Response time\n- **Error rate** - Failure %\n- **Throughput** - Requests/sec"
+        },
+        {
+            "id": "basics_quiz_1",
+            "type": "quiz",
+            "title": "Metrics Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "Which metric type is best for tracking total request count?",
+            "quizOptions": [
+                "Gauge",
+                "Counter",
+                "Histogram",
+                "Summary"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_4",
+            "type": "content",
+            "title": "Golden Signals",
+            "content": "# Four Golden Signals 🚦\n\nFrom Google SRE book.\n\n## The Signals\n1. **Latency** - Request time\n2. **Traffic** - Demand\n3. **Errors** - Failure rate\n4. **Saturation** - Resource usage\n\n## Implementation\n```\nLatency: p50, p95, p99 response times\nTraffic: requests/second\nErrors: 5xx count / total requests\nSaturation: CPU, memory, disk %\n```"
+        },
+        {
+            "id": "basics_5",
+            "type": "content",
+            "title": "Logging Fundamentals",
+            "content": "# Logging 📝\n\nRecord events for debugging.\n\n## Log Levels\n| Level | Use |\n|-------|-----|\n| DEBUG | Development |\n| INFO | Normal events |\n| WARN | Potential issues |\n| ERROR | Failures |\n| FATAL | Critical |\n\n## Good Log Example\n```json\n{\n  \"timestamp\": \"2024-01-15T10:30:00Z\",\n  \"level\": \"ERROR\",\n  \"message\": \"Payment failed\",\n  \"user_id\": \"u123\",\n  \"error_code\": \"INSUFFICIENT_FUNDS\"\n}\n```"
+        },
+        {
+            "id": "basics_6",
+            "type": "content",
+            "title": "Structured Logging",
+            "content": "# Structured Logs 📋\n\nJSON format for parsing.\n\n## Benefits\n- Machine readable\n- Queryable\n- Consistent format\n\n## Example\n```python\nimport logging\nimport json\n\nlogger = logging.getLogger()\n\ndef log_json(level, message, **kwargs):\n    log_entry = {\n        'message': message,\n        **kwargs\n    }\n    logger.log(level, json.dumps(log_entry))\n\nlog_json(logging.INFO, 'User login', \n         user_id='123', ip='10.0.0.1')\n```"
+        },
+        {
+            "id": "basics_quiz_2",
+            "type": "quiz",
+            "title": "Logging Quiz",
+            "content": "Test your logging knowledge!",
+            "quizQuestion": "What log level should you use for potential issues that are not errors?",
+            "quizOptions": [
+                "DEBUG",
+                "INFO",
+                "WARN",
+                "ERROR"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "basics_7",
+            "type": "content",
+            "title": "Distributed Tracing",
+            "content": "# Distributed Tracing 🔍\n\nTrack requests across services.\n\n## Concepts\n- **Trace** - Full request journey\n- **Span** - Single operation\n- **Trace ID** - Unique identifier\n\n## Flow\n```\nRequest → Service A → Service B → Database\n  │          │            │          │\n  └──────────┴────────────┴──────────┘\n              Trace ID: abc123\n```\n\n## Tools\n- Jaeger\n- Zipkin\n- AWS X-Ray\n- Datadog APM"
+        },
+        {
+            "id": "basics_8",
+            "type": "content",
+            "title": "Implementing Traces",
+            "content": "# Adding Traces 🔧\n\n## OpenTelemetry Example\n```python\nfrom opentelemetry import trace\n\ntracer = trace.get_tracer(__name__)\n\ndef process_order(order_id):\n    with tracer.start_as_current_span('process_order') as span:\n        span.set_attribute('order.id', order_id)\n        \n        with tracer.start_as_current_span('validate'):\n            validate(order_id)\n        \n        with tracer.start_as_current_span('charge'):\n            charge(order_id)\n```\n\n## Trace Propagation\n- Pass trace ID in headers\n- W3C Trace Context standard\n- Auto-instrumentation"
+        },
+        {
+            "id": "basics_9",
+            "type": "content",
+            "title": "Alerting Basics",
+            "content": "# Alerting 🚨\n\nNotify when something goes wrong.\n\n## Good Alert Properties\n- Actionable\n- Timely\n- Clear severity\n- Low noise\n\n## Alert Components\n| Part | Purpose |\n|------|--------|\n| Condition | When to fire |\n| Threshold | Trigger value |\n| Window | Time period |\n| Action | What to do |\n\n## Example\n```yaml\nalert: HighErrorRate\nexpr: error_rate > 0.05\nfor: 5m\nseverity: critical\n```"
+        },
+        {
+            "id": "basics_10",
+            "type": "content",
+            "title": "Alert Severity",
+            "content": "# Alert Severity Levels 🔔\n\n## Severity Matrix\n| Level | Response | Example |\n|-------|----------|--------|\n| P1/Critical | Immediate | Site down |\n| P2/High | Hours | Degraded |\n| P3/Medium | Day | Elevated errors |\n| P4/Low | Week | Warning |\n\n## Routing\n```\nP1 → PagerDuty → On-call phone\nP2 → Slack #alerts-high\nP3 → Slack #alerts\nP4 → Email digest\n```"
+        },
+        {
+            "id": "basics_quiz_3",
+            "type": "quiz",
+            "title": "Alerting Quiz",
+            "content": "Test your alerting knowledge!",
+            "quizQuestion": "What makes an alert 'actionable'?",
+            "quizOptions": [
+                "It sounds loud",
+                "Someone can fix the underlying issue",
+                "It fires frequently",
+                "It uses bright colors"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_11",
+            "type": "content",
+            "title": "Alert Fatigue",
+            "content": "# Avoiding Alert Fatigue 😴\n\nToo many alerts = ignored alerts.\n\n## Symptoms\n- Ignoring notifications\n- Slow response times\n- Critical alerts missed\n\n## Prevention\n- ✅ Set proper thresholds\n- ✅ Group related alerts\n- ✅ Auto-resolve\n- ✅ Regular review\n- ❌ Alert on everything\n\n## Rule of Thumb\n```\nIf it doesn't need action, don't alert.\nIf it's not urgent, use different channel.\n```"
+        },
+        {
+            "id": "basics_12",
+            "type": "content",
+            "title": "SLIs and SLOs",
+            "content": "# SLIs, SLOs, SLAs 📊\n\n## Definitions\n| Term | Meaning |\n|------|--------|\n| SLI | Service Level Indicator |\n| SLO | Service Level Objective |\n| SLA | Service Level Agreement |\n\n## Example\n```\nSLI: Latency p99 = 150ms\nSLO: 99.9% requests < 200ms\nSLA: If SLO missed, 10% credit\n```\n\n## Error Budgets\n```\n99.9% SLO = 0.1% error budget\n= 43.8 minutes/month downtime allowed\n```"
+        },
+        {
+            "id": "basics_13",
+            "type": "content",
+            "title": "Monitoring Tools",
+            "content": "# Monitoring Tools 🛠️\n\n## Categories\n| Type | Tools |\n|------|-------|\n| Metrics | Prometheus, CloudWatch |\n| Logs | ELK, Splunk, Loki |\n| Traces | Jaeger, Zipkin, X-Ray |\n| All-in-one | Datadog, New Relic |\n\n## Open Source Stack\n```\nPrometheus → Metrics\nLoki → Logs\nTempo → Traces\nGrafana → Visualization\n```"
+        },
+        {
+            "id": "basics_14",
+            "type": "content",
+            "title": "Dashboards",
+            "content": "# Building Dashboards 📺\n\nVisualize your data.\n\n## Dashboard Types\n- **Overview** - High-level health\n- **Service** - Per-service detail\n- **Debug** - Deep diagnostics\n\n## Best Practices\n- ✅ Most important at top\n- ✅ Consistent time ranges\n- ✅ Include thresholds\n- ✅ Color for status\n- ❌ Too many panels"
+        },
+        {
+            "id": "basics_quiz_4",
+            "type": "quiz",
+            "title": "SLO Quiz",
+            "content": "Test your SLO knowledge!",
+            "quizQuestion": "If your SLO is 99.9%, how much error budget do you have per month?",
+            "quizOptions": [
+                "1 hour",
+                "43 minutes",
+                "8.6 hours",
+                "0 minutes"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_15",
+            "type": "content",
+            "title": "Incident Management",
+            "content": "# Incident Response 🚨\n\nHandling production issues.\n\n## Process\n1. **Detect** - Alert fires\n2. **Triage** - Assess severity\n3. **Communicate** - Status page\n4. **Mitigate** - Stop bleeding\n5. **Resolve** - Fix root cause\n6. **Review** - Post-mortem\n\n## Communication\n```\nIncident #123 [CRITICAL]\nStatus: Investigating\nImpact: 10% users affected\nNext update: 15 minutes\n```"
+        },
+        {
+            "id": "basics_16",
+            "type": "content",
+            "title": "Post-Mortems",
+            "content": "# Blameless Post-Mortems 📝\n\nLearn from failures.\n\n## Template\n1. Summary\n2. Timeline\n3. Root cause\n4. Impact\n5. Action items\n\n## Key Principles\n- ✅ Blameless culture\n- ✅ Focus on systems\n- ✅ Follow up on actions\n- ❌ Blame individuals\n\n## Questions\n- What happened?\n- How did we detect it?\n- How can we prevent it?"
+        },
+        {
+            "id": "basics_17",
+            "type": "content",
+            "title": "On-Call Best Practices",
+            "content": "# On-Call Excellence 📱\n\n## Responsibilities\n- Respond to alerts\n- Triage issues\n- Escalate when needed\n- Document actions\n\n## Best Practices\n- ✅ Clear escalation paths\n- ✅ Runbooks for common issues\n- ✅ Reasonable schedules\n- ✅ Time to recover\n- ❌ 24/7 single person"
+        },
+        {
+            "id": "basics_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What are the Four Golden Signals?",
+            "quizOptions": [
+                "CPU, Memory, Disk, Network",
+                "Latency, Traffic, Errors, Saturation",
+                "Logs, Metrics, Traces, Alerts",
+                "Up, Down, Slow, Fast"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "basics_18",
+            "type": "content",
+            "title": "Monitoring Maturity",
+            "content": "# Monitoring Maturity 📈\n\n## Maturity Levels\n| Level | Description |\n|-------|-------------|\n| 1 | Basic uptime checks |\n| 2 | Metrics & logs |\n| 3 | Full observability |\n| 4 | SLO-driven |\n| 5 | Predictive |\n\n## Evolution\n```\nNone → Reactive → Proactive → Predictive\n```"
+        },
+        {
+            "id": "basics_19",
+            "type": "content",
+            "title": "Getting Started",
+            "content": "# Quick Start Guide 🚀\n\n## Step 1: Instrument\n- Add metrics library\n- Add logging\n- Add tracing\n\n## Step 2: Collect\n- Deploy Prometheus\n- Configure log shipping\n- Set up trace collector\n\n## Step 3: Visualize\n- Create Grafana dashboards\n- Build log queries\n- Configure trace views\n\n## Step 4: Alert\n- Define SLOs\n- Create alerts\n- Set up on-call"
+        },
+        {
+            "id": "basics_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Three Pillars\n- ✅ Metrics for numbers\n- ✅ Logs for events\n- ✅ Traces for flow\n\n### Golden Signals\n- ✅ Latency, Traffic, Errors, Saturation\n\n### Alerting\n- ✅ Actionable alerts\n- ✅ Proper severity\n- ✅ Avoid fatigue\n\n### Process\n- ✅ SLIs/SLOs\n- ✅ Incident response\n- ✅ Blameless post-mortems\n\nHappy monitoring! 📊"
+        }
+    ]
+}

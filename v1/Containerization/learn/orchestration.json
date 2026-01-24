@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_orchestration",
+    "topicId": "orchestration",
+    "topicTitle": "Container Orchestration",
+    "description": "Master container orchestration concepts including Kubernetes orchestration, Docker Swarm, scaling strategies, and high availability patterns",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "orchestration_1",
+            "type": "content",
+            "title": "Welcome to Container Orchestration",
+            "content": "# Container Orchestration 🎭\n\nAutomate container deployment, scaling, and management.\n\n## What you'll learn:\n- **Kubernetes** - Industry-standard orchestration\n- **Swarm** - Docker's native orchestration\n- **Scaling** - Horizontal and vertical strategies\n- **HA** - High availability patterns\n\n> 💡 **Fun Fact:** Netflix runs over 100,000 containers managed by orchestration tools!\n\n## What is Orchestration?\n\n| Manual | Orchestrated |\n|--------|-------------|\n| Start containers one by one | Declarative deployment |\n| Monitor health manually | Auto-healing |\n| Scale by hand | Auto-scaling |\n| Update with downtime | Rolling updates |\n| Single server | Multi-node cluster |\n\n## Orchestration Platforms\n\n```\n┌─────────────────────────────────────────────────┐\n│              ORCHESTRATION                       │\n├───────────────┬───────────────┬─────────────────┤\n│  Kubernetes   │ Docker Swarm  │  Nomad          │\n│  (K8s)        │  (Native)     │  (HashiCorp)    │\n├───────────────┼───────────────┼─────────────────┤\n│  Industry     │  Simpler      │  Multi-runtime  │\n│  Standard     │  Setup        │  Support        │\n└───────────────┴───────────────┴─────────────────┘\n```\n\nLet's master orchestration!"
+        },
+        {
+            "id": "orchestration_2",
+            "type": "content",
+            "title": "Orchestration Benefits",
+            "content": "# Why Orchestration? 🤔\n\n## Key Benefits\n\n### 1. Self-Healing\n```\nPod crashes → Orchestrator detects → Restarts pod\nNode fails  → Orchestrator detects → Reschedules pods\n```\n\n### 2. Scaling\n```\nHigh traffic → Scale out → More replicas\nLow traffic  → Scale in  → Fewer replicas\n```\n\n### 3. Load Balancing\n```\n                ┌─────────────┐\n                │ Load        │\n                │ Balancer    │\n                └──────┬──────┘\n         ┌─────────────┼─────────────┐\n         ▼             ▼             ▼\n    ┌─────────┐   ┌─────────┐   ┌─────────┐\n    │  Pod 1  │   │  Pod 2  │   │  Pod 3  │\n    └─────────┘   └─────────┘   └─────────┘\n```\n\n### 4. Rolling Updates\n```\nv1 → v2 without downtime\n```\n\n### 5. Service Discovery\n```\nContainers find each other by name, not IP\n```\n\n## Without vs With Orchestration\n\n| Aspect | Without | With |\n|--------|---------|------|\n| **Deployment** | Manual SSH | `kubectl apply` |\n| **Scaling** | Provision + deploy | `scale --replicas=10` |\n| **Recovery** | 3 AM pages | Automatic |\n| **Updates** | Downtime | Zero downtime |"
+        },
+        {
+            "id": "orchestration_3",
+            "type": "content",
+            "title": "Kubernetes Orchestration",
+            "content": "# Kubernetes Orchestration ☸️\n\n## K8s Orchestration Features\n\n```\n┌─────────────────────────────────────────────────┐\n│              KUBERNETES FEATURES                 │\n├─────────────────────────────────────────────────┤\n│  ✅ Declarative Configuration                   │\n│  ✅ Automatic Bin Packing                       │\n│  ✅ Self-healing                                │\n│  ✅ Horizontal Scaling                          │\n│  ✅ Service Discovery & Load Balancing          │\n│  ✅ Automated Rollouts and Rollbacks            │\n│  ✅ Secret and Configuration Management         │\n│  ✅ Storage Orchestration                       │\n└─────────────────────────────────────────────────┘\n```\n\n## Deployment Strategies\n\n### Rolling Update\n```yaml\nspec:\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxUnavailable: 25%\n      maxSurge: 25%\n```\n\n### Recreate\n```yaml\nspec:\n  strategy:\n    type: Recreate  # Stop all, then start new\n```\n\n## Declarative vs Imperative\n\n```bash\n# Imperative\nkubectl scale deployment nginx --replicas=5\n\n# Declarative (preferred)\nkubectl apply -f deployment.yaml\n# deployment.yaml has replicas: 5\n```"
+        },
+        {
+            "id": "orchestration_4",
+            "type": "content",
+            "title": "Docker Swarm",
+            "content": "# Docker Swarm 🐝\n\nDocker's **native** clustering and orchestration.\n\n## Swarm Architecture\n\n```\n┌─────────────────────────────────────────────────┐\n│                  SWARM CLUSTER                   │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  MANAGER NODES (Control Plane)                   │\n│  ┌─────────┐  ┌─────────┐  ┌─────────┐          │\n│  │Manager 1│  │Manager 2│  │Manager 3│          │\n│  │(Leader) │  │(Backup) │  │(Backup) │          │\n│  └─────────┘  └─────────┘  └─────────┘          │\n│                    │                             │\n│  ───────────────────────────────────────────    │\n│                    │                             │\n│  WORKER NODES (Data Plane)                       │\n│  ┌─────────┐  ┌─────────┐  ┌─────────┐          │\n│  │Worker 1 │  │Worker 2 │  │Worker 3 │          │\n│  │  tasks  │  │  tasks  │  │  tasks  │          │\n│  └─────────┘  └─────────┘  └─────────┘          │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Initialize Swarm\n\n```bash\n# On manager node\ndocker swarm init --advertise-addr <manager-ip>\n\n# Join workers\ndocker swarm join --token <token> <manager-ip>:2377\n\n# Check nodes\ndocker node ls\n```\n\n## Swarm vs Kubernetes\n\n| Swarm | Kubernetes |\n|-------|------------|\n| Simpler setup | More complex |\n| Built into Docker | Separate install |\n| Less features | Full ecosystem |\n| Smaller scale | Enterprise scale |"
+        },
+        {
+            "id": "orchestration_5",
+            "type": "quiz",
+            "title": "Orchestration Quiz",
+            "content": "Test your orchestration knowledge!",
+            "quizQuestion": "What is 'self-healing' in container orchestration?",
+            "quizOptions": [
+                "Containers automatically update themselves",
+                "Failed containers are automatically restarted or replaced",
+                "Containers repair their own code",
+                "The orchestrator repairs network issues"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orchestration_6",
+            "type": "content",
+            "title": "Swarm Services",
+            "content": "# Swarm Services 📦\n\n## Creating Services\n\n```bash\n# Create a service\ndocker service create \\\n  --name nginx \\\n  --replicas 3 \\\n  --publish 80:80 \\\n  nginx:alpine\n\n# List services\ndocker service ls\n\n# Inspect service\ndocker service inspect nginx\n\n# View tasks (containers)\ndocker service ps nginx\n```\n\n## Scaling Services\n\n```bash\n# Scale up/down\ndocker service scale nginx=5\n\n# Or update replicas\ndocker service update --replicas 10 nginx\n```\n\n## Rolling Updates\n\n```bash\n# Update with rolling policy\ndocker service update \\\n  --image nginx:latest \\\n  --update-parallelism 2 \\\n  --update-delay 10s \\\n  nginx\n```\n\n## Service Modes\n\n| Mode | Description |\n|------|-------------|\n| `replicated` | Specific number of tasks |\n| `global` | One task per node |\n\n```bash\n# Global mode (e.g., monitoring agent)\ndocker service create --mode global --name agent monitoring-agent\n```"
+        },
+        {
+            "id": "orchestration_7",
+            "type": "content",
+            "title": "Swarm Stacks",
+            "content": "# Swarm Stacks 📚\n\nDeploy multi-service apps with compose files.\n\n## Stack Compose File\n\n```yaml\n# docker-stack.yml\nversion: '3.8'\n\nservices:\n  web:\n    image: nginx:alpine\n    ports:\n      - \"80:80\"\n    deploy:\n      replicas: 3\n      update_config:\n        parallelism: 1\n        delay: 10s\n      restart_policy:\n        condition: on-failure\n    networks:\n      - frontend\n\n  api:\n    image: myapi:latest\n    deploy:\n      replicas: 2\n      resources:\n        limits:\n          cpus: '0.5'\n          memory: 256M\n    networks:\n      - frontend\n      - backend\n\n  db:\n    image: postgres:15\n    volumes:\n      - db_data:/var/lib/postgresql/data\n    deploy:\n      placement:\n        constraints:\n          - node.role == manager\n    networks:\n      - backend\n\nnetworks:\n  frontend:\n  backend:\n\nvolumes:\n  db_data:\n```\n\n## Stack Commands\n\n```bash\n# Deploy stack\ndocker stack deploy -c docker-stack.yml myapp\n\n# List stacks\ndocker stack ls\n\n# List stack services\ndocker stack services myapp\n\n# Remove stack\ndocker stack rm myapp\n```"
+        },
+        {
+            "id": "orchestration_8",
+            "type": "content",
+            "title": "Horizontal Scaling",
+            "content": "# Horizontal Scaling 📈\n\nAdd more **instances** to handle load.\n\n## Manual Scaling\n\n### Kubernetes\n```bash\nkubectl scale deployment nginx --replicas=10\n```\n\n### Swarm\n```bash\ndocker service scale nginx=10\n```\n\n## Auto-Scaling (K8s HPA)\n\n```yaml\napiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: nginx-hpa\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: nginx\n  minReplicas: 2\n  maxReplicas: 10\n  metrics:\n    - type: Resource\n      resource:\n        name: cpu\n        target:\n          type: Utilization\n          averageUtilization: 70\n    - type: Resource\n      resource:\n        name: memory\n        target:\n          type: Utilization\n          averageUtilization: 80\n```\n\n## Scaling Visualization\n\n```\nLoad Increases:\n\n  CPU: 30%        CPU: 70%        CPU: 90%\n  ┌────────┐      ┌────────┐      ┌────────┐\n  │ Pod 1  │  →   │ Pod 1  │  →   │ Pod 1  │\n  │ Pod 2  │      │ Pod 2  │      │ Pod 2  │\n  └────────┘      │ Pod 3  │      │ Pod 3  │\n                  │ Pod 4  │      │ Pod 4  │\n                  └────────┘      │ Pod 5  │\n                                  └────────┘\n  2 replicas      4 replicas      5 replicas\n```"
+        },
+        {
+            "id": "orchestration_9",
+            "type": "content",
+            "title": "Vertical Scaling",
+            "content": "# Vertical Scaling 📊\n\nIncrease resources for **existing** instances.\n\n## Resource Requests and Limits\n\n```yaml\nspec:\n  containers:\n    - name: app\n      resources:\n        requests:      # Guaranteed minimum\n          cpu: \"250m\"\n          memory: \"256Mi\"\n        limits:        # Maximum allowed\n          cpu: \"500m\"\n          memory: \"512Mi\"\n```\n\n## Vertical Pod Autoscaler (VPA)\n\n```yaml\napiVersion: autoscaling.k8s.io/v1\nkind: VerticalPodAutoscaler\nmetadata:\n  name: nginx-vpa\nspec:\n  targetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: nginx\n  updatePolicy:\n    updateMode: \"Auto\"  # Recreate pods with new resources\n  resourcePolicy:\n    containerPolicies:\n      - containerName: nginx\n        minAllowed:\n          cpu: 100m\n          memory: 128Mi\n        maxAllowed:\n          cpu: 2\n          memory: 4Gi\n```\n\n## Horizontal vs Vertical\n\n| Horizontal | Vertical |\n|------------|----------|\n| Add more pods | Bigger pods |\n| Better for stateless | Better for stateful |\n| More HA | Single point of failure |\n| Linear cost | Diminishing returns |\n\n> 💡 **Best Practice:** Prefer horizontal scaling!"
+        },
+        {
+            "id": "orchestration_10",
+            "type": "quiz",
+            "title": "Scaling Quiz",
+            "content": "Test your scaling knowledge!",
+            "quizQuestion": "What is horizontal scaling?",
+            "quizOptions": [
+                "Increasing CPU and memory of existing containers",
+                "Adding more container instances to handle load",
+                "Moving containers to better hardware",
+                "Reducing the number of containers"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orchestration_11",
+            "type": "content",
+            "title": "High Availability Concepts",
+            "content": "# High Availability (HA) 🏥\n\nEnsure applications remain available.\n\n## HA Components\n\n```\n┌─────────────────────────────────────────────────┐\n│              HIGH AVAILABILITY                   │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │ REDUNDANCY: Multiple instances          │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │ FAILOVER: Automatic switch on failure   │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │ LOAD BALANCING: Distribute traffic      │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n│  ┌─────────────────────────────────────────┐    │\n│  │ HEALTH CHECKS: Detect failures          │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Availability Targets\n\n| Level | Downtime/Year | Description |\n|-------|---------------|-------------|\n| 99% | 3.65 days | Basic |\n| 99.9% | 8.76 hours | Standard |\n| 99.99% | 52.6 minutes | High |\n| 99.999% | 5.26 minutes | Critical |\n\n## Key Strategies\n\n- **Multi-replica deployments**\n- **Multi-zone deployments**\n- **Health checks and probes**\n- **Automatic failover**\n- **Data replication**"
+        },
+        {
+            "id": "orchestration_12",
+            "type": "content",
+            "title": "HA Patterns in Kubernetes",
+            "content": "# K8s HA Patterns 🛡️\n\n## Pod Disruption Budgets\n\n```yaml\napiVersion: policy/v1\nkind: PodDisruptionBudget\nmetadata:\n  name: nginx-pdb\nspec:\n  minAvailable: 2  # Or maxUnavailable: 1\n  selector:\n    matchLabels:\n      app: nginx\n```\n\n## Anti-Affinity (Spread Across Nodes)\n\n```yaml\nspec:\n  affinity:\n    podAntiAffinity:\n      requiredDuringSchedulingIgnoredDuringExecution:\n        - labelSelector:\n            matchExpressions:\n              - key: app\n                operator: In\n                values: [nginx]\n          topologyKey: kubernetes.io/hostname\n```\n\n## Topology Spread\n\n```yaml\nspec:\n  topologySpreadConstraints:\n    - maxSkew: 1\n      topologyKey: topology.kubernetes.io/zone\n      whenUnsatisfiable: DoNotSchedule\n      labelSelector:\n        matchLabels:\n          app: nginx\n```\n\n## Health Checks\n\n```yaml\nlivenessProbe:\n  httpGet:\n    path: /health\n    port: 8080\n  initialDelaySeconds: 30\n  periodSeconds: 10\n\nreadinessProbe:\n  httpGet:\n    path: /ready\n    port: 8080\n  initialDelaySeconds: 5\n  periodSeconds: 5\n```"
+        },
+        {
+            "id": "orchestration_13",
+            "type": "content",
+            "title": "Multi-Zone Deployment",
+            "content": "# Multi-Zone/Region Deployment 🌍\n\n## Zone-Aware Scheduling\n\n```\n┌─────────────────────────────────────────────────┐\n│                   REGION                         │\n├───────────────┬───────────────┬─────────────────┤\n│    Zone A     │    Zone B     │    Zone C       │\n├───────────────┼───────────────┼─────────────────┤\n│   Node 1      │   Node 3      │   Node 5        │\n│   Node 2      │   Node 4      │   Node 6        │\n├───────────────┼───────────────┼─────────────────┤\n│   Pod 1       │   Pod 2       │   Pod 3         │\n│   Pod 4       │   Pod 5       │   Pod 6         │\n└───────────────┴───────────────┴─────────────────┘\n\nIf Zone A fails → Pods 2,3,5,6 still running\n```\n\n## Zone Topology Spread\n\n```yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web\nspec:\n  replicas: 6\n  template:\n    spec:\n      topologySpreadConstraints:\n        - maxSkew: 1\n          topologyKey: topology.kubernetes.io/zone\n          whenUnsatisfiable: ScheduleAnyway\n          labelSelector:\n            matchLabels:\n              app: web\n```\n\n## Benefits\n\n- ✅ Survive zone failures\n- ✅ Lower latency (closer to users)\n- ✅ Disaster recovery\n- ✅ Compliance requirements"
+        },
+        {
+            "id": "orchestration_14",
+            "type": "content",
+            "title": "Service Mesh",
+            "content": "# Service Mesh 🕸️\n\nAdvanced networking for microservices.\n\n## What is a Service Mesh?\n\n```\n┌─────────────────────────────────────────────────┐\n│               SERVICE MESH                       │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ┌─────────┐      ┌─────────┐      ┌─────────┐  │\n│  │Service A│──────│Service B│──────│Service C│  │\n│  │ + Proxy │      │ + Proxy │      │ + Proxy │  │\n│  └─────────┘      └─────────┘      └─────────┘  │\n│       │               │                │         │\n│       └───────────────┼────────────────┘         │\n│                       │                          │\n│               ┌───────────────┐                  │\n│               │ Control Plane │                  │\n│               │  (Istio/etc)  │                  │\n│               └───────────────┘                  │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Service Mesh Features\n\n| Feature | Description |\n|---------|-------------|\n| **Traffic Management** | Routing, load balancing |\n| **Security** | mTLS, authorization |\n| **Observability** | Tracing, metrics |\n| **Resilience** | Retries, circuit breaking |\n\n## Popular Service Meshes\n\n- **Istio** - Full-featured, complex\n- **Linkerd** - Lightweight, simpler\n- **Consul Connect** - HashiCorp ecosystem\n- **AWS App Mesh** - AWS native"
+        },
+        {
+            "id": "orchestration_15",
+            "type": "quiz",
+            "title": "HA Quiz",
+            "content": "Test your high availability knowledge!",
+            "quizQuestion": "What does a Pod Disruption Budget (PDB) ensure?",
+            "quizOptions": [
+                "Pods have enough CPU resources",
+                "A minimum number of pods remain available during disruptions",
+                "Pods are evenly distributed across nodes",
+                "Pods are automatically scaled"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orchestration_16",
+            "type": "content",
+            "title": "Blue-Green Deployments",
+            "content": "# Blue-Green Deployments 🔵🟢\n\nZero-downtime deployment strategy.\n\n## How It Works\n\n```\n                    PRODUCTION TRAFFIC\n                          │\n                          ▼\n                   ┌────────────┐\n                   │   Router   │\n                   └──────┬─────┘\n                          │\n         ┌────────────────┼────────────────┐\n         │                │                │\n         ▼                                 ▼\n┌─────────────────┐               ┌─────────────────┐\n│   BLUE (v1)     │               │  GREEN (v2)     │\n│   (Current)     │               │   (New)         │\n│   3 replicas    │               │   3 replicas    │\n└─────────────────┘               └─────────────────┘\n        ▲                                 │\n        │                                 │\n   Traffic now ─────── Switch ──────► Traffic after\n```\n\n## Kubernetes Implementation\n\n```yaml\n# Blue Deployment\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: app-blue\nspec:\n  replicas: 3\n  template:\n    metadata:\n      labels:\n        app: myapp\n        version: blue\n---\n# Service points to blue\napiVersion: v1\nkind: Service\nmetadata:\n  name: myapp\nspec:\n  selector:\n    app: myapp\n    version: blue  # Switch to 'green' to cutover\n```\n\n## Benefits\n\n- ✅ Instant rollback\n- ✅ Zero downtime\n- ✅ Full testing before switch\n- ❌ Requires double resources"
+        },
+        {
+            "id": "orchestration_17",
+            "type": "content",
+            "title": "Canary Deployments",
+            "content": "# Canary Deployments 🐤\n\nGradual rollout to subset of users.\n\n## Traffic Distribution\n\n```\n                    PRODUCTION TRAFFIC (100%)\n                          │\n            ┌─────────────┴─────────────┐\n            │                           │\n            ▼                           ▼\n    ┌───────────────┐           ┌───────────────┐\n    │  STABLE (95%) │           │ CANARY (5%)   │\n    │     v1.0      │           │     v1.1      │\n    │  10 replicas  │           │  1 replica    │\n    └───────────────┘           └───────────────┘\n\nMonitor metrics → Increase canary → Full rollout\n```\n\n## Progressive Rollout\n\n```\nStep 1:  5% canary\nStep 2: 10% canary  ← Monitor errors\nStep 3: 25% canary  ← Monitor latency\nStep 4: 50% canary  ← Monitor user feedback\nStep 5: 100% canary ← Full rollout\n```\n\n## Argo Rollouts Example\n\n```yaml\napiVersion: argoproj.io/v1alpha1\nkind: Rollout\nmetadata:\n  name: myapp\nspec:\n  replicas: 10\n  strategy:\n    canary:\n      steps:\n        - setWeight: 5\n        - pause: {duration: 1h}\n        - setWeight: 20\n        - pause: {duration: 1h}\n        - setWeight: 50\n        - pause: {duration: 1h}\n```\n\n## Benefits\n\n- ✅ Catch issues early\n- ✅ Limit blast radius\n- ✅ Data-driven decisions\n- ❌ More complex setup"
+        },
+        {
+            "id": "orchestration_18",
+            "type": "content",
+            "title": "Monitoring and Observability",
+            "content": "# Observability 📊\n\n## Three Pillars\n\n```\n┌─────────────────────────────────────────────────┐\n│               OBSERVABILITY                      │\n├───────────────┬───────────────┬─────────────────┤\n│    METRICS    │     LOGS      │    TRACES       │\n├───────────────┼───────────────┼─────────────────┤\n│  Prometheus   │  Fluentd/     │   Jaeger/       │\n│  Grafana      │  Loki         │   Zipkin        │\n├───────────────┼───────────────┼─────────────────┤\n│  CPU, Memory  │  App logs     │   Request flow  │\n│  Requests/sec │  Error logs   │   Latency       │\n│  Error rates  │  Audit logs   │   Dependencies  │\n└───────────────┴───────────────┴─────────────────┘\n```\n\n## Key Metrics for Orchestration\n\n| Metric | Description |\n|--------|-------------|\n| **Pod restarts** | Container crashes |\n| **Pod pending** | Scheduling issues |\n| **CPU/Memory** | Resource usage |\n| **Request rate** | Traffic volume |\n| **Error rate** | Failure percentage |\n| **Latency** | Response time |\n\n## Alerting\n\n```yaml\n# Prometheus AlertRule\napiVersion: monitoring.coreos.com/v1\nkind: PrometheusRule\nmetadata:\n  name: pod-alerts\nspec:\n  groups:\n    - name: pod-health\n      rules:\n        - alert: PodCrashLooping\n          expr: rate(kube_pod_container_status_restarts_total[15m]) > 0\n          for: 5m\n          labels:\n            severity: warning\n```"
+        },
+        {
+            "id": "orchestration_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Orchestration Best Practices ✅\n\n## Deployment\n\n- ✅ Use **declarative** configurations\n- ✅ Store manifests in **version control**\n- ✅ Use **namespaces** for isolation\n- ✅ Set **resource requests and limits**\n- ✅ Implement **health checks**\n\n## Scaling\n\n- ✅ Prefer **horizontal** scaling\n- ✅ Configure **HPA** for auto-scaling\n- ✅ Set appropriate **min/max replicas**\n- ✅ Monitor scaling events\n\n## High Availability\n\n- ✅ Run **multiple replicas** (3+)\n- ✅ Use **pod anti-affinity**\n- ✅ Deploy across **zones**\n- ✅ Configure **PodDisruptionBudgets**\n- ✅ Implement **circuit breakers**\n\n## Updates\n\n- ✅ Use **rolling updates** for zero downtime\n- ✅ Consider **canary** for risky changes\n- ✅ Always have **rollback** plan\n- ✅ Test in staging first\n\n## Monitoring\n\n- ✅ Collect **metrics, logs, traces**\n- ✅ Set up **alerting**\n- ✅ Create **dashboards**\n- ✅ Practice **incident response**"
+        },
+        {
+            "id": "orchestration_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall orchestration knowledge!",
+            "quizQuestion": "What is the difference between blue-green and canary deployments?",
+            "quizOptions": [
+                "Blue-green uses more resources; canary is resource-efficient",
+                "Blue-green switches all traffic at once; canary gradually shifts traffic",
+                "Blue-green is for Kubernetes only; canary is for Docker Swarm",
+                "There is no difference"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "orchestration_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Container Orchestration!\n\n## Key Takeaways\n\n### Kubernetes & Swarm 🎭\n- ✅ Automated container management\n- ✅ Self-healing and scaling\n- ✅ Service discovery and load balancing\n\n### Scaling 📈\n- ✅ Horizontal: Add more instances\n- ✅ Vertical: Increase resources\n- ✅ Auto-scaling with HPA/VPA\n\n### High Availability 🛡️\n- ✅ Multiple replicas\n- ✅ Multi-zone deployment\n- ✅ Pod disruption budgets\n- ✅ Health checks\n\n### Deployment Strategies 🚀\n- ✅ Rolling updates (default)\n- ✅ Blue-green (instant switch)\n- ✅ Canary (gradual rollout)\n\n## Remember\n\n```\nOrchestration = \n  Automation + \n  Scaling + \n  Self-healing + \n  Zero-downtime updates\n```\n\n> 🎭 **Orchestration turns containers into production-ready systems!**\n\nHappy orchestrating! 🚀"
+        }
+    ]
+}

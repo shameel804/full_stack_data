@@ -1,0 +1,167 @@
+{
+    "id": "learn_security_cors",
+    "topicId": "cors",
+    "topicTitle": "Cross-Origin Resource Sharing (CORS)",
+    "description": "Master CORS to securely manage cross-origin requests and prevent unauthorized access to your API resources",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "cors_1",
+            "type": "content",
+            "title": "What is CORS?",
+            "content": "# Cross-Origin Resource Sharing (CORS) 🌐\n\nA security mechanism that uses HTTP headers to tell browsers whether a web application running at one origin has permission to access resources from a different origin."
+        },
+        {
+            "id": "cors_2",
+            "type": "content",
+            "title": "The Same-Origin Policy (SOP)",
+            "content": "# The Standard Guard 🛡️\n\nBrowsers follow the **Same-Origin Policy**, which restricts scripts from reading data from a different origin (domain, protocol, or port) by default.\n\n- **CORS** is the protocol that allows us to selectively \"punch holes\" in SOP."
+        },
+        {
+            "id": "cors_3",
+            "type": "content",
+            "title": "What defines an Origin?",
+            "content": "# The Trio 🔗\n\nAn origin is defined by:\n1. **Protocol** (`http` vs `https`)\n2. **Domain** (`example.com` vs `api.example.com`)\n3. **Port** (`:3000` vs `:80`)\n\nIf **ANY** of these change, it is considered Cross-Origin."
+        },
+        {
+            "id": "cors_4",
+            "type": "content",
+            "title": "Simple vs Preflighted",
+            "content": "# The Two Routes 🛣️\n\n- **Simple Requests**: GET/POST with safe headers. Browser sends it immediately.\n- **Preflighted Requests**: Custom headers or PUT/DELETE. Browser sends an `OPTIONS` request first to ask for permission."
+        },
+        {
+            "id": "cors_5",
+            "quizQuestion": "Which of these changes would make a request 'Cross-Origin' according to SOP?",
+            "quizOptions": [
+                "Changing the URL path",
+                "Changing the Port (e.g. 3000 to 4000)",
+                "Adding a query parameter",
+                "Changing the user-agent"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Origin Quiz",
+            "content": "Defining origins."
+        },
+        {
+            "id": "cors_6",
+            "type": "content",
+            "title": "Access-Control-Allow-Origin",
+            "content": "# The VIP List 📋\n\nThe most important CORS header. The server sends this back to tell the browser who is allowed to see the data.\n\n- `*`: Everyone (Public API).\n- `https://my-app.com`: Dedicated (Secure App)."
+        },
+        {
+            "id": "cors_7",
+            "type": "content",
+            "title": "The Pitfall of Wildcards",
+            "content": "# Careful with '*' 🛑\n\nUsing `Access-Control-Allow-Origin: *` is safe for public data, but if you need to send **Cookies or Auth Headers**, you **cannot** use a wildcard. You must specify the exact origin."
+        },
+        {
+            "id": "cors_8",
+            "type": "content",
+            "title": "CORS Preflight (OPTIONS)",
+            "content": "# The Ask 🙋‍♂️\n\nBefore a complex request, the browser sends an `OPTIONS` request. The server must respond with:\n\n- `Access-Control-Allow-Methods`: GET, POST, DELETE.\n- `Access-Control-Allow-Headers`: Content-Type, Authorization."
+        },
+        {
+            "id": "cors_9",
+            "type": "content",
+            "title": "Credentials and CORS",
+            "content": "# Passing Cookies 🍪\n\nTo send cookies cross-origin:\n1. Client sets `withCredentials: true`.\n2. Server must send `Access-Control-Allow-Credentials: true`.\n3. Origin cannot be `*`."
+        },
+        {
+            "id": "cors_10",
+            "quizQuestion": "Which HTTP method is used for a CORS 'Preflight' request?",
+            "quizOptions": [
+                "GET",
+                "POST",
+                "OPTIONS",
+                "HEAD"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Preflight Quiz",
+            "content": "The permission check."
+        },
+        {
+            "id": "cors_11",
+            "type": "content",
+            "title": "Handling CORS Errors",
+            "content": "# The Dreaded Error ❌\n\n> \"No 'Access-Control-Allow-Origin' header is present on the requested resource.\"\n\n**Fix this on the Server**, not the client! Front-end code cannot bypass CORS headers; that's the whole point of the security."
+        },
+        {
+            "id": "cors_12",
+            "type": "content",
+            "title": "Exposing Headers",
+            "content": "# Making Data Visible 👀\n\nBy default, browsers only allow reading a few \"safe\" response headers. To see your custom headers (like `X-Total-Count`), the server must send:\n\n`Access-Control-Expose-Headers: X-Total-Count`"
+        },
+        {
+            "id": "cors_13",
+            "type": "content",
+            "title": "CSRF vs CORS",
+            "content": "# Distinctions 🥊\n\n- **CSRF**: Prevents *actions* (Writing).\n- **CORS/SOP**: Prevents *reading* response data.\n\nThey work together to keep the web safe."
+        },
+        {
+            "id": "cors_14",
+            "type": "content",
+            "title": "Postman/Curl vs Browser",
+            "content": "# No SOP outside Browser 🖥️\n\nCORS is a **Browser** feature. Tools like Postman or `curl` do not enforce CORS, which is why your API might work in Postman but fail in Chrome."
+        },
+        {
+            "id": "cors_15",
+            "quizQuestion": "Why does an API sometimes work in Postman but fail in a Web Browser with a CORS error?",
+            "quizOptions": [
+                "Postman is faster",
+                "SOP and CORS are enforced by the browser, not by server-side tools",
+                "Postman has a hidden key",
+                "The browser is outdated"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Insight Quiz",
+            "content": "Context matters."
+        },
+        {
+            "id": "cors_16",
+            "type": "content",
+            "title": "Dynamic Origins",
+            "content": "# Multiple Apps 🏘️\n\nServers can read the `Origin` request header and echo it back in `Access-Control-Allow-Origin` if it's found in an internal allow-list of safe domains."
+        },
+        {
+            "id": "cors_17",
+            "type": "content",
+            "title": "Vary: Origin Header",
+            "content": "# Cache Safety 📦\n\nIf you echo origins dynamically, you must send `Vary: Origin` so that intermediate caches don't serve the 'Allow' header meant for Site A to Site B."
+        },
+        {
+            "id": "cors_18",
+            "type": "content",
+            "title": "Preflight Caching",
+            "content": "# Efficiency 🏎️\n\nUse `Access-Control-Max-Age` to tell the browser it can cache the preflight result for X seconds, avoiding the double-request penalty for every call."
+        },
+        {
+            "id": "cors_19",
+            "type": "content",
+            "title": "Security Risk of '*'",
+            "content": "# Informational Leak 🔓\n\nIf an internal API uses `*`, a malicious site could fetch your internal data (like a list of private projects) if the user is currently on an internal VPN/network."
+        },
+        {
+            "id": "cors_20",
+            "quizQuestion": "What header tells the browser which custom response headers are allowed to be read by the JavaScript code?",
+            "quizOptions": [
+                "Access-Control-Allow-Origin",
+                "Access-Control-Expose-Headers",
+                "Access-Control-Allow-Methods",
+                "Content-Type"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Header visibility."
+        },
+        {
+            "id": "cors_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ **SOP** blocks cross-origin reading by default.\n- ✅ **CORS** headers like **Allow-Origin** grant access.\n- ✅ Use **OPTIONS** for preflighting complex requests.\n- ✅ Avoid `*` when using credentials/cookies.\n- ✅ CORS errors are fixed on the **Server** side.\n\nManage your origin permissions with confidence! 🌐🛡️"
+        }
+    ]
+}

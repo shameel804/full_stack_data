@@ -1,0 +1,167 @@
+{
+    "id": "learn_tdd_refactoring",
+    "topicId": "refactoring",
+    "topicTitle": "Refactoring Techniques",
+    "description": "Master advanced refactoring patterns and techniques to keep your codebase clean and malleable in a TDD environment",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "refactoring_1",
+            "type": "content",
+            "title": "What is Refactoring?",
+            "content": "# Refactoring Techniques 🛠️\n\nA disciplined technique for restructuring an existing body of code, changing its internal structure without changing its external behavior.\n\n- **Goal**: Make code easier to understand and cheaper to modify.\n- **Prerequisite**: A solid suite of automated tests."
+        },
+        {
+            "id": "refactoring_2",
+            "type": "content",
+            "title": "When to Refactor?",
+            "content": "# The Opportunity 🕵️\n\n- **During TDD**: The third step (Blue phase).\n- **Rule of Three**: When you've duplicated code three times, it's time to extract it.\n- **When Adding Features**: Clean up the area first to make it easier to add the new logic."
+        },
+        {
+            "id": "refactoring_3",
+            "type": "content",
+            "title": "Extract Method",
+            "content": "# Simplification ✂️\n\nOne of the most common techniques. Break a giant function into smaller, named methods that each do one thing.\n\n```javascript\n// Before\nfunction printReport() {\n  // 50 lines of complex logic\n}\n\n// After\nfunction printReport() {\n  calculateTotals();\n  formatOutput();\n  sendToPrinter();\n}\n```"
+        },
+        {
+            "id": "refactoring_4",
+            "type": "content",
+            "title": "Rename Variable",
+            "content": "# High ROI 🏷️\n\nChanging `d` to `daysSinceLastLogin` seems minor but drastically reduces cognitive load for future readers.\n\n> 💡 \"Good naming is documentation that never goes out of date.\""
+        },
+        {
+            "id": "refactoring_5",
+            "quizQuestion": "What is the primary condition for a 'Refactor' step in TDD?",
+            "quizOptions": [
+                "The code must be messy",
+                "You must have a passing (Green) test",
+                "You must be in a meeting",
+                "The customer must ask for it"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Principle Quiz",
+            "content": "Safety first."
+        },
+        {
+            "id": "refactoring_6",
+            "type": "content",
+            "title": "Replace Temp with Query",
+            "content": "# Removing Clutter 🧹\n\nIf you have a temporary variable used to store the result of an expression, replace it with a private function.\n\n```javascript\n// Before\nconst basePrice = this.quantity * this.price;\nif (basePrice > 1000) return basePrice * 0.95;\n\n// After\nif (this.basePrice() > 1000) return this.basePrice() * 0.95;\n```"
+        },
+        {
+            "id": "refactoring_7",
+            "type": "content",
+            "title": "Introduce Parameter Object",
+            "content": "# Grouping 📦\n\nIf a function takes `(start, end, limit, sort, order)`, group them into a single `QueryOptions` object."
+        },
+        {
+            "id": "refactoring_8",
+            "type": "content",
+            "title": "Remove Dead Code",
+            "content": "# Less is More 📉\n\nCode that is never executed (zombie code) should be deleted, not commented out. Trust your Version Control (Git) if you ever need it back!"
+        },
+        {
+            "id": "refactoring_9",
+            "type": "content",
+            "title": "The Smell of Success",
+            "content": "# Code Smells 👃\n\nRefactoring is about fixing 'Smells':\n- **Long Method**: Needs extraction.\n- **Large Class**: Needs splitting.\n- **Shotgun Surgery**: One change forces edits in 10 files.\n- **Feature Envy**: A class that seems more interested in another class's data than its own."
+        },
+        {
+            "id": "refactoring_10",
+            "quizQuestion": "What is 'Feature Envy' in refactoring?",
+            "quizOptions": [
+                "A developer wanting a newer laptop",
+                "A class that uses the data of another class excessively",
+                "A method that has too many parameters",
+                "A feature that is too popular"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Smells Quiz",
+            "content": "Identifying issues."
+        },
+        {
+            "id": "refactoring_11",
+            "type": "content",
+            "title": "Refactoring vs Rewrite",
+            "content": "# Small & Steady 🧱\n\n- **Refactoring**: Incremental improvements (Low risk).\n- **Rewrite**: Throwing it away and starting over (High risk).\n\n> 💡 Professional developers rarely rewrite; they evolve code through constant refactoring."
+        },
+        {
+            "id": "refactoring_12",
+            "type": "content",
+            "title": "Safe Refactor with IDEs",
+            "content": "# Power Tools 🛠️\n\nModern IDEs (VS Code, IntelliJ) have built-in refactoring tools. Use them! They automatically update all references when you rename or move a function, reducing human error."
+        },
+        {
+            "id": "refactoring_13",
+            "type": "content",
+            "title": "Composing Methods",
+            "content": "# Narrative 📖\n\nMethods should read like a story. High-level methods call mid-level methods, which call low-level helpers."
+        },
+        {
+            "id": "refactoring_14",
+            "type": "content",
+            "title": "Primitive Obsession",
+            "content": "# Stronger Types 🦴\n\nInstead of using a generic `String` for an email, create an `Email` class with validation logic. This centralizes rules and prevents invalid data from spreading."
+        },
+        {
+            "id": "refactoring_15",
+            "quizQuestion": "Which of these is a benefit of the 'Extract Method' technique?",
+            "quizOptions": [
+                "It makes the code run faster",
+                "It improves code readability and reusability",
+                "It reduces the file size",
+                "It encrypts the logic"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Benefits Quiz",
+            "content": "Why extract?"
+        },
+        {
+            "id": "refactoring_16",
+            "type": "content",
+            "title": "Extract Interface",
+            "content": "# Decoupling 🔌\n\nIf two classes use a similar set of methods, extract an **Interface**. This makes swapping implementations (and mocking) much easier."
+        },
+        {
+            "id": "refactoring_17",
+            "type": "content",
+            "title": "Replace Conditional with Polymorphism",
+            "content": "# Cleaner Logic 🦢\n\nInstead of a massive `switch` statement based on `UserType`, create subclasses for `Admin`, `Member`, and `Guest` each with their own `canDelete()` method."
+        },
+        {
+            "id": "refactoring_18",
+            "type": "content",
+            "title": "Collapse Hierarchy",
+            "content": "# Simplify 🏛️\n\nIf a parent and child class are almost identical, merge them. Over-engineering with too many layers of inheritance makes code hard to follow."
+        },
+        {
+            "id": "refactoring_19",
+            "type": "content",
+            "title": "The Golden Rule",
+            "content": "# Two Hats 🎩🎩\n\nMartin Fowler's Rule: You are either wearing the \"Feature\" hat or the \"Refactoring\" hat. Never both! Run your tests between every hat swap."
+        },
+        {
+            "id": "refactoring_20",
+            "quizQuestion": "According to the 'Two Hats' rule, what should you do if you discover a bug while refactoring?",
+            "quizOptions": [
+                "Finish the refactor then fix it",
+                "Switch to the 'Feature' hat, fix the bug, run tests, then swap back",
+                "Ignore the bug",
+                "Delete the code"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Switching focus."
+        },
+        {
+            "id": "refactoring_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Refactor for **readability** and **malleability**.\n- ✅ Use code **Smells** as a guide.\n- ✅ Small, incremental steps are safer.\n- ✅ Leverage **IDE Tools** for renaming and moving.\n- ✅ Never change behavior during a refactor.\n\nKeep your codebase healthy and clean with constant refactoring! 🚀"
+        }
+    ]
+}

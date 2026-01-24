@@ -1,0 +1,71 @@
+{
+    "id": "learn_communication_micro",
+    "topicId": "communication",
+    "topicTitle": "Service Communication",
+    "description": "Master synchronous and asynchronous communication patterns including HTTP, gRPC, and messaging",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "comm_1",
+            "type": "content",
+            "title": "Service Communication",
+            "content": "# Service Communication 📡\n\nHow microservices talk to each other.\n\n## What You'll Learn:\n- **Sync vs Async** - Communication styles\n- **REST/HTTP** - Standard web APIs\n- **gRPC** - High-performance RPC\n- **Message Queues** - Async messaging\n- **Event-Driven** - Event-based systems\n\n> 💡 Choose the right pattern for each use case!"
+        },
+        {
+            "id": "comm_2",
+            "type": "content",
+            "title": "Sync vs Async",
+            "content": "# Sync vs Async 🔄\n\n## Synchronous:\n```\nClient ──request──► Service\nClient ◄──response── Service\n(Client waits)\n```\n\n## Asynchronous:\n```\nClient ──message──► Queue ──► Service\n(Client doesn't wait)\n```\n\n## Comparison:\n| Aspect | Sync | Async |\n|--------|------|-------|\n| Coupling | Tight | Loose |\n| Response | Immediate | Eventual |\n| Failure | Cascade | Isolated |\n| Complexity | Lower | Higher |"
+        },
+        {
+            "id": "comm_3",
+            "type": "content",
+            "title": "REST APIs",
+            "content": "# REST APIs 🌐\n\n## Example:\n```javascript\n// User service\napp.get('/users/:id', async (req, res) => {\n    const user = await User.findById(req.params.id);\n    res.json(user);\n});\n\n// Order service calling User service\nconst user = await fetch('http://user-service/users/123');\n```\n\n## Best Practices:\n- Use HTTP verbs properly\n- Version your APIs\n- Return proper status codes\n- Handle timeouts\n\n## When to Use:\n- CRUD operations\n- Simple request/response\n- External APIs\n- Browser clients"
+        },
+        {
+            "id": "comm_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your communication knowledge!",
+            "quizQuestion": "When should you use asynchronous communication?",
+            "quizOptions": [
+                "Always",
+                "When immediate response isn't needed",
+                "Never",
+                "Only for databases"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "comm_4",
+            "type": "content",
+            "title": "gRPC",
+            "content": "# gRPC 🚀\n\nHigh-performance RPC framework.\n\n## Protocol Buffers:\n```protobuf\nservice UserService {\n    rpc GetUser (GetUserRequest) returns (User);\n}\n\nmessage GetUserRequest {\n    string id = 1;\n}\n\nmessage User {\n    string id = 1;\n    string name = 2;\n}\n```\n\n## Benefits:\n- Binary format (faster)\n- Strong typing\n- Streaming support\n- Code generation\n\n## When to Use:\n- Internal services\n- High-performance needs\n- Bi-directional streaming"
+        },
+        {
+            "id": "comm_5",
+            "type": "content",
+            "title": "Message Queues",
+            "content": "# Message Queues 📬\n\nAsync communication via messages.\n\n## Pattern:\n```\nProducer ──► Queue ──► Consumer\n                 └──► Consumer\n```\n\n## Popular Options:\n| Queue | Strength |\n|-------|----------|\n| RabbitMQ | Feature-rich |\n| Kafka | High throughput |\n| AWS SQS | Managed, scalable |\n| Redis | Simple, fast |\n\n## Example:\n```javascript\n// Producer\nawait queue.publish('orders', {\n    orderId: '123',\n    action: 'created'\n});\n\n// Consumer\nqueue.subscribe('orders', (msg) => {\n    processOrder(msg);\n});\n```"
+        },
+        {
+            "id": "comm_6",
+            "type": "content",
+            "title": "Event-Driven Architecture",
+            "content": "# Event-Driven Architecture 📢\n\nServices communicate via events.\n\n## Pattern:\n```\nOrder Service ──publishes──► EventBus\n                                │\n        ┌───────────────────────┼───────────┐\n        ▼                       ▼           ▼\n   Inventory              Notification   Analytics\n```\n\n## Benefits:\n- Loose coupling\n- Easy to add consumers\n- Audit trail\n- Resilience\n\n## Event Example:\n```json\n{\n    \"type\": \"order.created\",\n    \"timestamp\": \"2024-01-15T10:00:00Z\",\n    \"data\": {\n        \"orderId\": \"123\",\n        \"userId\": \"456\"\n    }\n}\n```"
+        },
+        {
+            "id": "comm_7",
+            "type": "content",
+            "title": "Patterns",
+            "content": "# Communication Patterns 📋\n\n## Request/Response:\nSynchronous, direct call.\n\n## Pub/Sub:\nPublish to topic, many subscribers.\n\n## Point-to-Point:\nQueue with single consumer.\n\n## Saga:\nDistributed transactions via events.\n\n## Choosing Pattern:\n| Scenario | Pattern |\n|----------|---------|\n| Need response | Request/Response |\n| Notify many | Pub/Sub |\n| Task queue | Point-to-Point |\n| Transactions | Saga |"
+        },
+        {
+            "id": "comm_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Service Communication!\n\n## Key Takeaways:\n\n### Synchronous\n- REST for simple CRUD\n- gRPC for performance\n- Direct coupling\n\n### Asynchronous\n- Message queues\n- Event-driven\n- Loose coupling\n\n## Best Practices:\n- Choose based on use case\n- Handle failures\n- Implement retries\n- Monitor latency\n\nCommunicate effectively! 📡"
+        }
+    ]
+}

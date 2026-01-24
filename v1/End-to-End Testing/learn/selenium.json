@@ -1,0 +1,167 @@
+{
+    "id": "learn_e2etest_selenium",
+    "topicId": "selenium",
+    "topicTitle": "Selenium",
+    "description": "Master Selenium WebDriver for powerful, cross-browser automation across multiple languages and operating systems",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "selenium_1",
+            "type": "content",
+            "title": "Introduction to Selenium",
+            "content": "# Selenium 🛡️\n\nThe industry veteran and most widely used tool for automative web testing across different browsers and platforms.\n\n- **Multi-language**: Supports Java, Python, C#, Ruby, JS, and more.\n- **Cross-browser**: Runs on Chrome, Firefox, Safari, Edge, and IE.\n- **Open Source**: Huge community and ecosystem."
+        },
+        {
+            "id": "selenium_2",
+            "type": "content",
+            "title": "Selenium Components",
+            "content": "# The Family 👨‍👩‍👧‍👦\n\n1. **Selenium IDE**: Browser extension for record-and-playback.\n2. **Selenium WebDriver**: The core API used to write scripts.\n3. **Selenium Grid**: Runs tests in parallel across multiple machines/OS."
+        },
+        {
+            "id": "selenium_3",
+            "type": "content",
+            "title": "WebDriver Architecture",
+            "content": "# How it Works ⚙️\n\nYour Script ➡️ **WebDriver API** ➡️ Browser Driver (e.g., ChromeDriver) ➡️ **Browser Native API**.\n\nUnlike Cypress, it sends commands *to* the browser through a standard protocol (JSON Wire Protocol or W3C)."
+        },
+        {
+            "id": "selenium_4",
+            "type": "content",
+            "title": "A Simple Example (Java)",
+            "content": "# Code Sample 💻\n\n```java\nWebDriver driver = new ChromeDriver();\ndriver.get(\"https://google.com\");\nWebElement element = driver.findElement(By.name(\"q\"));\nelement.sendKeys(\"Selenium Testing\");\nelement.submit();\ndriver.quit();\n```"
+        },
+        {
+            "id": "selenium_5",
+            "quizQuestion": "Which component of Selenium is used to run tests in parallel on multiple machines?",
+            "quizOptions": [
+                "Selenium IDE",
+                "WebDriver",
+                "Selenium Grid",
+                "Selenium Hub"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Component Quiz",
+            "content": "Scaling tests."
+        },
+        {
+            "id": "selenium_6",
+            "type": "content",
+            "title": "Locators",
+            "content": "# Finding Elements 🔍\n\n- `By.id(\"id\")` (Fastest)\n- `By.name(\"name\")`\n- `By.cssSelector(\".class\")`\n- `By.xpath(\"//button\")` (Most Flexible but Slower)\n- `By.linkText(\"Click Here\")`"
+        },
+        {
+            "id": "selenium_7",
+            "type": "content",
+            "title": "Waiting in Selenium",
+            "content": "# Timing is Everything ⏳\n\n- **Implicit Wait**: Global timeout for finding elements.\n- **Explicit Wait (WebDriverWait)**: Wait for a specific condition (e.g., `elementToBeClickable`).\n\n> [!IMPORTANT]\n> Use Explicit Waits! They make tests much more stable by checking conditions dynamically."
+        },
+        {
+            "id": "selenium_8",
+            "type": "content",
+            "title": "Page Object Model (POM)",
+            "content": "# Clean Design 🏗️\n\nSeparate your test logic from the page structure.\n\n- **Page Class**: Defines elements and actions of a page.\n- **Test Class**: Calls the Page Class to perform scenarios."
+        },
+        {
+            "id": "selenium_9",
+            "type": "content",
+            "title": "Managing Drivers",
+            "content": "# Driver Setup 🛠️\n\nHistorically, you had to manually download `chromedriver.exe`. \n\nModern tools like **WebDriverManager** (Java) or **webdriver-manager** (Python) automate this for you now!"
+        },
+        {
+            "id": "selenium_10",
+            "quizQuestion": "Which locator strategy is generally considered the fastest in Selenium?",
+            "quizOptions": [
+                "XPath",
+                "CSS Selector",
+                "ID",
+                "Name"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Locators Quiz",
+            "content": "Finding elements quickly."
+        },
+        {
+            "id": "selenium_11",
+            "type": "content",
+            "title": "Interacting with Windows",
+            "content": "# Multi-window 🪟\n\n```java\nString originalWindow = driver.getWindowHandle();\nfor (String handle : driver.getWindowHandles()) {\n    driver.switchTo().window(handle);\n}\n```\n\nSelenium makes it easy to switch between tabs and popups."
+        },
+        {
+            "id": "selenium_12",
+            "type": "content",
+            "title": "Alerts & Frames",
+            "content": "# Reaching Inside 🧤\n\n- **Alerts**: `driver.switchTo().alert().accept()`\n- **Frames**: `driver.switchTo().frame(\"frameId\")`"
+        },
+        {
+            "id": "selenium_13",
+            "type": "content",
+            "title": "Actions Class",
+            "content": "# Complex Moves 🖱️\n\nFor drag-and-drop, double-click, or hover:\n\n```java\nActions actions = new Actions(driver);\nactions.moveToElement(element).click().perform();\n```"
+        },
+        {
+            "id": "selenium_14",
+            "type": "content",
+            "title": "JavaScript Execution",
+            "content": "# Secret Sauce 💉\n\nSometimes you need to run JS directly in the browser to scroll or bypass issues.\n\n```java\nJavascriptExecutor js = (JavascriptExecutor) driver;\njs.executeScript(\"window.scrollBy(0,250)\");\n```"
+        },
+        {
+            "id": "selenium_15",
+            "quizQuestion": "Which class in Selenium is used for advanced user interactions like drag-and-drop?",
+            "quizOptions": [
+                "Interactions",
+                "Actions",
+                "UserMovement",
+                "MouseDriver"
+            ],
+            "correctOptionIndex": 1,
+            "type": "quiz",
+            "title": "Interactions Quiz",
+            "content": "Complex actions."
+        },
+        {
+            "id": "selenium_16",
+            "type": "content",
+            "title": "Screenshots on Failure",
+            "content": "# Visual Evidence 📸\n\n```java\nFile srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);\nFileUtils.copyFile(srcFile, new File(\"failure.png\"));\n```"
+        },
+        {
+            "id": "selenium_17",
+            "type": "content",
+            "title": "Headless Mode",
+            "content": "# Silent Runs 👻\n\n```java\nChromeOptions options = new ChromeOptions();\noptions.addArguments(\"--headless\");\nWebDriver driver = new ChromeDriver(options);\n```"
+        },
+        {
+            "id": "selenium_18",
+            "type": "content",
+            "title": "Selenium 4 Features",
+            "content": "# Modern Upgrades 🚀\n\n- **Relative Locators**: \"Above this element\", \"To the left of that one\".\n- **CDP Support**: Direct control via Chrome DevTools Protocol."
+        },
+        {
+            "id": "selenium_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Pro Tips ✅\n\n- **Don't use Threads.sleep()**.\n- Keep your locators short and unique.\n- Use **Data Provider** for parameterization.\n- Close the driver in `@AfterMethod` to avoid memory leaks."
+        },
+        {
+            "id": "selenium_20",
+            "quizQuestion": "Where should you generally place the code to close your browser in a Selenium test suite?",
+            "quizOptions": [
+                "Inside the @Test method",
+                "In the setup method",
+                "In a teardown method (e.g. @After)",
+                "In the database controller"
+            ],
+            "correctOptionIndex": 2,
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Lifecycle management."
+        },
+        {
+            "id": "selenium_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Universal E2E testing standard.\n- ✅ Multiple languages and browsers supported.\n- ✅ Stable scaling with **Grid**.\n- ✅ Robust architecture with **Page Object Model**.\n\nMaster Selenium to automate any web application on the planet! 🚀"
+        }
+    ]
+}

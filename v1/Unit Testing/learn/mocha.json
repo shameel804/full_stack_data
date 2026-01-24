@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_mocha",
+    "topicId": "mocha",
+    "topicTitle": "Mocha",
+    "description": "Master the Mocha testing framework and Chai assertion library for flexible JavaScript testing",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "mocha_1",
+            "type": "content",
+            "title": "Introduction to Mocha",
+            "content": "# Mocha ☕\n\nA feature-rich JavaScript test framework running on Node.js and in the browser.\n\n- **Flexible**: Use any assertion library (Chai, Assert).\n- **Asynchronous**: Built-in support for callbacks and promises.\n- **Extensible**: Supports various reporters and plugins.\n- **Hooks**: Robust setup/teardown mechanisms."
+        },
+        {
+            "id": "mocha_2",
+            "type": "content",
+            "title": "Basic Structure",
+            "content": "# Mocha Core 🏗️\n\n```javascript\ndescribe('Array', function() {\n  describe('#indexOf()', function() {\n    it('should return -1 when not present', function() {\n      [1, 2, 3].indexOf(4).should.equal(-1);\n    });\n  });\n});\n```\n\n- `describe()`: Groups related tests (Suites).\n- `it()`: Defines a single test case."
+        },
+        {
+            "id": "mocha_3",
+            "type": "content",
+            "title": "Chai Assertions",
+            "content": "# Chai 🍵\n\nSince Mocha has no built-in assertions, we use **Chai**.\n\n## Three Styles:\n\n1. `assert`: `assert.equal(3, 3)`\n2. `expect`: `expect(3).to.equal(3)`\n3. `should`: `3.should.equal(3)`"
+        },
+        {
+            "id": "mocha_4",
+            "type": "content",
+            "title": "Expect Style (BDD)",
+            "content": "# Chai Expect 🎯\n\nMost common style in BDD.\n\n```javascript\nconst expect = require('chai').expect;\n\nexpect(foo).to.be.a('string');\nexpect(foo).to.equal('bar');\nexpect(foo).to.have.lengthOf(3);\nexpect(beverages).to.have.property('tea').with.lengthOf(3);\n```"
+        },
+        {
+            "id": "mocha_5",
+            "type": "quiz",
+            "title": "Mocha Quiz",
+            "content": "What is the role of describe() in Mocha?",
+            "quizQuestion": "In Mocha, what is the purpose of the 'describe' function?",
+            "quizOptions": [
+                "To perform an assertion",
+                "To group related tests into a suite",
+                "To run a single test case",
+                "To install dependencies"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "mocha_6",
+            "type": "content",
+            "title": "Hooks",
+            "content": "# Lifecycle Hooks 🔄\n\n```javascript\ndescribe('hooks', function() {\n  before(function() { ... });       // Before all\n  after(function() { ... });        // After all\n  beforeEach(function() { ... });   // Before each\n  afterEach(function() { ... });    // After each\n});\n```"
+        },
+        {
+            "id": "mocha_7",
+            "type": "content",
+            "title": "Async with Callbacks",
+            "content": "# Callbacks (done) ⏳\n\nUse the `done` callback for legacy async code.\n\n```javascript\nit('should save without error', function(done) {\n  var user = new User('Luna');\n  user.save(function(err) {\n    if (err) done(err);\n    else done();\n  });\n});\n```"
+        },
+        {
+            "id": "mocha_8",
+            "type": "content",
+            "title": "Async/Await",
+            "content": "# Modern Async 🚀\n\nMocha handles async/await perfectly.\n\n```javascript\nit('should return data', async function() {\n  const res = await fetchData();\n  expect(res).to.not.be.null;\n});\n```"
+        },
+        {
+            "id": "mocha_9",
+            "type": "content",
+            "title": "Exclusive & Inclusive",
+            "content": "# Filtering Tests 🔍\n\n- `it.only()`: Run ONLY this test.\n- `it.skip()`: Skip this test.\n- Use `describe.only()` to run a whole suite."
+        },
+        {
+            "id": "mocha_10",
+            "type": "quiz",
+            "title": "Chai Style Quiz",
+            "content": "Which Chai style adds a property to Object.prototype?",
+            "quizQuestion": "Which Chai assertion style requires a specific function call on every object?",
+            "quizOptions": [
+                "assert",
+                "expect",
+                "should",
+                "verify"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "mocha_11",
+            "type": "content",
+            "title": "Retry Tests",
+            "content": "# Retries 🔁\n\nGreat for flaky integration tests.\n\n```javascript\ndescribe('retries', function() {\n  this.retries(4); // Retry failing tests 4 times\n\n  it('should pass finally', function() {\n    // ...\n  });\n});\n```"
+        },
+        {
+            "id": "mocha_12",
+            "type": "content",
+            "title": "Timeouts",
+            "content": "# Timeouts ⏱️\n\nDefault is 2000ms.\n\n```javascript\nit('slow test', function(done) {\n  this.timeout(5000);\n  setTimeout(done, 3000);\n});\n```"
+        },
+        {
+            "id": "mocha_13",
+            "type": "content",
+            "title": "Reporters",
+            "content": "# Visualizing Results 📊\n\nMocha has many built-in reporters:\n\n- `spec` (default)\n- `dot` (dots for passes, F for fails)\n- `nyan` (Nyan cat! 🐱)\n- `list`, `json`, `html`"
+        },
+        {
+            "id": "mocha_14",
+            "type": "content",
+            "title": "Mocha CLI",
+            "content": "# CLI Commands 💻\n\n```bash\n# Run all tests in 'test' folder\nmocha\n\n# Watch mode\nmocha --watch\n\n# Run with specific reporter\nmocha --reporter nyan\n\n# Targeted run\nmocha -g \"login\"\n```"
+        },
+        {
+            "id": "mocha_15",
+            "type": "quiz",
+            "title": "Timeout Quiz",
+            "content": "What is Mocha's default timeout for a test?",
+            "quizQuestion": "How many milliseconds does Mocha wait for a test to complete by default before failing it?",
+            "quizOptions": [
+                "1000ms",
+                "2000ms",
+                "5000ms",
+                "None"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "mocha_16",
+            "type": "content",
+            "title": "Browser Testing",
+            "content": "# In the Browser 🌐\n\nInclude `mocha.js`, `chai.js`, and your test files in an HTML page.\n\n```html\n<div id=\"mocha\"></div>\n<script>mocha.setup('bdd');</script>\n<script src=\"tests.js\"></script>\n<script>mocha.run();</script>\n```"
+        },
+        {
+            "id": "mocha_17",
+            "type": "content",
+            "title": "Configuration File",
+            "content": "# .mocharc.json ⚙️\n\n```json\n{\n  \"recursive\": true,\n  \"timeout\": 3000,\n  \"reporter\": \"spec\",\n  \"ui\": \"bdd\"\n}\n```"
+        },
+        {
+            "id": "mocha_18",
+            "type": "content",
+            "title": "Arrow Functions Warning",
+            "content": "# Arrows vs Regular 🛑\n\n> [!CAUTION]\n> Avoid using arrow functions `() => {}` with Mocha if you need to use `this` (e.g., `this.timeout()`)."
+        },
+        {
+            "id": "mocha_19",
+            "type": "content",
+            "title": "Slow Tests",
+            "content": "# Slow Markers 🐌\n\nMocha highlights \"slow\" tests in yellow/red in the console output to help you identify bottlenecks."
+        },
+        {
+            "id": "mocha_20",
+            "type": "quiz",
+            "title": "Final Summary Quiz",
+            "content": "Why might you avoid arrow functions in Mocha?",
+            "quizQuestion": "What is lost when using ES6 arrow functions for test definitions in Mocha?",
+            "quizOptions": [
+                "Performance",
+                "Ability to iterate",
+                "Lexical access to 'this' context",
+                "Async support"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "mocha_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Mocha is flexible and powerful.\n- ✅ Use **Chai** for assertions.\n- ✅ Pair with **Sinon** for mocks.\n- ✅ Handle async via `done` or `async/await`.\n\nKeep brewing great tests! ☕"
+        }
+    ]
+}

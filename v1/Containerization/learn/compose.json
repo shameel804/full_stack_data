@@ -1,0 +1,167 @@
+{
+    "id": "learn_container_compose",
+    "topicId": "compose",
+    "topicTitle": "Docker Compose",
+    "description": "Master Docker Compose for multi-container applications including services, volumes, networks, and YAML configuration syntax",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "compose_1",
+            "type": "content",
+            "title": "Welcome to Docker Compose",
+            "content": "# Docker Compose 🐙\n\nDefine and run **multi-container** applications.\n\n## What you'll learn:\n- **Services** - Defining application components\n- **Volumes** - Persistent data storage\n- **Networks** - Container communication\n- **YAML syntax** - Configuration format\n\n> 💡 **Fun Fact:** Docker Compose was originally a separate project called \"Fig\" before Docker acquired it!\n\n## Why Docker Compose?\n\n| Without Compose | With Compose |\n|-----------------|---------------|\n| Multiple docker run commands | Single `docker compose up` |\n| Manual network setup | Automatic networking |\n| Complex orchestration | Declarative YAML |\n| Hard to reproduce | Version-controlled |\n\n## When to Use Compose\n\n- 🔧 Local development environments\n- 🧪 Testing and CI/CD\n- 📦 Multi-container applications\n- 🚀 Single-host deployments\n\nLet's orchestrate containers!"
+        },
+        {
+            "id": "compose_2",
+            "type": "content",
+            "title": "Your First Compose File",
+            "content": "# Getting Started 📝\n\nCreate a `docker-compose.yml` or `compose.yaml` file:\n\n```yaml\n# docker-compose.yml\nversion: '3.9'\n\nservices:\n  web:\n    image: nginx:alpine\n    ports:\n      - \"8080:80\"\n    volumes:\n      - ./html:/usr/share/nginx/html\n\n  api:\n    build: ./api\n    ports:\n      - \"3000:3000\"\n    environment:\n      - NODE_ENV=development\n      - DATABASE_URL=postgres://db:5432/app\n    depends_on:\n      - db\n\n  db:\n    image: postgres:15-alpine\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    environment:\n      - POSTGRES_DB=app\n      - POSTGRES_PASSWORD=secret\n\nvolumes:\n  postgres_data:\n```\n\n## Key Sections\n\n| Section | Purpose |\n|---------|--------|\n| `version` | Compose file format version |\n| `services` | Container definitions |\n| `volumes` | Named volume declarations |\n| `networks` | Custom network definitions |"
+        },
+        {
+            "id": "compose_3",
+            "type": "content",
+            "title": "Essential Commands",
+            "content": "# Compose Commands 🔧\n\n## Starting Services\n\n```bash\n# Start all services\ndocker compose up\n\n# Start in detached mode\ndocker compose up -d\n\n# Start specific services\ndocker compose up web api\n\n# Rebuild and start\ndocker compose up --build\n\n# Force recreate containers\ndocker compose up --force-recreate\n```\n\n## Stopping Services\n\n```bash\n# Stop all services\ndocker compose down\n\n# Stop and remove volumes\ndocker compose down -v\n\n# Stop and remove images\ndocker compose down --rmi all\n```\n\n## Managing Services\n\n```bash\n# List running services\ndocker compose ps\n\n# View logs\ndocker compose logs\ndocker compose logs -f web    # Follow specific service\n\n# Execute command in service\ndocker compose exec web bash\n\n# Scale services\ndocker compose up -d --scale web=3\n\n# Restart services\ndocker compose restart\n```"
+        },
+        {
+            "id": "compose_4",
+            "type": "quiz",
+            "title": "Commands Quiz",
+            "content": "Test your Compose commands knowledge!",
+            "quizQuestion": "What command starts Docker Compose services in the background?",
+            "quizOptions": [
+                "docker compose up --background",
+                "docker compose up -d",
+                "docker compose start -b",
+                "docker compose run -d"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "compose_5",
+            "type": "content",
+            "title": "Service Configuration",
+            "content": "# Service Configuration ⚙️\n\n## Complete Service Example\n\n```yaml\nservices:\n  app:\n    # Image or build context\n    image: myapp:latest\n    # OR\n    build:\n      context: ./app\n      dockerfile: Dockerfile.prod\n      args:\n        - NODE_ENV=production\n    \n    # Container settings\n    container_name: my-app\n    hostname: app\n    restart: unless-stopped\n    \n    # Networking\n    ports:\n      - \"3000:3000\"\n    expose:\n      - \"3000\"\n    \n    # Environment\n    environment:\n      - NODE_ENV=production\n    env_file:\n      - .env\n    \n    # Storage\n    volumes:\n      - ./src:/app/src\n      - node_modules:/app/node_modules\n    \n    # Dependencies\n    depends_on:\n      - db\n      - redis\n    \n    # Health check\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 3\n    \n    # Resource limits\n    deploy:\n      resources:\n        limits:\n          cpus: '0.5'\n          memory: 512M\n```"
+        },
+        {
+            "id": "compose_6",
+            "type": "content",
+            "title": "Build Configuration",
+            "content": "# Build Configuration 🏗️\n\n## Simple Build\n\n```yaml\nservices:\n  app:\n    build: ./app  # Uses Dockerfile in ./app directory\n```\n\n## Advanced Build Options\n\n```yaml\nservices:\n  app:\n    build:\n      # Build context\n      context: ./app\n      \n      # Dockerfile path (relative to context)\n      dockerfile: Dockerfile.prod\n      \n      # Build arguments\n      args:\n        NODE_ENV: production\n        VERSION: \"1.0.0\"\n      \n      # Target stage (multi-stage)\n      target: production\n      \n      # SSH for private repos\n      ssh:\n        - default\n      \n      # Cache from images\n      cache_from:\n        - myapp:latest\n      \n      # Labels\n      labels:\n        - \"com.example.version=1.0\"\n    \n    # Tag the built image\n    image: myregistry/myapp:latest\n```\n\n## Build Commands\n\n```bash\n# Build all services\ndocker compose build\n\n# Build specific service\ndocker compose build app\n\n# Build without cache\ndocker compose build --no-cache\n\n# Build and start\ndocker compose up --build\n```"
+        },
+        {
+            "id": "compose_7",
+            "type": "content",
+            "title": "Volumes in Compose",
+            "content": "# Volumes Configuration 💾\n\n## Volume Types\n\n```yaml\nservices:\n  app:\n    volumes:\n      # Named volume\n      - data_volume:/app/data\n      \n      # Bind mount (host path)\n      - ./config:/app/config\n      \n      # Anonymous volume\n      - /app/temp\n      \n      # Read-only bind mount\n      - ./config:/app/config:ro\n      \n      # Specific permissions\n      - type: bind\n        source: ./data\n        target: /app/data\n        read_only: true\n\nvolumes:\n  data_volume:  # Named volume declaration\n```\n\n## Named Volume Configuration\n\n```yaml\nvolumes:\n  db_data:\n    driver: local\n    driver_opts:\n      type: none\n      device: /path/on/host\n      o: bind\n  \n  nfs_data:\n    driver: local\n    driver_opts:\n      type: nfs\n      o: addr=192.168.1.1,nolock,soft,rw\n      device: \":/path/to/dir\"\n  \n  external_volume:\n    external: true  # Use existing volume\n```\n\n## Volume Syntax\n\n| Syntax | Type |\n|--------|------|\n| `./host:/container` | Bind mount |\n| `volume_name:/container` | Named volume |\n| `/container` | Anonymous volume |"
+        },
+        {
+            "id": "compose_8",
+            "type": "content",
+            "title": "Networks in Compose",
+            "content": "# Networks Configuration 🌐\n\n## Default Networking\n\nCompose creates a **default network** for all services:\n\n```yaml\nservices:\n  web:\n    image: nginx\n  api:\n    image: node\n    # Can reach web at http://web:80\n```\n\n## Custom Networks\n\n```yaml\nservices:\n  frontend:\n    networks:\n      - frontend_net\n  \n  api:\n    networks:\n      - frontend_net\n      - backend_net\n  \n  db:\n    networks:\n      - backend_net\n\nnetworks:\n  frontend_net:\n    driver: bridge\n  backend_net:\n    driver: bridge\n```\n\n## Network Isolation\n\n```\n┌─────────────────────────────────────────────────┐\n│  frontend_net              backend_net          │\n│  ┌─────────┐             ┌─────────┐            │\n│  │frontend │────┐   ┌────│   db    │            │\n│  └─────────┘    │   │    └─────────┘            │\n│                 ▼   ▼                           │\n│              ┌─────────┐                        │\n│              │   api   │                        │\n│              └─────────┘                        │\n└─────────────────────────────────────────────────┘\n\nfrontend can reach: api ✓  db ✗\napi can reach:      frontend ✓  db ✓\ndb can reach:       api ✓  frontend ✗\n```"
+        },
+        {
+            "id": "compose_9",
+            "type": "quiz",
+            "title": "Volumes Quiz",
+            "content": "Test your volumes knowledge!",
+            "quizQuestion": "What type of volume is defined as './data:/app/data' in Docker Compose?",
+            "quizOptions": [
+                "Named volume",
+                "Anonymous volume",
+                "Bind mount",
+                "External volume"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "compose_10",
+            "type": "content",
+            "title": "Environment Variables",
+            "content": "# Environment Variables 🔧\n\n## Inline Definition\n\n```yaml\nservices:\n  app:\n    environment:\n      - NODE_ENV=production\n      - DATABASE_URL=postgres://db:5432/app\n      # Variable from host\n      - HOST_VAR=${HOST_VAR}\n```\n\n## Environment File\n\n```yaml\nservices:\n  app:\n    env_file:\n      - .env\n      - .env.local\n```\n\n**.env file:**\n```env\nNODE_ENV=production\nDATABASE_URL=postgres://db:5432/app\nSECRET_KEY=mysecretkey\n```\n\n## Variable Substitution\n\n```yaml\nservices:\n  app:\n    image: myapp:${TAG:-latest}  # Default value\n    environment:\n      - API_URL=${API_URL:?API_URL required}  # Required\n      - DEBUG=${DEBUG:-false}\n```\n\n## .env for Compose\n\n```env\n# .env (same directory as compose file)\nCOMPOSE_PROJECT_NAME=myproject\nTAG=1.0.0\nPORT=3000\n```\n\n```yaml\nservices:\n  app:\n    image: myapp:${TAG}\n    ports:\n      - \"${PORT}:3000\"\n```"
+        },
+        {
+            "id": "compose_11",
+            "type": "content",
+            "title": "Dependencies and Health",
+            "content": "# Dependencies & Health 🏥\n\n## Service Dependencies\n\n```yaml\nservices:\n  web:\n    depends_on:\n      - api\n      - db\n  \n  api:\n    depends_on:\n      - db\n      - redis\n```\n\n## Health Check Dependencies\n\n```yaml\nservices:\n  web:\n    depends_on:\n      db:\n        condition: service_healthy\n      redis:\n        condition: service_started\n  \n  db:\n    image: postgres:15\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U postgres\"]\n      interval: 5s\n      timeout: 5s\n      retries: 5\n```\n\n## Health Check Options\n\n```yaml\nservices:\n  app:\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/health\"]\n      interval: 30s      # Check every 30s\n      timeout: 10s       # Wait up to 10s\n      retries: 3         # Fail after 3 retries\n      start_period: 40s  # Wait before first check\n```\n\n## Dependency Conditions\n\n| Condition | Meaning |\n|-----------|--------|\n| `service_started` | Container started |\n| `service_healthy` | Health check passed |\n| `service_completed_successfully` | Container exited 0 |"
+        },
+        {
+            "id": "compose_12",
+            "type": "content",
+            "title": "Multiple Compose Files",
+            "content": "# Multiple Compose Files 📚\n\n## Override Files\n\n```bash\n# docker-compose.yml (base)\n# docker-compose.override.yml (auto-loaded)\n```\n\n```yaml\n# docker-compose.yml\nservices:\n  web:\n    image: myapp:latest\n    ports:\n      - \"80:80\"\n\n# docker-compose.override.yml\nservices:\n  web:\n    build: .\n    volumes:\n      - ./src:/app/src\n    environment:\n      - DEBUG=true\n```\n\n## Environment-Specific Files\n\n```bash\n# Production\ndocker compose -f docker-compose.yml -f docker-compose.prod.yml up\n\n# Development\ndocker compose -f docker-compose.yml -f docker-compose.dev.yml up\n```\n\n```yaml\n# docker-compose.prod.yml\nservices:\n  web:\n    restart: always\n    deploy:\n      replicas: 3\n      resources:\n        limits:\n          memory: 512M\n```\n\n## Using Profiles\n\n```yaml\nservices:\n  web:\n    image: myapp\n  \n  debug:\n    image: debug-tools\n    profiles:\n      - debug\n```\n\n```bash\n# Start only web\ndocker compose up\n\n# Start with debug profile\ndocker compose --profile debug up\n```"
+        },
+        {
+            "id": "compose_13",
+            "type": "content",
+            "title": "Common Patterns",
+            "content": "# Common Compose Patterns 📋\n\n## Full-Stack App Pattern\n\n```yaml\nversion: '3.9'\n\nservices:\n  # Frontend\n  frontend:\n    build: ./frontend\n    ports:\n      - \"3000:3000\"\n    depends_on:\n      - api\n    volumes:\n      - ./frontend/src:/app/src\n\n  # Backend API\n  api:\n    build: ./api\n    ports:\n      - \"8080:8080\"\n    environment:\n      - DATABASE_URL=postgres://postgres:password@db:5432/app\n      - REDIS_URL=redis://redis:6379\n    depends_on:\n      db:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  # Database\n  db:\n    image: postgres:15-alpine\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    environment:\n      - POSTGRES_PASSWORD=password\n      - POSTGRES_DB=app\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready\"]\n      interval: 5s\n      retries: 5\n\n  # Cache\n  redis:\n    image: redis:7-alpine\n\nvolumes:\n  postgres_data:\n```"
+        },
+        {
+            "id": "compose_14",
+            "type": "quiz",
+            "title": "Configuration Quiz",
+            "content": "Test your configuration knowledge!",
+            "quizQuestion": "What file does Docker Compose automatically load to override the base configuration?",
+            "quizOptions": [
+                "docker-compose.local.yml",
+                "docker-compose.override.yml",
+                "docker-compose.dev.yml",
+                "compose.override.yaml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "compose_15",
+            "type": "content",
+            "title": "Development Workflow",
+            "content": "# Development Workflow 💻\n\n## Hot Reload Setup\n\n```yaml\nservices:\n  app:\n    build: .\n    volumes:\n      # Mount source code\n      - ./src:/app/src\n      # Prevent overwriting node_modules\n      - /app/node_modules\n    command: npm run dev\n    environment:\n      - NODE_ENV=development\n```\n\n## Watch Mode (Compose v2.22+)\n\n```yaml\nservices:\n  web:\n    build: .\n    develop:\n      watch:\n        # Sync files without rebuild\n        - path: ./src\n          target: /app/src\n          action: sync\n        # Rebuild on config change\n        - path: package.json\n          action: rebuild\n```\n\n```bash\n# Start with watch mode\ndocker compose watch\n```\n\n## Debugging\n\n```yaml\nservices:\n  app:\n    build: .\n    ports:\n      - \"3000:3000\"\n      - \"9229:9229\"  # Debug port\n    command: node --inspect=0.0.0.0:9229 server.js\n```\n\n## Database Management\n\n```bash\n# Access database shell\ndocker compose exec db psql -U postgres\n\n# Run migrations\ndocker compose exec api npm run migrate\n\n# Import data\ndocker compose exec -T db psql < backup.sql\n```"
+        },
+        {
+            "id": "compose_16",
+            "type": "content",
+            "title": "Production Considerations",
+            "content": "# Production Best Practices 🚀\n\n## Production Compose File\n\n```yaml\nversion: '3.9'\n\nservices:\n  app:\n    image: myregistry/myapp:${TAG:-latest}\n    restart: always\n    deploy:\n      replicas: 2\n      resources:\n        limits:\n          cpus: '0.5'\n          memory: 512M\n        reservations:\n          cpus: '0.25'\n          memory: 256M\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 3\n    logging:\n      driver: \"json-file\"\n      options:\n        max-size: \"10m\"\n        max-file: \"3\"\n```\n\n## Security Practices\n\n```yaml\nservices:\n  app:\n    # Read-only filesystem\n    read_only: true\n    tmpfs:\n      - /tmp\n    \n    # Drop capabilities\n    cap_drop:\n      - ALL\n    cap_add:\n      - NET_BIND_SERVICE\n    \n    # Security options\n    security_opt:\n      - no-new-privileges:true\n    \n    # Use secrets\n    secrets:\n      - db_password\n\nsecrets:\n  db_password:\n    file: ./secrets/db_password.txt\n```"
+        },
+        {
+            "id": "compose_17",
+            "type": "content",
+            "title": "Compose CLI Reference",
+            "content": "# CLI Quick Reference 📋\n\n## Lifecycle Commands\n\n```bash\n# Start services\ndocker compose up -d\n\n# Stop services\ndocker compose down\n\n# Restart services\ndocker compose restart\n\n# Pause/unpause\ndocker compose pause\ndocker compose unpause\n```\n\n## Build Commands\n\n```bash\n# Build images\ndocker compose build\n\n# Build without cache\ndocker compose build --no-cache\n\n# Build specific service\ndocker compose build app\n```\n\n## Monitoring Commands\n\n```bash\n# List containers\ndocker compose ps\n\n# View logs\ndocker compose logs -f\n\n# View resource usage\ndocker compose top\n```\n\n## Execution Commands\n\n```bash\n# Execute in running container\ndocker compose exec app bash\n\n# Run one-off command\ndocker compose run app npm test\n\n# Copy files\ndocker compose cp app:/path/file ./local\n```\n\n## Config Commands\n\n```bash\n# Validate and view config\ndocker compose config\n\n# View images\ndocker compose images\n\n# View service ports\ndocker compose port app 3000\n```"
+        },
+        {
+            "id": "compose_18",
+            "type": "content",
+            "title": "Troubleshooting",
+            "content": "# Troubleshooting 🔧\n\n## Common Issues\n\n### Port Already in Use\n```bash\n# Find process using port\nlsof -i :3000\n\n# Change port in compose file\nports:\n  - \"3001:3000\"\n```\n\n### Container Keep Restarting\n```bash\n# Check logs\ndocker compose logs app\n\n# Check exit code\ndocker compose ps -a\n\n# Inspect container\ndocker inspect $(docker compose ps -q app)\n```\n\n### Volume Permission Issues\n```yaml\n# Fix ownership\nservices:\n  app:\n    user: \"1000:1000\"\n    volumes:\n      - ./data:/app/data\n```\n\n### Network Problems\n```bash\n# Inspect networks\ndocker network ls\ndocker network inspect myproject_default\n\n# Test connectivity\ndocker compose exec app ping db\n```\n\n### Debug Commands\n\n```bash\n# Validate compose file\ndocker compose config\n\n# View processed config\ndocker compose config --resolve-image-digests\n\n# Check events\ndocker compose events\n```"
+        },
+        {
+            "id": "compose_19",
+            "type": "content",
+            "title": "Real-World Example",
+            "content": "# Complete Example: Web App Stack 🌐\n\n```yaml\nversion: '3.9'\n\nservices:\n  nginx:\n    image: nginx:alpine\n    ports:\n      - \"80:80\"\n    volumes:\n      - ./nginx.conf:/etc/nginx/nginx.conf:ro\n    depends_on:\n      - web\n\n  web:\n    build:\n      context: ./web\n      target: production\n    expose:\n      - \"3000\"\n    environment:\n      - NODE_ENV=production\n      - DATABASE_URL=postgres://postgres:${DB_PASS}@db:5432/app\n      - REDIS_URL=redis://redis:6379\n    depends_on:\n      db:\n        condition: service_healthy\n    restart: unless-stopped\n\n  worker:\n    build: ./web\n    command: npm run worker\n    environment:\n      - DATABASE_URL=postgres://postgres:${DB_PASS}@db:5432/app\n      - REDIS_URL=redis://redis:6379\n    depends_on:\n      - db\n      - redis\n\n  db:\n    image: postgres:15-alpine\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    environment:\n      - POSTGRES_PASSWORD=${DB_PASS}\n      - POSTGRES_DB=app\n    healthcheck:\n      test: pg_isready -U postgres\n      interval: 5s\n\n  redis:\n    image: redis:7-alpine\n    volumes:\n      - redis_data:/data\n\nvolumes:\n  postgres_data:\n  redis_data:\n```"
+        },
+        {
+            "id": "compose_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall Docker Compose knowledge!",
+            "quizQuestion": "What command removes all containers, networks, AND volumes created by Docker Compose?",
+            "quizOptions": [
+                "docker compose stop",
+                "docker compose down",
+                "docker compose down -v",
+                "docker compose rm -v"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "compose_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Docker Compose!\n\n## Key Takeaways\n\n### Services ⚙️\n- ✅ Define containers declaratively\n- ✅ Use `build` or `image`\n- ✅ Configure dependencies with `depends_on`\n- ✅ Add health checks for reliability\n\n### Volumes 💾\n- ✅ Bind mounts for development\n- ✅ Named volumes for persistence\n- ✅ Use `:ro` for read-only mounts\n\n### Networks 🌐\n- ✅ Default network connects all services\n- ✅ Custom networks for isolation\n- ✅ Services reachable by name\n\n### YAML Syntax 📝\n- ✅ Environment variables with `${VAR}`\n- ✅ Override files for environments\n- ✅ Profiles for optional services\n\n## Quick Reference\n\n```bash\ndocker compose up -d    # Start\ndocker compose down     # Stop\ndocker compose logs -f  # Watch logs\ndocker compose exec     # Execute\n```\n\n> 🐙 **Remember:** Compose makes multi-container apps simple!\n\nHappy orchestrating! 🚀"
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "id": "learn_gateway_micro",
+    "topicId": "gateway",
+    "topicTitle": "API Gateway",
+    "description": "Master API Gateway patterns including Kong, rate limiting, and authentication",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "gate_1",
+            "type": "content",
+            "title": "API Gateway",
+            "content": "# API Gateway 🚪\n\nSingle entry point for all client requests.\n\n## What You'll Learn:\n- **Gateway Pattern** - Centralized entry\n- **Routing** - Request forwarding\n- **Rate Limiting** - Traffic control\n- **Authentication** - Security at edge\n- **Tools** - Kong, Zuul, AWS\n\n> 💡 Gateway handles cross-cutting concerns!"
+        },
+        {
+            "id": "gate_2",
+            "type": "content",
+            "title": "Gateway Pattern",
+            "content": "# Gateway Pattern 🔀\n\n## Without Gateway:\n```\nClient ──► User Service\nClient ──► Order Service\nClient ──► Payment Service\n(Multiple endpoints to manage)\n```\n\n## With Gateway:\n```\n              ┌─────────┐\nClient ──►    │ Gateway │\n              └────┬────┘\n          ┌───────┼───────┐\n          ▼       ▼       ▼\n       Users   Orders  Payments\n```\n\n## Benefits:\n- Single entry point\n- Simplified clients\n- Cross-cutting concerns\n- Security at edge"
+        },
+        {
+            "id": "gate_3",
+            "type": "content",
+            "title": "Gateway Responsibilities",
+            "content": "# Gateway Responsibilities 📋\n\n## Core Functions:\n| Function | Description |\n|----------|-------------|\n| Routing | Forward to services |\n| Authentication | Verify identity |\n| Authorization | Check permissions |\n| Rate Limiting | Control traffic |\n| Load Balancing | Distribute requests |\n| Caching | Store responses |\n| Logging | Track requests |\n| Transformation | Modify requests |\n\n## Not Gateway's Job:\n- Business logic\n- Data storage\n- Heavy processing"
+        },
+        {
+            "id": "gate_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your gateway knowledge!",
+            "quizQuestion": "What is the main purpose of an API Gateway?",
+            "quizOptions": [
+                "Database queries",
+                "Data storage",
+                "Single entry point with cross-cutting concerns",
+                "Running business logic"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "gate_4",
+            "type": "content",
+            "title": "Routing",
+            "content": "# Request Routing 🛤️\n\n## Path-Based:\n```\n/api/users/*   → User Service\n/api/orders/*  → Order Service\n/api/payments/* → Payment Service\n```\n\n## Configuration:\n```yaml\nroutes:\n  - path: /api/users\n    service: user-service\n    port: 3001\n  - path: /api/orders\n    service: order-service\n    port: 3002\n```\n\n## Header-Based:\n```\nX-Version: v2 → Service v2\n```\n\n## Query-Based:\n```\n/api?version=2 → Service v2\n```"
+        },
+        {
+            "id": "gate_5",
+            "type": "content",
+            "title": "Rate Limiting",
+            "content": "# Rate Limiting ⏱️\n\nProtect services from overload.\n\n## Strategies:\n```\nToken Bucket:\n  [tokens] ──► request uses token\n               tokens refill over time\n\nSliding Window:\n  Count requests in time window\n  Reject when limit reached\n```\n\n## Configuration:\n```yaml\nrate_limiting:\n  requests_per_second: 100\n  burst_size: 200\n  key: client_ip\n```\n\n## Response:\n```\nHTTP/1.1 429 Too Many Requests\nRetry-After: 30\n```\n\n## By:\n- IP address\n- API key\n- User ID\n- Endpoint"
+        },
+        {
+            "id": "gate_6",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Authentication at Gateway 🔐\n\n## Flow:\n```\n1. Client sends request + token\n2. Gateway validates token\n3. Gateway adds user info to request\n4. Service receives authenticated request\n```\n\n## JWT Validation:\n```javascript\nconst validateToken = (req, res, next) => {\n    const token = req.headers.authorization;\n    const decoded = jwt.verify(token, secret);\n    req.headers['X-User-Id'] = decoded.userId;\n    next();\n};\n```\n\n## Benefits:\n- Centralized auth\n- Services trust gateway\n- Single auth implementation\n- Token validation once"
+        },
+        {
+            "id": "gate_7",
+            "type": "content",
+            "title": "Kong Gateway",
+            "content": "# Kong Gateway 🦍\n\nPopular open-source gateway.\n\n## Features:\n- Plugin architecture\n- Admin API\n- Dashboard (Enterprise)\n- Database or DB-less\n\n## Setup:\n```yaml\nservices:\n  - name: user-service\n    url: http://user-service:3000\nroutes:\n  - name: users\n    service: user-service\n    paths:\n      - /api/users\nplugins:\n  - name: rate-limiting\n    config:\n      minute: 100\n```\n\n## Popular Plugins:\n- rate-limiting\n- jwt\n- cors\n- request-transformer"
+        },
+        {
+            "id": "gate_8",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered API Gateway!\n\n## Key Takeaways:\n\n### Responsibilities\n- Routing\n- Authentication\n- Rate limiting\n- Load balancing\n\n### Benefits\n- Single entry point\n- Simplified clients\n- Centralized security\n\n### Tools\n| Tool | Type |\n|------|------|\n| Kong | Open Source |\n| AWS API Gateway | Managed |\n| Zuul | Netflix/Java |\n\nSecure your APIs! 🚪"
+        }
+    ]
+}

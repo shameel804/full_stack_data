@@ -1,0 +1,167 @@
+{
+    "id": "learn_collab_ci",
+    "topicId": "ci",
+    "topicTitle": "CI Integration",
+    "description": "Master CI integration in collaboration platforms including runners, environment variables, artifacts, and automated workflow configurations",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "ci_1",
+            "type": "content",
+            "title": "Welcome to CI Integration",
+            "content": "# CI Integration in Collaboration Platforms 🔄\n\nIntegrate **Continuous Integration** directly with your version control.\n\n## What you'll learn:\n- **Runners** - Agents that execute CI jobs\n- **Variables** - Configuration and secrets\n- **Artifacts** - Build outputs and reports\n\n> 💡 **Fun Fact:** Continuous Integration was first named and proposed by Grady Booch in 1991!\n\n## CI/CD in Collaboration Platforms\n\n| Platform | CI System |\n|----------|----------|\n| 🐙 GitHub | GitHub Actions |\n| 🦊 GitLab | GitLab CI/CD |\n| 🪣 Bitbucket | Bitbucket Pipelines |\n| 🔵 Azure DevOps | Azure Pipelines |\n\n## Why Platform-Integrated CI?\n\n- ⚡ **Zero Setup** - Built right in\n- 🔗 **Tight Integration** - Status checks, PRs\n- 🔐 **Unified Security** - Same permissions\n- 💰 **Cost Effective** - Free tiers available\n- 📊 **Visibility** - Results in one place\n\nLet's master CI integration!"
+        },
+        {
+            "id": "ci_2",
+            "type": "content",
+            "title": "Understanding Runners",
+            "content": "# CI Runners 🏃\n\nRunners are **agents** that execute your CI/CD jobs.\n\n## How Runners Work\n\n```\n┌─────────────────────────────────────────────────┐\n│                CI PLATFORM                       │\n│  ┌─────────────────────────────────────────┐    │\n│  │           JOB QUEUE                      │    │\n│  │  Job A → Job B → Job C → ...            │    │\n│  └─────────────────────────────────────────┘    │\n└─────────────────────┬───────────────────────────┘\n                      │ Assigns jobs\n          ┌───────────┼───────────┐\n          ▼           ▼           ▼\n     ┌────────┐  ┌────────┐  ┌────────┐\n     │Runner 1│  │Runner 2│  │Runner 3│\n     │ Linux  │  │ macOS  │  │Windows │\n     └────────┘  └────────┘  └────────┘\n          │           │           │\n          ▼           ▼           ▼\n     ┌────────┐  ┌────────┐  ┌────────┐\n     │Execute │  │Execute │  │Execute │\n     │ Job A  │  │ Job B  │  │ Job C  │\n     └────────┘  └────────┘  └────────┘\n```\n\n## Runner Types\n\n| Type | Description | Use Case |\n|------|-------------|----------|\n| **Hosted** | Cloud-provided | General purpose |\n| **Self-hosted** | Your infrastructure | Custom needs |\n| **Container** | Docker-based | Reproducible builds |\n\n> 🎯 **Key Point:** Runners execute your scripts in isolated environments!"
+        },
+        {
+            "id": "ci_3",
+            "type": "content",
+            "title": "Hosted Runners",
+            "content": "# Hosted (Cloud) Runners ☁️\n\nPlatform-provided runners for quick setup.\n\n## GitHub Actions Runners\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest  # Linux\n    # runs-on: macos-latest  # macOS\n    # runs-on: windows-latest  # Windows\n    steps:\n      - uses: actions/checkout@v4\n      - run: echo \"Hello from hosted runner!\"\n```\n\n## Available Environments\n\n| Platform | Linux | macOS | Windows |\n|----------|-------|-------|--------|\n| GitHub | ✅ ubuntu-* | ✅ macos-* | ✅ windows-* |\n| GitLab | ✅ Linux | ✅ macOS | ✅ Windows |\n| Bitbucket | ✅ Linux | ❌ | ❌ |\n\n## Pre-installed Software\n\nHosted runners come with:\n- Programming languages (Node, Python, Java, etc.)\n- Build tools (npm, pip, Maven, etc.)\n- Container tools (Docker, docker-compose)\n- Cloud CLIs (AWS, Azure, GCP)\n- Common utilities (git, curl, wget)\n\n## Limitations\n\n| Constraint | Typical Limit |\n|------------|---------------|\n| Build time | 6 hours |\n| Disk space | 10-14 GB |\n| Memory | 7-14 GB |\n| Concurrency | Varies by plan |\n\n> 💡 **Tip:** Check the runner images documentation for full software list!"
+        },
+        {
+            "id": "ci_4",
+            "type": "content",
+            "title": "Self-Hosted Runners",
+            "content": "# Self-Hosted Runners 🖥️\n\nRun CI jobs on your own infrastructure.\n\n## Why Self-Host?\n\n- 🔒 **Security** - Keep code on-premise\n- ⚡ **Performance** - Powerful custom hardware\n- 💰 **Cost** - Reduce cloud costs at scale\n- 🎛️ **Control** - Custom software and config\n- 🌐 **Network** - Access internal resources\n\n## GitHub Actions Self-Hosted\n\n```bash\n# Download and configure runner\nmkdir actions-runner && cd actions-runner\ncurl -o runner.tar.gz -L https://github.com/actions/runner/releases/download/v2.x.x/actions-runner-linux-x64-2.x.x.tar.gz\ntar xzf runner.tar.gz\n\n# Configure\n./config.sh --url https://github.com/org/repo --token YOUR_TOKEN\n\n# Run as service\nsudo ./svc.sh install\nsudo ./svc.sh start\n```\n\n## Using Self-Hosted Runners\n\n```yaml\njobs:\n  build:\n    runs-on: self-hosted\n    # Or with labels:\n    # runs-on: [self-hosted, linux, gpu]\n    steps:\n      - uses: actions/checkout@v4\n      - run: ./build.sh\n```\n\n## Runner Labels\n\n```yaml\nruns-on: [self-hosted, linux, x64, gpu]\n```\n\nLabels match runners with specific capabilities.\n\n> ⚠️ **Security:** Self-hosted runners should only run trusted code!"
+        },
+        {
+            "id": "ci_5",
+            "type": "quiz",
+            "title": "Runners Quiz",
+            "content": "Test your runner knowledge!",
+            "quizQuestion": "What is the main advantage of using self-hosted runners?",
+            "quizOptions": [
+                "They are always faster than hosted runners",
+                "They are free to use on all platforms",
+                "They allow access to internal resources and custom configurations",
+                "They automatically update themselves"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "ci_6",
+            "type": "content",
+            "title": "Environment Variables",
+            "content": "# Variables in CI 🔧\n\nConfigure builds with **environment variables**.\n\n## Variable Types\n\n### 1. Built-in Variables\n\n```yaml\n# GitHub Actions\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: |\n          echo \"Repository: $GITHUB_REPOSITORY\"\n          echo \"Branch: $GITHUB_REF_NAME\"\n          echo \"Commit: $GITHUB_SHA\"\n          echo \"Actor: $GITHUB_ACTOR\"\n          echo \"Run ID: $GITHUB_RUN_ID\"\n```\n\n### 2. Custom Variables\n\n```yaml\n# Workflow-level\nenv:\n  NODE_ENV: production\n  API_URL: https://api.example.com\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    # Job-level\n    env:\n      DATABASE: postgres\n    steps:\n      - name: Use variables\n        # Step-level\n        env:\n          STEP_VAR: value\n        run: echo $NODE_ENV $DATABASE $STEP_VAR\n```\n\n## Variable Scope\n\n| Scope | Visibility |\n|-------|------------|\n| **Workflow** | All jobs and steps |\n| **Job** | All steps in job |\n| **Step** | Single step only |\n\n> 💡 **Tip:** Use lower scope for step-specific values!"
+        },
+        {
+            "id": "ci_7",
+            "type": "content",
+            "title": "Secrets Management",
+            "content": "# Secrets 🔐\n\nSecure storage for **sensitive** configuration.\n\n## Why Secrets?\n\n```yaml\n# ❌ NEVER do this!\nenv:\n  API_KEY: \"sk_live_abc123xyz\"  # Exposed in repo!\n\n# ✅ Use secrets instead\nenv:\n  API_KEY: ${{ secrets.API_KEY }}  # Encrypted\n```\n\n## Adding Secrets\n\n### GitHub\n1. Settings → Secrets and variables → Actions\n2. New repository secret\n3. Name and value\n\n### GitLab\n1. Settings → CI/CD → Variables\n2. Add variable\n3. Check \"Mask variable\" and \"Protect variable\"\n\n## Using Secrets\n\n```yaml\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Deploy\n        env:\n          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}\n          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}\n        run: ./deploy.sh\n```\n\n## Secret Scopes\n\n| Scope | Access |\n|-------|--------|\n| **Repository** | Single repo |\n| **Environment** | Specific deployment |\n| **Organization** | All org repos |\n\n> ⚠️ **Security:** Secrets are masked in logs but still accessible by code!"
+        },
+        {
+            "id": "ci_8",
+            "type": "content",
+            "title": "Protected Variables",
+            "content": "# Protected Variables 🛡️\n\nRestrict variable access to protected resources.\n\n## GitLab Protected Variables\n\n```\n┌─────────────────────────────────────────────────┐\n│  VARIABLE SETTINGS                               │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  Key:   PRODUCTION_API_KEY                       │\n│  Value: ********************************         │\n│                                                  │\n│  ☑ Protected                                    │\n│    Only available on protected branches/tags     │\n│                                                  │\n│  ☑ Masked                                       │\n│    Hidden in job logs                            │\n│                                                  │\n│  ☐ Expanded                                     │\n│    Expand $VARIABLE references                   │\n│                                                  │\n│  Environments: production                        │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## GitHub Environment Secrets\n\n```yaml\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment: production  # Requires approval\n    steps:\n      - name: Deploy\n        env:\n          # Only available when environment is 'production'\n          PROD_KEY: ${{ secrets.PROD_KEY }}\n        run: ./deploy.sh\n```\n\n## Protection Rules\n\n- Required reviewers for environments\n- Wait timer before deployment\n- Branch restrictions\n- Named branch filter\n\n> 🔒 **Best Practice:** Use environment protection for production secrets!"
+        },
+        {
+            "id": "ci_9",
+            "type": "quiz",
+            "title": "Variables Quiz",
+            "content": "Test your variables knowledge!",
+            "quizQuestion": "Why should you use secrets instead of hardcoding API keys in your CI configuration?",
+            "quizOptions": [
+                "Secrets make the build run faster",
+                "Secrets are encrypted and not exposed in the repository or logs",
+                "Secrets automatically rotate themselves",
+                "Secrets are easier to type"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ci_10",
+            "type": "content",
+            "title": "Artifacts Overview",
+            "content": "# CI Artifacts 📦\n\nArtifacts are **files** produced by CI jobs.\n\n## What Are Artifacts?\n\n```\n┌─────────────────────────────────────────────────┐\n│                   BUILD JOB                      │\n│                                                  │\n│  ┌───────────┐    ┌───────────┐                 │\n│  │   Source  │───►│   Build   │                 │\n│  │   Code    │    │  Process  │                 │\n│  └───────────┘    └─────┬─────┘                 │\n│                         │                        │\n│                         ▼                        │\n│  ┌─────────────────────────────────────────┐    │\n│  │              ARTIFACTS                   │    │\n│  │  ├── dist/app.js                        │    │\n│  │  ├── dist/app.css                       │    │\n│  │  ├── test-results.xml                   │    │\n│  │  └── coverage/coverage.html             │    │\n│  └─────────────────────────────────────────┘    │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Common Artifact Types\n\n| Type | Examples |\n|------|----------|\n| **Build Output** | dist/, build/, target/ |\n| **Test Reports** | junit.xml, test-results.html |\n| **Coverage** | coverage.xml, lcov.info |\n| **Logs** | build.log, debug.log |\n| **Packages** | *.jar, *.whl, *.deb |\n\n## Use Cases\n\n- 📤 Pass files between jobs\n- 📥 Download for debugging\n- 📊 View test reports\n- 🚀 Deploy built assets\n\n> 💡 **Tip:** Artifacts persist after job completion!"
+        },
+        {
+            "id": "ci_11",
+            "type": "content",
+            "title": "Creating Artifacts",
+            "content": "# Creating and Using Artifacts 📤\n\n## GitHub Actions\n\n### Upload Artifacts\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Build\n        run: npm run build\n      \n      - name: Upload build\n        uses: actions/upload-artifact@v4\n        with:\n          name: build-output\n          path: dist/\n          retention-days: 5\n```\n\n### Download Artifacts\n\n```yaml\njobs:\n  deploy:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - name: Download build\n        uses: actions/download-artifact@v4\n        with:\n          name: build-output\n          path: ./dist\n      \n      - name: Deploy\n        run: ./deploy.sh dist/\n```\n\n## GitLab CI\n\n```yaml\nbuild:\n  stage: build\n  script:\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 week\n\ndeploy:\n  stage: deploy\n  dependencies:\n    - build\n  script:\n    - ./deploy.sh dist/\n```\n\n> 🎯 **Note:** Artifacts are automatically passed in GitLab!"
+        },
+        {
+            "id": "ci_12",
+            "type": "content",
+            "title": "Test Reports",
+            "content": "# Test Report Artifacts 📊\n\nDisplay test results in CI interfaces.\n\n## Publishing JUnit Reports\n\n### GitHub Actions\n\n```yaml\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Run tests\n        run: npm test -- --reporter=junit --outputFile=results.xml\n      \n      - name: Publish test results\n        uses: dorny/test-reporter@v1\n        if: always()\n        with:\n          name: Jest Tests\n          path: results.xml\n          reporter: jest-junit\n```\n\n### GitLab CI\n\n```yaml\ntest:\n  stage: test\n  script:\n    - npm test -- --reporter=junit --outputFile=results.xml\n  artifacts:\n    when: always\n    reports:\n      junit: results.xml\n```\n\n## Report Types\n\n| Report | Format | Use |\n|--------|--------|-----|\n| **JUnit** | XML | Test results |\n| **Cobertura** | XML | Code coverage |\n| **JaCoCo** | XML | Java coverage |\n| **LCOV** | info | Line coverage |\n\n## Benefits\n\n- 📈 Visualize trends over time\n- 🔍 See failed test details\n- 📊 Track coverage metrics\n- 🚦 Block PRs on test failures"
+        },
+        {
+            "id": "ci_13",
+            "type": "content",
+            "title": "Caching",
+            "content": "# CI Caching ⚡\n\nSpeed up builds by **reusing** files between runs.\n\n## Why Cache?\n\n```\nWithout Cache:                With Cache:\n──────────────               ─────────────\nDownload deps: 2 min         Download deps: 10 sec (cached)\nBuild:         3 min         Build:         3 min\nTotal:         5 min         Total:         3 min 10 sec\n                             Savings:       37%\n```\n\n## GitHub Actions Cache\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Cache node modules\n        uses: actions/cache@v4\n        with:\n          path: node_modules\n          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}\n          restore-keys: |\n            ${{ runner.os }}-node-\n      \n      - name: Install dependencies\n        run: npm ci\n      \n      - name: Build\n        run: npm run build\n```\n\n## Cache Keys\n\n| Key Component | Purpose |\n|---------------|--------|\n| `runner.os` | OS-specific cache |\n| `hashFiles()` | Invalidate on file change |\n| `restore-keys` | Fallback to older cache |\n\n## Common Cache Targets\n\n```\nNode:    node_modules/\nPython:  ~/.cache/pip\nRuby:    vendor/bundle\nJava:    ~/.m2/repository\nGo:      ~/go/pkg/mod\n```\n\n> 💡 **Tip:** Cache key should include lockfile hash!"
+        },
+        {
+            "id": "ci_14",
+            "type": "quiz",
+            "title": "Artifacts Quiz",
+            "content": "Test your artifacts and caching knowledge!",
+            "quizQuestion": "What is the main difference between artifacts and cache in CI?",
+            "quizOptions": [
+                "Artifacts are faster than cache",
+                "Cache persists between runs to speed up builds; artifacts are job outputs for sharing or downloading",
+                "Artifacts are encrypted; cache is not",
+                "There is no difference"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ci_15",
+            "type": "content",
+            "title": "Status Checks",
+            "content": "# CI Status Checks ✅\n\nIntegrate CI results with pull requests.\n\n## How Status Checks Work\n\n```\n┌─────────────────────────────────────────────────┐\n│  PULL REQUEST #42                                │\n├─────────────────────────────────────────────────┤\n│                                                  │\n│  ✅ ci/build (3m 42s)         Passed            │\n│  ✅ ci/test (5m 12s)          Passed            │\n│  ✅ ci/lint (1m 03s)          Passed            │\n│  🔴 ci/coverage               Below threshold   │\n│                                                  │\n│  ┌──────────────────────────────────────────┐   │\n│  │  ⛔ Merge blocked                         │   │\n│  │  1 required check has not passed          │   │\n│  └──────────────────────────────────────────┘   │\n│                                                  │\n└─────────────────────────────────────────────────┘\n```\n\n## Requiring Status Checks\n\n### GitHub Branch Protection\n\n```\nSettings → Branches → Branch protection rules\n\n☑ Require status checks to pass before merging\n  ├── ci/build\n  ├── ci/test\n  └── ci/lint\n\n☑ Require branches to be up to date before merging\n```\n\n## Status Check Types\n\n| Status | Meaning |\n|--------|--------|\n| ✅ **Success** | Check passed |\n| 🔴 **Failure** | Check failed |\n| 🟡 **Pending** | Check running |\n| ⚪ **Neutral** | Informational only |\n\n> 🎯 **Best Practice:** Require all tests to pass before merge!"
+        },
+        {
+            "id": "ci_16",
+            "type": "content",
+            "title": "Notification Integration",
+            "content": "# CI Notifications 🔔\n\nGet notified about build results.\n\n## Slack Integration\n\n```yaml\njobs:\n  notify:\n    runs-on: ubuntu-latest\n    if: always()\n    needs: [build, test]\n    steps:\n      - name: Notify Slack\n        uses: slackapi/slack-github-action@v1\n        with:\n          payload: |\n            {\n              \"text\": \"Build ${{ job.status }}\",\n              \"blocks\": [\n                {\n                  \"type\": \"section\",\n                  \"text\": {\n                    \"type\": \"mrkdwn\",\n                    \"text\": \"*Build:* ${{ github.workflow }}\\n*Status:* ${{ job.status }}\\n*Commit:* ${{ github.sha }}\"\n                  }\n                }\n              ]\n            }\n        env:\n          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}\n```\n\n## Other Notification Channels\n\n| Channel | Use Case |\n|---------|----------|\n| **Email** | Individual notifications |\n| **Slack** | Team channels |\n| **Teams** | Microsoft ecosystem |\n| **Discord** | Open source projects |\n| **PagerDuty** | On-call alerts |\n\n## When to Notify\n\n```yaml\n# Only on failure\nif: failure()\n\n# Only on success\nif: success()\n\n# Always (success, failure, or cancelled)\nif: always()\n\n# Only on main branch\nif: github.ref == 'refs/heads/main'\n```\n\n> 💡 **Tip:** Only notify for failures to reduce noise!"
+        },
+        {
+            "id": "ci_17",
+            "type": "content",
+            "title": "Matrix Builds",
+            "content": "# Matrix Builds 🔲\n\nTest across multiple configurations.\n\n## What Is a Matrix?\n\n```\n┌────────────────────────────────────────────────────────┐\n│                    MATRIX BUILD                         │\n├────────────────────────────────────────────────────────┤\n│                                                         │\n│  Node 18 + Ubuntu    Node 18 + macOS    Node 18 + Win  │\n│       ✅                  ✅                 ✅         │\n│                                                         │\n│  Node 20 + Ubuntu    Node 20 + macOS    Node 20 + Win  │\n│       ✅                  ✅                 ✅         │\n│                                                         │\n│  Node 22 + Ubuntu    Node 22 + macOS    Node 22 + Win  │\n│       ✅                  ✅                 ✅         │\n│                                                         │\n│  9 parallel jobs from 1 configuration!                  │\n│                                                         │\n└────────────────────────────────────────────────────────┘\n```\n\n## GitHub Actions Matrix\n\n```yaml\njobs:\n  test:\n    runs-on: ${{ matrix.os }}\n    strategy:\n      matrix:\n        os: [ubuntu-latest, macos-latest, windows-latest]\n        node: [18, 20, 22]\n        exclude:\n          - os: windows-latest\n            node: 18\n        include:\n          - os: ubuntu-latest\n            node: 22\n            experimental: true\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ matrix.node }}\n      - run: npm test\n```\n\n## Matrix Options\n\n| Option | Purpose |\n|--------|--------|\n| `include` | Add specific combinations |\n| `exclude` | Remove specific combinations |\n| `fail-fast` | Stop all on first failure |"
+        },
+        {
+            "id": "ci_18",
+            "type": "content",
+            "title": "Reusable Workflows",
+            "content": "# Reusable Workflows 🔄\n\nShare workflow logic across repositories.\n\n## Creating a Reusable Workflow\n\n```yaml\n# .github/workflows/shared-build.yml\nname: Shared Build\n\non:\n  workflow_call:\n    inputs:\n      node-version:\n        required: true\n        type: string\n    secrets:\n      npm-token:\n        required: true\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ inputs.node-version }}\n      - run: npm ci\n        env:\n          NPM_TOKEN: ${{ secrets.npm-token }}\n      - run: npm run build\n```\n\n## Using a Reusable Workflow\n\n```yaml\n# In consuming repository\nname: CI\non: push\n\njobs:\n  build:\n    uses: org/shared-workflows/.github/workflows/shared-build.yml@main\n    with:\n      node-version: '20'\n    secrets:\n      npm-token: ${{ secrets.NPM_TOKEN }}\n```\n\n## Benefits\n\n- 📦 **DRY** - Don't repeat yourself\n- 🔧 **Maintainability** - Update once, apply everywhere\n- ✅ **Consistency** - Standard processes\n- 🔒 **Security** - Centralized secret handling"
+        },
+        {
+            "id": "ci_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# CI Integration Best Practices ✅\n\n## Runner Management\n\n- 🏷️ Use **tags** to route jobs appropriately\n- 🔄 Keep self-hosted runners **updated**\n- 📊 Monitor runner **utilization**\n- 🔐 Secure runners with **network isolation**\n\n## Variables and Secrets\n\n- 🔐 Never commit secrets to code\n- 🛡️ Use **environment protection** for production\n- 📝 Document required variables\n- 🔄 Rotate secrets regularly\n\n## Artifacts and Caching\n\n- 📦 Set appropriate **retention periods**\n- 🎯 Cache **dependencies**, not source code\n- 📊 Archive **test results** for debugging\n- 🗑️ Clean up old artifacts\n\n## General Best Practices\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    timeout-minutes: 30        # Prevent hanging jobs\n    concurrency:\n      group: ${{ github.ref }} # Prevent duplicate runs\n      cancel-in-progress: true\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0       # Full history if needed\n      # ...\n```\n\n> 🎯 **Remember:** Fast feedback loops improve productivity!"
+        },
+        {
+            "id": "ci_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall CI integration knowledge!",
+            "quizQuestion": "What is the purpose of a matrix build in CI?",
+            "quizOptions": [
+                "To run tests sequentially one after another",
+                "To test across multiple configurations (OS, versions) in parallel",
+                "To encrypt build artifacts",
+                "To send notifications to multiple channels"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "ci_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered CI Integration!\n\n## Key Takeaways\n\n### Runners 🏃\n- ✅ Hosted runners for quick start\n- ✅ Self-hosted for custom needs\n- ✅ Use labels to route jobs\n\n### Variables 🔧\n- ✅ Use secrets for sensitive data\n- ✅ Scope variables appropriately\n- ✅ Protect production secrets\n\n### Artifacts 📦\n- ✅ Share build outputs between jobs\n- ✅ Publish test reports for visibility\n- ✅ Set appropriate retention periods\n\n### Performance ⚡\n- ✅ Cache dependencies\n- ✅ Use matrix builds\n- ✅ Cancel duplicate runs\n\n## Integration Checklist\n\n```\n☑ Status checks required for PRs\n☑ Secrets stored securely\n☑ Caching configured\n☑ Test reports published\n☑ Notifications set up\n☑ Matrix builds where appropriate\n```\n\n> 🔄 **Remember:** Good CI integration is invisible - it just works!\n\nHappy automating! 🚀"
+        }
+    ]
+}

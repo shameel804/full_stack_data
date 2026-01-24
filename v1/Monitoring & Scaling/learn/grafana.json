@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_grafana",
+    "topicId": "grafana",
+    "topicTitle": "Grafana",
+    "description": "Master Grafana for visualization including dashboards, panels, data sources, and alerting",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "grafana_1",
+            "type": "content",
+            "title": "Grafana Overview",
+            "content": "# Grafana 📊\n\nThe open observability platform.\n\n## What You'll Learn\n- **Dashboards** - Visualizations\n- **Panels** - Chart types\n- **Data Sources** - Connections\n- **Alerting** - Notifications\n\n## Key Features\n| Feature | Benefit |\n|---------|--------|\n| Multi-source | Any data |\n| Beautiful UI | Easy to use |\n| Alerting | Built-in |\n| Plugins | Extensible |"
+        },
+        {
+            "id": "grafana_2",
+            "type": "content",
+            "title": "Data Sources",
+            "content": "# Data Sources 🔌\n\nConnect to your metrics.\n\n## Common Sources\n| Source | Use |\n|--------|-----|\n| Prometheus | Metrics |\n| Loki | Logs |\n| Elasticsearch | Logs/Metrics |\n| CloudWatch | AWS |\n| PostgreSQL | SQL data |\n\n## Configuration\n```yaml\nname: Prometheus\ntype: prometheus\nurl: http://prometheus:9090\naccess: proxy\n```"
+        },
+        {
+            "id": "grafana_3",
+            "type": "content",
+            "title": "Dashboard Basics",
+            "content": "# Creating Dashboards 🎨\n\n## Dashboard Structure\n```\nDashboard\n├── Row 1\n│   ├── Panel 1\n│   └── Panel 2\n└── Row 2\n    ├── Panel 3\n    └── Panel 4\n```\n\n## Settings\n- **Time range** - Last 1h, 24h, etc\n- **Refresh** - Auto-refresh interval\n- **Variables** - Dynamic values\n- **Annotations** - Event markers"
+        },
+        {
+            "id": "grafana_quiz_1",
+            "type": "quiz",
+            "title": "Basics Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What is a Grafana data source?",
+            "quizOptions": [
+                "A dashboard",
+                "Connection to metrics storage",
+                "A panel type",
+                "An alert rule"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "grafana_4",
+            "type": "content",
+            "title": "Panel Types",
+            "content": "# Panel Types 📈\n\n## Visualization Options\n| Type | Best For |\n|------|----------|\n| Time series | Trends |\n| Stat | Single number |\n| Gauge | Progress |\n| Bar chart | Comparisons |\n| Table | Raw data |\n| Heatmap | Distributions |\n| Logs | Log lines |\n\n## Most Used\n- Time series (lines, areas)\n- Stat with sparkline\n- Gauge for thresholds"
+        },
+        {
+            "id": "grafana_5",
+            "type": "content",
+            "title": "Time Series Panel",
+            "content": "# Time Series 📉\n\nMost common visualization.\n\n## Query Example\n```promql\nrate(http_requests_total[5m])\n```\n\n## Panel Options\n- **Legend** - Show labels\n- **Tooltip** - Hover details\n- **Axis** - Units, decimals\n- **Thresholds** - Color zones\n\n## Display Modes\n- Lines\n- Bars\n- Points\n- Stacked areas"
+        },
+        {
+            "id": "grafana_6",
+            "type": "content",
+            "title": "Stat Panels",
+            "content": "# Stat & Gauge 🎯\n\n## Stat Panel\nShow single values prominently.\n\n```promql\n# Current requests/second\nsum(rate(http_requests_total[5m]))\n```\n\nOptions:\n- Color modes\n- Graph modes\n- Text modes\n\n## Gauge Panel\nShow progress toward goal.\n\n- Min/Max values\n- Threshold colors\n- Show thresholds\n\n> 💡 Use stat for KPIs, gauge for capacity!"
+        },
+        {
+            "id": "grafana_quiz_2",
+            "type": "quiz",
+            "title": "Panels Quiz",
+            "content": "Test your panel knowledge!",
+            "quizQuestion": "Which panel type is best for showing a single prominent number?",
+            "quizOptions": [
+                "Time series",
+                "Stat",
+                "Table",
+                "Heatmap"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "grafana_7",
+            "type": "content",
+            "title": "Variables",
+            "content": "# Dashboard Variables 🔄\n\nMake dashboards dynamic.\n\n## Variable Types\n| Type | Use |\n|------|-----|\n| Query | From data source |\n| Custom | Fixed values |\n| Interval | Time intervals |\n| Text | User input |\n\n## Query Variable\n```promql\nlabel_values(up, job)\n```\n\n## Using Variables\n```promql\nrate(http_requests_total{job=\"$job\"}[5m])\n```"
+        },
+        {
+            "id": "grafana_8",
+            "type": "content",
+            "title": "Templating",
+            "content": "# Advanced Templating 📝\n\n## Multi-Value\n```promql\nrate(http_requests_total{instance=~\"$instance\"}[5m])\n```\n\n## Chained Variables\n```\n$datacenter → $cluster → $host\n```\n\n## Ad Hoc Filters\nDynamic label filtering.\n\n## Best Practices\n- ✅ Default selections\n- ✅ Include All option\n- ✅ Logical ordering\n- ❌ Too many variables"
+        },
+        {
+            "id": "grafana_9",
+            "type": "content",
+            "title": "Alerting Basics",
+            "content": "# Grafana Alerting 🚨\n\n## Unified Alerting\n- Grafana 8+ feature\n- Multi-data source\n- Alert grouping\n\n## Alert Components\n| Part | Purpose |\n|------|--------|\n| Alert rule | When to fire |\n| Contact point | Where to send |\n| Notification policy | Routing |\n| Silences | Temporary mute |\n\n## Rule Structure\n```\nCondition → Evaluate → Alert/Resolve\n```"
+        },
+        {
+            "id": "grafana_10",
+            "type": "content",
+            "title": "Creating Alerts",
+            "content": "# Alert Rules 📋\n\n## Example Rule\n```yaml\nname: High CPU\nfolder: infrastructure\ncondition: C\ndata:\n  - refId: A\n    query: node_cpu{mode=\"idle\"}\n  - refId: B\n    reduce: last\n    expression: A\n  - refId: C\n    type: threshold\n    expression: B\n    conditions:\n      - type: lt\n        value: 20\n```\n\n## Evaluation\n- Every X seconds\n- For duration (pending)\n- No data handling"
+        },
+        {
+            "id": "grafana_quiz_3",
+            "type": "quiz",
+            "title": "Alerting Quiz",
+            "content": "Test your alerting knowledge!",
+            "quizQuestion": "What is a 'contact point' in Grafana alerting?",
+            "quizOptions": [
+                "A dashboard link",
+                "Where alerts are sent",
+                "A data source",
+                "A variable"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "grafana_11",
+            "type": "content",
+            "title": "Contact Points",
+            "content": "# Contact Points 📧\n\nWhere alerts go.\n\n## Types\n| Type | Use |\n|------|-----|\n| Email | Team inbox |\n| Slack | Channel |\n| PagerDuty | On-call |\n| Webhook | Custom |\n| MS Teams | Team |\n\n## Slack Example\n```yaml\nname: slack-ops\ntype: slack\nsettings:\n  recipient: \"#alerts\"\n  token: \"xoxb-...\"\n```"
+        },
+        {
+            "id": "grafana_12",
+            "type": "content",
+            "title": "Notification Policies",
+            "content": "# Notification Policies 📬\n\nRoute alerts to contact points.\n\n## Policy Tree\n```\nRoot Policy\n├── severity=critical → PagerDuty\n├── team=frontend → #frontend-alerts\n└── Default → Email\n```\n\n## Settings\n- **Grouping** - Combine related\n- **Timing** - Wait, interval\n- **Continue matching** - Multi-route\n\n## Grouping\n```yaml\ngroup_by: [alertname, cluster]\ngroup_wait: 30s\ngroup_interval: 5m\n```"
+        },
+        {
+            "id": "grafana_13",
+            "type": "content",
+            "title": "Annotations",
+            "content": "# Annotations 📌\n\nMark events on graphs.\n\n## Types\n- **Manual** - Add by hand\n- **Query** - From data source\n- **External** - Via API\n\n## Query Annotation\n```promql\nchanges(deployment_timestamp[1m]) > 0\n```\n\n## Use Cases\n- Deployments\n- Incidents\n- Configuration changes\n- Maintenance windows"
+        },
+        {
+            "id": "grafana_quiz_4",
+            "type": "quiz",
+            "title": "Features Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "What are Grafana annotations used for?",
+            "quizOptions": [
+                "Storing data",
+                "Marking events on graphs",
+                "Creating alerts",
+                "Connecting sources"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "grafana_14",
+            "type": "content",
+            "title": "Dashboard Design",
+            "content": "# Dashboard Best Practices 🎨\n\n## Layout Tips\n- ✅ Important at top-left\n- ✅ Group related panels\n- ✅ Consistent sizing\n- ✅ Use rows for sections\n\n## Hierarchy\n```\n1. Overview dashboard (KPIs)\n2. Service dashboards\n3. Debug dashboards\n```\n\n## Performance\n- Limit time ranges\n- Use $__interval\n- Avoid too many panels"
+        },
+        {
+            "id": "grafana_15",
+            "type": "content",
+            "title": "Provisioning",
+            "content": "# Provisioning 📂\n\nDashboards as code.\n\n## File Structure\n```\nprovisioning/\n├── dashboards/\n│   └── default.yaml\n├── datasources/\n│   └── prometheus.yaml\n└── alerting/\n    └── rules.yaml\n```\n\n## Dashboard Provider\n```yaml\napiVersion: 1\nproviders:\n  - name: 'default'\n    folder: 'Provisioned'\n    type: file\n    options:\n      path: /dashboards\n```"
+        },
+        {
+            "id": "grafana_16",
+            "type": "content",
+            "title": "Plugins",
+            "content": "# Grafana Plugins 🔌\n\nExtend functionality.\n\n## Plugin Types\n| Type | Purpose |\n|------|--------|\n| Panel | New visualizations |\n| Data source | New connections |\n| App | Full features |\n\n## Popular Plugins\n- Pie chart\n- Worldmap\n- Flowcharting\n- Zabbix data source\n\n## Install\n```bash\ngrafana-cli plugins install grafana-piechart-panel\n```"
+        },
+        {
+            "id": "grafana_17",
+            "type": "content",
+            "title": "Authentication",
+            "content": "# Authentication 🔐\n\n## Auth Methods\n| Method | Use |\n|--------|-----|\n| Built-in | Simple |\n| LDAP | Enterprise |\n| OAuth | SSO |\n| SAML | Enterprise SSO |\n\n## OAuth Example\n```ini\n[auth.google]\nenabled = true\nclient_id = xxx\nclient_secret = xxx\nallowed_domains = company.com\n```"
+        },
+        {
+            "id": "grafana_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is Grafana provisioning used for?",
+            "quizOptions": [
+                "Installing plugins",
+                "Setting up dashboards as code",
+                "Creating users",
+                "Configuring alerts"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "grafana_18",
+            "type": "content",
+            "title": "Loki Integration",
+            "content": "# Grafana Loki 📝\n\nLogs like Prometheus.\n\n## LogQL\n```logql\n{app=\"frontend\"} |= \"error\"\n```\n\n## Log Panel\n- Show log lines\n- Filter by labels\n- Search text\n- Link to traces\n\n## Explore\n- Query logs\n- Split view\n- Live tail"
+        },
+        {
+            "id": "grafana_19",
+            "type": "content",
+            "title": "High Availability",
+            "content": "# Grafana HA 🔄\n\n## Requirements\n- Shared database\n- Session storage\n- Load balancer\n\n## Database\n```ini\n[database]\ntype = postgres\nhost = db:5432\n```\n\n## Session\n```ini\n[session]\nprovider = redis\n```"
+        },
+        {
+            "id": "grafana_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Dashboards\n- ✅ Variables for dynamic\n- ✅ Time series most common\n- ✅ Stat for KPIs\n\n### Data Sources\n- ✅ Multi-source support\n- ✅ Prometheus integration\n- ✅ Loki for logs\n\n### Alerting\n- ✅ Unified alerting\n- ✅ Contact points\n- ✅ Notification policies\n\nHappy visualizing! 📊"
+        }
+    ]
+}

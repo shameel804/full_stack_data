@@ -1,0 +1,167 @@
+{
+    "id": "learn_cicd_testing",
+    "topicId": "testing",
+    "topicTitle": "Testing in CI/CD",
+    "description": "Master testing strategies in CI/CD including unit, integration, E2E tests, test automation, and coverage",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "testing_1",
+            "type": "content",
+            "title": "Testing in CI/CD",
+            "content": "# Testing in CI/CD 🧪\n\nAutomated quality assurance at every step.\n\n## What you'll learn:\n- **Testing Pyramid** - Types of tests\n- **Automation** - CI integration\n- **Coverage** - Measuring quality\n\n## Testing Pyramid\n\n```\n         /\\\n        /E2E\\       <- Few, slow\n       /─────\\\n      /Integ  \\     <- Some\n     /─────────\\\n    /   Unit    \\   <- Many, fast\n   /─────────────\\\n```"
+        },
+        {
+            "id": "testing_2",
+            "type": "content",
+            "title": "Unit Tests",
+            "content": "# Unit Tests 📝\n\nTest individual functions/components.\n\n```javascript\ntest('adds 1 + 2 to equal 3', () => {\n  expect(sum(1, 2)).toBe(3);\n});\n```\n\n## Characteristics\n\n- ✅ Fast (ms)\n- ✅ Isolated\n- ✅ Many tests\n- ✅ Run on every commit"
+        },
+        {
+            "id": "testing_3",
+            "type": "content",
+            "title": "Integration Tests",
+            "content": "# Integration Tests 🔗\n\nTest component interactions.\n\n```javascript\ntest('creates user in database', async () => {\n  const user = await createUser({ name: 'John' });\n  const saved = await db.findUser(user.id);\n  expect(saved.name).toBe('John');\n});\n```\n\n## Characteristics\n\n- Medium speed\n- Test real dependencies\n- Use test databases"
+        },
+        {
+            "id": "testing_4",
+            "type": "content",
+            "title": "E2E Tests",
+            "content": "# E2E Tests 🔄\n\nTest complete user flows.\n\n```javascript\ntest('user can login', async ({ page }) => {\n  await page.goto('/login');\n  await page.fill('[name=email]', 'test@mail.com');\n  await page.fill('[name=password]', 'pass123');\n  await page.click('button[type=submit]');\n  await expect(page).toHaveURL('/dashboard');\n});\n```\n\n## Tools\n\n- Playwright, Cypress, Selenium"
+        },
+        {
+            "id": "testing_5",
+            "type": "quiz",
+            "title": "Testing Quiz",
+            "content": "Test your testing knowledge!",
+            "quizQuestion": "Which tests should be most numerous according to the testing pyramid?",
+            "quizOptions": [
+                "E2E tests",
+                "Integration tests",
+                "Unit tests",
+                "Manual tests"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "testing_6",
+            "type": "content",
+            "title": "CI Test Configuration",
+            "content": "# CI Test Config 🔧\n\n## GitHub Actions\n\n```yaml\ntest:\n  runs-on: ubuntu-latest\n  steps:\n    - uses: actions/checkout@v4\n    - run: npm ci\n    - run: npm test\n    - uses: codecov/codecov-action@v4\n```\n\n## Parallel Tests\n\n```yaml\nstrategy:\n  matrix:\n    shard: [1, 2, 3, 4]\n```"
+        },
+        {
+            "id": "testing_7",
+            "type": "content",
+            "title": "Test Coverage",
+            "content": "# Test Coverage 📊\n\nMeasure how much code is tested.\n\n## Metrics\n\n| Metric | Description |\n|--------|-------------|\n| Line | Lines executed |\n| Branch | Decision paths |\n| Function | Functions called |\n\n## Coverage Thresholds\n\n```json\n{\n  \"coverageThreshold\": {\n    \"global\": {\n      \"lines\": 80\n    }\n  }\n}\n```"
+        },
+        {
+            "id": "testing_8",
+            "type": "content",
+            "title": "Test Containers",
+            "content": "# Test Containers 🐳\n\nRun dependencies in Docker for tests.\n\n```javascript\nconst container = await new PostgreSqlContainer()\n  .start();\n\nconst client = await container.getClient();\nawait client.query('SELECT 1');\n```\n\n## Benefits\n\n- ✅ Consistent environment\n- ✅ Real database tests\n- ✅ Clean state per test"
+        },
+        {
+            "id": "testing_9",
+            "type": "content",
+            "title": "Smoke Tests",
+            "content": "# Smoke Tests 🔥\n\nQuick sanity checks after deployment.\n\n```bash\n# Critical paths only\ncurl -f https://api.com/health\ncurl -f https://api.com/api/v1/status\n```\n\n## When to Run\n\n- After every deployment\n- Before promoting to prod"
+        },
+        {
+            "id": "testing_10",
+            "type": "quiz",
+            "title": "Coverage Quiz",
+            "content": "Test your coverage knowledge!",
+            "quizQuestion": "What is a common minimum coverage threshold?",
+            "quizOptions": [
+                "50%",
+                "60%",
+                "80%",
+                "100%"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "testing_11",
+            "type": "content",
+            "title": "Mocking",
+            "content": "# Mocking & Stubs 🎭\n\nIsolate code from dependencies.\n\n```javascript\njest.mock('./api');\n\ntest('handles API error', async () => {\n  api.fetch.mockRejectedValue(\n    new Error('Network error')\n  );\n  \n  await expect(getUser()).rejects.toThrow();\n});\n```"
+        },
+        {
+            "id": "testing_12",
+            "type": "content",
+            "title": "Test Reports",
+            "content": "# Test Reports 📋\n\n## JUnit XML\n\n```yaml\ntest:\n  script: npm test\n  artifacts:\n    reports:\n      junit: junit.xml\n```\n\n## Benefits\n\n- Visual test results\n- Trend analysis\n- CI integration"
+        },
+        {
+            "id": "testing_13",
+            "type": "content",
+            "title": "Flaky Tests",
+            "content": "# Handling Flaky Tests 🎲\n\nTests that fail intermittently.\n\n## Causes\n\n- Timing issues\n- Shared state\n- Network dependency\n\n## Solutions\n\n- Retry mechanisms\n- Better isolation\n- Quarantine flaky tests"
+        },
+        {
+            "id": "testing_14",
+            "type": "content",
+            "title": "Performance Tests",
+            "content": "# Performance Testing ⚡\n\n## Load Testing\n\n```javascript\n// k6 example\nexport default function() {\n  http.get('https://api.example.com');\n}\n```\n\n## Metrics\n\n| Metric | Target |\n|--------|--------|\n| Response time | < 500ms |\n| Throughput | > 1000 rps |\n| Error rate | < 1% |"
+        },
+        {
+            "id": "testing_15",
+            "type": "quiz",
+            "title": "Smoke Test Quiz",
+            "content": "Test your smoke test knowledge!",
+            "quizQuestion": "When should smoke tests run?",
+            "quizOptions": [
+                "Before commit",
+                "After deployment",
+                "Weekly",
+                "Monthly"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "testing_16",
+            "type": "content",
+            "title": "Security Testing",
+            "content": "# Security Testing 🔒\n\n## Tools\n\n| Tool | Type |\n|------|------|\n| SAST | Static analysis |\n| DAST | Dynamic testing |\n| SCA | Dependency scan |\n\n## CI Integration\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n```"
+        },
+        {
+            "id": "testing_17",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Testing Best Practices ✅\n\n## Do\n\n- ✅ Test on every commit\n- ✅ Run fast tests first\n- ✅ Fail fast on errors\n- ✅ Use coverage thresholds\n\n## Don't\n\n- ❌ Skip tests to deploy faster\n- ❌ Ignore flaky tests\n- ❌ Test implementation details"
+        },
+        {
+            "id": "testing_18",
+            "type": "content",
+            "title": "Test Strategy",
+            "content": "# Test Strategy 📋\n\n## By Stage\n\n| Stage | Tests |\n|-------|-------|\n| PR | Unit, Lint |\n| Merge | Integration |\n| Deploy | E2E, Smoke |\n| Production | Monitoring |"
+        },
+        {
+            "id": "testing_19",
+            "type": "content",
+            "title": "Complete Pipeline",
+            "content": "# Test Pipeline 🚀\n\n```yaml\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run lint\n  \n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run test:unit\n  \n  e2e:\n    needs: [unit]\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run test:e2e\n```"
+        },
+        {
+            "id": "testing_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your testing knowledge!",
+            "quizQuestion": "What is the purpose of SAST in CI/CD?",
+            "quizOptions": [
+                "Speed testing",
+                "Static security analysis",
+                "Smoke testing",
+                "Load testing"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "testing_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Testing in CI/CD!\n\n## Key Takeaways\n\n- ✅ Follow the testing pyramid\n- ✅ Automate all tests\n- ✅ Set coverage thresholds\n- ✅ Handle flaky tests\n- ✅ Include security testing\n\n> 🧪 **Remember:** Quality is built in, not tested in!\n\nHappy testing! 🎯"
+        }
+    ]
+}

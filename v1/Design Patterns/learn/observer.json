@@ -1,0 +1,167 @@
+{
+    "id": "learn_observer_dp",
+    "topicId": "observer",
+    "topicTitle": "Observer Pattern",
+    "description": "Master the Observer pattern including pub/sub, event emitters, and callback mechanisms",
+    "baseKP": 75,
+    "slides": [
+        {
+            "id": "observer_1",
+            "type": "content",
+            "title": "Welcome to Observer Pattern",
+            "content": "# Observer Pattern 👁️\n\nMaster the pattern that powers reactive programming!\n\n## What You'll Learn:\n- **Observer Pattern** - Core concepts\n- **Pub/Sub** - Publish-subscribe systems\n- **Event Emitters** - Node.js style events\n- **Callbacks** - Foundation of async\n- **Real-world Usage** - React, Vue, RxJS\n\n> 💡 Observer is one of the most used patterns!\n\n## Why This Matters:\n- 🔔 **Decoupled Communication** - Objects don't need to know each other\n- 📡 **Event-Driven** - React to changes\n- 🔄 **Reactive Programming** - Foundation of modern frameworks\n- 📱 **UI Updates** - How React/Vue work"
+        },
+        {
+            "id": "observer_2",
+            "type": "content",
+            "title": "Understanding Observer",
+            "content": "# Understanding Observer 📖\n\n## The Problem:\nHow do multiple objects stay updated when one object changes?\n\n## The Solution:\n```\n     ┌─────────────┐\n     │   Subject   │\n     │  (Publisher)│\n     └──────┬──────┘\n            │ notifyAll()\n     ┌──────┴──────┐\n     ▼      ▼      ▼\n┌────────┐┌────────┐┌────────┐\n│Observer││Observer││Observer│\n│   A    ││   B    ││   C    │\n└────────┘└────────┘└────────┘\n```\n\n## Key Components:\n| Component | Role |\n|-----------|------|\n| Subject | Maintains observers, sends notifications |\n| Observer | Receives updates from subject |\n| Subscribe | Register for updates |\n| Unsubscribe | Stop receiving updates |\n\n## Real-World Analogy:\n- **YouTube Channel** = Subject\n- **Subscribers** = Observers\n- **New Video** = Notification"
+        },
+        {
+            "id": "observer_3",
+            "type": "content",
+            "title": "Basic Implementation",
+            "content": "# Basic Implementation 💻\n\n## Subject Class:\n```javascript\nclass Subject {\n    constructor() {\n        this.observers = [];\n    }\n    \n    subscribe(observer) {\n        this.observers.push(observer);\n    }\n    \n    unsubscribe(observer) {\n        this.observers = this.observers.filter(obs => obs !== observer);\n    }\n    \n    notify(data) {\n        this.observers.forEach(observer => observer.update(data));\n    }\n}\n```\n\n## Observer Class:\n```javascript\nclass Observer {\n    constructor(name) {\n        this.name = name;\n    }\n    \n    update(data) {\n        console.log(`${this.name} received: ${data}`);\n    }\n}\n```\n\n## Usage:\n```javascript\nconst news = new Subject();\nconst user1 = new Observer('User1');\nconst user2 = new Observer('User2');\n\nnews.subscribe(user1);\nnews.subscribe(user2);\nnews.notify('Breaking News!');\n// User1 received: Breaking News!\n// User2 received: Breaking News!\n```"
+        },
+        {
+            "id": "observer_quiz_1",
+            "type": "quiz",
+            "title": "Quick Check",
+            "content": "Test your Observer pattern knowledge!",
+            "quizQuestion": "In the Observer pattern, what is the role of the Subject?",
+            "quizOptions": [
+                "Receive updates",
+                "Send notifications to observers",
+                "Store data only",
+                "Handle errors"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "observer_4",
+            "type": "content",
+            "title": "Pub/Sub Pattern",
+            "content": "# Pub/Sub Pattern 📡\n\nA more decoupled version of Observer.\n\n## Observer vs Pub/Sub:\n```\nObserver Pattern:\nSubject ──────────→ Observers\n(Knows observers directly)\n\nPub/Sub Pattern:\nPublisher → Event Channel → Subscribers\n(No direct knowledge)\n```\n\n## Implementation:\n```javascript\nclass EventBus {\n    constructor() {\n        this.events = {};\n    }\n    \n    subscribe(event, callback) {\n        if (!this.events[event]) {\n            this.events[event] = [];\n        }\n        this.events[event].push(callback);\n        \n        return () => this.unsubscribe(event, callback);\n    }\n    \n    unsubscribe(event, callback) {\n        this.events[event] = this.events[event]\n            .filter(cb => cb !== callback);\n    }\n    \n    publish(event, data) {\n        if (this.events[event]) {\n            this.events[event].forEach(cb => cb(data));\n        }\n    }\n}\n```\n\n## Usage:\n```javascript\nconst bus = new EventBus();\n\nbus.subscribe('user:login', (user) => {\n    console.log('User logged in:', user);\n});\n\nbus.publish('user:login', { id: 1, name: 'John' });\n```"
+        },
+        {
+            "id": "observer_5",
+            "type": "content",
+            "title": "Node.js Event Emitter",
+            "content": "# Node.js Event Emitter 🟢\n\nNode's built-in implementation of Observer pattern.\n\n## Basic Usage:\n```javascript\nconst EventEmitter = require('events');\n\nclass MyEmitter extends EventEmitter {}\nconst myEmitter = new MyEmitter();\n\n// Subscribe\nmyEmitter.on('event', (data) => {\n    console.log('Event received:', data);\n});\n\n// Emit\nmyEmitter.emit('event', { message: 'Hello!' });\n```\n\n## Key Methods:\n| Method | Purpose |\n|--------|--------|\n| on(event, fn) | Subscribe |\n| once(event, fn) | Subscribe once |\n| emit(event, data) | Publish |\n| off(event, fn) | Unsubscribe |\n| removeAllListeners() | Clear all |\n\n## Practical Example:\n```javascript\nclass OrderService extends EventEmitter {\n    createOrder(data) {\n        const order = { id: Date.now(), ...data };\n        this.emit('order:created', order);\n        return order;\n    }\n}\n\nconst orderService = new OrderService();\n\norderService.on('order:created', (order) => {\n    sendEmail(order); // Email service\n});\n\norderService.on('order:created', (order) => {\n    updateInventory(order); // Inventory service\n});\n```"
+        },
+        {
+            "id": "observer_6",
+            "type": "content",
+            "title": "Browser Events",
+            "content": "# Browser Events 🌐\n\nThe DOM uses Observer pattern for event handling.\n\n## Event Listeners:\n```javascript\nconst button = document.querySelector('#myBtn');\n\n// Subscribe\nbutton.addEventListener('click', (event) => {\n    console.log('Clicked!', event);\n});\n\n// Unsubscribe\nfunction handleClick(event) {\n    console.log('Clicked!');\n}\nbutton.addEventListener('click', handleClick);\nbutton.removeEventListener('click', handleClick);\n```\n\n## Event Propagation:\n```\nCapturing Phase    Bubbling Phase\n     │                  ▲\n     ▼                  │\n┌─────────────┐    ┌─────────────┐\n│  document   │    │  document   │\n└─────┬───────┘    └───────┬─────┘\n      ▼                    ▲\n┌─────────────┐    ┌─────────────┐\n│   parent    │    │   parent    │\n└─────┬───────┘    └───────┬─────┘\n      ▼                    ▲\n┌─────────────┐    ┌─────────────┐\n│   button    │───→│   button    │\n└─────────────┘    └─────────────┘\n```\n\n## Custom Events:\n```javascript\nconst event = new CustomEvent('userLogin', {\n    detail: { userId: 123 }\n});\n\ndocument.dispatchEvent(event);\n```"
+        },
+        {
+            "id": "observer_7",
+            "type": "content",
+            "title": "Callbacks",
+            "content": "# Callbacks 📞\n\nThe simplest form of Observer pattern.\n\n## Basic Callback:\n```javascript\nfunction fetchData(callback) {\n    setTimeout(() => {\n        callback({ data: 'Result' });\n    }, 1000);\n}\n\nfetchData((result) => {\n    console.log(result.data);\n});\n```\n\n## Callback with Error Handling:\n```javascript\nfunction fetchData(onSuccess, onError) {\n    setTimeout(() => {\n        const success = Math.random() > 0.5;\n        if (success) {\n            onSuccess({ data: 'Result' });\n        } else {\n            onError(new Error('Failed'));\n        }\n    }, 1000);\n}\n```\n\n## Node.js Style (Error-First):\n```javascript\nfunction readFile(path, callback) {\n    // callback(error, result)\n    if (error) {\n        callback(error, null);\n    } else {\n        callback(null, data);\n    }\n}\n\nreadFile('file.txt', (err, data) => {\n    if (err) {\n        console.error(err);\n        return;\n    }\n    console.log(data);\n});\n```\n\n## Callback Hell Problem:\n```javascript\n// ❌ Pyramid of doom\ngetUser(id, (user) => {\n    getOrders(user, (orders) => {\n        getDetails(orders, (details) => {\n            // Deep nesting!\n        });\n    });\n});\n```"
+        },
+        {
+            "id": "observer_quiz_2",
+            "type": "quiz",
+            "title": "Events Check",
+            "content": "Test your event knowledge!",
+            "quizQuestion": "What is the Node.js error-first callback convention?",
+            "quizOptions": [
+                "callback(result)",
+                "callback(error, result)",
+                "callback(result, error)",
+                "callback({error, result})"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "observer_8",
+            "type": "content",
+            "title": "React State Management",
+            "content": "# React State & Observer ⚛️\n\nReact uses Observer pattern for reactivity.\n\n## useState Hook:\n```javascript\nfunction Counter() {\n    const [count, setCount] = useState(0);\n    // setCount triggers re-render (notification)\n    \n    return (\n        <button onClick={() => setCount(count + 1)}>\n            Count: {count}\n        </button>\n    );\n}\n```\n\n## Context as Pub/Sub:\n```javascript\nconst ThemeContext = createContext('light');\n\nfunction App() {\n    const [theme, setTheme] = useState('light');\n    \n    return (\n        <ThemeContext.Provider value={theme}>\n            <Toolbar />\n            <button onClick={() => setTheme('dark')}>\n                Toggle\n            </button>\n        </ThemeContext.Provider>\n    );\n}\n\nfunction ThemedButton() {\n    const theme = useContext(ThemeContext);\n    // Automatically updates when theme changes\n    return <button className={theme}>Click</button>;\n}\n```\n\n## useEffect as Subscription:\n```javascript\nuseEffect(() => {\n    const subscription = dataSource.subscribe(handleChange);\n    return () => subscription.unsubscribe();\n}, []);\n```"
+        },
+        {
+            "id": "observer_9",
+            "type": "content",
+            "title": "Vue Reactivity",
+            "content": "# Vue Reactivity 💚\n\nVue's reactivity system is Observer-based.\n\n## Reactive Data:\n```javascript\nimport { ref, watch, computed } from 'vue';\n\nconst count = ref(0);\n\n// Watch as Observer\nwatch(count, (newVal, oldVal) => {\n    console.log(`Changed from ${oldVal} to ${newVal}`);\n});\n\n// Computed as derived Observer\nconst doubled = computed(() => count.value * 2);\n\n// Trigger notification\ncount.value++;\n```\n\n## Event Bus:\n```javascript\n// eventBus.js\nimport mitt from 'mitt';\nexport const bus = mitt();\n\n// ComponentA.vue\nbus.emit('user:updated', userData);\n\n// ComponentB.vue\nbus.on('user:updated', (data) => {\n    updateUI(data);\n});\n```\n\n## Provide/Inject:\n```javascript\n// Parent\nprovide('theme', ref('dark'));\n\n// Child (anywhere in tree)\nconst theme = inject('theme');\n// Reactive updates automatically!\n```"
+        },
+        {
+            "id": "observer_10",
+            "type": "content",
+            "title": "RxJS Observables",
+            "content": "# RxJS Observables 🔄\n\nReactive Extensions - Observer pattern on steroids.\n\n## Basic Observable:\n```javascript\nimport { Observable } from 'rxjs';\n\nconst observable = new Observable(subscriber => {\n    subscriber.next('Hello');\n    subscriber.next('World');\n    subscriber.complete();\n});\n\nobservable.subscribe({\n    next: (value) => console.log(value),\n    error: (err) => console.error(err),\n    complete: () => console.log('Done')\n});\n```\n\n## Operators:\n```javascript\nimport { fromEvent } from 'rxjs';\nimport { map, filter, debounceTime } from 'rxjs/operators';\n\nconst clicks = fromEvent(document, 'click');\n\nclicks.pipe(\n    debounceTime(300),\n    map(event => event.clientX),\n    filter(x => x > 200)\n).subscribe(x => console.log(`X: ${x}`));\n```\n\n## Subjects (Pub/Sub):\n```javascript\nimport { Subject, BehaviorSubject } from 'rxjs';\n\nconst subject = new Subject();\n\nsubject.subscribe(v => console.log('A:', v));\nsubject.subscribe(v => console.log('B:', v));\n\nsubject.next('Hello');\n// A: Hello\n// B: Hello\n```"
+        },
+        {
+            "id": "observer_11",
+            "type": "content",
+            "title": "Redux Pattern",
+            "content": "# Redux & Observer 🔄\n\nRedux implements Observer for state management.\n\n## Store as Subject:\n```javascript\nimport { createStore } from 'redux';\n\nfunction reducer(state = { count: 0 }, action) {\n    switch (action.type) {\n        case 'INCREMENT':\n            return { count: state.count + 1 };\n        default:\n            return state;\n    }\n}\n\nconst store = createStore(reducer);\n\n// Subscribe (Observer)\nstore.subscribe(() => {\n    console.log('State changed:', store.getState());\n});\n\n// Dispatch (Notify)\nstore.dispatch({ type: 'INCREMENT' });\n```\n\n## React-Redux:\n```javascript\nimport { useSelector, useDispatch } from 'react-redux';\n\nfunction Counter() {\n    // Subscribe to store slice\n    const count = useSelector(state => state.count);\n    const dispatch = useDispatch();\n    \n    return (\n        <button onClick={() => dispatch({ type: 'INCREMENT' })}>\n            {count}\n        </button>\n    );\n}\n```"
+        },
+        {
+            "id": "observer_quiz_3",
+            "type": "quiz",
+            "title": "Framework Check",
+            "content": "Test your framework knowledge!",
+            "quizQuestion": "In Redux, what triggers observers to receive updates?",
+            "quizOptions": [
+                "setState()",
+                "store.dispatch()",
+                "store.notify()",
+                "emit()"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "observer_12",
+            "type": "content",
+            "title": "WebSocket Events",
+            "content": "# WebSocket Events 🔌\n\nReal-time communication using Observer pattern.\n\n## Client Side:\n```javascript\nconst socket = new WebSocket('ws://localhost:8080');\n\n// Subscribe to events\nsocket.addEventListener('open', () => {\n    console.log('Connected');\n});\n\nsocket.addEventListener('message', (event) => {\n    const data = JSON.parse(event.data);\n    handleMessage(data);\n});\n\nsocket.addEventListener('close', () => {\n    console.log('Disconnected');\n});\n\n// Send message\nsocket.send(JSON.stringify({ type: 'chat', text: 'Hello' }));\n```\n\n## With Socket.io:\n```javascript\nimport { io } from 'socket.io-client';\n\nconst socket = io('http://localhost:3000');\n\nsocket.on('connect', () => {\n    console.log('Connected:', socket.id);\n});\n\nsocket.on('chat:message', (msg) => {\n    displayMessage(msg);\n});\n\nsocket.emit('chat:send', { text: 'Hello!' });\n```"
+        },
+        {
+            "id": "observer_13",
+            "type": "content",
+            "title": "Memory Management",
+            "content": "# Memory Management 🧹\n\nAvoid memory leaks with proper cleanup.\n\n## The Problem:\n```javascript\nclass Component {\n    constructor() {\n        eventBus.subscribe('update', this.handleUpdate);\n    }\n    // ❌ Never unsubscribes - memory leak!\n}\n```\n\n## The Solution:\n```javascript\nclass Component {\n    constructor() {\n        this.unsubscribe = eventBus.subscribe(\n            'update', \n            this.handleUpdate\n        );\n    }\n    \n    destroy() {\n        this.unsubscribe(); // ✅ Clean up\n    }\n}\n```\n\n## React Cleanup:\n```javascript\nuseEffect(() => {\n    const subscription = api.subscribe(handleData);\n    \n    return () => {\n        subscription.unsubscribe(); // ✅ Cleanup\n    };\n}, []);\n```\n\n## Best Practices:\n- ✅ Always unsubscribe when component unmounts\n- ✅ Use WeakMap for automatic cleanup\n- ✅ Return unsubscribe functions\n- ✅ Clear intervals and timeouts"
+        },
+        {
+            "id": "observer_14",
+            "type": "content",
+            "title": "TypeScript Implementation",
+            "content": "# TypeScript Implementation 📘\n\nType-safe Observer pattern.\n\n## Typed Event Emitter:\n```typescript\ntype EventMap = {\n    'user:login': { userId: number; name: string };\n    'user:logout': { userId: number };\n    'error': Error;\n};\n\nclass TypedEmitter<T extends Record<string, any>> {\n    private events: Map<keyof T, Set<Function>> = new Map();\n    \n    on<K extends keyof T>(event: K, handler: (data: T[K]) => void) {\n        if (!this.events.has(event)) {\n            this.events.set(event, new Set());\n        }\n        this.events.get(event)!.add(handler);\n    }\n    \n    emit<K extends keyof T>(event: K, data: T[K]) {\n        this.events.get(event)?.forEach(handler => handler(data));\n    }\n}\n\nconst emitter = new TypedEmitter<EventMap>();\n\n// ✅ Type-safe!\nemitter.on('user:login', (data) => {\n    console.log(data.userId); // number\n    console.log(data.name);   // string\n});\n\nemitter.emit('user:login', { userId: 1, name: 'John' });\n```"
+        },
+        {
+            "id": "observer_15",
+            "type": "content",
+            "title": "Testing Observers",
+            "content": "# Testing Observers 🧪\n\nHow to test Observer-based code.\n\n## Testing Event Emission:\n```javascript\ndescribe('OrderService', () => {\n    it('emits order:created event', () => {\n        const service = new OrderService();\n        const handler = jest.fn();\n        \n        service.on('order:created', handler);\n        service.createOrder({ item: 'Book' });\n        \n        expect(handler).toHaveBeenCalledWith(\n            expect.objectContaining({ item: 'Book' })\n        );\n    });\n});\n```\n\n## Testing Subscriptions:\n```javascript\ndescribe('DataComponent', () => {\n    it('subscribes on mount', () => {\n        const subscribeSpy = jest.spyOn(dataService, 'subscribe');\n        render(<DataComponent />);\n        expect(subscribeSpy).toHaveBeenCalled();\n    });\n    \n    it('unsubscribes on unmount', () => {\n        const unsubscribe = jest.fn();\n        jest.spyOn(dataService, 'subscribe').mockReturnValue(unsubscribe);\n        \n        const { unmount } = render(<DataComponent />);\n        unmount();\n        \n        expect(unsubscribe).toHaveBeenCalled();\n    });\n});\n```"
+        },
+        {
+            "id": "observer_quiz_4",
+            "type": "quiz",
+            "title": "Best Practices",
+            "content": "Test your Observer best practices!",
+            "quizQuestion": "What causes memory leaks with observers?",
+            "quizOptions": [
+                "Too many events",
+                "Forgetting to unsubscribe",
+                "Using TypeScript",
+                "Async callbacks"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "observer_16",
+            "type": "content",
+            "title": "When to Use Observer",
+            "content": "# When to Use Observer ✅\n\n## Good Use Cases:\n- ✅ UI state changes\n- ✅ Real-time data updates\n- ✅ Cross-component communication\n- ✅ Plugin/extension systems\n- ✅ Event logging/analytics\n\n## When to Avoid:\n- ❌ Simple one-to-one communication\n- ❌ Synchronous, predictable flow\n- ❌ Performance-critical tight loops\n\n## Alternatives:\n| Pattern | Use When |\n|---------|---------|\n| Observer | Many-to-many events |\n| Mediator | Centralized control needed |\n| Command | Need undo/redo |\n| Direct calls | Simple, synchronous |\n\n## Design Considerations:\n- Event naming conventions\n- Error handling in subscribers\n- Event ordering guarantees\n- Debugging and tracing"
+        },
+        {
+            "id": "observer_17",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered the Observer Pattern!\n\n## Key Takeaways:\n\n### Core Concepts\n- ✅ Subject maintains list of observers\n- ✅ Observers subscribe for updates\n- ✅ Subject notifies all on changes\n\n### Implementations\n- ✅ Pub/Sub for decoupled events\n- ✅ Node.js EventEmitter\n- ✅ Browser addEventListener\n- ✅ React/Vue reactivity\n\n### Best Practices\n- ✅ Always unsubscribe\n- ✅ Type your events\n- ✅ Handle errors in handlers\n- ✅ Test subscriptions\n\n## Pattern Applications:\n| Framework | Implementation |\n|-----------|---------------|\n| React | useState, Context |\n| Vue | ref, watch |\n| RxJS | Observable |\n| Redux | store.subscribe |\n\n## Next Steps:\n- Learn MVC pattern\n- Explore SOLID principles\n- Master Microservices patterns\n\nHappy coding! 👁️"
+        }
+    ]
+}

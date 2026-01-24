@@ -1,0 +1,199 @@
+{
+    "id": "learn_monitoring_alerting",
+    "topicId": "alerting",
+    "topicTitle": "Alerting Strategies",
+    "description": "Master effective alerting including PagerDuty integration, runbooks, and on-call best practices",
+    "baseKP": 85,
+    "slides": [
+        {
+            "id": "alerting_1",
+            "type": "content",
+            "title": "Alerting Overview",
+            "content": "# Alerting Strategies 🚨\n\nEffective incident notification.\n\n## What You'll Learn\n- **PagerDuty** - Incident management\n- **Runbooks** - Response guides\n- **On-Call** - Best practices\n\n## Alert Flow\n```\nMetric → Threshold → Alert → Route → Notify\n```"
+        },
+        {
+            "id": "alerting_2",
+            "type": "content",
+            "title": "Alert Principles",
+            "content": "# Alert Principles 📋\n\n## Good Alerts Are\n| Property | Meaning |\n|----------|--------|\n| Actionable | Can fix it |\n| Timely | Fast enough |\n| Clear | Easy to understand |\n| Rare | Not noisy |\n\n## Questions\n- Does this need action?\n- Can it wait till morning?\n- Who should be notified?"
+        },
+        {
+            "id": "alerting_3",
+            "type": "content",
+            "title": "Severity Levels",
+            "content": "# Alert Severity 🔔\n\n## Levels\n| Level | Response | Example |\n|-------|----------|--------|\n| P1 | Immediate | Site down |\n| P2 | 1 hour | Degraded |\n| P3 | Business hours | Elevated errors |\n| P4 | Days | Warning |\n\n## Routing\n```\nP1 → PagerDuty → Phone\nP2 → Slack → On-call\nP3 → Email → Team\n```"
+        },
+        {
+            "id": "alerting_quiz_1",
+            "type": "quiz",
+            "title": "Severity Quiz",
+            "content": "Test your knowledge!",
+            "quizQuestion": "When should a P1 alert be used?",
+            "quizOptions": [
+                "Minor warnings",
+                "Immediate response needed",
+                "Weekly reports",
+                "Informational notices"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "alerting_4",
+            "type": "content",
+            "title": "PagerDuty Basics",
+            "content": "# PagerDuty 📟\n\nIncident management platform.\n\n## Key Concepts\n| Term | Purpose |\n|------|--------|\n| Service | What's being monitored |\n| Escalation | Who gets notified |\n| Schedule | On-call rotation |\n| Integration | Alert source |\n\n## Flow\n```\nAlert → PagerDuty → On-Call → Acknowledge → Resolve\n```"
+        },
+        {
+            "id": "alerting_5",
+            "type": "content",
+            "title": "PagerDuty Integration",
+            "content": "# PagerDuty Setup 🔧\n\n## Prometheus Alertmanager\n```yaml\nreceivers:\n- name: 'pagerduty-critical'\n  pagerduty_configs:\n  - service_key: 'xxxx'\n    severity: critical\n    description: '{{ .CommonAnnotations.summary }}'\n```\n\n## API Trigger\n```bash\ncurl -X POST \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"routing_key\":\"xxx\", \"event_action\":\"trigger\", \"payload\":{\"summary\":\"High CPU\"}}' \\\n  https://events.pagerduty.com/v2/enqueue\n```"
+        },
+        {
+            "id": "alerting_6",
+            "type": "content",
+            "title": "Escalation Policies",
+            "content": "# Escalation Policies 📈\n\nEnsure alerts don't go unanswered.\n\n## Example Policy\n```\nLevel 1: Primary on-call (5 min)\n    ↓ (no ack)\nLevel 2: Secondary on-call (10 min)\n    ↓ (no ack)\nLevel 3: Engineering manager (15 min)\n    ↓ (no ack)\nLevel 4: VP Engineering\n```\n\n## Considerations\n- Time between levels\n- Multiple contacts per level\n- Repeat policy"
+        },
+        {
+            "id": "alerting_quiz_2",
+            "type": "quiz",
+            "title": "PagerDuty Quiz",
+            "content": "Test your PagerDuty knowledge!",
+            "quizQuestion": "What happens when an alert isn't acknowledged in PagerDuty?",
+            "quizOptions": [
+                "It's deleted",
+                "It escalates to next level",
+                "It's marked resolved",
+                "Nothing"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "alerting_7",
+            "type": "content",
+            "title": "Runbooks",
+            "content": "# Runbooks 📖\n\nStep-by-step response guides.\n\n## Purpose\n- Consistent response\n- Faster resolution\n- Knowledge sharing\n- On-call training\n\n## Template\n```markdown\n# Alert: High CPU Usage\n\n## Description\nCPU > 80% for 5+ minutes\n\n## Impact\nSlow response times\n\n## Steps\n1. Check top processes\n2. Identify culprit\n3. Scale or restart\n```"
+        },
+        {
+            "id": "alerting_8",
+            "type": "content",
+            "title": "Runbook Content",
+            "content": "# Writing Runbooks 📝\n\n## Essential Sections\n| Section | Content |\n|---------|--------|\n| Description | What's happening |\n| Impact | Who's affected |\n| Diagnosis | How to investigate |\n| Remediation | How to fix |\n| Escalation | When to escalate |\n\n## Best Practices\n- ✅ Step-by-step commands\n- ✅ Include examples\n- ✅ Link to dashboards\n- ✅ Keep updated\n- ❌ Vague instructions"
+        },
+        {
+            "id": "alerting_9",
+            "type": "content",
+            "title": "Automated Runbooks",
+            "content": "# Automation 🤖\n\n## Self-Healing\n```\nAlert → Lambda → Remediation\n              ↓\n         Success? → Resolve\n              ↓\n         Failure → Page human\n```\n\n## Examples\n- Restart stuck service\n- Scale up capacity\n- Clear disk space\n- Rollback deployment\n\n## Tools\n- Rundeck\n- AWS Systems Manager\n- Ansible"
+        },
+        {
+            "id": "alerting_quiz_3",
+            "type": "quiz",
+            "title": "Runbooks Quiz",
+            "content": "Test your runbook knowledge!",
+            "quizQuestion": "What is the main purpose of a runbook?",
+            "quizOptions": [
+                "Replace documentation",
+                "Provide step-by-step response guide",
+                "Store metrics",
+                "Create dashboards"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "alerting_10",
+            "type": "content",
+            "title": "On-Call Setup",
+            "content": "# On-Call Schedules 📅\n\n## Schedule Types\n| Type | Description |\n|------|-------------|\n| Follow the Sun | Regional handoffs |\n| Weekly rotation | 7-day shifts |\n| Split shifts | Day/night |\n\n## Example\n```\nWeek 1: Alice (primary), Bob (secondary)\nWeek 2: Bob (primary), Carol (secondary)\nWeek 3: Carol (primary), Alice (secondary)\n```"
+        },
+        {
+            "id": "alerting_11",
+            "type": "content",
+            "title": "On-Call Best Practices",
+            "content": "# On-Call Excellence 🌟\n\n## Do's\n- ✅ Clear escalation paths\n- ✅ Document everything\n- ✅ Post-incident reviews\n- ✅ Compensatory time\n- ✅ Training before first shift\n\n## Don'ts\n- ❌ 24/7 single person\n- ❌ Ignore alert fatigue\n- ❌ Skip handoffs\n- ❌ Blame individuals"
+        },
+        {
+            "id": "alerting_12",
+            "type": "content",
+            "title": "Alert Routing",
+            "content": "# Alert Routing 🚦\n\n## Routing Rules\n```yaml\nroutes:\n  - match:\n      severity: critical\n    receiver: pagerduty\n  - match:\n      team: frontend\n    receiver: frontend-slack\n  - receiver: default-email\n```\n\n## Grouping\n```yaml\ngroup_by: [alertname, cluster]\ngroup_wait: 30s\ngroup_interval: 5m\n```"
+        },
+        {
+            "id": "alerting_quiz_4",
+            "type": "quiz",
+            "title": "On-Call Quiz",
+            "content": "Test your on-call knowledge!",
+            "quizQuestion": "What is alert grouping used for?",
+            "quizOptions": [
+                "Creating more alerts",
+                "Combining related alerts into one notification",
+                "Deleting alerts",
+                "Changing severity"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "alerting_13",
+            "type": "content",
+            "title": "Alert Fatigue",
+            "content": "# Avoiding Alert Fatigue 😴\n\n## Symptoms\n- Ignoring notifications\n- Slow response\n- Missed critical alerts\n\n## Prevention\n| Action | Effect |\n|--------|--------|\n| Review thresholds | Less noise |\n| Smart grouping | Fewer pages |\n| Regular cleanup | Remove stale |\n| Measure noise | Track signal |"
+        },
+        {
+            "id": "alerting_14",
+            "type": "content",
+            "title": "Incident Management",
+            "content": "# Incident Process 🎯\n\n## Stages\n1. **Detect** - Alert fires\n2. **Triage** - Assess severity\n3. **Communicate** - Status page\n4. **Mitigate** - Stop bleeding\n5. **Resolve** - Fix root cause\n6. **Review** - Post-mortem\n\n## Roles\n- Incident Commander\n- Technical Lead\n- Communications"
+        },
+        {
+            "id": "alerting_15",
+            "type": "content",
+            "title": "Status Pages",
+            "content": "# Status Communication 📢\n\n## Status Page Services\n- Statuspage.io\n- Atlassian Statuspage\n- Cachet (self-hosted)\n\n## Components\n- Operational ✅\n- Degraded ⚠️\n- Major Outage 🔴\n\n## Update Template\n```\nIdentified - We're investigating...\nMonitoring - Fix deployed...\nResolved - Issue resolved...\n```"
+        },
+        {
+            "id": "alerting_16",
+            "type": "content",
+            "title": "Post-Mortems",
+            "content": "# Post-Mortems 📝\n\nLearn from incidents.\n\n## Template\n1. Summary\n2. Timeline\n3. Root cause\n4. Impact metrics\n5. What went well\n6. What went wrong\n7. Action items\n\n## Principles\n- ✅ Blameless\n- ✅ Focus on systems\n- ✅ Follow up on actions\n- ✅ Share learnings"
+        },
+        {
+            "id": "alerting_quiz_5",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall knowledge!",
+            "quizQuestion": "What is a key principle of blameless post-mortems?",
+            "quizOptions": [
+                "Blame the developer",
+                "Focus on systems not people",
+                "Skip documentation",
+                "Ignore action items"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "alerting_17",
+            "type": "content",
+            "title": "SLO-Based Alerting",
+            "content": "# SLO Alerting 📊\n\n## Error Budget\n```\nSLO: 99.9% availability\nError budget: 0.1% = 43 min/month\n\nAlert when: Budget burn rate too high\n```\n\n## Multi-Window\n```yaml\n- alert: ErrorBudgetBurn\n  expr: |\n    (1 - rate(success[1h])) > 14.4 * 0.001\n    and\n    (1 - rate(success[5m])) > 14.4 * 0.001\n```"
+        },
+        {
+            "id": "alerting_18",
+            "type": "content",
+            "title": "Tools Overview",
+            "content": "# Alerting Tools 🛠️\n\n## Incident Management\n| Tool | Focus |\n|------|-------|\n| PagerDuty | Enterprise |\n| Opsgenie | Atlassian |\n| VictorOps | Splunk |\n| Incident.io | Slack-native |\n\n## Alert Sources\n- Prometheus Alertmanager\n- Grafana Unified Alerting\n- CloudWatch Alarms\n- Datadog Monitors"
+        },
+        {
+            "id": "alerting_19",
+            "type": "content",
+            "title": "Metrics",
+            "content": "# Measure Alerting Health 📈\n\n## Key Metrics\n| Metric | Target |\n|--------|--------|\n| MTTA | < 5 min |\n| MTTR | < 1 hour |\n| False positive rate | < 10% |\n| Pages per week | < 10 |\n\n## MTTA & MTTR\n```\nMTTA = Mean Time to Acknowledge\nMTTR = Mean Time to Resolve\n```"
+        },
+        {
+            "id": "alerting_20",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n## Key Takeaways\n\n### Alerts\n- ✅ Actionable only\n- ✅ Clear severity\n- ✅ Proper routing\n\n### Runbooks\n- ✅ Step-by-step guides\n- ✅ Keep updated\n- ✅ Automate when possible\n\n### On-Call\n- ✅ Fair schedules\n- ✅ Escalation policies\n- ✅ Blameless culture\n\nHappy alerting! 🚨"
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "id": "learn_collab_bitbucket",
+    "topicId": "bitbucket",
+    "topicTitle": "Bitbucket",
+    "description": "Master Bitbucket for Git repository hosting including Pipelines for CI/CD, pull requests for code review, and Stash for enterprise deployments",
+    "baseKP": 100,
+    "slides": [
+        {
+            "id": "bitbucket_1",
+            "type": "content",
+            "title": "Welcome to Bitbucket",
+            "content": "# Introduction to Bitbucket 🪣\n\nBitbucket is Atlassian's **Git-based** source code repository hosting service.\n\n## What you'll learn:\n- **Pipelines** - Built-in CI/CD automation\n- **Pull Requests** - Code review workflow\n- **Stash/Data Center** - Enterprise deployment\n\n> 💡 **Fun Fact:** Bitbucket was originally a Mercurial-only hosting service before adding Git support!\n\n## Why Choose Bitbucket?\n\n| Feature | Benefit |\n|---------|--------|\n| **Atlassian Integration** | Seamless Jira & Trello connection |\n| **Free Private Repos** | Up to 5 team members |\n| **Built-in CI/CD** | Pipelines included |\n| **Branch Permissions** | Granular access control |\n| **Code Insights** | Quality and security reports |\n\n## Bitbucket Products\n\n- ☁️ **Bitbucket Cloud** - SaaS offering\n- 🏢 **Bitbucket Data Center** - Self-managed enterprise\n- 📦 **Bitbucket Server** (legacy) - Now Data Center\n\nLet's explore Bitbucket!"
+        },
+        {
+            "id": "bitbucket_2",
+            "type": "content",
+            "title": "Bitbucket Pipelines Overview",
+            "content": "# Bitbucket Pipelines 🔧\n\nPipelines is Bitbucket's **integrated CI/CD** service.\n\n## How Pipelines Work\n\n```\n┌─────────────────────────────────────────────────┐\n│                   TRIGGER                        │\n│     Push, PR, Tag, Schedule, Manual             │\n└─────────────────────┬───────────────────────────┘\n                      ▼\n┌─────────────────────────────────────────────────┐\n│              BITBUCKET-PIPELINES.YML            │\n│           Pipeline Configuration                 │\n└─────────────────────┬───────────────────────────┘\n                      ▼\n┌─────────────────────────────────────────────────┐\n│                DOCKER CONTAINER                  │\n│            Runs your build steps                 │\n└─────────────────────┬───────────────────────────┘\n                      ▼\n┌─────────────────────────────────────────────────┐\n│               BUILD RESULTS                      │\n│       Artifacts, Reports, Deployments           │\n└─────────────────────────────────────────────────┘\n```\n\n## Key Features\n\n- 🐳 **Docker-based** - Every step runs in a container\n- 💰 **Build Minutes** - Free tier includes 50 min/month\n- 📊 **Test Reports** - JUnit integration\n- 🚀 **Deployments** - Track releases to environments\n- 🔐 **Secure Variables** - Encrypted secrets\n\n> 🎯 **Key Point:** Pipelines are defined in `bitbucket-pipelines.yml`"
+        },
+        {
+            "id": "bitbucket_3",
+            "type": "content",
+            "title": "Your First Pipeline",
+            "content": "# Creating Your First Pipeline 📝\n\nCreate `bitbucket-pipelines.yml` in your repository root:\n\n```yaml\nimage: node:20\n\npipelines:\n  default:\n    - step:\n        name: Build and Test\n        caches:\n          - node\n        script:\n          - npm ci\n          - npm test\n          - npm run build\n        artifacts:\n          - dist/**\n\n  branches:\n    main:\n      - step:\n          name: Build\n          script:\n            - npm ci\n            - npm run build\n      - step:\n          name: Deploy to Production\n          deployment: production\n          script:\n            - pipe: atlassian/rsync-deploy:0.4.0\n              variables:\n                USER: $DEPLOY_USER\n                SERVER: $DEPLOY_SERVER\n                REMOTE_PATH: /var/www/app\n                LOCAL_PATH: dist/\n```\n\n## Pipeline Structure\n\n| Component | Description |\n|-----------|-------------|\n| `image` | Default Docker image |\n| `pipelines` | Pipeline definitions |\n| `default` | Runs on all branches |\n| `branches` | Branch-specific pipelines |\n| `step` | Individual build step |"
+        },
+        {
+            "id": "bitbucket_4",
+            "type": "content",
+            "title": "Pipeline Configuration",
+            "content": "# Advanced Pipeline Configuration ⚙️\n\n## Step Options\n\n```yaml\npipelines:\n  default:\n    - step:\n        name: My Step\n        image: python:3.11  # Override default image\n        size: 2x            # Double resources\n        max-time: 30        # Timeout in minutes\n        script:\n          - echo \"Running...\"\n        after-script:\n          - echo \"Cleanup...\"\n        artifacts:\n          - build/**\n        caches:\n          - pip\n\n    - parallel:  # Run steps in parallel\n        - step:\n            name: Unit Tests\n            script:\n              - pytest tests/unit\n        - step:\n            name: Integration Tests\n            script:\n              - pytest tests/integration\n```\n\n## Trigger Types\n\n```yaml\npipelines:\n  # On push to any branch\n  default:\n    - step:\n        script: echo \"Default\"\n\n  # On pull request\n  pull-requests:\n    '**':\n      - step:\n          script: echo \"PR build\"\n\n  # On tag\n  tags:\n    'v*':\n      - step:\n          script: echo \"Release $BITBUCKET_TAG\"\n\n  # Custom pipelines (manual trigger)\n  custom:\n    deploy-staging:\n      - step:\n          script: echo \"Deploying to staging\"\n```"
+        },
+        {
+            "id": "bitbucket_5",
+            "type": "quiz",
+            "title": "Pipelines Quiz",
+            "content": "Test your Bitbucket Pipelines knowledge!",
+            "quizQuestion": "What is the name of the configuration file for Bitbucket Pipelines?",
+            "quizOptions": [
+                ".bitbucket/pipelines.yml",
+                "bitbucket-pipelines.yml",
+                "pipelines.config.yml",
+                ".pipelines.yml"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "bitbucket_6",
+            "type": "content",
+            "title": "Pipes in Bitbucket",
+            "content": "# Bitbucket Pipes 🔌\n\nPipes are **pre-built integration** scripts for common tasks.\n\n## Using Pipes\n\n```yaml\npipelines:\n  default:\n    - step:\n        script:\n          - npm run build\n          - pipe: atlassian/aws-s3-deploy:1.1.0\n            variables:\n              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID\n              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY\n              AWS_DEFAULT_REGION: us-east-1\n              S3_BUCKET: my-bucket\n              LOCAL_PATH: dist/\n```\n\n## Popular Pipes\n\n| Pipe | Purpose |\n|------|--------|\n| `aws-s3-deploy` | Deploy to S3 |\n| `aws-ecs-deploy` | Deploy to ECS |\n| `azure-web-apps-deploy` | Deploy to Azure |\n| `google-cloud-storage-deploy` | Deploy to GCS |\n| `slack-notify` | Send Slack messages |\n| `npm-publish` | Publish to npm |\n| `docker-push` | Push Docker images |\n\n## Finding Pipes\n\n1. Visit Bitbucket Pipelines editor\n2. Click **Add a pipe**\n3. Browse categories or search\n4. Copy configuration to your YAML\n\n> 💡 **Tip:** Pipes simplify complex integrations to a few lines of YAML!"
+        },
+        {
+            "id": "bitbucket_7",
+            "type": "content",
+            "title": "Pull Requests in Bitbucket",
+            "content": "# Pull Requests 🔀\n\nPull Requests enable **code review** and **collaboration** before merging.\n\n## PR Workflow\n\n```\n┌──────────────┐     ┌──────────────┐     ┌──────────────┐\n│   Create     │     │    Review    │     │    Merge     │\n│   Branch     │ ──► │     &        │ ──► │     &        │\n│              │     │   Discuss    │     │    Close     │\n└──────────────┘     └──────────────┘     └──────────────┘\n       │                    │                    │\n       ▼                    ▼                    ▼\n   git checkout -b     CI runs, comments      Squash/merge\n   feature/xyz         approvals given        Delete branch\n```\n\n## Creating a Pull Request\n\n1. Push your feature branch\n2. Click **Create pull request** in Bitbucket\n3. Fill in details:\n   - Title and description\n   - Reviewers\n   - Close branch option\n4. Submit for review\n\n## PR Features\n\n| Feature | Description |\n|---------|-------------|\n| **Inline Comments** | Comment on specific lines |\n| **Tasks** | Create actionable items |\n| **Approvals** | Require reviewer sign-off |\n| **Merge Checks** | Block on failing builds |\n| **Diff View** | Side-by-side or unified |"
+        },
+        {
+            "id": "bitbucket_8",
+            "type": "content",
+            "title": "Code Review Features",
+            "content": "# Code Review in Bitbucket 👀\n\n## Adding Comments\n\n### Line Comments\n- Click the line number to add comments\n- Comments appear in the diff view\n- Mark as resolved when addressed\n\n### File Comments\n- Add comments at the file level\n- Use for general file feedback\n\n### General Comments\n- Discussion not tied to specific code\n- Visible in the activity tab\n\n## Tasks\n\nTurn comments into actionable items:\n\n```\nComment: \"Please add error handling here\"\n         [Create task]\n\nTask appears in:\n- PR overview\n- Tasks tab\n- Merge check (optional)\n```\n\n## Approval Workflow\n\n| Action | Meaning |\n|--------|--------|\n| ✅ **Approve** | Code looks good |\n| ❌ **Request changes** | Must fix before merge |\n| 👀 **Unapprove** | Withdraw approval |\n\n## Merge Strategies\n\n- **Merge commit** - Preserve all commits\n- **Squash** - Combine into one commit\n- **Fast-forward** - Linear history only\n\n> 🎯 **Best Practice:** Require at least one approval before merging!"
+        },
+        {
+            "id": "bitbucket_9",
+            "type": "content",
+            "title": "Branch Permissions",
+            "content": "# Branch Permissions 🔒\n\nControl who can push and merge to branches.\n\n## Setting Permissions\n\n1. Go to **Repository settings**\n2. Click **Branch permissions**\n3. Add rules for branches\n\n## Permission Types\n\n```\n┌─────────────────────────────────────────────────┐\n│              BRANCH PERMISSIONS                  │\n├─────────────────────────────────────────────────┤\n│  Pattern: main, release/*, feature/*           │\n├─────────────────────────────────────────────────┤\n│  ✅ Write access                                │\n│     Select users/groups allowed to push        │\n│                                                 │\n│  ✅ Merge via pull request                     │\n│     Require PRs to merge                       │\n│                                                 │\n│  ✅ Check for approvals                        │\n│     Min 1, 2, or 3 approvals                   │\n│                                                 │\n│  ✅ Check for passing builds                   │\n│     Block merge on failing CI                  │\n│                                                 │\n│  ✅ Check for resolved tasks                   │\n│     All tasks must be resolved                 │\n└─────────────────────────────────────────────────┘\n```\n\n## Common Patterns\n\n| Pattern | Matches |\n|---------|--------|\n| `main` | Only main branch |\n| `release/*` | release/1.0, release/2.0 |\n| `feature/**` | Nested feature branches |\n| `*` | All branches |\n\n> ⚠️ **Important:** Protect main branch to prevent accidental direct pushes!"
+        },
+        {
+            "id": "bitbucket_10",
+            "type": "quiz",
+            "title": "Pull Request Quiz",
+            "content": "Test your Bitbucket Pull Request knowledge!",
+            "quizQuestion": "Which merge strategy combines all commits into a single commit?",
+            "quizOptions": [
+                "Merge commit",
+                "Fast-forward",
+                "Squash",
+                "Rebase"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "bitbucket_11",
+            "type": "content",
+            "title": "Stash and Data Center",
+            "content": "# Bitbucket Data Center 🏢\n\n**Bitbucket Data Center** (formerly Stash) is Atlassian's **self-managed** Git solution.\n\n## Cloud vs Data Center\n\n| Feature | Cloud | Data Center |\n|---------|-------|-------------|\n| Hosting | Atlassian managed | Self-managed |\n| Updates | Automatic | Manual |\n| Customization | Limited | Extensive |\n| Compliance | Atlassian controls | You control |\n| Scale | Up to 5000 users | Unlimited |\n| Cost | Per user/month | Annual license |\n\n## Why Choose Data Center?\n\n- 🔒 **Data Sovereignty** - Keep code on-premise\n- 📋 **Compliance** - Meet regulatory requirements\n- 🎛️ **Customization** - Install plugins, customize\n- 🔗 **Network Access** - Internal network only\n- 📈 **Performance** - Tune for your workload\n\n## Architecture\n\n```\n┌─────────────────────────────────────────────────┐\n│                  LOAD BALANCER                   │\n└─────────────────────┬───────────────────────────┘\n          ┌───────────┼───────────┐\n          ▼           ▼           ▼\n     ┌────────┐  ┌────────┐  ┌────────┐\n     │ Node 1 │  │ Node 2 │  │ Node 3 │\n     └────┬───┘  └────┬───┘  └────┬───┘\n          └───────────┼───────────┘\n                      ▼\n     ┌────────────────────────────────┐\n     │      SHARED FILE SYSTEM        │\n     │    (NFS, EFS, or similar)      │\n     └────────────────┬───────────────┘\n                      ▼\n     ┌────────────────────────────────┐\n     │         DATABASE               │\n     │   (PostgreSQL, MySQL, etc)     │\n     └────────────────────────────────┘\n```"
+        },
+        {
+            "id": "bitbucket_12",
+            "type": "content",
+            "title": "Data Center Features",
+            "content": "# Data Center Enterprise Features 🏛️\n\n## Smart Mirroring\n\nImprove performance for distributed teams:\n\n```\n        ┌────────────────┐\n        │  PRIMARY NODE  │  (New York)\n        │  Read + Write  │\n        └───────┬────────┘\n                │ Sync\n        ┌───────┴───────┐\n        ▼               ▼\n┌──────────────┐ ┌──────────────┐\n│    MIRROR    │ │    MIRROR    │\n│   (London)   │ │   (Tokyo)    │\n│  Read-only   │ │  Read-only   │\n└──────────────┘ └──────────────┘\n```\n\n## High Availability\n\n- **Active-Active Clustering** - Multiple nodes\n- **Zero Downtime Upgrades** - Rolling updates\n- **Automatic Failover** - Node failure handling\n\n## Project Permissions\n\n```\n┌─────────────────────────────────────────────────┐\n│              PROJECT: PLATFORM                   │\n├─────────────────────────────────────────────────┤\n│  Admins: platform-team                          │\n│  Write: developers                              │\n│  Read: contractors                              │\n├─────────────────────────────────────────────────┤\n│  ├── api-service                                │\n│  ├── web-frontend                               │\n│  └── shared-libs                                │\n└─────────────────────────────────────────────────┘\n```\n\n## Hooks and Plugins\n\n- Pre-receive hooks (validate before accept)\n- Post-receive hooks (notify after accept)\n- Marketplace plugins for extensions"
+        },
+        {
+            "id": "bitbucket_13",
+            "type": "content",
+            "title": "Pipeline Variables and Secrets",
+            "content": "# Variables and Secrets 🔐\n\n## Variable Types\n\n### Repository Variables\n- Available to all pipelines in the repo\n- Set in Repository settings → Pipelines → Variables\n\n### Workspace Variables\n- Shared across all repos in workspace\n- Set in Workspace settings → Pipelines → Variables\n\n### Deployment Variables\n- Environment-specific values\n- Set per deployment environment\n\n## Using Variables\n\n```yaml\npipelines:\n  default:\n    - step:\n        script:\n          # Repository variable\n          - echo $MY_VARIABLE\n          \n          # Secured variable (masked in logs)\n          - ./deploy.sh --key $SECRET_KEY\n          \n          # Built-in variables\n          - echo \"Branch: $BITBUCKET_BRANCH\"\n          - echo \"Commit: $BITBUCKET_COMMIT\"\n          - echo \"Repo: $BITBUCKET_REPO_SLUG\"\n```\n\n## Built-in Variables\n\n| Variable | Description |\n|----------|-------------|\n| `BITBUCKET_COMMIT` | Current commit SHA |\n| `BITBUCKET_BRANCH` | Branch name |\n| `BITBUCKET_TAG` | Tag name (if tagged) |\n| `BITBUCKET_PR_ID` | Pull request ID |\n| `BITBUCKET_BUILD_NUMBER` | Build number |\n\n> ⚠️ **Security:** Mark sensitive values as \"Secured\" to mask in logs!"
+        },
+        {
+            "id": "bitbucket_14",
+            "type": "content",
+            "title": "Jira Integration",
+            "content": "# Jira Integration 🔗\n\nBitbucket integrates seamlessly with **Jira** for issue tracking.\n\n## Connecting Jira\n\n1. Go to Repository settings → Integrations\n2. Select Jira\n3. Connect your Jira site\n\n## Smart Commits\n\nControl Jira from commit messages:\n\n```bash\n# Transition issue\ngit commit -m \"PROJ-123 #done Fix login button\"\n\n# Add comment\ngit commit -m \"PROJ-123 #comment Implemented new design\"\n\n# Log time\ngit commit -m \"PROJ-123 #time 2h Refactored auth module\"\n\n# Combine commands\ngit commit -m \"PROJ-123 #time 1h #comment Added tests #resolve\"\n```\n\n## PR to Jira Link\n\n```\n┌────────────────────────────────────────────────┐\n│              JIRA ISSUE PROJ-123               │\n├────────────────────────────────────────────────┤\n│  Development Panel:                            │\n│  ├── 1 branch: feature/PROJ-123-login         │\n│  ├── 3 commits                                 │\n│  └── 1 pull request: #42                       │\n└────────────────────────────────────────────────┘\n```\n\n## Branch Naming\n\nName branches with issue key:\n- `feature/PROJ-123-description`\n- `bugfix/PROJ-456-fix-issue`\n\n> 💡 **Tip:** Auto-create branches from Jira issues!"
+        },
+        {
+            "id": "bitbucket_15",
+            "type": "quiz",
+            "title": "Integration Quiz",
+            "content": "Test your Bitbucket integration knowledge!",
+            "quizQuestion": "What is the purpose of 'Smart Commits' in Bitbucket?",
+            "quizOptions": [
+                "Automatically fix code errors",
+                "Control Jira issues through commit messages",
+                "Compress commit history",
+                "Generate commit messages automatically"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "bitbucket_16",
+            "type": "content",
+            "title": "Deployment Environments",
+            "content": "# Deployments 🚀\n\nTrack and manage deployments to different environments.\n\n## Defining Environments\n\n```yaml\npipelines:\n  branches:\n    develop:\n      - step:\n          name: Deploy to Staging\n          deployment: staging\n          script:\n            - ./deploy.sh staging\n\n    main:\n      - step:\n          name: Deploy to Production\n          deployment: production\n          trigger: manual  # Require manual trigger\n          script:\n            - ./deploy.sh production\n```\n\n## Environment Types\n\n| Environment | Use Case |\n|-------------|----------|\n| **Test** | Testing and QA |\n| **Staging** | Pre-production |\n| **Production** | Live environment |\n\n## Deployment Dashboard\n\nView in Repository → Deployments:\n\n```\n┌─────────────────────────────────────────────────┐\n│              DEPLOYMENTS                         │\n├─────────────────────────────────────────────────┤\n│  Production                                      │\n│  └── v2.1.0 • deployed 2 hours ago • abc123    │\n│                                                  │\n│  Staging                                         │\n│  └── v2.2.0-beta • deployed 30 min ago • def456│\n│                                                  │\n│  Test                                            │\n│  └── feature/new-ui • deployed 5 min ago        │\n└─────────────────────────────────────────────────┘\n```\n\n## Environment Variables\n\nSet per-environment secrets in:\n- Repository settings → Deployments → [Environment]\n\n> 🎯 **Tip:** Use manual triggers for production deployments!"
+        },
+        {
+            "id": "bitbucket_17",
+            "type": "content",
+            "title": "Code Insights",
+            "content": "# Code Insights 📊\n\nCode Insights displays **quality and security reports** directly on PRs.\n\n## Available Insights\n\n| Insight | Description |\n|---------|-------------|\n| **Test Results** | Unit test pass/fail |\n| **Code Coverage** | Coverage percentage |\n| **Security Scan** | Vulnerability reports |\n| **Linting** | Code style issues |\n| **Dependencies** | Outdated packages |\n\n## Configuring Test Reports\n\n```yaml\npipelines:\n  default:\n    - step:\n        name: Test\n        script:\n          - npm test -- --reporter=junit --outputFile=test-results.xml\n        after-script:\n          - pipe: atlassian/checkstyle-report:0.4.0\n```\n\n## Coverage Reports\n\n```yaml\npipelines:\n  default:\n    - step:\n        script:\n          - npm test -- --coverage\n          - pipe: atlassian/codecov-report:1.0.0\n            variables:\n              CODECOV_TOKEN: $CODECOV_TOKEN\n```\n\n## Third-Party Integrations\n\n- **SonarQube** - Code quality\n- **Snyk** - Security scanning\n- **Codecov** - Coverage tracking\n- **ESLint** - JavaScript linting\n\n> 💡 **Benefit:** See quality issues before merging!"
+        },
+        {
+            "id": "bitbucket_18",
+            "type": "content",
+            "title": "Webhooks and Integrations",
+            "content": "# Webhooks 🪝\n\nWebhooks notify external systems about repository events.\n\n## Setting Up Webhooks\n\n1. Go to Repository settings → Webhooks\n2. Click Add webhook\n3. Enter URL and select triggers\n\n## Available Triggers\n\n```\n┌─────────────────────────────────────────────────┐\n│              WEBHOOK TRIGGERS                    │\n├─────────────────────────────────────────────────┤\n│  Repository:                                     │\n│  ├── Push                                        │\n│  ├── Fork                                        │\n│  └── Updated                                     │\n│                                                  │\n│  Pull Request:                                   │\n│  ├── Created                                     │\n│  ├── Updated                                     │\n│  ├── Approved                                    │\n│  ├── Merged                                      │\n│  └── Declined                                    │\n│                                                  │\n│  Issue:                                          │\n│  ├── Created                                     │\n│  ├── Updated                                     │\n│  └── Comment added                               │\n└─────────────────────────────────────────────────┘\n```\n\n## Example Payload\n\n```json\n{\n  \"repository\": {\n    \"name\": \"my-repo\",\n    \"full_name\": \"team/my-repo\"\n  },\n  \"actor\": {\n    \"display_name\": \"John Doe\"\n  },\n  \"push\": {\n    \"changes\": [...]\n  }\n}\n```\n\n> 🔗 **Use Cases:** CI triggers, notifications, deployments!"
+        },
+        {
+            "id": "bitbucket_19",
+            "type": "content",
+            "title": "Best Practices",
+            "content": "# Bitbucket Best Practices ✅\n\n## Repository Management\n\n- 📁 Use **Projects** to organize related repos\n- 🏷️ Set **default reviewers** for consistency\n- 🔒 Enable **branch permissions** for protection\n- 📝 Create **PR templates** for guidelines\n\n## Pipelines\n\n- ⚡ Use **caches** to speed up builds\n- 🔄 Run **tests in parallel** when possible\n- 🔐 Store secrets as **secured variables**\n- 📊 Add **code insights** for quality visibility\n- 🏷️ Use **semantic versioning** with tags\n\n## Pull Requests\n\n- ✅ Require **approvals** before merge\n- 🤖 Enable **merge checks** for quality gates\n- 📋 Use **tasks** for actionable feedback\n- 🔀 Choose appropriate **merge strategy**\n- 🗑️ **Delete merged branches** to keep clean\n\n## Team Workflow\n\n```\n       feature/xyz\n           │\n           ▼\n    Pull Request\n           │\n    ├── CI passes\n    ├── Review approved\n    └── Tasks resolved\n           │\n           ▼\n     Merge to main\n           │\n           ▼\n   Deploy to staging\n           │\n           ▼\n  Deploy to production\n```\n\n> 🎯 **Remember:** Good workflows lead to better collaboration!"
+        },
+        {
+            "id": "bitbucket_20",
+            "type": "quiz",
+            "title": "Final Quiz",
+            "content": "Test your overall Bitbucket knowledge!",
+            "quizQuestion": "Which feature allows you to see test results and code coverage directly on a pull request?",
+            "quizOptions": [
+                "Branch Permissions",
+                "Code Insights",
+                "Smart Commits",
+                "Webhooks"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "bitbucket_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Congratulations! 🎉\n\nYou've mastered Bitbucket fundamentals!\n\n## Key Takeaways\n\n### Pipelines 🔧\n- ✅ Configured via `bitbucket-pipelines.yml`\n- ✅ Docker-based execution\n- ✅ Pipes for easy integrations\n- ✅ Built-in caching and artifacts\n\n### Pull Requests 🔀\n- ✅ Code review with inline comments\n- ✅ Approvals and merge checks\n- ✅ Tasks for actionable items\n- ✅ Multiple merge strategies\n\n### Enterprise (Data Center) 🏢\n- ✅ Self-managed deployment\n- ✅ High availability clustering\n- ✅ Smart mirroring for global teams\n- ✅ Advanced permissions\n\n### Integrations 🔗\n- ✅ Jira smart commits\n- ✅ Code Insights for quality\n- ✅ Webhooks for automation\n- ✅ Deployment tracking\n\n## Next Steps\n\n- 📝 Create your first pipeline\n- 🔀 Practice the PR workflow\n- 🔒 Set up branch permissions\n- 🔗 Connect to Jira\n\n> 🪣 **Remember:** Bitbucket works best with the full Atlassian suite!\n\nHappy coding! 🚀"
+        }
+    ]
+}

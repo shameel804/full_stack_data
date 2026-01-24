@@ -1,0 +1,167 @@
+{
+    "id": "learn_unittest_junit",
+    "topicId": "junit",
+    "topicTitle": "JUnit",
+    "description": "Master the JUnit 5 framework for professional Java unit testing",
+    "baseKP": 90,
+    "slides": [
+        {
+            "id": "junit_1",
+            "type": "content",
+            "title": "Introduction to JUnit 5",
+            "content": "# JUnit 5 ☕\n\nThe standard for testing in the Java ecosystem (JUnit Platform + Jupiter + Vintage).\n\n- **@Test**: Mark a method as a test.\n- **Assertions**: Highly readable checks.\n- **Parameterized**: Run tests with varied inputs.\n- **Extensions**: Powerful modular architecture."
+        },
+        {
+            "id": "junit_2",
+            "type": "content",
+            "title": "Basic Annotations",
+            "content": "# Core Annotations 🏷️\n\n| Annotation | Purpose |\n|------------|---------|\n| `@Test` | Marks a test method |\n| `@BeforeEach` | Runs before every test |\n| `@AfterEach` | Runs after every test |\n| `@BeforeAll` | Static; runs once before all |\n| `@AfterAll` | Static; runs once after all |"
+        },
+        {
+            "id": "junit_3",
+            "type": "content",
+            "title": "A Simple Test",
+            "content": "# Code Example 💻\n\n```java\nimport org.junit.jupiter.api.Test;\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\nclass CalcTest {\n    @Test\n    void addTest() {\n        Calculator c = new Calculator();\n        assertEquals(5, c.add(2, 3), \"2 + 3 should be 5\");\n    }\n}\n```"
+        },
+        {
+            "id": "junit_4",
+            "type": "content",
+            "title": "Common Assertions",
+            "content": "# Assertions 📢\n\n`Assertions` class contains static methods:\n\n- `assertEquals(expected, actual)`\n- `assertTrue(condition)`\n- `assertNotNull(object)`\n- `assertArrayEquals(expectedArr, actualArr)`\n- `assertAll(executable...)`: Group assertions."
+        },
+        {
+            "id": "junit_5",
+            "type": "quiz",
+            "title": "Annotations Quiz",
+            "content": "Which annotation replaces JUnit 4's @Before?",
+            "quizQuestion": "In JUnit 5, which annotation is used to run a method before EACH individual test?",
+            "quizOptions": [
+                "@Before",
+                "@BeforeAll",
+                "@BeforeEach",
+                "@Setup"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "junit_6",
+            "type": "content",
+            "title": "Display Names",
+            "content": "# @DisplayName 🏷️\n\nGive your tests human-readable names for reports.\n\n```java\n@Test\n@DisplayName(\"Calculates interest for premium accounts 💰\")\nvoid testInterestCalculation() { ... }\n```"
+        },
+        {
+            "id": "junit_7",
+            "type": "content",
+            "title": "Testing Exceptions",
+            "content": "# assertThrows ⚠️\n\nVerify that your code fails when it should.\n\n```java\n@Test\nvoid exceptionTesting() {\n    Exception exception = assertThrows(\n        ArithmeticException.class, \n        () -> calculator.divide(1, 0)\n    );\n    assertEquals(\"/ by zero\", exception.getMessage());\n}\n```"
+        },
+        {
+            "id": "junit_8",
+            "type": "content",
+            "title": "Assertions Groups",
+            "content": "# assertAll 📦\n\nRun multiple assertions; even if the first fails, the others are checked.\n\n```java\nassertAll(\"user checks\",\n    () -> assertEquals(\"John\", user.getFirstName()),\n    () -> assertEquals(\"Doe\", user.getLastName())\n);\n```"
+        },
+        {
+            "id": "junit_9",
+            "type": "content",
+            "title": "Assumptions",
+            "content": "# Assumptions 🚧\n\nOnly run tests if certain conditions are met.\n\n```java\nAssumptions.assumeTrue(\n    \"DEV\".equals(System.getenv(\"ENV\")),\n    \"Skipping test; not in DEV environment\"\n);\n```"
+        },
+        {
+            "id": "junit_10",
+            "type": "quiz",
+            "title": "Exception Quiz",
+            "content": "What does assertThrows return?",
+            "quizQuestion": "In JUnit 5, what exactly does the 'assertThrows' method return upon success?",
+            "quizOptions": [
+                "Boolean true",
+                "The caught exception object",
+                "Nothing (void)",
+                "A success message"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "junit_11",
+            "type": "content",
+            "title": "Parameterized Tests",
+            "content": "# Parameterized 📊\n\nRun one test multiple times with different values.\n\n```java\n@ParameterizedTest\n@ValueSource(strings = { \"racecar\", \"radar\", \"level\" })\nvoid palindromes(String candidate) {\n    assertTrue(StringUtils.isPalindrome(candidate));\n}\n```"
+        },
+        {
+            "id": "junit_12",
+            "type": "content",
+            "title": "Repeated Tests",
+            "content": "# Repeated 🔁\n\nRun the same test multiple times (useful for random-based code).\n\n```java\n@RepeatedTest(10)\nvoid testRandomFlow() { ... }\n```"
+        },
+        {
+            "id": "junit_13",
+            "type": "content",
+            "title": "Conditional Execution",
+            "content": "# Selective Runs ☁️\n\n- `@EnabledOnOs(OS.MAC)`\n- `@EnabledOnJre(JRE.JAVA_11)`\n- `@EnabledIfSystemProperty(...)`"
+        },
+        {
+            "id": "junit_14",
+            "type": "content",
+            "title": "Nesting Tests",
+            "content": "# @Nested 📂\n\nGroup tests hierachically for better reports.\n\n```java\nclass AccountTest {\n    @Nested\n    class WhenNew {\n        @Test void balanceIsZero() { ... }\n    }\n}\n```"
+        },
+        {
+            "id": "junit_15",
+            "type": "quiz",
+            "title": "Parameterized Quiz",
+            "content": "Which source allows providing simple values to a parameterized test?",
+            "quizQuestion": "Which annotation provides a simple array of primitives or strings to a @ParameterizedTest?",
+            "quizOptions": [
+                "@CsvSource",
+                "@MethodSource",
+                "@ValueSource",
+                "@DataProvider"
+            ],
+            "correctOptionIndex": 2
+        },
+        {
+            "id": "junit_16",
+            "type": "content",
+            "title": "Timeouts",
+            "content": "# assertTimeout ⏱️\n\nFail if code takes too long.\n\n```java\nassertTimeout(Duration.ofMillis(500), () -> {\n    // some time consuming task\n});\n```"
+        },
+        {
+            "id": "junit_17",
+            "type": "content",
+            "title": "JUnit Vintage",
+            "content": "# Legacy Support 🏛️\n\n**JUnit Vintage** allows running JUnit 3 and 4 tests alongside JUnit 5 tests, making migration easy."
+        },
+        {
+            "id": "junit_18",
+            "type": "content",
+            "title": "Dependency Injection",
+            "content": "# DI in Tests 💉\n\nJUnit Jupiter allows parameter injection into constructors and methods (e.g., `TestInfo` or `RepetitionInfo`)."
+        },
+        {
+            "id": "junit_19",
+            "type": "content",
+            "title": "Integration with Mockito",
+            "content": "# JUnit + Mockito 🎭\n\nUse the `@ExtendWith(MockitoExtension.class)` to easily inject mocks.\n\n```java\n@Mock\nprivate PaymentGateway gateway;\n```"
+        },
+        {
+            "id": "junit_20",
+            "type": "quiz",
+            "title": "Final Summary Quiz",
+            "content": "Which JUnit 5 component translates tests into the platform?",
+            "quizQuestion": "What is the core JUnit 5 sub-project that provides the API for writing tests?",
+            "quizOptions": [
+                "Vintage",
+                "Jupiter",
+                "Platform",
+                "Mars"
+            ],
+            "correctOptionIndex": 1
+        },
+        {
+            "id": "junit_21",
+            "type": "content",
+            "title": "Summary",
+            "content": "# Summary 🎉\n\n- ✅ Standard for Java testing.\n- ✅ Rich set of annotations.\n- ✅ Built-in support for Parameterized tests.\n- ✅ Clean reporting with `@DisplayName`.\n\nWrite robust Java code with JUnit! 🚀"
+        }
+    ]
+}
