@@ -1,0 +1,4547 @@
+[
+    {
+        "q": "What is 'Resilience' in microservices?",
+        "o": [
+            "Ability to handle and recover from failures",
+            "Ability to run fast",
+            "Ability to save data",
+            "Ability to log errors"
+        ]
+    },
+    {
+        "q": "Why is resilience more important in microservices than monolith?",
+        "o": [
+            "More moving parts / Network failures are common",
+            "Monoliths never fail",
+            "Microservices are slower",
+            "Microservices are cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Partial Failure'?",
+        "o": [
+            "One service fails while others work",
+            "Everything fails",
+            "Nothing fails",
+            "Database fails"
+        ]
+    },
+    {
+        "q": "What is 'Cascading Failure'?",
+        "o": [
+            "One failure causes chain reaction closing others",
+            "Waterfall",
+            "Logging failure",
+            "Network failure"
+        ]
+    },
+    {
+        "q": "Which pattern prevents Cascading Failure?",
+        "o": [
+            "Circuit Breaker / Bulkhead",
+            "Retry",
+            "Singleton",
+            "Facade"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' pattern?",
+        "o": [
+            "Stop calling failing service for a while",
+            "Restart service",
+            "Retry immediately",
+            "Delete service"
+        ]
+    },
+    {
+        "q": "Which state handles requests normally?",
+        "o": [
+            "Closed",
+            "Open",
+            "Half-Open",
+            "Broken"
+        ]
+    },
+    {
+        "q": "Which state rejects requests immediately?",
+        "o": [
+            "Open",
+            "Closed",
+            "Half-Open",
+            "Connecting"
+        ]
+    },
+    {
+        "q": "Which state tests if service is back?",
+        "o": [
+            "Half-Open",
+            "Open",
+            "Closed",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What triggers Circuit Breaker to Open?",
+        "o": [
+            "Failure Rate Threshold exceeded",
+            "Success Rate",
+            "User request",
+            "Timer"
+        ]
+    },
+    {
+        "q": "What counts as 'Failure' usually?",
+        "o": [
+            "Exceptions / 5xx Errors / Timeouts",
+            "2xx OK",
+            "404 Not Found",
+            "High CPU"
+        ]
+    },
+    {
+        "q": "Does 404 typically trigger Circuit Breaker?",
+        "o": [
+            "No, usually indicates logic error (client), not system failure",
+            "Yes",
+            "Maybe",
+            "Always"
+        ]
+    },
+    {
+        "q": "What is 'Retry' pattern?",
+        "o": [
+            "Repeat failed request",
+            "Cancel request",
+            "Log request",
+            "Ignore request"
+        ]
+    },
+    {
+        "q": "When should you NOT use Retry?",
+        "o": [
+            "Non-Idempotent operations / Permanent errors",
+            "Idempotent ops",
+            "Network glitches",
+            "Read ops"
+        ]
+    },
+    {
+        "q": "What is 'Idempotency'?",
+        "o": [
+            "Repeating operation has same effect as once",
+            "Repeating causes error",
+            "Repeating doubles data",
+            "Repeating crashes"
+        ]
+    },
+    {
+        "q": "What is 'Retry Storm'?",
+        "o": [
+            "Massive retries overwhelming recovering service",
+            "Weather storm",
+            "Database storm",
+            "Network storm"
+        ]
+    },
+    {
+        "q": "How to prevent Retry Storm?",
+        "o": [
+            "Exponential Backoff + Jitter",
+            "Immediate retry",
+            "Infinite retry",
+            "Blocking retry"
+        ]
+    },
+    {
+        "q": "What is 'Backoff'?",
+        "o": [
+            "Waiting time between retries",
+            "Running away",
+            "Stopping",
+            "Logoff"
+        ]
+    },
+    {
+        "q": "What is 'Jitter'?",
+        "o": [
+            "Randomness added to wait time",
+            "Shaking",
+            "Vibration",
+            "Noise"
+        ]
+    },
+    {
+        "q": "What is 'Timeout' pattern?",
+        "o": [
+            "Stop waiting after defined duration",
+            "Wait forever",
+            "Wait until user cancels",
+            "Wait for reboot"
+        ]
+    },
+    {
+        "q": "Why Timeouts are essential?",
+        "o": [
+            "Free up threads/resources tied to slow request",
+            "Save disk",
+            "Save money",
+            "Better logs"
+        ]
+    },
+    {
+        "q": "What happens when Timeout occurs?",
+        "o": [
+            "Throw TimeoutException / Cancel request",
+            "Keep waiting",
+            "Retry",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Bulkhead' pattern?",
+        "o": [
+            "Isolate components so failure stays contained",
+            "Ship wall",
+            "Big head",
+            "Load balancer"
+        ]
+    },
+    {
+        "q": "Real world analogy for Bulkhead?",
+        "o": [
+            "Watertight compartments in ship",
+            "Circuit breaker in house",
+            "Retry button",
+            "Stop sign"
+        ]
+    },
+    {
+        "q": "How is Bulkhead implemented in code?",
+        "o": [
+            "Thread Pools / Semaphores per service",
+            "One global thread pool",
+            "Infinite threads",
+            "No threads"
+        ]
+    },
+    {
+        "q": "What is 'Rate Limiting' pattern?",
+        "o": [
+            "Limit number of requests over time",
+            "Limit size of request",
+            "Limit users",
+            "Limit IPs"
+        ]
+    },
+    {
+        "q": "Which side implements Rate Limiting usually?",
+        "o": [
+            "Server side (to protect itself)",
+            "Client side",
+            "Database side",
+            "User side"
+        ]
+    },
+    {
+        "q": "What is 'Client-side Rate Limiting' (Throttling)?",
+        "o": [
+            "Slow down outgoing requests to respect server limits",
+            "Block server",
+            "Ignore limits",
+            "Retry always"
+        ]
+    },
+    {
+        "q": "What is 'Fallback' pattern?",
+        "o": [
+            "Providing alternative response on failure",
+            "Falling down",
+            "Crashing",
+            "Returning 500"
+        ]
+    },
+    {
+        "q": "Example of Fallback?",
+        "o": [
+            "Return default value / Cached data",
+            "Throw error",
+            "Wait",
+            "Exit"
+        ]
+    },
+    {
+        "q": "What is 'Resilience4j'?",
+        "o": [
+            "Java library for fault tolerance",
+            "Game",
+            "Language",
+            "Database"
+        ]
+    },
+    {
+        "q": "What replaced 'Hystrix' (Netflix)?",
+        "o": [
+            "Resilience4j / Sentinel",
+            "Zuul",
+            "Eureka",
+            "Ribbon"
+        ]
+    },
+    {
+        "q": "Why was Hystrix deprecated?",
+        "o": [
+            "Maintenance mode / Moves to Reactive stack",
+            "Too slow",
+            "Too big",
+            "Insecure"
+        ]
+    },
+    {
+        "q": "Which decorator pattern does Resilience4j use?",
+        "o": [
+            "Functional Interface / Decorators",
+            "Inheritance",
+            "Proxy only",
+            "Singleton"
+        ]
+    },
+    {
+        "q": "What is 'Polly'?",
+        "o": [
+            ".NET Resilience Library",
+            "Parrot",
+            "Java Library",
+            "Python Library"
+        ]
+    },
+    {
+        "q": "Which pattern is 'Cache-Aside'?",
+        "o": [
+            "Code manages cache (Check cache -> DB -> set cache)",
+            "DB manages cache",
+            "No cache",
+            "Write-through"
+        ]
+    },
+    {
+        "q": "What is 'Time To Live' (TTL)?",
+        "o": [
+            "Expiration time for cache/data",
+            "Life of packet",
+            "Time to load",
+            "Time to leave"
+        ]
+    },
+    {
+        "q": "What is 'Fail Fast'?",
+        "o": [
+            "Report failure immediately without expensive work",
+            "Fail slow",
+            "Fail never",
+            "Retry forever"
+        ]
+    },
+    {
+        "q": "Which scenario warrants Fail Fast?",
+        "o": [
+            "Input validation / Circuit Open",
+            "Database query",
+            "File write",
+            "Email send"
+        ]
+    },
+    {
+        "q": "What is 'Load Shedding'?",
+        "o": [
+            "Dropping excess requests to save system",
+            "Shedding skin",
+            "Deleting data",
+            "Stopping server"
+        ]
+    },
+    {
+        "q": "When does Load Shedding kick in?",
+        "o": [
+            "When system is at capacity (CPU/RAM)",
+            "When idle",
+            "When starting",
+            "When sleeping"
+        ]
+    },
+    {
+        "q": "How is Load Shedding physically done?",
+        "o": [
+            "Return 503 Service Unavailable immediately",
+            "Wait in queue",
+            "Process slowly",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Deadline' vs 'Timeout'?",
+        "o": [
+            "Deadline is absolute time point, Timeout is duration",
+            "Same thing",
+            "Deadline is duration",
+            "Timeout is point"
+        ]
+    },
+    {
+        "q": "Does Deadline propagate across microservices?",
+        "o": [
+            "Yes (Distributed Timeout)",
+            "No",
+            "Maybe",
+            "Only in Google"
+        ]
+    },
+    {
+        "q": "What is 'Deadline Propagation'?",
+        "o": [
+            "Pass remaining time to downstream service",
+            "Pass start time",
+            "Pass end time",
+            "Pass duration"
+        ]
+    },
+    {
+        "q": "Why propagate Deadline?",
+        "o": [
+            "Avoid processing if user already gave up",
+            "Sync clocks",
+            "Log time",
+            "Better sorting"
+        ]
+    },
+    {
+        "q": "What happens if remaining deadline is negative?",
+        "o": [
+            "Abort immediately",
+            "Process anyway",
+            "Retry",
+            "Wait"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation'?",
+        "o": [
+            "Offer reduced functionality instead of total failure",
+            "Crash gracefully",
+            "Slow down",
+            "Show error"
+        ]
+    },
+    {
+        "q": "Example of Graceful Degradation?",
+        "o": [
+            "Show cached recs instead of live ML recs",
+            "Show 404",
+            "Show blank page",
+            "Redirect"
+        ]
+    },
+    {
+        "q": "What is 'Health Check'?",
+        "o": [
+            "Endpoint to verify service status",
+            "Doctor check",
+            "Virus scan",
+            "Data check"
+        ]
+    },
+    {
+        "q": "What is 'Shallow' vs 'Deep' health check?",
+        "o": [
+            "Shallow checks responsiveness, Deep checks dependencies",
+            "Same",
+            "Shallow is fast",
+            "Deep is slow"
+        ]
+    },
+    {
+        "q": "Risk of Deep Health Check?",
+        "o": [
+            "Cascading failure if dependency fails (marks healthy service as unhealthy)",
+            "Too fast",
+            "Useless",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Self-Healing'?",
+        "o": [
+            "System recovers automatically (e.g. K8s restarts pod)",
+            "Manual fix",
+            "Admin fix",
+            "User fix"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Engineering'?",
+        "o": [
+            "Experimenting on system to build confidence (break things)",
+            "Creating chaos manually",
+            "Bad coding",
+            "Random bugs"
+        ]
+    },
+    {
+        "q": "Who popularized Chaos Engineering?",
+        "o": [
+            "Netflix (Chaos Monkey)",
+            "Google",
+            "Facebook",
+            "Amazon"
+        ]
+    },
+    {
+        "q": "What is 'Simian Army'?",
+        "o": [
+            "Suite of chaos tools by Netflix",
+            "Real army",
+            "Game",
+            "Servers"
+        ]
+    },
+    {
+        "q": "What is 'Game Day' in resilience?",
+        "o": [
+            "Scheduled day to simulate failures/incidents",
+            "Playing games",
+            "Holiday",
+            "Deploy day"
+        ]
+    },
+    {
+        "q": "What is 'MTBF'?",
+        "o": [
+            "Mean Time Between Failures",
+            "Max Time Before Fail",
+            "Min Time Between Fail",
+            "Mean Time Back Fail"
+        ]
+    },
+    {
+        "q": "What is 'MTTR'?",
+        "o": [
+            "Mean Time To Recovery/Repair",
+            "Mean Time To Run",
+            "Max Time To Recover",
+            "Min Time To Repair"
+        ]
+    },
+    {
+        "q": "Goal of SRE is to minimize which metric?",
+        "o": [
+            "MTTR",
+            "MTBF",
+            "Uptime",
+            "Speed"
+        ]
+    },
+    {
+        "q": "What is 'RTO'?",
+        "o": [
+            "Recovery Time Objective (Target time to recover)",
+            "Real Time Object",
+            "Run Time Option",
+            "Recover To One"
+        ]
+    },
+    {
+        "q": "What is 'RPO'?",
+        "o": [
+            "Recovery Point Objective (Max data loss allowed)",
+            "Real Point Object",
+            "Run Point Option",
+            "Recover Point One"
+        ]
+    },
+    {
+        "q": "What is 'Static Stability'?",
+        "o": [
+            "System works without Control Plane being active",
+            "System never changes",
+            "System is stable",
+            "System is static"
+        ]
+    },
+    {
+        "q": "Example of Static Stability pattern?",
+        "o": [
+            "EC2 instance continues running even if launch API fails",
+            "Deleting instance",
+            "Rebooting",
+            "Crashing"
+        ]
+    },
+    {
+        "q": "What is 'Active-Active' redundancy?",
+        "o": [
+            "Multiple instances handling traffic simultaneously",
+            "One active, one standby",
+            "One active, none standby",
+            "All passive"
+        ]
+    },
+    {
+        "q": "What is 'Active-Passive' redundancy?",
+        "o": [
+            "One active, one waiting (failover)",
+            "All active",
+            "None active",
+            "All random"
+        ]
+    },
+    {
+        "q": "Which is more expensive: Active-Active or Active-Passive?",
+        "o": [
+            "Active-Active (requires more capacity always running)",
+            "Active-Passive",
+            "Same",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'Geo-Redundancy'?",
+        "o": [
+            "Replication across geographical regions",
+            "Local backup",
+            "Disk backup",
+            "Tape backup"
+        ]
+    },
+    {
+        "q": "What is 'Disaster Recovery' (DR)?",
+        "o": [
+            "Plan to restore critical functions after disaster",
+            "Backup",
+            "Resilience",
+            "Monitoring"
+        ]
+    },
+    {
+        "q": "What is 'Pilot Light' DR strategy?",
+        "o": [
+            "Minimal version running in cloud, scale up on disaster",
+            "Full copy running",
+            "Backup only",
+            "No copy"
+        ]
+    },
+    {
+        "q": "What is 'Warm Standby'?",
+        "o": [
+            "Scaled down version always running",
+            "Cold machine",
+            "Hot machine",
+            "Off machine"
+        ]
+    },
+    {
+        "q": "What is 'Multi-Site Active-Active'?",
+        "o": [
+            "Zero RTO/RPO (theoretically)",
+            "High RTO",
+            "Slow",
+            "Cheap"
+        ]
+    },
+    {
+        "q": "What is 'Eventual Consistency' tradeoff for resilience?",
+        "o": [
+            "Accept stale data to ensure availability (AP)",
+            "Reject data",
+            "Stop system",
+            "Lose data"
+        ]
+    },
+    {
+        "q": "What is 'CAP Theorem'?",
+        "o": [
+            "Consistency, Availability, Partition Tolerance (Pick 2)",
+            "CPU, API, Protocol",
+            "Cache, App, Pod",
+            "Code, App, Program"
+        ]
+    },
+    {
+        "q": "In distributed system, which CAP property is mandatory?",
+        "o": [
+            "Partition Tolerance (P)",
+            "Consistency (C)",
+            "Availability (A)",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Saga Pattern' for failure?",
+        "o": [
+            "Compensating transactions to undo partial work",
+            "Rollback DB",
+            "Restore backup",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'Compensating Transaction'?",
+        "o": [
+            "Logic to revert a completed step (e.g. Refund)",
+            "Database rollback",
+            "Delete row",
+            "Git revert"
+        ]
+    },
+    {
+        "q": "Why Sagas instead of 2PC?",
+        "o": [
+            "Better availability / scalable (no global lock)",
+            "2PC is better",
+            "Simpler",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is 'Two-Phase Commit' (2PC)?",
+        "o": [
+            "Distributed transaction protocol (Prepare/Commit)",
+            "Saga",
+            "Local transaction",
+            "One phase"
+        ]
+    },
+    {
+        "q": "Issue with 2PC?",
+        "o": [
+            "Blocking coordinator (Availability risk)",
+            "Data loss",
+            "Too fast",
+            "Insecure"
+        ]
+    },
+    {
+        "q": "What is 'Outbox Pattern'?",
+        "o": [
+            "Save event to DB in same tx, then publish",
+            "Send email",
+            "Send request",
+            "Write file"
+        ]
+    },
+    {
+        "q": "What problem does Outbox solve?",
+        "o": [
+            "Dual Write / Consistency between DB and Broker",
+            "Space issue",
+            "Speed issue",
+            "Network issue"
+        ]
+    },
+    {
+        "q": "What is 'Idempotent Consumer'?",
+        "o": [
+            "Check passed ID to ensure msg processed once",
+            "Process always",
+            "Process never",
+            "Process random"
+        ]
+    },
+    {
+        "q": "Which data store is best for Outbox table?",
+        "o": [
+            "Same Transactional DB as business data",
+            "Redis",
+            "File",
+            "Different DB"
+        ]
+    },
+    {
+        "q": "What is 'At-Least-Once' delivery?",
+        "o": [
+            "Message delivered 1 or more times (common)",
+            "Exactly once",
+            "At most once",
+            "Never"
+        ]
+    },
+    {
+        "q": "What is 'At-Most-Once' delivery?",
+        "o": [
+            "Fire and forget (may lose message)",
+            "Guaranteed",
+            "Retry",
+            "Store"
+        ]
+    },
+    {
+        "q": "What is 'Exactly-Once' delivery?",
+        "o": [
+            "Hardest to achieve (Kafka streams / Flink)",
+            "Easy",
+            "Standard",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "What is 'Thundering Herd Problem'?",
+        "o": [
+            "Many clients retry/wake up simultaneously causing spike",
+            "Animal stampede",
+            "Loud noise",
+            "Weather"
+        ]
+    },
+    {
+        "q": "How to fix Thundering Herd in Cache?",
+        "o": [
+            "Probabilistic Early Expiration / Leasing",
+            "Delete cache",
+            "Restart cache",
+            "Disable cache"
+        ]
+    },
+    {
+        "q": "What is 'Lease' in cache?",
+        "o": [
+            "Only one client gets right to compute/fill cache",
+            "Rent",
+            "Contract",
+            "Key"
+        ]
+    },
+    {
+        "q": "What is 'Cache Stampede'?",
+        "o": [
+            "Same as Thundering Herd on cache miss",
+            "Cache hit",
+            "Cache full",
+            "Cache empty"
+        ]
+    },
+    {
+        "q": "What is 'Semantic Monitoring'?",
+        "o": [
+            "Synthetic Transactions (Testing functionality)",
+            "Checking servers",
+            "Checking disks",
+            "Checking cables"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Transaction'?",
+        "o": [
+            "Fake user journey run periodically (Canary probe)",
+            "Real user",
+            "Database tx",
+            "Payment"
+        ]
+    },
+    {
+        "q": "What is 'Black Box' monitoring?",
+        "o": [
+            "Testing from outside (as user sees it)",
+            "Testing inside",
+            "Testing logs",
+            "Testing code"
+        ]
+    },
+    {
+        "q": "What is 'White Box' monitoring?",
+        "o": [
+            "Internal metrics / logs inspection",
+            "Testing outside",
+            "Click testing",
+            "Screen check"
+        ]
+    },
+    {
+        "q": "What is 'SLI'?",
+        "o": [
+            "Service Level Indicator (Metric)",
+            "Service Level Item",
+            "Slow Level Indicator",
+            "System Level Info"
+        ]
+    },
+    {
+        "q": "What is 'SLO'?",
+        "o": [
+            "Service Level Objective (Target val for SLI)",
+            "Service Level Order",
+            "Slow Level Order",
+            "System Level Obj"
+        ]
+    },
+    {
+        "q": "What is 'SLA'?",
+        "o": [
+            "Service Level Agreement (Contract/Consequence)",
+            "Service Level Admin",
+            "Slow Level App",
+            "System Level App"
+        ]
+    },
+    {
+        "q": "Which is internal: SLO or SLA?",
+        "o": [
+            "SLO (usually internal target)",
+            "SLA (external contract)",
+            "Both",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'Error Budget'?",
+        "o": [
+            "100% minus SLO (Allowed failure amount)",
+            "Money for errors",
+            "Team budget",
+            "User budget"
+        ]
+    },
+    {
+        "q": "What do you do if Error Budget is exhausted?",
+        "o": [
+            "Stop feature releases / Focus on reliability",
+            "Ignore it",
+            "Celebrate",
+            "Release more"
+        ]
+    },
+    {
+        "q": "What is 'Burn Rate'?",
+        "o": [
+            "How fast error budget is consumed",
+            "Fire speed",
+            "CPU heat",
+            "Money burn"
+        ]
+    },
+    {
+        "q": "What is 'Metric' in observability?",
+        "o": [
+            "Numerical data measured over time",
+            "Text log",
+            " Trace",
+            "Video"
+        ]
+    },
+    {
+        "q": "What is 'Cell-Based Architecture'?",
+        "o": [
+            "Self-contained unit (Cell) with all services",
+            "Microservice",
+            "Monolith",
+            "Serverless"
+        ]
+    },
+    {
+        "q": "Benefit of Cell-Based Architecture?",
+        "o": [
+            "Limit blast radius of failure to one cell",
+            "Faster build",
+            "Cheaper",
+            "Less code"
+        ]
+    },
+    {
+        "q": "What is 'Shuffle Sharding'?",
+        "o": [
+            "Assigning resources (shards) to customers in unique combinations",
+            "Random sharding",
+            "Simple sharding",
+            "No sharding"
+        ]
+    },
+    {
+        "q": "Why Shuffle Sharding?",
+        "o": [
+            "Extreme isolation (Neighbors change per customer)",
+            "Faster",
+            "Simpler",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Bad Neighbor' effect?",
+        "o": [
+            "One tenant consuming all resources affecting others",
+            "Noisy fan",
+            "Broken disk",
+            "Bad code"
+        ]
+    },
+    {
+        "q": "What is 'Quota Management'?",
+        "o": [
+            "Setting limits on resource usage per tenant",
+            "Billing",
+            "Logging",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Backpressure' in stream processing?",
+        "o": [
+            "Signaling upstream to slow down",
+            "Pushing back",
+            "Deleting",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What happens without Backpressure?",
+        "o": [
+            "Out of Memory / buffer overflow",
+            "Faster processing",
+            "Better logs",
+            "Success"
+        ]
+    },
+    {
+        "q": "What is 'Dead Letter Queue' (DLQ)?",
+        "o": [
+            "Queue for messages that failed processing",
+            "Email queue",
+            "Slow queue",
+            "Fast queue"
+        ]
+    },
+    {
+        "q": "When to move message to DLQ?",
+        "o": [
+            "After max retries exceeded / Poison pill",
+            "Immediately",
+            "Before processing",
+            "Randomly"
+        ]
+    },
+    {
+        "q": "What is 'Poison Pill' message?",
+        "o": [
+            "Message that always crashes consumer",
+            "Virus",
+            "Spam",
+            "Large message"
+        ]
+    },
+    {
+        "q": "How to handle Poison Pill?",
+        "o": [
+            "Discard or DLQ (Don't retry indefinitely)",
+            "Retry forever",
+            "Crash system",
+            "Resend"
+        ]
+    },
+    {
+        "q": "What is 'Priority Queue' resilience?",
+        "o": [
+            "Drop low priority requests under load",
+            "Process random",
+            "Process FIFO",
+            "Process LIFO"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag' resilience usage?",
+        "o": [
+            "Disable broken features instantly (Kill Switch)",
+            "Marketing",
+            "A/B testing",
+            "Sales"
+        ]
+    },
+    {
+        "q": "What is 'Dark Launch'?",
+        "o": [
+            "Deploy feature silently to subset of users",
+            "Night mode",
+            "Offline launch",
+            "Deleted launch"
+        ]
+    },
+    {
+        "q": "What is 'Immutable Infrastructure'?",
+        "o": [
+            "Servers are never modified, only replaced",
+            "Servers are patched",
+            "Servers are manual",
+            "Servers are expensive"
+        ]
+    },
+    {
+        "q": "Benefit of Immutable Infrastructure for resilience?",
+        "o": [
+            "Consistent, predictable state / No config drift",
+            "Faster CPU",
+            "Less RAM",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Configuration Drift'?",
+        "o": [
+            "Servers deviating from desired state over time",
+            "Car drift",
+            "Cloud drift",
+            "Network drift"
+        ]
+    },
+    {
+        "q": "What is 'Phoenix Server'?",
+        "o": [
+            "Server that is regularly destroyed and recreated",
+            "Bird server",
+            "Fire server",
+            "Ice server"
+        ]
+    },
+    {
+        "q": "What is 'Snowflake Server'?",
+        "o": [
+            "Unique, manually configured server (Bad practice)",
+            "Cold server",
+            "Good server",
+            "Fast server"
+        ]
+    },
+    {
+        "q": "What is 'Canary Release'?",
+        "o": [
+            "Rollout to small % first",
+            "Bird release",
+            "Alpha release",
+            "Beta release"
+        ]
+    },
+    {
+        "q": "What is 'Blue-Green Deployment' fallback?",
+        "o": [
+            "Fast rollback by switching router back to Blue",
+            "Reinstall",
+            "Restore backup",
+            "Fix code"
+        ]
+    },
+    {
+        "q": "What is 'Rolling Update' with Health Check?",
+        "o": [
+            "Update one by one, stop if health check fails",
+            "Update all at once",
+            "Update random",
+            "No update"
+        ]
+    },
+    {
+        "q": "What is 'MaxUnavailable' in K8s deployment?",
+        "o": [
+            "Max number of pods down during update",
+            "Max items",
+            "Max errors",
+            "Max time"
+        ]
+    },
+    {
+        "q": "What is 'MaxSurge' in K8s?",
+        "o": [
+            "Max extra pods creating during update",
+            "Max electric surge",
+            "Max speed",
+            "Max cost"
+        ]
+    },
+    {
+        "q": "What is 'Pod Disruption Budget' (PDB)?",
+        "o": [
+            "Limit concurrent voluntary disruptions (e.g. node drain)",
+            "Money budget",
+            "CPU budget",
+            "RAM budget"
+        ]
+    },
+    {
+        "q": "Why PDB is important?",
+        "o": [
+            "Ensures min available replicas during maintenance",
+            "Save money",
+            "Faster update",
+            "Less logs"
+        ]
+    },
+    {
+        "q": "What is 'Voluntary Disruption'?",
+        "o": [
+            "Drain, Delete by user",
+            "Hardware crash",
+            "Kernel panic",
+            "Power outage"
+        ]
+    },
+    {
+        "q": "What is 'Involuntary Disruption'?",
+        "o": [
+            "Hardware failure / Crash",
+            "Update",
+            "Patching",
+            "Scaling"
+        ]
+    },
+    {
+        "q": "Does PDB protect against Involuntary Disruption?",
+        "o": [
+            "No, cannot stop a crash",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Affinity'?",
+        "o": [
+            "Avoid placing pods on same node/zone",
+            "Place together",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "Why use Anti-Affinity?",
+        "o": [
+            "Spread risk (don't lose all replicas on one node failure)",
+            "Performance",
+            "Security",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'Topology Spread Constraint'?",
+        "o": [
+            "Control skew of pods across topology (zones/nodes)",
+            "Map spread",
+            "Network spread",
+            "Disk spread"
+        ]
+    },
+    {
+        "q": "What is 'Brain Split' (Split Brain)?",
+        "o": [
+            "Cluster partitions into two independent sub-clusters",
+            "Headache",
+            "CPU error",
+            "RAM error"
+        ]
+    },
+    {
+        "q": "Risk of Split Brain?",
+        "o": [
+            "Data corruption / Inconsistency (both write)",
+            "Data loss",
+            "Speed",
+            "None"
+        ]
+    },
+    {
+        "q": "How to prevent Split Brain updates?",
+        "o": [
+            "Quorum / Fencing",
+            "Guessing",
+            "Allow both",
+            "Stop both"
+        ]
+    },
+    {
+        "q": "What is 'Quorum'?",
+        "o": [
+            "Majority vote required (N/2 + 1)",
+            "Minority",
+            "One vote",
+            "All votes"
+        ]
+    },
+    {
+        "q": "What is 'Fencing' (STONITH)?",
+        "o": [
+            "Shoot The Other Node In The Head (Power off)",
+            "Build fence",
+            "Block port",
+            "Send email"
+        ]
+    },
+    {
+        "q": "What is 'Leader Election'?",
+        "o": [
+            "Choosing one coordinator to avoid conflict",
+            "Voting for president",
+            "Random choice",
+            "Manual choice"
+        ]
+    },
+    {
+        "q": "What is 'Lease' in Leader Election?",
+        "o": [
+            "Time duration leader holds lock",
+            "Rent",
+            "Contract",
+            "Key"
+        ]
+    },
+    {
+        "q": "If leader crashes, what happens?",
+        "o": [
+            "Lease expires, new election triggers",
+            "System stops",
+            "Data lost",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar Pattern' for resilience?",
+        "o": [
+            "Offload Retry/Circuit Breaker to proxy (Envoy)",
+            "In code",
+            "In DB",
+            "In OS"
+        ]
+    },
+    {
+        "q": "Benefit of Sidecar usage?",
+        "o": [
+            "Polyglot support / Consistent implementation",
+            "Less RAM",
+            "Faster",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Service Mesh'?",
+        "o": [
+            "Infrastructure layer for service-to-service communication",
+            "Mesh network",
+            "Wifi",
+            "Cable"
+        ]
+    },
+    {
+        "q": "Which resilience features does Mesh provide?",
+        "o": [
+            "Retries, Timeouts, Circuit Breaking, mTLS",
+            "Database sharding",
+            "UI rendering",
+            "Code compling"
+        ]
+    },
+    {
+        "q": "What is 'Outlier Detection' (Passive Health Check)?",
+        "o": [
+            "Ejecting unhealthy host from LB pool based on real traffic stats",
+            "Active ping",
+            "Manual check",
+            "Guessing"
+        ]
+    },
+    {
+        "q": "When does Outlier Detection trigger?",
+        "o": [
+            "After N consecutive 5xx errors",
+            "After 1 error",
+            "After success",
+            "Randomly"
+        ]
+    },
+    {
+        "q": "What is 'Panic Threshold' in LB?",
+        "o": [
+            "If too many hosts unhealthy, ignore health and send to all",
+            "Stop everything",
+            "Format disk",
+            "Send email"
+        ]
+    },
+    {
+        "q": "Why Payload Panic Threshold?",
+        "o": [
+            "Assume health check is broken / Better to try than drop all",
+            "Save CPU",
+            "Save RAM",
+            "Logic error"
+        ]
+    },
+    {
+        "q": "What is 'N+1 Redundancy'?",
+        "o": [
+            "1 extra component for backup",
+            "N extra",
+            "No extra",
+            "2N extra"
+        ]
+    },
+    {
+        "q": "What is '2N Redundancy'?",
+        "o": [
+            "Double resources (Fully mirrored)",
+            "N+1",
+            "Half",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Replication'?",
+        "o": [
+            "Copying data to multiple nodes",
+            "Deleting data",
+            "Moving data",
+            "Sharding data"
+        ]
+    },
+    {
+        "q": "What is 'Sharding'?",
+        "o": [
+            "Partitioning data across nodes",
+            "Copying data",
+            "Backup",
+            "Compression"
+        ]
+    },
+    {
+        "q": "What is 'Consistent Hashing'?",
+        "o": [
+            "Distribution technique minimizing remapping on node add/remove",
+            "Random hash",
+            "Mod N hash",
+            "Bad hash"
+        ]
+    },
+    {
+        "q": "Benefit of Consistent Hashing?",
+        "o": [
+            "Scalability / Minimal cache invalidation",
+            "Security",
+            "Speed",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Virtual Nodes' in Consistent Hashing?",
+        "o": [
+            "Multiple points on ring for one physical node (Better distribution)",
+            "Virtual machines",
+            "Fake nodes",
+            "Error nodes"
+        ]
+    },
+    {
+        "q": "What is 'Gossip Protocol'?",
+        "o": [
+            "Peer-to-peer state sharing (epidemic)",
+            "Chat app",
+            "Email",
+            "Central DB"
+        ]
+    },
+    {
+        "q": "What uses Gossip Protocol?",
+        "o": [
+            "Cassandra / Consul / DynamoDB",
+            "MySQL",
+            "Postgres (Single)",
+            "Sqlite"
+        ]
+    },
+    {
+        "q": "What is 'Hinted Handoff' used for?",
+        "o": [
+            "Storing write for temporarily down node (Cassandra)",
+            "Deleting write",
+            "Reading data",
+            "Blocking write"
+        ]
+    },
+    {
+        "q": "What is 'Anti-Entropy'?",
+        "o": [
+            "Repairing data inconsistencies (Merkle Tree sync)",
+            "Creating entropy",
+            "Randomness",
+            "Compression"
+        ]
+    },
+    {
+        "q": "What is 'Read Repair'?",
+        "o": [
+            "Fix stale data during read (Read path)",
+            "Fix on write",
+            "Fix manually",
+            "Never fix"
+        ]
+    },
+    {
+        "q": "What is 'Data Durability'?",
+        "o": [
+            "Data survives failure (Disk/Replication)",
+            "Data speed",
+            "Data format",
+            "Data privacy"
+        ]
+    },
+    {
+        "q": "What is 'WAL'?",
+        "o": [
+            "Write Ahead Log (Durability)",
+            "Walk And Look",
+            "Wall",
+            "Web App Log"
+        ]
+    },
+    {
+        "q": "Why WAL?",
+        "o": [
+            "Recover state after crash by replaying log",
+            "Faster read",
+            "Less space",
+            "Pretty logs"
+        ]
+    },
+    {
+        "q": "What is 'Snapshot'?",
+        "o": [
+            "Point-in-time copy of state",
+            "Photo",
+            "Video",
+            "Log"
+        ]
+    },
+    {
+        "q": "How WAL + Snapshot works?",
+        "o": [
+            "Restore snapshot + Replay WAL since snapshot",
+            "Replay all WAL",
+            "Restore snapshot only",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation' UI?",
+        "o": [
+            "Skeleton screens / Cached content",
+            "Error alert",
+            "White screen",
+            "Crash app"
+        ]
+    },
+    {
+        "q": "What is 'Skeleton Screen'?",
+        "o": [
+            "Placeholder layout while loading",
+            "Scary screen",
+            "Error screen",
+            "Login screen"
+        ]
+    },
+    {
+        "q": "What is 'Optimistic UI'?",
+        "o": [
+            "Update UI assuming success before server confirms",
+            "Update after confirm",
+            "Update never",
+            "Update slowly"
+        ]
+    },
+    {
+        "q": "What if Optimistic UI fails?",
+        "o": [
+            "Revert change and show error",
+            "Keep change",
+            "Crash",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Service Level'?",
+        "o": [
+            "Performance measure (Response time, Availability)",
+            "Level in game",
+            "Building floor",
+            "Rank"
+        ]
+    },
+    {
+        "q": "What is 'Availability' formula?",
+        "o": [
+            "Uptime / (Uptime + Downtime)",
+            "Uptime * Downtime",
+            "Downtime / Uptime",
+            "Uptime - Downtime"
+        ]
+    },
+    {
+        "q": "What is 'Five Nines'?",
+        "o": [
+            "99.999% Availability",
+            "59%",
+            "99999%",
+            "5%"
+        ]
+    },
+    {
+        "q": "How much downtime is 99.9% per year?",
+        "o": [
+            "~8.76 hours",
+            "~5 mins",
+            "~1 year",
+            "~1 sec"
+        ]
+    },
+    {
+        "q": "How much downtime is 99.999% per year?",
+        "o": [
+            "~5 minutes",
+            "~8 hours",
+            "~1 day",
+            "~1 month"
+        ]
+    },
+    {
+        "q": "What is 'Planned Downtime'?",
+        "o": [
+            "Scheduled maintenance",
+            "Crash",
+            "Bug",
+            "Attack"
+        ]
+    },
+    {
+        "q": "Is Planned Downtime counted in SLA usually?",
+        "o": [
+            "Often excluded (depends on contract)",
+            "Yes always",
+            "No never",
+            "Maybe"
+        ]
+    },
+    {
+        "q": "What is 'Unplanned Downtime'?",
+        "o": [
+            "Failure / Incident",
+            "Maintenance",
+            "Upgrade",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What is 'Incident Management'?",
+        "o": [
+            "Process to handle unplanned interruptions",
+            "Coding",
+            "Testing",
+            "Selling"
+        ]
+    },
+    {
+        "q": "What is 'Post-Mortem' (RCA)?",
+        "o": [
+            "Analysis after incident to prevent recurrence",
+            "Autopsy",
+            "Meeting",
+            "Party"
+        ]
+    },
+    {
+        "q": "What is 'Blameless Post-Mortem'?",
+        "o": [
+            "Focus on process/system fix, not blaming people",
+            "Blaming user",
+            "Blaming dev",
+            "Blaming ops"
+        ]
+    },
+    {
+        "q": "Why Blameless?",
+        "o": [
+            "Encourages honesty and reporting",
+            "Hides truth",
+            "Protects guilty",
+            "Saves money"
+        ]
+    },
+    {
+        "q": "What is 'Root Cause Analysis'?",
+        "o": [
+            "Finding fundamental cause of problem",
+            "Fixing symptom",
+            "Restarting",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "What is '5 Whys'?",
+        "o": [
+            "Asking Why 5 times to find root cause",
+            "Asking Who",
+            "Asking When",
+            "Asking Where"
+        ]
+    },
+    {
+        "q": "What is 'Runbook'?",
+        "o": [
+            "Standard procedure for operations/incidents",
+            "Book about running",
+            "Novel",
+            "Log file"
+        ]
+    },
+    {
+        "q": "What is 'Playbook'?",
+        "o": [
+            "Specific instructions for specific failure scenarios",
+            "Sports book",
+            "Game guide",
+            "Music"
+        ]
+    },
+    {
+        "q": "What is 'Automated Remediation'?",
+        "o": [
+            "System fixing itself via scripts (Self-Healing)",
+            "Manual fix",
+            "Human interaction",
+            "Ticket creation"
+        ]
+    },
+    {
+        "q": "What is 'Load Testing'?",
+        "o": [
+            "Testing system behavior under expected load",
+            "Testing weight",
+            "Testing power",
+            "Testing code"
+        ]
+    },
+    {
+        "q": "What is 'Stress Testing'?",
+        "o": [
+            "Testing system beyond limits to find breaking point",
+            "Relaxing",
+            "Normal load",
+            "Min load"
+        ]
+    },
+    {
+        "q": "What is 'Soak Testing'?",
+        "o": [
+            "Running load for long duration (find leaks)",
+            "Water test",
+            "Short test",
+            "Fast test"
+        ]
+    },
+    {
+        "q": "What is 'Spike Testing'?",
+        "o": [
+            "Testing sudden traffic spikes",
+            "Sharp test",
+            "Flat test",
+            "Low test"
+        ]
+    },
+    {
+        "q": "What is 'Failure Injection'?",
+        "o": [
+            "Deliberately introducing faults",
+            "Fixing faults",
+            "Avoiding faults",
+            "Hiding faults"
+        ]
+    },
+    {
+        "q": "What is 'Availability Zone' (AZ)?",
+        "o": [
+            "Isolated location within a Region (Data Center)",
+            "Country",
+            "Continent",
+            "Rack"
+        ]
+    },
+    {
+        "q": "What is 'Region' in cloud?",
+        "o": [
+            "Geographic area containing multiple AZs",
+            "Single server",
+            "Single rack",
+            "City"
+        ]
+    },
+    {
+        "q": "Why deploy across multiple AZs?",
+        "o": [
+            "Protect against data center failure",
+            "Faster speed",
+            "Latency",
+            "Cost"
+        ]
+    },
+    {
+        "q": "Why deploy across multiple Regions?",
+        "o": [
+            "Protect against regional disaster (Earthquake/flood)",
+            "Latency only",
+            "Cost only",
+            "Fun"
+        ]
+    },
+    {
+        "q": "What is latency between AZs typically?",
+        "o": [
+            "< 2ms (High speed)",
+            "100ms",
+            "1sec",
+            "0ms"
+        ]
+    },
+    {
+        "q": "What is latency between Regions?",
+        "o": [
+            "Tens/Hundreds of ms (Speed of light)",
+            "0ms",
+            "1ms",
+            "Infinite"
+        ]
+    },
+    {
+        "q": "What is 'Control Plane' failure risk?",
+        "o": [
+            "Cannot change state (scale/deploy), but Data Plane may work",
+            "Everything down",
+            "Only monitoring down",
+            "Nothing down"
+        ]
+    },
+    {
+        "q": "What is 'Data Plane'?",
+        "o": [
+            "Path where user traffic flows",
+            "Admin dashboard",
+            "Logging system",
+            "Billing system"
+        ]
+    },
+    {
+        "q": "Does Static Stability protect Data Plane or Control Plane?",
+        "o": [
+            "Data Plane (keeps working even if Control Plane fails)",
+            "Control Plane",
+            "Neither",
+            "Both"
+        ]
+    },
+    {
+        "q": "What is 'Replication Lag'?",
+        "o": [
+            "Delay between update on Primary and Follower",
+            "Network lag",
+            "Disk lag",
+            "CPU lag"
+        ]
+    },
+    {
+        "q": "What happens if you read from lagging replica?",
+        "o": [
+            "Stale data (inconsistency)",
+            "Error",
+            "Crash",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "How to handle replication lag in UI?",
+        "o": [
+            "Sticky Session (Read your own writes) / Version check",
+            "Ignore it",
+            "Refresh page",
+            "Wait 1 min"
+        ]
+    },
+    {
+        "q": "What is 'Monotonic Read' consistency?",
+        "o": [
+            "If you see a value, you never see an older value later",
+            "Always see latest",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Bounded Staleness'?",
+        "o": [
+            "Data might be stale, but only by X time or Y versions",
+            "Infinite staleness",
+            "Zero staleness",
+            "Unknown"
+        ]
+    },
+    {
+        "q": "What is 'Split-Brain Resolver'?",
+        "o": [
+            "Algorithm to merge conflicting data",
+            "Delete data",
+            "Keep both",
+            "Stop DB"
+        ]
+    },
+    {
+        "q": "Which strategy is 'Last Write Wins' (LWW)?",
+        "o": [
+            "Timestamp based resolution (Discard older)",
+            "First wins",
+            "Merge both",
+            "Error"
+        ]
+    },
+    {
+        "q": "Is LWW safe?",
+        "o": [
+            "No, can lose data if clocks skew or concurrent edits",
+            "Yes always",
+            "Maybe",
+            "Only for logs"
+        ]
+    },
+    {
+        "q": "What is 'Vector Clock'?",
+        "o": [
+            "Array of counters to track causality",
+            "Wall clock",
+            "Stopwatch",
+            "Alarm"
+        ]
+    },
+    {
+        "q": "Benefit of Vector Clock?",
+        "o": [
+            "Detects concurrent writes (Conflicts)",
+            "Faster",
+            "Smaller",
+            "Prettier"
+        ]
+    },
+    {
+        "q": "What is 'CRDT'?",
+        "o": [
+            "Conflict-free Replicated Data Type",
+            "Create Read Delete Type",
+            "Credit",
+            "Crypt"
+        ]
+    },
+    {
+        "q": "What does CRDT guarantee?",
+        "o": [
+            "Strong Eventual Consistency (Convergence)",
+            "Immediate Consistency",
+            "No consistency",
+            "Locking"
+        ]
+    },
+    {
+        "q": "What is 'Sidekeep'?",
+        "o": [
+            "No such thing (Trick question)",
+            "Sidecar",
+            "Backup",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Priority Load Shedding'?",
+        "o": [
+            "Drop non-critical requests (e.g. search) to save critical (checkout)",
+            "Drop random",
+            "Drop critical",
+            "Drop all"
+        ]
+    },
+    {
+        "q": "How to identify priority?",
+        "o": [
+            "API Key tier / Endpoint criticalness / User tier",
+            "Random",
+            "Time of day",
+            "Color"
+        ]
+    },
+    {
+        "q": "What is 'Brownout'?",
+        "o": [
+            "Deliberately disabling non-essential features under load",
+            "Blackout",
+            "Power out",
+            "Crash"
+        ]
+    },
+    {
+        "q": "Difference between Blackout and Brownout?",
+        "o": [
+            "Blackout is total failure, Brownout is partial reduction",
+            "Same",
+            "Brownout is total",
+            "Blackout is partial"
+        ]
+    },
+    {
+        "q": "What is 'Request Hedging'?",
+        "o": [
+            "Sending duplicate request to another replica if first is slow",
+            "Gardening",
+            "Blocking",
+            "Investing"
+        ]
+    },
+    {
+        "q": "Benefit of Hedging?",
+        "o": [
+            "Reduces tail latency (P99)",
+            "Increases throughput",
+            "Saves CPU",
+            "Saves Network"
+        ]
+    },
+    {
+        "q": "Risk of Hedging?",
+        "o": [
+            "Double load on system (Amplification)",
+            "Data loss",
+            "Security",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Backup' vs 'Archive'?",
+        "o": [
+            "Backup for recovery, Archive for compliance/history",
+            "Same",
+            "Backup is slow",
+            "Archive is fast"
+        ]
+    },
+    {
+        "q": "What is 'Point-in-Time Recovery' (PITR)?",
+        "o": [
+            "Restore DB to specific second in past",
+            "Restore to yesterday",
+            "Restore to now",
+            "Restore to start"
+        ]
+    },
+    {
+        "q": "What enables PITR?",
+        "o": [
+            "Full Backup + Transaction Logs (WAL)",
+            "Just backup",
+            "Just logs",
+            "Magic"
+        ]
+    },
+    {
+        "q": "What is 'Game Day Exercise'?",
+        "o": [
+            "Rehearsing incident response in prod/staging",
+            "Sports",
+            "Coding",
+            "Meeting"
+        ]
+    },
+    {
+        "q": "What is 'DiRT' (Google)?",
+        "o": [
+            "Disaster Recovery Testing",
+            "Dirt",
+            "Soil",
+            "Clean"
+        ]
+    },
+    {
+        "q": "What is 'Wheel of Misfortune'?",
+        "o": [
+            "Game to practice debugging past incidents",
+            "Wheel of fortune",
+            "Gambling",
+            "Spinning"
+        ]
+    },
+    {
+        "q": "What is 'Pre-Mortem'?",
+        "o": [
+            "Brainstorming what *could* go wrong before launch",
+            "Post mortem",
+            "Analysis",
+            "Guessing"
+        ]
+    },
+    {
+        "q": "What is 'Bus Factor'?",
+        "o": [
+            "Number of people getting hit by bus before project halts",
+            "Bus schedule",
+            "Transport",
+            "Cost"
+        ]
+    },
+    {
+        "q": "High Bus Factor is good or bad?",
+        "o": [
+            "Good (More people know the system)",
+            "Bad",
+            "Neutral",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'SPOF'?",
+        "o": [
+            "Single Point of Failure",
+            "Spoof",
+            "Speed",
+            "Space"
+        ]
+    },
+    {
+        "q": "How to eliminate SPOF?",
+        "o": [
+            "Redundancy",
+            "Faster CPU",
+            "Better code",
+            "Simpler design"
+        ]
+    },
+    {
+        "q": "What is 'Cold Standby'?",
+        "o": [
+            "Backup exists but servers are off (High RTO)",
+            "Servers running",
+            "Hot standby",
+            "Active"
+        ]
+    },
+    {
+        "q": "What is 'Hot Standby'?",
+        "o": [
+            "Fully running copy receiving updates (Low RTO)",
+            "Cold",
+            "Off",
+            "Tape"
+        ]
+    },
+    {
+        "q": "What is 'Pilot Light' vs 'Warm Standby'?",
+        "o": [
+            "Pilot Light is DB only/minimal, Warm is scaled down full app",
+            "Same",
+            "Pilot light is bigger",
+            "Warm is smaller"
+        ]
+    },
+    {
+        "q": "What is 'Bimodal IT' risk?",
+        "o": [
+            "Fast agile team vs Slow stable team friction",
+            "Two modes",
+            "Double speed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Failover'?",
+        "o": [
+            "Switching to backup implementation upon failure",
+            "Failing",
+            "Stopping",
+            "Starting"
+        ]
+    },
+    {
+        "q": "What is 'Failback'?",
+        "o": [
+            "Switching back to primary after recovery",
+            "Failing again",
+            "Stopping",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Manual Failover' risk?",
+        "o": [
+            "Human error / Slowness",
+            "Fast",
+            "Perfect",
+            "Cheap"
+        ]
+    },
+    {
+        "q": "What is 'Automated Failover' risk?",
+        "o": [
+            "False positives (Flapping)",
+            "Slow",
+            "Expensive",
+            "Tiring"
+        ]
+    },
+    {
+        "q": "What is 'Flapping'?",
+        "o": [
+            "Service going Up/Down repeatedly causing failover loops",
+            "Bird",
+            "Flying",
+            "Swimming"
+        ]
+    },
+    {
+        "q": "How to prevent Flapping?",
+        "o": [
+            "Hysteresis (Thresholds for up vs down)",
+            "Ignore",
+            "Manual",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Hysteresis'?",
+        "o": [
+            "Lag/delay in reaction (Need X successes to mark Up, 1 fail to mark Down)",
+            "History",
+            "Hysteria",
+            "Math"
+        ]
+    },
+    {
+        "q": "What is 'Taint and Toleration' (K8s) resilience?",
+        "o": [
+            "Dedicate nodes to specific pods (Isolation)",
+            "Security",
+            "Networking",
+            "Storage"
+        ]
+    },
+    {
+        "q": "What is 'Pod Priority'?",
+        "o": [
+            "K8s evicts lower priority pods to schedule higher ones",
+            "User priority",
+            "Network priority",
+            "Disk priority"
+        ]
+    },
+    {
+        "q": "What is 'Preemption' in K8s?",
+        "o": [
+            "Killing low priority pod to make room",
+            "Buying",
+            "Selling",
+            "Waiting"
+        ]
+    },
+    {
+        "q": "What is 'OOMKilled'?",
+        "o": [
+            "Out Of Memory killed (System protects itself)",
+            "CPU killed",
+            "User killed",
+            "Admin killed"
+        ]
+    },
+    {
+        "q": "How to prevent OOMKilled?",
+        "o": [
+            "Set correct Memory Requests & Limits",
+            "Delete app",
+            "Upgrade kernel",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What happens if Request > Limit?",
+        "o": [
+            "Impossible config (K8s rejects)",
+            "Allowed",
+            "Crash",
+            "Warning"
+        ]
+    },
+    {
+        "q": "What happens if usage > Limit?",
+        "o": [
+            "Throttled (CPU) or Killed (Memory)",
+            "Nothing",
+            "Allowed",
+            "Logged"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Pod Autoscaler' (VPA)?",
+        "o": [
+            "Adjusts CPU/Mem requests based on usage",
+            "Adds pods",
+            "Deletes pods",
+            "Moves pods"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal Pod Autoscaler' (HPA)?",
+        "o": [
+            "Adds replicas based on metric",
+            "Larger pods",
+            "Smaller pods",
+            "Moves pods"
+        ]
+    },
+    {
+        "q": "Can you use HPA and VPA together?",
+        "o": [
+            "Generally No (on same metric), creates race condition",
+            "Yes always",
+            "Maybe",
+            "Only on tuesday"
+        ]
+    },
+    {
+        "q": "What is 'Cluster Autoscaler'?",
+        "o": [
+            "Adds/Removes Nodes when pods pending/empty",
+            "Adds pods",
+            "Adds users",
+            "Adds disks"
+        ]
+    },
+    {
+        "q": "What is 'Overprovisioning'?",
+        "o": [
+            "Keeping extra capacity ready for spikes",
+            "Under capacity",
+            "Exact capacity",
+            "Zero capacity"
+        ]
+    },
+    {
+        "q": "What is 'Balloon Pod'?",
+        "o": [
+            "Low priority pod taking space, evicted when real load comes (Overprovisioning trick)",
+            "Party",
+            "Toy",
+            "Game"
+        ]
+    },
+    {
+        "q": "What is 'Rate Limit' 429 Retry-After?",
+        "o": [
+            "Header telling client when to try again",
+            "Error",
+            "Success",
+            "Wait 1s"
+        ]
+    },
+    {
+        "q": "What is 'Token Bucket' burst capacity?",
+        "o": [
+            "Max tokens accumulated (allows short spikes)",
+            "Zero",
+            "Infinite",
+            "One"
+        ]
+    },
+    {
+        "q": "What is 'Leaky Bucket' output?",
+        "o": [
+            "Steady stream (smoothes traffic)",
+            "Burst",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Concurrency Limit'?",
+        "o": [
+            "Limit number of parallel requests",
+            "Limit rate",
+            "Limit user",
+            "Limit IP"
+        ]
+    },
+    {
+        "q": "Which is better for preventing overload: Rate or Concurrency Limit?",
+        "o": [
+            "Concurrency (Adapts to processing time)",
+            "Rate (Fixed)",
+            "Neither",
+            "Both"
+        ]
+    },
+    {
+        "q": "What is Little's Law?",
+        "o": [
+            "L = Lambda * W (Concurrency = Rate * Wait Time)",
+            "E = mc2",
+            "F = ma",
+            "V = IR"
+        ]
+    },
+    {
+        "q": "What is 'Adaptive Concurrency Control'?",
+        "o": [
+            "Adjust limit based on latency/errors (TCP Vegas style)",
+            "Fixed limit",
+            "Manual limit",
+            "No limit"
+        ]
+    },
+    {
+        "q": "What is 'Coordinated Omission' in benchmarks?",
+        "o": [
+            "Ignoring blockage time during testing (Skewing results)",
+            "Good testing",
+            "Bad server",
+            "Low memory"
+        ]
+    },
+    {
+        "q": "Why is Coordinated Omission bad?",
+        "o": [
+            "Hides true worst-case latency",
+            "Shows error",
+            "Shows success",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Load Balancer' health check?",
+        "o": [
+            "Ping backend to enable/disable traffic",
+            "Ping client",
+            "Ping DB",
+            "Ping DNS"
+        ]
+    },
+    {
+        "q": "What is 'Deep Health Check' danger?",
+        "o": [
+            "Failure in dependency kills healthy app (Cascading)",
+            "Slow",
+            "Fast",
+            "Good"
+        ]
+    },
+    {
+        "q": "What is 'Zombie Process'?",
+        "o": [
+            "Dead process (defunct) waiting for parent to read code",
+            "Virus",
+            "Game",
+            "Runner"
+        ]
+    },
+    {
+        "q": "What is 'Orphan Process'?",
+        "o": [
+            "Parent died, adopted by init (PID 1)",
+            "Child died",
+            "Zombie",
+            "Ghost"
+        ]
+    },
+    {
+        "q": "What is 'PID 1' responsibility in container?",
+        "o": [
+            "Reap zombies / Handle signals",
+            "Run app",
+            "Log",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Tini'?",
+        "o": [
+            "Tiny init system for containers (reaps zombies)",
+            "Game",
+            "Code",
+            "Editor"
+        ]
+    },
+    {
+        "q": "Why use Tini?",
+        "o": [
+            "Prevent zombie apocalypse in container",
+            "Performance",
+            "Security",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'SIGKILL' vs 'SIGTERM'?",
+        "o": [
+            "SIGKILL is instant (FORCE), SIGTERM is polite (Ask)",
+            "Same",
+            "SIGKILL is polite",
+            "SIGTERM is force"
+        ]
+    },
+    {
+        "q": "Which signal allows Graceful Shutdown?",
+        "o": [
+            "SIGTERM",
+            "SIGKILL",
+            "SIGSTOP",
+            "SIGSEGV"
+        ]
+    },
+    {
+        "q": "What is 'Draining' a node?",
+        "o": [
+            "Evicting all pods safely before maintenance",
+            "Deleting node",
+            "Formatting node",
+            "Rebooting node"
+        ]
+    },
+    {
+        "q": "What is 'Cordon' a node?",
+        "o": [
+            "Mark unschedulable (No new pods)",
+            "Drain",
+            "Delete",
+            "Stop"
+        ]
+    },
+    {
+        "q": "What is 'Partition' in CAP?",
+        "o": [
+            "Network break between nodes",
+            "Disk part",
+            "Memory part",
+            "Room part"
+        ]
+    },
+    {
+        "q": "What is 'Availability' in CAP?",
+        "o": [
+            "Every request receives a response (success/fail)",
+            "Correct response",
+            "Fast response",
+            "Slow response"
+        ]
+    },
+    {
+        "q": "What is 'Consistency' in CAP?",
+        "o": [
+            "Every read receives most recent write (Linearizability)",
+            "Weak consistency",
+            "Eventual consistency",
+            "No consistency"
+        ]
+    },
+    {
+        "q": "Is 'CA' system possible in distributed network?",
+        "o": [
+            "No, Network Partitions are inevitable (Must choose P)",
+            "Yes",
+            "Maybe",
+            "In LAN"
+        ]
+    },
+    {
+        "q": "What is 'PACELC' theorem?",
+        "o": [
+            "Extension of CAP: Else (L vs C) when no Partition",
+            "Package",
+            "Game",
+            "Space"
+        ]
+    },
+    {
+        "q": "What does PACELC stand for?",
+        "o": [
+            "Partition, Availability, Consistency, Else, Latency, Consistency",
+            "Paper",
+            "Place",
+            "Public"
+        ]
+    },
+    {
+        "q": "What is 'Split Horizon DNS'?",
+        "o": [
+            "Different DNS answers for internal vs external",
+            "Split brain",
+            "Split disk",
+            "Split view"
+        ]
+    },
+    {
+        "q": "What is 'Anycast' resilience?",
+        "o": [
+            "Route to nearest healthy node sharing same IP",
+            "Broadcast",
+            "Multicast",
+            "Unicast"
+        ]
+    },
+    {
+        "q": "What is 'BGP'?",
+        "o": [
+            "Border Gateway Protocol (Routing internet)",
+            "Big Game",
+            "Blue Green",
+            "Bad Gateway"
+        ]
+    },
+    {
+        "q": "What is 'Hot Spot' in sharding?",
+        "o": [
+            "One shard receiving significantly more traffic than others",
+            "Warm area",
+            "Wifi spot",
+            "Fire"
+        ]
+    },
+    {
+        "q": "What causes Hot Spot?",
+        "o": [
+            "Uneven data distribution (Celebrity problem)",
+            "Even data",
+            "Slow disk",
+            "Bad code"
+        ]
+    },
+    {
+        "q": "How to fix Celebrity Problem?",
+        "o": [
+            "Add salt/random suffix to key for better spread",
+            "Delete celebrity",
+            "Block traffic",
+            "Use single node"
+        ]
+    },
+    {
+        "q": "What is 'Resharding'?",
+        "o": [
+            "Moving data to change shard count/layout",
+            "Deleting shards",
+            "Formatting shards",
+            "Backing up"
+        ]
+    },
+    {
+        "q": "Why is Resharding hard?",
+        "o": [
+            "Requires massive data movement while system assumes live",
+            "Easy",
+            "Fast",
+            "Cheap"
+        ]
+    },
+    {
+        "q": "What is 'Directory Based Sharding'?",
+        "o": [
+            "Lookup table maps Key to Shard ID",
+            "Hash based",
+            "Range based",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Range Based Sharding'?",
+        "o": [
+            "Keys split by range (A-M, N-Z)",
+            "Hash",
+            "Directory",
+            "Random"
+        ]
+    },
+    {
+        "q": "Risk of Range Based Sharding?",
+        "o": [
+            "Sequential writes hit same shard (Hot spot)",
+            "Slow read",
+            "Complex",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'X-Cache' header?",
+        "o": [
+            "Indicates HIT or MISS",
+            "Indicates error",
+            "Indicates size",
+            "Indicates time"
+        ]
+    },
+    {
+        "q": "What is 'Cache Penetration'?",
+        "o": [
+            "Querying for non-existent keys bypasses cache to DB",
+            "Hacking cache",
+            "Filling cache",
+            "Deleting cache"
+        ]
+    },
+    {
+        "q": "How to fix Cache Penetration?",
+        "o": [
+            "Bloom Filter / Cache Null values",
+            "Retry",
+            "Ignore",
+            "Restart"
+        ]
+    },
+    {
+        "q": "What is 'Bloom Filter'?",
+        "o": [
+            "Probabilistic structure to test set membership (May yield false positive)",
+            "Exact filter",
+            "Compression",
+            "Encryption"
+        ]
+    },
+    {
+        "q": "Does Bloom Filter have False Negatives?",
+        "o": [
+            "No (If it says 'No', it's definitely No)",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Cache Avalance'?",
+        "o": [
+            "Massive number of keys expiring simultaneously",
+            "Snow",
+            "Ice",
+            "Flow"
+        ]
+    },
+    {
+        "q": "How to fix Cache Avalanche?",
+        "o": [
+            "Add random jitter to TTL",
+            "Set same TTL",
+            "Remove TTL",
+            "Clear cache"
+        ]
+    },
+    {
+        "q": "What is 'Probabilistic Early Expiration'?",
+        "o": [
+            "Refresh cache before purely expired based on random chance (X-Fetch)",
+            "Expire late",
+            "Never expire",
+            "Expire now"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Lock'?",
+        "o": [
+            "Mechanism to ensure only one process performs task across cluster",
+            "Local lock",
+            "Door lock",
+            "Key"
+        ]
+    },
+    {
+        "q": "Which system provides Distributed Lock?",
+        "o": [
+            "Zookeeper / Etcd / Redis (Redlock)",
+            "Postgres",
+            "Nginx",
+            "Top"
+        ]
+    },
+    {
+        "q": "What is 'Fencing Token' in locks?",
+        "o": [
+            "Monotonically increasing number to reject old lock holders (Zombies)",
+            "Fence",
+            "Password",
+            "Key"
+        ]
+    },
+    {
+        "q": "Why is Fencing Token needed?",
+        "o": [
+            "GC Pause can cause process to wake up thinking it has lock",
+            "Speed",
+            "Security",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Redlock' algorithm?",
+        "o": [
+            "Distributed lock algorithm for Redis (Quorum based)",
+            "Blue lock",
+            "Green lock",
+            "Deadlock"
+        ]
+    },
+    {
+        "q": "Is Redlock 100% safe?",
+        "o": [
+            "Debatable (Depends on clock sync), Fencing Token preferred",
+            "Yes perfect",
+            "No useless",
+            "Only for read"
+        ]
+    },
+    {
+        "q": "What is 'Clock Skew'?",
+        "o": [
+            "Difference in time between servers",
+            "Broken clock",
+            "Fast clock",
+            "Slow clock"
+        ]
+    },
+    {
+        "q": "How to minimize Clock Skew?",
+        "o": [
+            "NTP (Network Time Protocol)",
+            "Manual setting",
+            "Ignore",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'Leap Second' handling?",
+        "o": [
+            "Smearing time (slowing down clock) instead of jumping",
+            "Stopping time",
+            "Jumping",
+            "Crashing"
+        ]
+    },
+    {
+        "q": "What is 'Google Spanner'?",
+        "o": [
+            "Globally distributed DB with TrueTime (Atomic clocks + GPS)",
+            "MySQL",
+            "Simple DB",
+            "Cache"
+        ]
+    },
+    {
+        "q": "What does TrueTime enable?",
+        "o": [
+            "Global external consistency (Linearizability) without waiting for max skew",
+            "Faster GPS",
+            "Map",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Byzantine Fault'?",
+        "o": [
+            "Node behaving maliciously or inconsistently (Traitor)",
+            "Crash only",
+            "Slow node",
+            "Dead node"
+        ]
+    },
+    {
+        "q": "What is 'Byzantine Fault Tolerance' (BFT)?",
+        "o": [
+            "Resilience against malicious nodes (needs 3f+1 nodes)",
+            "Crash tolerance",
+            "Error tolerance",
+            "None"
+        ]
+    },
+    {
+        "q": "Does standard 2PC handle Byzantine faults?",
+        "o": [
+            "No, assumes nodes are honest (crash-stop model)",
+            "Yes",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Network Partition' really?",
+        "o": [
+            "Dropped packets preventing communication",
+            "Cut cable",
+            "Firewall",
+            "All of above"
+        ]
+    },
+    {
+        "q": "Can you distinguish Partition from Slow Node?",
+        "o": [
+            "Ideally No (Async network model), impossible to be 100% sure",
+            "Yes always",
+            "Easy",
+            "Never"
+        ]
+    },
+    {
+        "q": "What covers 'Gray Failure'?",
+        "o": [
+            "Subtle failure (e.g. valid response but wrong data / high latency)",
+            "Total crash",
+            "Blackout",
+            "Success"
+        ]
+    },
+    {
+        "q": "How to detect Gray Failure?",
+        "o": [
+            "Application level health checks / Semantic monitoring",
+            "Ping",
+            "TCP check",
+            "Port check"
+        ]
+    },
+    {
+        "q": "What is 'Self-Preservation' mode (Eureka)?",
+        "o": [
+            "Stop expiring instances if network partition suspected (massive drops)",
+            "Delete everything",
+            "Restart",
+            " Panic"
+        ]
+    },
+    {
+        "q": "What is 'Unavailability' due to 'GC Pause'?",
+        "o": [
+            "Stop-the-world GC pauses app threads",
+            "Network down",
+            "Disk full",
+            "CPU busy"
+        ]
+    },
+    {
+        "q": "How to mitigate GC Pause in Java?",
+        "o": [
+            "Tune GC (G1GC / ZGC / Shenandoah)",
+            "Write in C",
+            "Restart",
+            "Add RAM only"
+        ]
+    },
+    {
+        "q": "What is 'ZGC' goal?",
+        "o": [
+            "Sub-millisecond pause times regardless of heap size",
+            "Zero GC",
+            "Zone GC",
+            "Zip GC"
+        ]
+    },
+    {
+        "q": "What is 'Off-Heap Memory'?",
+        "o": [
+            "Memory outside JVM Heap (Not managed by GC)",
+            "Disk",
+            "Cloud",
+            "Cache"
+        ]
+    },
+    {
+        "q": "Benefit of Off-Heap?",
+        "o": [
+            "Avoids GC pauses for large caches",
+            "Faster allocation",
+            "Better security",
+            "Easier code"
+        ]
+    },
+    {
+        "q": "What is 'Epoll'?",
+        "o": [
+            "Linux I/O event notification (efficient polling)",
+            "Polling",
+            "Select",
+            "Poll"
+        ]
+    },
+    {
+        "q": "Why Epoll better than Select?",
+        "o": [
+            "O(1) vs O(N) scaling with connections",
+            "Easier",
+            "Standard",
+            "Older"
+        ]
+    },
+    {
+        "q": "What is 'C10K Problem'?",
+        "o": [
+            "Handling 10,000 concurrent connections",
+            "10k lines of code",
+            "10k errors",
+            "10k rate"
+        ]
+    },
+    {
+        "q": "What solved C10K?",
+        "o": [
+            "Non-blocking I/O (NIO / Epoll / Kqueue)",
+            "Faster CPU",
+            "More threads",
+            "More disks"
+        ]
+    },
+    {
+        "q": "What is 'Reactive Programming' bias?",
+        "o": [
+            "Resilience/Responsiveness through async message passing",
+            "Fast coding",
+            "React JS",
+            "No SQL"
+        ]
+    },
+    {
+        "q": "What is 'Thread Starvation'?",
+        "o": [
+            "Threads blocked waiting, none available for new work",
+            "Hungry threads",
+            "Dead threads",
+            "Fast threads"
+        ]
+    },
+    {
+        "q": "How Reactive helps Thread Starvation?",
+        "o": [
+            "Small number of event loop threads, non-blocking I/O",
+            "More threads",
+            "Less RAM",
+            "Faster CPU"
+        ]
+    },
+    {
+        "q": "What is 'Loom' (Java 21)?",
+        "o": [
+            "Virtual Threads (Lightweight threads managed by JVM)",
+            "Fabric",
+            "Weaving",
+            "Tool"
+        ]
+    },
+    {
+        "q": "Benefit of Virtual Threads?",
+        "o": [
+            "Blocking code style with scalability of async",
+            "Faster math",
+            "Better UI",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Service Degradation'?",
+        "o": [
+            "Turning off non-core functionality to survive load",
+            "Failing",
+            "Stopping",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Shed Load Step'?",
+        "o": [
+            "Step in pipeline to drop request if too busy",
+            "Shedding skin",
+            "Moving load",
+            "Step down"
+        ]
+    },
+    {
+        "q": "What is 'Inter-Pod Affinity'?",
+        "o": [
+            "Schedule pods near each other (e.g. App near Cache)",
+            "Schedule far",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "Benefit of Inter-Pod Affinity?",
+        "o": [
+            "Lower latency / Higher throughput",
+            "Resilience",
+            "Security",
+            "Cost"
+        ]
+    },
+    {
+        "q": "Risk of Inter-Pod Affinity?",
+        "o": [
+            "Resource contention / Poor resilience if node fails",
+            "Slow",
+            "Bad code",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Node Selector'?",
+        "o": [
+            "Simple constraint to schedule pod on node with label",
+            "Complex constraint",
+            "Random selector",
+            "User selector"
+        ]
+    },
+    {
+        "q": "What is 'Taint' Effect 'NoSchedule'?",
+        "o": [
+            "Pod won't be scheduled unless it tolerates taint",
+            "Pod deleted",
+            "Pod crashes",
+            "Pod runs"
+        ]
+    },
+    {
+        "q": "What is 'Taint' Effect 'NoExecute'?",
+        "o": [
+            "Pod evicted if already running (unless tolerates)",
+            "Pod blocked",
+            "Pod slowed",
+            "Pod paused"
+        ]
+    },
+    {
+        "q": "What is 'Priority Class' value?",
+        "o": [
+            "Integer (Higher is more important)",
+            "String",
+            "Boolean",
+            "Float"
+        ]
+    },
+    {
+        "q": "Who uses 'system-node-critical' priority?",
+        "o": [
+            "Kubelet, CNI, etc.",
+            "User app",
+            "Database",
+            "Web server"
+        ]
+    },
+    {
+        "q": "What is 'Headless Service' resilience?",
+        "o": [
+            "Direct pod-to-pod IP discovery (No VIP bottleneck)",
+            "No head",
+            "LB",
+            "Proxy"
+        ]
+    },
+    {
+        "q": "Risk of Headless Service?",
+        "o": [
+            "Client must handle LB/Retry logic",
+            "Slow",
+            "Complex",
+            "Cost"
+        ]
+    },
+    {
+        "q": "What is 'ExternalName' Service?",
+        "o": [
+            "Maps service to external DNS name (CNAME)",
+            "External IP",
+            "Internal Name",
+            "Host file"
+        ]
+    },
+    {
+        "q": "What is 'ClusterIP'?",
+        "o": [
+            "Stable Internal Virtual IP for service",
+            "External IP",
+            "Node IP",
+            "Pod IP"
+        ]
+    },
+    {
+        "q": "What is 'NodePort'?",
+        "o": [
+            "Expose service on specific port on all Nodes",
+            "Cluster port",
+            "Pod port",
+            "Container port"
+        ]
+    },
+    {
+        "q": "What is 'LoadBalancer' service type?",
+        "o": [
+            "Provisions Cloud LB aiming at NodePorts",
+            "Software LB",
+            "Hardware LB",
+            "DNS LB"
+        ]
+    },
+    {
+        "q": "What is 'ExternalTrafficPolicy: Local'?",
+        "o": [
+            "Preserves Client IP (Routes only to local node pods)",
+            "Routes across nodes",
+            "Drops traffic",
+            "Hides IP"
+        ]
+    },
+    {
+        "q": "Benefit of ExternalTrafficPolicy: Local?",
+        "o": [
+            "Source IP preservation / Less network hops",
+            "Load balancing",
+            "Resilience",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Risk of ExternalTrafficPolicy: Local?",
+        "o": [
+            "Imbalanced load (if node has no pods, drops traffic)",
+            "Slow",
+            "Cost",
+            "Complexity"
+        ]
+    },
+    {
+        "q": "What is 'Session Affinity' (Sticky Session)?",
+        "o": [
+            "Route user to same pod based on ClientIP/Cookie",
+            "Random route",
+            "Round robin",
+            "Fastest route"
+        ]
+    },
+    {
+        "q": "When is Sticky Session required?",
+        "o": [
+            "Stateful legacy apps / WebSocket (sometimes)",
+            "Stateless apps",
+            "Databases",
+            "Files"
+        ]
+    },
+    {
+        "q": "What is 'Multipath TCP' (MPTCP)?",
+        "o": [
+            "Use multiple interfaces (Wifi+LTE) for one connection",
+            "Multiple ports",
+            "Multiple protocols",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'QUIC' connection migration?",
+        "o": [
+            "Connection survives IP change (e.g. Wifi to LTE)",
+            "Migration to cloud",
+            "Migration to DB",
+            "None"
+        ]
+    },
+    {
+        "q": "How QUIC handles migration?",
+        "o": [
+            "Connection ID (Independent of IP:Port tuple)",
+            "Cookies",
+            "Magic",
+            "VPN"
+        ]
+    },
+    {
+        "q": "What is 'Keepalive' timeout?",
+        "o": [
+            "Max time idle connection stays open",
+            "Max request time",
+            "Max response time",
+            "Max connect time"
+        ]
+    },
+    {
+        "q": "What happens if Keepalive is too short?",
+        "o": [
+            "Frequent TCP handshakes (Efficiency loss)",
+            "Stuck connections",
+            "Memory leak",
+            "Slow"
+        ]
+    },
+    {
+        "q": "What happens if Keepalive is too long?",
+        "o": [
+            "Resource exhaustion (Too many idle conns)",
+            "Fast",
+            "Good",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'TCP Fast Open'?",
+        "o": [
+            "Data exchange during handshake (3rd ACK)",
+            "Fast cable",
+            "Open port",
+            "No handshake"
+        ]
+    },
+    {
+        "q": "What is 'Congestion Control'?",
+        "o": [
+            "Preventing network collapse by slowing down sending",
+            "Traffic police",
+            "Flow control",
+            "Loss control"
+        ]
+    },
+    {
+        "q": "What is 'BBR' congestion control?",
+        "o": [
+            "Bottleneck Bandwidth and Round-trip propagation time (Google)",
+            "Basic",
+            "Best",
+            "Bad"
+        ]
+    },
+    {
+        "q": "Why BBR is better than CUBIC?",
+        "o": [
+            "Maximize throughput not just prevent loss (Model based)",
+            "Slower",
+            "Simpler",
+            "Older"
+        ]
+    },
+    {
+        "q": "What is 'ECMP'?",
+        "o": [
+            "Equal-Cost Multi-Path routing (Network layer LB)",
+            "Easy CMP",
+            "Error CheckMP",
+            "Ethernet CMP"
+        ]
+    },
+    {
+        "q": "What is 'Consistent Hashing' in LB?",
+        "o": [
+            "Maglev / Ring hash",
+            "Random",
+            "Round robin",
+            "Weight"
+        ]
+    },
+    {
+        "q": "What is 'Maglev'?",
+        "o": [
+            "Google's Soft LB hashing algorithm",
+            "Train",
+            "Magnet",
+            "Game"
+        ]
+    },
+    {
+        "q": "What is 'Power of Two Choices'?",
+        "o": [
+            "Pick 2 random nodes, choose better one (LB algorithm)",
+            "Pick 1",
+            "Pick all",
+            "Pick best"
+        ]
+    },
+    {
+        "q": "Why Power of Two Choices?",
+        "o": [
+            "Great balance with low overhead vs checking all",
+            "Perfect balance",
+            "Bad balance",
+            "No balance"
+        ]
+    },
+    {
+        "q": "What is 'Control Theory' mainly used for in SRE?",
+        "o": [
+            "Autoscaling / Adaptive Concurrency (Feedback loops)",
+            "Coding",
+            "Testing",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'PID Controller'?",
+        "o": [
+            "Proportional-Integral-Derivative (Standard feedback loop)",
+            "Process ID",
+            "Program ID",
+            "Protocol ID"
+        ]
+    },
+    {
+        "q": "What is 'Incident Commander' (IC)?",
+        "o": [
+            "Process leader managing the incident response (Not fixing it)",
+            "Person fixing the bug",
+            "CEO",
+            "Customer support"
+        ]
+    },
+    {
+        "q": "What is 'Scribe' in incident?",
+        "o": [
+            "Person documenting the timeline/decisions",
+            "Writer",
+            "Coder",
+            "Manager"
+        ]
+    },
+    {
+        "q": "What is 'Operations Lead' / 'Subject Matter Expert'?",
+        "o": [
+            "Person actually troubleshooting/fixing system",
+            "IC",
+            "Scribe",
+            "HR"
+        ]
+    },
+    {
+        "q": "What is 'Communication Lead'?",
+        "o": [
+            "Person updating stakeholders/customers",
+            "IC",
+            "Fixer",
+            "Tester"
+        ]
+    },
+    {
+        "q": "Why separate IC from Operations Lead?",
+        "o": [
+            "Prevents tunnel vision (IC sees big picture, Ops fixes)",
+            "Too many cooks",
+            "Cost",
+            "Fun"
+        ]
+    },
+    {
+        "q": "What is 'SEV 1' (Severity 1)?",
+        "o": [
+            "Critical incidents affecting all users (Immediate action)",
+            "Minor bug",
+            "Feature request",
+            "Slow down"
+        ]
+    },
+    {
+        "q": "What is 'SEV 5'?",
+        "o": [
+            "Minor issue / Trivial (Fix later)",
+            "Critical",
+            "Major",
+            "Urgent"
+        ]
+    },
+    {
+        "q": "What is 'Operational Readiness Review' (ORR)?",
+        "o": [
+            "Checklist before launching to prod ( Alerts, Runbooks, Capacity)",
+            "Code review",
+            "Design review",
+            "Lunch"
+        ]
+    },
+    {
+        "q": "What is 'Production Readiness Checklist'?",
+        "o": [
+            "Same as ORR",
+            "Shopping list",
+            "To do list",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Alert Fatigue'?",
+        "o": [
+            "Desensitization due to too many false/noisy alerts",
+            "Tiredness",
+            "Sleepy",
+            "Lazy"
+        ]
+    },
+    {
+        "q": "How to fix Alert Fatigue?",
+        "o": [
+            "Delete non-actionable alerts / Group alerts",
+            "Drink coffee",
+            "Sleep more",
+            "Ignore all"
+        ]
+    },
+    {
+        "q": "What is 'Symptom-based Alerting'?",
+        "o": [
+            "Alert on 'What' is broken (High Error Rate) not 'Why' (High CPU)",
+            "Alert on CPU",
+            "Alert on Disk",
+            "Alert on Cause"
+        ]
+    },
+    {
+        "q": "Why Symptom-based is better?",
+        "o": [
+            "Catches unknown unknowns (User pain) directly",
+            "Easier",
+            "Faster",
+            "Standard"
+        ]
+    },
+    {
+        "q": "What is 'Traffic Shadowing' (Mirroring)?",
+        "o": [
+            "Sending copy of live traffic to new version asynchronously",
+            "Blocking traffic",
+            "Splitting traffic",
+            "Testing in prod"
+        ]
+    },
+    {
+        "q": "Benefit of Traffic Shadowing?",
+        "o": [
+            "Test with real data with zero risk to users (Fire and forget)",
+            "Faster response",
+            "Less resources",
+            "Security"
+        ]
+    },
+    {
+        "q": "What is 'Tapping' traffic?",
+        "o": [
+            "Copying packets for analysis (Wireshark style)",
+            "Clicking",
+            "Stopping",
+            "Injecting"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Monitoring'?",
+        "o": [
+            "Running scripted user journeys to test availability",
+            "Real user monitoring",
+            "Log monitoring",
+            "Metrics"
+        ]
+    },
+    {
+        "q": "What is 'Real User Monitoring' (RUM)?",
+        "o": [
+            "Tracking actual user interactions (JS snippet)",
+            "Synthetic",
+            "Bot",
+            "Script"
+        ]
+    },
+    {
+        "q": "What is 'Observability' vs 'Monitoring'?",
+        "o": [
+            "Monitoring tells you system is broken, Observability tells you why",
+            "Same thing",
+            "Observability is logs",
+            "Monitoring is metrics"
+        ]
+    },
+    {
+        "q": "What are the 3 pillars of Observability?",
+        "o": [
+            "Logs, Metrics, Traces",
+            "CPU, RAM, Disk",
+            "Red, Blue, Green",
+            "Frontend, Backend, DB"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality' in metrics?",
+        "o": [
+            "Number of unique values for a dimension (e.g. UserID)",
+            "Size",
+            "Count",
+            "Speed"
+        ]
+    },
+    {
+        "q": "Why High Cardinality is expensive?",
+        "o": [
+            "Explodes storage/index size (e.g. 1 metric per UserID)",
+            "Slows CPU",
+            "Uses RAM",
+            "Network"
+        ]
+    },
+    {
+        "q": "What is 'Structured Logging' benefit?",
+        "o": [
+            "Machine readable (JSON) for easy querying",
+            "Pretty",
+            "Small",
+            "Fast"
+        ]
+    },
+    {
+        "q": "What is 'Correlation ID'?",
+        "o": [
+            "Unique ID passed across services to link logs",
+            "Log ID",
+            "User ID",
+            "Session ID"
+        ]
+    },
+    {
+        "q": "What is 'Sample Ratio'?",
+        "o": [
+            "Percentage of traces/logs kept (to save cost)",
+            "100%",
+            "0%",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'Tail-based Sampling'?",
+        "o": [
+            "Decide to keep trace typically after request finishes (keep errors)",
+            "Head-based",
+            "Random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Service Level Objective' (SLO) burn alert?",
+        "o": [
+            "Alert when error budget burning too fast (Predicts failure)",
+            "Alert when failing",
+            "Alert when slow",
+            "Alert when fast"
+        ]
+    },
+    {
+        "q": "What is 'Nines' of availability?",
+        "o": [
+            "99.9...% uptime",
+            "9 hours",
+            "9 days",
+            "9 errors"
+        ]
+    },
+    {
+        "q": "What is 'Self-Healing' mechanism in K8s?",
+        "o": [
+            "Restarting crashed containers / Replacing nodes",
+            "Calling admin",
+            "Emailing",
+            "Stopping"
+        ]
+    },
+    {
+        "q": "What is 'CrashLoopBackOff'?",
+        "o": [
+            "Pod crashing repeatedly, K8s increases restart delay",
+            "Infinite loop",
+            "Success",
+            "Fast restart"
+        ]
+    },
+    {
+        "q": "Why Backoff in CrashLoop?",
+        "o": [
+            "Prevent CPU churning / Give system time to recover",
+            "Punishment",
+            "Bug",
+            "Feature"
+        ]
+    },
+    {
+        "q": "What is 'Liveness Probe' failure action?",
+        "o": [
+            "Restart container",
+            "Stop traffic",
+            "Delete pod",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Readiness Probe' failure action?",
+        "o": [
+            "Remove from Service Endpoints (Stop traffic)",
+            "Restart",
+            "Delete",
+            "Log"
+        ]
+    },
+    {
+        "q": "What is 'Startup Probe'?",
+        "o": [
+            "Wait for slow start before Liveness checks",
+            "Check boot",
+            "Check code",
+            "Check user"
+        ]
+    },
+    {
+        "q": "What is 'PreStop Hook'?",
+        "o": [
+            "Command run before container kill (Graceful shutdown)",
+            "PostStart",
+            "Init",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "Why sleep in PreStop?",
+        "o": [
+            "Allow time for LB to propagate removal before stopping app",
+            "Rest",
+            "Wait for user",
+            "Slow down"
+        ]
+    },
+    {
+        "q": "What is 'TerminationGracePeriodSeconds'?",
+        "o": [
+            "Time K8s waits between SIGTERM and SIGKILL (Default 30s)",
+            "Time to boot",
+            "Time to run",
+            "Time to live"
+        ]
+    },
+    {
+        "q": "What happens if app ignores SIGTERM?",
+        "o": [
+            "Killed forcefully (SIGKILL) after grace period",
+            "Runs forever",
+            "Restarts",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Immutable Deployment'?",
+        "o": [
+            "New version = New servers/pods (No in-place update)",
+            "Update in place",
+            "Patching",
+            "Manual"
+        ]
+    },
+    {
+        "q": "What is 'Artifact Promotion'?",
+        "o": [
+            "Moving same build artifact (Docker image) from Dev -> Stage -> Prod",
+            "Rebuilding",
+            "Copying code",
+            "Compiling"
+        ]
+    },
+    {
+        "q": "Why not rebuild for Prod?",
+        "o": [
+            "Ensure tested binary is exactly what runs in Prod",
+            "Saves time",
+            "Saves disk",
+            "Lazy"
+        ]
+    },
+    {
+        "q": "What is 'GitOps' resilience?",
+        "o": [
+            "Config stored in Git is source of truth (Auto-sync prevents drift)",
+            "Git backup",
+            "Git log",
+            "Git commit"
+        ]
+    },
+    {
+        "q": "What is 'Drift Detection'?",
+        "o": [
+            "Noticing live state differs from Git state",
+            "Drifting car",
+            "Moving",
+            "Floating"
+        ]
+    },
+    {
+        "q": "What is 'Secret Management'?",
+        "o": [
+            "Secure storage for passwords/keys (Vault)",
+            "Hiding files",
+            "Encryption",
+            "Ignoring"
+        ]
+    },
+    {
+        "q": "Why not commit secrets to Git?",
+        "o": [
+            "Security risk (Once in history, always compromised)",
+            "Space",
+            "Messy",
+            "Ugly"
+        ]
+    },
+    {
+        "q": "What is 'Sealed Secrets'?",
+        "o": [
+            "Encrypting secret so it can be stored in Git safely",
+            "Hidden secret",
+            "Lost secret",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'External Secrets Operator'?",
+        "o": [
+            "Syncs secrets from Cloud (AWS SM/Vault) into K8s",
+            "Generates secrets",
+            "Deletes secrets",
+            "Validates secrets"
+        ]
+    },
+    {
+        "q": "What is 'Defense in Depth'?",
+        "o": [
+            "Multiple layers of security (Network + Auth + Encryption)",
+            "One strong layer",
+            "Firewall only",
+            "VPN only"
+        ]
+    },
+    {
+        "q": "What is 'Least Privilege'?",
+        "o": [
+            "Granting only necessary permissions",
+            "Granting admin",
+            "Granting all",
+            "Granting none"
+        ]
+    },
+    {
+        "q": "What is 'Break Glass' procedure?",
+        "o": [
+            "Emergency high-privilege access when automation fails",
+            "Breaking window",
+            "Fire alarm",
+            "Panic button"
+        ]
+    },
+    {
+        "q": "What is 'Bastion Host' (Jump Box)?",
+        "o": [
+            "Secure gateway/server to access private network",
+            "Admin PC",
+            "Router",
+            "Firewall"
+        ]
+    },
+    {
+        "q": "What is 'Zero Trust'?",
+        "o": [
+            "Never trust, always verify (Identity based, not IP based)",
+            "Trust LAN",
+            "Trust VPN",
+            "Trust nothing"
+        ]
+    },
+    {
+        "q": "What is 'Mutual TLS' (mTLS)?",
+        "o": [
+            "Both client & server authenticate each other via certs",
+            "Server only",
+            "Client only",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'JIT Access' (Just-In-Time)?",
+        "o": [
+            "Temporary privilege elevation for specific task",
+            "Permanent admin",
+            "No access",
+            "Fast access"
+        ]
+    },
+    {
+        "q": "What is 'Audit Log'?",
+        "o": [
+            "Record of 'Who did What and When'",
+            "Debug log",
+            "Error log",
+            "Access log"
+        ]
+    },
+    {
+        "q": "Why are Audit Logs immutable?",
+        "o": [
+            "Prevent tampering/covering tracks",
+            "Read only",
+            "Save space",
+            "Faster"
+        ]
+    },
+    {
+        "q": "What is 'SIEM'?",
+        "o": [
+            "Security Information and Event Management (Log analysis)",
+            "Sim game",
+            "Simple",
+            "System"
+        ]
+    },
+    {
+        "q": "What is 'DDoS'?",
+        "o": [
+            "Distributed Denial of Service",
+            "Direct DOS",
+            "Data DOS",
+            "Disk DOS"
+        ]
+    },
+    {
+        "q": "How to mitigate DDoS?",
+        "o": [
+            "WAF / Rate Limiting / CDN / Scrubbing",
+            "Restart",
+            "Shutdown",
+            "Ignore"
+        ]
+    },
+    {
+        "q": "What is 'WAF'?",
+        "o": [
+            "Web Application Firewall (L7)",
+            "Wifi",
+            "Web App Fix",
+            "Wall"
+        ]
+    },
+    {
+        "q": "What is 'Scrubbing Center'?",
+        "o": [
+            "Facility to filter malicious traffic from clean traffic",
+            "Cleaning room",
+            "Car wash",
+            "Data center"
+        ]
+    },
+    {
+        "q": "What is 'Syn Flood'?",
+        "o": [
+            "Sending SYN packets without ACK to exhaust server resources",
+            "Water flood",
+            "Data flood",
+            "Log flood"
+        ]
+    },
+    {
+        "q": "What is 'Syn Cookies'?",
+        "o": [
+            "Technique to mitigate Syn Flood (Stateless handshake)",
+            "Cookie",
+            "Food",
+            "Token"
+        ]
+    },
+    {
+        "q": "What is 'Amplification Attack'?",
+        "o": [
+            "Small request triggers large response to victim (DNS/NTP)",
+            "Loud attack",
+            "Big attack",
+            "Fast attack"
+        ]
+    },
+    {
+        "q": "What is 'Reflection Attack'?",
+        "o": [
+            "Spoofing victim IP so they get responses from 3rd parties",
+            "Mirror",
+            "Ghost",
+            "Echo"
+        ]
+    },
+    {
+        "q": "What is 'Count-based Sliding Window' in Circuit Breaker?",
+        "o": [
+            "Decision based on last N requests (e.g. last 100)",
+            "Decision based on time",
+            "Decision based on random",
+            "Decision based on user"
+        ]
+    },
+    {
+        "q": "What is 'Time-based Sliding Window'?",
+        "o": [
+            "Decision based on requests in last N seconds",
+            "Decision based on count",
+            "Decision based on bytes",
+            "Decision based on IP"
+        ]
+    },
+    {
+        "q": "Which window type reacts faster to sudden spikes?",
+        "o": [
+            "Count-based (can fill immediately)",
+            "Time-based",
+            "Both same",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'Bulkhead' Queue Capacity?",
+        "o": [
+            "Max number of requests waiting for thread",
+            "Max threads",
+            "Max memory",
+            "Max disk"
+        ]
+    },
+    {
+        "q": "What happens if Bulkhead Queue is full?",
+        "o": [
+            "Request rejected (BulkheadFullException)",
+            "Wait forever",
+            "Create new thread",
+            "Crash"
+        ]
+    },
+    {
+        "q": "What is 'X-RateLimit-Limit'?",
+        "o": [
+            "Max requests allowed in window",
+            "Current requests",
+            "Remaining requests",
+            "Reset time"
+        ]
+    },
+    {
+        "q": "What is 'X-RateLimit-Remaining'?",
+        "o": [
+            "Requests left in current window",
+            "Max requests",
+            "Reset time",
+            "User limit"
+        ]
+    },
+    {
+        "q": "What is 'X-RateLimit-Reset'?",
+        "o": [
+            "Time (Epoch seconds) when window resets",
+            "Time remaining",
+            "Window size",
+            "Current time"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Mesh'?",
+        "o": [
+            "K8s native chaos engineering platform",
+            "Service Mesh",
+            "Ingress",
+            "Database"
+        ]
+    },
+    {
+        "q": "What is 'LitmusChaos'?",
+        "o": [
+            "Cloud-native chaos engineering toolset",
+            "Litmus paper",
+            "Test runner",
+            "Log viewer"
+        ]
+    },
+    {
+        "q": " What is 'Time Travel' experiment?",
+        "o": [
+            "Adjusting system clock to test limit handling/certs",
+            "Sci-fi",
+            "Network delay",
+            "Reboot"
+        ]
+    },
+    {
+        "q": "What is 'Disk Fill' experiment?",
+        "o": [
+            "Filling disk to 100% to test behavior",
+            "Formatting disk",
+            "Deleting disk",
+            "Copying disk"
+        ]
+    },
+    {
+        "q": "What is 'Pod Kill' experiment?",
+        "o": [
+            "Randomly deleting pods",
+            "Killing node",
+            "Killing network",
+            "Killing DB"
+        ]
+    },
+    {
+        "q": "What is 'Network Loss' experiment?",
+        "o": [
+            "Dropping X% of packets",
+            "Stopping network",
+            "Slowing network",
+            "Corrupting network"
+        ]
+    },
+    {
+        "q": "What is 'Network Corruption' experiment?",
+        "o": [
+            "Modifying packet data (bit flips)",
+            "Dropping packets",
+            "Duplicating packets",
+            "Reordering packets"
+        ]
+    },
+    {
+        "q": "What is 'Network Duplication' experiment?",
+        "o": [
+            "Sending same packet multiple times",
+            "Dropping packets",
+            "Stopping network",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kernel Panic' experiment?",
+        "o": [
+            "Crashing OS kernel (Node failure simulation)",
+            "App crash",
+            "Pod crash",
+            "Log crash"
+        ]
+    },
+    {
+        "q": "What is 'DNS Chaos'?",
+        "o": [
+            "Returning wrong IP or error for DNS lookup",
+            "Deleting DNS",
+            "Slowing DNS",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Blackhole' chaos?",
+        "o": [
+            "Dropping all traffic silently (Timeout)",
+            "Rejecting traffic (RST)",
+            "Slowing traffic",
+            "Modifying traffic"
+        ]
+    },
+    {
+        "q": "What is 'Partition' chaos?",
+        "o": [
+            "Cutting communication between specific pod sets",
+            "Partitioning disk",
+            "Partitioning RAM",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Stress' chaos?",
+        "o": [
+            "Consuming CPU/Memory heavily",
+            "Network stress",
+            "Disk stress",
+            "User stress"
+        ]
+    },
+    {
+        "q": "What calls 'GetCallerIdentity' in AWS?",
+        "o": [
+            "Usually 'WhoAmI' verification",
+            "Login",
+            "Logout",
+            "Signup"
+        ]
+    },
+    {
+        "q": "What is 'STS'?",
+        "o": [
+            "Security Token Service (Temp creds)",
+            "Simple Token Service",
+            "Secure Transport Service",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AssumeRole'?",
+        "o": [
+            "Getting temporary creds for a role",
+            "Creating role",
+            "Deleting role",
+            "Listing role"
+        ]
+    },
+    {
+        "q": "What is 'Instance Profile'?",
+        "o": [
+            "Container for IAM Role attached to EC2",
+            "User profile",
+            "App profile",
+            "Network profile"
+        ]
+    },
+    {
+        "q": "What is 'Service Account' in K8s?",
+        "o": [
+            "Identity for Pods",
+            "User account",
+            "Admin account",
+            "Node account"
+        ]
+    },
+    {
+        "q": "What is 'IRSA' (AWS EKS)?",
+        "o": [
+            "IAM Roles for Service Accounts (Fine grained pod perm)",
+            "Identity RSA",
+            "Internal RSA",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Workload Identity' (GCP)?",
+        "o": [
+            "Mapping K8s SA to GCP IAM SA",
+            "User identity",
+            "Node identity",
+            "Cluster identity"
+        ]
+    },
+    {
+        "q": "What is 'Pod Security Standards' (PSS)?",
+        "o": [
+            "Rules for pod security (Baseline, Restricted, Privileged)",
+            "Network rules",
+            "Storage rules",
+            "User rules"
+        ]
+    },
+    {
+        "q": "What replaced 'PodSecurityPolicy' (PSP)?",
+        "o": [
+            "Pod Security Admission (PSA) controller",
+            "OPA",
+            "Kyverno",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Privileged' Profile in PSS?",
+        "o": [
+            "Unrestricted (Root/Host access)",
+            "Restricted",
+            "Baseline",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Restricted' Profile?",
+        "o": [
+            "Heavily restricted (Non-root, drop capabilities)",
+            "Medium",
+            "Low",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'RunAsNonRoot'?",
+        "o": [
+            "Ensures container runs as UID != 0",
+            "Runs as root",
+            "Runs as admin",
+            "Runs as user"
+        ]
+    },
+    {
+        "q": "What is 'ReadOnlyRootFilesystem'?",
+        "o": [
+            "Prevents writing to root fs (Improves security)",
+            "Read write",
+            "Write only",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Compromised Node' risk?",
+        "o": [
+            "Attacker controls all pods on node",
+            "Single pod only",
+            "No risk",
+            "Cluster down"
+        ]
+    },
+    {
+        "q": "How to isolate risky workloads?",
+        "o": [
+            "Separate Node Pools / Sandboxed Containers (gVisor/Kata)",
+            "Same node",
+            "Same pod",
+            "Same ns"
+        ]
+    },
+    {
+        "q": "What is 'gVisor'?",
+        "o": [
+            "User-space kernel for container isolation (Sandbox)",
+            "Hypervisor",
+            "Docker",
+            "K8s"
+        ]
+    },
+    {
+        "q": "What is 'Kata Containers'?",
+        "o": [
+            "Lightweight VMs as containers",
+            "Docker",
+            "LXC",
+            "Rkt"
+        ]
+    },
+    {
+        "q": "What is 'Image Signing'?",
+        "o": [
+            "Cryptographic signature verifying image origin (Cosign)",
+            "Signing paper",
+            "Watermark",
+            "Checksum"
+        ]
+    },
+    {
+        "q": "What is 'SBOM'?",
+        "o": [
+            "Software Bill Of Materials (Ingredients list)",
+            "Bill of rights",
+            "Invoice",
+            "Menu"
+        ]
+    },
+    {
+        "q": "Why SBOM?",
+        "o": [
+            "Tracking supply chain vulnerabilities",
+            "Billing",
+            "Performance",
+            "Size"
+        ]
+    },
+    {
+        "q": "What is 'Supply Chain Attack'?",
+        "o": [
+            "Compromising upstream dependency to infect downstream",
+            "attacking server",
+            "attacking user",
+            "attacking network"
+        ]
+    },
+    {
+        "q": "What is 'Dependency Confusion'?",
+        "o": [
+            "Tricking installer to pull public package instead of private",
+            "Confused dev",
+            "Wrong version",
+            "None"
+        ]
+    },
+    {
+        "q": "How to prevent Dependency Confusion?",
+        "o": [
+            "Scope packages / Private registry priority",
+            "Public registry",
+            "Ignore",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Typosquatting'?",
+        "o": [
+            "Registering package name similar to popular one (react vs raect)",
+            "Squatting",
+            "Typo",
+            "Error"
+        ]
+    },
+    {
+        "q": "What is 'CVE'?",
+        "o": [
+            "Common Vulnerabilities and Exposures (ID for vuln)",
+            "CV",
+            "Code",
+            "Cert"
+        ]
+    },
+    {
+        "q": "What is 'CVSS'?",
+        "o": [
+            "Common Vulnerability Scoring System (Severity 0-10)",
+            "CVS",
+            "Version Control",
+            "Code Verify"
+        ]
+    },
+    {
+        "q": "What is 'Zero Day'?",
+        "o": [
+            "Vulnerability known to hackers before vendors (0 days to fix)",
+            "New install",
+            "Holiday",
+            "Safe"
+        ]
+    },
+    {
+        "q": "What is 'Patch Management' in resilience?",
+        "o": [
+            "Process of applying updates/fixes systematically",
+            "Patching clothes",
+            "Ignoring",
+            "Deleting"
+        ]
+    },
+    {
+        "q": "What is 'Immutable OS' (e.g. Bottlerocket)?",
+        "o": [
+            "OS partition is read-only, updates via image swap",
+            "Windows",
+            "Linux",
+            "Mac"
+        ]
+    },
+    {
+        "q": "Benefit of Immutable OS?",
+        "o": [
+            "Reduced attack surface / No drift",
+            "Faster",
+            "Better UI",
+            "Cheaper"
+        ]
+    },
+    {
+        "q": "What is 'Ephemeral Container'?",
+        "o": [
+            "Temporary container attached to pod for debugging (not in spec)",
+            "Permanent container",
+            "Init container",
+            "Sidecar"
+        ]
+    },
+    {
+        "q": "Usage of Ephemeral Container?",
+        "o": [
+            "Troubleshooting distroless images (inject shell)",
+            "Running app",
+            "Storing data",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'Distroless Image'?",
+        "o": [
+            "Image containing only app + deps (No shell/package manager)",
+            "Full OS",
+            "Ubuntu",
+            "Alpine"
+        ]
+    },
+    {
+        "q": "Benefit of Distroless?",
+        "o": [
+            "Small size / Secure (No shell for attacker)",
+            "Fast boot",
+            "Easy debug",
+            "Pretty"
+        ]
+    },
+    {
+        "q": "How to debug Distroless?",
+        "o": [
+            "Ephemeral debug container",
+            "SSH",
+            "Exec",
+            "Logs"
+        ]
+    },
+    {
+        "q": "What is 'Scratch' image?",
+        "o": [
+            "Empty base image",
+            "Full image",
+            "Test image",
+            "Broken image"
+        ]
+    },
+    {
+        "q": "What is 'Multi-stage Build'?",
+        "o": [
+            "Docker build with multiple FROM instructions (Build vs Run)",
+            "Single stage",
+            "Complex build",
+            "Slow build"
+        ]
+    },
+    {
+        "q": "Benefit of Multi-stage Build?",
+        "o": [
+            "Small final image (Exclude build tools)",
+            "Faster build",
+            "More layers",
+            "Bigger image"
+        ]
+    },
+    {
+        "q": "What is '.dockerignore'?",
+        "o": [
+            "Excludes files from build context (secrets/node_modules)",
+            "Ignores docker",
+            "Ignores errors",
+            "Ignores logs"
+        ]
+    },
+    {
+        "q": "What is 'Context' in Docker build?",
+        "o": [
+            "Files sent to daemon for build",
+            "User context",
+            "App context",
+            "Network"
+        ]
+    },
+    {
+        "q": "Why minimal Context is good?",
+        "o": [
+            "Faster build (less upload)",
+            "More features",
+            "Better logs",
+            "Secure"
+        ]
+    },
+    {
+        "q": "What is 'Layer Caching'?",
+        "o": [
+            "Reusing unchanged layers to speed up build",
+            "Layering clothes",
+            "Caching data",
+            "None"
+        ]
+    },
+    {
+        "q": "Best practice for Layer Caching?",
+        "o": [
+            "Copy package.json, install deps, THEN copy src",
+            "Copy src first",
+            "Copy all",
+            "Install last"
+        ]
+    },
+    {
+        "q": "What causes Layer Cache invalidation?",
+        "o": [
+            "Change in instructions or files used",
+            "Time",
+            "Random",
+            "User"
+        ]
+    }
+]

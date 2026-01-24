@@ -1,0 +1,4583 @@
+[
+    {
+        "q": "What is 'Monitoring'?",
+        "o": [
+            "Process of collecting data to track system health ('Is it broken?')",
+            "Debugging",
+            "Coding",
+            "Testing"
+        ]
+    },
+    {
+        "q": "What is 'Observability'?",
+        "o": [
+            "Property of system enabling understanding of internal state via external outputs ('Why is it broken?')",
+            "Monitoring only",
+            "Logs only",
+            "Metrics only"
+        ]
+    },
+    {
+        "q": "What are the 'Three Pillars of Observability'?",
+        "o": [
+            "Metrics, Logs, Traces",
+            "CPU, Memory, Disk",
+            "Network, Storage, Compute",
+            "Frontend, Backend, DB"
+        ]
+    },
+    {
+        "q": "What is a 'Metric'?",
+        "o": [
+            "Numeric representation of data measured over intervals (e.g. CPU=80%)",
+            "Text log",
+            "Event list",
+            "Error trace"
+        ]
+    },
+    {
+        "q": "What is a 'Log'?",
+        "o": [
+            "Timestamped record of discrete event (Text/JSON)",
+            "Graph",
+            "Number",
+            "Average"
+        ]
+    },
+    {
+        "q": "What is a 'Trace' (Distributed Tracing)?",
+        "o": [
+            "Representation of request journey across multiple services",
+            "Single log",
+            "Metric chart",
+            "DB query"
+        ]
+    },
+    {
+        "q": "What is 'Structured Logging'?",
+        "o": [
+            "Logging in machine-readable format (JSON) instead of plain text",
+            "Pretty text",
+            "Colored text",
+            "No logging"
+        ]
+    },
+    {
+        "q": "Benefit of Structured Logging?",
+        "o": [
+            "Easier to query/filter by fields (e.g. userId=123)",
+            "Uses less space",
+            "Looks nicer",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Correlation ID'?",
+        "o": [
+            "Unique ID injected into all logs/traces for a single request",
+            "User ID",
+            "Session ID",
+            "IP address"
+        ]
+    },
+    {
+        "q": "What is 'Span' in Tracing?",
+        "o": [
+            "Single unit of work within a Trace (e.g. 'DB Query')",
+            "Full trace",
+            "Log line",
+            "Metric point"
+        ]
+    },
+    {
+        "q": "What is 'Root Span'?",
+        "o": [
+            "First span in a trace (Entry point)",
+            "Last span",
+            "Error span",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Propagator' in Tracing?",
+        "o": [
+            "Mechanism to inject/extract Trace Context in headers (W3C/B3)",
+            "Network switch",
+            "Router",
+            "Gateway"
+        ]
+    },
+    {
+        "q": "What is 'W3C Trace Context'?",
+        "o": [
+            "Standard http headers (traceparent) for propagation",
+            "Custom header",
+            "Google header",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Sampling' in Observability?",
+        "o": [
+            "Collecting only separate subset of data to reduce cost (e.g. 10%)",
+            "Collecting 100%",
+            "Collecting 0%",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Head-based Sampling'?",
+        "o": [
+            "Decision to sample made at start of request",
+            "Decision at end",
+            "Decision random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Tail-based Sampling'?",
+        "o": [
+            "Decision made after request completes (e.g. keep if error)",
+            "Decision at start",
+            "Decision random",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus'?",
+        "o": [
+            "Open source monitoring/alerting toolkit (Time Series DB)",
+            "Log tool",
+            "Trace tool",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "Is Prometheus Push or Pull by default?",
+        "o": [
+            "Pull (Scrapes metrics from /metrics endpoint)",
+            "Push",
+            "Both",
+            "Neither"
+        ]
+    },
+    {
+        "q": "What is 'Exposition Format'?",
+        "o": [
+            "Text format Prometheus reads (key value pairs)",
+            "JSON",
+            "XML",
+            "Binary"
+        ]
+    },
+    {
+        "q": "What is a 'Counter' metric?",
+        "o": [
+            "Cumulative metric that only goes up (Requests, Errors)",
+            "Goes up and down",
+            "Histogram",
+            "Gauge"
+        ]
+    },
+    {
+        "q": "What is a 'Gauge' metric?",
+        "o": [
+            "Metric that can go up and down (Memory usage, Temperature)",
+            "Only up",
+            "Only down",
+            "Rate"
+        ]
+    },
+    {
+        "q": "What is a 'Histogram' metric?",
+        "o": [
+            "Samples observations into buckets (Latency, Request Size)",
+            "Counter",
+            "Gauge",
+            "Summary"
+        ]
+    },
+    {
+        "q": "What is 'Summary' metric?",
+        "o": [
+            "Similar to Histogram but calculates quantiles on client side",
+            "Server side",
+            "Counter",
+            "Gauge"
+        ]
+    },
+    {
+        "q": "What is 'Label' / 'Dimension' in metrics?",
+        "o": [
+            "Key-value pair attached to metric (method='POST')",
+            "Metric name",
+            "Metric value",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cardinality' explosion?",
+        "o": [
+            "Too many unique label combinations (e.g. userId as label)",
+            "Too many logs",
+            "Too many users",
+            "None"
+        ]
+    },
+    {
+        "q": "Why avoid high cardinality?",
+        "o": [
+            "Consumes massive memory/storage, slows down queries",
+            "Consumes CPU",
+            "Consumes Network",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rate' function in PromQL?",
+        "o": [
+            "Calculates per-second avg rate of increase for Counters",
+            "Sum",
+            "Avg",
+            "Max"
+        ]
+    },
+    {
+        "q": "What is 'Irate' function?",
+        "o": [
+            "Instant rate (based on last two data points), volatile",
+            "Smooth rate",
+            "Average",
+            "Total"
+        ]
+    },
+    {
+        "q": "When to use Rate vs Irate?",
+        "o": [
+            "Rate for alerting/trends (smoother), Irate for zooming into high-res spikes",
+            "Always Rate",
+            "Always Irate",
+            "Random"
+        ]
+    },
+    {
+        "q": "What is 'AlertManager'?",
+        "o": [
+            "Component handling alerts sent by Prometheus server",
+            "Sender",
+            "Receiver",
+            "Visualizer"
+        ]
+    },
+    {
+        "q": "What does AlertManager do?",
+        "o": [
+            "Deduplication, Grouping, Routing (Email/Slack/PagerDuty)",
+            "Scraping",
+            "Storing",
+            "Querying"
+        ]
+    },
+    {
+        "q": "What is 'Grafana'?",
+        "o": [
+            "Visualization platform (Dashboards) for metrics/logs",
+            "Database",
+            "Collector",
+            "Alert tool"
+        ]
+    },
+    {
+        "q": "Can Grafana query multiple datasources?",
+        "o": [
+            "Yes (Prometheus, InfluxDB, CloudWatch, Loki, etc)",
+            "No only Prometheus",
+            "Only SQL",
+            "Only JSON"
+        ]
+    },
+    {
+        "q": "What is 'Golden Signals' (Google SRE)?",
+        "o": [
+            "Latency, Traffic, Errors, Saturation",
+            "CPU, RAM, Disk, Net",
+            "Red, Blue, Green, Gold",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Latency'?",
+        "o": [
+            "Time taken to service a request",
+            "Error rate",
+            "Traffic volume",
+            "Current load"
+        ]
+    },
+    {
+        "q": "What is 'Traffic'?",
+        "o": [
+            "Demand placed on system (RPS, Bandwidth)",
+            "Car traffic",
+            "Latency",
+            "Errors"
+        ]
+    },
+    {
+        "q": "What is 'Errors' signal?",
+        "o": [
+            "Rate of requests failing (5xx, explicit error)",
+            "Latency",
+            "Traffic",
+            "Saturation"
+        ]
+    },
+    {
+        "q": "What is 'Saturation'?",
+        "o": [
+            "How full system is (Resource utilization, Queue length)",
+            "Wetness",
+            "Color",
+            "None"
+        ]
+    },
+    {
+        "q": "What requires immediate attention?",
+        "o": [
+            "Saturation (Predicts future failure) & Errors (Current failure)",
+            "Traffic",
+            "Latency",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'RED' Method (Weaveworks)?",
+        "o": [
+            "Rate, Errors, Duration (Subset of Golden Signals for Services)",
+            "Color",
+            "Stop",
+            "Alert"
+        ]
+    },
+    {
+        "q": "What is 'USE' Method (Brendan Gregg)?",
+        "o": [
+            "Utilization, Saturation, Errors (For Hardware/Resources)",
+            "Usefulness",
+            "User",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Utilization'?",
+        "o": [
+            "Time resource was busy %",
+            "Space used",
+            "Count",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Saturation' in USE?",
+        "o": [
+            "Degree to which resource has extra work queued (Wait)",
+            "Fullness",
+            "Color",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Blackbox Monitoring'?",
+        "o": [
+            "Monitoring externally visible behavior (Pinging endpoints)",
+            "Internal state",
+            "Logs",
+            "Code"
+        ]
+    },
+    {
+        "q": "What is 'Whitebox Monitoring'?",
+        "o": [
+            "Monitoring internal state (Metrics/Logs from inside app)",
+            "External ping",
+            "User view",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Monitoring'?",
+        "o": [
+            "Scripted checks simulating user behavior (Selenium/Puppeteer)",
+            "Real user",
+            "Manual check",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'RUM' (Real User Monitoring)?",
+        "o": [
+            "Capturing performance from actual user browsers (JS snippet)",
+            "Synthetic",
+            "Bot",
+            "Backend"
+        ]
+    },
+    {
+        "q": "What is 'Application Performance Monitoring' (APM)?",
+        "o": [
+            "Deep monitoring of app code (Datadog/NewRelic agents)",
+            "Infra monitoring",
+            "Log monitoring",
+            "None"
+        ]
+    },
+    {
+        "q": "How does APM usually work?",
+        "o": [
+            "Bytecode instrumentation / Monkey patching",
+            "API polling",
+            "Log parsing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Percentile' (p95, p99)?",
+        "o": [
+            "Value below which X% of observations fall (Better than Average)",
+            "Average",
+            "Total",
+            "Min"
+        ]
+    },
+    {
+        "q": "Why is Average (Mean) latency bad?",
+        "o": [
+            "Hides outliers/spikes (Long tail)",
+            "Too accurate",
+            "Too slow",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SLI' (Service Level Indicator)?",
+        "o": [
+            "The actual metric being measured (e.g. Latency is < 200ms)",
+            "Goal",
+            "Agreement",
+            "Alert"
+        ]
+    },
+    {
+        "q": "What is 'SLO' (Service Level Objective)?",
+        "o": [
+            "Target value for SLI (e.g. 99.9% of requests < 200ms)",
+            "Metric",
+            "Agreement",
+            "Contract"
+        ]
+    },
+    {
+        "q": "What is 'SLA' (Service Level Agreement)?",
+        "o": [
+            "Legal contract with consequences (Financial penalty) if SLO breached",
+            "Target",
+            "Metric",
+            "Goal"
+        ]
+    },
+    {
+        "q": "Who defines SLOs?",
+        "o": [
+            "Product Owners + Engineering (Business need vs Tech capability)",
+            "Lawyers",
+            "Users",
+            "None"
+        ]
+    },
+    {
+        "q": "Who defines SLAs?",
+        "o": [
+            "Business/Legal (External promise)",
+            "Engineers",
+            "Bots",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Error Budget'?",
+        "o": [
+            "100% - SLO (Allowed amount of unreliability)",
+            "Money",
+            "Cost",
+            "Count"
+        ]
+    },
+    {
+        "q": "What happens if Error Budget is exhausted?",
+        "o": [
+            "Freeze new features, focus on reliability (Policy)",
+            "Pay fine",
+            "Stop server",
+            "Nothing"
+        ]
+    },
+    {
+        "q": "What is 'Burn Rate'?",
+        "o": [
+            "How fast error budget is being consumed",
+            "Fire",
+            "Speed",
+            "Money spent"
+        ]
+    },
+    {
+        "q": "What is 'ELK Stack'?",
+        "o": [
+            "Elasticsearch (Search), Logstash (Processing), Kibana (UI)",
+            "Animal",
+            "Tech",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "What is 'Beat' (Filebeat)?",
+        "o": [
+            "Lightweight shipper for logs/metrics",
+            "Music",
+            "Server",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Logstash' role?",
+        "o": [
+            "ETL pipeline: Ingest, Transform (Grok), Output",
+            "Storage",
+            "Viewer",
+            "Shipper"
+        ]
+    },
+    {
+        "q": "What is 'Grok' filter?",
+        "o": [
+            "Parsing unstructured text into structured fields using patterns",
+            "Character",
+            "Robot",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Elasticsearch' role?",
+        "o": [
+            "Distributed Search Engine (Indexing & Storage)",
+            "UI",
+            "Ingest",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kibana' role?",
+        "o": [
+            "Visualization UI for Elastic data",
+            "Storage",
+            "Search",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OpenSearch'?",
+        "o": [
+            "Fork of Elasticsearch/Kibana (AWS led) after license change",
+            "New tool",
+            "Google tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Loki' (Grafana)?",
+        "o": [
+            "Log aggregation system inspired by Prometheus (Index labels only)",
+            "Full text index",
+            "Database",
+            "Trace tool"
+        ]
+    },
+    {
+        "q": "Benefit of Loki vs ELK?",
+        "o": [
+            "Cheaper storage (only indexes labels, not content) / S3 backed",
+            "Faster search",
+            "Better UI",
+            "More features"
+        ]
+    },
+    {
+        "q": "What is 'Promtail'?",
+        "o": [
+            "Agent shipping logs to Loki",
+            "Tail command",
+            "Prometheus",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'LogQL'?",
+        "o": [
+            "Query language for Loki (Similar to PromQL)",
+            "SQL",
+            "NoSQL",
+            "Graph"
+        ]
+    },
+    {
+        "q": "What is 'Tempo'?",
+        "o": [
+            "Distributed Tracing backend by Grafana (S3 backed)",
+            "Speed",
+            "Music",
+            "Metrics"
+        ]
+    },
+    {
+        "q": "What is 'Jaeger'?",
+        "o": [
+            "Open Source Distributed Tracing",
+            "Robot",
+            "Monitoring",
+            "Logging"
+        ]
+    },
+    {
+        "q": "What is 'OpenTelemetry' (OTel)?",
+        "o": [
+            "Vendor-neutral standard for observability data (Metrics, Logs, Traces)",
+            "Tool",
+            "Cloud",
+            "Company"
+        ]
+    },
+    {
+        "q": "Why OTel important?",
+        "o": [
+            "Prevents vendor lock-in for instrumentation agents",
+            "Faster",
+            "Cheaper",
+            "Easier"
+        ]
+    },
+    {
+        "q": "What is 'OTel Collector'?",
+        "o": [
+            "Component that receives, processes, and exports telemetry",
+            "Agent",
+            "Server",
+            "DB"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar' pattern in Monitoring?",
+        "o": [
+            "Running agent alongside app container to share resources/network",
+            "Replacing app",
+            "Deleting app",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'ServiceMonitor' (Prometheus Operator)?",
+        "o": [
+            "CRD defining what services to scrape",
+            "Monitor",
+            "Alert",
+            "Pod"
+        ]
+    },
+    {
+        "q": "What is 'PodMonitor'?",
+        "o": [
+            "CRD defining what pods to scrape (if no Service)",
+            "Container",
+            "Node",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Black Hole' in monitoring?",
+        "o": [
+            "Data disappearing / broken pipeline",
+            "Space",
+            "Gravity",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Alert Fatigue'?",
+        "o": [
+            "Desensitization to alerts due to high noise/false positives",
+            "Tired",
+            "Sleepy",
+            "Lazy"
+        ]
+    },
+    {
+        "q": "How to fix Alert Fatigue?",
+        "o": [
+            "Tune thresholds, Group alerts, Make actionable, Delete useless",
+            "Ignore",
+            "Sleep",
+            "Quit"
+        ]
+    },
+    {
+        "q": "What is 'Runbook' / 'Playbook'?",
+        "o": [
+            "Document describing how to handle specific alerts/incidents",
+            "Script",
+            "Game",
+            "Book"
+        ]
+    },
+    {
+        "q": "Link between Alert and Runbook?",
+        "o": [
+            "Every alert should link to a Runbook",
+            "No link",
+            "Maybe",
+            "Sometimes"
+        ]
+    },
+    {
+        "q": "What is 'Anomaly Detection'?",
+        "o": [
+            "Using ML/Stats to detect deviation from baseline (not fixed threshold)",
+            "Fixed threshold",
+            "Manual check",
+            "None"
+        ]
+    },
+    {
+        "q": "Benefit of Anomaly Detection?",
+        "o": [
+            "Detects issues dynamic thresholds might miss / Seasonality awareness",
+            "Faster",
+            "Simpler",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dashboard Rot'?",
+        "o": [
+            "Dashboards becoming outdated/unused over time",
+            "Mold",
+            "Rust",
+            "None"
+        ]
+    },
+    {
+        "q": "Best practice for Dashboards?",
+        "o": [
+            "Keep them focused (Audience specific), Review regularly",
+            "Make one huge one",
+            "Never update",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Single Pane of Glass'?",
+        "o": [
+            "Unified view of all monitoring data (Ideal goal)",
+            "Window",
+            "Monitor",
+            "Screen"
+        ]
+    },
+    {
+        "q": "Is 'Single Pane' usually achievable?",
+        "o": [
+            "Hard, often requires specialized tools (Grafana tries)",
+            "Easy",
+            "Default",
+            "Impossible"
+        ]
+    },
+    {
+        "q": "What is 'Metric Churn'?",
+        "o": [
+            "Creation of new time series rapidly (High cardinality change)",
+            "Butter",
+            "Spinning",
+            "None"
+        ]
+    },
+    {
+        "q": "Impact of Metric Churn?",
+        "o": [
+            "Stress on TSDB index",
+            "Faster queries",
+            "Better data",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Amazon CloudWatch'?",
+        "o": [
+            "Monitoring and observability service for AWS resources",
+            "Network service",
+            "Database",
+            "Compute"
+        ]
+    },
+    {
+        "q": "What is a 'CloudWatch Metric' data point resolution?",
+        "o": [
+            "Standard (1 minute) or High Resolution (1 second)",
+            "1 hour",
+            "1 day",
+            "No limit"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch Alarms'?",
+        "o": [
+            "Watches a metric and performs action (e.g. SNS/AutoScaling) when breached",
+            "Clock",
+            "Timer",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch Logs'?",
+        "o": [
+            "Centralized log storage and analysis",
+            "Metrics storage",
+            "Trace storage",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Group' vs 'Log Stream'?",
+        "o": [
+            "Group is container (App), Stream is source instance (Pod/VM)",
+            "Stream is group",
+            "Group is stream",
+            "Same"
+        ]
+    },
+    {
+        "q": "What is 'Metric Filter' in CloudWatch Logs?",
+        "o": [
+            "Extracting metrics from log data (e.g. count 'Error' occurrences)",
+            "Filtering logs",
+            "Deleting logs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch Logs Insights'?",
+        "o": [
+            "Interactive query capability for logs",
+            "Metric dashboard",
+            "Alarm tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Google Cloud Operations' (Stackdriver)?",
+        "o": [
+            "Monitoring/Logging/Trace suite for GCP",
+            "Driver",
+            "Car",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Recording Rule'?",
+        "o": [
+            "Precomputing frequently needed or expensive expressions (saving as new metric)",
+            "Recording audio",
+            "Alert rule",
+            "None"
+        ]
+    },
+    {
+        "q": "Why use Recording Rules?",
+        "o": [
+            "Speed up dashboards queries (Querying pre-computed time series)",
+            "Save space",
+            "Better UI",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Alerting Rule'?",
+        "o": [
+            "Expression that triggers alert if true (e.g. up == 0)",
+            "Recording rule",
+            "Log rule",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Thanos'?",
+        "o": [
+            "Highly available Prometheus setup with long term storage (Object Store)",
+            "Marvel villain",
+            "Database",
+            "Game"
+        ]
+    },
+    {
+        "q": "How does Thanos solve storage?",
+        "o": [
+            "Offloads blocks to S3/GCS",
+            "Uses local disk",
+            "Uses RAM",
+            "Uses Tape"
+        ]
+    },
+    {
+        "q": "What is 'Thanos Sidecar'?",
+        "o": [
+            "Runs alongside Prometheus, uploads data to object storage",
+            "Runs typically",
+            "Runs remote",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Thanos Query' (Querier)?",
+        "o": [
+            "Attributes global query view across multiple Prometheus/Store instances",
+            "Database",
+            "UI",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cortex' (Grafana Mimir)?",
+        "o": [
+            "Horizontally scalable, multi-tenant Prometheus as a Service",
+            "Brain",
+            "Game",
+            "Tool"
+        ]
+    },
+    {
+        "q": "Difference between Thanos and Cortex?",
+        "o": [
+            "Thanos is 'pull' from object store (Sidecar), Cortex is 'push' (Remote Write)",
+            "Same",
+            "Thanos is push",
+            "Cortex is pull"
+        ]
+    },
+    {
+        "q": "What is 'Remote Write' in Prometheus?",
+        "o": [
+            "Sending scraped samples to remote storage endpoint (Cortex/InfluxDB)",
+            "Writing to disk",
+            "Logging",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Exemplar' in metrics?",
+        "o": [
+            "Linking a specific trace ID to a metric bucket (Context for spike)",
+            "Example",
+            "Sample",
+            "None"
+        ]
+    },
+    {
+        "q": "Benefit of Exemplars?",
+        "o": [
+            "Jump from 'High Latency Metric' directly to 'Trace of slow request'",
+            "Faster metrics",
+            "Better logs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Service Graph'?",
+        "o": [
+            "Visualization of service dependencies derived from Traces/Mesh",
+            "Bar chart",
+            "Pie chart",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Distributed Context Propagation'?",
+        "o": [
+            "Passing traceId/spanId across service boundaries",
+            "Network routing",
+            "Load balancing",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if Propagation is broken?",
+        "o": [
+            "Trace is fragmented (Broken link between services)",
+            "App crashes",
+            "Network fails",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Baggage' in Tracing?",
+        "o": [
+            "Arbitrary key-value pairs propagated alongside trace context",
+            "Luggage",
+            "Error",
+            "None"
+        ]
+    },
+    {
+        "q": "Risk of Baggage?",
+        "o": [
+            "Large headers (Network overhead), Security leakage",
+            "Lost baggage",
+            "Heavy trace",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Sentry'?",
+        "o": [
+            "Error Tracking and Performance Monitoring tool (Focus on stack traces)",
+            "Guard",
+            "Log tool",
+            "Metric tool"
+        ]
+    },
+    {
+        "q": "What is 'Source Maps' in frontend monitoring?",
+        "o": [
+            "Mapping minified JS back to original source code for debugging errors",
+            "Map",
+            "Code",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Datadog'?",
+        "o": [
+            "SaaS Observability Platform (Metrics, Logs, APM, Security)",
+            "Dog",
+            "Open source",
+            "Free"
+        ]
+    },
+    {
+        "q": "What is 'New Relic'?",
+        "o": [
+            "SaaS Observability Platform",
+            "Old Relic",
+            "Free",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Dynatrace'?",
+        "o": [
+            "AI-powered Software Intelligence Platform",
+            "Trace tool",
+            "Log tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Splunk'?",
+        "o": [
+            "Data-to-Everything Platform (Famous for Logs/SIEM)",
+            "Cave",
+            "Game",
+            "Tool"
+        ]
+    },
+    {
+        "q": "What is 'Nagios'?",
+        "o": [
+            "Legacy monitoring tool (Host based checks)",
+            "Greek god",
+            "New tool",
+            "Cloud"
+        ]
+    },
+    {
+        "q": "Why is Nagios considered legacy?",
+        "o": [
+            "Static config, Pull based, lack of dynamic discovery/dimensionality",
+            "Too fast",
+            "Too good",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Zabbix'?",
+        "o": [
+            "Open source monitoring tool (Enterprise grade)",
+            "Game",
+            "Cloud",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Telegraf'?",
+        "o": [
+            "Plugin-driven server agent for collecting & reporting metrics (InfluxData)",
+            "Telegram",
+            "Phone",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'InfluxDB'?",
+        "o": [
+            "Time Series Database (Push based)",
+            "Relational DB",
+            "Graph DB",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'StatsD'?",
+        "o": [
+            "Network daemon for aggregating statistics (UDP fire-and-forget)",
+            "TCP daemon",
+            "DB",
+            "None"
+        ]
+    },
+    {
+        "q": "Is StatsD reliable?",
+        "o": [
+            "No (UDP drops packets), favors speed over accuracy",
+            "Yes highly",
+            "Sometimes",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Graphite'?",
+        "o": [
+            "Monitoring tool (Carbon, Whisper, Graphite-Web)",
+            "Pencil",
+            "Rock",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Carbon' in Graphite?",
+        "o": [
+            "Daemon that listens for time-series data",
+            "Element",
+            "UI",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Whisper' in Graphite?",
+        "o": [
+            "Fixed-size database library (Round Robin Database)",
+            "Sound",
+            "Network",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'RRD' (Round Robin Database)?",
+        "o": [
+            "Circular buffer database (Old overwrites New eventually)",
+            "SQL",
+            "Graph",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Downsampling'?",
+        "o": [
+            "Reducing resolution of old data (e.g. 1 sec -> 1 min)",
+            "Deleting",
+            "Compressing",
+            "None"
+        ]
+    },
+    {
+        "q": "Why Downsample?",
+        "o": [
+            "Save storage space for long-term retention",
+            "Speed up write",
+            "Better accuracy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'VictoriaMetrics'?",
+        "o": [
+            "High performance Time Series DB (Prometheus compatible)",
+            "Name",
+            "Place",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Audit Logging'?",
+        "o": [
+            "Recording 'User X did Action Y on Resource Z'",
+            "Debug logging",
+            "Error logging",
+            "None"
+        ]
+    },
+    {
+        "q": "Why Audit Logs separate from App Logs?",
+        "o": [
+            "Security/Compliance requirement (Immutable, Retention)",
+            "Performance",
+            "Cost",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Access Log' (HTTP)?",
+        "o": [
+            "Log of every request (IP, URL, Status, Latency)",
+            "Error log",
+            "Debug log",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Heartbeat' monitoring?",
+        "o": [
+            "Signal sent periodically to indicate 'I am alive'",
+            "Pulse",
+            "Ping",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if Heartbeat missing?",
+        "o": [
+            "Assume failure (Dead man's switch)",
+            "Nothing",
+            "Wait",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dead Man's Switch' alert?",
+        "o": [
+            "Alert triggers if *no* signal received (Watchdog)",
+            "Switch",
+            "Button",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Watchdog'?",
+        "o": [
+            "Timer that resets periodically; if expires, triggers recovery",
+            "Dog",
+            "Pet",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Pull' model monitoring benefit?",
+        "o": [
+            "Monitoring system knows what *should* be there (Detects down/missing)",
+            "Fast",
+            "Easy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Push' model monitoring benefit?",
+        "o": [
+            "Good for short-lived jobs (Batch) / Firewalls",
+            "Accuracy",
+            "Control",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PushGateway' use case?",
+        "o": [
+            "Ephemeral batch jobs pushing metrics before dying",
+            "Long running service",
+            "Web app",
+            "None"
+        ]
+    },
+    {
+        "q": "Risk of PushGateway?",
+        "o": [
+            "Single point of failure / Metrics persist if not cleared",
+            "Fast",
+            "Slow",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Metrics Server' in K8s?",
+        "o": [
+            "Aggregator of resource usage data (CPU/Mem) for HPA",
+            "Prometheus",
+            "Influx",
+            "None"
+        ]
+    },
+    {
+        "q": "Does Metrics Server store data long term?",
+        "o": [
+            "No, in-memory only (For Autoscaling)",
+            "Yes",
+            "Maybe",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'cAdvisor'?",
+        "o": [
+            "Container Advisor (Runs in Kubelet, collects container stats)",
+            "Advisor",
+            "Manager",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'kube-state-metrics'?",
+        "o": [
+            "Service generating metrics from K8s API objects (Deployment status, Pod phase)",
+            "State",
+            "Metric",
+            "None"
+        ]
+    },
+    {
+        "q": "Difference cAdvisor vs kube-state-metrics?",
+        "o": [
+            "cAdvisor = Resource Usage (CPU/Mem), KSM = Object State (Replicas/Status)",
+            "Same",
+            "Opposite",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Self-Monitoring'?",
+        "o": [
+            "Monitoring the monitoring system itself (Prometheus monitoring Prometheus)",
+            "Selfie",
+            "Mirror",
+            "None"
+        ]
+    },
+    {
+        "q": "Why Meta-Monitoring (Self-Monitoring) needed?",
+        "o": [
+            "Who watches the watcher? (Ensure alerts work)",
+            "Fun",
+            "Cost",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'External Probe' for Meta-Monitoring?",
+        "o": [
+            "Separate cluster/service checking if main monitoring is up",
+            "Internal probe",
+            "Local probe",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PagerDuty'?",
+        "o": [
+            "Incident Response Platform (On-call scheduling/Alerting)",
+            "Pager",
+            "Phone",
+            "Email"
+        ]
+    },
+    {
+        "q": "What is 'OpsGenie'?",
+        "o": [
+            "Incident Management Platform (Atlassian)",
+            "Genie",
+            "Magic",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'VictorOps' (Splunk On-Call)?",
+        "o": [
+            "Incident Management Platform",
+            "Person",
+            "Victor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Escalation Policy'?",
+        "o": [
+            "Rules for if primary on-call doesn't ack, page secondary",
+            "Policy",
+            "Law",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Ack' (Acknowledgement)?",
+        "o": [
+            "Signal that on-call has seen alert and is working on it",
+            "Fix",
+            "Close",
+            "Delete"
+        ]
+    },
+    {
+        "q": "What is 'Resolve'?",
+        "o": [
+            "Issue is fixed",
+            "Ack",
+            "Delete",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Snooze'?",
+        "o": [
+            "Silence alert for X time",
+            "Sleep",
+            "Ignore",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Flapping' alert?",
+        "o": [
+            "Alert state changing rapidly (Fire-Resolve-Fire)",
+            "Bird",
+            "Flying",
+            "None"
+        ]
+    },
+    {
+        "q": "How to handle Flapping?",
+        "o": [
+            "Hysteresis (Wait for stable state) / Delay",
+            "Ignore",
+            "Delete",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Hysteresis'?",
+        "o": [
+            "Property of system where state depends on history (Buffer prevents flip-flop)",
+            "Hysteria",
+            "History",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MTBF'?",
+        "o": [
+            "Mean Time Between Failures (Reliability metric)",
+            "Time",
+            "Metric",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MTTR'?",
+        "o": [
+            "Mean Time To Recover/Repair (Availability metric)",
+            "Time",
+            "Metric",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MTTF'?",
+        "o": [
+            "Mean Time To Failure (Lifetime)",
+            "Time",
+            "Metric",
+            "None"
+        ]
+    },
+    {
+        "q": "Relationship: Avail = ?",
+        "o": [
+            "MTBF / (MTBF + MTTR)",
+            "MTBF + MTTR",
+            "MTTR / MTBF",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Five Nines'?",
+        "o": [
+            "99.999% Availability (approx 5 mins downtime per year)",
+            "99%",
+            "5%",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Four Nines'?",
+        "o": [
+            "99.99% (approx 52 mins downtime per year)",
+            "99.9%",
+            "4%",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Three Nines'?",
+        "o": [
+            "99.9% (approx 8.7 hours downtime per year)",
+            "99%",
+            "3%",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Planned Downtime'?",
+        "o": [
+            "Scheduled maintenance (Often excluded from SLA calculation)",
+            "Crash",
+            "Bug",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Unplanned Downtime'?",
+        "o": [
+            "Unexpected outage",
+            "Maintenance",
+            "Upgrade",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Single Point of Failure' (SPOF)?",
+        "o": [
+            "Component which, if it fails, stops entire system",
+            "Redundant",
+            "Cluster",
+            "None"
+        ]
+    },
+    {
+        "q": "How to eliminate SPOF?",
+        "o": [
+            "Redundancy / HA",
+            "Better code",
+            "Faster CPU",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Active-Passive'?",
+        "o": [
+            "Primary handles traffic, Secondary waits (Hot standby)",
+            "Active-Active",
+            "Cold",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Active-Active'?",
+        "o": [
+            "Both nodes handle traffic (Load Distributed)",
+            "Active-Passive",
+            "Cold",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Split Brain'?",
+        "o": [
+            "Cluster nodes lose connection and both think they are Primary",
+            "Headache",
+            "Medical",
+            "None"
+        ]
+    },
+    {
+        "q": "How to solve Split Brain?",
+        "o": [
+            "Quorum (Odd number of nodes) / Fencing",
+            "Restart",
+            "Ignore",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Quorum'?",
+        "o": [
+            "Minimum votes required to make decision (Majority, N/2 + 1)",
+            "Meeting",
+            "Forum",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Fencing' (STONITH)?",
+        "o": [
+            "Shoot The Other Node In The Head (Force kill failing node)",
+            "Wall",
+            "Guard",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Leader Election'?",
+        "o": [
+            "Process of designating a single coordinator in distributed system",
+            "Voting",
+            "Politics",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Consensus Algorithm'?",
+        "o": [
+            "Mechanism to agree on value (Raft/Paxos)",
+            "Voting",
+            "Math",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Raft'?",
+        "o": [
+            "Consensus algorithm (Easier than Paxos)",
+            "Boat",
+            "Pax",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Paxos'?",
+        "o": [
+            "Complex consensus algorithm (The original)",
+            "Raft",
+            "Peace",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Etcd'?",
+        "o": [
+            "Distributed Key-Value store using Raft (K8s Brain)",
+            "Database",
+            "File",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if Etcd loses quorum?",
+        "o": [
+            "Cluster becomes Read-Only / Unavailable for updates",
+            "Works fine",
+            "Fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Availability Zone' (AZ)?",
+        "o": [
+            "Isolated data center within a Region",
+            "Region",
+            "Rack",
+            "Server"
+        ]
+    },
+    {
+        "q": "What is 'Region'?",
+        "o": [
+            "Geographical Application Area (Collection of AZs)",
+            "AZ",
+            "City",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Edge Location'?",
+        "o": [
+            "CDN endpoint closer to users",
+            "Region",
+            "AZ",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Global Traffic Manager' (GLB)?",
+        "o": [
+            "DNS based load balancing across regions",
+            "Local LB",
+            "Proxy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Anycast'?",
+        "o": [
+            "Routing to nearest node with same IP",
+            "Broadcast",
+            "Multicast",
+            "Unicast"
+        ]
+    },
+    {
+        "q": "What is 'Load Testing'?",
+        "o": [
+            "Testing system behavior under expected load",
+            "Stress testing",
+            "Unit testing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Stress Testing'?",
+        "o": [
+            "Testing system behavior beyond expected limits (Finding breaking point)",
+            "Load testing",
+            "Smoke testing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Soak Testing' (Endurance)?",
+        "o": [
+            "Running load for long period to find leaks/slow degradation",
+            "Water testing",
+            "Speed testing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Spike Testing'?",
+        "o": [
+            "Sudden increase in load to test scaling speed",
+            "Sharp testing",
+            "Needle testing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Engineering'?",
+        "o": [
+            "Disciplined approach to identifying failures before they become outages (Injecting failure)",
+            "Causing chaos randomly",
+            "Breaking things for fun",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Monkey'?",
+        "o": [
+            "Tool that randomly terminates instances in Prod",
+            "Virus",
+            "Prank",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Simian Army'?",
+        "o": [
+            "Suite of chaos tools (Chaos Monkey, Latency Monkey, etc)",
+            "Zoo",
+            "Game",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Blast Radius' in Chaos?",
+        "o": [
+            "The scope of impact of a failure injection (Keep it small initially)",
+            "Explosion size",
+            "Bomb",
+            "None"
+        ]
+    },
+    {
+        "q": "Goal of Chaos Engineering?",
+        "o": [
+            "Build confidence in system's capability to withstand turbulent conditions",
+            "Destroy system",
+            "Create bugs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Gremlin'?",
+        "o": [
+            "Chaos Engineering Platform (SaaS)",
+            "Monster",
+            "Bug",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'LitmusChaos'?",
+        "o": [
+            "Open source Cloud-Native Chaos Engineering framework (K8s)",
+            "Chemistry",
+            "Paper",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Chaos Mesh'?",
+        "o": [
+            "Chaos engineering platform for Kubernetes",
+            "Service mesh",
+            "Network",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Game Day' in SRE?",
+        "o": [
+            "Scheduled event to practice incident response scenarios",
+            "Soccer",
+            "Gaming",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'DiRT' (Disaster Recovery Testing)?",
+        "o": [
+            "Google's annual disaster recovery exercise",
+            "Soil",
+            "Clean",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Observability Driven Development'?",
+        "o": [
+            "Writing signals/logs alongside code (TDD for Ops)",
+            "Coding blind",
+            "No logging",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Level' - DEBUG?",
+        "o": [
+            "Detailed info for diagnosing issues (Verbose)",
+            "Info",
+            "Error",
+            "Warn"
+        ]
+    },
+    {
+        "q": "What is 'Log Level' - INFO?",
+        "o": [
+            "Confirmation that things are working as expected",
+            "Debug",
+            "Error",
+            "Fatal"
+        ]
+    },
+    {
+        "q": "What is 'Log Level' - WARN?",
+        "o": [
+            "Something unexpected happened, but system still running",
+            "Error",
+            "Info",
+            "Panic"
+        ]
+    },
+    {
+        "q": "What is 'Log Level' - ERROR?",
+        "o": [
+            "Operation failed, attention needed",
+            "Info",
+            "Warn",
+            "Debug"
+        ]
+    },
+    {
+        "q": "What is 'Log Level' - FATAL?",
+        "o": [
+            "System is unusable, process exiting",
+            "Error",
+            "Warn",
+            "Info"
+        ]
+    },
+    {
+        "q": "Why reduce logging in Prod?",
+        "o": [
+            "Cost (Storage/Ingest) & Performance noise",
+            "Compliance",
+            "Security",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dynamic Log Levels'?",
+        "o": [
+            "Changing log level (Info -> Debug) at runtime without restart",
+            "Static",
+            "Reboot",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Contextual Logging'?",
+        "o": [
+            "Including context (User, RequestID) in every log message (MDC)",
+            "Plain text",
+            "No context",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MDC' (Mapped Diagnostic Context)?",
+        "o": [
+            "Thread-local map for storing context to be logged (Java/Log4j)",
+            "Database",
+            "Map",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PII' in logs?",
+        "o": [
+            "Personally Identifiable Information (Must be redacted/masked)",
+            "Public Info",
+            "Private IP",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Masking'?",
+        "o": [
+            "Replacing sensitive data (Credit Card) with *** in logs",
+            "Deleting logs",
+            "Encrypting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Tailing' logs?",
+        "o": [
+            "Viewing new log lines in real-time (tail -f)",
+            "Deleting",
+            "Archiving",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Rotation'?",
+        "o": [
+            "Archiving old log files and creating new ones to save disk space",
+            "Turning screen",
+            "Spinning",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Retention Policy'?",
+        "o": [
+            "How long to keep logs before deletion (e.g. 30 days)",
+            "Forever",
+            "1 day",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Hot Storage' for logs?",
+        "o": [
+            "Fast SSD, expensive, for recent logs (Searchable)",
+            "Tape",
+            "S3 Glacier",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cold Storage' for logs?",
+        "o": [
+            "Slow, cheap, for archival (S3/Glacier)",
+            "SSD",
+            "RAM",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rehydration' of logs?",
+        "o": [
+            "Restoring cold logs to hot storage for analysis",
+            "Drinking water",
+            "Deleting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Synthetic Transaction'?",
+        "o": [
+            "Fake transaction injected to test flow",
+            "Real money",
+            "Credit",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Canary Analysis'?",
+        "o": [
+            "Comparing metrics of Canary vs Baseline to decide rollout",
+            "Bird watching",
+            "Mining",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kayenta' (Spinnaker)?",
+        "o": [
+            "Automated Canary Analysis tool",
+            "Bird",
+            "Region",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Mann-Whitney U test' in Canary?",
+        "o": [
+            "Statistical test to compare distributions",
+            "Unit test",
+            "Integration test",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Root Cause Analysis' (RCA)?",
+        "o": [
+            "Process of identifying the fundamental cause of a failure",
+            "Fixing",
+            "Deploying",
+            "None"
+        ]
+    },
+    {
+        "q": "What is '5 Whys'?",
+        "o": [
+            "Iterative interrogative technique to find root cause",
+            "5 questions",
+            "5 people",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Fishbone Diagram' (Ishikawa)?",
+        "o": [
+            "Visual tool for RCA (Cause and Effect)",
+            "Fish drawing",
+            "Menu",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Incident Commander'?",
+        "o": [
+            "Person in charge of managing the incident response",
+            "General",
+            "Coder",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Scribe' in Incident?",
+        "o": [
+            "Person documenting the timeline/actions during incident",
+            "Writer",
+            "Coder",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Communication Lead' in Incident?",
+        "o": [
+            "Person handling external/internal comms",
+            "Talker",
+            "Manager",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SEV-1' (Severity 1)?",
+        "o": [
+            "Critical issue, system down, immediate action required",
+            "Minor issue",
+            "Feature request",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SEV-4'?",
+        "o": [
+            "Minor issue / Cosmetic / Low urgency",
+            "Critical",
+            "Major",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'War Room'?",
+        "o": [
+            "Virtual/Physical room where incident responders collaborate",
+            "Battle",
+            "Game",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Status Page'?",
+        "o": [
+            "Public page communicating system health to users",
+            "Internal doc",
+            "Secret",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'False Positive' in alerting?",
+        "o": [
+            "Alert fires but everything is fine (Noise)",
+            "Real issue",
+            "False Negative",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'False Negative'?",
+        "o": [
+            "System is broken but NO alert fired (Dangerous)",
+            "False Positive",
+            "Noise",
+            "None"
+        ]
+    },
+    {
+        "q": "Which is worse: False Positive or False Negative?",
+        "o": [
+            "False Negative (Silent failure / Customer reports it first)",
+            "False Positive",
+            "Both equal",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Inhibition' in AlertManager?",
+        "o": [
+            "Suppressing low-level alerts if high-level alert is firing (e.g. mute 'DB slow' if 'DB down')",
+            "Deleting",
+            "Ignoring",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Silencing' in AlertManager?",
+        "o": [
+            "Manually muting alerts for maintenance period",
+            "Inhibition",
+            "Deleting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Grouping' in AlertManager?",
+        "o": [
+            "Combining similar alerts into one notification (Reduce spam)",
+            "Sorting",
+            "Filtering",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Visual Regression Testing'?",
+        "o": [
+            "Comparing screenshots to detect UI changes",
+            "Unit test",
+            "API test",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Percy'?",
+        "o": [
+            "Visual testing platform",
+            "Train",
+            "Bus",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Lighthouse' (Google)?",
+        "o": [
+            "Tool for auditing web performance/accessibility/SEO",
+            "Building",
+            "Light",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Core Web Vitals'?",
+        "o": [
+            "LCP, FID, CLS (Key metrics for UX/SEO)",
+            "CPU, RAM",
+            "Red, Green",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'LCP' (Largest Contentful Paint)?",
+        "o": [
+            "Load speed of main content",
+            "Paint",
+            "Color",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'CLS' (Cumulative Layout Shift)?",
+        "o": [
+            "Visual stability (Does page jump around?)",
+            "Shift",
+            "Key",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'FID' (First Input Delay)?",
+        "o": [
+            "Interactivity (Time to react to click)",
+            "Delay",
+            "Lag",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'INP' (Interaction to Next Paint)?",
+        "o": [
+            "New metric replacing FID for responsiveness",
+            "Paint",
+            "Color",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Browser Instrumentation'?",
+        "o": [
+            "Injecting code to measure browser performance",
+            "Music",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OpenTracing'?",
+        "o": [
+            "Deprecated standard (Merged into OpenTelemetry)",
+            "New standard",
+            "Good",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OpenCensus'?",
+        "o": [
+            "Deprecated standard (Merged into OpenTelemetry)",
+            "New",
+            "Good",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'eBPF' (Extended Berkeley Packet Filter)?",
+        "o": [
+            "Tech to run sandboxed programs in kernel (Observability without agents)",
+            "Filter",
+            "Packet",
+            "None"
+        ]
+    },
+    {
+        "q": "Benefit of eBPF for Monitoring?",
+        "o": [
+            "Deep visibility into OS/Network with low overhead & no app code changes",
+            "Easy",
+            "Simple",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Pixie'?",
+        "o": [
+            "eBPF based observability tool for K8s",
+            "Fairy",
+            "Dust",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cilium' Hubble?",
+        "o": [
+            "Network observability using eBPF",
+            "Telescope",
+            "Space",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Profiling' ( CPU Profiling)?",
+        "o": [
+            "Measuring which functions consume CPU",
+            "Picture",
+            "User profile",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Flame Graph'?",
+        "o": [
+            "Visualization of stack traces / profiling data",
+            "Fire",
+            "Heat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Continuous Profiling'?",
+        "o": [
+            "Running profiler always in prod (Low overhead) to catch issues",
+            "Once",
+            "Never",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Pyroscope'?",
+        "o": [
+            "Continuous Profiling Platform",
+            "Fire",
+            "Scope",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Parca'?",
+        "o": [
+            "Continuous Profiling tool (eBPF based)",
+            "Park",
+            "Coat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Memory Leak'?",
+        "o": [
+            "App consuming more RAM over time without releasing it",
+            "Water leak",
+            "Information leak",
+            "None"
+        ]
+    },
+    {
+        "q": "How to detect Memory Leak?",
+        "o": [
+            "Growing 'sawtooth' pattern or linear growth in RAM metric",
+            "Flat line",
+            "Spikes",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OOM Killed' (Out of Memory)?",
+        "o": [
+            "Kernel kills process to save system when RAM full",
+            "Crash",
+            "Bug",
+            "None"
+        ]
+    },
+    {
+        "q": "Exit Code 137?",
+        "o": [
+            "OOM Killed (128 + 9 aka SIGKILL)",
+            "Success",
+            "Error",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Thundering Herd' problem?",
+        "o": [
+            "Many clients retrying simultaneously causing storm/overload",
+            "Animals",
+            "Storm",
+            "None"
+        ]
+    },
+    {
+        "q": "How to fix Thundering Herd?",
+        "o": [
+            "Exponential Backoff + Jitter",
+            "More servers",
+            "Faster CPU",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Jitter'?",
+        "o": [
+            "Adding randomness to wait time",
+            "Shaking",
+            "Nervous",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' status OPEN?",
+        "o": [
+            "Blocks requests immediately (Fail fast) to allow downstream recovery",
+            "Passes requests",
+            "Testing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' status HALF-OPEN?",
+        "o": [
+            "Allows limited requests to test if downstream recovered",
+            "Open",
+            "Closed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Circuit Breaker' status CLOSED?",
+        "o": [
+            "Normal operation (Requests flow)",
+            "Blocked",
+            "Broken",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Bulkhead Pattern'?",
+        "o": [
+            "Isolating resources (Thread pools) per service so one failure doesn't sink hole ship",
+            "Boat",
+            "Wall",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rate Limiting'?",
+        "o": [
+            "Controlling number of requests user can make (Protect backend)",
+            "Speed limit",
+            "Blocking",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Token Bucket' algorithm?",
+        "o": [
+            "Rate limiting algo (Tokens refill at rate X)",
+            "Bucket",
+            "Water",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Leaky Bucket'?",
+        "o": [
+            "Rate limiting algo (Queue drains at constant rate)",
+            "Hole",
+            "Water",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Load Shedding'?",
+        "o": [
+            "Intentionally dropping excess requests to save the system",
+            "Diet",
+            "Hair",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Graceful Degradation'?",
+        "o": [
+            "Reducing functionality (e.g. no recommendations) to keep core service up",
+            "Crashing",
+            "Failing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Failover'?",
+        "o": [
+            "Switching to standby system upon failure",
+            "Falling",
+            "Stopping",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Failback'?",
+        "o": [
+            "Switching back to primary system after recovery",
+            "Failover",
+            "Falling",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Database Connection Pool Saturation'?",
+        "o": [
+            "All available connections are in use, new requests wait",
+            "Empty pool",
+            "Network saturation",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if DB Pool is exhausted?",
+        "o": [
+            "Latency spikes (Wait time) then Connection Timeouts",
+            "DB crash",
+            "App speed up",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Slow Query Log'?",
+        "o": [
+            "DB log recording queries taking longer than X ms",
+            "Error log",
+            "Access log",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Replica Lag'?",
+        "o": [
+            "Time delay between write on Primary and appearance on Replica",
+            "Network lag",
+            "Code lag",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'IOPS' (Input/Output Operations Per Second)?",
+        "o": [
+            "Measure of disk storage performance (Read/Write count)",
+            "Bandwidth",
+            "Latency",
+            "Space"
+        ]
+    },
+    {
+        "q": "What is 'Throughput' (Disk)?",
+        "o": [
+            "Amount of data transferred per second (MB/s)",
+            "IOPS",
+            "Latency",
+            "Space"
+        ]
+    },
+    {
+        "q": "What is 'Disk Queue Length'?",
+        "o": [
+            "Number of I/O requests waiting to be processed (High = Saturation)",
+            "Disk size",
+            "File count",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'VPC Flow Logs'?",
+        "o": [
+            "Network traffic logs for VPC (Src IP, Dst IP, Port, Action)",
+            "App logs",
+            "DB logs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Packet Loss'?",
+        "o": [
+            "Percentage of data packets that fail to reach destination",
+            "Latency",
+            "Bandwidth",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Jitter' in Network?",
+        "o": [
+            "Variation in packet delay (Latency variance)",
+            "Packet loss",
+            "Bandwidth",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'DNS Latency'?",
+        "o": [
+            "Time taken to resolve domain name to IP",
+            "HTTP latency",
+            "Ping",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'NPM' (Network Performance Monitoring)?",
+        "o": [
+            "Tools monitoring network health (Bandwidth, Latency, Errors)",
+            "Node Package Manager",
+            "Project Manager",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SIEM'?",
+        "o": [
+            "Security Information and Event Management (Log aggregation for Security)",
+            "Monitoring",
+            "Logging",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SOC' (Security Operations Center)?",
+        "o": [
+            "Team responsible for monitoring and responding to security incidents",
+            "NOC",
+            "SRE",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'IDS'?",
+        "o": [
+            "Intrusion Detection System (Monitors for malicious activity)",
+            "IPS",
+            "Firewall",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'IPS'?",
+        "o": [
+            "Intrusion Prevention System (Detects AND Blocks)",
+            "IDS",
+            "Monitor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'FIM' (File Integrity Monitoring)?",
+        "o": [
+            "Monitoring changes to critical system files",
+            "File server",
+            "Backup",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'WAF' logs?",
+        "o": [
+            "Logs of blocked/allowed web requests (SQL Injection attempts, etc)",
+            "App logs",
+            "DB logs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Model Drift' (ML)?",
+        "o": [
+            "Degradation of ML model performance over time due to changing real-world data",
+            "Code drift",
+            "Infra drift",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Data Drift' (Feature Drift)?",
+        "o": [
+            "Change in distribution of input data compared to training data",
+            "Label drift",
+            "Concept drift",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Concept Drift'?",
+        "o": [
+            "Change in the relationship between input and output (Target meaning changes)",
+            "Data drift",
+            "Model drift",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Training-Serving Skew'?",
+        "o": [
+            "Difference in performance between training and inference (e.g. library mismatch)",
+            "Drift",
+            "Lag",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Bias' monitoring?",
+        "o": [
+            "Checking if model predictions favor/penalize specific groups unfairly",
+            "Accuracy",
+            "Speed",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Feature Store' monitoring?",
+        "o": [
+            "Ensuring features served are fresh and correct",
+            "DB monitoring",
+            "Log monitoring",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'ANR' (Android)?",
+        "o": [
+            "Application Not Responding (UI Thread blocked)",
+            "Crash",
+            "Error",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Crashlytics'?",
+        "o": [
+            "Tool for reporting mobile app crashes",
+            "Analytics",
+            "Marketing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cold Start' (Mobile)?",
+        "o": [
+            "App starting from scratch (Process created)",
+            "Warm start",
+            "Hot start",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Warm Start' (Mobile)?",
+        "o": [
+            "App starting with process/activity still in memory",
+            "Cold start",
+            "Hot start",
+            "None"
+        ]
+    },
+    {
+        "q": "Why is Mobile Monitoring harder?",
+        "o": [
+            "Device fragmentation / Unreliable Network / Client side variability",
+            "Easier",
+            "Same",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Session Replay'?",
+        "o": [
+            "Video-like playback of user interactions (Mouse moves, clicks)",
+            "Video recording",
+            "Log",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Heatmap'?",
+        "o": [
+            "Visual map of where users click/scroll most",
+            "Weather",
+            "Temperature",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Funnel Analysis'?",
+        "o": [
+            "Tracking user drop-off through steps (e.g. Cart -> Checkout -> Pay)",
+            "Pipeline",
+            "Tunnel",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Conversion Rate'?",
+        "o": [
+            "Percentage of users completing a desired action",
+            "Click rate",
+            "Bounce rate",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Bounce Rate'?",
+        "o": [
+            "Percentage of visitors who leave after viewing only one page",
+            "Conversion",
+            "Exit rate",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Time to First Byte' (TTFB)?",
+        "o": [
+            "Time from request to receiving first byte of response (Backend latency)",
+            "Load time",
+            "Render time",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'First Contentful Paint' (FCP)?",
+        "o": [
+            "Time when first text/image is painted",
+            "LCP",
+            "Load",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kubernetes Dashboard'?",
+        "o": [
+            "Official web-based UI for K8s",
+            "CLI",
+            "Grafana",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Lens'?",
+        "o": [
+            "Popular Desktop IDE for Kubernetes",
+            "Glass",
+            "Camera",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'K9s'?",
+        "o": [
+            "Terminal-based UI for Kubernetes",
+            "Dog",
+            "Cat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Headlamp'?",
+        "o": [
+            "Extensible K8s UI",
+            "Light",
+            "Lamp",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Octant'?",
+        "o": [
+            "VMware's open source K8s Developer Dashboard (Discontinued)",
+            "Shape",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Skooner'?",
+        "o": [
+            "K8s dashboard (formerly K8dash)",
+            "Boat",
+            "Ship",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Weave Scope'?",
+        "o": [
+            "Visualization/Debugging tool for K8s (Draws map)",
+            "Loom",
+            "Thread",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Sidecar Injection' monitoring?",
+        "o": [
+            "Ensuring sidecars (Istio/Linkerd) are injected correctly",
+            "Pod monitoring",
+            "Node monitoring",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Certificate Expiry' monitoring?",
+        "o": [
+            "Alerting before SSL/TLS certs expire (Prevent outages)",
+            "Disk full",
+            "CPU high",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cert-Manager' metric?",
+        "o": [
+            "Exposes metrics about cert health/expiry",
+            "Manager",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Domain Expiry' monitoring?",
+        "o": [
+            "Checking whois expiry date",
+            "Cert expiry",
+            "DNS",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Quota Monitoring' (Cloud)?",
+        "o": [
+            "Tracking API limits / Resource limits (e.g. Max vCPUs)",
+            "Disk space",
+            "Cost",
+            "None"
+        ]
+    },
+    {
+        "q": "What happens if Quota exceeded?",
+        "o": [
+            "Unable to create resources (Deployment fails)",
+            "Cost increase",
+            "Slowdown",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Cost Anomaly Detection'?",
+        "o": [
+            "Alerting on unexpected spike in cloud spend",
+            "Performance anomaly",
+            "Security anomaly",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS Trusted Advisor'?",
+        "o": [
+            "Tool providing real-time guidance (Cost, Security, Perf)",
+            "Consultant",
+            "Person",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Azure Advisor'?",
+        "o": [
+            "Personalized cloud consultant for Azure",
+            "AWS",
+            "GCP",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Google Cloud Recommender'?",
+        "o": [
+            "Insights/Recommendations for GCP resources",
+            "Search",
+            "Ads",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'GreenOps'?",
+        "o": [
+            "Monitoring carbon footprint / Energy efficiency of IT",
+            "FinOps",
+            "DevOps",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Carbon Intensity'?",
+        "o": [
+            "Amount of CO2 emitted per unit of energy (Varies by region/time)",
+            "Weight",
+            "Color",
+            "None"
+        ]
+    },
+    {
+        "q": "How to optimize for Carbon?",
+        "o": [
+            "Run workloads in low-carbon regions / times (Carbon Aware Scheduling)",
+            "Run faster",
+            "Run slower",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PUE'?",
+        "o": [
+            "Power Usage Effectiveness (DC Efficiency metric)",
+            "Smell",
+            "PU",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Serverless Monitoring' challenge?",
+        "o": [
+            "Short lifespan (Telemetry must be pushed, no agent scraping)",
+            "Long lifespan",
+            "Easy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Lambda Powertools'?",
+        "o": [
+            "Library to help with Tracing/Logging/Metrics in Lambda",
+            "Tool",
+            "Hammer",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'X-Ray' (AWS)?",
+        "o": [
+            "Distributed Tracing service by AWS",
+            "Medical",
+            "Vision",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'CloudWatch ServiceLens'?",
+        "o": [
+            "Integrates Traces (X-Ray) with Metrics/Logs",
+            "Glasses",
+            "Camera",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Container Insights'?",
+        "o": [
+            "Curated monitoring for ECS/EKS/K8s in CloudWatch",
+            "Docker",
+            "Lens",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'VM Insights'?",
+        "o": [
+            "Monitoring for Azure VMs",
+            "AWS",
+            "GCP",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Application Insights' (Azure)?",
+        "o": [
+            "APM service for Azure",
+            "AWS",
+            "GCP",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Analytics Workspace' (Azure)?",
+        "o": [
+            "Storage/Query engine for Azure Monitor logs (KQL)",
+            "S3",
+            "EBS",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'KQL'?",
+        "o": [
+            "Kusto Query Language (Used in Azure Monitor)",
+            "SQL",
+            "NoSQL",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'BigQuery' for logs?",
+        "o": [
+            "Using BQ to analyze massive scale logs from GCP",
+            "SmallQuery",
+            "DB",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Log Router' (GCP)?",
+        "o": [
+            "Routes logs to destinations (Bucket, PubSub, BQ)",
+            "Router",
+            "Switch",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Pub/Sub' in monitoring?",
+        "o": [
+            "Buffer for logs/events before processing (Decoupling)",
+            "Bar",
+            "Club",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Kafka' in logging pipeline?",
+        "o": [
+            "High throughput buffer/broker for log streams",
+            "Writer",
+            "Poet",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Graylog'?",
+        "o": [
+            "Open source log management (Alternative to ELK)",
+            "Color",
+            "Log",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'GELF'?",
+        "o": [
+            "Graylog Extended Log Format (Structured)",
+            "Elf",
+            "Format",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Syslog'?",
+        "o": [
+            "Standard for message logging (Facility/Severity)",
+            "System",
+            "Log",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Journald'?",
+        "o": [
+            "Systemd journal (Binary logs on Linux)",
+            "Diary",
+            "Note",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Logrotate'?",
+        "o": [
+            "Utility to rotate/compress/remove old log files",
+            "Spinning",
+            "Turning",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Prometheus Federation'?",
+        "o": [
+            "Hierarchical scraping (Global Prometheus scrapes Local Prometheus)",
+            "Union",
+            "Star Trek",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Remote Read'?",
+        "o": [
+            "Prometheus reading from external storage",
+            "Remote Write",
+            "Local Read",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Long Term Storage' (LTS) monitoring?",
+        "o": [
+            "Retaining downsampled metrics for months/years (Capacity planning)",
+            "Short term",
+            "Real time",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Planning'?",
+        "o": [
+            "Forecasting future resource needs based on historical trends",
+            "Guessing",
+            "Buying",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Forecasting'?",
+        "o": [
+            "Predicting future values using algo (Linear regression, Holt-Winters)",
+            "Weather",
+            "Magic",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Seasonality'?",
+        "o": [
+            "Periodic fluctuations (Traffic higher on Monday / Black Friday)",
+            "Weather",
+            "Winter",
+            "Summer"
+        ]
+    },
+    {
+        "q": "How to alert on Seasonal data?",
+        "o": [
+            "Compare to 'Same time last week' (WoW) not fixed threshold",
+            "Fixed threshold",
+            "Ignore",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'WoW'?",
+        "o": [
+            "Week Over Week",
+            "Game",
+            "Exclamation",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MoM'?",
+        "o": [
+            "Month Over Month",
+            "Mother",
+            "Metric",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'YoY'?",
+        "o": [
+            "Year Over Year",
+            "Toy",
+            "Game",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Baseline'?",
+        "o": [
+            "Standard/Normal behavior to compare against",
+            "Bottom",
+            "Line",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OTELEMETRY_SDK_DISABLED'?",
+        "o": [
+            "Env var to disable OTel SDK",
+            "Enable SDK",
+            "Log SDK",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OTel Processor'?",
+        "o": [
+            "Component in Collector pipeline to modify/filter data (Batch, MemoryLimit)",
+            "Receiver",
+            "Exporter",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OTel Receiver'?",
+        "o": [
+            "Component accepting data (e.g. OTLP, Jaeger, Prometheus)",
+            "Sender",
+            "Processor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OTel Exporter'?",
+        "o": [
+            "Component sending data to backend (e.g. OTLP to Honeycomb)",
+            "Receiver",
+            "Processor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'OTLP'?",
+        "o": [
+            "OpenTelemetry Protocol (gRPC/HTTP) for data exchange",
+            "JSON",
+            "XML",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Envoy Access Logs'?",
+        "o": [
+            "Highly detailed logs generated by Envoy proxy in Mesh",
+            "App logs",
+            "DB logs",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Psychological Safety' in SRE?",
+        "o": [
+            "Team feels safe to take risks/admit mistakes without fear of punishment",
+            "Safety gear",
+            "Hospital",
+            "None"
+        ]
+    },
+    {
+        "q": "Why is Psychological Safety crucial for Reliability?",
+        "o": [
+            "Enables honest post-mortems and faster incident reporting",
+            "Nice to have",
+            "Fun",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Technical Debt' monitoring?",
+        "o": [
+            "Tracking accumulation of hacks/shortcuts (e.g. deprecated API usage)",
+            "Money debt",
+            "Credit card",
+            "None"
+        ]
+    },
+    {
+        "q": "How to track Tech Debt?",
+        "o": [
+            "Static Analysis metrics / TODO comments count / Deprecation logs",
+            "Ignore it",
+            "Feelings",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Bus Factor'?",
+        "o": [
+            "Number of people who can get hit by a bus before project stalls (Key person risk)",
+            "Bus schedule",
+            "Travel",
+            "None"
+        ]
+    },
+    {
+        "q": "What is a 'Good Bus Factor'?",
+        "o": [
+            "High (Many people know the system)",
+            "1 (Only one person knows)",
+            "0",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'On-Call Burnout'?",
+        "o": [
+            "Exhaustion due to frequent alerts/sleep interruption",
+            "Fire",
+            "Heat",
+            "None"
+        ]
+    },
+    {
+        "q": "How to prevent Burnout?",
+        "o": [
+            "Limit on-call shifts, Fix root causes of noise, Pay/Compensate",
+            "More alerts",
+            "Ignore",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Hero Culture'?",
+        "o": [
+            "Relying on one 'Hero' to save the day (Anti-pattern)",
+            "Marvel",
+            "Good culture",
+            "None"
+        ]
+    },
+    {
+        "q": "Why is Hero Culture bad?",
+        "o": [
+            "Unscalable, leads to burnout, hides system fragility",
+            "Good",
+            "Fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Non-Abstract Large System Design' (NALSD)?",
+        "o": [
+            "Google SRE concept: Design must consider practical limits (Quota, failures)",
+            "Abstract art",
+            "Small design",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Production Readiness Review' (PRR)?",
+        "o": [
+            "Checklist before launching service to Prod (Monitoring, Docs, On-call setup)",
+            "Code review",
+            "Design review",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dark Launch'?",
+        "o": [
+            "Deploying feature to prod but hiding it from users (Feature Flag off)",
+            "Night launch",
+            "Space",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Shadow Traffic'?",
+        "o": [
+            "Replaying real requests to new version asynchronously (Fire and forget)",
+            "Ghost",
+            "Dark",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Feature Flag'?",
+        "o": [
+            "Configuration toggle to enable/disable features at runtime",
+            "Flag",
+            "Banner",
+            "None"
+        ]
+    },
+    {
+        "q": "Risk of Feature Flags?",
+        "o": [
+            "Tech debt (Old flags clutter code), Complexity in testing combinations",
+            "Fast",
+            "Easy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'LaunchDarkly'?",
+        "o": [
+            "Feature Flag management platform",
+            "Rocket",
+            "Space",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Unleash'?",
+        "o": [
+            "Open source Feature Flag system",
+            "Dog",
+            "Run",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Split.io'?",
+        "o": [
+            "Feature Delivery Platform",
+            "Banana split",
+            "Atom",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'A/B Testing'?",
+        "o": [
+            "Showing two variants (A and B) to users to compare performance (Business metric)",
+            "Unit test",
+            "Load test",
+            "None"
+        ]
+    },
+    {
+        "q": "Difference A/B Testing vs Canary?",
+        "o": [
+            "A/B is about Business Value (Conversion), Canary is about Tech Stability (Errors)",
+            "Same",
+            "Canary is business",
+            "A/B is tech"
+        ]
+    },
+    {
+        "q": "What is 'Blue/Green Deployment'?",
+        "o": [
+            "Running two full envs (Blue=Old, Green=New), switching traffic at LB",
+            "Red/Black",
+            "Canary",
+            "Rolling"
+        ]
+    },
+    {
+        "q": "Benefit of Blue/Green?",
+        "o": [
+            "Instant rollback (Switch LB back), Testing in prod before switch",
+            "Cheap",
+            "Simple",
+            "None"
+        ]
+    },
+    {
+        "q": "Downside of Blue/Green?",
+        "o": [
+            "Double resource cost (2x environments)",
+            "Slow",
+            "Hard",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rolling Update'?",
+        "o": [
+            "Replacing instances one by one (No downtime, low cost)",
+            "Blue/Green",
+            "Big Bang",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SlackOps'?",
+        "o": [
+            "Managing operations via Chat (Slack commands)",
+            "ChatOps",
+            "EmailOps",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Hubot'?",
+        "o": [
+            "Chat bot for ChatOps (GitHub)",
+            "Robot",
+            "Toy",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Alert Correlation'?",
+        "o": [
+            "Linking related alerts to single root cause (DB Down -> App Down -> API Down)",
+            "Grouping",
+            "Sorting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Moogsoft'?",
+        "o": [
+            "AIOps platform for alert correlation",
+            "Cow",
+            "Soft",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'BigPanda'?",
+        "o": [
+            "AIOps platform",
+            "Animal",
+            "Zoo",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AIOps'?",
+        "o": [
+            "Artificial Intelligence for IT Operations (Automating noise reduction)",
+            "DevOps",
+            "ChatOps",
+            "None"
+        ]
+    },
+    {
+        "q": "Is AIOps magic?",
+        "o": [
+            "No, requires good data/training, often just advanced filtering",
+            "Yes",
+            "Maybe",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Mean Time To Detect' (MTTD)?",
+        "o": [
+            "Avg time until incident is noticed",
+            "MTTR",
+            "MTBF",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Mean Time To Acknowledge' (MTTA)?",
+        "o": [
+            "Avg time until human starts looking at alert",
+            "MTTD",
+            "MTTR",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Mean Time To Resolve' (MTTR)?",
+        "o": [
+            "Avg time to fix the issue (Restore service)",
+            "MTTD",
+            "MTTA",
+            "None"
+        ]
+    },
+    {
+        "q": "Which metric matters most to User?",
+        "o": [
+            "Uptime / MTTR (How long was I blocked?)",
+            "MTTA",
+            "MTTD",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Uptime'?",
+        "o": [
+            "Percentage of time service is available",
+            "Downtime",
+            "Time",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Downtime'?",
+        "o": [
+            "Time service is unavailable",
+            "Uptime",
+            "Fun time",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Nines' calculator?",
+        "o": [
+            "Tool to convert % availability to downtime per year",
+            "Math",
+            "Game",
+            "None"
+        ]
+    },
+    {
+        "q": "99.9% uptime = ?",
+        "o": [
+            "~43 mins downtime/month",
+            "1 min",
+            "1 hour",
+            "None"
+        ]
+    },
+    {
+        "q": "99.99% uptime = ?",
+        "o": [
+            "~4 mins downtime/month",
+            "40 mins",
+            "4 hours",
+            "None"
+        ]
+    },
+    {
+        "q": "99.999% uptime = ?",
+        "o": [
+            "~26 seconds downtime/month",
+            "26 mins",
+            "26 hours",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Maintenance Window'?",
+        "o": [
+            "Scheduled time for upgrades (Users notified)",
+            "Broken window",
+            "Glass",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Incident Management'?",
+        "o": [
+            "Process of returning service to normal ASAP",
+            "Project management",
+            "Code management",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Problem Management'?",
+        "o": [
+            "Process of finding root cause to prevent recurrence (RCA)",
+            "Incident management",
+            "Change management",
+            "None"
+        ]
+    },
+    {
+        "q": "Diff Incident vs Problem?",
+        "o": [
+            "Incident = Put out fire (Now), Problem = Fire prevention (Later)",
+            "Same",
+            "Incident is later",
+            "Problem is now"
+        ]
+    },
+    {
+        "q": "What is 'Change Management'?",
+        "o": [
+            "Process of controlling changes to prod (Approvals/CAB)",
+            "Incident",
+            "Problem",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'CAB' (Change Advisory Board)?",
+        "o": [
+            "Committee approving changes (Old school / Slower)",
+            "Taxi",
+            "Car",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Standard Change'?",
+        "o": [
+            "Pre-approved, low risk change (No CAB needed)",
+            "Emergency change",
+            "Normal change",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Emergency Change'?",
+        "o": [
+            "Change needed immediately to fix incident (Approval after)",
+            "Standard",
+            "Normal",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'ITIL'?",
+        "o": [
+            "Framework for ITSM (Incident, Problem, Change)",
+            "Agile",
+            "Scrum",
+            "None"
+        ]
+    },
+    {
+        "q": "Is SRE compatible with ITIL?",
+        "o": [
+            "Yes, SRE implements ITIL principles with automation instead of bureaucracy",
+            "No",
+            "Maybe",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'DevOps' goal?",
+        "o": [
+            "Bridge gap between Dev and Ops (Collaboration, Automation)",
+            "Coding",
+            "Servers",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SRE' vs DevOps?",
+        "o": [
+            "class SRE implements DevOps",
+            "SRE is older",
+            "DevOps is Google",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Platform Engineering' vs SRE?",
+        "o": [
+            "Platform builds the internal product (IDP), SRE ensures it stays up",
+            "Same",
+            "Opposite",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Full Cycle Developer'?",
+        "o": [
+            "Dev who owns code from Design -> Deploy -> OnCall (You build it, you run it)",
+            "Partial",
+            "Frontend",
+            "Backend"
+        ]
+    },
+    {
+        "q": "Benefit of Full Cycle?",
+        "o": [
+            "Aligned incentives (Dev feels pain of bad code), Faster feedback",
+            "Less work",
+            "More silo",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Silo'?",
+        "o": [
+            "Teams working in isolation without sharing info",
+            "Farm",
+            "Grain",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Wall of Confusion'?",
+        "o": [
+            "Barrier between Dev and Ops (Throwing code over wall)",
+            "Brick wall",
+            "Fence",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Shift Right' testing?",
+        "o": [
+            "Testing in Production (Chaos, Canary, Real Users)",
+            "Shift Left",
+            "Unit test",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Shift Left' testing?",
+        "o": [
+            "Testing early in pipeline (Unit, Integration, Security security)",
+            "Shift Right",
+            "Prod test",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Immutable Infrastructure'?",
+        "o": [
+            "Servers are never modified, only replaced (Bake new image)",
+            "Mutable",
+            "Changing",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Drift' in Infra?",
+        "o": [
+            "Server state deviating from definition over time (Manual hacks)",
+            "Car",
+            "Snow",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Idempotency'?",
+        "o": [
+            "Applying same operation multiple times has same effect as once",
+            "Random",
+            "Once",
+            "None"
+        ]
+    },
+    {
+        "q": "Why Idempotency important for Ansible/Terraform?",
+        "o": [
+            "Allows safe re-running of scripts without breaking things",
+            "Faster",
+            "Slower",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Convergence' in config management?",
+        "o": [
+            "System moving towards desired state over time",
+            "Divergence",
+            "Splitting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Self-Healing'?",
+        "o": [
+            "System detecting and fixing its own problems (Restarting pod)",
+            "Doctor",
+            "Nurse",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Auto-Scaling'?",
+        "o": [
+            "Automatically adjusting resources based on load",
+            "Manual scaling",
+            "Fixed size",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Horizontal Scaling' (Scale Out)?",
+        "o": [
+            "Adding more machines (Nodes/Pods)",
+            "Vertical",
+            "Up",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Vertical Scaling' (Scale Up)?",
+        "o": [
+            "Adding more CPU/RAM to existing machine",
+            "Horizontal",
+            "Out",
+            "None"
+        ]
+    },
+    {
+        "q": "Which scaling is cloud native?",
+        "o": [
+            "Horizontal (Treat servers as cattle)",
+            "Vertical",
+            "Diagonal",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Diagonal Scaling'?",
+        "o": [
+            "Combination of Vertical and Horizontal",
+            "X",
+            "Y",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Elasticity'?",
+        "o": [
+            "Ability to scale UP and DOWN automatically to match demand",
+            "Rubber",
+            "Plastic",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Over-provisioning'?",
+        "o": [
+            "Allocating more resources than needed (buffer)",
+            "Under-provisioning",
+            "Exact",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Under-provisioning'?",
+        "o": [
+            "Allocating less resources than needed (Performance suffers)",
+            "Over",
+            "Good",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Rightsizing'?",
+        "o": [
+            "Matching resource allocation to actual usage (Cost optimization)",
+            "Wrong sizing",
+            "Bigger",
+            "Smaller"
+        ]
+    },
+    {
+        "q": "What is 'Capacity Planning'?",
+        "o": [
+            "Process of determining future resource needs",
+            "Party planning",
+            "Code planning",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Load Balancing'?",
+        "o": [
+            "Distributing traffic across multiple servers",
+            "Weight balancing",
+            "Scale",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Sticky Session' (Session Affinity)?",
+        "o": [
+            "Routing requests from same user to same server",
+            "Random",
+            "Round robin",
+            "None"
+        ]
+    },
+    {
+        "q": "Why avoid Sticky Sessions?",
+        "o": [
+            "Creates unequal load distribution (Hotspots), harder to scale down",
+            "Good",
+            "Fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Stateless App'?",
+        "o": [
+            "App that stores no state locally (State in DB/Redis)",
+            "Stateful",
+            "Memory",
+            "None"
+        ]
+    },
+    {
+        "q": "Why Stateless for Cloud?",
+        "o": [
+            "Easy scaling/replacement (Any instance can handle any request)",
+            "Hard",
+            "Slow",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Twelve-Factor App'?",
+        "o": [
+            "Methodology for building SaaS apps (Heroku)",
+            "10 factor",
+            "Agile",
+            "Scrum"
+        ]
+    },
+    {
+        "q": "Factor: 'Codebase'?",
+        "o": [
+            "One codebase tracked in revision control, many deploys",
+            "Multiple codebases",
+            "No git",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Dependencies'?",
+        "o": [
+            "Explicitly declare and isolate dependencies (Gemfile/package.json)",
+            "Global install",
+            "System lib",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Config'?",
+        "o": [
+            "Store config in environment variables",
+            "Hardcoded",
+            "File",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Backing Services'?",
+        "o": [
+            "Treat backing services (DB, Queue) as attached resources (URL)",
+            "Local",
+            "Embedded",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Build, Release, Run'?",
+        "o": [
+            "Strictly separate build and run stages",
+            "Edit on server",
+            "Mix",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Processes'?",
+        "o": [
+            "Execute app as one or more stateless processes",
+            "Stateful",
+            "Single",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Port Binding'?",
+        "o": [
+            "Export services via port binding (Self-contained)",
+            "Tomcat",
+            "IIS",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Concurrency'?",
+        "o": [
+            "Scale out via the process model",
+            "Threads",
+            "Async",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Disposability'?",
+        "o": [
+            "Maximize robustness with fast startup and graceful shutdown",
+            "Long running",
+            "Slow start",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Dev/Prod Parity'?",
+        "o": [
+            "Keep development, staging, and production as similar as possible",
+            "Different",
+            "Unique",
+            "None"
+        ]
+    },
+    {
+        "q": "Factor: 'Logs'?",
+        "o": [
+            "Treat logs as event streams (stdout)",
+            "Files",
+            "DB",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS Cost Explorer'?",
+        "o": [
+            "Tool to visualize and analyze AWS costs over time",
+            "Billing dashboard",
+            "Invoice",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS Budgets'?",
+        "o": [
+            "Set custom cost/usage budgets and get alerts when exceeded",
+            "Calculator",
+            "Excel",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS Config'?",
+        "o": [
+            "Service that records config changes and evaluates compliance (Auditing)",
+            "Monitoring",
+            "Logging",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS CloudTrail'?",
+        "o": [
+            "Service that logs all API calls made in AWS account (Audit trail)",
+            "Log tool",
+            "Monitor tool",
+            "None"
+        ]
+    },
+    {
+        "q": "Diff CloudWatch vs CloudTrail?",
+        "o": [
+            "CloudWatch = Performance/Logs (Metrics), CloudTrail = API Auditing (Who did what)",
+            "Same",
+            "Opposite",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'VPC Flow Logs'?",
+        "o": [
+            "Captures IP traffic going to/from network interfaces in VPC",
+            "Packet capture",
+            "Wireshark",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'GuardDuty'?",
+        "o": [
+            "Threart detection service (ML based) for AWS accounts/workloads",
+            "Firewall",
+            "WAF",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'AWS Inspector'?",
+        "o": [
+            "Automated vulnerability management (Scans EC2/Container images)",
+            "Human inspector",
+            "Auditor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Pingdom'?",
+        "o": [
+            "SaaS for Synthetic Monitoring (Uptime/Page Speed)",
+            "Log tool",
+            "Trace tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Uptime Robot'?",
+        "o": [
+            "Simple uptime monitoring tool (Free tier)",
+            "Robot",
+            "Server",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Navigation Timing API'?",
+        "o": [
+            "Browser API providing detailed latency data for page loads (DNS, TCP, DOM)",
+            "Navigation bar",
+            "Map",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Resource Timing API'?",
+        "o": [
+            "Browser API for individual resource (image/script) load times",
+            "Navigation",
+            "Memory",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'PerformanceObserver'?",
+        "o": [
+            "JS API to subscribe to performance events (e.g. LCP candidates)",
+            "Observer pattern",
+            "User",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Lighthouse CI'?",
+        "o": [
+            "Running Lighthouse audits automatically in CI pipeline",
+            "Local lighthouse",
+            "Manual check",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Web Vitals extension'?",
+        "o": [
+            "Chrome extension to measure Core Web Vitals in real time",
+            "Plugin",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Flame Chart' in Chrome DevTools?",
+        "o": [
+            "Visualizing CPU stack traces over time (Performance tab)",
+            "Flame graph",
+            "Heatmap",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Memory Snapshots' (Heap Dump)?",
+        "o": [
+            "Capture of JS heap to analyze object retention (Leak detection)",
+            "Photo",
+            "Screen",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Allocation sampling'?",
+        "o": [
+            "Tracking memory allocations over time to find heavy creators",
+            "Sampling",
+            "Counting",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'React Profiler'?",
+        "o": [
+            "Tool to measure rendering performance of React components",
+            "Profiler",
+            "Debugger",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Redux DevTools'?",
+        "o": [
+            "Tool to inspect state changes/actions in Redux apps (Time travel)",
+            "Browser tool",
+            "Editor",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Vue DevTools'?",
+        "o": [
+            "Tool to inspect Vue component tree/state",
+            "React tool",
+            "Angular tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Angular DevTools'?",
+        "o": [
+            "Tool to profile/debug Angular apps",
+            "Vue tool",
+            "React tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Wireshark'?",
+        "o": [
+            "Network Protocol Analyzer (Packet Sniffer)",
+            "Shark",
+            "Fish",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Tcpdump'?",
+        "o": [
+            "Command line packet analyzer",
+            "Wireshark",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Netcat' (nc)?",
+        "o": [
+            "Networking utility for reading/writing to network connections",
+            "Cat",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Dig'?",
+        "o": [
+            "DNS lookup utility",
+            "Shovel",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Nslookup'?",
+        "o": [
+            "Old DNS lookup utility (Dig is preferred)",
+            "New tool",
+            "Good tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Traceroute'?",
+        "o": [
+            "Tool to display path (hops) packets take to network host",
+            "Map",
+            "Route",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'MTR' (My Traceroute)?",
+        "o": [
+            "Combines Traceroute and Ping (Real-time path analysis)",
+            "Train",
+            "Metro",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Curl'?",
+        "o": [
+            "Command line tool for transferring data with URLs (Client)",
+            "Hair",
+            "Tool",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Curl -v'?",
+        "o": [
+            "Verbose mode (Shows request/response headers)",
+            "Version",
+            "Very fast",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Curl -I' (Head)?",
+        "o": [
+            "Fetch headers only",
+            "Info",
+            "Internet",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Htop'?",
+        "o": [
+            "Interactive Process Viewer (Better Top)",
+            "Top",
+            "Stop",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Iostat'?",
+        "o": [
+            "Report CPU and I/O statistics",
+            "Netstat",
+            "Vmstat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Vmstat'?",
+        "o": [
+            "Report virtual memory statistics",
+            "Iostat",
+            "Netstat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Netstat'?",
+        "o": [
+            "Print network connections/routing tables",
+            "Iostat",
+            "Vmstat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'SS' command?",
+        "o": [
+            "Modern replacement for Netstat (Socket Statistics)",
+            "Ship",
+            "Boat",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'Free' command?",
+        "o": [
+            "Display amount of free and used memory",
+            "No cost",
+            "Linux",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'DF' (Disk Free)?",
+        "o": [
+            "Report file system disk space usage",
+            "Disk full",
+            "Delete file",
+            "None"
+        ]
+    },
+    {
+        "q": "What is 'DU' (Disk Usage)?",
+        "o": [
+            "Estimate file space usage (Directory size)",
+            "Disk unit",
+            "Disk up",
+            "None"
+        ]
+    }
+]
